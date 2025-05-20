@@ -345,6 +345,7 @@ module Aws::Deadline
       attr_accessor max_worker_count: ::Integer
       attr_accessor configuration: Types::FleetConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor host_configuration: Types::HostConfiguration
       SENSITIVE: [:description]
     end
 
@@ -494,6 +495,7 @@ module Aws::Deadline
       attr_accessor fleet_id: ::String
       attr_accessor host_properties: Types::HostPropertiesRequest
       attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -506,6 +508,7 @@ module Aws::Deadline
       attr_accessor mode: ("NO_SCALING" | "EVENT_BASED_AUTO_SCALING")
       attr_accessor worker_capabilities: Types::CustomerManagedWorkerCapabilities
       attr_accessor storage_profile_id: ::String
+      attr_accessor tag_propagation_mode: ("NO_PROPAGATION" | "PROPAGATE_TAGS_TO_WORKERS_AT_LAUNCH")
       SENSITIVE: []
     end
 
@@ -904,6 +907,7 @@ module Aws::Deadline
       attr_accessor min_worker_count: ::Integer
       attr_accessor max_worker_count: ::Integer
       attr_accessor configuration: Types::FleetConfiguration
+      attr_accessor host_configuration: Types::HostConfiguration
       attr_accessor capabilities: Types::FleetCapabilities
       attr_accessor role_arn: ::String
       attr_accessor created_at: ::Time
@@ -1274,6 +1278,12 @@ module Aws::Deadline
       attr_accessor updated_at: ::Time
       attr_accessor updated_by: ::String
       SENSITIVE: []
+    end
+
+    class HostConfiguration
+      attr_accessor script_body: ::String
+      attr_accessor script_timeout_seconds: ::Integer
+      SENSITIVE: [:script_body]
     end
 
     class HostPropertiesRequest
@@ -2216,7 +2226,7 @@ module Aws::Deadline
 
     class ServiceQuotaExceededException
       attr_accessor message: ::String
-      attr_accessor reason: ("SERVICE_QUOTA_EXCEEDED_EXCEPTION" | "KMS_KEY_LIMIT_EXCEEDED")
+      attr_accessor reason: ("SERVICE_QUOTA_EXCEEDED_EXCEPTION" | "KMS_KEY_LIMIT_EXCEEDED" | "DEPENDENCY_LIMIT_EXCEEDED")
       attr_accessor resource_type: ::String
       attr_accessor service_code: ::String
       attr_accessor quota_code: ::String
@@ -2593,6 +2603,7 @@ module Aws::Deadline
       attr_accessor min_worker_count: ::Integer
       attr_accessor max_worker_count: ::Integer
       attr_accessor configuration: Types::FleetConfiguration
+      attr_accessor host_configuration: Types::HostConfiguration
       SENSITIVE: [:description]
     end
 
@@ -2761,6 +2772,7 @@ module Aws::Deadline
 
     class UpdateWorkerResponse
       attr_accessor log: Types::LogConfiguration
+      attr_accessor host_configuration: Types::HostConfiguration
       SENSITIVE: []
     end
 

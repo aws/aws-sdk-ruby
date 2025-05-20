@@ -367,7 +367,7 @@ module Aws::Finspace
     CreateKxChangesetRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location: "uri", location_name: "environmentId"))
     CreateKxChangesetRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, required: true, location: "uri", location_name: "databaseName"))
     CreateKxChangesetRequest.add_member(:change_requests, Shapes::ShapeRef.new(shape: ChangeRequests, required: true, location_name: "changeRequests"))
-    CreateKxChangesetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateKxChangesetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateKxChangesetRequest.struct_class = Types::CreateKxChangesetRequest
 
     CreateKxChangesetResponse.add_member(:changeset_id, Shapes::ShapeRef.new(shape: ChangesetId, location_name: "changesetId"))
@@ -380,7 +380,7 @@ module Aws::Finspace
     CreateKxChangesetResponse.add_member(:error_info, Shapes::ShapeRef.new(shape: ErrorInfo, location_name: "errorInfo"))
     CreateKxChangesetResponse.struct_class = Types::CreateKxChangesetResponse
 
-    CreateKxClusterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateKxClusterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateKxClusterRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, required: true, location: "uri", location_name: "environmentId"))
     CreateKxClusterRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: KxClusterName, required: true, location_name: "clusterName"))
     CreateKxClusterRequest.add_member(:cluster_type, Shapes::ShapeRef.new(shape: KxClusterType, required: true, location_name: "clusterType"))
@@ -433,7 +433,7 @@ module Aws::Finspace
     CreateKxDatabaseRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, required: true, location_name: "databaseName"))
     CreateKxDatabaseRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateKxDatabaseRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateKxDatabaseRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateKxDatabaseRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateKxDatabaseRequest.struct_class = Types::CreateKxDatabaseRequest
 
     CreateKxDatabaseResponse.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, location_name: "databaseName"))
@@ -455,7 +455,7 @@ module Aws::Finspace
     CreateKxDataviewRequest.add_member(:read_write, Shapes::ShapeRef.new(shape: booleanValue, location_name: "readWrite"))
     CreateKxDataviewRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateKxDataviewRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateKxDataviewRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateKxDataviewRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateKxDataviewRequest.struct_class = Types::CreateKxDataviewRequest
 
     CreateKxDataviewResponse.add_member(:dataview_name, Shapes::ShapeRef.new(shape: KxDataviewName, location_name: "dataviewName"))
@@ -477,7 +477,7 @@ module Aws::Finspace
     CreateKxEnvironmentRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateKxEnvironmentRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyARN, required: true, location_name: "kmsKeyId"))
     CreateKxEnvironmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateKxEnvironmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateKxEnvironmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateKxEnvironmentRequest.struct_class = Types::CreateKxEnvironmentRequest
 
     CreateKxEnvironmentResponse.add_member(:name, Shapes::ShapeRef.new(shape: KxEnvironmentName, location_name: "name"))
@@ -489,7 +489,7 @@ module Aws::Finspace
     CreateKxEnvironmentResponse.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTimestamp"))
     CreateKxEnvironmentResponse.struct_class = Types::CreateKxEnvironmentResponse
 
-    CreateKxScalingGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateKxScalingGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateKxScalingGroupRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, required: true, location: "uri", location_name: "environmentId"))
     CreateKxScalingGroupRequest.add_member(:scaling_group_name, Shapes::ShapeRef.new(shape: KxScalingGroupName, required: true, location_name: "scalingGroupName"))
     CreateKxScalingGroupRequest.add_member(:host_type, Shapes::ShapeRef.new(shape: KxHostType, required: true, location_name: "hostType"))
@@ -510,7 +510,7 @@ module Aws::Finspace
     CreateKxUserRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: KxUserNameString, required: true, location_name: "userName"))
     CreateKxUserRequest.add_member(:iam_role, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "iamRole"))
     CreateKxUserRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateKxUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateKxUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateKxUserRequest.struct_class = Types::CreateKxUserRequest
 
     CreateKxUserResponse.add_member(:user_name, Shapes::ShapeRef.new(shape: KxUserNameString, location_name: "userName"))
@@ -519,7 +519,7 @@ module Aws::Finspace
     CreateKxUserResponse.add_member(:iam_role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "iamRole"))
     CreateKxUserResponse.struct_class = Types::CreateKxUserResponse
 
-    CreateKxVolumeRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateKxVolumeRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateKxVolumeRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, required: true, location: "uri", location_name: "environmentId"))
     CreateKxVolumeRequest.add_member(:volume_type, Shapes::ShapeRef.new(shape: KxVolumeType, required: true, location_name: "volumeType"))
     CreateKxVolumeRequest.add_member(:volume_name, Shapes::ShapeRef.new(shape: KxVolumeName, required: true, location_name: "volumeName"))
@@ -567,14 +567,14 @@ module Aws::Finspace
 
     DeleteKxClusterRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, required: true, location: "uri", location_name: "environmentId"))
     DeleteKxClusterRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: KxClusterName, required: true, location: "uri", location_name: "clusterName"))
-    DeleteKxClusterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteKxClusterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteKxClusterRequest.struct_class = Types::DeleteKxClusterRequest
 
     DeleteKxClusterResponse.struct_class = Types::DeleteKxClusterResponse
 
     DeleteKxDatabaseRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location: "uri", location_name: "environmentId"))
     DeleteKxDatabaseRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, required: true, location: "uri", location_name: "databaseName"))
-    DeleteKxDatabaseRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, required: true, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteKxDatabaseRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, required: true, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteKxDatabaseRequest.struct_class = Types::DeleteKxDatabaseRequest
 
     DeleteKxDatabaseResponse.struct_class = Types::DeleteKxDatabaseResponse
@@ -582,34 +582,34 @@ module Aws::Finspace
     DeleteKxDataviewRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location: "uri", location_name: "environmentId"))
     DeleteKxDataviewRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, required: true, location: "uri", location_name: "databaseName"))
     DeleteKxDataviewRequest.add_member(:dataview_name, Shapes::ShapeRef.new(shape: KxDataviewName, required: true, location: "uri", location_name: "dataviewName"))
-    DeleteKxDataviewRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, required: true, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteKxDataviewRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, required: true, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteKxDataviewRequest.struct_class = Types::DeleteKxDataviewRequest
 
     DeleteKxDataviewResponse.struct_class = Types::DeleteKxDataviewResponse
 
     DeleteKxEnvironmentRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: IdType, required: true, location: "uri", location_name: "environmentId"))
-    DeleteKxEnvironmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteKxEnvironmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteKxEnvironmentRequest.struct_class = Types::DeleteKxEnvironmentRequest
 
     DeleteKxEnvironmentResponse.struct_class = Types::DeleteKxEnvironmentResponse
 
     DeleteKxScalingGroupRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, required: true, location: "uri", location_name: "environmentId"))
     DeleteKxScalingGroupRequest.add_member(:scaling_group_name, Shapes::ShapeRef.new(shape: KxScalingGroupName, required: true, location: "uri", location_name: "scalingGroupName"))
-    DeleteKxScalingGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteKxScalingGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteKxScalingGroupRequest.struct_class = Types::DeleteKxScalingGroupRequest
 
     DeleteKxScalingGroupResponse.struct_class = Types::DeleteKxScalingGroupResponse
 
     DeleteKxUserRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: KxUserNameString, required: true, location: "uri", location_name: "userName"))
     DeleteKxUserRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: IdType, required: true, location: "uri", location_name: "environmentId"))
-    DeleteKxUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteKxUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteKxUserRequest.struct_class = Types::DeleteKxUserRequest
 
     DeleteKxUserResponse.struct_class = Types::DeleteKxUserResponse
 
     DeleteKxVolumeRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, required: true, location: "uri", location_name: "environmentId"))
     DeleteKxVolumeRequest.add_member(:volume_name, Shapes::ShapeRef.new(shape: KxVolumeName, required: true, location: "uri", location_name: "volumeName"))
-    DeleteKxVolumeRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteKxVolumeRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteKxVolumeRequest.struct_class = Types::DeleteKxVolumeRequest
 
     DeleteKxVolumeResponse.struct_class = Types::DeleteKxVolumeResponse
@@ -1189,7 +1189,7 @@ module Aws::Finspace
 
     UpdateKxClusterCodeConfigurationRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, required: true, location: "uri", location_name: "environmentId"))
     UpdateKxClusterCodeConfigurationRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: KxClusterName, required: true, location: "uri", location_name: "clusterName"))
-    UpdateKxClusterCodeConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateKxClusterCodeConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateKxClusterCodeConfigurationRequest.add_member(:code, Shapes::ShapeRef.new(shape: CodeConfiguration, required: true, location_name: "code"))
     UpdateKxClusterCodeConfigurationRequest.add_member(:initialization_script, Shapes::ShapeRef.new(shape: InitializationScriptFilePath, location_name: "initializationScript"))
     UpdateKxClusterCodeConfigurationRequest.add_member(:command_line_arguments, Shapes::ShapeRef.new(shape: KxCommandLineArguments, location_name: "commandLineArguments"))
@@ -1200,7 +1200,7 @@ module Aws::Finspace
 
     UpdateKxClusterDatabasesRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, required: true, location: "uri", location_name: "environmentId"))
     UpdateKxClusterDatabasesRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: KxClusterName, required: true, location: "uri", location_name: "clusterName"))
-    UpdateKxClusterDatabasesRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateKxClusterDatabasesRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateKxClusterDatabasesRequest.add_member(:databases, Shapes::ShapeRef.new(shape: KxDatabaseConfigurations, required: true, location_name: "databases"))
     UpdateKxClusterDatabasesRequest.add_member(:deployment_configuration, Shapes::ShapeRef.new(shape: KxDeploymentConfiguration, location_name: "deploymentConfiguration"))
     UpdateKxClusterDatabasesRequest.struct_class = Types::UpdateKxClusterDatabasesRequest
@@ -1210,7 +1210,7 @@ module Aws::Finspace
     UpdateKxDatabaseRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location: "uri", location_name: "environmentId"))
     UpdateKxDatabaseRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, required: true, location: "uri", location_name: "databaseName"))
     UpdateKxDatabaseRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    UpdateKxDatabaseRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateKxDatabaseRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateKxDatabaseRequest.struct_class = Types::UpdateKxDatabaseRequest
 
     UpdateKxDatabaseResponse.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, location_name: "databaseName"))
@@ -1225,7 +1225,7 @@ module Aws::Finspace
     UpdateKxDataviewRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateKxDataviewRequest.add_member(:changeset_id, Shapes::ShapeRef.new(shape: ChangesetId, location_name: "changesetId"))
     UpdateKxDataviewRequest.add_member(:segment_configurations, Shapes::ShapeRef.new(shape: KxDataviewSegmentConfigurationList, location_name: "segmentConfigurations"))
-    UpdateKxDataviewRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateKxDataviewRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateKxDataviewRequest.struct_class = Types::UpdateKxDataviewRequest
 
     UpdateKxDataviewResponse.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "environmentId"))
@@ -1247,7 +1247,7 @@ module Aws::Finspace
     UpdateKxEnvironmentNetworkRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: IdType, required: true, location: "uri", location_name: "environmentId"))
     UpdateKxEnvironmentNetworkRequest.add_member(:transit_gateway_configuration, Shapes::ShapeRef.new(shape: TransitGatewayConfiguration, location_name: "transitGatewayConfiguration"))
     UpdateKxEnvironmentNetworkRequest.add_member(:custom_dns_configuration, Shapes::ShapeRef.new(shape: CustomDNSConfiguration, location_name: "customDNSConfiguration"))
-    UpdateKxEnvironmentNetworkRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateKxEnvironmentNetworkRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateKxEnvironmentNetworkRequest.struct_class = Types::UpdateKxEnvironmentNetworkRequest
 
     UpdateKxEnvironmentNetworkResponse.add_member(:name, Shapes::ShapeRef.new(shape: KxEnvironmentName, location_name: "name"))
@@ -1271,7 +1271,7 @@ module Aws::Finspace
     UpdateKxEnvironmentRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: IdType, required: true, location: "uri", location_name: "environmentId"))
     UpdateKxEnvironmentRequest.add_member(:name, Shapes::ShapeRef.new(shape: KxEnvironmentName, location_name: "name"))
     UpdateKxEnvironmentRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    UpdateKxEnvironmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateKxEnvironmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateKxEnvironmentRequest.struct_class = Types::UpdateKxEnvironmentRequest
 
     UpdateKxEnvironmentResponse.add_member(:name, Shapes::ShapeRef.new(shape: KxEnvironmentName, location_name: "name"))
@@ -1295,7 +1295,7 @@ module Aws::Finspace
     UpdateKxUserRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: IdType, required: true, location: "uri", location_name: "environmentId"))
     UpdateKxUserRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: KxUserNameString, required: true, location: "uri", location_name: "userName"))
     UpdateKxUserRequest.add_member(:iam_role, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "iamRole"))
-    UpdateKxUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateKxUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateKxUserRequest.struct_class = Types::UpdateKxUserRequest
 
     UpdateKxUserResponse.add_member(:user_name, Shapes::ShapeRef.new(shape: KxUserNameString, location_name: "userName"))
@@ -1307,7 +1307,7 @@ module Aws::Finspace
     UpdateKxVolumeRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, required: true, location: "uri", location_name: "environmentId"))
     UpdateKxVolumeRequest.add_member(:volume_name, Shapes::ShapeRef.new(shape: KxVolumeName, required: true, location: "uri", location_name: "volumeName"))
     UpdateKxVolumeRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    UpdateKxVolumeRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateKxVolumeRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateKxVolumeRequest.add_member(:nas1_configuration, Shapes::ShapeRef.new(shape: KxNAS1Configuration, location_name: "nas1Configuration"))
     UpdateKxVolumeRequest.struct_class = Types::UpdateKxVolumeRequest
 

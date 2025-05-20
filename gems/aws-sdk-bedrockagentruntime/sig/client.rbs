@@ -494,6 +494,7 @@ module Aws
                                    },
                                  ],
                                  ?agent_collaboration: ("SUPERVISOR" | "SUPERVISOR_ROUTER" | "DISABLED"),
+                                 ?agent_name: ::String,
                                  ?bedrock_model_configurations: {
                                    performance_config: {
                                      latency: ("standard" | "optimized")?
@@ -695,6 +696,11 @@ module Aws
                                      }?
                                    },
                                  ],
+                                 ?custom_orchestration: {
+                                   executor: {
+                                     lambda: ::String?
+                                   }?
+                                 },
                                  ?customer_encryption_key_arn: ::String,
                                  ?enable_trace: bool,
                                  ?end_session: bool,
@@ -892,6 +898,7 @@ module Aws
                                      }?
                                    },
                                  ],
+                                 ?orchestration_type: ("DEFAULT" | "CUSTOM_ORCHESTRATION"),
                                  ?prompt_override_configuration: {
                                    override_lambda: ::String?,
                                    prompt_configurations: Array[

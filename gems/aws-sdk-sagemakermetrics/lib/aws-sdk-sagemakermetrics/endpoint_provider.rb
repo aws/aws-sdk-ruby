@@ -29,6 +29,9 @@ module Aws::SageMakerMetrics
           end
           if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true)
             if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"), true)
+              if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws")
+                return Aws::Endpoints::Endpoint.new(url: "https://metrics-fips.sagemaker.#{parameters.region}.amazonaws.com", headers: {}, properties: {})
+              end
               return Aws::Endpoints::Endpoint.new(url: "https://metrics.sagemaker-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"

@@ -250,7 +250,7 @@ module Aws::Chatbot
     CreateCustomActionRequest.add_member(:alias_name, Shapes::ShapeRef.new(shape: CustomActionAliasName, location_name: "AliasName"))
     CreateCustomActionRequest.add_member(:attachments, Shapes::ShapeRef.new(shape: CustomActionAttachmentList, location_name: "Attachments"))
     CreateCustomActionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateCustomActionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateCustomActionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateCustomActionRequest.add_member(:action_name, Shapes::ShapeRef.new(shape: CustomActionName, required: true, location_name: "ActionName"))
     CreateCustomActionRequest.struct_class = Types::CreateCustomActionRequest
 

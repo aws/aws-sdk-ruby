@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.118.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.117.0 (2025-05-08)
+------------------
+
+* Feature - Doc-only update for CloudFront. These changes include customer-reported issues.
+
+1.116.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.115.0 (2025-04-28)
 ------------------
 

@@ -200,8 +200,7 @@ module Aws::DataZone
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -771,11 +770,14 @@ module Aws::DataZone
     #       override_project_owners: {
     #         include_child_domain_units: false,
     #       },
+    #       use_asset_type: {
+    #         domain_unit_id: "DomainUnitId",
+    #       },
     #     },
     #     domain_identifier: "DomainId", # required
     #     entity_identifier: "String", # required
-    #     entity_type: "DOMAIN_UNIT", # required, accepts DOMAIN_UNIT, ENVIRONMENT_BLUEPRINT_CONFIGURATION, ENVIRONMENT_PROFILE
-    #     policy_type: "CREATE_DOMAIN_UNIT", # required, accepts CREATE_DOMAIN_UNIT, OVERRIDE_DOMAIN_UNIT_OWNERS, ADD_TO_PROJECT_MEMBER_POOL, OVERRIDE_PROJECT_OWNERS, CREATE_GLOSSARY, CREATE_FORM_TYPE, CREATE_ASSET_TYPE, CREATE_PROJECT, CREATE_ENVIRONMENT_PROFILE, DELEGATE_CREATE_ENVIRONMENT_PROFILE, CREATE_ENVIRONMENT, CREATE_ENVIRONMENT_FROM_BLUEPRINT, CREATE_PROJECT_FROM_PROJECT_PROFILE
+    #     entity_type: "DOMAIN_UNIT", # required, accepts DOMAIN_UNIT, ENVIRONMENT_BLUEPRINT_CONFIGURATION, ENVIRONMENT_PROFILE, ASSET_TYPE
+    #     policy_type: "CREATE_DOMAIN_UNIT", # required, accepts CREATE_DOMAIN_UNIT, OVERRIDE_DOMAIN_UNIT_OWNERS, ADD_TO_PROJECT_MEMBER_POOL, OVERRIDE_PROJECT_OWNERS, CREATE_GLOSSARY, CREATE_FORM_TYPE, CREATE_ASSET_TYPE, CREATE_PROJECT, CREATE_ENVIRONMENT_PROFILE, DELEGATE_CREATE_ENVIRONMENT_PROFILE, CREATE_ENVIRONMENT, CREATE_ENVIRONMENT_FROM_BLUEPRINT, CREATE_PROJECT_FROM_PROJECT_PROFILE, USE_ASSET_TYPE
     #     principal: { # required
     #       domain_unit: {
     #         domain_unit_designation: "OWNER", # required, accepts OWNER
@@ -8536,10 +8538,10 @@ module Aws::DataZone
     #   resp = client.list_policy_grants({
     #     domain_identifier: "DomainId", # required
     #     entity_identifier: "String", # required
-    #     entity_type: "DOMAIN_UNIT", # required, accepts DOMAIN_UNIT, ENVIRONMENT_BLUEPRINT_CONFIGURATION, ENVIRONMENT_PROFILE
+    #     entity_type: "DOMAIN_UNIT", # required, accepts DOMAIN_UNIT, ENVIRONMENT_BLUEPRINT_CONFIGURATION, ENVIRONMENT_PROFILE, ASSET_TYPE
     #     max_results: 1,
     #     next_token: "PaginationToken",
-    #     policy_type: "CREATE_DOMAIN_UNIT", # required, accepts CREATE_DOMAIN_UNIT, OVERRIDE_DOMAIN_UNIT_OWNERS, ADD_TO_PROJECT_MEMBER_POOL, OVERRIDE_PROJECT_OWNERS, CREATE_GLOSSARY, CREATE_FORM_TYPE, CREATE_ASSET_TYPE, CREATE_PROJECT, CREATE_ENVIRONMENT_PROFILE, DELEGATE_CREATE_ENVIRONMENT_PROFILE, CREATE_ENVIRONMENT, CREATE_ENVIRONMENT_FROM_BLUEPRINT, CREATE_PROJECT_FROM_PROJECT_PROFILE
+    #     policy_type: "CREATE_DOMAIN_UNIT", # required, accepts CREATE_DOMAIN_UNIT, OVERRIDE_DOMAIN_UNIT_OWNERS, ADD_TO_PROJECT_MEMBER_POOL, OVERRIDE_PROJECT_OWNERS, CREATE_GLOSSARY, CREATE_FORM_TYPE, CREATE_ASSET_TYPE, CREATE_PROJECT, CREATE_ENVIRONMENT_PROFILE, DELEGATE_CREATE_ENVIRONMENT_PROFILE, CREATE_ENVIRONMENT, CREATE_ENVIRONMENT_FROM_BLUEPRINT, CREATE_PROJECT_FROM_PROJECT_PROFILE, USE_ASSET_TYPE
     #   })
     #
     # @example Response structure
@@ -8559,6 +8561,7 @@ module Aws::DataZone
     #   resp.grant_list[0].detail.create_project_from_project_profile.project_profiles[0] #=> String
     #   resp.grant_list[0].detail.override_domain_unit_owners.include_child_domain_units #=> Boolean
     #   resp.grant_list[0].detail.override_project_owners.include_child_domain_units #=> Boolean
+    #   resp.grant_list[0].detail.use_asset_type.domain_unit_id #=> String
     #   resp.grant_list[0].principal.domain_unit.domain_unit_designation #=> String, one of "OWNER"
     #   resp.grant_list[0].principal.domain_unit.domain_unit_identifier #=> String
     #   resp.grant_list[0].principal.group.group_identifier #=> String
@@ -9888,8 +9891,8 @@ module Aws::DataZone
     #     client_token: "ClientToken",
     #     domain_identifier: "DomainId", # required
     #     entity_identifier: "String", # required
-    #     entity_type: "DOMAIN_UNIT", # required, accepts DOMAIN_UNIT, ENVIRONMENT_BLUEPRINT_CONFIGURATION, ENVIRONMENT_PROFILE
-    #     policy_type: "CREATE_DOMAIN_UNIT", # required, accepts CREATE_DOMAIN_UNIT, OVERRIDE_DOMAIN_UNIT_OWNERS, ADD_TO_PROJECT_MEMBER_POOL, OVERRIDE_PROJECT_OWNERS, CREATE_GLOSSARY, CREATE_FORM_TYPE, CREATE_ASSET_TYPE, CREATE_PROJECT, CREATE_ENVIRONMENT_PROFILE, DELEGATE_CREATE_ENVIRONMENT_PROFILE, CREATE_ENVIRONMENT, CREATE_ENVIRONMENT_FROM_BLUEPRINT, CREATE_PROJECT_FROM_PROJECT_PROFILE
+    #     entity_type: "DOMAIN_UNIT", # required, accepts DOMAIN_UNIT, ENVIRONMENT_BLUEPRINT_CONFIGURATION, ENVIRONMENT_PROFILE, ASSET_TYPE
+    #     policy_type: "CREATE_DOMAIN_UNIT", # required, accepts CREATE_DOMAIN_UNIT, OVERRIDE_DOMAIN_UNIT_OWNERS, ADD_TO_PROJECT_MEMBER_POOL, OVERRIDE_PROJECT_OWNERS, CREATE_GLOSSARY, CREATE_FORM_TYPE, CREATE_ASSET_TYPE, CREATE_PROJECT, CREATE_ENVIRONMENT_PROFILE, DELEGATE_CREATE_ENVIRONMENT_PROFILE, CREATE_ENVIRONMENT, CREATE_ENVIRONMENT_FROM_BLUEPRINT, CREATE_PROJECT_FROM_PROJECT_PROFILE, USE_ASSET_TYPE
     #     principal: { # required
     #       domain_unit: {
     #         domain_unit_designation: "OWNER", # required, accepts OWNER
@@ -12700,7 +12703,7 @@ module Aws::DataZone
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

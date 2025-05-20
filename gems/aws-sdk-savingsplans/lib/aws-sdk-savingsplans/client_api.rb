@@ -124,7 +124,7 @@ module Aws::SavingsPlans
     CreateSavingsPlanRequest.add_member(:commitment, Shapes::ShapeRef.new(shape: Amount, required: true, location_name: "commitment"))
     CreateSavingsPlanRequest.add_member(:upfront_payment_amount, Shapes::ShapeRef.new(shape: Amount, location_name: "upfrontPaymentAmount"))
     CreateSavingsPlanRequest.add_member(:purchase_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "purchaseTime"))
-    CreateSavingsPlanRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateSavingsPlanRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateSavingsPlanRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateSavingsPlanRequest.struct_class = Types::CreateSavingsPlanRequest
 
@@ -223,7 +223,7 @@ module Aws::SavingsPlans
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     ReturnSavingsPlanRequest.add_member(:savings_plan_id, Shapes::ShapeRef.new(shape: SavingsPlanId, required: true, location_name: "savingsPlanId"))
-    ReturnSavingsPlanRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    ReturnSavingsPlanRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     ReturnSavingsPlanRequest.struct_class = Types::ReturnSavingsPlanRequest
 
     ReturnSavingsPlanResponse.add_member(:savings_plan_id, Shapes::ShapeRef.new(shape: SavingsPlanId, location_name: "savingsPlanId"))

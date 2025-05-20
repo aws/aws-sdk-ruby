@@ -128,6 +128,7 @@ module Aws
                         ena_srd_udp_enabled: bool?
                       }?
                     },
+                    ?ena_queue_count: ::Integer,
                     ?dry_run: bool,
                     instance_id: ::String,
                     device_index: ::Integer
@@ -200,6 +201,8 @@ module Aws
                               },
                               ?groups: Array[::String],
                               ?attachment: {
+                                default_ena_queue_count: bool?,
+                                ena_queue_count: ::Integer?,
                                 attachment_id: ::String?,
                                 delete_on_termination: bool?
                               }

@@ -200,8 +200,7 @@ module Aws::Bedrock
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -1016,6 +1015,18 @@ module Aws::Bedrock
     #   The contextual grounding policy configuration used to create a
     #   guardrail.
     #
+    # @option params [Types::GuardrailCrossRegionConfig] :cross_region_config
+    #   The system-defined guardrail profile that you're using with your
+    #   guardrail. Guardrail profiles define the destination Amazon Web
+    #   Services Regions where guardrail inference requests can be
+    #   automatically routed.
+    #
+    #   For more information, see the [Amazon Bedrock User Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+    #
     # @option params [required, String] :blocked_input_messaging
     #   The message to return when the guardrail blocks a prompt.
     #
@@ -1136,6 +1147,9 @@ module Aws::Bedrock
     #           enabled: false,
     #         },
     #       ],
+    #     },
+    #     cross_region_config: {
+    #       guardrail_profile_identifier: "GuardrailCrossRegionGuardrailProfileIdentifier", # required
     #     },
     #     blocked_input_messaging: "GuardrailBlockedMessaging", # required
     #     blocked_outputs_messaging: "GuardrailBlockedMessaging", # required
@@ -2596,6 +2610,7 @@ module Aws::Bedrock
     #   * {Types::GetGuardrailResponse#word_policy #word_policy} => Types::GuardrailWordPolicy
     #   * {Types::GetGuardrailResponse#sensitive_information_policy #sensitive_information_policy} => Types::GuardrailSensitiveInformationPolicy
     #   * {Types::GetGuardrailResponse#contextual_grounding_policy #contextual_grounding_policy} => Types::GuardrailContextualGroundingPolicy
+    #   * {Types::GetGuardrailResponse#cross_region_details #cross_region_details} => Types::GuardrailCrossRegionDetails
     #   * {Types::GetGuardrailResponse#created_at #created_at} => Time
     #   * {Types::GetGuardrailResponse#updated_at #updated_at} => Time
     #   * {Types::GetGuardrailResponse#status_reasons #status_reasons} => Array&lt;String&gt;
@@ -2674,6 +2689,8 @@ module Aws::Bedrock
     #   resp.contextual_grounding_policy.filters[0].threshold #=> Float
     #   resp.contextual_grounding_policy.filters[0].action #=> String, one of "BLOCK", "NONE"
     #   resp.contextual_grounding_policy.filters[0].enabled #=> Boolean
+    #   resp.cross_region_details.guardrail_profile_id #=> String
+    #   resp.cross_region_details.guardrail_profile_arn #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.status_reasons #=> Array
@@ -2915,6 +2932,7 @@ module Aws::Bedrock
     #   * {Types::GetModelCustomizationJobResponse#role_arn #role_arn} => String
     #   * {Types::GetModelCustomizationJobResponse#status #status} => String
     #   * {Types::GetModelCustomizationJobResponse#failure_message #failure_message} => String
+    #   * {Types::GetModelCustomizationJobResponse#status_details #status_details} => Types::StatusDetails
     #   * {Types::GetModelCustomizationJobResponse#creation_time #creation_time} => Time
     #   * {Types::GetModelCustomizationJobResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::GetModelCustomizationJobResponse#end_time #end_time} => Time
@@ -2946,6 +2964,15 @@ module Aws::Bedrock
     #   resp.role_arn #=> String
     #   resp.status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
     #   resp.failure_message #=> String
+    #   resp.status_details.validation_details.status #=> String, one of "InProgress", "Completed", "Stopping", "Stopped", "Failed", "NotStarted"
+    #   resp.status_details.validation_details.creation_time #=> Time
+    #   resp.status_details.validation_details.last_modified_time #=> Time
+    #   resp.status_details.data_processing_details.status #=> String, one of "InProgress", "Completed", "Stopping", "Stopped", "Failed", "NotStarted"
+    #   resp.status_details.data_processing_details.creation_time #=> Time
+    #   resp.status_details.data_processing_details.last_modified_time #=> Time
+    #   resp.status_details.training_details.status #=> String, one of "InProgress", "Completed", "Stopping", "Stopped", "Failed", "NotStarted"
+    #   resp.status_details.training_details.creation_time #=> Time
+    #   resp.status_details.training_details.last_modified_time #=> Time
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
     #   resp.end_time #=> Time
@@ -3564,6 +3591,8 @@ module Aws::Bedrock
     #   resp.guardrails[0].version #=> String
     #   resp.guardrails[0].created_at #=> Time
     #   resp.guardrails[0].updated_at #=> Time
+    #   resp.guardrails[0].cross_region_details.guardrail_profile_id #=> String
+    #   resp.guardrails[0].cross_region_details.guardrail_profile_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListGuardrails AWS API Documentation
@@ -3943,6 +3972,15 @@ module Aws::Bedrock
     #   resp.model_customization_job_summaries[0].job_name #=> String
     #   resp.model_customization_job_summaries[0].status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
     #   resp.model_customization_job_summaries[0].last_modified_time #=> Time
+    #   resp.model_customization_job_summaries[0].status_details.validation_details.status #=> String, one of "InProgress", "Completed", "Stopping", "Stopped", "Failed", "NotStarted"
+    #   resp.model_customization_job_summaries[0].status_details.validation_details.creation_time #=> Time
+    #   resp.model_customization_job_summaries[0].status_details.validation_details.last_modified_time #=> Time
+    #   resp.model_customization_job_summaries[0].status_details.data_processing_details.status #=> String, one of "InProgress", "Completed", "Stopping", "Stopped", "Failed", "NotStarted"
+    #   resp.model_customization_job_summaries[0].status_details.data_processing_details.creation_time #=> Time
+    #   resp.model_customization_job_summaries[0].status_details.data_processing_details.last_modified_time #=> Time
+    #   resp.model_customization_job_summaries[0].status_details.training_details.status #=> String, one of "InProgress", "Completed", "Stopping", "Stopped", "Failed", "NotStarted"
+    #   resp.model_customization_job_summaries[0].status_details.training_details.creation_time #=> Time
+    #   resp.model_customization_job_summaries[0].status_details.training_details.last_modified_time #=> Time
     #   resp.model_customization_job_summaries[0].creation_time #=> Time
     #   resp.model_customization_job_summaries[0].end_time #=> Time
     #   resp.model_customization_job_summaries[0].custom_model_arn #=> String
@@ -4669,6 +4707,18 @@ module Aws::Bedrock
     #   The contextual grounding policy configuration used to update a
     #   guardrail.
     #
+    # @option params [Types::GuardrailCrossRegionConfig] :cross_region_config
+    #   The system-defined guardrail profile that you're using with your
+    #   guardrail. Guardrail profiles define the destination Amazon Web
+    #   Services Regions where guardrail inference requests can be
+    #   automatically routed.
+    #
+    #   For more information, see the [Amazon Bedrock User Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+    #
     # @option params [required, String] :blocked_input_messaging
     #   The message to return when the guardrail blocks a prompt.
     #
@@ -4773,6 +4823,9 @@ module Aws::Bedrock
     #           enabled: false,
     #         },
     #       ],
+    #     },
+    #     cross_region_config: {
+    #       guardrail_profile_identifier: "GuardrailCrossRegionGuardrailProfileIdentifier", # required
     #     },
     #     blocked_input_messaging: "GuardrailBlockedMessaging", # required
     #     blocked_outputs_messaging: "GuardrailBlockedMessaging", # required
@@ -4932,7 +4985,7 @@ module Aws::Bedrock
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

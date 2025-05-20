@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.42.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.41.0 (2025-04-29)
+------------------
+
+* Feature - Introduces CustomEntity as part of the UserUnion data type. This field is used to indicate the entity who is performing the API action.
+
 1.40.0 (2025-04-16)
 ------------------
 

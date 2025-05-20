@@ -1975,6 +1975,8 @@ module Aws::DatabaseMigrationService
       attr_accessor secrets_manager_access_role_arn: ::String
       attr_accessor secrets_manager_secret_id: ::String
       attr_accessor execute_timeout: ::Integer
+      attr_accessor service_access_role_arn: ::String
+      attr_accessor authentication_method: ("password" | "iam")
       SENSITIVE: [:password]
     end
 
@@ -2108,6 +2110,8 @@ module Aws::DatabaseMigrationService
       attr_accessor database_mode: ("default" | "babelfish")
       attr_accessor babelfish_database_name: ::String
       attr_accessor disable_unicode_source_filter: bool
+      attr_accessor service_access_role_arn: ::String
+      attr_accessor authentication_method: ("password" | "iam")
       SENSITIVE: [:password]
     end
 
@@ -2909,6 +2913,11 @@ module Aws::DatabaseMigrationService
       attr_accessor validation_suspended_records: ::Integer
       attr_accessor validation_state: ::String
       attr_accessor validation_state_details: ::String
+      attr_accessor resync_state: ::String
+      attr_accessor resync_rows_attempted: ::Integer
+      attr_accessor resync_rows_succeeded: ::Integer
+      attr_accessor resync_rows_failed: ::Integer
+      attr_accessor resync_progress: ::Float
       SENSITIVE: []
     end
 

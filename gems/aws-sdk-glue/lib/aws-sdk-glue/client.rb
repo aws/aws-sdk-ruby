@@ -200,8 +200,7 @@ module Aws::Glue
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -1255,6 +1254,27 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.output_schemas[0].columns #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.output_schemas[0].columns[0].name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.paths #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.paths[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.compression_type #=> String, one of "snappy", "lzo", "gzip", "brotli", "lz4", "uncompressed", "none"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.exclusions #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.exclusions[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.group_size #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.group_files #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.recurse #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.max_band #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.max_files_in_band #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.additional_options.bounded_size #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.additional_options.bounded_files #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.additional_options.enable_sample_path #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.additional_options.sample_path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.number_rows #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.skip_footer #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.output_schemas[0].columns[0].type #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.paths #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.paths[0] #=> String
@@ -1279,7 +1299,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.paths #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.paths[0] #=> String
-    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.compression_type #=> String, one of "snappy", "lzo", "gzip", "uncompressed", "none"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.compression_type #=> String, one of "snappy", "lzo", "gzip", "brotli", "lz4", "uncompressed", "none"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.exclusions #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.exclusions[0] #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.group_size #=> String
@@ -1362,11 +1382,24 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.partition_keys[0] #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.partition_keys[0][0] #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.path #=> String
-    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.compression #=> String, one of "snappy", "lzo", "gzip", "uncompressed", "none"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.compression #=> String, one of "snappy", "lzo", "gzip", "brotli", "lz4", "uncompressed", "none"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.number_target_partitions #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.schema_change_policy.enable_update_catalog #=> Boolean
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.schema_change_policy.table #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.schema_change_policy.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.partition_keys #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.partition_keys[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.partition_keys[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.compression #=> String, one of "uncompressed"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.schema_change_policy.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.schema_change_policy.database #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.inputs #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.inputs[0] #=> String
@@ -1375,11 +1408,28 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.partition_keys[0][0] #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.path #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.compression #=> String
-    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi", "delta"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.number_target_partitions #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi", "delta", "iceberg", "hyper", "xml"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.table #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.partition_keys #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.partition_keys[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.partition_keys[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi", "delta", "iceberg", "hyper", "xml"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.additional_options #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.additional_options["EnclosedInStringProperty"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.schema_change_policy.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.schema_change_policy.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.compression #=> String, one of "gzip", "lzo", "uncompressed", "snappy"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.number_target_partitions #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].apply_mapping.name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].apply_mapping.inputs #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].apply_mapping.inputs[0] #=> String
@@ -1748,10 +1798,11 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.inputs[0] #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.path #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.compression #=> String, one of "gzip", "lzo", "uncompressed", "snappy"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.number_target_partitions #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.partition_keys #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.partition_keys[0] #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.partition_keys[0][0] #=> String
-    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi", "delta"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi", "delta", "iceberg", "hyper", "xml"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.additional_options #=> Hash
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.additional_options["EnclosedInStringProperty"] #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
@@ -1815,7 +1866,8 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.partition_keys[0][0] #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.path #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.compression #=> String, one of "uncompressed", "snappy"
-    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi", "delta"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.number_target_partitions #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi", "delta", "iceberg", "hyper", "xml"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.additional_options #=> Hash
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.additional_options["EnclosedInStringProperty"] #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
@@ -3771,6 +3823,9 @@ module Aws::Glue
     #   Metadata assigned to the resource consisting of a list of key-value
     #   pairs.
     #
+    # @option params [Types::IntegrationConfig] :integration_config
+    #   The configuration settings.
+    #
     # @return [Types::CreateIntegrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateIntegrationResponse#source_arn #source_arn} => String
@@ -3785,6 +3840,7 @@ module Aws::Glue
     #   * {Types::CreateIntegrationResponse#create_time #create_time} => Time
     #   * {Types::CreateIntegrationResponse#errors #errors} => Array&lt;Types::IntegrationError&gt;
     #   * {Types::CreateIntegrationResponse#data_filter #data_filter} => String
+    #   * {Types::CreateIntegrationResponse#integration_config #integration_config} => Types::IntegrationConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -3804,6 +3860,9 @@ module Aws::Glue
     #         value: "TagValue",
     #       },
     #     ],
+    #     integration_config: {
+    #       refresh_interval: "String128",
+    #     },
     #   })
     #
     # @example Response structure
@@ -3825,6 +3884,7 @@ module Aws::Glue
     #   resp.errors[0].error_code #=> String
     #   resp.errors[0].error_message #=> String
     #   resp.data_filter #=> String
+    #   resp.integration_config.refresh_interval #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateIntegration AWS API Documentation
     #
@@ -3906,7 +3966,9 @@ module Aws::Glue
     #   The name of the table to be replicated.
     #
     # @option params [Types::SourceTableConfig] :source_table_config
-    #   A structure for the source table configuration.
+    #   A structure for the source table configuration. See the
+    #   `SourceTableConfig` structure to see list of supported source
+    #   properties.
     #
     # @option params [Types::TargetTableConfig] :target_table_config
     #   A structure for the target table configuration.
@@ -6891,6 +6953,7 @@ module Aws::Glue
     #   resp.inbound_integrations[0].integration_arn #=> String
     #   resp.inbound_integrations[0].status #=> String, one of "CREATING", "ACTIVE", "MODIFYING", "FAILED", "DELETING", "SYNCING", "NEEDS_ATTENTION"
     #   resp.inbound_integrations[0].create_time #=> Time
+    #   resp.inbound_integrations[0].integration_config.refresh_interval #=> String
     #   resp.inbound_integrations[0].errors #=> Array
     #   resp.inbound_integrations[0].errors[0].error_code #=> String
     #   resp.inbound_integrations[0].errors[0].error_message #=> String
@@ -6957,6 +7020,7 @@ module Aws::Glue
     #   resp.integrations[0].tags[0].value #=> String
     #   resp.integrations[0].status #=> String, one of "CREATING", "ACTIVE", "MODIFYING", "FAILED", "DELETING", "SYNCING", "NEEDS_ATTENTION"
     #   resp.integrations[0].create_time #=> Time
+    #   resp.integrations[0].integration_config.refresh_interval #=> String
     #   resp.integrations[0].errors #=> Array
     #   resp.integrations[0].errors[0].error_code #=> String
     #   resp.integrations[0].errors[0].error_message #=> String
@@ -9181,6 +9245,27 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_csv_source.output_schemas[0].columns #=> Array
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_csv_source.output_schemas[0].columns[0].name #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_csv_source.output_schemas[0].columns[0].type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_excel_source.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_excel_source.paths #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_excel_source.paths[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_excel_source.compression_type #=> String, one of "snappy", "lzo", "gzip", "brotli", "lz4", "uncompressed", "none"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_excel_source.exclusions #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_excel_source.exclusions[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_excel_source.group_size #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_excel_source.group_files #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_excel_source.recurse #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_excel_source.max_band #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_excel_source.max_files_in_band #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_excel_source.additional_options.bounded_size #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_excel_source.additional_options.bounded_files #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_excel_source.additional_options.enable_sample_path #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_excel_source.additional_options.sample_path #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_excel_source.number_rows #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_excel_source.skip_footer #=> Integer
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_excel_source.output_schemas #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_excel_source.output_schemas[0].columns #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_excel_source.output_schemas[0].columns[0].name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_excel_source.output_schemas[0].columns[0].type #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_json_source.name #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_json_source.paths #=> Array
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_json_source.paths[0] #=> String
@@ -9205,7 +9290,7 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_parquet_source.name #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_parquet_source.paths #=> Array
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_parquet_source.paths[0] #=> String
-    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_parquet_source.compression_type #=> String, one of "snappy", "lzo", "gzip", "uncompressed", "none"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_parquet_source.compression_type #=> String, one of "snappy", "lzo", "gzip", "brotli", "lz4", "uncompressed", "none"
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_parquet_source.exclusions #=> Array
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_parquet_source.exclusions[0] #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_parquet_source.group_size #=> String
@@ -9288,11 +9373,24 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.partition_keys[0] #=> Array
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.partition_keys[0][0] #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.path #=> String
-    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.compression #=> String, one of "snappy", "lzo", "gzip", "uncompressed", "none"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.compression #=> String, one of "snappy", "lzo", "gzip", "brotli", "lz4", "uncompressed", "none"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.number_target_partitions #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.schema_change_policy.enable_update_catalog #=> Boolean
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.schema_change_policy.table #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.schema_change_policy.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.partition_keys #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.partition_keys[0] #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.partition_keys[0][0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.path #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.compression #=> String, one of "uncompressed"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.schema_change_policy.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.schema_change_policy.database #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.name #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.inputs #=> Array
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.inputs[0] #=> String
@@ -9301,11 +9399,28 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.partition_keys[0][0] #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.path #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.compression #=> String
-    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi", "delta"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.number_target_partitions #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi", "delta", "iceberg", "hyper", "xml"
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.table #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.partition_keys #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.partition_keys[0] #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.partition_keys[0][0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.path #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi", "delta", "iceberg", "hyper", "xml"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.additional_options #=> Hash
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.additional_options["EnclosedInStringProperty"] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.schema_change_policy.table #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.schema_change_policy.database #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.compression #=> String, one of "gzip", "lzo", "uncompressed", "snappy"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.number_target_partitions #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].apply_mapping.name #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].apply_mapping.inputs #=> Array
     #   resp.job.code_gen_configuration_nodes["NodeId"].apply_mapping.inputs[0] #=> String
@@ -9674,10 +9789,11 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.inputs[0] #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.path #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.compression #=> String, one of "gzip", "lzo", "uncompressed", "snappy"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.number_target_partitions #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.partition_keys #=> Array
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.partition_keys[0] #=> Array
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.partition_keys[0][0] #=> String
-    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi", "delta"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi", "delta", "iceberg", "hyper", "xml"
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.additional_options #=> Hash
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.additional_options["EnclosedInStringProperty"] #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
@@ -9741,7 +9857,8 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.partition_keys[0][0] #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.path #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.compression #=> String, one of "uncompressed", "snappy"
-    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi", "delta"
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.number_target_partitions #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi", "delta", "iceberg", "hyper", "xml"
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.additional_options #=> Hash
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.additional_options["EnclosedInStringProperty"] #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
@@ -10307,6 +10424,27 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.output_schemas[0].columns #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.output_schemas[0].columns[0].name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_csv_source.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.paths #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.paths[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.compression_type #=> String, one of "snappy", "lzo", "gzip", "brotli", "lz4", "uncompressed", "none"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.exclusions #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.exclusions[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.group_size #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.group_files #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.recurse #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.max_band #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.max_files_in_band #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.additional_options.bounded_size #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.additional_options.bounded_files #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.additional_options.enable_sample_path #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.additional_options.sample_path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.number_rows #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.skip_footer #=> Integer
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_excel_source.output_schemas[0].columns[0].type #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.paths #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_json_source.paths[0] #=> String
@@ -10331,7 +10469,7 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.paths #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.paths[0] #=> String
-    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.compression_type #=> String, one of "snappy", "lzo", "gzip", "uncompressed", "none"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.compression_type #=> String, one of "snappy", "lzo", "gzip", "brotli", "lz4", "uncompressed", "none"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.exclusions #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.exclusions[0] #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_parquet_source.group_size #=> String
@@ -10414,11 +10552,24 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.partition_keys[0] #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.partition_keys[0][0] #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.path #=> String
-    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.compression #=> String, one of "snappy", "lzo", "gzip", "uncompressed", "none"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.compression #=> String, one of "snappy", "lzo", "gzip", "brotli", "lz4", "uncompressed", "none"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.number_target_partitions #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.schema_change_policy.enable_update_catalog #=> Boolean
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.schema_change_policy.table #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_glue_parquet_target.schema_change_policy.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.partition_keys #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.partition_keys[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.partition_keys[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.compression #=> String, one of "uncompressed"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.schema_change_policy.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hyper_direct_target.schema_change_policy.database #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.inputs #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.inputs[0] #=> String
@@ -10427,11 +10578,28 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.partition_keys[0][0] #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.path #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.compression #=> String
-    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi", "delta"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.number_target_partitions #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi", "delta", "iceberg", "hyper", "xml"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.table #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_direct_target.schema_change_policy.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.partition_keys #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.partition_keys[0] #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.partition_keys[0][0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.path #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi", "delta", "iceberg", "hyper", "xml"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.additional_options #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.additional_options["EnclosedInStringProperty"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.schema_change_policy.update_behavior #=> String, one of "UPDATE_IN_DATABASE", "LOG"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.schema_change_policy.table #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.schema_change_policy.database #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.compression #=> String, one of "gzip", "lzo", "uncompressed", "snappy"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_iceberg_direct_target.number_target_partitions #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].apply_mapping.name #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].apply_mapping.inputs #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].apply_mapping.inputs[0] #=> String
@@ -10800,10 +10968,11 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.inputs[0] #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.path #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.compression #=> String, one of "gzip", "lzo", "uncompressed", "snappy"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.number_target_partitions #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.partition_keys #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.partition_keys[0] #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.partition_keys[0][0] #=> String
-    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi", "delta"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi", "delta", "iceberg", "hyper", "xml"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.additional_options #=> Hash
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.additional_options["EnclosedInStringProperty"] #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_hudi_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
@@ -10867,7 +11036,8 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.partition_keys[0][0] #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.path #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.compression #=> String, one of "uncompressed", "snappy"
-    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi", "delta"
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.number_target_partitions #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.format #=> String, one of "json", "csv", "avro", "orc", "parquet", "hudi", "delta", "iceberg", "hyper", "xml"
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.additional_options #=> Hash
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.additional_options["EnclosedInStringProperty"] #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].s3_delta_direct_target.schema_change_policy.enable_update_catalog #=> Boolean
@@ -20094,7 +20264,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.213.0'
+      context[:gem_version] = '1.217.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

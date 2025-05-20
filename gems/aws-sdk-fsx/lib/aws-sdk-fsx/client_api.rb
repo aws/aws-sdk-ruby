@@ -504,7 +504,7 @@ module Aws::FSx
 
     AlternateDNSNames.member = Shapes::ShapeRef.new(shape: AlternateDNSName)
 
-    AssociateFileSystemAliasesRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    AssociateFileSystemAliasesRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     AssociateFileSystemAliasesRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
     AssociateFileSystemAliasesRequest.add_member(:aliases, Shapes::ShapeRef.new(shape: AlternateDNSNames, required: true, location_name: "Aliases"))
     AssociateFileSystemAliasesRequest.struct_class = Types::AssociateFileSystemAliasesRequest
@@ -578,7 +578,7 @@ module Aws::FSx
     CompletionReport.add_member(:scope, Shapes::ShapeRef.new(shape: ReportScope, location_name: "Scope"))
     CompletionReport.struct_class = Types::CompletionReport
 
-    CopyBackupRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CopyBackupRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CopyBackupRequest.add_member(:source_backup_id, Shapes::ShapeRef.new(shape: SourceBackupId, required: true, location_name: "SourceBackupId"))
     CopyBackupRequest.add_member(:source_region, Shapes::ShapeRef.new(shape: Region, location_name: "SourceRegion"))
     CopyBackupRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
@@ -589,7 +589,7 @@ module Aws::FSx
     CopyBackupResponse.add_member(:backup, Shapes::ShapeRef.new(shape: Backup, location_name: "Backup"))
     CopyBackupResponse.struct_class = Types::CopyBackupResponse
 
-    CopySnapshotAndUpdateVolumeRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CopySnapshotAndUpdateVolumeRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CopySnapshotAndUpdateVolumeRequest.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, required: true, location_name: "VolumeId"))
     CopySnapshotAndUpdateVolumeRequest.add_member(:source_snapshot_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "SourceSnapshotARN"))
     CopySnapshotAndUpdateVolumeRequest.add_member(:copy_strategy, Shapes::ShapeRef.new(shape: OpenZFSCopyStrategy, location_name: "CopyStrategy"))
@@ -606,7 +606,7 @@ module Aws::FSx
     CreateAggregateConfiguration.struct_class = Types::CreateAggregateConfiguration
 
     CreateBackupRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId"))
-    CreateBackupRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateBackupRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateBackupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateBackupRequest.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId"))
     CreateBackupRequest.struct_class = Types::CreateBackupRequest
@@ -620,7 +620,7 @@ module Aws::FSx
     CreateDataRepositoryAssociationRequest.add_member(:batch_import_meta_data_on_create, Shapes::ShapeRef.new(shape: BatchImportMetaDataOnCreate, location_name: "BatchImportMetaDataOnCreate"))
     CreateDataRepositoryAssociationRequest.add_member(:imported_file_chunk_size, Shapes::ShapeRef.new(shape: Megabytes, location_name: "ImportedFileChunkSize"))
     CreateDataRepositoryAssociationRequest.add_member(:s3, Shapes::ShapeRef.new(shape: S3DataRepositoryConfiguration, location_name: "S3"))
-    CreateDataRepositoryAssociationRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateDataRepositoryAssociationRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateDataRepositoryAssociationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateDataRepositoryAssociationRequest.struct_class = Types::CreateDataRepositoryAssociationRequest
 
@@ -631,7 +631,7 @@ module Aws::FSx
     CreateDataRepositoryTaskRequest.add_member(:paths, Shapes::ShapeRef.new(shape: DataRepositoryTaskPaths, location_name: "Paths"))
     CreateDataRepositoryTaskRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
     CreateDataRepositoryTaskRequest.add_member(:report, Shapes::ShapeRef.new(shape: CompletionReport, required: true, location_name: "Report"))
-    CreateDataRepositoryTaskRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateDataRepositoryTaskRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateDataRepositoryTaskRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateDataRepositoryTaskRequest.add_member(:capacity_to_release, Shapes::ShapeRef.new(shape: CapacityToRelease, location_name: "CapacityToRelease"))
     CreateDataRepositoryTaskRequest.add_member(:release_configuration, Shapes::ShapeRef.new(shape: ReleaseConfiguration, location_name: "ReleaseConfiguration"))
@@ -648,7 +648,7 @@ module Aws::FSx
     CreateFileCacheLustreConfiguration.add_member(:metadata_configuration, Shapes::ShapeRef.new(shape: FileCacheLustreMetadataConfiguration, required: true, location_name: "MetadataConfiguration"))
     CreateFileCacheLustreConfiguration.struct_class = Types::CreateFileCacheLustreConfiguration
 
-    CreateFileCacheRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateFileCacheRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateFileCacheRequest.add_member(:file_cache_type, Shapes::ShapeRef.new(shape: FileCacheType, required: true, location_name: "FileCacheType"))
     CreateFileCacheRequest.add_member(:file_cache_type_version, Shapes::ShapeRef.new(shape: FileSystemTypeVersion, required: true, location_name: "FileCacheTypeVersion"))
     CreateFileCacheRequest.add_member(:storage_capacity, Shapes::ShapeRef.new(shape: StorageCapacity, required: true, location_name: "StorageCapacity"))
@@ -665,7 +665,7 @@ module Aws::FSx
     CreateFileCacheResponse.struct_class = Types::CreateFileCacheResponse
 
     CreateFileSystemFromBackupRequest.add_member(:backup_id, Shapes::ShapeRef.new(shape: BackupId, required: true, location_name: "BackupId"))
-    CreateFileSystemFromBackupRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateFileSystemFromBackupRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateFileSystemFromBackupRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, required: true, location_name: "SubnetIds"))
     CreateFileSystemFromBackupRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "SecurityGroupIds"))
     CreateFileSystemFromBackupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
@@ -732,7 +732,7 @@ module Aws::FSx
     CreateFileSystemOpenZFSConfiguration.add_member(:read_cache_configuration, Shapes::ShapeRef.new(shape: OpenZFSReadCacheConfiguration, location_name: "ReadCacheConfiguration"))
     CreateFileSystemOpenZFSConfiguration.struct_class = Types::CreateFileSystemOpenZFSConfiguration
 
-    CreateFileSystemRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateFileSystemRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateFileSystemRequest.add_member(:file_system_type, Shapes::ShapeRef.new(shape: FileSystemType, required: true, location_name: "FileSystemType"))
     CreateFileSystemRequest.add_member(:storage_capacity, Shapes::ShapeRef.new(shape: StorageCapacity, location_name: "StorageCapacity"))
     CreateFileSystemRequest.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, location_name: "StorageType"))
@@ -766,7 +766,7 @@ module Aws::FSx
 
     CreateOntapVolumeConfiguration.add_member(:junction_path, Shapes::ShapeRef.new(shape: JunctionPath, location_name: "JunctionPath"))
     CreateOntapVolumeConfiguration.add_member(:security_style, Shapes::ShapeRef.new(shape: SecurityStyle, location_name: "SecurityStyle"))
-    CreateOntapVolumeConfiguration.add_member(:size_in_megabytes, Shapes::ShapeRef.new(shape: VolumeCapacity, deprecated: true, location_name: "SizeInMegabytes", metadata: {"deprecatedMessage"=>"This property is deprecated, use SizeInBytes instead"}))
+    CreateOntapVolumeConfiguration.add_member(:size_in_megabytes, Shapes::ShapeRef.new(shape: VolumeCapacity, deprecated: true, location_name: "SizeInMegabytes", metadata: {"deprecatedMessage" => "This property is deprecated, use SizeInBytes instead"}))
     CreateOntapVolumeConfiguration.add_member(:storage_efficiency_enabled, Shapes::ShapeRef.new(shape: Flag, location_name: "StorageEfficiencyEnabled"))
     CreateOntapVolumeConfiguration.add_member(:storage_virtual_machine_id, Shapes::ShapeRef.new(shape: StorageVirtualMachineId, required: true, location_name: "StorageVirtualMachineId"))
     CreateOntapVolumeConfiguration.add_member(:tiering_policy, Shapes::ShapeRef.new(shape: TieringPolicy, location_name: "TieringPolicy"))
@@ -803,7 +803,7 @@ module Aws::FSx
     CreateSnaplockConfiguration.add_member(:volume_append_mode_enabled, Shapes::ShapeRef.new(shape: Flag, location_name: "VolumeAppendModeEnabled"))
     CreateSnaplockConfiguration.struct_class = Types::CreateSnaplockConfiguration
 
-    CreateSnapshotRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateSnapshotRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateSnapshotRequest.add_member(:name, Shapes::ShapeRef.new(shape: SnapshotName, required: true, location_name: "Name"))
     CreateSnapshotRequest.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, required: true, location_name: "VolumeId"))
     CreateSnapshotRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
@@ -813,7 +813,7 @@ module Aws::FSx
     CreateSnapshotResponse.struct_class = Types::CreateSnapshotResponse
 
     CreateStorageVirtualMachineRequest.add_member(:active_directory_configuration, Shapes::ShapeRef.new(shape: CreateSvmActiveDirectoryConfiguration, location_name: "ActiveDirectoryConfiguration"))
-    CreateStorageVirtualMachineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateStorageVirtualMachineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateStorageVirtualMachineRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
     CreateStorageVirtualMachineRequest.add_member(:name, Shapes::ShapeRef.new(shape: StorageVirtualMachineName, required: true, location_name: "Name"))
     CreateStorageVirtualMachineRequest.add_member(:svm_admin_password, Shapes::ShapeRef.new(shape: AdminPassword, location_name: "SvmAdminPassword"))
@@ -829,7 +829,7 @@ module Aws::FSx
     CreateSvmActiveDirectoryConfiguration.struct_class = Types::CreateSvmActiveDirectoryConfiguration
 
     CreateVolumeFromBackupRequest.add_member(:backup_id, Shapes::ShapeRef.new(shape: BackupId, required: true, location_name: "BackupId"))
-    CreateVolumeFromBackupRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateVolumeFromBackupRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateVolumeFromBackupRequest.add_member(:name, Shapes::ShapeRef.new(shape: VolumeName, required: true, location_name: "Name"))
     CreateVolumeFromBackupRequest.add_member(:ontap_configuration, Shapes::ShapeRef.new(shape: CreateOntapVolumeConfiguration, location_name: "OntapConfiguration"))
     CreateVolumeFromBackupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
@@ -838,7 +838,7 @@ module Aws::FSx
     CreateVolumeFromBackupResponse.add_member(:volume, Shapes::ShapeRef.new(shape: Volume, location_name: "Volume"))
     CreateVolumeFromBackupResponse.struct_class = Types::CreateVolumeFromBackupResponse
 
-    CreateVolumeRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateVolumeRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateVolumeRequest.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, required: true, location_name: "VolumeType"))
     CreateVolumeRequest.add_member(:name, Shapes::ShapeRef.new(shape: VolumeName, required: true, location_name: "Name"))
     CreateVolumeRequest.add_member(:ontap_configuration, Shapes::ShapeRef.new(shape: CreateOntapVolumeConfiguration, location_name: "OntapConfiguration"))
@@ -935,7 +935,7 @@ module Aws::FSx
     DataRepositoryTasks.member = Shapes::ShapeRef.new(shape: DataRepositoryTask)
 
     DeleteBackupRequest.add_member(:backup_id, Shapes::ShapeRef.new(shape: BackupId, required: true, location_name: "BackupId"))
-    DeleteBackupRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DeleteBackupRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     DeleteBackupRequest.struct_class = Types::DeleteBackupRequest
 
     DeleteBackupResponse.add_member(:backup_id, Shapes::ShapeRef.new(shape: BackupId, location_name: "BackupId"))
@@ -943,7 +943,7 @@ module Aws::FSx
     DeleteBackupResponse.struct_class = Types::DeleteBackupResponse
 
     DeleteDataRepositoryAssociationRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: DataRepositoryAssociationId, required: true, location_name: "AssociationId"))
-    DeleteDataRepositoryAssociationRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DeleteDataRepositoryAssociationRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     DeleteDataRepositoryAssociationRequest.add_member(:delete_data_in_file_system, Shapes::ShapeRef.new(shape: DeleteDataInFileSystem, location_name: "DeleteDataInFileSystem"))
     DeleteDataRepositoryAssociationRequest.struct_class = Types::DeleteDataRepositoryAssociationRequest
 
@@ -953,7 +953,7 @@ module Aws::FSx
     DeleteDataRepositoryAssociationResponse.struct_class = Types::DeleteDataRepositoryAssociationResponse
 
     DeleteFileCacheRequest.add_member(:file_cache_id, Shapes::ShapeRef.new(shape: FileCacheId, required: true, location_name: "FileCacheId"))
-    DeleteFileCacheRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DeleteFileCacheRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     DeleteFileCacheRequest.struct_class = Types::DeleteFileCacheRequest
 
     DeleteFileCacheResponse.add_member(:file_cache_id, Shapes::ShapeRef.new(shape: FileCacheId, location_name: "FileCacheId"))
@@ -980,7 +980,7 @@ module Aws::FSx
     DeleteFileSystemOpenZFSResponse.struct_class = Types::DeleteFileSystemOpenZFSResponse
 
     DeleteFileSystemRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
-    DeleteFileSystemRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DeleteFileSystemRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     DeleteFileSystemRequest.add_member(:windows_configuration, Shapes::ShapeRef.new(shape: DeleteFileSystemWindowsConfiguration, location_name: "WindowsConfiguration"))
     DeleteFileSystemRequest.add_member(:lustre_configuration, Shapes::ShapeRef.new(shape: DeleteFileSystemLustreConfiguration, location_name: "LustreConfiguration"))
     DeleteFileSystemRequest.add_member(:open_zfs_configuration, Shapes::ShapeRef.new(shape: DeleteFileSystemOpenZFSConfiguration, location_name: "OpenZFSConfiguration"))
@@ -1003,7 +1003,7 @@ module Aws::FSx
 
     DeleteOpenZFSVolumeOptions.member = Shapes::ShapeRef.new(shape: DeleteOpenZFSVolumeOption)
 
-    DeleteSnapshotRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DeleteSnapshotRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     DeleteSnapshotRequest.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, required: true, location_name: "SnapshotId"))
     DeleteSnapshotRequest.struct_class = Types::DeleteSnapshotRequest
 
@@ -1011,7 +1011,7 @@ module Aws::FSx
     DeleteSnapshotResponse.add_member(:lifecycle, Shapes::ShapeRef.new(shape: SnapshotLifecycle, location_name: "Lifecycle"))
     DeleteSnapshotResponse.struct_class = Types::DeleteSnapshotResponse
 
-    DeleteStorageVirtualMachineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DeleteStorageVirtualMachineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     DeleteStorageVirtualMachineRequest.add_member(:storage_virtual_machine_id, Shapes::ShapeRef.new(shape: StorageVirtualMachineId, required: true, location_name: "StorageVirtualMachineId"))
     DeleteStorageVirtualMachineRequest.struct_class = Types::DeleteStorageVirtualMachineRequest
 
@@ -1031,7 +1031,7 @@ module Aws::FSx
     DeleteVolumeOpenZFSConfiguration.add_member(:options, Shapes::ShapeRef.new(shape: DeleteOpenZFSVolumeOptions, location_name: "Options"))
     DeleteVolumeOpenZFSConfiguration.struct_class = Types::DeleteVolumeOpenZFSConfiguration
 
-    DeleteVolumeRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DeleteVolumeRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     DeleteVolumeRequest.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, required: true, location_name: "VolumeId"))
     DeleteVolumeRequest.add_member(:ontap_configuration, Shapes::ShapeRef.new(shape: DeleteVolumeOntapConfiguration, location_name: "OntapConfiguration"))
     DeleteVolumeRequest.add_member(:open_zfs_configuration, Shapes::ShapeRef.new(shape: DeleteVolumeOpenZFSConfiguration, location_name: "OpenZFSConfiguration"))
@@ -1081,7 +1081,7 @@ module Aws::FSx
     DescribeFileCachesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeFileCachesResponse.struct_class = Types::DescribeFileCachesResponse
 
-    DescribeFileSystemAliasesRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DescribeFileSystemAliasesRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     DescribeFileSystemAliasesRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
     DescribeFileSystemAliasesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     DescribeFileSystemAliasesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -1136,7 +1136,7 @@ module Aws::FSx
     DescribeVolumesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeVolumesResponse.struct_class = Types::DescribeVolumesResponse
 
-    DisassociateFileSystemAliasesRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DisassociateFileSystemAliasesRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     DisassociateFileSystemAliasesRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
     DisassociateFileSystemAliasesRequest.add_member(:aliases, Shapes::ShapeRef.new(shape: AlternateDNSNames, required: true, location_name: "Aliases"))
     DisassociateFileSystemAliasesRequest.struct_class = Types::DisassociateFileSystemAliasesRequest
@@ -1490,7 +1490,7 @@ module Aws::FSx
     ReleaseConfiguration.struct_class = Types::ReleaseConfiguration
 
     ReleaseFileSystemNfsV3LocksRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
-    ReleaseFileSystemNfsV3LocksRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    ReleaseFileSystemNfsV3LocksRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     ReleaseFileSystemNfsV3LocksRequest.struct_class = Types::ReleaseFileSystemNfsV3LocksRequest
 
     ReleaseFileSystemNfsV3LocksResponse.add_member(:file_system, Shapes::ShapeRef.new(shape: FileSystem, location_name: "FileSystem"))
@@ -1508,7 +1508,7 @@ module Aws::FSx
 
     RestoreOpenZFSVolumeOptions.member = Shapes::ShapeRef.new(shape: RestoreOpenZFSVolumeOption)
 
-    RestoreVolumeFromSnapshotRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    RestoreVolumeFromSnapshotRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     RestoreVolumeFromSnapshotRequest.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, required: true, location_name: "VolumeId"))
     RestoreVolumeFromSnapshotRequest.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, required: true, location_name: "SnapshotId"))
     RestoreVolumeFromSnapshotRequest.add_member(:options, Shapes::ShapeRef.new(shape: RestoreOpenZFSVolumeOptions, location_name: "Options"))
@@ -1601,7 +1601,7 @@ module Aws::FSx
     SourceBackupUnavailable.add_member(:backup_id, Shapes::ShapeRef.new(shape: BackupId, location_name: "BackupId"))
     SourceBackupUnavailable.struct_class = Types::SourceBackupUnavailable
 
-    StartMisconfiguredStateRecoveryRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    StartMisconfiguredStateRecoveryRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     StartMisconfiguredStateRecoveryRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
     StartMisconfiguredStateRecoveryRequest.struct_class = Types::StartMisconfiguredStateRecoveryRequest
 
@@ -1686,7 +1686,7 @@ module Aws::FSx
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateDataRepositoryAssociationRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: DataRepositoryAssociationId, required: true, location_name: "AssociationId"))
-    UpdateDataRepositoryAssociationRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdateDataRepositoryAssociationRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     UpdateDataRepositoryAssociationRequest.add_member(:imported_file_chunk_size, Shapes::ShapeRef.new(shape: Megabytes, location_name: "ImportedFileChunkSize"))
     UpdateDataRepositoryAssociationRequest.add_member(:s3, Shapes::ShapeRef.new(shape: S3DataRepositoryConfiguration, location_name: "S3"))
     UpdateDataRepositoryAssociationRequest.struct_class = Types::UpdateDataRepositoryAssociationRequest
@@ -1698,7 +1698,7 @@ module Aws::FSx
     UpdateFileCacheLustreConfiguration.struct_class = Types::UpdateFileCacheLustreConfiguration
 
     UpdateFileCacheRequest.add_member(:file_cache_id, Shapes::ShapeRef.new(shape: FileCacheId, required: true, location_name: "FileCacheId"))
-    UpdateFileCacheRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdateFileCacheRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     UpdateFileCacheRequest.add_member(:lustre_configuration, Shapes::ShapeRef.new(shape: UpdateFileCacheLustreConfiguration, location_name: "LustreConfiguration"))
     UpdateFileCacheRequest.struct_class = Types::UpdateFileCacheRequest
 
@@ -1745,7 +1745,7 @@ module Aws::FSx
     UpdateFileSystemOpenZFSConfiguration.struct_class = Types::UpdateFileSystemOpenZFSConfiguration
 
     UpdateFileSystemRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
-    UpdateFileSystemRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdateFileSystemRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     UpdateFileSystemRequest.add_member(:storage_capacity, Shapes::ShapeRef.new(shape: StorageCapacity, location_name: "StorageCapacity"))
     UpdateFileSystemRequest.add_member(:windows_configuration, Shapes::ShapeRef.new(shape: UpdateFileSystemWindowsConfiguration, location_name: "WindowsConfiguration"))
     UpdateFileSystemRequest.add_member(:lustre_configuration, Shapes::ShapeRef.new(shape: UpdateFileSystemLustreConfiguration, location_name: "LustreConfiguration"))
@@ -1790,7 +1790,7 @@ module Aws::FSx
     UpdateOpenZFSVolumeOptions.member = Shapes::ShapeRef.new(shape: UpdateOpenZFSVolumeOption)
 
     UpdateSharedVpcConfigurationRequest.add_member(:enable_fsx_route_table_updates_from_participant_accounts, Shapes::ShapeRef.new(shape: VerboseFlag, location_name: "EnableFsxRouteTableUpdatesFromParticipantAccounts"))
-    UpdateSharedVpcConfigurationRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdateSharedVpcConfigurationRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     UpdateSharedVpcConfigurationRequest.struct_class = Types::UpdateSharedVpcConfigurationRequest
 
     UpdateSharedVpcConfigurationResponse.add_member(:enable_fsx_route_table_updates_from_participant_accounts, Shapes::ShapeRef.new(shape: VerboseFlag, location_name: "EnableFsxRouteTableUpdatesFromParticipantAccounts"))
@@ -1803,7 +1803,7 @@ module Aws::FSx
     UpdateSnaplockConfiguration.add_member(:volume_append_mode_enabled, Shapes::ShapeRef.new(shape: Flag, location_name: "VolumeAppendModeEnabled"))
     UpdateSnaplockConfiguration.struct_class = Types::UpdateSnaplockConfiguration
 
-    UpdateSnapshotRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdateSnapshotRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     UpdateSnapshotRequest.add_member(:name, Shapes::ShapeRef.new(shape: SnapshotName, required: true, location_name: "Name"))
     UpdateSnapshotRequest.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, required: true, location_name: "SnapshotId"))
     UpdateSnapshotRequest.struct_class = Types::UpdateSnapshotRequest
@@ -1812,7 +1812,7 @@ module Aws::FSx
     UpdateSnapshotResponse.struct_class = Types::UpdateSnapshotResponse
 
     UpdateStorageVirtualMachineRequest.add_member(:active_directory_configuration, Shapes::ShapeRef.new(shape: UpdateSvmActiveDirectoryConfiguration, location_name: "ActiveDirectoryConfiguration"))
-    UpdateStorageVirtualMachineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdateStorageVirtualMachineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     UpdateStorageVirtualMachineRequest.add_member(:storage_virtual_machine_id, Shapes::ShapeRef.new(shape: StorageVirtualMachineId, required: true, location_name: "StorageVirtualMachineId"))
     UpdateStorageVirtualMachineRequest.add_member(:svm_admin_password, Shapes::ShapeRef.new(shape: AdminPassword, location_name: "SvmAdminPassword"))
     UpdateStorageVirtualMachineRequest.struct_class = Types::UpdateStorageVirtualMachineRequest
@@ -1824,7 +1824,7 @@ module Aws::FSx
     UpdateSvmActiveDirectoryConfiguration.add_member(:net_bios_name, Shapes::ShapeRef.new(shape: NetBiosAlias, location_name: "NetBiosName"))
     UpdateSvmActiveDirectoryConfiguration.struct_class = Types::UpdateSvmActiveDirectoryConfiguration
 
-    UpdateVolumeRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdateVolumeRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     UpdateVolumeRequest.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, required: true, location_name: "VolumeId"))
     UpdateVolumeRequest.add_member(:ontap_configuration, Shapes::ShapeRef.new(shape: UpdateOntapVolumeConfiguration, location_name: "OntapConfiguration"))
     UpdateVolumeRequest.add_member(:name, Shapes::ShapeRef.new(shape: VolumeName, location_name: "Name"))

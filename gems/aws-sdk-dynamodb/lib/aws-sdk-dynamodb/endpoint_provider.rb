@@ -28,7 +28,7 @@ module Aws::DynamoDB
             if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
               raise ArgumentError, "Invalid Configuration: Dualstack and local endpoint are not supported"
             end
-            return Aws::Endpoints::Endpoint.new(url: "http://localhost:8000", headers: {}, properties: {"authSchemes"=>[{"signingRegion"=>"us-east-1", "name"=>"sigv4", "signingName"=>"dynamodb"}]}, metadata: { account_id_endpoint: false })
+            return Aws::Endpoints::Endpoint.new(url: "http://localhost:8000", headers: {}, properties: {"authSchemes" => [{"signingRegion" => "us-east-1", "name" => "sigv4", "signingName" => "dynamodb"}]}, metadata: { account_id_endpoint: false })
           end
           if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
             if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"), true) && Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"), true)

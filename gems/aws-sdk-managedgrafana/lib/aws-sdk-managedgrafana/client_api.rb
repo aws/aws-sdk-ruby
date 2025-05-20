@@ -221,8 +221,8 @@ module Aws::ManagedGrafana
 
     CreateWorkspaceRequest.add_member(:account_access_type, Shapes::ShapeRef.new(shape: AccountAccessType, required: true, location_name: "accountAccessType"))
     CreateWorkspaceRequest.add_member(:authentication_providers, Shapes::ShapeRef.new(shape: AuthenticationProviders, required: true, location_name: "authenticationProviders"))
-    CreateWorkspaceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
-    CreateWorkspaceRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: OverridableConfigurationJson, location_name: "configuration", metadata: {"jsonvalue"=>true}))
+    CreateWorkspaceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateWorkspaceRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: OverridableConfigurationJson, location_name: "configuration", metadata: {"jsonvalue" => true}))
     CreateWorkspaceRequest.add_member(:grafana_version, Shapes::ShapeRef.new(shape: GrafanaVersion, location_name: "grafanaVersion"))
     CreateWorkspaceRequest.add_member(:network_access_control, Shapes::ShapeRef.new(shape: NetworkAccessConfiguration, location_name: "networkAccessControl"))
     CreateWorkspaceRequest.add_member(:organization_role_name, Shapes::ShapeRef.new(shape: OrganizationRoleName, location_name: "organizationRoleName"))
@@ -306,7 +306,7 @@ module Aws::ManagedGrafana
     DescribeWorkspaceConfigurationRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
     DescribeWorkspaceConfigurationRequest.struct_class = Types::DescribeWorkspaceConfigurationRequest
 
-    DescribeWorkspaceConfigurationResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: OverridableConfigurationJson, required: true, location_name: "configuration", metadata: {"jsonvalue"=>true}))
+    DescribeWorkspaceConfigurationResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: OverridableConfigurationJson, required: true, location_name: "configuration", metadata: {"jsonvalue" => true}))
     DescribeWorkspaceConfigurationResponse.add_member(:grafana_version, Shapes::ShapeRef.new(shape: GrafanaVersion, location_name: "grafanaVersion"))
     DescribeWorkspaceConfigurationResponse.struct_class = Types::DescribeWorkspaceConfigurationResponse
 
@@ -517,7 +517,7 @@ module Aws::ManagedGrafana
     UpdateWorkspaceAuthenticationResponse.add_member(:authentication, Shapes::ShapeRef.new(shape: AuthenticationDescription, required: true, location_name: "authentication"))
     UpdateWorkspaceAuthenticationResponse.struct_class = Types::UpdateWorkspaceAuthenticationResponse
 
-    UpdateWorkspaceConfigurationRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: OverridableConfigurationJson, required: true, location_name: "configuration", metadata: {"jsonvalue"=>true}))
+    UpdateWorkspaceConfigurationRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: OverridableConfigurationJson, required: true, location_name: "configuration", metadata: {"jsonvalue" => true}))
     UpdateWorkspaceConfigurationRequest.add_member(:grafana_version, Shapes::ShapeRef.new(shape: GrafanaVersion, location_name: "grafanaVersion"))
     UpdateWorkspaceConfigurationRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
     UpdateWorkspaceConfigurationRequest.struct_class = Types::UpdateWorkspaceConfigurationRequest

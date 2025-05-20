@@ -813,7 +813,7 @@ module Aws::Omics
     CreateRunCacheRequest.add_member(:cache_s3_location, Shapes::ShapeRef.new(shape: S3UriForBucketOrObject, required: true, location_name: "cacheS3Location"))
     CreateRunCacheRequest.add_member(:description, Shapes::ShapeRef.new(shape: UserCustomDescription, location_name: "description"))
     CreateRunCacheRequest.add_member(:name, Shapes::ShapeRef.new(shape: UserCustomName, location_name: "name"))
-    CreateRunCacheRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: RunCacheRequestId, required: true, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateRunCacheRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: RunCacheRequestId, required: true, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     CreateRunCacheRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateRunCacheRequest.add_member(:cache_bucket_owner_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "cacheBucketOwnerId"))
     CreateRunCacheRequest.struct_class = Types::CreateRunCacheRequest
@@ -829,7 +829,7 @@ module Aws::Omics
     CreateRunGroupRequest.add_member(:max_runs, Shapes::ShapeRef.new(shape: CreateRunGroupRequestMaxRunsInteger, location_name: "maxRuns"))
     CreateRunGroupRequest.add_member(:max_duration, Shapes::ShapeRef.new(shape: CreateRunGroupRequestMaxDurationInteger, location_name: "maxDuration"))
     CreateRunGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateRunGroupRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: RunGroupRequestId, required: true, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateRunGroupRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: RunGroupRequestId, required: true, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     CreateRunGroupRequest.add_member(:max_gpus, Shapes::ShapeRef.new(shape: CreateRunGroupRequestMaxGpusInteger, location_name: "maxGpus"))
     CreateRunGroupRequest.struct_class = Types::CreateRunGroupRequest
 
@@ -842,7 +842,7 @@ module Aws::Omics
     CreateSequenceStoreRequest.add_member(:description, Shapes::ShapeRef.new(shape: SequenceStoreDescription, location_name: "description"))
     CreateSequenceStoreRequest.add_member(:sse_config, Shapes::ShapeRef.new(shape: SseConfig, location_name: "sseConfig"))
     CreateSequenceStoreRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateSequenceStoreRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateSequenceStoreRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateSequenceStoreRequest.add_member(:fallback_location, Shapes::ShapeRef.new(shape: FallbackLocation, location_name: "fallbackLocation"))
     CreateSequenceStoreRequest.add_member(:e_tag_algorithm_family, Shapes::ShapeRef.new(shape: ETagAlgorithmFamily, location_name: "eTagAlgorithmFamily"))
     CreateSequenceStoreRequest.add_member(:propagated_set_level_tags, Shapes::ShapeRef.new(shape: PropagatedSetLevelTags, location_name: "propagatedSetLevelTags"))
@@ -896,7 +896,7 @@ module Aws::Omics
     CreateWorkflowRequest.add_member(:parameter_template, Shapes::ShapeRef.new(shape: WorkflowParameterTemplate, location_name: "parameterTemplate"))
     CreateWorkflowRequest.add_member(:storage_capacity, Shapes::ShapeRef.new(shape: CreateWorkflowRequestStorageCapacityInteger, location_name: "storageCapacity"))
     CreateWorkflowRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateWorkflowRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: WorkflowRequestId, required: true, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateWorkflowRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: WorkflowRequestId, required: true, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     CreateWorkflowRequest.add_member(:accelerators, Shapes::ShapeRef.new(shape: Accelerators, location_name: "accelerators"))
     CreateWorkflowRequest.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, location_name: "storageType"))
     CreateWorkflowRequest.struct_class = Types::CreateWorkflowRequest
@@ -917,7 +917,7 @@ module Aws::Omics
     CreateWorkflowVersionRequest.add_member(:engine, Shapes::ShapeRef.new(shape: WorkflowEngine, location_name: "engine"))
     CreateWorkflowVersionRequest.add_member(:main, Shapes::ShapeRef.new(shape: WorkflowMain, location_name: "main"))
     CreateWorkflowVersionRequest.add_member(:parameter_template, Shapes::ShapeRef.new(shape: WorkflowParameterTemplate, location_name: "parameterTemplate"))
-    CreateWorkflowVersionRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: WorkflowRequestId, required: true, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateWorkflowVersionRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: WorkflowRequestId, required: true, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     CreateWorkflowVersionRequest.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, location_name: "storageType"))
     CreateWorkflowVersionRequest.add_member(:storage_capacity, Shapes::ShapeRef.new(shape: CreateWorkflowVersionRequestStorageCapacityInteger, location_name: "storageCapacity"))
     CreateWorkflowVersionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
@@ -1335,7 +1335,7 @@ module Aws::Omics
     GetS3AccessPolicyResponse.add_member(:store_id, Shapes::ShapeRef.new(shape: StoreId, location_name: "storeId"))
     GetS3AccessPolicyResponse.add_member(:store_type, Shapes::ShapeRef.new(shape: StoreType, location_name: "storeType"))
     GetS3AccessPolicyResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updateTime"))
-    GetS3AccessPolicyResponse.add_member(:s3_access_policy, Shapes::ShapeRef.new(shape: S3AccessPolicy, required: true, location_name: "s3AccessPolicy", metadata: {"jsonvalue"=>true}))
+    GetS3AccessPolicyResponse.add_member(:s3_access_policy, Shapes::ShapeRef.new(shape: S3AccessPolicy, required: true, location_name: "s3AccessPolicy", metadata: {"jsonvalue" => true}))
     GetS3AccessPolicyResponse.struct_class = Types::GetS3AccessPolicyResponse
 
     GetSequenceStoreRequest.add_member(:id, Shapes::ShapeRef.new(shape: SequenceStoreId, required: true, location: "uri", location_name: "id"))
@@ -1781,7 +1781,7 @@ module Aws::Omics
     PropagatedSetLevelTags.member = Shapes::ShapeRef.new(shape: TagKey)
 
     PutS3AccessPolicyRequest.add_member(:s3_access_point_arn, Shapes::ShapeRef.new(shape: S3AccessPointArn, required: true, location: "uri", location_name: "s3AccessPointArn"))
-    PutS3AccessPolicyRequest.add_member(:s3_access_policy, Shapes::ShapeRef.new(shape: S3AccessPolicy, required: true, location_name: "s3AccessPolicy", metadata: {"jsonvalue"=>true}))
+    PutS3AccessPolicyRequest.add_member(:s3_access_policy, Shapes::ShapeRef.new(shape: S3AccessPolicy, required: true, location_name: "s3AccessPolicy", metadata: {"jsonvalue" => true}))
     PutS3AccessPolicyRequest.struct_class = Types::PutS3AccessPolicyRequest
 
     PutS3AccessPolicyResponse.add_member(:s3_access_point_arn, Shapes::ShapeRef.new(shape: S3AccessPointArn, location_name: "s3AccessPointArn"))
@@ -2132,7 +2132,7 @@ module Aws::Omics
     StartRunRequest.add_member(:output_uri, Shapes::ShapeRef.new(shape: RunOutputUri, location_name: "outputUri"))
     StartRunRequest.add_member(:log_level, Shapes::ShapeRef.new(shape: RunLogLevel, location_name: "logLevel"))
     StartRunRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    StartRunRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: RunRequestId, required: true, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    StartRunRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: RunRequestId, required: true, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     StartRunRequest.add_member(:retention_mode, Shapes::ShapeRef.new(shape: RunRetentionMode, location_name: "retentionMode"))
     StartRunRequest.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, location_name: "storageType"))
     StartRunRequest.add_member(:workflow_owner_id, Shapes::ShapeRef.new(shape: WorkflowOwnerId, location_name: "workflowOwnerId"))
@@ -2270,7 +2270,7 @@ module Aws::Omics
     UpdateSequenceStoreRequest.add_member(:id, Shapes::ShapeRef.new(shape: SequenceStoreId, required: true, location: "uri", location_name: "id"))
     UpdateSequenceStoreRequest.add_member(:name, Shapes::ShapeRef.new(shape: SequenceStoreName, location_name: "name"))
     UpdateSequenceStoreRequest.add_member(:description, Shapes::ShapeRef.new(shape: SequenceStoreDescription, location_name: "description"))
-    UpdateSequenceStoreRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateSequenceStoreRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateSequenceStoreRequest.add_member(:fallback_location, Shapes::ShapeRef.new(shape: FallbackLocation, location_name: "fallbackLocation"))
     UpdateSequenceStoreRequest.add_member(:propagated_set_level_tags, Shapes::ShapeRef.new(shape: PropagatedSetLevelTags, location_name: "propagatedSetLevelTags"))
     UpdateSequenceStoreRequest.add_member(:s3_access_config, Shapes::ShapeRef.new(shape: S3AccessConfig, location_name: "s3AccessConfig"))

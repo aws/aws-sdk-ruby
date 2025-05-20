@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.195.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.194.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.193.0 (2025-04-29)
+------------------
+
+* Feature - This release adds support for just-In-time node access in AWS Systems Manager. Just-in-time node access enables customers to move towards zero standing privileges by requiring operators to request access and obtain approval before remotely connecting to nodes managed by the SSM Agent.
+
 1.192.0 (2025-03-24)
 ------------------
 

@@ -1282,7 +1282,7 @@ module Aws::Mgn
     StartExportResponse.add_member(:export_task, Shapes::ShapeRef.new(shape: ExportTask, location_name: "exportTask"))
     StartExportResponse.struct_class = Types::StartExportResponse
 
-    StartImportRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientIdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    StartImportRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientIdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     StartImportRequest.add_member(:s3_bucket_source, Shapes::ShapeRef.new(shape: S3BucketSource, required: true, location_name: "s3BucketSource"))
     StartImportRequest.struct_class = Types::StartImportRequest
 

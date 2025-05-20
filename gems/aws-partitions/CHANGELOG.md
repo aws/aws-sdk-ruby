@@ -1,6 +1,66 @@
 Unreleased Changes
 ------------------
 
+1.1105.0 (2025-05-19)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1104.0 (2025-05-16)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1103.0 (2025-05-12)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1102.0 (2025-05-09)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1101.0 (2025-05-08)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1100.0 (2025-05-07)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1099.0 (2025-05-06)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1098.0 (2025-05-05)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1097.0 (2025-05-02)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1096.0 (2025-05-01)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1095.0 (2025-04-30)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1094.0 (2025-04-29)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::SSMGuiConnect`.
+
 1.1093.0 (2025-04-28)
 ------------------
 

@@ -547,6 +547,19 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # The action execution was not found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionExecutionNotFoundException AWS API Documentation
+    #
+    class ActionExecutionNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Output details listed for an action execution, such as the action
     # execution result.
     #
@@ -1678,6 +1691,98 @@ module Aws::CodePipeline
     #
     class DeleteWebhookOutput < Aws::EmptyStructure; end
 
+    # The target for the deploy action.
+    #
+    # @!attribute [rw] target_id
+    #   The ID of the target for the deploy action.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_type
+    #   The type of target for the deploy action.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the deploy action.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start time for the deploy action.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time for the deploy action.
+    #   @return [Time]
+    #
+    # @!attribute [rw] events
+    #   The lifecycle events for the deploy action.
+    #   @return [Array<Types::DeployTargetEvent>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DeployActionExecutionTarget AWS API Documentation
+    #
+    class DeployActionExecutionTarget < Struct.new(
+      :target_id,
+      :target_type,
+      :status,
+      :start_time,
+      :end_time,
+      :events)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A lifecycle event for the deploy action.
+    #
+    # @!attribute [rw] name
+    #   The name of the event for the deploy action.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the event for the deploy action.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start time for the event for the deploy action.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time for the event for the deploy action.
+    #   @return [Time]
+    #
+    # @!attribute [rw] context
+    #   The context for the event for the deploy action.
+    #   @return [Types::DeployTargetEventContext]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DeployTargetEvent AWS API Documentation
+    #
+    class DeployTargetEvent < Struct.new(
+      :name,
+      :status,
+      :start_time,
+      :end_time,
+      :context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The context for the event for the deploy action.
+    #
+    # @!attribute [rw] ssm_command_id
+    #   The command ID for the event for the deploy action.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The context message for the event for the deploy action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DeployTargetEventContext AWS API Documentation
+    #
+    class DeployTargetEventContext < Struct.new(
+      :ssm_command_id,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] webhook_name
     #   The name of the webhook you want to deregister.
     #   @return [String]
@@ -1819,11 +1924,19 @@ module Aws::CodePipeline
     #   The environment variable value in the key-value pair.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   Specifies the type of use for the environment variable value. The
+    #   value can be either `PLAINTEXT` or `SECRETS_MANAGER`. If the value
+    #   is `SECRETS_MANAGER`, provide the Secrets reference in the
+    #   EnvironmentVariable value.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/EnvironmentVariable AWS API Documentation
     #
     class EnvironmentVariable < Struct.new(
       :name,
-      :value)
+      :value,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2840,6 +2953,61 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # @!attribute [rw] pipeline_name
+    #   The name of the pipeline with the deploy action.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_execution_id
+    #   The execution ID for the deploy action.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters the targets for a specified deploy action.
+    #   @return [Array<Types::TargetFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   nextToken value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   An identifier that was returned from the previous list action types
+    #   call, which can be used to return the next set of action types in
+    #   the list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListDeployActionExecutionTargetsInput AWS API Documentation
+    #
+    class ListDeployActionExecutionTargetsInput < Struct.new(
+      :pipeline_name,
+      :action_execution_id,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] targets
+    #   The targets for the deploy action.
+    #   @return [Array<Types::DeployActionExecutionTarget>]
+    #
+    # @!attribute [rw] next_token
+    #   An identifier that was returned from the previous list action types
+    #   call, which can be used to return the next set of action types in
+    #   the list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListDeployActionExecutionTargetsOutput AWS API Documentation
+    #
+    class ListDeployActionExecutionTargetsOutput < Struct.new(
+      :targets,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input of a `ListPipelineExecutions` action.
     #
     # @!attribute [rw] pipeline_name
@@ -3647,16 +3815,26 @@ module Aws::CodePipeline
     #
     # @!attribute [rw] polling_disabled_at
     #   The date and time that polling for source changes (periodic checks)
-    #   was stopped for the pipeline, in timestamp format. You can migrate
-    #   (update) a polling pipeline to use event-based change detection. For
-    #   example, for a pipeline with a CodeCommit source, we recommend you
-    #   migrate (update) your pipeline to use CloudWatch Events. To learn
-    #   more, see [Migrate polling pipelines to use event-based change
-    #   detection][1] in the CodePipeline User Guide.
+    #   was stopped for the pipeline, in timestamp format.
+    #
+    #   Pipelines that are inactive for longer than 30 days will have
+    #   polling disabled for the pipeline. For more information, see
+    #   [pollingDisabledAt][1] in the pipeline structure reference. For the
+    #   steps to migrate your pipeline from polling to event-based change
+    #   detection, see [Migrate polling pipelines to use event-based change
+    #   detection][2].
+    #
+    #   You can migrate (update) a polling pipeline to use event-based
+    #   change detection. For example, for a pipeline with a CodeCommit
+    #   source, we recommend you migrate (update) your pipeline to use
+    #   CloudWatch Events. To learn more, see [Migrate polling pipelines to
+    #   use event-based change detection][2] in the *CodePipeline User
+    #   Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/codepipeline/latest/userguide/update-change-detection.html
+    #   [1]: https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#metadata.pollingDisabledAt
+    #   [2]: https://docs.aws.amazon.com/codepipeline/latest/userguide/update-change-detection.html
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineMetadata AWS API Documentation
@@ -5454,6 +5632,25 @@ module Aws::CodePipeline
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/TagResourceOutput AWS API Documentation
     #
     class TagResourceOutput < Aws::EmptyStructure; end
+
+    # Filters the list of targets.
+    #
+    # @!attribute [rw] name
+    #   The name on which to filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values on which to filter.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/TargetFilter AWS API Documentation
+    #
+    class TargetFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # A response to a `PollForThirdPartyJobs` request returned by
     # CodePipeline when there is a job to be worked on by a partner action.

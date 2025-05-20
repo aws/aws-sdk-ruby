@@ -840,7 +840,7 @@ module Aws::MarketplaceCatalog
     StartChangeSetRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "Catalog"))
     StartChangeSetRequest.add_member(:change_set, Shapes::ShapeRef.new(shape: RequestedChangeList, required: true, location_name: "ChangeSet"))
     StartChangeSetRequest.add_member(:change_set_name, Shapes::ShapeRef.new(shape: ChangeSetName, location_name: "ChangeSetName"))
-    StartChangeSetRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    StartChangeSetRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     StartChangeSetRequest.add_member(:change_set_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "ChangeSetTags"))
     StartChangeSetRequest.add_member(:intent, Shapes::ShapeRef.new(shape: Intent, location_name: "Intent"))
     StartChangeSetRequest.struct_class = Types::StartChangeSetRequest

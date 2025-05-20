@@ -200,8 +200,7 @@ module Aws::ConnectCases
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -681,7 +680,7 @@ module Aws::ConnectCases
     #   and value union data.
     #
     # @option params [Types::UserUnion] :performed_by
-    #   Represents the identity of the person who performed the action.
+    #   Represents the entity that performed the action.
     #
     # @option params [required, String] :template_id
     #   A unique identifier of a template.
@@ -710,6 +709,7 @@ module Aws::ConnectCases
     #       },
     #     ],
     #     performed_by: {
+    #       custom_entity: "CustomEntity",
     #       user_arn: "UserArn",
     #     },
     #     template_id: "TemplateId", # required
@@ -1060,6 +1060,7 @@ module Aws::ConnectCases
     #     },
     #     domain_id: "DomainId", # required
     #     performed_by: {
+    #       custom_entity: "CustomEntity",
     #       user_arn: "UserArn",
     #     },
     #     type: "Contact", # required, accepts Contact, Comment, File, Sla
@@ -1487,6 +1488,7 @@ module Aws::ConnectCases
     #   resp.audit_events[0].fields[0].old_value.string_value #=> String
     #   resp.audit_events[0].fields[0].old_value.user_arn_value #=> String
     #   resp.audit_events[0].performed_by.iam_principal_arn #=> String
+    #   resp.audit_events[0].performed_by.user.custom_entity #=> String
     #   resp.audit_events[0].performed_by.user.user_arn #=> String
     #   resp.audit_events[0].performed_time #=> Time
     #   resp.audit_events[0].related_item_type #=> String, one of "Contact", "Comment", "File", "Sla"
@@ -2383,6 +2385,7 @@ module Aws::ConnectCases
     #   resp.related_items[0].content.sla.sla_configuration.target_field_values[0].user_arn_value #=> String
     #   resp.related_items[0].content.sla.sla_configuration.target_time #=> Time
     #   resp.related_items[0].content.sla.sla_configuration.type #=> String, one of "CaseField"
+    #   resp.related_items[0].performed_by.custom_entity #=> String
     #   resp.related_items[0].performed_by.user_arn #=> String
     #   resp.related_items[0].related_item_id #=> String
     #   resp.related_items[0].tags #=> Hash
@@ -2481,7 +2484,7 @@ module Aws::ConnectCases
     #   and value union data, structured identical to `CreateCase`.
     #
     # @option params [Types::UserUnion] :performed_by
-    #   Represents the identity of the person who performed the action.
+    #   Represents the entity that performed the action.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2504,6 +2507,7 @@ module Aws::ConnectCases
     #       },
     #     ],
     #     performed_by: {
+    #       custom_entity: "CustomEntity",
     #       user_arn: "UserArn",
     #     },
     #   })
@@ -2814,7 +2818,7 @@ module Aws::ConnectCases
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connectcases'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -819,13 +819,13 @@ module Aws::IoTSiteWise
     AssociateAssetsRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "assetId"))
     AssociateAssetsRequest.add_member(:hierarchy_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location_name: "hierarchyId"))
     AssociateAssetsRequest.add_member(:child_asset_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location_name: "childAssetId"))
-    AssociateAssetsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    AssociateAssetsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     AssociateAssetsRequest.struct_class = Types::AssociateAssetsRequest
 
     AssociateTimeSeriesToAssetPropertyRequest.add_member(:alias, Shapes::ShapeRef.new(shape: PropertyAlias, required: true, location: "querystring", location_name: "alias"))
     AssociateTimeSeriesToAssetPropertyRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "querystring", location_name: "assetId"))
     AssociateTimeSeriesToAssetPropertyRequest.add_member(:property_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "querystring", location_name: "propertyId"))
-    AssociateTimeSeriesToAssetPropertyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    AssociateTimeSeriesToAssetPropertyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     AssociateTimeSeriesToAssetPropertyRequest.struct_class = Types::AssociateTimeSeriesToAssetPropertyRequest
 
     AssociatedAssetsSummaries.member = Shapes::ShapeRef.new(shape: AssociatedAssetsSummary)
@@ -849,7 +849,7 @@ module Aws::IoTSiteWise
 
     BatchAssociateProjectAssetsRequest.add_member(:project_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "projectId"))
     BatchAssociateProjectAssetsRequest.add_member(:asset_ids, Shapes::ShapeRef.new(shape: IDs, required: true, location_name: "assetIds"))
-    BatchAssociateProjectAssetsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    BatchAssociateProjectAssetsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     BatchAssociateProjectAssetsRequest.struct_class = Types::BatchAssociateProjectAssetsRequest
 
     BatchAssociateProjectAssetsResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchAssociateProjectAssetsErrors, location_name: "errors"))
@@ -859,7 +859,7 @@ module Aws::IoTSiteWise
 
     BatchDisassociateProjectAssetsRequest.add_member(:project_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "projectId"))
     BatchDisassociateProjectAssetsRequest.add_member(:asset_ids, Shapes::ShapeRef.new(shape: IDs, required: true, location_name: "assetIds"))
-    BatchDisassociateProjectAssetsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    BatchDisassociateProjectAssetsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     BatchDisassociateProjectAssetsRequest.struct_class = Types::BatchDisassociateProjectAssetsRequest
 
     BatchDisassociateProjectAssetsResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchDisassociateProjectAssetsErrors, location_name: "errors"))
@@ -1081,7 +1081,7 @@ module Aws::IoTSiteWise
     CreateAccessPolicyRequest.add_member(:access_policy_identity, Shapes::ShapeRef.new(shape: Identity, required: true, location_name: "accessPolicyIdentity"))
     CreateAccessPolicyRequest.add_member(:access_policy_resource, Shapes::ShapeRef.new(shape: Resource, required: true, location_name: "accessPolicyResource"))
     CreateAccessPolicyRequest.add_member(:access_policy_permission, Shapes::ShapeRef.new(shape: Permission, required: true, location_name: "accessPolicyPermission"))
-    CreateAccessPolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAccessPolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAccessPolicyRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateAccessPolicyRequest.struct_class = Types::CreateAccessPolicyRequest
 
@@ -1096,7 +1096,7 @@ module Aws::IoTSiteWise
     CreateAssetModelCompositeModelRequest.add_member(:asset_model_composite_model_description, Shapes::ShapeRef.new(shape: Description, location_name: "assetModelCompositeModelDescription"))
     CreateAssetModelCompositeModelRequest.add_member(:asset_model_composite_model_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "assetModelCompositeModelName"))
     CreateAssetModelCompositeModelRequest.add_member(:asset_model_composite_model_type, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "assetModelCompositeModelType"))
-    CreateAssetModelCompositeModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAssetModelCompositeModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAssetModelCompositeModelRequest.add_member(:composed_asset_model_id, Shapes::ShapeRef.new(shape: CustomID, location_name: "composedAssetModelId"))
     CreateAssetModelCompositeModelRequest.add_member(:asset_model_composite_model_properties, Shapes::ShapeRef.new(shape: AssetModelPropertyDefinitions, location_name: "assetModelCompositeModelProperties"))
     CreateAssetModelCompositeModelRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: ETag, location: "header", location_name: "If-Match"))
@@ -1117,7 +1117,7 @@ module Aws::IoTSiteWise
     CreateAssetModelRequest.add_member(:asset_model_properties, Shapes::ShapeRef.new(shape: AssetModelPropertyDefinitions, location_name: "assetModelProperties"))
     CreateAssetModelRequest.add_member(:asset_model_hierarchies, Shapes::ShapeRef.new(shape: AssetModelHierarchyDefinitions, location_name: "assetModelHierarchies"))
     CreateAssetModelRequest.add_member(:asset_model_composite_models, Shapes::ShapeRef.new(shape: AssetModelCompositeModelDefinitions, location_name: "assetModelCompositeModels"))
-    CreateAssetModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAssetModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAssetModelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateAssetModelRequest.struct_class = Types::CreateAssetModelRequest
 
@@ -1128,7 +1128,7 @@ module Aws::IoTSiteWise
 
     CreateAssetRequest.add_member(:asset_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "assetName"))
     CreateAssetRequest.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location_name: "assetModelId"))
-    CreateAssetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAssetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAssetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateAssetRequest.add_member(:asset_description, Shapes::ShapeRef.new(shape: Description, location_name: "assetDescription"))
     CreateAssetRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: ID, location_name: "assetId"))
@@ -1158,7 +1158,7 @@ module Aws::IoTSiteWise
     CreateDashboardRequest.add_member(:dashboard_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "dashboardName"))
     CreateDashboardRequest.add_member(:dashboard_description, Shapes::ShapeRef.new(shape: Description, location_name: "dashboardDescription"))
     CreateDashboardRequest.add_member(:dashboard_definition, Shapes::ShapeRef.new(shape: DashboardDefinition, required: true, location_name: "dashboardDefinition"))
-    CreateDashboardRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDashboardRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateDashboardRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateDashboardRequest.struct_class = Types::CreateDashboardRequest
 
@@ -1170,7 +1170,7 @@ module Aws::IoTSiteWise
     CreateDatasetRequest.add_member(:dataset_name, Shapes::ShapeRef.new(shape: RestrictedName, required: true, location_name: "datasetName"))
     CreateDatasetRequest.add_member(:dataset_description, Shapes::ShapeRef.new(shape: RestrictedDescription, location_name: "datasetDescription"))
     CreateDatasetRequest.add_member(:dataset_source, Shapes::ShapeRef.new(shape: DatasetSource, required: true, location_name: "datasetSource"))
-    CreateDatasetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDatasetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateDatasetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateDatasetRequest.struct_class = Types::CreateDatasetRequest
 
@@ -1192,7 +1192,7 @@ module Aws::IoTSiteWise
     CreatePortalRequest.add_member(:portal_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "portalName"))
     CreatePortalRequest.add_member(:portal_description, Shapes::ShapeRef.new(shape: Description, location_name: "portalDescription"))
     CreatePortalRequest.add_member(:portal_contact_email, Shapes::ShapeRef.new(shape: Email, required: true, location_name: "portalContactEmail"))
-    CreatePortalRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreatePortalRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreatePortalRequest.add_member(:portal_logo_image_file, Shapes::ShapeRef.new(shape: ImageFile, location_name: "portalLogoImageFile"))
     CreatePortalRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamArn, required: true, location_name: "roleArn"))
     CreatePortalRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
@@ -1213,7 +1213,7 @@ module Aws::IoTSiteWise
     CreateProjectRequest.add_member(:portal_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "portalId"))
     CreateProjectRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "projectName"))
     CreateProjectRequest.add_member(:project_description, Shapes::ShapeRef.new(shape: Description, location_name: "projectDescription"))
-    CreateProjectRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateProjectRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateProjectRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateProjectRequest.struct_class = Types::CreateProjectRequest
 
@@ -1270,14 +1270,14 @@ module Aws::IoTSiteWise
     DatumList.member = Shapes::ShapeRef.new(shape: Datum)
 
     DeleteAccessPolicyRequest.add_member(:access_policy_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "accessPolicyId"))
-    DeleteAccessPolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteAccessPolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteAccessPolicyRequest.struct_class = Types::DeleteAccessPolicyRequest
 
     DeleteAccessPolicyResponse.struct_class = Types::DeleteAccessPolicyResponse
 
     DeleteAssetModelCompositeModelRequest.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "assetModelId"))
     DeleteAssetModelCompositeModelRequest.add_member(:asset_model_composite_model_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "assetModelCompositeModelId"))
-    DeleteAssetModelCompositeModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteAssetModelCompositeModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteAssetModelCompositeModelRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: ETag, location: "header", location_name: "If-Match"))
     DeleteAssetModelCompositeModelRequest.add_member(:if_none_match, Shapes::ShapeRef.new(shape: SelectAll, location: "header", location_name: "If-None-Match"))
     DeleteAssetModelCompositeModelRequest.add_member(:match_for_version_type, Shapes::ShapeRef.new(shape: AssetModelVersionType, location: "header", location_name: "Match-For-Version-Type"))
@@ -1287,7 +1287,7 @@ module Aws::IoTSiteWise
     DeleteAssetModelCompositeModelResponse.struct_class = Types::DeleteAssetModelCompositeModelResponse
 
     DeleteAssetModelRequest.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "assetModelId"))
-    DeleteAssetModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteAssetModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteAssetModelRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: ETag, location: "header", location_name: "If-Match"))
     DeleteAssetModelRequest.add_member(:if_none_match, Shapes::ShapeRef.new(shape: SelectAll, location: "header", location_name: "If-None-Match"))
     DeleteAssetModelRequest.add_member(:match_for_version_type, Shapes::ShapeRef.new(shape: AssetModelVersionType, location: "header", location_name: "Match-For-Version-Type"))
@@ -1297,20 +1297,20 @@ module Aws::IoTSiteWise
     DeleteAssetModelResponse.struct_class = Types::DeleteAssetModelResponse
 
     DeleteAssetRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "assetId"))
-    DeleteAssetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteAssetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteAssetRequest.struct_class = Types::DeleteAssetRequest
 
     DeleteAssetResponse.add_member(:asset_status, Shapes::ShapeRef.new(shape: AssetStatus, required: true, location_name: "assetStatus"))
     DeleteAssetResponse.struct_class = Types::DeleteAssetResponse
 
     DeleteDashboardRequest.add_member(:dashboard_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "dashboardId"))
-    DeleteDashboardRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteDashboardRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteDashboardRequest.struct_class = Types::DeleteDashboardRequest
 
     DeleteDashboardResponse.struct_class = Types::DeleteDashboardResponse
 
     DeleteDatasetRequest.add_member(:dataset_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "datasetId"))
-    DeleteDatasetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteDatasetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteDatasetRequest.struct_class = Types::DeleteDatasetRequest
 
     DeleteDatasetResponse.add_member(:dataset_status, Shapes::ShapeRef.new(shape: DatasetStatus, required: true, location_name: "datasetStatus"))
@@ -1320,14 +1320,14 @@ module Aws::IoTSiteWise
     DeleteGatewayRequest.struct_class = Types::DeleteGatewayRequest
 
     DeletePortalRequest.add_member(:portal_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "portalId"))
-    DeletePortalRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeletePortalRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeletePortalRequest.struct_class = Types::DeletePortalRequest
 
     DeletePortalResponse.add_member(:portal_status, Shapes::ShapeRef.new(shape: PortalStatus, required: true, location_name: "portalStatus"))
     DeletePortalResponse.struct_class = Types::DeletePortalResponse
 
     DeleteProjectRequest.add_member(:project_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "projectId"))
-    DeleteProjectRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteProjectRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteProjectRequest.struct_class = Types::DeleteProjectRequest
 
     DeleteProjectResponse.struct_class = Types::DeleteProjectResponse
@@ -1335,7 +1335,7 @@ module Aws::IoTSiteWise
     DeleteTimeSeriesRequest.add_member(:alias, Shapes::ShapeRef.new(shape: PropertyAlias, location: "querystring", location_name: "alias"))
     DeleteTimeSeriesRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: CustomID, location: "querystring", location_name: "assetId"))
     DeleteTimeSeriesRequest.add_member(:property_id, Shapes::ShapeRef.new(shape: CustomID, location: "querystring", location_name: "propertyId"))
-    DeleteTimeSeriesRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteTimeSeriesRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteTimeSeriesRequest.struct_class = Types::DeleteTimeSeriesRequest
 
     DescribeAccessPolicyRequest.add_member(:access_policy_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "accessPolicyId"))
@@ -1597,13 +1597,13 @@ module Aws::IoTSiteWise
     DisassociateAssetsRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "assetId"))
     DisassociateAssetsRequest.add_member(:hierarchy_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location_name: "hierarchyId"))
     DisassociateAssetsRequest.add_member(:child_asset_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location_name: "childAssetId"))
-    DisassociateAssetsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DisassociateAssetsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DisassociateAssetsRequest.struct_class = Types::DisassociateAssetsRequest
 
     DisassociateTimeSeriesFromAssetPropertyRequest.add_member(:alias, Shapes::ShapeRef.new(shape: PropertyAlias, required: true, location: "querystring", location_name: "alias"))
     DisassociateTimeSeriesFromAssetPropertyRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "querystring", location_name: "assetId"))
     DisassociateTimeSeriesFromAssetPropertyRequest.add_member(:property_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "querystring", location_name: "propertyId"))
-    DisassociateTimeSeriesFromAssetPropertyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DisassociateTimeSeriesFromAssetPropertyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DisassociateTimeSeriesFromAssetPropertyRequest.struct_class = Types::DisassociateTimeSeriesFromAssetPropertyRequest
 
     ErrorDetails.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "code"))
@@ -1627,7 +1627,7 @@ module Aws::IoTSiteWise
     ExecuteQueryRequest.add_member(:query_statement, Shapes::ShapeRef.new(shape: QueryStatement, required: true, location_name: "queryStatement"))
     ExecuteQueryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ExecuteQueryNextToken, location_name: "nextToken"))
     ExecuteQueryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ExecuteQueryMaxResults, location_name: "maxResults"))
-    ExecuteQueryRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    ExecuteQueryRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     ExecuteQueryRequest.struct_class = Types::ExecuteQueryRequest
 
     ExecuteQueryResponse.add_member(:columns, Shapes::ShapeRef.new(shape: ColumnsList, location_name: "columns"))
@@ -2266,7 +2266,7 @@ module Aws::IoTSiteWise
     UpdateAccessPolicyRequest.add_member(:access_policy_identity, Shapes::ShapeRef.new(shape: Identity, required: true, location_name: "accessPolicyIdentity"))
     UpdateAccessPolicyRequest.add_member(:access_policy_resource, Shapes::ShapeRef.new(shape: Resource, required: true, location_name: "accessPolicyResource"))
     UpdateAccessPolicyRequest.add_member(:access_policy_permission, Shapes::ShapeRef.new(shape: Permission, required: true, location_name: "accessPolicyPermission"))
-    UpdateAccessPolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateAccessPolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateAccessPolicyRequest.struct_class = Types::UpdateAccessPolicyRequest
 
     UpdateAccessPolicyResponse.struct_class = Types::UpdateAccessPolicyResponse
@@ -2276,7 +2276,7 @@ module Aws::IoTSiteWise
     UpdateAssetModelCompositeModelRequest.add_member(:asset_model_composite_model_external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "assetModelCompositeModelExternalId"))
     UpdateAssetModelCompositeModelRequest.add_member(:asset_model_composite_model_description, Shapes::ShapeRef.new(shape: Description, location_name: "assetModelCompositeModelDescription"))
     UpdateAssetModelCompositeModelRequest.add_member(:asset_model_composite_model_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "assetModelCompositeModelName"))
-    UpdateAssetModelCompositeModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateAssetModelCompositeModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateAssetModelCompositeModelRequest.add_member(:asset_model_composite_model_properties, Shapes::ShapeRef.new(shape: AssetModelProperties, location_name: "assetModelCompositeModelProperties"))
     UpdateAssetModelCompositeModelRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: ETag, location: "header", location_name: "If-Match"))
     UpdateAssetModelCompositeModelRequest.add_member(:if_none_match, Shapes::ShapeRef.new(shape: SelectAll, location: "header", location_name: "If-None-Match"))
@@ -2294,7 +2294,7 @@ module Aws::IoTSiteWise
     UpdateAssetModelRequest.add_member(:asset_model_properties, Shapes::ShapeRef.new(shape: AssetModelProperties, location_name: "assetModelProperties"))
     UpdateAssetModelRequest.add_member(:asset_model_hierarchies, Shapes::ShapeRef.new(shape: AssetModelHierarchies, location_name: "assetModelHierarchies"))
     UpdateAssetModelRequest.add_member(:asset_model_composite_models, Shapes::ShapeRef.new(shape: AssetModelCompositeModels, location_name: "assetModelCompositeModels"))
-    UpdateAssetModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateAssetModelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateAssetModelRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: ETag, location: "header", location_name: "If-Match"))
     UpdateAssetModelRequest.add_member(:if_none_match, Shapes::ShapeRef.new(shape: SelectAll, location: "header", location_name: "If-None-Match"))
     UpdateAssetModelRequest.add_member(:match_for_version_type, Shapes::ShapeRef.new(shape: AssetModelVersionType, location: "header", location_name: "Match-For-Version-Type"))
@@ -2307,13 +2307,13 @@ module Aws::IoTSiteWise
     UpdateAssetPropertyRequest.add_member(:property_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "propertyId"))
     UpdateAssetPropertyRequest.add_member(:property_alias, Shapes::ShapeRef.new(shape: PropertyAlias, location_name: "propertyAlias"))
     UpdateAssetPropertyRequest.add_member(:property_notification_state, Shapes::ShapeRef.new(shape: PropertyNotificationState, location_name: "propertyNotificationState"))
-    UpdateAssetPropertyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateAssetPropertyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateAssetPropertyRequest.add_member(:property_unit, Shapes::ShapeRef.new(shape: PropertyUnit, location_name: "propertyUnit"))
     UpdateAssetPropertyRequest.struct_class = Types::UpdateAssetPropertyRequest
 
     UpdateAssetRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: CustomID, required: true, location: "uri", location_name: "assetId"))
     UpdateAssetRequest.add_member(:asset_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "assetName"))
-    UpdateAssetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateAssetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateAssetRequest.add_member(:asset_description, Shapes::ShapeRef.new(shape: Description, location_name: "assetDescription"))
     UpdateAssetRequest.add_member(:asset_external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "assetExternalId"))
     UpdateAssetRequest.struct_class = Types::UpdateAssetRequest
@@ -2325,7 +2325,7 @@ module Aws::IoTSiteWise
     UpdateDashboardRequest.add_member(:dashboard_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "dashboardName"))
     UpdateDashboardRequest.add_member(:dashboard_description, Shapes::ShapeRef.new(shape: Description, location_name: "dashboardDescription"))
     UpdateDashboardRequest.add_member(:dashboard_definition, Shapes::ShapeRef.new(shape: DashboardDefinition, required: true, location_name: "dashboardDefinition"))
-    UpdateDashboardRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateDashboardRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateDashboardRequest.struct_class = Types::UpdateDashboardRequest
 
     UpdateDashboardResponse.struct_class = Types::UpdateDashboardResponse
@@ -2334,7 +2334,7 @@ module Aws::IoTSiteWise
     UpdateDatasetRequest.add_member(:dataset_name, Shapes::ShapeRef.new(shape: RestrictedName, required: true, location_name: "datasetName"))
     UpdateDatasetRequest.add_member(:dataset_description, Shapes::ShapeRef.new(shape: RestrictedDescription, location_name: "datasetDescription"))
     UpdateDatasetRequest.add_member(:dataset_source, Shapes::ShapeRef.new(shape: DatasetSource, required: true, location_name: "datasetSource"))
-    UpdateDatasetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateDatasetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateDatasetRequest.struct_class = Types::UpdateDatasetRequest
 
     UpdateDatasetResponse.add_member(:dataset_id, Shapes::ShapeRef.new(shape: CustomID, location_name: "datasetId"))
@@ -2361,7 +2361,7 @@ module Aws::IoTSiteWise
     UpdatePortalRequest.add_member(:portal_contact_email, Shapes::ShapeRef.new(shape: Email, required: true, location_name: "portalContactEmail"))
     UpdatePortalRequest.add_member(:portal_logo_image, Shapes::ShapeRef.new(shape: Image, location_name: "portalLogoImage"))
     UpdatePortalRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamArn, required: true, location_name: "roleArn"))
-    UpdatePortalRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdatePortalRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdatePortalRequest.add_member(:notification_sender_email, Shapes::ShapeRef.new(shape: Email, location_name: "notificationSenderEmail"))
     UpdatePortalRequest.add_member(:alarms, Shapes::ShapeRef.new(shape: Alarms, location_name: "alarms"))
     UpdatePortalRequest.add_member(:portal_type, Shapes::ShapeRef.new(shape: PortalType, location_name: "portalType"))
@@ -2374,7 +2374,7 @@ module Aws::IoTSiteWise
     UpdateProjectRequest.add_member(:project_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "projectId"))
     UpdateProjectRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "projectName"))
     UpdateProjectRequest.add_member(:project_description, Shapes::ShapeRef.new(shape: Description, location_name: "projectDescription"))
-    UpdateProjectRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateProjectRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateProjectRequest.struct_class = Types::UpdateProjectRequest
 
     UpdateProjectResponse.struct_class = Types::UpdateProjectResponse

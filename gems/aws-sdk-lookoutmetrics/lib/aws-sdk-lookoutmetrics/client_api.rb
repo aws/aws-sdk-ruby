@@ -431,7 +431,7 @@ module Aws::LookoutMetrics
     CreateMetricSetRequest.add_member(:metric_set_name, Shapes::ShapeRef.new(shape: MetricSetName, required: true, location_name: "MetricSetName"))
     CreateMetricSetRequest.add_member(:metric_set_description, Shapes::ShapeRef.new(shape: MetricSetDescription, location_name: "MetricSetDescription"))
     CreateMetricSetRequest.add_member(:metric_list, Shapes::ShapeRef.new(shape: MetricList, required: true, location_name: "MetricList"))
-    CreateMetricSetRequest.add_member(:offset, Shapes::ShapeRef.new(shape: Offset, location_name: "Offset", metadata: {"box"=>true}))
+    CreateMetricSetRequest.add_member(:offset, Shapes::ShapeRef.new(shape: Offset, location_name: "Offset", metadata: {"box" => true}))
     CreateMetricSetRequest.add_member(:timestamp_column, Shapes::ShapeRef.new(shape: TimestampColumn, location_name: "TimestampColumn"))
     CreateMetricSetRequest.add_member(:dimension_list, Shapes::ShapeRef.new(shape: DimensionList, location_name: "DimensionList"))
     CreateMetricSetRequest.add_member(:metric_set_frequency, Shapes::ShapeRef.new(shape: Frequency, location_name: "MetricSetFrequency"))
@@ -483,7 +483,7 @@ module Aws::LookoutMetrics
 
     DescribeAnomalyDetectionExecutionsRequest.add_member(:anomaly_detector_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AnomalyDetectorArn"))
     DescribeAnomalyDetectionExecutionsRequest.add_member(:timestamp, Shapes::ShapeRef.new(shape: TimestampString, location_name: "Timestamp"))
-    DescribeAnomalyDetectionExecutionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    DescribeAnomalyDetectionExecutionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     DescribeAnomalyDetectionExecutionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeAnomalyDetectionExecutionsRequest.struct_class = Types::DescribeAnomalyDetectionExecutionsRequest
 
@@ -515,7 +515,7 @@ module Aws::LookoutMetrics
     DescribeMetricSetResponse.add_member(:metric_set_description, Shapes::ShapeRef.new(shape: MetricSetDescription, location_name: "MetricSetDescription"))
     DescribeMetricSetResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     DescribeMetricSetResponse.add_member(:last_modification_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModificationTime"))
-    DescribeMetricSetResponse.add_member(:offset, Shapes::ShapeRef.new(shape: Offset, location_name: "Offset", metadata: {"box"=>true}))
+    DescribeMetricSetResponse.add_member(:offset, Shapes::ShapeRef.new(shape: Offset, location_name: "Offset", metadata: {"box" => true}))
     DescribeMetricSetResponse.add_member(:metric_list, Shapes::ShapeRef.new(shape: MetricList, location_name: "MetricList"))
     DescribeMetricSetResponse.add_member(:timestamp_column, Shapes::ShapeRef.new(shape: TimestampColumn, location_name: "TimestampColumn"))
     DescribeMetricSetResponse.add_member(:dimension_list, Shapes::ShapeRef.new(shape: DimensionList, location_name: "DimensionList"))
@@ -625,7 +625,7 @@ module Aws::LookoutMetrics
 
     GetFeedbackRequest.add_member(:anomaly_detector_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AnomalyDetectorArn"))
     GetFeedbackRequest.add_member(:anomaly_group_time_series_feedback, Shapes::ShapeRef.new(shape: AnomalyGroupTimeSeries, required: true, location_name: "AnomalyGroupTimeSeriesFeedback"))
-    GetFeedbackRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    GetFeedbackRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     GetFeedbackRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetFeedbackRequest.struct_class = Types::GetFeedbackRequest
 
@@ -673,14 +673,14 @@ module Aws::LookoutMetrics
 
     ListAlertsRequest.add_member(:anomaly_detector_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AnomalyDetectorArn"))
     ListAlertsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListAlertsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListAlertsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     ListAlertsRequest.struct_class = Types::ListAlertsRequest
 
     ListAlertsResponse.add_member(:alert_summary_list, Shapes::ShapeRef.new(shape: AlertSummaryList, location_name: "AlertSummaryList"))
     ListAlertsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListAlertsResponse.struct_class = Types::ListAlertsResponse
 
-    ListAnomalyDetectorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListAnomalyDetectorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     ListAnomalyDetectorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListAnomalyDetectorsRequest.struct_class = Types::ListAnomalyDetectorsRequest
 
@@ -691,7 +691,7 @@ module Aws::LookoutMetrics
     ListAnomalyGroupRelatedMetricsRequest.add_member(:anomaly_detector_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AnomalyDetectorArn"))
     ListAnomalyGroupRelatedMetricsRequest.add_member(:anomaly_group_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "AnomalyGroupId"))
     ListAnomalyGroupRelatedMetricsRequest.add_member(:relationship_type_filter, Shapes::ShapeRef.new(shape: RelationshipType, location_name: "RelationshipTypeFilter"))
-    ListAnomalyGroupRelatedMetricsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListAnomalyGroupRelatedMetricsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     ListAnomalyGroupRelatedMetricsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListAnomalyGroupRelatedMetricsRequest.struct_class = Types::ListAnomalyGroupRelatedMetricsRequest
 
@@ -701,7 +701,7 @@ module Aws::LookoutMetrics
 
     ListAnomalyGroupSummariesRequest.add_member(:anomaly_detector_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AnomalyDetectorArn"))
     ListAnomalyGroupSummariesRequest.add_member(:sensitivity_threshold, Shapes::ShapeRef.new(shape: SensitivityThreshold, required: true, location_name: "SensitivityThreshold"))
-    ListAnomalyGroupSummariesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListAnomalyGroupSummariesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     ListAnomalyGroupSummariesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListAnomalyGroupSummariesRequest.struct_class = Types::ListAnomalyGroupSummariesRequest
 
@@ -713,7 +713,7 @@ module Aws::LookoutMetrics
     ListAnomalyGroupTimeSeriesRequest.add_member(:anomaly_detector_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AnomalyDetectorArn"))
     ListAnomalyGroupTimeSeriesRequest.add_member(:anomaly_group_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "AnomalyGroupId"))
     ListAnomalyGroupTimeSeriesRequest.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
-    ListAnomalyGroupTimeSeriesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListAnomalyGroupTimeSeriesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     ListAnomalyGroupTimeSeriesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListAnomalyGroupTimeSeriesRequest.struct_class = Types::ListAnomalyGroupTimeSeriesRequest
 
@@ -725,7 +725,7 @@ module Aws::LookoutMetrics
     ListAnomalyGroupTimeSeriesResponse.struct_class = Types::ListAnomalyGroupTimeSeriesResponse
 
     ListMetricSetsRequest.add_member(:anomaly_detector_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AnomalyDetectorArn"))
-    ListMetricSetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListMetricSetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     ListMetricSetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListMetricSetsRequest.struct_class = Types::ListMetricSetsRequest
 
@@ -798,7 +798,7 @@ module Aws::LookoutMetrics
 
     RDSSourceConfig.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: RDSDatabaseIdentifier, location_name: "DBInstanceIdentifier"))
     RDSSourceConfig.add_member(:database_host, Shapes::ShapeRef.new(shape: DatabaseHost, location_name: "DatabaseHost"))
-    RDSSourceConfig.add_member(:database_port, Shapes::ShapeRef.new(shape: DatabasePort, location_name: "DatabasePort", metadata: {"box"=>true}))
+    RDSSourceConfig.add_member(:database_port, Shapes::ShapeRef.new(shape: DatabasePort, location_name: "DatabasePort", metadata: {"box" => true}))
     RDSSourceConfig.add_member(:secret_manager_arn, Shapes::ShapeRef.new(shape: PoirotSecretManagerArn, location_name: "SecretManagerArn"))
     RDSSourceConfig.add_member(:database_name, Shapes::ShapeRef.new(shape: RDSDatabaseName, location_name: "DatabaseName"))
     RDSSourceConfig.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "TableName"))
@@ -808,7 +808,7 @@ module Aws::LookoutMetrics
 
     RedshiftSourceConfig.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: RedshiftClusterIdentifier, location_name: "ClusterIdentifier"))
     RedshiftSourceConfig.add_member(:database_host, Shapes::ShapeRef.new(shape: DatabaseHost, location_name: "DatabaseHost"))
-    RedshiftSourceConfig.add_member(:database_port, Shapes::ShapeRef.new(shape: DatabasePort, location_name: "DatabasePort", metadata: {"box"=>true}))
+    RedshiftSourceConfig.add_member(:database_port, Shapes::ShapeRef.new(shape: DatabasePort, location_name: "DatabasePort", metadata: {"box" => true}))
     RedshiftSourceConfig.add_member(:secret_manager_arn, Shapes::ShapeRef.new(shape: PoirotSecretManagerArn, location_name: "SecretManagerArn"))
     RedshiftSourceConfig.add_member(:database_name, Shapes::ShapeRef.new(shape: RedshiftDatabaseName, location_name: "DatabaseName"))
     RedshiftSourceConfig.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "TableName"))
@@ -918,7 +918,7 @@ module Aws::LookoutMetrics
     UpdateMetricSetRequest.add_member(:metric_set_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "MetricSetArn"))
     UpdateMetricSetRequest.add_member(:metric_set_description, Shapes::ShapeRef.new(shape: MetricSetDescription, location_name: "MetricSetDescription"))
     UpdateMetricSetRequest.add_member(:metric_list, Shapes::ShapeRef.new(shape: MetricList, location_name: "MetricList"))
-    UpdateMetricSetRequest.add_member(:offset, Shapes::ShapeRef.new(shape: Offset, location_name: "Offset", metadata: {"box"=>true}))
+    UpdateMetricSetRequest.add_member(:offset, Shapes::ShapeRef.new(shape: Offset, location_name: "Offset", metadata: {"box" => true}))
     UpdateMetricSetRequest.add_member(:timestamp_column, Shapes::ShapeRef.new(shape: TimestampColumn, location_name: "TimestampColumn"))
     UpdateMetricSetRequest.add_member(:dimension_list, Shapes::ShapeRef.new(shape: DimensionList, location_name: "DimensionList"))
     UpdateMetricSetRequest.add_member(:metric_set_frequency, Shapes::ShapeRef.new(shape: Frequency, location_name: "MetricSetFrequency"))

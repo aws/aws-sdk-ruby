@@ -342,7 +342,7 @@ module Aws::IdentityStore
     ListGroupsRequest.add_member(:identity_store_id, Shapes::ShapeRef.new(shape: IdentityStoreId, required: true, location_name: "IdentityStoreId"))
     ListGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListGroupsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, deprecated: true, location_name: "Filters", metadata: {"deprecatedMessage"=>"Using filters with ListGroups API is deprecated, please use GetGroupId API instead."}))
+    ListGroupsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, deprecated: true, location_name: "Filters", metadata: {"deprecatedMessage" => "Using filters with ListGroups API is deprecated, please use GetGroupId API instead."}))
     ListGroupsRequest.struct_class = Types::ListGroupsRequest
 
     ListGroupsResponse.add_member(:groups, Shapes::ShapeRef.new(shape: Groups, required: true, location_name: "Groups"))
@@ -352,7 +352,7 @@ module Aws::IdentityStore
     ListUsersRequest.add_member(:identity_store_id, Shapes::ShapeRef.new(shape: IdentityStoreId, required: true, location_name: "IdentityStoreId"))
     ListUsersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListUsersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListUsersRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, deprecated: true, location_name: "Filters", metadata: {"deprecatedMessage"=>"Using filters with ListUsers API is deprecated, please use GetGroupId API instead."}))
+    ListUsersRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, deprecated: true, location_name: "Filters", metadata: {"deprecatedMessage" => "Using filters with ListUsers API is deprecated, please use GetGroupId API instead."}))
     ListUsersRequest.struct_class = Types::ListUsersRequest
 
     ListUsersResponse.add_member(:users, Shapes::ShapeRef.new(shape: Users, required: true, location_name: "Users"))

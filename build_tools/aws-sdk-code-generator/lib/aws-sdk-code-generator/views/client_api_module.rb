@@ -49,6 +49,7 @@ module AwsSdkCodeGenerator
         'fault' => false,
         'deprecated' => false,
         'deprecatedMessage' => false,
+        'deprecatedSince' => false,
         'type' => false,
         'documentation' => false,
         'members' => false,

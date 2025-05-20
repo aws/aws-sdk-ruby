@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.116.0 (2025-05-14)
+------------------
+
+* Feature - This release adds a new API "ListLogGroups" and an improvement in API "DescribeLogGroups"
+
+1.115.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.114.0 (2025-05-09)
+------------------
+
+* Feature - We are pleased to announce limit increases to our grok processor logs transformation feature. Now you can define 20 Grok patterns in their configurations, with an expanded total pattern matching limit of 512 characters.
+
+1.113.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.112.0 (2025-04-30)
+------------------
+
+* Feature - CloudWatch Logs supports "DELIVERY" log class. This log class is used only for delivering AWS Lambda logs to Amazon S3 or Amazon Data Firehose.
+
 1.111.0 (2025-04-28)
 ------------------
 

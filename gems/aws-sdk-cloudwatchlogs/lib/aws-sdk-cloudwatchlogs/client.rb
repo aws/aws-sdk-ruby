@@ -202,8 +202,7 @@ module Aws::CloudWatchLogs
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -534,9 +533,9 @@ module Aws::CloudWatchLogs
     # results that were encrypted with that key will be unencryptable and
     # unusable.
     #
-    # <note markdown="1"> CloudWatch Logs supports only symmetric KMS keys. Do not use an
-    # associate an asymmetric KMS key with your log group or query results.
-    # For more information, see [Using Symmetric and Asymmetric Keys][3].
+    # <note markdown="1"> CloudWatch Logs supports only symmetric KMS keys. Do not associate an
+    # asymmetric KMS key with your log group or query results. For more
+    # information, see [Using Symmetric and Asymmetric Keys][3].
     #
     #  </note>
     #
@@ -784,7 +783,7 @@ module Aws::CloudWatchLogs
     # exported objects.
     #
     # <note markdown="1"> We recommend that you don't regularly export to Amazon S3 as a way to
-    # continuously archive your logs. For that use case, we instaed
+    # continuously archive your logs. For that use case, we instead
     # recommend that you use subscriptions. For more information about
     # subscriptions, see [Real-time processing of log data with
     # subscriptions][3].
@@ -1062,12 +1061,18 @@ module Aws::CloudWatchLogs
     #
     # @option params [String] :log_group_class
     #   Use this parameter to specify the log group class for this log group.
-    #   There are two classes:
+    #   There are three classes:
     #
     #   * The `Standard` log class supports all CloudWatch Logs features.
     #
     #   * The `Infrequent Access` log class supports a subset of CloudWatch
     #     Logs features and incurs lower costs.
+    #
+    #   * Use the `Delivery` log class only for delivering Lambda logs to
+    #     store in Amazon S3 or Amazon Data Firehose. Log events in log groups
+    #     in the Delivery class are kept in CloudWatch Logs for only one day.
+    #     This log class doesn't offer rich CloudWatch Logs capabilities such
+    #     as CloudWatch Logs Insights queries.
     #
     #   If you omit this parameter, the default of `STANDARD` is used.
     #
@@ -1091,7 +1096,7 @@ module Aws::CloudWatchLogs
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
-    #     log_group_class: "STANDARD", # accepts STANDARD, INFREQUENT_ACCESS
+    #     log_group_class: "STANDARD", # accepts STANDARD, INFREQUENT_ACCESS, DELIVERY
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateLogGroup AWS API Documentation
@@ -1717,7 +1722,7 @@ module Aws::CloudWatchLogs
     #   permissions.
     #
     # * To see subscription filter policies, you must have the
-    #   `logs:DescrubeSubscriptionFilters` and
+    #   `logs:DescribeSubscriptionFilters` and
     #   `logs:DescribeAccountPolicies` permissions.
     #
     # * To see transformer policies, you must have the `logs:GetTransformer`
@@ -2243,9 +2248,9 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
-    # Lists the specified log groups. You can list all your log groups or
-    # filter the results by prefix. The results are ASCII-sorted by log
-    # group name.
+    # Returns information about log groups. You can return all your log
+    # groups or filter the results by prefix. The results are ASCII-sorted
+    # by log group name.
     #
     # CloudWatch Logs doesn't support IAM policies that control access to
     # the `DescribeLogGroups` action by using the `aws:ResourceTag/key-name
@@ -2265,7 +2270,7 @@ module Aws::CloudWatchLogs
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html
     #
     # @option params [Array<String>] :account_identifiers
-    #   When `includeLinkedAccounts` is set to `True`, use this parameter to
+    #   When `includeLinkedAccounts` is set to `true`, use this parameter to
     #   specify the list of accounts to search. You can specify as many as 20
     #   account IDs in the array.
     #
@@ -2301,7 +2306,7 @@ module Aws::CloudWatchLogs
     #   the default is up to 50 items.
     #
     # @option params [Boolean] :include_linked_accounts
-    #   If you are using a monitoring account, set this to `True` to have the
+    #   If you are using a monitoring account, set this to `true` to have the
     #   operation return log groups in the accounts listed in
     #   `accountIdentifiers`.
     #
@@ -2310,8 +2315,14 @@ module Aws::CloudWatchLogs
     #   account and all log groups in all source accounts that are linked to
     #   the monitoring account.
     #
+    #   The default for this parameter is `false`.
+    #
     # @option params [String] :log_group_class
-    #   Specifies the log group class for this log group. There are two
+    #   Use this parameter to limit the results to only those log groups in
+    #   the specified log group class. If you omit this parameter, log groups
+    #   of all classes can be returned.
+    #
+    #   Specifies the log group class for this log group. There are three
     #   classes:
     #
     #   * The `Standard` log class supports all CloudWatch Logs features.
@@ -2319,12 +2330,29 @@ module Aws::CloudWatchLogs
     #   * The `Infrequent Access` log class supports a subset of CloudWatch
     #     Logs features and incurs lower costs.
     #
+    #   * Use the `Delivery` log class only for delivering Lambda logs to
+    #     store in Amazon S3 or Amazon Data Firehose. Log events in log groups
+    #     in the Delivery class are kept in CloudWatch Logs for only one day.
+    #     This log class doesn't offer rich CloudWatch Logs capabilities such
+    #     as CloudWatch Logs Insights queries.
+    #
     #   For details about the features supported by each class, see [Log
     #   classes][1]
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html
+    #
+    # @option params [Array<String>] :log_group_identifiers
+    #   Use this array to filter the list of log groups returned. If you
+    #   specify this parameter, the only other filter that you can choose to
+    #   specify is `includeLinkedAccounts`.
+    #
+    #   If you are using this operation in a monitoring account, you can
+    #   specify the ARNs of log groups in source accounts and in the
+    #   monitoring account itself. If you are using this operation in an
+    #   account that is not a cross-account monitoring account, you can
+    #   specify only log group names in the same account as the operation.
     #
     # @return [Types::DescribeLogGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2342,7 +2370,8 @@ module Aws::CloudWatchLogs
     #     next_token: "NextToken",
     #     limit: 1,
     #     include_linked_accounts: false,
-    #     log_group_class: "STANDARD", # accepts STANDARD, INFREQUENT_ACCESS
+    #     log_group_class: "STANDARD", # accepts STANDARD, INFREQUENT_ACCESS, DELIVERY
+    #     log_group_identifiers: ["LogGroupIdentifier"],
     #   })
     #
     # @example Response structure
@@ -2358,7 +2387,7 @@ module Aws::CloudWatchLogs
     #   resp.log_groups[0].data_protection_status #=> String, one of "ACTIVATED", "DELETED", "ARCHIVED", "DISABLED"
     #   resp.log_groups[0].inherited_properties #=> Array
     #   resp.log_groups[0].inherited_properties[0] #=> String, one of "ACCOUNT_DATA_PROTECTION"
-    #   resp.log_groups[0].log_group_class #=> String, one of "STANDARD", "INFREQUENT_ACCESS"
+    #   resp.log_groups[0].log_group_class #=> String, one of "STANDARD", "INFREQUENT_ACCESS", "DELIVERY"
     #   resp.log_groups[0].log_group_arn #=> String
     #   resp.next_token #=> String
     #
@@ -2889,14 +2918,9 @@ module Aws::CloudWatchLogs
     # If the results don't include a `nextToken`, then pagination is
     # finished.
     #
-    # <note markdown="1"> If you set `startFromHead` to `true` and you don’t include `endTime`
-    # in your request, you can end up in a situation where the pagination
-    # doesn't terminate. This can happen when the new log events are being
-    # added to the target log streams faster than they are being read. This
-    # situation is a good use case for the CloudWatch Logs [Live Tail][1]
-    # feature.
-    #
-    #  </note>
+    # Specifying the `limit` parameter only guarantees that a single page
+    # doesn't return more log events than the specified limit, but it might
+    # return fewer events than the limit. This is the expected API behavior.
     #
     # The returned log events are sorted by event timestamp, the timestamp
     # when the event was ingested by CloudWatch Logs, and the ID of the
@@ -2905,21 +2929,20 @@ module Aws::CloudWatchLogs
     # If you are using CloudWatch cross-account observability, you can use
     # this operation in a monitoring account and view data from the linked
     # source accounts. For more information, see [CloudWatch cross-account
-    # observability][2].
+    # observability][1].
     #
-    # <note markdown="1"> If you are using [log transformation][3], the `FilterLogEvents`
+    # <note markdown="1"> If you are using [log transformation][2], the `FilterLogEvents`
     # operation returns only the original versions of log events, before
     # they were transformed. To view the transformed versions, you must use
-    # a [CloudWatch Logs query.][4]
+    # a [CloudWatch Logs query.][3]
     #
     #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs_LiveTail.html
-    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html
-    # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html
-    # [4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html
     #
     # @option params [String] :log_group_name
     #   The name of the log group to search.
@@ -3991,6 +4014,108 @@ module Aws::CloudWatchLogs
     # @param [Hash] params ({})
     def list_log_anomaly_detectors(params = {}, options = {})
       req = build_request(:list_log_anomaly_detectors, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of log groups in the Region in your account. If you are
+    # performing this action in a monitoring account, you can choose to also
+    # return log groups from source accounts that are linked to the
+    # monitoring account. For more information about using cross-account
+    # observability to set up monitoring accounts and source accounts, see [
+    # CloudWatch cross-account observability][1].
+    #
+    # You can optionally filter the list by log group class and by using
+    # regular expressions in your request to match strings in the log group
+    # names.
+    #
+    # This operation is paginated. By default, your first use of this
+    # operation returns 50 results, and includes a token to use in a
+    # subsequent operation to return more results.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html
+    #
+    # @option params [String] :log_group_name_pattern
+    #   Use this parameter to limit the returned log groups to only those with
+    #   names that match the pattern that you specify. This parameter is a
+    #   regular expression that can match prefixes and substrings, and
+    #   supports wildcard matching and matching multiple patterns, as in the
+    #   following examples.
+    #
+    #   * Use `^` to match log group names by prefix.
+    #
+    #   * For a substring match, specify the string to match. All matches are
+    #     case sensitive
+    #
+    #   * To match multiple patterns, separate them with a `|` as in the
+    #     example `^/aws/lambda|discovery`
+    #
+    #   You can specify as many as five different regular expression patterns
+    #   in this field, each of which must be between 3 and 24 characters. You
+    #   can include the `^` symbol as many as five times, and include the `|`
+    #   symbol as many as four times.
+    #
+    # @option params [String] :log_group_class
+    #   Use this parameter to limit the results to only those log groups in
+    #   the specified log group class. If you omit this parameter, log groups
+    #   of all classes can be returned.
+    #
+    # @option params [Boolean] :include_linked_accounts
+    #   If you are using a monitoring account, set this to `true` to have the
+    #   operation return log groups in the accounts listed in
+    #   `accountIdentifiers`.
+    #
+    #   If this parameter is set to `true` and `accountIdentifiers` contains a
+    #   null value, the operation returns all log groups in the monitoring
+    #   account and all log groups in all source accounts that are linked to
+    #   the monitoring account.
+    #
+    #   The default for this parameter is `false`.
+    #
+    # @option params [Array<String>] :account_identifiers
+    #   When `includeLinkedAccounts` is set to `true`, use this parameter to
+    #   specify the list of accounts to search. You can specify as many as 20
+    #   account IDs in the array.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. The token expires after
+    #   24 hours.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of log groups to return. If you omit this
+    #   parameter, the default is up to 50 log groups.
+    #
+    # @return [Types::ListLogGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLogGroupsResponse#log_groups #log_groups} => Array&lt;Types::LogGroupSummary&gt;
+    #   * {Types::ListLogGroupsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_log_groups({
+    #     log_group_name_pattern: "LogGroupNameRegexPattern",
+    #     log_group_class: "STANDARD", # accepts STANDARD, INFREQUENT_ACCESS, DELIVERY
+    #     include_linked_accounts: false,
+    #     account_identifiers: ["AccountId"],
+    #     next_token: "NextToken",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.log_groups #=> Array
+    #   resp.log_groups[0].log_group_name #=> String
+    #   resp.log_groups[0].log_group_arn #=> String
+    #   resp.log_groups[0].log_group_class #=> String, one of "STANDARD", "INFREQUENT_ACCESS", "DELIVERY"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ListLogGroups AWS API Documentation
+    #
+    # @overload list_log_groups(params = {})
+    # @param [Hash] params ({})
+    def list_log_groups(params = {}, options = {})
+      req = build_request(:list_log_groups, params)
       req.send_request(options)
     end
 
@@ -5237,7 +5362,7 @@ module Aws::CloudWatchLogs
     # * A batch of log events in a single request cannot span more than 24
     #   hours. Otherwise, the operation fails.
     #
-    # * Each log event can be no larger than 256 KB.
+    # * Each log event can be no larger than 1 MB.
     #
     # * The maximum number of log events in a batch is 10,000.
     #
@@ -5947,7 +6072,7 @@ module Aws::CloudWatchLogs
     #           entries: [ # required
     #             {
     #               source: "Source", # required
-    #               delimiter: "Delimiter", # required
+    #               delimiter: "SplitStringDelimiter", # required
     #             },
     #           ],
     #         },
@@ -6022,6 +6147,12 @@ module Aws::CloudWatchLogs
     #
     # * A [SessionTimeoutException][5] object is returned when the session
     #   times out, after it has been kept open for three hours.
+    #
+    # <note markdown="1"> The `StartLiveTail` API routes requests to
+    # `streaming-logs.Region.amazonaws.com` using SDK host prefix injection.
+    # VPC endpoint support is not available for this API.
+    #
+    #  </note>
     #
     # You can end a session before it times out by closing the session
     # stream or by closing the client that is receiving the stream. The
@@ -6741,7 +6872,7 @@ module Aws::CloudWatchLogs
     #           entries: [ # required
     #             {
     #               source: "Source", # required
-    #               delimiter: "Delimiter", # required
+    #               delimiter: "SplitStringDelimiter", # required
     #             },
     #           ],
     #         },
@@ -7067,7 +7198,7 @@ module Aws::CloudWatchLogs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.111.0'
+      context[:gem_version] = '1.116.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

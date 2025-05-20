@@ -557,10 +557,10 @@ module Aws::CloudFront
     # @!attribute [rw] trusted_signers
     #   We recommend using `TrustedKeyGroups` instead of `TrustedSigners`.
     #
-    #   A list of Amazon Web Services account IDs whose public keys
+    #    A list of Amazon Web Services account IDs whose public keys
     #   CloudFront can use to validate signed URLs or signed cookies.
     #
-    #   When a cache behavior contains trusted signers, CloudFront requires
+    #    When a cache behavior contains trusted signers, CloudFront requires
     #   signed URLs or signed cookies for all requests that match the cache
     #   behavior. The URLs or cookies must be signed with the private key of
     #   a CloudFront key pair in the trusted signer's Amazon Web Services
@@ -3422,10 +3422,10 @@ module Aws::CloudFront
     # @!attribute [rw] trusted_signers
     #   We recommend using `TrustedKeyGroups` instead of `TrustedSigners`.
     #
-    #   A list of Amazon Web Services account IDs whose public keys
+    #    A list of Amazon Web Services account IDs whose public keys
     #   CloudFront can use to validate signed URLs or signed cookies.
     #
-    #   When a cache behavior contains trusted signers, CloudFront requires
+    #    When a cache behavior contains trusted signers, CloudFront requires
     #   signed URLs or signed cookies for all requests that match the cache
     #   behavior. The URLs or cookies must be signed with the private key of
     #   a CloudFront key pair in a trusted signer's Amazon Web Services
@@ -4328,7 +4328,7 @@ module Aws::CloudFront
     # @!attribute [rw] active_trusted_signers
     #   We recommend using `TrustedKeyGroups` instead of `TrustedSigners`.
     #
-    #   This field contains a list of Amazon Web Services account IDs and
+    #    This field contains a list of Amazon Web Services account IDs and
     #   the active CloudFront key pairs in each account that CloudFront can
     #   use to verify the signatures of signed URLs or signed cookies.
     #   @return [Types::ActiveTrustedSigners]
@@ -6594,8 +6594,8 @@ module Aws::CloudFront
     end
 
     # @!attribute [rw] identifier
-    #   The ID of the distribution tenant. You can specify the ARN ID, or
-    #   name of the distribution tenant.
+    #   The identifier of the distribution tenant. You can specify the ARN,
+    #   ID, or name of the distribution tenant.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetDistributionTenantRequest AWS API Documentation
@@ -6915,7 +6915,8 @@ module Aws::CloudFront
     end
 
     # @!attribute [rw] identifier
-    #   The identifier of the multi-tenant distribution.
+    #   The identifier of the distribution tenant. You can specify the ARN,
+    #   ID, or name of the distribution tenant.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetManagedCertificateDetailsRequest AWS API Documentation
@@ -12782,36 +12783,37 @@ module Aws::CloudFront
     # a website endpoint, use the `CustomOriginConfig` element instead.
     #
     # @!attribute [rw] origin_access_identity
-    #   <note markdown="1"> If you're using origin access control (OAC) instead of origin
+    #   <note markdown="1"> If you're using origin access control (OAC)
+    #   instead of origin
     #   access identity, specify an empty `OriginAccessIdentity` element.
     #   For more information, see [Restricting access to an Amazon Web
     #   Services][1] in the *Amazon CloudFront Developer Guide*.
     #
     #    </note>
     #
-    #   The CloudFront origin access identity to associate with the origin.
+    #    The CloudFront origin access identity to associate with the origin.
     #   Use an origin access identity to configure the origin so that
     #   viewers can *only* access objects in an Amazon S3 bucket through
     #   CloudFront. The format of the value is:
     #
-    #   `origin-access-identity/cloudfront/ID-of-origin-access-identity`
+    #    `origin-access-identity/cloudfront/ID-of-origin-access-identity`
     #
-    #   The ` ID-of-origin-access-identity ` is the value that CloudFront
+    #    The ` ID-of-origin-access-identity ` is the value that CloudFront
     #   returned in the `ID` element when you created the origin access
     #   identity.
     #
-    #   If you want viewers to be able to access objects using either the
+    #    If you want viewers to be able to access objects using either the
     #   CloudFront URL or the Amazon S3 URL, specify an empty
     #   `OriginAccessIdentity` element.
     #
-    #   To delete the origin access identity from an existing distribution,
+    #    To delete the origin access identity from an existing distribution,
     #   update the distribution configuration and include an empty
     #   `OriginAccessIdentity` element.
     #
-    #   To replace the origin access identity, update the distribution
+    #    To replace the origin access identity, update the distribution
     #   configuration and specify the new origin access identity.
     #
-    #   For more information about the origin access identity, see [Serving
+    #    For more information about the origin access identity, see [Serving
     #   Private Content through CloudFront][2] in the *Amazon CloudFront
     #   Developer Guide*.
     #
@@ -15486,7 +15488,8 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] identifier
-    #   The ID of the distribution tenant.
+    #   The identifier of the distribution tenant. You can specify the ARN,
+    #   ID, or name of the distribution tenant.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/VerifyDnsConfigurationRequest AWS API Documentation
@@ -15630,8 +15633,8 @@ module Aws::CloudFront
     #   * `static-ip` - Do not specify this value unless your distribution
     #     has been enabled for this feature by the CloudFront team. If you
     #     have a use case that requires static IP addresses for a
-    #     distribution, contact CloudFront through the [Amazon Web Services
-    #     Support Center][2].
+    #     distribution, contact CloudFront through the [Amazon Web
+    #     ServicesSupport Center][2].
     #
     #   If the distribution uses the CloudFront domain name such as
     #   `d111111abcdef8.cloudfront.net`, don't set a value for this field.

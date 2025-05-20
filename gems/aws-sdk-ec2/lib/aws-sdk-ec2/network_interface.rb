@@ -396,6 +396,7 @@ module Aws::EC2
     #         ena_srd_udp_enabled: false,
     #       },
     #     },
+    #     ena_queue_count: 1,
     #     dry_run: false,
     #     instance_id: "InstanceId", # required
     #     device_index: 1, # required
@@ -408,6 +409,8 @@ module Aws::EC2
     # @option options [Types::EnaSrdSpecification] :ena_srd_specification
     #   Configures ENA Express for the network interface that this action
     #   attaches to the instance.
+    # @option options [Integer] :ena_queue_count
+    #   The number of ENA queues to be created with the instance.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -621,6 +624,8 @@ module Aws::EC2
     #     },
     #     groups: ["SecurityGroupId"],
     #     attachment: {
+    #       default_ena_queue_count: false,
+    #       ena_queue_count: 1,
     #       attachment_id: "NetworkInterfaceAttachmentId",
     #       delete_on_termination: false,
     #     },

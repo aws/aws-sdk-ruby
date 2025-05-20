@@ -1072,6 +1072,58 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # @!attribute [rw] target_resource_arn
+    #   The unique Amazon Resource Name (ARN) of the target resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] emr_containers_config
+    #   The EMR containers configuration.
+    #   @return [Types::EMRContainersConfig]
+    #
+    # @!attribute [rw] tags
+    #   Tags for the persistent application user interface.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] x_referer
+    #   The cross reference for the persistent application user interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] profiler_type
+    #   The profiler type for the persistent application user interface.
+    #   Valid values are SHS, TEZUI, or YTS.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CreatePersistentAppUIInput AWS API Documentation
+    #
+    class CreatePersistentAppUIInput < Struct.new(
+      :target_resource_arn,
+      :emr_containers_config,
+      :tags,
+      :x_referer,
+      :profiler_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] persistent_app_ui_id
+    #   The persistent application user interface identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] runtime_role_enabled_cluster
+    #   Represents if the EMR on EC2 cluster that the persisent application
+    #   user interface is created for is a runtime role enabled cluster or
+    #   not.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CreatePersistentAppUIOutput AWS API Documentation
+    #
+    class CreatePersistentAppUIOutput < Struct.new(
+      :persistent_app_ui_id,
+      :runtime_role_enabled_cluster)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the security configuration.
     #   @return [String]
@@ -1503,6 +1555,30 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # @!attribute [rw] persistent_app_ui_id
+    #   The identifier for the persistent application user interface.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribePersistentAppUIInput AWS API Documentation
+    #
+    class DescribePersistentAppUIInput < Struct.new(
+      :persistent_app_ui_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] persistent_app_ui
+    #   The persistent application user interface.
+    #   @return [Types::PersistentAppUI]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribePersistentAppUIOutput AWS API Documentation
+    #
+    class DescribePersistentAppUIOutput < Struct.new(
+      :persistent_app_ui)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] release_label
     #   The target release label to be described.
     #   @return [String]
@@ -1651,6 +1727,20 @@ module Aws::EMR
     #
     class DescribeStudioOutput < Struct.new(
       :studio)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The EMR container configuration.
+    #
+    # @!attribute [rw] job_run_id
+    #   The Job run ID for the container configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/EMRContainersConfig AWS API Documentation
+    #
+    class EMRContainersConfig < Struct.new(
+      :job_run_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2068,6 +2158,111 @@ module Aws::EMR
     #
     class GetManagedScalingPolicyOutput < Struct.new(
       :managed_scaling_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_id
+    #   The cluster ID associated with the cluster's application user
+    #   interface presigned URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] on_cluster_app_ui_type
+    #   The application UI type associated with the cluster's application
+    #   user interface presigned URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_id
+    #   The application ID associated with the cluster's application user
+    #   interface presigned URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Determines if the user interface presigned URL is for a dry run.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The execution role ARN associated with the cluster's application
+    #   user interface presigned URL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetOnClusterAppUIPresignedURLInput AWS API Documentation
+    #
+    class GetOnClusterAppUIPresignedURLInput < Struct.new(
+      :cluster_id,
+      :on_cluster_app_ui_type,
+      :application_id,
+      :dry_run,
+      :execution_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] presigned_url_ready
+    #   Used to determine if the presigned URL is ready.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] presigned_url
+    #   The cluster's generated presigned URL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetOnClusterAppUIPresignedURLOutput AWS API Documentation
+    #
+    class GetOnClusterAppUIPresignedURLOutput < Struct.new(
+      :presigned_url_ready,
+      :presigned_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] persistent_app_ui_id
+    #   The persistent application user interface ID associated with the
+    #   presigned URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] persistent_app_ui_type
+    #   The persistent application user interface type associated with the
+    #   presigned URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_id
+    #   The application ID associated with the presigned URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_proxy_call
+    #   A boolean that represents if the caller is an authentication proxy
+    #   call.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The execution role ARN associated with the presigned URL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetPersistentAppUIPresignedURLInput AWS API Documentation
+    #
+    class GetPersistentAppUIPresignedURLInput < Struct.new(
+      :persistent_app_ui_id,
+      :persistent_app_ui_type,
+      :application_id,
+      :auth_proxy_call,
+      :execution_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] presigned_url_ready
+    #   Used to determine if the presigned URL is ready.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] presigned_url
+    #   The returned presigned URL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetPersistentAppUIPresignedURLOutput AWS API Documentation
+    #
+    class GetPersistentAppUIPresignedURLOutput < Struct.new(
+      :presigned_url_ready,
+      :presigned_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5022,6 +5217,62 @@ module Aws::EMR
     class OutputNotebookS3LocationFromInput < Struct.new(
       :bucket,
       :key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Holds persistent application user interface information. Applications
+    # installed on the Amazon EMR cluster publish user interfaces as web
+    # sites to monitor cluster activity.
+    #
+    # @!attribute [rw] persistent_app_ui_id
+    #   The identifier for the persistent application user interface object.
+    #   @return [String]
+    #
+    # @!attribute [rw] persistent_app_ui_type_list
+    #   The type list for the persistent application user interface object.
+    #   Valid values include SHS, YTS, or TEZ.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] persistent_app_ui_status
+    #   The status for the persistent application user interface object.
+    #   @return [String]
+    #
+    # @!attribute [rw] author_id
+    #   The author ID for the persistent application user interface object.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The creation date and time for the persistent application user
+    #   interface object.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time the persistent application user interface object
+    #   was last changed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_state_change_reason
+    #   The reason the persistent application user interface object was last
+    #   changed.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A collection of tags for the persistent application user interface
+    #   object.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PersistentAppUI AWS API Documentation
+    #
+    class PersistentAppUI < Struct.new(
+      :persistent_app_ui_id,
+      :persistent_app_ui_type_list,
+      :persistent_app_ui_status,
+      :author_id,
+      :creation_time,
+      :last_modified_time,
+      :last_state_change_reason,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -40,7 +40,7 @@ module Aws::MemoryDB
             raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
           end
           if Aws::Endpoints::Matchers.string_equals?(parameters.region, "fips")
-            return Aws::Endpoints::Endpoint.new(url: "https://memory-db-fips.us-west-1.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"memorydb", "signingRegion"=>"us-west-1"}]})
+            return Aws::Endpoints::Endpoint.new(url: "https://memory-db-fips.us-west-1.amazonaws.com", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "memorydb", "signingRegion" => "us-west-1"}]})
           end
           return Aws::Endpoints::Endpoint.new(url: "https://memory-db.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
         end

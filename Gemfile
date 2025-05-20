@@ -7,6 +7,7 @@ gem 'rake', require: false
 gem 'aws-crt' if ENV['CRT']
 gem 'base64'
 gem 'bigdecimal'
+gem 'csv'
 gem 'http-2'
 gem 'jmespath'
 if defined?(JRUBY_VERSION)

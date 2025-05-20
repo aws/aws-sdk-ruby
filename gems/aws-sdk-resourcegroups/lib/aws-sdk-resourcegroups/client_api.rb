@@ -184,7 +184,7 @@ module Aws::ResourceGroups
     CreateGroupOutput.add_member(:group_configuration, Shapes::ShapeRef.new(shape: GroupConfiguration, location_name: "GroupConfiguration"))
     CreateGroupOutput.struct_class = Types::CreateGroupOutput
 
-    DeleteGroupInput.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, deprecated: true, location_name: "GroupName", metadata: {"deprecatedMessage"=>"This field is deprecated, use Group instead."}))
+    DeleteGroupInput.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, deprecated: true, location_name: "GroupName", metadata: {"deprecatedMessage" => "This field is deprecated, use Group instead."}))
     DeleteGroupInput.add_member(:group, Shapes::ShapeRef.new(shape: GroupStringV2, location_name: "Group"))
     DeleteGroupInput.struct_class = Types::DeleteGroupInput
 
@@ -210,14 +210,14 @@ module Aws::ResourceGroups
     GetGroupConfigurationOutput.add_member(:group_configuration, Shapes::ShapeRef.new(shape: GroupConfiguration, location_name: "GroupConfiguration"))
     GetGroupConfigurationOutput.struct_class = Types::GetGroupConfigurationOutput
 
-    GetGroupInput.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, deprecated: true, location_name: "GroupName", metadata: {"deprecatedMessage"=>"This field is deprecated, use Group instead."}))
+    GetGroupInput.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, deprecated: true, location_name: "GroupName", metadata: {"deprecatedMessage" => "This field is deprecated, use Group instead."}))
     GetGroupInput.add_member(:group, Shapes::ShapeRef.new(shape: GroupStringV2, location_name: "Group"))
     GetGroupInput.struct_class = Types::GetGroupInput
 
     GetGroupOutput.add_member(:group, Shapes::ShapeRef.new(shape: Group, location_name: "Group"))
     GetGroupOutput.struct_class = Types::GetGroupOutput
 
-    GetGroupQueryInput.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, deprecated: true, location_name: "GroupName", metadata: {"deprecatedMessage"=>"This field is deprecated, use Group instead."}))
+    GetGroupQueryInput.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, deprecated: true, location_name: "GroupName", metadata: {"deprecatedMessage" => "This field is deprecated, use Group instead."}))
     GetGroupQueryInput.add_member(:group, Shapes::ShapeRef.new(shape: GroupString, location_name: "Group"))
     GetGroupQueryInput.struct_class = Types::GetGroupQueryInput
 
@@ -321,7 +321,7 @@ module Aws::ResourceGroups
     InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InternalServerErrorException.struct_class = Types::InternalServerErrorException
 
-    ListGroupResourcesInput.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, deprecated: true, location_name: "GroupName", metadata: {"deprecatedMessage"=>"This field is deprecated, use Group instead."}))
+    ListGroupResourcesInput.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, deprecated: true, location_name: "GroupName", metadata: {"deprecatedMessage" => "This field is deprecated, use Group instead."}))
     ListGroupResourcesInput.add_member(:group, Shapes::ShapeRef.new(shape: GroupStringV2, location_name: "Group"))
     ListGroupResourcesInput.add_member(:filters, Shapes::ShapeRef.new(shape: ResourceFilterList, location_name: "Filters"))
     ListGroupResourcesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
@@ -335,7 +335,7 @@ module Aws::ResourceGroups
     ListGroupResourcesItemList.member = Shapes::ShapeRef.new(shape: ListGroupResourcesItem)
 
     ListGroupResourcesOutput.add_member(:resources, Shapes::ShapeRef.new(shape: ListGroupResourcesItemList, location_name: "Resources"))
-    ListGroupResourcesOutput.add_member(:resource_identifiers, Shapes::ShapeRef.new(shape: ResourceIdentifierList, deprecated: true, location_name: "ResourceIdentifiers", metadata: {"deprecatedMessage"=>"This field is deprecated, use Resources instead."}))
+    ListGroupResourcesOutput.add_member(:resource_identifiers, Shapes::ShapeRef.new(shape: ResourceIdentifierList, deprecated: true, location_name: "ResourceIdentifiers", metadata: {"deprecatedMessage" => "This field is deprecated, use Resources instead."}))
     ListGroupResourcesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListGroupResourcesOutput.add_member(:query_errors, Shapes::ShapeRef.new(shape: QueryErrorList, location_name: "QueryErrors"))
     ListGroupResourcesOutput.struct_class = Types::ListGroupResourcesOutput
@@ -365,7 +365,7 @@ module Aws::ResourceGroups
     ListGroupsInput.struct_class = Types::ListGroupsInput
 
     ListGroupsOutput.add_member(:group_identifiers, Shapes::ShapeRef.new(shape: GroupIdentifierList, location_name: "GroupIdentifiers"))
-    ListGroupsOutput.add_member(:groups, Shapes::ShapeRef.new(shape: GroupList, deprecated: true, location_name: "Groups", metadata: {"deprecatedMessage"=>"This field is deprecated, use GroupIdentifiers instead."}))
+    ListGroupsOutput.add_member(:groups, Shapes::ShapeRef.new(shape: GroupList, deprecated: true, location_name: "Groups", metadata: {"deprecatedMessage" => "This field is deprecated, use GroupIdentifiers instead."}))
     ListGroupsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListGroupsOutput.struct_class = Types::ListGroupsOutput
 
@@ -512,7 +512,7 @@ module Aws::ResourceGroups
     UpdateAccountSettingsOutput.add_member(:account_settings, Shapes::ShapeRef.new(shape: AccountSettings, location_name: "AccountSettings"))
     UpdateAccountSettingsOutput.struct_class = Types::UpdateAccountSettingsOutput
 
-    UpdateGroupInput.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, deprecated: true, location_name: "GroupName", metadata: {"deprecatedMessage"=>"This field is deprecated, use Group instead."}))
+    UpdateGroupInput.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, deprecated: true, location_name: "GroupName", metadata: {"deprecatedMessage" => "This field is deprecated, use Group instead."}))
     UpdateGroupInput.add_member(:group, Shapes::ShapeRef.new(shape: GroupStringV2, location_name: "Group"))
     UpdateGroupInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     UpdateGroupInput.add_member(:criticality, Shapes::ShapeRef.new(shape: Criticality, location_name: "Criticality"))
@@ -523,7 +523,7 @@ module Aws::ResourceGroups
     UpdateGroupOutput.add_member(:group, Shapes::ShapeRef.new(shape: Group, location_name: "Group"))
     UpdateGroupOutput.struct_class = Types::UpdateGroupOutput
 
-    UpdateGroupQueryInput.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, deprecated: true, location_name: "GroupName", metadata: {"deprecatedMessage"=>"This field is deprecated, use Group instead."}))
+    UpdateGroupQueryInput.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, deprecated: true, location_name: "GroupName", metadata: {"deprecatedMessage" => "This field is deprecated, use Group instead."}))
     UpdateGroupQueryInput.add_member(:group, Shapes::ShapeRef.new(shape: GroupString, location_name: "Group"))
     UpdateGroupQueryInput.add_member(:resource_query, Shapes::ShapeRef.new(shape: ResourceQuery, required: true, location_name: "ResourceQuery"))
     UpdateGroupQueryInput.struct_class = Types::UpdateGroupQueryInput

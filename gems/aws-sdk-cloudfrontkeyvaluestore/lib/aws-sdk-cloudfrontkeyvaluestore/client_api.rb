@@ -54,7 +54,7 @@ module Aws::CloudFrontKeyValueStore
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
 
-    DeleteKeyRequest.add_member(:kvs_arn, Shapes::ShapeRef.new(shape: KvsARN, required: true, location: "uri", location_name: "KvsARN", metadata: {"contextParam"=>{"name"=>"KvsARN"}}))
+    DeleteKeyRequest.add_member(:kvs_arn, Shapes::ShapeRef.new(shape: KvsARN, required: true, location: "uri", location_name: "KvsARN", metadata: {"contextParam" => {"name" => "KvsARN"}}))
     DeleteKeyRequest.add_member(:key, Shapes::ShapeRef.new(shape: Key, required: true, location: "uri", location_name: "Key"))
     DeleteKeyRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: Etag, required: true, location: "header", location_name: "If-Match"))
     DeleteKeyRequest.struct_class = Types::DeleteKeyRequest
@@ -69,7 +69,7 @@ module Aws::CloudFrontKeyValueStore
     DeleteKeyResponse.add_member(:etag, Shapes::ShapeRef.new(shape: Etag, required: true, location: "header", location_name: "ETag"))
     DeleteKeyResponse.struct_class = Types::DeleteKeyResponse
 
-    DescribeKeyValueStoreRequest.add_member(:kvs_arn, Shapes::ShapeRef.new(shape: KvsARN, required: true, location: "uri", location_name: "KvsARN", metadata: {"contextParam"=>{"name"=>"KvsARN"}}))
+    DescribeKeyValueStoreRequest.add_member(:kvs_arn, Shapes::ShapeRef.new(shape: KvsARN, required: true, location: "uri", location_name: "KvsARN", metadata: {"contextParam" => {"name" => "KvsARN"}}))
     DescribeKeyValueStoreRequest.struct_class = Types::DescribeKeyValueStoreRequest
 
     DescribeKeyValueStoreResponse.add_member(:item_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "ItemCount"))
@@ -82,7 +82,7 @@ module Aws::CloudFrontKeyValueStore
     DescribeKeyValueStoreResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "FailureReason"))
     DescribeKeyValueStoreResponse.struct_class = Types::DescribeKeyValueStoreResponse
 
-    GetKeyRequest.add_member(:kvs_arn, Shapes::ShapeRef.new(shape: KvsARN, required: true, location: "uri", location_name: "KvsARN", metadata: {"contextParam"=>{"name"=>"KvsARN"}}))
+    GetKeyRequest.add_member(:kvs_arn, Shapes::ShapeRef.new(shape: KvsARN, required: true, location: "uri", location_name: "KvsARN", metadata: {"contextParam" => {"name" => "KvsARN"}}))
     GetKeyRequest.add_member(:key, Shapes::ShapeRef.new(shape: Key, required: true, location: "uri", location_name: "Key"))
     GetKeyRequest.struct_class = Types::GetKeyRequest
 
@@ -95,7 +95,7 @@ module Aws::CloudFrontKeyValueStore
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
 
-    ListKeysRequest.add_member(:kvs_arn, Shapes::ShapeRef.new(shape: KvsARN, required: true, location: "uri", location_name: "KvsARN", metadata: {"contextParam"=>{"name"=>"KvsARN"}}))
+    ListKeysRequest.add_member(:kvs_arn, Shapes::ShapeRef.new(shape: KvsARN, required: true, location: "uri", location_name: "KvsARN", metadata: {"contextParam" => {"name" => "KvsARN"}}))
     ListKeysRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "NextToken"))
     ListKeysRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListKeysRequestMaxResultsInteger, location: "querystring", location_name: "MaxResults"))
     ListKeysRequest.struct_class = Types::ListKeysRequest
@@ -112,7 +112,7 @@ module Aws::CloudFrontKeyValueStore
 
     PutKeyRequest.add_member(:key, Shapes::ShapeRef.new(shape: Key, required: true, location: "uri", location_name: "Key"))
     PutKeyRequest.add_member(:value, Shapes::ShapeRef.new(shape: Value, required: true, location_name: "Value"))
-    PutKeyRequest.add_member(:kvs_arn, Shapes::ShapeRef.new(shape: KvsARN, required: true, location: "uri", location_name: "KvsARN", metadata: {"contextParam"=>{"name"=>"KvsARN"}}))
+    PutKeyRequest.add_member(:kvs_arn, Shapes::ShapeRef.new(shape: KvsARN, required: true, location: "uri", location_name: "KvsARN", metadata: {"contextParam" => {"name" => "KvsARN"}}))
     PutKeyRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: Etag, required: true, location: "header", location_name: "If-Match"))
     PutKeyRequest.struct_class = Types::PutKeyRequest
 
@@ -133,7 +133,7 @@ module Aws::CloudFrontKeyValueStore
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
-    UpdateKeysRequest.add_member(:kvs_arn, Shapes::ShapeRef.new(shape: KvsARN, required: true, location: "uri", location_name: "KvsARN", metadata: {"contextParam"=>{"name"=>"KvsARN"}}))
+    UpdateKeysRequest.add_member(:kvs_arn, Shapes::ShapeRef.new(shape: KvsARN, required: true, location: "uri", location_name: "KvsARN", metadata: {"contextParam" => {"name" => "KvsARN"}}))
     UpdateKeysRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: Etag, required: true, location: "header", location_name: "If-Match"))
     UpdateKeysRequest.add_member(:puts, Shapes::ShapeRef.new(shape: PutKeyRequestsList, location_name: "Puts"))
     UpdateKeysRequest.add_member(:deletes, Shapes::ShapeRef.new(shape: DeleteKeyRequestsList, location_name: "Deletes"))

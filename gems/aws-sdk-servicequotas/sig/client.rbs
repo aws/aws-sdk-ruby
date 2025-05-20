@@ -86,6 +86,15 @@ module Aws
                                             ) -> _AssociateServiceQuotaTemplateResponseSuccess
                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateServiceQuotaTemplateResponseSuccess
 
+      interface _CreateSupportCaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSupportCaseResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceQuotas/Client.html#create_support_case-instance_method
+      def create_support_case: (
+                                 request_id: ::String
+                               ) -> _CreateSupportCaseResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSupportCaseResponseSuccess
+
       interface _DeleteServiceQuotaIncreaseRequestFromTemplateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteServiceQuotaIncreaseRequestFromTemplateResponse]
       end

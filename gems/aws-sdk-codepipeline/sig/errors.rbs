@@ -11,6 +11,9 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
+      class ActionExecutionNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class ActionNotFoundException < ::Aws::Errors::ServiceError
       end
       class ActionTypeAlreadyExistsException < ::Aws::Errors::ServiceError

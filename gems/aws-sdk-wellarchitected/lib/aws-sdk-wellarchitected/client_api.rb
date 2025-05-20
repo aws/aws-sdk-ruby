@@ -577,7 +577,7 @@ module Aws::WellArchitected
 
     CreateLensShareInput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, required: true, location: "uri", location_name: "LensAlias"))
     CreateLensShareInput.add_member(:shared_with, Shapes::ShapeRef.new(shape: SharedWith, required: true, location_name: "SharedWith"))
-    CreateLensShareInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateLensShareInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateLensShareInput.struct_class = Types::CreateLensShareInput
 
     CreateLensShareOutput.add_member(:share_id, Shapes::ShapeRef.new(shape: ShareId, location_name: "ShareId"))
@@ -586,7 +586,7 @@ module Aws::WellArchitected
     CreateLensVersionInput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, required: true, location: "uri", location_name: "LensAlias"))
     CreateLensVersionInput.add_member(:lens_version, Shapes::ShapeRef.new(shape: LensVersion, required: true, location_name: "LensVersion"))
     CreateLensVersionInput.add_member(:is_major_version, Shapes::ShapeRef.new(shape: IsMajorVersion, location_name: "IsMajorVersion"))
-    CreateLensVersionInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateLensVersionInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateLensVersionInput.struct_class = Types::CreateLensVersionInput
 
     CreateLensVersionOutput.add_member(:lens_arn, Shapes::ShapeRef.new(shape: LensArn, location_name: "LensArn"))
@@ -595,7 +595,7 @@ module Aws::WellArchitected
 
     CreateMilestoneInput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, required: true, location: "uri", location_name: "WorkloadId"))
     CreateMilestoneInput.add_member(:milestone_name, Shapes::ShapeRef.new(shape: MilestoneName, required: true, location_name: "MilestoneName"))
-    CreateMilestoneInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateMilestoneInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateMilestoneInput.struct_class = Types::CreateMilestoneInput
 
     CreateMilestoneOutput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, location_name: "WorkloadId"))
@@ -605,7 +605,7 @@ module Aws::WellArchitected
     CreateProfileInput.add_member(:profile_name, Shapes::ShapeRef.new(shape: ProfileName, required: true, location_name: "ProfileName"))
     CreateProfileInput.add_member(:profile_description, Shapes::ShapeRef.new(shape: ProfileDescription, required: true, location_name: "ProfileDescription"))
     CreateProfileInput.add_member(:profile_questions, Shapes::ShapeRef.new(shape: ProfileQuestionUpdates, required: true, location_name: "ProfileQuestions"))
-    CreateProfileInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateProfileInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateProfileInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateProfileInput.struct_class = Types::CreateProfileInput
 
@@ -615,7 +615,7 @@ module Aws::WellArchitected
 
     CreateProfileShareInput.add_member(:profile_arn, Shapes::ShapeRef.new(shape: ProfileArn, required: true, location: "uri", location_name: "ProfileArn"))
     CreateProfileShareInput.add_member(:shared_with, Shapes::ShapeRef.new(shape: SharedWith, required: true, location_name: "SharedWith"))
-    CreateProfileShareInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateProfileShareInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateProfileShareInput.struct_class = Types::CreateProfileShareInput
 
     CreateProfileShareOutput.add_member(:share_id, Shapes::ShapeRef.new(shape: ShareId, location_name: "ShareId"))
@@ -627,7 +627,7 @@ module Aws::WellArchitected
     CreateReviewTemplateInput.add_member(:lenses, Shapes::ShapeRef.new(shape: ReviewTemplateLenses, required: true, location_name: "Lenses"))
     CreateReviewTemplateInput.add_member(:notes, Shapes::ShapeRef.new(shape: Notes, location_name: "Notes"))
     CreateReviewTemplateInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
-    CreateReviewTemplateInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateReviewTemplateInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateReviewTemplateInput.struct_class = Types::CreateReviewTemplateInput
 
     CreateReviewTemplateOutput.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, location_name: "TemplateArn"))
@@ -635,7 +635,7 @@ module Aws::WellArchitected
 
     CreateTemplateShareInput.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, required: true, location: "uri", location_name: "TemplateArn"))
     CreateTemplateShareInput.add_member(:shared_with, Shapes::ShapeRef.new(shape: SharedWith, required: true, location_name: "SharedWith"))
-    CreateTemplateShareInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateTemplateShareInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateTemplateShareInput.struct_class = Types::CreateTemplateShareInput
 
     CreateTemplateShareOutput.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, location_name: "TemplateArn"))
@@ -655,7 +655,7 @@ module Aws::WellArchitected
     CreateWorkloadInput.add_member(:industry, Shapes::ShapeRef.new(shape: WorkloadIndustry, location_name: "Industry"))
     CreateWorkloadInput.add_member(:lenses, Shapes::ShapeRef.new(shape: WorkloadLenses, required: true, location_name: "Lenses"))
     CreateWorkloadInput.add_member(:notes, Shapes::ShapeRef.new(shape: Notes, location_name: "Notes"))
-    CreateWorkloadInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateWorkloadInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateWorkloadInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateWorkloadInput.add_member(:discovery_config, Shapes::ShapeRef.new(shape: WorkloadDiscoveryConfig, location_name: "DiscoveryConfig"))
     CreateWorkloadInput.add_member(:applications, Shapes::ShapeRef.new(shape: WorkloadApplications, location_name: "Applications"))
@@ -671,7 +671,7 @@ module Aws::WellArchitected
     CreateWorkloadShareInput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, required: true, location: "uri", location_name: "WorkloadId"))
     CreateWorkloadShareInput.add_member(:shared_with, Shapes::ShapeRef.new(shape: SharedWith, required: true, location_name: "SharedWith"))
     CreateWorkloadShareInput.add_member(:permission_type, Shapes::ShapeRef.new(shape: PermissionType, required: true, location_name: "PermissionType"))
-    CreateWorkloadShareInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateWorkloadShareInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateWorkloadShareInput.struct_class = Types::CreateWorkloadShareInput
 
     CreateWorkloadShareOutput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, location_name: "WorkloadId"))
@@ -679,40 +679,40 @@ module Aws::WellArchitected
     CreateWorkloadShareOutput.struct_class = Types::CreateWorkloadShareOutput
 
     DeleteLensInput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, required: true, location: "uri", location_name: "LensAlias"))
-    DeleteLensInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location: "querystring", location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DeleteLensInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location: "querystring", location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     DeleteLensInput.add_member(:lens_status, Shapes::ShapeRef.new(shape: LensStatusType, required: true, location: "querystring", location_name: "LensStatus"))
     DeleteLensInput.struct_class = Types::DeleteLensInput
 
     DeleteLensShareInput.add_member(:share_id, Shapes::ShapeRef.new(shape: ShareId, required: true, location: "uri", location_name: "ShareId"))
     DeleteLensShareInput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, required: true, location: "uri", location_name: "LensAlias"))
-    DeleteLensShareInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location: "querystring", location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DeleteLensShareInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location: "querystring", location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     DeleteLensShareInput.struct_class = Types::DeleteLensShareInput
 
     DeleteProfileInput.add_member(:profile_arn, Shapes::ShapeRef.new(shape: ProfileArn, required: true, location: "uri", location_name: "ProfileArn"))
-    DeleteProfileInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location: "querystring", location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DeleteProfileInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location: "querystring", location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     DeleteProfileInput.struct_class = Types::DeleteProfileInput
 
     DeleteProfileShareInput.add_member(:share_id, Shapes::ShapeRef.new(shape: ShareId, required: true, location: "uri", location_name: "ShareId"))
     DeleteProfileShareInput.add_member(:profile_arn, Shapes::ShapeRef.new(shape: ProfileArn, required: true, location: "uri", location_name: "ProfileArn"))
-    DeleteProfileShareInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location: "querystring", location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DeleteProfileShareInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location: "querystring", location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     DeleteProfileShareInput.struct_class = Types::DeleteProfileShareInput
 
     DeleteReviewTemplateInput.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, required: true, location: "uri", location_name: "TemplateArn"))
-    DeleteReviewTemplateInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location: "querystring", location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DeleteReviewTemplateInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location: "querystring", location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     DeleteReviewTemplateInput.struct_class = Types::DeleteReviewTemplateInput
 
     DeleteTemplateShareInput.add_member(:share_id, Shapes::ShapeRef.new(shape: ShareId, required: true, location: "uri", location_name: "ShareId"))
     DeleteTemplateShareInput.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, required: true, location: "uri", location_name: "TemplateArn"))
-    DeleteTemplateShareInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location: "querystring", location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DeleteTemplateShareInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location: "querystring", location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     DeleteTemplateShareInput.struct_class = Types::DeleteTemplateShareInput
 
     DeleteWorkloadInput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, required: true, location: "uri", location_name: "WorkloadId"))
-    DeleteWorkloadInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location: "querystring", location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DeleteWorkloadInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location: "querystring", location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     DeleteWorkloadInput.struct_class = Types::DeleteWorkloadInput
 
     DeleteWorkloadShareInput.add_member(:share_id, Shapes::ShapeRef.new(shape: ShareId, required: true, location: "uri", location_name: "ShareId"))
     DeleteWorkloadShareInput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, required: true, location: "uri", location_name: "WorkloadId"))
-    DeleteWorkloadShareInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location: "querystring", location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DeleteWorkloadShareInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location: "querystring", location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     DeleteWorkloadShareInput.struct_class = Types::DeleteWorkloadShareInput
 
     DisassociateLensesInput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, required: true, location: "uri", location_name: "WorkloadId"))
@@ -851,7 +851,7 @@ module Aws::WellArchitected
 
     ImportLensInput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, location_name: "LensAlias"))
     ImportLensInput.add_member(:json_string, Shapes::ShapeRef.new(shape: LensJSON, required: true, location_name: "JSONString"))
-    ImportLensInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    ImportLensInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     ImportLensInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     ImportLensInput.struct_class = Types::ImportLensInput
 
@@ -1522,7 +1522,7 @@ module Aws::WellArchitected
     UpdateGlobalSettingsInput.struct_class = Types::UpdateGlobalSettingsInput
 
     UpdateIntegrationInput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, required: true, location: "uri", location_name: "WorkloadId"))
-    UpdateIntegrationInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdateIntegrationInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     UpdateIntegrationInput.add_member(:integrating_service, Shapes::ShapeRef.new(shape: IntegratingService, required: true, location_name: "IntegratingService"))
     UpdateIntegrationInput.struct_class = Types::UpdateIntegrationInput
 
@@ -1629,7 +1629,7 @@ module Aws::WellArchitected
     UpgradeProfileVersionInput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, required: true, location: "uri", location_name: "WorkloadId"))
     UpgradeProfileVersionInput.add_member(:profile_arn, Shapes::ShapeRef.new(shape: ProfileArn, required: true, location: "uri", location_name: "ProfileArn"))
     UpgradeProfileVersionInput.add_member(:milestone_name, Shapes::ShapeRef.new(shape: MilestoneName, location_name: "MilestoneName"))
-    UpgradeProfileVersionInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpgradeProfileVersionInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     UpgradeProfileVersionInput.struct_class = Types::UpgradeProfileVersionInput
 
     UpgradeReviewTemplateLensReviewInput.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, required: true, location: "uri", location_name: "TemplateArn"))

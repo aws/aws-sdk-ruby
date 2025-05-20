@@ -1168,6 +1168,10 @@ module Aws::WorkSpaces
     #   Indicates the timeout settings of the pool.
     #   @return [Types::TimeoutSettings]
     #
+    # @!attribute [rw] running_mode
+    #   The running mode for the pool.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspacesPoolRequest AWS API Documentation
     #
     class CreateWorkspacesPoolRequest < Struct.new(
@@ -1178,7 +1182,8 @@ module Aws::WorkSpaces
       :capacity,
       :tags,
       :application_settings,
-      :timeout_settings)
+      :timeout_settings,
+      :running_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1382,10 +1387,6 @@ module Aws::WorkSpaces
     #
     # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/update-directory-details.html
     #
-    # @!attribute [rw] enable_work_docs
-    #   Specifies whether the directory is enabled for Amazon WorkDocs.
-    #   @return [Boolean]
-    #
     # @!attribute [rw] enable_internet_access
     #   Specifies whether to automatically assign an Elastic public IP
     #   address to WorkSpaces in this directory by default. If enabled, the
@@ -1440,7 +1441,6 @@ module Aws::WorkSpaces
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DefaultWorkspaceCreationProperties AWS API Documentation
     #
     class DefaultWorkspaceCreationProperties < Struct.new(
-      :enable_work_docs,
       :enable_internet_access,
       :default_ou,
       :custom_security_group_id,
@@ -4045,13 +4045,6 @@ module Aws::WorkSpaces
     #   OperationNotSupportedException error.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] enable_work_docs
-    #   Indicates whether Amazon WorkDocs is enabled or disabled. If you
-    #   have enabled this parameter and WorkDocs is not available in the
-    #   Region, you will receive an OperationNotSupportedException error.
-    #   Set `EnableWorkDocs` to disabled, and try again.
-    #   @return [Boolean]
-    #
     # @!attribute [rw] enable_self_service
     #   Indicates whether self-service capabilities are enabled or disabled.
     #   @return [Boolean]
@@ -4108,7 +4101,6 @@ module Aws::WorkSpaces
     class RegisterWorkspaceDirectoryRequest < Struct.new(
       :directory_id,
       :subnet_ids,
-      :enable_work_docs,
       :enable_self_service,
       :tenancy,
       :tags,
@@ -5034,6 +5026,11 @@ module Aws::WorkSpaces
     #   Indicates the timeout settings of the specified pool.
     #   @return [Types::TimeoutSettings]
     #
+    # @!attribute [rw] running_mode
+    #   The desired running mode for the pool. The running mode can only be
+    #   updated when the pool is in a stopped state.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateWorkspacesPoolRequest AWS API Documentation
     #
     class UpdateWorkspacesPoolRequest < Struct.new(
@@ -5043,7 +5040,8 @@ module Aws::WorkSpaces
       :directory_id,
       :capacity,
       :application_settings,
-      :timeout_settings)
+      :timeout_settings,
+      :running_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5530,30 +5528,6 @@ module Aws::WorkSpaces
     #
     # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/update-directory-details.html
     #
-    # @!attribute [rw] enable_work_docs
-    #   Indicates whether Amazon WorkDocs is enabled for your WorkSpaces.
-    #
-    #   <note markdown="1"> If WorkDocs is already enabled for a WorkSpaces directory and you
-    #   disable it, new WorkSpaces launched in the directory will not have
-    #   WorkDocs enabled. However, WorkDocs remains enabled for any existing
-    #   WorkSpaces, unless you either disable users' access to WorkDocs or
-    #   you delete the WorkDocs site. To disable users' access to WorkDocs,
-    #   see [Disabling Users][1] in the *Amazon WorkDocs Administration
-    #   Guide*. To delete a WorkDocs site, see [Deleting a Site][2] in the
-    #   *Amazon WorkDocs Administration Guide*.
-    #
-    #    If you enable WorkDocs on a directory that already has existing
-    #   WorkSpaces, the existing WorkSpaces and any new WorkSpaces that are
-    #   launched in the directory will have WorkDocs enabled.
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/workdocs/latest/adminguide/inactive-user.html
-    #   [2]: https://docs.aws.amazon.com/workdocs/latest/adminguide/manage-sites.html
-    #   @return [Boolean]
-    #
     # @!attribute [rw] enable_internet_access
     #   Indicates whether internet access is enabled for your WorkSpaces.
     #   @return [Boolean]
@@ -5603,7 +5577,6 @@ module Aws::WorkSpaces
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceCreationProperties AWS API Documentation
     #
     class WorkspaceCreationProperties < Struct.new(
-      :enable_work_docs,
       :enable_internet_access,
       :default_ou,
       :custom_security_group_id,
@@ -6155,7 +6128,7 @@ module Aws::WorkSpaces
     #   @return [Types::CapacityStatus]
     #
     # @!attribute [rw] pool_name
-    #   The name of the pool,
+    #   The name of the pool.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -6194,6 +6167,10 @@ module Aws::WorkSpaces
     #   connected to a new session with a new pool instance.
     #   @return [Types::TimeoutSettings]
     #
+    # @!attribute [rw] running_mode
+    #   The running mode of the pool.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspacesPool AWS API Documentation
     #
     class WorkspacesPool < Struct.new(
@@ -6208,7 +6185,8 @@ module Aws::WorkSpaces
       :directory_id,
       :errors,
       :application_settings,
-      :timeout_settings)
+      :timeout_settings,
+      :running_mode)
       SENSITIVE = []
       include Aws::Structure
     end

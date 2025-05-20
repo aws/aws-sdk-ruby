@@ -1597,7 +1597,7 @@ module Aws
                                                            protect_configuration_id: ::String,
                                                            number_capability: ("SMS" | "VOICE" | "MMS"),
                                                            country_rule_set_updates: Hash[::String, {
-                                                               protect_status: ("ALLOW" | "BLOCK")
+                                                               protect_status: ("ALLOW" | "BLOCK" | "MONITOR" | "FILTER")
                                                              }]
                                                          ) -> _UpdateProtectConfigurationCountryRuleSetResponseSuccess
                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProtectConfigurationCountryRuleSetResponseSuccess

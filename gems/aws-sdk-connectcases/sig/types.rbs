@@ -1086,10 +1086,13 @@ module Aws::ConnectCases
     end
 
     class UserUnion
+      attr_accessor custom_entity: ::String
       attr_accessor user_arn: ::String
       attr_accessor unknown: untyped
-      SENSITIVE: []
+      SENSITIVE: [:custom_entity]
 
+      class CustomEntity < UserUnion
+      end
       class UserArn < UserUnion
       end
       class Unknown < UserUnion

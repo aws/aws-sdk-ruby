@@ -839,8 +839,8 @@ module Aws::ApiGatewayV2
     ExportApiRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "apiId"))
     ExportApiRequest.add_member(:export_version, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "exportVersion"))
     ExportApiRequest.add_member(:include_extensions, Shapes::ShapeRef.new(shape: __boolean, location: "querystring", location_name: "includeExtensions"))
-    ExportApiRequest.add_member(:output_type, Shapes::ShapeRef.new(shape: __string, required: true, location: "querystring", location_name: "outputType", metadata: {"enum"=>["YAML", "JSON"]}))
-    ExportApiRequest.add_member(:specification, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "specification", metadata: {"enum"=>["OAS30"]}))
+    ExportApiRequest.add_member(:output_type, Shapes::ShapeRef.new(shape: __string, required: true, location: "querystring", location_name: "outputType", metadata: {"enum" => ["YAML", "JSON"]}))
+    ExportApiRequest.add_member(:specification, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "specification", metadata: {"enum" => ["OAS30"]}))
     ExportApiRequest.add_member(:stage_name, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "stageName"))
     ExportApiRequest.struct_class = Types::ExportApiRequest
 

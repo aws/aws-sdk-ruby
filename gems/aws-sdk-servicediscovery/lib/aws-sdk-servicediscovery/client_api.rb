@@ -193,7 +193,7 @@ module Aws::ServiceDiscovery
     Attributes.value = Shapes::ShapeRef.new(shape: AttrValue)
 
     CreateHttpNamespaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: NamespaceNameHttp, required: true, location_name: "Name"))
-    CreateHttpNamespaceRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "CreatorRequestId", metadata: {"idempotencyToken"=>true}))
+    CreateHttpNamespaceRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "CreatorRequestId", metadata: {"idempotencyToken" => true}))
     CreateHttpNamespaceRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     CreateHttpNamespaceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateHttpNamespaceRequest.struct_class = Types::CreateHttpNamespaceRequest
@@ -202,7 +202,7 @@ module Aws::ServiceDiscovery
     CreateHttpNamespaceResponse.struct_class = Types::CreateHttpNamespaceResponse
 
     CreatePrivateDnsNamespaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: NamespaceNamePrivate, required: true, location_name: "Name"))
-    CreatePrivateDnsNamespaceRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "CreatorRequestId", metadata: {"idempotencyToken"=>true}))
+    CreatePrivateDnsNamespaceRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "CreatorRequestId", metadata: {"idempotencyToken" => true}))
     CreatePrivateDnsNamespaceRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     CreatePrivateDnsNamespaceRequest.add_member(:vpc, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "Vpc"))
     CreatePrivateDnsNamespaceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
@@ -213,7 +213,7 @@ module Aws::ServiceDiscovery
     CreatePrivateDnsNamespaceResponse.struct_class = Types::CreatePrivateDnsNamespaceResponse
 
     CreatePublicDnsNamespaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: NamespaceNamePublic, required: true, location_name: "Name"))
-    CreatePublicDnsNamespaceRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "CreatorRequestId", metadata: {"idempotencyToken"=>true}))
+    CreatePublicDnsNamespaceRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "CreatorRequestId", metadata: {"idempotencyToken" => true}))
     CreatePublicDnsNamespaceRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     CreatePublicDnsNamespaceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreatePublicDnsNamespaceRequest.add_member(:properties, Shapes::ShapeRef.new(shape: PublicDnsNamespaceProperties, location_name: "Properties"))
@@ -224,7 +224,7 @@ module Aws::ServiceDiscovery
 
     CreateServiceRequest.add_member(:name, Shapes::ShapeRef.new(shape: ServiceName, required: true, location_name: "Name"))
     CreateServiceRequest.add_member(:namespace_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "NamespaceId"))
-    CreateServiceRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "CreatorRequestId", metadata: {"idempotencyToken"=>true}))
+    CreateServiceRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "CreatorRequestId", metadata: {"idempotencyToken" => true}))
     CreateServiceRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     CreateServiceRequest.add_member(:dns_config, Shapes::ShapeRef.new(shape: DnsConfig, location_name: "DnsConfig"))
     CreateServiceRequest.add_member(:health_check_config, Shapes::ShapeRef.new(shape: HealthCheckConfig, location_name: "HealthCheckConfig"))
@@ -282,7 +282,7 @@ module Aws::ServiceDiscovery
     DiscoverInstancesRevisionResponse.add_member(:instances_revision, Shapes::ShapeRef.new(shape: Revision, location_name: "InstancesRevision"))
     DiscoverInstancesRevisionResponse.struct_class = Types::DiscoverInstancesRevisionResponse
 
-    DnsConfig.add_member(:namespace_id, Shapes::ShapeRef.new(shape: ResourceId, deprecated: true, location_name: "NamespaceId", metadata: {"deprecatedMessage"=>"Top level attribute in request should be used to reference namespace-id"}))
+    DnsConfig.add_member(:namespace_id, Shapes::ShapeRef.new(shape: ResourceId, deprecated: true, location_name: "NamespaceId", metadata: {"deprecatedMessage" => "Top level attribute in request should be used to reference namespace-id"}))
     DnsConfig.add_member(:routing_policy, Shapes::ShapeRef.new(shape: RoutingPolicy, location_name: "RoutingPolicy"))
     DnsConfig.add_member(:dns_records, Shapes::ShapeRef.new(shape: DnsRecordList, required: true, location_name: "DnsRecords"))
     DnsConfig.struct_class = Types::DnsConfig
@@ -352,7 +352,7 @@ module Aws::ServiceDiscovery
     HealthCheckConfig.add_member(:failure_threshold, Shapes::ShapeRef.new(shape: FailureThreshold, location_name: "FailureThreshold"))
     HealthCheckConfig.struct_class = Types::HealthCheckConfig
 
-    HealthCheckCustomConfig.add_member(:failure_threshold, Shapes::ShapeRef.new(shape: FailureThreshold, deprecated: true, location_name: "FailureThreshold", metadata: {"deprecatedMessage"=>"Configurable FailureThreshold of HealthCheckCustomConfig is deprecated.  It will always have value 1."}))
+    HealthCheckCustomConfig.add_member(:failure_threshold, Shapes::ShapeRef.new(shape: FailureThreshold, deprecated: true, location_name: "FailureThreshold", metadata: {"deprecatedMessage" => "Configurable FailureThreshold of HealthCheckCustomConfig is deprecated.  It will always have value 1."}))
     HealthCheckCustomConfig.struct_class = Types::HealthCheckCustomConfig
 
     HttpInstanceSummary.add_member(:instance_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "InstanceId"))
@@ -539,7 +539,7 @@ module Aws::ServiceDiscovery
 
     RegisterInstanceRequest.add_member(:service_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ServiceId"))
     RegisterInstanceRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
-    RegisterInstanceRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "CreatorRequestId", metadata: {"idempotencyToken"=>true}))
+    RegisterInstanceRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "CreatorRequestId", metadata: {"idempotencyToken" => true}))
     RegisterInstanceRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, required: true, location_name: "Attributes"))
     RegisterInstanceRequest.struct_class = Types::RegisterInstanceRequest
 
@@ -649,7 +649,7 @@ module Aws::ServiceDiscovery
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateHttpNamespaceRequest.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "Id"))
-    UpdateHttpNamespaceRequest.add_member(:updater_request_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "UpdaterRequestId", metadata: {"idempotencyToken"=>true}))
+    UpdateHttpNamespaceRequest.add_member(:updater_request_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "UpdaterRequestId", metadata: {"idempotencyToken" => true}))
     UpdateHttpNamespaceRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: HttpNamespaceChange, required: true, location_name: "Namespace"))
     UpdateHttpNamespaceRequest.struct_class = Types::UpdateHttpNamespaceRequest
 
@@ -662,7 +662,7 @@ module Aws::ServiceDiscovery
     UpdateInstanceCustomHealthStatusRequest.struct_class = Types::UpdateInstanceCustomHealthStatusRequest
 
     UpdatePrivateDnsNamespaceRequest.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "Id"))
-    UpdatePrivateDnsNamespaceRequest.add_member(:updater_request_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "UpdaterRequestId", metadata: {"idempotencyToken"=>true}))
+    UpdatePrivateDnsNamespaceRequest.add_member(:updater_request_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "UpdaterRequestId", metadata: {"idempotencyToken" => true}))
     UpdatePrivateDnsNamespaceRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: PrivateDnsNamespaceChange, required: true, location_name: "Namespace"))
     UpdatePrivateDnsNamespaceRequest.struct_class = Types::UpdatePrivateDnsNamespaceRequest
 
@@ -670,7 +670,7 @@ module Aws::ServiceDiscovery
     UpdatePrivateDnsNamespaceResponse.struct_class = Types::UpdatePrivateDnsNamespaceResponse
 
     UpdatePublicDnsNamespaceRequest.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "Id"))
-    UpdatePublicDnsNamespaceRequest.add_member(:updater_request_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "UpdaterRequestId", metadata: {"idempotencyToken"=>true}))
+    UpdatePublicDnsNamespaceRequest.add_member(:updater_request_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "UpdaterRequestId", metadata: {"idempotencyToken" => true}))
     UpdatePublicDnsNamespaceRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: PublicDnsNamespaceChange, required: true, location_name: "Namespace"))
     UpdatePublicDnsNamespaceRequest.struct_class = Types::UpdatePublicDnsNamespaceRequest
 

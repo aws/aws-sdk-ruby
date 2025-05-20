@@ -2548,6 +2548,7 @@ module Aws::MediaLive
       attr_accessor multiplex_settings: Types::MultiplexProgramChannelDestinationSettings
       attr_accessor settings: ::Array[Types::OutputDestinationSettings]
       attr_accessor srt_settings: ::Array[Types::SrtOutputDestinationSettings]
+      attr_accessor logical_interface_names: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -3247,6 +3248,7 @@ module Aws::MediaLive
       attr_accessor role_arn: ::String
       attr_accessor channel_engine_version: Types::ChannelEngineVersionRequest
       attr_accessor dry_run: bool
+      attr_accessor anywhere_settings: Types::AnywhereSettings
       SENSITIVE: []
     end
 
@@ -3281,6 +3283,7 @@ module Aws::MediaLive
       attr_accessor role_arn: ::String
       attr_accessor channel_engine_version: Types::ChannelEngineVersionRequest
       attr_accessor dry_run: bool
+      attr_accessor anywhere_settings: Types::AnywhereSettings
       SENSITIVE: []
     end
 
@@ -4755,6 +4758,8 @@ module Aws::MediaLive
       attr_accessor qvbr_quality_level: ::Integer
       attr_accessor scene_change_detect: ("DISABLED" | "ENABLED")
       attr_accessor timecode_burnin_settings: Types::TimecodeBurninSettings
+      attr_accessor bitrate: ::Integer
+      attr_accessor rate_control_mode: ("CBR" | "QVBR")
       SENSITIVE: []
     end
 

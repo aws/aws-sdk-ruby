@@ -608,7 +608,7 @@ module Aws::RAM
     ResourceShareInvitation.add_member(:receiver_account_id, Shapes::ShapeRef.new(shape: String, location_name: "receiverAccountId"))
     ResourceShareInvitation.add_member(:invitation_timestamp, Shapes::ShapeRef.new(shape: DateTime, location_name: "invitationTimestamp"))
     ResourceShareInvitation.add_member(:status, Shapes::ShapeRef.new(shape: ResourceShareInvitationStatus, location_name: "status"))
-    ResourceShareInvitation.add_member(:resource_share_associations, Shapes::ShapeRef.new(shape: ResourceShareAssociationList, deprecated: true, location_name: "resourceShareAssociations", metadata: {"deprecatedMessage"=>"This member has been deprecated. Use ListPendingInvitationResources."}))
+    ResourceShareInvitation.add_member(:resource_share_associations, Shapes::ShapeRef.new(shape: ResourceShareAssociationList, deprecated: true, location_name: "resourceShareAssociations", metadata: {"deprecatedMessage" => "This member has been deprecated. Use ListPendingInvitationResources."}))
     ResourceShareInvitation.add_member(:receiver_arn, Shapes::ShapeRef.new(shape: String, location_name: "receiverArn"))
     ResourceShareInvitation.struct_class = Types::ResourceShareInvitation
 

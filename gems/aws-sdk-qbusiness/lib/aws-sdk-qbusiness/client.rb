@@ -202,8 +202,7 @@ module Aws::QBusiness
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -1154,6 +1153,46 @@ module Aws::QBusiness
       req.send_request(options)
     end
 
+    # Creates a unique URL for anonymous Amazon Q Business web experience.
+    # This URL can only be used once and must be used within 5 minutes after
+    # it's generated.
+    #
+    # @option params [required, String] :application_id
+    #   The identifier of the Amazon Q Business application environment
+    #   attached to the web experience.
+    #
+    # @option params [required, String] :web_experience_id
+    #   The identifier of the web experience.
+    #
+    # @option params [Integer] :session_duration_in_minutes
+    #   The duration of the session associated with the unique URL for the web
+    #   experience.
+    #
+    # @return [Types::CreateAnonymousWebExperienceUrlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAnonymousWebExperienceUrlResponse#anonymous_url #anonymous_url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_anonymous_web_experience_url({
+    #     application_id: "ApplicationId", # required
+    #     web_experience_id: "WebExperienceId", # required
+    #     session_duration_in_minutes: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.anonymous_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/CreateAnonymousWebExperienceUrl AWS API Documentation
+    #
+    # @overload create_anonymous_web_experience_url(params = {})
+    # @param [Hash] params ({})
+    def create_anonymous_web_experience_url(params = {}, options = {})
+      req = build_request(:create_anonymous_web_experience_url, params)
+      req.send_request(options)
+    end
+
     # Creates an Amazon Q Business application.
     #
     # <note markdown="1"> There are new tiers for Amazon Q Business. Not all features in Amazon
@@ -1266,7 +1305,7 @@ module Aws::QBusiness
     #   resp = client.create_application({
     #     display_name: "ApplicationName", # required
     #     role_arn: "RoleArn",
-    #     identity_type: "AWS_IAM_IDP_SAML", # accepts AWS_IAM_IDP_SAML, AWS_IAM_IDP_OIDC, AWS_IAM_IDC, AWS_QUICKSIGHT_IDP
+    #     identity_type: "AWS_IAM_IDP_SAML", # accepts AWS_IAM_IDP_SAML, AWS_IAM_IDP_OIDC, AWS_IAM_IDC, AWS_QUICKSIGHT_IDP, ANONYMOUS
     #     iam_identity_provider_arn: "IAMIdentityProviderArn",
     #     identity_center_instance_arn: "InstanceArn",
     #     client_ids_for_oidc: ["ClientIdForOIDC"],
@@ -2645,7 +2684,7 @@ module Aws::QBusiness
     #   resp.display_name #=> String
     #   resp.application_id #=> String
     #   resp.application_arn #=> String
-    #   resp.identity_type #=> String, one of "AWS_IAM_IDP_SAML", "AWS_IAM_IDP_OIDC", "AWS_IAM_IDC", "AWS_QUICKSIGHT_IDP"
+    #   resp.identity_type #=> String, one of "AWS_IAM_IDP_SAML", "AWS_IAM_IDP_OIDC", "AWS_IAM_IDC", "AWS_QUICKSIGHT_IDP", "ANONYMOUS"
     #   resp.iam_identity_provider_arn #=> String
     #   resp.identity_center_application_arn #=> String
     #   resp.role_arn #=> String
@@ -3443,7 +3482,7 @@ module Aws::QBusiness
     #   resp.applications[0].created_at #=> Time
     #   resp.applications[0].updated_at #=> Time
     #   resp.applications[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED", "UPDATING"
-    #   resp.applications[0].identity_type #=> String, one of "AWS_IAM_IDP_SAML", "AWS_IAM_IDP_OIDC", "AWS_IAM_IDC", "AWS_QUICKSIGHT_IDP"
+    #   resp.applications[0].identity_type #=> String, one of "AWS_IAM_IDP_SAML", "AWS_IAM_IDP_OIDC", "AWS_IAM_IDC", "AWS_QUICKSIGHT_IDP", "ANONYMOUS"
     #   resp.applications[0].quick_sight_configuration.client_namespace #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/ListApplications AWS API Documentation
@@ -5785,7 +5824,7 @@ module Aws::QBusiness
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-qbusiness'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

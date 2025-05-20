@@ -164,7 +164,7 @@ module Aws::IoTJobsDataPlane
     StartCommandExecutionRequest.add_member(:command_arn, Shapes::ShapeRef.new(shape: CommandArn, required: true, location_name: "commandArn"))
     StartCommandExecutionRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: CommandExecutionParameterMap, location_name: "parameters"))
     StartCommandExecutionRequest.add_member(:execution_timeout_seconds, Shapes::ShapeRef.new(shape: CommandExecutionTimeoutInSeconds, location_name: "executionTimeoutSeconds"))
-    StartCommandExecutionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientRequestTokenV2, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    StartCommandExecutionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientRequestTokenV2, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     StartCommandExecutionRequest.struct_class = Types::StartCommandExecutionRequest
 
     StartCommandExecutionResponse.add_member(:execution_id, Shapes::ShapeRef.new(shape: CommandExecutionId, location_name: "executionId"))

@@ -83,7 +83,7 @@ module Aws::NetworkMonitor
     CreateMonitorInput.add_member(:monitor_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "monitorName"))
     CreateMonitorInput.add_member(:probes, Shapes::ShapeRef.new(shape: CreateMonitorProbeInputList, location_name: "probes"))
     CreateMonitorInput.add_member(:aggregation_period, Shapes::ShapeRef.new(shape: AggregationPeriod, location_name: "aggregationPeriod"))
-    CreateMonitorInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateMonitorInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateMonitorInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateMonitorInput.struct_class = Types::CreateMonitorInput
 
@@ -106,7 +106,7 @@ module Aws::NetworkMonitor
 
     CreateProbeInput.add_member(:monitor_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "monitorName"))
     CreateProbeInput.add_member(:probe, Shapes::ShapeRef.new(shape: ProbeInput, required: true, location_name: "probe"))
-    CreateProbeInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateProbeInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateProbeInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateProbeInput.struct_class = Types::CreateProbeInput
 

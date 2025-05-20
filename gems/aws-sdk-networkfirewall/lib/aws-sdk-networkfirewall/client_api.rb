@@ -1039,7 +1039,7 @@ module Aws::NetworkFirewall
     StatefulRuleGroupOverride.struct_class = Types::StatefulRuleGroupOverride
 
     StatefulRuleGroupReference.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
-    StatefulRuleGroupReference.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, location_name: "Priority", metadata: {"box"=>true}))
+    StatefulRuleGroupReference.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, location_name: "Priority", metadata: {"box" => true}))
     StatefulRuleGroupReference.add_member(:override, Shapes::ShapeRef.new(shape: StatefulRuleGroupOverride, location_name: "Override"))
     StatefulRuleGroupReference.struct_class = Types::StatefulRuleGroupReference
 

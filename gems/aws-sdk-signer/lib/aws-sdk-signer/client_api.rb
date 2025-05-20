@@ -478,7 +478,7 @@ module Aws::Signer
     StartSigningJobRequest.add_member(:source, Shapes::ShapeRef.new(shape: Source, required: true, location_name: "source"))
     StartSigningJobRequest.add_member(:destination, Shapes::ShapeRef.new(shape: Destination, required: true, location_name: "destination"))
     StartSigningJobRequest.add_member(:profile_name, Shapes::ShapeRef.new(shape: ProfileName, required: true, location_name: "profileName"))
-    StartSigningJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    StartSigningJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     StartSigningJobRequest.add_member(:profile_owner, Shapes::ShapeRef.new(shape: AccountId, location_name: "profileOwner"))
     StartSigningJobRequest.struct_class = Types::StartSigningJobRequest
 

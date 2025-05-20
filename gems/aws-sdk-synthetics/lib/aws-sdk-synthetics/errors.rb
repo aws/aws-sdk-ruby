@@ -27,6 +27,7 @@ module Aws::Synthetics
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {AccessDeniedException}
   # * {BadRequestException}
   # * {ConflictException}
   # * {InternalFailureException}
@@ -43,6 +44,21 @@ module Aws::Synthetics
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class AccessDeniedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Synthetics::Types::AccessDeniedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
 
     class BadRequestException < ServiceError
 

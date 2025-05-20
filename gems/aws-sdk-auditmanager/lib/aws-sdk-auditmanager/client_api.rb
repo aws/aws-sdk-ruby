@@ -1188,7 +1188,7 @@ module Aws::AuditManager
     Roles.member = Shapes::ShapeRef.new(shape: Role)
 
     Scope.add_member(:aws_accounts, Shapes::ShapeRef.new(shape: AWSAccounts, location_name: "awsAccounts"))
-    Scope.add_member(:aws_services, Shapes::ShapeRef.new(shape: AWSServices, deprecated: true, location_name: "awsServices", metadata: {"deprecatedMessage"=>"You can't specify services in scope when creating/updating an assessment. If you use the parameter to specify one or more AWS services, Audit Manager ignores the input. Instead the value of the parameter will show as empty indicating that the services are defined and managed by Audit Manager."}))
+    Scope.add_member(:aws_services, Shapes::ShapeRef.new(shape: AWSServices, deprecated: true, location_name: "awsServices", metadata: {"deprecatedMessage" => "You can't specify services in scope when creating/updating an assessment. If you use the parameter to specify one or more AWS services, Audit Manager ignores the input. Instead the value of the parameter will show as empty indicating that the services are defined and managed by Audit Manager."}))
     Scope.struct_class = Types::Scope
 
     ServiceMetadata.add_member(:name, Shapes::ShapeRef.new(shape: AWSServiceName, location_name: "name"))

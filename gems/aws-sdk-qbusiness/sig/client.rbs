@@ -392,6 +392,18 @@ module Aws
                                  ) -> _CheckDocumentAccessResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CheckDocumentAccessResponseSuccess
 
+      interface _CreateAnonymousWebExperienceUrlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAnonymousWebExperienceUrlResponse]
+        def anonymous_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#create_anonymous_web_experience_url-instance_method
+      def create_anonymous_web_experience_url: (
+                                                 application_id: ::String,
+                                                 web_experience_id: ::String,
+                                                 ?session_duration_in_minutes: ::Integer
+                                               ) -> _CreateAnonymousWebExperienceUrlResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAnonymousWebExperienceUrlResponseSuccess
+
       interface _CreateApplicationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateApplicationResponse]
         def application_id: () -> ::String
@@ -401,7 +413,7 @@ module Aws
       def create_application: (
                                 display_name: ::String,
                                 ?role_arn: ::String,
-                                ?identity_type: ("AWS_IAM_IDP_SAML" | "AWS_IAM_IDP_OIDC" | "AWS_IAM_IDC" | "AWS_QUICKSIGHT_IDP"),
+                                ?identity_type: ("AWS_IAM_IDP_SAML" | "AWS_IAM_IDP_OIDC" | "AWS_IAM_IDC" | "AWS_QUICKSIGHT_IDP" | "ANONYMOUS"),
                                 ?iam_identity_provider_arn: ::String,
                                 ?identity_center_instance_arn: ::String,
                                 ?client_ids_for_oidc: Array[::String],
@@ -967,7 +979,7 @@ module Aws
         def display_name: () -> ::String
         def application_id: () -> ::String
         def application_arn: () -> ::String
-        def identity_type: () -> ("AWS_IAM_IDP_SAML" | "AWS_IAM_IDP_OIDC" | "AWS_IAM_IDC" | "AWS_QUICKSIGHT_IDP")
+        def identity_type: () -> ("AWS_IAM_IDP_SAML" | "AWS_IAM_IDP_OIDC" | "AWS_IAM_IDC" | "AWS_QUICKSIGHT_IDP" | "ANONYMOUS")
         def iam_identity_provider_arn: () -> ::String
         def identity_center_application_arn: () -> ::String
         def role_arn: () -> ::String

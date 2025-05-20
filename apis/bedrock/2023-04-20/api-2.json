@@ -1337,6 +1337,7 @@
         "wordPolicyConfig":{"shape":"GuardrailWordPolicyConfig"},
         "sensitiveInformationPolicyConfig":{"shape":"GuardrailSensitiveInformationPolicyConfig"},
         "contextualGroundingPolicyConfig":{"shape":"GuardrailContextualGroundingPolicyConfig"},
+        "crossRegionConfig":{"shape":"GuardrailCrossRegionConfig"},
         "blockedInputMessaging":{"shape":"GuardrailBlockedMessaging"},
         "blockedOutputsMessaging":{"shape":"GuardrailBlockedMessaging"},
         "kmsKeyId":{"shape":"KmsKeyId"},
@@ -1711,6 +1712,14 @@
         "CONTINUED_PRE_TRAINING",
         "DISTILLATION"
       ]
+    },
+    "DataProcessingDetails":{
+      "type":"structure",
+      "members":{
+        "status":{"shape":"JobStatusDetails"},
+        "creationTime":{"shape":"Timestamp"},
+        "lastModifiedTime":{"shape":"Timestamp"}
+      }
     },
     "DeleteCustomModelRequest":{
       "type":"structure",
@@ -2512,6 +2521,7 @@
         "wordPolicy":{"shape":"GuardrailWordPolicy"},
         "sensitiveInformationPolicy":{"shape":"GuardrailSensitiveInformationPolicy"},
         "contextualGroundingPolicy":{"shape":"GuardrailContextualGroundingPolicy"},
+        "crossRegionDetails":{"shape":"GuardrailCrossRegionDetails"},
         "createdAt":{"shape":"Timestamp"},
         "updatedAt":{"shape":"Timestamp"},
         "statusReasons":{"shape":"GuardrailStatusReasons"},
@@ -2665,6 +2675,7 @@
         "roleArn":{"shape":"RoleArn"},
         "status":{"shape":"ModelCustomizationJobStatus"},
         "failureMessage":{"shape":"ErrorMessage"},
+        "statusDetails":{"shape":"StatusDetails"},
         "creationTime":{"shape":"Timestamp"},
         "lastModifiedTime":{"shape":"Timestamp"},
         "endTime":{"shape":"Timestamp"},
@@ -3028,6 +3039,38 @@
         "filtersConfig":{"shape":"GuardrailContextualGroundingFiltersConfig"}
       }
     },
+    "GuardrailCrossRegionConfig":{
+      "type":"structure",
+      "required":["guardrailProfileIdentifier"],
+      "members":{
+        "guardrailProfileIdentifier":{"shape":"GuardrailCrossRegionGuardrailProfileIdentifier"}
+      }
+    },
+    "GuardrailCrossRegionDetails":{
+      "type":"structure",
+      "members":{
+        "guardrailProfileId":{"shape":"GuardrailCrossRegionGuardrailProfileId"},
+        "guardrailProfileArn":{"shape":"GuardrailCrossRegionGuardrailProfileArn"}
+      }
+    },
+    "GuardrailCrossRegionGuardrailProfileArn":{
+      "type":"string",
+      "max":2048,
+      "min":20,
+      "pattern":"arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail-profile/[a-z0-9-]+[.]{1}guardrail[.]{1}v[0-9:]+"
+    },
+    "GuardrailCrossRegionGuardrailProfileId":{
+      "type":"string",
+      "max":30,
+      "min":15,
+      "pattern":"[a-z0-9-]+[.]{1}guardrail[.]{1}v[0-9:]+"
+    },
+    "GuardrailCrossRegionGuardrailProfileIdentifier":{
+      "type":"string",
+      "max":2048,
+      "min":15,
+      "pattern":"[a-z0-9-]+[.]{1}guardrail[.]{1}v[0-9:]+|arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail-profile/[a-z0-9-]+[.]{1}guardrail[.]{1}v[0-9:]+"
+    },
     "GuardrailDescription":{
       "type":"string",
       "max":200,
@@ -3354,7 +3397,8 @@
         "description":{"shape":"GuardrailDescription"},
         "version":{"shape":"GuardrailVersion"},
         "createdAt":{"shape":"Timestamp"},
-        "updatedAt":{"shape":"Timestamp"}
+        "updatedAt":{"shape":"Timestamp"},
+        "crossRegionDetails":{"shape":"GuardrailCrossRegionDetails"}
       }
     },
     "GuardrailTopic":{
@@ -3768,6 +3812,17 @@
       "max":63,
       "min":1,
       "pattern":"[a-zA-Z0-9](-*[a-zA-Z0-9\\+\\-\\.])*"
+    },
+    "JobStatusDetails":{
+      "type":"string",
+      "enum":[
+        "InProgress",
+        "Completed",
+        "Stopping",
+        "Stopped",
+        "Failed",
+        "NotStarted"
+      ]
     },
     "KbInferenceConfig":{
       "type":"structure",
@@ -4628,6 +4683,7 @@
         "jobName":{"shape":"JobName"},
         "status":{"shape":"ModelCustomizationJobStatus"},
         "lastModifiedTime":{"shape":"Timestamp"},
+        "statusDetails":{"shape":"StatusDetails"},
         "creationTime":{"shape":"Timestamp"},
         "endTime":{"shape":"Timestamp"},
         "customModelArn":{"shape":"CustomModelArn"},
@@ -5366,6 +5422,14 @@
         "INCOMPATIBLE_ENDPOINT"
       ]
     },
+    "StatusDetails":{
+      "type":"structure",
+      "members":{
+        "validationDetails":{"shape":"ValidationDetails"},
+        "dataProcessingDetails":{"shape":"DataProcessingDetails"},
+        "trainingDetails":{"shape":"TrainingDetails"}
+      }
+    },
     "StopEvaluationJobRequest":{
       "type":"structure",
       "required":["jobIdentifier"],
@@ -5494,7 +5558,7 @@
     },
     "TeacherModelIdentifier":{
       "type":"string",
-      "pattern":"arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model/[a-z0-9-]{1,63}[.]{1}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2}|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2})|(([0-9a-zA-Z][_-]?)+)"
+      "pattern":"(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:((:foundation-model/([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2})|(([0-9a-zA-Z][_-]?)+)$)|([0-9]{12}:inference-profile/[a-zA-Z0-9-:.]+$)))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2})"
     },
     "Temperature":{
       "type":"float",
@@ -5557,6 +5621,14 @@
         "invocationLogsConfig":{"shape":"InvocationLogsConfig"}
       }
     },
+    "TrainingDetails":{
+      "type":"structure",
+      "members":{
+        "status":{"shape":"JobStatusDetails"},
+        "creationTime":{"shape":"Timestamp"},
+        "lastModifiedTime":{"shape":"Timestamp"}
+      }
+    },
     "TrainingMetrics":{
       "type":"structure",
       "members":{
@@ -5600,6 +5672,7 @@
         "wordPolicyConfig":{"shape":"GuardrailWordPolicyConfig"},
         "sensitiveInformationPolicyConfig":{"shape":"GuardrailSensitiveInformationPolicyConfig"},
         "contextualGroundingPolicyConfig":{"shape":"GuardrailContextualGroundingPolicyConfig"},
+        "crossRegionConfig":{"shape":"GuardrailCrossRegionConfig"},
         "blockedInputMessaging":{"shape":"GuardrailBlockedMessaging"},
         "blockedOutputsMessaging":{"shape":"GuardrailBlockedMessaging"},
         "kmsKeyId":{"shape":"KmsKeyId"}
@@ -5670,6 +5743,14 @@
       "required":["validators"],
       "members":{
         "validators":{"shape":"Validators"}
+      }
+    },
+    "ValidationDetails":{
+      "type":"structure",
+      "members":{
+        "status":{"shape":"JobStatusDetails"},
+        "creationTime":{"shape":"Timestamp"},
+        "lastModifiedTime":{"shape":"Timestamp"}
       }
     },
     "ValidationException":{

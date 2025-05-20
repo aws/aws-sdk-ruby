@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2025-05-19)
+------------------
+
+* Feature - This release adds support for DVB-DASH, EBU-TT-D subtitle format, and non-compacted manifests for DASH in MediaPackage v2 Origin Endpoints.
+
+1.39.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.38.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.37.0 (2025-03-13)
 ------------------
 

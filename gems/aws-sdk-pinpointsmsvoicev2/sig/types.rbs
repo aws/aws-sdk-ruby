@@ -1053,7 +1053,7 @@ module Aws::PinpointSMSVoiceV2
     end
 
     class ProtectConfigurationCountryRuleSetInformation
-      attr_accessor protect_status: ("ALLOW" | "BLOCK")
+      attr_accessor protect_status: ("ALLOW" | "BLOCK" | "MONITOR" | "FILTER")
       SENSITIVE: []
     end
 

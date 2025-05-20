@@ -433,9 +433,9 @@ module Aws::CloudWatchRUM
     ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "resourceType"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
-    RumEvent.add_member(:details, Shapes::ShapeRef.new(shape: JsonValue, required: true, location_name: "details", metadata: {"jsonvalue"=>true}))
+    RumEvent.add_member(:details, Shapes::ShapeRef.new(shape: JsonValue, required: true, location_name: "details", metadata: {"jsonvalue" => true}))
     RumEvent.add_member(:id, Shapes::ShapeRef.new(shape: RumEventIdString, required: true, location_name: "id"))
-    RumEvent.add_member(:metadata, Shapes::ShapeRef.new(shape: JsonValue, location_name: "metadata", metadata: {"jsonvalue"=>true}))
+    RumEvent.add_member(:metadata, Shapes::ShapeRef.new(shape: JsonValue, location_name: "metadata", metadata: {"jsonvalue" => true}))
     RumEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "timestamp"))
     RumEvent.add_member(:type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "type"))
     RumEvent.struct_class = Types::RumEvent

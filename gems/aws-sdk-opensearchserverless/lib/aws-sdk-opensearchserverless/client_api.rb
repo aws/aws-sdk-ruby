@@ -319,7 +319,7 @@ module Aws::OpenSearchServerless
     CreateAccessPolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location_name: "name"))
     CreateAccessPolicyRequest.add_member(:description, Shapes::ShapeRef.new(shape: PolicyDescription, location_name: "description"))
     CreateAccessPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyDocument, required: true, location_name: "policy"))
-    CreateAccessPolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAccessPolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAccessPolicyRequest.struct_class = Types::CreateAccessPolicyRequest
 
     CreateAccessPolicyResponse.add_member(:access_policy_detail, Shapes::ShapeRef.new(shape: AccessPolicyDetail, location_name: "accessPolicyDetail"))
@@ -342,7 +342,7 @@ module Aws::OpenSearchServerless
     CreateCollectionRequest.add_member(:description, Shapes::ShapeRef.new(shape: CreateCollectionRequestDescriptionString, location_name: "description"))
     CreateCollectionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateCollectionRequest.add_member(:standby_replicas, Shapes::ShapeRef.new(shape: StandbyReplicas, location_name: "standbyReplicas"))
-    CreateCollectionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateCollectionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateCollectionRequest.struct_class = Types::CreateCollectionRequest
 
     CreateCollectionResponse.add_member(:create_collection_detail, Shapes::ShapeRef.new(shape: CreateCollectionDetail, location_name: "createCollectionDetail"))
@@ -357,7 +357,7 @@ module Aws::OpenSearchServerless
     CreateLifecyclePolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location_name: "name"))
     CreateLifecyclePolicyRequest.add_member(:description, Shapes::ShapeRef.new(shape: PolicyDescription, location_name: "description"))
     CreateLifecyclePolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyDocument, required: true, location_name: "policy"))
-    CreateLifecyclePolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateLifecyclePolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateLifecyclePolicyRequest.struct_class = Types::CreateLifecyclePolicyRequest
 
     CreateLifecyclePolicyResponse.add_member(:lifecycle_policy_detail, Shapes::ShapeRef.new(shape: LifecyclePolicyDetail, location_name: "lifecyclePolicyDetail"))
@@ -368,7 +368,7 @@ module Aws::OpenSearchServerless
     CreateSecurityConfigRequest.add_member(:description, Shapes::ShapeRef.new(shape: ConfigDescription, location_name: "description"))
     CreateSecurityConfigRequest.add_member(:saml_options, Shapes::ShapeRef.new(shape: SamlConfigOptions, location_name: "samlOptions"))
     CreateSecurityConfigRequest.add_member(:iam_identity_center_options, Shapes::ShapeRef.new(shape: CreateIamIdentityCenterConfigOptions, location_name: "iamIdentityCenterOptions"))
-    CreateSecurityConfigRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateSecurityConfigRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateSecurityConfigRequest.struct_class = Types::CreateSecurityConfigRequest
 
     CreateSecurityConfigResponse.add_member(:security_config_detail, Shapes::ShapeRef.new(shape: SecurityConfigDetail, location_name: "securityConfigDetail"))
@@ -378,7 +378,7 @@ module Aws::OpenSearchServerless
     CreateSecurityPolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location_name: "name"))
     CreateSecurityPolicyRequest.add_member(:description, Shapes::ShapeRef.new(shape: PolicyDescription, location_name: "description"))
     CreateSecurityPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyDocument, required: true, location_name: "policy"))
-    CreateSecurityPolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateSecurityPolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateSecurityPolicyRequest.struct_class = Types::CreateSecurityPolicyRequest
 
     CreateSecurityPolicyResponse.add_member(:security_policy_detail, Shapes::ShapeRef.new(shape: SecurityPolicyDetail, location_name: "securityPolicyDetail"))
@@ -393,7 +393,7 @@ module Aws::OpenSearchServerless
     CreateVpcEndpointRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "vpcId"))
     CreateVpcEndpointRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, required: true, location_name: "subnetIds"))
     CreateVpcEndpointRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "securityGroupIds"))
-    CreateVpcEndpointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateVpcEndpointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateVpcEndpointRequest.struct_class = Types::CreateVpcEndpointRequest
 
     CreateVpcEndpointResponse.add_member(:create_vpc_endpoint_detail, Shapes::ShapeRef.new(shape: CreateVpcEndpointDetail, location_name: "createVpcEndpointDetail"))
@@ -401,7 +401,7 @@ module Aws::OpenSearchServerless
 
     DeleteAccessPolicyRequest.add_member(:type, Shapes::ShapeRef.new(shape: AccessPolicyType, required: true, location_name: "type"))
     DeleteAccessPolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location_name: "name"))
-    DeleteAccessPolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteAccessPolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteAccessPolicyRequest.struct_class = Types::DeleteAccessPolicyRequest
 
     DeleteAccessPolicyResponse.struct_class = Types::DeleteAccessPolicyResponse
@@ -412,7 +412,7 @@ module Aws::OpenSearchServerless
     DeleteCollectionDetail.struct_class = Types::DeleteCollectionDetail
 
     DeleteCollectionRequest.add_member(:id, Shapes::ShapeRef.new(shape: CollectionId, required: true, location_name: "id"))
-    DeleteCollectionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteCollectionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteCollectionRequest.struct_class = Types::DeleteCollectionRequest
 
     DeleteCollectionResponse.add_member(:delete_collection_detail, Shapes::ShapeRef.new(shape: DeleteCollectionDetail, location_name: "deleteCollectionDetail"))
@@ -420,20 +420,20 @@ module Aws::OpenSearchServerless
 
     DeleteLifecyclePolicyRequest.add_member(:type, Shapes::ShapeRef.new(shape: LifecyclePolicyType, required: true, location_name: "type"))
     DeleteLifecyclePolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location_name: "name"))
-    DeleteLifecyclePolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteLifecyclePolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteLifecyclePolicyRequest.struct_class = Types::DeleteLifecyclePolicyRequest
 
     DeleteLifecyclePolicyResponse.struct_class = Types::DeleteLifecyclePolicyResponse
 
     DeleteSecurityConfigRequest.add_member(:id, Shapes::ShapeRef.new(shape: SecurityConfigId, required: true, location_name: "id"))
-    DeleteSecurityConfigRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteSecurityConfigRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteSecurityConfigRequest.struct_class = Types::DeleteSecurityConfigRequest
 
     DeleteSecurityConfigResponse.struct_class = Types::DeleteSecurityConfigResponse
 
     DeleteSecurityPolicyRequest.add_member(:type, Shapes::ShapeRef.new(shape: SecurityPolicyType, required: true, location_name: "type"))
     DeleteSecurityPolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location_name: "name"))
-    DeleteSecurityPolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteSecurityPolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteSecurityPolicyRequest.struct_class = Types::DeleteSecurityPolicyRequest
 
     DeleteSecurityPolicyResponse.struct_class = Types::DeleteSecurityPolicyResponse
@@ -444,7 +444,7 @@ module Aws::OpenSearchServerless
     DeleteVpcEndpointDetail.struct_class = Types::DeleteVpcEndpointDetail
 
     DeleteVpcEndpointRequest.add_member(:id, Shapes::ShapeRef.new(shape: VpcEndpointId, required: true, location_name: "id"))
-    DeleteVpcEndpointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteVpcEndpointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteVpcEndpointRequest.struct_class = Types::DeleteVpcEndpointRequest
 
     DeleteVpcEndpointResponse.add_member(:delete_vpc_endpoint_detail, Shapes::ShapeRef.new(shape: DeleteVpcEndpointDetail, location_name: "deleteVpcEndpointDetail"))
@@ -721,7 +721,7 @@ module Aws::OpenSearchServerless
     UpdateAccessPolicyRequest.add_member(:policy_version, Shapes::ShapeRef.new(shape: PolicyVersion, required: true, location_name: "policyVersion"))
     UpdateAccessPolicyRequest.add_member(:description, Shapes::ShapeRef.new(shape: PolicyDescription, location_name: "description"))
     UpdateAccessPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyDocument, location_name: "policy"))
-    UpdateAccessPolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateAccessPolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateAccessPolicyRequest.struct_class = Types::UpdateAccessPolicyRequest
 
     UpdateAccessPolicyResponse.add_member(:access_policy_detail, Shapes::ShapeRef.new(shape: AccessPolicyDetail, location_name: "accessPolicyDetail"))
@@ -745,7 +745,7 @@ module Aws::OpenSearchServerless
 
     UpdateCollectionRequest.add_member(:id, Shapes::ShapeRef.new(shape: CollectionId, required: true, location_name: "id"))
     UpdateCollectionRequest.add_member(:description, Shapes::ShapeRef.new(shape: UpdateCollectionRequestDescriptionString, location_name: "description"))
-    UpdateCollectionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateCollectionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateCollectionRequest.struct_class = Types::UpdateCollectionRequest
 
     UpdateCollectionResponse.add_member(:update_collection_detail, Shapes::ShapeRef.new(shape: UpdateCollectionDetail, location_name: "updateCollectionDetail"))
@@ -760,7 +760,7 @@ module Aws::OpenSearchServerless
     UpdateLifecyclePolicyRequest.add_member(:policy_version, Shapes::ShapeRef.new(shape: PolicyVersion, required: true, location_name: "policyVersion"))
     UpdateLifecyclePolicyRequest.add_member(:description, Shapes::ShapeRef.new(shape: PolicyDescription, location_name: "description"))
     UpdateLifecyclePolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyDocument, location_name: "policy"))
-    UpdateLifecyclePolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateLifecyclePolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateLifecyclePolicyRequest.struct_class = Types::UpdateLifecyclePolicyRequest
 
     UpdateLifecyclePolicyResponse.add_member(:lifecycle_policy_detail, Shapes::ShapeRef.new(shape: LifecyclePolicyDetail, location_name: "lifecyclePolicyDetail"))
@@ -771,7 +771,7 @@ module Aws::OpenSearchServerless
     UpdateSecurityConfigRequest.add_member(:description, Shapes::ShapeRef.new(shape: ConfigDescription, location_name: "description"))
     UpdateSecurityConfigRequest.add_member(:saml_options, Shapes::ShapeRef.new(shape: SamlConfigOptions, location_name: "samlOptions"))
     UpdateSecurityConfigRequest.add_member(:iam_identity_center_options_updates, Shapes::ShapeRef.new(shape: UpdateIamIdentityCenterConfigOptions, location_name: "iamIdentityCenterOptionsUpdates"))
-    UpdateSecurityConfigRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateSecurityConfigRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateSecurityConfigRequest.struct_class = Types::UpdateSecurityConfigRequest
 
     UpdateSecurityConfigResponse.add_member(:security_config_detail, Shapes::ShapeRef.new(shape: SecurityConfigDetail, location_name: "securityConfigDetail"))
@@ -782,7 +782,7 @@ module Aws::OpenSearchServerless
     UpdateSecurityPolicyRequest.add_member(:policy_version, Shapes::ShapeRef.new(shape: PolicyVersion, required: true, location_name: "policyVersion"))
     UpdateSecurityPolicyRequest.add_member(:description, Shapes::ShapeRef.new(shape: PolicyDescription, location_name: "description"))
     UpdateSecurityPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyDocument, location_name: "policy"))
-    UpdateSecurityPolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateSecurityPolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateSecurityPolicyRequest.struct_class = Types::UpdateSecurityPolicyRequest
 
     UpdateSecurityPolicyResponse.add_member(:security_policy_detail, Shapes::ShapeRef.new(shape: SecurityPolicyDetail, location_name: "securityPolicyDetail"))
@@ -801,7 +801,7 @@ module Aws::OpenSearchServerless
     UpdateVpcEndpointRequest.add_member(:remove_subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, location_name: "removeSubnetIds"))
     UpdateVpcEndpointRequest.add_member(:add_security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "addSecurityGroupIds"))
     UpdateVpcEndpointRequest.add_member(:remove_security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "removeSecurityGroupIds"))
-    UpdateVpcEndpointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateVpcEndpointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateVpcEndpointRequest.struct_class = Types::UpdateVpcEndpointRequest
 
     UpdateVpcEndpointResponse.add_member(:update_vpc_endpoint_detail, Shapes::ShapeRef.new(shape: UpdateVpcEndpointDetail, location_name: "UpdateVpcEndpointDetail"))

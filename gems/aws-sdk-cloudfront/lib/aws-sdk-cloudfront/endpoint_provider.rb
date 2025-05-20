@@ -22,13 +22,13 @@ module Aws::CloudFront
       if Aws::Endpoints::Matchers.set?(parameters.region)
         if (partition_result = Aws::Endpoints::Matchers.aws_partition(parameters.region))
           if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws") && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, false)
-            return Aws::Endpoints::Endpoint.new(url: "https://cloudfront.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"cloudfront", "signingRegion"=>"us-east-1"}]})
+            return Aws::Endpoints::Endpoint.new(url: "https://cloudfront.amazonaws.com", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "cloudfront", "signingRegion" => "us-east-1"}]})
           end
           if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws") && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, false)
-            return Aws::Endpoints::Endpoint.new(url: "https://cloudfront-fips.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"cloudfront", "signingRegion"=>"us-east-1"}]})
+            return Aws::Endpoints::Endpoint.new(url: "https://cloudfront-fips.amazonaws.com", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "cloudfront", "signingRegion" => "us-east-1"}]})
           end
           if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-cn") && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, false)
-            return Aws::Endpoints::Endpoint.new(url: "https://cloudfront.cn-northwest-1.amazonaws.com.cn", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"cloudfront", "signingRegion"=>"cn-northwest-1"}]})
+            return Aws::Endpoints::Endpoint.new(url: "https://cloudfront.cn-northwest-1.amazonaws.com.cn", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "cloudfront", "signingRegion" => "cn-northwest-1"}]})
           end
           if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
             if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS")) && Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))

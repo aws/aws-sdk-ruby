@@ -14,15 +14,15 @@ module Aws::EventBridge
         if Aws::Endpoints::Matchers.valid_host_label?(parameters.endpoint_id, true)
           if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, false)
             if Aws::Endpoints::Matchers.set?(parameters.endpoint)
-              return Aws::Endpoints::Endpoint.new(url: parameters.endpoint, headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4a", "signingName"=>"events", "signingRegionSet"=>["*"]}]})
+              return Aws::Endpoints::Endpoint.new(url: parameters.endpoint, headers: {}, properties: {"authSchemes" => [{"name" => "sigv4a", "signingName" => "events", "signingRegionSet" => ["*"]}]})
             end
             if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
               if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
-                return Aws::Endpoints::Endpoint.new(url: "https://#{parameters.endpoint_id}.endpoint.events.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4a", "signingName"=>"events", "signingRegionSet"=>["*"]}]})
+                return Aws::Endpoints::Endpoint.new(url: "https://#{parameters.endpoint_id}.endpoint.events.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4a", "signingName" => "events", "signingRegionSet" => ["*"]}]})
               end
               raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
             end
-            return Aws::Endpoints::Endpoint.new(url: "https://#{parameters.endpoint_id}.endpoint.events.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4a", "signingName"=>"events", "signingRegionSet"=>["*"]}]})
+            return Aws::Endpoints::Endpoint.new(url: "https://#{parameters.endpoint_id}.endpoint.events.#{partition_result['dnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4a", "signingName" => "events", "signingRegionSet" => ["*"]}]})
           end
           raise ArgumentError, "Invalid Configuration: FIPS is not supported with EventBridge multi-region endpoints."
         end

@@ -210,14 +210,14 @@ module Aws::AppFabric
     CreateAppAuthorizationRequest.add_member(:credential, Shapes::ShapeRef.new(shape: Credential, required: true, location_name: "credential"))
     CreateAppAuthorizationRequest.add_member(:tenant, Shapes::ShapeRef.new(shape: Tenant, required: true, location_name: "tenant"))
     CreateAppAuthorizationRequest.add_member(:auth_type, Shapes::ShapeRef.new(shape: AuthType, required: true, location_name: "authType"))
-    CreateAppAuthorizationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: UUID, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAppAuthorizationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: UUID, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAppAuthorizationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateAppAuthorizationRequest.struct_class = Types::CreateAppAuthorizationRequest
 
     CreateAppAuthorizationResponse.add_member(:app_authorization, Shapes::ShapeRef.new(shape: AppAuthorization, required: true, location_name: "appAuthorization"))
     CreateAppAuthorizationResponse.struct_class = Types::CreateAppAuthorizationResponse
 
-    CreateAppBundleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: UUID, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAppBundleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: UUID, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAppBundleRequest.add_member(:customer_managed_key_identifier, Shapes::ShapeRef.new(shape: Identifier, location_name: "customerManagedKeyIdentifier"))
     CreateAppBundleRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateAppBundleRequest.struct_class = Types::CreateAppBundleRequest
@@ -229,7 +229,7 @@ module Aws::AppFabric
     CreateIngestionDestinationRequest.add_member(:ingestion_identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "ingestionIdentifier"))
     CreateIngestionDestinationRequest.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, required: true, location_name: "processingConfiguration"))
     CreateIngestionDestinationRequest.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, required: true, location_name: "destinationConfiguration"))
-    CreateIngestionDestinationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: UUID, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateIngestionDestinationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: UUID, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateIngestionDestinationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateIngestionDestinationRequest.struct_class = Types::CreateIngestionDestinationRequest
 
@@ -240,7 +240,7 @@ module Aws::AppFabric
     CreateIngestionRequest.add_member(:app, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "app"))
     CreateIngestionRequest.add_member(:tenant_id, Shapes::ShapeRef.new(shape: TenantIdentifier, required: true, location_name: "tenantId"))
     CreateIngestionRequest.add_member(:ingestion_type, Shapes::ShapeRef.new(shape: IngestionType, required: true, location_name: "ingestionType"))
-    CreateIngestionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: UUID, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateIngestionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: UUID, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateIngestionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateIngestionRequest.struct_class = Types::CreateIngestionRequest
 

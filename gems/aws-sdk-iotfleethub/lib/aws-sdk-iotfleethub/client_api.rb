@@ -72,7 +72,7 @@ module Aws::IoTFleetHub
 
     CreateApplicationRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "applicationName"))
     CreateApplicationRequest.add_member(:application_description, Shapes::ShapeRef.new(shape: Description, location_name: "applicationDescription"))
-    CreateApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateApplicationRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "roleArn"))
     CreateApplicationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
@@ -82,7 +82,7 @@ module Aws::IoTFleetHub
     CreateApplicationResponse.struct_class = Types::CreateApplicationResponse
 
     DeleteApplicationRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "applicationId"))
-    DeleteApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteApplicationRequest.struct_class = Types::DeleteApplicationRequest
 
     DeleteApplicationResponse.struct_class = Types::DeleteApplicationResponse
@@ -152,7 +152,7 @@ module Aws::IoTFleetHub
     UpdateApplicationRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "applicationId"))
     UpdateApplicationRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: Name, location_name: "applicationName"))
     UpdateApplicationRequest.add_member(:application_description, Shapes::ShapeRef.new(shape: Description, location_name: "applicationDescription"))
-    UpdateApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateApplicationRequest.struct_class = Types::UpdateApplicationRequest
 
     UpdateApplicationResponse.struct_class = Types::UpdateApplicationResponse

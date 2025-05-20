@@ -25,7 +25,7 @@ module Aws::BCMDataExports
               end
               raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
             end
-            return Aws::Endpoints::Endpoint.new(url: "https://bcm-data-exports.us-east-1.api.aws", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"bcm-data-exports", "signingRegion"=>"us-east-1"}]})
+            return Aws::Endpoints::Endpoint.new(url: "https://bcm-data-exports.us-east-1.api.aws", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "bcm-data-exports", "signingRegion" => "us-east-1"}]})
           end
           if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
             if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true)

@@ -218,14 +218,14 @@ module Aws::EFS
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
 
-    CreateAccessPointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAccessPointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateAccessPointRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateAccessPointRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
     CreateAccessPointRequest.add_member(:posix_user, Shapes::ShapeRef.new(shape: PosixUser, location_name: "PosixUser"))
     CreateAccessPointRequest.add_member(:root_directory, Shapes::ShapeRef.new(shape: RootDirectory, location_name: "RootDirectory"))
     CreateAccessPointRequest.struct_class = Types::CreateAccessPointRequest
 
-    CreateFileSystemRequest.add_member(:creation_token, Shapes::ShapeRef.new(shape: CreationToken, required: true, location_name: "CreationToken", metadata: {"idempotencyToken"=>true}))
+    CreateFileSystemRequest.add_member(:creation_token, Shapes::ShapeRef.new(shape: CreationToken, required: true, location_name: "CreationToken", metadata: {"idempotencyToken" => true}))
     CreateFileSystemRequest.add_member(:performance_mode, Shapes::ShapeRef.new(shape: PerformanceMode, location_name: "PerformanceMode"))
     CreateFileSystemRequest.add_member(:encrypted, Shapes::ShapeRef.new(shape: Encrypted, location_name: "Encrypted"))
     CreateFileSystemRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))

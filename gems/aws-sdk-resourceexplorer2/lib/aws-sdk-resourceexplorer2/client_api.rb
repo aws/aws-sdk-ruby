@@ -162,7 +162,7 @@ module Aws::ResourceExplorer2
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
 
-    CreateIndexInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateIndexInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateIndexInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateIndexInput.struct_class = Types::CreateIndexInput
 
@@ -171,7 +171,7 @@ module Aws::ResourceExplorer2
     CreateIndexOutput.add_member(:state, Shapes::ShapeRef.new(shape: IndexState, location_name: "State"))
     CreateIndexOutput.struct_class = Types::CreateIndexOutput
 
-    CreateViewInput.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateViewInputClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateViewInput.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateViewInputClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateViewInput.add_member(:filters, Shapes::ShapeRef.new(shape: SearchFilter, location_name: "Filters"))
     CreateViewInput.add_member(:included_properties, Shapes::ShapeRef.new(shape: IncludedPropertyList, location_name: "IncludedProperties"))
     CreateViewInput.add_member(:scope, Shapes::ShapeRef.new(shape: CreateViewInputScopeString, location_name: "Scope"))

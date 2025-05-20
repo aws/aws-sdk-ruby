@@ -435,7 +435,7 @@ module Aws::AccessAnalyzer
 
     ApplyArchiveRuleRequest.add_member(:analyzer_arn, Shapes::ShapeRef.new(shape: AnalyzerArn, required: true, location_name: "analyzerArn"))
     ApplyArchiveRuleRequest.add_member(:rule_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "ruleName"))
-    ApplyArchiveRuleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    ApplyArchiveRuleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     ApplyArchiveRuleRequest.struct_class = Types::ApplyArchiveRuleRequest
 
     ArchiveRuleSummary.add_member(:rule_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "ruleName"))
@@ -538,7 +538,7 @@ module Aws::AccessAnalyzer
 
     CreateAccessPreviewRequest.add_member(:analyzer_arn, Shapes::ShapeRef.new(shape: AnalyzerArn, required: true, location_name: "analyzerArn"))
     CreateAccessPreviewRequest.add_member(:configurations, Shapes::ShapeRef.new(shape: ConfigurationsMap, required: true, location_name: "configurations"))
-    CreateAccessPreviewRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAccessPreviewRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAccessPreviewRequest.struct_class = Types::CreateAccessPreviewRequest
 
     CreateAccessPreviewResponse.add_member(:id, Shapes::ShapeRef.new(shape: AccessPreviewId, required: true, location_name: "id"))
@@ -548,7 +548,7 @@ module Aws::AccessAnalyzer
     CreateAnalyzerRequest.add_member(:type, Shapes::ShapeRef.new(shape: Type, required: true, location_name: "type"))
     CreateAnalyzerRequest.add_member(:archive_rules, Shapes::ShapeRef.new(shape: InlineArchiveRulesList, location_name: "archiveRules"))
     CreateAnalyzerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
-    CreateAnalyzerRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAnalyzerRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAnalyzerRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: AnalyzerConfiguration, location_name: "configuration"))
     CreateAnalyzerRequest.struct_class = Types::CreateAnalyzerRequest
 
@@ -558,7 +558,7 @@ module Aws::AccessAnalyzer
     CreateArchiveRuleRequest.add_member(:analyzer_name, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "analyzerName"))
     CreateArchiveRuleRequest.add_member(:rule_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "ruleName"))
     CreateArchiveRuleRequest.add_member(:filter, Shapes::ShapeRef.new(shape: FilterCriteriaMap, required: true, location_name: "filter"))
-    CreateArchiveRuleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateArchiveRuleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateArchiveRuleRequest.struct_class = Types::CreateArchiveRuleRequest
 
     Criterion.add_member(:eq, Shapes::ShapeRef.new(shape: ValueList, location_name: "eq"))
@@ -568,12 +568,12 @@ module Aws::AccessAnalyzer
     Criterion.struct_class = Types::Criterion
 
     DeleteAnalyzerRequest.add_member(:analyzer_name, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "analyzerName"))
-    DeleteAnalyzerRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteAnalyzerRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteAnalyzerRequest.struct_class = Types::DeleteAnalyzerRequest
 
     DeleteArchiveRuleRequest.add_member(:analyzer_name, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "analyzerName"))
     DeleteArchiveRuleRequest.add_member(:rule_name, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "ruleName"))
-    DeleteArchiveRuleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteArchiveRuleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteArchiveRuleRequest.struct_class = Types::DeleteArchiveRuleRequest
 
     DynamodbStreamConfiguration.add_member(:stream_policy, Shapes::ShapeRef.new(shape: DynamodbStreamPolicy, location_name: "streamPolicy"))
@@ -1126,7 +1126,7 @@ module Aws::AccessAnalyzer
 
     StartPolicyGenerationRequest.add_member(:policy_generation_details, Shapes::ShapeRef.new(shape: PolicyGenerationDetails, required: true, location_name: "policyGenerationDetails"))
     StartPolicyGenerationRequest.add_member(:cloud_trail_details, Shapes::ShapeRef.new(shape: CloudTrailDetails, location_name: "cloudTrailDetails"))
-    StartPolicyGenerationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    StartPolicyGenerationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     StartPolicyGenerationRequest.struct_class = Types::StartPolicyGenerationRequest
 
     StartPolicyGenerationResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "jobId"))
@@ -1238,14 +1238,14 @@ module Aws::AccessAnalyzer
     UpdateArchiveRuleRequest.add_member(:analyzer_name, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "analyzerName"))
     UpdateArchiveRuleRequest.add_member(:rule_name, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "ruleName"))
     UpdateArchiveRuleRequest.add_member(:filter, Shapes::ShapeRef.new(shape: FilterCriteriaMap, required: true, location_name: "filter"))
-    UpdateArchiveRuleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateArchiveRuleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateArchiveRuleRequest.struct_class = Types::UpdateArchiveRuleRequest
 
     UpdateFindingsRequest.add_member(:analyzer_arn, Shapes::ShapeRef.new(shape: AnalyzerArn, required: true, location_name: "analyzerArn"))
     UpdateFindingsRequest.add_member(:status, Shapes::ShapeRef.new(shape: FindingStatusUpdate, required: true, location_name: "status"))
     UpdateFindingsRequest.add_member(:ids, Shapes::ShapeRef.new(shape: FindingIdList, location_name: "ids"))
     UpdateFindingsRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "resourceArn"))
-    UpdateFindingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateFindingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateFindingsRequest.struct_class = Types::UpdateFindingsRequest
 
     ValidatePolicyFinding.add_member(:finding_details, Shapes::ShapeRef.new(shape: String, required: true, location_name: "findingDetails"))

@@ -25,7 +25,7 @@ module Aws::FreeTier
               end
               raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
             end
-            return Aws::Endpoints::Endpoint.new(url: "https://freetier.us-east-1.api.aws", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"freetier", "signingRegion"=>"us-east-1"}]})
+            return Aws::Endpoints::Endpoint.new(url: "https://freetier.us-east-1.api.aws", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "freetier", "signingRegion" => "us-east-1"}]})
           end
           if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
             if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true)
@@ -35,7 +35,7 @@ module Aws::FreeTier
               raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
             end
             if Aws::Endpoints::Matchers.string_equals?(parameters.region, "aws-cn-global")
-              return Aws::Endpoints::Endpoint.new(url: "https://freetier.cn-northwest-1.api.amazonwebservices.com.cn", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"freetier", "signingRegion"=>"cn-northwest-1"}]})
+              return Aws::Endpoints::Endpoint.new(url: "https://freetier.cn-northwest-1.api.amazonwebservices.com.cn", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "freetier", "signingRegion" => "cn-northwest-1"}]})
             end
             return Aws::Endpoints::Endpoint.new(url: "https://freetier.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
           end
@@ -46,7 +46,7 @@ module Aws::FreeTier
             raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
           end
           if Aws::Endpoints::Matchers.string_equals?(parameters.region, "aws-cn-global")
-            return Aws::Endpoints::Endpoint.new(url: "https://freetier.cn-northwest-1.api.amazonwebservices.com.cn", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"freetier", "signingRegion"=>"cn-northwest-1"}]})
+            return Aws::Endpoints::Endpoint.new(url: "https://freetier.cn-northwest-1.api.amazonwebservices.com.cn", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "freetier", "signingRegion" => "cn-northwest-1"}]})
           end
           return Aws::Endpoints::Endpoint.new(url: "https://freetier.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
         end

@@ -209,7 +209,7 @@ module Aws::AppRegistry
     CreateApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateApplicationRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateApplicationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
-    CreateApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
 
     CreateApplicationResponse.add_member(:application, Shapes::ShapeRef.new(shape: Application, location_name: "application"))
@@ -219,7 +219,7 @@ module Aws::AppRegistry
     CreateAttributeGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateAttributeGroupRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, required: true, location_name: "attributes"))
     CreateAttributeGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
-    CreateAttributeGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAttributeGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAttributeGroupRequest.struct_class = Types::CreateAttributeGroupRequest
 
     CreateAttributeGroupResponse.add_member(:attribute_group, Shapes::ShapeRef.new(shape: AttributeGroup, location_name: "attributeGroup"))
@@ -276,7 +276,7 @@ module Aws::AppRegistry
     GetAssociatedResourceRequest.add_member(:resource, Shapes::ShapeRef.new(shape: ResourceSpecifier, required: true, location: "uri", location_name: "resource"))
     GetAssociatedResourceRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     GetAssociatedResourceRequest.add_member(:resource_tag_status, Shapes::ShapeRef.new(shape: GetAssociatedResourceFilter, location: "querystring", location_name: "resourceTagStatus"))
-    GetAssociatedResourceRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    GetAssociatedResourceRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
     GetAssociatedResourceRequest.struct_class = Types::GetAssociatedResourceRequest
 
     GetAssociatedResourceResponse.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, location_name: "resource"))
@@ -309,7 +309,7 @@ module Aws::AppRegistry
     InternalServerException.struct_class = Types::InternalServerException
 
     ListApplicationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
-    ListApplicationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListApplicationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
     ListApplicationsRequest.struct_class = Types::ListApplicationsRequest
 
     ListApplicationsResponse.add_member(:applications, Shapes::ShapeRef.new(shape: ApplicationSummaries, location_name: "applications"))
@@ -318,7 +318,7 @@ module Aws::AppRegistry
 
     ListAssociatedAttributeGroupsRequest.add_member(:application, Shapes::ShapeRef.new(shape: ApplicationSpecifier, required: true, location: "uri", location_name: "application"))
     ListAssociatedAttributeGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
-    ListAssociatedAttributeGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListAssociatedAttributeGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
     ListAssociatedAttributeGroupsRequest.struct_class = Types::ListAssociatedAttributeGroupsRequest
 
     ListAssociatedAttributeGroupsResponse.add_member(:attribute_groups, Shapes::ShapeRef.new(shape: AttributeGroupIds, location_name: "attributeGroups"))
@@ -327,7 +327,7 @@ module Aws::AppRegistry
 
     ListAssociatedResourcesRequest.add_member(:application, Shapes::ShapeRef.new(shape: ApplicationSpecifier, required: true, location: "uri", location_name: "application"))
     ListAssociatedResourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
-    ListAssociatedResourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListAssociatedResourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
     ListAssociatedResourcesRequest.struct_class = Types::ListAssociatedResourcesRequest
 
     ListAssociatedResourcesResponse.add_member(:resources, Shapes::ShapeRef.new(shape: Resources, location_name: "resources"))
@@ -336,7 +336,7 @@ module Aws::AppRegistry
 
     ListAttributeGroupsForApplicationRequest.add_member(:application, Shapes::ShapeRef.new(shape: ApplicationSpecifier, required: true, location: "uri", location_name: "application"))
     ListAttributeGroupsForApplicationRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
-    ListAttributeGroupsForApplicationRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListAttributeGroupsForApplicationRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
     ListAttributeGroupsForApplicationRequest.struct_class = Types::ListAttributeGroupsForApplicationRequest
 
     ListAttributeGroupsForApplicationResponse.add_member(:attribute_groups_details, Shapes::ShapeRef.new(shape: AttributeGroupDetailsList, location_name: "attributeGroupsDetails"))
@@ -344,7 +344,7 @@ module Aws::AppRegistry
     ListAttributeGroupsForApplicationResponse.struct_class = Types::ListAttributeGroupsForApplicationResponse
 
     ListAttributeGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
-    ListAttributeGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListAttributeGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
     ListAttributeGroupsRequest.struct_class = Types::ListAttributeGroupsRequest
 
     ListAttributeGroupsResponse.add_member(:attribute_groups, Shapes::ShapeRef.new(shape: AttributeGroupSummaries, location_name: "attributeGroups"))
@@ -436,7 +436,7 @@ module Aws::AppRegistry
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateApplicationRequest.add_member(:application, Shapes::ShapeRef.new(shape: ApplicationSpecifier, required: true, location: "uri", location_name: "application"))
-    UpdateApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, deprecated: true, location_name: "name", metadata: {"deprecatedMessage"=>"Name update for application is deprecated."}))
+    UpdateApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, deprecated: true, location_name: "name", metadata: {"deprecatedMessage" => "Name update for application is deprecated."}))
     UpdateApplicationRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateApplicationRequest.struct_class = Types::UpdateApplicationRequest
 
@@ -444,7 +444,7 @@ module Aws::AppRegistry
     UpdateApplicationResponse.struct_class = Types::UpdateApplicationResponse
 
     UpdateAttributeGroupRequest.add_member(:attribute_group, Shapes::ShapeRef.new(shape: AttributeGroupSpecifier, required: true, location: "uri", location_name: "attributeGroup"))
-    UpdateAttributeGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, deprecated: true, location_name: "name", metadata: {"deprecatedMessage"=>"Name update for attribute group is deprecated."}))
+    UpdateAttributeGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, deprecated: true, location_name: "name", metadata: {"deprecatedMessage" => "Name update for attribute group is deprecated."}))
     UpdateAttributeGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateAttributeGroupRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "attributes"))
     UpdateAttributeGroupRequest.struct_class = Types::UpdateAttributeGroupRequest

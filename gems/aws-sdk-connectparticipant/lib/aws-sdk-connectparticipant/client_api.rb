@@ -127,7 +127,7 @@ module Aws::ConnectParticipant
     CancelParticipantAuthenticationResponse.struct_class = Types::CancelParticipantAuthenticationResponse
 
     CompleteAttachmentUploadRequest.add_member(:attachment_ids, Shapes::ShapeRef.new(shape: AttachmentIdList, required: true, location_name: "AttachmentIds"))
-    CompleteAttachmentUploadRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: NonEmptyClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CompleteAttachmentUploadRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: NonEmptyClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CompleteAttachmentUploadRequest.add_member(:connection_token, Shapes::ShapeRef.new(shape: ParticipantToken, required: true, location: "header", location_name: "X-Amz-Bearer"))
     CompleteAttachmentUploadRequest.struct_class = Types::CompleteAttachmentUploadRequest
 
@@ -158,7 +158,7 @@ module Aws::ConnectParticipant
     DescribeViewResponse.add_member(:view, Shapes::ShapeRef.new(shape: View, location_name: "View"))
     DescribeViewResponse.struct_class = Types::DescribeViewResponse
 
-    DisconnectParticipantRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    DisconnectParticipantRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     DisconnectParticipantRequest.add_member(:connection_token, Shapes::ShapeRef.new(shape: ParticipantToken, required: true, location: "header", location_name: "X-Amz-Bearer"))
     DisconnectParticipantRequest.struct_class = Types::DisconnectParticipantRequest
 
@@ -171,7 +171,7 @@ module Aws::ConnectParticipant
 
     GetAttachmentResponse.add_member(:url, Shapes::ShapeRef.new(shape: PreSignedAttachmentUrl, location_name: "Url"))
     GetAttachmentResponse.add_member(:url_expiry, Shapes::ShapeRef.new(shape: ISO8601Datetime, location_name: "UrlExpiry"))
-    GetAttachmentResponse.add_member(:attachment_size_in_bytes, Shapes::ShapeRef.new(shape: AttachmentSizeInBytes, required: true, location_name: "AttachmentSizeInBytes", metadata: {"box"=>true}))
+    GetAttachmentResponse.add_member(:attachment_size_in_bytes, Shapes::ShapeRef.new(shape: AttachmentSizeInBytes, required: true, location_name: "AttachmentSizeInBytes", metadata: {"box" => true}))
     GetAttachmentResponse.struct_class = Types::GetAttachmentResponse
 
     GetAuthenticationUrlRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, required: true, location_name: "SessionId"))
@@ -183,7 +183,7 @@ module Aws::ConnectParticipant
     GetAuthenticationUrlResponse.struct_class = Types::GetAuthenticationUrlResponse
 
     GetTranscriptRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "ContactId"))
-    GetTranscriptRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    GetTranscriptRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     GetTranscriptRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetTranscriptRequest.add_member(:scan_direction, Shapes::ShapeRef.new(shape: ScanDirection, location_name: "ScanDirection"))
     GetTranscriptRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortKey, location_name: "SortOrder"))
@@ -231,7 +231,7 @@ module Aws::ConnectParticipant
 
     SendEventRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: ChatContentType, required: true, location_name: "ContentType"))
     SendEventRequest.add_member(:content, Shapes::ShapeRef.new(shape: ChatContent, location_name: "Content"))
-    SendEventRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    SendEventRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     SendEventRequest.add_member(:connection_token, Shapes::ShapeRef.new(shape: ParticipantToken, required: true, location: "header", location_name: "X-Amz-Bearer"))
     SendEventRequest.struct_class = Types::SendEventRequest
 
@@ -241,7 +241,7 @@ module Aws::ConnectParticipant
 
     SendMessageRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: ChatContentType, required: true, location_name: "ContentType"))
     SendMessageRequest.add_member(:content, Shapes::ShapeRef.new(shape: ChatContent, required: true, location_name: "Content"))
-    SendMessageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    SendMessageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     SendMessageRequest.add_member(:connection_token, Shapes::ShapeRef.new(shape: ParticipantToken, required: true, location: "header", location_name: "X-Amz-Bearer"))
     SendMessageRequest.struct_class = Types::SendMessageRequest
 
@@ -255,7 +255,7 @@ module Aws::ConnectParticipant
     StartAttachmentUploadRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, required: true, location_name: "ContentType"))
     StartAttachmentUploadRequest.add_member(:attachment_size_in_bytes, Shapes::ShapeRef.new(shape: AttachmentSizeInBytes, required: true, location_name: "AttachmentSizeInBytes"))
     StartAttachmentUploadRequest.add_member(:attachment_name, Shapes::ShapeRef.new(shape: AttachmentName, required: true, location_name: "AttachmentName"))
-    StartAttachmentUploadRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: NonEmptyClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    StartAttachmentUploadRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: NonEmptyClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     StartAttachmentUploadRequest.add_member(:connection_token, Shapes::ShapeRef.new(shape: ParticipantToken, required: true, location: "header", location_name: "X-Amz-Bearer"))
     StartAttachmentUploadRequest.struct_class = Types::StartAttachmentUploadRequest
 

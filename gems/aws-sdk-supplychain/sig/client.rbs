@@ -113,7 +113,18 @@ module Aws
                                                 dataset_identifier: ::String,
                                                 options: {
                                                   load_type: ("INCREMENTAL" | "REPLACE")?,
-                                                  dedupe_records: bool?
+                                                  dedupe_records: bool?,
+                                                  dedupe_strategy: {
+                                                    type: ("FIELD_PRIORITY"),
+                                                    field_priority: {
+                                                      fields: Array[
+                                                        {
+                                                          name: ::String,
+                                                          sort_order: ("ASC" | "DESC")
+                                                        },
+                                                      ]
+                                                    }?
+                                                  }?
                                                 }?
                                               }?
                                             },
@@ -137,7 +148,18 @@ module Aws
                                               dataset_identifier: ::String,
                                               options: {
                                                 load_type: ("INCREMENTAL" | "REPLACE")?,
-                                                dedupe_records: bool?
+                                                dedupe_records: bool?,
+                                                dedupe_strategy: {
+                                                  type: ("FIELD_PRIORITY"),
+                                                  field_priority: {
+                                                    fields: Array[
+                                                      {
+                                                        name: ::String,
+                                                        sort_order: ("ASC" | "DESC")
+                                                      },
+                                                    ]
+                                                  }?
+                                                }?
                                               }?
                                             }?
                                           },
@@ -159,15 +181,43 @@ module Aws
                                         fields: Array[
                                           {
                                             name: ::String,
-                                            type: ("INT" | "DOUBLE" | "STRING" | "TIMESTAMP"),
+                                            type: ("INT" | "DOUBLE" | "STRING" | "TIMESTAMP" | "LONG"),
                                             is_required: bool
+                                          },
+                                        ],
+                                        primary_keys: Array[
+                                          {
+                                            name: ::String
+                                          },
+                                        ]?
+                                      },
+                                      ?description: ::String,
+                                      ?partition_spec: {
+                                        fields: Array[
+                                          {
+                                            name: ::String,
+                                            transform: {
+                                              type: ("YEAR" | "MONTH" | "DAY" | "HOUR" | "IDENTITY")
+                                            }
                                           },
                                         ]
                                       },
-                                      ?description: ::String,
                                       ?tags: Hash[::String, ::String]
                                     ) -> _CreateDataLakeDatasetResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataLakeDatasetResponseSuccess
+
+      interface _CreateDataLakeNamespaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataLakeNamespaceResponse]
+        def namespace: () -> Types::DataLakeNamespace
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupplyChain/Client.html#create_data_lake_namespace-instance_method
+      def create_data_lake_namespace: (
+                                        instance_id: ::String,
+                                        name: ::String,
+                                        ?description: ::String,
+                                        ?tags: Hash[::String, ::String]
+                                      ) -> _CreateDataLakeNamespaceResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataLakeNamespaceResponseSuccess
 
       interface _CreateInstanceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateInstanceResponse]
@@ -210,6 +260,18 @@ module Aws
                                     ) -> _DeleteDataLakeDatasetResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataLakeDatasetResponseSuccess
 
+      interface _DeleteDataLakeNamespaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataLakeNamespaceResponse]
+        def instance_id: () -> ::String
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupplyChain/Client.html#delete_data_lake_namespace-instance_method
+      def delete_data_lake_namespace: (
+                                        instance_id: ::String,
+                                        name: ::String
+                                      ) -> _DeleteDataLakeNamespaceResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataLakeNamespaceResponseSuccess
+
       interface _DeleteInstanceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteInstanceResponse]
         def instance: () -> Types::Instance
@@ -231,6 +293,17 @@ module Aws
                                             ) -> _GetBillOfMaterialsImportJobResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBillOfMaterialsImportJobResponseSuccess
 
+      interface _GetDataIntegrationEventResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataIntegrationEventResponse]
+        def event: () -> Types::DataIntegrationEvent
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupplyChain/Client.html#get_data_integration_event-instance_method
+      def get_data_integration_event: (
+                                        instance_id: ::String,
+                                        event_id: ::String
+                                      ) -> _GetDataIntegrationEventResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataIntegrationEventResponseSuccess
+
       interface _GetDataIntegrationFlowResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDataIntegrationFlowResponse]
         def flow: () -> Types::DataIntegrationFlow
@@ -241,6 +314,18 @@ module Aws
                                        name: ::String
                                      ) -> _GetDataIntegrationFlowResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataIntegrationFlowResponseSuccess
+
+      interface _GetDataIntegrationFlowExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataIntegrationFlowExecutionResponse]
+        def flow_execution: () -> Types::DataIntegrationFlowExecution
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupplyChain/Client.html#get_data_integration_flow_execution-instance_method
+      def get_data_integration_flow_execution: (
+                                                 instance_id: ::String,
+                                                 flow_name: ::String,
+                                                 execution_id: ::String
+                                               ) -> _GetDataIntegrationFlowExecutionResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataIntegrationFlowExecutionResponseSuccess
 
       interface _GetDataLakeDatasetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDataLakeDatasetResponse]
@@ -254,6 +339,17 @@ module Aws
                                  ) -> _GetDataLakeDatasetResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataLakeDatasetResponseSuccess
 
+      interface _GetDataLakeNamespaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataLakeNamespaceResponse]
+        def namespace: () -> Types::DataLakeNamespace
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupplyChain/Client.html#get_data_lake_namespace-instance_method
+      def get_data_lake_namespace: (
+                                     instance_id: ::String,
+                                     name: ::String
+                                   ) -> _GetDataLakeNamespaceResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataLakeNamespaceResponseSuccess
+
       interface _GetInstanceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetInstanceResponse]
         def instance: () -> Types::Instance
@@ -263,6 +359,34 @@ module Aws
                           instance_id: ::String
                         ) -> _GetInstanceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInstanceResponseSuccess
+
+      interface _ListDataIntegrationEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataIntegrationEventsResponse]
+        def events: () -> ::Array[Types::DataIntegrationEvent]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupplyChain/Client.html#list_data_integration_events-instance_method
+      def list_data_integration_events: (
+                                          instance_id: ::String,
+                                          ?event_type: ("scn.data.forecast" | "scn.data.inventorylevel" | "scn.data.inboundorder" | "scn.data.inboundorderline" | "scn.data.inboundorderlineschedule" | "scn.data.outboundorderline" | "scn.data.outboundshipment" | "scn.data.processheader" | "scn.data.processoperation" | "scn.data.processproduct" | "scn.data.reservation" | "scn.data.shipment" | "scn.data.shipmentstop" | "scn.data.shipmentstoporder" | "scn.data.supplyplan" | "scn.data.dataset"),
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _ListDataIntegrationEventsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataIntegrationEventsResponseSuccess
+
+      interface _ListDataIntegrationFlowExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataIntegrationFlowExecutionsResponse]
+        def flow_executions: () -> ::Array[Types::DataIntegrationFlowExecution]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupplyChain/Client.html#list_data_integration_flow_executions-instance_method
+      def list_data_integration_flow_executions: (
+                                                   instance_id: ::String,
+                                                   flow_name: ::String,
+                                                   ?next_token: ::String,
+                                                   ?max_results: ::Integer
+                                                 ) -> _ListDataIntegrationFlowExecutionsResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataIntegrationFlowExecutionsResponseSuccess
 
       interface _ListDataIntegrationFlowsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDataIntegrationFlowsResponse]
@@ -290,6 +414,19 @@ module Aws
                                      ?max_results: ::Integer
                                    ) -> _ListDataLakeDatasetsResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataLakeDatasetsResponseSuccess
+
+      interface _ListDataLakeNamespacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataLakeNamespacesResponse]
+        def namespaces: () -> ::Array[Types::DataLakeNamespace]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupplyChain/Client.html#list_data_lake_namespaces-instance_method
+      def list_data_lake_namespaces: (
+                                       instance_id: ::String,
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _ListDataLakeNamespacesResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataLakeNamespacesResponseSuccess
 
       interface _ListInstancesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListInstancesResponse]
@@ -322,11 +459,15 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupplyChain/Client.html#send_data_integration_event-instance_method
       def send_data_integration_event: (
                                          instance_id: ::String,
-                                         event_type: ("scn.data.forecast" | "scn.data.inventorylevel" | "scn.data.inboundorder" | "scn.data.inboundorderline" | "scn.data.inboundorderlineschedule" | "scn.data.outboundorderline" | "scn.data.outboundshipment" | "scn.data.processheader" | "scn.data.processoperation" | "scn.data.processproduct" | "scn.data.reservation" | "scn.data.shipment" | "scn.data.shipmentstop" | "scn.data.shipmentstoporder" | "scn.data.supplyplan"),
+                                         event_type: ("scn.data.forecast" | "scn.data.inventorylevel" | "scn.data.inboundorder" | "scn.data.inboundorderline" | "scn.data.inboundorderlineschedule" | "scn.data.outboundorderline" | "scn.data.outboundshipment" | "scn.data.processheader" | "scn.data.processoperation" | "scn.data.processproduct" | "scn.data.reservation" | "scn.data.shipment" | "scn.data.shipmentstop" | "scn.data.shipmentstoporder" | "scn.data.supplyplan" | "scn.data.dataset"),
                                          data: ::String,
                                          event_group_id: ::String,
                                          ?event_timestamp: ::Time,
-                                         ?client_token: ::String
+                                         ?client_token: ::String,
+                                         ?dataset_target: {
+                                           dataset_identifier: ::String,
+                                           operation_type: ("APPEND" | "UPSERT" | "DELETE")
+                                         }
                                        ) -> _SendDataIntegrationEventResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendDataIntegrationEventResponseSuccess
 
@@ -373,7 +514,18 @@ module Aws
                                                 dataset_identifier: ::String,
                                                 options: {
                                                   load_type: ("INCREMENTAL" | "REPLACE")?,
-                                                  dedupe_records: bool?
+                                                  dedupe_records: bool?,
+                                                  dedupe_strategy: {
+                                                    type: ("FIELD_PRIORITY"),
+                                                    field_priority: {
+                                                      fields: Array[
+                                                        {
+                                                          name: ::String,
+                                                          sort_order: ("ASC" | "DESC")
+                                                        },
+                                                      ]
+                                                    }?
+                                                  }?
                                                 }?
                                               }?
                                             },
@@ -397,7 +549,18 @@ module Aws
                                               dataset_identifier: ::String,
                                               options: {
                                                 load_type: ("INCREMENTAL" | "REPLACE")?,
-                                                dedupe_records: bool?
+                                                dedupe_records: bool?,
+                                                dedupe_strategy: {
+                                                  type: ("FIELD_PRIORITY"),
+                                                  field_priority: {
+                                                    fields: Array[
+                                                      {
+                                                        name: ::String,
+                                                        sort_order: ("ASC" | "DESC")
+                                                      },
+                                                    ]
+                                                  }?
+                                                }?
                                               }?
                                             }?
                                           }
@@ -416,6 +579,18 @@ module Aws
                                       ?description: ::String
                                     ) -> _UpdateDataLakeDatasetResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataLakeDatasetResponseSuccess
+
+      interface _UpdateDataLakeNamespaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataLakeNamespaceResponse]
+        def namespace: () -> Types::DataLakeNamespace
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupplyChain/Client.html#update_data_lake_namespace-instance_method
+      def update_data_lake_namespace: (
+                                        instance_id: ::String,
+                                        name: ::String,
+                                        ?description: ::String
+                                      ) -> _UpdateDataLakeNamespaceResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataLakeNamespaceResponseSuccess
 
       interface _UpdateInstanceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateInstanceResponse]

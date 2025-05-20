@@ -1011,6 +1011,7 @@ module Aws::DataZone
     UpdateUserProfileOutput = Shapes::StructureShape.new(name: 'UpdateUserProfileOutput')
     UpdatedAt = Shapes::TimestampShape.new(name: 'UpdatedAt')
     UpdatedBy = Shapes::StringShape.new(name: 'UpdatedBy')
+    UseAssetTypePolicyGrantDetail = Shapes::StructureShape.new(name: 'UseAssetTypePolicyGrantDetail')
     UserAssignment = Shapes::StringShape.new(name: 'UserAssignment')
     UserDesignation = Shapes::StringShape.new(name: 'UserDesignation')
     UserDetails = Shapes::StructureShape.new(name: 'UserDetails')
@@ -1039,7 +1040,7 @@ module Aws::DataZone
 
     AcceptPredictionsInput.add_member(:accept_choices, Shapes::ShapeRef.new(shape: AcceptChoices, location_name: "acceptChoices"))
     AcceptPredictionsInput.add_member(:accept_rule, Shapes::ShapeRef.new(shape: AcceptRule, location_name: "acceptRule"))
-    AcceptPredictionsInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    AcceptPredictionsInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     AcceptPredictionsInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     AcceptPredictionsInput.add_member(:identifier, Shapes::ShapeRef.new(shape: AssetIdentifier, required: true, location: "uri", location_name: "identifier"))
     AcceptPredictionsInput.add_member(:revision, Shapes::ShapeRef.new(shape: Revision, location: "querystring", location_name: "revision"))
@@ -1095,7 +1096,7 @@ module Aws::DataZone
     ActionParameters.add_member_subclass(:unknown, Types::ActionParameters::Unknown)
     ActionParameters.struct_class = Types::ActionParameters
 
-    AddEntityOwnerInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    AddEntityOwnerInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     AddEntityOwnerInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     AddEntityOwnerInput.add_member(:entity_identifier, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "entityIdentifier"))
     AddEntityOwnerInput.add_member(:entity_type, Shapes::ShapeRef.new(shape: DataZoneEntityType, required: true, location: "uri", location_name: "entityType"))
@@ -1104,7 +1105,7 @@ module Aws::DataZone
 
     AddEntityOwnerOutput.struct_class = Types::AddEntityOwnerOutput
 
-    AddPolicyGrantInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    AddPolicyGrantInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     AddPolicyGrantInput.add_member(:detail, Shapes::ShapeRef.new(shape: PolicyGrantDetail, required: true, location_name: "detail"))
     AddPolicyGrantInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     AddPolicyGrantInput.add_member(:entity_identifier, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "entityIdentifier"))
@@ -1431,7 +1432,7 @@ module Aws::DataZone
     ConnectionSummary.struct_class = Types::ConnectionSummary
 
     CreateAssetFilterInput.add_member(:asset_identifier, Shapes::ShapeRef.new(shape: AssetId, required: true, location: "uri", location_name: "assetIdentifier"))
-    CreateAssetFilterInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAssetFilterInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAssetFilterInput.add_member(:configuration, Shapes::ShapeRef.new(shape: AssetFilterConfiguration, required: true, location_name: "configuration"))
     CreateAssetFilterInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateAssetFilterInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
@@ -1451,7 +1452,7 @@ module Aws::DataZone
     CreateAssetFilterOutput.add_member(:status, Shapes::ShapeRef.new(shape: FilterStatus, location_name: "status"))
     CreateAssetFilterOutput.struct_class = Types::CreateAssetFilterOutput
 
-    CreateAssetInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAssetInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAssetInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateAssetInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     CreateAssetInput.add_member(:external_identifier, Shapes::ShapeRef.new(shape: ExternalIdentifier, location_name: "externalIdentifier"))
@@ -1485,7 +1486,7 @@ module Aws::DataZone
     CreateAssetOutput.add_member(:type_revision, Shapes::ShapeRef.new(shape: Revision, required: true, location_name: "typeRevision"))
     CreateAssetOutput.struct_class = Types::CreateAssetOutput
 
-    CreateAssetRevisionInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAssetRevisionInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAssetRevisionInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateAssetRevisionInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     CreateAssetRevisionInput.add_member(:forms_input, Shapes::ShapeRef.new(shape: FormInputList, location_name: "formsInput"))
@@ -1542,7 +1543,7 @@ module Aws::DataZone
     CreateAssetTypePolicyGrantDetail.struct_class = Types::CreateAssetTypePolicyGrantDetail
 
     CreateConnectionInput.add_member(:aws_location, Shapes::ShapeRef.new(shape: AwsLocation, location_name: "awsLocation"))
-    CreateConnectionInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateConnectionInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateConnectionInput.add_member(:description, Shapes::ShapeRef.new(shape: CreateConnectionInputDescriptionString, location_name: "description"))
     CreateConnectionInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     CreateConnectionInput.add_member(:environment_identifier, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location_name: "environmentIdentifier"))
@@ -1562,7 +1563,7 @@ module Aws::DataZone
     CreateConnectionOutput.add_member(:type, Shapes::ShapeRef.new(shape: ConnectionType, required: true, location_name: "type"))
     CreateConnectionOutput.struct_class = Types::CreateConnectionOutput
 
-    CreateDataProductInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDataProductInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateDataProductInput.add_member(:description, Shapes::ShapeRef.new(shape: DataProductDescription, location_name: "description"))
     CreateDataProductInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     CreateDataProductInput.add_member(:forms_input, Shapes::ShapeRef.new(shape: FormInputList, location_name: "formsInput"))
@@ -1588,7 +1589,7 @@ module Aws::DataZone
     CreateDataProductOutput.add_member(:status, Shapes::ShapeRef.new(shape: DataProductStatus, required: true, location_name: "status"))
     CreateDataProductOutput.struct_class = Types::CreateDataProductOutput
 
-    CreateDataProductRevisionInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDataProductRevisionInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateDataProductRevisionInput.add_member(:description, Shapes::ShapeRef.new(shape: DataProductDescription, location_name: "description"))
     CreateDataProductRevisionInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     CreateDataProductRevisionInput.add_member(:forms_input, Shapes::ShapeRef.new(shape: FormInputList, location_name: "formsInput"))
@@ -1615,7 +1616,7 @@ module Aws::DataZone
     CreateDataProductRevisionOutput.struct_class = Types::CreateDataProductRevisionOutput
 
     CreateDataSourceInput.add_member(:asset_forms_input, Shapes::ShapeRef.new(shape: FormInputList, location_name: "assetFormsInput"))
-    CreateDataSourceInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDataSourceInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateDataSourceInput.add_member(:configuration, Shapes::ShapeRef.new(shape: DataSourceConfigurationInput, location_name: "configuration"))
     CreateDataSourceInput.add_member(:connection_identifier, Shapes::ShapeRef.new(shape: CreateDataSourceInputConnectionIdentifierString, location_name: "connectionIdentifier"))
     CreateDataSourceInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
@@ -1653,7 +1654,7 @@ module Aws::DataZone
     CreateDataSourceOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "updatedAt"))
     CreateDataSourceOutput.struct_class = Types::CreateDataSourceOutput
 
-    CreateDomainInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDomainInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateDomainInput.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     CreateDomainInput.add_member(:domain_execution_role, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "domainExecutionRole"))
     CreateDomainInput.add_member(:domain_version, Shapes::ShapeRef.new(shape: DomainVersion, location_name: "domainVersion"))
@@ -1679,7 +1680,7 @@ module Aws::DataZone
     CreateDomainOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateDomainOutput.struct_class = Types::CreateDomainOutput
 
-    CreateDomainUnitInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDomainUnitInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateDomainUnitInput.add_member(:description, Shapes::ShapeRef.new(shape: DomainUnitDescription, location_name: "description"))
     CreateDomainUnitInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     CreateDomainUnitInput.add_member(:name, Shapes::ShapeRef.new(shape: DomainUnitName, required: true, location_name: "name"))
@@ -1800,7 +1801,7 @@ module Aws::DataZone
     CreateFormTypePolicyGrantDetail.add_member(:include_child_domain_units, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeChildDomainUnits"))
     CreateFormTypePolicyGrantDetail.struct_class = Types::CreateFormTypePolicyGrantDetail
 
-    CreateGlossaryInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateGlossaryInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateGlossaryInput.add_member(:description, Shapes::ShapeRef.new(shape: GlossaryDescription, location_name: "description"))
     CreateGlossaryInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     CreateGlossaryInput.add_member(:name, Shapes::ShapeRef.new(shape: GlossaryName, required: true, location_name: "name"))
@@ -1819,7 +1820,7 @@ module Aws::DataZone
     CreateGlossaryPolicyGrantDetail.add_member(:include_child_domain_units, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeChildDomainUnits"))
     CreateGlossaryPolicyGrantDetail.struct_class = Types::CreateGlossaryPolicyGrantDetail
 
-    CreateGlossaryTermInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateGlossaryTermInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateGlossaryTermInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     CreateGlossaryTermInput.add_member(:glossary_identifier, Shapes::ShapeRef.new(shape: GlossaryTermId, required: true, location_name: "glossaryIdentifier"))
     CreateGlossaryTermInput.add_member(:long_description, Shapes::ShapeRef.new(shape: LongDescription, location_name: "longDescription"))
@@ -1839,7 +1840,7 @@ module Aws::DataZone
     CreateGlossaryTermOutput.add_member(:term_relations, Shapes::ShapeRef.new(shape: TermRelations, location_name: "termRelations"))
     CreateGlossaryTermOutput.struct_class = Types::CreateGlossaryTermOutput
 
-    CreateGroupProfileInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateGroupProfileInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateGroupProfileInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     CreateGroupProfileInput.add_member(:group_identifier, Shapes::ShapeRef.new(shape: GroupIdentifier, required: true, location_name: "groupIdentifier"))
     CreateGroupProfileInput.struct_class = Types::CreateGroupProfileInput
@@ -1851,7 +1852,7 @@ module Aws::DataZone
     CreateGroupProfileOutput.struct_class = Types::CreateGroupProfileOutput
 
     CreateListingChangeSetInput.add_member(:action, Shapes::ShapeRef.new(shape: ChangeAction, required: true, location_name: "action"))
-    CreateListingChangeSetInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateListingChangeSetInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateListingChangeSetInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     CreateListingChangeSetInput.add_member(:entity_identifier, Shapes::ShapeRef.new(shape: EntityIdentifier, required: true, location_name: "entityIdentifier"))
     CreateListingChangeSetInput.add_member(:entity_revision, Shapes::ShapeRef.new(shape: Revision, location_name: "entityRevision"))
@@ -1924,7 +1925,7 @@ module Aws::DataZone
     CreateProjectProfileOutput.struct_class = Types::CreateProjectProfileOutput
 
     CreateRuleInput.add_member(:action, Shapes::ShapeRef.new(shape: RuleAction, required: true, location_name: "action"))
-    CreateRuleInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateRuleInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateRuleInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateRuleInput.add_member(:detail, Shapes::ShapeRef.new(shape: RuleDetail, required: true, location_name: "detail"))
     CreateRuleInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
@@ -1947,7 +1948,7 @@ module Aws::DataZone
     CreateRuleOutput.struct_class = Types::CreateRuleOutput
 
     CreateSubscriptionGrantInput.add_member(:asset_target_names, Shapes::ShapeRef.new(shape: AssetTargetNames, location_name: "assetTargetNames"))
-    CreateSubscriptionGrantInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateSubscriptionGrantInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateSubscriptionGrantInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     CreateSubscriptionGrantInput.add_member(:environment_identifier, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location_name: "environmentIdentifier"))
     CreateSubscriptionGrantInput.add_member(:granted_entity, Shapes::ShapeRef.new(shape: GrantedEntityInput, required: true, location_name: "grantedEntity"))
@@ -1961,13 +1962,13 @@ module Aws::DataZone
     CreateSubscriptionGrantOutput.add_member(:granted_entity, Shapes::ShapeRef.new(shape: GrantedEntity, required: true, location_name: "grantedEntity"))
     CreateSubscriptionGrantOutput.add_member(:id, Shapes::ShapeRef.new(shape: SubscriptionGrantId, required: true, location_name: "id"))
     CreateSubscriptionGrantOutput.add_member(:status, Shapes::ShapeRef.new(shape: SubscriptionGrantOverallStatus, required: true, location_name: "status"))
-    CreateSubscriptionGrantOutput.add_member(:subscription_id, Shapes::ShapeRef.new(shape: SubscriptionId, deprecated: true, location_name: "subscriptionId", metadata: {"deprecatedMessage"=>"Multiple subscriptions can exist for a single grant"}))
+    CreateSubscriptionGrantOutput.add_member(:subscription_id, Shapes::ShapeRef.new(shape: SubscriptionId, deprecated: true, location_name: "subscriptionId", metadata: {"deprecatedMessage" => "Multiple subscriptions can exist for a single grant"}))
     CreateSubscriptionGrantOutput.add_member(:subscription_target_id, Shapes::ShapeRef.new(shape: SubscriptionTargetId, required: true, location_name: "subscriptionTargetId"))
     CreateSubscriptionGrantOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, required: true, location_name: "updatedAt"))
     CreateSubscriptionGrantOutput.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
     CreateSubscriptionGrantOutput.struct_class = Types::CreateSubscriptionGrantOutput
 
-    CreateSubscriptionRequestInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateSubscriptionRequestInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateSubscriptionRequestInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     CreateSubscriptionRequestInput.add_member(:metadata_forms, Shapes::ShapeRef.new(shape: MetadataFormInputs, location_name: "metadataForms"))
     CreateSubscriptionRequestInput.add_member(:request_reason, Shapes::ShapeRef.new(shape: RequestReason, required: true, location_name: "requestReason"))
@@ -1997,7 +1998,7 @@ module Aws::DataZone
 
     CreateSubscriptionTargetInput.add_member(:applicable_asset_types, Shapes::ShapeRef.new(shape: ApplicableAssetTypes, required: true, location_name: "applicableAssetTypes"))
     CreateSubscriptionTargetInput.add_member(:authorized_principals, Shapes::ShapeRef.new(shape: AuthorizedPrincipalIdentifiers, required: true, location_name: "authorizedPrincipals"))
-    CreateSubscriptionTargetInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateSubscriptionTargetInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateSubscriptionTargetInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     CreateSubscriptionTargetInput.add_member(:environment_identifier, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location: "uri", location_name: "environmentIdentifier"))
     CreateSubscriptionTargetInput.add_member(:manage_access_role, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "manageAccessRole"))
@@ -2024,7 +2025,7 @@ module Aws::DataZone
     CreateSubscriptionTargetOutput.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
     CreateSubscriptionTargetOutput.struct_class = Types::CreateSubscriptionTargetOutput
 
-    CreateUserProfileInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateUserProfileInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateUserProfileInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     CreateUserProfileInput.add_member(:user_identifier, Shapes::ShapeRef.new(shape: UserIdentifier, required: true, location_name: "userIdentifier"))
     CreateUserProfileInput.add_member(:user_type, Shapes::ShapeRef.new(shape: UserType, location_name: "userType"))
@@ -2214,7 +2215,7 @@ module Aws::DataZone
 
     DeleteDataProductOutput.struct_class = Types::DeleteDataProductOutput
 
-    DeleteDataSourceInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, deprecated: true, location: "querystring", location_name: "clientToken", metadata: {"deprecatedMessage"=>"This field is no longer required for idempotency.", "idempotencyToken"=>true}))
+    DeleteDataSourceInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, deprecated: true, location: "querystring", location_name: "clientToken", metadata: {"deprecatedMessage" => "This field is no longer required for idempotency.", "idempotencyToken" => true}))
     DeleteDataSourceInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     DeleteDataSourceInput.add_member(:identifier, Shapes::ShapeRef.new(shape: DataSourceId, required: true, location: "uri", location_name: "identifier"))
     DeleteDataSourceInput.add_member(:retain_permissions_on_revoke_failure, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "retainPermissionsOnRevokeFailure"))
@@ -2244,7 +2245,7 @@ module Aws::DataZone
     DeleteDataSourceOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "updatedAt"))
     DeleteDataSourceOutput.struct_class = Types::DeleteDataSourceOutput
 
-    DeleteDomainInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteDomainInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteDomainInput.add_member(:identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "identifier"))
     DeleteDomainInput.add_member(:skip_deletion_check, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "skipDeletionCheck"))
     DeleteDomainInput.struct_class = Types::DeleteDomainInput
@@ -2338,7 +2339,7 @@ module Aws::DataZone
     DeleteSubscriptionGrantOutput.add_member(:granted_entity, Shapes::ShapeRef.new(shape: GrantedEntity, required: true, location_name: "grantedEntity"))
     DeleteSubscriptionGrantOutput.add_member(:id, Shapes::ShapeRef.new(shape: SubscriptionGrantId, required: true, location_name: "id"))
     DeleteSubscriptionGrantOutput.add_member(:status, Shapes::ShapeRef.new(shape: SubscriptionGrantOverallStatus, required: true, location_name: "status"))
-    DeleteSubscriptionGrantOutput.add_member(:subscription_id, Shapes::ShapeRef.new(shape: SubscriptionId, deprecated: true, location_name: "subscriptionId", metadata: {"deprecatedMessage"=>"Multiple subscriptions can exist for a single grant"}))
+    DeleteSubscriptionGrantOutput.add_member(:subscription_id, Shapes::ShapeRef.new(shape: SubscriptionId, deprecated: true, location_name: "subscriptionId", metadata: {"deprecatedMessage" => "Multiple subscriptions can exist for a single grant"}))
     DeleteSubscriptionGrantOutput.add_member(:subscription_target_id, Shapes::ShapeRef.new(shape: SubscriptionTargetId, required: true, location_name: "subscriptionTargetId"))
     DeleteSubscriptionGrantOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, required: true, location_name: "updatedAt"))
     DeleteSubscriptionGrantOutput.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
@@ -2353,7 +2354,7 @@ module Aws::DataZone
     DeleteSubscriptionTargetInput.add_member(:identifier, Shapes::ShapeRef.new(shape: SubscriptionTargetId, required: true, location: "uri", location_name: "identifier"))
     DeleteSubscriptionTargetInput.struct_class = Types::DeleteSubscriptionTargetInput
 
-    DeleteTimeSeriesDataPointsInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteTimeSeriesDataPointsInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteTimeSeriesDataPointsInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     DeleteTimeSeriesDataPointsInput.add_member(:entity_identifier, Shapes::ShapeRef.new(shape: EntityIdentifier, required: true, location: "uri", location_name: "entityIdentifier"))
     DeleteTimeSeriesDataPointsInput.add_member(:entity_type, Shapes::ShapeRef.new(shape: TimeSeriesEntityType, required: true, location: "uri", location_name: "entityType"))
@@ -2404,7 +2405,7 @@ module Aws::DataZone
     DomainSummary.struct_class = Types::DomainSummary
 
     DomainUnitFilterForProject.add_member(:domain_unit, Shapes::ShapeRef.new(shape: DomainUnitId, required: true, location_name: "domainUnit"))
-    DomainUnitFilterForProject.add_member(:include_child_domain_units, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeChildDomainUnits", metadata: {"box"=>true}))
+    DomainUnitFilterForProject.add_member(:include_child_domain_units, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeChildDomainUnits", metadata: {"box" => true}))
     DomainUnitFilterForProject.struct_class = Types::DomainUnitFilterForProject
 
     DomainUnitGrantFilter.add_member(:all_domain_units_grant_filter, Shapes::ShapeRef.new(shape: AllDomainUnitsGrantFilter, location_name: "allDomainUnitsGrantFilter"))
@@ -3169,7 +3170,7 @@ module Aws::DataZone
     GetSubscriptionGrantOutput.add_member(:granted_entity, Shapes::ShapeRef.new(shape: GrantedEntity, required: true, location_name: "grantedEntity"))
     GetSubscriptionGrantOutput.add_member(:id, Shapes::ShapeRef.new(shape: SubscriptionGrantId, required: true, location_name: "id"))
     GetSubscriptionGrantOutput.add_member(:status, Shapes::ShapeRef.new(shape: SubscriptionGrantOverallStatus, required: true, location_name: "status"))
-    GetSubscriptionGrantOutput.add_member(:subscription_id, Shapes::ShapeRef.new(shape: SubscriptionId, deprecated: true, location_name: "subscriptionId", metadata: {"deprecatedMessage"=>"Multiple subscriptions can exist for a single grant"}))
+    GetSubscriptionGrantOutput.add_member(:subscription_id, Shapes::ShapeRef.new(shape: SubscriptionId, deprecated: true, location_name: "subscriptionId", metadata: {"deprecatedMessage" => "Multiple subscriptions can exist for a single grant"}))
     GetSubscriptionGrantOutput.add_member(:subscription_target_id, Shapes::ShapeRef.new(shape: SubscriptionTargetId, required: true, location_name: "subscriptionTargetId"))
     GetSubscriptionGrantOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, required: true, location_name: "updatedAt"))
     GetSubscriptionGrantOutput.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
@@ -4144,6 +4145,7 @@ module Aws::DataZone
     PolicyGrantDetail.add_member(:delegate_create_environment_profile, Shapes::ShapeRef.new(shape: Unit, location_name: "delegateCreateEnvironmentProfile"))
     PolicyGrantDetail.add_member(:override_domain_unit_owners, Shapes::ShapeRef.new(shape: OverrideDomainUnitOwnersPolicyGrantDetail, location_name: "overrideDomainUnitOwners"))
     PolicyGrantDetail.add_member(:override_project_owners, Shapes::ShapeRef.new(shape: OverrideProjectOwnersPolicyGrantDetail, location_name: "overrideProjectOwners"))
+    PolicyGrantDetail.add_member(:use_asset_type, Shapes::ShapeRef.new(shape: UseAssetTypePolicyGrantDetail, location_name: "useAssetType"))
     PolicyGrantDetail.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     PolicyGrantDetail.add_member_subclass(:add_to_project_member_pool, Types::PolicyGrantDetail::AddToProjectMemberPool)
     PolicyGrantDetail.add_member_subclass(:create_asset_type, Types::PolicyGrantDetail::CreateAssetType)
@@ -4158,6 +4160,7 @@ module Aws::DataZone
     PolicyGrantDetail.add_member_subclass(:delegate_create_environment_profile, Types::PolicyGrantDetail::DelegateCreateEnvironmentProfile)
     PolicyGrantDetail.add_member_subclass(:override_domain_unit_owners, Types::PolicyGrantDetail::OverrideDomainUnitOwners)
     PolicyGrantDetail.add_member_subclass(:override_project_owners, Types::PolicyGrantDetail::OverrideProjectOwners)
+    PolicyGrantDetail.add_member_subclass(:use_asset_type, Types::PolicyGrantDetail::UseAssetType)
     PolicyGrantDetail.add_member_subclass(:unknown, Types::PolicyGrantDetail::Unknown)
     PolicyGrantDetail.struct_class = Types::PolicyGrantDetail
 
@@ -4181,7 +4184,7 @@ module Aws::DataZone
     PolicyGrantPrincipal.add_member_subclass(:unknown, Types::PolicyGrantPrincipal::Unknown)
     PolicyGrantPrincipal.struct_class = Types::PolicyGrantPrincipal
 
-    PostLineageEventInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "Client-Token", metadata: {"idempotencyToken"=>true}))
+    PostLineageEventInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "Client-Token", metadata: {"idempotencyToken" => true}))
     PostLineageEventInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     PostLineageEventInput.add_member(:event, Shapes::ShapeRef.new(shape: LineageEvent, required: true, location_name: "event"))
     PostLineageEventInput.struct_class = Types::PostLineageEventInput
@@ -4192,7 +4195,7 @@ module Aws::DataZone
     PostLineageEventOutput.add_member(:id, Shapes::ShapeRef.new(shape: LineageEventIdentifier, location_name: "id"))
     PostLineageEventOutput.struct_class = Types::PostLineageEventOutput
 
-    PostTimeSeriesDataPointsInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    PostTimeSeriesDataPointsInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     PostTimeSeriesDataPointsInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     PostTimeSeriesDataPointsInput.add_member(:entity_identifier, Shapes::ShapeRef.new(shape: EntityIdentifier, required: true, location: "uri", location_name: "entityIdentifier"))
     PostTimeSeriesDataPointsInput.add_member(:entity_type, Shapes::ShapeRef.new(shape: TimeSeriesEntityType, required: true, location: "uri", location_name: "entityType"))
@@ -4414,7 +4417,7 @@ module Aws::DataZone
 
     RejectChoices.member = Shapes::ShapeRef.new(shape: RejectChoice)
 
-    RejectPredictionsInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    RejectPredictionsInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     RejectPredictionsInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     RejectPredictionsInput.add_member(:identifier, Shapes::ShapeRef.new(shape: AssetIdentifier, required: true, location: "uri", location_name: "identifier"))
     RejectPredictionsInput.add_member(:reject_choices, Shapes::ShapeRef.new(shape: RejectChoices, location_name: "rejectChoices"))
@@ -4463,7 +4466,7 @@ module Aws::DataZone
 
     RelationalFilterConfigurations.member = Shapes::ShapeRef.new(shape: RelationalFilterConfiguration)
 
-    RemoveEntityOwnerInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    RemoveEntityOwnerInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     RemoveEntityOwnerInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     RemoveEntityOwnerInput.add_member(:entity_identifier, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "entityIdentifier"))
     RemoveEntityOwnerInput.add_member(:entity_type, Shapes::ShapeRef.new(shape: DataZoneEntityType, required: true, location: "uri", location_name: "entityType"))
@@ -4472,7 +4475,7 @@ module Aws::DataZone
 
     RemoveEntityOwnerOutput.struct_class = Types::RemoveEntityOwnerOutput
 
-    RemovePolicyGrantInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    RemovePolicyGrantInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     RemovePolicyGrantInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     RemovePolicyGrantInput.add_member(:entity_identifier, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "entityIdentifier"))
     RemovePolicyGrantInput.add_member(:entity_type, Shapes::ShapeRef.new(shape: TargetEntityType, required: true, location: "uri", location_name: "entityType"))
@@ -4815,7 +4818,7 @@ module Aws::DataZone
     SsoUserProfileDetails.add_member(:username, Shapes::ShapeRef.new(shape: UserProfileName, location_name: "username"))
     SsoUserProfileDetails.struct_class = Types::SsoUserProfileDetails
 
-    StartDataSourceRunInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    StartDataSourceRunInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     StartDataSourceRunInput.add_member(:data_source_identifier, Shapes::ShapeRef.new(shape: DataSourceId, required: true, location: "uri", location_name: "dataSourceIdentifier"))
     StartDataSourceRunInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     StartDataSourceRunInput.struct_class = Types::StartDataSourceRunInput
@@ -4835,7 +4838,7 @@ module Aws::DataZone
     StartDataSourceRunOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "updatedAt"))
     StartDataSourceRunOutput.struct_class = Types::StartDataSourceRunOutput
 
-    StartMetadataGenerationRunInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    StartMetadataGenerationRunInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     StartMetadataGenerationRunInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     StartMetadataGenerationRunInput.add_member(:owning_project_identifier, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "owningProjectIdentifier"))
     StartMetadataGenerationRunInput.add_member(:target, Shapes::ShapeRef.new(shape: MetadataGenerationRunTarget, required: true, location_name: "target"))
@@ -4933,7 +4936,7 @@ module Aws::DataZone
     SubscriptionGrantSummary.add_member(:granted_entity, Shapes::ShapeRef.new(shape: GrantedEntity, required: true, location_name: "grantedEntity"))
     SubscriptionGrantSummary.add_member(:id, Shapes::ShapeRef.new(shape: SubscriptionGrantId, required: true, location_name: "id"))
     SubscriptionGrantSummary.add_member(:status, Shapes::ShapeRef.new(shape: SubscriptionGrantOverallStatus, required: true, location_name: "status"))
-    SubscriptionGrantSummary.add_member(:subscription_id, Shapes::ShapeRef.new(shape: SubscriptionId, deprecated: true, location_name: "subscriptionId", metadata: {"deprecatedMessage"=>"Multiple subscriptions can exist for a single grant"}))
+    SubscriptionGrantSummary.add_member(:subscription_id, Shapes::ShapeRef.new(shape: SubscriptionId, deprecated: true, location_name: "subscriptionId", metadata: {"deprecatedMessage" => "Multiple subscriptions can exist for a single grant"}))
     SubscriptionGrantSummary.add_member(:subscription_target_id, Shapes::ShapeRef.new(shape: SubscriptionTargetId, required: true, location_name: "subscriptionTargetId"))
     SubscriptionGrantSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, required: true, location_name: "updatedAt"))
     SubscriptionGrantSummary.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
@@ -5156,7 +5159,7 @@ module Aws::DataZone
     UpdateDataSourceOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "updatedAt"))
     UpdateDataSourceOutput.struct_class = Types::UpdateDataSourceOutput
 
-    UpdateDomainInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateDomainInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateDomainInput.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     UpdateDomainInput.add_member(:domain_execution_role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "domainExecutionRole"))
     UpdateDomainInput.add_member(:identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "identifier"))
@@ -5265,7 +5268,7 @@ module Aws::DataZone
     UpdateEnvironmentProfileOutput.add_member(:user_parameters, Shapes::ShapeRef.new(shape: CustomParameterList, location_name: "userParameters"))
     UpdateEnvironmentProfileOutput.struct_class = Types::UpdateEnvironmentProfileOutput
 
-    UpdateGlossaryInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateGlossaryInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateGlossaryInput.add_member(:description, Shapes::ShapeRef.new(shape: GlossaryDescription, location_name: "description"))
     UpdateGlossaryInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     UpdateGlossaryInput.add_member(:identifier, Shapes::ShapeRef.new(shape: GlossaryId, required: true, location: "uri", location_name: "identifier"))
@@ -5398,7 +5401,7 @@ module Aws::DataZone
     UpdateSubscriptionGrantStatusOutput.add_member(:granted_entity, Shapes::ShapeRef.new(shape: GrantedEntity, required: true, location_name: "grantedEntity"))
     UpdateSubscriptionGrantStatusOutput.add_member(:id, Shapes::ShapeRef.new(shape: SubscriptionGrantId, required: true, location_name: "id"))
     UpdateSubscriptionGrantStatusOutput.add_member(:status, Shapes::ShapeRef.new(shape: SubscriptionGrantOverallStatus, required: true, location_name: "status"))
-    UpdateSubscriptionGrantStatusOutput.add_member(:subscription_id, Shapes::ShapeRef.new(shape: SubscriptionId, deprecated: true, location_name: "subscriptionId", metadata: {"deprecatedMessage"=>"Multiple subscriptions can exist for a single grant"}))
+    UpdateSubscriptionGrantStatusOutput.add_member(:subscription_id, Shapes::ShapeRef.new(shape: SubscriptionId, deprecated: true, location_name: "subscriptionId", metadata: {"deprecatedMessage" => "Multiple subscriptions can exist for a single grant"}))
     UpdateSubscriptionGrantStatusOutput.add_member(:subscription_target_id, Shapes::ShapeRef.new(shape: SubscriptionTargetId, required: true, location_name: "subscriptionTargetId"))
     UpdateSubscriptionGrantStatusOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, required: true, location_name: "updatedAt"))
     UpdateSubscriptionGrantStatusOutput.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
@@ -5469,6 +5472,9 @@ module Aws::DataZone
     UpdateUserProfileOutput.add_member(:status, Shapes::ShapeRef.new(shape: UserProfileStatus, location_name: "status"))
     UpdateUserProfileOutput.add_member(:type, Shapes::ShapeRef.new(shape: UserProfileType, location_name: "type"))
     UpdateUserProfileOutput.struct_class = Types::UpdateUserProfileOutput
+
+    UseAssetTypePolicyGrantDetail.add_member(:domain_unit_id, Shapes::ShapeRef.new(shape: DomainUnitId, location_name: "domainUnitId"))
+    UseAssetTypePolicyGrantDetail.struct_class = Types::UseAssetTypePolicyGrantDetail
 
     UserDetails.add_member(:user_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "userId"))
     UserDetails.struct_class = Types::UserDetails

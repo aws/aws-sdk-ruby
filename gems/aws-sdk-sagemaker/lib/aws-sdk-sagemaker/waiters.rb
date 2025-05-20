@@ -102,15 +102,15 @@ module Aws::SageMaker
             operation_name: :describe_endpoint,
             acceptors: [
               {
-                "expected" => "ValidationException",
                 "matcher" => "error",
-                "state" => "success"
+                "state" => "success",
+                "expected" => "ValidationException"
               },
               {
-                "expected" => "Failed",
                 "matcher" => "path",
+                "argument" => "endpoint_status",
                 "state" => "failure",
-                "argument" => "endpoint_status"
+                "expected" => "Failed"
               }
             ]
           )
@@ -145,21 +145,21 @@ module Aws::SageMaker
             operation_name: :describe_endpoint,
             acceptors: [
               {
-                "expected" => "InService",
                 "matcher" => "path",
+                "argument" => "endpoint_status",
                 "state" => "success",
-                "argument" => "endpoint_status"
+                "expected" => "InService"
               },
               {
-                "expected" => "Failed",
                 "matcher" => "path",
+                "argument" => "endpoint_status",
                 "state" => "failure",
-                "argument" => "endpoint_status"
+                "expected" => "Failed"
               },
               {
-                "expected" => "ValidationException",
                 "matcher" => "error",
-                "state" => "failure"
+                "state" => "failure",
+                "expected" => "ValidationException"
               }
             ]
           )
@@ -194,21 +194,21 @@ module Aws::SageMaker
             operation_name: :describe_image,
             acceptors: [
               {
-                "expected" => "CREATED",
                 "matcher" => "path",
+                "argument" => "image_status",
                 "state" => "success",
-                "argument" => "image_status"
+                "expected" => "CREATED"
               },
               {
-                "expected" => "CREATE_FAILED",
                 "matcher" => "path",
+                "argument" => "image_status",
                 "state" => "failure",
-                "argument" => "image_status"
+                "expected" => "CREATE_FAILED"
               },
               {
-                "expected" => "ValidationException",
                 "matcher" => "error",
-                "state" => "failure"
+                "state" => "failure",
+                "expected" => "ValidationException"
               }
             ]
           )
@@ -243,20 +243,20 @@ module Aws::SageMaker
             operation_name: :describe_image,
             acceptors: [
               {
-                "expected" => "ResourceNotFoundException",
                 "matcher" => "error",
-                "state" => "success"
+                "state" => "success",
+                "expected" => "ResourceNotFoundException"
               },
               {
-                "expected" => "DELETE_FAILED",
                 "matcher" => "path",
+                "argument" => "image_status",
                 "state" => "failure",
-                "argument" => "image_status"
+                "expected" => "DELETE_FAILED"
               },
               {
-                "expected" => "ValidationException",
                 "matcher" => "error",
-                "state" => "failure"
+                "state" => "failure",
+                "expected" => "ValidationException"
               }
             ]
           )
@@ -291,21 +291,21 @@ module Aws::SageMaker
             operation_name: :describe_image,
             acceptors: [
               {
-                "expected" => "CREATED",
                 "matcher" => "path",
+                "argument" => "image_status",
                 "state" => "success",
-                "argument" => "image_status"
+                "expected" => "CREATED"
               },
               {
-                "expected" => "UPDATE_FAILED",
                 "matcher" => "path",
+                "argument" => "image_status",
                 "state" => "failure",
-                "argument" => "image_status"
+                "expected" => "UPDATE_FAILED"
               },
               {
-                "expected" => "ValidationException",
                 "matcher" => "error",
-                "state" => "failure"
+                "state" => "failure",
+                "expected" => "ValidationException"
               }
             ]
           )
@@ -340,21 +340,21 @@ module Aws::SageMaker
             operation_name: :describe_image_version,
             acceptors: [
               {
-                "expected" => "CREATED",
                 "matcher" => "path",
+                "argument" => "image_version_status",
                 "state" => "success",
-                "argument" => "image_version_status"
+                "expected" => "CREATED"
               },
               {
-                "expected" => "CREATE_FAILED",
                 "matcher" => "path",
+                "argument" => "image_version_status",
                 "state" => "failure",
-                "argument" => "image_version_status"
+                "expected" => "CREATE_FAILED"
               },
               {
-                "expected" => "ValidationException",
                 "matcher" => "error",
-                "state" => "failure"
+                "state" => "failure",
+                "expected" => "ValidationException"
               }
             ]
           )
@@ -389,20 +389,20 @@ module Aws::SageMaker
             operation_name: :describe_image_version,
             acceptors: [
               {
-                "expected" => "ResourceNotFoundException",
                 "matcher" => "error",
-                "state" => "success"
+                "state" => "success",
+                "expected" => "ResourceNotFoundException"
               },
               {
-                "expected" => "DELETE_FAILED",
                 "matcher" => "path",
+                "argument" => "image_version_status",
                 "state" => "failure",
-                "argument" => "image_version_status"
+                "expected" => "DELETE_FAILED"
               },
               {
-                "expected" => "ValidationException",
                 "matcher" => "error",
-                "state" => "failure"
+                "state" => "failure",
+                "expected" => "ValidationException"
               }
             ]
           )
@@ -437,15 +437,15 @@ module Aws::SageMaker
             operation_name: :describe_notebook_instance,
             acceptors: [
               {
-                "expected" => "ValidationException",
                 "matcher" => "error",
-                "state" => "success"
+                "state" => "success",
+                "expected" => "ValidationException"
               },
               {
-                "expected" => "Failed",
                 "matcher" => "path",
+                "argument" => "notebook_instance_status",
                 "state" => "failure",
-                "argument" => "notebook_instance_status"
+                "expected" => "Failed"
               }
             ]
           )
@@ -480,16 +480,16 @@ module Aws::SageMaker
             operation_name: :describe_notebook_instance,
             acceptors: [
               {
-                "expected" => "InService",
                 "matcher" => "path",
+                "argument" => "notebook_instance_status",
                 "state" => "success",
-                "argument" => "notebook_instance_status"
+                "expected" => "InService"
               },
               {
-                "expected" => "Failed",
                 "matcher" => "path",
+                "argument" => "notebook_instance_status",
                 "state" => "failure",
-                "argument" => "notebook_instance_status"
+                "expected" => "Failed"
               }
             ]
           )
@@ -524,16 +524,16 @@ module Aws::SageMaker
             operation_name: :describe_notebook_instance,
             acceptors: [
               {
-                "expected" => "Stopped",
                 "matcher" => "path",
+                "argument" => "notebook_instance_status",
                 "state" => "success",
-                "argument" => "notebook_instance_status"
+                "expected" => "Stopped"
               },
               {
-                "expected" => "Failed",
                 "matcher" => "path",
+                "argument" => "notebook_instance_status",
                 "state" => "failure",
-                "argument" => "notebook_instance_status"
+                "expected" => "Failed"
               }
             ]
           )
@@ -568,27 +568,27 @@ module Aws::SageMaker
             operation_name: :describe_processing_job,
             acceptors: [
               {
-                "expected" => "Completed",
                 "matcher" => "path",
+                "argument" => "processing_job_status",
                 "state" => "success",
-                "argument" => "processing_job_status"
+                "expected" => "Completed"
               },
               {
-                "expected" => "Stopped",
                 "matcher" => "path",
+                "argument" => "processing_job_status",
                 "state" => "success",
-                "argument" => "processing_job_status"
+                "expected" => "Stopped"
               },
               {
-                "expected" => "Failed",
                 "matcher" => "path",
+                "argument" => "processing_job_status",
                 "state" => "failure",
-                "argument" => "processing_job_status"
+                "expected" => "Failed"
               },
               {
-                "expected" => "ValidationException",
                 "matcher" => "error",
-                "state" => "failure"
+                "state" => "failure",
+                "expected" => "ValidationException"
               }
             ]
           )
@@ -623,27 +623,27 @@ module Aws::SageMaker
             operation_name: :describe_training_job,
             acceptors: [
               {
-                "expected" => "Completed",
                 "matcher" => "path",
+                "argument" => "training_job_status",
                 "state" => "success",
-                "argument" => "training_job_status"
+                "expected" => "Completed"
               },
               {
-                "expected" => "Stopped",
                 "matcher" => "path",
+                "argument" => "training_job_status",
                 "state" => "success",
-                "argument" => "training_job_status"
+                "expected" => "Stopped"
               },
               {
-                "expected" => "Failed",
                 "matcher" => "path",
+                "argument" => "training_job_status",
                 "state" => "failure",
-                "argument" => "training_job_status"
+                "expected" => "Failed"
               },
               {
-                "expected" => "ValidationException",
                 "matcher" => "error",
-                "state" => "failure"
+                "state" => "failure",
+                "expected" => "ValidationException"
               }
             ]
           )
@@ -678,27 +678,27 @@ module Aws::SageMaker
             operation_name: :describe_transform_job,
             acceptors: [
               {
-                "expected" => "Completed",
                 "matcher" => "path",
+                "argument" => "transform_job_status",
                 "state" => "success",
-                "argument" => "transform_job_status"
+                "expected" => "Completed"
               },
               {
-                "expected" => "Stopped",
                 "matcher" => "path",
+                "argument" => "transform_job_status",
                 "state" => "success",
-                "argument" => "transform_job_status"
+                "expected" => "Stopped"
               },
               {
-                "expected" => "Failed",
                 "matcher" => "path",
+                "argument" => "transform_job_status",
                 "state" => "failure",
-                "argument" => "transform_job_status"
+                "expected" => "Failed"
               },
               {
-                "expected" => "ValidationException",
                 "matcher" => "error",
-                "state" => "failure"
+                "state" => "failure",
+                "expected" => "ValidationException"
               }
             ]
           )

@@ -190,7 +190,7 @@ module Aws::MedicalImaging
     CopySourceImageSetProperties.struct_class = Types::CopySourceImageSetProperties
 
     CreateDatastoreRequest.add_member(:datastore_name, Shapes::ShapeRef.new(shape: DatastoreName, location_name: "datastoreName"))
-    CreateDatastoreRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDatastoreRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateDatastoreRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateDatastoreRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     CreateDatastoreRequest.struct_class = Types::CreateDatastoreRequest
@@ -475,7 +475,7 @@ module Aws::MedicalImaging
 
     StartDICOMImportJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "jobName"))
     StartDICOMImportJobRequest.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "dataAccessRoleArn"))
-    StartDICOMImportJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    StartDICOMImportJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     StartDICOMImportJobRequest.add_member(:datastore_id, Shapes::ShapeRef.new(shape: DatastoreId, required: true, location: "uri", location_name: "datastoreId"))
     StartDICOMImportJobRequest.add_member(:input_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "inputS3Uri"))
     StartDICOMImportJobRequest.add_member(:output_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "outputS3Uri"))

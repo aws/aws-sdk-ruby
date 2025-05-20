@@ -152,6 +152,7 @@ module Aws::ControlTower
       attr_accessor arn: ::String
       attr_accessor baseline_identifier: ::String
       attr_accessor baseline_version: ::String
+      attr_accessor drift_status_summary: Types::EnabledBaselineDriftStatusSummary
       attr_accessor parameters: ::Array[Types::EnabledBaselineParameterSummary]
       attr_accessor parent_identifier: ::String
       attr_accessor status_summary: Types::EnablementStatusSummary
@@ -159,10 +160,27 @@ module Aws::ControlTower
       SENSITIVE: []
     end
 
+    class EnabledBaselineDriftStatusSummary
+      attr_accessor types: Types::EnabledBaselineDriftTypes
+      SENSITIVE: []
+    end
+
+    class EnabledBaselineDriftTypes
+      attr_accessor inheritance: Types::EnabledBaselineInheritanceDrift
+      SENSITIVE: []
+    end
+
     class EnabledBaselineFilter
       attr_accessor baseline_identifiers: ::Array[::String]
+      attr_accessor inheritance_drift_statuses: ::Array[("IN_SYNC" | "DRIFTED")]
       attr_accessor parent_identifiers: ::Array[::String]
+      attr_accessor statuses: ::Array[("SUCCEEDED" | "FAILED" | "UNDER_CHANGE")]
       attr_accessor target_identifiers: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class EnabledBaselineInheritanceDrift
+      attr_accessor status: ("IN_SYNC" | "DRIFTED")
       SENSITIVE: []
     end
 
@@ -182,6 +200,7 @@ module Aws::ControlTower
       attr_accessor arn: ::String
       attr_accessor baseline_identifier: ::String
       attr_accessor baseline_version: ::String
+      attr_accessor drift_status_summary: Types::EnabledBaselineDriftStatusSummary
       attr_accessor parent_identifier: ::String
       attr_accessor status_summary: Types::EnablementStatusSummary
       attr_accessor target_identifier: ::String

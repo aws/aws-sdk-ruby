@@ -200,8 +200,7 @@ module Aws::MediaLive
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -1090,6 +1089,8 @@ module Aws::MediaLive
     #   resp.channel.destinations[0].srt_settings[0].encryption_passphrase_secret_arn #=> String
     #   resp.channel.destinations[0].srt_settings[0].stream_id #=> String
     #   resp.channel.destinations[0].srt_settings[0].url #=> String
+    #   resp.channel.destinations[0].logical_interface_names #=> Array
+    #   resp.channel.destinations[0].logical_interface_names[0] #=> String
     #   resp.channel.egress_endpoints #=> Array
     #   resp.channel.egress_endpoints[0].source_ip #=> String
     #   resp.channel.encoder_settings.audio_descriptions #=> Array
@@ -1770,6 +1771,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.timecode_burnin_settings.font_size #=> String, one of "EXTRA_SMALL_10", "LARGE_48", "MEDIUM_32", "SMALL_16"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.timecode_burnin_settings.position #=> String, one of "BOTTOM_CENTER", "BOTTOM_LEFT", "BOTTOM_RIGHT", "MIDDLE_CENTER", "MIDDLE_LEFT", "MIDDLE_RIGHT", "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.timecode_burnin_settings.prefix #=> String
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.bitrate #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
     #   resp.channel.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].name #=> String
     #   resp.channel.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
@@ -2477,6 +2480,8 @@ module Aws::MediaLive
     #   resp.destinations[0].srt_settings[0].encryption_passphrase_secret_arn #=> String
     #   resp.destinations[0].srt_settings[0].stream_id #=> String
     #   resp.destinations[0].srt_settings[0].url #=> String
+    #   resp.destinations[0].logical_interface_names #=> Array
+    #   resp.destinations[0].logical_interface_names[0] #=> String
     #   resp.egress_endpoints #=> Array
     #   resp.egress_endpoints[0].source_ip #=> String
     #   resp.encoder_settings.audio_descriptions #=> Array
@@ -3157,6 +3162,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.timecode_burnin_settings.font_size #=> String, one of "EXTRA_SMALL_10", "LARGE_48", "MEDIUM_32", "SMALL_16"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.timecode_burnin_settings.position #=> String, one of "BOTTOM_CENTER", "BOTTOM_LEFT", "BOTTOM_RIGHT", "MIDDLE_CENTER", "MIDDLE_LEFT", "MIDDLE_RIGHT", "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.timecode_burnin_settings.prefix #=> String
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.bitrate #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
     #   resp.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.encoder_settings.video_descriptions[0].name #=> String
     #   resp.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
@@ -3628,6 +3635,8 @@ module Aws::MediaLive
     #   resp.destinations[0].srt_settings[0].encryption_passphrase_secret_arn #=> String
     #   resp.destinations[0].srt_settings[0].stream_id #=> String
     #   resp.destinations[0].srt_settings[0].url #=> String
+    #   resp.destinations[0].logical_interface_names #=> Array
+    #   resp.destinations[0].logical_interface_names[0] #=> String
     #   resp.egress_endpoints #=> Array
     #   resp.egress_endpoints[0].source_ip #=> String
     #   resp.encoder_settings.audio_descriptions #=> Array
@@ -4308,6 +4317,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.timecode_burnin_settings.font_size #=> String, one of "EXTRA_SMALL_10", "LARGE_48", "MEDIUM_32", "SMALL_16"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.timecode_burnin_settings.position #=> String, one of "BOTTOM_CENTER", "BOTTOM_LEFT", "BOTTOM_RIGHT", "MIDDLE_CENTER", "MIDDLE_LEFT", "MIDDLE_RIGHT", "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.timecode_burnin_settings.prefix #=> String
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.bitrate #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
     #   resp.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.encoder_settings.video_descriptions[0].name #=> String
     #   resp.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
@@ -5166,6 +5177,8 @@ module Aws::MediaLive
     #   resp.channels[0].destinations[0].srt_settings[0].encryption_passphrase_secret_arn #=> String
     #   resp.channels[0].destinations[0].srt_settings[0].stream_id #=> String
     #   resp.channels[0].destinations[0].srt_settings[0].url #=> String
+    #   resp.channels[0].destinations[0].logical_interface_names #=> Array
+    #   resp.channels[0].destinations[0].logical_interface_names[0] #=> String
     #   resp.channels[0].egress_endpoints #=> Array
     #   resp.channels[0].egress_endpoints[0].source_ip #=> String
     #   resp.channels[0].id #=> String
@@ -5994,6 +6007,8 @@ module Aws::MediaLive
     #   resp.destinations[0].srt_settings[0].encryption_passphrase_secret_arn #=> String
     #   resp.destinations[0].srt_settings[0].stream_id #=> String
     #   resp.destinations[0].srt_settings[0].url #=> String
+    #   resp.destinations[0].logical_interface_names #=> Array
+    #   resp.destinations[0].logical_interface_names[0] #=> String
     #   resp.egress_endpoints #=> Array
     #   resp.egress_endpoints[0].source_ip #=> String
     #   resp.encoder_settings.audio_descriptions #=> Array
@@ -6674,6 +6689,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.timecode_burnin_settings.font_size #=> String, one of "EXTRA_SMALL_10", "LARGE_48", "MEDIUM_32", "SMALL_16"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.timecode_burnin_settings.position #=> String, one of "BOTTOM_CENTER", "BOTTOM_LEFT", "BOTTOM_RIGHT", "MIDDLE_CENTER", "MIDDLE_LEFT", "MIDDLE_RIGHT", "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.timecode_burnin_settings.prefix #=> String
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.bitrate #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
     #   resp.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.encoder_settings.video_descriptions[0].name #=> String
     #   resp.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
@@ -6952,6 +6969,8 @@ module Aws::MediaLive
     #   resp.destinations[0].srt_settings[0].encryption_passphrase_secret_arn #=> String
     #   resp.destinations[0].srt_settings[0].stream_id #=> String
     #   resp.destinations[0].srt_settings[0].url #=> String
+    #   resp.destinations[0].logical_interface_names #=> Array
+    #   resp.destinations[0].logical_interface_names[0] #=> String
     #   resp.egress_endpoints #=> Array
     #   resp.egress_endpoints[0].source_ip #=> String
     #   resp.encoder_settings.audio_descriptions #=> Array
@@ -7632,6 +7651,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.timecode_burnin_settings.font_size #=> String, one of "EXTRA_SMALL_10", "LARGE_48", "MEDIUM_32", "SMALL_16"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.timecode_burnin_settings.position #=> String, one of "BOTTOM_CENTER", "BOTTOM_LEFT", "BOTTOM_RIGHT", "MIDDLE_CENTER", "MIDDLE_LEFT", "MIDDLE_RIGHT", "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.timecode_burnin_settings.prefix #=> String
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.bitrate #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
     #   resp.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.encoder_settings.video_descriptions[0].name #=> String
     #   resp.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
@@ -7914,6 +7935,9 @@ module Aws::MediaLive
     #
     # @option params [Boolean] :dry_run
     #
+    # @option params [Types::AnywhereSettings] :anywhere_settings
+    #   Elemental anywhere settings
+    #
     # @return [Types::UpdateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateChannelResponse#channel #channel} => Types::Channel
@@ -7940,6 +7964,8 @@ module Aws::MediaLive
     #   resp.channel.destinations[0].srt_settings[0].encryption_passphrase_secret_arn #=> String
     #   resp.channel.destinations[0].srt_settings[0].stream_id #=> String
     #   resp.channel.destinations[0].srt_settings[0].url #=> String
+    #   resp.channel.destinations[0].logical_interface_names #=> Array
+    #   resp.channel.destinations[0].logical_interface_names[0] #=> String
     #   resp.channel.egress_endpoints #=> Array
     #   resp.channel.egress_endpoints[0].source_ip #=> String
     #   resp.channel.encoder_settings.audio_descriptions #=> Array
@@ -8620,6 +8646,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.timecode_burnin_settings.font_size #=> String, one of "EXTRA_SMALL_10", "LARGE_48", "MEDIUM_32", "SMALL_16"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.timecode_burnin_settings.position #=> String, one of "BOTTOM_CENTER", "BOTTOM_LEFT", "BOTTOM_RIGHT", "MIDDLE_CENTER", "MIDDLE_LEFT", "MIDDLE_RIGHT", "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.timecode_burnin_settings.prefix #=> String
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.bitrate #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
     #   resp.channel.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].name #=> String
     #   resp.channel.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
@@ -8787,6 +8815,7 @@ module Aws::MediaLive
     #             url: "__string",
     #           },
     #         ],
+    #         logical_interface_names: ["__string"],
     #       },
     #     ],
     #   })
@@ -8813,6 +8842,8 @@ module Aws::MediaLive
     #   resp.channel.destinations[0].srt_settings[0].encryption_passphrase_secret_arn #=> String
     #   resp.channel.destinations[0].srt_settings[0].stream_id #=> String
     #   resp.channel.destinations[0].srt_settings[0].url #=> String
+    #   resp.channel.destinations[0].logical_interface_names #=> Array
+    #   resp.channel.destinations[0].logical_interface_names[0] #=> String
     #   resp.channel.egress_endpoints #=> Array
     #   resp.channel.egress_endpoints[0].source_ip #=> String
     #   resp.channel.encoder_settings.audio_descriptions #=> Array
@@ -9493,6 +9524,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.timecode_burnin_settings.font_size #=> String, one of "EXTRA_SMALL_10", "LARGE_48", "MEDIUM_32", "SMALL_16"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.timecode_burnin_settings.position #=> String, one of "BOTTOM_CENTER", "BOTTOM_LEFT", "BOTTOM_RIGHT", "MIDDLE_CENTER", "MIDDLE_LEFT", "MIDDLE_RIGHT", "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.timecode_burnin_settings.prefix #=> String
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.bitrate #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
     #   resp.channel.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].name #=> String
     #   resp.channel.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
@@ -10274,6 +10307,8 @@ module Aws::MediaLive
     #   resp.destinations[0].srt_settings[0].encryption_passphrase_secret_arn #=> String
     #   resp.destinations[0].srt_settings[0].stream_id #=> String
     #   resp.destinations[0].srt_settings[0].url #=> String
+    #   resp.destinations[0].logical_interface_names #=> Array
+    #   resp.destinations[0].logical_interface_names[0] #=> String
     #   resp.egress_endpoints #=> Array
     #   resp.egress_endpoints[0].source_ip #=> String
     #   resp.encoder_settings.audio_descriptions #=> Array
@@ -10954,6 +10989,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.timecode_burnin_settings.font_size #=> String, one of "EXTRA_SMALL_10", "LARGE_48", "MEDIUM_32", "SMALL_16"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.timecode_burnin_settings.position #=> String, one of "BOTTOM_CENTER", "BOTTOM_LEFT", "BOTTOM_RIGHT", "MIDDLE_CENTER", "MIDDLE_LEFT", "MIDDLE_RIGHT", "TOP_CENTER", "TOP_LEFT", "TOP_RIGHT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.timecode_burnin_settings.prefix #=> String
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.bitrate #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.av_1_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
     #   resp.encoder_settings.video_descriptions[0].height #=> Integer
     #   resp.encoder_settings.video_descriptions[0].name #=> String
     #   resp.encoder_settings.video_descriptions[0].respond_to_afd #=> String, one of "NONE", "PASSTHROUGH", "RESPOND"
@@ -14246,7 +14283,7 @@ module Aws::MediaLive
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.151.0'
+      context[:gem_version] = '1.154.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

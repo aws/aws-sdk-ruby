@@ -440,7 +440,7 @@ module Aws::CostExplorer
     AnomalySubscription.add_member(:account_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "AccountId"))
     AnomalySubscription.add_member(:monitor_arn_list, Shapes::ShapeRef.new(shape: MonitorArnList, required: true, location_name: "MonitorArnList"))
     AnomalySubscription.add_member(:subscribers, Shapes::ShapeRef.new(shape: Subscribers, required: true, location_name: "Subscribers"))
-    AnomalySubscription.add_member(:threshold, Shapes::ShapeRef.new(shape: NullableNonNegativeDouble, deprecated: true, location_name: "Threshold", metadata: {"deprecatedMessage"=>"Threshold has been deprecated in favor of ThresholdExpression"}))
+    AnomalySubscription.add_member(:threshold, Shapes::ShapeRef.new(shape: NullableNonNegativeDouble, deprecated: true, location_name: "Threshold", metadata: {"deprecatedMessage" => "Threshold has been deprecated in favor of ThresholdExpression"}))
     AnomalySubscription.add_member(:frequency, Shapes::ShapeRef.new(shape: AnomalySubscriptionFrequency, required: true, location_name: "Frequency"))
     AnomalySubscription.add_member(:subscription_name, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "SubscriptionName"))
     AnomalySubscription.add_member(:threshold_expression, Shapes::ShapeRef.new(shape: Expression, location_name: "ThresholdExpression"))
@@ -766,7 +766,7 @@ module Aws::CostExplorer
     GetAnomaliesRequest.add_member(:feedback, Shapes::ShapeRef.new(shape: AnomalyFeedbackType, location_name: "Feedback"))
     GetAnomaliesRequest.add_member(:total_impact, Shapes::ShapeRef.new(shape: TotalImpactFilter, location_name: "TotalImpact"))
     GetAnomaliesRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
-    GetAnomaliesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults", metadata: {"box"=>true}))
+    GetAnomaliesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults", metadata: {"box" => true}))
     GetAnomaliesRequest.struct_class = Types::GetAnomaliesRequest
 
     GetAnomaliesResponse.add_member(:anomalies, Shapes::ShapeRef.new(shape: Anomalies, required: true, location_name: "Anomalies"))
@@ -775,7 +775,7 @@ module Aws::CostExplorer
 
     GetAnomalyMonitorsRequest.add_member(:monitor_arn_list, Shapes::ShapeRef.new(shape: Values, location_name: "MonitorArnList"))
     GetAnomalyMonitorsRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
-    GetAnomalyMonitorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults", metadata: {"box"=>true}))
+    GetAnomalyMonitorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults", metadata: {"box" => true}))
     GetAnomalyMonitorsRequest.struct_class = Types::GetAnomalyMonitorsRequest
 
     GetAnomalyMonitorsResponse.add_member(:anomaly_monitors, Shapes::ShapeRef.new(shape: AnomalyMonitors, required: true, location_name: "AnomalyMonitors"))
@@ -785,7 +785,7 @@ module Aws::CostExplorer
     GetAnomalySubscriptionsRequest.add_member(:subscription_arn_list, Shapes::ShapeRef.new(shape: Values, location_name: "SubscriptionArnList"))
     GetAnomalySubscriptionsRequest.add_member(:monitor_arn, Shapes::ShapeRef.new(shape: GenericString, location_name: "MonitorArn"))
     GetAnomalySubscriptionsRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
-    GetAnomalySubscriptionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults", metadata: {"box"=>true}))
+    GetAnomalySubscriptionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults", metadata: {"box" => true}))
     GetAnomalySubscriptionsRequest.struct_class = Types::GetAnomalySubscriptionsRequest
 
     GetAnomalySubscriptionsResponse.add_member(:anomaly_subscriptions, Shapes::ShapeRef.new(shape: AnomalySubscriptions, required: true, location_name: "AnomalySubscriptions"))
@@ -898,7 +898,7 @@ module Aws::CostExplorer
     GetReservationCoverageRequest.add_member(:metrics, Shapes::ShapeRef.new(shape: MetricNames, location_name: "Metrics"))
     GetReservationCoverageRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
     GetReservationCoverageRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortDefinition, location_name: "SortBy"))
-    GetReservationCoverageRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    GetReservationCoverageRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     GetReservationCoverageRequest.struct_class = Types::GetReservationCoverageRequest
 
     GetReservationCoverageResponse.add_member(:coverages_by_time, Shapes::ShapeRef.new(shape: CoveragesByTime, required: true, location_name: "CoveragesByTime"))
@@ -929,7 +929,7 @@ module Aws::CostExplorer
     GetReservationUtilizationRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
     GetReservationUtilizationRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortDefinition, location_name: "SortBy"))
     GetReservationUtilizationRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
-    GetReservationUtilizationRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    GetReservationUtilizationRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     GetReservationUtilizationRequest.struct_class = Types::GetReservationUtilizationRequest
 
     GetReservationUtilizationResponse.add_member(:utilizations_by_time, Shapes::ShapeRef.new(shape: UtilizationsByTime, required: true, location_name: "UtilizationsByTime"))
@@ -964,7 +964,7 @@ module Aws::CostExplorer
     GetSavingsPlansCoverageRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
     GetSavingsPlansCoverageRequest.add_member(:metrics, Shapes::ShapeRef.new(shape: MetricNames, location_name: "Metrics"))
     GetSavingsPlansCoverageRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
-    GetSavingsPlansCoverageRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    GetSavingsPlansCoverageRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     GetSavingsPlansCoverageRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortDefinition, location_name: "SortBy"))
     GetSavingsPlansCoverageRequest.struct_class = Types::GetSavingsPlansCoverageRequest
 
@@ -991,7 +991,7 @@ module Aws::CostExplorer
     GetSavingsPlansUtilizationDetailsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
     GetSavingsPlansUtilizationDetailsRequest.add_member(:data_type, Shapes::ShapeRef.new(shape: SavingsPlansDataTypes, location_name: "DataType"))
     GetSavingsPlansUtilizationDetailsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
-    GetSavingsPlansUtilizationDetailsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    GetSavingsPlansUtilizationDetailsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     GetSavingsPlansUtilizationDetailsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortDefinition, location_name: "SortBy"))
     GetSavingsPlansUtilizationDetailsRequest.struct_class = Types::GetSavingsPlansUtilizationDetailsRequest
 
@@ -1085,7 +1085,7 @@ module Aws::CostExplorer
     ListCommitmentPurchaseAnalysesResponse.struct_class = Types::ListCommitmentPurchaseAnalysesResponse
 
     ListCostAllocationTagBackfillHistoryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
-    ListCostAllocationTagBackfillHistoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CostAllocationTagsMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListCostAllocationTagBackfillHistoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CostAllocationTagsMaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     ListCostAllocationTagBackfillHistoryRequest.struct_class = Types::ListCostAllocationTagBackfillHistoryRequest
 
     ListCostAllocationTagBackfillHistoryResponse.add_member(:backfill_requests, Shapes::ShapeRef.new(shape: CostAllocationTagBackfillRequestList, location_name: "BackfillRequests"))
@@ -1096,7 +1096,7 @@ module Aws::CostExplorer
     ListCostAllocationTagsRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: CostAllocationTagKeyList, location_name: "TagKeys"))
     ListCostAllocationTagsRequest.add_member(:type, Shapes::ShapeRef.new(shape: CostAllocationTagType, location_name: "Type"))
     ListCostAllocationTagsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
-    ListCostAllocationTagsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CostAllocationTagsMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListCostAllocationTagsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CostAllocationTagsMaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     ListCostAllocationTagsRequest.struct_class = Types::ListCostAllocationTagsRequest
 
     ListCostAllocationTagsResponse.add_member(:cost_allocation_tags, Shapes::ShapeRef.new(shape: CostAllocationTagList, location_name: "CostAllocationTags"))
@@ -1105,7 +1105,7 @@ module Aws::CostExplorer
 
     ListCostCategoryDefinitionsRequest.add_member(:effective_on, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "EffectiveOn"))
     ListCostCategoryDefinitionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
-    ListCostCategoryDefinitionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CostCategoryMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListCostCategoryDefinitionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CostCategoryMaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     ListCostCategoryDefinitionsRequest.struct_class = Types::ListCostCategoryDefinitionsRequest
 
     ListCostCategoryDefinitionsResponse.add_member(:cost_category_references, Shapes::ShapeRef.new(shape: CostCategoryReferencesList, location_name: "CostCategoryReferences"))
@@ -1631,7 +1631,7 @@ module Aws::CostExplorer
     UpdateAnomalyMonitorResponse.struct_class = Types::UpdateAnomalyMonitorResponse
 
     UpdateAnomalySubscriptionRequest.add_member(:subscription_arn, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "SubscriptionArn"))
-    UpdateAnomalySubscriptionRequest.add_member(:threshold, Shapes::ShapeRef.new(shape: NullableNonNegativeDouble, deprecated: true, location_name: "Threshold", metadata: {"deprecatedMessage"=>"Threshold has been deprecated in favor of ThresholdExpression"}))
+    UpdateAnomalySubscriptionRequest.add_member(:threshold, Shapes::ShapeRef.new(shape: NullableNonNegativeDouble, deprecated: true, location_name: "Threshold", metadata: {"deprecatedMessage" => "Threshold has been deprecated in favor of ThresholdExpression"}))
     UpdateAnomalySubscriptionRequest.add_member(:frequency, Shapes::ShapeRef.new(shape: AnomalySubscriptionFrequency, location_name: "Frequency"))
     UpdateAnomalySubscriptionRequest.add_member(:monitor_arn_list, Shapes::ShapeRef.new(shape: MonitorArnList, location_name: "MonitorArnList"))
     UpdateAnomalySubscriptionRequest.add_member(:subscribers, Shapes::ShapeRef.new(shape: Subscribers, location_name: "Subscribers"))

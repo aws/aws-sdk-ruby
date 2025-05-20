@@ -101,7 +101,11 @@ module Aws
                                   parameter_name: ::String,
                                   parameter_value: ::String
                                 },
-                              ]?
+                              ]?,
+                              accounting: {
+                                mode: ("STANDARD" | "NONE"),
+                                default_purge_time_in_days: ::Integer?
+                              }?
                             },
                             ?client_token: ::String,
                             ?tags: Hash[::String, ::String]

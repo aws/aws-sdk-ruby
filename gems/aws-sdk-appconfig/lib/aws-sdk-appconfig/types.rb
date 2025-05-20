@@ -11,13 +11,12 @@ module Aws::AppConfig
   module Types
 
     # @!attribute [rw] deletion_protection
-    #   A parameter to configure deletion protection. If enabled, deletion
-    #   protection prevents a user from deleting a configuration profile or
-    #   an environment if AppConfig has called either
+    #   A parameter to configure deletion protection. Deletion protection
+    #   prevents a user from deleting a configuration profile or an
+    #   environment if AppConfig has called either
     #   [GetLatestConfiguration][1] or for the configuration profile or from
-    #   the environment during the specified interval. Deletion protection
-    #   is disabled by default. The default interval for
-    #   `ProtectionPeriodInMinutes` is 60.
+    #   the environment during the specified interval. The default interval
+    #   for `ProtectionPeriodInMinutes` is 60.
     #
     #
     #
@@ -505,8 +504,8 @@ module Aws::AppConfig
     #   at the specified `LocationUri`.
     #
     #   A retrieval role ARN is not required for configurations stored in
-    #   the AppConfig hosted configuration store. It is required for all
-    #   other sources that store your configuration.
+    #   CodePipeline or the AppConfig hosted configuration store. It is
+    #   required for all other sources that store your configuration.
     #   @return [String]
     #
     # @!attribute [rw] validators
@@ -844,10 +843,10 @@ module Aws::AppConfig
     #   @return [String]
     #
     # @!attribute [rw] deletion_protection_check
-    #   A parameter to configure deletion protection. If enabled, deletion
-    #   protection prevents a user from deleting a configuration profile if
-    #   your application has called either [GetLatestConfiguration][1] or
-    #   for the configuration profile during the specified interval.
+    #   A parameter to configure deletion protection. Deletion protection
+    #   prevents a user from deleting a configuration profile if your
+    #   application has called either [GetLatestConfiguration][1] or for the
+    #   configuration profile during the specified interval.
     #
     #   This parameter supports the following values:
     #
@@ -902,10 +901,10 @@ module Aws::AppConfig
     #   @return [String]
     #
     # @!attribute [rw] deletion_protection_check
-    #   A parameter to configure deletion protection. If enabled, deletion
-    #   protection prevents a user from deleting an environment if your
-    #   application called either [GetLatestConfiguration][1] or in the
-    #   environment during the specified interval.
+    #   A parameter to configure deletion protection. Deletion protection
+    #   prevents a user from deleting an environment if your application
+    #   called either [GetLatestConfiguration][1] or in the environment
+    #   during the specified interval.
     #
     #   This parameter supports the following values:
     #
@@ -991,20 +990,15 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # A parameter to configure deletion protection. If enabled, deletion
-    # protection prevents a user from deleting a configuration profile or an
+    # A parameter to configure deletion protection. Deletion protection
+    # prevents a user from deleting a configuration profile or an
     # environment if AppConfig has called either [GetLatestConfiguration][1]
     # or for the configuration profile or from the environment during the
     # specified interval.
     #
-    # This setting uses the following default values:
-    #
-    # * Deletion protection is disabled by default.
-    #
-    # * The default interval specified by `ProtectionPeriodInMinutes` is 60.
-    #
-    # * `DeletionProtectionCheck` skips configuration profiles and
-    #   environments that were created in the past hour.
+    # The default interval specified by `ProtectionPeriodInMinutes` is 60.
+    # `DeletionProtectionCheck` skips configuration profiles and
+    # environments that were created in the past hour.
     #
     #
     #
@@ -2436,7 +2430,7 @@ module Aws::AppConfig
       :tags,
       :kms_key_identifier,
       :dynamic_extension_parameters)
-      SENSITIVE = []
+      SENSITIVE = [:dynamic_extension_parameters]
       include Aws::Structure
     end
 
@@ -2506,13 +2500,12 @@ module Aws::AppConfig
     end
 
     # @!attribute [rw] deletion_protection
-    #   A parameter to configure deletion protection. If enabled, deletion
-    #   protection prevents a user from deleting a configuration profile or
-    #   an environment if AppConfig has called either
+    #   A parameter to configure deletion protection. Deletion protection
+    #   prevents a user from deleting a configuration profile or an
+    #   environment if AppConfig has called either
     #   [GetLatestConfiguration][1] or for the configuration profile or from
-    #   the environment during the specified interval. Deletion protection
-    #   is disabled by default. The default interval for
-    #   `ProtectionPeriodInMinutes` is 60.
+    #   the environment during the specified interval. The default interval
+    #   for `ProtectionPeriodInMinutes` is 60.
     #
     #
     #
@@ -2568,6 +2561,10 @@ module Aws::AppConfig
     # @!attribute [rw] retrieval_role_arn
     #   The ARN of an IAM role with permission to access the configuration
     #   at the specified `LocationUri`.
+    #
+    #   A retrieval role ARN is not required for configurations stored in
+    #   CodePipeline or the AppConfig hosted configuration store. It is
+    #   required for all other sources that store your configuration.
     #   @return [String]
     #
     # @!attribute [rw] validators

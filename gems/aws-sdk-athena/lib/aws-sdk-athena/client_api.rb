@@ -486,7 +486,7 @@ module Aws::Athena
     CreateNamedQueryInput.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
     CreateNamedQueryInput.add_member(:database, Shapes::ShapeRef.new(shape: DatabaseString, required: true, location_name: "Database"))
     CreateNamedQueryInput.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryString, required: true, location_name: "QueryString"))
-    CreateNamedQueryInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateNamedQueryInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateNamedQueryInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, location_name: "WorkGroup"))
     CreateNamedQueryInput.struct_class = Types::CreateNamedQueryInput
 
@@ -568,7 +568,7 @@ module Aws::Athena
     DeleteDataCatalogOutput.add_member(:data_catalog, Shapes::ShapeRef.new(shape: DataCatalog, location_name: "DataCatalog"))
     DeleteDataCatalogOutput.struct_class = Types::DeleteDataCatalogOutput
 
-    DeleteNamedQueryInput.add_member(:named_query_id, Shapes::ShapeRef.new(shape: NamedQueryId, required: true, location_name: "NamedQueryId", metadata: {"idempotencyToken"=>true}))
+    DeleteNamedQueryInput.add_member(:named_query_id, Shapes::ShapeRef.new(shape: NamedQueryId, required: true, location_name: "NamedQueryId", metadata: {"idempotencyToken" => true}))
     DeleteNamedQueryInput.struct_class = Types::DeleteNamedQueryInput
 
     DeleteNamedQueryOutput.struct_class = Types::DeleteNamedQueryOutput
@@ -1145,7 +1145,7 @@ module Aws::Athena
 
     StartCalculationExecutionRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, required: true, location_name: "SessionId"))
     StartCalculationExecutionRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
-    StartCalculationExecutionRequest.add_member(:calculation_configuration, Shapes::ShapeRef.new(shape: CalculationConfiguration, deprecated: true, location_name: "CalculationConfiguration", metadata: {"deprecatedMessage"=>"Kepler Post GA Tasks : https://sim.amazon.com/issues/ATHENA-39828"}))
+    StartCalculationExecutionRequest.add_member(:calculation_configuration, Shapes::ShapeRef.new(shape: CalculationConfiguration, deprecated: true, location_name: "CalculationConfiguration", metadata: {"deprecatedMessage" => "Structure is deprecated."}))
     StartCalculationExecutionRequest.add_member(:code_block, Shapes::ShapeRef.new(shape: CodeBlock, location_name: "CodeBlock"))
     StartCalculationExecutionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "ClientRequestToken"))
     StartCalculationExecutionRequest.struct_class = Types::StartCalculationExecutionRequest
@@ -1155,7 +1155,7 @@ module Aws::Athena
     StartCalculationExecutionResponse.struct_class = Types::StartCalculationExecutionResponse
 
     StartQueryExecutionInput.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryString, required: true, location_name: "QueryString"))
-    StartQueryExecutionInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    StartQueryExecutionInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     StartQueryExecutionInput.add_member(:query_execution_context, Shapes::ShapeRef.new(shape: QueryExecutionContext, location_name: "QueryExecutionContext"))
     StartQueryExecutionInput.add_member(:result_configuration, Shapes::ShapeRef.new(shape: ResultConfiguration, location_name: "ResultConfiguration"))
     StartQueryExecutionInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, location_name: "WorkGroup"))
@@ -1184,7 +1184,7 @@ module Aws::Athena
     StopCalculationExecutionResponse.add_member(:state, Shapes::ShapeRef.new(shape: CalculationExecutionState, location_name: "State"))
     StopCalculationExecutionResponse.struct_class = Types::StopCalculationExecutionResponse
 
-    StopQueryExecutionInput.add_member(:query_execution_id, Shapes::ShapeRef.new(shape: QueryExecutionId, required: true, location_name: "QueryExecutionId", metadata: {"idempotencyToken"=>true}))
+    StopQueryExecutionInput.add_member(:query_execution_id, Shapes::ShapeRef.new(shape: QueryExecutionId, required: true, location_name: "QueryExecutionId", metadata: {"idempotencyToken" => true}))
     StopQueryExecutionInput.struct_class = Types::StopQueryExecutionInput
 
     StopQueryExecutionOutput.struct_class = Types::StopQueryExecutionOutput

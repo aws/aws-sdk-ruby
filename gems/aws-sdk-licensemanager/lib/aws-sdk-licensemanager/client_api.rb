@@ -332,6 +332,7 @@ module Aws::LicenseManager
     CreateGrantRequest.add_member(:principals, Shapes::ShapeRef.new(shape: PrincipalArnList, required: true, location_name: "Principals"))
     CreateGrantRequest.add_member(:home_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "HomeRegion"))
     CreateGrantRequest.add_member(:allowed_operations, Shapes::ShapeRef.new(shape: AllowedOperationList, required: true, location_name: "AllowedOperations"))
+    CreateGrantRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateGrantRequest.struct_class = Types::CreateGrantRequest
 
     CreateGrantResponse.add_member(:grant_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "GrantArn"))
@@ -399,6 +400,7 @@ module Aws::LicenseManager
     CreateLicenseRequest.add_member(:consumption_configuration, Shapes::ShapeRef.new(shape: ConsumptionConfiguration, required: true, location_name: "ConsumptionConfiguration"))
     CreateLicenseRequest.add_member(:license_metadata, Shapes::ShapeRef.new(shape: MetadataList, location_name: "LicenseMetadata"))
     CreateLicenseRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "ClientToken"))
+    CreateLicenseRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateLicenseRequest.struct_class = Types::CreateLicenseRequest
 
     CreateLicenseResponse.add_member(:license_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "LicenseArn"))
@@ -1112,9 +1114,11 @@ module Aws::LicenseManager
 
       api.metadata = {
         "apiVersion" => "2018-08-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "license-manager",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "AWS License Manager",
         "serviceId" => "License Manager",
         "signatureVersion" => "v4",
@@ -1804,6 +1808,7 @@ module Aws::LicenseManager
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: RateLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_license_manager_report_generator, Seahorse::Model::Operation.new.tap do |o|
@@ -1835,6 +1840,7 @@ module Aws::LicenseManager
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: RateLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_service_settings, Seahorse::Model::Operation.new.tap do |o|

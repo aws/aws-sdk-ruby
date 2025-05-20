@@ -652,6 +652,7 @@ module Aws::DeviceFarm
     GetDevicePoolCompatibilityRequest.add_member(:test_type, Shapes::ShapeRef.new(shape: TestType, location_name: "testType"))
     GetDevicePoolCompatibilityRequest.add_member(:test, Shapes::ShapeRef.new(shape: ScheduleRunTest, location_name: "test"))
     GetDevicePoolCompatibilityRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: ScheduleRunConfiguration, location_name: "configuration"))
+    GetDevicePoolCompatibilityRequest.add_member(:project_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "projectArn"))
     GetDevicePoolCompatibilityRequest.struct_class = Types::GetDevicePoolCompatibilityRequest
 
     GetDevicePoolCompatibilityResult.add_member(:compatible_devices, Shapes::ShapeRef.new(shape: DevicePoolCompatibilityResults, location_name: "compatibleDevices"))

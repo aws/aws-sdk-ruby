@@ -99,7 +99,17 @@ module Aws
       def invoke_data_automation_async: (
                                           ?client_token: ::String,
                                           input_configuration: {
-                                            s3_uri: ::String
+                                            s3_uri: ::String,
+                                            asset_processing_configuration: {
+                                              video: {
+                                                segment_configuration: {
+                                                  timestamp_segment: {
+                                                    start_time_millis: ::Integer,
+                                                    end_time_millis: ::Integer
+                                                  }?
+                                                }?
+                                              }?
+                                            }?
                                           },
                                           output_configuration: {
                                             s3_uri: ::String

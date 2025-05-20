@@ -103,8 +103,8 @@ module Aws::DataZone
       attr_accessor detail: Types::PolicyGrantDetail
       attr_accessor domain_identifier: ::String
       attr_accessor entity_identifier: ::String
-      attr_accessor entity_type: ("DOMAIN_UNIT" | "ENVIRONMENT_BLUEPRINT_CONFIGURATION" | "ENVIRONMENT_PROFILE")
-      attr_accessor policy_type: ("CREATE_DOMAIN_UNIT" | "OVERRIDE_DOMAIN_UNIT_OWNERS" | "ADD_TO_PROJECT_MEMBER_POOL" | "OVERRIDE_PROJECT_OWNERS" | "CREATE_GLOSSARY" | "CREATE_FORM_TYPE" | "CREATE_ASSET_TYPE" | "CREATE_PROJECT" | "CREATE_ENVIRONMENT_PROFILE" | "DELEGATE_CREATE_ENVIRONMENT_PROFILE" | "CREATE_ENVIRONMENT" | "CREATE_ENVIRONMENT_FROM_BLUEPRINT" | "CREATE_PROJECT_FROM_PROJECT_PROFILE")
+      attr_accessor entity_type: ("DOMAIN_UNIT" | "ENVIRONMENT_BLUEPRINT_CONFIGURATION" | "ENVIRONMENT_PROFILE" | "ASSET_TYPE")
+      attr_accessor policy_type: ("CREATE_DOMAIN_UNIT" | "OVERRIDE_DOMAIN_UNIT_OWNERS" | "ADD_TO_PROJECT_MEMBER_POOL" | "OVERRIDE_PROJECT_OWNERS" | "CREATE_GLOSSARY" | "CREATE_FORM_TYPE" | "CREATE_ASSET_TYPE" | "CREATE_PROJECT" | "CREATE_ENVIRONMENT_PROFILE" | "DELEGATE_CREATE_ENVIRONMENT_PROFILE" | "CREATE_ENVIRONMENT" | "CREATE_ENVIRONMENT_FROM_BLUEPRINT" | "CREATE_PROJECT_FROM_PROJECT_PROFILE" | "USE_ASSET_TYPE")
       attr_accessor principal: Types::PolicyGrantPrincipal
       SENSITIVE: []
     end
@@ -3408,10 +3408,10 @@ module Aws::DataZone
     class ListPolicyGrantsInput
       attr_accessor domain_identifier: ::String
       attr_accessor entity_identifier: ::String
-      attr_accessor entity_type: ("DOMAIN_UNIT" | "ENVIRONMENT_BLUEPRINT_CONFIGURATION" | "ENVIRONMENT_PROFILE")
+      attr_accessor entity_type: ("DOMAIN_UNIT" | "ENVIRONMENT_BLUEPRINT_CONFIGURATION" | "ENVIRONMENT_PROFILE" | "ASSET_TYPE")
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
-      attr_accessor policy_type: ("CREATE_DOMAIN_UNIT" | "OVERRIDE_DOMAIN_UNIT_OWNERS" | "ADD_TO_PROJECT_MEMBER_POOL" | "OVERRIDE_PROJECT_OWNERS" | "CREATE_GLOSSARY" | "CREATE_FORM_TYPE" | "CREATE_ASSET_TYPE" | "CREATE_PROJECT" | "CREATE_ENVIRONMENT_PROFILE" | "DELEGATE_CREATE_ENVIRONMENT_PROFILE" | "CREATE_ENVIRONMENT" | "CREATE_ENVIRONMENT_FROM_BLUEPRINT" | "CREATE_PROJECT_FROM_PROJECT_PROFILE")
+      attr_accessor policy_type: ("CREATE_DOMAIN_UNIT" | "OVERRIDE_DOMAIN_UNIT_OWNERS" | "ADD_TO_PROJECT_MEMBER_POOL" | "OVERRIDE_PROJECT_OWNERS" | "CREATE_GLOSSARY" | "CREATE_FORM_TYPE" | "CREATE_ASSET_TYPE" | "CREATE_PROJECT" | "CREATE_ENVIRONMENT_PROFILE" | "DELEGATE_CREATE_ENVIRONMENT_PROFILE" | "CREATE_ENVIRONMENT" | "CREATE_ENVIRONMENT_FROM_BLUEPRINT" | "CREATE_PROJECT_FROM_PROJECT_PROFILE" | "USE_ASSET_TYPE")
       SENSITIVE: []
     end
 
@@ -3871,6 +3871,7 @@ module Aws::DataZone
       attr_accessor delegate_create_environment_profile: Types::Unit
       attr_accessor override_domain_unit_owners: Types::OverrideDomainUnitOwnersPolicyGrantDetail
       attr_accessor override_project_owners: Types::OverrideProjectOwnersPolicyGrantDetail
+      attr_accessor use_asset_type: Types::UseAssetTypePolicyGrantDetail
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -3899,6 +3900,8 @@ module Aws::DataZone
       class OverrideDomainUnitOwners < PolicyGrantDetail
       end
       class OverrideProjectOwners < PolicyGrantDetail
+      end
+      class UseAssetType < PolicyGrantDetail
       end
       class Unknown < PolicyGrantDetail
       end
@@ -4300,8 +4303,8 @@ module Aws::DataZone
       attr_accessor client_token: ::String
       attr_accessor domain_identifier: ::String
       attr_accessor entity_identifier: ::String
-      attr_accessor entity_type: ("DOMAIN_UNIT" | "ENVIRONMENT_BLUEPRINT_CONFIGURATION" | "ENVIRONMENT_PROFILE")
-      attr_accessor policy_type: ("CREATE_DOMAIN_UNIT" | "OVERRIDE_DOMAIN_UNIT_OWNERS" | "ADD_TO_PROJECT_MEMBER_POOL" | "OVERRIDE_PROJECT_OWNERS" | "CREATE_GLOSSARY" | "CREATE_FORM_TYPE" | "CREATE_ASSET_TYPE" | "CREATE_PROJECT" | "CREATE_ENVIRONMENT_PROFILE" | "DELEGATE_CREATE_ENVIRONMENT_PROFILE" | "CREATE_ENVIRONMENT" | "CREATE_ENVIRONMENT_FROM_BLUEPRINT" | "CREATE_PROJECT_FROM_PROJECT_PROFILE")
+      attr_accessor entity_type: ("DOMAIN_UNIT" | "ENVIRONMENT_BLUEPRINT_CONFIGURATION" | "ENVIRONMENT_PROFILE" | "ASSET_TYPE")
+      attr_accessor policy_type: ("CREATE_DOMAIN_UNIT" | "OVERRIDE_DOMAIN_UNIT_OWNERS" | "ADD_TO_PROJECT_MEMBER_POOL" | "OVERRIDE_PROJECT_OWNERS" | "CREATE_GLOSSARY" | "CREATE_FORM_TYPE" | "CREATE_ASSET_TYPE" | "CREATE_PROJECT" | "CREATE_ENVIRONMENT_PROFILE" | "DELEGATE_CREATE_ENVIRONMENT_PROFILE" | "CREATE_ENVIRONMENT" | "CREATE_ENVIRONMENT_FROM_BLUEPRINT" | "CREATE_PROJECT_FROM_PROJECT_PROFILE" | "USE_ASSET_TYPE")
       attr_accessor principal: Types::PolicyGrantPrincipal
       SENSITIVE: []
     end
@@ -5482,6 +5485,11 @@ module Aws::DataZone
       attr_accessor id: ::String
       attr_accessor status: ("ASSIGNED" | "NOT_ASSIGNED" | "ACTIVATED" | "DEACTIVATED")
       attr_accessor type: ("IAM" | "SSO")
+      SENSITIVE: []
+    end
+
+    class UseAssetTypePolicyGrantDetail
+      attr_accessor domain_unit_id: ::String
       SENSITIVE: []
     end
 

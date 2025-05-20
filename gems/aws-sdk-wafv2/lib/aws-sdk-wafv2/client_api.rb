@@ -1146,10 +1146,10 @@ module Aws::WAFV2
 
     ManagedProductDescriptors.member = Shapes::ShapeRef.new(shape: ManagedProductDescriptor)
 
-    ManagedRuleGroupConfig.add_member(:login_path, Shapes::ShapeRef.new(shape: LoginPathString, deprecated: true, location_name: "LoginPath", metadata: {"deprecatedMessage"=>"Deprecated. Use AWSManagedRulesATPRuleSet LoginPath"}))
-    ManagedRuleGroupConfig.add_member(:payload_type, Shapes::ShapeRef.new(shape: PayloadType, deprecated: true, location_name: "PayloadType", metadata: {"deprecatedMessage"=>"Deprecated. Use AWSManagedRulesATPRuleSet RequestInspection PayloadType"}))
-    ManagedRuleGroupConfig.add_member(:username_field, Shapes::ShapeRef.new(shape: UsernameField, deprecated: true, location_name: "UsernameField", metadata: {"deprecatedMessage"=>"Deprecated. Use AWSManagedRulesATPRuleSet RequestInspection UsernameField"}))
-    ManagedRuleGroupConfig.add_member(:password_field, Shapes::ShapeRef.new(shape: PasswordField, deprecated: true, location_name: "PasswordField", metadata: {"deprecatedMessage"=>"Deprecated. Use AWSManagedRulesATPRuleSet RequestInspection PasswordField"}))
+    ManagedRuleGroupConfig.add_member(:login_path, Shapes::ShapeRef.new(shape: LoginPathString, deprecated: true, location_name: "LoginPath", metadata: {"deprecatedMessage" => "Deprecated. Use AWSManagedRulesATPRuleSet LoginPath"}))
+    ManagedRuleGroupConfig.add_member(:payload_type, Shapes::ShapeRef.new(shape: PayloadType, deprecated: true, location_name: "PayloadType", metadata: {"deprecatedMessage" => "Deprecated. Use AWSManagedRulesATPRuleSet RequestInspection PayloadType"}))
+    ManagedRuleGroupConfig.add_member(:username_field, Shapes::ShapeRef.new(shape: UsernameField, deprecated: true, location_name: "UsernameField", metadata: {"deprecatedMessage" => "Deprecated. Use AWSManagedRulesATPRuleSet RequestInspection UsernameField"}))
+    ManagedRuleGroupConfig.add_member(:password_field, Shapes::ShapeRef.new(shape: PasswordField, deprecated: true, location_name: "PasswordField", metadata: {"deprecatedMessage" => "Deprecated. Use AWSManagedRulesATPRuleSet RequestInspection PasswordField"}))
     ManagedRuleGroupConfig.add_member(:aws_managed_rules_bot_control_rule_set, Shapes::ShapeRef.new(shape: AWSManagedRulesBotControlRuleSet, location_name: "AWSManagedRulesBotControlRuleSet"))
     ManagedRuleGroupConfig.add_member(:aws_managed_rules_atp_rule_set, Shapes::ShapeRef.new(shape: AWSManagedRulesATPRuleSet, location_name: "AWSManagedRulesATPRuleSet"))
     ManagedRuleGroupConfig.add_member(:aws_managed_rules_acfp_rule_set, Shapes::ShapeRef.new(shape: AWSManagedRulesACFPRuleSet, location_name: "AWSManagedRulesACFPRuleSet"))

@@ -368,14 +368,14 @@ module Aws::ConnectWisdomService
     CreateAssistantAssociationRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
     CreateAssistantAssociationRequest.add_member(:association, Shapes::ShapeRef.new(shape: AssistantAssociationInputData, required: true, location_name: "association"))
     CreateAssistantAssociationRequest.add_member(:association_type, Shapes::ShapeRef.new(shape: AssociationType, required: true, location_name: "associationType"))
-    CreateAssistantAssociationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAssistantAssociationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAssistantAssociationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateAssistantAssociationRequest.struct_class = Types::CreateAssistantAssociationRequest
 
     CreateAssistantAssociationResponse.add_member(:assistant_association, Shapes::ShapeRef.new(shape: AssistantAssociationData, location_name: "assistantAssociation"))
     CreateAssistantAssociationResponse.struct_class = Types::CreateAssistantAssociationResponse
 
-    CreateAssistantRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAssistantRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAssistantRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateAssistantRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateAssistantRequest.add_member(:server_side_encryption_configuration, Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, location_name: "serverSideEncryptionConfiguration"))
@@ -386,7 +386,7 @@ module Aws::ConnectWisdomService
     CreateAssistantResponse.add_member(:assistant, Shapes::ShapeRef.new(shape: AssistantData, location_name: "assistant"))
     CreateAssistantResponse.struct_class = Types::CreateAssistantResponse
 
-    CreateContentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateContentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateContentRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
     CreateContentRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: ContentMetadata, location_name: "metadata"))
     CreateContentRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
@@ -399,7 +399,7 @@ module Aws::ConnectWisdomService
     CreateContentResponse.add_member(:content, Shapes::ShapeRef.new(shape: ContentData, location_name: "content"))
     CreateContentResponse.struct_class = Types::CreateContentResponse
 
-    CreateKnowledgeBaseRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateKnowledgeBaseRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateKnowledgeBaseRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateKnowledgeBaseRequest.add_member(:knowledge_base_type, Shapes::ShapeRef.new(shape: KnowledgeBaseType, required: true, location_name: "knowledgeBaseType"))
     CreateKnowledgeBaseRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
@@ -413,7 +413,7 @@ module Aws::ConnectWisdomService
     CreateKnowledgeBaseResponse.struct_class = Types::CreateKnowledgeBaseResponse
 
     CreateQuickResponseRequest.add_member(:channels, Shapes::ShapeRef.new(shape: Channels, location_name: "channels"))
-    CreateQuickResponseRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateQuickResponseRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateQuickResponseRequest.add_member(:content, Shapes::ShapeRef.new(shape: QuickResponseDataProvider, required: true, location_name: "content"))
     CreateQuickResponseRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: QuickResponseType, location_name: "contentType"))
     CreateQuickResponseRequest.add_member(:description, Shapes::ShapeRef.new(shape: QuickResponseDescription, location_name: "description"))
@@ -430,7 +430,7 @@ module Aws::ConnectWisdomService
     CreateQuickResponseResponse.struct_class = Types::CreateQuickResponseResponse
 
     CreateSessionRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
-    CreateSessionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateSessionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateSessionRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateSessionRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateSessionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
@@ -955,7 +955,7 @@ module Aws::ConnectWisdomService
     StartContentUploadResponse.add_member(:url_expiry, Shapes::ShapeRef.new(shape: SyntheticTimestamp_epoch_seconds, required: true, location_name: "urlExpiry"))
     StartContentUploadResponse.struct_class = Types::StartContentUploadResponse
 
-    StartImportJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    StartImportJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     StartImportJobRequest.add_member(:external_source_configuration, Shapes::ShapeRef.new(shape: ExternalSourceConfiguration, location_name: "externalSourceConfiguration"))
     StartImportJobRequest.add_member(:import_job_type, Shapes::ShapeRef.new(shape: ImportJobType, required: true, location_name: "importJobType"))
     StartImportJobRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))

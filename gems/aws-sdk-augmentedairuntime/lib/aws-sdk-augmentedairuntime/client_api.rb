@@ -98,7 +98,7 @@ module Aws::AugmentedAIRuntime
     ListHumanLoopsRequest.add_member(:flow_definition_arn, Shapes::ShapeRef.new(shape: FlowDefinitionArn, required: true, location: "querystring", location_name: "FlowDefinitionArn"))
     ListHumanLoopsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location: "querystring", location_name: "SortOrder"))
     ListHumanLoopsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
-    ListHumanLoopsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults", metadata: {"box"=>true}))
+    ListHumanLoopsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults", metadata: {"box" => true}))
     ListHumanLoopsRequest.struct_class = Types::ListHumanLoopsRequest
 
     ListHumanLoopsResponse.add_member(:human_loop_summaries, Shapes::ShapeRef.new(shape: HumanLoopSummaries, required: true, location_name: "HumanLoopSummaries"))

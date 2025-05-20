@@ -1148,6 +1148,15 @@ module Aws::Deadline
     #
     # @!attribute [rw] max_worker_count
     #   The maximum number of workers for the fleet.
+    #
+    #   Deadline Cloud limits the number of workers to less than or equal to
+    #   the fleet's maximum worker count. The service maintains eventual
+    #   consistency for the worker count. If you make multiple rapid calls
+    #   to `CreateWorker` before the field updates, you might exceed your
+    #   fleet's maximum worker count. For example, if your `maxWorkerCount`
+    #   is 10 and you currently have 9 workers, making two quick
+    #   `CreateWorker` calls might successfully create 2 workers instead of
+    #   1, resulting in 11 total workers.
     #   @return [Integer]
     #
     # @!attribute [rw] configuration
@@ -1161,6 +1170,11 @@ module Aws::Deadline
     #   are both required, but tag values can be empty strings.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] host_configuration
+    #   Provides a script that runs as a worker is starting up that you can
+    #   use to provide additional configuration for workers in your fleet.
+    #   @return [Types::HostConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/CreateFleetRequest AWS API Documentation
     #
     class CreateFleetRequest < Struct.new(
@@ -1172,7 +1186,8 @@ module Aws::Deadline
       :min_worker_count,
       :max_worker_count,
       :configuration,
-      :tags)
+      :tags,
+      :host_configuration)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -1751,13 +1766,19 @@ module Aws::Deadline
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Each tag consists of a tag key and a tag value. Tag keys and values
+    #   are both required, but tag values can be empty strings.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/CreateWorkerRequest AWS API Documentation
     #
     class CreateWorkerRequest < Struct.new(
       :farm_id,
       :fleet_id,
       :host_properties,
-      :client_token)
+      :client_token,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1788,12 +1809,27 @@ module Aws::Deadline
     #   The storage profile ID.
     #   @return [String]
     #
+    # @!attribute [rw] tag_propagation_mode
+    #   Specifies whether tags associated with a fleet are attached to
+    #   workers when the worker is launched.
+    #
+    #   When the `tagPropagationMode` is set to
+    #   `PROPAGATE_TAGS_TO_WORKERS_AT_LAUNCH` any tag associated with a
+    #   fleet is attached to workers when they launch. If the tags for a
+    #   fleet change, the tags associated with running workers **do not**
+    #   change.
+    #
+    #   If you don't specify `tagPropagationMode`, the default is
+    #   `NO_PROPAGATION`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/CustomerManagedFleetConfiguration AWS API Documentation
     #
     class CustomerManagedFleetConfiguration < Struct.new(
       :mode,
       :worker_capabilities,
-      :storage_profile_id)
+      :storage_profile_id,
+      :tag_propagation_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3062,6 +3098,11 @@ module Aws::Deadline
     #   The configuration setting for the fleet.
     #   @return [Types::FleetConfiguration]
     #
+    # @!attribute [rw] host_configuration
+    #   The script that runs as a worker is starting up that you can use to
+    #   provide additional configuration for workers in your fleet.
+    #   @return [Types::HostConfiguration]
+    #
     # @!attribute [rw] capabilities
     #   Outlines what the fleet is capable of for minimums, maximums, and
     #   naming, in addition to attribute names and values.
@@ -3101,6 +3142,7 @@ module Aws::Deadline
       :min_worker_count,
       :max_worker_count,
       :configuration,
+      :host_configuration,
       :capabilities,
       :role_arn,
       :created_at,
@@ -4545,6 +4587,59 @@ module Aws::Deadline
       :updated_at,
       :updated_by)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a script that runs as a worker is starting up that you can
+    # use to provide additional configuration for workers in your fleet.
+    #
+    # To remove a script from a fleet, use the [UpdateFleet][1] operation
+    # with the `hostConfiguration` `scriptBody` parameter set to an empty
+    # string ("").
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/deadline-cloud/latest/APIReference/API_UpdateFleet.html
+    #
+    # @!attribute [rw] script_body
+    #   The text of the script that runs as a worker is starting up that you
+    #   can use to provide additional configuration for workers in your
+    #   fleet. The script runs after a worker enters the `STARTING` state
+    #   and before the worker processes tasks.
+    #
+    #   For more information about using the script, see [Run scripts as an
+    #   administrator to configure workers][1] in the *Deadline Cloud
+    #   Developer Guide*.
+    #
+    #   The script runs as an administrative user (`sudo root` on Linux, as
+    #   an Administrator on Windows).
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/deadline-cloud/latest/developerguide/smf-admin.html
+    #   @return [String]
+    #
+    # @!attribute [rw] script_timeout_seconds
+    #   The maximum time that the host configuration can run. If the timeout
+    #   expires, the worker enters the `NOT RESPONDING` state and shuts
+    #   down. You are charged for the time that the worker is running the
+    #   host configuration script.
+    #
+    #   <note markdown="1"> You should configure your fleet for a maximum of one worker while
+    #   testing your host configuration script to avoid starting additional
+    #   workers.
+    #
+    #    </note>
+    #
+    #   The default is 300 seconds (5 minutes).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/HostConfiguration AWS API Documentation
+    #
+    class HostConfiguration < Struct.new(
+      :script_body,
+      :script_timeout_seconds)
+      SENSITIVE = [:script_body]
       include Aws::Structure
     end
 
@@ -9351,11 +9446,25 @@ module Aws::Deadline
     #
     # @!attribute [rw] max_worker_count
     #   The maximum number of workers in the fleet.
+    #
+    #   Deadline Cloud limits the number of workers to less than or equal to
+    #   the fleet's maximum worker count. The service maintains eventual
+    #   consistency for the worker count. If you make multiple rapid calls
+    #   to `CreateWorker` before the field updates, you might exceed your
+    #   fleet's maximum worker count. For example, if your `maxWorkerCount`
+    #   is 10 and you currently have 9 workers, making two quick
+    #   `CreateWorker` calls might successfully create 2 workers instead of
+    #   1, resulting in 11 total workers.
     #   @return [Integer]
     #
     # @!attribute [rw] configuration
     #   The fleet configuration to update.
     #   @return [Types::FleetConfiguration]
+    #
+    # @!attribute [rw] host_configuration
+    #   Provides a script that runs as a worker is starting up that you can
+    #   use to provide additional configuration for workers in your fleet.
+    #   @return [Types::HostConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/UpdateFleetRequest AWS API Documentation
     #
@@ -9368,7 +9477,8 @@ module Aws::Deadline
       :role_arn,
       :min_worker_count,
       :max_worker_count,
-      :configuration)
+      :configuration,
+      :host_configuration)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -9985,10 +10095,16 @@ module Aws::Deadline
     #   The worker log to update.
     #   @return [Types::LogConfiguration]
     #
+    # @!attribute [rw] host_configuration
+    #   The script that runs as a worker is starting up that you can use to
+    #   provide additional configuration for workers in your fleet.
+    #   @return [Types::HostConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/UpdateWorkerResponse AWS API Documentation
     #
     class UpdateWorkerResponse < Struct.new(
-      :log)
+      :log,
+      :host_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

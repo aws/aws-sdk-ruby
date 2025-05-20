@@ -3018,7 +3018,8 @@
         "minWorkerCount":{"shape":"MinZeroMaxInteger"},
         "maxWorkerCount":{"shape":"MinZeroMaxInteger"},
         "configuration":{"shape":"FleetConfiguration"},
-        "tags":{"shape":"Tags"}
+        "tags":{"shape":"Tags"},
+        "hostConfiguration":{"shape":"HostConfiguration"}
       }
     },
     "CreateFleetResponse":{
@@ -3355,7 +3356,8 @@
           "idempotencyToken":true,
           "location":"header",
           "locationName":"X-Amz-Client-Token"
-        }
+        },
+        "tags":{"shape":"Tags"}
       }
     },
     "CreateWorkerResponse":{
@@ -3391,7 +3393,8 @@
       "members":{
         "mode":{"shape":"AutoScalingMode"},
         "workerCapabilities":{"shape":"CustomerManagedWorkerCapabilities"},
-        "storageProfileId":{"shape":"StorageProfileId"}
+        "storageProfileId":{"shape":"StorageProfileId"},
+        "tagPropagationMode":{"shape":"TagPropagationMode"}
       }
     },
     "CustomerManagedFleetOperatingSystemFamily":{
@@ -4419,6 +4422,7 @@
         "minWorkerCount":{"shape":"MinZeroMaxInteger"},
         "maxWorkerCount":{"shape":"MinZeroMaxInteger"},
         "configuration":{"shape":"FleetConfiguration"},
+        "hostConfiguration":{"shape":"HostConfiguration"},
         "capabilities":{"shape":"FleetCapabilities"},
         "roleArn":{"shape":"IamRoleArn"},
         "createdAt":{"shape":"CreatedAt"},
@@ -5202,6 +5206,26 @@
         "updatedBy":{"shape":"UpdatedBy"}
       }
     },
+    "HostConfiguration":{
+      "type":"structure",
+      "required":["scriptBody"],
+      "members":{
+        "scriptBody":{"shape":"HostConfigurationScript"},
+        "scriptTimeoutSeconds":{"shape":"HostConfigurationScriptTimeoutSeconds"}
+      }
+    },
+    "HostConfigurationScript":{
+      "type":"string",
+      "max":15000,
+      "min":0,
+      "sensitive":true
+    },
+    "HostConfigurationScriptTimeoutSeconds":{
+      "type":"integer",
+      "box":true,
+      "max":3600,
+      "min":300
+    },
     "HostName":{
       "type":"string",
       "pattern":"[a-zA-Z0-9_\\.\\-]{0,255}"
@@ -5602,7 +5626,7 @@
     },
     "JobTemplate":{
       "type":"string",
-      "max":300000,
+      "max":1000000,
       "min":1,
       "sensitive":true
     },
@@ -7721,7 +7745,8 @@
       "type":"string",
       "enum":[
         "SERVICE_QUOTA_EXCEEDED_EXCEPTION",
-        "KMS_KEY_LIMIT_EXCEEDED"
+        "KMS_KEY_LIMIT_EXCEEDED",
+        "DEPENDENCY_LIMIT_EXCEEDED"
       ]
     },
     "SessionActionDefinition":{
@@ -8278,6 +8303,13 @@
       "type":"timestamp",
       "timestampFormat":"iso8601"
     },
+    "TagPropagationMode":{
+      "type":"string",
+      "enum":[
+        "NO_PROPAGATION",
+        "PROPAGATE_TAGS_TO_WORKERS_AT_LAUNCH"
+      ]
+    },
     "TagResourceRequest":{
       "type":"structure",
       "required":["resourceArn"],
@@ -8576,7 +8608,8 @@
         "roleArn":{"shape":"IamRoleArn"},
         "minWorkerCount":{"shape":"MinZeroMaxInteger"},
         "maxWorkerCount":{"shape":"MinZeroMaxInteger"},
-        "configuration":{"shape":"FleetConfiguration"}
+        "configuration":{"shape":"FleetConfiguration"},
+        "hostConfiguration":{"shape":"HostConfiguration"}
       }
     },
     "UpdateFleetResponse":{
@@ -9038,7 +9071,8 @@
     "UpdateWorkerResponse":{
       "type":"structure",
       "members":{
-        "log":{"shape":"LogConfiguration"}
+        "log":{"shape":"LogConfiguration"},
+        "hostConfiguration":{"shape":"HostConfiguration"}
       }
     },
     "UpdateWorkerScheduleInterval":{

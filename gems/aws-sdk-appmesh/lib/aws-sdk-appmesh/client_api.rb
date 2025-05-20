@@ -402,7 +402,7 @@ module Aws::AppMesh
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
 
-    CreateGatewayRouteInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateGatewayRouteInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateGatewayRouteInput.add_member(:gateway_route_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "gatewayRouteName"))
     CreateGatewayRouteInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
     CreateGatewayRouteInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
@@ -416,7 +416,7 @@ module Aws::AppMesh
     CreateGatewayRouteOutput[:payload] = :gateway_route
     CreateGatewayRouteOutput[:payload_member] = CreateGatewayRouteOutput.member(:gateway_route)
 
-    CreateMeshInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateMeshInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateMeshInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "meshName"))
     CreateMeshInput.add_member(:spec, Shapes::ShapeRef.new(shape: MeshSpec, location_name: "spec"))
     CreateMeshInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
@@ -427,7 +427,7 @@ module Aws::AppMesh
     CreateMeshOutput[:payload] = :mesh
     CreateMeshOutput[:payload_member] = CreateMeshOutput.member(:mesh)
 
-    CreateRouteInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateRouteInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateRouteInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
     CreateRouteInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     CreateRouteInput.add_member(:route_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "routeName"))
@@ -441,7 +441,7 @@ module Aws::AppMesh
     CreateRouteOutput[:payload] = :route
     CreateRouteOutput[:payload_member] = CreateRouteOutput.member(:route)
 
-    CreateVirtualGatewayInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateVirtualGatewayInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateVirtualGatewayInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
     CreateVirtualGatewayInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     CreateVirtualGatewayInput.add_member(:spec, Shapes::ShapeRef.new(shape: VirtualGatewaySpec, required: true, location_name: "spec"))
@@ -454,7 +454,7 @@ module Aws::AppMesh
     CreateVirtualGatewayOutput[:payload] = :virtual_gateway
     CreateVirtualGatewayOutput[:payload_member] = CreateVirtualGatewayOutput.member(:virtual_gateway)
 
-    CreateVirtualNodeInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateVirtualNodeInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateVirtualNodeInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
     CreateVirtualNodeInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     CreateVirtualNodeInput.add_member(:spec, Shapes::ShapeRef.new(shape: VirtualNodeSpec, required: true, location_name: "spec"))
@@ -467,7 +467,7 @@ module Aws::AppMesh
     CreateVirtualNodeOutput[:payload] = :virtual_node
     CreateVirtualNodeOutput[:payload_member] = CreateVirtualNodeOutput.member(:virtual_node)
 
-    CreateVirtualRouterInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateVirtualRouterInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateVirtualRouterInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
     CreateVirtualRouterInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     CreateVirtualRouterInput.add_member(:spec, Shapes::ShapeRef.new(shape: VirtualRouterSpec, required: true, location_name: "spec"))
@@ -480,7 +480,7 @@ module Aws::AppMesh
     CreateVirtualRouterOutput[:payload] = :virtual_router
     CreateVirtualRouterOutput[:payload_member] = CreateVirtualRouterOutput.member(:virtual_router)
 
-    CreateVirtualServiceInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateVirtualServiceInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateVirtualServiceInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
     CreateVirtualServiceInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     CreateVirtualServiceInput.add_member(:spec, Shapes::ShapeRef.new(shape: VirtualServiceSpec, required: true, location_name: "spec"))
@@ -1227,7 +1227,7 @@ module Aws::AppMesh
 
     UntagResourceOutput.struct_class = Types::UntagResourceOutput
 
-    UpdateGatewayRouteInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateGatewayRouteInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateGatewayRouteInput.add_member(:gateway_route_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "gatewayRouteName"))
     UpdateGatewayRouteInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
     UpdateGatewayRouteInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
@@ -1240,7 +1240,7 @@ module Aws::AppMesh
     UpdateGatewayRouteOutput[:payload] = :gateway_route
     UpdateGatewayRouteOutput[:payload_member] = UpdateGatewayRouteOutput.member(:gateway_route)
 
-    UpdateMeshInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateMeshInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateMeshInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
     UpdateMeshInput.add_member(:spec, Shapes::ShapeRef.new(shape: MeshSpec, location_name: "spec"))
     UpdateMeshInput.struct_class = Types::UpdateMeshInput
@@ -1250,7 +1250,7 @@ module Aws::AppMesh
     UpdateMeshOutput[:payload] = :mesh
     UpdateMeshOutput[:payload_member] = UpdateMeshOutput.member(:mesh)
 
-    UpdateRouteInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateRouteInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateRouteInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
     UpdateRouteInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     UpdateRouteInput.add_member(:route_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "routeName"))
@@ -1263,7 +1263,7 @@ module Aws::AppMesh
     UpdateRouteOutput[:payload] = :route
     UpdateRouteOutput[:payload_member] = UpdateRouteOutput.member(:route)
 
-    UpdateVirtualGatewayInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateVirtualGatewayInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateVirtualGatewayInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
     UpdateVirtualGatewayInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     UpdateVirtualGatewayInput.add_member(:spec, Shapes::ShapeRef.new(shape: VirtualGatewaySpec, required: true, location_name: "spec"))
@@ -1275,7 +1275,7 @@ module Aws::AppMesh
     UpdateVirtualGatewayOutput[:payload] = :virtual_gateway
     UpdateVirtualGatewayOutput[:payload_member] = UpdateVirtualGatewayOutput.member(:virtual_gateway)
 
-    UpdateVirtualNodeInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateVirtualNodeInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateVirtualNodeInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
     UpdateVirtualNodeInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     UpdateVirtualNodeInput.add_member(:spec, Shapes::ShapeRef.new(shape: VirtualNodeSpec, required: true, location_name: "spec"))
@@ -1287,7 +1287,7 @@ module Aws::AppMesh
     UpdateVirtualNodeOutput[:payload] = :virtual_node
     UpdateVirtualNodeOutput[:payload_member] = UpdateVirtualNodeOutput.member(:virtual_node)
 
-    UpdateVirtualRouterInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateVirtualRouterInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateVirtualRouterInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
     UpdateVirtualRouterInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     UpdateVirtualRouterInput.add_member(:spec, Shapes::ShapeRef.new(shape: VirtualRouterSpec, required: true, location_name: "spec"))
@@ -1299,7 +1299,7 @@ module Aws::AppMesh
     UpdateVirtualRouterOutput[:payload] = :virtual_router
     UpdateVirtualRouterOutput[:payload_member] = UpdateVirtualRouterOutput.member(:virtual_router)
 
-    UpdateVirtualServiceInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateVirtualServiceInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateVirtualServiceInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
     UpdateVirtualServiceInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     UpdateVirtualServiceInput.add_member(:spec, Shapes::ShapeRef.new(shape: VirtualServiceSpec, required: true, location_name: "spec"))

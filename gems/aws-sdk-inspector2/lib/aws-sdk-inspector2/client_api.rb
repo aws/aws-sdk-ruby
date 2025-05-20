@@ -1321,7 +1321,7 @@ module Aws::Inspector2
     EcrRescanDurationState.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "updatedAt"))
     EcrRescanDurationState.struct_class = Types::EcrRescanDurationState
 
-    EnableDelegatedAdminAccountRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    EnableDelegatedAdminAccountRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     EnableDelegatedAdminAccountRequest.add_member(:delegated_admin_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "delegatedAdminAccountId"))
     EnableDelegatedAdminAccountRequest.struct_class = Types::EnableDelegatedAdminAccountRequest
 
@@ -1329,7 +1329,7 @@ module Aws::Inspector2
     EnableDelegatedAdminAccountResponse.struct_class = Types::EnableDelegatedAdminAccountResponse
 
     EnableRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIdSet, location_name: "accountIds"))
-    EnableRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    EnableRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     EnableRequest.add_member(:resource_types, Shapes::ShapeRef.new(shape: EnableResourceTypeList, required: true, location_name: "resourceTypes"))
     EnableRequest.struct_class = Types::EnableRequest
 

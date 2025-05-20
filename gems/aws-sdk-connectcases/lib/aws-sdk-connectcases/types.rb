@@ -146,7 +146,7 @@ module Aws::ConnectCases
     #   @return [String]
     #
     # @!attribute [rw] user
-    #   Represents the identity of the person who performed the action.
+    #   Represents the entity that performed the action.
     #   @return [Types::UserUnion]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/AuditEventPerformedBy AWS API Documentation
@@ -661,7 +661,7 @@ module Aws::ConnectCases
     #   @return [Array<Types::FieldValue>]
     #
     # @!attribute [rw] performed_by
-    #   Represents the identity of the person who performed the action.
+    #   Represents the entity that performed the action.
     #   @return [Types::UserUnion]
     #
     # @!attribute [rw] template_id
@@ -3176,7 +3176,7 @@ module Aws::ConnectCases
     #   @return [Array<Types::FieldValue>]
     #
     # @!attribute [rw] performed_by
-    #   Represents the identity of the person who performed the action.
+    #   Represents the entity that performed the action.
     #   @return [Types::UserUnion]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/UpdateCaseRequest AWS API Documentation
@@ -3350,11 +3350,15 @@ module Aws::ConnectCases
     #
     class UpdateTemplateResponse < Aws::EmptyStructure; end
 
-    # Represents the identity of the person who performed the action.
+    # Represents the entity that performed the action.
     #
     # @note UserUnion is a union - when making an API calls you must set exactly one of the members.
     #
     # @note UserUnion is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of UserUnion corresponding to the set member.
+    #
+    # @!attribute [rw] custom_entity
+    #   Any provided entity.
+    #   @return [String]
     #
     # @!attribute [rw] user_arn
     #   Represents the Amazon Connect ARN of the user.
@@ -3363,12 +3367,14 @@ module Aws::ConnectCases
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/UserUnion AWS API Documentation
     #
     class UserUnion < Struct.new(
+      :custom_entity,
       :user_arn,
       :unknown)
-      SENSITIVE = []
+      SENSITIVE = [:custom_entity]
       include Aws::Structure
       include Aws::Structure::Union
 
+      class CustomEntity < UserUnion; end
       class UserArn < UserUnion; end
       class Unknown < UserUnion; end
     end

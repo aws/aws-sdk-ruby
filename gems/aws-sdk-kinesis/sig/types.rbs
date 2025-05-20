@@ -313,6 +313,16 @@ module Aws::Kinesis
       SENSITIVE: []
     end
 
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
     class ListTagsForStreamInput
       attr_accessor stream_name: ::String
       attr_accessor exclusive_start_tag_key: ::String
@@ -404,6 +414,7 @@ module Aws::Kinesis
     class RegisterStreamConsumerInput
       attr_accessor stream_arn: ::String
       attr_accessor consumer_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -552,6 +563,18 @@ module Aws::Kinesis
     class Tag
       attr_accessor key: ::String
       attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceInput
+      attr_accessor tag_keys: ::Array[::String]
+      attr_accessor resource_arn: ::String
       SENSITIVE: []
     end
 

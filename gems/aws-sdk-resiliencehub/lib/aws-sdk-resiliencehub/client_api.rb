@@ -379,7 +379,7 @@ module Aws::ResilienceHub
     Alarm.add_member(:source, Shapes::ShapeRef.new(shape: String255, location_name: "source"))
     Alarm.struct_class = Types::Alarm
 
-    AlarmRecommendation.add_member(:app_component_name, Shapes::ShapeRef.new(shape: EntityId, deprecated: true, location_name: "appComponentName", metadata: {"deprecatedMessage"=>"An alarm recommendation can be attached to multiple Application Components, hence this property will be replaced by the new property 'appComponentNames'."}))
+    AlarmRecommendation.add_member(:app_component_name, Shapes::ShapeRef.new(shape: EntityId, deprecated: true, location_name: "appComponentName", metadata: {"deprecatedMessage" => "An alarm recommendation can be attached to multiple Application Components, hence this property will be replaced by the new property 'appComponentNames'."}))
     AlarmRecommendation.add_member(:app_component_names, Shapes::ShapeRef.new(shape: AppComponentNameList, location_name: "appComponentNames"))
     AlarmRecommendation.add_member(:description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "description"))
     AlarmRecommendation.add_member(:items, Shapes::ShapeRef.new(shape: RecommendationItemList, location_name: "items"))
@@ -607,7 +607,7 @@ module Aws::ResilienceHub
 
     CreateAppRequest.add_member(:assessment_schedule, Shapes::ShapeRef.new(shape: AppAssessmentScheduleType, location_name: "assessmentSchedule"))
     CreateAppRequest.add_member(:aws_application_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "awsApplicationArn"))
-    CreateAppRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAppRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAppRequest.add_member(:description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "description"))
     CreateAppRequest.add_member(:event_subscriptions, Shapes::ShapeRef.new(shape: EventSubscriptionList, location_name: "eventSubscriptions"))
     CreateAppRequest.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "name"))
@@ -621,7 +621,7 @@ module Aws::ResilienceHub
 
     CreateAppVersionAppComponentRequest.add_member(:additional_info, Shapes::ShapeRef.new(shape: AdditionalInfoMap, location_name: "additionalInfo"))
     CreateAppVersionAppComponentRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
-    CreateAppVersionAppComponentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAppVersionAppComponentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAppVersionAppComponentRequest.add_member(:id, Shapes::ShapeRef.new(shape: String255, location_name: "id"))
     CreateAppVersionAppComponentRequest.add_member(:name, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "name"))
     CreateAppVersionAppComponentRequest.add_member(:type, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "type"))
@@ -637,7 +637,7 @@ module Aws::ResilienceHub
     CreateAppVersionResourceRequest.add_member(:app_components, Shapes::ShapeRef.new(shape: AppComponentNameList, required: true, location_name: "appComponents"))
     CreateAppVersionResourceRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: CustomerId, location_name: "awsAccountId"))
     CreateAppVersionResourceRequest.add_member(:aws_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "awsRegion"))
-    CreateAppVersionResourceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAppVersionResourceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAppVersionResourceRequest.add_member(:logical_resource_id, Shapes::ShapeRef.new(shape: LogicalResourceId, required: true, location_name: "logicalResourceId"))
     CreateAppVersionResourceRequest.add_member(:physical_resource_id, Shapes::ShapeRef.new(shape: String2048, required: true, location_name: "physicalResourceId"))
     CreateAppVersionResourceRequest.add_member(:resource_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "resourceName"))
@@ -651,7 +651,7 @@ module Aws::ResilienceHub
 
     CreateRecommendationTemplateRequest.add_member(:assessment_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "assessmentArn"))
     CreateRecommendationTemplateRequest.add_member(:bucket_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "bucketName"))
-    CreateRecommendationTemplateRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateRecommendationTemplateRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateRecommendationTemplateRequest.add_member(:format, Shapes::ShapeRef.new(shape: TemplateFormat, location_name: "format"))
     CreateRecommendationTemplateRequest.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "name"))
     CreateRecommendationTemplateRequest.add_member(:recommendation_ids, Shapes::ShapeRef.new(shape: RecommendationIdList, location_name: "recommendationIds"))
@@ -662,7 +662,7 @@ module Aws::ResilienceHub
     CreateRecommendationTemplateResponse.add_member(:recommendation_template, Shapes::ShapeRef.new(shape: RecommendationTemplate, location_name: "recommendationTemplate"))
     CreateRecommendationTemplateResponse.struct_class = Types::CreateRecommendationTemplateResponse
 
-    CreateResiliencyPolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateResiliencyPolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateResiliencyPolicyRequest.add_member(:data_location_constraint, Shapes::ShapeRef.new(shape: DataLocationConstraint, location_name: "dataLocationConstraint"))
     CreateResiliencyPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: DisruptionPolicy, required: true, location_name: "policy"))
     CreateResiliencyPolicyRequest.add_member(:policy_description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "policyDescription"))
@@ -675,7 +675,7 @@ module Aws::ResilienceHub
     CreateResiliencyPolicyResponse.struct_class = Types::CreateResiliencyPolicyResponse
 
     DeleteAppAssessmentRequest.add_member(:assessment_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "assessmentArn"))
-    DeleteAppAssessmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteAppAssessmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteAppAssessmentRequest.struct_class = Types::DeleteAppAssessmentRequest
 
     DeleteAppAssessmentResponse.add_member(:assessment_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "assessmentArn"))
@@ -683,7 +683,7 @@ module Aws::ResilienceHub
     DeleteAppAssessmentResponse.struct_class = Types::DeleteAppAssessmentResponse
 
     DeleteAppInputSourceRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
-    DeleteAppInputSourceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteAppInputSourceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteAppInputSourceRequest.add_member(:eks_source_cluster_namespace, Shapes::ShapeRef.new(shape: EksSourceClusterNamespace, location_name: "eksSourceClusterNamespace"))
     DeleteAppInputSourceRequest.add_member(:source_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "sourceArn"))
     DeleteAppInputSourceRequest.add_member(:terraform_source, Shapes::ShapeRef.new(shape: TerraformSource, location_name: "terraformSource"))
@@ -694,7 +694,7 @@ module Aws::ResilienceHub
     DeleteAppInputSourceResponse.struct_class = Types::DeleteAppInputSourceResponse
 
     DeleteAppRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
-    DeleteAppRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteAppRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteAppRequest.add_member(:force_delete, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "forceDelete"))
     DeleteAppRequest.struct_class = Types::DeleteAppRequest
 
@@ -702,7 +702,7 @@ module Aws::ResilienceHub
     DeleteAppResponse.struct_class = Types::DeleteAppResponse
 
     DeleteAppVersionAppComponentRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
-    DeleteAppVersionAppComponentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteAppVersionAppComponentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteAppVersionAppComponentRequest.add_member(:id, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "id"))
     DeleteAppVersionAppComponentRequest.struct_class = Types::DeleteAppVersionAppComponentRequest
 
@@ -714,7 +714,7 @@ module Aws::ResilienceHub
     DeleteAppVersionResourceRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
     DeleteAppVersionResourceRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: CustomerId, location_name: "awsAccountId"))
     DeleteAppVersionResourceRequest.add_member(:aws_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "awsRegion"))
-    DeleteAppVersionResourceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteAppVersionResourceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteAppVersionResourceRequest.add_member(:logical_resource_id, Shapes::ShapeRef.new(shape: LogicalResourceId, location_name: "logicalResourceId"))
     DeleteAppVersionResourceRequest.add_member(:physical_resource_id, Shapes::ShapeRef.new(shape: String2048, location_name: "physicalResourceId"))
     DeleteAppVersionResourceRequest.add_member(:resource_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "resourceName"))
@@ -725,7 +725,7 @@ module Aws::ResilienceHub
     DeleteAppVersionResourceResponse.add_member(:physical_resource, Shapes::ShapeRef.new(shape: PhysicalResource, location_name: "physicalResource"))
     DeleteAppVersionResourceResponse.struct_class = Types::DeleteAppVersionResourceResponse
 
-    DeleteRecommendationTemplateRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteRecommendationTemplateRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteRecommendationTemplateRequest.add_member(:recommendation_template_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "recommendationTemplateArn"))
     DeleteRecommendationTemplateRequest.struct_class = Types::DeleteRecommendationTemplateRequest
 
@@ -733,7 +733,7 @@ module Aws::ResilienceHub
     DeleteRecommendationTemplateResponse.add_member(:status, Shapes::ShapeRef.new(shape: RecommendationTemplateStatus, required: true, location_name: "status"))
     DeleteRecommendationTemplateResponse.struct_class = Types::DeleteRecommendationTemplateResponse
 
-    DeleteResiliencyPolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteResiliencyPolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteResiliencyPolicyRequest.add_member(:policy_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "policyArn"))
     DeleteResiliencyPolicyRequest.struct_class = Types::DeleteResiliencyPolicyRequest
 
@@ -1400,7 +1400,7 @@ module Aws::ResilienceHub
     StartAppAssessmentRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "appArn"))
     StartAppAssessmentRequest.add_member(:app_version, Shapes::ShapeRef.new(shape: EntityVersion, required: true, location_name: "appVersion"))
     StartAppAssessmentRequest.add_member(:assessment_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "assessmentName"))
-    StartAppAssessmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    StartAppAssessmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     StartAppAssessmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     StartAppAssessmentRequest.struct_class = Types::StartAppAssessmentRequest
 
@@ -1408,7 +1408,7 @@ module Aws::ResilienceHub
     StartAppAssessmentResponse.struct_class = Types::StartAppAssessmentResponse
 
     StartMetricsExportRequest.add_member(:bucket_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "bucketName"))
-    StartMetricsExportRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    StartMetricsExportRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     StartMetricsExportRequest.struct_class = Types::StartMetricsExportRequest
 
     StartMetricsExportResponse.add_member(:metrics_export_id, Shapes::ShapeRef.new(shape: String255, required: true, location_name: "metricsExportId"))

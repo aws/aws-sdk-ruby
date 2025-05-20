@@ -347,6 +347,7 @@ module Aws
   autoload :SQS, 'aws-sdk-sqs'
   autoload :SSM, 'aws-sdk-ssm'
   autoload :SSMContacts, 'aws-sdk-ssmcontacts'
+  autoload :SSMGuiConnect, 'aws-sdk-ssmguiconnect'
   autoload :SSMIncidents, 'aws-sdk-ssmincidents'
   autoload :SSMQuickSetup, 'aws-sdk-ssmquicksetup'
   autoload :SSO, 'aws-sdk-core'

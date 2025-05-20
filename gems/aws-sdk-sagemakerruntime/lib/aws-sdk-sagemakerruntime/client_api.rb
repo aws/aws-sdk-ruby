@@ -137,7 +137,7 @@ module Aws::SageMakerRuntime
     ModelStreamError.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
     ModelStreamError.struct_class = Types::ModelStreamError
 
-    PayloadPart.add_member(:bytes, Shapes::ShapeRef.new(shape: PartBlob, eventpayload: true, eventpayload_type: 'blob', location_name: "Bytes", metadata: {"eventpayload"=>true}))
+    PayloadPart.add_member(:bytes, Shapes::ShapeRef.new(shape: PartBlob, eventpayload: true, eventpayload_type: 'blob', location_name: "Bytes", metadata: {"eventpayload" => true}))
     PayloadPart.struct_class = Types::PayloadPart
 
     ResponseStream.add_member(:payload_part, Shapes::ShapeRef.new(shape: PayloadPart, event: true, location_name: "PayloadPart"))

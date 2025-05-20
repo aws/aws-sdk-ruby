@@ -624,7 +624,7 @@ module Aws::GuardDuty
     AccountDetails.member = Shapes::ShapeRef.new(shape: AccountDetail)
 
     AccountFreeTrialInfo.add_member(:account_id, Shapes::ShapeRef.new(shape: String, location_name: "accountId"))
-    AccountFreeTrialInfo.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSourcesFreeTrial, deprecated: true, location_name: "dataSources", metadata: {"deprecatedMessage"=>"This parameter is deprecated, use Features instead"}))
+    AccountFreeTrialInfo.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSourcesFreeTrial, deprecated: true, location_name: "dataSources", metadata: {"deprecatedMessage" => "This parameter is deprecated, use Features instead"}))
     AccountFreeTrialInfo.add_member(:features, Shapes::ShapeRef.new(shape: FreeTrialFeatureConfigurationsResults, location_name: "features"))
     AccountFreeTrialInfo.struct_class = Types::AccountFreeTrialInfo
 
@@ -861,9 +861,9 @@ module Aws::GuardDuty
     CoverageStatisticsTypeList.member = Shapes::ShapeRef.new(shape: CoverageStatisticsType)
 
     CreateDetectorRequest.add_member(:enable, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enable"))
-    CreateDetectorRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDetectorRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateDetectorRequest.add_member(:finding_publishing_frequency, Shapes::ShapeRef.new(shape: FindingPublishingFrequency, location_name: "findingPublishingFrequency"))
-    CreateDetectorRequest.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSourceConfigurations, deprecated: true, location_name: "dataSources", metadata: {"deprecatedMessage"=>"This parameter is deprecated, use Features instead"}))
+    CreateDetectorRequest.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSourceConfigurations, deprecated: true, location_name: "dataSources", metadata: {"deprecatedMessage" => "This parameter is deprecated, use Features instead"}))
     CreateDetectorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateDetectorRequest.add_member(:features, Shapes::ShapeRef.new(shape: DetectorFeatureConfigurations, location_name: "features"))
     CreateDetectorRequest.struct_class = Types::CreateDetectorRequest
@@ -878,7 +878,7 @@ module Aws::GuardDuty
     CreateFilterRequest.add_member(:action, Shapes::ShapeRef.new(shape: FilterAction, location_name: "action"))
     CreateFilterRequest.add_member(:rank, Shapes::ShapeRef.new(shape: FilterRank, location_name: "rank"))
     CreateFilterRequest.add_member(:finding_criteria, Shapes::ShapeRef.new(shape: FindingCriteria, required: true, location_name: "findingCriteria"))
-    CreateFilterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateFilterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateFilterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateFilterRequest.struct_class = Types::CreateFilterRequest
 
@@ -890,14 +890,14 @@ module Aws::GuardDuty
     CreateIPSetRequest.add_member(:format, Shapes::ShapeRef.new(shape: IpSetFormat, required: true, location_name: "format"))
     CreateIPSetRequest.add_member(:location, Shapes::ShapeRef.new(shape: Location, required: true, location_name: "location"))
     CreateIPSetRequest.add_member(:activate, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "activate"))
-    CreateIPSetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateIPSetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateIPSetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateIPSetRequest.struct_class = Types::CreateIPSetRequest
 
     CreateIPSetResponse.add_member(:ip_set_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ipSetId"))
     CreateIPSetResponse.struct_class = Types::CreateIPSetResponse
 
-    CreateMalwareProtectionPlanRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateMalwareProtectionPlanRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateMalwareProtectionPlanRequest.add_member(:role, Shapes::ShapeRef.new(shape: String, required: true, location_name: "role"))
     CreateMalwareProtectionPlanRequest.add_member(:protected_resource, Shapes::ShapeRef.new(shape: CreateProtectedResource, required: true, location_name: "protectedResource"))
     CreateMalwareProtectionPlanRequest.add_member(:actions, Shapes::ShapeRef.new(shape: MalwareProtectionPlanActions, location_name: "actions"))
@@ -920,7 +920,7 @@ module Aws::GuardDuty
     CreatePublishingDestinationRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     CreatePublishingDestinationRequest.add_member(:destination_type, Shapes::ShapeRef.new(shape: DestinationType, required: true, location_name: "destinationType"))
     CreatePublishingDestinationRequest.add_member(:destination_properties, Shapes::ShapeRef.new(shape: DestinationProperties, required: true, location_name: "destinationProperties"))
-    CreatePublishingDestinationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreatePublishingDestinationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreatePublishingDestinationRequest.struct_class = Types::CreatePublishingDestinationRequest
 
     CreatePublishingDestinationResponse.add_member(:destination_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "destinationId"))
@@ -941,7 +941,7 @@ module Aws::GuardDuty
     CreateThreatIntelSetRequest.add_member(:format, Shapes::ShapeRef.new(shape: ThreatIntelSetFormat, required: true, location_name: "format"))
     CreateThreatIntelSetRequest.add_member(:location, Shapes::ShapeRef.new(shape: Location, required: true, location_name: "location"))
     CreateThreatIntelSetRequest.add_member(:activate, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "activate"))
-    CreateThreatIntelSetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateThreatIntelSetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateThreatIntelSetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateThreatIntelSetRequest.struct_class = Types::CreateThreatIntelSetRequest
 
@@ -1057,9 +1057,9 @@ module Aws::GuardDuty
     DescribeOrganizationConfigurationRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
     DescribeOrganizationConfigurationRequest.struct_class = Types::DescribeOrganizationConfigurationRequest
 
-    DescribeOrganizationConfigurationResponse.add_member(:auto_enable, Shapes::ShapeRef.new(shape: Boolean, deprecated: true, location_name: "autoEnable", metadata: {"deprecatedMessage"=>"This field is deprecated, use AutoEnableOrganizationMembers instead"}))
+    DescribeOrganizationConfigurationResponse.add_member(:auto_enable, Shapes::ShapeRef.new(shape: Boolean, deprecated: true, location_name: "autoEnable", metadata: {"deprecatedMessage" => "This field is deprecated, use AutoEnableOrganizationMembers instead"}))
     DescribeOrganizationConfigurationResponse.add_member(:member_account_limit_reached, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "memberAccountLimitReached"))
-    DescribeOrganizationConfigurationResponse.add_member(:data_sources, Shapes::ShapeRef.new(shape: OrganizationDataSourceConfigurationsResult, deprecated: true, location_name: "dataSources", metadata: {"deprecatedMessage"=>"This parameter is deprecated, use Features instead"}))
+    DescribeOrganizationConfigurationResponse.add_member(:data_sources, Shapes::ShapeRef.new(shape: OrganizationDataSourceConfigurationsResult, deprecated: true, location_name: "dataSources", metadata: {"deprecatedMessage" => "This parameter is deprecated, use Features instead"}))
     DescribeOrganizationConfigurationResponse.add_member(:features, Shapes::ShapeRef.new(shape: OrganizationFeaturesConfigurationsResults, location_name: "features"))
     DescribeOrganizationConfigurationResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeOrganizationConfigurationResponse.add_member(:auto_enable_organization_members, Shapes::ShapeRef.new(shape: AutoEnableMembers, location_name: "autoEnableOrganizationMembers"))
@@ -1282,7 +1282,7 @@ module Aws::GuardDuty
 
     FindingStatisticTypes.member = Shapes::ShapeRef.new(shape: FindingStatisticType)
 
-    FindingStatistics.add_member(:count_by_severity, Shapes::ShapeRef.new(shape: CountBySeverity, deprecated: true, location_name: "countBySeverity", metadata: {"deprecatedMessage"=>"This parameter is deprecated. Please set GroupBy to 'SEVERITY' to return GroupedBySeverity instead."}))
+    FindingStatistics.add_member(:count_by_severity, Shapes::ShapeRef.new(shape: CountBySeverity, deprecated: true, location_name: "countBySeverity", metadata: {"deprecatedMessage" => "This parameter is deprecated. Please set GroupBy to 'SEVERITY' to return GroupedBySeverity instead."}))
     FindingStatistics.add_member(:grouped_by_account, Shapes::ShapeRef.new(shape: GroupedByAccount, location_name: "groupedByAccount"))
     FindingStatistics.add_member(:grouped_by_date, Shapes::ShapeRef.new(shape: GroupedByDate, location_name: "groupedByDate"))
     FindingStatistics.add_member(:grouped_by_finding_type, Shapes::ShapeRef.new(shape: GroupedByFindingType, location_name: "groupedByFindingType"))
@@ -1336,7 +1336,7 @@ module Aws::GuardDuty
     GetDetectorResponse.add_member(:service_role, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceRole"))
     GetDetectorResponse.add_member(:status, Shapes::ShapeRef.new(shape: DetectorStatus, required: true, location_name: "status"))
     GetDetectorResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: String, location_name: "updatedAt"))
-    GetDetectorResponse.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSourceConfigurationsResult, deprecated: true, location_name: "dataSources", metadata: {"deprecatedMessage"=>"This parameter is deprecated, use Features instead"}))
+    GetDetectorResponse.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSourceConfigurationsResult, deprecated: true, location_name: "dataSources", metadata: {"deprecatedMessage" => "This parameter is deprecated, use Features instead"}))
     GetDetectorResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GetDetectorResponse.add_member(:features, Shapes::ShapeRef.new(shape: DetectorFeatureConfigurationsResults, location_name: "features"))
     GetDetectorResponse.struct_class = Types::GetDetectorResponse
@@ -1362,7 +1362,7 @@ module Aws::GuardDuty
     GetFindingsResponse.struct_class = Types::GetFindingsResponse
 
     GetFindingsStatisticsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
-    GetFindingsStatisticsRequest.add_member(:finding_statistic_types, Shapes::ShapeRef.new(shape: FindingStatisticTypes, deprecated: true, location_name: "findingStatisticTypes", metadata: {"deprecatedMessage"=>"This parameter is deprecated, please use GroupBy instead"}))
+    GetFindingsStatisticsRequest.add_member(:finding_statistic_types, Shapes::ShapeRef.new(shape: FindingStatisticTypes, deprecated: true, location_name: "findingStatisticTypes", metadata: {"deprecatedMessage" => "This parameter is deprecated, please use GroupBy instead"}))
     GetFindingsStatisticsRequest.add_member(:finding_criteria, Shapes::ShapeRef.new(shape: FindingCriteria, location_name: "findingCriteria"))
     GetFindingsStatisticsRequest.add_member(:group_by, Shapes::ShapeRef.new(shape: GroupByType, location_name: "groupBy"))
     GetFindingsStatisticsRequest.add_member(:order_by, Shapes::ShapeRef.new(shape: OrderBy, location_name: "orderBy"))
@@ -1828,7 +1828,7 @@ module Aws::GuardDuty
     MemberAdditionalConfigurations.member = Shapes::ShapeRef.new(shape: MemberAdditionalConfiguration)
 
     MemberDataSourceConfiguration.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
-    MemberDataSourceConfiguration.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSourceConfigurationsResult, deprecated: true, location_name: "dataSources", metadata: {"deprecatedMessage"=>"This parameter is deprecated, use Features instead"}))
+    MemberDataSourceConfiguration.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSourceConfigurationsResult, deprecated: true, location_name: "dataSources", metadata: {"deprecatedMessage" => "This parameter is deprecated, use Features instead"}))
     MemberDataSourceConfiguration.add_member(:features, Shapes::ShapeRef.new(shape: MemberFeaturesConfigurationsResults, location_name: "features"))
     MemberDataSourceConfiguration.struct_class = Types::MemberDataSourceConfiguration
 
@@ -2483,7 +2483,7 @@ module Aws::GuardDuty
     UpdateDetectorRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     UpdateDetectorRequest.add_member(:enable, Shapes::ShapeRef.new(shape: Boolean, location_name: "enable"))
     UpdateDetectorRequest.add_member(:finding_publishing_frequency, Shapes::ShapeRef.new(shape: FindingPublishingFrequency, location_name: "findingPublishingFrequency"))
-    UpdateDetectorRequest.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSourceConfigurations, deprecated: true, location_name: "dataSources", metadata: {"deprecatedMessage"=>"This parameter is deprecated, use Features instead"}))
+    UpdateDetectorRequest.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSourceConfigurations, deprecated: true, location_name: "dataSources", metadata: {"deprecatedMessage" => "This parameter is deprecated, use Features instead"}))
     UpdateDetectorRequest.add_member(:features, Shapes::ShapeRef.new(shape: DetectorFeatureConfigurations, location_name: "features"))
     UpdateDetectorRequest.struct_class = Types::UpdateDetectorRequest
 
@@ -2532,7 +2532,7 @@ module Aws::GuardDuty
 
     UpdateMemberDetectorsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     UpdateMemberDetectorsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, required: true, location_name: "accountIds"))
-    UpdateMemberDetectorsRequest.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSourceConfigurations, deprecated: true, location_name: "dataSources", metadata: {"deprecatedMessage"=>"This parameter is deprecated, use Features instead"}))
+    UpdateMemberDetectorsRequest.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSourceConfigurations, deprecated: true, location_name: "dataSources", metadata: {"deprecatedMessage" => "This parameter is deprecated, use Features instead"}))
     UpdateMemberDetectorsRequest.add_member(:features, Shapes::ShapeRef.new(shape: MemberFeaturesConfigurations, location_name: "features"))
     UpdateMemberDetectorsRequest.struct_class = Types::UpdateMemberDetectorsRequest
 
@@ -2540,8 +2540,8 @@ module Aws::GuardDuty
     UpdateMemberDetectorsResponse.struct_class = Types::UpdateMemberDetectorsResponse
 
     UpdateOrganizationConfigurationRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
-    UpdateOrganizationConfigurationRequest.add_member(:auto_enable, Shapes::ShapeRef.new(shape: Boolean, deprecated: true, location_name: "autoEnable", metadata: {"deprecatedMessage"=>"This field is deprecated, use AutoEnableOrganizationMembers instead"}))
-    UpdateOrganizationConfigurationRequest.add_member(:data_sources, Shapes::ShapeRef.new(shape: OrganizationDataSourceConfigurations, deprecated: true, location_name: "dataSources", metadata: {"deprecatedMessage"=>"This parameter is deprecated, use Features instead"}))
+    UpdateOrganizationConfigurationRequest.add_member(:auto_enable, Shapes::ShapeRef.new(shape: Boolean, deprecated: true, location_name: "autoEnable", metadata: {"deprecatedMessage" => "This field is deprecated, use AutoEnableOrganizationMembers instead"}))
+    UpdateOrganizationConfigurationRequest.add_member(:data_sources, Shapes::ShapeRef.new(shape: OrganizationDataSourceConfigurations, deprecated: true, location_name: "dataSources", metadata: {"deprecatedMessage" => "This parameter is deprecated, use Features instead"}))
     UpdateOrganizationConfigurationRequest.add_member(:features, Shapes::ShapeRef.new(shape: OrganizationFeaturesConfigurations, location_name: "features"))
     UpdateOrganizationConfigurationRequest.add_member(:auto_enable_organization_members, Shapes::ShapeRef.new(shape: AutoEnableMembers, location_name: "autoEnableOrganizationMembers"))
     UpdateOrganizationConfigurationRequest.struct_class = Types::UpdateOrganizationConfigurationRequest
@@ -2577,7 +2577,7 @@ module Aws::GuardDuty
     UsageAccountResultList.member = Shapes::ShapeRef.new(shape: UsageAccountResult)
 
     UsageCriteria.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
-    UsageCriteria.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSourceList, deprecated: true, location_name: "dataSources", metadata: {"deprecatedMessage"=>"This parameter is deprecated, use Features instead"}))
+    UsageCriteria.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSourceList, deprecated: true, location_name: "dataSources", metadata: {"deprecatedMessage" => "This parameter is deprecated, use Features instead"}))
     UsageCriteria.add_member(:resources, Shapes::ShapeRef.new(shape: ResourceList, location_name: "resources"))
     UsageCriteria.add_member(:features, Shapes::ShapeRef.new(shape: UsageFeatureList, location_name: "features"))
     UsageCriteria.struct_class = Types::UsageCriteria

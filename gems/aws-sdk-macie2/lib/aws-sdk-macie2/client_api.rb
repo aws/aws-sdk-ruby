@@ -696,7 +696,7 @@ module Aws::Macie2
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
 
-    CreateAllowListRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAllowListRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAllowListRequest.add_member(:criteria, Shapes::ShapeRef.new(shape: AllowListCriteria, required: true, location_name: "criteria"))
     CreateAllowListRequest.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin1Max512PatternSS, location_name: "description"))
     CreateAllowListRequest.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max128Pattern, required: true, location_name: "name"))
@@ -708,7 +708,7 @@ module Aws::Macie2
     CreateAllowListResponse.struct_class = Types::CreateAllowListResponse
 
     CreateClassificationJobRequest.add_member(:allow_list_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "allowListIds"))
-    CreateClassificationJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateClassificationJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateClassificationJobRequest.add_member(:custom_data_identifier_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "customDataIdentifierIds"))
     CreateClassificationJobRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     CreateClassificationJobRequest.add_member(:initial_run, Shapes::ShapeRef.new(shape: __boolean, location_name: "initialRun"))
@@ -726,7 +726,7 @@ module Aws::Macie2
     CreateClassificationJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: __string, location_name: "jobId"))
     CreateClassificationJobResponse.struct_class = Types::CreateClassificationJobResponse
 
-    CreateCustomDataIdentifierRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __string, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateCustomDataIdentifierRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __string, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateCustomDataIdentifierRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     CreateCustomDataIdentifierRequest.add_member(:ignore_words, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "ignoreWords"))
     CreateCustomDataIdentifierRequest.add_member(:keywords, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "keywords"))
@@ -741,7 +741,7 @@ module Aws::Macie2
     CreateCustomDataIdentifierResponse.struct_class = Types::CreateCustomDataIdentifierResponse
 
     CreateFindingsFilterRequest.add_member(:action, Shapes::ShapeRef.new(shape: FindingsFilterAction, required: true, location_name: "action"))
-    CreateFindingsFilterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __string, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateFindingsFilterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __string, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateFindingsFilterRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     CreateFindingsFilterRequest.add_member(:finding_criteria, Shapes::ShapeRef.new(shape: FindingCriteria, required: true, location_name: "findingCriteria"))
     CreateFindingsFilterRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
@@ -867,7 +867,7 @@ module Aws::Macie2
     DescribeClassificationJobRequest.struct_class = Types::DescribeClassificationJobRequest
 
     DescribeClassificationJobResponse.add_member(:allow_list_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "allowListIds"))
-    DescribeClassificationJobResponse.add_member(:client_token, Shapes::ShapeRef.new(shape: __string, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DescribeClassificationJobResponse.add_member(:client_token, Shapes::ShapeRef.new(shape: __string, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DescribeClassificationJobResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdAt"))
     DescribeClassificationJobResponse.add_member(:custom_data_identifier_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "customDataIdentifierIds"))
     DescribeClassificationJobResponse.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
@@ -933,7 +933,7 @@ module Aws::Macie2
 
     Empty.struct_class = Types::Empty
 
-    EnableMacieRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __string, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    EnableMacieRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __string, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     EnableMacieRequest.add_member(:finding_publishing_frequency, Shapes::ShapeRef.new(shape: FindingPublishingFrequency, location_name: "findingPublishingFrequency"))
     EnableMacieRequest.add_member(:status, Shapes::ShapeRef.new(shape: MacieStatus, location_name: "status"))
     EnableMacieRequest.struct_class = Types::EnableMacieRequest
@@ -941,7 +941,7 @@ module Aws::Macie2
     EnableMacieResponse.struct_class = Types::EnableMacieResponse
 
     EnableOrganizationAdminAccountRequest.add_member(:admin_account_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "adminAccountId"))
-    EnableOrganizationAdminAccountRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __string, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    EnableOrganizationAdminAccountRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __string, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     EnableOrganizationAdminAccountRequest.struct_class = Types::EnableOrganizationAdminAccountRequest
 
     EnableOrganizationAdminAccountResponse.struct_class = Types::EnableOrganizationAdminAccountResponse
@@ -1494,7 +1494,7 @@ module Aws::Macie2
     PutClassificationExportConfigurationResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: ClassificationExportConfiguration, location_name: "configuration"))
     PutClassificationExportConfigurationResponse.struct_class = Types::PutClassificationExportConfigurationResponse
 
-    PutFindingsPublicationConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __string, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    PutFindingsPublicationConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __string, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     PutFindingsPublicationConfigurationRequest.add_member(:security_hub_configuration, Shapes::ShapeRef.new(shape: SecurityHubConfiguration, location_name: "securityHubConfiguration"))
     PutFindingsPublicationConfigurationRequest.struct_class = Types::PutFindingsPublicationConfigurationRequest
 
@@ -1829,7 +1829,7 @@ module Aws::Macie2
     UpdateClassificationScopeResponse.struct_class = Types::UpdateClassificationScopeResponse
 
     UpdateFindingsFilterRequest.add_member(:action, Shapes::ShapeRef.new(shape: FindingsFilterAction, location_name: "action"))
-    UpdateFindingsFilterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __string, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateFindingsFilterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __string, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateFindingsFilterRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     UpdateFindingsFilterRequest.add_member(:finding_criteria, Shapes::ShapeRef.new(shape: FindingCriteria, location_name: "findingCriteria"))
     UpdateFindingsFilterRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "id"))

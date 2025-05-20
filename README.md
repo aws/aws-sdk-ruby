@@ -440,6 +440,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Route53 Recovery Control Config                   | Aws::Route53RecoveryControlConfig        | aws-sdk-route53recoverycontrolconfig        | 2020-11-02  |
 | AWS Route53 Recovery Readiness                        | Aws::Route53RecoveryReadiness            | aws-sdk-route53recoveryreadiness            | 2019-12-02  |
 | AWS S3 Control                                        | Aws::S3Control                           | aws-sdk-s3control                           | 2018-08-20  |
+| AWS SSM-GUIConnect                                    | Aws::SSMGuiConnect                       | aws-sdk-ssmguiconnect                       | 2021-05-01  |
 | AWS SSO Identity Store                                | Aws::IdentityStore                       | aws-sdk-identitystore                       | 2020-06-15  |
 | AWS SSO OIDC                                          | Aws::SSOOIDC                             | aws-sdk-core                                | 2019-06-10  |
 | AWS Savings Plans                                     | Aws::SavingsPlans                        | aws-sdk-savingsplans                        | 2019-06-28  |

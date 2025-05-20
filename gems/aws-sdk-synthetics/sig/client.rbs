@@ -105,7 +105,10 @@ module Aws
                            execution_role_arn: ::String,
                            schedule: {
                              expression: ::String,
-                             duration_in_seconds: ::Integer?
+                             duration_in_seconds: ::Integer?,
+                             retry_config: {
+                               max_retries: ::Integer
+                             }?
                            },
                            ?run_config: {
                              timeout_in_seconds: ::Integer?,
@@ -217,7 +220,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Synthetics/Client.html#get_canary-instance_method
       def get_canary: (
-                        name: ::String
+                        name: ::String,
+                        ?dry_run_id: ::String
                       ) -> _GetCanaryResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCanaryResponseSuccess
 
@@ -230,7 +234,9 @@ module Aws
       def get_canary_runs: (
                              name: ::String,
                              ?next_token: ::String,
-                             ?max_results: ::Integer
+                             ?max_results: ::Integer,
+                             ?dry_run_id: ::String,
+                             ?run_type: ("CANARY_RUN" | "DRY_RUN")
                            ) -> _GetCanaryRunsResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCanaryRunsResponseSuccess
 
@@ -301,6 +307,55 @@ module Aws
                         ) -> _StartCanaryResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartCanaryResponseSuccess
 
+      interface _StartCanaryDryRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartCanaryDryRunResponse]
+        def dry_run_config: () -> Types::DryRunConfigOutput
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Synthetics/Client.html#start_canary_dry_run-instance_method
+      def start_canary_dry_run: (
+                                  name: ::String,
+                                  ?code: {
+                                    s3_bucket: ::String?,
+                                    s3_key: ::String?,
+                                    s3_version: ::String?,
+                                    zip_file: ::String?,
+                                    handler: ::String
+                                  },
+                                  ?runtime_version: ::String,
+                                  ?run_config: {
+                                    timeout_in_seconds: ::Integer?,
+                                    memory_in_mb: ::Integer?,
+                                    active_tracing: bool?,
+                                    environment_variables: Hash[::String, ::String]?
+                                  },
+                                  ?vpc_config: {
+                                    subnet_ids: Array[::String]?,
+                                    security_group_ids: Array[::String]?,
+                                    ipv_6_allowed_for_dual_stack: bool?
+                                  },
+                                  ?execution_role_arn: ::String,
+                                  ?success_retention_period_in_days: ::Integer,
+                                  ?failure_retention_period_in_days: ::Integer,
+                                  ?visual_reference: {
+                                    base_screenshots: Array[
+                                      {
+                                        screenshot_name: ::String,
+                                        ignore_coordinates: Array[::String]?
+                                      },
+                                    ]?,
+                                    base_canary_run_id: ::String
+                                  },
+                                  ?artifact_s3_location: ::String,
+                                  ?artifact_config: {
+                                    s3_encryption: {
+                                      encryption_mode: ("SSE_S3" | "SSE_KMS")?,
+                                      kms_key_arn: ::String?
+                                    }?
+                                  },
+                                  ?provisioned_resource_cleanup: ("AUTOMATIC" | "OFF")
+                                ) -> _StartCanaryDryRunResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartCanaryDryRunResponseSuccess
+
       interface _StopCanaryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StopCanaryResponse]
       end
@@ -347,7 +402,10 @@ module Aws
                            ?runtime_version: ::String,
                            ?schedule: {
                              expression: ::String,
-                             duration_in_seconds: ::Integer?
+                             duration_in_seconds: ::Integer?,
+                             retry_config: {
+                               max_retries: ::Integer
+                             }?
                            },
                            ?run_config: {
                              timeout_in_seconds: ::Integer?,
@@ -378,7 +436,8 @@ module Aws
                                kms_key_arn: ::String?
                              }?
                            },
-                           ?provisioned_resource_cleanup: ("AUTOMATIC" | "OFF")
+                           ?provisioned_resource_cleanup: ("AUTOMATIC" | "OFF"),
+                           ?dry_run_id: ::String
                          ) -> _UpdateCanaryResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCanaryResponseSuccess
     end

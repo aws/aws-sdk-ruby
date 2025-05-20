@@ -123,7 +123,7 @@ module Aws::QBusiness
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING")
-      attr_accessor identity_type: ("AWS_IAM_IDP_SAML" | "AWS_IAM_IDP_OIDC" | "AWS_IAM_IDC" | "AWS_QUICKSIGHT_IDP")
+      attr_accessor identity_type: ("AWS_IAM_IDP_SAML" | "AWS_IAM_IDP_OIDC" | "AWS_IAM_IDC" | "AWS_QUICKSIGHT_IDP" | "ANONYMOUS")
       attr_accessor quick_sight_configuration: Types::QuickSightConfiguration
       SENSITIVE: []
     end
@@ -462,10 +462,22 @@ module Aws::QBusiness
       end
     end
 
+    class CreateAnonymousWebExperienceUrlRequest
+      attr_accessor application_id: ::String
+      attr_accessor web_experience_id: ::String
+      attr_accessor session_duration_in_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateAnonymousWebExperienceUrlResponse
+      attr_accessor anonymous_url: ::String
+      SENSITIVE: []
+    end
+
     class CreateApplicationRequest
       attr_accessor display_name: ::String
       attr_accessor role_arn: ::String
-      attr_accessor identity_type: ("AWS_IAM_IDP_SAML" | "AWS_IAM_IDP_OIDC" | "AWS_IAM_IDC" | "AWS_QUICKSIGHT_IDP")
+      attr_accessor identity_type: ("AWS_IAM_IDP_SAML" | "AWS_IAM_IDP_OIDC" | "AWS_IAM_IDC" | "AWS_QUICKSIGHT_IDP" | "ANONYMOUS")
       attr_accessor iam_identity_provider_arn: ::String
       attr_accessor identity_center_instance_arn: ::String
       attr_accessor client_ids_for_oidc: ::Array[::String]
@@ -1018,7 +1030,7 @@ module Aws::QBusiness
       attr_accessor display_name: ::String
       attr_accessor application_id: ::String
       attr_accessor application_arn: ::String
-      attr_accessor identity_type: ("AWS_IAM_IDP_SAML" | "AWS_IAM_IDP_OIDC" | "AWS_IAM_IDC" | "AWS_QUICKSIGHT_IDP")
+      attr_accessor identity_type: ("AWS_IAM_IDP_SAML" | "AWS_IAM_IDP_OIDC" | "AWS_IAM_IDC" | "AWS_QUICKSIGHT_IDP" | "ANONYMOUS")
       attr_accessor iam_identity_provider_arn: ::String
       attr_accessor identity_center_application_arn: ::String
       attr_accessor role_arn: ::String

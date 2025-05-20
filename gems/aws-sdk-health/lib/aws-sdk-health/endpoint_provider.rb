@@ -40,10 +40,10 @@ module Aws::Health
             raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
           end
           if Aws::Endpoints::Matchers.string_equals?(parameters.region, "aws-global")
-            return Aws::Endpoints::Endpoint.new(url: "https://global.health.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"health", "signingRegion"=>"us-east-1"}]})
+            return Aws::Endpoints::Endpoint.new(url: "https://global.health.amazonaws.com", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "health", "signingRegion" => "us-east-1"}]})
           end
           if Aws::Endpoints::Matchers.string_equals?(parameters.region, "aws-cn-global")
-            return Aws::Endpoints::Endpoint.new(url: "https://global.health.amazonaws.com.cn", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"health", "signingRegion"=>"cn-northwest-1"}]})
+            return Aws::Endpoints::Endpoint.new(url: "https://global.health.amazonaws.com.cn", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "health", "signingRegion" => "cn-northwest-1"}]})
           end
           return Aws::Endpoints::Endpoint.new(url: "https://health.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
         end

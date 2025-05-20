@@ -152,7 +152,7 @@ module Aws::Translate
     CreateParallelDataRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateParallelDataRequest.add_member(:parallel_data_config, Shapes::ShapeRef.new(shape: ParallelDataConfig, required: true, location_name: "ParallelDataConfig"))
     CreateParallelDataRequest.add_member(:encryption_key, Shapes::ShapeRef.new(shape: EncryptionKey, location_name: "EncryptionKey"))
-    CreateParallelDataRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateParallelDataRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateParallelDataRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateParallelDataRequest.struct_class = Types::CreateParallelDataRequest
 
@@ -340,7 +340,7 @@ module Aws::Translate
     StartTextTranslationJobRequest.add_member(:target_language_codes, Shapes::ShapeRef.new(shape: TargetLanguageCodeStringList, required: true, location_name: "TargetLanguageCodes"))
     StartTextTranslationJobRequest.add_member(:terminology_names, Shapes::ShapeRef.new(shape: ResourceNameList, location_name: "TerminologyNames"))
     StartTextTranslationJobRequest.add_member(:parallel_data_names, Shapes::ShapeRef.new(shape: ResourceNameList, location_name: "ParallelDataNames"))
-    StartTextTranslationJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    StartTextTranslationJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     StartTextTranslationJobRequest.add_member(:settings, Shapes::ShapeRef.new(shape: TranslationSettings, location_name: "Settings"))
     StartTextTranslationJobRequest.struct_class = Types::StartTextTranslationJobRequest
 
@@ -493,7 +493,7 @@ module Aws::Translate
     UpdateParallelDataRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
     UpdateParallelDataRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     UpdateParallelDataRequest.add_member(:parallel_data_config, Shapes::ShapeRef.new(shape: ParallelDataConfig, required: true, location_name: "ParallelDataConfig"))
-    UpdateParallelDataRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateParallelDataRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     UpdateParallelDataRequest.struct_class = Types::UpdateParallelDataRequest
 
     UpdateParallelDataResponse.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))

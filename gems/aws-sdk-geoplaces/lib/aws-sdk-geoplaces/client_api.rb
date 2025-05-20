@@ -415,7 +415,7 @@ module Aws::GeoPlaces
     FilterCategoryList.member = Shapes::ShapeRef.new(shape: FilterCategoryListMemberString)
 
     FilterCircle.add_member(:center, Shapes::ShapeRef.new(shape: Position, required: true, location_name: "Center"))
-    FilterCircle.add_member(:radius, Shapes::ShapeRef.new(shape: FilterCircleRadiusLong, required: true, location_name: "Radius", metadata: {"box"=>true}))
+    FilterCircle.add_member(:radius, Shapes::ShapeRef.new(shape: FilterCircleRadiusLong, required: true, location_name: "Radius", metadata: {"box" => true}))
     FilterCircle.struct_class = Types::FilterCircle
 
     FilterFoodTypeList.member = Shapes::ShapeRef.new(shape: FilterFoodTypeListMemberString)
@@ -592,7 +592,7 @@ module Aws::GeoPlaces
     ReverseGeocodeFilterPlaceTypeList.member = Shapes::ShapeRef.new(shape: ReverseGeocodeFilterPlaceType)
 
     ReverseGeocodeRequest.add_member(:query_position, Shapes::ShapeRef.new(shape: Position, required: true, location_name: "QueryPosition"))
-    ReverseGeocodeRequest.add_member(:query_radius, Shapes::ShapeRef.new(shape: ReverseGeocodeRequestQueryRadiusLong, location_name: "QueryRadius", metadata: {"box"=>true}))
+    ReverseGeocodeRequest.add_member(:query_radius, Shapes::ShapeRef.new(shape: ReverseGeocodeRequestQueryRadiusLong, location_name: "QueryRadius", metadata: {"box" => true}))
     ReverseGeocodeRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ReverseGeocodeRequestMaxResultsInteger, location_name: "MaxResults"))
     ReverseGeocodeRequest.add_member(:filter, Shapes::ShapeRef.new(shape: ReverseGeocodeFilter, location_name: "Filter"))
     ReverseGeocodeRequest.add_member(:additional_features, Shapes::ShapeRef.new(shape: ReverseGeocodeAdditionalFeatureList, location_name: "AdditionalFeatures"))
@@ -637,7 +637,7 @@ module Aws::GeoPlaces
     SearchNearbyFilter.struct_class = Types::SearchNearbyFilter
 
     SearchNearbyRequest.add_member(:query_position, Shapes::ShapeRef.new(shape: Position, required: true, location_name: "QueryPosition"))
-    SearchNearbyRequest.add_member(:query_radius, Shapes::ShapeRef.new(shape: SearchNearbyRequestQueryRadiusLong, location_name: "QueryRadius", metadata: {"box"=>true}))
+    SearchNearbyRequest.add_member(:query_radius, Shapes::ShapeRef.new(shape: SearchNearbyRequestQueryRadiusLong, location_name: "QueryRadius", metadata: {"box" => true}))
     SearchNearbyRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: SearchNearbyRequestMaxResultsInteger, location_name: "MaxResults"))
     SearchNearbyRequest.add_member(:filter, Shapes::ShapeRef.new(shape: SearchNearbyFilter, location_name: "Filter"))
     SearchNearbyRequest.add_member(:additional_features, Shapes::ShapeRef.new(shape: SearchNearbyAdditionalFeatureList, location_name: "AdditionalFeatures"))

@@ -174,6 +174,16 @@ module Aws::Kinesis
       end
     end
 
+    class ListTagsForResource
+      def self.build(context)
+        Aws::Kinesis::EndpointParameters.create(
+          context.config,
+          operation_type: "control",
+          resource_arn: context.params[:resource_arn],
+        )
+      end
+    end
+
     class ListTagsForStream
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
@@ -284,6 +294,26 @@ module Aws::Kinesis
       end
     end
 
+    class TagResource
+      def self.build(context)
+        Aws::Kinesis::EndpointParameters.create(
+          context.config,
+          operation_type: "control",
+          resource_arn: context.params[:resource_arn],
+        )
+      end
+    end
+
+    class UntagResource
+      def self.build(context)
+        Aws::Kinesis::EndpointParameters.create(
+          context.config,
+          operation_type: "control",
+          resource_arn: context.params[:resource_arn],
+        )
+      end
+    end
+
     class UpdateShardCount
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
@@ -339,6 +369,8 @@ module Aws::Kinesis
         ListShards.build(context)
       when :list_stream_consumers
         ListStreamConsumers.build(context)
+      when :list_tags_for_resource
+        ListTagsForResource.build(context)
       when :list_tags_for_stream
         ListTagsForStream.build(context)
       when :merge_shards
@@ -361,6 +393,10 @@ module Aws::Kinesis
         StopStreamEncryption.build(context)
       when :subscribe_to_shard
         SubscribeToShard.build(context)
+      when :tag_resource
+        TagResource.build(context)
+      when :untag_resource
+        UntagResource.build(context)
       when :update_shard_count
         UpdateShardCount.build(context)
       when :update_stream_mode

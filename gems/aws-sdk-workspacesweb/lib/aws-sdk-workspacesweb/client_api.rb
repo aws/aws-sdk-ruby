@@ -397,7 +397,7 @@ module Aws::WorkSpacesWeb
 
     CreateBrowserSettingsRequest.add_member(:additional_encryption_context, Shapes::ShapeRef.new(shape: EncryptionContextMap, location_name: "additionalEncryptionContext"))
     CreateBrowserSettingsRequest.add_member(:browser_policy, Shapes::ShapeRef.new(shape: BrowserPolicy, required: true, location_name: "browserPolicy"))
-    CreateBrowserSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateBrowserSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateBrowserSettingsRequest.add_member(:customer_managed_key, Shapes::ShapeRef.new(shape: keyArn, location_name: "customerManagedKey"))
     CreateBrowserSettingsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateBrowserSettingsRequest.struct_class = Types::CreateBrowserSettingsRequest
@@ -406,7 +406,7 @@ module Aws::WorkSpacesWeb
     CreateBrowserSettingsResponse.struct_class = Types::CreateBrowserSettingsResponse
 
     CreateDataProtectionSettingsRequest.add_member(:additional_encryption_context, Shapes::ShapeRef.new(shape: EncryptionContextMap, location_name: "additionalEncryptionContext"))
-    CreateDataProtectionSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDataProtectionSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateDataProtectionSettingsRequest.add_member(:customer_managed_key, Shapes::ShapeRef.new(shape: keyArn, location_name: "customerManagedKey"))
     CreateDataProtectionSettingsRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionSafe, location_name: "description"))
     CreateDataProtectionSettingsRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayNameSafe, location_name: "displayName"))
@@ -417,7 +417,7 @@ module Aws::WorkSpacesWeb
     CreateDataProtectionSettingsResponse.add_member(:data_protection_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "dataProtectionSettingsArn"))
     CreateDataProtectionSettingsResponse.struct_class = Types::CreateDataProtectionSettingsResponse
 
-    CreateIdentityProviderRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateIdentityProviderRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateIdentityProviderRequest.add_member(:identity_provider_details, Shapes::ShapeRef.new(shape: IdentityProviderDetails, required: true, location_name: "identityProviderDetails"))
     CreateIdentityProviderRequest.add_member(:identity_provider_name, Shapes::ShapeRef.new(shape: IdentityProviderName, required: true, location_name: "identityProviderName"))
     CreateIdentityProviderRequest.add_member(:identity_provider_type, Shapes::ShapeRef.new(shape: IdentityProviderType, required: true, location_name: "identityProviderType"))
@@ -429,7 +429,7 @@ module Aws::WorkSpacesWeb
     CreateIdentityProviderResponse.struct_class = Types::CreateIdentityProviderResponse
 
     CreateIpAccessSettingsRequest.add_member(:additional_encryption_context, Shapes::ShapeRef.new(shape: EncryptionContextMap, location_name: "additionalEncryptionContext"))
-    CreateIpAccessSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateIpAccessSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateIpAccessSettingsRequest.add_member(:customer_managed_key, Shapes::ShapeRef.new(shape: keyArn, location_name: "customerManagedKey"))
     CreateIpAccessSettingsRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateIpAccessSettingsRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "displayName"))
@@ -440,7 +440,7 @@ module Aws::WorkSpacesWeb
     CreateIpAccessSettingsResponse.add_member(:ip_access_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "ipAccessSettingsArn"))
     CreateIpAccessSettingsResponse.struct_class = Types::CreateIpAccessSettingsResponse
 
-    CreateNetworkSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateNetworkSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateNetworkSettingsRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, required: true, location_name: "securityGroupIds"))
     CreateNetworkSettingsRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, required: true, location_name: "subnetIds"))
     CreateNetworkSettingsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
@@ -452,7 +452,7 @@ module Aws::WorkSpacesWeb
 
     CreatePortalRequest.add_member(:additional_encryption_context, Shapes::ShapeRef.new(shape: EncryptionContextMap, location_name: "additionalEncryptionContext"))
     CreatePortalRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "authenticationType"))
-    CreatePortalRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreatePortalRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreatePortalRequest.add_member(:customer_managed_key, Shapes::ShapeRef.new(shape: keyArn, location_name: "customerManagedKey"))
     CreatePortalRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "displayName"))
     CreatePortalRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "instanceType"))
@@ -465,14 +465,14 @@ module Aws::WorkSpacesWeb
     CreatePortalResponse.struct_class = Types::CreatePortalResponse
 
     CreateTrustStoreRequest.add_member(:certificate_list, Shapes::ShapeRef.new(shape: CertificateList, required: true, location_name: "certificateList"))
-    CreateTrustStoreRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateTrustStoreRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateTrustStoreRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateTrustStoreRequest.struct_class = Types::CreateTrustStoreRequest
 
     CreateTrustStoreResponse.add_member(:trust_store_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "trustStoreArn"))
     CreateTrustStoreResponse.struct_class = Types::CreateTrustStoreResponse
 
-    CreateUserAccessLoggingSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateUserAccessLoggingSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateUserAccessLoggingSettingsRequest.add_member(:kinesis_stream_arn, Shapes::ShapeRef.new(shape: KinesisStreamArn, required: true, location_name: "kinesisStreamArn"))
     CreateUserAccessLoggingSettingsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateUserAccessLoggingSettingsRequest.struct_class = Types::CreateUserAccessLoggingSettingsRequest
@@ -481,7 +481,7 @@ module Aws::WorkSpacesWeb
     CreateUserAccessLoggingSettingsResponse.struct_class = Types::CreateUserAccessLoggingSettingsResponse
 
     CreateUserSettingsRequest.add_member(:additional_encryption_context, Shapes::ShapeRef.new(shape: EncryptionContextMap, location_name: "additionalEncryptionContext"))
-    CreateUserSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateUserSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateUserSettingsRequest.add_member(:cookie_synchronization_configuration, Shapes::ShapeRef.new(shape: CookieSynchronizationConfiguration, location_name: "cookieSynchronizationConfiguration"))
     CreateUserSettingsRequest.add_member(:copy_allowed, Shapes::ShapeRef.new(shape: EnabledType, required: true, location_name: "copyAllowed"))
     CreateUserSettingsRequest.add_member(:customer_managed_key, Shapes::ShapeRef.new(shape: keyArn, location_name: "customerManagedKey"))
@@ -961,7 +961,7 @@ module Aws::WorkSpacesWeb
 
     TagList.member = Shapes::ShapeRef.new(shape: Tag)
 
-    TagResourceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    TagResourceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "resourceArn"))
     TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "tags"))
     TagResourceRequest.struct_class = Types::TagResourceRequest
@@ -1001,13 +1001,13 @@ module Aws::WorkSpacesWeb
 
     UpdateBrowserSettingsRequest.add_member(:browser_policy, Shapes::ShapeRef.new(shape: BrowserPolicy, location_name: "browserPolicy"))
     UpdateBrowserSettingsRequest.add_member(:browser_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "browserSettingsArn"))
-    UpdateBrowserSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateBrowserSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateBrowserSettingsRequest.struct_class = Types::UpdateBrowserSettingsRequest
 
     UpdateBrowserSettingsResponse.add_member(:browser_settings, Shapes::ShapeRef.new(shape: BrowserSettings, required: true, location_name: "browserSettings"))
     UpdateBrowserSettingsResponse.struct_class = Types::UpdateBrowserSettingsResponse
 
-    UpdateDataProtectionSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateDataProtectionSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateDataProtectionSettingsRequest.add_member(:data_protection_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "dataProtectionSettingsArn"))
     UpdateDataProtectionSettingsRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionSafe, location_name: "description"))
     UpdateDataProtectionSettingsRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayNameSafe, location_name: "displayName"))
@@ -1017,7 +1017,7 @@ module Aws::WorkSpacesWeb
     UpdateDataProtectionSettingsResponse.add_member(:data_protection_settings, Shapes::ShapeRef.new(shape: DataProtectionSettings, required: true, location_name: "dataProtectionSettings"))
     UpdateDataProtectionSettingsResponse.struct_class = Types::UpdateDataProtectionSettingsResponse
 
-    UpdateIdentityProviderRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateIdentityProviderRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateIdentityProviderRequest.add_member(:identity_provider_arn, Shapes::ShapeRef.new(shape: SubresourceARN, required: true, location: "uri", location_name: "identityProviderArn"))
     UpdateIdentityProviderRequest.add_member(:identity_provider_details, Shapes::ShapeRef.new(shape: IdentityProviderDetails, location_name: "identityProviderDetails"))
     UpdateIdentityProviderRequest.add_member(:identity_provider_name, Shapes::ShapeRef.new(shape: IdentityProviderName, location_name: "identityProviderName"))
@@ -1027,7 +1027,7 @@ module Aws::WorkSpacesWeb
     UpdateIdentityProviderResponse.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProvider, required: true, location_name: "identityProvider"))
     UpdateIdentityProviderResponse.struct_class = Types::UpdateIdentityProviderResponse
 
-    UpdateIpAccessSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateIpAccessSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateIpAccessSettingsRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateIpAccessSettingsRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "displayName"))
     UpdateIpAccessSettingsRequest.add_member(:ip_access_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "ipAccessSettingsArn"))
@@ -1037,7 +1037,7 @@ module Aws::WorkSpacesWeb
     UpdateIpAccessSettingsResponse.add_member(:ip_access_settings, Shapes::ShapeRef.new(shape: IpAccessSettings, required: true, location_name: "ipAccessSettings"))
     UpdateIpAccessSettingsResponse.struct_class = Types::UpdateIpAccessSettingsResponse
 
-    UpdateNetworkSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateNetworkSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateNetworkSettingsRequest.add_member(:network_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "networkSettingsArn"))
     UpdateNetworkSettingsRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, location_name: "securityGroupIds"))
     UpdateNetworkSettingsRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, location_name: "subnetIds"))
@@ -1059,14 +1059,14 @@ module Aws::WorkSpacesWeb
 
     UpdateTrustStoreRequest.add_member(:certificates_to_add, Shapes::ShapeRef.new(shape: CertificateList, location_name: "certificatesToAdd"))
     UpdateTrustStoreRequest.add_member(:certificates_to_delete, Shapes::ShapeRef.new(shape: CertificateThumbprintList, location_name: "certificatesToDelete"))
-    UpdateTrustStoreRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateTrustStoreRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateTrustStoreRequest.add_member(:trust_store_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "trustStoreArn"))
     UpdateTrustStoreRequest.struct_class = Types::UpdateTrustStoreRequest
 
     UpdateTrustStoreResponse.add_member(:trust_store_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "trustStoreArn"))
     UpdateTrustStoreResponse.struct_class = Types::UpdateTrustStoreResponse
 
-    UpdateUserAccessLoggingSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateUserAccessLoggingSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateUserAccessLoggingSettingsRequest.add_member(:kinesis_stream_arn, Shapes::ShapeRef.new(shape: KinesisStreamArn, location_name: "kinesisStreamArn"))
     UpdateUserAccessLoggingSettingsRequest.add_member(:user_access_logging_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "userAccessLoggingSettingsArn"))
     UpdateUserAccessLoggingSettingsRequest.struct_class = Types::UpdateUserAccessLoggingSettingsRequest
@@ -1074,7 +1074,7 @@ module Aws::WorkSpacesWeb
     UpdateUserAccessLoggingSettingsResponse.add_member(:user_access_logging_settings, Shapes::ShapeRef.new(shape: UserAccessLoggingSettings, required: true, location_name: "userAccessLoggingSettings"))
     UpdateUserAccessLoggingSettingsResponse.struct_class = Types::UpdateUserAccessLoggingSettingsResponse
 
-    UpdateUserSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateUserSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateUserSettingsRequest.add_member(:cookie_synchronization_configuration, Shapes::ShapeRef.new(shape: CookieSynchronizationConfiguration, location_name: "cookieSynchronizationConfiguration"))
     UpdateUserSettingsRequest.add_member(:copy_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "copyAllowed"))
     UpdateUserSettingsRequest.add_member(:deep_link_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "deepLinkAllowed"))

@@ -554,6 +554,10 @@ module Aws::ControlTower
     #   The enabled version of the `Baseline`.
     #   @return [String]
     #
+    # @!attribute [rw] drift_status_summary
+    #   The drift status of the enabled baseline.
+    #   @return [Types::EnabledBaselineDriftStatusSummary]
+    #
     # @!attribute [rw] parameters
     #   Shows the parameters that are applied when enabling this `Baseline`.
     #   @return [Array<Types::EnabledBaselineParameterSummary>]
@@ -580,10 +584,77 @@ module Aws::ControlTower
       :arn,
       :baseline_identifier,
       :baseline_version,
+      :drift_status_summary,
       :parameters,
       :parent_identifier,
       :status_summary,
       :target_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The drift summary of the enabled baseline. Amazon Web Services Control
+    # Tower reports inheritance drift when an enabled baseline configuration
+    # of a member account is different than the configuration that applies
+    # to the OU. Amazon Web Services Control Tower reports this type of
+    # drift for a parent or child enabled baseline. One way to repair this
+    # drift by resetting the parent enabled baseline, on the OU.
+    #
+    # For example, you may see this type of drift if you move accounts
+    # between OUs, but the accounts are not yet (re-)enrolled.
+    #
+    # @!attribute [rw] types
+    #   The types of drift that can be detected for an enabled baseline.
+    #   Amazon Web Services Control Tower detects inheritance drift on
+    #   enabled baselines that apply at the OU level.
+    #   @return [Types::EnabledBaselineDriftTypes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnabledBaselineDriftStatusSummary AWS API Documentation
+    #
+    class EnabledBaselineDriftStatusSummary < Struct.new(
+      :types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The types of drift that can be detected for an enabled baseline.
+    #
+    # * Amazon Web Services Control Tower detects inheritance drift on the
+    #   enabled baselines that target OUs: `AWSControlTowerBaseline` and
+    #   `BackupBaseline`.
+    #
+    # * Amazon Web Services Control Tower does not detect drift on the
+    #   baselines that apply to your landing zone: `IdentityCenterBaseline`,
+    #   `AuditBaseline`, `LogArchiveBaseline`, `BackupCentralVaultBaseline`,
+    #   or `BackupAdminBaseline`. For more information, see [Types of
+    #   baselines][1].
+    #
+    # Baselines enabled on an OU are inherited by its member accounts as
+    # child `EnabledBaseline` resources. The baseline on the OU serves as
+    # the parent `EnabledBaseline`, which governs the configuration of each
+    # child `EnabledBaseline`.
+    #
+    # If the baseline configuration of a member account in an OU does not
+    # match the configuration of the parent OU, the parent and child
+    # baseline is in a state of inheritance drift. This drift could occur in
+    # the `AWSControlTowerBaseline` or the `BackupBaseline` related to that
+    # account.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/controltower/latest/userguide/types-of-baselines.html
+    #
+    # @!attribute [rw] inheritance
+    #   At least one account within the target OU does not match the
+    #   baseline configuration defined on that OU. An account is in
+    #   inheritance drift when it does not match the configuration of a
+    #   parent OU, possibly a new parent OU, if the account is moved.
+    #   @return [Types::EnabledBaselineInheritanceDrift]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnabledBaselineDriftTypes AWS API Documentation
+    #
+    class EnabledBaselineDriftTypes < Struct.new(
+      :inheritance)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -597,9 +668,17 @@ module Aws::ControlTower
     #   filter operation.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] inheritance_drift_statuses
+    #   A list of `EnabledBaselineDriftStatus` items for enabled baselines.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] parent_identifiers
     #   An optional filter that sets up a list of `parentIdentifiers` to
     #   filter the results of the `ListEnabledBaseline` output.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] statuses
+    #   A list of `EnablementStatus` items.
     #   @return [Array<String>]
     #
     # @!attribute [rw] target_identifiers
@@ -610,8 +689,26 @@ module Aws::ControlTower
     #
     class EnabledBaselineFilter < Struct.new(
       :baseline_identifiers,
+      :inheritance_drift_statuses,
       :parent_identifiers,
+      :statuses,
       :target_identifiers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The inheritance drift summary for the enabled baseline. Inheritance
+    # drift occurs when any accounts in the target OU do not match the
+    # baseline configuration defined on that OU.
+    #
+    # @!attribute [rw] status
+    #   The inheritance drift status for enabled baselines.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnabledBaselineInheritanceDrift AWS API Documentation
+    #
+    class EnabledBaselineInheritanceDrift < Struct.new(
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -671,6 +768,10 @@ module Aws::ControlTower
     #   The enabled version of the baseline.
     #   @return [String]
     #
+    # @!attribute [rw] drift_status_summary
+    #   The drift status of the enabled baseline.
+    #   @return [Types::EnabledBaselineDriftStatusSummary]
+    #
     # @!attribute [rw] parent_identifier
     #   An ARN that represents an object returned by `ListEnabledBaseline`,
     #   to describe an enabled baseline.
@@ -691,6 +792,7 @@ module Aws::ControlTower
       :arn,
       :baseline_identifier,
       :baseline_version,
+      :drift_status_summary,
       :parent_identifier,
       :status_summary,
       :target_identifier)
@@ -1652,7 +1754,7 @@ module Aws::ControlTower
     end
 
     # The request would cause a service quota to be exceeded. The limit is
-    # 10 concurrent operations.
+    # 100 concurrent operations.
     #
     # @!attribute [rw] message
     #   @return [String]

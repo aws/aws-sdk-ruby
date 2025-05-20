@@ -200,8 +200,7 @@ module Aws::MailManager
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -931,6 +930,13 @@ module Aws::MailManager
     #               role_arn: "IamRoleArn", # required
     #             },
     #             drop: {
+    #             },
+    #             publish_to_sns: {
+    #               action_failure_policy: "CONTINUE", # accepts CONTINUE, DROP
+    #               encoding: "UTF-8", # accepts UTF-8, BASE64
+    #               payload_type: "HEADERS", # accepts HEADERS, CONTENT
+    #               role_arn: "IamRoleArn", # required
+    #               topic_arn: "SnsTopicArn", # required
     #             },
     #             relay: {
     #               action_failure_policy: "CONTINUE", # accepts CONTINUE, DROP
@@ -2026,6 +2032,11 @@ module Aws::MailManager
     #   resp.rules[0].actions[0].deliver_to_q_business.application_id #=> String
     #   resp.rules[0].actions[0].deliver_to_q_business.index_id #=> String
     #   resp.rules[0].actions[0].deliver_to_q_business.role_arn #=> String
+    #   resp.rules[0].actions[0].publish_to_sns.action_failure_policy #=> String, one of "CONTINUE", "DROP"
+    #   resp.rules[0].actions[0].publish_to_sns.encoding #=> String, one of "UTF-8", "BASE64"
+    #   resp.rules[0].actions[0].publish_to_sns.payload_type #=> String, one of "HEADERS", "CONTENT"
+    #   resp.rules[0].actions[0].publish_to_sns.role_arn #=> String
+    #   resp.rules[0].actions[0].publish_to_sns.topic_arn #=> String
     #   resp.rules[0].actions[0].relay.action_failure_policy #=> String, one of "CONTINUE", "DROP"
     #   resp.rules[0].actions[0].relay.mail_from #=> String, one of "REPLACE", "PRESERVE"
     #   resp.rules[0].actions[0].relay.relay #=> String
@@ -3266,6 +3277,13 @@ module Aws::MailManager
     #             },
     #             drop: {
     #             },
+    #             publish_to_sns: {
+    #               action_failure_policy: "CONTINUE", # accepts CONTINUE, DROP
+    #               encoding: "UTF-8", # accepts UTF-8, BASE64
+    #               payload_type: "HEADERS", # accepts HEADERS, CONTENT
+    #               role_arn: "IamRoleArn", # required
+    #               topic_arn: "SnsTopicArn", # required
+    #             },
     #             relay: {
     #               action_failure_policy: "CONTINUE", # accepts CONTINUE, DROP
     #               mail_from: "REPLACE", # accepts REPLACE, PRESERVE
@@ -3531,7 +3549,7 @@ module Aws::MailManager
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mailmanager'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

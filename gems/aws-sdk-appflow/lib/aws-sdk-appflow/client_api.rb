@@ -703,7 +703,7 @@ module Aws::Appflow
     CreateConnectorProfileRequest.add_member(:connector_label, Shapes::ShapeRef.new(shape: ConnectorLabel, location_name: "connectorLabel"))
     CreateConnectorProfileRequest.add_member(:connection_mode, Shapes::ShapeRef.new(shape: ConnectionMode, required: true, location_name: "connectionMode"))
     CreateConnectorProfileRequest.add_member(:connector_profile_config, Shapes::ShapeRef.new(shape: ConnectorProfileConfig, required: true, location_name: "connectorProfileConfig"))
-    CreateConnectorProfileRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateConnectorProfileRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateConnectorProfileRequest.struct_class = Types::CreateConnectorProfileRequest
 
     CreateConnectorProfileResponse.add_member(:connector_profile_arn, Shapes::ShapeRef.new(shape: ConnectorProfileArn, location_name: "connectorProfileArn"))
@@ -718,7 +718,7 @@ module Aws::Appflow
     CreateFlowRequest.add_member(:tasks, Shapes::ShapeRef.new(shape: Tasks, required: true, location_name: "tasks"))
     CreateFlowRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateFlowRequest.add_member(:metadata_catalog_config, Shapes::ShapeRef.new(shape: MetadataCatalogConfig, location_name: "metadataCatalogConfig"))
-    CreateFlowRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateFlowRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateFlowRequest.struct_class = Types::CreateFlowRequest
 
     CreateFlowResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: FlowArn, location_name: "flowArn"))
@@ -1216,7 +1216,7 @@ module Aws::Appflow
     RegisterConnectorRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     RegisterConnectorRequest.add_member(:connector_provisioning_type, Shapes::ShapeRef.new(shape: ConnectorProvisioningType, location_name: "connectorProvisioningType"))
     RegisterConnectorRequest.add_member(:connector_provisioning_config, Shapes::ShapeRef.new(shape: ConnectorProvisioningConfig, location_name: "connectorProvisioningConfig"))
-    RegisterConnectorRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    RegisterConnectorRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     RegisterConnectorRequest.struct_class = Types::RegisterConnectorRequest
 
     RegisterConnectorResponse.add_member(:connector_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "connectorArn"))
@@ -1266,7 +1266,7 @@ module Aws::Appflow
 
     SAPODataConnectorProfileProperties.add_member(:application_host_url, Shapes::ShapeRef.new(shape: ApplicationHostUrl, required: true, location_name: "applicationHostUrl"))
     SAPODataConnectorProfileProperties.add_member(:application_service_path, Shapes::ShapeRef.new(shape: ApplicationServicePath, required: true, location_name: "applicationServicePath"))
-    SAPODataConnectorProfileProperties.add_member(:port_number, Shapes::ShapeRef.new(shape: PortNumber, required: true, location_name: "portNumber", metadata: {"box"=>true}))
+    SAPODataConnectorProfileProperties.add_member(:port_number, Shapes::ShapeRef.new(shape: PortNumber, required: true, location_name: "portNumber", metadata: {"box" => true}))
     SAPODataConnectorProfileProperties.add_member(:client_number, Shapes::ShapeRef.new(shape: ClientNumber, required: true, location_name: "clientNumber"))
     SAPODataConnectorProfileProperties.add_member(:logon_language, Shapes::ShapeRef.new(shape: LogonLanguage, location_name: "logonLanguage"))
     SAPODataConnectorProfileProperties.add_member(:private_link_service_name, Shapes::ShapeRef.new(shape: PrivateLinkServiceName, location_name: "privateLinkServiceName"))
@@ -1283,10 +1283,10 @@ module Aws::Appflow
 
     SAPODataMetadata.struct_class = Types::SAPODataMetadata
 
-    SAPODataPaginationConfig.add_member(:max_page_size, Shapes::ShapeRef.new(shape: SAPODataMaxPageSize, required: true, location_name: "maxPageSize", metadata: {"box"=>true}))
+    SAPODataPaginationConfig.add_member(:max_page_size, Shapes::ShapeRef.new(shape: SAPODataMaxPageSize, required: true, location_name: "maxPageSize", metadata: {"box" => true}))
     SAPODataPaginationConfig.struct_class = Types::SAPODataPaginationConfig
 
-    SAPODataParallelismConfig.add_member(:max_parallelism, Shapes::ShapeRef.new(shape: SAPODataMaxParallelism, required: true, location_name: "maxParallelism", metadata: {"box"=>true}))
+    SAPODataParallelismConfig.add_member(:max_parallelism, Shapes::ShapeRef.new(shape: SAPODataMaxParallelism, required: true, location_name: "maxParallelism", metadata: {"box" => true}))
     SAPODataParallelismConfig.struct_class = Types::SAPODataParallelismConfig
 
     SAPODataSourceProperties.add_member(:object_path, Shapes::ShapeRef.new(shape: Object, location_name: "objectPath"))
@@ -1332,9 +1332,9 @@ module Aws::Appflow
     ScheduledTriggerProperties.add_member(:schedule_start_time, Shapes::ShapeRef.new(shape: Date, location_name: "scheduleStartTime"))
     ScheduledTriggerProperties.add_member(:schedule_end_time, Shapes::ShapeRef.new(shape: Date, location_name: "scheduleEndTime"))
     ScheduledTriggerProperties.add_member(:timezone, Shapes::ShapeRef.new(shape: Timezone, location_name: "timezone"))
-    ScheduledTriggerProperties.add_member(:schedule_offset, Shapes::ShapeRef.new(shape: ScheduleOffset, location_name: "scheduleOffset", metadata: {"box"=>true}))
+    ScheduledTriggerProperties.add_member(:schedule_offset, Shapes::ShapeRef.new(shape: ScheduleOffset, location_name: "scheduleOffset", metadata: {"box" => true}))
     ScheduledTriggerProperties.add_member(:first_execution_from, Shapes::ShapeRef.new(shape: Date, location_name: "firstExecutionFrom"))
-    ScheduledTriggerProperties.add_member(:flow_error_deactivation_threshold, Shapes::ShapeRef.new(shape: FlowErrorDeactivationThreshold, location_name: "flowErrorDeactivationThreshold", metadata: {"box"=>true}))
+    ScheduledTriggerProperties.add_member(:flow_error_deactivation_threshold, Shapes::ShapeRef.new(shape: FlowErrorDeactivationThreshold, location_name: "flowErrorDeactivationThreshold", metadata: {"box" => true}))
     ScheduledTriggerProperties.struct_class = Types::ScheduledTriggerProperties
 
     SchedulingFrequencyTypeList.member = Shapes::ShapeRef.new(shape: ScheduleFrequencyType)
@@ -1436,7 +1436,7 @@ module Aws::Appflow
     SourceFlowConfig.struct_class = Types::SourceFlowConfig
 
     StartFlowRequest.add_member(:flow_name, Shapes::ShapeRef.new(shape: FlowName, required: true, location_name: "flowName"))
-    StartFlowRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    StartFlowRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     StartFlowRequest.struct_class = Types::StartFlowRequest
 
     StartFlowResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: FlowArn, location_name: "flowArn"))
@@ -1538,7 +1538,7 @@ module Aws::Appflow
     UpdateConnectorProfileRequest.add_member(:connector_profile_name, Shapes::ShapeRef.new(shape: ConnectorProfileName, required: true, location_name: "connectorProfileName"))
     UpdateConnectorProfileRequest.add_member(:connection_mode, Shapes::ShapeRef.new(shape: ConnectionMode, required: true, location_name: "connectionMode"))
     UpdateConnectorProfileRequest.add_member(:connector_profile_config, Shapes::ShapeRef.new(shape: ConnectorProfileConfig, required: true, location_name: "connectorProfileConfig"))
-    UpdateConnectorProfileRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateConnectorProfileRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateConnectorProfileRequest.struct_class = Types::UpdateConnectorProfileRequest
 
     UpdateConnectorProfileResponse.add_member(:connector_profile_arn, Shapes::ShapeRef.new(shape: ConnectorProfileArn, location_name: "connectorProfileArn"))
@@ -1547,7 +1547,7 @@ module Aws::Appflow
     UpdateConnectorRegistrationRequest.add_member(:connector_label, Shapes::ShapeRef.new(shape: ConnectorLabel, required: true, location_name: "connectorLabel"))
     UpdateConnectorRegistrationRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateConnectorRegistrationRequest.add_member(:connector_provisioning_config, Shapes::ShapeRef.new(shape: ConnectorProvisioningConfig, location_name: "connectorProvisioningConfig"))
-    UpdateConnectorRegistrationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateConnectorRegistrationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateConnectorRegistrationRequest.struct_class = Types::UpdateConnectorRegistrationRequest
 
     UpdateConnectorRegistrationResponse.add_member(:connector_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "connectorArn"))
@@ -1560,7 +1560,7 @@ module Aws::Appflow
     UpdateFlowRequest.add_member(:destination_flow_config_list, Shapes::ShapeRef.new(shape: DestinationFlowConfigList, required: true, location_name: "destinationFlowConfigList"))
     UpdateFlowRequest.add_member(:tasks, Shapes::ShapeRef.new(shape: Tasks, required: true, location_name: "tasks"))
     UpdateFlowRequest.add_member(:metadata_catalog_config, Shapes::ShapeRef.new(shape: MetadataCatalogConfig, location_name: "metadataCatalogConfig"))
-    UpdateFlowRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateFlowRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateFlowRequest.struct_class = Types::UpdateFlowRequest
 
     UpdateFlowResponse.add_member(:flow_status, Shapes::ShapeRef.new(shape: FlowStatus, location_name: "flowStatus"))

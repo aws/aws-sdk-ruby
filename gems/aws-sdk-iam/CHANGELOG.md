@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.122.0 (2025-05-12)
+------------------
+
+* Feature - Updating the endpoint list for the Identity and access management (IAM) service
+
+1.121.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.120.0 (2025-03-27)
 ------------------
 

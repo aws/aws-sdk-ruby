@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.109.0 (2025-05-12)
+------------------
+
+* Feature - Updates to support S3 Express zonal endpoints for directory buckets in AWS CLI
+
+1.108.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.107.0 (2025-04-22)
 ------------------
 

@@ -8,6 +8,29 @@
 module Aws
   module AppConfig
     module Waiters
+
+      class DeploymentComplete
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    application_id: ::String,
+                    environment_id: ::String,
+                    deployment_number: ::Integer
+                  ) -> Client::_GetDeploymentResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetDeploymentResponseSuccess
+      end
+
+      class EnvironmentReadyForDeployment
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    application_id: ::String,
+                    environment_id: ::String
+                  ) -> Client::_GetEnvironmentResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetEnvironmentResponseSuccess
+      end
     end
   end
 end

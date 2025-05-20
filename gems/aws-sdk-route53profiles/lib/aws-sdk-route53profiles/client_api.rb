@@ -107,7 +107,7 @@ module Aws::Route53Profiles
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
 
-    CreateProfileRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreatorRequestId, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateProfileRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreatorRequestId, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
     CreateProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateProfileRequest.struct_class = Types::CreateProfileRequest

@@ -27,8 +27,8 @@ module Aws::SSOAdmin
     class AccountAssignment
       attr_accessor account_id: ::String
       attr_accessor permission_set_arn: ::String
-      attr_accessor principal_id: ::String
       attr_accessor principal_type: ("USER" | "GROUP")
+      attr_accessor principal_id: ::String
       SENSITIVE: []
     end
 
@@ -41,35 +41,35 @@ module Aws::SSOAdmin
     end
 
     class AccountAssignmentOperationStatus
-      attr_accessor created_date: ::Time
-      attr_accessor failure_reason: ::String
-      attr_accessor permission_set_arn: ::String
-      attr_accessor principal_id: ::String
-      attr_accessor principal_type: ("USER" | "GROUP")
-      attr_accessor request_id: ::String
       attr_accessor status: ("IN_PROGRESS" | "FAILED" | "SUCCEEDED")
+      attr_accessor request_id: ::String
+      attr_accessor failure_reason: ::String
       attr_accessor target_id: ::String
       attr_accessor target_type: ("AWS_ACCOUNT")
+      attr_accessor permission_set_arn: ::String
+      attr_accessor principal_type: ("USER" | "GROUP")
+      attr_accessor principal_id: ::String
+      attr_accessor created_date: ::Time
       SENSITIVE: []
     end
 
     class AccountAssignmentOperationStatusMetadata
-      attr_accessor created_date: ::Time
-      attr_accessor request_id: ::String
       attr_accessor status: ("IN_PROGRESS" | "FAILED" | "SUCCEEDED")
+      attr_accessor request_id: ::String
+      attr_accessor created_date: ::Time
       SENSITIVE: []
     end
 
     class Application
-      attr_accessor application_account: ::String
       attr_accessor application_arn: ::String
       attr_accessor application_provider_arn: ::String
-      attr_accessor created_date: ::Time
-      attr_accessor description: ::String
-      attr_accessor instance_arn: ::String
       attr_accessor name: ::String
-      attr_accessor portal_options: Types::PortalOptions
+      attr_accessor application_account: ::String
+      attr_accessor instance_arn: ::String
       attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor portal_options: Types::PortalOptions
+      attr_accessor description: ::String
+      attr_accessor created_date: ::Time
       SENSITIVE: []
     end
 
@@ -89,16 +89,16 @@ module Aws::SSOAdmin
 
     class ApplicationProvider
       attr_accessor application_provider_arn: ::String
-      attr_accessor display_data: Types::DisplayData
       attr_accessor federation_protocol: ("SAML" | "OAUTH")
+      attr_accessor display_data: Types::DisplayData
       attr_accessor resource_server_config: Types::ResourceServerConfig
       SENSITIVE: []
     end
 
     class AttachCustomerManagedPolicyReferenceToPermissionSetRequest
-      attr_accessor customer_managed_policy_reference: Types::CustomerManagedPolicyReference
       attr_accessor instance_arn: ::String
       attr_accessor permission_set_arn: ::String
+      attr_accessor customer_managed_policy_reference: Types::CustomerManagedPolicyReference
       SENSITIVE: []
     end
 
@@ -107,8 +107,8 @@ module Aws::SSOAdmin
 
     class AttachManagedPolicyToPermissionSetRequest
       attr_accessor instance_arn: ::String
-      attr_accessor managed_policy_arn: ::String
       attr_accessor permission_set_arn: ::String
+      attr_accessor managed_policy_arn: ::String
       SENSITIVE: []
     end
 
@@ -116,8 +116,8 @@ module Aws::SSOAdmin
     end
 
     class AttachedManagedPolicy
-      attr_accessor arn: ::String
       attr_accessor name: ::String
+      attr_accessor arn: ::String
       SENSITIVE: []
     end
 
@@ -133,8 +133,8 @@ module Aws::SSOAdmin
     end
 
     class AuthenticationMethodItem
-      attr_accessor authentication_method: Types::AuthenticationMethod
       attr_accessor authentication_method_type: ("IAM")
+      attr_accessor authentication_method: Types::AuthenticationMethod
       SENSITIVE: []
     end
 
@@ -144,8 +144,8 @@ module Aws::SSOAdmin
     end
 
     class AuthorizedTokenIssuer
-      attr_accessor authorized_audiences: ::Array[::String]
       attr_accessor trusted_token_issuer_arn: ::String
+      attr_accessor authorized_audiences: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -156,11 +156,11 @@ module Aws::SSOAdmin
 
     class CreateAccountAssignmentRequest
       attr_accessor instance_arn: ::String
-      attr_accessor permission_set_arn: ::String
-      attr_accessor principal_id: ::String
-      attr_accessor principal_type: ("USER" | "GROUP")
       attr_accessor target_id: ::String
       attr_accessor target_type: ("AWS_ACCOUNT")
+      attr_accessor permission_set_arn: ::String
+      attr_accessor principal_type: ("USER" | "GROUP")
+      attr_accessor principal_id: ::String
       SENSITIVE: []
     end
 
@@ -180,14 +180,14 @@ module Aws::SSOAdmin
     end
 
     class CreateApplicationRequest
-      attr_accessor application_provider_arn: ::String
-      attr_accessor client_token: ::String
-      attr_accessor description: ::String
       attr_accessor instance_arn: ::String
+      attr_accessor application_provider_arn: ::String
       attr_accessor name: ::String
+      attr_accessor description: ::String
       attr_accessor portal_options: Types::PortalOptions
-      attr_accessor status: ("ENABLED" | "DISABLED")
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -197,8 +197,8 @@ module Aws::SSOAdmin
     end
 
     class CreateInstanceAccessControlAttributeConfigurationRequest
-      attr_accessor instance_access_control_attribute_configuration: Types::InstanceAccessControlAttributeConfiguration
       attr_accessor instance_arn: ::String
+      attr_accessor instance_access_control_attribute_configuration: Types::InstanceAccessControlAttributeConfiguration
       SENSITIVE: []
     end
 
@@ -206,8 +206,8 @@ module Aws::SSOAdmin
     end
 
     class CreateInstanceRequest
-      attr_accessor client_token: ::String
       attr_accessor name: ::String
+      attr_accessor client_token: ::String
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
@@ -218,11 +218,11 @@ module Aws::SSOAdmin
     end
 
     class CreatePermissionSetRequest
+      attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor instance_arn: ::String
-      attr_accessor name: ::String
-      attr_accessor relay_state: ::String
       attr_accessor session_duration: ::String
+      attr_accessor relay_state: ::String
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
@@ -233,12 +233,12 @@ module Aws::SSOAdmin
     end
 
     class CreateTrustedTokenIssuerRequest
-      attr_accessor client_token: ::String
       attr_accessor instance_arn: ::String
       attr_accessor name: ::String
-      attr_accessor tags: ::Array[Types::Tag]
-      attr_accessor trusted_token_issuer_configuration: Types::TrustedTokenIssuerConfiguration
       attr_accessor trusted_token_issuer_type: ("OIDC_JWT")
+      attr_accessor trusted_token_issuer_configuration: Types::TrustedTokenIssuerConfiguration
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 
@@ -255,11 +255,11 @@ module Aws::SSOAdmin
 
     class DeleteAccountAssignmentRequest
       attr_accessor instance_arn: ::String
-      attr_accessor permission_set_arn: ::String
-      attr_accessor principal_id: ::String
-      attr_accessor principal_type: ("USER" | "GROUP")
       attr_accessor target_id: ::String
       attr_accessor target_type: ("AWS_ACCOUNT")
+      attr_accessor permission_set_arn: ::String
+      attr_accessor principal_type: ("USER" | "GROUP")
+      attr_accessor principal_id: ::String
       SENSITIVE: []
     end
 
@@ -356,8 +356,8 @@ module Aws::SSOAdmin
     end
 
     class DescribeAccountAssignmentCreationStatusRequest
-      attr_accessor account_assignment_creation_request_id: ::String
       attr_accessor instance_arn: ::String
+      attr_accessor account_assignment_creation_request_id: ::String
       SENSITIVE: []
     end
 
@@ -367,8 +367,8 @@ module Aws::SSOAdmin
     end
 
     class DescribeAccountAssignmentDeletionStatusRequest
-      attr_accessor account_assignment_deletion_request_id: ::String
       attr_accessor instance_arn: ::String
+      attr_accessor account_assignment_deletion_request_id: ::String
       SENSITIVE: []
     end
 
@@ -385,9 +385,9 @@ module Aws::SSOAdmin
     end
 
     class DescribeApplicationAssignmentResponse
-      attr_accessor application_arn: ::String
-      attr_accessor principal_id: ::String
       attr_accessor principal_type: ("USER" | "GROUP")
+      attr_accessor principal_id: ::String
+      attr_accessor application_arn: ::String
       SENSITIVE: []
     end
 
@@ -398,8 +398,8 @@ module Aws::SSOAdmin
 
     class DescribeApplicationProviderResponse
       attr_accessor application_provider_arn: ::String
-      attr_accessor display_data: Types::DisplayData
       attr_accessor federation_protocol: ("SAML" | "OAUTH")
+      attr_accessor display_data: Types::DisplayData
       attr_accessor resource_server_config: Types::ResourceServerConfig
       SENSITIVE: []
     end
@@ -410,15 +410,15 @@ module Aws::SSOAdmin
     end
 
     class DescribeApplicationResponse
-      attr_accessor application_account: ::String
       attr_accessor application_arn: ::String
       attr_accessor application_provider_arn: ::String
-      attr_accessor created_date: ::Time
-      attr_accessor description: ::String
-      attr_accessor instance_arn: ::String
       attr_accessor name: ::String
-      attr_accessor portal_options: Types::PortalOptions
+      attr_accessor application_account: ::String
+      attr_accessor instance_arn: ::String
       attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor portal_options: Types::PortalOptions
+      attr_accessor description: ::String
+      attr_accessor created_date: ::Time
       SENSITIVE: []
     end
 
@@ -428,9 +428,9 @@ module Aws::SSOAdmin
     end
 
     class DescribeInstanceAccessControlAttributeConfigurationResponse
-      attr_accessor instance_access_control_attribute_configuration: Types::InstanceAccessControlAttributeConfiguration
       attr_accessor status: ("ENABLED" | "CREATION_IN_PROGRESS" | "CREATION_FAILED")
       attr_accessor status_reason: ::String
+      attr_accessor instance_access_control_attribute_configuration: Types::InstanceAccessControlAttributeConfiguration
       SENSITIVE: []
     end
 
@@ -440,11 +440,11 @@ module Aws::SSOAdmin
     end
 
     class DescribeInstanceResponse
-      attr_accessor created_date: ::Time
-      attr_accessor identity_store_id: ::String
       attr_accessor instance_arn: ::String
-      attr_accessor name: ::String
+      attr_accessor identity_store_id: ::String
       attr_accessor owner_account_id: ::String
+      attr_accessor name: ::String
+      attr_accessor created_date: ::Time
       attr_accessor status: ("CREATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "ACTIVE")
       SENSITIVE: []
     end
@@ -477,17 +477,17 @@ module Aws::SSOAdmin
     end
 
     class DescribeTrustedTokenIssuerResponse
-      attr_accessor name: ::String
       attr_accessor trusted_token_issuer_arn: ::String
-      attr_accessor trusted_token_issuer_configuration: Types::TrustedTokenIssuerConfiguration
+      attr_accessor name: ::String
       attr_accessor trusted_token_issuer_type: ("OIDC_JWT")
+      attr_accessor trusted_token_issuer_configuration: Types::TrustedTokenIssuerConfiguration
       SENSITIVE: []
     end
 
     class DetachCustomerManagedPolicyReferenceFromPermissionSetRequest
-      attr_accessor customer_managed_policy_reference: Types::CustomerManagedPolicyReference
       attr_accessor instance_arn: ::String
       attr_accessor permission_set_arn: ::String
+      attr_accessor customer_managed_policy_reference: Types::CustomerManagedPolicyReference
       SENSITIVE: []
     end
 
@@ -496,8 +496,8 @@ module Aws::SSOAdmin
 
     class DetachManagedPolicyFromPermissionSetRequest
       attr_accessor instance_arn: ::String
-      attr_accessor managed_policy_arn: ::String
       attr_accessor permission_set_arn: ::String
+      attr_accessor managed_policy_arn: ::String
       SENSITIVE: []
     end
 
@@ -505,9 +505,9 @@ module Aws::SSOAdmin
     end
 
     class DisplayData
-      attr_accessor description: ::String
       attr_accessor display_name: ::String
       attr_accessor icon_url: ::String
+      attr_accessor description: ::String
       SENSITIVE: []
     end
 
@@ -518,8 +518,8 @@ module Aws::SSOAdmin
     end
 
     class GetApplicationAccessScopeResponse
-      attr_accessor authorized_targets: ::Array[::String]
       attr_accessor scope: ::String
+      attr_accessor authorized_targets: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -598,8 +598,8 @@ module Aws::SSOAdmin
     end
 
     class GrantItem
-      attr_accessor grant: Types::Grant
       attr_accessor grant_type: ("authorization_code" | "refresh_token" | "urn:ietf:params:oauth:grant-type:jwt-bearer" | "urn:ietf:params:oauth:grant-type:token-exchange")
+      attr_accessor grant: Types::Grant
       SENSITIVE: []
     end
 
@@ -614,11 +614,11 @@ module Aws::SSOAdmin
     end
 
     class InstanceMetadata
-      attr_accessor created_date: ::Time
-      attr_accessor identity_store_id: ::String
       attr_accessor instance_arn: ::String
-      attr_accessor name: ::String
+      attr_accessor identity_store_id: ::String
       attr_accessor owner_account_id: ::String
+      attr_accessor name: ::String
+      attr_accessor created_date: ::Time
       attr_accessor status: ("CREATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "ACTIVE")
       SENSITIVE: []
     end
@@ -634,10 +634,10 @@ module Aws::SSOAdmin
     end
 
     class ListAccountAssignmentCreationStatusRequest
-      attr_accessor filter: Types::OperationStatusFilter
       attr_accessor instance_arn: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor filter: Types::OperationStatusFilter
       SENSITIVE: []
     end
 
@@ -648,10 +648,10 @@ module Aws::SSOAdmin
     end
 
     class ListAccountAssignmentDeletionStatusRequest
-      attr_accessor filter: Types::OperationStatusFilter
       attr_accessor instance_arn: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor filter: Types::OperationStatusFilter
       SENSITIVE: []
     end
 
@@ -667,12 +667,12 @@ module Aws::SSOAdmin
     end
 
     class ListAccountAssignmentsForPrincipalRequest
-      attr_accessor filter: Types::ListAccountAssignmentsFilter
       attr_accessor instance_arn: ::String
-      attr_accessor max_results: ::Integer
-      attr_accessor next_token: ::String
       attr_accessor principal_id: ::String
       attr_accessor principal_type: ("USER" | "GROUP")
+      attr_accessor filter: Types::ListAccountAssignmentsFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
@@ -683,11 +683,11 @@ module Aws::SSOAdmin
     end
 
     class ListAccountAssignmentsRequest
-      attr_accessor account_id: ::String
       attr_accessor instance_arn: ::String
+      attr_accessor account_id: ::String
+      attr_accessor permission_set_arn: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
-      attr_accessor permission_set_arn: ::String
       SENSITIVE: []
     end
 
@@ -699,10 +699,10 @@ module Aws::SSOAdmin
 
     class ListAccountsForProvisionedPermissionSetRequest
       attr_accessor instance_arn: ::String
-      attr_accessor max_results: ::Integer
-      attr_accessor next_token: ::String
       attr_accessor permission_set_arn: ::String
       attr_accessor provisioning_status: ("LATEST_PERMISSION_SET_PROVISIONED" | "LATEST_PERMISSION_SET_NOT_PROVISIONED")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -720,8 +720,8 @@ module Aws::SSOAdmin
     end
 
     class ListApplicationAccessScopesResponse
-      attr_accessor next_token: ::String
       attr_accessor scopes: ::Array[Types::ScopeDetails]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -731,12 +731,12 @@ module Aws::SSOAdmin
     end
 
     class ListApplicationAssignmentsForPrincipalRequest
-      attr_accessor filter: Types::ListApplicationAssignmentsFilter
       attr_accessor instance_arn: ::String
-      attr_accessor max_results: ::Integer
-      attr_accessor next_token: ::String
       attr_accessor principal_id: ::String
       attr_accessor principal_type: ("USER" | "GROUP")
+      attr_accessor filter: Types::ListApplicationAssignmentsFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
@@ -802,10 +802,10 @@ module Aws::SSOAdmin
     end
 
     class ListApplicationsRequest
-      attr_accessor filter: Types::ListApplicationsFilter
       attr_accessor instance_arn: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor filter: Types::ListApplicationsFilter
       SENSITIVE: []
     end
 
@@ -817,9 +817,9 @@ module Aws::SSOAdmin
 
     class ListCustomerManagedPolicyReferencesInPermissionSetRequest
       attr_accessor instance_arn: ::String
+      attr_accessor permission_set_arn: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
-      attr_accessor permission_set_arn: ::String
       SENSITIVE: []
     end
 
@@ -843,9 +843,9 @@ module Aws::SSOAdmin
 
     class ListManagedPoliciesInPermissionSetRequest
       attr_accessor instance_arn: ::String
+      attr_accessor permission_set_arn: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
-      attr_accessor permission_set_arn: ::String
       SENSITIVE: []
     end
 
@@ -856,25 +856,25 @@ module Aws::SSOAdmin
     end
 
     class ListPermissionSetProvisioningStatusRequest
-      attr_accessor filter: Types::OperationStatusFilter
       attr_accessor instance_arn: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor filter: Types::OperationStatusFilter
       SENSITIVE: []
     end
 
     class ListPermissionSetProvisioningStatusResponse
-      attr_accessor next_token: ::String
       attr_accessor permission_sets_provisioning_status: ::Array[Types::PermissionSetProvisioningStatusMetadata]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class ListPermissionSetsProvisionedToAccountRequest
-      attr_accessor account_id: ::String
       attr_accessor instance_arn: ::String
+      attr_accessor account_id: ::String
+      attr_accessor provisioning_status: ("LATEST_PERMISSION_SET_PROVISIONED" | "LATEST_PERMISSION_SET_NOT_PROVISIONED")
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
-      attr_accessor provisioning_status: ("LATEST_PERMISSION_SET_PROVISIONED" | "LATEST_PERMISSION_SET_NOT_PROVISIONED")
       SENSITIVE: []
     end
 
@@ -886,27 +886,27 @@ module Aws::SSOAdmin
 
     class ListPermissionSetsRequest
       attr_accessor instance_arn: ::String
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListPermissionSetsResponse
-      attr_accessor next_token: ::String
       attr_accessor permission_sets: ::Array[::String]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class ListTagsForResourceRequest
       attr_accessor instance_arn: ::String
-      attr_accessor next_token: ::String
       attr_accessor resource_arn: ::String
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class ListTagsForResourceResponse
-      attr_accessor next_token: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -918,15 +918,15 @@ module Aws::SSOAdmin
     end
 
     class ListTrustedTokenIssuersResponse
-      attr_accessor next_token: ::String
       attr_accessor trusted_token_issuers: ::Array[Types::TrustedTokenIssuerMetadata]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class OidcJwtConfiguration
+      attr_accessor issuer_url: ::String
       attr_accessor claim_attribute_path: ::String
       attr_accessor identity_store_attribute_path: ::String
-      attr_accessor issuer_url: ::String
       attr_accessor jwks_retrieval_option: ("OPEN_ID_DISCOVERY")
       SENSITIVE: []
     end
@@ -944,29 +944,29 @@ module Aws::SSOAdmin
     end
 
     class PermissionSet
-      attr_accessor created_date: ::Time
-      attr_accessor description: ::String
       attr_accessor name: ::String
       attr_accessor permission_set_arn: ::String
-      attr_accessor relay_state: ::String
+      attr_accessor description: ::String
+      attr_accessor created_date: ::Time
       attr_accessor session_duration: ::String
+      attr_accessor relay_state: ::String
       SENSITIVE: []
     end
 
     class PermissionSetProvisioningStatus
-      attr_accessor account_id: ::String
-      attr_accessor created_date: ::Time
-      attr_accessor failure_reason: ::String
-      attr_accessor permission_set_arn: ::String
-      attr_accessor request_id: ::String
       attr_accessor status: ("IN_PROGRESS" | "FAILED" | "SUCCEEDED")
+      attr_accessor request_id: ::String
+      attr_accessor account_id: ::String
+      attr_accessor permission_set_arn: ::String
+      attr_accessor failure_reason: ::String
+      attr_accessor created_date: ::Time
       SENSITIVE: []
     end
 
     class PermissionSetProvisioningStatusMetadata
-      attr_accessor created_date: ::Time
-      attr_accessor request_id: ::String
       attr_accessor status: ("IN_PROGRESS" | "FAILED" | "SUCCEEDED")
+      attr_accessor request_id: ::String
+      attr_accessor created_date: ::Time
       SENSITIVE: []
     end
 
@@ -996,9 +996,9 @@ module Aws::SSOAdmin
     end
 
     class PutApplicationAccessScopeRequest
-      attr_accessor application_arn: ::String
-      attr_accessor authorized_targets: ::Array[::String]
       attr_accessor scope: ::String
+      attr_accessor authorized_targets: ::Array[::String]
+      attr_accessor application_arn: ::String
       SENSITIVE: []
     end
 
@@ -1013,22 +1013,22 @@ module Aws::SSOAdmin
 
     class PutApplicationAuthenticationMethodRequest
       attr_accessor application_arn: ::String
-      attr_accessor authentication_method: Types::AuthenticationMethod
       attr_accessor authentication_method_type: ("IAM")
+      attr_accessor authentication_method: Types::AuthenticationMethod
       SENSITIVE: []
     end
 
     class PutApplicationGrantRequest
       attr_accessor application_arn: ::String
-      attr_accessor grant: Types::Grant
       attr_accessor grant_type: ("authorization_code" | "refresh_token" | "urn:ietf:params:oauth:grant-type:jwt-bearer" | "urn:ietf:params:oauth:grant-type:token-exchange")
+      attr_accessor grant: Types::Grant
       SENSITIVE: []
     end
 
     class PutInlinePolicyToPermissionSetRequest
-      attr_accessor inline_policy: ::String
       attr_accessor instance_arn: ::String
       attr_accessor permission_set_arn: ::String
+      attr_accessor inline_policy: ::String
       SENSITIVE: []
     end
 
@@ -1059,14 +1059,14 @@ module Aws::SSOAdmin
     end
 
     class ResourceServerScopeDetails
-      attr_accessor detailed_title: ::String
       attr_accessor long_description: ::String
+      attr_accessor detailed_title: ::String
       SENSITIVE: []
     end
 
     class ScopeDetails
-      attr_accessor authorized_targets: ::Array[::String]
       attr_accessor scope: ::String
+      attr_accessor authorized_targets: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1076,8 +1076,8 @@ module Aws::SSOAdmin
     end
 
     class SignInOptions
-      attr_accessor application_url: ::String
       attr_accessor origin: ("IDENTITY_CENTER" | "APPLICATION")
+      attr_accessor application_url: ::String
       SENSITIVE: []
     end
 
@@ -1117,8 +1117,8 @@ module Aws::SSOAdmin
     end
 
     class TrustedTokenIssuerMetadata
-      attr_accessor name: ::String
       attr_accessor trusted_token_issuer_arn: ::String
+      attr_accessor name: ::String
       attr_accessor trusted_token_issuer_type: ("OIDC_JWT")
       SENSITIVE: []
     end
@@ -1151,10 +1151,10 @@ module Aws::SSOAdmin
 
     class UpdateApplicationRequest
       attr_accessor application_arn: ::String
-      attr_accessor description: ::String
       attr_accessor name: ::String
-      attr_accessor portal_options: Types::UpdateApplicationPortalOptions
+      attr_accessor description: ::String
       attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor portal_options: Types::UpdateApplicationPortalOptions
       SENSITIVE: []
     end
 
@@ -1162,8 +1162,8 @@ module Aws::SSOAdmin
     end
 
     class UpdateInstanceAccessControlAttributeConfigurationRequest
-      attr_accessor instance_access_control_attribute_configuration: Types::InstanceAccessControlAttributeConfiguration
       attr_accessor instance_arn: ::String
+      attr_accessor instance_access_control_attribute_configuration: Types::InstanceAccessControlAttributeConfiguration
       SENSITIVE: []
     end
 
@@ -1171,8 +1171,8 @@ module Aws::SSOAdmin
     end
 
     class UpdateInstanceRequest
-      attr_accessor instance_arn: ::String
       attr_accessor name: ::String
+      attr_accessor instance_arn: ::String
       SENSITIVE: []
     end
 
@@ -1180,11 +1180,11 @@ module Aws::SSOAdmin
     end
 
     class UpdatePermissionSetRequest
-      attr_accessor description: ::String
       attr_accessor instance_arn: ::String
       attr_accessor permission_set_arn: ::String
-      attr_accessor relay_state: ::String
+      attr_accessor description: ::String
       attr_accessor session_duration: ::String
+      attr_accessor relay_state: ::String
       SENSITIVE: []
     end
 
@@ -1192,8 +1192,8 @@ module Aws::SSOAdmin
     end
 
     class UpdateTrustedTokenIssuerRequest
-      attr_accessor name: ::String
       attr_accessor trusted_token_issuer_arn: ::String
+      attr_accessor name: ::String
       attr_accessor trusted_token_issuer_configuration: Types::TrustedTokenIssuerUpdateConfiguration
       SENSITIVE: []
     end

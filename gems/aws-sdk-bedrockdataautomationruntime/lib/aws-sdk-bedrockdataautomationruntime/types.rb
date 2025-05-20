@@ -24,6 +24,20 @@ module Aws::BedrockDataAutomationRuntime
       include Aws::Structure
     end
 
+    # Config containing asset processing related knobs for all modalities
+    #
+    # @!attribute [rw] video
+    #   Video asset processing configuration
+    #   @return [Types::VideoAssetProcessingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-runtime-2024-06-13/AssetProcessingConfiguration AWS API Documentation
+    #
+    class AssetProcessingConfiguration < Struct.new(
+      :video)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Structure for single blueprint entity.
     #
     # @!attribute [rw] blueprint_arn
@@ -149,10 +163,15 @@ module Aws::BedrockDataAutomationRuntime
     #   S3 uri.
     #   @return [String]
     #
+    # @!attribute [rw] asset_processing_configuration
+    #   Asset processing configuration
+    #   @return [Types::AssetProcessingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-runtime-2024-06-13/InputConfiguration AWS API Documentation
     #
     class InputConfiguration < Struct.new(
-      :s3_uri)
+      :s3_uri,
+      :asset_processing_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -374,6 +393,25 @@ module Aws::BedrockDataAutomationRuntime
       include Aws::Structure
     end
 
+    # Timestamp segment
+    #
+    # @!attribute [rw] start_time_millis
+    #   Start timestamp in milliseconds
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_time_millis
+    #   End timestamp in milliseconds
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-runtime-2024-06-13/TimestampSegment AWS API Documentation
+    #
+    class TimestampSegment < Struct.new(
+      :start_time_millis,
+      :end_time_millis)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   ARN of a taggable resource
     #   @return [String]
@@ -407,6 +445,41 @@ module Aws::BedrockDataAutomationRuntime
       :message)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Video asset processing configuration
+    #
+    # @!attribute [rw] segment_configuration
+    #   Delimits the segment of the input that will be processed
+    #   @return [Types::VideoSegmentConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-runtime-2024-06-13/VideoAssetProcessingConfiguration AWS API Documentation
+    #
+    class VideoAssetProcessingConfiguration < Struct.new(
+      :segment_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Delimits the segment of the input that will be processed
+    #
+    # @note VideoSegmentConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] timestamp_segment
+    #   Timestamp segment
+    #   @return [Types::TimestampSegment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-runtime-2024-06-13/VideoSegmentConfiguration AWS API Documentation
+    #
+    class VideoSegmentConfiguration < Struct.new(
+      :timestamp_segment,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class TimestampSegment < VideoSegmentConfiguration; end
+      class Unknown < VideoSegmentConfiguration; end
     end
 
   end

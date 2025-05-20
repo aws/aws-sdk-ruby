@@ -470,7 +470,9 @@ module Aws
                                map_long_varchar_as: ("wstring" | "clob" | "nclob")?,
                                database_mode: ("default" | "babelfish")?,
                                babelfish_database_name: ::String?,
-                               disable_unicode_source_filter: bool?
+                               disable_unicode_source_filter: bool?,
+                               service_access_role_arn: ::String?,
+                               authentication_method: ("password" | "iam")?
                              },
                              ?my_sql_settings: {
                                after_connect_script: ::String?,
@@ -487,7 +489,9 @@ module Aws
                                username: ::String?,
                                secrets_manager_access_role_arn: ::String?,
                                secrets_manager_secret_id: ::String?,
-                               execute_timeout: ::Integer?
+                               execute_timeout: ::Integer?,
+                               service_access_role_arn: ::String?,
+                               authentication_method: ("password" | "iam")?
                              },
                              ?oracle_settings: {
                                add_supplemental_logging: bool?,
@@ -2120,7 +2124,9 @@ module Aws
                                map_long_varchar_as: ("wstring" | "clob" | "nclob")?,
                                database_mode: ("default" | "babelfish")?,
                                babelfish_database_name: ::String?,
-                               disable_unicode_source_filter: bool?
+                               disable_unicode_source_filter: bool?,
+                               service_access_role_arn: ::String?,
+                               authentication_method: ("password" | "iam")?
                              },
                              ?my_sql_settings: {
                                after_connect_script: ::String?,
@@ -2137,7 +2143,9 @@ module Aws
                                username: ::String?,
                                secrets_manager_access_role_arn: ::String?,
                                secrets_manager_secret_id: ::String?,
-                               execute_timeout: ::Integer?
+                               execute_timeout: ::Integer?,
+                               service_access_role_arn: ::String?,
+                               authentication_method: ("password" | "iam")?
                              },
                              ?oracle_settings: {
                                add_supplemental_logging: bool?,

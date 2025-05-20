@@ -150,7 +150,7 @@ module Aws::CodeGuruReviewer
     AnalysisTypes.member = Shapes::ShapeRef.new(shape: AnalysisType)
 
     AssociateRepositoryRequest.add_member(:repository, Shapes::ShapeRef.new(shape: Repository, required: true, location_name: "Repository"))
-    AssociateRepositoryRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    AssociateRepositoryRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     AssociateRepositoryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     AssociateRepositoryRequest.add_member(:kms_key_details, Shapes::ShapeRef.new(shape: KMSKeyDetails, location_name: "KMSKeyDetails"))
     AssociateRepositoryRequest.struct_class = Types::AssociateRepositoryRequest
@@ -219,7 +219,7 @@ module Aws::CodeGuruReviewer
     CreateCodeReviewRequest.add_member(:name, Shapes::ShapeRef.new(shape: CodeReviewName, required: true, location_name: "Name"))
     CreateCodeReviewRequest.add_member(:repository_association_arn, Shapes::ShapeRef.new(shape: AssociationArn, required: true, location_name: "RepositoryAssociationArn"))
     CreateCodeReviewRequest.add_member(:type, Shapes::ShapeRef.new(shape: CodeReviewType, required: true, location_name: "Type"))
-    CreateCodeReviewRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateCodeReviewRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateCodeReviewRequest.struct_class = Types::CreateCodeReviewRequest
 
     CreateCodeReviewResponse.add_member(:code_review, Shapes::ShapeRef.new(shape: CodeReview, location_name: "CodeReview"))

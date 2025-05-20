@@ -27,6 +27,7 @@ module Aws::SSM
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {AccessDeniedException}
   # * {AlreadyExistsException}
   # * {AssociatedInstances}
   # * {AssociationAlreadyExists}
@@ -145,11 +146,13 @@ module Aws::SSM
   # * {ResourcePolicyInvalidParameterException}
   # * {ResourcePolicyLimitExceededException}
   # * {ResourcePolicyNotFoundException}
+  # * {ServiceQuotaExceededException}
   # * {ServiceSettingNotFound}
   # * {StatusUnchanged}
   # * {SubTypeCountLimitExceededException}
   # * {TargetInUseException}
   # * {TargetNotConnected}
+  # * {ThrottlingException}
   # * {TooManyTagsError}
   # * {TooManyUpdates}
   # * {TotalSizeLimitExceededException}
@@ -168,6 +171,21 @@ module Aws::SSM
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class AccessDeniedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::AccessDeniedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
 
     class AlreadyExistsException < ServiceError
 
@@ -1954,6 +1972,41 @@ module Aws::SSM
       end
     end
 
+    class ServiceQuotaExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::ServiceQuotaExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def resource_id
+        @data[:resource_id]
+      end
+
+      # @return [String]
+      def resource_type
+        @data[:resource_type]
+      end
+
+      # @return [String]
+      def quota_code
+        @data[:quota_code]
+      end
+
+      # @return [String]
+      def service_code
+        @data[:service_code]
+      end
+    end
+
     class ServiceSettingNotFound < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -2021,6 +2074,31 @@ module Aws::SSM
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class ThrottlingException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::ThrottlingException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def quota_code
+        @data[:quota_code]
+      end
+
+      # @return [String]
+      def service_code
+        @data[:service_code]
       end
     end
 
