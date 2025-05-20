@@ -266,7 +266,24 @@ module Aws::Neptune
     #   @return [Integer]
     #
     # @!attribute [rw] storage_type
-    #   The storage type for the DB cluster.
+    #   The pending change in storage type for the DB cluster.   Valid
+    #   Values:
+    #
+    #   * <b> <code>standard</code> </b>   –   ( *the default* ) Configures
+    #     cost-effective database storage for applications with moderate to
+    #     small I/O usage.
+    #
+    #   * <b> <code>iopt1</code> </b>   –   Enables [I/O-Optimized
+    #     storage][1] that's designed to meet the needs of I/O-intensive
+    #     graph workloads that require predictable pricing with low I/O
+    #     latency and consistent I/O throughput.
+    #
+    #     Neptune I/O-Optimized storage is only available starting with
+    #     engine release 1.3.0.0.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/storage-types.html#provisioned-iops-storage
     #   @return [String]
     #
     # @!attribute [rw] allocated_storage
@@ -278,7 +295,7 @@ module Aws::Neptune
     #
     # @!attribute [rw] iops
     #   The Provisioned IOPS (I/O operations per second) value. This setting
-    #   is only for non-Aurora Multi-AZ DB clusters.
+    #   is only for Multi-AZ DB clusters.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ClusterPendingModifiedValues AWS API Documentation
@@ -747,7 +764,7 @@ module Aws::Neptune
     #   The version number of the database engine to use for the new DB
     #   cluster.
     #
-    #   Example: `1.0.2.1`
+    #   Example: `1.2.1.0`
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -904,25 +921,26 @@ module Aws::Neptune
     #   @return [String]
     #
     # @!attribute [rw] storage_type
-    #   The storage type to associate with the DB cluster.
+    #   The storage type for the new DB cluster.
     #
     #   Valid Values:
     #
-    #   * `standard | iopt1`
+    #   * <b> <code>standard</code> </b>   –   ( *the default* ) Configures
+    #     cost-effective database storage for applications with moderate to
+    #     small I/O usage. When set to `standard`, the storage type is not
+    #     returned in the response.
     #
-    #   ^
+    #   * <b> <code>iopt1</code> </b>   –   Enables [I/O-Optimized
+    #     storage][1] that's designed to meet the needs of I/O-intensive
+    #     graph workloads that require predictable pricing with low I/O
+    #     latency and consistent I/O throughput.
     #
-    #   Default:
+    #     Neptune I/O-Optimized storage is only available starting with
+    #     engine release 1.3.0.0.
     #
-    #   * `standard`
     #
-    #   ^
     #
-    #   <note markdown="1"> When you create a Neptune cluster with the storage type set to
-    #   `iopt1`, the storage type is returned in the response. The storage
-    #   type isn't returned when you set it to `standard`.
-    #
-    #    </note>
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/storage-types.html#provisioned-iops-storage
     #   @return [String]
     #
     # @!attribute [rw] source_region
@@ -1294,9 +1312,8 @@ module Aws::Neptune
     #   @return [String]
     #
     # @!attribute [rw] storage_type
-    #   Specifies the storage type to be associated with the DB instance.
-    #
-    #   Not applicable. Storage is managed by the DB Cluster.
+    #   Not applicable. In Neptune the storage type is managed at the DB
+    #   Cluster level.
     #   @return [String]
     #
     # @!attribute [rw] tde_credential_arn
@@ -1980,7 +1997,25 @@ module Aws::Neptune
     #   @return [Time]
     #
     # @!attribute [rw] storage_type
-    #   The storage type associated with the DB cluster.
+    #   The storage type used by the DB cluster.
+    #
+    #   Valid Values:
+    #
+    #   * <b> <code>standard</code> </b>   –   ( *the default* ) Provides
+    #     cost-effective database storage for applications with moderate to
+    #     small I/O usage.
+    #
+    #   * <b> <code>iopt1</code> </b>   –   Enables [I/O-Optimized
+    #     storage][1] that's designed to meet the needs of I/O-intensive
+    #     graph workloads that require predictable pricing with low I/O
+    #     latency and consistent I/O throughput.
+    #
+    #     Neptune I/O-Optimized storage is only available starting with
+    #     engine release 1.3.0.0.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/storage-types.html#provisioned-iops-storage
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBCluster AWS API Documentation
@@ -2133,7 +2168,7 @@ module Aws::Neptune
     class DBClusterEndpointAlreadyExistsFault < Aws::EmptyStructure; end
 
     # @!attribute [rw] marker
-    #   An optional pagination token provided by a previous
+    #   n optional pagination token provided by a previous
     #   `DescribeDBClusterEndpoints` request. If this parameter is
     #   specified, the response includes only records beyond the marker, up
     #   to the value specified by `MaxRecords`.
@@ -2905,7 +2940,7 @@ module Aws::Neptune
     #   @return [Array<Types::DBInstanceStatusInfo>]
     #
     # @!attribute [rw] storage_type
-    #   Specifies the storage type associated with DB instance.
+    #   Specifies the storage type associated with the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] tde_credential_arn
@@ -5211,11 +5246,32 @@ module Aws::Neptune
     #   that you want to promote to primary for the global database.
     #   @return [String]
     #
+    # @!attribute [rw] allow_data_loss
+    #   Specifies whether to allow data loss for this global database
+    #   cluster operation. Allowing data loss triggers a global failover
+    #   operation.
+    #
+    #   If you don't specify `AllowDataLoss`, the global database cluster
+    #   operation defaults to a switchover.
+    #
+    #   Constraints:Can't be specified together with the `Switchover`
+    #   parameter.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] switchover
+    #   Specifies whether to switch over this global database cluster.
+    #
+    #   Constraints:Can't be specified together with the `AllowDataLoss`
+    #   parameter.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/FailoverGlobalClusterMessage AWS API Documentation
     #
     class FailoverGlobalClusterMessage < Struct.new(
       :global_cluster_identifier,
-      :target_db_cluster_identifier)
+      :target_db_cluster_identifier,
+      :allow_data_loss,
+      :switchover)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5233,6 +5289,62 @@ module Aws::Neptune
     #
     class FailoverGlobalClusterResult < Struct.new(
       :global_cluster)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the state of scheduled or in-process operations on a global
+    # cluster (Neptune global database). This data type is empty unless a
+    # switchover or failover operation is scheduled or is in progress on the
+    # Neptune global database.
+    #
+    # @!attribute [rw] status
+    #   The current status of the global cluster. Possible values are as
+    #   follows:
+    #
+    #   * pending – The service received a request to switch over or fail
+    #     over the global cluster. The global cluster's primary DB cluster
+    #     and the specified secondary DB cluster are being verified before
+    #     the operation starts.
+    #
+    #   * failing-over – Neptune is promoting the chosen secondary Neptune
+    #     DB cluster to become the new primary DB cluster to fail over the
+    #     global cluster.
+    #
+    #   * cancelling – The request to switch over or fail over the global
+    #     cluster was cancelled and the primary Neptune DB cluster and the
+    #     selected secondary Neptune DB cluster are returning to their
+    #     previous states.
+    #
+    #   * switching-over – This status covers the range of Neptune internal
+    #     operations that take place during the switchover process, such as
+    #     demoting the primary Neptune DB cluster, promoting the secondary
+    #     Neptune DB cluster, and synchronizing replicas.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_db_cluster_arn
+    #   The Amazon Resource Name (ARN) of the Neptune DB cluster that is
+    #   currently being demoted, and which is associated with this state.
+    #   @return [String]
+    #
+    # @!attribute [rw] to_db_cluster_arn
+    #   The Amazon Resource Name (ARN) of the Neptune DB cluster that is
+    #   currently being promoted, and which is associated with this state.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_data_loss_allowed
+    #   Indicates whether the operation is a global switchover or a global
+    #   failover. If data loss is allowed, then the operation is a global
+    #   failover. Otherwise, it's a switchover.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/FailoverState AWS API Documentation
+    #
+    class FailoverState < Struct.new(
+      :status,
+      :from_db_cluster_arn,
+      :to_db_cluster_arn,
+      :is_data_loss_allowed)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5304,6 +5416,14 @@ module Aws::Neptune
     #   that are part of the global database.
     #   @return [Array<Types::GlobalClusterMember>]
     #
+    # @!attribute [rw] failover_state
+    #   A data object containing all properties for the current state of an
+    #   in-process or pending switchover or failover process for this global
+    #   cluster (Neptune global database). This object is empty unless the
+    #   `SwitchoverGlobalCluster` or `FailoverGlobalCluster` operation was
+    #   called on this global cluster.
+    #   @return [Types::FailoverState]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/GlobalCluster AWS API Documentation
     #
     class GlobalCluster < Struct.new(
@@ -5315,7 +5435,8 @@ module Aws::Neptune
       :engine_version,
       :storage_encrypted,
       :deletion_protection,
-      :global_cluster_members)
+      :global_cluster_members,
+      :failover_state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5858,15 +5979,21 @@ module Aws::Neptune
     #
     #   Valid Values:
     #
-    #   * `standard | iopt1`
+    #   * <b> <code>standard</code> </b>   –   ( *the default* ) Configures
+    #     cost-effective database storage for applications with moderate to
+    #     small I/O usage.
     #
-    #   ^
+    #   * <b> <code>iopt1</code> </b>   –   Enables [I/O-Optimized
+    #     storage][1] that's designed to meet the needs of I/O-intensive
+    #     graph workloads that require predictable pricing with low I/O
+    #     latency and consistent I/O throughput.
     #
-    #   Default:
+    #     Neptune I/O-Optimized storage is only available starting with
+    #     engine release 1.3.0.0.
     #
-    #   * `standard`
     #
-    #   ^
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/storage-types.html#provisioned-iops-storage
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ModifyDBClusterMessage AWS API Documentation
@@ -6210,7 +6337,8 @@ module Aws::Neptune
     #   @return [String]
     #
     # @!attribute [rw] storage_type
-    #   Not supported.
+    #   Not applicable. In Neptune the storage type is managed at the DB
+    #   Cluster level.
     #   @return [String]
     #
     # @!attribute [rw] tde_credential_arn
@@ -6667,7 +6795,8 @@ module Aws::Neptune
     #   @return [Boolean]
     #
     # @!attribute [rw] storage_type
-    #   Indicates the storage type for a DB instance.
+    #   Not applicable. In Neptune the storage type is managed at the DB
+    #   Cluster level.
     #   @return [String]
     #
     # @!attribute [rw] supports_iops
@@ -6982,7 +7111,8 @@ module Aws::Neptune
     #   @return [String]
     #
     # @!attribute [rw] storage_type
-    #   Specifies the storage type to be associated with the DB instance.
+    #   Not applicable. In Neptune the storage type is managed at the DB
+    #   Cluster level.
     #   @return [String]
     #
     # @!attribute [rw] ca_certificate_identifier
@@ -7961,6 +8091,45 @@ module Aws::Neptune
     #
     class SubscriptionNotFoundFault < Aws::EmptyStructure; end
 
+    # @!attribute [rw] global_cluster_identifier
+    #   The identifier of the global database cluster to switch over. This
+    #   parameter isn't case-sensitive.
+    #
+    #   Constraints: Must match the identifier of an existing global
+    #   database cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_db_cluster_identifier
+    #   The Amazon Resource Name (ARN) of the secondary Neptune DB cluster
+    #   that you want to promote to primary for the global database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/SwitchoverGlobalClusterMessage AWS API Documentation
+    #
+    class SwitchoverGlobalClusterMessage < Struct.new(
+      :global_cluster_identifier,
+      :target_db_cluster_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_cluster
+    #   Contains the details of an Amazon Neptune global database.
+    #
+    #   This data type is used as a response element for the
+    #   CreateGlobalCluster, DescribeGlobalClusters, ModifyGlobalCluster,
+    #   DeleteGlobalCluster, FailoverGlobalCluster, and
+    #   RemoveFromGlobalCluster actions.
+    #   @return [Types::GlobalCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/SwitchoverGlobalClusterResult AWS API Documentation
+    #
+    class SwitchoverGlobalClusterResult < Struct.new(
+      :global_cluster)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Metadata assigned to an Amazon Neptune resource consisting of a
     # key-value pair.
     #
@@ -8078,28 +8247,27 @@ module Aws::Neptune
       include Aws::Structure
     end
 
-    # Information about valid modifications that you can make to your DB
-    # instance.
-    #
-    # Contains the result of a successful call to the
-    # DescribeValidDBInstanceModifications action.
+    # Not applicable. In Neptune the storage type is managed at the DB
+    # Cluster level.
     #
     # @!attribute [rw] storage_type
-    #   The valid storage types for your DB instance. For example, gp2, io1.
+    #   Not applicable. In Neptune the storage type is managed at the DB
+    #   Cluster level.
     #   @return [String]
     #
     # @!attribute [rw] storage_size
-    #   The valid range of storage in gibibytes. For example, 100 to 16384.
+    #   Not applicable. In Neptune the storage type is managed at the DB
+    #   Cluster level.
     #   @return [Array<Types::Range>]
     #
     # @!attribute [rw] provisioned_iops
-    #   The valid range of provisioned IOPS. For example, 1000-20000.
+    #   Not applicable. In Neptune the storage type is managed at the DB
+    #   Cluster level.
     #   @return [Array<Types::Range>]
     #
     # @!attribute [rw] iops_to_storage_ratio
-    #   The valid range of Provisioned IOPS to gibibytes of storage
-    #   multiplier. For example, 3-10, which means that provisioned IOPS can
-    #   be between 3 and 10 times storage.
+    #   Not applicable. In Neptune the storage type is managed at the DB
+    #   Cluster level.
     #   @return [Array<Types::DoubleRange>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ValidStorageOptions AWS API Documentation

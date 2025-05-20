@@ -312,6 +312,20 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The details of the alarm to monitor during the AMI update.
+    #
+    # @!attribute [rw] alarm_name
+    #   The name of the alarm.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AlarmDetails AWS API Documentation
+    #
+    class AlarmDetails < Struct.new(
+      :alarm_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the training algorithm to use in a [CreateTrainingJob][1]
     # request.
     #
@@ -2116,12 +2130,13 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # <note markdown="1"> This data type is intended for use exclusively by SageMaker Canvas and
+    # <note markdown="1"> This data type is intended for use exclusively by
+    # SageMaker Canvas and
     # cannot be used in other contexts at the moment.
     #
     #  </note>
     #
-    # Specifies the compute configuration for an AutoML job V2.
+    #  Specifies the compute configuration for an AutoML job V2.
     #
     # @!attribute [rw] emr_serverless_compute_config
     #   The configuration for using [ EMR Serverless][1] to run the AutoML
@@ -3534,6 +3549,29 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The configuration of the size measurements of the AMI update. Using
+    # this configuration, you can specify whether SageMaker should update
+    # your instance group by an amount or percentage of instances.
+    #
+    # @!attribute [rw] type
+    #   Specifies whether SageMaker should process the update by amount or
+    #   percentage of instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Specifies the amount or percentage of instances SageMaker updates at
+    #   a time.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CapacitySizeConfig AWS API Documentation
+    #
+    class CapacitySizeConfig < Struct.new(
+      :type,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration specifying how to treat different headers. If no headers
     # are specified Amazon SageMaker AI will by default base64 encode when
     # capturing the data.
@@ -4294,6 +4332,11 @@ module Aws::SageMaker
     #   HyperPod cluster.
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] scheduled_update_config
+    #   The configuration object of the schedule that SageMaker follows when
+    #   updating the AMI.
+    #   @return [Types::ScheduledUpdateConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterInstanceGroupDetails AWS API Documentation
     #
     class ClusterInstanceGroupDetails < Struct.new(
@@ -4309,7 +4352,8 @@ module Aws::SageMaker
       :status,
       :training_plan_arn,
       :training_plan_status,
-      :override_vpc_config)
+      :override_vpc_config,
+      :scheduled_update_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4414,6 +4458,11 @@ module Aws::SageMaker
     #   [5]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-prerequisites.html#sagemaker-hyperpod-prerequisites-optional-vpc
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] scheduled_update_config
+    #   The configuration object of the schedule that SageMaker uses to
+    #   update the AMI.
+    #   @return [Types::ScheduledUpdateConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterInstanceGroupSpecification AWS API Documentation
     #
     class ClusterInstanceGroupSpecification < Struct.new(
@@ -4426,7 +4475,8 @@ module Aws::SageMaker
       :instance_storage_configs,
       :on_start_deep_health_checks,
       :training_plan_arn,
-      :override_vpc_config)
+      :override_vpc_config,
+      :scheduled_update_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4559,6 +4609,10 @@ module Aws::SageMaker
     #   The time when the instance is launched.
     #   @return [Time]
     #
+    # @!attribute [rw] last_software_update_time
+    #   The time when the cluster was last updated.
+    #   @return [Time]
+    #
     # @!attribute [rw] life_cycle_config
     #   The LifeCycle configuration applied to the instance.
     #   @return [Types::ClusterLifeCycleConfig]
@@ -4608,6 +4662,7 @@ module Aws::SageMaker
       :instance_status,
       :instance_type,
       :launch_time,
+      :last_software_update_time,
       :life_cycle_config,
       :override_vpc_config,
       :threads_per_core,
@@ -4639,6 +4694,11 @@ module Aws::SageMaker
     #   The time when the instance is launched.
     #   @return [Time]
     #
+    # @!attribute [rw] last_software_update_time
+    #   The time when SageMaker last updated the software of the instances
+    #   in the cluster.
+    #   @return [Time]
+    #
     # @!attribute [rw] instance_status
     #   The status of the instance.
     #   @return [Types::ClusterInstanceStatusDetails]
@@ -4650,6 +4710,7 @@ module Aws::SageMaker
       :instance_id,
       :instance_type,
       :launch_time,
+      :last_software_update_time,
       :instance_status)
       SENSITIVE = []
       include Aws::Structure
@@ -9951,6 +10012,13 @@ module Aws::SageMaker
     # @!attribute [rw] environment
     #   The environment variables to set in the Docker container. Up to 100
     #   key and values entries in the map are supported.
+    #
+    #   Do not include any security-sensitive information including account
+    #   access IDs, secrets, or tokens in any environment fields. As part of
+    #   the shared responsibility model, you are responsible for any
+    #   potential exposure, unauthorized access, or compromise of your
+    #   sensitive data if caused by security-sensitive information included
+    #   in the request environment variable or plain text fields.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] network_config
@@ -9969,6 +10037,13 @@ module Aws::SageMaker
     #   (Optional) An array of key-value pairs. For more information, see
     #   [Using Cost Allocation Tags][1] in the *Amazon Web Services Billing
     #   and Cost Management User Guide*.
+    #
+    #   Do not include any security-sensitive information including account
+    #   access IDs, secrets, or tokens in any tags. As part of the shared
+    #   responsibility model, you are responsible for any potential
+    #   exposure, unauthorized access, or compromise of your sensitive data
+    #   if caused by security-sensitive information included in the request
+    #   tag variable or plain text fields.
     #
     #
     #
@@ -10196,9 +10271,12 @@ module Aws::SageMaker
     #   256 characters, as specified by the `Length Constraint`.
     #
     #   Do not include any security-sensitive information including account
-    #   access IDs, secrets or tokens in any hyperparameter field. If the
-    #   use of security-sensitive credentials are detected, SageMaker will
-    #   reject your training job request and return an exception error.
+    #   access IDs, secrets, or tokens in any hyperparameter fields. As part
+    #   of the shared responsibility model, you are responsible for any
+    #   potential exposure, unauthorized access, or compromise of your
+    #   sensitive data if caused by any security-sensitive information
+    #   included in the request hyperparameter variable or plain text
+    #   fields.
     #
     #
     #
@@ -10310,6 +10388,13 @@ module Aws::SageMaker
     #   purpose, owner, or environment. For more information, see [Tagging
     #   Amazon Web Services Resources][1].
     #
+    #   Do not include any security-sensitive information including account
+    #   access IDs, secrets, or tokens in any tags. As part of the shared
+    #   responsibility model, you are responsible for any potential
+    #   exposure, unauthorized access, or compromise of your sensitive data
+    #   if caused by any security-sensitive information included in the
+    #   request tag variable or plain text fields.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
@@ -10410,6 +10495,13 @@ module Aws::SageMaker
     #
     # @!attribute [rw] environment
     #   The environment variables to set in the Docker container.
+    #
+    #   Do not include any security-sensitive information including account
+    #   access IDs, secrets, or tokens in any environment fields. As part of
+    #   the shared responsibility model, you are responsible for any
+    #   potential exposure, unauthorized access, or compromise of your
+    #   sensitive data if caused by security-sensitive information included
+    #   in the request environment variable or plain text fields.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] retry_strategy
@@ -12809,6 +12901,33 @@ module Aws::SageMaker
     class DeploymentConfig < Struct.new(
       :blue_green_update_policy,
       :rolling_update_policy,
+      :auto_rollback_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration to use when updating the AMI versions.
+    #
+    # @!attribute [rw] rolling_update_policy
+    #   The policy that SageMaker uses when updating the AMI versions of the
+    #   cluster.
+    #   @return [Types::RollingDeploymentPolicy]
+    #
+    # @!attribute [rw] wait_interval_in_seconds
+    #   The duration in seconds that SageMaker waits before updating more
+    #   instances in the cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] auto_rollback_configuration
+    #   An array that contains the alarms that SageMaker monitors to know
+    #   whether to roll back the AMI update.
+    #   @return [Array<Types::AlarmDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeploymentConfiguration AWS API Documentation
+    #
+    class DeploymentConfiguration < Struct.new(
+      :rolling_update_policy,
+      :wait_interval_in_seconds,
       :auto_rollback_configuration)
       SENSITIVE = []
       include Aws::Structure
@@ -18940,6 +19059,13 @@ module Aws::SageMaker
     #
     # @!attribute [rw] environment
     #   The environment variables to set in the Docker container.
+    #
+    #   Do not include any security-sensitive information including account
+    #   access IDs, secrets, or tokens in any environment fields. As part of
+    #   the shared responsibility model, you are responsible for any
+    #   potential exposure, unauthorized access, or compromise of your
+    #   sensitive data if caused by security-sensitive information included
+    #   in the request environment variable or plain text fields.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] retry_strategy
@@ -20045,6 +20171,11 @@ module Aws::SageMaker
     #   must be `SSO`.
     #   @return [Types::AmazonQSettings]
     #
+    # @!attribute [rw] unified_studio_settings
+    #   The settings that apply to an SageMaker AI domain when you use it in
+    #   Amazon SageMaker Unified Studio.
+    #   @return [Types::UnifiedStudioSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DomainSettings AWS API Documentation
     #
     class DomainSettings < Struct.new(
@@ -20052,7 +20183,8 @@ module Aws::SageMaker
       :r_studio_server_pro_domain_settings,
       :execution_role_identity_config,
       :docker_settings,
-      :amazon_q_settings)
+      :amazon_q_settings,
+      :unified_studio_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20092,6 +20224,11 @@ module Aws::SageMaker
     #   within the domain.
     #   @return [Types::AmazonQSettings]
     #
+    # @!attribute [rw] unified_studio_settings
+    #   The settings that apply to an SageMaker AI domain when you use it in
+    #   Amazon SageMaker Unified Studio.
+    #   @return [Types::UnifiedStudioSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DomainSettingsForUpdate AWS API Documentation
     #
     class DomainSettingsForUpdate < Struct.new(
@@ -20099,7 +20236,8 @@ module Aws::SageMaker
       :execution_role_identity_config,
       :security_group_ids,
       :docker_settings,
-      :amazon_q_settings)
+      :amazon_q_settings,
+      :unified_studio_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20740,12 +20878,13 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # <note markdown="1"> This data type is intended for use exclusively by SageMaker Canvas and
+    # <note markdown="1"> This data type is intended for use exclusively by
+    # SageMaker Canvas and
     # cannot be used in other contexts at the moment.
     #
     #  </note>
     #
-    # Specifies the compute configuration for the EMR Serverless job.
+    #  Specifies the compute configuration for the EMR Serverless job.
     #
     # @!attribute [rw] execution_role_arn
     #   The ARN of the IAM role granting the AutoML job V2 the necessary
@@ -33469,14 +33608,6 @@ module Aws::SageMaker
     #   The name of the metric.
     #   @return [String]
     #
-    # @!attribute [rw] value
-    #   The value of the metric.
-    #   @return [Float]
-    #
-    # @!attribute [rw] set
-    #   The dataset split from which the AutoML job produced the metric.
-    #   @return [String]
-    #
     # @!attribute [rw] standard_metric_name
     #   The name of the standard metric.
     #
@@ -33490,13 +33621,21 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-metrics
     #   @return [String]
     #
+    # @!attribute [rw] value
+    #   The value of the metric.
+    #   @return [Float]
+    #
+    # @!attribute [rw] set
+    #   The dataset split from which the AutoML job produced the metric.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MetricDatum AWS API Documentation
     #
     class MetricDatum < Struct.new(
       :metric_name,
+      :standard_metric_name,
       :value,
-      :set,
-      :standard_metric_name)
+      :set)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -41934,6 +42073,27 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The configurations that SageMaker uses when updating the AMI versions.
+    #
+    # @!attribute [rw] maximum_batch_size
+    #   The maximum amount of instances in the cluster that SageMaker can
+    #   update at a time.
+    #   @return [Types::CapacitySizeConfig]
+    #
+    # @!attribute [rw] rollback_maximum_batch_size
+    #   The maximum amount of instances in the cluster that SageMaker can
+    #   roll back at a time.
+    #   @return [Types::CapacitySizeConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RollingDeploymentPolicy AWS API Documentation
+    #
+    class RollingDeploymentPolicy < Struct.new(
+      :maximum_batch_size,
+      :rollback_maximum_batch_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies a rolling deployment strategy for updating a SageMaker
     # endpoint.
     #
@@ -42464,6 +42624,27 @@ module Aws::SageMaker
       :schedule_expression,
       :data_analysis_start_time,
       :data_analysis_end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration object of the schedule that SageMaker follows when
+    # updating the AMI.
+    #
+    # @!attribute [rw] schedule_expression
+    #   A cron expression that specifies the schedule that SageMaker follows
+    #   when updating the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_config
+    #   The configuration to use when updating the AMI versions.
+    #   @return [Types::DeploymentConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ScheduledUpdateConfig AWS API Documentation
+    #
+    class ScheduledUpdateConfig < Struct.new(
+      :schedule_expression,
+      :deployment_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -43603,6 +43784,15 @@ module Aws::SageMaker
     #   The storage settings for a space.
     #   @return [Types::SpaceStorageSettings]
     #
+    # @!attribute [rw] space_managed_resources
+    #   If you enable this option, SageMaker AI creates the following
+    #   resources on your behalf when you create the space:
+    #
+    #   * The user profile that possesses the space.
+    #
+    #   * The app that the space contains.
+    #   @return [String]
+    #
     # @!attribute [rw] custom_file_systems
     #   A file system, created by you, that you assign to a space for an
     #   Amazon SageMaker AI Domain. Permitted users can access this file
@@ -43618,6 +43808,7 @@ module Aws::SageMaker
       :jupyter_lab_app_settings,
       :app_type,
       :space_storage_settings,
+      :space_managed_resources,
       :custom_file_systems)
       SENSITIVE = []
       include Aws::Structure
@@ -47616,6 +47807,77 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The settings that apply to an Amazon SageMaker AI domain when you use
+    # it in Amazon SageMaker Unified Studio.
+    #
+    # @!attribute [rw] studio_web_portal_access
+    #   Sets whether you can access the domain in Amazon SageMaker Studio:
+    #
+    #   ENABLED
+    #
+    #   : You can access the domain in Amazon SageMaker Studio. If you
+    #     migrate the domain to Amazon SageMaker Unified Studio, you can
+    #     access it in both studio interfaces.
+    #
+    #   DISABLED
+    #
+    #   : You can't access the domain in Amazon SageMaker Studio. If you
+    #     migrate the domain to Amazon SageMaker Unified Studio, you can
+    #     access it only in that studio interface.
+    #
+    #   To migrate a domain to Amazon SageMaker Unified Studio, you specify
+    #   the UnifiedStudioSettings data type when you use the UpdateDomain
+    #   action.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_account_id
+    #   The ID of the Amazon Web Services account that has the Amazon
+    #   SageMaker Unified Studio domain. The default value, if you don't
+    #   specify an ID, is the ID of the account that has the Amazon
+    #   SageMaker AI domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_region
+    #   The Amazon Web Services Region where the domain is located in Amazon
+    #   SageMaker Unified Studio. The default value, if you don't specify a
+    #   Region, is the Region where the Amazon SageMaker AI domain is
+    #   located.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The ID of the Amazon SageMaker Unified Studio domain associated with
+    #   this domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_id
+    #   The ID of the Amazon SageMaker Unified Studio project that
+    #   corresponds to the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_id
+    #   The ID of the environment that Amazon SageMaker Unified Studio
+    #   associates with the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_s3_path
+    #   The location where Amazon S3 stores temporary execution data and
+    #   other artifacts for the project that corresponds to the domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UnifiedStudioSettings AWS API Documentation
+    #
+    class UnifiedStudioSettings < Struct.new(
+      :studio_web_portal_access,
+      :domain_account_id,
+      :domain_region,
+      :domain_id,
+      :project_id,
+      :environment_id,
+      :project_s3_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] action_name
     #   The name of the action to update.
     #   @return [String]
@@ -47825,15 +48087,40 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The configuration that describes specifications of the instance groups
+    # to update.
+    #
+    # @!attribute [rw] instance_group_name
+    #   The name of the instance group to update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateClusterSoftwareInstanceGroupSpecification AWS API Documentation
+    #
+    class UpdateClusterSoftwareInstanceGroupSpecification < Struct.new(
+      :instance_group_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] cluster_name
     #   Specify the name or the Amazon Resource Name (ARN) of the SageMaker
     #   HyperPod cluster you want to update for security patching.
     #   @return [String]
     #
+    # @!attribute [rw] instance_groups
+    #   The array of instance groups for which to update AMI versions.
+    #   @return [Array<Types::UpdateClusterSoftwareInstanceGroupSpecification>]
+    #
+    # @!attribute [rw] deployment_config
+    #   The configuration to use when updating the AMI versions.
+    #   @return [Types::DeploymentConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateClusterSoftwareRequest AWS API Documentation
     #
     class UpdateClusterSoftwareRequest < Struct.new(
-      :cluster_name)
+      :cluster_name,
+      :instance_groups,
+      :deployment_config)
       SENSITIVE = []
       include Aws::Structure
     end

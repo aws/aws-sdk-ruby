@@ -692,6 +692,7 @@ module Aws::Glue
       attr_accessor redshift_source: Types::RedshiftSource
       attr_accessor s3_catalog_source: Types::S3CatalogSource
       attr_accessor s3_csv_source: Types::S3CsvSource
+      attr_accessor s3_excel_source: Types::S3ExcelSource
       attr_accessor s3_json_source: Types::S3JsonSource
       attr_accessor s3_parquet_source: Types::S3ParquetSource
       attr_accessor relational_catalog_source: Types::RelationalCatalogSource
@@ -702,7 +703,9 @@ module Aws::Glue
       attr_accessor redshift_target: Types::RedshiftTarget
       attr_accessor s3_catalog_target: Types::S3CatalogTarget
       attr_accessor s3_glue_parquet_target: Types::S3GlueParquetTarget
+      attr_accessor s3_hyper_direct_target: Types::S3HyperDirectTarget
       attr_accessor s3_direct_target: Types::S3DirectTarget
+      attr_accessor s3_iceberg_direct_target: Types::S3IcebergDirectTarget
       attr_accessor apply_mapping: Types::ApplyMapping
       attr_accessor select_fields: Types::SelectFields
       attr_accessor drop_fields: Types::DropFields
@@ -1002,8 +1005,21 @@ module Aws::Glue
 
     class ConnectionTypeBrief
       attr_accessor connection_type: ("JDBC" | "SFTP" | "MONGODB" | "KAFKA" | "NETWORK" | "MARKETPLACE" | "CUSTOM" | "SALESFORCE" | "VIEW_VALIDATION_REDSHIFT" | "VIEW_VALIDATION_ATHENA" | "GOOGLEADS" | "GOOGLESHEETS" | "GOOGLEANALYTICS4" | "SERVICENOW" | "MARKETO" | "SAPODATA" | "ZENDESK" | "JIRACLOUD" | "NETSUITEERP" | "HUBSPOT" | "FACEBOOKADS" | "INSTAGRAMADS" | "ZOHOCRM" | "SALESFORCEPARDOT" | "SALESFORCEMARKETINGCLOUD" | "SLACK" | "STRIPE" | "INTERCOM" | "SNAPCHATADS")
+      attr_accessor display_name: ::String
+      attr_accessor vendor: ::String
       attr_accessor description: ::String
+      attr_accessor categories: ::Array[::String]
       attr_accessor capabilities: Types::Capabilities
+      attr_accessor logo_url: ::String
+      attr_accessor connection_type_variants: ::Array[Types::ConnectionTypeVariant]
+      SENSITIVE: []
+    end
+
+    class ConnectionTypeVariant
+      attr_accessor connection_type_variant_name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor logo_url: ::String
       SENSITIVE: []
     end
 
@@ -1323,6 +1339,7 @@ module Aws::Glue
       attr_accessor kms_key_id: ::String
       attr_accessor additional_encryption_context: ::Hash[::String, ::String]
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor integration_config: Types::IntegrationConfig
       SENSITIVE: []
     end
 
@@ -1353,6 +1370,7 @@ module Aws::Glue
       attr_accessor create_time: ::Time
       attr_accessor errors: ::Array[Types::IntegrationError]
       attr_accessor data_filter: ::String
+      attr_accessor integration_config: Types::IntegrationConfig
       SENSITIVE: []
     end
 
@@ -3910,6 +3928,7 @@ module Aws::Glue
       attr_accessor integration_arn: ::String
       attr_accessor status: ("CREATING" | "ACTIVE" | "MODIFYING" | "FAILED" | "DELETING" | "SYNCING" | "NEEDS_ATTENTION")
       attr_accessor create_time: ::Time
+      attr_accessor integration_config: Types::IntegrationConfig
       attr_accessor errors: ::Array[Types::IntegrationError]
       SENSITIVE: []
     end
@@ -3925,8 +3944,14 @@ module Aws::Glue
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor status: ("CREATING" | "ACTIVE" | "MODIFYING" | "FAILED" | "DELETING" | "SYNCING" | "NEEDS_ATTENTION")
       attr_accessor create_time: ::Time
+      attr_accessor integration_config: Types::IntegrationConfig
       attr_accessor errors: ::Array[Types::IntegrationError]
       attr_accessor data_filter: ::String
+      SENSITIVE: []
+    end
+
+    class IntegrationConfig
+      attr_accessor refresh_interval: ::String
       SENSITIVE: []
     end
 
@@ -5382,7 +5407,8 @@ module Aws::Glue
       attr_accessor partition_keys: ::Array[::Array[::String]]
       attr_accessor path: ::String
       attr_accessor compression: ("uncompressed" | "snappy")
-      attr_accessor format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta")
+      attr_accessor number_target_partitions: ::String
+      attr_accessor format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta" | "iceberg" | "hyper" | "xml")
       attr_accessor additional_options: ::Hash[::String, ::String]
       attr_accessor schema_change_policy: Types::DirectSchemaChangePolicy
       SENSITIVE: []
@@ -5411,7 +5437,8 @@ module Aws::Glue
       attr_accessor partition_keys: ::Array[::Array[::String]]
       attr_accessor path: ::String
       attr_accessor compression: ::String
-      attr_accessor format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta")
+      attr_accessor number_target_partitions: ::String
+      attr_accessor format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta" | "iceberg" | "hyper" | "xml")
       attr_accessor schema_change_policy: Types::DirectSchemaChangePolicy
       SENSITIVE: []
     end
@@ -5422,12 +5449,30 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class S3ExcelSource
+      attr_accessor name: ::String
+      attr_accessor paths: ::Array[::String]
+      attr_accessor compression_type: ("snappy" | "lzo" | "gzip" | "brotli" | "lz4" | "uncompressed" | "none")
+      attr_accessor exclusions: ::Array[::String]
+      attr_accessor group_size: ::String
+      attr_accessor group_files: ::String
+      attr_accessor recurse: bool
+      attr_accessor max_band: ::Integer
+      attr_accessor max_files_in_band: ::Integer
+      attr_accessor additional_options: Types::S3DirectSourceAdditionalOptions
+      attr_accessor number_rows: ::Integer
+      attr_accessor skip_footer: ::Integer
+      attr_accessor output_schemas: ::Array[Types::GlueSchema]
+      SENSITIVE: []
+    end
+
     class S3GlueParquetTarget
       attr_accessor name: ::String
       attr_accessor inputs: ::Array[::String]
       attr_accessor partition_keys: ::Array[::Array[::String]]
       attr_accessor path: ::String
-      attr_accessor compression: ("snappy" | "lzo" | "gzip" | "uncompressed" | "none")
+      attr_accessor compression: ("snappy" | "lzo" | "gzip" | "brotli" | "lz4" | "uncompressed" | "none")
+      attr_accessor number_target_partitions: ::String
       attr_accessor schema_change_policy: Types::DirectSchemaChangePolicy
       SENSITIVE: []
     end
@@ -5448,8 +5493,9 @@ module Aws::Glue
       attr_accessor inputs: ::Array[::String]
       attr_accessor path: ::String
       attr_accessor compression: ("gzip" | "lzo" | "uncompressed" | "snappy")
+      attr_accessor number_target_partitions: ::String
       attr_accessor partition_keys: ::Array[::Array[::String]]
-      attr_accessor format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta")
+      attr_accessor format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta" | "iceberg" | "hyper" | "xml")
       attr_accessor additional_options: ::Hash[::String, ::String]
       attr_accessor schema_change_policy: Types::DirectSchemaChangePolicy
       SENSITIVE: []
@@ -5461,6 +5507,29 @@ module Aws::Glue
       attr_accessor additional_hudi_options: ::Hash[::String, ::String]
       attr_accessor additional_options: Types::S3DirectSourceAdditionalOptions
       attr_accessor output_schemas: ::Array[Types::GlueSchema]
+      SENSITIVE: []
+    end
+
+    class S3HyperDirectTarget
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor partition_keys: ::Array[::Array[::String]]
+      attr_accessor path: ::String
+      attr_accessor compression: ("uncompressed")
+      attr_accessor schema_change_policy: Types::DirectSchemaChangePolicy
+      SENSITIVE: []
+    end
+
+    class S3IcebergDirectTarget
+      attr_accessor name: ::String
+      attr_accessor inputs: ::Array[::String]
+      attr_accessor partition_keys: ::Array[::Array[::String]]
+      attr_accessor path: ::String
+      attr_accessor format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta" | "iceberg" | "hyper" | "xml")
+      attr_accessor additional_options: ::Hash[::String, ::String]
+      attr_accessor schema_change_policy: Types::DirectSchemaChangePolicy
+      attr_accessor compression: ("gzip" | "lzo" | "uncompressed" | "snappy")
+      attr_accessor number_target_partitions: ::String
       SENSITIVE: []
     end
 
@@ -5484,7 +5553,7 @@ module Aws::Glue
     class S3ParquetSource
       attr_accessor name: ::String
       attr_accessor paths: ::Array[::String]
-      attr_accessor compression_type: ("snappy" | "lzo" | "gzip" | "uncompressed" | "none")
+      attr_accessor compression_type: ("snappy" | "lzo" | "gzip" | "brotli" | "lz4" | "uncompressed" | "none")
       attr_accessor exclusions: ::Array[::String]
       attr_accessor group_size: ::String
       attr_accessor group_files: ::String

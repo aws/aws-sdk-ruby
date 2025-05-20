@@ -463,7 +463,7 @@ module Aws::LexRuntimeV2
         "endpointPrefix" => "runtime-v2-lex",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
-        "protocolSettings" => {"h2"=>"eventstream"},
+        "protocolSettings" => {"h2" => "eventstream"},
         "protocols" => ["rest-json"],
         "serviceAbbreviation" => "Lex Runtime V2",
         "serviceFullName" => "Amazon Lex Runtime V2",

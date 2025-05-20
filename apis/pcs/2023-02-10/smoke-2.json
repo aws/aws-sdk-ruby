@@ -1,11 +1,10 @@
 {
   "version" : 2,
   "testCases" : [ {
-    "id" : "GetComputeNodeGroup_AccessDeniedException",
-    "operationName" : "GetComputeNodeGroup",
+    "id" : "ListComputeNodeGroups_AccessDeniedException",
+    "operationName" : "ListComputeNodeGroups",
     "input" : {
-      "clusterIdentifier" : "pcs_donotexist",
-      "computeNodeGroupIdentifier" : "pcs_donotexist"
+      "clusterIdentifier" : "pcs_donotexist"
     },
     "expectation" : {
       "failure" : {
@@ -19,11 +18,10 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "GetQueueFailure_AccessDeniedException",
-    "operationName" : "GetQueue",
+    "id" : "GetCluster_AccessDeniedException",
+    "operationName" : "GetCluster",
     "input" : {
-      "clusterIdentifier" : "pcs_donotexist",
-      "queueIdentifier" : "pcs_donotexist"
+      "clusterIdentifier" : "pcs_donotexist"
     },
     "expectation" : {
       "failure" : {
@@ -50,10 +48,11 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListComputeNodeGroups_AccessDeniedException",
-    "operationName" : "ListComputeNodeGroups",
+    "id" : "GetQueueFailure_AccessDeniedException",
+    "operationName" : "GetQueue",
     "input" : {
-      "clusterIdentifier" : "pcs_donotexist"
+      "clusterIdentifier" : "pcs_donotexist",
+      "queueIdentifier" : "pcs_donotexist"
     },
     "expectation" : {
       "failure" : {
@@ -67,10 +66,11 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "GetCluster_AccessDeniedException",
-    "operationName" : "GetCluster",
+    "id" : "GetComputeNodeGroup_AccessDeniedException",
+    "operationName" : "GetComputeNodeGroup",
     "input" : {
-      "clusterIdentifier" : "pcs_donotexist"
+      "clusterIdentifier" : "pcs_donotexist",
+      "computeNodeGroupIdentifier" : "pcs_donotexist"
     },
     "expectation" : {
       "failure" : {

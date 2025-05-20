@@ -66,6 +66,8 @@ module Aws::EMR
     ComputeLimitsUnitType = Shapes::StringShape.new(name: 'ComputeLimitsUnitType')
     Configuration = Shapes::StructureShape.new(name: 'Configuration')
     ConfigurationList = Shapes::ListShape.new(name: 'ConfigurationList')
+    CreatePersistentAppUIInput = Shapes::StructureShape.new(name: 'CreatePersistentAppUIInput')
+    CreatePersistentAppUIOutput = Shapes::StructureShape.new(name: 'CreatePersistentAppUIOutput')
     CreateSecurityConfigurationInput = Shapes::StructureShape.new(name: 'CreateSecurityConfigurationInput')
     CreateSecurityConfigurationOutput = Shapes::StructureShape.new(name: 'CreateSecurityConfigurationOutput')
     CreateStudioInput = Shapes::StructureShape.new(name: 'CreateStudioInput')
@@ -83,6 +85,8 @@ module Aws::EMR
     DescribeJobFlowsOutput = Shapes::StructureShape.new(name: 'DescribeJobFlowsOutput')
     DescribeNotebookExecutionInput = Shapes::StructureShape.new(name: 'DescribeNotebookExecutionInput')
     DescribeNotebookExecutionOutput = Shapes::StructureShape.new(name: 'DescribeNotebookExecutionOutput')
+    DescribePersistentAppUIInput = Shapes::StructureShape.new(name: 'DescribePersistentAppUIInput')
+    DescribePersistentAppUIOutput = Shapes::StructureShape.new(name: 'DescribePersistentAppUIOutput')
     DescribeReleaseLabelInput = Shapes::StructureShape.new(name: 'DescribeReleaseLabelInput')
     DescribeReleaseLabelOutput = Shapes::StructureShape.new(name: 'DescribeReleaseLabelOutput')
     DescribeSecurityConfigurationInput = Shapes::StructureShape.new(name: 'DescribeSecurityConfigurationInput')
@@ -93,6 +97,7 @@ module Aws::EMR
     DescribeStudioOutput = Shapes::StructureShape.new(name: 'DescribeStudioOutput')
     EC2InstanceIdsList = Shapes::ListShape.new(name: 'EC2InstanceIdsList')
     EC2InstanceIdsToTerminateList = Shapes::ListShape.new(name: 'EC2InstanceIdsToTerminateList')
+    EMRContainersConfig = Shapes::StructureShape.new(name: 'EMRContainersConfig')
     EbsBlockDevice = Shapes::StructureShape.new(name: 'EbsBlockDevice')
     EbsBlockDeviceConfig = Shapes::StructureShape.new(name: 'EbsBlockDeviceConfig')
     EbsBlockDeviceConfigList = Shapes::ListShape.new(name: 'EbsBlockDeviceConfigList')
@@ -119,6 +124,10 @@ module Aws::EMR
     GetClusterSessionCredentialsOutput = Shapes::StructureShape.new(name: 'GetClusterSessionCredentialsOutput')
     GetManagedScalingPolicyInput = Shapes::StructureShape.new(name: 'GetManagedScalingPolicyInput')
     GetManagedScalingPolicyOutput = Shapes::StructureShape.new(name: 'GetManagedScalingPolicyOutput')
+    GetOnClusterAppUIPresignedURLInput = Shapes::StructureShape.new(name: 'GetOnClusterAppUIPresignedURLInput')
+    GetOnClusterAppUIPresignedURLOutput = Shapes::StructureShape.new(name: 'GetOnClusterAppUIPresignedURLOutput')
+    GetPersistentAppUIPresignedURLInput = Shapes::StructureShape.new(name: 'GetPersistentAppUIPresignedURLInput')
+    GetPersistentAppUIPresignedURLOutput = Shapes::StructureShape.new(name: 'GetPersistentAppUIPresignedURLOutput')
     GetStudioSessionMappingInput = Shapes::StructureShape.new(name: 'GetStudioSessionMappingInput')
     GetStudioSessionMappingOutput = Shapes::StructureShape.new(name: 'GetStudioSessionMappingOutput')
     HadoopJarStepConfig = Shapes::StructureShape.new(name: 'HadoopJarStepConfig')
@@ -233,6 +242,7 @@ module Aws::EMR
     NotebookS3LocationFromInput = Shapes::StructureShape.new(name: 'NotebookS3LocationFromInput')
     OSRelease = Shapes::StructureShape.new(name: 'OSRelease')
     OSReleaseList = Shapes::ListShape.new(name: 'OSReleaseList')
+    OnClusterAppUIType = Shapes::StringShape.new(name: 'OnClusterAppUIType')
     OnDemandCapacityReservationOptions = Shapes::StructureShape.new(name: 'OnDemandCapacityReservationOptions')
     OnDemandCapacityReservationPreference = Shapes::StringShape.new(name: 'OnDemandCapacityReservationPreference')
     OnDemandCapacityReservationUsageStrategy = Shapes::StringShape.new(name: 'OnDemandCapacityReservationUsageStrategy')
@@ -243,6 +253,9 @@ module Aws::EMR
     OutputNotebookFormat = Shapes::StringShape.new(name: 'OutputNotebookFormat')
     OutputNotebookS3LocationForOutput = Shapes::StructureShape.new(name: 'OutputNotebookS3LocationForOutput')
     OutputNotebookS3LocationFromInput = Shapes::StructureShape.new(name: 'OutputNotebookS3LocationFromInput')
+    PersistentAppUI = Shapes::StructureShape.new(name: 'PersistentAppUI')
+    PersistentAppUIType = Shapes::StringShape.new(name: 'PersistentAppUIType')
+    PersistentAppUITypeList = Shapes::ListShape.new(name: 'PersistentAppUITypeList')
     PlacementGroupConfig = Shapes::StructureShape.new(name: 'PlacementGroupConfig')
     PlacementGroupConfigList = Shapes::ListShape.new(name: 'PlacementGroupConfigList')
     PlacementGroupStrategy = Shapes::StringShape.new(name: 'PlacementGroupStrategy')
@@ -250,6 +263,7 @@ module Aws::EMR
     Port = Shapes::IntegerShape.new(name: 'Port')
     PortRange = Shapes::StructureShape.new(name: 'PortRange')
     PortRanges = Shapes::ListShape.new(name: 'PortRanges')
+    ProfilerType = Shapes::StringShape.new(name: 'ProfilerType')
     PutAutoScalingPolicyInput = Shapes::StructureShape.new(name: 'PutAutoScalingPolicyInput')
     PutAutoScalingPolicyOutput = Shapes::StructureShape.new(name: 'PutAutoScalingPolicyOutput')
     PutAutoTerminationPolicyInput = Shapes::StructureShape.new(name: 'PutAutoTerminationPolicyInput')
@@ -537,6 +551,17 @@ module Aws::EMR
 
     ConfigurationList.member = Shapes::ShapeRef.new(shape: Configuration)
 
+    CreatePersistentAppUIInput.add_member(:target_resource_arn, Shapes::ShapeRef.new(shape: ArnType, required: true, location_name: "TargetResourceArn"))
+    CreatePersistentAppUIInput.add_member(:emr_containers_config, Shapes::ShapeRef.new(shape: EMRContainersConfig, location_name: "EMRContainersConfig"))
+    CreatePersistentAppUIInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreatePersistentAppUIInput.add_member(:x_referer, Shapes::ShapeRef.new(shape: String, location_name: "XReferer"))
+    CreatePersistentAppUIInput.add_member(:profiler_type, Shapes::ShapeRef.new(shape: ProfilerType, location_name: "ProfilerType"))
+    CreatePersistentAppUIInput.struct_class = Types::CreatePersistentAppUIInput
+
+    CreatePersistentAppUIOutput.add_member(:persistent_app_ui_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "PersistentAppUIId"))
+    CreatePersistentAppUIOutput.add_member(:runtime_role_enabled_cluster, Shapes::ShapeRef.new(shape: Boolean, location_name: "RuntimeRoleEnabledCluster"))
+    CreatePersistentAppUIOutput.struct_class = Types::CreatePersistentAppUIOutput
+
     CreateSecurityConfigurationInput.add_member(:name, Shapes::ShapeRef.new(shape: XmlString, required: true, location_name: "Name"))
     CreateSecurityConfigurationInput.add_member(:security_configuration, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SecurityConfiguration"))
     CreateSecurityConfigurationInput.struct_class = Types::CreateSecurityConfigurationInput
@@ -616,6 +641,12 @@ module Aws::EMR
     DescribeNotebookExecutionOutput.add_member(:notebook_execution, Shapes::ShapeRef.new(shape: NotebookExecution, location_name: "NotebookExecution"))
     DescribeNotebookExecutionOutput.struct_class = Types::DescribeNotebookExecutionOutput
 
+    DescribePersistentAppUIInput.add_member(:persistent_app_ui_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "PersistentAppUIId"))
+    DescribePersistentAppUIInput.struct_class = Types::DescribePersistentAppUIInput
+
+    DescribePersistentAppUIOutput.add_member(:persistent_app_ui, Shapes::ShapeRef.new(shape: PersistentAppUI, location_name: "PersistentAppUI"))
+    DescribePersistentAppUIOutput.struct_class = Types::DescribePersistentAppUIOutput
+
     DescribeReleaseLabelInput.add_member(:release_label, Shapes::ShapeRef.new(shape: String, location_name: "ReleaseLabel"))
     DescribeReleaseLabelInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeReleaseLabelInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsNumber, location_name: "MaxResults"))
@@ -651,6 +682,9 @@ module Aws::EMR
     EC2InstanceIdsList.member = Shapes::ShapeRef.new(shape: InstanceId)
 
     EC2InstanceIdsToTerminateList.member = Shapes::ShapeRef.new(shape: InstanceId)
+
+    EMRContainersConfig.add_member(:job_run_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "JobRunId"))
+    EMRContainersConfig.struct_class = Types::EMRContainersConfig
 
     EbsBlockDevice.add_member(:volume_specification, Shapes::ShapeRef.new(shape: VolumeSpecification, location_name: "VolumeSpecification"))
     EbsBlockDevice.add_member(:device, Shapes::ShapeRef.new(shape: String, location_name: "Device"))
@@ -735,6 +769,28 @@ module Aws::EMR
 
     GetManagedScalingPolicyOutput.add_member(:managed_scaling_policy, Shapes::ShapeRef.new(shape: ManagedScalingPolicy, location_name: "ManagedScalingPolicy"))
     GetManagedScalingPolicyOutput.struct_class = Types::GetManagedScalingPolicyOutput
+
+    GetOnClusterAppUIPresignedURLInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "ClusterId"))
+    GetOnClusterAppUIPresignedURLInput.add_member(:on_cluster_app_ui_type, Shapes::ShapeRef.new(shape: OnClusterAppUIType, location_name: "OnClusterAppUIType"))
+    GetOnClusterAppUIPresignedURLInput.add_member(:application_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "ApplicationId"))
+    GetOnClusterAppUIPresignedURLInput.add_member(:dry_run, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DryRun"))
+    GetOnClusterAppUIPresignedURLInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "ExecutionRoleArn"))
+    GetOnClusterAppUIPresignedURLInput.struct_class = Types::GetOnClusterAppUIPresignedURLInput
+
+    GetOnClusterAppUIPresignedURLOutput.add_member(:presigned_url_ready, Shapes::ShapeRef.new(shape: Boolean, location_name: "PresignedURLReady"))
+    GetOnClusterAppUIPresignedURLOutput.add_member(:presigned_url, Shapes::ShapeRef.new(shape: XmlString, location_name: "PresignedURL"))
+    GetOnClusterAppUIPresignedURLOutput.struct_class = Types::GetOnClusterAppUIPresignedURLOutput
+
+    GetPersistentAppUIPresignedURLInput.add_member(:persistent_app_ui_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "PersistentAppUIId"))
+    GetPersistentAppUIPresignedURLInput.add_member(:persistent_app_ui_type, Shapes::ShapeRef.new(shape: PersistentAppUIType, location_name: "PersistentAppUIType"))
+    GetPersistentAppUIPresignedURLInput.add_member(:application_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "ApplicationId"))
+    GetPersistentAppUIPresignedURLInput.add_member(:auth_proxy_call, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "AuthProxyCall"))
+    GetPersistentAppUIPresignedURLInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "ExecutionRoleArn"))
+    GetPersistentAppUIPresignedURLInput.struct_class = Types::GetPersistentAppUIPresignedURLInput
+
+    GetPersistentAppUIPresignedURLOutput.add_member(:presigned_url_ready, Shapes::ShapeRef.new(shape: Boolean, location_name: "PresignedURLReady"))
+    GetPersistentAppUIPresignedURLOutput.add_member(:presigned_url, Shapes::ShapeRef.new(shape: XmlString, location_name: "PresignedURL"))
+    GetPersistentAppUIPresignedURLOutput.struct_class = Types::GetPersistentAppUIPresignedURLOutput
 
     GetStudioSessionMappingInput.add_member(:studio_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "StudioId"))
     GetStudioSessionMappingInput.add_member(:identity_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "IdentityId"))
@@ -1250,6 +1306,18 @@ module Aws::EMR
     OutputNotebookS3LocationFromInput.add_member(:key, Shapes::ShapeRef.new(shape: UriString, location_name: "Key"))
     OutputNotebookS3LocationFromInput.struct_class = Types::OutputNotebookS3LocationFromInput
 
+    PersistentAppUI.add_member(:persistent_app_ui_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "PersistentAppUIId"))
+    PersistentAppUI.add_member(:persistent_app_ui_type_list, Shapes::ShapeRef.new(shape: PersistentAppUITypeList, location_name: "PersistentAppUITypeList"))
+    PersistentAppUI.add_member(:persistent_app_ui_status, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "PersistentAppUIStatus"))
+    PersistentAppUI.add_member(:author_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "AuthorId"))
+    PersistentAppUI.add_member(:creation_time, Shapes::ShapeRef.new(shape: Date, location_name: "CreationTime"))
+    PersistentAppUI.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Date, location_name: "LastModifiedTime"))
+    PersistentAppUI.add_member(:last_state_change_reason, Shapes::ShapeRef.new(shape: XmlString, location_name: "LastStateChangeReason"))
+    PersistentAppUI.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    PersistentAppUI.struct_class = Types::PersistentAppUI
+
+    PersistentAppUITypeList.member = Shapes::ShapeRef.new(shape: PersistentAppUIType)
+
     PlacementGroupConfig.add_member(:instance_role, Shapes::ShapeRef.new(shape: InstanceRoleType, required: true, location_name: "InstanceRole"))
     PlacementGroupConfig.add_member(:placement_strategy, Shapes::ShapeRef.new(shape: PlacementGroupStrategy, location_name: "PlacementStrategy"))
     PlacementGroupConfig.struct_class = Types::PlacementGroupConfig
@@ -1693,6 +1761,16 @@ module Aws::EMR
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
+      api.add_operation(:create_persistent_app_ui, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreatePersistentAppUI"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreatePersistentAppUIInput)
+        o.output = Shapes::ShapeRef.new(shape: CreatePersistentAppUIOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
       api.add_operation(:create_security_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateSecurityConfiguration"
         o.http_method = "POST"
@@ -1783,6 +1861,16 @@ module Aws::EMR
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
+      api.add_operation(:describe_persistent_app_ui, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribePersistentAppUI"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribePersistentAppUIInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribePersistentAppUIOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
       api.add_operation(:describe_release_label, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeReleaseLabel"
         o.http_method = "POST"
@@ -1857,6 +1945,26 @@ module Aws::EMR
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetManagedScalingPolicyInput)
         o.output = Shapes::ShapeRef.new(shape: GetManagedScalingPolicyOutput)
+      end)
+
+      api.add_operation(:get_on_cluster_app_ui_presigned_url, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetOnClusterAppUIPresignedURL"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetOnClusterAppUIPresignedURLInput)
+        o.output = Shapes::ShapeRef.new(shape: GetOnClusterAppUIPresignedURLOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:get_persistent_app_ui_presigned_url, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPersistentAppUIPresignedURL"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetPersistentAppUIPresignedURLInput)
+        o.output = Shapes::ShapeRef.new(shape: GetPersistentAppUIPresignedURLOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
       api.add_operation(:get_studio_session_mapping, Seahorse::Model::Operation.new.tap do |o|

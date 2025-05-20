@@ -43,7 +43,7 @@ module Aws
           when 'get_range'
             if @chunk_size
               resp = @client.head_object(@params)
-              multithreaded_get_by_ranges(resp.content_length)
+              multithreaded_get_by_ranges(resp.content_length, resp.etag)
             else
               msg = 'In :get_range mode, :chunk_size must be provided'
               raise ArgumentError, msg
@@ -71,7 +71,7 @@ module Aws
           if resp.content_length <= MIN_CHUNK_SIZE
             single_request
           else
-            multithreaded_get_by_ranges(resp.content_length)
+            multithreaded_get_by_ranges(resp.content_length, resp.etag)
           end
         else
           # partNumber is an option
@@ -79,18 +79,18 @@ module Aws
           if resp.content_length <= MIN_CHUNK_SIZE
             single_request
           else
-            compute_mode(resp.content_length, count)
+            compute_mode(resp.content_length, count, resp.etag)
           end
         end
       end
 
-      def compute_mode(file_size, count)
+      def compute_mode(file_size, count, etag)
         chunk_size = compute_chunk(file_size)
         part_size = (file_size.to_f / count.to_f).ceil
         if chunk_size < part_size
-          multithreaded_get_by_ranges(file_size)
+          multithreaded_get_by_ranges(file_size, etag)
         else
-          multithreaded_get_by_parts(count, file_size)
+          multithreaded_get_by_parts(count, file_size, etag)
         end
       end
 
@@ -122,7 +122,7 @@ module Aws
         chunks.each_slice(@thread_count).to_a
       end
 
-      def multithreaded_get_by_ranges(file_size)
+      def multithreaded_get_by_ranges(file_size, etag)
         offset = 0
         default_chunk_size = compute_chunk(file_size)
         chunks = []
@@ -134,7 +134,7 @@ module Aws
           chunks << Part.new(
             part_number: part_number,
             size: (progress-offset),
-            params: @params.merge(range: range)
+            params: @params.merge(range: range, if_match: etag)
           )
           part_number += 1
           offset = progress
@@ -142,9 +142,9 @@ module Aws
         download_in_threads(PartList.new(chunks), file_size)
       end
 
-      def multithreaded_get_by_parts(n_parts, total_size)
+      def multithreaded_get_by_parts(n_parts, total_size, etag)
         parts = (1..n_parts).map do |part|
-          Part.new(part_number: part, params: @params.merge(part_number: part))
+          Part.new(part_number: part, params: @params.merge(part_number: part, if_match: etag))
         end
         download_in_threads(PartList.new(parts), total_size)
       end

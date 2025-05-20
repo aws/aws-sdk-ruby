@@ -13,6 +13,18 @@ module Aws::PCS
       SENSITIVE: []
     end
 
+    class Accounting
+      attr_accessor mode: ("STANDARD" | "NONE")
+      attr_accessor default_purge_time_in_days: ::Integer
+      SENSITIVE: []
+    end
+
+    class AccountingRequest
+      attr_accessor mode: ("STANDARD" | "NONE")
+      attr_accessor default_purge_time_in_days: ::Integer
+      SENSITIVE: []
+    end
+
     class Cluster
       attr_accessor name: ::String
       attr_accessor id: ::String
@@ -33,12 +45,14 @@ module Aws::PCS
       attr_accessor scale_down_idle_time_in_seconds: ::Integer
       attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
       attr_accessor auth_key: Types::SlurmAuthKey
+      attr_accessor accounting: Types::Accounting
       SENSITIVE: []
     end
 
     class ClusterSlurmConfigurationRequest
       attr_accessor scale_down_idle_time_in_seconds: ::Integer
       attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
+      attr_accessor accounting: Types::AccountingRequest
       SENSITIVE: []
     end
 

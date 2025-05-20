@@ -200,8 +200,7 @@ module Aws::Route53RecoveryCluster
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -805,7 +804,7 @@ module Aws::Route53RecoveryCluster
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-route53recoverycluster'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

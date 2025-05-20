@@ -214,7 +214,7 @@ module Aws::NeptuneGraph
     CancelImportTaskOutput.add_member(:status, Shapes::ShapeRef.new(shape: ImportTaskStatus, required: true, location_name: "status"))
     CancelImportTaskOutput.struct_class = Types::CancelImportTaskOutput
 
-    CancelQueryInput.add_member(:graph_identifier, Shapes::ShapeRef.new(shape: GraphIdentifier, required: true, location: "header", location_name: "graphIdentifier", metadata: {"hostLabel"=>true, "hostLabelName"=>"graphIdentifier"}))
+    CancelQueryInput.add_member(:graph_identifier, Shapes::ShapeRef.new(shape: GraphIdentifier, required: true, location: "header", location_name: "graphIdentifier", metadata: {"hostLabel" => true, "hostLabelName" => "graphIdentifier"}))
     CancelQueryInput.add_member(:query_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "queryId"))
     CancelQueryInput.struct_class = Types::CancelQueryInput
 
@@ -359,7 +359,7 @@ module Aws::NeptuneGraph
 
     EdgeStructures.member = Shapes::ShapeRef.new(shape: EdgeStructure)
 
-    ExecuteQueryInput.add_member(:graph_identifier, Shapes::ShapeRef.new(shape: GraphIdentifier, required: true, location: "header", location_name: "graphIdentifier", metadata: {"hostLabel"=>true, "hostLabelName"=>"graphIdentifier"}))
+    ExecuteQueryInput.add_member(:graph_identifier, Shapes::ShapeRef.new(shape: GraphIdentifier, required: true, location: "header", location_name: "graphIdentifier", metadata: {"hostLabel" => true, "hostLabelName" => "graphIdentifier"}))
     ExecuteQueryInput.add_member(:query_string, Shapes::ShapeRef.new(shape: String, required: true, location_name: "query"))
     ExecuteQueryInput.add_member(:language, Shapes::ShapeRef.new(shape: QueryLanguage, required: true, location_name: "language"))
     ExecuteQueryInput.add_member(:parameters, Shapes::ShapeRef.new(shape: DocumentValuedMap, location_name: "parameters"))
@@ -459,7 +459,7 @@ module Aws::NeptuneGraph
     GetGraphSnapshotOutput.add_member(:kms_key_identifier, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyIdentifier"))
     GetGraphSnapshotOutput.struct_class = Types::GetGraphSnapshotOutput
 
-    GetGraphSummaryInput.add_member(:graph_identifier, Shapes::ShapeRef.new(shape: GraphIdentifier, required: true, location: "header", location_name: "graphIdentifier", metadata: {"hostLabel"=>true, "hostLabelName"=>"graphIdentifier"}))
+    GetGraphSummaryInput.add_member(:graph_identifier, Shapes::ShapeRef.new(shape: GraphIdentifier, required: true, location: "header", location_name: "graphIdentifier", metadata: {"hostLabel" => true, "hostLabelName" => "graphIdentifier"}))
     GetGraphSummaryInput.add_member(:mode, Shapes::ShapeRef.new(shape: GraphSummaryMode, location: "querystring", location_name: "mode"))
     GetGraphSummaryInput.struct_class = Types::GetGraphSummaryInput
 
@@ -494,7 +494,7 @@ module Aws::NeptuneGraph
     GetPrivateGraphEndpointOutput.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "vpcEndpointId"))
     GetPrivateGraphEndpointOutput.struct_class = Types::GetPrivateGraphEndpointOutput
 
-    GetQueryInput.add_member(:graph_identifier, Shapes::ShapeRef.new(shape: GraphIdentifier, required: true, location: "header", location_name: "graphIdentifier", metadata: {"hostLabel"=>true, "hostLabelName"=>"graphIdentifier"}))
+    GetQueryInput.add_member(:graph_identifier, Shapes::ShapeRef.new(shape: GraphIdentifier, required: true, location: "header", location_name: "graphIdentifier", metadata: {"hostLabel" => true, "hostLabelName" => "graphIdentifier"}))
     GetQueryInput.add_member(:query_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "queryId"))
     GetQueryInput.struct_class = Types::GetQueryInput
 
@@ -619,7 +619,7 @@ module Aws::NeptuneGraph
     ListPrivateGraphEndpointsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListPrivateGraphEndpointsOutput.struct_class = Types::ListPrivateGraphEndpointsOutput
 
-    ListQueriesInput.add_member(:graph_identifier, Shapes::ShapeRef.new(shape: GraphIdentifier, required: true, location: "header", location_name: "graphIdentifier", metadata: {"hostLabel"=>true, "hostLabelName"=>"graphIdentifier"}))
+    ListQueriesInput.add_member(:graph_identifier, Shapes::ShapeRef.new(shape: GraphIdentifier, required: true, location: "header", location_name: "graphIdentifier", metadata: {"hostLabel" => true, "hostLabelName" => "graphIdentifier"}))
     ListQueriesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, required: true, location: "querystring", location_name: "maxResults"))
     ListQueriesInput.add_member(:state, Shapes::ShapeRef.new(shape: QueryStateInput, location: "querystring", location_name: "state"))
     ListQueriesInput.struct_class = Types::ListQueriesInput

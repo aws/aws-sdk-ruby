@@ -276,9 +276,9 @@ module Aws::AppConfig
 
     CreateDeploymentStrategyRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
     CreateDeploymentStrategyRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    CreateDeploymentStrategyRequest.add_member(:deployment_duration_in_minutes, Shapes::ShapeRef.new(shape: MinutesBetween0And24Hours, required: true, location_name: "DeploymentDurationInMinutes", metadata: {"box"=>true}))
+    CreateDeploymentStrategyRequest.add_member(:deployment_duration_in_minutes, Shapes::ShapeRef.new(shape: MinutesBetween0And24Hours, required: true, location_name: "DeploymentDurationInMinutes", metadata: {"box" => true}))
     CreateDeploymentStrategyRequest.add_member(:final_bake_time_in_minutes, Shapes::ShapeRef.new(shape: MinutesBetween0And24Hours, location_name: "FinalBakeTimeInMinutes"))
-    CreateDeploymentStrategyRequest.add_member(:growth_factor, Shapes::ShapeRef.new(shape: GrowthFactor, required: true, location_name: "GrowthFactor", metadata: {"box"=>true}))
+    CreateDeploymentStrategyRequest.add_member(:growth_factor, Shapes::ShapeRef.new(shape: GrowthFactor, required: true, location_name: "GrowthFactor", metadata: {"box" => true}))
     CreateDeploymentStrategyRequest.add_member(:growth_type, Shapes::ShapeRef.new(shape: GrowthType, location_name: "GrowthType"))
     CreateDeploymentStrategyRequest.add_member(:replicate_to, Shapes::ShapeRef.new(shape: ReplicateTo, location_name: "ReplicateTo"))
     CreateDeploymentStrategyRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
@@ -292,7 +292,7 @@ module Aws::AppConfig
     CreateEnvironmentRequest.struct_class = Types::CreateEnvironmentRequest
 
     CreateExtensionAssociationRequest.add_member(:extension_identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "ExtensionIdentifier"))
-    CreateExtensionAssociationRequest.add_member(:extension_version_number, Shapes::ShapeRef.new(shape: Integer, location_name: "ExtensionVersionNumber", metadata: {"box"=>true}))
+    CreateExtensionAssociationRequest.add_member(:extension_version_number, Shapes::ShapeRef.new(shape: Integer, location_name: "ExtensionVersionNumber", metadata: {"box" => true}))
     CreateExtensionAssociationRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "ResourceIdentifier"))
     CreateExtensionAssociationRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: ParameterValueMap, location_name: "Parameters"))
     CreateExtensionAssociationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
@@ -303,7 +303,7 @@ module Aws::AppConfig
     CreateExtensionRequest.add_member(:actions, Shapes::ShapeRef.new(shape: ActionsMap, required: true, location_name: "Actions"))
     CreateExtensionRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: ParameterMap, location_name: "Parameters"))
     CreateExtensionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
-    CreateExtensionRequest.add_member(:latest_version_number, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Latest-Version-Number", metadata: {"box"=>true}))
+    CreateExtensionRequest.add_member(:latest_version_number, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Latest-Version-Number", metadata: {"box" => true}))
     CreateExtensionRequest.struct_class = Types::CreateExtensionRequest
 
     CreateHostedConfigurationVersionRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "ApplicationId"))
@@ -311,7 +311,7 @@ module Aws::AppConfig
     CreateHostedConfigurationVersionRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location: "header", location_name: "Description"))
     CreateHostedConfigurationVersionRequest.add_member(:content, Shapes::ShapeRef.new(shape: Blob, required: true, location_name: "Content"))
     CreateHostedConfigurationVersionRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And255, required: true, location: "header", location_name: "Content-Type"))
-    CreateHostedConfigurationVersionRequest.add_member(:latest_version_number, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Latest-Version-Number", metadata: {"box"=>true}))
+    CreateHostedConfigurationVersionRequest.add_member(:latest_version_number, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Latest-Version-Number", metadata: {"box" => true}))
     CreateHostedConfigurationVersionRequest.add_member(:version_label, Shapes::ShapeRef.new(shape: VersionLabel, location: "header", location_name: "VersionLabel"))
     CreateHostedConfigurationVersionRequest.struct_class = Types::CreateHostedConfigurationVersionRequest
     CreateHostedConfigurationVersionRequest[:payload] = :content
@@ -337,7 +337,7 @@ module Aws::AppConfig
     DeleteExtensionAssociationRequest.struct_class = Types::DeleteExtensionAssociationRequest
 
     DeleteExtensionRequest.add_member(:extension_identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "ExtensionIdentifier"))
-    DeleteExtensionRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: Integer, location: "querystring", location_name: "version", metadata: {"box"=>true}))
+    DeleteExtensionRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: Integer, location: "querystring", location_name: "version", metadata: {"box" => true}))
     DeleteExtensionRequest.struct_class = Types::DeleteExtensionRequest
 
     DeleteHostedConfigurationVersionRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "ApplicationId"))
@@ -345,8 +345,8 @@ module Aws::AppConfig
     DeleteHostedConfigurationVersionRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: Integer, required: true, location: "uri", location_name: "VersionNumber"))
     DeleteHostedConfigurationVersionRequest.struct_class = Types::DeleteHostedConfigurationVersionRequest
 
-    DeletionProtectionSettings.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled", metadata: {"box"=>true}))
-    DeletionProtectionSettings.add_member(:protection_period_in_minutes, Shapes::ShapeRef.new(shape: DeletionProtectionDuration, location_name: "ProtectionPeriodInMinutes", metadata: {"box"=>true}))
+    DeletionProtectionSettings.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled", metadata: {"box" => true}))
+    DeletionProtectionSettings.add_member(:protection_period_in_minutes, Shapes::ShapeRef.new(shape: DeletionProtectionDuration, location_name: "ProtectionPeriodInMinutes", metadata: {"box" => true}))
     DeletionProtectionSettings.struct_class = Types::DeletionProtectionSettings
 
     Deployment.add_member(:application_id, Shapes::ShapeRef.new(shape: Id, location_name: "ApplicationId"))
@@ -492,7 +492,7 @@ module Aws::AppConfig
 
     GetDeploymentRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "ApplicationId"))
     GetDeploymentRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "EnvironmentId"))
-    GetDeploymentRequest.add_member(:deployment_number, Shapes::ShapeRef.new(shape: Integer, required: true, location: "uri", location_name: "DeploymentNumber", metadata: {"box"=>true}))
+    GetDeploymentRequest.add_member(:deployment_number, Shapes::ShapeRef.new(shape: Integer, required: true, location: "uri", location_name: "DeploymentNumber", metadata: {"box" => true}))
     GetDeploymentRequest.struct_class = Types::GetDeploymentRequest
 
     GetDeploymentStrategyRequest.add_member(:deployment_strategy_id, Shapes::ShapeRef.new(shape: DeploymentStrategyId, required: true, location: "uri", location_name: "DeploymentStrategyId"))
@@ -506,7 +506,7 @@ module Aws::AppConfig
     GetExtensionAssociationRequest.struct_class = Types::GetExtensionAssociationRequest
 
     GetExtensionRequest.add_member(:extension_identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "ExtensionIdentifier"))
-    GetExtensionRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: Integer, location: "querystring", location_name: "version_number", metadata: {"box"=>true}))
+    GetExtensionRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: Integer, location: "querystring", location_name: "version_number", metadata: {"box" => true}))
     GetExtensionRequest.struct_class = Types::GetExtensionRequest
 
     GetHostedConfigurationVersionRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "ApplicationId"))
@@ -553,46 +553,46 @@ module Aws::AppConfig
 
     InvalidConfigurationDetailList.member = Shapes::ShapeRef.new(shape: InvalidConfigurationDetail)
 
-    ListApplicationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max_results", metadata: {"box"=>true}))
+    ListApplicationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max_results", metadata: {"box" => true}))
     ListApplicationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "next_token"))
     ListApplicationsRequest.struct_class = Types::ListApplicationsRequest
 
     ListConfigurationProfilesRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "ApplicationId"))
-    ListConfigurationProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max_results", metadata: {"box"=>true}))
+    ListConfigurationProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max_results", metadata: {"box" => true}))
     ListConfigurationProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "next_token"))
     ListConfigurationProfilesRequest.add_member(:type, Shapes::ShapeRef.new(shape: ConfigurationProfileType, location: "querystring", location_name: "type"))
     ListConfigurationProfilesRequest.struct_class = Types::ListConfigurationProfilesRequest
 
-    ListDeploymentStrategiesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max_results", metadata: {"box"=>true}))
+    ListDeploymentStrategiesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max_results", metadata: {"box" => true}))
     ListDeploymentStrategiesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "next_token"))
     ListDeploymentStrategiesRequest.struct_class = Types::ListDeploymentStrategiesRequest
 
     ListDeploymentsRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "ApplicationId"))
     ListDeploymentsRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "EnvironmentId"))
-    ListDeploymentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max_results", metadata: {"box"=>true}))
+    ListDeploymentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max_results", metadata: {"box" => true}))
     ListDeploymentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "next_token"))
     ListDeploymentsRequest.struct_class = Types::ListDeploymentsRequest
 
     ListEnvironmentsRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "ApplicationId"))
-    ListEnvironmentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max_results", metadata: {"box"=>true}))
+    ListEnvironmentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max_results", metadata: {"box" => true}))
     ListEnvironmentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "next_token"))
     ListEnvironmentsRequest.struct_class = Types::ListEnvironmentsRequest
 
     ListExtensionAssociationsRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: Arn, location: "querystring", location_name: "resource_identifier"))
     ListExtensionAssociationsRequest.add_member(:extension_identifier, Shapes::ShapeRef.new(shape: Identifier, location: "querystring", location_name: "extension_identifier"))
-    ListExtensionAssociationsRequest.add_member(:extension_version_number, Shapes::ShapeRef.new(shape: Integer, location: "querystring", location_name: "extension_version_number", metadata: {"box"=>true}))
-    ListExtensionAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max_results", metadata: {"box"=>true}))
+    ListExtensionAssociationsRequest.add_member(:extension_version_number, Shapes::ShapeRef.new(shape: Integer, location: "querystring", location_name: "extension_version_number", metadata: {"box" => true}))
+    ListExtensionAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max_results", metadata: {"box" => true}))
     ListExtensionAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "next_token"))
     ListExtensionAssociationsRequest.struct_class = Types::ListExtensionAssociationsRequest
 
-    ListExtensionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max_results", metadata: {"box"=>true}))
+    ListExtensionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max_results", metadata: {"box" => true}))
     ListExtensionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "next_token"))
     ListExtensionsRequest.add_member(:name, Shapes::ShapeRef.new(shape: QueryName, location: "querystring", location_name: "name"))
     ListExtensionsRequest.struct_class = Types::ListExtensionsRequest
 
     ListHostedConfigurationVersionsRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "ApplicationId"))
     ListHostedConfigurationVersionsRequest.add_member(:configuration_profile_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "ConfigurationProfileId"))
-    ListHostedConfigurationVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max_results", metadata: {"box"=>true}))
+    ListHostedConfigurationVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max_results", metadata: {"box" => true}))
     ListHostedConfigurationVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "next_token"))
     ListHostedConfigurationVersionsRequest.add_member(:version_label, Shapes::ShapeRef.new(shape: QueryName, location: "querystring", location_name: "version_label"))
     ListHostedConfigurationVersionsRequest.struct_class = Types::ListHostedConfigurationVersionsRequest
@@ -646,8 +646,8 @@ module Aws::AppConfig
 
     StopDeploymentRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "ApplicationId"))
     StopDeploymentRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "EnvironmentId"))
-    StopDeploymentRequest.add_member(:deployment_number, Shapes::ShapeRef.new(shape: Integer, required: true, location: "uri", location_name: "DeploymentNumber", metadata: {"box"=>true}))
-    StopDeploymentRequest.add_member(:allow_revert, Shapes::ShapeRef.new(shape: Boolean, location: "header", location_name: "Allow-Revert", metadata: {"box"=>true}))
+    StopDeploymentRequest.add_member(:deployment_number, Shapes::ShapeRef.new(shape: Integer, required: true, location: "uri", location_name: "DeploymentNumber", metadata: {"box" => true}))
+    StopDeploymentRequest.add_member(:allow_revert, Shapes::ShapeRef.new(shape: Boolean, location: "header", location_name: "Allow-Revert", metadata: {"box" => true}))
     StopDeploymentRequest.struct_class = Types::StopDeploymentRequest
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
@@ -682,9 +682,9 @@ module Aws::AppConfig
 
     UpdateDeploymentStrategyRequest.add_member(:deployment_strategy_id, Shapes::ShapeRef.new(shape: DeploymentStrategyId, required: true, location: "uri", location_name: "DeploymentStrategyId"))
     UpdateDeploymentStrategyRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    UpdateDeploymentStrategyRequest.add_member(:deployment_duration_in_minutes, Shapes::ShapeRef.new(shape: MinutesBetween0And24Hours, location_name: "DeploymentDurationInMinutes", metadata: {"box"=>true}))
-    UpdateDeploymentStrategyRequest.add_member(:final_bake_time_in_minutes, Shapes::ShapeRef.new(shape: MinutesBetween0And24Hours, location_name: "FinalBakeTimeInMinutes", metadata: {"box"=>true}))
-    UpdateDeploymentStrategyRequest.add_member(:growth_factor, Shapes::ShapeRef.new(shape: GrowthFactor, location_name: "GrowthFactor", metadata: {"box"=>true}))
+    UpdateDeploymentStrategyRequest.add_member(:deployment_duration_in_minutes, Shapes::ShapeRef.new(shape: MinutesBetween0And24Hours, location_name: "DeploymentDurationInMinutes", metadata: {"box" => true}))
+    UpdateDeploymentStrategyRequest.add_member(:final_bake_time_in_minutes, Shapes::ShapeRef.new(shape: MinutesBetween0And24Hours, location_name: "FinalBakeTimeInMinutes", metadata: {"box" => true}))
+    UpdateDeploymentStrategyRequest.add_member(:growth_factor, Shapes::ShapeRef.new(shape: GrowthFactor, location_name: "GrowthFactor", metadata: {"box" => true}))
     UpdateDeploymentStrategyRequest.add_member(:growth_type, Shapes::ShapeRef.new(shape: GrowthType, location_name: "GrowthType"))
     UpdateDeploymentStrategyRequest.struct_class = Types::UpdateDeploymentStrategyRequest
 
@@ -703,7 +703,7 @@ module Aws::AppConfig
     UpdateExtensionRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     UpdateExtensionRequest.add_member(:actions, Shapes::ShapeRef.new(shape: ActionsMap, location_name: "Actions"))
     UpdateExtensionRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: ParameterMap, location_name: "Parameters"))
-    UpdateExtensionRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: Integer, location_name: "VersionNumber", metadata: {"box"=>true}))
+    UpdateExtensionRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: Integer, location_name: "VersionNumber", metadata: {"box" => true}))
     UpdateExtensionRequest.struct_class = Types::UpdateExtensionRequest
 
     ValidateConfigurationRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "ApplicationId"))

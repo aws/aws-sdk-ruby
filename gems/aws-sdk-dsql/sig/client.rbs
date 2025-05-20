@@ -81,41 +81,29 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateClusterOutput]
         def identifier: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "FAILED")
+        def status: () -> ("CREATING" | "ACTIVE" | "IDLE" | "INACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "FAILED" | "PENDING_SETUP" | "PENDING_DELETE")
         def creation_time: () -> ::Time
+        def multi_region_properties: () -> Types::MultiRegionProperties
         def deletion_protection_enabled: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DSQL/Client.html#create_cluster-instance_method
       def create_cluster: (
                             ?deletion_protection_enabled: bool,
                             ?tags: Hash[::String, ::String],
-                            ?client_token: ::String
+                            ?client_token: ::String,
+                            ?multi_region_properties: {
+                              witness_region: ::String?,
+                              clusters: Array[::String]?
+                            }
                           ) -> _CreateClusterResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterResponseSuccess
-
-      interface _CreateMultiRegionClustersResponseSuccess
-        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMultiRegionClustersOutput]
-        def linked_cluster_arns: () -> ::Array[::String]
-      end
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DSQL/Client.html#create_multi_region_clusters-instance_method
-      def create_multi_region_clusters: (
-                                          linked_region_list: Array[::String],
-                                          ?cluster_properties: Hash[::String, {
-                                              deletion_protection_enabled: bool?,
-                                              tags: Hash[::String, ::String]?
-                                            }],
-                                          witness_region: ::String,
-                                          ?client_token: ::String
-                                        ) -> _CreateMultiRegionClustersResponseSuccess
-                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMultiRegionClustersResponseSuccess
 
       interface _DeleteClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteClusterOutput]
         def identifier: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "FAILED")
+        def status: () -> ("CREATING" | "ACTIVE" | "IDLE" | "INACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "FAILED" | "PENDING_SETUP" | "PENDING_DELETE")
         def creation_time: () -> ::Time
-        def deletion_protection_enabled: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DSQL/Client.html#delete_cluster-instance_method
       def delete_cluster: (
@@ -124,22 +112,15 @@ module Aws
                           ) -> _DeleteClusterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteClusterResponseSuccess
 
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DSQL/Client.html#delete_multi_region_clusters-instance_method
-      def delete_multi_region_clusters: (
-                                          linked_cluster_arns: Array[::String],
-                                          ?client_token: ::String
-                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
-                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
-
       interface _GetClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetClusterOutput]
         def identifier: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "FAILED")
+        def status: () -> ("CREATING" | "ACTIVE" | "IDLE" | "INACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "FAILED" | "PENDING_SETUP" | "PENDING_DELETE")
         def creation_time: () -> ::Time
         def deletion_protection_enabled: () -> bool
-        def witness_region: () -> ::String
-        def linked_cluster_arns: () -> ::Array[::String]
+        def multi_region_properties: () -> Types::MultiRegionProperties
+        def tags: () -> ::Hash[::String, ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DSQL/Client.html#get_cluster-instance_method
       def get_cluster: (
@@ -197,17 +178,18 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateClusterOutput]
         def identifier: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "FAILED")
+        def status: () -> ("CREATING" | "ACTIVE" | "IDLE" | "INACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "FAILED" | "PENDING_SETUP" | "PENDING_DELETE")
         def creation_time: () -> ::Time
-        def deletion_protection_enabled: () -> bool
-        def witness_region: () -> ::String
-        def linked_cluster_arns: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DSQL/Client.html#update_cluster-instance_method
       def update_cluster: (
                             identifier: ::String,
                             ?deletion_protection_enabled: bool,
-                            ?client_token: ::String
+                            ?client_token: ::String,
+                            ?multi_region_properties: {
+                              witness_region: ::String?,
+                              clusters: Array[::String]?
+                            }
                           ) -> _UpdateClusterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClusterResponseSuccess
 

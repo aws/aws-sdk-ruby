@@ -481,7 +481,7 @@ module Aws::AmplifyUIBuilder
 
     CreateComponentRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "appId"))
     CreateComponentRequest.add_member(:environment_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "environmentName"))
-    CreateComponentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateComponentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateComponentRequest.add_member(:component_to_create, Shapes::ShapeRef.new(shape: CreateComponentData, required: true, location_name: "componentToCreate"))
     CreateComponentRequest.struct_class = Types::CreateComponentRequest
     CreateComponentRequest[:payload] = :component_to_create
@@ -506,7 +506,7 @@ module Aws::AmplifyUIBuilder
 
     CreateFormRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "appId"))
     CreateFormRequest.add_member(:environment_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "environmentName"))
-    CreateFormRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateFormRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateFormRequest.add_member(:form_to_create, Shapes::ShapeRef.new(shape: CreateFormData, required: true, location_name: "formToCreate"))
     CreateFormRequest.struct_class = Types::CreateFormRequest
     CreateFormRequest[:payload] = :form_to_create
@@ -525,7 +525,7 @@ module Aws::AmplifyUIBuilder
 
     CreateThemeRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "appId"))
     CreateThemeRequest.add_member(:environment_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "environmentName"))
-    CreateThemeRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateThemeRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateThemeRequest.add_member(:theme_to_create, Shapes::ShapeRef.new(shape: CreateThemeData, required: true, location_name: "themeToCreate"))
     CreateThemeRequest.struct_class = Types::CreateThemeRequest
     CreateThemeRequest[:payload] = :theme_to_create
@@ -935,7 +935,7 @@ module Aws::AmplifyUIBuilder
 
     StartCodegenJobRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, required: true, location: "uri", location_name: "appId"))
     StartCodegenJobRequest.add_member(:environment_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "environmentName"))
-    StartCodegenJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    StartCodegenJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     StartCodegenJobRequest.add_member(:codegen_job_to_create, Shapes::ShapeRef.new(shape: StartCodegenJobData, required: true, location_name: "codegenJobToCreate"))
     StartCodegenJobRequest.struct_class = Types::StartCodegenJobRequest
     StartCodegenJobRequest[:payload] = :codegen_job_to_create
@@ -1019,7 +1019,7 @@ module Aws::AmplifyUIBuilder
     UpdateComponentRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "appId"))
     UpdateComponentRequest.add_member(:environment_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "environmentName"))
     UpdateComponentRequest.add_member(:id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "id"))
-    UpdateComponentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateComponentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateComponentRequest.add_member(:updated_component, Shapes::ShapeRef.new(shape: UpdateComponentData, required: true, location_name: "updatedComponent"))
     UpdateComponentRequest.struct_class = Types::UpdateComponentRequest
     UpdateComponentRequest[:payload] = :updated_component
@@ -1044,7 +1044,7 @@ module Aws::AmplifyUIBuilder
     UpdateFormRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "appId"))
     UpdateFormRequest.add_member(:environment_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "environmentName"))
     UpdateFormRequest.add_member(:id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "id"))
-    UpdateFormRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateFormRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateFormRequest.add_member(:updated_form, Shapes::ShapeRef.new(shape: UpdateFormData, required: true, location_name: "updatedForm"))
     UpdateFormRequest.struct_class = Types::UpdateFormRequest
     UpdateFormRequest[:payload] = :updated_form
@@ -1064,7 +1064,7 @@ module Aws::AmplifyUIBuilder
     UpdateThemeRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "appId"))
     UpdateThemeRequest.add_member(:environment_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "environmentName"))
     UpdateThemeRequest.add_member(:id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "id"))
-    UpdateThemeRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateThemeRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateThemeRequest.add_member(:updated_theme, Shapes::ShapeRef.new(shape: UpdateThemeData, required: true, location_name: "updatedTheme"))
     UpdateThemeRequest.struct_class = Types::UpdateThemeRequest
     UpdateThemeRequest[:payload] = :updated_theme

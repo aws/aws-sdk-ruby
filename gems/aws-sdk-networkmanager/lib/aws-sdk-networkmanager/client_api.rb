@@ -688,7 +688,7 @@ module Aws::NetworkManager
     CoreNetworkPolicy.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedAt"))
     CoreNetworkPolicy.add_member(:change_set_state, Shapes::ShapeRef.new(shape: ChangeSetState, location_name: "ChangeSetState"))
     CoreNetworkPolicy.add_member(:policy_errors, Shapes::ShapeRef.new(shape: CoreNetworkPolicyErrorList, location_name: "PolicyErrors"))
-    CoreNetworkPolicy.add_member(:policy_document, Shapes::ShapeRef.new(shape: CoreNetworkPolicyDocument, location_name: "PolicyDocument", metadata: {"jsonvalue"=>true}))
+    CoreNetworkPolicy.add_member(:policy_document, Shapes::ShapeRef.new(shape: CoreNetworkPolicyDocument, location_name: "PolicyDocument", metadata: {"jsonvalue" => true}))
     CoreNetworkPolicy.struct_class = Types::CoreNetworkPolicy
 
     CoreNetworkPolicyError.add_member(:error_code, Shapes::ShapeRef.new(shape: ServerSideString, required: true, location_name: "ErrorCode"))
@@ -740,7 +740,7 @@ module Aws::NetworkManager
     CreateConnectAttachmentRequest.add_member(:transport_attachment_id, Shapes::ShapeRef.new(shape: AttachmentId, required: true, location_name: "TransportAttachmentId"))
     CreateConnectAttachmentRequest.add_member(:options, Shapes::ShapeRef.new(shape: ConnectAttachmentOptions, required: true, location_name: "Options"))
     CreateConnectAttachmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateConnectAttachmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateConnectAttachmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateConnectAttachmentRequest.struct_class = Types::CreateConnectAttachmentRequest
 
     CreateConnectAttachmentResponse.add_member(:connect_attachment, Shapes::ShapeRef.new(shape: ConnectAttachment, location_name: "ConnectAttachment"))
@@ -752,7 +752,7 @@ module Aws::NetworkManager
     CreateConnectPeerRequest.add_member(:bgp_options, Shapes::ShapeRef.new(shape: BgpOptions, location_name: "BgpOptions"))
     CreateConnectPeerRequest.add_member(:inside_cidr_blocks, Shapes::ShapeRef.new(shape: ConstrainedStringList, location_name: "InsideCidrBlocks"))
     CreateConnectPeerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateConnectPeerRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateConnectPeerRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateConnectPeerRequest.add_member(:subnet_arn, Shapes::ShapeRef.new(shape: SubnetArn, location_name: "SubnetArn"))
     CreateConnectPeerRequest.struct_class = Types::CreateConnectPeerRequest
 
@@ -775,7 +775,7 @@ module Aws::NetworkManager
     CreateCoreNetworkRequest.add_member(:description, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "Description"))
     CreateCoreNetworkRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateCoreNetworkRequest.add_member(:policy_document, Shapes::ShapeRef.new(shape: CoreNetworkPolicyDocument, location_name: "PolicyDocument"))
-    CreateCoreNetworkRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateCoreNetworkRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateCoreNetworkRequest.struct_class = Types::CreateCoreNetworkRequest
 
     CreateCoreNetworkResponse.add_member(:core_network, Shapes::ShapeRef.new(shape: CoreNetwork, location_name: "CoreNetwork"))
@@ -800,7 +800,7 @@ module Aws::NetworkManager
     CreateDirectConnectGatewayAttachmentRequest.add_member(:direct_connect_gateway_arn, Shapes::ShapeRef.new(shape: DirectConnectGatewayArn, required: true, location_name: "DirectConnectGatewayArn"))
     CreateDirectConnectGatewayAttachmentRequest.add_member(:edge_locations, Shapes::ShapeRef.new(shape: ExternalRegionCodeList, required: true, location_name: "EdgeLocations"))
     CreateDirectConnectGatewayAttachmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateDirectConnectGatewayAttachmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDirectConnectGatewayAttachmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateDirectConnectGatewayAttachmentRequest.struct_class = Types::CreateDirectConnectGatewayAttachmentRequest
 
     CreateDirectConnectGatewayAttachmentResponse.add_member(:direct_connect_gateway_attachment, Shapes::ShapeRef.new(shape: DirectConnectGatewayAttachment, location_name: "DirectConnectGatewayAttachment"))
@@ -837,7 +837,7 @@ module Aws::NetworkManager
     CreateSiteToSiteVpnAttachmentRequest.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, required: true, location_name: "CoreNetworkId"))
     CreateSiteToSiteVpnAttachmentRequest.add_member(:vpn_connection_arn, Shapes::ShapeRef.new(shape: VpnConnectionArn, required: true, location_name: "VpnConnectionArn"))
     CreateSiteToSiteVpnAttachmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateSiteToSiteVpnAttachmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateSiteToSiteVpnAttachmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateSiteToSiteVpnAttachmentRequest.struct_class = Types::CreateSiteToSiteVpnAttachmentRequest
 
     CreateSiteToSiteVpnAttachmentResponse.add_member(:site_to_site_vpn_attachment, Shapes::ShapeRef.new(shape: SiteToSiteVpnAttachment, location_name: "SiteToSiteVpnAttachment"))
@@ -846,7 +846,7 @@ module Aws::NetworkManager
     CreateTransitGatewayPeeringRequest.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, required: true, location_name: "CoreNetworkId"))
     CreateTransitGatewayPeeringRequest.add_member(:transit_gateway_arn, Shapes::ShapeRef.new(shape: TransitGatewayArn, required: true, location_name: "TransitGatewayArn"))
     CreateTransitGatewayPeeringRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateTransitGatewayPeeringRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateTransitGatewayPeeringRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateTransitGatewayPeeringRequest.struct_class = Types::CreateTransitGatewayPeeringRequest
 
     CreateTransitGatewayPeeringResponse.add_member(:transit_gateway_peering, Shapes::ShapeRef.new(shape: TransitGatewayPeering, location_name: "TransitGatewayPeering"))
@@ -855,7 +855,7 @@ module Aws::NetworkManager
     CreateTransitGatewayRouteTableAttachmentRequest.add_member(:peering_id, Shapes::ShapeRef.new(shape: PeeringId, required: true, location_name: "PeeringId"))
     CreateTransitGatewayRouteTableAttachmentRequest.add_member(:transit_gateway_route_table_arn, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableArn, required: true, location_name: "TransitGatewayRouteTableArn"))
     CreateTransitGatewayRouteTableAttachmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateTransitGatewayRouteTableAttachmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateTransitGatewayRouteTableAttachmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateTransitGatewayRouteTableAttachmentRequest.struct_class = Types::CreateTransitGatewayRouteTableAttachmentRequest
 
     CreateTransitGatewayRouteTableAttachmentResponse.add_member(:transit_gateway_route_table_attachment, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableAttachment, location_name: "TransitGatewayRouteTableAttachment"))
@@ -866,7 +866,7 @@ module Aws::NetworkManager
     CreateVpcAttachmentRequest.add_member(:subnet_arns, Shapes::ShapeRef.new(shape: SubnetArnList, required: true, location_name: "SubnetArns"))
     CreateVpcAttachmentRequest.add_member(:options, Shapes::ShapeRef.new(shape: VpcOptions, location_name: "Options"))
     CreateVpcAttachmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateVpcAttachmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateVpcAttachmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateVpcAttachmentRequest.struct_class = Types::CreateVpcAttachmentRequest
 
     CreateVpcAttachmentResponse.add_member(:vpc_attachment, Shapes::ShapeRef.new(shape: VpcAttachment, location_name: "VpcAttachment"))
@@ -1241,7 +1241,7 @@ module Aws::NetworkManager
     GetResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "resourceArn"))
     GetResourcePolicyRequest.struct_class = Types::GetResourcePolicyRequest
 
-    GetResourcePolicyResponse.add_member(:policy_document, Shapes::ShapeRef.new(shape: ResourcePolicyDocument, location_name: "PolicyDocument", metadata: {"jsonvalue"=>true}))
+    GetResourcePolicyResponse.add_member(:policy_document, Shapes::ShapeRef.new(shape: ResourcePolicyDocument, location_name: "PolicyDocument", metadata: {"jsonvalue" => true}))
     GetResourcePolicyResponse.struct_class = Types::GetResourcePolicyResponse
 
     GetRouteAnalysisRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: GlobalNetworkId, required: true, location: "uri", location_name: "globalNetworkId"))
@@ -1537,16 +1537,16 @@ module Aws::NetworkManager
     ProposedSegmentChange.struct_class = Types::ProposedSegmentChange
 
     PutCoreNetworkPolicyRequest.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, required: true, location: "uri", location_name: "coreNetworkId"))
-    PutCoreNetworkPolicyRequest.add_member(:policy_document, Shapes::ShapeRef.new(shape: CoreNetworkPolicyDocument, required: true, location_name: "PolicyDocument", metadata: {"jsonvalue"=>true}))
+    PutCoreNetworkPolicyRequest.add_member(:policy_document, Shapes::ShapeRef.new(shape: CoreNetworkPolicyDocument, required: true, location_name: "PolicyDocument", metadata: {"jsonvalue" => true}))
     PutCoreNetworkPolicyRequest.add_member(:description, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "Description"))
     PutCoreNetworkPolicyRequest.add_member(:latest_version_id, Shapes::ShapeRef.new(shape: Integer, location_name: "LatestVersionId"))
-    PutCoreNetworkPolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    PutCoreNetworkPolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     PutCoreNetworkPolicyRequest.struct_class = Types::PutCoreNetworkPolicyRequest
 
     PutCoreNetworkPolicyResponse.add_member(:core_network_policy, Shapes::ShapeRef.new(shape: CoreNetworkPolicy, location_name: "CoreNetworkPolicy"))
     PutCoreNetworkPolicyResponse.struct_class = Types::PutCoreNetworkPolicyResponse
 
-    PutResourcePolicyRequest.add_member(:policy_document, Shapes::ShapeRef.new(shape: ResourcePolicyDocument, required: true, location_name: "PolicyDocument", metadata: {"jsonvalue"=>true}))
+    PutResourcePolicyRequest.add_member(:policy_document, Shapes::ShapeRef.new(shape: ResourcePolicyDocument, required: true, location_name: "PolicyDocument", metadata: {"jsonvalue" => true}))
     PutResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "resourceArn"))
     PutResourcePolicyRequest.struct_class = Types::PutResourcePolicyRequest
 

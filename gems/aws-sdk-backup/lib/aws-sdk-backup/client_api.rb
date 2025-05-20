@@ -653,7 +653,7 @@ module Aws::Backup
     CreateFrameworkInput.add_member(:framework_name, Shapes::ShapeRef.new(shape: FrameworkName, required: true, location_name: "FrameworkName"))
     CreateFrameworkInput.add_member(:framework_description, Shapes::ShapeRef.new(shape: FrameworkDescription, location_name: "FrameworkDescription"))
     CreateFrameworkInput.add_member(:framework_controls, Shapes::ShapeRef.new(shape: FrameworkControls, required: true, location_name: "FrameworkControls"))
-    CreateFrameworkInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: string, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    CreateFrameworkInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: string, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     CreateFrameworkInput.add_member(:framework_tags, Shapes::ShapeRef.new(shape: stringMap, location_name: "FrameworkTags"))
     CreateFrameworkInput.struct_class = Types::CreateFrameworkInput
 
@@ -695,7 +695,7 @@ module Aws::Backup
     CreateReportPlanInput.add_member(:report_delivery_channel, Shapes::ShapeRef.new(shape: ReportDeliveryChannel, required: true, location_name: "ReportDeliveryChannel"))
     CreateReportPlanInput.add_member(:report_setting, Shapes::ShapeRef.new(shape: ReportSetting, required: true, location_name: "ReportSetting"))
     CreateReportPlanInput.add_member(:report_plan_tags, Shapes::ShapeRef.new(shape: stringMap, location_name: "ReportPlanTags"))
-    CreateReportPlanInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: string, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    CreateReportPlanInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: string, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     CreateReportPlanInput.struct_class = Types::CreateReportPlanInput
 
     CreateReportPlanOutput.add_member(:report_plan_name, Shapes::ShapeRef.new(shape: ReportPlanName, location_name: "ReportPlanName"))
@@ -1781,7 +1781,7 @@ module Aws::Backup
     StartCopyJobOutput.struct_class = Types::StartCopyJobOutput
 
     StartReportJobInput.add_member(:report_plan_name, Shapes::ShapeRef.new(shape: ReportPlanName, required: true, location: "uri", location_name: "reportPlanName"))
-    StartReportJobInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: string, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    StartReportJobInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: string, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     StartReportJobInput.struct_class = Types::StartReportJobInput
 
     StartReportJobOutput.add_member(:report_job_id, Shapes::ShapeRef.new(shape: ReportJobId, location_name: "ReportJobId"))
@@ -1828,7 +1828,7 @@ module Aws::Backup
     UpdateFrameworkInput.add_member(:framework_name, Shapes::ShapeRef.new(shape: FrameworkName, required: true, location: "uri", location_name: "frameworkName"))
     UpdateFrameworkInput.add_member(:framework_description, Shapes::ShapeRef.new(shape: FrameworkDescription, location_name: "FrameworkDescription"))
     UpdateFrameworkInput.add_member(:framework_controls, Shapes::ShapeRef.new(shape: FrameworkControls, location_name: "FrameworkControls"))
-    UpdateFrameworkInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: string, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    UpdateFrameworkInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: string, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     UpdateFrameworkInput.struct_class = Types::UpdateFrameworkInput
 
     UpdateFrameworkOutput.add_member(:framework_name, Shapes::ShapeRef.new(shape: FrameworkName, location_name: "FrameworkName"))
@@ -1870,7 +1870,7 @@ module Aws::Backup
     UpdateReportPlanInput.add_member(:report_plan_description, Shapes::ShapeRef.new(shape: ReportPlanDescription, location_name: "ReportPlanDescription"))
     UpdateReportPlanInput.add_member(:report_delivery_channel, Shapes::ShapeRef.new(shape: ReportDeliveryChannel, location_name: "ReportDeliveryChannel"))
     UpdateReportPlanInput.add_member(:report_setting, Shapes::ShapeRef.new(shape: ReportSetting, location_name: "ReportSetting"))
-    UpdateReportPlanInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: string, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    UpdateReportPlanInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: string, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     UpdateReportPlanInput.struct_class = Types::UpdateReportPlanInput
 
     UpdateReportPlanOutput.add_member(:report_plan_name, Shapes::ShapeRef.new(shape: ReportPlanName, location_name: "ReportPlanName"))

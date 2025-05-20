@@ -285,6 +285,7 @@ module Aws::VerifiedPermissions
       attr_accessor validation_settings: Types::ValidationSettings
       attr_accessor description: ::String
       attr_accessor deletion_protection: ("ENABLED" | "DISABLED")
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:description]
     end
 
@@ -437,6 +438,7 @@ module Aws::VerifiedPermissions
 
     class GetPolicyStoreInput
       attr_accessor policy_store_id: ::String
+      attr_accessor tags: bool
       SENSITIVE: []
     end
 
@@ -448,6 +450,8 @@ module Aws::VerifiedPermissions
       attr_accessor last_updated_date: ::Time
       attr_accessor description: ::String
       attr_accessor deletion_protection: ("ENABLED" | "DISABLED")
+      attr_accessor cedar_version: ("CEDAR_2" | "CEDAR_4")
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:description]
     end
 
@@ -609,6 +613,16 @@ module Aws::VerifiedPermissions
     class ListPolicyTemplatesOutput
       attr_accessor next_token: ::String
       attr_accessor policy_templates: ::Array[Types::PolicyTemplateItem]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -878,6 +892,15 @@ module Aws::VerifiedPermissions
       SENSITIVE: [:description]
     end
 
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceOutput < Aws::EmptyStructure
+    end
+
     class TemplateLinkedPolicyDefinition
       attr_accessor policy_template_id: ::String
       attr_accessor principal: Types::EntityIdentifier
@@ -904,6 +927,21 @@ module Aws::VerifiedPermissions
       attr_accessor service_code: ::String
       attr_accessor quota_code: ::String
       SENSITIVE: []
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceOutput < Aws::EmptyStructure
     end
 
     class UpdateCognitoGroupConfiguration

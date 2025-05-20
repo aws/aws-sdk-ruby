@@ -514,6 +514,42 @@ module Aws::MediaPackageV2
     #   Presentation Description (MPD).
     #   @return [Types::DashUtcTiming]
     #
+    # @!attribute [rw] profiles
+    #   The profile that the output is compliant with.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] base_urls
+    #   The base URLs to use for retrieving segments.
+    #   @return [Array<Types::DashBaseUrl>]
+    #
+    # @!attribute [rw] program_information
+    #   Details about the content that you want MediaPackage to pass through
+    #   in the manifest to the playback device.
+    #   @return [Types::DashProgramInformation]
+    #
+    # @!attribute [rw] dvb_settings
+    #   For endpoints that use the DVB-DASH profile only. The font download
+    #   and error reporting information that you want MediaPackage to pass
+    #   through to the manifest.
+    #   @return [Types::DashDvbSettings]
+    #
+    # @!attribute [rw] compactness
+    #   The layout of the DASH manifest that MediaPackage produces.
+    #   `STANDARD` indicates a default manifest, which is compacted. `NONE`
+    #   indicates a full manifest.
+    #
+    #   For information about compactness, see [DASH manifest
+    #   compactness][1] in the *Elemental MediaPackage v2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediapackage/latest/userguide/compacted.html
+    #   @return [String]
+    #
+    # @!attribute [rw] subtitle_configuration
+    #   The configuration for DASH subtitles.
+    #   @return [Types::DashSubtitleConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/CreateDashManifestConfiguration AWS API Documentation
     #
     class CreateDashManifestConfiguration < Struct.new(
@@ -527,7 +563,13 @@ module Aws::MediaPackageV2
       :period_triggers,
       :scte_dash,
       :drm_signaling,
-      :utc_timing)
+      :utc_timing,
+      :profiles,
+      :base_urls,
+      :program_information,
+      :dvb_settings,
+      :compactness,
+      :subtitle_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1040,6 +1082,194 @@ module Aws::MediaPackageV2
       :force_endpoint_error_configuration,
       :etag,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The base URLs to use for retrieving segments. You can specify multiple
+    # locations and indicate the priority and weight for when each should be
+    # used, for use in mutli-CDN workflows.
+    #
+    # @!attribute [rw] url
+    #   A source location for segments.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_location
+    #   The name of the source location.
+    #   @return [String]
+    #
+    # @!attribute [rw] dvb_priority
+    #   For use with DVB-DASH profiles only. The priority of this location
+    #   for servings segments. The lower the number, the higher the
+    #   priority.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dvb_weight
+    #   For use with DVB-DASH profiles only. The weighting for source
+    #   locations that have the same priority.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/DashBaseUrl AWS API Documentation
+    #
+    class DashBaseUrl < Struct.new(
+      :url,
+      :service_location,
+      :dvb_priority,
+      :dvb_weight)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # For use with DVB-DASH profiles only. The settings for font downloads
+    # that you want Elemental MediaPackage to pass through to the manifest.
+    #
+    # @!attribute [rw] url
+    #   The URL for downloading fonts for subtitles.
+    #   @return [String]
+    #
+    # @!attribute [rw] mime_type
+    #   The `mimeType` of the resource that's at the font download URL.
+    #
+    #   For information about font MIME types, see the [MPEG-DASH Profile
+    #   for Transport of ISO BMFF Based DVB Services over IP Based
+    #   Networks][1] document.
+    #
+    #
+    #
+    #   [1]: https://dvb.org/wp-content/uploads/2021/06/A168r4_MPEG-DASH-Profile-for-Transport-of-ISO-BMFF-Based-DVB-Services_Draft-ts_103-285-v140_November_2021.pdf
+    #   @return [String]
+    #
+    # @!attribute [rw] font_family
+    #   The `fontFamily` name for subtitles, as described in [EBU-TT-D
+    #   Subtitling Distribution Format][1].
+    #
+    #
+    #
+    #   [1]: https://tech.ebu.ch/publications/tech3380
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/DashDvbFontDownload AWS API Documentation
+    #
+    class DashDvbFontDownload < Struct.new(
+      :url,
+      :mime_type,
+      :font_family)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # For use with DVB-DASH profiles only. The settings for error reporting
+    # from the playback device that you want Elemental MediaPackage to pass
+    # through to the manifest.
+    #
+    # @!attribute [rw] reporting_url
+    #   The URL where playback devices send error reports.
+    #   @return [String]
+    #
+    # @!attribute [rw] probability
+    #   The number of playback devices per 1000 that will send error reports
+    #   to the reporting URL. This represents the probability that a
+    #   playback device will be a reporting player for this session.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/DashDvbMetricsReporting AWS API Documentation
+    #
+    class DashDvbMetricsReporting < Struct.new(
+      :reporting_url,
+      :probability)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # For endpoints that use the DVB-DASH profile only. The font download
+    # and error reporting information that you want MediaPackage to pass
+    # through to the manifest.
+    #
+    # @!attribute [rw] font_download
+    #   Subtitle font settings.
+    #   @return [Types::DashDvbFontDownload]
+    #
+    # @!attribute [rw] error_metrics
+    #   Playback device error reporting settings.
+    #   @return [Array<Types::DashDvbMetricsReporting>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/DashDvbSettings AWS API Documentation
+    #
+    class DashDvbSettings < Struct.new(
+      :font_download,
+      :error_metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the content that you want MediaPackage to pass through
+    # in the manifest to the playback device.
+    #
+    # @!attribute [rw] title
+    #   The title for the manifest.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   Information about the content provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] copyright
+    #   A copyright statement about the content.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language code for this manifest.
+    #   @return [String]
+    #
+    # @!attribute [rw] more_information_url
+    #   An absolute URL that contains more information about this content.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/DashProgramInformation AWS API Documentation
+    #
+    class DashProgramInformation < Struct.new(
+      :title,
+      :source,
+      :copyright,
+      :language_code,
+      :more_information_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for DASH subtitles.
+    #
+    # @!attribute [rw] ttml_configuration
+    #   Settings for TTML subtitles.
+    #   @return [Types::DashTtmlConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/DashSubtitleConfiguration AWS API Documentation
+    #
+    class DashSubtitleConfiguration < Struct.new(
+      :ttml_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The settings for TTML subtitles.
+    #
+    # @!attribute [rw] ttml_profile
+    #   The profile that MediaPackage uses when signaling subtitles in the
+    #   manifest. `IMSC` is the default profile. `EBU-TT-D` produces
+    #   subtitles that are compliant with the EBU-TT-D TTML profile.
+    #   MediaPackage passes through subtitle styles to the manifest. For
+    #   more information about EBU-TT-D subtitles, see [EBU-TT-D Subtitling
+    #   Distribution Format][1].
+    #
+    #
+    #
+    #   [1]: https://tech.ebu.ch/publications/tech3380
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/DashTtmlConfiguration AWS API Documentation
+    #
+    class DashTtmlConfiguration < Struct.new(
+      :ttml_profile)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1741,6 +1971,35 @@ module Aws::MediaPackageV2
     #   Presentation Description (MPD).
     #   @return [Types::DashUtcTiming]
     #
+    # @!attribute [rw] profiles
+    #   The profile that the output is compliant with.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] base_urls
+    #   The base URL to use for retrieving segments.
+    #   @return [Array<Types::DashBaseUrl>]
+    #
+    # @!attribute [rw] program_information
+    #   Details about the content that you want MediaPackage to pass through
+    #   in the manifest to the playback device.
+    #   @return [Types::DashProgramInformation]
+    #
+    # @!attribute [rw] dvb_settings
+    #   For endpoints that use the DVB-DASH profile only. The font download
+    #   and error reporting information that you want MediaPackage to pass
+    #   through to the manifest.
+    #   @return [Types::DashDvbSettings]
+    #
+    # @!attribute [rw] compactness
+    #   The layout of the DASH manifest that MediaPackage produces.
+    #   `STANDARD` indicates a default manifest, which is compacted. `NONE`
+    #   indicates a full manifest.
+    #   @return [String]
+    #
+    # @!attribute [rw] subtitle_configuration
+    #   The configuration for DASH subtitles.
+    #   @return [Types::DashSubtitleConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/GetDashManifestConfiguration AWS API Documentation
     #
     class GetDashManifestConfiguration < Struct.new(
@@ -1755,7 +2014,13 @@ module Aws::MediaPackageV2
       :period_triggers,
       :scte_dash,
       :drm_signaling,
-      :utc_timing)
+      :utc_timing,
+      :profiles,
+      :base_urls,
+      :program_information,
+      :dvb_settings,
+      :compactness,
+      :subtitle_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

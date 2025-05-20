@@ -120,6 +120,7 @@ module Aws::LicenseManager
       attr_accessor principals: ::Array[::String]
       attr_accessor home_region: ::String
       attr_accessor allowed_operations: ::Array[("CreateGrant" | "CheckoutLicense" | "CheckoutBorrowLicense" | "CheckInLicense" | "ExtendConsumptionLicense" | "ListPurchasedLicenses" | "CreateToken")]
+      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 
@@ -207,6 +208,7 @@ module Aws::LicenseManager
       attr_accessor consumption_configuration: Types::ConsumptionConfiguration
       attr_accessor license_metadata: ::Array[Types::Metadata]
       attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 

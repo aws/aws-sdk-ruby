@@ -296,6 +296,28 @@ module Aws
                         ) -> _CancelStepsResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelStepsResponseSuccess
 
+      interface _CreatePersistentAppUIResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePersistentAppUIOutput]
+        def persistent_app_ui_id: () -> ::String
+        def runtime_role_enabled_cluster: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#create_persistent_app_ui-instance_method
+      def create_persistent_app_ui: (
+                                      target_resource_arn: ::String,
+                                      ?emr_containers_config: {
+                                        job_run_id: ::String?
+                                      },
+                                      ?tags: Array[
+                                        {
+                                          key: ::String?,
+                                          value: ::String?
+                                        },
+                                      ],
+                                      ?x_referer: ::String,
+                                      ?profiler_type: ("SHS" | "TEZUI" | "YTS")
+                                    ) -> _CreatePersistentAppUIResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePersistentAppUIResponseSuccess
+
       interface _CreateSecurityConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateSecurityConfigurationOutput]
         def name: () -> ::String
@@ -407,6 +429,16 @@ module Aws
                                        ) -> _DescribeNotebookExecutionResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeNotebookExecutionResponseSuccess
 
+      interface _DescribePersistentAppUIResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePersistentAppUIOutput]
+        def persistent_app_ui: () -> Types::PersistentAppUI
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#describe_persistent_app_ui-instance_method
+      def describe_persistent_app_ui: (
+                                        persistent_app_ui_id: ::String
+                                      ) -> _DescribePersistentAppUIResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePersistentAppUIResponseSuccess
+
       interface _DescribeReleaseLabelResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeReleaseLabelOutput]
         def release_label: () -> ::String
@@ -496,6 +528,36 @@ module Aws
                                         cluster_id: ::String
                                       ) -> _GetManagedScalingPolicyResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetManagedScalingPolicyResponseSuccess
+
+      interface _GetOnClusterAppUIPresignedURLResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOnClusterAppUIPresignedURLOutput]
+        def presigned_url_ready: () -> bool
+        def presigned_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#get_on_cluster_app_ui_presigned_url-instance_method
+      def get_on_cluster_app_ui_presigned_url: (
+                                                 cluster_id: ::String,
+                                                 ?on_cluster_app_ui_type: ("SparkHistoryServer" | "YarnTimelineService" | "TezUI" | "ApplicationMaster" | "JobHistoryServer" | "ResourceManager"),
+                                                 ?application_id: ::String,
+                                                 ?dry_run: bool,
+                                                 ?execution_role_arn: ::String
+                                               ) -> _GetOnClusterAppUIPresignedURLResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOnClusterAppUIPresignedURLResponseSuccess
+
+      interface _GetPersistentAppUIPresignedURLResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPersistentAppUIPresignedURLOutput]
+        def presigned_url_ready: () -> bool
+        def presigned_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMR/Client.html#get_persistent_app_ui_presigned_url-instance_method
+      def get_persistent_app_ui_presigned_url: (
+                                                 persistent_app_ui_id: ::String,
+                                                 ?persistent_app_ui_type: ("SHS" | "TEZ" | "YTS"),
+                                                 ?application_id: ::String,
+                                                 ?auth_proxy_call: bool,
+                                                 ?execution_role_arn: ::String
+                                               ) -> _GetPersistentAppUIPresignedURLResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPersistentAppUIPresignedURLResponseSuccess
 
       interface _GetStudioSessionMappingResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetStudioSessionMappingOutput]

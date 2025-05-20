@@ -155,7 +155,7 @@ module Aws::Route53RecoveryControlConfig
     ControlPanel.add_member(:owner, Shapes::ShapeRef.new(shape: __stringMin12Max12PatternD12, location_name: "Owner"))
     ControlPanel.struct_class = Types::ControlPanel
 
-    CreateClusterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateClusterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateClusterRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, required: true, location_name: "ClusterName"))
     CreateClusterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__stringMin0Max256PatternS, location_name: "Tags"))
     CreateClusterRequest.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
@@ -164,7 +164,7 @@ module Aws::Route53RecoveryControlConfig
     CreateClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
     CreateClusterResponse.struct_class = Types::CreateClusterResponse
 
-    CreateControlPanelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateControlPanelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateControlPanelRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternAZaZ09, required: true, location_name: "ClusterArn"))
     CreateControlPanelRequest.add_member(:control_panel_name, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, required: true, location_name: "ControlPanelName"))
     CreateControlPanelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__stringMin0Max256PatternS, location_name: "Tags"))
@@ -173,7 +173,7 @@ module Aws::Route53RecoveryControlConfig
     CreateControlPanelResponse.add_member(:control_panel, Shapes::ShapeRef.new(shape: ControlPanel, location_name: "ControlPanel"))
     CreateControlPanelResponse.struct_class = Types::CreateControlPanelResponse
 
-    CreateRoutingControlRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateRoutingControlRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateRoutingControlRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternAZaZ09, required: true, location_name: "ClusterArn"))
     CreateRoutingControlRequest.add_member(:control_panel_arn, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternAZaZ09, location_name: "ControlPanelArn"))
     CreateRoutingControlRequest.add_member(:routing_control_name, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, required: true, location_name: "RoutingControlName"))
@@ -183,7 +183,7 @@ module Aws::Route53RecoveryControlConfig
     CreateRoutingControlResponse.struct_class = Types::CreateRoutingControlResponse
 
     CreateSafetyRuleRequest.add_member(:assertion_rule, Shapes::ShapeRef.new(shape: NewAssertionRule, location_name: "AssertionRule"))
-    CreateSafetyRuleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateSafetyRuleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateSafetyRuleRequest.add_member(:gating_rule, Shapes::ShapeRef.new(shape: NewGatingRule, location_name: "GatingRule"))
     CreateSafetyRuleRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__stringMin0Max256PatternS, location_name: "Tags"))
     CreateSafetyRuleRequest.struct_class = Types::CreateSafetyRuleRequest

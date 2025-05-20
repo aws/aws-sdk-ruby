@@ -115,6 +115,7 @@ module Aws::MediaConvert
     CaptionSourceFramerate = Shapes::StructureShape.new(name: 'CaptionSourceFramerate')
     CaptionSourceSettings = Shapes::StructureShape.new(name: 'CaptionSourceSettings')
     CaptionSourceType = Shapes::StringShape.new(name: 'CaptionSourceType')
+    CaptionSourceUpconvertSTLToTeletext = Shapes::StringShape.new(name: 'CaptionSourceUpconvertSTLToTeletext')
     ChannelMapping = Shapes::StructureShape.new(name: 'ChannelMapping')
     ChromaPositionMode = Shapes::StringShape.new(name: 'ChromaPositionMode')
     ClipLimits = Shapes::StructureShape.new(name: 'ClipLimits')
@@ -286,6 +287,7 @@ module Aws::MediaConvert
     ForceIncludeRenditionSize = Shapes::StructureShape.new(name: 'ForceIncludeRenditionSize')
     Format = Shapes::StringShape.new(name: 'Format')
     FrameCaptureSettings = Shapes::StructureShape.new(name: 'FrameCaptureSettings')
+    FrameMetricType = Shapes::StringShape.new(name: 'FrameMetricType')
     FrameRate = Shapes::StructureShape.new(name: 'FrameRate')
     GetJobRequest = Shapes::StructureShape.new(name: 'GetJobRequest')
     GetJobResponse = Shapes::StructureShape.new(name: 'GetJobResponse')
@@ -665,6 +667,7 @@ module Aws::MediaConvert
     VideoDescription = Shapes::StructureShape.new(name: 'VideoDescription')
     VideoDetail = Shapes::StructureShape.new(name: 'VideoDetail')
     VideoOverlay = Shapes::StructureShape.new(name: 'VideoOverlay')
+    VideoOverlayCrop = Shapes::StructureShape.new(name: 'VideoOverlayCrop')
     VideoOverlayInput = Shapes::StructureShape.new(name: 'VideoOverlayInput')
     VideoOverlayInputClipping = Shapes::StructureShape.new(name: 'VideoOverlayInputClipping')
     VideoOverlayPlayBackMode = Shapes::StringShape.new(name: 'VideoOverlayPlayBackMode')
@@ -848,6 +851,7 @@ module Aws::MediaConvert
     __listOfDashAdditionalManifest = Shapes::ListShape.new(name: '__listOfDashAdditionalManifest')
     __listOfEndpoint = Shapes::ListShape.new(name: '__listOfEndpoint')
     __listOfForceIncludeRenditionSize = Shapes::ListShape.new(name: '__listOfForceIncludeRenditionSize')
+    __listOfFrameMetricType = Shapes::ListShape.new(name: '__listOfFrameMetricType')
     __listOfHlsAdMarkers = Shapes::ListShape.new(name: '__listOfHlsAdMarkers')
     __listOfHlsAdditionalManifest = Shapes::ListShape.new(name: '__listOfHlsAdditionalManifest')
     __listOfHlsCaptionLanguageMapping = Shapes::ListShape.new(name: '__listOfHlsCaptionLanguageMapping')
@@ -1043,7 +1047,7 @@ module Aws::MediaConvert
     AudioNormalizationSettings.struct_class = Types::AudioNormalizationSettings
 
     AudioProperties.add_member(:bit_depth, Shapes::ShapeRef.new(shape: __integer, location_name: "bitDepth"))
-    AudioProperties.add_member(:bit_rate, Shapes::ShapeRef.new(shape: __integer, location_name: "bitRate"))
+    AudioProperties.add_member(:bit_rate, Shapes::ShapeRef.new(shape: __long, location_name: "bitRate"))
     AudioProperties.add_member(:channels, Shapes::ShapeRef.new(shape: __integer, location_name: "channels"))
     AudioProperties.add_member(:frame_rate, Shapes::ShapeRef.new(shape: FrameRate, location_name: "frameRate"))
     AudioProperties.add_member(:language_code, Shapes::ShapeRef.new(shape: __string, location_name: "languageCode"))
@@ -1098,6 +1102,7 @@ module Aws::MediaConvert
     Av1Settings.add_member(:gop_size, Shapes::ShapeRef.new(shape: __doubleMin0, location_name: "gopSize"))
     Av1Settings.add_member(:max_bitrate, Shapes::ShapeRef.new(shape: __integerMin1000Max1152000000, location_name: "maxBitrate"))
     Av1Settings.add_member(:number_b_frames_between_reference_frames, Shapes::ShapeRef.new(shape: __integerMin0Max15, location_name: "numberBFramesBetweenReferenceFrames"))
+    Av1Settings.add_member(:per_frame_metrics, Shapes::ShapeRef.new(shape: __listOfFrameMetricType, location_name: "perFrameMetrics"))
     Av1Settings.add_member(:qvbr_settings, Shapes::ShapeRef.new(shape: Av1QvbrSettings, location_name: "qvbrSettings"))
     Av1Settings.add_member(:rate_control_mode, Shapes::ShapeRef.new(shape: Av1RateControlMode, location_name: "rateControlMode"))
     Av1Settings.add_member(:slices, Shapes::ShapeRef.new(shape: __integerMin1Max32, location_name: "slices"))
@@ -1114,6 +1119,7 @@ module Aws::MediaConvert
     AvcIntraSettings.add_member(:framerate_denominator, Shapes::ShapeRef.new(shape: __integerMin1Max1001, location_name: "framerateDenominator"))
     AvcIntraSettings.add_member(:framerate_numerator, Shapes::ShapeRef.new(shape: __integerMin24Max60000, location_name: "framerateNumerator"))
     AvcIntraSettings.add_member(:interlace_mode, Shapes::ShapeRef.new(shape: AvcIntraInterlaceMode, location_name: "interlaceMode"))
+    AvcIntraSettings.add_member(:per_frame_metrics, Shapes::ShapeRef.new(shape: __listOfFrameMetricType, location_name: "perFrameMetrics"))
     AvcIntraSettings.add_member(:scan_type_conversion_mode, Shapes::ShapeRef.new(shape: AvcIntraScanTypeConversionMode, location_name: "scanTypeConversionMode"))
     AvcIntraSettings.add_member(:slow_pal, Shapes::ShapeRef.new(shape: AvcIntraSlowPal, location_name: "slowPal"))
     AvcIntraSettings.add_member(:telecine, Shapes::ShapeRef.new(shape: AvcIntraTelecine, location_name: "telecine"))
@@ -1322,7 +1328,7 @@ module Aws::MediaConvert
 
     CreateJobRequest.add_member(:acceleration_settings, Shapes::ShapeRef.new(shape: AccelerationSettings, location_name: "accelerationSettings"))
     CreateJobRequest.add_member(:billing_tags_source, Shapes::ShapeRef.new(shape: BillingTagsSource, location_name: "billingTagsSource"))
-    CreateJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: __string, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: __string, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateJobRequest.add_member(:hop_destinations, Shapes::ShapeRef.new(shape: __listOfHopDestination, location_name: "hopDestinations"))
     CreateJobRequest.add_member(:job_engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "jobEngineVersion"))
     CreateJobRequest.add_member(:job_template, Shapes::ShapeRef.new(shape: __string, location_name: "jobTemplate"))
@@ -1618,6 +1624,7 @@ module Aws::MediaConvert
     FileSourceSettings.add_member(:source_file, Shapes::ShapeRef.new(shape: __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT, location_name: "sourceFile"))
     FileSourceSettings.add_member(:time_delta, Shapes::ShapeRef.new(shape: __integerMinNegative2147483648Max2147483647, location_name: "timeDelta"))
     FileSourceSettings.add_member(:time_delta_units, Shapes::ShapeRef.new(shape: FileSourceTimeDeltaUnits, location_name: "timeDeltaUnits"))
+    FileSourceSettings.add_member(:upconvert_stl_to_teletext, Shapes::ShapeRef.new(shape: CaptionSourceUpconvertSTLToTeletext, location_name: "upconvertSTLToTeletext"))
     FileSourceSettings.struct_class = Types::FileSourceSettings
 
     FlacSettings.add_member(:bit_depth, Shapes::ShapeRef.new(shape: __integerMin16Max24, location_name: "bitDepth"))
@@ -1711,6 +1718,7 @@ module Aws::MediaConvert
     H264Settings.add_member(:par_control, Shapes::ShapeRef.new(shape: H264ParControl, location_name: "parControl"))
     H264Settings.add_member(:par_denominator, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "parDenominator"))
     H264Settings.add_member(:par_numerator, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "parNumerator"))
+    H264Settings.add_member(:per_frame_metrics, Shapes::ShapeRef.new(shape: __listOfFrameMetricType, location_name: "perFrameMetrics"))
     H264Settings.add_member(:quality_tuning_level, Shapes::ShapeRef.new(shape: H264QualityTuningLevel, location_name: "qualityTuningLevel"))
     H264Settings.add_member(:qvbr_settings, Shapes::ShapeRef.new(shape: H264QvbrSettings, location_name: "qvbrSettings"))
     H264Settings.add_member(:rate_control_mode, Shapes::ShapeRef.new(shape: H264RateControlMode, location_name: "rateControlMode"))
@@ -1763,6 +1771,7 @@ module Aws::MediaConvert
     H265Settings.add_member(:par_control, Shapes::ShapeRef.new(shape: H265ParControl, location_name: "parControl"))
     H265Settings.add_member(:par_denominator, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "parDenominator"))
     H265Settings.add_member(:par_numerator, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "parNumerator"))
+    H265Settings.add_member(:per_frame_metrics, Shapes::ShapeRef.new(shape: __listOfFrameMetricType, location_name: "perFrameMetrics"))
     H265Settings.add_member(:quality_tuning_level, Shapes::ShapeRef.new(shape: H265QualityTuningLevel, location_name: "qualityTuningLevel"))
     H265Settings.add_member(:qvbr_settings, Shapes::ShapeRef.new(shape: H265QvbrSettings, location_name: "qvbrSettings"))
     H265Settings.add_member(:rate_control_mode, Shapes::ShapeRef.new(shape: H265RateControlMode, location_name: "rateControlMode"))
@@ -2300,6 +2309,7 @@ module Aws::MediaConvert
     Mpeg2Settings.add_member(:par_control, Shapes::ShapeRef.new(shape: Mpeg2ParControl, location_name: "parControl"))
     Mpeg2Settings.add_member(:par_denominator, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "parDenominator"))
     Mpeg2Settings.add_member(:par_numerator, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "parNumerator"))
+    Mpeg2Settings.add_member(:per_frame_metrics, Shapes::ShapeRef.new(shape: __listOfFrameMetricType, location_name: "perFrameMetrics"))
     Mpeg2Settings.add_member(:quality_tuning_level, Shapes::ShapeRef.new(shape: Mpeg2QualityTuningLevel, location_name: "qualityTuningLevel"))
     Mpeg2Settings.add_member(:rate_control_mode, Shapes::ShapeRef.new(shape: Mpeg2RateControlMode, location_name: "rateControlMode"))
     Mpeg2Settings.add_member(:scan_type_conversion_mode, Shapes::ShapeRef.new(shape: Mpeg2ScanTypeConversionMode, location_name: "scanTypeConversionMode"))
@@ -2423,6 +2433,7 @@ module Aws::MediaConvert
     OutputGroupSettings.add_member(:file_group_settings, Shapes::ShapeRef.new(shape: FileGroupSettings, location_name: "fileGroupSettings"))
     OutputGroupSettings.add_member(:hls_group_settings, Shapes::ShapeRef.new(shape: HlsGroupSettings, location_name: "hlsGroupSettings"))
     OutputGroupSettings.add_member(:ms_smooth_group_settings, Shapes::ShapeRef.new(shape: MsSmoothGroupSettings, location_name: "msSmoothGroupSettings"))
+    OutputGroupSettings.add_member(:per_frame_metrics, Shapes::ShapeRef.new(shape: __listOfFrameMetricType, location_name: "perFrameMetrics"))
     OutputGroupSettings.add_member(:type, Shapes::ShapeRef.new(shape: OutputGroupType, location_name: "type"))
     OutputGroupSettings.struct_class = Types::OutputGroupSettings
 
@@ -2477,6 +2488,7 @@ module Aws::MediaConvert
     ProresSettings.add_member(:par_control, Shapes::ShapeRef.new(shape: ProresParControl, location_name: "parControl"))
     ProresSettings.add_member(:par_denominator, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "parDenominator"))
     ProresSettings.add_member(:par_numerator, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "parNumerator"))
+    ProresSettings.add_member(:per_frame_metrics, Shapes::ShapeRef.new(shape: __listOfFrameMetricType, location_name: "perFrameMetrics"))
     ProresSettings.add_member(:scan_type_conversion_mode, Shapes::ShapeRef.new(shape: ProresScanTypeConversionMode, location_name: "scanTypeConversionMode"))
     ProresSettings.add_member(:slow_pal, Shapes::ShapeRef.new(shape: ProresSlowPal, location_name: "slowPal"))
     ProresSettings.add_member(:telecine, Shapes::ShapeRef.new(shape: ProresTelecine, location_name: "telecine"))
@@ -2751,6 +2763,7 @@ module Aws::MediaConvert
     VideoDetail.add_member(:width_in_px, Shapes::ShapeRef.new(shape: __integer, location_name: "widthInPx"))
     VideoDetail.struct_class = Types::VideoDetail
 
+    VideoOverlay.add_member(:crop, Shapes::ShapeRef.new(shape: VideoOverlayCrop, location_name: "crop"))
     VideoOverlay.add_member(:end_timecode, Shapes::ShapeRef.new(shape: __stringPattern010920405090509092, location_name: "endTimecode"))
     VideoOverlay.add_member(:initial_position, Shapes::ShapeRef.new(shape: VideoOverlayPosition, location_name: "initialPosition"))
     VideoOverlay.add_member(:input, Shapes::ShapeRef.new(shape: VideoOverlayInput, location_name: "input"))
@@ -2758,6 +2771,13 @@ module Aws::MediaConvert
     VideoOverlay.add_member(:start_timecode, Shapes::ShapeRef.new(shape: __stringPattern010920405090509092, location_name: "startTimecode"))
     VideoOverlay.add_member(:transitions, Shapes::ShapeRef.new(shape: __listOfVideoOverlayTransition, location_name: "transitions"))
     VideoOverlay.struct_class = Types::VideoOverlay
+
+    VideoOverlayCrop.add_member(:height, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "height"))
+    VideoOverlayCrop.add_member(:unit, Shapes::ShapeRef.new(shape: VideoOverlayUnit, location_name: "unit"))
+    VideoOverlayCrop.add_member(:width, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "width"))
+    VideoOverlayCrop.add_member(:x, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "x"))
+    VideoOverlayCrop.add_member(:y, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "y"))
+    VideoOverlayCrop.struct_class = Types::VideoOverlayCrop
 
     VideoOverlayInput.add_member(:file_input, Shapes::ShapeRef.new(shape: __stringPatternS3Https, location_name: "fileInput"))
     VideoOverlayInput.add_member(:input_clippings, Shapes::ShapeRef.new(shape: __listOfVideoOverlayInputClipping, location_name: "inputClippings"))
@@ -2792,7 +2812,7 @@ module Aws::MediaConvert
     VideoPreprocessor.struct_class = Types::VideoPreprocessor
 
     VideoProperties.add_member(:bit_depth, Shapes::ShapeRef.new(shape: __integer, location_name: "bitDepth"))
-    VideoProperties.add_member(:bit_rate, Shapes::ShapeRef.new(shape: __integer, location_name: "bitRate"))
+    VideoProperties.add_member(:bit_rate, Shapes::ShapeRef.new(shape: __long, location_name: "bitRate"))
     VideoProperties.add_member(:color_primaries, Shapes::ShapeRef.new(shape: ColorPrimaries, location_name: "colorPrimaries"))
     VideoProperties.add_member(:frame_rate, Shapes::ShapeRef.new(shape: FrameRate, location_name: "frameRate"))
     VideoProperties.add_member(:height, Shapes::ShapeRef.new(shape: __integer, location_name: "height"))
@@ -2904,6 +2924,7 @@ module Aws::MediaConvert
     XavcSettings.add_member(:framerate_conversion_algorithm, Shapes::ShapeRef.new(shape: XavcFramerateConversionAlgorithm, location_name: "framerateConversionAlgorithm"))
     XavcSettings.add_member(:framerate_denominator, Shapes::ShapeRef.new(shape: __integerMin1Max1001, location_name: "framerateDenominator"))
     XavcSettings.add_member(:framerate_numerator, Shapes::ShapeRef.new(shape: __integerMin24Max60000, location_name: "framerateNumerator"))
+    XavcSettings.add_member(:per_frame_metrics, Shapes::ShapeRef.new(shape: __listOfFrameMetricType, location_name: "perFrameMetrics"))
     XavcSettings.add_member(:profile, Shapes::ShapeRef.new(shape: XavcProfile, location_name: "profile"))
     XavcSettings.add_member(:slow_pal, Shapes::ShapeRef.new(shape: XavcSlowPal, location_name: "slowPal"))
     XavcSettings.add_member(:softness, Shapes::ShapeRef.new(shape: __integerMin0Max128, location_name: "softness"))
@@ -2937,6 +2958,8 @@ module Aws::MediaConvert
     __listOfEndpoint.member = Shapes::ShapeRef.new(shape: Endpoint)
 
     __listOfForceIncludeRenditionSize.member = Shapes::ShapeRef.new(shape: ForceIncludeRenditionSize)
+
+    __listOfFrameMetricType.member = Shapes::ShapeRef.new(shape: FrameMetricType)
 
     __listOfHlsAdMarkers.member = Shapes::ShapeRef.new(shape: HlsAdMarkers)
 

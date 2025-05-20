@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.218.0 (2025-05-20)
+------------------
+
+* Feature - Enhanced AWS Glue ListConnectionTypes API Model with additional metadata fields.
+
+1.217.0 (2025-05-16)
+------------------
+
+* Feature - Changes include (1) Excel as S3 Source type and XML and Tableau's Hyper as S3 Sink types, (2) targeted number of partitions parameter in S3 sinks and (3) new compression types in CSV/JSON and Parquet S3 sinks.
+
+1.216.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.215.0 (2025-05-08)
+------------------
+
+* Feature - This new release supports customizable RefreshInterval for all Saas ZETL integrations from 15 minutes to 6 days.
+
+1.214.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.213.0 (2025-04-09)
 ------------------
 

@@ -1444,8 +1444,7 @@
     },
     "AssociateCertificateResponse": {
       "type": "structure",
-      "members": {
-      }
+      "members": {}
     },
     "AudioChannelTag": {
       "type": "string",
@@ -1707,7 +1706,7 @@
           "locationName": "bitDepth"
         },
         "BitRate": {
-          "shape": "__integer",
+          "shape": "__long",
           "locationName": "bitRate"
         },
         "Channels": {
@@ -1796,7 +1795,8 @@
         "PID",
         "TRACK",
         "LANGUAGE_CODE",
-        "HLS_RENDITION_GROUP"
+        "HLS_RENDITION_GROUP",
+        "ALL_PCM"
       ]
     },
     "AudioTypeControl": {
@@ -1968,6 +1968,10 @@
           "shape": "__integerMin0Max15",
           "locationName": "numberBFramesBetweenReferenceFrames"
         },
+        "PerFrameMetrics": {
+          "shape": "__listOfFrameMetricType",
+          "locationName": "perFrameMetrics"
+        },
         "QvbrSettings": {
           "shape": "Av1QvbrSettings",
           "locationName": "qvbrSettings"
@@ -2074,6 +2078,10 @@
         "InterlaceMode": {
           "shape": "AvcIntraInterlaceMode",
           "locationName": "interlaceMode"
+        },
+        "PerFrameMetrics": {
+          "shape": "__listOfFrameMetricType",
+          "locationName": "perFrameMetrics"
         },
         "ScanTypeConversionMode": {
           "shape": "AvcIntraScanTypeConversionMode",
@@ -2380,8 +2388,7 @@
     },
     "CancelJobResponse": {
       "type": "structure",
-      "members": {
-      }
+      "members": {}
     },
     "CaptionDescription": {
       "type": "structure",
@@ -2589,6 +2596,13 @@
         "NULL_SOURCE",
         "IMSC",
         "WEBVTT"
+      ]
+    },
+    "CaptionSourceUpconvertSTLToTeletext": {
+      "type": "string",
+      "enum": [
+        "UPCONVERT",
+        "DISABLED"
       ]
     },
     "ChannelMapping": {
@@ -3891,18 +3905,15 @@
     },
     "DeleteJobTemplateResponse": {
       "type": "structure",
-      "members": {
-      }
+      "members": {}
     },
     "DeletePolicyRequest": {
       "type": "structure",
-      "members": {
-      }
+      "members": {}
     },
     "DeletePolicyResponse": {
       "type": "structure",
-      "members": {
-      }
+      "members": {}
     },
     "DeletePresetRequest": {
       "type": "structure",
@@ -3919,8 +3930,7 @@
     },
     "DeletePresetResponse": {
       "type": "structure",
-      "members": {
-      }
+      "members": {}
     },
     "DeleteQueueRequest": {
       "type": "structure",
@@ -3937,8 +3947,7 @@
     },
     "DeleteQueueResponse": {
       "type": "structure",
-      "members": {
-      }
+      "members": {}
     },
     "DescribeEndpointsMode": {
       "type": "string",
@@ -4007,8 +4016,7 @@
     },
     "DisassociateCertificateResponse": {
       "type": "structure",
-      "members": {
-      }
+      "members": {}
     },
     "DolbyVision": {
       "type": "structure",
@@ -4949,6 +4957,10 @@
         "TimeDeltaUnits": {
           "shape": "FileSourceTimeDeltaUnits",
           "locationName": "timeDeltaUnits"
+        },
+        "UpconvertSTLToTeletext": {
+          "shape": "CaptionSourceUpconvertSTLToTeletext",
+          "locationName": "upconvertSTLToTeletext"
         }
       }
     },
@@ -5040,6 +5052,17 @@
         }
       }
     },
+    "FrameMetricType": {
+      "type": "string",
+      "enum": [
+        "PSNR",
+        "SSIM",
+        "MS_SSIM",
+        "PSNR_HVS",
+        "VMAF",
+        "QVBR"
+      ]
+    },
     "FrameRate": {
       "type": "structure",
       "members": {
@@ -5099,8 +5122,7 @@
     },
     "GetPolicyRequest": {
       "type": "structure",
-      "members": {
-      }
+      "members": {}
     },
     "GetPolicyResponse": {
       "type": "structure",
@@ -5499,6 +5521,10 @@
         "ParNumerator": {
           "shape": "__integerMin1Max2147483647",
           "locationName": "parNumerator"
+        },
+        "PerFrameMetrics": {
+          "shape": "__listOfFrameMetricType",
+          "locationName": "perFrameMetrics"
         },
         "QualityTuningLevel": {
           "shape": "H264QualityTuningLevel",
@@ -5917,6 +5943,10 @@
         "ParNumerator": {
           "shape": "__integerMin1Max2147483647",
           "locationName": "parNumerator"
+        },
+        "PerFrameMetrics": {
+          "shape": "__listOfFrameMetricType",
+          "locationName": "perFrameMetrics"
         },
         "QualityTuningLevel": {
           "shape": "H265QualityTuningLevel",
@@ -8932,6 +8962,10 @@
           "shape": "__integerMin1Max2147483647",
           "locationName": "parNumerator"
         },
+        "PerFrameMetrics": {
+          "shape": "__listOfFrameMetricType",
+          "locationName": "perFrameMetrics"
+        },
         "QualityTuningLevel": {
           "shape": "Mpeg2QualityTuningLevel",
           "locationName": "qualityTuningLevel"
@@ -9507,6 +9541,10 @@
           "shape": "MsSmoothGroupSettings",
           "locationName": "msSmoothGroupSettings"
         },
+        "PerFrameMetrics": {
+          "shape": "__listOfFrameMetricType",
+          "locationName": "perFrameMetrics"
+        },
         "Type": {
           "shape": "OutputGroupType",
           "locationName": "type"
@@ -9820,6 +9858,10 @@
         "ParNumerator": {
           "shape": "__integerMin1Max2147483647",
           "locationName": "parNumerator"
+        },
+        "PerFrameMetrics": {
+          "shape": "__listOfFrameMetricType",
+          "locationName": "perFrameMetrics"
         },
         "ScanTypeConversionMode": {
           "shape": "ProresScanTypeConversionMode",
@@ -10430,8 +10472,7 @@
     },
     "TagResourceResponse": {
       "type": "structure",
-      "members": {
-      }
+      "members": {}
     },
     "TeletextDestinationSettings": {
       "type": "structure",
@@ -10812,8 +10853,7 @@
     },
     "UntagResourceResponse": {
       "type": "structure",
-      "members": {
-      }
+      "members": {}
     },
     "UpdateJobTemplateRequest": {
       "type": "structure",
@@ -11210,6 +11250,10 @@
     "VideoOverlay": {
       "type": "structure",
       "members": {
+        "Crop": {
+          "shape": "VideoOverlayCrop",
+          "locationName": "crop"
+        },
         "EndTimecode": {
           "shape": "__stringPattern010920405090509092",
           "locationName": "endTimecode"
@@ -11233,6 +11277,31 @@
         "Transitions": {
           "shape": "__listOfVideoOverlayTransition",
           "locationName": "transitions"
+        }
+      }
+    },
+    "VideoOverlayCrop": {
+      "type": "structure",
+      "members": {
+        "Height": {
+          "shape": "__integerMin0Max2147483647",
+          "locationName": "height"
+        },
+        "Unit": {
+          "shape": "VideoOverlayUnit",
+          "locationName": "unit"
+        },
+        "Width": {
+          "shape": "__integerMin0Max2147483647",
+          "locationName": "width"
+        },
+        "X": {
+          "shape": "__integerMin0Max2147483647",
+          "locationName": "x"
+        },
+        "Y": {
+          "shape": "__integerMin0Max2147483647",
+          "locationName": "y"
         }
       }
     },
@@ -11371,7 +11440,7 @@
           "locationName": "bitDepth"
         },
         "BitRate": {
-          "shape": "__integer",
+          "shape": "__long",
           "locationName": "bitRate"
         },
         "ColorPrimaries": {
@@ -12032,6 +12101,10 @@
         "FramerateNumerator": {
           "shape": "__integerMin24Max60000",
           "locationName": "framerateNumerator"
+        },
+        "PerFrameMetrics": {
+          "shape": "__listOfFrameMetricType",
+          "locationName": "perFrameMetrics"
         },
         "Profile": {
           "shape": "XavcProfile",
@@ -12709,6 +12782,12 @@
       "type": "list",
       "member": {
         "shape": "ForceIncludeRenditionSize"
+      }
+    },
+    "__listOfFrameMetricType": {
+      "type": "list",
+      "member": {
+        "shape": "FrameMetricType"
       }
     },
     "__listOfHlsAdMarkers": {

@@ -128,6 +128,8 @@ module Aws::QBusiness
     ConversationTitle = Shapes::StringShape.new(name: 'ConversationTitle')
     Conversations = Shapes::ListShape.new(name: 'Conversations')
     CopyFromSource = Shapes::UnionShape.new(name: 'CopyFromSource')
+    CreateAnonymousWebExperienceUrlRequest = Shapes::StructureShape.new(name: 'CreateAnonymousWebExperienceUrlRequest')
+    CreateAnonymousWebExperienceUrlResponse = Shapes::StructureShape.new(name: 'CreateAnonymousWebExperienceUrlResponse')
     CreateApplicationRequest = Shapes::StructureShape.new(name: 'CreateApplicationRequest')
     CreateApplicationResponse = Shapes::StructureShape.new(name: 'CreateApplicationResponse')
     CreateDataAccessorRequest = Shapes::StructureShape.new(name: 'CreateDataAccessorRequest')
@@ -468,6 +470,7 @@ module Aws::QBusiness
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    SessionDurationInMinutes = Shapes::IntegerShape.new(name: 'SessionDurationInMinutes')
     SnippetExcerpt = Shapes::StructureShape.new(name: 'SnippetExcerpt')
     SnippetExcerptText = Shapes::StringShape.new(name: 'SnippetExcerptText')
     SourceAttribution = Shapes::StructureShape.new(name: 'SourceAttribution')
@@ -830,7 +833,7 @@ module Aws::QBusiness
     ChatInput.add_member(:user_groups, Shapes::ShapeRef.new(shape: UserGroups, location: "querystring", location_name: "userGroups"))
     ChatInput.add_member(:conversation_id, Shapes::ShapeRef.new(shape: ConversationId, location: "querystring", location_name: "conversationId"))
     ChatInput.add_member(:parent_message_id, Shapes::ShapeRef.new(shape: MessageId, location: "querystring", location_name: "parentMessageId"))
-    ChatInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    ChatInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     ChatInput.add_member(:input_stream, Shapes::ShapeRef.new(shape: ChatInputStream, eventstream: true, location_name: "inputStream"))
     ChatInput.struct_class = Types::ChatInput
     ChatInput[:payload] = :input_stream
@@ -874,7 +877,7 @@ module Aws::QBusiness
     ChatSyncInput.add_member(:attribute_filter, Shapes::ShapeRef.new(shape: AttributeFilter, location_name: "attributeFilter"))
     ChatSyncInput.add_member(:chat_mode, Shapes::ShapeRef.new(shape: ChatMode, location_name: "chatMode"))
     ChatSyncInput.add_member(:chat_mode_configuration, Shapes::ShapeRef.new(shape: ChatModeConfiguration, location_name: "chatModeConfiguration"))
-    ChatSyncInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    ChatSyncInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     ChatSyncInput.struct_class = Types::ChatSyncInput
 
     ChatSyncOutput.add_member(:conversation_id, Shapes::ShapeRef.new(shape: ConversationId, location_name: "conversationId"))
@@ -941,6 +944,14 @@ module Aws::QBusiness
     CopyFromSource.add_member_subclass(:unknown, Types::CopyFromSource::Unknown)
     CopyFromSource.struct_class = Types::CopyFromSource
 
+    CreateAnonymousWebExperienceUrlRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
+    CreateAnonymousWebExperienceUrlRequest.add_member(:web_experience_id, Shapes::ShapeRef.new(shape: WebExperienceId, required: true, location: "uri", location_name: "webExperienceId"))
+    CreateAnonymousWebExperienceUrlRequest.add_member(:session_duration_in_minutes, Shapes::ShapeRef.new(shape: SessionDurationInMinutes, location_name: "sessionDurationInMinutes"))
+    CreateAnonymousWebExperienceUrlRequest.struct_class = Types::CreateAnonymousWebExperienceUrlRequest
+
+    CreateAnonymousWebExperienceUrlResponse.add_member(:anonymous_url, Shapes::ShapeRef.new(shape: Url, location_name: "anonymousUrl"))
+    CreateAnonymousWebExperienceUrlResponse.struct_class = Types::CreateAnonymousWebExperienceUrlResponse
+
     CreateApplicationRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "displayName"))
     CreateApplicationRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     CreateApplicationRequest.add_member(:identity_type, Shapes::ShapeRef.new(shape: IdentityType, location_name: "identityType"))
@@ -950,7 +961,7 @@ module Aws::QBusiness
     CreateApplicationRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateApplicationRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
     CreateApplicationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
-    CreateApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateApplicationRequest.add_member(:attachments_configuration, Shapes::ShapeRef.new(shape: AttachmentsConfiguration, location_name: "attachmentsConfiguration"))
     CreateApplicationRequest.add_member(:q_apps_configuration, Shapes::ShapeRef.new(shape: QAppsConfiguration, location_name: "qAppsConfiguration"))
     CreateApplicationRequest.add_member(:personalization_configuration, Shapes::ShapeRef.new(shape: PersonalizationConfiguration, location_name: "personalizationConfiguration"))
@@ -964,7 +975,7 @@ module Aws::QBusiness
     CreateDataAccessorRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
     CreateDataAccessorRequest.add_member(:principal, Shapes::ShapeRef.new(shape: PrincipalRoleArn, required: true, location_name: "principal"))
     CreateDataAccessorRequest.add_member(:action_configurations, Shapes::ShapeRef.new(shape: ActionConfigurationList, required: true, location_name: "actionConfigurations"))
-    CreateDataAccessorRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDataAccessorRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateDataAccessorRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DataAccessorName, required: true, location_name: "displayName"))
     CreateDataAccessorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateDataAccessorRequest.struct_class = Types::CreateDataAccessorRequest
@@ -983,7 +994,7 @@ module Aws::QBusiness
     CreateDataSourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateDataSourceRequest.add_member(:sync_schedule, Shapes::ShapeRef.new(shape: SyncSchedule, location_name: "syncSchedule"))
     CreateDataSourceRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
-    CreateDataSourceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDataSourceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateDataSourceRequest.add_member(:document_enrichment_configuration, Shapes::ShapeRef.new(shape: DocumentEnrichmentConfiguration, location_name: "documentEnrichmentConfiguration"))
     CreateDataSourceRequest.add_member(:media_extraction_configuration, Shapes::ShapeRef.new(shape: MediaExtractionConfiguration, location_name: "mediaExtractionConfiguration"))
     CreateDataSourceRequest.struct_class = Types::CreateDataSourceRequest
@@ -998,7 +1009,7 @@ module Aws::QBusiness
     CreateIndexRequest.add_member(:type, Shapes::ShapeRef.new(shape: IndexType, location_name: "type"))
     CreateIndexRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateIndexRequest.add_member(:capacity_configuration, Shapes::ShapeRef.new(shape: IndexCapacityConfiguration, location_name: "capacityConfiguration"))
-    CreateIndexRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateIndexRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateIndexRequest.struct_class = Types::CreateIndexRequest
 
     CreateIndexResponse.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, location_name: "indexId"))
@@ -1012,7 +1023,7 @@ module Aws::QBusiness
     CreatePluginRequest.add_member(:server_url, Shapes::ShapeRef.new(shape: Url, location_name: "serverUrl"))
     CreatePluginRequest.add_member(:custom_plugin_configuration, Shapes::ShapeRef.new(shape: CustomPluginConfiguration, location_name: "customPluginConfiguration"))
     CreatePluginRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
-    CreatePluginRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreatePluginRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreatePluginRequest.struct_class = Types::CreatePluginRequest
 
     CreatePluginResponse.add_member(:plugin_id, Shapes::ShapeRef.new(shape: PluginId, location_name: "pluginId"))
@@ -1025,7 +1036,7 @@ module Aws::QBusiness
     CreateRetrieverRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: RetrieverName, required: true, location_name: "displayName"))
     CreateRetrieverRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: RetrieverConfiguration, required: true, location_name: "configuration"))
     CreateRetrieverRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
-    CreateRetrieverRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateRetrieverRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateRetrieverRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateRetrieverRequest.struct_class = Types::CreateRetrieverRequest
 
@@ -1036,7 +1047,7 @@ module Aws::QBusiness
     CreateSubscriptionRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
     CreateSubscriptionRequest.add_member(:principal, Shapes::ShapeRef.new(shape: SubscriptionPrincipal, required: true, location_name: "principal"))
     CreateSubscriptionRequest.add_member(:type, Shapes::ShapeRef.new(shape: SubscriptionType, required: true, location_name: "type"))
-    CreateSubscriptionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateSubscriptionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateSubscriptionRequest.struct_class = Types::CreateSubscriptionRequest
 
     CreateSubscriptionResponse.add_member(:subscription_id, Shapes::ShapeRef.new(shape: SubscriptionId, location_name: "subscriptionId"))
@@ -1048,7 +1059,7 @@ module Aws::QBusiness
     CreateUserRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
     CreateUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "userId"))
     CreateUserRequest.add_member(:user_aliases, Shapes::ShapeRef.new(shape: CreateUserRequestUserAliasesList, location_name: "userAliases"))
-    CreateUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateUserRequest.struct_class = Types::CreateUserRequest
 
     CreateUserRequestUserAliasesList.member = Shapes::ShapeRef.new(shape: UserAlias)
@@ -1063,7 +1074,7 @@ module Aws::QBusiness
     CreateWebExperienceRequest.add_member(:origins, Shapes::ShapeRef.new(shape: WebExperienceOrigins, location_name: "origins"))
     CreateWebExperienceRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     CreateWebExperienceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
-    CreateWebExperienceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateWebExperienceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateWebExperienceRequest.add_member(:identity_provider_configuration, Shapes::ShapeRef.new(shape: IdentityProviderConfiguration, location_name: "identityProviderConfiguration"))
     CreateWebExperienceRequest.add_member(:browser_extension_configuration, Shapes::ShapeRef.new(shape: BrowserExtensionConfiguration, location_name: "browserExtensionConfiguration"))
     CreateWebExperienceRequest.add_member(:customization_configuration, Shapes::ShapeRef.new(shape: CustomizationConfiguration, location_name: "customizationConfiguration"))
@@ -1550,7 +1561,7 @@ module Aws::QBusiness
     GetWebExperienceResponse.add_member(:origins, Shapes::ShapeRef.new(shape: WebExperienceOrigins, location_name: "origins"))
     GetWebExperienceResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     GetWebExperienceResponse.add_member(:identity_provider_configuration, Shapes::ShapeRef.new(shape: IdentityProviderConfiguration, location_name: "identityProviderConfiguration"))
-    GetWebExperienceResponse.add_member(:authentication_configuration, Shapes::ShapeRef.new(shape: WebExperienceAuthConfiguration, deprecated: true, location_name: "authenticationConfiguration", metadata: {"deprecatedMessage"=>"Property associated with legacy SAML IdP flow. Deprecated in favor of using AWS IAM Identity Center for user management."}))
+    GetWebExperienceResponse.add_member(:authentication_configuration, Shapes::ShapeRef.new(shape: WebExperienceAuthConfiguration, deprecated: true, location_name: "authenticationConfiguration", metadata: {"deprecatedMessage" => "Property associated with legacy SAML IdP flow. Deprecated in favor of using AWS IAM Identity Center for user management."}))
     GetWebExperienceResponse.add_member(:error, Shapes::ShapeRef.new(shape: ErrorDetail, location_name: "error"))
     GetWebExperienceResponse.add_member(:browser_extension_configuration, Shapes::ShapeRef.new(shape: BrowserExtensionConfiguration, location_name: "browserExtensionConfiguration"))
     GetWebExperienceResponse.add_member(:customization_configuration, Shapes::ShapeRef.new(shape: CustomizationConfiguration, location_name: "customizationConfiguration"))
@@ -2145,8 +2156,8 @@ module Aws::QBusiness
     TextSegment.add_member(:begin_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "beginOffset"))
     TextSegment.add_member(:end_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "endOffset"))
     TextSegment.add_member(:snippet_excerpt, Shapes::ShapeRef.new(shape: SnippetExcerpt, location_name: "snippetExcerpt"))
-    TextSegment.add_member(:media_id, Shapes::ShapeRef.new(shape: SourceAttributionMediaId, deprecated: true, location_name: "mediaId", metadata: {"deprecatedMessage"=>"Deprecated in favor of using mediaId within the respective sourceDetails field.", "deprecatedSince"=>"2025-02-28"}))
-    TextSegment.add_member(:media_mime_type, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "mediaMimeType", metadata: {"deprecatedMessage"=>"Deprecated in favor of using mediaMimeType within the respective sourceDetails field.", "deprecatedSince"=>"2025-02-28"}))
+    TextSegment.add_member(:media_id, Shapes::ShapeRef.new(shape: SourceAttributionMediaId, deprecated: true, location_name: "mediaId", metadata: {"deprecatedMessage" => "Deprecated in favor of using mediaId within the respective sourceDetails field.", "deprecatedSince" => "2025-02-28"}))
+    TextSegment.add_member(:media_mime_type, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "mediaMimeType", metadata: {"deprecatedMessage" => "Deprecated in favor of using mediaMimeType within the respective sourceDetails field.", "deprecatedSince" => "2025-02-28"}))
     TextSegment.add_member(:source_details, Shapes::ShapeRef.new(shape: SourceDetails, location_name: "sourceDetails"))
     TextSegment.struct_class = Types::TextSegment
 
@@ -2183,7 +2194,7 @@ module Aws::QBusiness
     UpdateApplicationResponse.struct_class = Types::UpdateApplicationResponse
 
     UpdateChatControlsConfigurationRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
-    UpdateChatControlsConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateChatControlsConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateChatControlsConfigurationRequest.add_member(:response_scope, Shapes::ShapeRef.new(shape: ResponseScope, location_name: "responseScope"))
     UpdateChatControlsConfigurationRequest.add_member(:orchestration_configuration, Shapes::ShapeRef.new(shape: OrchestrationConfiguration, location_name: "orchestrationConfiguration"))
     UpdateChatControlsConfigurationRequest.add_member(:blocked_phrases_configuration_update, Shapes::ShapeRef.new(shape: BlockedPhrasesConfigurationUpdate, location_name: "blockedPhrasesConfigurationUpdate"))
@@ -2272,7 +2283,7 @@ module Aws::QBusiness
     UpdateWebExperienceRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
     UpdateWebExperienceRequest.add_member(:web_experience_id, Shapes::ShapeRef.new(shape: WebExperienceId, required: true, location: "uri", location_name: "webExperienceId"))
     UpdateWebExperienceRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
-    UpdateWebExperienceRequest.add_member(:authentication_configuration, Shapes::ShapeRef.new(shape: WebExperienceAuthConfiguration, deprecated: true, location_name: "authenticationConfiguration", metadata: {"deprecatedMessage"=>"Property associated with legacy SAML IdP flow. Deprecated in favor of using AWS IAM Identity Center for user management."}))
+    UpdateWebExperienceRequest.add_member(:authentication_configuration, Shapes::ShapeRef.new(shape: WebExperienceAuthConfiguration, deprecated: true, location_name: "authenticationConfiguration", metadata: {"deprecatedMessage" => "Property associated with legacy SAML IdP flow. Deprecated in favor of using AWS IAM Identity Center for user management."}))
     UpdateWebExperienceRequest.add_member(:title, Shapes::ShapeRef.new(shape: WebExperienceTitle, location_name: "title"))
     UpdateWebExperienceRequest.add_member(:subtitle, Shapes::ShapeRef.new(shape: WebExperienceSubtitle, location_name: "subtitle"))
     UpdateWebExperienceRequest.add_member(:welcome_message, Shapes::ShapeRef.new(shape: WebExperienceWelcomeMessage, location_name: "welcomeMessage"))
@@ -2349,7 +2360,7 @@ module Aws::QBusiness
         "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "qbusiness",
         "protocol" => "rest-json",
-        "protocolSettings" => {"h2"=>"eventstream"},
+        "protocolSettings" => {"h2" => "eventstream"},
         "protocols" => ["rest-json"],
         "serviceFullName" => "QBusiness",
         "serviceId" => "QBusiness",
@@ -2459,6 +2470,20 @@ module Aws::QBusiness
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:create_anonymous_web_experience_url, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAnonymousWebExperienceUrl"
+        o.http_method = "POST"
+        o.http_request_uri = "/applications/{applicationId}/experiences/{webExperienceId}/anonymous-url"
+        o.input = Shapes::ShapeRef.new(shape: CreateAnonymousWebExperienceUrlRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAnonymousWebExperienceUrlResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_application, Seahorse::Model::Operation.new.tap do |o|

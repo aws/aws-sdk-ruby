@@ -47,6 +47,23 @@ module Aws::ServiceQuotas
     #
     class AssociateServiceQuotaTemplateResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] request_id
+    #   The ID of the pending quota increase request for which you want to
+    #   open a Support case.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/CreateSupportCaseRequest AWS API Documentation
+    #
+    class CreateSupportCaseRequest < Struct.new(
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/CreateSupportCaseResponse AWS API Documentation
+    #
+    class CreateSupportCaseResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] service_code
     #   Specifies the service identifier. To find the service code value for
     #   an Amazon Web Services service, use the ListServices operation.

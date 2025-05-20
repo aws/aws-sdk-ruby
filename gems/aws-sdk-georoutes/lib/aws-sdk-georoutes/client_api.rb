@@ -655,7 +655,7 @@ module Aws::GeoRoutes
 
     IsolineCarOptions.add_member(:engine_type, Shapes::ShapeRef.new(shape: IsolineEngineType, location_name: "EngineType"))
     IsolineCarOptions.add_member(:license_plate, Shapes::ShapeRef.new(shape: IsolineVehicleLicensePlate, location_name: "LicensePlate"))
-    IsolineCarOptions.add_member(:max_speed, Shapes::ShapeRef.new(shape: IsolineCarOptionsMaxSpeedDouble, location_name: "MaxSpeed", metadata: {"box"=>true}))
+    IsolineCarOptions.add_member(:max_speed, Shapes::ShapeRef.new(shape: IsolineCarOptionsMaxSpeedDouble, location_name: "MaxSpeed", metadata: {"box" => true}))
     IsolineCarOptions.add_member(:occupancy, Shapes::ShapeRef.new(shape: IsolineCarOptionsOccupancyInteger, location_name: "Occupancy"))
     IsolineCarOptions.struct_class = Types::IsolineCarOptions
 
@@ -698,7 +698,7 @@ module Aws::GeoRoutes
 
     IsolineScooterOptions.add_member(:engine_type, Shapes::ShapeRef.new(shape: IsolineEngineType, location_name: "EngineType"))
     IsolineScooterOptions.add_member(:license_plate, Shapes::ShapeRef.new(shape: IsolineVehicleLicensePlate, location_name: "LicensePlate"))
-    IsolineScooterOptions.add_member(:max_speed, Shapes::ShapeRef.new(shape: IsolineScooterOptionsMaxSpeedDouble, location_name: "MaxSpeed", metadata: {"box"=>true}))
+    IsolineScooterOptions.add_member(:max_speed, Shapes::ShapeRef.new(shape: IsolineScooterOptionsMaxSpeedDouble, location_name: "MaxSpeed", metadata: {"box" => true}))
     IsolineScooterOptions.add_member(:occupancy, Shapes::ShapeRef.new(shape: IsolineScooterOptionsOccupancyInteger, location_name: "Occupancy"))
     IsolineScooterOptions.struct_class = Types::IsolineScooterOptions
 
@@ -738,7 +738,7 @@ module Aws::GeoRoutes
     IsolineTruckOptions.add_member(:kpra_length, Shapes::ShapeRef.new(shape: DimensionCentimeters, location_name: "KpraLength"))
     IsolineTruckOptions.add_member(:length, Shapes::ShapeRef.new(shape: IsolineTruckOptionsLengthLong, location_name: "Length"))
     IsolineTruckOptions.add_member(:license_plate, Shapes::ShapeRef.new(shape: IsolineVehicleLicensePlate, location_name: "LicensePlate"))
-    IsolineTruckOptions.add_member(:max_speed, Shapes::ShapeRef.new(shape: IsolineTruckOptionsMaxSpeedDouble, location_name: "MaxSpeed", metadata: {"box"=>true}))
+    IsolineTruckOptions.add_member(:max_speed, Shapes::ShapeRef.new(shape: IsolineTruckOptionsMaxSpeedDouble, location_name: "MaxSpeed", metadata: {"box" => true}))
     IsolineTruckOptions.add_member(:occupancy, Shapes::ShapeRef.new(shape: IsolineTruckOptionsOccupancyInteger, location_name: "Occupancy"))
     IsolineTruckOptions.add_member(:payload_capacity, Shapes::ShapeRef.new(shape: WeightKilograms, location_name: "PayloadCapacity"))
     IsolineTruckOptions.add_member(:tire_count, Shapes::ShapeRef.new(shape: IsolineTruckOptionsTireCountInteger, location_name: "TireCount"))
@@ -893,7 +893,7 @@ module Aws::GeoRoutes
 
     RouteCarOptions.add_member(:engine_type, Shapes::ShapeRef.new(shape: RouteEngineType, location_name: "EngineType"))
     RouteCarOptions.add_member(:license_plate, Shapes::ShapeRef.new(shape: RouteVehicleLicensePlate, location_name: "LicensePlate"))
-    RouteCarOptions.add_member(:max_speed, Shapes::ShapeRef.new(shape: RouteCarOptionsMaxSpeedDouble, location_name: "MaxSpeed", metadata: {"box"=>true}))
+    RouteCarOptions.add_member(:max_speed, Shapes::ShapeRef.new(shape: RouteCarOptionsMaxSpeedDouble, location_name: "MaxSpeed", metadata: {"box" => true}))
     RouteCarOptions.add_member(:occupancy, Shapes::ShapeRef.new(shape: RouteCarOptionsOccupancyInteger, location_name: "Occupancy"))
     RouteCarOptions.struct_class = Types::RouteCarOptions
 
@@ -1113,7 +1113,7 @@ module Aws::GeoRoutes
     RouteMatrixBoundaryGeometryPolygonList.member = Shapes::ShapeRef.new(shape: LinearRing)
 
     RouteMatrixCarOptions.add_member(:license_plate, Shapes::ShapeRef.new(shape: RouteMatrixVehicleLicensePlate, location_name: "LicensePlate"))
-    RouteMatrixCarOptions.add_member(:max_speed, Shapes::ShapeRef.new(shape: RouteMatrixCarOptionsMaxSpeedDouble, location_name: "MaxSpeed", metadata: {"box"=>true}))
+    RouteMatrixCarOptions.add_member(:max_speed, Shapes::ShapeRef.new(shape: RouteMatrixCarOptionsMaxSpeedDouble, location_name: "MaxSpeed", metadata: {"box" => true}))
     RouteMatrixCarOptions.add_member(:occupancy, Shapes::ShapeRef.new(shape: RouteMatrixCarOptionsOccupancyInteger, location_name: "Occupancy"))
     RouteMatrixCarOptions.struct_class = Types::RouteMatrixCarOptions
 
@@ -1156,7 +1156,7 @@ module Aws::GeoRoutes
     RouteMatrixRow.member = Shapes::ShapeRef.new(shape: RouteMatrixEntry)
 
     RouteMatrixScooterOptions.add_member(:license_plate, Shapes::ShapeRef.new(shape: RouteMatrixVehicleLicensePlate, location_name: "LicensePlate"))
-    RouteMatrixScooterOptions.add_member(:max_speed, Shapes::ShapeRef.new(shape: RouteMatrixScooterOptionsMaxSpeedDouble, location_name: "MaxSpeed", metadata: {"box"=>true}))
+    RouteMatrixScooterOptions.add_member(:max_speed, Shapes::ShapeRef.new(shape: RouteMatrixScooterOptionsMaxSpeedDouble, location_name: "MaxSpeed", metadata: {"box" => true}))
     RouteMatrixScooterOptions.add_member(:occupancy, Shapes::ShapeRef.new(shape: RouteMatrixScooterOptionsOccupancyInteger, location_name: "Occupancy"))
     RouteMatrixScooterOptions.struct_class = Types::RouteMatrixScooterOptions
 
@@ -1183,7 +1183,7 @@ module Aws::GeoRoutes
     RouteMatrixTruckOptions.add_member(:kpra_length, Shapes::ShapeRef.new(shape: DimensionCentimeters, location_name: "KpraLength"))
     RouteMatrixTruckOptions.add_member(:length, Shapes::ShapeRef.new(shape: RouteMatrixTruckOptionsLengthLong, location_name: "Length"))
     RouteMatrixTruckOptions.add_member(:license_plate, Shapes::ShapeRef.new(shape: RouteMatrixVehicleLicensePlate, location_name: "LicensePlate"))
-    RouteMatrixTruckOptions.add_member(:max_speed, Shapes::ShapeRef.new(shape: RouteMatrixTruckOptionsMaxSpeedDouble, location_name: "MaxSpeed", metadata: {"box"=>true}))
+    RouteMatrixTruckOptions.add_member(:max_speed, Shapes::ShapeRef.new(shape: RouteMatrixTruckOptionsMaxSpeedDouble, location_name: "MaxSpeed", metadata: {"box" => true}))
     RouteMatrixTruckOptions.add_member(:occupancy, Shapes::ShapeRef.new(shape: RouteMatrixTruckOptionsOccupancyInteger, location_name: "Occupancy"))
     RouteMatrixTruckOptions.add_member(:payload_capacity, Shapes::ShapeRef.new(shape: WeightKilograms, location_name: "PayloadCapacity"))
     RouteMatrixTruckOptions.add_member(:trailer, Shapes::ShapeRef.new(shape: RouteMatrixTrailerOptions, location_name: "Trailer"))
@@ -1249,7 +1249,7 @@ module Aws::GeoRoutes
 
     RoutePedestrianNoticeList.member = Shapes::ShapeRef.new(shape: RoutePedestrianNotice)
 
-    RoutePedestrianOptions.add_member(:speed, Shapes::ShapeRef.new(shape: RoutePedestrianOptionsSpeedDouble, location_name: "Speed", metadata: {"box"=>true}))
+    RoutePedestrianOptions.add_member(:speed, Shapes::ShapeRef.new(shape: RoutePedestrianOptionsSpeedDouble, location_name: "Speed", metadata: {"box" => true}))
     RoutePedestrianOptions.struct_class = Types::RoutePedestrianOptions
 
     RoutePedestrianOverviewSummary.add_member(:distance, Shapes::ShapeRef.new(shape: DistanceMeters, required: true, location_name: "Distance"))
@@ -1346,7 +1346,7 @@ module Aws::GeoRoutes
 
     RouteScooterOptions.add_member(:engine_type, Shapes::ShapeRef.new(shape: RouteEngineType, location_name: "EngineType"))
     RouteScooterOptions.add_member(:license_plate, Shapes::ShapeRef.new(shape: RouteVehicleLicensePlate, location_name: "LicensePlate"))
-    RouteScooterOptions.add_member(:max_speed, Shapes::ShapeRef.new(shape: RouteScooterOptionsMaxSpeedDouble, location_name: "MaxSpeed", metadata: {"box"=>true}))
+    RouteScooterOptions.add_member(:max_speed, Shapes::ShapeRef.new(shape: RouteScooterOptionsMaxSpeedDouble, location_name: "MaxSpeed", metadata: {"box" => true}))
     RouteScooterOptions.add_member(:occupancy, Shapes::ShapeRef.new(shape: RouteScooterOptionsOccupancyInteger, location_name: "Occupancy"))
     RouteScooterOptions.struct_class = Types::RouteScooterOptions
 
@@ -1490,7 +1490,7 @@ module Aws::GeoRoutes
     RouteTruckOptions.add_member(:kpra_length, Shapes::ShapeRef.new(shape: DimensionCentimeters, location_name: "KpraLength"))
     RouteTruckOptions.add_member(:length, Shapes::ShapeRef.new(shape: RouteTruckOptionsLengthLong, location_name: "Length"))
     RouteTruckOptions.add_member(:license_plate, Shapes::ShapeRef.new(shape: RouteVehicleLicensePlate, location_name: "LicensePlate"))
-    RouteTruckOptions.add_member(:max_speed, Shapes::ShapeRef.new(shape: RouteTruckOptionsMaxSpeedDouble, location_name: "MaxSpeed", metadata: {"box"=>true}))
+    RouteTruckOptions.add_member(:max_speed, Shapes::ShapeRef.new(shape: RouteTruckOptionsMaxSpeedDouble, location_name: "MaxSpeed", metadata: {"box" => true}))
     RouteTruckOptions.add_member(:occupancy, Shapes::ShapeRef.new(shape: RouteTruckOptionsOccupancyInteger, location_name: "Occupancy"))
     RouteTruckOptions.add_member(:payload_capacity, Shapes::ShapeRef.new(shape: WeightKilograms, location_name: "PayloadCapacity"))
     RouteTruckOptions.add_member(:tire_count, Shapes::ShapeRef.new(shape: RouteTruckOptionsTireCountInteger, location_name: "TireCount"))
@@ -1798,7 +1798,7 @@ module Aws::GeoRoutes
     WaypointOptimizationOriginOptions.add_member(:id, Shapes::ShapeRef.new(shape: WaypointId, location_name: "Id"))
     WaypointOptimizationOriginOptions.struct_class = Types::WaypointOptimizationOriginOptions
 
-    WaypointOptimizationPedestrianOptions.add_member(:speed, Shapes::ShapeRef.new(shape: WaypointOptimizationPedestrianOptionsSpeedDouble, location_name: "Speed", metadata: {"box"=>true}))
+    WaypointOptimizationPedestrianOptions.add_member(:speed, Shapes::ShapeRef.new(shape: WaypointOptimizationPedestrianOptionsSpeedDouble, location_name: "Speed", metadata: {"box" => true}))
     WaypointOptimizationPedestrianOptions.struct_class = Types::WaypointOptimizationPedestrianOptions
 
     WaypointOptimizationRestCycleDurations.add_member(:rest_duration, Shapes::ShapeRef.new(shape: DurationSeconds, required: true, location_name: "RestDuration"))

@@ -145,6 +145,24 @@
         {"shape":"AccessDeniedException"}
       ]
     },
+    "CreateAnonymousWebExperienceUrl":{
+      "name":"CreateAnonymousWebExperienceUrl",
+      "http":{
+        "method":"POST",
+        "requestUri":"/applications/{applicationId}/experiences/{webExperienceId}/anonymous-url",
+        "responseCode":200
+      },
+      "input":{"shape":"CreateAnonymousWebExperienceUrlRequest"},
+      "output":{"shape":"CreateAnonymousWebExperienceUrlResponse"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ValidationException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceQuotaExceededException"}
+      ]
+    },
     "CreateApplication":{
       "name":"CreateApplication",
       "http":{
@@ -2379,6 +2397,32 @@
       },
       "union":true
     },
+    "CreateAnonymousWebExperienceUrlRequest":{
+      "type":"structure",
+      "required":[
+        "applicationId",
+        "webExperienceId"
+      ],
+      "members":{
+        "applicationId":{
+          "shape":"ApplicationId",
+          "location":"uri",
+          "locationName":"applicationId"
+        },
+        "webExperienceId":{
+          "shape":"WebExperienceId",
+          "location":"uri",
+          "locationName":"webExperienceId"
+        },
+        "sessionDurationInMinutes":{"shape":"SessionDurationInMinutes"}
+      }
+    },
+    "CreateAnonymousWebExperienceUrlResponse":{
+      "type":"structure",
+      "members":{
+        "anonymousUrl":{"shape":"Url"}
+      }
+    },
     "CreateApplicationRequest":{
       "type":"structure",
       "required":["displayName"],
@@ -4104,7 +4148,8 @@
         "AWS_IAM_IDP_SAML",
         "AWS_IAM_IDP_OIDC",
         "AWS_IAM_IDC",
-        "AWS_QUICKSIGHT_IDP"
+        "AWS_QUICKSIGHT_IDP",
+        "ANONYMOUS"
       ]
     },
     "ImageExtractionConfiguration":{
@@ -5777,6 +5822,12 @@
         "senderFault":true
       },
       "exception":true
+    },
+    "SessionDurationInMinutes":{
+      "type":"integer",
+      "box":true,
+      "max":60,
+      "min":15
     },
     "SnippetExcerpt":{
       "type":"structure",

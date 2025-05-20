@@ -78,34 +78,6 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
-      interface _AddStorageSystemResponseSuccess
-        include ::Seahorse::Client::_ResponseSuccess[Types::AddStorageSystemResponse]
-        def storage_system_arn: () -> ::String
-      end
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#add_storage_system-instance_method
-      def add_storage_system: (
-                                server_configuration: {
-                                  server_hostname: ::String,
-                                  server_port: ::Integer?
-                                },
-                                system_type: ("NetAppONTAP"),
-                                agent_arns: Array[::String],
-                                ?cloud_watch_log_group_arn: ::String,
-                                ?tags: Array[
-                                  {
-                                    key: ::String,
-                                    value: ::String?
-                                  },
-                                ],
-                                ?name: ::String,
-                                client_token: ::String,
-                                credentials: {
-                                  username: ::String,
-                                  password: ::String
-                                }
-                              ) -> _AddStorageSystemResponseSuccess
-                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddStorageSystemResponseSuccess
-
       interface _CancelTaskExecutionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CancelTaskExecutionResponse]
       end
@@ -556,21 +528,6 @@ module Aws
                           ) -> _DescribeAgentResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAgentResponseSuccess
 
-      interface _DescribeDiscoveryJobResponseSuccess
-        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDiscoveryJobResponse]
-        def storage_system_arn: () -> ::String
-        def discovery_job_arn: () -> ::String
-        def collection_duration_minutes: () -> ::Integer
-        def status: () -> ("RUNNING" | "WARNING" | "TERMINATED" | "FAILED" | "STOPPED" | "COMPLETED" | "COMPLETED_WITH_ISSUES")
-        def job_start_time: () -> ::Time
-        def job_end_time: () -> ::Time
-      end
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_discovery_job-instance_method
-      def describe_discovery_job: (
-                                    discovery_job_arn: ::String
-                                  ) -> _DescribeDiscoveryJobResponseSuccess
-                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDiscoveryJobResponseSuccess
-
       interface _DescribeLocationAzureBlobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLocationAzureBlobResponse]
         def location_arn: () -> ::String
@@ -747,58 +704,6 @@ module Aws
                                  ) -> _DescribeLocationSmbResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLocationSmbResponseSuccess
 
-      interface _DescribeStorageSystemResponseSuccess
-        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStorageSystemResponse]
-        def storage_system_arn: () -> ::String
-        def server_configuration: () -> Types::DiscoveryServerConfiguration
-        def system_type: () -> ("NetAppONTAP")
-        def agent_arns: () -> ::Array[::String]
-        def name: () -> ::String
-        def error_message: () -> ::String
-        def connectivity_status: () -> ("PASS" | "FAIL" | "UNKNOWN")
-        def cloud_watch_log_group_arn: () -> ::String
-        def creation_time: () -> ::Time
-        def secrets_manager_arn: () -> ::String
-      end
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_storage_system-instance_method
-      def describe_storage_system: (
-                                     storage_system_arn: ::String
-                                   ) -> _DescribeStorageSystemResponseSuccess
-                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStorageSystemResponseSuccess
-
-      interface _DescribeStorageSystemResourceMetricsResponseSuccess
-        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStorageSystemResourceMetricsResponse]
-        def metrics: () -> ::Array[Types::ResourceMetrics]
-        def next_token: () -> ::String
-      end
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_storage_system_resource_metrics-instance_method
-      def describe_storage_system_resource_metrics: (
-                                                      discovery_job_arn: ::String,
-                                                      resource_type: ("SVM" | "VOLUME" | "CLUSTER"),
-                                                      resource_id: ::String,
-                                                      ?start_time: ::Time,
-                                                      ?end_time: ::Time,
-                                                      ?max_results: ::Integer,
-                                                      ?next_token: ::String
-                                                    ) -> _DescribeStorageSystemResourceMetricsResponseSuccess
-                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStorageSystemResourceMetricsResponseSuccess
-
-      interface _DescribeStorageSystemResourcesResponseSuccess
-        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStorageSystemResourcesResponse]
-        def resource_details: () -> Types::ResourceDetails
-        def next_token: () -> ::String
-      end
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_storage_system_resources-instance_method
-      def describe_storage_system_resources: (
-                                               discovery_job_arn: ::String,
-                                               resource_type: ("SVM" | "VOLUME" | "CLUSTER"),
-                                               ?resource_ids: Array[::String],
-                                               ?filter: Hash[("SVM"), Array[::String]],
-                                               ?max_results: ::Integer,
-                                               ?next_token: ::String
-                                             ) -> _DescribeStorageSystemResourcesResponseSuccess
-                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStorageSystemResourcesResponseSuccess
-
       interface _DescribeTaskResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTaskResponse]
         def task_arn: () -> ::String
@@ -861,17 +766,6 @@ module Aws
                                    ) -> _DescribeTaskExecutionResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTaskExecutionResponseSuccess
 
-      interface _GenerateRecommendationsResponseSuccess
-        include ::Seahorse::Client::_ResponseSuccess[Types::GenerateRecommendationsResponse]
-      end
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#generate_recommendations-instance_method
-      def generate_recommendations: (
-                                      discovery_job_arn: ::String,
-                                      resource_ids: Array[::String],
-                                      resource_type: ("SVM" | "VOLUME" | "CLUSTER")
-                                    ) -> _GenerateRecommendationsResponseSuccess
-                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GenerateRecommendationsResponseSuccess
-
       interface _ListAgentsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAgentsResponse]
         def agents: () -> ::Array[Types::AgentListEntry]
@@ -883,19 +777,6 @@ module Aws
                          ?next_token: ::String
                        ) -> _ListAgentsResponseSuccess
                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAgentsResponseSuccess
-
-      interface _ListDiscoveryJobsResponseSuccess
-        include ::Seahorse::Client::_ResponseSuccess[Types::ListDiscoveryJobsResponse]
-        def discovery_jobs: () -> ::Array[Types::DiscoveryJobListEntry]
-        def next_token: () -> ::String
-      end
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#list_discovery_jobs-instance_method
-      def list_discovery_jobs: (
-                                 ?storage_system_arn: ::String,
-                                 ?max_results: ::Integer,
-                                 ?next_token: ::String
-                               ) -> _ListDiscoveryJobsResponseSuccess
-                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDiscoveryJobsResponseSuccess
 
       interface _ListLocationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListLocationsResponse]
@@ -915,18 +796,6 @@ module Aws
                             ]
                           ) -> _ListLocationsResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLocationsResponseSuccess
-
-      interface _ListStorageSystemsResponseSuccess
-        include ::Seahorse::Client::_ResponseSuccess[Types::ListStorageSystemsResponse]
-        def storage_systems: () -> ::Array[Types::StorageSystemListEntry]
-        def next_token: () -> ::String
-      end
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#list_storage_systems-instance_method
-      def list_storage_systems: (
-                                  ?max_results: ::Integer,
-                                  ?next_token: ::String
-                                ) -> _ListStorageSystemsResponseSuccess
-                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStorageSystemsResponseSuccess
 
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
@@ -972,33 +841,6 @@ module Aws
                         ]
                       ) -> _ListTasksResponseSuccess
                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTasksResponseSuccess
-
-      interface _RemoveStorageSystemResponseSuccess
-        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveStorageSystemResponse]
-      end
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#remove_storage_system-instance_method
-      def remove_storage_system: (
-                                   storage_system_arn: ::String
-                                 ) -> _RemoveStorageSystemResponseSuccess
-                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveStorageSystemResponseSuccess
-
-      interface _StartDiscoveryJobResponseSuccess
-        include ::Seahorse::Client::_ResponseSuccess[Types::StartDiscoveryJobResponse]
-        def discovery_job_arn: () -> ::String
-      end
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#start_discovery_job-instance_method
-      def start_discovery_job: (
-                                 storage_system_arn: ::String,
-                                 collection_duration_minutes: ::Integer,
-                                 client_token: ::String,
-                                 ?tags: Array[
-                                   {
-                                     key: ::String,
-                                     value: ::String?
-                                   },
-                                 ]
-                               ) -> _StartDiscoveryJobResponseSuccess
-                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDiscoveryJobResponseSuccess
 
       interface _StartTaskExecutionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartTaskExecutionResponse]
@@ -1083,15 +925,6 @@ module Aws
                                 ) -> _StartTaskExecutionResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartTaskExecutionResponseSuccess
 
-      interface _StopDiscoveryJobResponseSuccess
-        include ::Seahorse::Client::_ResponseSuccess[Types::StopDiscoveryJobResponse]
-      end
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#stop_discovery_job-instance_method
-      def stop_discovery_job: (
-                                discovery_job_arn: ::String
-                              ) -> _StopDiscoveryJobResponseSuccess
-                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopDiscoveryJobResponseSuccess
-
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
       end
@@ -1126,16 +959,6 @@ module Aws
                           ?name: ::String
                         ) -> _UpdateAgentResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAgentResponseSuccess
-
-      interface _UpdateDiscoveryJobResponseSuccess
-        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDiscoveryJobResponse]
-      end
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#update_discovery_job-instance_method
-      def update_discovery_job: (
-                                  discovery_job_arn: ::String,
-                                  collection_duration_minutes: ::Integer
-                                ) -> _UpdateDiscoveryJobResponseSuccess
-                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDiscoveryJobResponseSuccess
 
       interface _UpdateLocationAzureBlobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLocationAzureBlobResponse]
@@ -1339,26 +1162,6 @@ module Aws
                                  ?kerberos_krb_5_conf: ::String
                                ) -> _UpdateLocationSmbResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLocationSmbResponseSuccess
-
-      interface _UpdateStorageSystemResponseSuccess
-        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateStorageSystemResponse]
-      end
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#update_storage_system-instance_method
-      def update_storage_system: (
-                                   storage_system_arn: ::String,
-                                   ?server_configuration: {
-                                     server_hostname: ::String,
-                                     server_port: ::Integer?
-                                   },
-                                   ?agent_arns: Array[::String],
-                                   ?name: ::String,
-                                   ?cloud_watch_log_group_arn: ::String,
-                                   ?credentials: {
-                                     username: ::String,
-                                     password: ::String
-                                   }
-                                 ) -> _UpdateStorageSystemResponseSuccess
-                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStorageSystemResponseSuccess
 
       interface _UpdateTaskResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTaskResponse]

@@ -75,6 +75,11 @@ module Aws::Connect
       attr_accessor hierarchy_groups: Types::HierarchyGroups
       attr_accessor device_info: Types::DeviceInfo
       attr_accessor capabilities: Types::ParticipantCapabilities
+      attr_accessor after_contact_work_duration: ::Integer
+      attr_accessor after_contact_work_start_timestamp: ::Time
+      attr_accessor after_contact_work_end_timestamp: ::Time
+      attr_accessor agent_initiated_hold_duration: ::Integer
+      attr_accessor state_transitions: ::Array[Types::StateTransition]
       SENSITIVE: []
     end
 
@@ -622,6 +627,11 @@ module Aws::Connect
       attr_accessor disconnect_details: Types::DisconnectDetails
       attr_accessor additional_email_recipients: Types::AdditionalEmailRecipients
       attr_accessor segment_attributes: ::Hash[::String, Types::SegmentAttributeValue]
+      attr_accessor recordings: ::Array[Types::RecordingInfo]
+      attr_accessor disconnect_reason: ::String
+      attr_accessor contact_evaluations: ::Hash[::String, Types::ContactEvaluation]
+      attr_accessor contact_details: Types::ContactDetails
+      attr_accessor attributes: ::Hash[::String, ::String]
       SENSITIVE: [:name, :description]
     end
 
@@ -644,6 +654,23 @@ module Aws::Connect
       attr_accessor queue_id: ::String
       attr_accessor attributes: ::Hash[::String, ::String]
       attr_accessor campaign: Types::Campaign
+      SENSITIVE: []
+    end
+
+    class ContactDetails
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class ContactEvaluation
+      attr_accessor form_id: ::String
+      attr_accessor evaluation_arn: ::String
+      attr_accessor status: ("COMPLETE" | "IN_PROGRESS" | "DELETED")
+      attr_accessor start_timestamp: ::Time
+      attr_accessor end_timestamp: ::Time
+      attr_accessor delete_timestamp: ::Time
+      attr_accessor export_location: ::String
       SENSITIVE: []
     end
 
@@ -4316,6 +4343,20 @@ module Aws::Connect
       end
     end
 
+    class RecordingInfo
+      attr_accessor storage_type: ("S3" | "KINESIS_VIDEO_STREAM" | "KINESIS_STREAM" | "KINESIS_FIREHOSE")
+      attr_accessor location: ::String
+      attr_accessor media_stream_type: ("AUDIO" | "VIDEO")
+      attr_accessor participant_type: ("ALL" | "MANAGER" | "AGENT" | "CUSTOMER" | "THIRDPARTY")
+      attr_accessor fragment_start_number: ::String
+      attr_accessor fragment_stop_number: ::String
+      attr_accessor start_timestamp: ::Time
+      attr_accessor stop_timestamp: ::Time
+      attr_accessor status: ("AVAILABLE" | "DELETED")
+      attr_accessor deletion_reason: ::String
+      SENSITIVE: []
+    end
+
     class Reference
       attr_accessor value: ::String
       attr_accessor type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE")
@@ -5283,6 +5324,13 @@ module Aws::Connect
       attr_accessor contact_id: ::String
       attr_accessor participant_id: ::String
       attr_accessor participant_token: ::String
+      SENSITIVE: []
+    end
+
+    class StateTransition
+      attr_accessor state: ("INITIAL" | "CONNECTED" | "DISCONNECTED" | "MISSED")
+      attr_accessor state_start_timestamp: ::Time
+      attr_accessor state_end_timestamp: ::Time
       SENSITIVE: []
     end
 

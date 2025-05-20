@@ -200,8 +200,7 @@ module Aws::DeviceFarm
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -1836,6 +1835,10 @@ module Aws::DeviceFarm
     # @option params [Types::ScheduleRunConfiguration] :configuration
     #   An object that contains information about the settings for a run.
     #
+    # @option params [String] :project_arn
+    #   The ARN of the project for which you want to check device pool
+    #   compatibility.
+    #
     # @return [Types::GetDevicePoolCompatibilityResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDevicePoolCompatibilityResult#compatible_devices #compatible_devices} => Array&lt;Types::DevicePoolCompatibilityResult&gt;
@@ -1902,6 +1905,7 @@ module Aws::DeviceFarm
     #       auxiliary_apps: ["AmazonResourceName"],
     #       billing_method: "METERED", # accepts METERED, UNMETERED
     #     },
+    #     project_arn: "AmazonResourceName",
     #   })
     #
     # @example Response structure
@@ -6205,7 +6209,7 @@ module Aws::DeviceFarm
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-devicefarm'
-      context[:gem_version] = '1.85.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

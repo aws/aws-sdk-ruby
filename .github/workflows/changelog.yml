@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Get changed files
         id: changed-files
-        uses: tj-actions/changed-files@c34c1c13a740b06851baff92ab9a653d93ad6ce7
+        uses: tj-actions/changed-files@480f49412651059a414a6a5c96887abb1877de8a
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 

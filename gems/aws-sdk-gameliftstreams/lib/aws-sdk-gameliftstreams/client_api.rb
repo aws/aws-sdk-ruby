@@ -171,7 +171,7 @@ module Aws::GameLiftStreams
     CreateApplicationInput.add_member(:application_log_output_uri, Shapes::ShapeRef.new(shape: ApplicationLogOutputUri, location_name: "ApplicationLogOutputUri"))
     CreateApplicationInput.add_member(:application_log_paths, Shapes::ShapeRef.new(shape: FilePaths, location_name: "ApplicationLogPaths"))
     CreateApplicationInput.add_member(:application_source_uri, Shapes::ShapeRef.new(shape: ApplicationSourceUri, required: true, location_name: "ApplicationSourceUri"))
-    CreateApplicationInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateApplicationInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateApplicationInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, required: true, location_name: "Description"))
     CreateApplicationInput.add_member(:executable_path, Shapes::ShapeRef.new(shape: ExecutablePath, required: true, location_name: "ExecutablePath"))
     CreateApplicationInput.add_member(:runtime_environment, Shapes::ShapeRef.new(shape: RuntimeEnvironment, required: true, location_name: "RuntimeEnvironment"))
@@ -194,7 +194,7 @@ module Aws::GameLiftStreams
     CreateApplicationOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: ApplicationStatusReason, location_name: "StatusReason"))
     CreateApplicationOutput.struct_class = Types::CreateApplicationOutput
 
-    CreateStreamGroupInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateStreamGroupInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateStreamGroupInput.add_member(:default_application_identifier, Shapes::ShapeRef.new(shape: Identifier, location_name: "DefaultApplicationIdentifier"))
     CreateStreamGroupInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, required: true, location_name: "Description"))
     CreateStreamGroupInput.add_member(:location_configurations, Shapes::ShapeRef.new(shape: LocationConfigurations, location_name: "LocationConfigurations"))
@@ -215,7 +215,7 @@ module Aws::GameLiftStreams
     CreateStreamGroupOutput.add_member(:stream_class, Shapes::ShapeRef.new(shape: StreamClass, location_name: "StreamClass"))
     CreateStreamGroupOutput.struct_class = Types::CreateStreamGroupOutput
 
-    CreateStreamSessionConnectionInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateStreamSessionConnectionInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateStreamSessionConnectionInput.add_member(:identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "Identifier"))
     CreateStreamSessionConnectionInput.add_member(:signal_request, Shapes::ShapeRef.new(shape: SignalRequest, required: true, location_name: "SignalRequest"))
     CreateStreamSessionConnectionInput.add_member(:stream_session_identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "StreamSessionIdentifier"))
@@ -415,7 +415,7 @@ module Aws::GameLiftStreams
     StartStreamSessionInput.add_member(:additional_environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "AdditionalEnvironmentVariables"))
     StartStreamSessionInput.add_member(:additional_launch_args, Shapes::ShapeRef.new(shape: GameLaunchArgList, location_name: "AdditionalLaunchArgs"))
     StartStreamSessionInput.add_member(:application_identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "ApplicationIdentifier"))
-    StartStreamSessionInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    StartStreamSessionInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     StartStreamSessionInput.add_member(:connection_timeout_seconds, Shapes::ShapeRef.new(shape: ConnectionTimeoutSeconds, location_name: "ConnectionTimeoutSeconds"))
     StartStreamSessionInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     StartStreamSessionInput.add_member(:identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "Identifier"))

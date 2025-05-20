@@ -128,7 +128,7 @@ module Aws::SnowDeviceManagement
     CpuOptions.add_member(:threads_per_core, Shapes::ShapeRef.new(shape: Integer, location_name: "threadsPerCore"))
     CpuOptions.struct_class = Types::CpuOptions
 
-    CreateTaskInput.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateTaskInput.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateTaskInput.add_member(:command, Shapes::ShapeRef.new(shape: Command, required: true, location_name: "command"))
     CreateTaskInput.add_member(:description, Shapes::ShapeRef.new(shape: TaskDescriptionString, location_name: "description"))
     CreateTaskInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))

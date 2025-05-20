@@ -200,8 +200,7 @@ module Aws::CleanRooms
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -3044,11 +3043,20 @@ module Aws::CleanRooms
     #   resp.protected_query.result_configuration.output_configuration.s3.key_prefix #=> String
     #   resp.protected_query.result_configuration.output_configuration.s3.single_file_output #=> Boolean
     #   resp.protected_query.result_configuration.output_configuration.member.account_id #=> String
+    #   resp.protected_query.result_configuration.output_configuration.distribute.locations #=> Array
+    #   resp.protected_query.result_configuration.output_configuration.distribute.locations[0].s3.result_format #=> String, one of "CSV", "PARQUET"
+    #   resp.protected_query.result_configuration.output_configuration.distribute.locations[0].s3.bucket #=> String
+    #   resp.protected_query.result_configuration.output_configuration.distribute.locations[0].s3.key_prefix #=> String
+    #   resp.protected_query.result_configuration.output_configuration.distribute.locations[0].s3.single_file_output #=> Boolean
+    #   resp.protected_query.result_configuration.output_configuration.distribute.locations[0].member.account_id #=> String
     #   resp.protected_query.statistics.total_duration_in_millis #=> Integer
     #   resp.protected_query.statistics.billed_resource_utilization.units #=> Float
     #   resp.protected_query.result.output.s3.location #=> String
     #   resp.protected_query.result.output.member_list #=> Array
     #   resp.protected_query.result.output.member_list[0].account_id #=> String
+    #   resp.protected_query.result.output.distribute.s3.location #=> String
+    #   resp.protected_query.result.output.distribute.member_list #=> Array
+    #   resp.protected_query.result.output.distribute.member_list[0].account_id #=> String
     #   resp.protected_query.error.message #=> String
     #   resp.protected_query.error.code #=> String
     #   resp.protected_query.differential_privacy.sensitivity_parameters #=> Array
@@ -4554,6 +4562,21 @@ module Aws::CleanRooms
     #         member: {
     #           account_id: "AccountId", # required
     #         },
+    #         distribute: {
+    #           locations: [ # required
+    #             {
+    #               s3: {
+    #                 result_format: "CSV", # required, accepts CSV, PARQUET
+    #                 bucket: "ProtectedQueryS3OutputConfigurationBucketString", # required
+    #                 key_prefix: "KeyPrefix",
+    #                 single_file_output: false,
+    #               },
+    #               member: {
+    #                 account_id: "AccountId", # required
+    #               },
+    #             },
+    #           ],
+    #         },
     #       },
     #     },
     #     compute_configuration: {
@@ -4580,11 +4603,20 @@ module Aws::CleanRooms
     #   resp.protected_query.result_configuration.output_configuration.s3.key_prefix #=> String
     #   resp.protected_query.result_configuration.output_configuration.s3.single_file_output #=> Boolean
     #   resp.protected_query.result_configuration.output_configuration.member.account_id #=> String
+    #   resp.protected_query.result_configuration.output_configuration.distribute.locations #=> Array
+    #   resp.protected_query.result_configuration.output_configuration.distribute.locations[0].s3.result_format #=> String, one of "CSV", "PARQUET"
+    #   resp.protected_query.result_configuration.output_configuration.distribute.locations[0].s3.bucket #=> String
+    #   resp.protected_query.result_configuration.output_configuration.distribute.locations[0].s3.key_prefix #=> String
+    #   resp.protected_query.result_configuration.output_configuration.distribute.locations[0].s3.single_file_output #=> Boolean
+    #   resp.protected_query.result_configuration.output_configuration.distribute.locations[0].member.account_id #=> String
     #   resp.protected_query.statistics.total_duration_in_millis #=> Integer
     #   resp.protected_query.statistics.billed_resource_utilization.units #=> Float
     #   resp.protected_query.result.output.s3.location #=> String
     #   resp.protected_query.result.output.member_list #=> Array
     #   resp.protected_query.result.output.member_list[0].account_id #=> String
+    #   resp.protected_query.result.output.distribute.s3.location #=> String
+    #   resp.protected_query.result.output.distribute.member_list #=> Array
+    #   resp.protected_query.result.output.distribute.member_list[0].account_id #=> String
     #   resp.protected_query.error.message #=> String
     #   resp.protected_query.error.code #=> String
     #   resp.protected_query.differential_privacy.sensitivity_parameters #=> Array
@@ -5538,11 +5570,20 @@ module Aws::CleanRooms
     #   resp.protected_query.result_configuration.output_configuration.s3.key_prefix #=> String
     #   resp.protected_query.result_configuration.output_configuration.s3.single_file_output #=> Boolean
     #   resp.protected_query.result_configuration.output_configuration.member.account_id #=> String
+    #   resp.protected_query.result_configuration.output_configuration.distribute.locations #=> Array
+    #   resp.protected_query.result_configuration.output_configuration.distribute.locations[0].s3.result_format #=> String, one of "CSV", "PARQUET"
+    #   resp.protected_query.result_configuration.output_configuration.distribute.locations[0].s3.bucket #=> String
+    #   resp.protected_query.result_configuration.output_configuration.distribute.locations[0].s3.key_prefix #=> String
+    #   resp.protected_query.result_configuration.output_configuration.distribute.locations[0].s3.single_file_output #=> Boolean
+    #   resp.protected_query.result_configuration.output_configuration.distribute.locations[0].member.account_id #=> String
     #   resp.protected_query.statistics.total_duration_in_millis #=> Integer
     #   resp.protected_query.statistics.billed_resource_utilization.units #=> Float
     #   resp.protected_query.result.output.s3.location #=> String
     #   resp.protected_query.result.output.member_list #=> Array
     #   resp.protected_query.result.output.member_list[0].account_id #=> String
+    #   resp.protected_query.result.output.distribute.s3.location #=> String
+    #   resp.protected_query.result.output.distribute.member_list #=> Array
+    #   resp.protected_query.result.output.distribute.member_list[0].account_id #=> String
     #   resp.protected_query.error.message #=> String
     #   resp.protected_query.error.code #=> String
     #   resp.protected_query.differential_privacy.sensitivity_parameters #=> Array
@@ -5581,7 +5622,7 @@ module Aws::CleanRooms
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cleanrooms'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -305,7 +305,7 @@ module Aws::ChimeSDKMessaging
     ChannelFlow.add_member(:last_updated_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTimestamp"))
     ChannelFlow.struct_class = Types::ChannelFlow
 
-    ChannelFlowCallbackRequest.add_member(:callback_id, Shapes::ShapeRef.new(shape: CallbackIdType, required: true, location_name: "CallbackId", metadata: {"idempotencyToken"=>true}))
+    ChannelFlowCallbackRequest.add_member(:callback_id, Shapes::ShapeRef.new(shape: CallbackIdType, required: true, location_name: "CallbackId", metadata: {"idempotencyToken" => true}))
     ChannelFlowCallbackRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
     ChannelFlowCallbackRequest.add_member(:delete_resource, Shapes::ShapeRef.new(shape: NonNullableBoolean, location_name: "DeleteResource"))
     ChannelFlowCallbackRequest.add_member(:channel_message, Shapes::ShapeRef.new(shape: ChannelMessageCallback, required: true, location_name: "ChannelMessage"))
@@ -440,7 +440,7 @@ module Aws::ChimeSDKMessaging
     CreateChannelFlowRequest.add_member(:processors, Shapes::ShapeRef.new(shape: ProcessorList, required: true, location_name: "Processors"))
     CreateChannelFlowRequest.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyResourceName, required: true, location_name: "Name"))
     CreateChannelFlowRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateChannelFlowRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateChannelFlowRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateChannelFlowRequest.struct_class = Types::CreateChannelFlowRequest
 
     CreateChannelFlowResponse.add_member(:channel_flow_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelFlowArn"))
@@ -472,7 +472,7 @@ module Aws::ChimeSDKMessaging
     CreateChannelRequest.add_member(:mode, Shapes::ShapeRef.new(shape: ChannelMode, location_name: "Mode"))
     CreateChannelRequest.add_member(:privacy, Shapes::ShapeRef.new(shape: ChannelPrivacy, location_name: "Privacy"))
     CreateChannelRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
-    CreateChannelRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateChannelRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateChannelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateChannelRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "header", location_name: "x-amz-chime-bearer"))
     CreateChannelRequest.add_member(:channel_id, Shapes::ShapeRef.new(shape: ChannelId, location_name: "ChannelId"))
@@ -858,7 +858,7 @@ module Aws::ChimeSDKMessaging
     SendChannelMessageRequest.add_member(:type, Shapes::ShapeRef.new(shape: ChannelMessageType, required: true, location_name: "Type"))
     SendChannelMessageRequest.add_member(:persistence, Shapes::ShapeRef.new(shape: ChannelMessagePersistenceType, required: true, location_name: "Persistence"))
     SendChannelMessageRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
-    SendChannelMessageRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    SendChannelMessageRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     SendChannelMessageRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "header", location_name: "x-amz-chime-bearer"))
     SendChannelMessageRequest.add_member(:push_notification, Shapes::ShapeRef.new(shape: PushNotificationConfiguration, location_name: "PushNotification"))
     SendChannelMessageRequest.add_member(:message_attributes, Shapes::ShapeRef.new(shape: MessageAttributeMap, location_name: "MessageAttributes"))

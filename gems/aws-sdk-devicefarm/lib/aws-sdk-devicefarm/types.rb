@@ -1801,6 +1801,11 @@ module Aws::DeviceFarm
     #   An object that contains information about the settings for a run.
     #   @return [Types::ScheduleRunConfiguration]
     #
+    # @!attribute [rw] project_arn
+    #   The ARN of the project for which you want to check device pool
+    #   compatibility.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevicePoolCompatibilityRequest AWS API Documentation
     #
     class GetDevicePoolCompatibilityRequest < Struct.new(
@@ -1808,7 +1813,8 @@ module Aws::DeviceFarm
       :app_arn,
       :test_type,
       :test,
-      :configuration)
+      :configuration,
+      :project_arn)
       SENSITIVE = []
       include Aws::Structure
     end

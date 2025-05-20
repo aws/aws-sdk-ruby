@@ -372,7 +372,7 @@ module Aws::GreengrassV2
     CreateComponentVersionRequest.add_member(:inline_recipe, Shapes::ShapeRef.new(shape: RecipeBlob, location_name: "inlineRecipe"))
     CreateComponentVersionRequest.add_member(:lambda_function, Shapes::ShapeRef.new(shape: LambdaFunctionRecipeSource, location_name: "lambdaFunction"))
     CreateComponentVersionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateComponentVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateComponentVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateComponentVersionRequest.struct_class = Types::CreateComponentVersionRequest
 
     CreateComponentVersionResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ComponentVersionARN, location_name: "arn"))
@@ -389,7 +389,7 @@ module Aws::GreengrassV2
     CreateDeploymentRequest.add_member(:deployment_policies, Shapes::ShapeRef.new(shape: DeploymentPolicies, location_name: "deploymentPolicies"))
     CreateDeploymentRequest.add_member(:parent_target_arn, Shapes::ShapeRef.new(shape: ThingGroupARN, location_name: "parentTargetArn"))
     CreateDeploymentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateDeploymentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDeploymentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateDeploymentRequest.struct_class = Types::CreateDeploymentRequest
 
     CreateDeploymentResponse.add_member(:deployment_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "deploymentId"))
@@ -416,11 +416,11 @@ module Aws::GreengrassV2
     Deployment.add_member(:parent_target_arn, Shapes::ShapeRef.new(shape: ThingGroupARN, location_name: "parentTargetArn"))
     Deployment.struct_class = Types::Deployment
 
-    DeploymentComponentUpdatePolicy.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: OptionalInteger, location_name: "timeoutInSeconds", metadata: {"box"=>true}))
+    DeploymentComponentUpdatePolicy.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: OptionalInteger, location_name: "timeoutInSeconds", metadata: {"box" => true}))
     DeploymentComponentUpdatePolicy.add_member(:action, Shapes::ShapeRef.new(shape: DeploymentComponentUpdatePolicyAction, location_name: "action"))
     DeploymentComponentUpdatePolicy.struct_class = Types::DeploymentComponentUpdatePolicy
 
-    DeploymentConfigurationValidationPolicy.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: OptionalInteger, location_name: "timeoutInSeconds", metadata: {"box"=>true}))
+    DeploymentConfigurationValidationPolicy.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: OptionalInteger, location_name: "timeoutInSeconds", metadata: {"box" => true}))
     DeploymentConfigurationValidationPolicy.struct_class = Types::DeploymentConfigurationValidationPolicy
 
     DeploymentIoTJobConfiguration.add_member(:job_executions_rollout_config, Shapes::ShapeRef.new(shape: IoTJobExecutionsRolloutConfig, location_name: "jobExecutionsRolloutConfig"))
@@ -583,7 +583,7 @@ module Aws::GreengrassV2
     IoTJobAbortCriteriaList.member = Shapes::ShapeRef.new(shape: IoTJobAbortCriteria)
 
     IoTJobExecutionsRolloutConfig.add_member(:exponential_rate, Shapes::ShapeRef.new(shape: IoTJobExponentialRolloutRate, location_name: "exponentialRate"))
-    IoTJobExecutionsRolloutConfig.add_member(:maximum_per_minute, Shapes::ShapeRef.new(shape: IoTJobMaxExecutionsPerMin, location_name: "maximumPerMinute", metadata: {"box"=>true}))
+    IoTJobExecutionsRolloutConfig.add_member(:maximum_per_minute, Shapes::ShapeRef.new(shape: IoTJobMaxExecutionsPerMin, location_name: "maximumPerMinute", metadata: {"box" => true}))
     IoTJobExecutionsRolloutConfig.struct_class = Types::IoTJobExecutionsRolloutConfig
 
     IoTJobExponentialRolloutRate.add_member(:base_rate_per_minute, Shapes::ShapeRef.new(shape: IoTJobRolloutBaseRatePerMinute, required: true, location_name: "baseRatePerMinute"))
@@ -591,15 +591,15 @@ module Aws::GreengrassV2
     IoTJobExponentialRolloutRate.add_member(:rate_increase_criteria, Shapes::ShapeRef.new(shape: IoTJobRateIncreaseCriteria, required: true, location_name: "rateIncreaseCriteria"))
     IoTJobExponentialRolloutRate.struct_class = Types::IoTJobExponentialRolloutRate
 
-    IoTJobRateIncreaseCriteria.add_member(:number_of_notified_things, Shapes::ShapeRef.new(shape: IoTJobNumberOfThings, location_name: "numberOfNotifiedThings", metadata: {"box"=>true}))
-    IoTJobRateIncreaseCriteria.add_member(:number_of_succeeded_things, Shapes::ShapeRef.new(shape: IoTJobNumberOfThings, location_name: "numberOfSucceededThings", metadata: {"box"=>true}))
+    IoTJobRateIncreaseCriteria.add_member(:number_of_notified_things, Shapes::ShapeRef.new(shape: IoTJobNumberOfThings, location_name: "numberOfNotifiedThings", metadata: {"box" => true}))
+    IoTJobRateIncreaseCriteria.add_member(:number_of_succeeded_things, Shapes::ShapeRef.new(shape: IoTJobNumberOfThings, location_name: "numberOfSucceededThings", metadata: {"box" => true}))
     IoTJobRateIncreaseCriteria.struct_class = Types::IoTJobRateIncreaseCriteria
 
-    IoTJobTimeoutConfig.add_member(:in_progress_timeout_in_minutes, Shapes::ShapeRef.new(shape: IoTJobInProgressTimeoutInMinutes, location_name: "inProgressTimeoutInMinutes", metadata: {"box"=>true}))
+    IoTJobTimeoutConfig.add_member(:in_progress_timeout_in_minutes, Shapes::ShapeRef.new(shape: IoTJobInProgressTimeoutInMinutes, location_name: "inProgressTimeoutInMinutes", metadata: {"box" => true}))
     IoTJobTimeoutConfig.struct_class = Types::IoTJobTimeoutConfig
 
-    LambdaContainerParams.add_member(:memory_size_in_kb, Shapes::ShapeRef.new(shape: OptionalInteger, location_name: "memorySizeInKB", metadata: {"box"=>true}))
-    LambdaContainerParams.add_member(:mount_ro_sysfs, Shapes::ShapeRef.new(shape: OptionalBoolean, location_name: "mountROSysfs", metadata: {"box"=>true}))
+    LambdaContainerParams.add_member(:memory_size_in_kb, Shapes::ShapeRef.new(shape: OptionalInteger, location_name: "memorySizeInKB", metadata: {"box" => true}))
+    LambdaContainerParams.add_member(:mount_ro_sysfs, Shapes::ShapeRef.new(shape: OptionalBoolean, location_name: "mountROSysfs", metadata: {"box" => true}))
     LambdaContainerParams.add_member(:volumes, Shapes::ShapeRef.new(shape: LambdaVolumeList, location_name: "volumes"))
     LambdaContainerParams.add_member(:devices, Shapes::ShapeRef.new(shape: LambdaDeviceList, location_name: "devices"))
     LambdaContainerParams.struct_class = Types::LambdaContainerParams
@@ -608,7 +608,7 @@ module Aws::GreengrassV2
 
     LambdaDeviceMount.add_member(:path, Shapes::ShapeRef.new(shape: FileSystemPath, required: true, location_name: "path"))
     LambdaDeviceMount.add_member(:permission, Shapes::ShapeRef.new(shape: LambdaFilesystemPermission, location_name: "permission"))
-    LambdaDeviceMount.add_member(:add_group_owner, Shapes::ShapeRef.new(shape: OptionalBoolean, location_name: "addGroupOwner", metadata: {"box"=>true}))
+    LambdaDeviceMount.add_member(:add_group_owner, Shapes::ShapeRef.new(shape: OptionalBoolean, location_name: "addGroupOwner", metadata: {"box" => true}))
     LambdaDeviceMount.struct_class = Types::LambdaDeviceMount
 
     LambdaEnvironmentVariables.key = Shapes::ShapeRef.new(shape: NonEmptyString)
@@ -623,12 +623,12 @@ module Aws::GreengrassV2
     LambdaExecArgsList.member = Shapes::ShapeRef.new(shape: LambdaExecArg)
 
     LambdaExecutionParameters.add_member(:event_sources, Shapes::ShapeRef.new(shape: LambdaEventSourceList, location_name: "eventSources"))
-    LambdaExecutionParameters.add_member(:max_queue_size, Shapes::ShapeRef.new(shape: OptionalInteger, location_name: "maxQueueSize", metadata: {"box"=>true}))
-    LambdaExecutionParameters.add_member(:max_instances_count, Shapes::ShapeRef.new(shape: OptionalInteger, location_name: "maxInstancesCount", metadata: {"box"=>true}))
-    LambdaExecutionParameters.add_member(:max_idle_time_in_seconds, Shapes::ShapeRef.new(shape: OptionalInteger, location_name: "maxIdleTimeInSeconds", metadata: {"box"=>true}))
-    LambdaExecutionParameters.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: OptionalInteger, location_name: "timeoutInSeconds", metadata: {"box"=>true}))
-    LambdaExecutionParameters.add_member(:status_timeout_in_seconds, Shapes::ShapeRef.new(shape: OptionalInteger, location_name: "statusTimeoutInSeconds", metadata: {"box"=>true}))
-    LambdaExecutionParameters.add_member(:pinned, Shapes::ShapeRef.new(shape: OptionalBoolean, location_name: "pinned", metadata: {"box"=>true}))
+    LambdaExecutionParameters.add_member(:max_queue_size, Shapes::ShapeRef.new(shape: OptionalInteger, location_name: "maxQueueSize", metadata: {"box" => true}))
+    LambdaExecutionParameters.add_member(:max_instances_count, Shapes::ShapeRef.new(shape: OptionalInteger, location_name: "maxInstancesCount", metadata: {"box" => true}))
+    LambdaExecutionParameters.add_member(:max_idle_time_in_seconds, Shapes::ShapeRef.new(shape: OptionalInteger, location_name: "maxIdleTimeInSeconds", metadata: {"box" => true}))
+    LambdaExecutionParameters.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: OptionalInteger, location_name: "timeoutInSeconds", metadata: {"box" => true}))
+    LambdaExecutionParameters.add_member(:status_timeout_in_seconds, Shapes::ShapeRef.new(shape: OptionalInteger, location_name: "statusTimeoutInSeconds", metadata: {"box" => true}))
+    LambdaExecutionParameters.add_member(:pinned, Shapes::ShapeRef.new(shape: OptionalBoolean, location_name: "pinned", metadata: {"box" => true}))
     LambdaExecutionParameters.add_member(:input_payload_encoding_type, Shapes::ShapeRef.new(shape: LambdaInputPayloadEncodingType, location_name: "inputPayloadEncodingType"))
     LambdaExecutionParameters.add_member(:exec_args, Shapes::ShapeRef.new(shape: LambdaExecArgsList, location_name: "execArgs"))
     LambdaExecutionParameters.add_member(:environment_variables, Shapes::ShapeRef.new(shape: LambdaEnvironmentVariables, location_name: "environmentVariables"))
@@ -652,21 +652,21 @@ module Aws::GreengrassV2
     LambdaVolumeMount.add_member(:source_path, Shapes::ShapeRef.new(shape: FileSystemPath, required: true, location_name: "sourcePath"))
     LambdaVolumeMount.add_member(:destination_path, Shapes::ShapeRef.new(shape: FileSystemPath, required: true, location_name: "destinationPath"))
     LambdaVolumeMount.add_member(:permission, Shapes::ShapeRef.new(shape: LambdaFilesystemPermission, location_name: "permission"))
-    LambdaVolumeMount.add_member(:add_group_owner, Shapes::ShapeRef.new(shape: OptionalBoolean, location_name: "addGroupOwner", metadata: {"box"=>true}))
+    LambdaVolumeMount.add_member(:add_group_owner, Shapes::ShapeRef.new(shape: OptionalBoolean, location_name: "addGroupOwner", metadata: {"box" => true}))
     LambdaVolumeMount.struct_class = Types::LambdaVolumeMount
 
     ListClientDevicesAssociatedWithCoreDeviceRequest.add_member(:core_device_thing_name, Shapes::ShapeRef.new(shape: IoTThingName, required: true, location: "uri", location_name: "coreDeviceThingName"))
-    ListClientDevicesAssociatedWithCoreDeviceRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DefaultMaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
-    ListClientDevicesAssociatedWithCoreDeviceRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location: "querystring", location_name: "nextToken", metadata: {"box"=>true}))
+    ListClientDevicesAssociatedWithCoreDeviceRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DefaultMaxResults, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
+    ListClientDevicesAssociatedWithCoreDeviceRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location: "querystring", location_name: "nextToken", metadata: {"box" => true}))
     ListClientDevicesAssociatedWithCoreDeviceRequest.struct_class = Types::ListClientDevicesAssociatedWithCoreDeviceRequest
 
     ListClientDevicesAssociatedWithCoreDeviceResponse.add_member(:associated_client_devices, Shapes::ShapeRef.new(shape: AssociatedClientDeviceList, location_name: "associatedClientDevices"))
-    ListClientDevicesAssociatedWithCoreDeviceResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location_name: "nextToken", metadata: {"box"=>true}))
+    ListClientDevicesAssociatedWithCoreDeviceResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location_name: "nextToken", metadata: {"box" => true}))
     ListClientDevicesAssociatedWithCoreDeviceResponse.struct_class = Types::ListClientDevicesAssociatedWithCoreDeviceResponse
 
     ListComponentVersionsRequest.add_member(:arn, Shapes::ShapeRef.new(shape: ComponentARN, required: true, location: "uri", location_name: "arn"))
-    ListComponentVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DefaultMaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
-    ListComponentVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location: "querystring", location_name: "nextToken", metadata: {"box"=>true}))
+    ListComponentVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DefaultMaxResults, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
+    ListComponentVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location: "querystring", location_name: "nextToken", metadata: {"box" => true}))
     ListComponentVersionsRequest.struct_class = Types::ListComponentVersionsRequest
 
     ListComponentVersionsResponse.add_member(:component_versions, Shapes::ShapeRef.new(shape: ComponentVersionList, location_name: "componentVersions"))
@@ -674,8 +674,8 @@ module Aws::GreengrassV2
     ListComponentVersionsResponse.struct_class = Types::ListComponentVersionsResponse
 
     ListComponentsRequest.add_member(:scope, Shapes::ShapeRef.new(shape: ComponentVisibilityScope, location: "querystring", location_name: "scope"))
-    ListComponentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DefaultMaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
-    ListComponentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location: "querystring", location_name: "nextToken", metadata: {"box"=>true}))
+    ListComponentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DefaultMaxResults, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
+    ListComponentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location: "querystring", location_name: "nextToken", metadata: {"box" => true}))
     ListComponentsRequest.struct_class = Types::ListComponentsRequest
 
     ListComponentsResponse.add_member(:components, Shapes::ShapeRef.new(shape: ComponentList, location_name: "components"))
@@ -684,8 +684,8 @@ module Aws::GreengrassV2
 
     ListCoreDevicesRequest.add_member(:thing_group_arn, Shapes::ShapeRef.new(shape: ThingGroupARN, location: "querystring", location_name: "thingGroupArn"))
     ListCoreDevicesRequest.add_member(:status, Shapes::ShapeRef.new(shape: CoreDeviceStatus, location: "querystring", location_name: "status"))
-    ListCoreDevicesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DefaultMaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
-    ListCoreDevicesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location: "querystring", location_name: "nextToken", metadata: {"box"=>true}))
+    ListCoreDevicesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DefaultMaxResults, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
+    ListCoreDevicesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location: "querystring", location_name: "nextToken", metadata: {"box" => true}))
     ListCoreDevicesRequest.add_member(:runtime, Shapes::ShapeRef.new(shape: CoreDeviceRuntimeString, location: "querystring", location_name: "runtime"))
     ListCoreDevicesRequest.struct_class = Types::ListCoreDevicesRequest
 
@@ -696,8 +696,8 @@ module Aws::GreengrassV2
     ListDeploymentsRequest.add_member(:target_arn, Shapes::ShapeRef.new(shape: TargetARN, location: "querystring", location_name: "targetArn"))
     ListDeploymentsRequest.add_member(:history_filter, Shapes::ShapeRef.new(shape: DeploymentHistoryFilter, location: "querystring", location_name: "historyFilter"))
     ListDeploymentsRequest.add_member(:parent_target_arn, Shapes::ShapeRef.new(shape: ThingGroupARN, location: "querystring", location_name: "parentTargetArn"))
-    ListDeploymentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DefaultMaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
-    ListDeploymentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location: "querystring", location_name: "nextToken", metadata: {"box"=>true}))
+    ListDeploymentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DefaultMaxResults, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
+    ListDeploymentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location: "querystring", location_name: "nextToken", metadata: {"box" => true}))
     ListDeploymentsRequest.struct_class = Types::ListDeploymentsRequest
 
     ListDeploymentsResponse.add_member(:deployments, Shapes::ShapeRef.new(shape: DeploymentList, location_name: "deployments"))
@@ -705,8 +705,8 @@ module Aws::GreengrassV2
     ListDeploymentsResponse.struct_class = Types::ListDeploymentsResponse
 
     ListEffectiveDeploymentsRequest.add_member(:core_device_thing_name, Shapes::ShapeRef.new(shape: CoreDeviceThingName, required: true, location: "uri", location_name: "coreDeviceThingName"))
-    ListEffectiveDeploymentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DefaultMaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
-    ListEffectiveDeploymentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location: "querystring", location_name: "nextToken", metadata: {"box"=>true}))
+    ListEffectiveDeploymentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DefaultMaxResults, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
+    ListEffectiveDeploymentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location: "querystring", location_name: "nextToken", metadata: {"box" => true}))
     ListEffectiveDeploymentsRequest.struct_class = Types::ListEffectiveDeploymentsRequest
 
     ListEffectiveDeploymentsResponse.add_member(:effective_deployments, Shapes::ShapeRef.new(shape: EffectiveDeploymentsList, location_name: "effectiveDeployments"))
@@ -714,9 +714,9 @@ module Aws::GreengrassV2
     ListEffectiveDeploymentsResponse.struct_class = Types::ListEffectiveDeploymentsResponse
 
     ListInstalledComponentsRequest.add_member(:core_device_thing_name, Shapes::ShapeRef.new(shape: CoreDeviceThingName, required: true, location: "uri", location_name: "coreDeviceThingName"))
-    ListInstalledComponentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DefaultMaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
-    ListInstalledComponentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location: "querystring", location_name: "nextToken", metadata: {"box"=>true}))
-    ListInstalledComponentsRequest.add_member(:topology_filter, Shapes::ShapeRef.new(shape: InstalledComponentTopologyFilter, location: "querystring", location_name: "topologyFilter", metadata: {"box"=>true}))
+    ListInstalledComponentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DefaultMaxResults, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
+    ListInstalledComponentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location: "querystring", location_name: "nextToken", metadata: {"box" => true}))
+    ListInstalledComponentsRequest.add_member(:topology_filter, Shapes::ShapeRef.new(shape: InstalledComponentTopologyFilter, location: "querystring", location_name: "topologyFilter", metadata: {"box" => true}))
     ListInstalledComponentsRequest.struct_class = Types::ListInstalledComponentsRequest
 
     ListInstalledComponentsResponse.add_member(:installed_components, Shapes::ShapeRef.new(shape: InstalledComponentList, location_name: "installedComponents"))

@@ -2352,11 +2352,11 @@ module Aws::QuickSight
     ArcAxisConfiguration.add_member(:reserve_range, Shapes::ShapeRef.new(shape: Integer, location_name: "ReserveRange"))
     ArcAxisConfiguration.struct_class = Types::ArcAxisConfiguration
 
-    ArcAxisDisplayRange.add_member(:min, Shapes::ShapeRef.new(shape: Double, location_name: "Min", metadata: {"box"=>true}))
-    ArcAxisDisplayRange.add_member(:max, Shapes::ShapeRef.new(shape: Double, location_name: "Max", metadata: {"box"=>true}))
+    ArcAxisDisplayRange.add_member(:min, Shapes::ShapeRef.new(shape: Double, location_name: "Min", metadata: {"box" => true}))
+    ArcAxisDisplayRange.add_member(:max, Shapes::ShapeRef.new(shape: Double, location_name: "Max", metadata: {"box" => true}))
     ArcAxisDisplayRange.struct_class = Types::ArcAxisDisplayRange
 
-    ArcConfiguration.add_member(:arc_angle, Shapes::ShapeRef.new(shape: Double, location_name: "ArcAngle", metadata: {"box"=>true}))
+    ArcConfiguration.add_member(:arc_angle, Shapes::ShapeRef.new(shape: Double, location_name: "ArcAngle", metadata: {"box" => true}))
     ArcConfiguration.add_member(:arc_thickness, Shapes::ShapeRef.new(shape: ArcThicknessOptions, location_name: "ArcThickness"))
     ArcConfiguration.struct_class = Types::ArcConfiguration
 
@@ -2738,8 +2738,8 @@ module Aws::QuickSight
 
     AxisDisplayDataDrivenRange.struct_class = Types::AxisDisplayDataDrivenRange
 
-    AxisDisplayMinMaxRange.add_member(:minimum, Shapes::ShapeRef.new(shape: Double, location_name: "Minimum", metadata: {"box"=>true}))
-    AxisDisplayMinMaxRange.add_member(:maximum, Shapes::ShapeRef.new(shape: Double, location_name: "Maximum", metadata: {"box"=>true}))
+    AxisDisplayMinMaxRange.add_member(:minimum, Shapes::ShapeRef.new(shape: Double, location_name: "Minimum", metadata: {"box" => true}))
+    AxisDisplayMinMaxRange.add_member(:maximum, Shapes::ShapeRef.new(shape: Double, location_name: "Maximum", metadata: {"box" => true}))
     AxisDisplayMinMaxRange.struct_class = Types::AxisDisplayMinMaxRange
 
     AxisDisplayOptions.add_member(:tick_label_options, Shapes::ShapeRef.new(shape: AxisTickLabelOptions, location_name: "TickLabelOptions"))
@@ -2765,11 +2765,11 @@ module Aws::QuickSight
     AxisLabelReferenceOptions.add_member(:column, Shapes::ShapeRef.new(shape: ColumnIdentifier, required: true, location_name: "Column"))
     AxisLabelReferenceOptions.struct_class = Types::AxisLabelReferenceOptions
 
-    AxisLinearScale.add_member(:step_count, Shapes::ShapeRef.new(shape: Integer, location_name: "StepCount", metadata: {"box"=>true}))
-    AxisLinearScale.add_member(:step_size, Shapes::ShapeRef.new(shape: Double, location_name: "StepSize", metadata: {"box"=>true}))
+    AxisLinearScale.add_member(:step_count, Shapes::ShapeRef.new(shape: Integer, location_name: "StepCount", metadata: {"box" => true}))
+    AxisLinearScale.add_member(:step_size, Shapes::ShapeRef.new(shape: Double, location_name: "StepSize", metadata: {"box" => true}))
     AxisLinearScale.struct_class = Types::AxisLinearScale
 
-    AxisLogarithmicScale.add_member(:base, Shapes::ShapeRef.new(shape: Double, location_name: "Base", metadata: {"box"=>true}))
+    AxisLogarithmicScale.add_member(:base, Shapes::ShapeRef.new(shape: Double, location_name: "Base", metadata: {"box" => true}))
     AxisLogarithmicScale.struct_class = Types::AxisLogarithmicScale
 
     AxisScale.add_member(:linear, Shapes::ShapeRef.new(shape: AxisLinearScale, location_name: "Linear"))
@@ -2777,7 +2777,7 @@ module Aws::QuickSight
     AxisScale.struct_class = Types::AxisScale
 
     AxisTickLabelOptions.add_member(:label_options, Shapes::ShapeRef.new(shape: LabelOptions, location_name: "LabelOptions"))
-    AxisTickLabelOptions.add_member(:rotation_angle, Shapes::ShapeRef.new(shape: Double, location_name: "RotationAngle", metadata: {"box"=>true}))
+    AxisTickLabelOptions.add_member(:rotation_angle, Shapes::ShapeRef.new(shape: Double, location_name: "RotationAngle", metadata: {"box" => true}))
     AxisTickLabelOptions.struct_class = Types::AxisTickLabelOptions
 
     BarChartAggregatedFieldWells.add_member(:category, Shapes::ShapeRef.new(shape: DimensionFieldList, location_name: "Category"))
@@ -2875,14 +2875,14 @@ module Aws::QuickSight
     BodySectionContent.struct_class = Types::BodySectionContent
 
     BodySectionDynamicCategoryDimensionConfiguration.add_member(:column, Shapes::ShapeRef.new(shape: ColumnIdentifier, required: true, location_name: "Column"))
-    BodySectionDynamicCategoryDimensionConfiguration.add_member(:limit, Shapes::ShapeRef.new(shape: BodySectionDynamicDimensionLimit, location_name: "Limit", metadata: {"box"=>true}))
+    BodySectionDynamicCategoryDimensionConfiguration.add_member(:limit, Shapes::ShapeRef.new(shape: BodySectionDynamicDimensionLimit, location_name: "Limit", metadata: {"box" => true}))
     BodySectionDynamicCategoryDimensionConfiguration.add_member(:sort_by_metrics, Shapes::ShapeRef.new(shape: BodySectionDynamicDimensionSortConfigurationList, location_name: "SortByMetrics"))
     BodySectionDynamicCategoryDimensionConfiguration.struct_class = Types::BodySectionDynamicCategoryDimensionConfiguration
 
     BodySectionDynamicDimensionSortConfigurationList.member = Shapes::ShapeRef.new(shape: ColumnSort)
 
     BodySectionDynamicNumericDimensionConfiguration.add_member(:column, Shapes::ShapeRef.new(shape: ColumnIdentifier, required: true, location_name: "Column"))
-    BodySectionDynamicNumericDimensionConfiguration.add_member(:limit, Shapes::ShapeRef.new(shape: BodySectionDynamicDimensionLimit, location_name: "Limit", metadata: {"box"=>true}))
+    BodySectionDynamicNumericDimensionConfiguration.add_member(:limit, Shapes::ShapeRef.new(shape: BodySectionDynamicDimensionLimit, location_name: "Limit", metadata: {"box" => true}))
     BodySectionDynamicNumericDimensionConfiguration.add_member(:sort_by_metrics, Shapes::ShapeRef.new(shape: BodySectionDynamicDimensionSortConfigurationList, location_name: "SortByMetrics"))
     BodySectionDynamicNumericDimensionConfiguration.struct_class = Types::BodySectionDynamicNumericDimensionConfiguration
 
@@ -2903,7 +2903,7 @@ module Aws::QuickSight
     BookmarksConfigurations.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
     BookmarksConfigurations.struct_class = Types::BookmarksConfigurations
 
-    BorderStyle.add_member(:show, Shapes::ShapeRef.new(shape: Boolean, location_name: "Show", metadata: {"box"=>true}))
+    BorderStyle.add_member(:show, Shapes::ShapeRef.new(shape: Boolean, location_name: "Show", metadata: {"box" => true}))
     BorderStyle.struct_class = Types::BorderStyle
 
     BoxPlotAggregatedFieldWells.add_member(:group_by, Shapes::ShapeRef.new(shape: BoxPlotDimensionFieldList, location_name: "GroupBy"))
@@ -3842,7 +3842,7 @@ module Aws::QuickSight
     DashboardPublishOptions.add_member(:ad_hoc_filtering_option, Shapes::ShapeRef.new(shape: AdHocFilteringOption, location_name: "AdHocFilteringOption"))
     DashboardPublishOptions.add_member(:export_to_csv_option, Shapes::ShapeRef.new(shape: ExportToCSVOption, location_name: "ExportToCSVOption"))
     DashboardPublishOptions.add_member(:sheet_controls_option, Shapes::ShapeRef.new(shape: SheetControlsOption, location_name: "SheetControlsOption"))
-    DashboardPublishOptions.add_member(:visual_publish_options, Shapes::ShapeRef.new(shape: DashboardVisualPublishOptions, deprecated: true, location_name: "VisualPublishOptions", metadata: {"deprecatedMessage"=>"VisualPublishOptions property will reach its end of standard support in a future release. To perform this action, use ExportWithHiddenFields."}))
+    DashboardPublishOptions.add_member(:visual_publish_options, Shapes::ShapeRef.new(shape: DashboardVisualPublishOptions, deprecated: true, location_name: "VisualPublishOptions", metadata: {"deprecatedMessage" => "VisualPublishOptions property will reach its end of standard support in a future release. To perform this action, use ExportWithHiddenFields."}))
     DashboardPublishOptions.add_member(:sheet_layout_element_maximization_option, Shapes::ShapeRef.new(shape: SheetLayoutElementMaximizationOption, location_name: "SheetLayoutElementMaximizationOption"))
     DashboardPublishOptions.add_member(:visual_menu_option, Shapes::ShapeRef.new(shape: VisualMenuOption, location_name: "VisualMenuOption"))
     DashboardPublishOptions.add_member(:visual_axis_sort_option, Shapes::ShapeRef.new(shape: VisualAxisSortOption, location_name: "VisualAxisSortOption"))
@@ -3939,7 +3939,7 @@ module Aws::QuickSight
     DataBarsOptions.struct_class = Types::DataBarsOptions
 
     DataColor.add_member(:color, Shapes::ShapeRef.new(shape: HexColor, location_name: "Color"))
-    DataColor.add_member(:data_value, Shapes::ShapeRef.new(shape: Double, location_name: "DataValue", metadata: {"box"=>true}))
+    DataColor.add_member(:data_value, Shapes::ShapeRef.new(shape: Double, location_name: "DataValue", metadata: {"box" => true}))
     DataColor.struct_class = Types::DataColor
 
     DataColorPalette.add_member(:colors, Shapes::ShapeRef.new(shape: ColorList, location_name: "Colors"))
@@ -4294,7 +4294,7 @@ module Aws::QuickSight
     DecimalPlacesConfiguration.struct_class = Types::DecimalPlacesConfiguration
 
     DecimalValueWhenUnsetConfiguration.add_member(:value_when_unset_option, Shapes::ShapeRef.new(shape: ValueWhenUnsetOption, location_name: "ValueWhenUnsetOption"))
-    DecimalValueWhenUnsetConfiguration.add_member(:custom_value, Shapes::ShapeRef.new(shape: SensitiveDouble, location_name: "CustomValue", metadata: {"box"=>true}))
+    DecimalValueWhenUnsetConfiguration.add_member(:custom_value, Shapes::ShapeRef.new(shape: SensitiveDouble, location_name: "CustomValue", metadata: {"box" => true}))
     DecimalValueWhenUnsetConfiguration.struct_class = Types::DecimalValueWhenUnsetConfiguration
 
     DefaultDateTimePickerControlOptions.add_member(:type, Shapes::ShapeRef.new(shape: SheetControlDateTimePickerType, location_name: "Type"))
@@ -4955,7 +4955,7 @@ module Aws::QuickSight
     DescribeFolderPermissionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DescribeFolderPermissionsRequest.add_member(:folder_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "FolderId"))
     DescribeFolderPermissionsRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location: "querystring", location_name: "namespace"))
-    DescribeFolderPermissionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    DescribeFolderPermissionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
     DescribeFolderPermissionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
     DescribeFolderPermissionsRequest.struct_class = Types::DescribeFolderPermissionsRequest
 
@@ -4974,7 +4974,7 @@ module Aws::QuickSight
     DescribeFolderResolvedPermissionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DescribeFolderResolvedPermissionsRequest.add_member(:folder_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "FolderId"))
     DescribeFolderResolvedPermissionsRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location: "querystring", location_name: "namespace"))
-    DescribeFolderResolvedPermissionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    DescribeFolderResolvedPermissionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
     DescribeFolderResolvedPermissionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
     DescribeFolderResolvedPermissionsRequest.struct_class = Types::DescribeFolderResolvedPermissionsRequest
 
@@ -5322,7 +5322,7 @@ module Aws::QuickSight
     ExasolParameters.add_member(:port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "Port"))
     ExasolParameters.struct_class = Types::ExasolParameters
 
-    ExcludePeriodConfiguration.add_member(:amount, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "Amount", metadata: {"box"=>true}))
+    ExcludePeriodConfiguration.add_member(:amount, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "Amount", metadata: {"box" => true}))
     ExcludePeriodConfiguration.add_member(:granularity, Shapes::ShapeRef.new(shape: TimeGranularity, required: true, location_name: "Granularity"))
     ExcludePeriodConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: WidgetStatus, location_name: "Status"))
     ExcludePeriodConfiguration.struct_class = Types::ExcludePeriodConfiguration
@@ -5632,11 +5632,11 @@ module Aws::QuickSight
     ForecastComputation.add_member(:value, Shapes::ShapeRef.new(shape: MeasureField, location_name: "Value"))
     ForecastComputation.add_member(:periods_forward, Shapes::ShapeRef.new(shape: PeriodsForward, location_name: "PeriodsForward"))
     ForecastComputation.add_member(:periods_backward, Shapes::ShapeRef.new(shape: PeriodsBackward, location_name: "PeriodsBackward"))
-    ForecastComputation.add_member(:upper_boundary, Shapes::ShapeRef.new(shape: Double, location_name: "UpperBoundary", metadata: {"box"=>true}))
-    ForecastComputation.add_member(:lower_boundary, Shapes::ShapeRef.new(shape: Double, location_name: "LowerBoundary", metadata: {"box"=>true}))
+    ForecastComputation.add_member(:upper_boundary, Shapes::ShapeRef.new(shape: Double, location_name: "UpperBoundary", metadata: {"box" => true}))
+    ForecastComputation.add_member(:lower_boundary, Shapes::ShapeRef.new(shape: Double, location_name: "LowerBoundary", metadata: {"box" => true}))
     ForecastComputation.add_member(:prediction_interval, Shapes::ShapeRef.new(shape: PredictionInterval, location_name: "PredictionInterval"))
     ForecastComputation.add_member(:seasonality, Shapes::ShapeRef.new(shape: ForecastComputationSeasonality, location_name: "Seasonality"))
-    ForecastComputation.add_member(:custom_seasonality_value, Shapes::ShapeRef.new(shape: ForecastComputationCustomSeasonalityValue, location_name: "CustomSeasonalityValue", metadata: {"box"=>true}))
+    ForecastComputation.add_member(:custom_seasonality_value, Shapes::ShapeRef.new(shape: ForecastComputationCustomSeasonalityValue, location_name: "CustomSeasonalityValue", metadata: {"box" => true}))
     ForecastComputation.struct_class = Types::ForecastComputation
 
     ForecastConfiguration.add_member(:forecast_properties, Shapes::ShapeRef.new(shape: TimeBasedForecastProperties, location_name: "ForecastProperties"))
@@ -5683,7 +5683,7 @@ module Aws::QuickSight
     FreeFormLayoutElementBorderStyle.add_member(:color, Shapes::ShapeRef.new(shape: HexColorWithTransparency, location_name: "Color"))
     FreeFormLayoutElementBorderStyle.struct_class = Types::FreeFormLayoutElementBorderStyle
 
-    FreeFormLayoutScreenCanvasSizeOptions.add_member(:optimized_view_port_width, Shapes::ShapeRef.new(shape: PixelLength, required: true, location_name: "OptimizedViewPortWidth", metadata: {"box"=>true}))
+    FreeFormLayoutScreenCanvasSizeOptions.add_member(:optimized_view_port_width, Shapes::ShapeRef.new(shape: PixelLength, required: true, location_name: "OptimizedViewPortWidth", metadata: {"box" => true}))
     FreeFormLayoutScreenCanvasSizeOptions.struct_class = Types::FreeFormLayoutScreenCanvasSizeOptions
 
     FreeFormSectionLayoutConfiguration.add_member(:elements, Shapes::ShapeRef.new(shape: FreeFromLayoutElementList, required: true, location_name: "Elements"))
@@ -6064,7 +6064,7 @@ module Aws::QuickSight
     GradientColor.struct_class = Types::GradientColor
 
     GradientStop.add_member(:gradient_offset, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "GradientOffset"))
-    GradientStop.add_member(:data_value, Shapes::ShapeRef.new(shape: Double, location_name: "DataValue", metadata: {"box"=>true}))
+    GradientStop.add_member(:data_value, Shapes::ShapeRef.new(shape: Double, location_name: "DataValue", metadata: {"box" => true}))
     GradientStop.add_member(:color, Shapes::ShapeRef.new(shape: HexColor, location_name: "Color"))
     GradientStop.struct_class = Types::GradientStop
 
@@ -6088,7 +6088,7 @@ module Aws::QuickSight
     GridLayoutElementList.member = Shapes::ShapeRef.new(shape: GridLayoutElement)
 
     GridLayoutScreenCanvasSizeOptions.add_member(:resize_option, Shapes::ShapeRef.new(shape: ResizeOption, required: true, location_name: "ResizeOption"))
-    GridLayoutScreenCanvasSizeOptions.add_member(:optimized_view_port_width, Shapes::ShapeRef.new(shape: PixelLength, location_name: "OptimizedViewPortWidth", metadata: {"box"=>true}))
+    GridLayoutScreenCanvasSizeOptions.add_member(:optimized_view_port_width, Shapes::ShapeRef.new(shape: PixelLength, location_name: "OptimizedViewPortWidth", metadata: {"box" => true}))
     GridLayoutScreenCanvasSizeOptions.struct_class = Types::GridLayoutScreenCanvasSizeOptions
 
     Group.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -6121,7 +6121,7 @@ module Aws::QuickSight
     GrowthRateComputation.add_member(:period_size, Shapes::ShapeRef.new(shape: GrowthRatePeriodSize, location_name: "PeriodSize"))
     GrowthRateComputation.struct_class = Types::GrowthRateComputation
 
-    GutterStyle.add_member(:show, Shapes::ShapeRef.new(shape: Boolean, location_name: "Show", metadata: {"box"=>true}))
+    GutterStyle.add_member(:show, Shapes::ShapeRef.new(shape: Boolean, location_name: "Show", metadata: {"box" => true}))
     GutterStyle.struct_class = Types::GutterStyle
 
     HeaderFooterSectionConfiguration.add_member(:section_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "SectionId"))
@@ -6175,7 +6175,7 @@ module Aws::QuickSight
     HistogramBinOptions.add_member(:selected_bin_type, Shapes::ShapeRef.new(shape: HistogramBinType, location_name: "SelectedBinType"))
     HistogramBinOptions.add_member(:bin_count, Shapes::ShapeRef.new(shape: BinCountOptions, location_name: "BinCount"))
     HistogramBinOptions.add_member(:bin_width, Shapes::ShapeRef.new(shape: BinWidthOptions, location_name: "BinWidth"))
-    HistogramBinOptions.add_member(:start_value, Shapes::ShapeRef.new(shape: Double, location_name: "StartValue", metadata: {"box"=>true}))
+    HistogramBinOptions.add_member(:start_value, Shapes::ShapeRef.new(shape: Double, location_name: "StartValue", metadata: {"box" => true}))
     HistogramBinOptions.struct_class = Types::HistogramBinOptions
 
     HistogramConfiguration.add_member(:field_wells, Shapes::ShapeRef.new(shape: HistogramFieldWells, location_name: "FieldWells"))
@@ -6219,7 +6219,7 @@ module Aws::QuickSight
     Identifier.add_member(:identity, Shapes::ShapeRef.new(shape: LimitedString, required: true, location_name: "Identity"))
     Identifier.struct_class = Types::Identifier
 
-    IdentityCenterConfiguration.add_member(:enable_identity_propagation, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableIdentityPropagation", metadata: {"box"=>true}))
+    IdentityCenterConfiguration.add_member(:enable_identity_propagation, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableIdentityPropagation", metadata: {"box" => true}))
     IdentityCenterConfiguration.struct_class = Types::IdentityCenterConfiguration
 
     IdentityMap.key = Shapes::ShapeRef.new(shape: String)
@@ -6290,8 +6290,8 @@ module Aws::QuickSight
     Ingestion.add_member(:row_info, Shapes::ShapeRef.new(shape: RowInfo, location_name: "RowInfo"))
     Ingestion.add_member(:queue_info, Shapes::ShapeRef.new(shape: QueueInfo, location_name: "QueueInfo"))
     Ingestion.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTime"))
-    Ingestion.add_member(:ingestion_time_in_seconds, Shapes::ShapeRef.new(shape: Long, location_name: "IngestionTimeInSeconds", metadata: {"box"=>true}))
-    Ingestion.add_member(:ingestion_size_in_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "IngestionSizeInBytes", metadata: {"box"=>true}))
+    Ingestion.add_member(:ingestion_time_in_seconds, Shapes::ShapeRef.new(shape: Long, location_name: "IngestionTimeInSeconds", metadata: {"box" => true}))
+    Ingestion.add_member(:ingestion_size_in_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "IngestionSizeInBytes", metadata: {"box" => true}))
     Ingestion.add_member(:request_source, Shapes::ShapeRef.new(shape: IngestionRequestSource, location_name: "RequestSource"))
     Ingestion.add_member(:request_type, Shapes::ShapeRef.new(shape: IngestionRequestType, location_name: "RequestType"))
     Ingestion.struct_class = Types::Ingestion
@@ -6353,7 +6353,7 @@ module Aws::QuickSight
     IntegerParameterList.member = Shapes::ShapeRef.new(shape: IntegerParameter)
 
     IntegerValueWhenUnsetConfiguration.add_member(:value_when_unset_option, Shapes::ShapeRef.new(shape: ValueWhenUnsetOption, location_name: "ValueWhenUnsetOption"))
-    IntegerValueWhenUnsetConfiguration.add_member(:custom_value, Shapes::ShapeRef.new(shape: SensitiveLong, location_name: "CustomValue", metadata: {"box"=>true}))
+    IntegerValueWhenUnsetConfiguration.add_member(:custom_value, Shapes::ShapeRef.new(shape: SensitiveLong, location_name: "CustomValue", metadata: {"box" => true}))
     IntegerValueWhenUnsetConfiguration.struct_class = Types::IntegerValueWhenUnsetConfiguration
 
     InternalFailureException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -6384,7 +6384,7 @@ module Aws::QuickSight
     IpRestrictionRuleMap.key = Shapes::ShapeRef.new(shape: CIDR)
     IpRestrictionRuleMap.value = Shapes::ShapeRef.new(shape: IpRestrictionRuleDescription)
 
-    ItemsLimitConfiguration.add_member(:items_limit, Shapes::ShapeRef.new(shape: Long, location_name: "ItemsLimit", metadata: {"box"=>true}))
+    ItemsLimitConfiguration.add_member(:items_limit, Shapes::ShapeRef.new(shape: Long, location_name: "ItemsLimit", metadata: {"box" => true}))
     ItemsLimitConfiguration.add_member(:other_categories, Shapes::ShapeRef.new(shape: OtherCategories, location_name: "OtherCategories"))
     ItemsLimitConfiguration.struct_class = Types::ItemsLimitConfiguration
 
@@ -6399,7 +6399,7 @@ module Aws::QuickSight
     JoinInstruction.add_member(:on_clause, Shapes::ShapeRef.new(shape: OnClause, required: true, location_name: "OnClause"))
     JoinInstruction.struct_class = Types::JoinInstruction
 
-    JoinKeyProperties.add_member(:unique_key, Shapes::ShapeRef.new(shape: Boolean, location_name: "UniqueKey", metadata: {"box"=>true}))
+    JoinKeyProperties.add_member(:unique_key, Shapes::ShapeRef.new(shape: Boolean, location_name: "UniqueKey", metadata: {"box" => true}))
     JoinKeyProperties.struct_class = Types::JoinKeyProperties
 
     KPIActualValueConditionalFormatting.add_member(:text_color, Shapes::ShapeRef.new(shape: ConditionalFormattingColor, location_name: "TextColor"))
@@ -6610,7 +6610,7 @@ module Aws::QuickSight
 
     ListAnalysesRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListAnalysesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
-    ListAnalysesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListAnalysesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
     ListAnalysesRequest.struct_class = Types::ListAnalysesRequest
 
     ListAnalysesResponse.add_member(:analysis_summary_list, Shapes::ShapeRef.new(shape: AnalysisSummaryList, location_name: "AnalysisSummaryList"))
@@ -6621,7 +6621,7 @@ module Aws::QuickSight
 
     ListAssetBundleExportJobsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListAssetBundleExportJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
-    ListAssetBundleExportJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListAssetBundleExportJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
     ListAssetBundleExportJobsRequest.struct_class = Types::ListAssetBundleExportJobsRequest
 
     ListAssetBundleExportJobsResponse.add_member(:asset_bundle_export_job_summary_list, Shapes::ShapeRef.new(shape: AssetBundleExportJobSummaryList, location_name: "AssetBundleExportJobSummaryList"))
@@ -6632,7 +6632,7 @@ module Aws::QuickSight
 
     ListAssetBundleImportJobsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListAssetBundleImportJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
-    ListAssetBundleImportJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListAssetBundleImportJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
     ListAssetBundleImportJobsRequest.struct_class = Types::ListAssetBundleImportJobsRequest
 
     ListAssetBundleImportJobsResponse.add_member(:asset_bundle_import_job_summary_list, Shapes::ShapeRef.new(shape: AssetBundleImportJobSummaryList, location_name: "AssetBundleImportJobSummaryList"))
@@ -6642,7 +6642,7 @@ module Aws::QuickSight
     ListAssetBundleImportJobsResponse.struct_class = Types::ListAssetBundleImportJobsResponse
 
     ListBrandsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
-    ListBrandsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListBrandsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
     ListBrandsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
     ListBrandsRequest.struct_class = Types::ListBrandsRequest
 
@@ -6663,7 +6663,7 @@ module Aws::QuickSight
     ListControlSelectAllOptions.struct_class = Types::ListControlSelectAllOptions
 
     ListCustomPermissionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
-    ListCustomPermissionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListCustomPermissionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
     ListCustomPermissionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
     ListCustomPermissionsRequest.struct_class = Types::ListCustomPermissionsRequest
 
@@ -6676,7 +6676,7 @@ module Aws::QuickSight
     ListDashboardVersionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListDashboardVersionsRequest.add_member(:dashboard_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "DashboardId"))
     ListDashboardVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
-    ListDashboardVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListDashboardVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
     ListDashboardVersionsRequest.struct_class = Types::ListDashboardVersionsRequest
 
     ListDashboardVersionsResponse.add_member(:dashboard_version_summary_list, Shapes::ShapeRef.new(shape: DashboardVersionSummaryList, location_name: "DashboardVersionSummaryList"))
@@ -6687,7 +6687,7 @@ module Aws::QuickSight
 
     ListDashboardsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListDashboardsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
-    ListDashboardsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListDashboardsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
     ListDashboardsRequest.struct_class = Types::ListDashboardsRequest
 
     ListDashboardsResponse.add_member(:dashboard_summary_list, Shapes::ShapeRef.new(shape: DashboardSummaryList, location_name: "DashboardSummaryList"))
@@ -6698,7 +6698,7 @@ module Aws::QuickSight
 
     ListDataSetsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListDataSetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
-    ListDataSetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListDataSetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
     ListDataSetsRequest.struct_class = Types::ListDataSetsRequest
 
     ListDataSetsResponse.add_member(:data_set_summaries, Shapes::ShapeRef.new(shape: DataSetSummaryList, location_name: "DataSetSummaries"))
@@ -6709,7 +6709,7 @@ module Aws::QuickSight
 
     ListDataSourcesRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListDataSourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
-    ListDataSourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListDataSourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
     ListDataSourcesRequest.struct_class = Types::ListDataSourcesRequest
 
     ListDataSourcesResponse.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSourceList, location_name: "DataSources"))
@@ -6721,7 +6721,7 @@ module Aws::QuickSight
     ListFolderMembersRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListFolderMembersRequest.add_member(:folder_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "FolderId"))
     ListFolderMembersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
-    ListFolderMembersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListFolderMembersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
     ListFolderMembersRequest.struct_class = Types::ListFolderMembersRequest
 
     ListFolderMembersResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
@@ -6733,7 +6733,7 @@ module Aws::QuickSight
     ListFoldersForResourceRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListFoldersForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "ResourceArn"))
     ListFoldersForResourceRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
-    ListFoldersForResourceRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListFoldersForResourceRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
     ListFoldersForResourceRequest.struct_class = Types::ListFoldersForResourceRequest
 
     ListFoldersForResourceResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
@@ -6744,7 +6744,7 @@ module Aws::QuickSight
 
     ListFoldersRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListFoldersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
-    ListFoldersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListFoldersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
     ListFoldersRequest.struct_class = Types::ListFoldersRequest
 
     ListFoldersResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
@@ -6755,7 +6755,7 @@ module Aws::QuickSight
 
     ListGroupMembershipsRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, required: true, location: "uri", location_name: "GroupName"))
     ListGroupMembershipsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
-    ListGroupMembershipsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListGroupMembershipsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
     ListGroupMembershipsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListGroupMembershipsRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location: "uri", location_name: "Namespace"))
     ListGroupMembershipsRequest.struct_class = Types::ListGroupMembershipsRequest
@@ -6768,7 +6768,7 @@ module Aws::QuickSight
 
     ListGroupsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
-    ListGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
     ListGroupsRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location: "uri", location_name: "Namespace"))
     ListGroupsRequest.struct_class = Types::ListGroupsRequest
 
@@ -6781,7 +6781,7 @@ module Aws::QuickSight
     ListIAMPolicyAssignmentsForUserRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListIAMPolicyAssignmentsForUserRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: UserName, required: true, location: "uri", location_name: "UserName"))
     ListIAMPolicyAssignmentsForUserRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
-    ListIAMPolicyAssignmentsForUserRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListIAMPolicyAssignmentsForUserRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
     ListIAMPolicyAssignmentsForUserRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location: "uri", location_name: "Namespace"))
     ListIAMPolicyAssignmentsForUserRequest.struct_class = Types::ListIAMPolicyAssignmentsForUserRequest
 
@@ -6795,7 +6795,7 @@ module Aws::QuickSight
     ListIAMPolicyAssignmentsRequest.add_member(:assignment_status, Shapes::ShapeRef.new(shape: AssignmentStatus, location: "querystring", location_name: "assignment-status"))
     ListIAMPolicyAssignmentsRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location: "uri", location_name: "Namespace"))
     ListIAMPolicyAssignmentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
-    ListIAMPolicyAssignmentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListIAMPolicyAssignmentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
     ListIAMPolicyAssignmentsRequest.struct_class = Types::ListIAMPolicyAssignmentsRequest
 
     ListIAMPolicyAssignmentsResponse.add_member(:iam_policy_assignments, Shapes::ShapeRef.new(shape: IAMPolicyAssignmentSummaryList, location_name: "IAMPolicyAssignments"))
@@ -6805,7 +6805,7 @@ module Aws::QuickSight
     ListIAMPolicyAssignmentsResponse.struct_class = Types::ListIAMPolicyAssignmentsResponse
 
     ListIdentityPropagationConfigsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
-    ListIdentityPropagationConfigsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListIdentityPropagationMaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListIdentityPropagationConfigsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListIdentityPropagationMaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
     ListIdentityPropagationConfigsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
     ListIdentityPropagationConfigsRequest.struct_class = Types::ListIdentityPropagationConfigsRequest
 
@@ -6818,7 +6818,7 @@ module Aws::QuickSight
     ListIngestionsRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "DataSetId"))
     ListIngestionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
     ListIngestionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
-    ListIngestionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: IngestionMaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListIngestionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: IngestionMaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
     ListIngestionsRequest.struct_class = Types::ListIngestionsRequest
 
     ListIngestionsResponse.add_member(:ingestions, Shapes::ShapeRef.new(shape: Ingestions, location_name: "Ingestions"))
@@ -6829,7 +6829,7 @@ module Aws::QuickSight
 
     ListNamespacesRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListNamespacesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
-    ListNamespacesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListNamespacesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
     ListNamespacesRequest.struct_class = Types::ListNamespacesRequest
 
     ListNamespacesResponse.add_member(:namespaces, Shapes::ShapeRef.new(shape: Namespaces, location_name: "Namespaces"))
@@ -6849,7 +6849,7 @@ module Aws::QuickSight
 
     ListRoleMembershipsRequest.add_member(:role, Shapes::ShapeRef.new(shape: Role, required: true, location: "uri", location_name: "Role"))
     ListRoleMembershipsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
-    ListRoleMembershipsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListRoleMembershipsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
     ListRoleMembershipsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListRoleMembershipsRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location: "uri", location_name: "Namespace"))
     ListRoleMembershipsRequest.struct_class = Types::ListRoleMembershipsRequest
@@ -6871,7 +6871,7 @@ module Aws::QuickSight
     ListTemplateAliasesRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListTemplateAliasesRequest.add_member(:template_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "TemplateId"))
     ListTemplateAliasesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
-    ListTemplateAliasesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-result", metadata: {"box"=>true}))
+    ListTemplateAliasesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-result", metadata: {"box" => true}))
     ListTemplateAliasesRequest.struct_class = Types::ListTemplateAliasesRequest
 
     ListTemplateAliasesResponse.add_member(:template_alias_list, Shapes::ShapeRef.new(shape: TemplateAliasList, location_name: "TemplateAliasList"))
@@ -6883,7 +6883,7 @@ module Aws::QuickSight
     ListTemplateVersionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListTemplateVersionsRequest.add_member(:template_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "TemplateId"))
     ListTemplateVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
-    ListTemplateVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListTemplateVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
     ListTemplateVersionsRequest.struct_class = Types::ListTemplateVersionsRequest
 
     ListTemplateVersionsResponse.add_member(:template_version_summary_list, Shapes::ShapeRef.new(shape: TemplateVersionSummaryList, location_name: "TemplateVersionSummaryList"))
@@ -6894,7 +6894,7 @@ module Aws::QuickSight
 
     ListTemplatesRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListTemplatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
-    ListTemplatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-result", metadata: {"box"=>true}))
+    ListTemplatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-result", metadata: {"box" => true}))
     ListTemplatesRequest.struct_class = Types::ListTemplatesRequest
 
     ListTemplatesResponse.add_member(:template_summary_list, Shapes::ShapeRef.new(shape: TemplateSummaryList, location_name: "TemplateSummaryList"))
@@ -6906,7 +6906,7 @@ module Aws::QuickSight
     ListThemeAliasesRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListThemeAliasesRequest.add_member(:theme_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "ThemeId"))
     ListThemeAliasesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
-    ListThemeAliasesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-result", metadata: {"box"=>true}))
+    ListThemeAliasesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-result", metadata: {"box" => true}))
     ListThemeAliasesRequest.struct_class = Types::ListThemeAliasesRequest
 
     ListThemeAliasesResponse.add_member(:theme_alias_list, Shapes::ShapeRef.new(shape: ThemeAliasList, location_name: "ThemeAliasList"))
@@ -6918,7 +6918,7 @@ module Aws::QuickSight
     ListThemeVersionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListThemeVersionsRequest.add_member(:theme_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "ThemeId"))
     ListThemeVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
-    ListThemeVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListThemeVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
     ListThemeVersionsRequest.struct_class = Types::ListThemeVersionsRequest
 
     ListThemeVersionsResponse.add_member(:theme_version_summary_list, Shapes::ShapeRef.new(shape: ThemeVersionSummaryList, location_name: "ThemeVersionSummaryList"))
@@ -6929,7 +6929,7 @@ module Aws::QuickSight
 
     ListThemesRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListThemesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
-    ListThemesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListThemesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
     ListThemesRequest.add_member(:type, Shapes::ShapeRef.new(shape: ThemeType, location: "querystring", location_name: "type"))
     ListThemesRequest.struct_class = Types::ListThemesRequest
 
@@ -6963,7 +6963,7 @@ module Aws::QuickSight
 
     ListTopicsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListTopicsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
-    ListTopicsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListTopicsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
     ListTopicsRequest.struct_class = Types::ListTopicsRequest
 
     ListTopicsResponse.add_member(:topics_summaries, Shapes::ShapeRef.new(shape: TopicSummaries, location_name: "TopicsSummaries"))
@@ -6976,7 +6976,7 @@ module Aws::QuickSight
     ListUserGroupsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListUserGroupsRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location: "uri", location_name: "Namespace"))
     ListUserGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
-    ListUserGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListUserGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
     ListUserGroupsRequest.struct_class = Types::ListUserGroupsRequest
 
     ListUserGroupsResponse.add_member(:group_list, Shapes::ShapeRef.new(shape: GroupList, location_name: "GroupList"))
@@ -6987,7 +6987,7 @@ module Aws::QuickSight
 
     ListUsersRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListUsersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
-    ListUsersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListUsersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
     ListUsersRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location: "uri", location_name: "Namespace"))
     ListUsersRequest.struct_class = Types::ListUsersRequest
 
@@ -6999,7 +6999,7 @@ module Aws::QuickSight
 
     ListVPCConnectionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListVPCConnectionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
-    ListVPCConnectionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    ListVPCConnectionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
     ListVPCConnectionsRequest.struct_class = Types::ListVPCConnectionsRequest
 
     ListVPCConnectionsResponse.add_member(:vpc_connection_summaries, Shapes::ShapeRef.new(shape: VPCConnectionSummaryList, location_name: "VPCConnectionSummaries"))
@@ -7062,7 +7062,7 @@ module Aws::QuickSight
 
     MappedDataSetParameters.member = Shapes::ShapeRef.new(shape: MappedDataSetParameter)
 
-    MarginStyle.add_member(:show, Shapes::ShapeRef.new(shape: Boolean, location_name: "Show", metadata: {"box"=>true}))
+    MarginStyle.add_member(:show, Shapes::ShapeRef.new(shape: Boolean, location_name: "Show", metadata: {"box" => true}))
     MarginStyle.struct_class = Types::MarginStyle
 
     MariaDbParameters.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
@@ -7203,7 +7203,7 @@ module Aws::QuickSight
 
     NumericEqualityFilter.add_member(:filter_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "FilterId"))
     NumericEqualityFilter.add_member(:column, Shapes::ShapeRef.new(shape: ColumnIdentifier, required: true, location_name: "Column"))
-    NumericEqualityFilter.add_member(:value, Shapes::ShapeRef.new(shape: Double, location_name: "Value", metadata: {"box"=>true}))
+    NumericEqualityFilter.add_member(:value, Shapes::ShapeRef.new(shape: Double, location_name: "Value", metadata: {"box" => true}))
     NumericEqualityFilter.add_member(:select_all_options, Shapes::ShapeRef.new(shape: NumericFilterSelectAllOptions, location_name: "SelectAllOptions"))
     NumericEqualityFilter.add_member(:match_operator, Shapes::ShapeRef.new(shape: NumericEqualityMatchOperator, required: true, location_name: "MatchOperator"))
     NumericEqualityFilter.add_member(:aggregation_function, Shapes::ShapeRef.new(shape: AggregationFunction, location_name: "AggregationFunction"))
@@ -7219,17 +7219,17 @@ module Aws::QuickSight
 
     NumericRangeFilter.add_member(:filter_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "FilterId"))
     NumericRangeFilter.add_member(:column, Shapes::ShapeRef.new(shape: ColumnIdentifier, required: true, location_name: "Column"))
-    NumericRangeFilter.add_member(:include_minimum, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeMinimum", metadata: {"box"=>true}))
-    NumericRangeFilter.add_member(:include_maximum, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeMaximum", metadata: {"box"=>true}))
-    NumericRangeFilter.add_member(:range_minimum, Shapes::ShapeRef.new(shape: NumericRangeFilterValue, location_name: "RangeMinimum", metadata: {"box"=>true}))
-    NumericRangeFilter.add_member(:range_maximum, Shapes::ShapeRef.new(shape: NumericRangeFilterValue, location_name: "RangeMaximum", metadata: {"box"=>true}))
+    NumericRangeFilter.add_member(:include_minimum, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeMinimum", metadata: {"box" => true}))
+    NumericRangeFilter.add_member(:include_maximum, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeMaximum", metadata: {"box" => true}))
+    NumericRangeFilter.add_member(:range_minimum, Shapes::ShapeRef.new(shape: NumericRangeFilterValue, location_name: "RangeMinimum", metadata: {"box" => true}))
+    NumericRangeFilter.add_member(:range_maximum, Shapes::ShapeRef.new(shape: NumericRangeFilterValue, location_name: "RangeMaximum", metadata: {"box" => true}))
     NumericRangeFilter.add_member(:select_all_options, Shapes::ShapeRef.new(shape: NumericFilterSelectAllOptions, location_name: "SelectAllOptions"))
     NumericRangeFilter.add_member(:aggregation_function, Shapes::ShapeRef.new(shape: AggregationFunction, location_name: "AggregationFunction"))
     NumericRangeFilter.add_member(:null_option, Shapes::ShapeRef.new(shape: FilterNullOption, required: true, location_name: "NullOption"))
     NumericRangeFilter.add_member(:default_filter_control_configuration, Shapes::ShapeRef.new(shape: DefaultFilterControlConfiguration, location_name: "DefaultFilterControlConfiguration"))
     NumericRangeFilter.struct_class = Types::NumericRangeFilter
 
-    NumericRangeFilterValue.add_member(:static_value, Shapes::ShapeRef.new(shape: Double, location_name: "StaticValue", metadata: {"box"=>true}))
+    NumericRangeFilterValue.add_member(:static_value, Shapes::ShapeRef.new(shape: Double, location_name: "StaticValue", metadata: {"box" => true}))
     NumericRangeFilterValue.add_member(:parameter, Shapes::ShapeRef.new(shape: ParameterName, location_name: "Parameter"))
     NumericRangeFilterValue.struct_class = Types::NumericRangeFilterValue
 
@@ -7280,7 +7280,7 @@ module Aws::QuickSight
     OverrideDatasetParameterOperation.add_member(:new_default_values, Shapes::ShapeRef.new(shape: NewDefaultValues, location_name: "NewDefaultValues"))
     OverrideDatasetParameterOperation.struct_class = Types::OverrideDatasetParameterOperation
 
-    PaginationConfiguration.add_member(:page_size, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "PageSize", metadata: {"box"=>true}))
+    PaginationConfiguration.add_member(:page_size, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "PageSize", metadata: {"box" => true}))
     PaginationConfiguration.add_member(:page_number, Shapes::ShapeRef.new(shape: PageNumber, required: true, location_name: "PageNumber"))
     PaginationConfiguration.struct_class = Types::PaginationConfiguration
 
@@ -7383,8 +7383,8 @@ module Aws::QuickSight
 
     Path.member = Shapes::ShapeRef.new(shape: Arn)
 
-    PercentVisibleRange.add_member(:from, Shapes::ShapeRef.new(shape: PercentNumber, location_name: "From", metadata: {"box"=>true}))
-    PercentVisibleRange.add_member(:to, Shapes::ShapeRef.new(shape: PercentNumber, location_name: "To", metadata: {"box"=>true}))
+    PercentVisibleRange.add_member(:from, Shapes::ShapeRef.new(shape: PercentNumber, location_name: "From", metadata: {"box" => true}))
+    PercentVisibleRange.add_member(:to, Shapes::ShapeRef.new(shape: PercentNumber, location_name: "To", metadata: {"box" => true}))
     PercentVisibleRange.struct_class = Types::PercentVisibleRange
 
     PercentageDisplayFormatConfiguration.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
@@ -7615,7 +7615,7 @@ module Aws::QuickSight
 
     PluginVisualFieldWells.member = Shapes::ShapeRef.new(shape: PluginVisualFieldWell)
 
-    PluginVisualItemsLimitConfiguration.add_member(:items_limit, Shapes::ShapeRef.new(shape: Long, location_name: "ItemsLimit", metadata: {"box"=>true}))
+    PluginVisualItemsLimitConfiguration.add_member(:items_limit, Shapes::ShapeRef.new(shape: Long, location_name: "ItemsLimit", metadata: {"box" => true}))
     PluginVisualItemsLimitConfiguration.struct_class = Types::PluginVisualItemsLimitConfiguration
 
     PluginVisualOptions.add_member(:visual_properties, Shapes::ShapeRef.new(shape: PluginVisualPropertiesList, location_name: "VisualProperties"))
@@ -7935,7 +7935,7 @@ module Aws::QuickSight
     RelativeDatesFilter.add_member(:minimum_granularity, Shapes::ShapeRef.new(shape: TimeGranularity, location_name: "MinimumGranularity"))
     RelativeDatesFilter.add_member(:time_granularity, Shapes::ShapeRef.new(shape: TimeGranularity, required: true, location_name: "TimeGranularity"))
     RelativeDatesFilter.add_member(:relative_date_type, Shapes::ShapeRef.new(shape: RelativeDateType, required: true, location_name: "RelativeDateType"))
-    RelativeDatesFilter.add_member(:relative_date_value, Shapes::ShapeRef.new(shape: Integer, location_name: "RelativeDateValue", metadata: {"box"=>true}))
+    RelativeDatesFilter.add_member(:relative_date_value, Shapes::ShapeRef.new(shape: Integer, location_name: "RelativeDateValue", metadata: {"box" => true}))
     RelativeDatesFilter.add_member(:parameter_name, Shapes::ShapeRef.new(shape: ParameterName, location_name: "ParameterName"))
     RelativeDatesFilter.add_member(:null_option, Shapes::ShapeRef.new(shape: FilterNullOption, required: true, location_name: "NullOption"))
     RelativeDatesFilter.add_member(:exclude_period_configuration, Shapes::ShapeRef.new(shape: ExcludePeriodConfiguration, location_name: "ExcludePeriodConfiguration"))
@@ -7990,9 +7990,9 @@ module Aws::QuickSight
     RowAlternateColorOptions.add_member(:use_primary_background_color, Shapes::ShapeRef.new(shape: WidgetStatus, location_name: "UsePrimaryBackgroundColor"))
     RowAlternateColorOptions.struct_class = Types::RowAlternateColorOptions
 
-    RowInfo.add_member(:rows_ingested, Shapes::ShapeRef.new(shape: Long, location_name: "RowsIngested", metadata: {"box"=>true}))
-    RowInfo.add_member(:rows_dropped, Shapes::ShapeRef.new(shape: Long, location_name: "RowsDropped", metadata: {"box"=>true}))
-    RowInfo.add_member(:total_rows_in_dataset, Shapes::ShapeRef.new(shape: Long, location_name: "TotalRowsInDataset", metadata: {"box"=>true}))
+    RowInfo.add_member(:rows_ingested, Shapes::ShapeRef.new(shape: Long, location_name: "RowsIngested", metadata: {"box" => true}))
+    RowInfo.add_member(:rows_dropped, Shapes::ShapeRef.new(shape: Long, location_name: "RowsDropped", metadata: {"box" => true}))
+    RowInfo.add_member(:total_rows_in_dataset, Shapes::ShapeRef.new(shape: Long, location_name: "TotalRowsInDataset", metadata: {"box" => true}))
     RowInfo.struct_class = Types::RowInfo
 
     RowLevelPermissionDataSet.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "Namespace"))
@@ -8123,7 +8123,7 @@ module Aws::QuickSight
     SearchAnalysesRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     SearchAnalysesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: AnalysisSearchFilterList, required: true, location_name: "Filters"))
     SearchAnalysesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    SearchAnalysesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    SearchAnalysesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     SearchAnalysesRequest.struct_class = Types::SearchAnalysesRequest
 
     SearchAnalysesResponse.add_member(:analysis_summary_list, Shapes::ShapeRef.new(shape: AnalysisSummaryList, location_name: "AnalysisSummaryList"))
@@ -8135,7 +8135,7 @@ module Aws::QuickSight
     SearchDashboardsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     SearchDashboardsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: DashboardSearchFilterList, required: true, location_name: "Filters"))
     SearchDashboardsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    SearchDashboardsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    SearchDashboardsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     SearchDashboardsRequest.struct_class = Types::SearchDashboardsRequest
 
     SearchDashboardsResponse.add_member(:dashboard_summary_list, Shapes::ShapeRef.new(shape: DashboardSummaryList, location_name: "DashboardSummaryList"))
@@ -8147,7 +8147,7 @@ module Aws::QuickSight
     SearchDataSetsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     SearchDataSetsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: DataSetSearchFilterList, required: true, location_name: "Filters"))
     SearchDataSetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    SearchDataSetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    SearchDataSetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     SearchDataSetsRequest.struct_class = Types::SearchDataSetsRequest
 
     SearchDataSetsResponse.add_member(:data_set_summaries, Shapes::ShapeRef.new(shape: DataSetSummaryList, location_name: "DataSetSummaries"))
@@ -8159,7 +8159,7 @@ module Aws::QuickSight
     SearchDataSourcesRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     SearchDataSourcesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: DataSourceSearchFilterList, required: true, location_name: "Filters"))
     SearchDataSourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    SearchDataSourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    SearchDataSourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     SearchDataSourcesRequest.struct_class = Types::SearchDataSourcesRequest
 
     SearchDataSourcesResponse.add_member(:data_source_summaries, Shapes::ShapeRef.new(shape: DataSourceSummaryList, location_name: "DataSourceSummaries"))
@@ -8171,7 +8171,7 @@ module Aws::QuickSight
     SearchFoldersRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     SearchFoldersRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FolderSearchFilterList, required: true, location_name: "Filters"))
     SearchFoldersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    SearchFoldersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    SearchFoldersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     SearchFoldersRequest.struct_class = Types::SearchFoldersRequest
 
     SearchFoldersResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
@@ -8182,7 +8182,7 @@ module Aws::QuickSight
 
     SearchGroupsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     SearchGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
-    SearchGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    SearchGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
     SearchGroupsRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location: "uri", location_name: "Namespace"))
     SearchGroupsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: GroupSearchFilterList, required: true, location_name: "Filters"))
     SearchGroupsRequest.struct_class = Types::SearchGroupsRequest
@@ -8196,7 +8196,7 @@ module Aws::QuickSight
     SearchTopicsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     SearchTopicsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: TopicSearchFilterList, required: true, location_name: "Filters"))
     SearchTopicsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
-    SearchTopicsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    SearchTopicsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     SearchTopicsRequest.struct_class = Types::SearchTopicsRequest
 
     SearchTopicsResponse.add_member(:topic_summary_list, Shapes::ShapeRef.new(shape: TopicSummaries, location_name: "TopicSummaryList"))
@@ -9025,12 +9025,12 @@ module Aws::QuickSight
     TileStyle.add_member(:border, Shapes::ShapeRef.new(shape: BorderStyle, location_name: "Border"))
     TileStyle.struct_class = Types::TileStyle
 
-    TimeBasedForecastProperties.add_member(:periods_forward, Shapes::ShapeRef.new(shape: PeriodsForward, location_name: "PeriodsForward", metadata: {"box"=>true}))
-    TimeBasedForecastProperties.add_member(:periods_backward, Shapes::ShapeRef.new(shape: PeriodsBackward, location_name: "PeriodsBackward", metadata: {"box"=>true}))
-    TimeBasedForecastProperties.add_member(:upper_boundary, Shapes::ShapeRef.new(shape: Double, location_name: "UpperBoundary", metadata: {"box"=>true}))
-    TimeBasedForecastProperties.add_member(:lower_boundary, Shapes::ShapeRef.new(shape: Double, location_name: "LowerBoundary", metadata: {"box"=>true}))
-    TimeBasedForecastProperties.add_member(:prediction_interval, Shapes::ShapeRef.new(shape: PredictionInterval, location_name: "PredictionInterval", metadata: {"box"=>true}))
-    TimeBasedForecastProperties.add_member(:seasonality, Shapes::ShapeRef.new(shape: Seasonality, location_name: "Seasonality", metadata: {"box"=>true}))
+    TimeBasedForecastProperties.add_member(:periods_forward, Shapes::ShapeRef.new(shape: PeriodsForward, location_name: "PeriodsForward", metadata: {"box" => true}))
+    TimeBasedForecastProperties.add_member(:periods_backward, Shapes::ShapeRef.new(shape: PeriodsBackward, location_name: "PeriodsBackward", metadata: {"box" => true}))
+    TimeBasedForecastProperties.add_member(:upper_boundary, Shapes::ShapeRef.new(shape: Double, location_name: "UpperBoundary", metadata: {"box" => true}))
+    TimeBasedForecastProperties.add_member(:lower_boundary, Shapes::ShapeRef.new(shape: Double, location_name: "LowerBoundary", metadata: {"box" => true}))
+    TimeBasedForecastProperties.add_member(:prediction_interval, Shapes::ShapeRef.new(shape: PredictionInterval, location_name: "PredictionInterval", metadata: {"box" => true}))
+    TimeBasedForecastProperties.add_member(:seasonality, Shapes::ShapeRef.new(shape: Seasonality, location_name: "Seasonality", metadata: {"box" => true}))
     TimeBasedForecastProperties.struct_class = Types::TimeBasedForecastProperties
 
     TimeEqualityFilter.add_member(:filter_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "FilterId"))
@@ -9050,8 +9050,8 @@ module Aws::QuickSight
 
     TimeRangeFilter.add_member(:filter_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "FilterId"))
     TimeRangeFilter.add_member(:column, Shapes::ShapeRef.new(shape: ColumnIdentifier, required: true, location_name: "Column"))
-    TimeRangeFilter.add_member(:include_minimum, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeMinimum", metadata: {"box"=>true}))
-    TimeRangeFilter.add_member(:include_maximum, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeMaximum", metadata: {"box"=>true}))
+    TimeRangeFilter.add_member(:include_minimum, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeMinimum", metadata: {"box" => true}))
+    TimeRangeFilter.add_member(:include_maximum, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeMaximum", metadata: {"box" => true}))
     TimeRangeFilter.add_member(:range_minimum_value, Shapes::ShapeRef.new(shape: TimeRangeFilterValue, location_name: "RangeMinimumValue"))
     TimeRangeFilter.add_member(:range_maximum_value, Shapes::ShapeRef.new(shape: TimeRangeFilterValue, location_name: "RangeMaximumValue"))
     TimeRangeFilter.add_member(:null_option, Shapes::ShapeRef.new(shape: FilterNullOption, required: true, location_name: "NullOption"))
@@ -9078,7 +9078,7 @@ module Aws::QuickSight
 
     TopBottomFilter.add_member(:filter_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "FilterId"))
     TopBottomFilter.add_member(:column, Shapes::ShapeRef.new(shape: ColumnIdentifier, required: true, location_name: "Column"))
-    TopBottomFilter.add_member(:limit, Shapes::ShapeRef.new(shape: Integer, location_name: "Limit", metadata: {"box"=>true}))
+    TopBottomFilter.add_member(:limit, Shapes::ShapeRef.new(shape: Integer, location_name: "Limit", metadata: {"box" => true}))
     TopBottomFilter.add_member(:aggregation_sort_configurations, Shapes::ShapeRef.new(shape: AggregationSortConfigurationList, required: true, location_name: "AggregationSortConfigurations"))
     TopBottomFilter.add_member(:time_granularity, Shapes::ShapeRef.new(shape: TimeGranularity, location_name: "TimeGranularity"))
     TopBottomFilter.add_member(:parameter_name, Shapes::ShapeRef.new(shape: ParameterName, location_name: "ParameterName"))
@@ -10048,8 +10048,8 @@ module Aws::QuickSight
     UpdateVPCConnectionResponse.struct_class = Types::UpdateVPCConnectionResponse
 
     UploadSettings.add_member(:format, Shapes::ShapeRef.new(shape: FileFormat, location_name: "Format"))
-    UploadSettings.add_member(:start_from_row, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "StartFromRow", metadata: {"box"=>true}))
-    UploadSettings.add_member(:contains_header, Shapes::ShapeRef.new(shape: Boolean, location_name: "ContainsHeader", metadata: {"box"=>true}))
+    UploadSettings.add_member(:start_from_row, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "StartFromRow", metadata: {"box" => true}))
+    UploadSettings.add_member(:contains_header, Shapes::ShapeRef.new(shape: Boolean, location_name: "ContainsHeader", metadata: {"box" => true}))
     UploadSettings.add_member(:text_qualifier, Shapes::ShapeRef.new(shape: TextQualifier, location_name: "TextQualifier"))
     UploadSettings.add_member(:delimiter, Shapes::ShapeRef.new(shape: Delimiter, location_name: "Delimiter"))
     UploadSettings.struct_class = Types::UploadSettings

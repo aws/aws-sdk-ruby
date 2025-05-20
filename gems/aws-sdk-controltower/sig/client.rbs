@@ -275,7 +275,9 @@ module Aws
       def list_enabled_baselines: (
                                     ?filter: {
                                       baseline_identifiers: Array[::String]?,
+                                      inheritance_drift_statuses: Array[("IN_SYNC" | "DRIFTED")]?,
                                       parent_identifiers: Array[::String]?,
+                                      statuses: Array[("SUCCEEDED" | "FAILED" | "UNDER_CHANGE")]?,
                                       target_identifiers: Array[::String]?
                                     },
                                     ?include_children: bool,

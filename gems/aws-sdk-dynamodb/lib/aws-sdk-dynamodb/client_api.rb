@@ -709,7 +709,7 @@ module Aws::DynamoDB
     ContributorInsightsSummary.add_member(:contributor_insights_status, Shapes::ShapeRef.new(shape: ContributorInsightsStatus, location_name: "ContributorInsightsStatus"))
     ContributorInsightsSummary.struct_class = Types::ContributorInsightsSummary
 
-    CreateBackupInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    CreateBackupInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     CreateBackupInput.add_member(:backup_name, Shapes::ShapeRef.new(shape: BackupName, required: true, location_name: "BackupName"))
     CreateBackupInput.struct_class = Types::CreateBackupInput
 
@@ -724,7 +724,7 @@ module Aws::DynamoDB
     CreateGlobalSecondaryIndexAction.add_member(:warm_throughput, Shapes::ShapeRef.new(shape: WarmThroughput, location_name: "WarmThroughput"))
     CreateGlobalSecondaryIndexAction.struct_class = Types::CreateGlobalSecondaryIndexAction
 
-    CreateGlobalTableInput.add_member(:global_table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "GlobalTableName", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    CreateGlobalTableInput.add_member(:global_table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "GlobalTableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     CreateGlobalTableInput.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicaList, required: true, location_name: "ReplicationGroup"))
     CreateGlobalTableInput.struct_class = Types::CreateGlobalTableInput
 
@@ -743,7 +743,7 @@ module Aws::DynamoDB
     CreateReplicationGroupMemberAction.struct_class = Types::CreateReplicationGroupMemberAction
 
     CreateTableInput.add_member(:attribute_definitions, Shapes::ShapeRef.new(shape: AttributeDefinitions, required: true, location_name: "AttributeDefinitions"))
-    CreateTableInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    CreateTableInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     CreateTableInput.add_member(:key_schema, Shapes::ShapeRef.new(shape: KeySchema, required: true, location_name: "KeySchema"))
     CreateTableInput.add_member(:local_secondary_indexes, Shapes::ShapeRef.new(shape: LocalSecondaryIndexList, location_name: "LocalSecondaryIndexes"))
     CreateTableInput.add_member(:global_secondary_indexes, Shapes::ShapeRef.new(shape: GlobalSecondaryIndexList, location_name: "GlobalSecondaryIndexes"))
@@ -776,7 +776,7 @@ module Aws::DynamoDB
     Delete.add_member(:return_values_on_condition_check_failure, Shapes::ShapeRef.new(shape: ReturnValuesOnConditionCheckFailure, location_name: "ReturnValuesOnConditionCheckFailure"))
     Delete.struct_class = Types::Delete
 
-    DeleteBackupInput.add_member(:backup_arn, Shapes::ShapeRef.new(shape: BackupArn, required: true, location_name: "BackupArn", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    DeleteBackupInput.add_member(:backup_arn, Shapes::ShapeRef.new(shape: BackupArn, required: true, location_name: "BackupArn", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     DeleteBackupInput.struct_class = Types::DeleteBackupInput
 
     DeleteBackupOutput.add_member(:backup_description, Shapes::ShapeRef.new(shape: BackupDescription, location_name: "BackupDescription"))
@@ -785,7 +785,7 @@ module Aws::DynamoDB
     DeleteGlobalSecondaryIndexAction.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, required: true, location_name: "IndexName"))
     DeleteGlobalSecondaryIndexAction.struct_class = Types::DeleteGlobalSecondaryIndexAction
 
-    DeleteItemInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    DeleteItemInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     DeleteItemInput.add_member(:key, Shapes::ShapeRef.new(shape: Key, required: true, location_name: "Key"))
     DeleteItemInput.add_member(:expected, Shapes::ShapeRef.new(shape: ExpectedAttributeMap, location_name: "Expected"))
     DeleteItemInput.add_member(:conditional_operator, Shapes::ShapeRef.new(shape: ConditionalOperator, location_name: "ConditionalOperator"))
@@ -812,32 +812,32 @@ module Aws::DynamoDB
     DeleteRequest.add_member(:key, Shapes::ShapeRef.new(shape: Key, required: true, location_name: "Key"))
     DeleteRequest.struct_class = Types::DeleteRequest
 
-    DeleteResourcePolicyInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    DeleteResourcePolicyInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     DeleteResourcePolicyInput.add_member(:expected_revision_id, Shapes::ShapeRef.new(shape: PolicyRevisionId, location_name: "ExpectedRevisionId"))
     DeleteResourcePolicyInput.struct_class = Types::DeleteResourcePolicyInput
 
     DeleteResourcePolicyOutput.add_member(:revision_id, Shapes::ShapeRef.new(shape: PolicyRevisionId, location_name: "RevisionId"))
     DeleteResourcePolicyOutput.struct_class = Types::DeleteResourcePolicyOutput
 
-    DeleteTableInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    DeleteTableInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     DeleteTableInput.struct_class = Types::DeleteTableInput
 
     DeleteTableOutput.add_member(:table_description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "TableDescription"))
     DeleteTableOutput.struct_class = Types::DeleteTableOutput
 
-    DescribeBackupInput.add_member(:backup_arn, Shapes::ShapeRef.new(shape: BackupArn, required: true, location_name: "BackupArn", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    DescribeBackupInput.add_member(:backup_arn, Shapes::ShapeRef.new(shape: BackupArn, required: true, location_name: "BackupArn", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     DescribeBackupInput.struct_class = Types::DescribeBackupInput
 
     DescribeBackupOutput.add_member(:backup_description, Shapes::ShapeRef.new(shape: BackupDescription, location_name: "BackupDescription"))
     DescribeBackupOutput.struct_class = Types::DescribeBackupOutput
 
-    DescribeContinuousBackupsInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    DescribeContinuousBackupsInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     DescribeContinuousBackupsInput.struct_class = Types::DescribeContinuousBackupsInput
 
     DescribeContinuousBackupsOutput.add_member(:continuous_backups_description, Shapes::ShapeRef.new(shape: ContinuousBackupsDescription, location_name: "ContinuousBackupsDescription"))
     DescribeContinuousBackupsOutput.struct_class = Types::DescribeContinuousBackupsOutput
 
-    DescribeContributorInsightsInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    DescribeContributorInsightsInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     DescribeContributorInsightsInput.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "IndexName"))
     DescribeContributorInsightsInput.struct_class = Types::DescribeContributorInsightsInput
 
@@ -854,32 +854,32 @@ module Aws::DynamoDB
     DescribeEndpointsResponse.add_member(:endpoints, Shapes::ShapeRef.new(shape: Endpoints, required: true, location_name: "Endpoints"))
     DescribeEndpointsResponse.struct_class = Types::DescribeEndpointsResponse
 
-    DescribeExportInput.add_member(:export_arn, Shapes::ShapeRef.new(shape: ExportArn, required: true, location_name: "ExportArn", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    DescribeExportInput.add_member(:export_arn, Shapes::ShapeRef.new(shape: ExportArn, required: true, location_name: "ExportArn", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     DescribeExportInput.struct_class = Types::DescribeExportInput
 
     DescribeExportOutput.add_member(:export_description, Shapes::ShapeRef.new(shape: ExportDescription, location_name: "ExportDescription"))
     DescribeExportOutput.struct_class = Types::DescribeExportOutput
 
-    DescribeGlobalTableInput.add_member(:global_table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "GlobalTableName", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    DescribeGlobalTableInput.add_member(:global_table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "GlobalTableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     DescribeGlobalTableInput.struct_class = Types::DescribeGlobalTableInput
 
     DescribeGlobalTableOutput.add_member(:global_table_description, Shapes::ShapeRef.new(shape: GlobalTableDescription, location_name: "GlobalTableDescription"))
     DescribeGlobalTableOutput.struct_class = Types::DescribeGlobalTableOutput
 
-    DescribeGlobalTableSettingsInput.add_member(:global_table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "GlobalTableName", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    DescribeGlobalTableSettingsInput.add_member(:global_table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "GlobalTableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     DescribeGlobalTableSettingsInput.struct_class = Types::DescribeGlobalTableSettingsInput
 
     DescribeGlobalTableSettingsOutput.add_member(:global_table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "GlobalTableName"))
     DescribeGlobalTableSettingsOutput.add_member(:replica_settings, Shapes::ShapeRef.new(shape: ReplicaSettingsDescriptionList, location_name: "ReplicaSettings"))
     DescribeGlobalTableSettingsOutput.struct_class = Types::DescribeGlobalTableSettingsOutput
 
-    DescribeImportInput.add_member(:import_arn, Shapes::ShapeRef.new(shape: ImportArn, required: true, location_name: "ImportArn", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    DescribeImportInput.add_member(:import_arn, Shapes::ShapeRef.new(shape: ImportArn, required: true, location_name: "ImportArn", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     DescribeImportInput.struct_class = Types::DescribeImportInput
 
     DescribeImportOutput.add_member(:import_table_description, Shapes::ShapeRef.new(shape: ImportTableDescription, required: true, location_name: "ImportTableDescription"))
     DescribeImportOutput.struct_class = Types::DescribeImportOutput
 
-    DescribeKinesisStreamingDestinationInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    DescribeKinesisStreamingDestinationInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     DescribeKinesisStreamingDestinationInput.struct_class = Types::DescribeKinesisStreamingDestinationInput
 
     DescribeKinesisStreamingDestinationOutput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "TableName"))
@@ -894,19 +894,19 @@ module Aws::DynamoDB
     DescribeLimitsOutput.add_member(:table_max_write_capacity_units, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "TableMaxWriteCapacityUnits"))
     DescribeLimitsOutput.struct_class = Types::DescribeLimitsOutput
 
-    DescribeTableInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    DescribeTableInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     DescribeTableInput.struct_class = Types::DescribeTableInput
 
     DescribeTableOutput.add_member(:table, Shapes::ShapeRef.new(shape: TableDescription, location_name: "Table"))
     DescribeTableOutput.struct_class = Types::DescribeTableOutput
 
-    DescribeTableReplicaAutoScalingInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    DescribeTableReplicaAutoScalingInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     DescribeTableReplicaAutoScalingInput.struct_class = Types::DescribeTableReplicaAutoScalingInput
 
     DescribeTableReplicaAutoScalingOutput.add_member(:table_auto_scaling_description, Shapes::ShapeRef.new(shape: TableAutoScalingDescription, location_name: "TableAutoScalingDescription"))
     DescribeTableReplicaAutoScalingOutput.struct_class = Types::DescribeTableReplicaAutoScalingOutput
 
-    DescribeTimeToLiveInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    DescribeTimeToLiveInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     DescribeTimeToLiveInput.struct_class = Types::DescribeTimeToLiveInput
 
     DescribeTimeToLiveOutput.add_member(:time_to_live_description, Shapes::ShapeRef.new(shape: TimeToLiveDescription, location_name: "TimeToLiveDescription"))
@@ -940,7 +940,7 @@ module Aws::DynamoDB
     ExecuteStatementOutput.struct_class = Types::ExecuteStatementOutput
 
     ExecuteTransactionInput.add_member(:transact_statements, Shapes::ShapeRef.new(shape: ParameterizedStatements, required: true, location_name: "TransactStatements"))
-    ExecuteTransactionInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    ExecuteTransactionInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     ExecuteTransactionInput.add_member(:return_consumed_capacity, Shapes::ShapeRef.new(shape: ReturnConsumedCapacity, location_name: "ReturnConsumedCapacity"))
     ExecuteTransactionInput.struct_class = Types::ExecuteTransactionInput
 
@@ -993,9 +993,9 @@ module Aws::DynamoDB
     ExportSummary.add_member(:export_type, Shapes::ShapeRef.new(shape: ExportType, location_name: "ExportType"))
     ExportSummary.struct_class = Types::ExportSummary
 
-    ExportTableToPointInTimeInput.add_member(:table_arn, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableArn", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    ExportTableToPointInTimeInput.add_member(:table_arn, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableArn", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     ExportTableToPointInTimeInput.add_member(:export_time, Shapes::ShapeRef.new(shape: ExportTime, location_name: "ExportTime"))
-    ExportTableToPointInTimeInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    ExportTableToPointInTimeInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     ExportTableToPointInTimeInput.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, required: true, location_name: "S3Bucket"))
     ExportTableToPointInTimeInput.add_member(:s3_bucket_owner, Shapes::ShapeRef.new(shape: S3BucketOwner, location_name: "S3BucketOwner"))
     ExportTableToPointInTimeInput.add_member(:s3_prefix, Shapes::ShapeRef.new(shape: S3Prefix, location_name: "S3Prefix"))
@@ -1028,7 +1028,7 @@ module Aws::DynamoDB
     Get.add_member(:expression_attribute_names, Shapes::ShapeRef.new(shape: ExpressionAttributeNameMap, location_name: "ExpressionAttributeNames"))
     Get.struct_class = Types::Get
 
-    GetItemInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    GetItemInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     GetItemInput.add_member(:key, Shapes::ShapeRef.new(shape: Key, required: true, location_name: "Key"))
     GetItemInput.add_member(:attributes_to_get, Shapes::ShapeRef.new(shape: AttributeNameList, location_name: "AttributesToGet"))
     GetItemInput.add_member(:consistent_read, Shapes::ShapeRef.new(shape: ConsistentRead, location_name: "ConsistentRead"))
@@ -1041,7 +1041,7 @@ module Aws::DynamoDB
     GetItemOutput.add_member(:consumed_capacity, Shapes::ShapeRef.new(shape: ConsumedCapacity, location_name: "ConsumedCapacity"))
     GetItemOutput.struct_class = Types::GetItemOutput
 
-    GetResourcePolicyInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    GetResourcePolicyInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     GetResourcePolicyInput.struct_class = Types::GetResourcePolicyInput
 
     GetResourcePolicyOutput.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicy, location_name: "Policy"))
@@ -1168,7 +1168,7 @@ module Aws::DynamoDB
     ImportTableDescription.add_member(:failure_message, Shapes::ShapeRef.new(shape: FailureMessage, location_name: "FailureMessage"))
     ImportTableDescription.struct_class = Types::ImportTableDescription
 
-    ImportTableInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    ImportTableInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     ImportTableInput.add_member(:s3_bucket_source, Shapes::ShapeRef.new(shape: S3BucketSource, required: true, location_name: "S3BucketSource"))
     ImportTableInput.add_member(:input_format, Shapes::ShapeRef.new(shape: InputFormat, required: true, location_name: "InputFormat"))
     ImportTableInput.add_member(:input_format_options, Shapes::ShapeRef.new(shape: InputFormatOptions, location_name: "InputFormatOptions"))
@@ -1252,7 +1252,7 @@ module Aws::DynamoDB
 
     KinesisDataStreamDestinations.member = Shapes::ShapeRef.new(shape: KinesisDataStreamDestination)
 
-    KinesisStreamingDestinationInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    KinesisStreamingDestinationInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     KinesisStreamingDestinationInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamArn, required: true, location_name: "StreamArn"))
     KinesisStreamingDestinationInput.add_member(:enable_kinesis_streaming_configuration, Shapes::ShapeRef.new(shape: EnableKinesisStreamingConfiguration, location_name: "EnableKinesisStreamingConfiguration"))
     KinesisStreamingDestinationInput.struct_class = Types::KinesisStreamingDestinationInput
@@ -1268,7 +1268,7 @@ module Aws::DynamoDB
 
     ListAttributeValue.member = Shapes::ShapeRef.new(shape: AttributeValue)
 
-    ListBackupsInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, location_name: "TableName", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    ListBackupsInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, location_name: "TableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     ListBackupsInput.add_member(:limit, Shapes::ShapeRef.new(shape: BackupsInputLimit, location_name: "Limit"))
     ListBackupsInput.add_member(:time_range_lower_bound, Shapes::ShapeRef.new(shape: TimeRangeLowerBound, location_name: "TimeRangeLowerBound"))
     ListBackupsInput.add_member(:time_range_upper_bound, Shapes::ShapeRef.new(shape: TimeRangeUpperBound, location_name: "TimeRangeUpperBound"))
@@ -1280,7 +1280,7 @@ module Aws::DynamoDB
     ListBackupsOutput.add_member(:last_evaluated_backup_arn, Shapes::ShapeRef.new(shape: BackupArn, location_name: "LastEvaluatedBackupArn"))
     ListBackupsOutput.struct_class = Types::ListBackupsOutput
 
-    ListContributorInsightsInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, location_name: "TableName", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    ListContributorInsightsInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, location_name: "TableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     ListContributorInsightsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location_name: "NextToken"))
     ListContributorInsightsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListContributorInsightsLimit, location_name: "MaxResults"))
     ListContributorInsightsInput.struct_class = Types::ListContributorInsightsInput
@@ -1289,7 +1289,7 @@ module Aws::DynamoDB
     ListContributorInsightsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location_name: "NextToken"))
     ListContributorInsightsOutput.struct_class = Types::ListContributorInsightsOutput
 
-    ListExportsInput.add_member(:table_arn, Shapes::ShapeRef.new(shape: TableArn, location_name: "TableArn", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    ListExportsInput.add_member(:table_arn, Shapes::ShapeRef.new(shape: TableArn, location_name: "TableArn", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     ListExportsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListExportsMaxLimit, location_name: "MaxResults"))
     ListExportsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: ExportNextToken, location_name: "NextToken"))
     ListExportsInput.struct_class = Types::ListExportsInput
@@ -1307,7 +1307,7 @@ module Aws::DynamoDB
     ListGlobalTablesOutput.add_member(:last_evaluated_global_table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "LastEvaluatedGlobalTableName"))
     ListGlobalTablesOutput.struct_class = Types::ListGlobalTablesOutput
 
-    ListImportsInput.add_member(:table_arn, Shapes::ShapeRef.new(shape: TableArn, location_name: "TableArn", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    ListImportsInput.add_member(:table_arn, Shapes::ShapeRef.new(shape: TableArn, location_name: "TableArn", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     ListImportsInput.add_member(:page_size, Shapes::ShapeRef.new(shape: ListImportsMaxLimit, location_name: "PageSize"))
     ListImportsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: ImportNextToken, location_name: "NextToken"))
     ListImportsInput.struct_class = Types::ListImportsInput
@@ -1324,7 +1324,7 @@ module Aws::DynamoDB
     ListTablesOutput.add_member(:last_evaluated_table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "LastEvaluatedTableName"))
     ListTablesOutput.struct_class = Types::ListTablesOutput
 
-    ListTagsOfResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    ListTagsOfResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     ListTagsOfResourceInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location_name: "NextToken"))
     ListTagsOfResourceInput.struct_class = Types::ListTagsOfResourceInput
 
@@ -1428,7 +1428,7 @@ module Aws::DynamoDB
     Put.add_member(:return_values_on_condition_check_failure, Shapes::ShapeRef.new(shape: ReturnValuesOnConditionCheckFailure, location_name: "ReturnValuesOnConditionCheckFailure"))
     Put.struct_class = Types::Put
 
-    PutItemInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    PutItemInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     PutItemInput.add_member(:item, Shapes::ShapeRef.new(shape: PutItemInputAttributeMap, required: true, location_name: "Item"))
     PutItemInput.add_member(:expected, Shapes::ShapeRef.new(shape: ExpectedAttributeMap, location_name: "Expected"))
     PutItemInput.add_member(:return_values, Shapes::ShapeRef.new(shape: ReturnValue, location_name: "ReturnValues"))
@@ -1452,7 +1452,7 @@ module Aws::DynamoDB
     PutRequest.add_member(:item, Shapes::ShapeRef.new(shape: PutItemInputAttributeMap, required: true, location_name: "Item"))
     PutRequest.struct_class = Types::PutRequest
 
-    PutResourcePolicyInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    PutResourcePolicyInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     PutResourcePolicyInput.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicy, required: true, location_name: "Policy"))
     PutResourcePolicyInput.add_member(:expected_revision_id, Shapes::ShapeRef.new(shape: PolicyRevisionId, location_name: "ExpectedRevisionId"))
     PutResourcePolicyInput.add_member(:confirm_remove_self_resource_access, Shapes::ShapeRef.new(shape: ConfirmRemoveSelfResourceAccess, location_name: "ConfirmRemoveSelfResourceAccess"))
@@ -1461,7 +1461,7 @@ module Aws::DynamoDB
     PutResourcePolicyOutput.add_member(:revision_id, Shapes::ShapeRef.new(shape: PolicyRevisionId, location_name: "RevisionId"))
     PutResourcePolicyOutput.struct_class = Types::PutResourcePolicyOutput
 
-    QueryInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    QueryInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     QueryInput.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "IndexName"))
     QueryInput.add_member(:select, Shapes::ShapeRef.new(shape: Select, location_name: "Select"))
     QueryInput.add_member(:attributes_to_get, Shapes::ShapeRef.new(shape: AttributeNameList, location_name: "AttributesToGet"))
@@ -1628,7 +1628,7 @@ module Aws::DynamoDB
     RestoreSummary.add_member(:restore_in_progress, Shapes::ShapeRef.new(shape: RestoreInProgress, required: true, location_name: "RestoreInProgress"))
     RestoreSummary.struct_class = Types::RestoreSummary
 
-    RestoreTableFromBackupInput.add_member(:target_table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "TargetTableName", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    RestoreTableFromBackupInput.add_member(:target_table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "TargetTableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     RestoreTableFromBackupInput.add_member(:backup_arn, Shapes::ShapeRef.new(shape: BackupArn, required: true, location_name: "BackupArn"))
     RestoreTableFromBackupInput.add_member(:billing_mode_override, Shapes::ShapeRef.new(shape: BillingMode, location_name: "BillingModeOverride"))
     RestoreTableFromBackupInput.add_member(:global_secondary_index_override, Shapes::ShapeRef.new(shape: GlobalSecondaryIndexList, location_name: "GlobalSecondaryIndexOverride"))
@@ -1643,7 +1643,7 @@ module Aws::DynamoDB
 
     RestoreTableToPointInTimeInput.add_member(:source_table_arn, Shapes::ShapeRef.new(shape: TableArn, location_name: "SourceTableArn"))
     RestoreTableToPointInTimeInput.add_member(:source_table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "SourceTableName"))
-    RestoreTableToPointInTimeInput.add_member(:target_table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "TargetTableName", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    RestoreTableToPointInTimeInput.add_member(:target_table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "TargetTableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     RestoreTableToPointInTimeInput.add_member(:use_latest_restorable_time, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "UseLatestRestorableTime"))
     RestoreTableToPointInTimeInput.add_member(:restore_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "RestoreDateTime"))
     RestoreTableToPointInTimeInput.add_member(:billing_mode_override, Shapes::ShapeRef.new(shape: BillingMode, location_name: "BillingModeOverride"))
@@ -1673,7 +1673,7 @@ module Aws::DynamoDB
     SSESpecification.add_member(:kms_master_key_id, Shapes::ShapeRef.new(shape: KMSMasterKeyId, location_name: "KMSMasterKeyId"))
     SSESpecification.struct_class = Types::SSESpecification
 
-    ScanInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    ScanInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     ScanInput.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "IndexName"))
     ScanInput.add_member(:attributes_to_get, Shapes::ShapeRef.new(shape: AttributeNameList, location_name: "AttributesToGet"))
     ScanInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveIntegerObject, location_name: "Limit"))
@@ -1797,7 +1797,7 @@ module Aws::DynamoDB
 
     TagList.member = Shapes::ShapeRef.new(shape: Tag)
 
-    TagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    TagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     TagResourceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
     TagResourceInput.struct_class = Types::TagResourceInput
 
@@ -1833,7 +1833,7 @@ module Aws::DynamoDB
     TransactWriteItemsInput.add_member(:transact_items, Shapes::ShapeRef.new(shape: TransactWriteItemList, required: true, location_name: "TransactItems"))
     TransactWriteItemsInput.add_member(:return_consumed_capacity, Shapes::ShapeRef.new(shape: ReturnConsumedCapacity, location_name: "ReturnConsumedCapacity"))
     TransactWriteItemsInput.add_member(:return_item_collection_metrics, Shapes::ShapeRef.new(shape: ReturnItemCollectionMetrics, location_name: "ReturnItemCollectionMetrics"))
-    TransactWriteItemsInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    TransactWriteItemsInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     TransactWriteItemsInput.struct_class = Types::TransactWriteItemsInput
 
     TransactWriteItemsOutput.add_member(:consumed_capacity, Shapes::ShapeRef.new(shape: ConsumedCapacityMultiple, location_name: "ConsumedCapacity"))
@@ -1850,7 +1850,7 @@ module Aws::DynamoDB
     TransactionInProgressException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     TransactionInProgressException.struct_class = Types::TransactionInProgressException
 
-    UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
     UntagResourceInput.struct_class = Types::UntagResourceInput
 
@@ -1863,14 +1863,14 @@ module Aws::DynamoDB
     Update.add_member(:return_values_on_condition_check_failure, Shapes::ShapeRef.new(shape: ReturnValuesOnConditionCheckFailure, location_name: "ReturnValuesOnConditionCheckFailure"))
     Update.struct_class = Types::Update
 
-    UpdateContinuousBackupsInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    UpdateContinuousBackupsInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     UpdateContinuousBackupsInput.add_member(:point_in_time_recovery_specification, Shapes::ShapeRef.new(shape: PointInTimeRecoverySpecification, required: true, location_name: "PointInTimeRecoverySpecification"))
     UpdateContinuousBackupsInput.struct_class = Types::UpdateContinuousBackupsInput
 
     UpdateContinuousBackupsOutput.add_member(:continuous_backups_description, Shapes::ShapeRef.new(shape: ContinuousBackupsDescription, location_name: "ContinuousBackupsDescription"))
     UpdateContinuousBackupsOutput.struct_class = Types::UpdateContinuousBackupsOutput
 
-    UpdateContributorInsightsInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    UpdateContributorInsightsInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     UpdateContributorInsightsInput.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "IndexName"))
     UpdateContributorInsightsInput.add_member(:contributor_insights_action, Shapes::ShapeRef.new(shape: ContributorInsightsAction, required: true, location_name: "ContributorInsightsAction"))
     UpdateContributorInsightsInput.struct_class = Types::UpdateContributorInsightsInput
@@ -1886,14 +1886,14 @@ module Aws::DynamoDB
     UpdateGlobalSecondaryIndexAction.add_member(:warm_throughput, Shapes::ShapeRef.new(shape: WarmThroughput, location_name: "WarmThroughput"))
     UpdateGlobalSecondaryIndexAction.struct_class = Types::UpdateGlobalSecondaryIndexAction
 
-    UpdateGlobalTableInput.add_member(:global_table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "GlobalTableName", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    UpdateGlobalTableInput.add_member(:global_table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "GlobalTableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     UpdateGlobalTableInput.add_member(:replica_updates, Shapes::ShapeRef.new(shape: ReplicaUpdateList, required: true, location_name: "ReplicaUpdates"))
     UpdateGlobalTableInput.struct_class = Types::UpdateGlobalTableInput
 
     UpdateGlobalTableOutput.add_member(:global_table_description, Shapes::ShapeRef.new(shape: GlobalTableDescription, location_name: "GlobalTableDescription"))
     UpdateGlobalTableOutput.struct_class = Types::UpdateGlobalTableOutput
 
-    UpdateGlobalTableSettingsInput.add_member(:global_table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "GlobalTableName", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    UpdateGlobalTableSettingsInput.add_member(:global_table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "GlobalTableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     UpdateGlobalTableSettingsInput.add_member(:global_table_billing_mode, Shapes::ShapeRef.new(shape: BillingMode, location_name: "GlobalTableBillingMode"))
     UpdateGlobalTableSettingsInput.add_member(:global_table_provisioned_write_capacity_units, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "GlobalTableProvisionedWriteCapacityUnits"))
     UpdateGlobalTableSettingsInput.add_member(:global_table_provisioned_write_capacity_auto_scaling_settings_update, Shapes::ShapeRef.new(shape: AutoScalingSettingsUpdate, location_name: "GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate"))
@@ -1905,7 +1905,7 @@ module Aws::DynamoDB
     UpdateGlobalTableSettingsOutput.add_member(:replica_settings, Shapes::ShapeRef.new(shape: ReplicaSettingsDescriptionList, location_name: "ReplicaSettings"))
     UpdateGlobalTableSettingsOutput.struct_class = Types::UpdateGlobalTableSettingsOutput
 
-    UpdateItemInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    UpdateItemInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     UpdateItemInput.add_member(:key, Shapes::ShapeRef.new(shape: Key, required: true, location_name: "Key"))
     UpdateItemInput.add_member(:attribute_updates, Shapes::ShapeRef.new(shape: AttributeUpdates, location_name: "AttributeUpdates"))
     UpdateItemInput.add_member(:expected, Shapes::ShapeRef.new(shape: ExpectedAttributeMap, location_name: "Expected"))
@@ -1928,7 +1928,7 @@ module Aws::DynamoDB
     UpdateKinesisStreamingConfiguration.add_member(:approximate_creation_date_time_precision, Shapes::ShapeRef.new(shape: ApproximateCreationDateTimePrecision, location_name: "ApproximateCreationDateTimePrecision"))
     UpdateKinesisStreamingConfiguration.struct_class = Types::UpdateKinesisStreamingConfiguration
 
-    UpdateKinesisStreamingDestinationInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    UpdateKinesisStreamingDestinationInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     UpdateKinesisStreamingDestinationInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamArn, required: true, location_name: "StreamArn"))
     UpdateKinesisStreamingDestinationInput.add_member(:update_kinesis_streaming_configuration, Shapes::ShapeRef.new(shape: UpdateKinesisStreamingConfiguration, location_name: "UpdateKinesisStreamingConfiguration"))
     UpdateKinesisStreamingDestinationInput.struct_class = Types::UpdateKinesisStreamingDestinationInput
@@ -1948,7 +1948,7 @@ module Aws::DynamoDB
     UpdateReplicationGroupMemberAction.struct_class = Types::UpdateReplicationGroupMemberAction
 
     UpdateTableInput.add_member(:attribute_definitions, Shapes::ShapeRef.new(shape: AttributeDefinitions, location_name: "AttributeDefinitions"))
-    UpdateTableInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    UpdateTableInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     UpdateTableInput.add_member(:billing_mode, Shapes::ShapeRef.new(shape: BillingMode, location_name: "BillingMode"))
     UpdateTableInput.add_member(:provisioned_throughput, Shapes::ShapeRef.new(shape: ProvisionedThroughput, location_name: "ProvisionedThroughput"))
     UpdateTableInput.add_member(:global_secondary_index_updates, Shapes::ShapeRef.new(shape: GlobalSecondaryIndexUpdateList, location_name: "GlobalSecondaryIndexUpdates"))
@@ -1966,7 +1966,7 @@ module Aws::DynamoDB
     UpdateTableOutput.struct_class = Types::UpdateTableOutput
 
     UpdateTableReplicaAutoScalingInput.add_member(:global_secondary_index_updates, Shapes::ShapeRef.new(shape: GlobalSecondaryIndexAutoScalingUpdateList, location_name: "GlobalSecondaryIndexUpdates"))
-    UpdateTableReplicaAutoScalingInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    UpdateTableReplicaAutoScalingInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     UpdateTableReplicaAutoScalingInput.add_member(:provisioned_write_capacity_auto_scaling_update, Shapes::ShapeRef.new(shape: AutoScalingSettingsUpdate, location_name: "ProvisionedWriteCapacityAutoScalingUpdate"))
     UpdateTableReplicaAutoScalingInput.add_member(:replica_updates, Shapes::ShapeRef.new(shape: ReplicaAutoScalingUpdateList, location_name: "ReplicaUpdates"))
     UpdateTableReplicaAutoScalingInput.struct_class = Types::UpdateTableReplicaAutoScalingInput
@@ -1974,7 +1974,7 @@ module Aws::DynamoDB
     UpdateTableReplicaAutoScalingOutput.add_member(:table_auto_scaling_description, Shapes::ShapeRef.new(shape: TableAutoScalingDescription, location_name: "TableAutoScalingDescription"))
     UpdateTableReplicaAutoScalingOutput.struct_class = Types::UpdateTableReplicaAutoScalingOutput
 
-    UpdateTimeToLiveInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam"=>{"name"=>"ResourceArn"}}))
+    UpdateTimeToLiveInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     UpdateTimeToLiveInput.add_member(:time_to_live_specification, Shapes::ShapeRef.new(shape: TimeToLiveSpecification, required: true, location_name: "TimeToLiveSpecification"))
     UpdateTimeToLiveInput.struct_class = Types::UpdateTimeToLiveInput
 

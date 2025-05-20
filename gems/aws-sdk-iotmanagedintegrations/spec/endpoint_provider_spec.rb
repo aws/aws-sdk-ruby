@@ -16,11 +16,11 @@ module Aws::IoTManagedIntegrations
 
     context "For custom endpoint with region not set and fips disabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://example.com"}}
+        {"endpoint" => {"url" => "https://example.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:endpoint=>"https://example.com", :use_fips=>false})
+        params = EndpointParameters.new(**{endpoint: "https://example.com", use_fips: false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -30,11 +30,11 @@ module Aws::IoTManagedIntegrations
 
     context "For custom endpoint with fips enabled" do
       let(:expected) do
-        {"error"=>"Invalid Configuration: FIPS and custom endpoint are not supported"}
+        {"error" => "Invalid Configuration: FIPS and custom endpoint are not supported"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:endpoint=>"https://example.com", :use_fips=>true})
+        params = EndpointParameters.new(**{endpoint: "https://example.com", use_fips: true})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -43,11 +43,11 @@ module Aws::IoTManagedIntegrations
 
     context "For region us-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotmanagedintegrations-fips.us-east-1.api.aws"}}
+        {"endpoint" => {"url" => "https://api.iotmanagedintegrations-fips.us-east-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>true})
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -57,11 +57,11 @@ module Aws::IoTManagedIntegrations
 
     context "For region us-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotmanagedintegrations.us-east-1.api.aws"}}
+        {"endpoint" => {"url" => "https://api.iotmanagedintegrations.us-east-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false})
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -71,11 +71,11 @@ module Aws::IoTManagedIntegrations
 
     context "For region cn-northwest-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotmanagedintegrations-fips.cn-northwest-1.api.amazonwebservices.com.cn"}}
+        {"endpoint" => {"url" => "https://api.iotmanagedintegrations-fips.cn-northwest-1.api.amazonwebservices.com.cn"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"cn-northwest-1", :use_fips=>true})
+        params = EndpointParameters.new(**{region: "cn-northwest-1", use_fips: true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -85,11 +85,11 @@ module Aws::IoTManagedIntegrations
 
     context "For region cn-northwest-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotmanagedintegrations.cn-northwest-1.api.amazonwebservices.com.cn"}}
+        {"endpoint" => {"url" => "https://api.iotmanagedintegrations.cn-northwest-1.api.amazonwebservices.com.cn"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"cn-northwest-1", :use_fips=>false})
+        params = EndpointParameters.new(**{region: "cn-northwest-1", use_fips: false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -99,11 +99,11 @@ module Aws::IoTManagedIntegrations
 
     context "For region us-gov-west-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotmanagedintegrations-fips.us-gov-west-1.api.aws"}}
+        {"endpoint" => {"url" => "https://api.iotmanagedintegrations-fips.us-gov-west-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-gov-west-1", :use_fips=>true})
+        params = EndpointParameters.new(**{region: "us-gov-west-1", use_fips: true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -113,11 +113,11 @@ module Aws::IoTManagedIntegrations
 
     context "For region us-gov-west-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotmanagedintegrations.us-gov-west-1.api.aws"}}
+        {"endpoint" => {"url" => "https://api.iotmanagedintegrations.us-gov-west-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-gov-west-1", :use_fips=>false})
+        params = EndpointParameters.new(**{region: "us-gov-west-1", use_fips: false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -127,11 +127,11 @@ module Aws::IoTManagedIntegrations
 
     context "For region us-iso-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotmanagedintegrations-fips.us-iso-east-1.c2s.ic.gov"}}
+        {"endpoint" => {"url" => "https://api.iotmanagedintegrations-fips.us-iso-east-1.c2s.ic.gov"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-iso-east-1", :use_fips=>true})
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -141,11 +141,11 @@ module Aws::IoTManagedIntegrations
 
     context "For region us-iso-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotmanagedintegrations.us-iso-east-1.c2s.ic.gov"}}
+        {"endpoint" => {"url" => "https://api.iotmanagedintegrations.us-iso-east-1.c2s.ic.gov"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-iso-east-1", :use_fips=>false})
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -155,11 +155,11 @@ module Aws::IoTManagedIntegrations
 
     context "For region us-isob-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotmanagedintegrations-fips.us-isob-east-1.sc2s.sgov.gov"}}
+        {"endpoint" => {"url" => "https://api.iotmanagedintegrations-fips.us-isob-east-1.sc2s.sgov.gov"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-isob-east-1", :use_fips=>true})
+        params = EndpointParameters.new(**{region: "us-isob-east-1", use_fips: true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -169,11 +169,11 @@ module Aws::IoTManagedIntegrations
 
     context "For region us-isob-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotmanagedintegrations.us-isob-east-1.sc2s.sgov.gov"}}
+        {"endpoint" => {"url" => "https://api.iotmanagedintegrations.us-isob-east-1.sc2s.sgov.gov"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-isob-east-1", :use_fips=>false})
+        params = EndpointParameters.new(**{region: "us-isob-east-1", use_fips: false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -183,11 +183,11 @@ module Aws::IoTManagedIntegrations
 
     context "For region eu-isoe-west-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotmanagedintegrations-fips.eu-isoe-west-1.cloud.adc-e.uk"}}
+        {"endpoint" => {"url" => "https://api.iotmanagedintegrations-fips.eu-isoe-west-1.cloud.adc-e.uk"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"eu-isoe-west-1", :use_fips=>true})
+        params = EndpointParameters.new(**{region: "eu-isoe-west-1", use_fips: true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -197,11 +197,11 @@ module Aws::IoTManagedIntegrations
 
     context "For region eu-isoe-west-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotmanagedintegrations.eu-isoe-west-1.cloud.adc-e.uk"}}
+        {"endpoint" => {"url" => "https://api.iotmanagedintegrations.eu-isoe-west-1.cloud.adc-e.uk"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"eu-isoe-west-1", :use_fips=>false})
+        params = EndpointParameters.new(**{region: "eu-isoe-west-1", use_fips: false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -211,11 +211,11 @@ module Aws::IoTManagedIntegrations
 
     context "For region us-isof-south-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotmanagedintegrations-fips.us-isof-south-1.csp.hci.ic.gov"}}
+        {"endpoint" => {"url" => "https://api.iotmanagedintegrations-fips.us-isof-south-1.csp.hci.ic.gov"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-isof-south-1", :use_fips=>true})
+        params = EndpointParameters.new(**{region: "us-isof-south-1", use_fips: true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -225,11 +225,11 @@ module Aws::IoTManagedIntegrations
 
     context "For region us-isof-south-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://api.iotmanagedintegrations.us-isof-south-1.csp.hci.ic.gov"}}
+        {"endpoint" => {"url" => "https://api.iotmanagedintegrations.us-isof-south-1.csp.hci.ic.gov"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{:region=>"us-isof-south-1", :use_fips=>false})
+        params = EndpointParameters.new(**{region: "us-isof-south-1", use_fips: false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -239,7 +239,7 @@ module Aws::IoTManagedIntegrations
 
     context "Missing region" do
       let(:expected) do
-        {"error"=>"Invalid Configuration: Missing Region"}
+        {"error" => "Invalid Configuration: Missing Region"}
       end
 
       it 'produces the expected output from the EndpointProvider' do

@@ -344,7 +344,7 @@ module Aws::GlobalAccelerator
     CreateAcceleratorRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
     CreateAcceleratorRequest.add_member(:ip_addresses, Shapes::ShapeRef.new(shape: IpAddresses, location_name: "IpAddresses"))
     CreateAcceleratorRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: GenericBoolean, location_name: "Enabled"))
-    CreateAcceleratorRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    CreateAcceleratorRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     CreateAcceleratorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateAcceleratorRequest.struct_class = Types::CreateAcceleratorRequest
 
@@ -354,7 +354,7 @@ module Aws::GlobalAccelerator
     CreateCrossAccountAttachmentRequest.add_member(:name, Shapes::ShapeRef.new(shape: AttachmentName, required: true, location_name: "Name"))
     CreateCrossAccountAttachmentRequest.add_member(:principals, Shapes::ShapeRef.new(shape: Principals, location_name: "Principals"))
     CreateCrossAccountAttachmentRequest.add_member(:resources, Shapes::ShapeRef.new(shape: Resources, location_name: "Resources"))
-    CreateCrossAccountAttachmentRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    CreateCrossAccountAttachmentRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     CreateCrossAccountAttachmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateCrossAccountAttachmentRequest.struct_class = Types::CreateCrossAccountAttachmentRequest
 
@@ -365,7 +365,7 @@ module Aws::GlobalAccelerator
     CreateCustomRoutingAcceleratorRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
     CreateCustomRoutingAcceleratorRequest.add_member(:ip_addresses, Shapes::ShapeRef.new(shape: IpAddresses, location_name: "IpAddresses"))
     CreateCustomRoutingAcceleratorRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: GenericBoolean, location_name: "Enabled"))
-    CreateCustomRoutingAcceleratorRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    CreateCustomRoutingAcceleratorRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     CreateCustomRoutingAcceleratorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateCustomRoutingAcceleratorRequest.struct_class = Types::CreateCustomRoutingAcceleratorRequest
 
@@ -375,7 +375,7 @@ module Aws::GlobalAccelerator
     CreateCustomRoutingEndpointGroupRequest.add_member(:listener_arn, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "ListenerArn"))
     CreateCustomRoutingEndpointGroupRequest.add_member(:endpoint_group_region, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "EndpointGroupRegion"))
     CreateCustomRoutingEndpointGroupRequest.add_member(:destination_configurations, Shapes::ShapeRef.new(shape: CustomRoutingDestinationConfigurations, required: true, location_name: "DestinationConfigurations"))
-    CreateCustomRoutingEndpointGroupRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    CreateCustomRoutingEndpointGroupRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     CreateCustomRoutingEndpointGroupRequest.struct_class = Types::CreateCustomRoutingEndpointGroupRequest
 
     CreateCustomRoutingEndpointGroupResponse.add_member(:endpoint_group, Shapes::ShapeRef.new(shape: CustomRoutingEndpointGroup, location_name: "EndpointGroup"))
@@ -383,7 +383,7 @@ module Aws::GlobalAccelerator
 
     CreateCustomRoutingListenerRequest.add_member(:accelerator_arn, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "AcceleratorArn"))
     CreateCustomRoutingListenerRequest.add_member(:port_ranges, Shapes::ShapeRef.new(shape: PortRanges, required: true, location_name: "PortRanges"))
-    CreateCustomRoutingListenerRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    CreateCustomRoutingListenerRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     CreateCustomRoutingListenerRequest.struct_class = Types::CreateCustomRoutingListenerRequest
 
     CreateCustomRoutingListenerResponse.add_member(:listener, Shapes::ShapeRef.new(shape: CustomRoutingListener, location_name: "Listener"))
@@ -398,7 +398,7 @@ module Aws::GlobalAccelerator
     CreateEndpointGroupRequest.add_member(:health_check_path, Shapes::ShapeRef.new(shape: HealthCheckPath, location_name: "HealthCheckPath"))
     CreateEndpointGroupRequest.add_member(:health_check_interval_seconds, Shapes::ShapeRef.new(shape: HealthCheckIntervalSeconds, location_name: "HealthCheckIntervalSeconds"))
     CreateEndpointGroupRequest.add_member(:threshold_count, Shapes::ShapeRef.new(shape: ThresholdCount, location_name: "ThresholdCount"))
-    CreateEndpointGroupRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    CreateEndpointGroupRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     CreateEndpointGroupRequest.add_member(:port_overrides, Shapes::ShapeRef.new(shape: PortOverrides, location_name: "PortOverrides"))
     CreateEndpointGroupRequest.struct_class = Types::CreateEndpointGroupRequest
 
@@ -409,7 +409,7 @@ module Aws::GlobalAccelerator
     CreateListenerRequest.add_member(:port_ranges, Shapes::ShapeRef.new(shape: PortRanges, required: true, location_name: "PortRanges"))
     CreateListenerRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, required: true, location_name: "Protocol"))
     CreateListenerRequest.add_member(:client_affinity, Shapes::ShapeRef.new(shape: ClientAffinity, location_name: "ClientAffinity"))
-    CreateListenerRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
+    CreateListenerRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     CreateListenerRequest.struct_class = Types::CreateListenerRequest
 
     CreateListenerResponse.add_member(:listener, Shapes::ShapeRef.new(shape: Listener, location_name: "Listener"))
@@ -653,7 +653,7 @@ module Aws::GlobalAccelerator
 
     IpAddresses.member = Shapes::ShapeRef.new(shape: IpAddress)
 
-    IpSet.add_member(:ip_family, Shapes::ShapeRef.new(shape: GenericString, deprecated: true, location_name: "IpFamily", metadata: {"deprecatedMessage"=>"IpFamily has been replaced by IpAddressFamily"}))
+    IpSet.add_member(:ip_family, Shapes::ShapeRef.new(shape: GenericString, deprecated: true, location_name: "IpFamily", metadata: {"deprecatedMessage" => "IpFamily has been replaced by IpAddressFamily"}))
     IpSet.add_member(:ip_addresses, Shapes::ShapeRef.new(shape: IpAddresses, location_name: "IpAddresses"))
     IpSet.add_member(:ip_address_family, Shapes::ShapeRef.new(shape: IpAddressFamily, location_name: "IpAddressFamily"))
     IpSet.struct_class = Types::IpSet

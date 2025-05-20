@@ -75,7 +75,7 @@ module Aws::Route53RecoveryCluster
 
     ListRoutingControlsRequest.add_member(:control_panel_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ControlPanelArn"))
     ListRoutingControlsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "NextToken"))
-    ListRoutingControlsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListRoutingControlsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     ListRoutingControlsRequest.struct_class = Types::ListRoutingControlsRequest
 
     ListRoutingControlsResponse.add_member(:routing_controls, Shapes::ShapeRef.new(shape: RoutingControls, required: true, location_name: "RoutingControls"))

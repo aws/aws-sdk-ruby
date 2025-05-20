@@ -567,7 +567,7 @@ module Aws::Rekognition
     AssociateFacesRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location_name: "UserId"))
     AssociateFacesRequest.add_member(:face_ids, Shapes::ShapeRef.new(shape: UserFaceIdList, required: true, location_name: "FaceIds"))
     AssociateFacesRequest.add_member(:user_match_threshold, Shapes::ShapeRef.new(shape: Percent, location_name: "UserMatchThreshold"))
-    AssociateFacesRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    AssociateFacesRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     AssociateFacesRequest.struct_class = Types::AssociateFacesRequest
 
     AssociateFacesResponse.add_member(:associated_faces, Shapes::ShapeRef.new(shape: AssociatedFacesList, location_name: "AssociatedFaces"))
@@ -792,7 +792,7 @@ module Aws::Rekognition
 
     CreateUserRequest.add_member(:collection_id, Shapes::ShapeRef.new(shape: CollectionId, required: true, location_name: "CollectionId"))
     CreateUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location_name: "UserId"))
-    CreateUserRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateUserRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateUserRequest.struct_class = Types::CreateUserRequest
 
     CreateUserResponse.struct_class = Types::CreateUserResponse
@@ -902,7 +902,7 @@ module Aws::Rekognition
 
     DeleteUserRequest.add_member(:collection_id, Shapes::ShapeRef.new(shape: CollectionId, required: true, location_name: "CollectionId"))
     DeleteUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location_name: "UserId"))
-    DeleteUserRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DeleteUserRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     DeleteUserRequest.struct_class = Types::DeleteUserRequest
 
     DeleteUserResponse.struct_class = Types::DeleteUserResponse
@@ -1061,7 +1061,7 @@ module Aws::Rekognition
 
     DisassociateFacesRequest.add_member(:collection_id, Shapes::ShapeRef.new(shape: CollectionId, required: true, location_name: "CollectionId"))
     DisassociateFacesRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location_name: "UserId"))
-    DisassociateFacesRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DisassociateFacesRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     DisassociateFacesRequest.add_member(:face_ids, Shapes::ShapeRef.new(shape: UserFaceIdList, required: true, location_name: "FaceIds"))
     DisassociateFacesRequest.struct_class = Types::DisassociateFacesRequest
 
@@ -1387,7 +1387,7 @@ module Aws::Rekognition
 
     HumanLoopActivationOutput.add_member(:human_loop_arn, Shapes::ShapeRef.new(shape: HumanLoopArn, location_name: "HumanLoopArn"))
     HumanLoopActivationOutput.add_member(:human_loop_activation_reasons, Shapes::ShapeRef.new(shape: HumanLoopActivationReasons, location_name: "HumanLoopActivationReasons"))
-    HumanLoopActivationOutput.add_member(:human_loop_activation_conditions_evaluation_results, Shapes::ShapeRef.new(shape: HumanLoopActivationConditionsEvaluationResults, location_name: "HumanLoopActivationConditionsEvaluationResults", metadata: {"jsonvalue"=>true}))
+    HumanLoopActivationOutput.add_member(:human_loop_activation_conditions_evaluation_results, Shapes::ShapeRef.new(shape: HumanLoopActivationConditionsEvaluationResults, location_name: "HumanLoopActivationConditionsEvaluationResults", metadata: {"jsonvalue" => true}))
     HumanLoopActivationOutput.struct_class = Types::HumanLoopActivationOutput
 
     HumanLoopActivationReasons.member = Shapes::ShapeRef.new(shape: HumanLoopActivationReason)
@@ -1965,7 +1965,7 @@ module Aws::Rekognition
     StartLabelDetectionResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
     StartLabelDetectionResponse.struct_class = Types::StartLabelDetectionResponse
 
-    StartMediaAnalysisJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    StartMediaAnalysisJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     StartMediaAnalysisJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: MediaAnalysisJobName, location_name: "JobName"))
     StartMediaAnalysisJobRequest.add_member(:operations_config, Shapes::ShapeRef.new(shape: MediaAnalysisOperationsConfig, required: true, location_name: "OperationsConfig"))
     StartMediaAnalysisJobRequest.add_member(:input, Shapes::ShapeRef.new(shape: MediaAnalysisInput, required: true, location_name: "Input"))

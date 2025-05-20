@@ -61,12 +61,26 @@ module Aws::SupplyChain
       attr_accessor name: ::String
       attr_accessor schema: Types::DataLakeDatasetSchema
       attr_accessor description: ::String
+      attr_accessor partition_spec: Types::DataLakeDatasetPartitionSpec
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
     class CreateDataLakeDatasetResponse
       attr_accessor dataset: Types::DataLakeDataset
+      SENSITIVE: []
+    end
+
+    class CreateDataLakeNamespaceRequest
+      attr_accessor instance_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateDataLakeNamespaceResponse
+      attr_accessor namespace: Types::DataLakeNamespace
       SENSITIVE: []
     end
 
@@ -85,6 +99,35 @@ module Aws::SupplyChain
       SENSITIVE: []
     end
 
+    class DataIntegrationEvent
+      attr_accessor instance_id: ::String
+      attr_accessor event_id: ::String
+      attr_accessor event_type: ("scn.data.forecast" | "scn.data.inventorylevel" | "scn.data.inboundorder" | "scn.data.inboundorderline" | "scn.data.inboundorderlineschedule" | "scn.data.outboundorderline" | "scn.data.outboundshipment" | "scn.data.processheader" | "scn.data.processoperation" | "scn.data.processproduct" | "scn.data.reservation" | "scn.data.shipment" | "scn.data.shipmentstop" | "scn.data.shipmentstoporder" | "scn.data.supplyplan" | "scn.data.dataset")
+      attr_accessor event_group_id: ::String
+      attr_accessor event_timestamp: ::Time
+      attr_accessor dataset_target_details: Types::DataIntegrationEventDatasetTargetDetails
+      SENSITIVE: []
+    end
+
+    class DataIntegrationEventDatasetLoadExecutionDetails
+      attr_accessor status: ("SUCCEEDED" | "IN_PROGRESS" | "FAILED")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DataIntegrationEventDatasetTargetConfiguration
+      attr_accessor dataset_identifier: ::String
+      attr_accessor operation_type: ("APPEND" | "UPSERT" | "DELETE")
+      SENSITIVE: []
+    end
+
+    class DataIntegrationEventDatasetTargetDetails
+      attr_accessor dataset_identifier: ::String
+      attr_accessor operation_type: ("APPEND" | "UPSERT" | "DELETE")
+      attr_accessor dataset_load_execution: Types::DataIntegrationEventDatasetLoadExecutionDetails
+      SENSITIVE: []
+    end
+
     class DataIntegrationFlow
       attr_accessor instance_id: ::String
       attr_accessor name: ::String
@@ -99,6 +142,12 @@ module Aws::SupplyChain
     class DataIntegrationFlowDatasetOptions
       attr_accessor load_type: ("INCREMENTAL" | "REPLACE")
       attr_accessor dedupe_records: bool
+      attr_accessor dedupe_strategy: Types::DataIntegrationFlowDedupeStrategy
+      SENSITIVE: []
+    end
+
+    class DataIntegrationFlowDatasetSource
+      attr_accessor dataset_identifier: ::String
       SENSITIVE: []
     end
 
@@ -114,8 +163,56 @@ module Aws::SupplyChain
       SENSITIVE: []
     end
 
+    class DataIntegrationFlowDedupeStrategy
+      attr_accessor type: ("FIELD_PRIORITY")
+      attr_accessor field_priority: Types::DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration
+      SENSITIVE: []
+    end
+
+    class DataIntegrationFlowExecution
+      attr_accessor instance_id: ::String
+      attr_accessor flow_name: ::String
+      attr_accessor execution_id: ::String
+      attr_accessor status: ("SUCCEEDED" | "IN_PROGRESS" | "FAILED")
+      attr_accessor source_info: Types::DataIntegrationFlowExecutionSourceInfo
+      attr_accessor message: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor output_metadata: Types::DataIntegrationFlowExecutionOutputMetadata
+      SENSITIVE: []
+    end
+
+    class DataIntegrationFlowExecutionOutputMetadata
+      attr_accessor diagnostic_reports_root_s3uri: ::String
+      SENSITIVE: []
+    end
+
+    class DataIntegrationFlowExecutionSourceInfo
+      attr_accessor source_type: ("S3" | "DATASET")
+      attr_accessor s3_source: Types::DataIntegrationFlowS3Source
+      attr_accessor dataset_source: Types::DataIntegrationFlowDatasetSource
+      SENSITIVE: []
+    end
+
+    class DataIntegrationFlowFieldPriorityDedupeField
+      attr_accessor name: ::String
+      attr_accessor sort_order: ("ASC" | "DESC")
+      SENSITIVE: []
+    end
+
+    class DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration
+      attr_accessor fields: ::Array[Types::DataIntegrationFlowFieldPriorityDedupeField]
+      SENSITIVE: []
+    end
+
     class DataIntegrationFlowS3Options
       attr_accessor file_type: ("CSV" | "PARQUET" | "JSON")
+      SENSITIVE: []
+    end
+
+    class DataIntegrationFlowS3Source
+      attr_accessor bucket_name: ::String
+      attr_accessor key: ::String
       SENSITIVE: []
     end
 
@@ -135,7 +232,7 @@ module Aws::SupplyChain
 
     class DataIntegrationFlowSQLTransformationConfiguration
       attr_accessor query: ::String
-      SENSITIVE: []
+      SENSITIVE: [:query]
     end
 
     class DataIntegrationFlowSource
@@ -166,21 +263,54 @@ module Aws::SupplyChain
       attr_accessor arn: ::String
       attr_accessor schema: Types::DataLakeDatasetSchema
       attr_accessor description: ::String
+      attr_accessor partition_spec: Types::DataLakeDatasetPartitionSpec
       attr_accessor created_time: ::Time
       attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DataLakeDatasetPartitionField
+      attr_accessor name: ::String
+      attr_accessor transform: Types::DataLakeDatasetPartitionFieldTransform
+      SENSITIVE: []
+    end
+
+    class DataLakeDatasetPartitionFieldTransform
+      attr_accessor type: ("YEAR" | "MONTH" | "DAY" | "HOUR" | "IDENTITY")
+      SENSITIVE: []
+    end
+
+    class DataLakeDatasetPartitionSpec
+      attr_accessor fields: ::Array[Types::DataLakeDatasetPartitionField]
+      SENSITIVE: []
+    end
+
+    class DataLakeDatasetPrimaryKeyField
+      attr_accessor name: ::String
       SENSITIVE: []
     end
 
     class DataLakeDatasetSchema
       attr_accessor name: ::String
       attr_accessor fields: ::Array[Types::DataLakeDatasetSchemaField]
+      attr_accessor primary_keys: ::Array[Types::DataLakeDatasetPrimaryKeyField]
       SENSITIVE: []
     end
 
     class DataLakeDatasetSchemaField
       attr_accessor name: ::String
-      attr_accessor type: ("INT" | "DOUBLE" | "STRING" | "TIMESTAMP")
+      attr_accessor type: ("INT" | "DOUBLE" | "STRING" | "TIMESTAMP" | "LONG")
       attr_accessor is_required: bool
+      SENSITIVE: []
+    end
+
+    class DataLakeNamespace
+      attr_accessor instance_id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor last_modified_time: ::Time
       SENSITIVE: []
     end
 
@@ -210,6 +340,18 @@ module Aws::SupplyChain
       SENSITIVE: []
     end
 
+    class DeleteDataLakeNamespaceRequest
+      attr_accessor instance_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDataLakeNamespaceResponse
+      attr_accessor instance_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
     class DeleteInstanceRequest
       attr_accessor instance_id: ::String
       SENSITIVE: []
@@ -228,6 +370,29 @@ module Aws::SupplyChain
 
     class GetBillOfMaterialsImportJobResponse
       attr_accessor job: Types::BillOfMaterialsImportJob
+      SENSITIVE: []
+    end
+
+    class GetDataIntegrationEventRequest
+      attr_accessor instance_id: ::String
+      attr_accessor event_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataIntegrationEventResponse
+      attr_accessor event: Types::DataIntegrationEvent
+      SENSITIVE: []
+    end
+
+    class GetDataIntegrationFlowExecutionRequest
+      attr_accessor instance_id: ::String
+      attr_accessor flow_name: ::String
+      attr_accessor execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataIntegrationFlowExecutionResponse
+      attr_accessor flow_execution: Types::DataIntegrationFlowExecution
       SENSITIVE: []
     end
 
@@ -251,6 +416,17 @@ module Aws::SupplyChain
 
     class GetDataLakeDatasetResponse
       attr_accessor dataset: Types::DataLakeDataset
+      SENSITIVE: []
+    end
+
+    class GetDataLakeNamespaceRequest
+      attr_accessor instance_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataLakeNamespaceResponse
+      attr_accessor namespace: Types::DataLakeNamespace
       SENSITIVE: []
     end
 
@@ -284,6 +460,34 @@ module Aws::SupplyChain
       SENSITIVE: []
     end
 
+    class ListDataIntegrationEventsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor event_type: ("scn.data.forecast" | "scn.data.inventorylevel" | "scn.data.inboundorder" | "scn.data.inboundorderline" | "scn.data.inboundorderlineschedule" | "scn.data.outboundorderline" | "scn.data.outboundshipment" | "scn.data.processheader" | "scn.data.processoperation" | "scn.data.processproduct" | "scn.data.reservation" | "scn.data.shipment" | "scn.data.shipmentstop" | "scn.data.shipmentstoporder" | "scn.data.supplyplan" | "scn.data.dataset")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDataIntegrationEventsResponse
+      attr_accessor events: ::Array[Types::DataIntegrationEvent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataIntegrationFlowExecutionsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor flow_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDataIntegrationFlowExecutionsResponse
+      attr_accessor flow_executions: ::Array[Types::DataIntegrationFlowExecution]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListDataIntegrationFlowsRequest
       attr_accessor instance_id: ::String
       attr_accessor next_token: ::String
@@ -307,6 +511,19 @@ module Aws::SupplyChain
 
     class ListDataLakeDatasetsResponse
       attr_accessor datasets: ::Array[Types::DataLakeDataset]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataLakeNamespacesRequest
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDataLakeNamespacesResponse
+      attr_accessor namespaces: ::Array[Types::DataLakeNamespace]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -342,11 +559,12 @@ module Aws::SupplyChain
 
     class SendDataIntegrationEventRequest
       attr_accessor instance_id: ::String
-      attr_accessor event_type: ("scn.data.forecast" | "scn.data.inventorylevel" | "scn.data.inboundorder" | "scn.data.inboundorderline" | "scn.data.inboundorderlineschedule" | "scn.data.outboundorderline" | "scn.data.outboundshipment" | "scn.data.processheader" | "scn.data.processoperation" | "scn.data.processproduct" | "scn.data.reservation" | "scn.data.shipment" | "scn.data.shipmentstop" | "scn.data.shipmentstoporder" | "scn.data.supplyplan")
+      attr_accessor event_type: ("scn.data.forecast" | "scn.data.inventorylevel" | "scn.data.inboundorder" | "scn.data.inboundorderline" | "scn.data.inboundorderlineschedule" | "scn.data.outboundorderline" | "scn.data.outboundshipment" | "scn.data.processheader" | "scn.data.processoperation" | "scn.data.processproduct" | "scn.data.reservation" | "scn.data.shipment" | "scn.data.shipmentstop" | "scn.data.shipmentstoporder" | "scn.data.supplyplan" | "scn.data.dataset")
       attr_accessor data: ::String
       attr_accessor event_group_id: ::String
       attr_accessor event_timestamp: ::Time
       attr_accessor client_token: ::String
+      attr_accessor dataset_target: Types::DataIntegrationEventDatasetTargetConfiguration
       SENSITIVE: [:data]
     end
 
@@ -407,6 +625,18 @@ module Aws::SupplyChain
 
     class UpdateDataLakeDatasetResponse
       attr_accessor dataset: Types::DataLakeDataset
+      SENSITIVE: []
+    end
+
+    class UpdateDataLakeNamespaceRequest
+      attr_accessor instance_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDataLakeNamespaceResponse
+      attr_accessor namespace: Types::DataLakeNamespace
       SENSITIVE: []
     end
 

@@ -507,7 +507,7 @@ module Aws::Imagebuilder
     CallRateLimitExceededException.struct_class = Types::CallRateLimitExceededException
 
     CancelImageCreationRequest.add_member(:image_build_version_arn, Shapes::ShapeRef.new(shape: ImageBuildVersionArn, required: true, location_name: "imageBuildVersionArn"))
-    CancelImageCreationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CancelImageCreationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CancelImageCreationRequest.struct_class = Types::CancelImageCreationRequest
 
     CancelImageCreationResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
@@ -516,7 +516,7 @@ module Aws::Imagebuilder
     CancelImageCreationResponse.struct_class = Types::CancelImageCreationResponse
 
     CancelLifecycleExecutionRequest.add_member(:lifecycle_execution_id, Shapes::ShapeRef.new(shape: LifecycleExecutionId, required: true, location_name: "lifecycleExecutionId"))
-    CancelLifecycleExecutionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CancelLifecycleExecutionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CancelLifecycleExecutionRequest.struct_class = Types::CancelLifecycleExecutionRequest
 
     CancelLifecycleExecutionResponse.add_member(:lifecycle_execution_id, Shapes::ShapeRef.new(shape: LifecycleExecutionId, location_name: "lifecycleExecutionId"))
@@ -657,7 +657,7 @@ module Aws::Imagebuilder
     CreateComponentRequest.add_member(:uri, Shapes::ShapeRef.new(shape: Uri, location_name: "uri"))
     CreateComponentRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "kmsKeyId"))
     CreateComponentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateComponentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateComponentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateComponentRequest.struct_class = Types::CreateComponentRequest
 
     CreateComponentResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
@@ -680,7 +680,7 @@ module Aws::Imagebuilder
     CreateContainerRecipeRequest.add_member(:working_directory, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "workingDirectory"))
     CreateContainerRecipeRequest.add_member(:target_repository, Shapes::ShapeRef.new(shape: TargetContainerRepository, required: true, location_name: "targetRepository"))
     CreateContainerRecipeRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "kmsKeyId"))
-    CreateContainerRecipeRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateContainerRecipeRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateContainerRecipeRequest.struct_class = Types::CreateContainerRecipeRequest
 
     CreateContainerRecipeResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
@@ -692,7 +692,7 @@ module Aws::Imagebuilder
     CreateDistributionConfigurationRequest.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
     CreateDistributionConfigurationRequest.add_member(:distributions, Shapes::ShapeRef.new(shape: DistributionList, required: true, location_name: "distributions"))
     CreateDistributionConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateDistributionConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDistributionConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateDistributionConfigurationRequest.struct_class = Types::CreateDistributionConfigurationRequest
 
     CreateDistributionConfigurationResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
@@ -711,7 +711,7 @@ module Aws::Imagebuilder
     CreateImagePipelineRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: Schedule, location_name: "schedule"))
     CreateImagePipelineRequest.add_member(:status, Shapes::ShapeRef.new(shape: PipelineStatus, location_name: "status"))
     CreateImagePipelineRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateImagePipelineRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateImagePipelineRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateImagePipelineRequest.add_member(:image_scanning_configuration, Shapes::ShapeRef.new(shape: ImageScanningConfiguration, location_name: "imageScanningConfiguration"))
     CreateImagePipelineRequest.add_member(:workflows, Shapes::ShapeRef.new(shape: WorkflowConfigurationList, location_name: "workflows"))
     CreateImagePipelineRequest.add_member(:execution_role, Shapes::ShapeRef.new(shape: RoleNameOrArn, location_name: "executionRole"))
@@ -731,7 +731,7 @@ module Aws::Imagebuilder
     CreateImageRecipeRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateImageRecipeRequest.add_member(:working_directory, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "workingDirectory"))
     CreateImageRecipeRequest.add_member(:additional_instance_configuration, Shapes::ShapeRef.new(shape: AdditionalInstanceConfiguration, location_name: "additionalInstanceConfiguration"))
-    CreateImageRecipeRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateImageRecipeRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateImageRecipeRequest.struct_class = Types::CreateImageRecipeRequest
 
     CreateImageRecipeResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
@@ -746,7 +746,7 @@ module Aws::Imagebuilder
     CreateImageRequest.add_member(:image_tests_configuration, Shapes::ShapeRef.new(shape: ImageTestsConfiguration, location_name: "imageTestsConfiguration"))
     CreateImageRequest.add_member(:enhanced_image_metadata_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "enhancedImageMetadataEnabled"))
     CreateImageRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateImageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateImageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateImageRequest.add_member(:image_scanning_configuration, Shapes::ShapeRef.new(shape: ImageScanningConfiguration, location_name: "imageScanningConfiguration"))
     CreateImageRequest.add_member(:workflows, Shapes::ShapeRef.new(shape: WorkflowConfigurationList, location_name: "workflows"))
     CreateImageRequest.add_member(:execution_role, Shapes::ShapeRef.new(shape: RoleNameOrArn, location_name: "executionRole"))
@@ -771,7 +771,7 @@ module Aws::Imagebuilder
     CreateInfrastructureConfigurationRequest.add_member(:instance_metadata_options, Shapes::ShapeRef.new(shape: InstanceMetadataOptions, location_name: "instanceMetadataOptions"))
     CreateInfrastructureConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateInfrastructureConfigurationRequest.add_member(:placement, Shapes::ShapeRef.new(shape: Placement, location_name: "placement"))
-    CreateInfrastructureConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateInfrastructureConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateInfrastructureConfigurationRequest.struct_class = Types::CreateInfrastructureConfigurationRequest
 
     CreateInfrastructureConfigurationResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
@@ -787,7 +787,7 @@ module Aws::Imagebuilder
     CreateLifecyclePolicyRequest.add_member(:policy_details, Shapes::ShapeRef.new(shape: LifecyclePolicyDetails, required: true, location_name: "policyDetails"))
     CreateLifecyclePolicyRequest.add_member(:resource_selection, Shapes::ShapeRef.new(shape: LifecyclePolicyResourceSelection, required: true, location_name: "resourceSelection"))
     CreateLifecyclePolicyRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateLifecyclePolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateLifecyclePolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateLifecyclePolicyRequest.struct_class = Types::CreateLifecyclePolicyRequest
 
     CreateLifecyclePolicyResponse.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
@@ -802,7 +802,7 @@ module Aws::Imagebuilder
     CreateWorkflowRequest.add_member(:uri, Shapes::ShapeRef.new(shape: Uri, location_name: "uri"))
     CreateWorkflowRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "kmsKeyId"))
     CreateWorkflowRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateWorkflowRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateWorkflowRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateWorkflowRequest.add_member(:type, Shapes::ShapeRef.new(shape: WorkflowType, required: true, location_name: "type"))
     CreateWorkflowRequest.struct_class = Types::CreateWorkflowRequest
 
@@ -1304,7 +1304,7 @@ module Aws::Imagebuilder
     ImportComponentRequest.add_member(:uri, Shapes::ShapeRef.new(shape: Uri, location_name: "uri"))
     ImportComponentRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "kmsKeyId"))
     ImportComponentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    ImportComponentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    ImportComponentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     ImportComponentRequest.struct_class = Types::ImportComponentRequest
 
     ImportComponentResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
@@ -1321,7 +1321,7 @@ module Aws::Imagebuilder
     ImportDiskImageRequest.add_member(:infrastructure_configuration_arn, Shapes::ShapeRef.new(shape: InfrastructureConfigurationArn, required: true, location_name: "infrastructureConfigurationArn"))
     ImportDiskImageRequest.add_member(:uri, Shapes::ShapeRef.new(shape: Uri, required: true, location_name: "uri"))
     ImportDiskImageRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    ImportDiskImageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    ImportDiskImageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     ImportDiskImageRequest.struct_class = Types::ImportDiskImageRequest
 
     ImportDiskImageResponse.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
@@ -1335,7 +1335,7 @@ module Aws::Imagebuilder
     ImportVmImageRequest.add_member(:os_version, Shapes::ShapeRef.new(shape: OsVersion, location_name: "osVersion"))
     ImportVmImageRequest.add_member(:vm_import_task_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "vmImportTaskId"))
     ImportVmImageRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    ImportVmImageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    ImportVmImageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     ImportVmImageRequest.struct_class = Types::ImportVmImageRequest
 
     ImportVmImageResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
@@ -1550,7 +1550,7 @@ module Aws::Imagebuilder
     LifecyclePolicySummaryList.member = Shapes::ShapeRef.new(shape: LifecyclePolicySummary)
 
     ListComponentBuildVersionsRequest.add_member(:component_version_arn, Shapes::ShapeRef.new(shape: ComponentVersionArn, required: true, location_name: "componentVersionArn"))
-    ListComponentBuildVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListComponentBuildVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box" => true}))
     ListComponentBuildVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListComponentBuildVersionsRequest.struct_class = Types::ListComponentBuildVersionsRequest
 
@@ -1562,7 +1562,7 @@ module Aws::Imagebuilder
     ListComponentsRequest.add_member(:owner, Shapes::ShapeRef.new(shape: Ownership, location_name: "owner"))
     ListComponentsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
     ListComponentsRequest.add_member(:by_name, Shapes::ShapeRef.new(shape: Boolean, location_name: "byName"))
-    ListComponentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListComponentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box" => true}))
     ListComponentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListComponentsRequest.struct_class = Types::ListComponentsRequest
 
@@ -1573,7 +1573,7 @@ module Aws::Imagebuilder
 
     ListContainerRecipesRequest.add_member(:owner, Shapes::ShapeRef.new(shape: Ownership, location_name: "owner"))
     ListContainerRecipesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
-    ListContainerRecipesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListContainerRecipesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box" => true}))
     ListContainerRecipesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "nextToken"))
     ListContainerRecipesRequest.struct_class = Types::ListContainerRecipesRequest
 
@@ -1583,7 +1583,7 @@ module Aws::Imagebuilder
     ListContainerRecipesResponse.struct_class = Types::ListContainerRecipesResponse
 
     ListDistributionConfigurationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
-    ListDistributionConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListDistributionConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box" => true}))
     ListDistributionConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListDistributionConfigurationsRequest.struct_class = Types::ListDistributionConfigurationsRequest
 
@@ -1594,7 +1594,7 @@ module Aws::Imagebuilder
 
     ListImageBuildVersionsRequest.add_member(:image_version_arn, Shapes::ShapeRef.new(shape: ImageVersionArn, required: true, location_name: "imageVersionArn"))
     ListImageBuildVersionsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
-    ListImageBuildVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListImageBuildVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box" => true}))
     ListImageBuildVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListImageBuildVersionsRequest.struct_class = Types::ListImageBuildVersionsRequest
 
@@ -1604,7 +1604,7 @@ module Aws::Imagebuilder
     ListImageBuildVersionsResponse.struct_class = Types::ListImageBuildVersionsResponse
 
     ListImagePackagesRequest.add_member(:image_build_version_arn, Shapes::ShapeRef.new(shape: ImageBuildVersionArn, required: true, location_name: "imageBuildVersionArn"))
-    ListImagePackagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListImagePackagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box" => true}))
     ListImagePackagesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListImagePackagesRequest.struct_class = Types::ListImagePackagesRequest
 
@@ -1615,7 +1615,7 @@ module Aws::Imagebuilder
 
     ListImagePipelineImagesRequest.add_member(:image_pipeline_arn, Shapes::ShapeRef.new(shape: ImagePipelineArn, required: true, location_name: "imagePipelineArn"))
     ListImagePipelineImagesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
-    ListImagePipelineImagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListImagePipelineImagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box" => true}))
     ListImagePipelineImagesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListImagePipelineImagesRequest.struct_class = Types::ListImagePipelineImagesRequest
 
@@ -1625,7 +1625,7 @@ module Aws::Imagebuilder
     ListImagePipelineImagesResponse.struct_class = Types::ListImagePipelineImagesResponse
 
     ListImagePipelinesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
-    ListImagePipelinesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListImagePipelinesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box" => true}))
     ListImagePipelinesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListImagePipelinesRequest.struct_class = Types::ListImagePipelinesRequest
 
@@ -1636,7 +1636,7 @@ module Aws::Imagebuilder
 
     ListImageRecipesRequest.add_member(:owner, Shapes::ShapeRef.new(shape: Ownership, location_name: "owner"))
     ListImageRecipesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
-    ListImageRecipesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListImageRecipesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box" => true}))
     ListImageRecipesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListImageRecipesRequest.struct_class = Types::ListImageRecipesRequest
 
@@ -1656,7 +1656,7 @@ module Aws::Imagebuilder
     ListImageScanFindingAggregationsResponse.struct_class = Types::ListImageScanFindingAggregationsResponse
 
     ListImageScanFindingsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ImageScanFindingsFilterList, location_name: "filters"))
-    ListImageScanFindingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListImageScanFindingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box" => true}))
     ListImageScanFindingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListImageScanFindingsRequest.struct_class = Types::ListImageScanFindingsRequest
 
@@ -1668,7 +1668,7 @@ module Aws::Imagebuilder
     ListImagesRequest.add_member(:owner, Shapes::ShapeRef.new(shape: Ownership, location_name: "owner"))
     ListImagesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
     ListImagesRequest.add_member(:by_name, Shapes::ShapeRef.new(shape: Boolean, location_name: "byName"))
-    ListImagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListImagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box" => true}))
     ListImagesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListImagesRequest.add_member(:include_deprecated, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "includeDeprecated"))
     ListImagesRequest.struct_class = Types::ListImagesRequest
@@ -1679,7 +1679,7 @@ module Aws::Imagebuilder
     ListImagesResponse.struct_class = Types::ListImagesResponse
 
     ListInfrastructureConfigurationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
-    ListInfrastructureConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListInfrastructureConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box" => true}))
     ListInfrastructureConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListInfrastructureConfigurationsRequest.struct_class = Types::ListInfrastructureConfigurationsRequest
 
@@ -1690,7 +1690,7 @@ module Aws::Imagebuilder
 
     ListLifecycleExecutionResourcesRequest.add_member(:lifecycle_execution_id, Shapes::ShapeRef.new(shape: LifecycleExecutionId, required: true, location_name: "lifecycleExecutionId"))
     ListLifecycleExecutionResourcesRequest.add_member(:parent_resource_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "parentResourceId"))
-    ListLifecycleExecutionResourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListLifecycleExecutionResourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box" => true}))
     ListLifecycleExecutionResourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListLifecycleExecutionResourcesRequest.struct_class = Types::ListLifecycleExecutionResourcesRequest
 
@@ -1700,7 +1700,7 @@ module Aws::Imagebuilder
     ListLifecycleExecutionResourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListLifecycleExecutionResourcesResponse.struct_class = Types::ListLifecycleExecutionResourcesResponse
 
-    ListLifecycleExecutionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListLifecycleExecutionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box" => true}))
     ListLifecycleExecutionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListLifecycleExecutionsRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ImageBuilderArn, required: true, location_name: "resourceArn"))
     ListLifecycleExecutionsRequest.struct_class = Types::ListLifecycleExecutionsRequest
@@ -1710,7 +1710,7 @@ module Aws::Imagebuilder
     ListLifecycleExecutionsResponse.struct_class = Types::ListLifecycleExecutionsResponse
 
     ListLifecyclePoliciesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
-    ListLifecyclePoliciesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListLifecyclePoliciesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box" => true}))
     ListLifecyclePoliciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListLifecyclePoliciesRequest.struct_class = Types::ListLifecyclePoliciesRequest
 
@@ -1724,7 +1724,7 @@ module Aws::Imagebuilder
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
-    ListWaitingWorkflowStepsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListWaitingWorkflowStepsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box" => true}))
     ListWaitingWorkflowStepsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListWaitingWorkflowStepsRequest.struct_class = Types::ListWaitingWorkflowStepsRequest
 
@@ -1733,7 +1733,7 @@ module Aws::Imagebuilder
     ListWaitingWorkflowStepsResponse.struct_class = Types::ListWaitingWorkflowStepsResponse
 
     ListWorkflowBuildVersionsRequest.add_member(:workflow_version_arn, Shapes::ShapeRef.new(shape: WorkflowWildcardVersionArn, required: true, location_name: "workflowVersionArn"))
-    ListWorkflowBuildVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListWorkflowBuildVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box" => true}))
     ListWorkflowBuildVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListWorkflowBuildVersionsRequest.struct_class = Types::ListWorkflowBuildVersionsRequest
 
@@ -1741,7 +1741,7 @@ module Aws::Imagebuilder
     ListWorkflowBuildVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListWorkflowBuildVersionsResponse.struct_class = Types::ListWorkflowBuildVersionsResponse
 
-    ListWorkflowExecutionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListWorkflowExecutionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box" => true}))
     ListWorkflowExecutionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListWorkflowExecutionsRequest.add_member(:image_build_version_arn, Shapes::ShapeRef.new(shape: ImageBuildVersionArn, required: true, location_name: "imageBuildVersionArn"))
     ListWorkflowExecutionsRequest.struct_class = Types::ListWorkflowExecutionsRequest
@@ -1753,7 +1753,7 @@ module Aws::Imagebuilder
     ListWorkflowExecutionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListWorkflowExecutionsResponse.struct_class = Types::ListWorkflowExecutionsResponse
 
-    ListWorkflowStepExecutionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListWorkflowStepExecutionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box" => true}))
     ListWorkflowStepExecutionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListWorkflowStepExecutionsRequest.add_member(:workflow_execution_id, Shapes::ShapeRef.new(shape: WorkflowExecutionId, required: true, location_name: "workflowExecutionId"))
     ListWorkflowStepExecutionsRequest.struct_class = Types::ListWorkflowStepExecutionsRequest
@@ -1770,7 +1770,7 @@ module Aws::Imagebuilder
     ListWorkflowsRequest.add_member(:owner, Shapes::ShapeRef.new(shape: Ownership, location_name: "owner"))
     ListWorkflowsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
     ListWorkflowsRequest.add_member(:by_name, Shapes::ShapeRef.new(shape: Boolean, location_name: "byName"))
-    ListWorkflowsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListWorkflowsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box" => true}))
     ListWorkflowsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListWorkflowsRequest.struct_class = Types::ListWorkflowsRequest
 
@@ -1905,7 +1905,7 @@ module Aws::Imagebuilder
     SendWorkflowStepActionRequest.add_member(:image_build_version_arn, Shapes::ShapeRef.new(shape: ImageBuildVersionArn, required: true, location_name: "imageBuildVersionArn"))
     SendWorkflowStepActionRequest.add_member(:action, Shapes::ShapeRef.new(shape: WorkflowStepActionType, required: true, location_name: "action"))
     SendWorkflowStepActionRequest.add_member(:reason, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "reason"))
-    SendWorkflowStepActionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    SendWorkflowStepActionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     SendWorkflowStepActionRequest.struct_class = Types::SendWorkflowStepActionRequest
 
     SendWorkflowStepActionResponse.add_member(:step_execution_id, Shapes::ShapeRef.new(shape: WorkflowStepExecutionId, location_name: "stepExecutionId"))
@@ -1936,7 +1936,7 @@ module Aws::Imagebuilder
     SsmParameterConfigurationList.member = Shapes::ShapeRef.new(shape: SsmParameterConfiguration)
 
     StartImagePipelineExecutionRequest.add_member(:image_pipeline_arn, Shapes::ShapeRef.new(shape: ImagePipelineArn, required: true, location_name: "imagePipelineArn"))
-    StartImagePipelineExecutionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    StartImagePipelineExecutionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     StartImagePipelineExecutionRequest.struct_class = Types::StartImagePipelineExecutionRequest
 
     StartImagePipelineExecutionResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
@@ -1950,7 +1950,7 @@ module Aws::Imagebuilder
     StartResourceStateUpdateRequest.add_member(:include_resources, Shapes::ShapeRef.new(shape: ResourceStateUpdateIncludeResources, location_name: "includeResources"))
     StartResourceStateUpdateRequest.add_member(:exclusion_rules, Shapes::ShapeRef.new(shape: ResourceStateUpdateExclusionRules, location_name: "exclusionRules"))
     StartResourceStateUpdateRequest.add_member(:update_at, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "updateAt"))
-    StartResourceStateUpdateRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    StartResourceStateUpdateRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     StartResourceStateUpdateRequest.struct_class = Types::StartResourceStateUpdateRequest
 
     StartResourceStateUpdateResponse.add_member(:lifecycle_execution_id, Shapes::ShapeRef.new(shape: LifecycleExecutionId, location_name: "lifecycleExecutionId"))
@@ -1986,7 +1986,7 @@ module Aws::Imagebuilder
     UpdateDistributionConfigurationRequest.add_member(:distribution_configuration_arn, Shapes::ShapeRef.new(shape: DistributionConfigurationArn, required: true, location_name: "distributionConfigurationArn"))
     UpdateDistributionConfigurationRequest.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
     UpdateDistributionConfigurationRequest.add_member(:distributions, Shapes::ShapeRef.new(shape: DistributionList, required: true, location_name: "distributions"))
-    UpdateDistributionConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateDistributionConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateDistributionConfigurationRequest.struct_class = Types::UpdateDistributionConfigurationRequest
 
     UpdateDistributionConfigurationResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
@@ -2004,7 +2004,7 @@ module Aws::Imagebuilder
     UpdateImagePipelineRequest.add_member(:enhanced_image_metadata_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "enhancedImageMetadataEnabled"))
     UpdateImagePipelineRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: Schedule, location_name: "schedule"))
     UpdateImagePipelineRequest.add_member(:status, Shapes::ShapeRef.new(shape: PipelineStatus, location_name: "status"))
-    UpdateImagePipelineRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateImagePipelineRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateImagePipelineRequest.add_member(:image_scanning_configuration, Shapes::ShapeRef.new(shape: ImageScanningConfiguration, location_name: "imageScanningConfiguration"))
     UpdateImagePipelineRequest.add_member(:workflows, Shapes::ShapeRef.new(shape: WorkflowConfigurationList, location_name: "workflows"))
     UpdateImagePipelineRequest.add_member(:execution_role, Shapes::ShapeRef.new(shape: RoleNameOrArn, location_name: "executionRole"))
@@ -2028,7 +2028,7 @@ module Aws::Imagebuilder
     UpdateInfrastructureConfigurationRequest.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagMap, location_name: "resourceTags"))
     UpdateInfrastructureConfigurationRequest.add_member(:instance_metadata_options, Shapes::ShapeRef.new(shape: InstanceMetadataOptions, location_name: "instanceMetadataOptions"))
     UpdateInfrastructureConfigurationRequest.add_member(:placement, Shapes::ShapeRef.new(shape: Placement, location_name: "placement"))
-    UpdateInfrastructureConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateInfrastructureConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateInfrastructureConfigurationRequest.struct_class = Types::UpdateInfrastructureConfigurationRequest
 
     UpdateInfrastructureConfigurationResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
@@ -2043,7 +2043,7 @@ module Aws::Imagebuilder
     UpdateLifecyclePolicyRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: LifecyclePolicyResourceType, required: true, location_name: "resourceType"))
     UpdateLifecyclePolicyRequest.add_member(:policy_details, Shapes::ShapeRef.new(shape: LifecyclePolicyDetails, required: true, location_name: "policyDetails"))
     UpdateLifecyclePolicyRequest.add_member(:resource_selection, Shapes::ShapeRef.new(shape: LifecyclePolicyResourceSelection, required: true, location_name: "resourceSelection"))
-    UpdateLifecyclePolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateLifecyclePolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateLifecyclePolicyRequest.struct_class = Types::UpdateLifecyclePolicyRequest
 
     UpdateLifecyclePolicyResponse.add_member(:lifecycle_policy_arn, Shapes::ShapeRef.new(shape: LifecyclePolicyArn, location_name: "lifecyclePolicyArn"))

@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.192.0 (2025-05-16)
+------------------
+
+* Feature - This is an Amazon ECs documentation only release to support the change of the container exit "reason" field from 255 characters to 1024 characters.
+
+1.191.0 (2025-05-13)
+------------------
+
+* Feature - This release extends functionality for Amazon EBS volumes attached to Amazon ECS tasks by adding support for the new EBS volumeInitializationRate parameter in ECS RunTask/StartTask/CreateService/UpdateService APIs.
+
+1.190.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.189.0 (2025-05-05)
+------------------
+
+* Feature - Add support to roll back an In_Progress ECS Service Deployment
+
+1.188.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.187.0 (2025-04-25)
 ------------------
 

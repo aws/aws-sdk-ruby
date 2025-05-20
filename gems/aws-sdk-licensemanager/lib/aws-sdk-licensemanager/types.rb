@@ -406,6 +406,15 @@ module Aws::LicenseManager
     #   Allowed operations for the grant.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tags
+    #   Tags to add to the grant. For more information about tagging support
+    #   in License Manager, see the [TagResource][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/license-manager/latest/APIReference/API_TagResource.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/CreateGrantRequest AWS API Documentation
     #
     class CreateGrantRequest < Struct.new(
@@ -414,7 +423,8 @@ module Aws::LicenseManager
       :license_arn,
       :principals,
       :home_region,
-      :allowed_operations)
+      :allowed_operations,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -540,9 +550,8 @@ module Aws::LicenseManager
     #   * `Cores` dimension: `allowedTenancy` \| `licenseAffinityToHost` \|
     #     `maximumCores` \| `minimumCores`
     #
-    #   * `Instances` dimension: `allowedTenancy` \| `maximumCores` \|
-    #     `minimumCores` \| `maximumSockets` \| `minimumSockets` \|
-    #     `maximumVcpus` \| `minimumVcpus`
+    #   * `Instances` dimension: `allowedTenancy` \| `maximumVcpus` \|
+    #     `minimumVcpus`
     #
     #   * `Sockets` dimension: `allowedTenancy` \| `licenseAffinityToHost`
     #     \| `maximumSockets` \| `minimumSockets`
@@ -755,6 +764,15 @@ module Aws::LicenseManager
     #   idempotency of the request.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Tags to add to the license. For more information about tagging
+    #   support in License Manager, see the [TagResource][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/license-manager/latest/APIReference/API_TagResource.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/CreateLicenseRequest AWS API Documentation
     #
     class CreateLicenseRequest < Struct.new(
@@ -768,7 +786,8 @@ module Aws::LicenseManager
       :beneficiary,
       :consumption_configuration,
       :license_metadata,
-      :client_token)
+      :client_token,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2457,15 +2476,13 @@ module Aws::LicenseManager
     #
     #   * `licenseCountingType` - The dimension for which licenses are
     #     counted. Possible values are `vCPU` \| `Instance` \| `Core` \|
-    #     `Socket`. Logical operators are `EQUALS` \| `NOT_EQUALS`.
+    #     `Socket`.
     #
     #   * `enforceLicenseCount` - A Boolean value that indicates whether
-    #     hard license enforcement is used. Logical operators are `EQUALS`
-    #     \| `NOT_EQUALS`.
+    #     hard license enforcement is used.
     #
     #   * `usagelimitExceeded` - A Boolean value that indicates whether the
-    #     available licenses have been exceeded. Logical operators are
-    #     `EQUALS` \| `NOT_EQUALS`.
+    #     available licenses have been exceeded.
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListLicenseConfigurationsRequest AWS API Documentation
@@ -2972,7 +2989,7 @@ module Aws::LicenseManager
     end
 
     # @!attribute [rw] resource_arn
-    #   Amazon Resource Name (ARN) of the license configuration.
+    #   Amazon Resource Name (ARN) of the resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListTagsForResourceRequest AWS API Documentation
@@ -3060,14 +3077,11 @@ module Aws::LicenseManager
     #   operators are supported:
     #
     #   * `resourceArn` - The ARN of the license configuration resource.
-    #     Logical operators are `EQUALS` \| `NOT_EQUALS`.
     #
     #   * `resourceType` - The resource type (`EC2_INSTANCE` \| `EC2_HOST`
-    #     \| `EC2_AMI` \| `SYSTEMS_MANAGER_MANAGED_INSTANCE`). Logical
-    #     operators are `EQUALS` \| `NOT_EQUALS`.
+    #     \| `EC2_AMI` \| `SYSTEMS_MANAGER_MANAGED_INSTANCE`).
     #
     #   * `resourceAccount` - The ID of the account that owns the resource.
-    #     Logical operators are `EQUALS` \| `NOT_EQUALS`.
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListUsageForLicenseConfigurationRequest AWS API Documentation
@@ -3267,7 +3281,8 @@ module Aws::LicenseManager
     #
     #   * `Engine Edition` - The edition of the database engine. Logical
     #     operator is `EQUALS`. Possible values are: `oracle-ee` \|
-    #     `oracle-se` \| `oracle-se1` \| `oracle-se2`.
+    #     `oracle-se` \| `oracle-se1` \| `oracle-se2` \| `db2-se` \|
+    #     `db2-ae`.
     #
     #   * `License Pack` - The license pack. Logical operator is `EQUALS`.
     #     Possible values are: `data guard` \| `diagnostic pack sqlt` \|
@@ -3619,14 +3634,20 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # Details about a tag for a license configuration.
+    # Details about the tags for a resource. For more information about
+    # tagging support in License Manager, see the [TagResource][1]
+    # operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/license-manager/latest/APIReference/API_TagResource.html
     #
     # @!attribute [rw] key
-    #   Tag key.
+    #   The tag key.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   Tag value.
+    #   The tag value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/Tag AWS API Documentation
@@ -3639,7 +3660,21 @@ module Aws::LicenseManager
     end
 
     # @!attribute [rw] resource_arn
-    #   Amazon Resource Name (ARN) of the license configuration.
+    #   Amazon Resource Name (ARN) of the resource. The following examples
+    #   provide an example ARN for each supported resource in License
+    #   Manager:
+    #
+    #   * Licenses -
+    #     `arn:aws:license-manager::111122223333:license:l-EXAMPLE2da7646d6861033667f20e895`
+    #
+    #   * Grants -
+    #     `arn:aws:license-manager::111122223333:grant:g-EXAMPLE7b19f4a0ab73679b0beb52707`
+    #
+    #   * License configurations -
+    #     `arn:aws:license-manager:us-east-1:111122223333:license-configuration:lic-EXAMPLE6a788d4c8acd4264ff0ecf2ed2d`
+    #
+    #   * Report generators -
+    #     `arn:aws:license-manager:us-east-1:111122223333:report-generator:r-EXAMPLE825b4a4f8fe5a3e0c88824e5fc6`
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -3717,7 +3752,7 @@ module Aws::LicenseManager
     end
 
     # @!attribute [rw] resource_arn
-    #   Amazon Resource Name (ARN) of the license configuration.
+    #   Amazon Resource Name (ARN) of the resource.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys

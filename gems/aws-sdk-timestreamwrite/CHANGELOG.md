@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.47.0 (2025-05-06)
+------------------
+
+* Feature - Add dualstack endpoints support.
+
+1.46.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.45.0 (2025-02-18)
 ------------------
 

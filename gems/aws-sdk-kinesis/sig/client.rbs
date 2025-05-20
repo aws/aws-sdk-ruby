@@ -306,6 +306,16 @@ module Aws
                         ) -> _ListStreamsResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStreamsResponseSuccess
 
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kinesis/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
       interface _ListTagsForStreamResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForStreamOutput]
         def tags: () -> ::Array[Types::Tag]
@@ -380,7 +390,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kinesis/Client.html#register_stream_consumer-instance_method
       def register_stream_consumer: (
                                       stream_arn: ::String,
-                                      consumer_name: ::String
+                                      consumer_name: ::String,
+                                      ?tags: Hash[::String, ::String]
                                     ) -> _RegisterStreamConsumerResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterStreamConsumerResponseSuccess
 
@@ -418,6 +429,20 @@ module Aws
                                     ?stream_arn: ::String
                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kinesis/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          tags: Hash[::String, ::String],
+                          resource_arn: ::String
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kinesis/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            tag_keys: Array[::String],
+                            resource_arn: ::String
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       interface _UpdateShardCountResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateShardCountOutput]

@@ -861,6 +861,19 @@
         {"shape":"OperationAbortedException"}
       ]
     },
+    "ListLogGroups":{
+      "name":"ListLogGroups",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListLogGroupsRequest"},
+      "output":{"shape":"ListLogGroupsResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ServiceUnavailableException"}
+      ]
+    },
     "ListLogGroupsForQuery":{
       "name":"ListLogGroupsForQuery",
       "http":{
@@ -1328,8 +1341,7 @@
   "shapes":{
     "AccessDeniedException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "AccessPolicy":{
@@ -1577,8 +1589,7 @@
     },
     "ConflictException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "CopyValue":{
@@ -1794,8 +1805,7 @@
     },
     "DeleteIndexPolicyResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DeleteIntegrationRequest":{
       "type":"structure",
@@ -1807,8 +1817,7 @@
     },
     "DeleteIntegrationResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DeleteKeys":{
       "type":"structure",
@@ -1905,7 +1914,7 @@
     },
     "Delimiter":{
       "type":"string",
-      "max":1,
+      "max":2,
       "min":1
     },
     "Deliveries":{
@@ -2161,6 +2170,12 @@
       "max":50,
       "min":1
     },
+    "DescribeLogGroupsLogGroupIdentifiers":{
+      "type":"list",
+      "member":{"shape":"LogGroupIdentifier"},
+      "max":50,
+      "min":1
+    },
     "DescribeLogGroupsRequest":{
       "type":"structure",
       "members":{
@@ -2170,7 +2185,8 @@
         "nextToken":{"shape":"NextToken"},
         "limit":{"shape":"DescribeLimit"},
         "includeLinkedAccounts":{"shape":"IncludeLinkedAccounts"},
-        "logGroupClass":{"shape":"LogGroupClass"}
+        "logGroupClass":{"shape":"LogGroupClass"},
+        "logGroupIdentifiers":{"shape":"DescribeLogGroupsLogGroupIdentifiers"}
       }
     },
     "DescribeLogGroupsResponse":{
@@ -2808,7 +2824,7 @@
     },
     "GrokMatch":{
       "type":"string",
-      "max":128,
+      "max":512,
       "min":1
     },
     "Histogram":{
@@ -2924,14 +2940,12 @@
     "Interleaved":{"type":"boolean"},
     "InvalidOperationException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "InvalidParameterException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "InvalidSequenceTokenException":{
@@ -2963,8 +2977,7 @@
     },
     "LimitExceededException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "ListAnomaliesLimit":{
@@ -3001,6 +3014,11 @@
       "members":{
         "integrationSummaries":{"shape":"IntegrationSummaries"}
       }
+    },
+    "ListLimit":{
+      "type":"integer",
+      "max":1000,
+      "min":1
     },
     "ListLogAnomalyDetectorsLimit":{
       "type":"integer",
@@ -3040,6 +3058,24 @@
       "type":"structure",
       "members":{
         "logGroupIdentifiers":{"shape":"LogGroupIdentifiers"},
+        "nextToken":{"shape":"NextToken"}
+      }
+    },
+    "ListLogGroupsRequest":{
+      "type":"structure",
+      "members":{
+        "logGroupNamePattern":{"shape":"LogGroupNameRegexPattern"},
+        "logGroupClass":{"shape":"LogGroupClass"},
+        "includeLinkedAccounts":{"shape":"IncludeLinkedAccounts"},
+        "accountIdentifiers":{"shape":"AccountIds"},
+        "nextToken":{"shape":"NextToken"},
+        "limit":{"shape":"ListLimit"}
+      }
+    },
+    "ListLogGroupsResponse":{
+      "type":"structure",
+      "members":{
+        "logGroups":{"shape":"LogGroupSummaries"},
         "nextToken":{"shape":"NextToken"}
       }
     },
@@ -3170,7 +3206,8 @@
       "type":"string",
       "enum":[
         "STANDARD",
-        "INFREQUENT_ACCESS"
+        "INFREQUENT_ACCESS",
+        "DELIVERY"
       ]
     },
     "LogGroupField":{
@@ -3206,9 +3243,27 @@
       "min":0,
       "pattern":"[\\.\\-_/#A-Za-z0-9]*"
     },
+    "LogGroupNameRegexPattern":{
+      "type":"string",
+      "max":129,
+      "min":3,
+      "pattern":"(\\^?[\\.\\-_\\/#A-Za-z0-9]{3,24})(\\|\\^?[\\.\\-_\\/#A-Za-z0-9]{3,24}){0,4}"
+    },
     "LogGroupNames":{
       "type":"list",
       "member":{"shape":"LogGroupName"}
+    },
+    "LogGroupSummaries":{
+      "type":"list",
+      "member":{"shape":"LogGroupSummary"}
+    },
+    "LogGroupSummary":{
+      "type":"structure",
+      "members":{
+        "logGroupName":{"shape":"LogGroupName"},
+        "logGroupArn":{"shape":"Arn"},
+        "logGroupClass":{"shape":"LogGroupClass"}
+      }
     },
     "LogGroups":{
       "type":"list",
@@ -3532,8 +3587,7 @@
     },
     "OperationAbortedException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "OrderBy":{
@@ -4170,8 +4224,7 @@
     },
     "ResourceAlreadyExistsException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "ResourceArns":{
@@ -4193,8 +4246,7 @@
     },
     "ResourceNotFoundException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "ResourcePolicies":{
@@ -4274,14 +4326,12 @@
     },
     "ServiceQuotaExceededException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "ServiceUnavailableException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true,
       "fault":true
     },
@@ -4320,6 +4370,11 @@
         "entries":{"shape":"SplitStringEntries"}
       }
     },
+    "SplitStringDelimiter":{
+      "type":"string",
+      "max":128,
+      "min":1
+    },
     "SplitStringEntries":{
       "type":"list",
       "member":{"shape":"SplitStringEntry"},
@@ -4334,7 +4389,7 @@
       ],
       "members":{
         "source":{"shape":"Source"},
-        "delimiter":{"shape":"Delimiter"}
+        "delimiter":{"shape":"SplitStringDelimiter"}
       }
     },
     "StandardUnit":{
@@ -4638,8 +4693,7 @@
     },
     "ThrottlingException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "Time":{
@@ -4734,8 +4788,7 @@
     "Unmask":{"type":"boolean"},
     "UnrecognizedClientException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "UntagLogGroupRequest":{
@@ -4786,8 +4839,7 @@
     },
     "UpdateDeliveryConfigurationResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "UpdateLogAnomalyDetectorRequest":{
       "type":"structure",
@@ -4818,8 +4870,7 @@
     },
     "ValidationException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "Value":{"type":"string"},

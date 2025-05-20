@@ -747,7 +747,7 @@ module Aws::CodeCatalyst
     StartWorkflowRunRequest.add_member(:space_name, Shapes::ShapeRef.new(shape: StartWorkflowRunRequestSpaceNameString, required: true, location: "uri", location_name: "spaceName"))
     StartWorkflowRunRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: StartWorkflowRunRequestProjectNameString, required: true, location: "uri", location_name: "projectName"))
     StartWorkflowRunRequest.add_member(:workflow_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "querystring", location_name: "workflowId"))
-    StartWorkflowRunRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: StartWorkflowRunRequestClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    StartWorkflowRunRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: StartWorkflowRunRequestClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     StartWorkflowRunRequest.struct_class = Types::StartWorkflowRunRequest
 
     StartWorkflowRunResponse.add_member(:space_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "spaceName"))

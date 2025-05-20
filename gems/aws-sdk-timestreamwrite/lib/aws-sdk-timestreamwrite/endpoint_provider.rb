@@ -23,13 +23,19 @@ module Aws::TimestreamWrite
         if (partition_result = Aws::Endpoints::Matchers.aws_partition(parameters.region))
           if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
             if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS")) && Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
+              if Aws::Endpoints::Matchers.string_equals?("aws", Aws::Endpoints::Matchers.attr(partition_result, "name"))
+                return Aws::Endpoints::Endpoint.new(url: "https://timestream-ingest-fips.#{parameters.region}.api.aws", headers: {}, properties: {})
+              end
+              if Aws::Endpoints::Matchers.string_equals?("aws-us-gov", Aws::Endpoints::Matchers.attr(partition_result, "name"))
+                return Aws::Endpoints::Endpoint.new(url: "https://timestream-ingest.#{parameters.region}.api.aws", headers: {}, properties: {})
+              end
               return Aws::Endpoints::Endpoint.new(url: "https://ingest.timestream-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
           end
           if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true)
-            if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
-              if Aws::Endpoints::Matchers.string_equals?("aws-us-gov", Aws::Endpoints::Matchers.attr(partition_result, "name"))
+            if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"), true)
+              if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-us-gov")
                 return Aws::Endpoints::Endpoint.new(url: "https://ingest.timestream.#{parameters.region}.amazonaws.com", headers: {}, properties: {})
               end
               return Aws::Endpoints::Endpoint.new(url: "https://ingest.timestream-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
@@ -38,6 +44,12 @@ module Aws::TimestreamWrite
           end
           if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
             if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
+              if Aws::Endpoints::Matchers.string_equals?("aws", Aws::Endpoints::Matchers.attr(partition_result, "name"))
+                return Aws::Endpoints::Endpoint.new(url: "https://timestream-ingest.#{parameters.region}.api.aws", headers: {}, properties: {})
+              end
+              if Aws::Endpoints::Matchers.string_equals?("aws-us-gov", Aws::Endpoints::Matchers.attr(partition_result, "name"))
+                return Aws::Endpoints::Endpoint.new(url: "https://timestream-ingest.#{parameters.region}.api.aws", headers: {}, properties: {})
+              end
               return Aws::Endpoints::Endpoint.new(url: "https://ingest.timestream.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"

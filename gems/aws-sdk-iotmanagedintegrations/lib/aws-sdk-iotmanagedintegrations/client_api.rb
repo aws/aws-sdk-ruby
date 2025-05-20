@@ -407,7 +407,7 @@ module Aws::IoTManagedIntegrations
     ConflictException.struct_class = Types::ConflictException
 
     CreateCredentialLockerRequest.add_member(:name, Shapes::ShapeRef.new(shape: CredentialLockerName, location_name: "Name"))
-    CreateCredentialLockerRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateCredentialLockerRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateCredentialLockerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
     CreateCredentialLockerRequest.struct_class = Types::CreateCredentialLockerRequest
 
@@ -420,7 +420,7 @@ module Aws::IoTManagedIntegrations
     CreateDestinationRequest.add_member(:delivery_destination_type, Shapes::ShapeRef.new(shape: DeliveryDestinationType, required: true, location_name: "DeliveryDestinationType"))
     CreateDestinationRequest.add_member(:name, Shapes::ShapeRef.new(shape: DestinationName, required: true, location_name: "Name"))
     CreateDestinationRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: DeliveryDestinationRoleArn, required: true, location_name: "RoleArn"))
-    CreateDestinationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDestinationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateDestinationRequest.add_member(:description, Shapes::ShapeRef.new(shape: DestinationDescription, location_name: "Description"))
     CreateDestinationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
     CreateDestinationRequest.struct_class = Types::CreateDestinationRequest
@@ -431,7 +431,7 @@ module Aws::IoTManagedIntegrations
     CreateEventLogConfigurationRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: SmartHomeResourceType, required: true, location_name: "ResourceType"))
     CreateEventLogConfigurationRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: SmartHomeResourceId, location_name: "ResourceId"))
     CreateEventLogConfigurationRequest.add_member(:event_log_level, Shapes::ShapeRef.new(shape: LogLevel, required: true, location_name: "EventLogLevel"))
-    CreateEventLogConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateEventLogConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateEventLogConfigurationRequest.struct_class = Types::CreateEventLogConfigurationRequest
 
     CreateEventLogConfigurationResponse.add_member(:id, Shapes::ShapeRef.new(shape: LogConfigurationId, location_name: "Id"))
@@ -448,7 +448,7 @@ module Aws::IoTManagedIntegrations
     CreateManagedThingRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     CreateManagedThingRequest.add_member(:capability_report, Shapes::ShapeRef.new(shape: CapabilityReport, location_name: "CapabilityReport"))
     CreateManagedThingRequest.add_member(:capabilities, Shapes::ShapeRef.new(shape: Capabilities, location_name: "Capabilities"))
-    CreateManagedThingRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateManagedThingRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateManagedThingRequest.add_member(:classification, Shapes::ShapeRef.new(shape: Classification, location_name: "Classification"))
     CreateManagedThingRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
     CreateManagedThingRequest.add_member(:meta_data, Shapes::ShapeRef.new(shape: MetaData, location_name: "MetaData"))
@@ -461,7 +461,7 @@ module Aws::IoTManagedIntegrations
 
     CreateNotificationConfigurationRequest.add_member(:event_type, Shapes::ShapeRef.new(shape: EventType, required: true, location_name: "EventType"))
     CreateNotificationConfigurationRequest.add_member(:destination_name, Shapes::ShapeRef.new(shape: DestinationName, required: true, location_name: "DestinationName"))
-    CreateNotificationConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateNotificationConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateNotificationConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
     CreateNotificationConfigurationRequest.struct_class = Types::CreateNotificationConfigurationRequest
 
@@ -471,7 +471,7 @@ module Aws::IoTManagedIntegrations
     CreateOtaTaskConfigurationRequest.add_member(:description, Shapes::ShapeRef.new(shape: OtaDescription, location_name: "Description"))
     CreateOtaTaskConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: OtaTaskConfigurationName, location_name: "Name"))
     CreateOtaTaskConfigurationRequest.add_member(:push_config, Shapes::ShapeRef.new(shape: PushConfig, location_name: "PushConfig"))
-    CreateOtaTaskConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateOtaTaskConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateOtaTaskConfigurationRequest.struct_class = Types::CreateOtaTaskConfigurationRequest
 
     CreateOtaTaskConfigurationResponse.add_member(:task_configuration_id, Shapes::ShapeRef.new(shape: OtaTaskConfigurationId, location_name: "TaskConfigurationId"))
@@ -485,7 +485,7 @@ module Aws::IoTManagedIntegrations
     CreateOtaTaskRequest.add_member(:ota_mechanism, Shapes::ShapeRef.new(shape: OtaMechanism, location_name: "OtaMechanism"))
     CreateOtaTaskRequest.add_member(:ota_type, Shapes::ShapeRef.new(shape: OtaType, required: true, location_name: "OtaType"))
     CreateOtaTaskRequest.add_member(:ota_target_query_string, Shapes::ShapeRef.new(shape: OtaTargetQueryString, location_name: "OtaTargetQueryString"))
-    CreateOtaTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateOtaTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateOtaTaskRequest.add_member(:ota_scheduling_config, Shapes::ShapeRef.new(shape: OtaTaskSchedulingConfig, location_name: "OtaSchedulingConfig"))
     CreateOtaTaskRequest.add_member(:ota_task_execution_retry_config, Shapes::ShapeRef.new(shape: OtaTaskExecutionRetryConfig, location_name: "OtaTaskExecutionRetryConfig"))
     CreateOtaTaskRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
@@ -499,7 +499,7 @@ module Aws::IoTManagedIntegrations
     CreateProvisioningProfileRequest.add_member(:provisioning_type, Shapes::ShapeRef.new(shape: ProvisioningType, required: true, location_name: "ProvisioningType"))
     CreateProvisioningProfileRequest.add_member(:ca_certificate, Shapes::ShapeRef.new(shape: CaCertificate, location_name: "CaCertificate"))
     CreateProvisioningProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: ProvisioningProfileName, location_name: "Name"))
-    CreateProvisioningProfileRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateProvisioningProfileRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateProvisioningProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
     CreateProvisioningProfileRequest.struct_class = Types::CreateProvisioningProfileRequest
 

@@ -76,6 +76,7 @@ module Aws::MediaLive
     Av1GopSizeUnits = Shapes::StringShape.new(name: 'Av1GopSizeUnits')
     Av1Level = Shapes::StringShape.new(name: 'Av1Level')
     Av1LookAheadRateControl = Shapes::StringShape.new(name: 'Av1LookAheadRateControl')
+    Av1RateControlMode = Shapes::StringShape.new(name: 'Av1RateControlMode')
     Av1SceneChangeDetect = Shapes::StringShape.new(name: 'Av1SceneChangeDetect')
     Av1Settings = Shapes::StructureShape.new(name: 'Av1Settings')
     AvailBlanking = Shapes::StructureShape.new(name: 'AvailBlanking')
@@ -1402,6 +1403,8 @@ module Aws::MediaLive
     Av1Settings.add_member(:qvbr_quality_level, Shapes::ShapeRef.new(shape: __integerMin1Max10, location_name: "qvbrQualityLevel"))
     Av1Settings.add_member(:scene_change_detect, Shapes::ShapeRef.new(shape: Av1SceneChangeDetect, location_name: "sceneChangeDetect"))
     Av1Settings.add_member(:timecode_burnin_settings, Shapes::ShapeRef.new(shape: TimecodeBurninSettings, location_name: "timecodeBurninSettings"))
+    Av1Settings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __integerMin50000Max8000000, location_name: "bitrate"))
+    Av1Settings.add_member(:rate_control_mode, Shapes::ShapeRef.new(shape: Av1RateControlMode, location_name: "rateControlMode"))
     Av1Settings.struct_class = Types::Av1Settings
 
     AvailBlanking.add_member(:avail_blanking_image, Shapes::ShapeRef.new(shape: InputLocation, location_name: "availBlankingImage"))
@@ -1755,7 +1758,7 @@ module Aws::MediaLive
     CreateChannel.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "logLevel"))
     CreateChannel.add_member(:maintenance, Shapes::ShapeRef.new(shape: MaintenanceCreateSettings, location_name: "maintenance"))
     CreateChannel.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
-    CreateChannel.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateChannel.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     CreateChannel.add_member(:reserved, Shapes::ShapeRef.new(shape: __string, deprecated: true, location_name: "reserved"))
     CreateChannel.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     CreateChannel.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
@@ -1768,7 +1771,7 @@ module Aws::MediaLive
     CreateChannelPlacementGroupRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterId"))
     CreateChannelPlacementGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     CreateChannelPlacementGroupRequest.add_member(:nodes, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "nodes"))
-    CreateChannelPlacementGroupRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateChannelPlacementGroupRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     CreateChannelPlacementGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateChannelPlacementGroupRequest.struct_class = Types::CreateChannelPlacementGroupRequest
 
@@ -1790,7 +1793,7 @@ module Aws::MediaLive
     CreateChannelRequest.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "logLevel"))
     CreateChannelRequest.add_member(:maintenance, Shapes::ShapeRef.new(shape: MaintenanceCreateSettings, location_name: "maintenance"))
     CreateChannelRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
-    CreateChannelRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateChannelRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     CreateChannelRequest.add_member(:reserved, Shapes::ShapeRef.new(shape: __string, deprecated: true, location_name: "reserved"))
     CreateChannelRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     CreateChannelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
@@ -1809,13 +1812,13 @@ module Aws::MediaLive
     CreateCloudWatchAlarmTemplateGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
     CreateCloudWatchAlarmTemplateGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
     CreateCloudWatchAlarmTemplateGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateCloudWatchAlarmTemplateGroupRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternS, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateCloudWatchAlarmTemplateGroupRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternS, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     CreateCloudWatchAlarmTemplateGroupRequest.struct_class = Types::CreateCloudWatchAlarmTemplateGroupRequest
 
     CreateCloudWatchAlarmTemplateGroupRequestContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
     CreateCloudWatchAlarmTemplateGroupRequestContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
     CreateCloudWatchAlarmTemplateGroupRequestContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateCloudWatchAlarmTemplateGroupRequestContent.add_member(:request_id, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternS, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateCloudWatchAlarmTemplateGroupRequestContent.add_member(:request_id, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternS, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     CreateCloudWatchAlarmTemplateGroupRequestContent.struct_class = Types::CreateCloudWatchAlarmTemplateGroupRequestContent
 
     CreateCloudWatchAlarmTemplateGroupResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveCloudwatchAlarmTemplateGroup, location_name: "arn"))
@@ -1849,7 +1852,7 @@ module Aws::MediaLive
     CreateCloudWatchAlarmTemplateRequest.add_member(:target_resource_type, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTargetResourceType, required: true, location_name: "targetResourceType"))
     CreateCloudWatchAlarmTemplateRequest.add_member(:threshold, Shapes::ShapeRef.new(shape: __double, required: true, location_name: "threshold"))
     CreateCloudWatchAlarmTemplateRequest.add_member(:treat_missing_data, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTreatMissingData, required: true, location_name: "treatMissingData"))
-    CreateCloudWatchAlarmTemplateRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternS, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateCloudWatchAlarmTemplateRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternS, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     CreateCloudWatchAlarmTemplateRequest.struct_class = Types::CreateCloudWatchAlarmTemplateRequest
 
     CreateCloudWatchAlarmTemplateRequestContent.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateComparisonOperator, required: true, location_name: "comparisonOperator"))
@@ -1865,7 +1868,7 @@ module Aws::MediaLive
     CreateCloudWatchAlarmTemplateRequestContent.add_member(:target_resource_type, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTargetResourceType, required: true, location_name: "targetResourceType"))
     CreateCloudWatchAlarmTemplateRequestContent.add_member(:threshold, Shapes::ShapeRef.new(shape: __double, required: true, location_name: "threshold"))
     CreateCloudWatchAlarmTemplateRequestContent.add_member(:treat_missing_data, Shapes::ShapeRef.new(shape: CloudWatchAlarmTemplateTreatMissingData, required: true, location_name: "treatMissingData"))
-    CreateCloudWatchAlarmTemplateRequestContent.add_member(:request_id, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternS, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateCloudWatchAlarmTemplateRequestContent.add_member(:request_id, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternS, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     CreateCloudWatchAlarmTemplateRequestContent.struct_class = Types::CreateCloudWatchAlarmTemplateRequestContent
 
     CreateCloudWatchAlarmTemplateResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveCloudwatchAlarmTemplate, location_name: "arn"))
@@ -1910,7 +1913,7 @@ module Aws::MediaLive
     CreateClusterRequest.add_member(:instance_role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "instanceRoleArn"))
     CreateClusterRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     CreateClusterRequest.add_member(:network_settings, Shapes::ShapeRef.new(shape: ClusterNetworkSettingsCreateRequest, location_name: "networkSettings"))
-    CreateClusterRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateClusterRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     CreateClusterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateClusterRequest.struct_class = Types::CreateClusterRequest
 
@@ -1927,13 +1930,13 @@ module Aws::MediaLive
     CreateEventBridgeRuleTemplateGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
     CreateEventBridgeRuleTemplateGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
     CreateEventBridgeRuleTemplateGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateEventBridgeRuleTemplateGroupRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternS, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateEventBridgeRuleTemplateGroupRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternS, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     CreateEventBridgeRuleTemplateGroupRequest.struct_class = Types::CreateEventBridgeRuleTemplateGroupRequest
 
     CreateEventBridgeRuleTemplateGroupRequestContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
     CreateEventBridgeRuleTemplateGroupRequestContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
     CreateEventBridgeRuleTemplateGroupRequestContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateEventBridgeRuleTemplateGroupRequestContent.add_member(:request_id, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternS, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateEventBridgeRuleTemplateGroupRequestContent.add_member(:request_id, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternS, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     CreateEventBridgeRuleTemplateGroupRequestContent.struct_class = Types::CreateEventBridgeRuleTemplateGroupRequestContent
 
     CreateEventBridgeRuleTemplateGroupResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveEventbridgeRuleTemplateGroup, location_name: "arn"))
@@ -1960,7 +1963,7 @@ module Aws::MediaLive
     CreateEventBridgeRuleTemplateRequest.add_member(:group_identifier, Shapes::ShapeRef.new(shape: __stringPatternS, required: true, location_name: "groupIdentifier"))
     CreateEventBridgeRuleTemplateRequest.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
     CreateEventBridgeRuleTemplateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateEventBridgeRuleTemplateRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternS, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateEventBridgeRuleTemplateRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternS, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     CreateEventBridgeRuleTemplateRequest.struct_class = Types::CreateEventBridgeRuleTemplateRequest
 
     CreateEventBridgeRuleTemplateRequestContent.add_member(:description, Shapes::ShapeRef.new(shape: __stringMin0Max1024, location_name: "description"))
@@ -1969,7 +1972,7 @@ module Aws::MediaLive
     CreateEventBridgeRuleTemplateRequestContent.add_member(:group_identifier, Shapes::ShapeRef.new(shape: __stringPatternS, required: true, location_name: "groupIdentifier"))
     CreateEventBridgeRuleTemplateRequestContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
     CreateEventBridgeRuleTemplateRequestContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateEventBridgeRuleTemplateRequestContent.add_member(:request_id, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternS, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateEventBridgeRuleTemplateRequestContent.add_member(:request_id, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternS, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     CreateEventBridgeRuleTemplateRequestContent.struct_class = Types::CreateEventBridgeRuleTemplateRequestContent
 
     CreateEventBridgeRuleTemplateResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveEventbridgeRuleTemplate, location_name: "arn"))
@@ -2001,7 +2004,7 @@ module Aws::MediaLive
     CreateInput.add_member(:input_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "inputSecurityGroups"))
     CreateInput.add_member(:media_connect_flows, Shapes::ShapeRef.new(shape: __listOfMediaConnectFlowRequest, location_name: "mediaConnectFlows"))
     CreateInput.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
-    CreateInput.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateInput.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     CreateInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     CreateInput.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfInputSourceRequest, location_name: "sources"))
     CreateInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
@@ -2019,7 +2022,7 @@ module Aws::MediaLive
     CreateInputRequest.add_member(:input_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "inputSecurityGroups"))
     CreateInputRequest.add_member(:media_connect_flows, Shapes::ShapeRef.new(shape: __listOfMediaConnectFlowRequest, location_name: "mediaConnectFlows"))
     CreateInputRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
-    CreateInputRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateInputRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     CreateInputRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     CreateInputRequest.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfInputSourceRequest, location_name: "sources"))
     CreateInputRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
@@ -2051,19 +2054,19 @@ module Aws::MediaLive
     CreateMultiplex.add_member(:availability_zones, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "availabilityZones"))
     CreateMultiplex.add_member(:multiplex_settings, Shapes::ShapeRef.new(shape: MultiplexSettings, required: true, location_name: "multiplexSettings"))
     CreateMultiplex.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
-    CreateMultiplex.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateMultiplex.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     CreateMultiplex.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateMultiplex.struct_class = Types::CreateMultiplex
 
     CreateMultiplexProgram.add_member(:multiplex_program_settings, Shapes::ShapeRef.new(shape: MultiplexProgramSettings, required: true, location_name: "multiplexProgramSettings"))
     CreateMultiplexProgram.add_member(:program_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "programName"))
-    CreateMultiplexProgram.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateMultiplexProgram.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     CreateMultiplexProgram.struct_class = Types::CreateMultiplexProgram
 
     CreateMultiplexProgramRequest.add_member(:multiplex_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "multiplexId"))
     CreateMultiplexProgramRequest.add_member(:multiplex_program_settings, Shapes::ShapeRef.new(shape: MultiplexProgramSettings, required: true, location_name: "multiplexProgramSettings"))
     CreateMultiplexProgramRequest.add_member(:program_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "programName"))
-    CreateMultiplexProgramRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateMultiplexProgramRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     CreateMultiplexProgramRequest.struct_class = Types::CreateMultiplexProgramRequest
 
     CreateMultiplexProgramResponse.add_member(:multiplex_program, Shapes::ShapeRef.new(shape: MultiplexProgram, location_name: "multiplexProgram"))
@@ -2075,7 +2078,7 @@ module Aws::MediaLive
     CreateMultiplexRequest.add_member(:availability_zones, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "availabilityZones"))
     CreateMultiplexRequest.add_member(:multiplex_settings, Shapes::ShapeRef.new(shape: MultiplexSettings, required: true, location_name: "multiplexSettings"))
     CreateMultiplexRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
-    CreateMultiplexRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateMultiplexRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     CreateMultiplexRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateMultiplexRequest.struct_class = Types::CreateMultiplexRequest
 
@@ -2087,7 +2090,7 @@ module Aws::MediaLive
 
     CreateNetworkRequest.add_member(:ip_pools, Shapes::ShapeRef.new(shape: __listOfIpPoolCreateRequest, location_name: "ipPools"))
     CreateNetworkRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
-    CreateNetworkRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateNetworkRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     CreateNetworkRequest.add_member(:routes, Shapes::ShapeRef.new(shape: __listOfRouteCreateRequest, location_name: "routes"))
     CreateNetworkRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateNetworkRequest.struct_class = Types::CreateNetworkRequest
@@ -2105,7 +2108,7 @@ module Aws::MediaLive
     CreateNodeRegistrationScriptRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     CreateNodeRegistrationScriptRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     CreateNodeRegistrationScriptRequest.add_member(:node_interface_mappings, Shapes::ShapeRef.new(shape: __listOfNodeInterfaceMapping, location_name: "nodeInterfaceMappings"))
-    CreateNodeRegistrationScriptRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateNodeRegistrationScriptRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     CreateNodeRegistrationScriptRequest.add_member(:role, Shapes::ShapeRef.new(shape: NodeRole, location_name: "role"))
     CreateNodeRegistrationScriptRequest.struct_class = Types::CreateNodeRegistrationScriptRequest
 
@@ -2118,7 +2121,7 @@ module Aws::MediaLive
     CreateNodeRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterId"))
     CreateNodeRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     CreateNodeRequest.add_member(:node_interface_mappings, Shapes::ShapeRef.new(shape: __listOfNodeInterfaceMappingCreateRequest, location_name: "nodeInterfaceMappings"))
-    CreateNodeRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateNodeRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     CreateNodeRequest.add_member(:role, Shapes::ShapeRef.new(shape: NodeRole, location_name: "role"))
     CreateNodeRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateNodeRequest.struct_class = Types::CreateNodeRequest
@@ -2136,12 +2139,12 @@ module Aws::MediaLive
     CreateNodeResponse.add_member(:sdi_source_mappings, Shapes::ShapeRef.new(shape: SdiSourceMappings, location_name: "sdiSourceMappings"))
     CreateNodeResponse.struct_class = Types::CreateNodeResponse
 
-    CreatePartnerInput.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreatePartnerInput.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     CreatePartnerInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreatePartnerInput.struct_class = Types::CreatePartnerInput
 
     CreatePartnerInputRequest.add_member(:input_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputId"))
-    CreatePartnerInputRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreatePartnerInputRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     CreatePartnerInputRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreatePartnerInputRequest.struct_class = Types::CreatePartnerInputRequest
 
@@ -2153,7 +2156,7 @@ module Aws::MediaLive
 
     CreateSdiSourceRequest.add_member(:mode, Shapes::ShapeRef.new(shape: SdiSourceMode, location_name: "mode"))
     CreateSdiSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
-    CreateSdiSourceRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateSdiSourceRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     CreateSdiSourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateSdiSourceRequest.add_member(:type, Shapes::ShapeRef.new(shape: SdiSourceType, location_name: "type"))
     CreateSdiSourceRequest.struct_class = Types::CreateSdiSourceRequest
@@ -2167,7 +2170,7 @@ module Aws::MediaLive
     CreateSignalMapRequest.add_member(:event_bridge_rule_template_group_identifiers, Shapes::ShapeRef.new(shape: __listOf__stringPatternS, location_name: "eventBridgeRuleTemplateGroupIdentifiers"))
     CreateSignalMapRequest.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
     CreateSignalMapRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateSignalMapRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternS, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateSignalMapRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternS, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     CreateSignalMapRequest.struct_class = Types::CreateSignalMapRequest
 
     CreateSignalMapRequestContent.add_member(:cloud_watch_alarm_template_group_identifiers, Shapes::ShapeRef.new(shape: __listOf__stringPatternS, location_name: "cloudWatchAlarmTemplateGroupIdentifiers"))
@@ -2176,7 +2179,7 @@ module Aws::MediaLive
     CreateSignalMapRequestContent.add_member(:event_bridge_rule_template_group_identifiers, Shapes::ShapeRef.new(shape: __listOf__stringPatternS, location_name: "eventBridgeRuleTemplateGroupIdentifiers"))
     CreateSignalMapRequestContent.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max255PatternS, required: true, location_name: "name"))
     CreateSignalMapRequestContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateSignalMapRequestContent.add_member(:request_id, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternS, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateSignalMapRequestContent.add_member(:request_id, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternS, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     CreateSignalMapRequestContent.struct_class = Types::CreateSignalMapRequestContent
 
     CreateSignalMapResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __stringPatternArnMedialiveSignalMap, location_name: "arn"))
@@ -4290,6 +4293,7 @@ module Aws::MediaLive
     OutputDestination.add_member(:multiplex_settings, Shapes::ShapeRef.new(shape: MultiplexProgramChannelDestinationSettings, location_name: "multiplexSettings"))
     OutputDestination.add_member(:settings, Shapes::ShapeRef.new(shape: __listOfOutputDestinationSettings, location_name: "settings"))
     OutputDestination.add_member(:srt_settings, Shapes::ShapeRef.new(shape: __listOfSrtOutputDestinationSettings, location_name: "srtSettings"))
+    OutputDestination.add_member(:logical_interface_names, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "logicalInterfaceNames"))
     OutputDestination.struct_class = Types::OutputDestination
 
     OutputDestinationSettings.add_member(:password_param, Shapes::ShapeRef.new(shape: __string, location_name: "passwordParam"))
@@ -4355,7 +4359,7 @@ module Aws::MediaLive
     PurchaseOffering.add_member(:count, Shapes::ShapeRef.new(shape: __integerMin1, required: true, location_name: "count"))
     PurchaseOffering.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     PurchaseOffering.add_member(:renewal_settings, Shapes::ShapeRef.new(shape: RenewalSettings, location_name: "renewalSettings"))
-    PurchaseOffering.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    PurchaseOffering.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     PurchaseOffering.add_member(:start, Shapes::ShapeRef.new(shape: __string, location_name: "start"))
     PurchaseOffering.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     PurchaseOffering.struct_class = Types::PurchaseOffering
@@ -4364,7 +4368,7 @@ module Aws::MediaLive
     PurchaseOfferingRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     PurchaseOfferingRequest.add_member(:offering_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "offeringId"))
     PurchaseOfferingRequest.add_member(:renewal_settings, Shapes::ShapeRef.new(shape: RenewalSettings, location_name: "renewalSettings"))
-    PurchaseOfferingRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    PurchaseOfferingRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken" => true}))
     PurchaseOfferingRequest.add_member(:start, Shapes::ShapeRef.new(shape: __string, location_name: "start"))
     PurchaseOfferingRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     PurchaseOfferingRequest.struct_class = Types::PurchaseOfferingRequest
@@ -5106,6 +5110,7 @@ module Aws::MediaLive
     UpdateChannel.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     UpdateChannel.add_member(:channel_engine_version, Shapes::ShapeRef.new(shape: ChannelEngineVersionRequest, location_name: "channelEngineVersion"))
     UpdateChannel.add_member(:dry_run, Shapes::ShapeRef.new(shape: __boolean, location_name: "dryRun"))
+    UpdateChannel.add_member(:anywhere_settings, Shapes::ShapeRef.new(shape: AnywhereSettings, location_name: "anywhereSettings"))
     UpdateChannel.struct_class = Types::UpdateChannel
 
     UpdateChannelClass.add_member(:channel_class, Shapes::ShapeRef.new(shape: ChannelClass, required: true, location_name: "channelClass"))
@@ -5147,6 +5152,7 @@ module Aws::MediaLive
     UpdateChannelRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     UpdateChannelRequest.add_member(:channel_engine_version, Shapes::ShapeRef.new(shape: ChannelEngineVersionRequest, location_name: "channelEngineVersion"))
     UpdateChannelRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: __boolean, location_name: "dryRun"))
+    UpdateChannelRequest.add_member(:anywhere_settings, Shapes::ShapeRef.new(shape: AnywhereSettings, location_name: "anywhereSettings"))
     UpdateChannelRequest.struct_class = Types::UpdateChannelRequest
 
     UpdateChannelResponse.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
@@ -5399,7 +5405,7 @@ module Aws::MediaLive
     UpdateInputResultModel.struct_class = Types::UpdateInputResultModel
 
     UpdateInputSecurityGroupRequest.add_member(:input_security_group_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputSecurityGroupId"))
-    UpdateInputSecurityGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, deprecated: true, location_name: "tags", metadata: {"deprecatedMessage"=>"This API is deprecated. You must use UpdateTagsForResource instead.", "deprecatedSince"=>"2024-11-20"}))
+    UpdateInputSecurityGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, deprecated: true, location_name: "tags", metadata: {"deprecatedMessage" => "This API is deprecated. You must use UpdateTagsForResource instead.", "deprecatedSince" => "2024-11-20"}))
     UpdateInputSecurityGroupRequest.add_member(:whitelist_rules, Shapes::ShapeRef.new(shape: __listOfInputWhitelistRuleCidr, location_name: "whitelistRules"))
     UpdateInputSecurityGroupRequest.struct_class = Types::UpdateInputSecurityGroupRequest
 

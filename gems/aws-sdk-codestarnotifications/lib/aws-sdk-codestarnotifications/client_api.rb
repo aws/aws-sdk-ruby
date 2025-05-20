@@ -109,7 +109,7 @@ module Aws::CodeStarNotifications
     CreateNotificationRuleRequest.add_member(:resource, Shapes::ShapeRef.new(shape: NotificationRuleResource, required: true, location_name: "Resource"))
     CreateNotificationRuleRequest.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, required: true, location_name: "Targets"))
     CreateNotificationRuleRequest.add_member(:detail_type, Shapes::ShapeRef.new(shape: DetailType, required: true, location_name: "DetailType"))
-    CreateNotificationRuleRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateNotificationRuleRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateNotificationRuleRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateNotificationRuleRequest.add_member(:status, Shapes::ShapeRef.new(shape: NotificationRuleStatus, location_name: "Status"))
     CreateNotificationRuleRequest.struct_class = Types::CreateNotificationRuleRequest
@@ -169,7 +169,7 @@ module Aws::CodeStarNotifications
 
     ListEventTypesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ListEventTypesFilters, location_name: "Filters"))
     ListEventTypesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListEventTypesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListEventTypesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     ListEventTypesRequest.struct_class = Types::ListEventTypesRequest
 
     ListEventTypesResult.add_member(:event_types, Shapes::ShapeRef.new(shape: EventTypeBatch, location_name: "EventTypes"))
@@ -184,7 +184,7 @@ module Aws::CodeStarNotifications
 
     ListNotificationRulesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ListNotificationRulesFilters, location_name: "Filters"))
     ListNotificationRulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListNotificationRulesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListNotificationRulesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     ListNotificationRulesRequest.struct_class = Types::ListNotificationRulesRequest
 
     ListNotificationRulesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -205,7 +205,7 @@ module Aws::CodeStarNotifications
 
     ListTargetsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ListTargetsFilters, location_name: "Filters"))
     ListTargetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    ListTargetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListTargetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     ListTargetsRequest.struct_class = Types::ListTargetsRequest
 
     ListTargetsResult.add_member(:targets, Shapes::ShapeRef.new(shape: TargetsBatch, location_name: "Targets"))

@@ -102,7 +102,7 @@ module Aws::RedshiftDataAPIService
     BatchExecuteStatementException.add_member(:statement_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "StatementId"))
     BatchExecuteStatementException.struct_class = Types::BatchExecuteStatementException
 
-    BatchExecuteStatementInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    BatchExecuteStatementInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     BatchExecuteStatementInput.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: ClusterIdentifierString, location_name: "ClusterIdentifier"))
     BatchExecuteStatementInput.add_member(:database, Shapes::ShapeRef.new(shape: String, location_name: "Database"))
     BatchExecuteStatementInput.add_member(:db_user, Shapes::ShapeRef.new(shape: String, location_name: "DbUser"))
@@ -206,7 +206,7 @@ module Aws::RedshiftDataAPIService
     ExecuteStatementException.add_member(:statement_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "StatementId"))
     ExecuteStatementException.struct_class = Types::ExecuteStatementException
 
-    ExecuteStatementInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    ExecuteStatementInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     ExecuteStatementInput.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: ClusterIdentifierString, location_name: "ClusterIdentifier"))
     ExecuteStatementInput.add_member(:database, Shapes::ShapeRef.new(shape: String, location_name: "Database"))
     ExecuteStatementInput.add_member(:db_user, Shapes::ShapeRef.new(shape: String, location_name: "DbUser"))

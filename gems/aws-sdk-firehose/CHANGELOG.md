@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.93.0 (2025-05-14)
+------------------
+
+* Feature - This release adds catalogARN support for s3 tables multi-catalog catalogARNs.
+
+1.92.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.91.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.90.0 (2025-04-21)
 ------------------
 

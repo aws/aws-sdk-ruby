@@ -186,7 +186,7 @@ module Aws::FinSpaceData
 
     AssociateUserToPermissionGroupRequest.add_member(:permission_group_id, Shapes::ShapeRef.new(shape: PermissionGroupId, required: true, location: "uri", location_name: "permissionGroupId"))
     AssociateUserToPermissionGroupRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "userId"))
-    AssociateUserToPermissionGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    AssociateUserToPermissionGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     AssociateUserToPermissionGroupRequest.struct_class = Types::AssociateUserToPermissionGroupRequest
 
     AssociateUserToPermissionGroupResponse.add_member(:status_code, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "statusCode"))
@@ -213,8 +213,8 @@ module Aws::FinSpaceData
     ChangesetSummary.add_member(:create_time, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "createTime"))
     ChangesetSummary.add_member(:status, Shapes::ShapeRef.new(shape: IngestionStatus, location_name: "status"))
     ChangesetSummary.add_member(:error_info, Shapes::ShapeRef.new(shape: ChangesetErrorInfo, location_name: "errorInfo"))
-    ChangesetSummary.add_member(:active_until_timestamp, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "activeUntilTimestamp", metadata: {"box"=>true}))
-    ChangesetSummary.add_member(:active_from_timestamp, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "activeFromTimestamp", metadata: {"box"=>true}))
+    ChangesetSummary.add_member(:active_until_timestamp, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "activeUntilTimestamp", metadata: {"box" => true}))
+    ChangesetSummary.add_member(:active_from_timestamp, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "activeFromTimestamp", metadata: {"box" => true}))
     ChangesetSummary.add_member(:updates_changeset_id, Shapes::ShapeRef.new(shape: ChangesetId, location_name: "updatesChangesetId"))
     ChangesetSummary.add_member(:updated_by_changeset_id, Shapes::ShapeRef.new(shape: ChangesetId, location_name: "updatedByChangesetId"))
     ChangesetSummary.struct_class = Types::ChangesetSummary
@@ -232,7 +232,7 @@ module Aws::FinSpaceData
     ConflictException.add_member(:reason, Shapes::ShapeRef.new(shape: errorMessage, location_name: "reason"))
     ConflictException.struct_class = Types::ConflictException
 
-    CreateChangesetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateChangesetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateChangesetRequest.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, required: true, location: "uri", location_name: "datasetId"))
     CreateChangesetRequest.add_member(:change_type, Shapes::ShapeRef.new(shape: ChangeType, required: true, location_name: "changeType"))
     CreateChangesetRequest.add_member(:source_params, Shapes::ShapeRef.new(shape: SourceParams, required: true, location_name: "sourceParams"))
@@ -243,12 +243,12 @@ module Aws::FinSpaceData
     CreateChangesetResponse.add_member(:changeset_id, Shapes::ShapeRef.new(shape: ChangesetId, location_name: "changesetId"))
     CreateChangesetResponse.struct_class = Types::CreateChangesetResponse
 
-    CreateDataViewRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDataViewRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateDataViewRequest.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, required: true, location: "uri", location_name: "datasetId"))
     CreateDataViewRequest.add_member(:auto_update, Shapes::ShapeRef.new(shape: Boolean, location_name: "autoUpdate"))
     CreateDataViewRequest.add_member(:sort_columns, Shapes::ShapeRef.new(shape: SortColumnList, location_name: "sortColumns"))
     CreateDataViewRequest.add_member(:partition_columns, Shapes::ShapeRef.new(shape: PartitionColumnList, location_name: "partitionColumns"))
-    CreateDataViewRequest.add_member(:as_of_timestamp, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "asOfTimestamp", metadata: {"box"=>true}))
+    CreateDataViewRequest.add_member(:as_of_timestamp, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "asOfTimestamp", metadata: {"box" => true}))
     CreateDataViewRequest.add_member(:destination_type_params, Shapes::ShapeRef.new(shape: DataViewDestinationTypeParams, required: true, location_name: "destinationTypeParams"))
     CreateDataViewRequest.struct_class = Types::CreateDataViewRequest
 
@@ -256,7 +256,7 @@ module Aws::FinSpaceData
     CreateDataViewResponse.add_member(:data_view_id, Shapes::ShapeRef.new(shape: DataViewId, location_name: "dataViewId"))
     CreateDataViewResponse.struct_class = Types::CreateDataViewResponse
 
-    CreateDatasetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDatasetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateDatasetRequest.add_member(:dataset_title, Shapes::ShapeRef.new(shape: DatasetTitle, required: true, location_name: "datasetTitle"))
     CreateDatasetRequest.add_member(:kind, Shapes::ShapeRef.new(shape: DatasetKind, required: true, location_name: "kind"))
     CreateDatasetRequest.add_member(:dataset_description, Shapes::ShapeRef.new(shape: DatasetDescription, location_name: "datasetDescription"))
@@ -272,7 +272,7 @@ module Aws::FinSpaceData
     CreatePermissionGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: PermissionGroupName, required: true, location_name: "name"))
     CreatePermissionGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: PermissionGroupDescription, location_name: "description"))
     CreatePermissionGroupRequest.add_member(:application_permissions, Shapes::ShapeRef.new(shape: ApplicationPermissionList, required: true, location_name: "applicationPermissions"))
-    CreatePermissionGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreatePermissionGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreatePermissionGroupRequest.struct_class = Types::CreatePermissionGroupRequest
 
     CreatePermissionGroupResponse.add_member(:permission_group_id, Shapes::ShapeRef.new(shape: PermissionGroupId, location_name: "permissionGroupId"))
@@ -284,7 +284,7 @@ module Aws::FinSpaceData
     CreateUserRequest.add_member(:last_name, Shapes::ShapeRef.new(shape: LastName, location_name: "lastName"))
     CreateUserRequest.add_member(:api_access, Shapes::ShapeRef.new(shape: ApiAccess, location_name: "apiAccess"))
     CreateUserRequest.add_member(:api_access_principal_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "apiAccessPrincipalArn"))
-    CreateUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateUserRequest.struct_class = Types::CreateUserRequest
 
     CreateUserResponse.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "userId"))
@@ -309,7 +309,7 @@ module Aws::FinSpaceData
     DataViewSummary.add_member(:data_view_id, Shapes::ShapeRef.new(shape: DataViewId, location_name: "dataViewId"))
     DataViewSummary.add_member(:data_view_arn, Shapes::ShapeRef.new(shape: DataViewArn, location_name: "dataViewArn"))
     DataViewSummary.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, location_name: "datasetId"))
-    DataViewSummary.add_member(:as_of_timestamp, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "asOfTimestamp", metadata: {"box"=>true}))
+    DataViewSummary.add_member(:as_of_timestamp, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "asOfTimestamp", metadata: {"box" => true}))
     DataViewSummary.add_member(:partition_columns, Shapes::ShapeRef.new(shape: PartitionColumnList, location_name: "partitionColumns"))
     DataViewSummary.add_member(:sort_columns, Shapes::ShapeRef.new(shape: SortColumnList, location_name: "sortColumns"))
     DataViewSummary.add_member(:status, Shapes::ShapeRef.new(shape: DataViewStatus, location_name: "status"))
@@ -339,7 +339,7 @@ module Aws::FinSpaceData
     DatasetOwnerInfo.add_member(:email, Shapes::ShapeRef.new(shape: Email, location_name: "email"))
     DatasetOwnerInfo.struct_class = Types::DatasetOwnerInfo
 
-    DeleteDatasetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteDatasetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteDatasetRequest.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, required: true, location: "uri", location_name: "datasetId"))
     DeleteDatasetRequest.struct_class = Types::DeleteDatasetRequest
 
@@ -347,14 +347,14 @@ module Aws::FinSpaceData
     DeleteDatasetResponse.struct_class = Types::DeleteDatasetResponse
 
     DeletePermissionGroupRequest.add_member(:permission_group_id, Shapes::ShapeRef.new(shape: PermissionGroupId, required: true, location: "uri", location_name: "permissionGroupId"))
-    DeletePermissionGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeletePermissionGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeletePermissionGroupRequest.struct_class = Types::DeletePermissionGroupRequest
 
     DeletePermissionGroupResponse.add_member(:permission_group_id, Shapes::ShapeRef.new(shape: PermissionGroupId, location_name: "permissionGroupId"))
     DeletePermissionGroupResponse.struct_class = Types::DeletePermissionGroupResponse
 
     DisableUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "userId"))
-    DisableUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DisableUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DisableUserRequest.struct_class = Types::DisableUserRequest
 
     DisableUserResponse.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "userId"))
@@ -362,14 +362,14 @@ module Aws::FinSpaceData
 
     DisassociateUserFromPermissionGroupRequest.add_member(:permission_group_id, Shapes::ShapeRef.new(shape: PermissionGroupId, required: true, location: "uri", location_name: "permissionGroupId"))
     DisassociateUserFromPermissionGroupRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "userId"))
-    DisassociateUserFromPermissionGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DisassociateUserFromPermissionGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DisassociateUserFromPermissionGroupRequest.struct_class = Types::DisassociateUserFromPermissionGroupRequest
 
     DisassociateUserFromPermissionGroupResponse.add_member(:status_code, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "statusCode"))
     DisassociateUserFromPermissionGroupResponse.struct_class = Types::DisassociateUserFromPermissionGroupResponse
 
     EnableUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "userId"))
-    EnableUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    EnableUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     EnableUserRequest.struct_class = Types::EnableUserRequest
 
     EnableUserResponse.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "userId"))
@@ -391,8 +391,8 @@ module Aws::FinSpaceData
     GetChangesetResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "createTime"))
     GetChangesetResponse.add_member(:status, Shapes::ShapeRef.new(shape: IngestionStatus, location_name: "status"))
     GetChangesetResponse.add_member(:error_info, Shapes::ShapeRef.new(shape: ChangesetErrorInfo, location_name: "errorInfo"))
-    GetChangesetResponse.add_member(:active_until_timestamp, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "activeUntilTimestamp", metadata: {"box"=>true}))
-    GetChangesetResponse.add_member(:active_from_timestamp, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "activeFromTimestamp", metadata: {"box"=>true}))
+    GetChangesetResponse.add_member(:active_until_timestamp, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "activeUntilTimestamp", metadata: {"box" => true}))
+    GetChangesetResponse.add_member(:active_from_timestamp, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "activeFromTimestamp", metadata: {"box" => true}))
     GetChangesetResponse.add_member(:updates_changeset_id, Shapes::ShapeRef.new(shape: ChangesetId, location_name: "updatesChangesetId"))
     GetChangesetResponse.add_member(:updated_by_changeset_id, Shapes::ShapeRef.new(shape: ChangesetId, location_name: "updatedByChangesetId"))
     GetChangesetResponse.struct_class = Types::GetChangesetResponse
@@ -404,7 +404,7 @@ module Aws::FinSpaceData
     GetDataViewResponse.add_member(:auto_update, Shapes::ShapeRef.new(shape: Boolean, location_name: "autoUpdate"))
     GetDataViewResponse.add_member(:partition_columns, Shapes::ShapeRef.new(shape: PartitionColumnList, location_name: "partitionColumns"))
     GetDataViewResponse.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, location_name: "datasetId"))
-    GetDataViewResponse.add_member(:as_of_timestamp, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "asOfTimestamp", metadata: {"box"=>true}))
+    GetDataViewResponse.add_member(:as_of_timestamp, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "asOfTimestamp", metadata: {"box" => true}))
     GetDataViewResponse.add_member(:error_info, Shapes::ShapeRef.new(shape: DataViewErrorInfo, location_name: "errorInfo"))
     GetDataViewResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "lastModifiedTime"))
     GetDataViewResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "createTime"))
@@ -485,7 +485,7 @@ module Aws::FinSpaceData
     LimitExceededException.struct_class = Types::LimitExceededException
 
     ListChangesetsRequest.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, required: true, location: "uri", location_name: "datasetId"))
-    ListChangesetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResultLimit, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListChangesetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResultLimit, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
     ListChangesetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
     ListChangesetsRequest.struct_class = Types::ListChangesetsRequest
 
@@ -495,7 +495,7 @@ module Aws::FinSpaceData
 
     ListDataViewsRequest.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, required: true, location: "uri", location_name: "datasetId"))
     ListDataViewsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
-    ListDataViewsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResultLimit, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListDataViewsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResultLimit, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
     ListDataViewsRequest.struct_class = Types::ListDataViewsRequest
 
     ListDataViewsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
@@ -503,7 +503,7 @@ module Aws::FinSpaceData
     ListDataViewsResponse.struct_class = Types::ListDataViewsResponse
 
     ListDatasetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
-    ListDatasetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResultLimit, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListDatasetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResultLimit, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
     ListDatasetsRequest.struct_class = Types::ListDatasetsRequest
 
     ListDatasetsResponse.add_member(:datasets, Shapes::ShapeRef.new(shape: DatasetList, location_name: "datasets"))
@@ -569,7 +569,7 @@ module Aws::FinSpaceData
     PermissionGroupParams.struct_class = Types::PermissionGroupParams
 
     ResetUserPasswordRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "userId"))
-    ResetUserPasswordRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    ResetUserPasswordRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     ResetUserPasswordRequest.struct_class = Types::ResetUserPasswordRequest
 
     ResetUserPasswordResponse.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "userId"))
@@ -606,7 +606,7 @@ module Aws::FinSpaceData
 
     ThrottlingException.struct_class = Types::ThrottlingException
 
-    UpdateChangesetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateChangesetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateChangesetRequest.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, required: true, location: "uri", location_name: "datasetId"))
     UpdateChangesetRequest.add_member(:changeset_id, Shapes::ShapeRef.new(shape: ChangesetId, required: true, location: "uri", location_name: "changesetId"))
     UpdateChangesetRequest.add_member(:source_params, Shapes::ShapeRef.new(shape: SourceParams, required: true, location_name: "sourceParams"))
@@ -617,7 +617,7 @@ module Aws::FinSpaceData
     UpdateChangesetResponse.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, location_name: "datasetId"))
     UpdateChangesetResponse.struct_class = Types::UpdateChangesetResponse
 
-    UpdateDatasetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateDatasetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateDatasetRequest.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, required: true, location: "uri", location_name: "datasetId"))
     UpdateDatasetRequest.add_member(:dataset_title, Shapes::ShapeRef.new(shape: DatasetTitle, required: true, location_name: "datasetTitle"))
     UpdateDatasetRequest.add_member(:kind, Shapes::ShapeRef.new(shape: DatasetKind, required: true, location_name: "kind"))
@@ -633,7 +633,7 @@ module Aws::FinSpaceData
     UpdatePermissionGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: PermissionGroupName, location_name: "name"))
     UpdatePermissionGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: PermissionGroupDescription, location_name: "description"))
     UpdatePermissionGroupRequest.add_member(:application_permissions, Shapes::ShapeRef.new(shape: ApplicationPermissionList, location_name: "applicationPermissions"))
-    UpdatePermissionGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdatePermissionGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdatePermissionGroupRequest.struct_class = Types::UpdatePermissionGroupRequest
 
     UpdatePermissionGroupResponse.add_member(:permission_group_id, Shapes::ShapeRef.new(shape: PermissionGroupId, location_name: "permissionGroupId"))
@@ -645,7 +645,7 @@ module Aws::FinSpaceData
     UpdateUserRequest.add_member(:last_name, Shapes::ShapeRef.new(shape: LastName, location_name: "lastName"))
     UpdateUserRequest.add_member(:api_access, Shapes::ShapeRef.new(shape: ApiAccess, location_name: "apiAccess"))
     UpdateUserRequest.add_member(:api_access_principal_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "apiAccessPrincipalArn"))
-    UpdateUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateUserRequest.struct_class = Types::UpdateUserRequest
 
     UpdateUserResponse.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "userId"))

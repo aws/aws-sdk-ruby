@@ -208,7 +208,7 @@ module Aws::BedrockDataAutomation
     CreateBlueprintRequest.add_member(:type, Shapes::ShapeRef.new(shape: Type, required: true, location_name: "type"))
     CreateBlueprintRequest.add_member(:blueprint_stage, Shapes::ShapeRef.new(shape: BlueprintStage, location_name: "blueprintStage"))
     CreateBlueprintRequest.add_member(:schema, Shapes::ShapeRef.new(shape: BlueprintSchema, required: true, location_name: "schema"))
-    CreateBlueprintRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateBlueprintRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateBlueprintRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
     CreateBlueprintRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateBlueprintRequest.struct_class = Types::CreateBlueprintRequest
@@ -217,7 +217,7 @@ module Aws::BedrockDataAutomation
     CreateBlueprintResponse.struct_class = Types::CreateBlueprintResponse
 
     CreateBlueprintVersionRequest.add_member(:blueprint_arn, Shapes::ShapeRef.new(shape: BlueprintArn, required: true, location: "uri", location_name: "blueprintArn"))
-    CreateBlueprintVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateBlueprintVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateBlueprintVersionRequest.struct_class = Types::CreateBlueprintVersionRequest
 
     CreateBlueprintVersionResponse.add_member(:blueprint, Shapes::ShapeRef.new(shape: Blueprint, required: true, location_name: "blueprint"))
@@ -229,7 +229,7 @@ module Aws::BedrockDataAutomation
     CreateDataAutomationProjectRequest.add_member(:standard_output_configuration, Shapes::ShapeRef.new(shape: StandardOutputConfiguration, required: true, location_name: "standardOutputConfiguration"))
     CreateDataAutomationProjectRequest.add_member(:custom_output_configuration, Shapes::ShapeRef.new(shape: CustomOutputConfiguration, location_name: "customOutputConfiguration"))
     CreateDataAutomationProjectRequest.add_member(:override_configuration, Shapes::ShapeRef.new(shape: OverrideConfiguration, location_name: "overrideConfiguration"))
-    CreateDataAutomationProjectRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDataAutomationProjectRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateDataAutomationProjectRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
     CreateDataAutomationProjectRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateDataAutomationProjectRequest.struct_class = Types::CreateDataAutomationProjectRequest

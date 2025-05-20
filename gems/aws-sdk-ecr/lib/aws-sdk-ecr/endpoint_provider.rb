@@ -23,6 +23,12 @@ module Aws::ECR
         if (partition_result = Aws::Endpoints::Matchers.aws_partition(parameters.region))
           if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
             if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS")) && Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
+              if Aws::Endpoints::Matchers.string_equals?("aws", Aws::Endpoints::Matchers.attr(partition_result, "name"))
+                return Aws::Endpoints::Endpoint.new(url: "https://ecr-fips.#{parameters.region}.api.aws", headers: {}, properties: {})
+              end
+              if Aws::Endpoints::Matchers.string_equals?("aws-us-gov", Aws::Endpoints::Matchers.attr(partition_result, "name"))
+                return Aws::Endpoints::Endpoint.new(url: "https://ecr-fips.#{parameters.region}.api.aws", headers: {}, properties: {})
+              end
               return Aws::Endpoints::Endpoint.new(url: "https://api.ecr-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
@@ -41,6 +47,15 @@ module Aws::ECR
           end
           if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
             if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
+              if Aws::Endpoints::Matchers.string_equals?("aws", Aws::Endpoints::Matchers.attr(partition_result, "name"))
+                return Aws::Endpoints::Endpoint.new(url: "https://ecr.#{parameters.region}.api.aws", headers: {}, properties: {})
+              end
+              if Aws::Endpoints::Matchers.string_equals?("aws-cn", Aws::Endpoints::Matchers.attr(partition_result, "name"))
+                return Aws::Endpoints::Endpoint.new(url: "https://ecr.#{parameters.region}.api.amazonwebservices.com.cn", headers: {}, properties: {})
+              end
+              if Aws::Endpoints::Matchers.string_equals?("aws-us-gov", Aws::Endpoints::Matchers.attr(partition_result, "name"))
+                return Aws::Endpoints::Endpoint.new(url: "https://ecr.#{parameters.region}.api.aws", headers: {}, properties: {})
+              end
               return Aws::Endpoints::Endpoint.new(url: "https://api.ecr.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"

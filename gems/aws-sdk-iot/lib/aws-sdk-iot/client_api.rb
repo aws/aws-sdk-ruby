@@ -1600,7 +1600,7 @@ module Aws::IoT
     AssociateSbomWithPackageVersionRequest.add_member(:package_name, Shapes::ShapeRef.new(shape: PackageName, required: true, location: "uri", location_name: "packageName"))
     AssociateSbomWithPackageVersionRequest.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionName, required: true, location: "uri", location_name: "versionName"))
     AssociateSbomWithPackageVersionRequest.add_member(:sbom, Shapes::ShapeRef.new(shape: Sbom, required: true, location_name: "sbom"))
-    AssociateSbomWithPackageVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    AssociateSbomWithPackageVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     AssociateSbomWithPackageVersionRequest.struct_class = Types::AssociateSbomWithPackageVersionRequest
 
     AssociateSbomWithPackageVersionResponse.add_member(:package_name, Shapes::ShapeRef.new(shape: PackageName, location_name: "packageName"))
@@ -1759,7 +1759,7 @@ module Aws::IoT
     AuthResults.member = Shapes::ShapeRef.new(shape: AuthResult)
 
     AuthorizerConfig.add_member(:default_authorizer_name, Shapes::ShapeRef.new(shape: AuthorizerName, location_name: "defaultAuthorizerName"))
-    AuthorizerConfig.add_member(:allow_authorizer_override, Shapes::ShapeRef.new(shape: AllowAuthorizerOverride, location_name: "allowAuthorizerOverride", metadata: {"box"=>true}))
+    AuthorizerConfig.add_member(:allow_authorizer_override, Shapes::ShapeRef.new(shape: AllowAuthorizerOverride, location_name: "allowAuthorizerOverride", metadata: {"box" => true}))
     AuthorizerConfig.struct_class = Types::AuthorizerConfig
 
     AuthorizerDescription.add_member(:authorizer_name, Shapes::ShapeRef.new(shape: AuthorizerName, location_name: "authorizerName"))
@@ -2080,7 +2080,7 @@ module Aws::IoT
     CreateAuditSuppressionRequest.add_member(:expiration_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expirationDate"))
     CreateAuditSuppressionRequest.add_member(:suppress_indefinitely, Shapes::ShapeRef.new(shape: SuppressIndefinitely, location_name: "suppressIndefinitely"))
     CreateAuditSuppressionRequest.add_member(:description, Shapes::ShapeRef.new(shape: AuditDescription, location_name: "description"))
-    CreateAuditSuppressionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateAuditSuppressionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateAuditSuppressionRequest.struct_class = Types::CreateAuditSuppressionRequest
 
     CreateAuditSuppressionResponse.struct_class = Types::CreateAuditSuppressionResponse
@@ -2121,7 +2121,7 @@ module Aws::IoT
     CreateCertificateProviderRequest.add_member(:certificate_provider_name, Shapes::ShapeRef.new(shape: CertificateProviderName, required: true, location: "uri", location_name: "certificateProviderName"))
     CreateCertificateProviderRequest.add_member(:lambda_function_arn, Shapes::ShapeRef.new(shape: CertificateProviderFunctionArn, required: true, location_name: "lambdaFunctionArn"))
     CreateCertificateProviderRequest.add_member(:account_default_for_operations, Shapes::ShapeRef.new(shape: CertificateProviderAccountDefaultForOperations, required: true, location_name: "accountDefaultForOperations"))
-    CreateCertificateProviderRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateCertificateProviderRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateCertificateProviderRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateCertificateProviderRequest.struct_class = Types::CreateCertificateProviderRequest
 
@@ -2147,7 +2147,7 @@ module Aws::IoT
     CreateCustomMetricRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: CustomMetricDisplayName, location_name: "displayName"))
     CreateCustomMetricRequest.add_member(:metric_type, Shapes::ShapeRef.new(shape: CustomMetricType, required: true, location_name: "metricType"))
     CreateCustomMetricRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
-    CreateCustomMetricRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateCustomMetricRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateCustomMetricRequest.struct_class = Types::CreateCustomMetricRequest
 
     CreateCustomMetricResponse.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, location_name: "metricName"))
@@ -2158,7 +2158,7 @@ module Aws::IoT
     CreateDimensionRequest.add_member(:type, Shapes::ShapeRef.new(shape: DimensionType, required: true, location_name: "type"))
     CreateDimensionRequest.add_member(:string_values, Shapes::ShapeRef.new(shape: DimensionStringValues, required: true, location_name: "stringValues"))
     CreateDimensionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
-    CreateDimensionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateDimensionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateDimensionRequest.struct_class = Types::CreateDimensionRequest
 
     CreateDimensionResponse.add_member(:name, Shapes::ShapeRef.new(shape: DimensionName, location_name: "name"))
@@ -2302,7 +2302,7 @@ module Aws::IoT
     CreatePackageRequest.add_member(:package_name, Shapes::ShapeRef.new(shape: PackageName, required: true, location: "uri", location_name: "packageName"))
     CreatePackageRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
     CreatePackageRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreatePackageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreatePackageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreatePackageRequest.struct_class = Types::CreatePackageRequest
 
     CreatePackageResponse.add_member(:package_name, Shapes::ShapeRef.new(shape: PackageName, location_name: "packageName"))
@@ -2317,7 +2317,7 @@ module Aws::IoT
     CreatePackageVersionRequest.add_member(:artifact, Shapes::ShapeRef.new(shape: PackageVersionArtifact, location_name: "artifact"))
     CreatePackageVersionRequest.add_member(:recipe, Shapes::ShapeRef.new(shape: PackageVersionRecipe, location_name: "recipe"))
     CreatePackageVersionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreatePackageVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreatePackageVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreatePackageVersionRequest.struct_class = Types::CreatePackageVersionRequest
 
     CreatePackageVersionResponse.add_member(:package_version_arn, Shapes::ShapeRef.new(shape: PackageVersionArn, location_name: "packageVersionArn"))
@@ -2411,7 +2411,7 @@ module Aws::IoT
     CreateSecurityProfileRequest.add_member(:security_profile_description, Shapes::ShapeRef.new(shape: SecurityProfileDescription, location_name: "securityProfileDescription"))
     CreateSecurityProfileRequest.add_member(:behaviors, Shapes::ShapeRef.new(shape: Behaviors, location_name: "behaviors"))
     CreateSecurityProfileRequest.add_member(:alert_targets, Shapes::ShapeRef.new(shape: AlertTargets, location_name: "alertTargets"))
-    CreateSecurityProfileRequest.add_member(:additional_metrics_to_retain, Shapes::ShapeRef.new(shape: AdditionalMetricsToRetainList, deprecated: true, location_name: "additionalMetricsToRetain", metadata: {"deprecatedMessage"=>"Use additionalMetricsToRetainV2."}))
+    CreateSecurityProfileRequest.add_member(:additional_metrics_to_retain, Shapes::ShapeRef.new(shape: AdditionalMetricsToRetainList, deprecated: true, location_name: "additionalMetricsToRetain", metadata: {"deprecatedMessage" => "Use additionalMetricsToRetainV2."}))
     CreateSecurityProfileRequest.add_member(:additional_metrics_to_retain_v2, Shapes::ShapeRef.new(shape: AdditionalMetricsToRetainV2List, location_name: "additionalMetricsToRetainV2"))
     CreateSecurityProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateSecurityProfileRequest.add_member(:metrics_export_config, Shapes::ShapeRef.new(shape: MetricsExportConfig, location_name: "metricsExportConfig"))
@@ -2589,14 +2589,14 @@ module Aws::IoT
     DeleteOTAUpdateResponse.struct_class = Types::DeleteOTAUpdateResponse
 
     DeletePackageRequest.add_member(:package_name, Shapes::ShapeRef.new(shape: PackageName, required: true, location: "uri", location_name: "packageName"))
-    DeletePackageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeletePackageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeletePackageRequest.struct_class = Types::DeletePackageRequest
 
     DeletePackageResponse.struct_class = Types::DeletePackageResponse
 
     DeletePackageVersionRequest.add_member(:package_name, Shapes::ShapeRef.new(shape: PackageName, required: true, location: "uri", location_name: "packageName"))
     DeletePackageVersionRequest.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionName, required: true, location: "uri", location_name: "versionName"))
-    DeletePackageVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeletePackageVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeletePackageVersionRequest.struct_class = Types::DeletePackageVersionRequest
 
     DeletePackageVersionResponse.struct_class = Types::DeletePackageVersionResponse
@@ -2973,7 +2973,7 @@ module Aws::IoT
     DescribeSecurityProfileResponse.add_member(:security_profile_description, Shapes::ShapeRef.new(shape: SecurityProfileDescription, location_name: "securityProfileDescription"))
     DescribeSecurityProfileResponse.add_member(:behaviors, Shapes::ShapeRef.new(shape: Behaviors, location_name: "behaviors"))
     DescribeSecurityProfileResponse.add_member(:alert_targets, Shapes::ShapeRef.new(shape: AlertTargets, location_name: "alertTargets"))
-    DescribeSecurityProfileResponse.add_member(:additional_metrics_to_retain, Shapes::ShapeRef.new(shape: AdditionalMetricsToRetainList, deprecated: true, location_name: "additionalMetricsToRetain", metadata: {"deprecatedMessage"=>"Use additionalMetricsToRetainV2."}))
+    DescribeSecurityProfileResponse.add_member(:additional_metrics_to_retain, Shapes::ShapeRef.new(shape: AdditionalMetricsToRetainList, deprecated: true, location_name: "additionalMetricsToRetain", metadata: {"deprecatedMessage" => "Use additionalMetricsToRetainV2."}))
     DescribeSecurityProfileResponse.add_member(:additional_metrics_to_retain_v2, Shapes::ShapeRef.new(shape: AdditionalMetricsToRetainV2List, location_name: "additionalMetricsToRetainV2"))
     DescribeSecurityProfileResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     DescribeSecurityProfileResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDate"))
@@ -3118,7 +3118,7 @@ module Aws::IoT
 
     DisassociateSbomFromPackageVersionRequest.add_member(:package_name, Shapes::ShapeRef.new(shape: PackageName, required: true, location: "uri", location_name: "packageName"))
     DisassociateSbomFromPackageVersionRequest.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionName, required: true, location: "uri", location_name: "versionName"))
-    DisassociateSbomFromPackageVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DisassociateSbomFromPackageVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DisassociateSbomFromPackageVersionRequest.struct_class = Types::DisassociateSbomFromPackageVersionRequest
 
     DisassociateSbomFromPackageVersionResponse.struct_class = Types::DisassociateSbomFromPackageVersionResponse
@@ -4917,7 +4917,7 @@ module Aws::IoT
     StartAuditMitigationActionsTaskRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: MitigationActionsTaskId, required: true, location: "uri", location_name: "taskId"))
     StartAuditMitigationActionsTaskRequest.add_member(:target, Shapes::ShapeRef.new(shape: AuditMitigationActionsTaskTarget, required: true, location_name: "target"))
     StartAuditMitigationActionsTaskRequest.add_member(:audit_check_to_actions_mapping, Shapes::ShapeRef.new(shape: AuditCheckToActionsMapping, required: true, location_name: "auditCheckToActionsMapping"))
-    StartAuditMitigationActionsTaskRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    StartAuditMitigationActionsTaskRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     StartAuditMitigationActionsTaskRequest.struct_class = Types::StartAuditMitigationActionsTaskRequest
 
     StartAuditMitigationActionsTaskResponse.add_member(:task_id, Shapes::ShapeRef.new(shape: MitigationActionsTaskId, location_name: "taskId"))
@@ -4929,7 +4929,7 @@ module Aws::IoT
     StartDetectMitigationActionsTaskRequest.add_member(:violation_event_occurrence_range, Shapes::ShapeRef.new(shape: ViolationEventOccurrenceRange, location_name: "violationEventOccurrenceRange"))
     StartDetectMitigationActionsTaskRequest.add_member(:include_only_active_violations, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "includeOnlyActiveViolations"))
     StartDetectMitigationActionsTaskRequest.add_member(:include_suppressed_alerts, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "includeSuppressedAlerts"))
-    StartDetectMitigationActionsTaskRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    StartDetectMitigationActionsTaskRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     StartDetectMitigationActionsTaskRequest.struct_class = Types::StartDetectMitigationActionsTaskRequest
 
     StartDetectMitigationActionsTaskResponse.add_member(:task_id, Shapes::ShapeRef.new(shape: MitigationActionsTaskId, location_name: "taskId"))
@@ -4959,13 +4959,13 @@ module Aws::IoT
     StatisticalThreshold.struct_class = Types::StatisticalThreshold
 
     Statistics.add_member(:count, Shapes::ShapeRef.new(shape: Count, location_name: "count"))
-    Statistics.add_member(:average, Shapes::ShapeRef.new(shape: Average, location_name: "average", metadata: {"box"=>true}))
-    Statistics.add_member(:sum, Shapes::ShapeRef.new(shape: Sum, location_name: "sum", metadata: {"box"=>true}))
-    Statistics.add_member(:minimum, Shapes::ShapeRef.new(shape: Minimum, location_name: "minimum", metadata: {"box"=>true}))
-    Statistics.add_member(:maximum, Shapes::ShapeRef.new(shape: Maximum, location_name: "maximum", metadata: {"box"=>true}))
-    Statistics.add_member(:sum_of_squares, Shapes::ShapeRef.new(shape: SumOfSquares, location_name: "sumOfSquares", metadata: {"box"=>true}))
-    Statistics.add_member(:variance, Shapes::ShapeRef.new(shape: Variance, location_name: "variance", metadata: {"box"=>true}))
-    Statistics.add_member(:std_deviation, Shapes::ShapeRef.new(shape: StdDeviation, location_name: "stdDeviation", metadata: {"box"=>true}))
+    Statistics.add_member(:average, Shapes::ShapeRef.new(shape: Average, location_name: "average", metadata: {"box" => true}))
+    Statistics.add_member(:sum, Shapes::ShapeRef.new(shape: Sum, location_name: "sum", metadata: {"box" => true}))
+    Statistics.add_member(:minimum, Shapes::ShapeRef.new(shape: Minimum, location_name: "minimum", metadata: {"box" => true}))
+    Statistics.add_member(:maximum, Shapes::ShapeRef.new(shape: Maximum, location_name: "maximum", metadata: {"box" => true}))
+    Statistics.add_member(:sum_of_squares, Shapes::ShapeRef.new(shape: SumOfSquares, location_name: "sumOfSquares", metadata: {"box" => true}))
+    Statistics.add_member(:variance, Shapes::ShapeRef.new(shape: Variance, location_name: "variance", metadata: {"box" => true}))
+    Statistics.add_member(:std_deviation, Shapes::ShapeRef.new(shape: StdDeviation, location_name: "stdDeviation", metadata: {"box" => true}))
     Statistics.struct_class = Types::Statistics
 
     StatusReason.add_member(:reason_code, Shapes::ShapeRef.new(shape: StatusReasonCode, required: true, location_name: "reasonCode"))
@@ -5464,7 +5464,7 @@ module Aws::IoT
     UpdateMitigationActionResponse.struct_class = Types::UpdateMitigationActionResponse
 
     UpdatePackageConfigurationRequest.add_member(:version_update_by_jobs_config, Shapes::ShapeRef.new(shape: VersionUpdateByJobsConfig, location_name: "versionUpdateByJobsConfig"))
-    UpdatePackageConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdatePackageConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdatePackageConfigurationRequest.struct_class = Types::UpdatePackageConfigurationRequest
 
     UpdatePackageConfigurationResponse.struct_class = Types::UpdatePackageConfigurationResponse
@@ -5473,7 +5473,7 @@ module Aws::IoT
     UpdatePackageRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
     UpdatePackageRequest.add_member(:default_version_name, Shapes::ShapeRef.new(shape: VersionName, location_name: "defaultVersionName"))
     UpdatePackageRequest.add_member(:unset_default_version, Shapes::ShapeRef.new(shape: UnsetDefaultVersion, location_name: "unsetDefaultVersion"))
-    UpdatePackageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdatePackageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdatePackageRequest.struct_class = Types::UpdatePackageRequest
 
     UpdatePackageResponse.struct_class = Types::UpdatePackageResponse
@@ -5485,7 +5485,7 @@ module Aws::IoT
     UpdatePackageVersionRequest.add_member(:artifact, Shapes::ShapeRef.new(shape: PackageVersionArtifact, location_name: "artifact"))
     UpdatePackageVersionRequest.add_member(:action, Shapes::ShapeRef.new(shape: PackageVersionAction, location_name: "action"))
     UpdatePackageVersionRequest.add_member(:recipe, Shapes::ShapeRef.new(shape: PackageVersionRecipe, location_name: "recipe"))
-    UpdatePackageVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdatePackageVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdatePackageVersionRequest.struct_class = Types::UpdatePackageVersionRequest
 
     UpdatePackageVersionResponse.struct_class = Types::UpdatePackageVersionResponse
@@ -5524,7 +5524,7 @@ module Aws::IoT
     UpdateSecurityProfileRequest.add_member(:security_profile_description, Shapes::ShapeRef.new(shape: SecurityProfileDescription, location_name: "securityProfileDescription"))
     UpdateSecurityProfileRequest.add_member(:behaviors, Shapes::ShapeRef.new(shape: Behaviors, location_name: "behaviors"))
     UpdateSecurityProfileRequest.add_member(:alert_targets, Shapes::ShapeRef.new(shape: AlertTargets, location_name: "alertTargets"))
-    UpdateSecurityProfileRequest.add_member(:additional_metrics_to_retain, Shapes::ShapeRef.new(shape: AdditionalMetricsToRetainList, deprecated: true, location_name: "additionalMetricsToRetain", metadata: {"deprecatedMessage"=>"Use additionalMetricsToRetainV2."}))
+    UpdateSecurityProfileRequest.add_member(:additional_metrics_to_retain, Shapes::ShapeRef.new(shape: AdditionalMetricsToRetainList, deprecated: true, location_name: "additionalMetricsToRetain", metadata: {"deprecatedMessage" => "Use additionalMetricsToRetainV2."}))
     UpdateSecurityProfileRequest.add_member(:additional_metrics_to_retain_v2, Shapes::ShapeRef.new(shape: AdditionalMetricsToRetainV2List, location_name: "additionalMetricsToRetainV2"))
     UpdateSecurityProfileRequest.add_member(:delete_behaviors, Shapes::ShapeRef.new(shape: DeleteBehaviors, location_name: "deleteBehaviors"))
     UpdateSecurityProfileRequest.add_member(:delete_alert_targets, Shapes::ShapeRef.new(shape: DeleteAlertTargets, location_name: "deleteAlertTargets"))
@@ -5539,7 +5539,7 @@ module Aws::IoT
     UpdateSecurityProfileResponse.add_member(:security_profile_description, Shapes::ShapeRef.new(shape: SecurityProfileDescription, location_name: "securityProfileDescription"))
     UpdateSecurityProfileResponse.add_member(:behaviors, Shapes::ShapeRef.new(shape: Behaviors, location_name: "behaviors"))
     UpdateSecurityProfileResponse.add_member(:alert_targets, Shapes::ShapeRef.new(shape: AlertTargets, location_name: "alertTargets"))
-    UpdateSecurityProfileResponse.add_member(:additional_metrics_to_retain, Shapes::ShapeRef.new(shape: AdditionalMetricsToRetainList, deprecated: true, location_name: "additionalMetricsToRetain", metadata: {"deprecatedMessage"=>"Use additionalMetricsToRetainV2."}))
+    UpdateSecurityProfileResponse.add_member(:additional_metrics_to_retain, Shapes::ShapeRef.new(shape: AdditionalMetricsToRetainList, deprecated: true, location_name: "additionalMetricsToRetain", metadata: {"deprecatedMessage" => "Use additionalMetricsToRetainV2."}))
     UpdateSecurityProfileResponse.add_member(:additional_metrics_to_retain_v2, Shapes::ShapeRef.new(shape: AdditionalMetricsToRetainV2List, location_name: "additionalMetricsToRetainV2"))
     UpdateSecurityProfileResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     UpdateSecurityProfileResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDate"))

@@ -357,6 +357,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-sqs', '~> 1')
   spec.add_dependency('aws-sdk-ssm', '~> 1')
   spec.add_dependency('aws-sdk-ssmcontacts', '~> 1')
+  spec.add_dependency('aws-sdk-ssmguiconnect', '~> 1')
   spec.add_dependency('aws-sdk-ssmincidents', '~> 1')
   spec.add_dependency('aws-sdk-ssmquicksetup', '~> 1')
   spec.add_dependency('aws-sdk-ssoadmin', '~> 1')

@@ -62,7 +62,7 @@ module Aws::IoTSecureTunneling
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
 
     CloseTunnelRequest.add_member(:tunnel_id, Shapes::ShapeRef.new(shape: TunnelId, required: true, location_name: "tunnelId"))
-    CloseTunnelRequest.add_member(:delete, Shapes::ShapeRef.new(shape: DeleteFlag, location_name: "delete", metadata: {"box"=>true}))
+    CloseTunnelRequest.add_member(:delete, Shapes::ShapeRef.new(shape: DeleteFlag, location_name: "delete", metadata: {"box" => true}))
     CloseTunnelRequest.struct_class = Types::CloseTunnelRequest
 
     CloseTunnelResponse.struct_class = Types::CloseTunnelResponse
@@ -91,7 +91,7 @@ module Aws::IoTSecureTunneling
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
     ListTunnelsRequest.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, location_name: "thingName"))
-    ListTunnelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", metadata: {"box"=>true}))
+    ListTunnelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", metadata: {"box" => true}))
     ListTunnelsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListTunnelsRequest.struct_class = Types::ListTunnelsRequest
 
@@ -140,7 +140,7 @@ module Aws::IoTSecureTunneling
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
-    TimeoutConfig.add_member(:max_lifetime_timeout_minutes, Shapes::ShapeRef.new(shape: TimeoutInMin, location_name: "maxLifetimeTimeoutMinutes", metadata: {"box"=>true}))
+    TimeoutConfig.add_member(:max_lifetime_timeout_minutes, Shapes::ShapeRef.new(shape: TimeoutInMin, location_name: "maxLifetimeTimeoutMinutes", metadata: {"box" => true}))
     TimeoutConfig.struct_class = Types::TimeoutConfig
 
     Tunnel.add_member(:tunnel_id, Shapes::ShapeRef.new(shape: TunnelId, location_name: "tunnelId"))

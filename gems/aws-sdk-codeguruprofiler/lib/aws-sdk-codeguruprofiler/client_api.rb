@@ -217,7 +217,7 @@ module Aws::CodeGuruProfiler
     ConflictException.struct_class = Types::ConflictException
 
     CreateProfilingGroupRequest.add_member(:agent_orchestration_config, Shapes::ShapeRef.new(shape: AgentOrchestrationConfig, location_name: "agentOrchestrationConfig"))
-    CreateProfilingGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateProfilingGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateProfilingGroupRequest.add_member(:compute_platform, Shapes::ShapeRef.new(shape: ComputePlatform, location_name: "computePlatform"))
     CreateProfilingGroupRequest.add_member(:profiling_group_name, Shapes::ShapeRef.new(shape: ProfilingGroupName, required: true, location_name: "profilingGroupName"))
     CreateProfilingGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
@@ -392,7 +392,7 @@ module Aws::CodeGuruProfiler
 
     PostAgentProfileRequest.add_member(:agent_profile, Shapes::ShapeRef.new(shape: AgentProfile, required: true, location_name: "agentProfile"))
     PostAgentProfileRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: String, required: true, location: "header", location_name: "Content-Type"))
-    PostAgentProfileRequest.add_member(:profile_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "profileToken", metadata: {"idempotencyToken"=>true}))
+    PostAgentProfileRequest.add_member(:profile_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "profileToken", metadata: {"idempotencyToken" => true}))
     PostAgentProfileRequest.add_member(:profiling_group_name, Shapes::ShapeRef.new(shape: ProfilingGroupName, required: true, location: "uri", location_name: "profilingGroupName"))
     PostAgentProfileRequest.struct_class = Types::PostAgentProfileRequest
     PostAgentProfileRequest[:payload] = :agent_profile

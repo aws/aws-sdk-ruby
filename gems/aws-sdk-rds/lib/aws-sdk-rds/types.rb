@@ -3125,11 +3125,11 @@ module Aws::RDS
     #   standard support for that engine version. For more information, see
     #   the following sections:
     #
-    #   * Amazon Aurora - [Using Amazon RDS Extended Support][1] in the
-    #     *Amazon Aurora User Guide*
+    #   * Amazon Aurora - [Amazon RDS Extended Support with Amazon
+    #     Aurora][1] in the *Amazon Aurora User Guide*
     #
-    #   * Amazon RDS - [Using Amazon RDS Extended Support][2] in the *Amazon
-    #     RDS User Guide*
+    #   * Amazon RDS - [Amazon RDS Extended Support with Amazon RDS][2] in
+    #     the *Amazon RDS User Guide*
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #
@@ -4788,8 +4788,8 @@ module Aws::RDS
     #   Extended Support. With RDS Extended Support, you can run the
     #   selected major engine version on your DB instance past the end of
     #   standard support for that engine version. For more information, see
-    #   [Using Amazon RDS Extended Support][1] in the *Amazon RDS User
-    #   Guide*.
+    #   [Amazon RDS Extended Support with Amazon RDS][1] in the *Amazon RDS
+    #   User Guide*.
     #
     #   Valid Values: `open-source-rds-extended-support |
     #   open-source-rds-extended-support-disabled`
@@ -6432,8 +6432,8 @@ module Aws::RDS
     #   RDS Extended Support. With RDS Extended Support, you can run the
     #   selected major engine version on your global cluster past the end of
     #   standard support for that engine version. For more information, see
-    #   [Using Amazon RDS Extended Support][1] in the *Amazon Aurora User
-    #   Guide*.
+    #   [Amazon RDS Extended Support with Amazon Aurora][1] in the *Amazon
+    #   Aurora User Guide*.
     #
     #   Valid Values: `open-source-rds-extended-support |
     #   open-source-rds-extended-support-disabled`
@@ -7448,7 +7448,7 @@ module Aws::RDS
     #   @return [Types::CertificateDetails]
     #
     # @!attribute [rw] engine_lifecycle_support
-    #   The life cycle type for the DB cluster.
+    #   The lifecycle type for the DB cluster.
     #
     #   For more information, see CreateDBCluster.
     #   @return [String]
@@ -9464,7 +9464,7 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] engine_lifecycle_support
-    #   The life cycle type for the DB instance.
+    #   The lifecycle type for the DB instance.
     #
     #   For more information, see CreateDBInstance.
     #   @return [String]
@@ -9958,6 +9958,32 @@ module Aws::RDS
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBLogFileNotFoundFault AWS API Documentation
     #
     class DBLogFileNotFoundFault < Aws::EmptyStructure; end
+
+    # This data type is used as a response element in the operation
+    # `DescribeDBMajorEngineVersions`.
+    #
+    # @!attribute [rw] engine
+    #   The name of the database engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] major_engine_version
+    #   The major version number of the database engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] supported_engine_lifecycles
+    #   A list of the lifecycles supported by this engine for the
+    #   `DescribeDBMajorEngineVersions` operation.
+    #   @return [Array<Types::SupportedEngineLifecycle>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBMajorEngineVersion AWS API Documentation
+    #
+    class DBMajorEngineVersion < Struct.new(
+      :engine,
+      :major_engine_version,
+      :supported_engine_lifecycles)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Contains the details of an Amazon RDS DB parameter group.
     #
@@ -13343,6 +13369,99 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @!attribute [rw] engine
+    #   The database engine to return major version details for.
+    #
+    #   Valid Values:
+    #
+    #   * `aurora-mysql`
+    #
+    #   * `aurora-postgresql`
+    #
+    #   * `custom-sqlserver-ee`
+    #
+    #   * `custom-sqlserver-se`
+    #
+    #   * `custom-sqlserver-web`
+    #
+    #   * `db2-ae`
+    #
+    #   * `db2-se`
+    #
+    #   * `mariadb`
+    #
+    #   * `mysql`
+    #
+    #   * `oracle-ee`
+    #
+    #   * `oracle-ee-cdb`
+    #
+    #   * `oracle-se2`
+    #
+    #   * `oracle-se2-cdb`
+    #
+    #   * `postgres`
+    #
+    #   * `sqlserver-ee`
+    #
+    #   * `sqlserver-se`
+    #
+    #   * `sqlserver-ex`
+    #
+    #   * `sqlserver-web`
+    #   @return [String]
+    #
+    # @!attribute [rw] major_engine_version
+    #   A specific database major engine version to return details for.
+    #
+    #   Example: `8.4`
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   than the `MaxRecords` value is available, a pagination token called
+    #   a marker is included in the response so you can retrieve the
+    #   remaining results.
+    #
+    #   Default: 100
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBMajorEngineVersionsRequest AWS API Documentation
+    #
+    class DescribeDBMajorEngineVersionsRequest < Struct.new(
+      :engine,
+      :major_engine_version,
+      :marker,
+      :max_records)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_major_engine_versions
+    #   A list of `DBMajorEngineVersion` elements.
+    #   @return [Array<Types::DBMajorEngineVersion>]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBMajorEngineVersionsResponse AWS API Documentation
+    #
+    class DescribeDBMajorEngineVersionsResponse < Struct.new(
+      :db_major_engine_versions,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] db_parameter_group_name
     #   The name of a specific DB parameter group to return details for.
     #
@@ -16382,7 +16501,7 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] engine_lifecycle_support
-    #   The life cycle type for the global cluster.
+    #   The lifecycle type for the global cluster.
     #
     #   For more information, see CreateGlobalCluster.
     #   @return [String]
@@ -23380,11 +23499,11 @@ module Aws::RDS
     #   standard support for that engine version. For more information, see
     #   the following sections:
     #
-    #   * Amazon Aurora - [Using Amazon RDS Extended Support][1] in the
-    #     *Amazon Aurora User Guide*
+    #   * Amazon Aurora - [Amazon RDS Extended Support with Amazon
+    #     Aurora][1] in the *Amazon Aurora User Guide*
     #
-    #   * Amazon RDS - [Using Amazon RDS Extended Support][2] in the *Amazon
-    #     RDS User Guide*
+    #   * Amazon RDS - [Amazon RDS Extended Support with Amazon RDS][2] in
+    #     the *Amazon RDS User Guide*
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #
@@ -24022,11 +24141,11 @@ module Aws::RDS
     #   standard support for that engine version. For more information, see
     #   the following sections:
     #
-    #   * Amazon Aurora - [Using Amazon RDS Extended Support][1] in the
-    #     *Amazon Aurora User Guide*
+    #   * Amazon Aurora - [Amazon RDS Extended Support with Amazon
+    #     Aurora][1] in the *Amazon Aurora User Guide*
     #
-    #   * Amazon RDS - [Using Amazon RDS Extended Support][2] in the *Amazon
-    #     RDS User Guide*
+    #   * Amazon RDS - [Amazon RDS Extended Support with Amazon RDS][2] in
+    #     the *Amazon RDS User Guide*
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #
@@ -24639,11 +24758,11 @@ module Aws::RDS
     #   standard support for that engine version. For more information, see
     #   the following sections:
     #
-    #   * Amazon Aurora - [Using Amazon RDS Extended Support][1] in the
-    #     *Amazon Aurora User Guide*
+    #   * Amazon Aurora - [Amazon RDS Extended Support with Amazon
+    #     Aurora][1] in the *Amazon Aurora User Guide*
     #
-    #   * Amazon RDS - [Using Amazon RDS Extended Support][2] in the *Amazon
-    #     RDS User Guide*
+    #   * Amazon RDS - [Amazon RDS Extended Support with Amazon RDS][2] in
+    #     the *Amazon RDS User Guide*
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #
@@ -25362,8 +25481,8 @@ module Aws::RDS
     #   Extended Support. With RDS Extended Support, you can run the
     #   selected major engine version on your DB instance past the end of
     #   standard support for that engine version. For more information, see
-    #   [Using Amazon RDS Extended Support][1] in the *Amazon RDS User
-    #   Guide*.
+    #   [Amazon RDS Extended Support with Amazon RDS][1] in the *Amazon RDS
+    #   User Guide*.
     #
     #   This setting applies only to RDS for MySQL and RDS for PostgreSQL.
     #   For Amazon Aurora DB instances, the life cycle type is managed by
@@ -26095,7 +26214,7 @@ module Aws::RDS
     #   Extended Support. With RDS Extended Support, you can run the
     #   selected major engine version on your DB instance past the end of
     #   standard support for that engine version. For more information, see
-    #   [Using Amazon RDS Extended Support][1] in the *Amazon RDS User
+    #   [Amazon RDS Extended Support Amazon RDS][1] in the *Amazon RDS User
     #   Guide*.
     #
     #   This setting applies only to RDS for MySQL and RDS for PostgreSQL.
@@ -26840,8 +26959,8 @@ module Aws::RDS
     #   Extended Support. With RDS Extended Support, you can run the
     #   selected major engine version on your DB instance past the end of
     #   standard support for that engine version. For more information, see
-    #   [Using Amazon RDS Extended Support][1] in the *Amazon RDS User
-    #   Guide*.
+    #   [Amazon RDS Extended Support with Amazon RDS][1] in the *Amazon RDS
+    #   User Guide*.
     #
     #   This setting applies only to RDS for MySQL and RDS for PostgreSQL.
     #   For Amazon Aurora DB instances, the life cycle type is managed by
@@ -27764,23 +27883,9 @@ module Aws::RDS
     #   operations. These can be set in the Amazon Web Services KMS key
     #   policy:
     #
-    #   * kms:Encrypt
-    #
-    #   * kms:Decrypt
-    #
-    #   * kms:GenerateDataKey
-    #
-    #   * kms:GenerateDataKeyWithoutPlaintext
-    #
-    #   * kms:ReEncryptFrom
-    #
-    #   * kms:ReEncryptTo
-    #
     #   * kms:CreateGrant
     #
     #   * kms:DescribeKey
-    #
-    #   * kms:RetireGrant
     #   @return [String]
     #
     # @!attribute [rw] s3_prefix
@@ -28073,6 +28178,66 @@ module Aws::RDS
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SubscriptionNotFoundFault AWS API Documentation
     #
     class SubscriptionNotFoundFault < Aws::EmptyStructure; end
+
+    # This data type is used as a response element in the operation
+    # `DescribeDBMajorEngineVersions`.
+    #
+    # You can use the information that this data type returns to plan for
+    # upgrades.
+    #
+    # This data type only returns information for the open source engines
+    # Amazon RDS for MariaDB, Amazon RDS for MySQL, Amazon RDS for
+    # PostgreSQL, Aurora MySQL, and Aurora PostgreSQL.
+    #
+    # @!attribute [rw] lifecycle_support_name
+    #   The type of lifecycle support that the engine version is in.
+    #
+    #   This parameter returns the following values:
+    #
+    #   * `open-source-rds-standard-support` - Indicates RDS standard
+    #     support or Aurora standard support.
+    #
+    #   * `open-source-rds-extended-support` - Indicates Amazon RDS Extended
+    #     Support.
+    #
+    #   For Amazon RDS for MySQL, Amazon RDS for PostgreSQL, Aurora MySQL,
+    #   and Aurora PostgreSQL, this parameter returns both
+    #   `open-source-rds-standard-support` and
+    #   `open-source-rds-extended-support`.
+    #
+    #   For Amazon RDS for MariaDB, this parameter only returns the value
+    #   `open-source-rds-standard-support`.
+    #
+    #   For information about Amazon RDS Extended Support, see [Amazon RDS
+    #   Extended Support with Amazon RDS][1] in the *Amazon RDS User Guide*
+    #   and [Amazon RDS Extended Support with Amazon Aurora][2] in the
+    #   *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_support_start_date
+    #   The start date for the type of support returned by
+    #   `LifecycleSupportName`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] lifecycle_support_end_date
+    #   The end date for the type of support returned by
+    #   `LifecycleSupportName`.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SupportedEngineLifecycle AWS API Documentation
+    #
+    class SupportedEngineLifecycle < Struct.new(
+      :lifecycle_support_name,
+      :lifecycle_support_start_date,
+      :lifecycle_support_end_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] blue_green_deployment_identifier
     #   The resource ID of the blue/green deployment.

@@ -770,8 +770,8 @@ module Aws::IoTTwinMaker
     GetPropertyValueHistoryRequest.add_member(:component_type_id, Shapes::ShapeRef.new(shape: ComponentTypeId, location_name: "componentTypeId"))
     GetPropertyValueHistoryRequest.add_member(:selected_properties, Shapes::ShapeRef.new(shape: SelectedPropertyList, required: true, location_name: "selectedProperties"))
     GetPropertyValueHistoryRequest.add_member(:property_filters, Shapes::ShapeRef.new(shape: PropertyFilters, location_name: "propertyFilters"))
-    GetPropertyValueHistoryRequest.add_member(:start_date_time, Shapes::ShapeRef.new(shape: Timestamp, deprecated: true, location_name: "startDateTime", metadata: {"deprecatedMessage"=>"This field is deprecated and will throw an error in the future. Use startTime instead."}))
-    GetPropertyValueHistoryRequest.add_member(:end_date_time, Shapes::ShapeRef.new(shape: Timestamp, deprecated: true, location_name: "endDateTime", metadata: {"deprecatedMessage"=>"This field is deprecated and will throw an error in the future. Use endTime instead."}))
+    GetPropertyValueHistoryRequest.add_member(:start_date_time, Shapes::ShapeRef.new(shape: Timestamp, deprecated: true, location_name: "startDateTime", metadata: {"deprecatedMessage" => "This field is deprecated and will throw an error in the future. Use startTime instead."}))
+    GetPropertyValueHistoryRequest.add_member(:end_date_time, Shapes::ShapeRef.new(shape: Timestamp, deprecated: true, location_name: "endDateTime", metadata: {"deprecatedMessage" => "This field is deprecated and will throw an error in the future. Use endTime instead."}))
     GetPropertyValueHistoryRequest.add_member(:interpolation, Shapes::ShapeRef.new(shape: InterpolationParameters, location_name: "interpolation"))
     GetPropertyValueHistoryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     GetPropertyValueHistoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
@@ -1150,7 +1150,7 @@ module Aws::IoTTwinMaker
     PropertyTableValue.key = Shapes::ShapeRef.new(shape: Name)
     PropertyTableValue.value = Shapes::ShapeRef.new(shape: DataValue)
 
-    PropertyValue.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, deprecated: true, location_name: "timestamp", metadata: {"deprecatedMessage"=>"This field is deprecated and will throw an error in the future. Use time instead."}))
+    PropertyValue.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, deprecated: true, location_name: "timestamp", metadata: {"deprecatedMessage" => "This field is deprecated and will throw an error in the future. Use time instead."}))
     PropertyValue.add_member(:value, Shapes::ShapeRef.new(shape: DataValue, required: true, location_name: "value"))
     PropertyValue.add_member(:time, Shapes::ShapeRef.new(shape: Time, location_name: "time"))
     PropertyValue.struct_class = Types::PropertyValue

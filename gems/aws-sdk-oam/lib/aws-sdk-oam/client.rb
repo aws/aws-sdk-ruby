@@ -200,8 +200,7 @@ module Aws::OAM
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -509,6 +508,14 @@ module Aws::OAM
     #   * `$AccountEmailNoDomain` is the email address of the account without
     #     the domain name
     #
+    #   <note markdown="1"> In the Amazon Web Services GovCloud (US-East) and Amazon Web Services
+    #   GovCloud (US-West) Regions, the only supported option is to use custom
+    #   labels, and the `$AccountName`, `$AccountEmail`, and
+    #   `$AccountEmailNoDomain` variables all resolve as *account-id* instead
+    #   of the specified variable.
+    #
+    #    </note>
+    #
     # @option params [Types::LinkConfiguration] :link_configuration
     #   Use this structure to optionally create filters that specify that only
     #   some metric namespaces or log groups are to be shared from the source
@@ -721,6 +728,16 @@ module Aws::OAM
     # @option params [required, String] :identifier
     #   The ARN of the link to retrieve information for.
     #
+    # @option params [Boolean] :include_tags
+    #   Specifies whether to include the tags associated with the link in the
+    #   response. When `IncludeTags` is set to `true` and the caller has the
+    #   required permission, `oam:ListTagsForResource`, the API will return
+    #   the tags for the specified resource. If the caller doesn't have the
+    #   required permission, `oam:ListTagsForResource`, the API will raise an
+    #   exception.
+    #
+    #   The default value is `false`.
+    #
     # @return [Types::GetLinkOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetLinkOutput#arn #arn} => String
@@ -736,6 +753,7 @@ module Aws::OAM
     #
     #   resp = client.get_link({
     #     identifier: "ResourceIdentifier", # required
+    #     include_tags: false,
     #   })
     #
     # @example Response structure
@@ -773,6 +791,16 @@ module Aws::OAM
     # @option params [required, String] :identifier
     #   The ARN of the sink to retrieve information for.
     #
+    # @option params [Boolean] :include_tags
+    #   Specifies whether to include the tags associated with the sink in the
+    #   response. When `IncludeTags` is set to `true` and the caller has the
+    #   required permission, `oam:ListTagsForResource`, the API will return
+    #   the tags for the specified resource. If the caller doesn't have the
+    #   required permission, `oam:ListTagsForResource`, the API will raise an
+    #   exception.
+    #
+    #   The default value is `false`.
+    #
     # @return [Types::GetSinkOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetSinkOutput#arn #arn} => String
@@ -784,6 +812,7 @@ module Aws::OAM
     #
     #   resp = client.get_sink({
     #     identifier: "ResourceIdentifier", # required
+    #     include_tags: false,
     #   })
     #
     # @example Response structure
@@ -1039,7 +1068,8 @@ module Aws::OAM
     # organization or to individual accounts.
     #
     # You can also use a sink policy to limit the types of data that is
-    # shared. The three types that you can allow or deny are:
+    # shared. The six types of services with their respective resource types
+    # that you can allow or deny are:
     #
     # * **Metrics** - Specify with `AWS::CloudWatch::Metric`
     #
@@ -1049,6 +1079,12 @@ module Aws::OAM
     #
     # * **Application Insights - Applications** - Specify with
     #   `AWS::ApplicationInsights::Application`
+    #
+    # * **Internet Monitor** - Specify with `AWS::InternetMonitor::Monitor`
+    #
+    # * **Application Signals** - Specify with
+    #   `AWS::ApplicationSignals::Service` and
+    #   `AWS::ApplicationSignals::ServiceLevelObjective`
     #
     # See the examples in this section to see how to specify permitted
     # source accounts and data types.
@@ -1218,6 +1254,17 @@ module Aws::OAM
     # @option params [required, String] :identifier
     #   The ARN of the link that you want to update.
     #
+    # @option params [Boolean] :include_tags
+    #   Specifies whether to include the tags associated with the link in the
+    #   response after the update operation. When `IncludeTags` is set to
+    #   `true` and the caller has the required permission,
+    #   `oam:ListTagsForResource`, the API will return the tags for the
+    #   specified resource. If the caller doesn't have the required
+    #   permission, `oam:ListTagsForResource`, the API will raise an
+    #   exception.
+    #
+    #   The default value is `false`.
+    #
     # @option params [Types::LinkConfiguration] :link_configuration
     #   Use this structure to filter which metric namespaces and which log
     #   groups are to be shared from the source account to the monitoring
@@ -1245,6 +1292,7 @@ module Aws::OAM
     #
     #   resp = client.update_link({
     #     identifier: "ResourceIdentifier", # required
+    #     include_tags: false,
     #     link_configuration: {
     #       log_group_configuration: {
     #         filter: "LogsFilter", # required
@@ -1297,7 +1345,7 @@ module Aws::OAM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-oam'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

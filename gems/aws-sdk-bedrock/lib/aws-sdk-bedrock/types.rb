@@ -394,6 +394,19 @@ module Aws::Bedrock
     #   guardrail.
     #   @return [Types::GuardrailContextualGroundingPolicyConfig]
     #
+    # @!attribute [rw] cross_region_config
+    #   The system-defined guardrail profile that you're using with your
+    #   guardrail. Guardrail profiles define the destination Amazon Web
+    #   Services Regions where guardrail inference requests can be
+    #   automatically routed.
+    #
+    #   For more information, see the [Amazon Bedrock User Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+    #   @return [Types::GuardrailCrossRegionConfig]
+    #
     # @!attribute [rw] blocked_input_messaging
     #   The message to return when the guardrail blocks a prompt.
     #   @return [String]
@@ -435,6 +448,7 @@ module Aws::Bedrock
       :word_policy_config,
       :sensitive_information_policy_config,
       :contextual_grounding_policy_config,
+      :cross_region_config,
       :blocked_input_messaging,
       :blocked_outputs_messaging,
       :kms_key_id,
@@ -1337,7 +1351,7 @@ module Aws::Bedrock
     # @note CustomizationConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of CustomizationConfig corresponding to the set member.
     #
     # @!attribute [rw] distillation_config
-    #   The distillation configuration for the custom model.
+    #   The Distillation configuration for the custom model.
     #   @return [Types::DistillationConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CustomizationConfig AWS API Documentation
@@ -1351,6 +1365,31 @@ module Aws::Bedrock
 
       class DistillationConfig < CustomizationConfig; end
       class Unknown < CustomizationConfig; end
+    end
+
+    # For a Distillation job, the status details for the data processing
+    # sub-task of the job.
+    #
+    # @!attribute [rw] status
+    #   The status of the data processing sub-task of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The start time of the data processing sub-task of the job.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The latest update to the data processing sub-task of the job.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DataProcessingDetails AWS API Documentation
+    #
+    class DataProcessingDetails < Struct.new(
+      :status,
+      :creation_time,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # @!attribute [rw] model_identifier
@@ -2629,6 +2668,12 @@ module Aws::Bedrock
     #   The contextual grounding policy used in the guardrail.
     #   @return [Types::GuardrailContextualGroundingPolicy]
     #
+    # @!attribute [rw] cross_region_details
+    #   Details about the system-defined guardrail profile that you're
+    #   using with your guardrail, including the guardrail profile ID and
+    #   Amazon Resource Name (ARN).
+    #   @return [Types::GuardrailCrossRegionDetails]
+    #
     # @!attribute [rw] created_at
     #   The date and time at which the guardrail was created.
     #   @return [Time]
@@ -2674,6 +2719,7 @@ module Aws::Bedrock
       :word_policy,
       :sensitive_information_policy,
       :contextual_grounding_policy,
+      :cross_region_details,
       :created_at,
       :updated_at,
       :status_reasons,
@@ -2978,6 +3024,11 @@ module Aws::Bedrock
     #   Information about why the job failed.
     #   @return [String]
     #
+    # @!attribute [rw] status_details
+    #   For a Distillation job, the details about the statuses of the
+    #   sub-tasks of the customization job.
+    #   @return [Types::StatusDetails]
+    #
     # @!attribute [rw] creation_time
     #   Time that the resource was created.
     #   @return [Time]
@@ -3051,6 +3102,7 @@ module Aws::Bedrock
       :role_arn,
       :status,
       :failure_message,
+      :status_details,
       :creation_time,
       :last_modified_time,
       :end_time,
@@ -3908,6 +3960,71 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # The system-defined guardrail profile that you're using with your
+    # guardrail. Guardrail profiles define the destination Amazon Web
+    # Services Regions where guardrail inference requests can be
+    # automatically routed. Using guardrail profiles helps maintain
+    # guardrail performance and reliability when demand increases.
+    #
+    # For more information, see the [Amazon Bedrock User Guide][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+    #
+    # @!attribute [rw] guardrail_profile_identifier
+    #   The ID or Amazon Resource Name (ARN) of the guardrail profile that
+    #   your guardrail is using. Guardrail profile availability depends on
+    #   your current Amazon Web Services Region. For more information, see
+    #   the [Amazon Bedrock User Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region-support.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GuardrailCrossRegionConfig AWS API Documentation
+    #
+    class GuardrailCrossRegionConfig < Struct.new(
+      :guardrail_profile_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about the system-defined guardrail profile that
+    # you're using with your guardrail for cross-Region inference.
+    #
+    # For more information, see the [Amazon Bedrock User Guide][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+    #
+    # @!attribute [rw] guardrail_profile_id
+    #   The ID of the guardrail profile that your guardrail is using.
+    #   Profile availability depends on your current Amazon Web Services
+    #   Region. For more information, see the [Amazon Bedrock User
+    #   Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region-support.html
+    #   @return [String]
+    #
+    # @!attribute [rw] guardrail_profile_arn
+    #   The Amazon Resource Name (ARN) of the guardrail profile that you're
+    #   using with your guardrail.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GuardrailCrossRegionDetails AWS API Documentation
+    #
+    class GuardrailCrossRegionDetails < Struct.new(
+      :guardrail_profile_id,
+      :guardrail_profile_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The managed word list that was configured for the guardrail. (This is
     # a list of words that are pre-defined and managed by guardrails only.)
     #
@@ -4567,6 +4684,12 @@ module Aws::Bedrock
     #   The date and time at which the guardrail was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] cross_region_details
+    #   Details about the system-defined guardrail profile that you're
+    #   using with your guardrail, including the guardrail profile ID and
+    #   Amazon Resource Name (ARN).
+    #   @return [Types::GuardrailCrossRegionDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GuardrailSummary AWS API Documentation
     #
     class GuardrailSummary < Struct.new(
@@ -4577,7 +4700,8 @@ module Aws::Bedrock
       :description,
       :version,
       :created_at,
-      :updated_at)
+      :updated_at,
+      :cross_region_details)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -6518,6 +6642,10 @@ module Aws::Bedrock
     #   Time that the customization job was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] status_details
+    #   Details about the status of the data processing sub-task of the job.
+    #   @return [Types::StatusDetails]
+    #
     # @!attribute [rw] creation_time
     #   Creation time of the custom model.
     #   @return [Time]
@@ -6552,6 +6680,7 @@ module Aws::Bedrock
       :job_name,
       :status,
       :last_modified_time,
+      :status_details,
       :creation_time,
       :end_time,
       :custom_model_arn,
@@ -7693,6 +7822,43 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # For a Distillation job, the status details for sub-tasks of the job.
+    # Possible statuses for each sub-task include the following:
+    #
+    # * NotStarted
+    #
+    # * InProgress
+    #
+    # * Completed
+    #
+    # * Stopping
+    #
+    # * Stopped
+    #
+    # * Failed
+    #
+    # @!attribute [rw] validation_details
+    #   The status details for the validation sub-task of the job.
+    #   @return [Types::ValidationDetails]
+    #
+    # @!attribute [rw] data_processing_details
+    #   The status details for the data processing sub-task of the job.
+    #   @return [Types::DataProcessingDetails]
+    #
+    # @!attribute [rw] training_details
+    #   The status details for the training sub-task of the job.
+    #   @return [Types::TrainingDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/StatusDetails AWS API Documentation
+    #
+    class StatusDetails < Struct.new(
+      :validation_details,
+      :data_processing_details,
+      :training_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] job_identifier
     #   The Amazon Resource Name (ARN) of the evaluation job you want to
     #   stop.
@@ -7899,6 +8065,31 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # For a Distillation job, the status details for the training sub-task
+    # of the job.
+    #
+    # @!attribute [rw] status
+    #   The status of the training sub-task of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The start time of the training sub-task of the job.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The latest update to the training sub-task of the job.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/TrainingDetails AWS API Documentation
+    #
+    class TrainingDetails < Struct.new(
+      :status,
+      :creation_time,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Metrics associated with the custom job.
     #
     # @!attribute [rw] training_loss
@@ -7968,6 +8159,19 @@ module Aws::Bedrock
     #   guardrail.
     #   @return [Types::GuardrailContextualGroundingPolicyConfig]
     #
+    # @!attribute [rw] cross_region_config
+    #   The system-defined guardrail profile that you're using with your
+    #   guardrail. Guardrail profiles define the destination Amazon Web
+    #   Services Regions where guardrail inference requests can be
+    #   automatically routed.
+    #
+    #   For more information, see the [Amazon Bedrock User Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+    #   @return [Types::GuardrailCrossRegionConfig]
+    #
     # @!attribute [rw] blocked_input_messaging
     #   The message to return when the guardrail blocks a prompt.
     #   @return [String]
@@ -7991,6 +8195,7 @@ module Aws::Bedrock
       :word_policy_config,
       :sensitive_information_policy_config,
       :contextual_grounding_policy_config,
+      :cross_region_config,
       :blocked_input_messaging,
       :blocked_outputs_messaging,
       :kms_key_id)
@@ -8114,6 +8319,31 @@ module Aws::Bedrock
     #
     class ValidationDataConfig < Struct.new(
       :validators)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # For a Distillation job, the status details for the validation sub-task
+    # of the job.
+    #
+    # @!attribute [rw] status
+    #   The status of the validation sub-task of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The start time of the validation sub-task of the job.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The latest update to the validation sub-task of the job.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ValidationDetails AWS API Documentation
+    #
+    class ValidationDetails < Struct.new(
+      :status,
+      :creation_time,
+      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end

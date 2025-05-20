@@ -384,7 +384,7 @@ module Aws::VPCLattice
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceType"))
     ConflictException.struct_class = Types::ConflictException
 
-    CreateAccessLogSubscriptionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAccessLogSubscriptionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAccessLogSubscriptionRequest.add_member(:destination_arn, Shapes::ShapeRef.new(shape: AccessLogDestinationArn, required: true, location_name: "destinationArn"))
     CreateAccessLogSubscriptionRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location_name: "resourceIdentifier"))
     CreateAccessLogSubscriptionRequest.add_member(:service_network_log_type, Shapes::ShapeRef.new(shape: ServiceNetworkLogType, location_name: "serviceNetworkLogType"))
@@ -399,7 +399,7 @@ module Aws::VPCLattice
     CreateAccessLogSubscriptionResponse.add_member(:service_network_log_type, Shapes::ShapeRef.new(shape: ServiceNetworkLogType, location_name: "serviceNetworkLogType"))
     CreateAccessLogSubscriptionResponse.struct_class = Types::CreateAccessLogSubscriptionResponse
 
-    CreateListenerRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateListenerRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateListenerRequest.add_member(:default_action, Shapes::ShapeRef.new(shape: RuleAction, required: true, location_name: "defaultAction"))
     CreateListenerRequest.add_member(:name, Shapes::ShapeRef.new(shape: ListenerName, required: true, location_name: "name"))
     CreateListenerRequest.add_member(:port, Shapes::ShapeRef.new(shape: Port, location_name: "port"))
@@ -419,7 +419,7 @@ module Aws::VPCLattice
     CreateListenerResponse.struct_class = Types::CreateListenerResponse
 
     CreateResourceConfigurationRequest.add_member(:allow_association_to_shareable_service_network, Shapes::ShapeRef.new(shape: Boolean, location_name: "allowAssociationToShareableServiceNetwork"))
-    CreateResourceConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateResourceConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateResourceConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceConfigurationName, required: true, location_name: "name"))
     CreateResourceConfigurationRequest.add_member(:port_ranges, Shapes::ShapeRef.new(shape: PortRangeList, location_name: "portRanges"))
     CreateResourceConfigurationRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: ProtocolType, location_name: "protocol"))
@@ -445,7 +445,7 @@ module Aws::VPCLattice
     CreateResourceConfigurationResponse.add_member(:type, Shapes::ShapeRef.new(shape: ResourceConfigurationType, location_name: "type"))
     CreateResourceConfigurationResponse.struct_class = Types::CreateResourceConfigurationResponse
 
-    CreateResourceGatewayRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateResourceGatewayRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateResourceGatewayRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: ResourceGatewayIpAddressType, location_name: "ipAddressType"))
     CreateResourceGatewayRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceGatewayName, required: true, location_name: "name"))
     CreateResourceGatewayRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: CreateResourceGatewayRequestSecurityGroupIdsList, location_name: "securityGroupIds"))
@@ -467,7 +467,7 @@ module Aws::VPCLattice
     CreateResourceGatewayResponse.struct_class = Types::CreateResourceGatewayResponse
 
     CreateRuleRequest.add_member(:action, Shapes::ShapeRef.new(shape: RuleAction, required: true, location_name: "action"))
-    CreateRuleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateRuleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateRuleRequest.add_member(:listener_identifier, Shapes::ShapeRef.new(shape: ListenerIdentifier, required: true, location: "uri", location_name: "listenerIdentifier"))
     CreateRuleRequest.add_member(:match, Shapes::ShapeRef.new(shape: RuleMatch, required: true, location_name: "match"))
     CreateRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "name"))
@@ -485,13 +485,13 @@ module Aws::VPCLattice
     CreateRuleResponse.struct_class = Types::CreateRuleResponse
 
     CreateServiceNetworkRequest.add_member(:auth_type, Shapes::ShapeRef.new(shape: AuthType, location_name: "authType"))
-    CreateServiceNetworkRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateServiceNetworkRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateServiceNetworkRequest.add_member(:name, Shapes::ShapeRef.new(shape: ServiceNetworkName, required: true, location_name: "name"))
     CreateServiceNetworkRequest.add_member(:sharing_config, Shapes::ShapeRef.new(shape: SharingConfig, location_name: "sharingConfig"))
     CreateServiceNetworkRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateServiceNetworkRequest.struct_class = Types::CreateServiceNetworkRequest
 
-    CreateServiceNetworkResourceAssociationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateServiceNetworkResourceAssociationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateServiceNetworkResourceAssociationRequest.add_member(:resource_configuration_identifier, Shapes::ShapeRef.new(shape: ResourceConfigurationIdentifier, required: true, location_name: "resourceConfigurationIdentifier"))
     CreateServiceNetworkResourceAssociationRequest.add_member(:service_network_identifier, Shapes::ShapeRef.new(shape: ServiceNetworkIdentifierWithoutRegex, required: true, location_name: "serviceNetworkIdentifier"))
     CreateServiceNetworkResourceAssociationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
@@ -510,7 +510,7 @@ module Aws::VPCLattice
     CreateServiceNetworkResponse.add_member(:sharing_config, Shapes::ShapeRef.new(shape: SharingConfig, location_name: "sharingConfig"))
     CreateServiceNetworkResponse.struct_class = Types::CreateServiceNetworkResponse
 
-    CreateServiceNetworkServiceAssociationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateServiceNetworkServiceAssociationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateServiceNetworkServiceAssociationRequest.add_member(:service_identifier, Shapes::ShapeRef.new(shape: ServiceIdentifier, required: true, location_name: "serviceIdentifier"))
     CreateServiceNetworkServiceAssociationRequest.add_member(:service_network_identifier, Shapes::ShapeRef.new(shape: ServiceNetworkIdentifier, required: true, location_name: "serviceNetworkIdentifier"))
     CreateServiceNetworkServiceAssociationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
@@ -524,7 +524,7 @@ module Aws::VPCLattice
     CreateServiceNetworkServiceAssociationResponse.add_member(:status, Shapes::ShapeRef.new(shape: ServiceNetworkServiceAssociationStatus, location_name: "status"))
     CreateServiceNetworkServiceAssociationResponse.struct_class = Types::CreateServiceNetworkServiceAssociationResponse
 
-    CreateServiceNetworkVpcAssociationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateServiceNetworkVpcAssociationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateServiceNetworkVpcAssociationRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: CreateServiceNetworkVpcAssociationRequestSecurityGroupIdsList, location_name: "securityGroupIds"))
     CreateServiceNetworkVpcAssociationRequest.add_member(:service_network_identifier, Shapes::ShapeRef.new(shape: ServiceNetworkIdentifier, required: true, location_name: "serviceNetworkIdentifier"))
     CreateServiceNetworkVpcAssociationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
@@ -542,7 +542,7 @@ module Aws::VPCLattice
 
     CreateServiceRequest.add_member(:auth_type, Shapes::ShapeRef.new(shape: AuthType, location_name: "authType"))
     CreateServiceRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: CertificateArn, location_name: "certificateArn"))
-    CreateServiceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateServiceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateServiceRequest.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: ServiceCustomDomainName, location_name: "customDomainName"))
     CreateServiceRequest.add_member(:name, Shapes::ShapeRef.new(shape: ServiceName, required: true, location_name: "name"))
     CreateServiceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
@@ -558,7 +558,7 @@ module Aws::VPCLattice
     CreateServiceResponse.add_member(:status, Shapes::ShapeRef.new(shape: ServiceStatus, location_name: "status"))
     CreateServiceResponse.struct_class = Types::CreateServiceResponse
 
-    CreateTargetGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateTargetGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateTargetGroupRequest.add_member(:config, Shapes::ShapeRef.new(shape: TargetGroupConfig, location_name: "config"))
     CreateTargetGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: TargetGroupName, required: true, location_name: "name"))
     CreateTargetGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))

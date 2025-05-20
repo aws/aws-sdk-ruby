@@ -21,6 +21,8 @@ module Aws::ServiceQuotas
     AssociateServiceQuotaTemplateRequest = Shapes::StructureShape.new(name: 'AssociateServiceQuotaTemplateRequest')
     AssociateServiceQuotaTemplateResponse = Shapes::StructureShape.new(name: 'AssociateServiceQuotaTemplateResponse')
     AwsRegion = Shapes::StringShape.new(name: 'AwsRegion')
+    CreateSupportCaseRequest = Shapes::StructureShape.new(name: 'CreateSupportCaseRequest')
+    CreateSupportCaseResponse = Shapes::StructureShape.new(name: 'CreateSupportCaseResponse')
     CustomerServiceEngagementId = Shapes::StringShape.new(name: 'CustomerServiceEngagementId')
     DateTime = Shapes::TimestampShape.new(name: 'DateTime')
     DeleteServiceQuotaIncreaseRequestFromTemplateRequest = Shapes::StructureShape.new(name: 'DeleteServiceQuotaIncreaseRequestFromTemplateRequest')
@@ -133,6 +135,11 @@ module Aws::ServiceQuotas
     AssociateServiceQuotaTemplateRequest.struct_class = Types::AssociateServiceQuotaTemplateRequest
 
     AssociateServiceQuotaTemplateResponse.struct_class = Types::AssociateServiceQuotaTemplateResponse
+
+    CreateSupportCaseRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, required: true, location_name: "RequestId"))
+    CreateSupportCaseRequest.struct_class = Types::CreateSupportCaseRequest
+
+    CreateSupportCaseResponse.struct_class = Types::CreateSupportCaseResponse
 
     DeleteServiceQuotaIncreaseRequestFromTemplateRequest.add_member(:service_code, Shapes::ShapeRef.new(shape: ServiceCode, required: true, location_name: "ServiceCode"))
     DeleteServiceQuotaIncreaseRequestFromTemplateRequest.add_member(:quota_code, Shapes::ShapeRef.new(shape: QuotaCode, required: true, location_name: "QuotaCode"))
@@ -445,6 +452,22 @@ module Aws::ServiceQuotas
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotInAllFeaturesModeException)
         o.errors << Shapes::ShapeRef.new(shape: TemplatesNotAvailableInRegionException)
         o.errors << Shapes::ShapeRef.new(shape: NoAvailableOrganizationException)
+      end)
+
+      api.add_operation(:create_support_case, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSupportCase"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateSupportCaseRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateSupportCaseResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:delete_service_quota_increase_request_from_template, Seahorse::Model::Operation.new.tap do |o|

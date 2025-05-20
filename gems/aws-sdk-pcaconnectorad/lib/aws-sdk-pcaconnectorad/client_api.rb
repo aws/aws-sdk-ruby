@@ -229,7 +229,7 @@ module Aws::PcaConnectorAd
     ConnectorSummary.struct_class = Types::ConnectorSummary
 
     CreateConnectorRequest.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: CertificateAuthorityArn, required: true, location_name: "CertificateAuthorityArn"))
-    CreateConnectorRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateConnectorRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateConnectorRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     CreateConnectorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateConnectorRequest.add_member(:vpc_information, Shapes::ShapeRef.new(shape: VpcInformation, required: true, location_name: "VpcInformation"))
@@ -238,7 +238,7 @@ module Aws::PcaConnectorAd
     CreateConnectorResponse.add_member(:connector_arn, Shapes::ShapeRef.new(shape: ConnectorArn, location_name: "ConnectorArn"))
     CreateConnectorResponse.struct_class = Types::CreateConnectorResponse
 
-    CreateDirectoryRegistrationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDirectoryRegistrationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateDirectoryRegistrationRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     CreateDirectoryRegistrationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateDirectoryRegistrationRequest.struct_class = Types::CreateDirectoryRegistrationRequest
@@ -246,19 +246,19 @@ module Aws::PcaConnectorAd
     CreateDirectoryRegistrationResponse.add_member(:directory_registration_arn, Shapes::ShapeRef.new(shape: DirectoryRegistrationArn, location_name: "DirectoryRegistrationArn"))
     CreateDirectoryRegistrationResponse.struct_class = Types::CreateDirectoryRegistrationResponse
 
-    CreateServicePrincipalNameRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateServicePrincipalNameRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateServicePrincipalNameRequest.add_member(:connector_arn, Shapes::ShapeRef.new(shape: ConnectorArn, required: true, location: "uri", location_name: "ConnectorArn"))
     CreateServicePrincipalNameRequest.add_member(:directory_registration_arn, Shapes::ShapeRef.new(shape: DirectoryRegistrationArn, required: true, location: "uri", location_name: "DirectoryRegistrationArn"))
     CreateServicePrincipalNameRequest.struct_class = Types::CreateServicePrincipalNameRequest
 
     CreateTemplateGroupAccessControlEntryRequest.add_member(:access_rights, Shapes::ShapeRef.new(shape: AccessRights, required: true, location_name: "AccessRights"))
-    CreateTemplateGroupAccessControlEntryRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateTemplateGroupAccessControlEntryRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateTemplateGroupAccessControlEntryRequest.add_member(:group_display_name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "GroupDisplayName"))
     CreateTemplateGroupAccessControlEntryRequest.add_member(:group_security_identifier, Shapes::ShapeRef.new(shape: GroupSecurityIdentifier, required: true, location_name: "GroupSecurityIdentifier"))
     CreateTemplateGroupAccessControlEntryRequest.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, required: true, location: "uri", location_name: "TemplateArn"))
     CreateTemplateGroupAccessControlEntryRequest.struct_class = Types::CreateTemplateGroupAccessControlEntryRequest
 
-    CreateTemplateRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateTemplateRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateTemplateRequest.add_member(:connector_arn, Shapes::ShapeRef.new(shape: ConnectorArn, required: true, location_name: "ConnectorArn"))
     CreateTemplateRequest.add_member(:definition, Shapes::ShapeRef.new(shape: TemplateDefinition, required: true, location_name: "Definition"))
     CreateTemplateRequest.add_member(:name, Shapes::ShapeRef.new(shape: TemplateName, required: true, location_name: "Name"))

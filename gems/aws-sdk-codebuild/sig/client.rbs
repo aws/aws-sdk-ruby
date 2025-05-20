@@ -348,7 +348,15 @@ module Aws
                                 credential: ::String,
                                 credential_provider: ("SECRETS_MANAGER")
                               }?,
-                              image_pull_credentials_type: ("CODEBUILD" | "SERVICE_ROLE")?
+                              image_pull_credentials_type: ("CODEBUILD" | "SERVICE_ROLE")?,
+                              docker_server: {
+                                compute_type: ("BUILD_GENERAL1_SMALL" | "BUILD_GENERAL1_MEDIUM" | "BUILD_GENERAL1_LARGE" | "BUILD_GENERAL1_XLARGE" | "BUILD_GENERAL1_2XLARGE" | "BUILD_LAMBDA_1GB" | "BUILD_LAMBDA_2GB" | "BUILD_LAMBDA_4GB" | "BUILD_LAMBDA_8GB" | "BUILD_LAMBDA_10GB" | "ATTRIBUTE_BASED_COMPUTE" | "CUSTOM_INSTANCE_TYPE"),
+                                security_group_ids: Array[::String]?,
+                                status: {
+                                  status: ::String?,
+                                  message: ::String?
+                                }?
+                              }?
                             },
                             service_role: ::String,
                             ?timeout_in_minutes: ::Integer,
@@ -1361,7 +1369,15 @@ module Aws
                                 credential: ::String,
                                 credential_provider: ("SECRETS_MANAGER")
                               }?,
-                              image_pull_credentials_type: ("CODEBUILD" | "SERVICE_ROLE")?
+                              image_pull_credentials_type: ("CODEBUILD" | "SERVICE_ROLE")?,
+                              docker_server: {
+                                compute_type: ("BUILD_GENERAL1_SMALL" | "BUILD_GENERAL1_MEDIUM" | "BUILD_GENERAL1_LARGE" | "BUILD_GENERAL1_XLARGE" | "BUILD_GENERAL1_2XLARGE" | "BUILD_LAMBDA_1GB" | "BUILD_LAMBDA_2GB" | "BUILD_LAMBDA_4GB" | "BUILD_LAMBDA_8GB" | "BUILD_LAMBDA_10GB" | "ATTRIBUTE_BASED_COMPUTE" | "CUSTOM_INSTANCE_TYPE"),
+                                security_group_ids: Array[::String]?,
+                                status: {
+                                  status: ::String?,
+                                  message: ::String?
+                                }?
+                              }?
                             },
                             ?service_role: ::String,
                             ?timeout_in_minutes: ::Integer,

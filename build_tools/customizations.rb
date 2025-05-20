@@ -63,10 +63,6 @@ module BuildTools
       end
     end
 
-    api('BedrockRuntime') do |api|
-      api['metadata']['protocolSettings'] = {'h2' => 'optional'}
-    end
-
     api('CloudFront') do |api|
       api['shapes'].each do |_, shape|
         if shape['members'] && shape['members']['MaxItems'] && shape['members']['MaxItems']['shape'] == 'string'

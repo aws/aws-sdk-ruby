@@ -175,7 +175,13 @@ module Aws
                           license_arn: ::String,
                           principals: Array[::String],
                           home_region: ::String,
-                          allowed_operations: Array[("CreateGrant" | "CheckoutLicense" | "CheckoutBorrowLicense" | "CheckInLicense" | "ExtendConsumptionLicense" | "ListPurchasedLicenses" | "CreateToken")]
+                          allowed_operations: Array[("CreateGrant" | "CheckoutLicense" | "CheckoutBorrowLicense" | "CheckInLicense" | "ExtendConsumptionLicense" | "ListPurchasedLicenses" | "CreateToken")],
+                          ?tags: Array[
+                            {
+                              key: ::String?,
+                              value: ::String?
+                            },
+                          ]
                         ) -> _CreateGrantResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGrantResponseSuccess
 
@@ -247,7 +253,13 @@ module Aws
                                 value: ::String?
                               },
                             ],
-                            client_token: ::String
+                            client_token: ::String,
+                            ?tags: Array[
+                              {
+                                key: ::String?,
+                                value: ::String?
+                              },
+                            ]
                           ) -> _CreateLicenseResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLicenseResponseSuccess
 

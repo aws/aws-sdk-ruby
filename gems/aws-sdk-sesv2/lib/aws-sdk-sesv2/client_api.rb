@@ -1761,7 +1761,7 @@ module Aws::SESV2
     SendBulkEmailRequest.add_member(:default_content, Shapes::ShapeRef.new(shape: BulkEmailContent, required: true, location_name: "DefaultContent"))
     SendBulkEmailRequest.add_member(:bulk_email_entries, Shapes::ShapeRef.new(shape: BulkEmailEntryList, required: true, location_name: "BulkEmailEntries"))
     SendBulkEmailRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
-    SendBulkEmailRequest.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: EndpointId, location_name: "EndpointId", metadata: {"contextParam"=>{"name"=>"EndpointId"}}))
+    SendBulkEmailRequest.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: EndpointId, location_name: "EndpointId", metadata: {"contextParam" => {"name" => "EndpointId"}}))
     SendBulkEmailRequest.struct_class = Types::SendBulkEmailRequest
 
     SendBulkEmailResponse.add_member(:bulk_email_entry_results, Shapes::ShapeRef.new(shape: BulkEmailEntryResultList, required: true, location_name: "BulkEmailEntryResults"))
@@ -1784,7 +1784,7 @@ module Aws::SESV2
     SendEmailRequest.add_member(:content, Shapes::ShapeRef.new(shape: EmailContent, required: true, location_name: "Content"))
     SendEmailRequest.add_member(:email_tags, Shapes::ShapeRef.new(shape: MessageTagList, location_name: "EmailTags"))
     SendEmailRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
-    SendEmailRequest.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: EndpointId, location_name: "EndpointId", metadata: {"contextParam"=>{"name"=>"EndpointId"}}))
+    SendEmailRequest.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: EndpointId, location_name: "EndpointId", metadata: {"contextParam" => {"name" => "EndpointId"}}))
     SendEmailRequest.add_member(:list_management_options, Shapes::ShapeRef.new(shape: ListManagementOptions, location_name: "ListManagementOptions"))
     SendEmailRequest.struct_class = Types::SendEmailRequest
 

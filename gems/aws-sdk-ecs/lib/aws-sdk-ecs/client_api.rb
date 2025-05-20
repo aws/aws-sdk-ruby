@@ -1497,7 +1497,7 @@ module Aws::ECS
     RunTaskRequest.add_member(:started_by, Shapes::ShapeRef.new(shape: String, location_name: "startedBy"))
     RunTaskRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     RunTaskRequest.add_member(:task_definition, Shapes::ShapeRef.new(shape: String, required: true, location_name: "taskDefinition"))
-    RunTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    RunTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     RunTaskRequest.add_member(:volume_configurations, Shapes::ShapeRef.new(shape: TaskVolumeConfigurations, location_name: "volumeConfigurations"))
     RunTaskRequest.struct_class = Types::RunTaskRequest
 
@@ -1653,6 +1653,7 @@ module Aws::ECS
     ServiceManagedEBSVolumeConfiguration.add_member(:volume_type, Shapes::ShapeRef.new(shape: EBSVolumeType, location_name: "volumeType"))
     ServiceManagedEBSVolumeConfiguration.add_member(:size_in_gi_b, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "sizeInGiB"))
     ServiceManagedEBSVolumeConfiguration.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: EBSSnapshotId, location_name: "snapshotId"))
+    ServiceManagedEBSVolumeConfiguration.add_member(:volume_initialization_rate, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "volumeInitializationRate"))
     ServiceManagedEBSVolumeConfiguration.add_member(:iops, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "iops"))
     ServiceManagedEBSVolumeConfiguration.add_member(:throughput, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "throughput"))
     ServiceManagedEBSVolumeConfiguration.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: EBSTagSpecifications, location_name: "tagSpecifications"))
@@ -1910,6 +1911,7 @@ module Aws::ECS
     TaskManagedEBSVolumeConfiguration.add_member(:volume_type, Shapes::ShapeRef.new(shape: EBSVolumeType, location_name: "volumeType"))
     TaskManagedEBSVolumeConfiguration.add_member(:size_in_gi_b, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "sizeInGiB"))
     TaskManagedEBSVolumeConfiguration.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: EBSSnapshotId, location_name: "snapshotId"))
+    TaskManagedEBSVolumeConfiguration.add_member(:volume_initialization_rate, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "volumeInitializationRate"))
     TaskManagedEBSVolumeConfiguration.add_member(:iops, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "iops"))
     TaskManagedEBSVolumeConfiguration.add_member(:throughput, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "throughput"))
     TaskManagedEBSVolumeConfiguration.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: EBSTagSpecifications, location_name: "tagSpecifications"))

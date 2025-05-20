@@ -67,7 +67,7 @@ module Aws::MarketplaceDeployment
 
     PutDeploymentParameterRequest.add_member(:agreement_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "agreementId"))
     PutDeploymentParameterRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location: "uri", location_name: "catalog"))
-    PutDeploymentParameterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    PutDeploymentParameterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     PutDeploymentParameterRequest.add_member(:deployment_parameter, Shapes::ShapeRef.new(shape: DeploymentParameterInput, required: true, location_name: "deploymentParameter"))
     PutDeploymentParameterRequest.add_member(:expiration_date, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "expirationDate"))
     PutDeploymentParameterRequest.add_member(:product_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "productId"))

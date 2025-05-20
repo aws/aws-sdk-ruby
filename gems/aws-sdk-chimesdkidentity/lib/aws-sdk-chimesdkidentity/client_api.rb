@@ -239,7 +239,7 @@ module Aws::ChimeSDKIdentity
     CreateAppInstanceBotRequest.add_member(:app_instance_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location_name: "AppInstanceArn"))
     CreateAppInstanceBotRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
     CreateAppInstanceBotRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
-    CreateAppInstanceBotRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateAppInstanceBotRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateAppInstanceBotRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateAppInstanceBotRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: Configuration, required: true, location_name: "Configuration"))
     CreateAppInstanceBotRequest.struct_class = Types::CreateAppInstanceBotRequest
@@ -249,7 +249,7 @@ module Aws::ChimeSDKIdentity
 
     CreateAppInstanceRequest.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyResourceName, required: true, location_name: "Name"))
     CreateAppInstanceRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
-    CreateAppInstanceRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateAppInstanceRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateAppInstanceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateAppInstanceRequest.struct_class = Types::CreateAppInstanceRequest
 
@@ -260,7 +260,7 @@ module Aws::ChimeSDKIdentity
     CreateAppInstanceUserRequest.add_member(:app_instance_user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location_name: "AppInstanceUserId"))
     CreateAppInstanceUserRequest.add_member(:name, Shapes::ShapeRef.new(shape: UserName, required: true, location_name: "Name"))
     CreateAppInstanceUserRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
-    CreateAppInstanceUserRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateAppInstanceUserRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateAppInstanceUserRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateAppInstanceUserRequest.add_member(:expiration_settings, Shapes::ShapeRef.new(shape: ExpirationSettings, location_name: "ExpirationSettings"))
     CreateAppInstanceUserRequest.struct_class = Types::CreateAppInstanceUserRequest
@@ -433,7 +433,7 @@ module Aws::ChimeSDKIdentity
     RegisterAppInstanceUserEndpointRequest.add_member(:type, Shapes::ShapeRef.new(shape: AppInstanceUserEndpointType, required: true, location_name: "Type"))
     RegisterAppInstanceUserEndpointRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location_name: "ResourceArn"))
     RegisterAppInstanceUserEndpointRequest.add_member(:endpoint_attributes, Shapes::ShapeRef.new(shape: EndpointAttributes, required: true, location_name: "EndpointAttributes"))
-    RegisterAppInstanceUserEndpointRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    RegisterAppInstanceUserEndpointRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     RegisterAppInstanceUserEndpointRequest.add_member(:allow_messages, Shapes::ShapeRef.new(shape: AllowMessages, location_name: "AllowMessages"))
     RegisterAppInstanceUserEndpointRequest.struct_class = Types::RegisterAppInstanceUserEndpointRequest
 

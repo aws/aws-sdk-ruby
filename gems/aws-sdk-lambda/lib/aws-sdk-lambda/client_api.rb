@@ -1023,7 +1023,7 @@ module Aws::Lambda
     InvokeAsyncResponse.add_member(:status, Shapes::ShapeRef.new(shape: HttpStatus, location: "statusCode", location_name: "Status"))
     InvokeAsyncResponse.struct_class = Types::InvokeAsyncResponse
 
-    InvokeResponseStreamUpdate.add_member(:payload, Shapes::ShapeRef.new(shape: Blob, eventpayload: true, eventpayload_type: 'blob', location_name: "Payload", metadata: {"eventpayload"=>true}))
+    InvokeResponseStreamUpdate.add_member(:payload, Shapes::ShapeRef.new(shape: Blob, eventpayload: true, eventpayload_type: 'blob', location_name: "Payload", metadata: {"eventpayload" => true}))
     InvokeResponseStreamUpdate.struct_class = Types::InvokeResponseStreamUpdate
 
     InvokeWithResponseStreamCompleteEvent.add_member(:error_code, Shapes::ShapeRef.new(shape: String, location_name: "ErrorCode"))

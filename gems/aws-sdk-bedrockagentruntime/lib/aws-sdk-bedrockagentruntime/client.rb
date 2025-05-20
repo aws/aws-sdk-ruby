@@ -202,8 +202,7 @@ module Aws::BedrockAgentRuntime
     #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
-    #     Set to true to disable SDK automatically adding host prefix
-    #     to default service endpoint when available.
+    #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
     #
     #   @option options [Boolean] :disable_request_compression (false)
     #     When set to 'true' the request body will not be compressed
@@ -964,10 +963,10 @@ module Aws::BedrockAgentRuntime
 
     # <note> </note>
     #
-    # Sends a prompt for the agent to process and respond to. Note the
+    #  Sends a prompt for the agent to process and respond to. Note the
     # following fields for the request:
     #
-    # * To continue the same conversation with an agent, use the same
+    #  * To continue the same conversation with an agent, use the same
     #   `sessionId` value in the request.
     #
     # * To activate trace enablement, turn `enableTrace` to `true`. Trace
@@ -982,13 +981,13 @@ module Aws::BedrockAgentRuntime
     #   session or prompt or, if you configured an action group to return
     #   control, results from invocation of the action group.
     #
-    # The response contains both **chunk** and **trace** attributes.
+    #  The response contains both **chunk** and **trace** attributes.
     #
-    # The final response is returned in the `bytes` field of the `chunk`
+    #  The final response is returned in the `bytes` field of the `chunk`
     # object. The `InvokeAgent` returns one chunk for the entire
     # interaction.
     #
-    # * The `attribution` object contains citations for parts of the
+    #  * The `attribution` object contains citations for parts of the
     #   response.
     #
     # * If you set `enableTrace` to `true` in the request, you can trace the
@@ -1603,7 +1602,15 @@ module Aws::BedrockAgentRuntime
     #   event.session_id #=> String
     #   event.trace.custom_orchestration_trace.event.text #=> String
     #   event.trace.custom_orchestration_trace.trace_id #=> String
+    #   event.trace.failure_trace.failure_code #=> Integer
     #   event.trace.failure_trace.failure_reason #=> String
+    #   event.trace.failure_trace.metadata.client_request_id #=> String
+    #   event.trace.failure_trace.metadata.end_time #=> Time
+    #   event.trace.failure_trace.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.failure_trace.metadata.start_time #=> Time
+    #   event.trace.failure_trace.metadata.total_time_ms #=> Integer
+    #   event.trace.failure_trace.metadata.usage.input_tokens #=> Integer
+    #   event.trace.failure_trace.metadata.usage.output_tokens #=> Integer
     #   event.trace.failure_trace.trace_id #=> String
     #   event.trace.guardrail_trace.action #=> String, one of "INTERVENED", "NONE"
     #   event.trace.guardrail_trace.input_assessments #=> Array
@@ -1631,6 +1638,13 @@ module Aws::BedrockAgentRuntime
     #   event.trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].action #=> String, one of "BLOCKED"
     #   event.trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].match #=> String
     #   event.trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].type #=> String, one of "PROFANITY"
+    #   event.trace.guardrail_trace.metadata.client_request_id #=> String
+    #   event.trace.guardrail_trace.metadata.end_time #=> Time
+    #   event.trace.guardrail_trace.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.guardrail_trace.metadata.start_time #=> Time
+    #   event.trace.guardrail_trace.metadata.total_time_ms #=> Integer
+    #   event.trace.guardrail_trace.metadata.usage.input_tokens #=> Integer
+    #   event.trace.guardrail_trace.metadata.usage.output_tokens #=> Integer
     #   event.trace.guardrail_trace.output_assessments #=> Array
     #   event.trace.guardrail_trace.output_assessments[0].content_policy.filters #=> Array
     #   event.trace.guardrail_trace.output_assessments[0].content_policy.filters[0].action #=> String, one of "BLOCKED"
@@ -1720,6 +1734,11 @@ module Aws::BedrockAgentRuntime
     #   event.trace.orchestration_trace.model_invocation_input.text #=> String
     #   event.trace.orchestration_trace.model_invocation_input.trace_id #=> String
     #   event.trace.orchestration_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.total_time_ms #=> Integer
     #   event.trace.orchestration_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
     #   event.trace.orchestration_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.orchestration_trace.model_invocation_output.raw_response.content #=> String
@@ -1727,9 +1746,23 @@ module Aws::BedrockAgentRuntime
     #   event.trace.orchestration_trace.model_invocation_output.reasoning_content.reasoning_text.text #=> String
     #   event.trace.orchestration_trace.model_invocation_output.reasoning_content.redacted_content #=> String
     #   event.trace.orchestration_trace.model_invocation_output.trace_id #=> String
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.orchestration_trace.observation.action_group_invocation_output.text #=> String
     #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.agent_collaborator_alias_arn #=> String
     #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.agent_collaborator_name #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_id #=> String
     #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs #=> Array
     #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_group #=> String
@@ -1763,7 +1796,28 @@ module Aws::BedrockAgentRuntime
     #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_timeout #=> Boolean
     #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.files #=> Array
     #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.files[0] #=> String
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.final_response.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.observation.final_response.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.observation.final_response.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.final_response.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.observation.final_response.metadata.total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.final_response.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.final_response.metadata.usage.output_tokens #=> Integer
     #   event.trace.orchestration_trace.observation.final_response.text #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references #=> Array
     #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.byte_content #=> String
     #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row #=> Array
@@ -1801,6 +1855,11 @@ module Aws::BedrockAgentRuntime
     #   event.trace.post_processing_trace.model_invocation_input.text #=> String
     #   event.trace.post_processing_trace.model_invocation_input.trace_id #=> String
     #   event.trace.post_processing_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.end_time #=> Time
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.start_time #=> Time
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.total_time_ms #=> Integer
     #   event.trace.post_processing_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
     #   event.trace.post_processing_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.post_processing_trace.model_invocation_output.parsed_response.text #=> String
@@ -1822,6 +1881,11 @@ module Aws::BedrockAgentRuntime
     #   event.trace.pre_processing_trace.model_invocation_input.text #=> String
     #   event.trace.pre_processing_trace.model_invocation_input.trace_id #=> String
     #   event.trace.pre_processing_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.end_time #=> Time
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.start_time #=> Time
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.total_time_ms #=> Integer
     #   event.trace.pre_processing_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
     #   event.trace.pre_processing_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.pre_processing_trace.model_invocation_output.parsed_response.is_valid #=> Boolean
@@ -1894,13 +1958,32 @@ module Aws::BedrockAgentRuntime
     #   event.trace.routing_classifier_trace.model_invocation_input.text #=> String
     #   event.trace.routing_classifier_trace.model_invocation_input.trace_id #=> String
     #   event.trace.routing_classifier_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.total_time_ms #=> Integer
     #   event.trace.routing_classifier_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
     #   event.trace.routing_classifier_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.routing_classifier_trace.model_invocation_output.raw_response.content #=> String
     #   event.trace.routing_classifier_trace.model_invocation_output.trace_id #=> String
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.text #=> String
     #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.agent_collaborator_alias_arn #=> String
     #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.agent_collaborator_name #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_id #=> String
     #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs #=> Array
     #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_group #=> String
@@ -1934,7 +2017,28 @@ module Aws::BedrockAgentRuntime
     #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.execution_timeout #=> Boolean
     #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.files #=> Array
     #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.files[0] #=> String
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.usage.input_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.usage.output_tokens #=> Integer
     #   event.trace.routing_classifier_trace.observation.final_response.text #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references #=> Array
     #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.byte_content #=> String
     #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row #=> Array
@@ -2390,6 +2494,9 @@ module Aws::BedrockAgentRuntime
     #   multiple collaborator agents to coordinate a final response. The
     #   inline collaborator agent can also be the supervisor.
     #
+    # @option params [String] :agent_name
+    #   The name for the agent.
+    #
     # @option params [Types::InlineBedrockModelConfigurations] :bedrock_model_configurations
     #   Model settings for the request.
     #
@@ -2404,6 +2511,9 @@ module Aws::BedrockAgentRuntime
     # @option params [Array<Types::Collaborator>] :collaborators
     #   List of collaborator inline agents.
     #
+    # @option params [Types::CustomOrchestration] :custom_orchestration
+    #   Contains details of the custom orchestration configured for the agent.
+    #
     # @option params [String] :customer_encryption_key_arn
     #   The Amazon Resource Name (ARN) of the Amazon Web Services KMS key to
     #   use to encrypt your inline agent.
@@ -2411,7 +2521,6 @@ module Aws::BedrockAgentRuntime
     # @option params [Boolean] :enable_trace
     #   Specifies whether to turn on the trace or not to track the agent's
     #   reasoning process. For more information, see [Using trace][1].
-    #   </p>
     #
     #
     #
@@ -2473,6 +2582,10 @@ module Aws::BedrockAgentRuntime
     #
     # @option params [Array<Types::KnowledgeBase>] :knowledge_bases
     #   Contains information of the knowledge bases to associate with.
+    #
+    # @option params [String] :orchestration_type
+    #   Specifies the type of orchestration strategy for the agent. This is
+    #   set to DEFAULT orchestration type, by default.
     #
     # @option params [Types::PromptOverrideConfiguration] :prompt_override_configuration
     #   Configurations for advanced prompts used to override the default
@@ -2734,6 +2847,7 @@ module Aws::BedrockAgentRuntime
     #       },
     #     ],
     #     agent_collaboration: "SUPERVISOR", # accepts SUPERVISOR, SUPERVISOR_ROUTER, DISABLED
+    #     agent_name: "Name",
     #     bedrock_model_configurations: {
     #       performance_config: {
     #         latency: "standard", # accepts standard, optimized
@@ -2945,6 +3059,11 @@ module Aws::BedrockAgentRuntime
     #         },
     #       },
     #     ],
+    #     custom_orchestration: {
+    #       executor: {
+    #         lambda: "LambdaArn",
+    #       },
+    #     },
     #     customer_encryption_key_arn: "KmsKeyArn",
     #     enable_trace: false,
     #     end_session: false,
@@ -3156,6 +3275,7 @@ module Aws::BedrockAgentRuntime
     #         },
     #       },
     #     ],
+    #     orchestration_type: "DEFAULT", # accepts DEFAULT, CUSTOM_ORCHESTRATION
     #     prompt_override_configuration: {
     #       override_lambda: "LambdaResourceArn",
     #       prompt_configurations: [ # required
@@ -3278,10 +3398,22 @@ module Aws::BedrockAgentRuntime
     #   event.message #=> String
     #
     #   # For :trace event available at #on_trace_event callback and response eventstream enumerator:
+    #   event.caller_chain #=> Array
+    #   event.caller_chain[0].agent_alias_arn #=> String
+    #   event.collaborator_name #=> String
+    #   event.event_time #=> Time
     #   event.session_id #=> String
     #   event.trace.custom_orchestration_trace.event.text #=> String
     #   event.trace.custom_orchestration_trace.trace_id #=> String
+    #   event.trace.failure_trace.failure_code #=> Integer
     #   event.trace.failure_trace.failure_reason #=> String
+    #   event.trace.failure_trace.metadata.client_request_id #=> String
+    #   event.trace.failure_trace.metadata.end_time #=> Time
+    #   event.trace.failure_trace.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.failure_trace.metadata.start_time #=> Time
+    #   event.trace.failure_trace.metadata.total_time_ms #=> Integer
+    #   event.trace.failure_trace.metadata.usage.input_tokens #=> Integer
+    #   event.trace.failure_trace.metadata.usage.output_tokens #=> Integer
     #   event.trace.failure_trace.trace_id #=> String
     #   event.trace.guardrail_trace.action #=> String, one of "INTERVENED", "NONE"
     #   event.trace.guardrail_trace.input_assessments #=> Array
@@ -3309,6 +3441,13 @@ module Aws::BedrockAgentRuntime
     #   event.trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].action #=> String, one of "BLOCKED"
     #   event.trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].match #=> String
     #   event.trace.guardrail_trace.input_assessments[0].word_policy.managed_word_lists[0].type #=> String, one of "PROFANITY"
+    #   event.trace.guardrail_trace.metadata.client_request_id #=> String
+    #   event.trace.guardrail_trace.metadata.end_time #=> Time
+    #   event.trace.guardrail_trace.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.guardrail_trace.metadata.start_time #=> Time
+    #   event.trace.guardrail_trace.metadata.total_time_ms #=> Integer
+    #   event.trace.guardrail_trace.metadata.usage.input_tokens #=> Integer
+    #   event.trace.guardrail_trace.metadata.usage.output_tokens #=> Integer
     #   event.trace.guardrail_trace.output_assessments #=> Array
     #   event.trace.guardrail_trace.output_assessments[0].content_policy.filters #=> Array
     #   event.trace.guardrail_trace.output_assessments[0].content_policy.filters[0].action #=> String, one of "BLOCKED"
@@ -3398,6 +3537,11 @@ module Aws::BedrockAgentRuntime
     #   event.trace.orchestration_trace.model_invocation_input.text #=> String
     #   event.trace.orchestration_trace.model_invocation_input.trace_id #=> String
     #   event.trace.orchestration_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.model_invocation_output.metadata.total_time_ms #=> Integer
     #   event.trace.orchestration_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
     #   event.trace.orchestration_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.orchestration_trace.model_invocation_output.raw_response.content #=> String
@@ -3405,9 +3549,23 @@ module Aws::BedrockAgentRuntime
     #   event.trace.orchestration_trace.model_invocation_output.reasoning_content.reasoning_text.text #=> String
     #   event.trace.orchestration_trace.model_invocation_output.reasoning_content.redacted_content #=> String
     #   event.trace.orchestration_trace.model_invocation_output.trace_id #=> String
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.action_group_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.orchestration_trace.observation.action_group_invocation_output.text #=> String
     #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.agent_collaborator_alias_arn #=> String
     #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.agent_collaborator_name #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_id #=> String
     #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs #=> Array
     #   event.trace.orchestration_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_group #=> String
@@ -3441,7 +3599,28 @@ module Aws::BedrockAgentRuntime
     #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.execution_timeout #=> Boolean
     #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.files #=> Array
     #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.files[0] #=> String
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.code_interpreter_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.final_response.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.observation.final_response.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.observation.final_response.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.final_response.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.observation.final_response.metadata.total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.final_response.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.final_response.metadata.usage.output_tokens #=> Integer
     #   event.trace.orchestration_trace.observation.final_response.text #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.client_request_id #=> String
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.end_time #=> Time
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.start_time #=> Time
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.total_time_ms #=> Integer
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references #=> Array
     #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.byte_content #=> String
     #   event.trace.orchestration_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row #=> Array
@@ -3479,6 +3658,11 @@ module Aws::BedrockAgentRuntime
     #   event.trace.post_processing_trace.model_invocation_input.text #=> String
     #   event.trace.post_processing_trace.model_invocation_input.trace_id #=> String
     #   event.trace.post_processing_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.end_time #=> Time
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.start_time #=> Time
+    #   event.trace.post_processing_trace.model_invocation_output.metadata.total_time_ms #=> Integer
     #   event.trace.post_processing_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
     #   event.trace.post_processing_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.post_processing_trace.model_invocation_output.parsed_response.text #=> String
@@ -3500,6 +3684,11 @@ module Aws::BedrockAgentRuntime
     #   event.trace.pre_processing_trace.model_invocation_input.text #=> String
     #   event.trace.pre_processing_trace.model_invocation_input.trace_id #=> String
     #   event.trace.pre_processing_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.end_time #=> Time
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.start_time #=> Time
+    #   event.trace.pre_processing_trace.model_invocation_output.metadata.total_time_ms #=> Integer
     #   event.trace.pre_processing_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
     #   event.trace.pre_processing_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.pre_processing_trace.model_invocation_output.parsed_response.is_valid #=> Boolean
@@ -3572,13 +3761,32 @@ module Aws::BedrockAgentRuntime
     #   event.trace.routing_classifier_trace.model_invocation_input.text #=> String
     #   event.trace.routing_classifier_trace.model_invocation_input.trace_id #=> String
     #   event.trace.routing_classifier_trace.model_invocation_input.type #=> String, one of "PRE_PROCESSING", "ORCHESTRATION", "KNOWLEDGE_BASE_RESPONSE_GENERATION", "POST_PROCESSING", "ROUTING_CLASSIFIER"
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.model_invocation_output.metadata.total_time_ms #=> Integer
     #   event.trace.routing_classifier_trace.model_invocation_output.metadata.usage.input_tokens #=> Integer
     #   event.trace.routing_classifier_trace.model_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.routing_classifier_trace.model_invocation_output.raw_response.content #=> String
     #   event.trace.routing_classifier_trace.model_invocation_output.trace_id #=> String
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.routing_classifier_trace.observation.action_group_invocation_output.text #=> String
     #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.agent_collaborator_alias_arn #=> String
     #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.agent_collaborator_name #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_id #=> String
     #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs #=> Array
     #   event.trace.routing_classifier_trace.observation.agent_collaborator_invocation_output.output.return_control_payload.invocation_inputs[0].api_invocation_input.action_group #=> String
@@ -3612,7 +3820,28 @@ module Aws::BedrockAgentRuntime
     #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.execution_timeout #=> Boolean
     #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.files #=> Array
     #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.files[0] #=> String
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.code_interpreter_invocation_output.metadata.usage.output_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.usage.input_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.final_response.metadata.usage.output_tokens #=> Integer
     #   event.trace.routing_classifier_trace.observation.final_response.text #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.client_request_id #=> String
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.end_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.operation_total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.start_time #=> Time
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.total_time_ms #=> Integer
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.usage.input_tokens #=> Integer
+    #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.metadata.usage.output_tokens #=> Integer
     #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references #=> Array
     #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.byte_content #=> String
     #   event.trace.routing_classifier_trace.observation.knowledge_base_lookup_output.retrieved_references[0].content.row #=> Array
@@ -5457,7 +5686,7 @@ module Aws::BedrockAgentRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentruntime'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

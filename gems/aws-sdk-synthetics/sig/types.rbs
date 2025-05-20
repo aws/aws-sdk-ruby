@@ -8,6 +8,11 @@
 module Aws::Synthetics
   module Types
 
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class ArtifactConfigInput
       attr_accessor s3_encryption: Types::S3EncryptionConfig
       SENSITIVE: []
@@ -57,6 +62,7 @@ module Aws::Synthetics
       attr_accessor provisioned_resource_cleanup: ("AUTOMATIC" | "OFF")
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor artifact_config: Types::ArtifactConfigOutput
+      attr_accessor dry_run_config: Types::DryRunConfigOutput
       SENSITIVE: []
     end
 
@@ -75,6 +81,11 @@ module Aws::Synthetics
       SENSITIVE: []
     end
 
+    class CanaryDryRunConfigOutput
+      attr_accessor dry_run_id: ::String
+      SENSITIVE: []
+    end
+
     class CanaryLastRun
       attr_accessor canary_name: ::String
       attr_accessor last_run: Types::CanaryRun
@@ -83,10 +94,13 @@ module Aws::Synthetics
 
     class CanaryRun
       attr_accessor id: ::String
+      attr_accessor scheduled_run_id: ::String
+      attr_accessor retry_attempt: ::Integer
       attr_accessor name: ::String
       attr_accessor status: Types::CanaryRunStatus
       attr_accessor timeline: Types::CanaryRunTimeline
       attr_accessor artifact_s3_location: ::String
+      attr_accessor dry_run_config: Types::CanaryDryRunConfigOutput
       SENSITIVE: []
     end
 
@@ -115,18 +129,21 @@ module Aws::Synthetics
     class CanaryRunTimeline
       attr_accessor started: ::Time
       attr_accessor completed: ::Time
+      attr_accessor metric_timestamp_for_run_and_retries: ::Time
       SENSITIVE: []
     end
 
     class CanaryScheduleInput
       attr_accessor expression: ::String
       attr_accessor duration_in_seconds: ::Integer
+      attr_accessor retry_config: Types::RetryConfigInput
       SENSITIVE: []
     end
 
     class CanaryScheduleOutput
       attr_accessor expression: ::String
       attr_accessor duration_in_seconds: ::Integer
+      attr_accessor retry_config: Types::RetryConfigOutput
       SENSITIVE: []
     end
 
@@ -248,8 +265,15 @@ module Aws::Synthetics
     class DisassociateResourceResponse < Aws::EmptyStructure
     end
 
+    class DryRunConfigOutput
+      attr_accessor dry_run_id: ::String
+      attr_accessor last_dry_run_execution_status: ::String
+      SENSITIVE: []
+    end
+
     class GetCanaryRequest
       attr_accessor name: ::String
+      attr_accessor dry_run_id: ::String
       SENSITIVE: []
     end
 
@@ -262,6 +286,8 @@ module Aws::Synthetics
       attr_accessor name: ::String
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
+      attr_accessor dry_run_id: ::String
+      attr_accessor run_type: ("CANARY_RUN" | "DRY_RUN")
       SENSITIVE: []
     end
 
@@ -371,6 +397,16 @@ module Aws::Synthetics
       SENSITIVE: []
     end
 
+    class RetryConfigInput
+      attr_accessor max_retries: ::Integer
+      SENSITIVE: []
+    end
+
+    class RetryConfigOutput
+      attr_accessor max_retries: ::Integer
+      SENSITIVE: []
+    end
+
     class RuntimeVersion
       attr_accessor version_name: ::String
       attr_accessor description: ::String
@@ -387,6 +423,27 @@ module Aws::Synthetics
 
     class ServiceQuotaExceededException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartCanaryDryRunRequest
+      attr_accessor name: ::String
+      attr_accessor code: Types::CanaryCodeInput
+      attr_accessor runtime_version: ::String
+      attr_accessor run_config: Types::CanaryRunConfigInput
+      attr_accessor vpc_config: Types::VpcConfigInput
+      attr_accessor execution_role_arn: ::String
+      attr_accessor success_retention_period_in_days: ::Integer
+      attr_accessor failure_retention_period_in_days: ::Integer
+      attr_accessor visual_reference: Types::VisualReferenceInput
+      attr_accessor artifact_s3_location: ::String
+      attr_accessor artifact_config: Types::ArtifactConfigInput
+      attr_accessor provisioned_resource_cleanup: ("AUTOMATIC" | "OFF")
+      SENSITIVE: []
+    end
+
+    class StartCanaryDryRunResponse
+      attr_accessor dry_run_config: Types::DryRunConfigOutput
       SENSITIVE: []
     end
 
@@ -443,6 +500,7 @@ module Aws::Synthetics
       attr_accessor artifact_s3_location: ::String
       attr_accessor artifact_config: Types::ArtifactConfigInput
       attr_accessor provisioned_resource_cleanup: ("AUTOMATIC" | "OFF")
+      attr_accessor dry_run_id: ::String
       SENSITIVE: []
     end
 

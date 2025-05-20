@@ -910,7 +910,7 @@ module Aws::Kendra
     CreateAccessControlConfigurationRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateAccessControlConfigurationRequest.add_member(:access_control_list, Shapes::ShapeRef.new(shape: PrincipalList, location_name: "AccessControlList"))
     CreateAccessControlConfigurationRequest.add_member(:hierarchical_access_control_list, Shapes::ShapeRef.new(shape: HierarchicalPrincipalList, location_name: "HierarchicalAccessControlList"))
-    CreateAccessControlConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenName, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAccessControlConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenName, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateAccessControlConfigurationRequest.struct_class = Types::CreateAccessControlConfigurationRequest
 
     CreateAccessControlConfigurationResponse.add_member(:id, Shapes::ShapeRef.new(shape: AccessControlConfigurationId, required: true, location_name: "Id"))
@@ -925,7 +925,7 @@ module Aws::Kendra
     CreateDataSourceRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: ScanSchedule, location_name: "Schedule"))
     CreateDataSourceRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     CreateDataSourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateDataSourceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenName, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDataSourceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenName, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateDataSourceRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
     CreateDataSourceRequest.add_member(:custom_document_enrichment_configuration, Shapes::ShapeRef.new(shape: CustomDocumentEnrichmentConfiguration, location_name: "CustomDocumentEnrichmentConfiguration"))
     CreateDataSourceRequest.struct_class = Types::CreateDataSourceRequest
@@ -938,7 +938,7 @@ module Aws::Kendra
     CreateExperienceRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     CreateExperienceRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: ExperienceConfiguration, location_name: "Configuration"))
     CreateExperienceRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    CreateExperienceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenName, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateExperienceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenName, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateExperienceRequest.struct_class = Types::CreateExperienceRequest
 
     CreateExperienceResponse.add_member(:id, Shapes::ShapeRef.new(shape: ExperienceId, required: true, location_name: "Id"))
@@ -951,7 +951,7 @@ module Aws::Kendra
     CreateFaqRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     CreateFaqRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateFaqRequest.add_member(:file_format, Shapes::ShapeRef.new(shape: FaqFileFormat, location_name: "FileFormat"))
-    CreateFaqRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenName, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateFaqRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenName, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateFaqRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
     CreateFaqRequest.struct_class = Types::CreateFaqRequest
 
@@ -976,7 +976,7 @@ module Aws::Kendra
     CreateIndexRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     CreateIndexRequest.add_member(:server_side_encryption_configuration, Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, location_name: "ServerSideEncryptionConfiguration"))
     CreateIndexRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    CreateIndexRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenName, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateIndexRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenName, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateIndexRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateIndexRequest.add_member(:user_token_configurations, Shapes::ShapeRef.new(shape: UserTokenConfigurationList, location_name: "UserTokenConfigurations"))
     CreateIndexRequest.add_member(:user_context_policy, Shapes::ShapeRef.new(shape: UserContextPolicy, location_name: "UserContextPolicy"))
@@ -990,7 +990,7 @@ module Aws::Kendra
     CreateQuerySuggestionsBlockListRequest.add_member(:name, Shapes::ShapeRef.new(shape: QuerySuggestionsBlockListName, required: true, location_name: "Name"))
     CreateQuerySuggestionsBlockListRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateQuerySuggestionsBlockListRequest.add_member(:source_s3_path, Shapes::ShapeRef.new(shape: S3Path, required: true, location_name: "SourceS3Path"))
-    CreateQuerySuggestionsBlockListRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenName, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateQuerySuggestionsBlockListRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenName, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateQuerySuggestionsBlockListRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     CreateQuerySuggestionsBlockListRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateQuerySuggestionsBlockListRequest.struct_class = Types::CreateQuerySuggestionsBlockListRequest
@@ -1004,7 +1004,7 @@ module Aws::Kendra
     CreateThesaurusRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     CreateThesaurusRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateThesaurusRequest.add_member(:source_s3_path, Shapes::ShapeRef.new(shape: S3Path, required: true, location_name: "SourceS3Path"))
-    CreateThesaurusRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenName, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateThesaurusRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenName, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateThesaurusRequest.struct_class = Types::CreateThesaurusRequest
 
     CreateThesaurusResponse.add_member(:id, Shapes::ShapeRef.new(shape: ThesaurusId, location_name: "Id"))
@@ -1032,7 +1032,7 @@ module Aws::Kendra
     DataSourceConfiguration.add_member(:quip_configuration, Shapes::ShapeRef.new(shape: QuipConfiguration, location_name: "QuipConfiguration"))
     DataSourceConfiguration.add_member(:jira_configuration, Shapes::ShapeRef.new(shape: JiraConfiguration, location_name: "JiraConfiguration"))
     DataSourceConfiguration.add_member(:git_hub_configuration, Shapes::ShapeRef.new(shape: GitHubConfiguration, location_name: "GitHubConfiguration"))
-    DataSourceConfiguration.add_member(:alfresco_configuration, Shapes::ShapeRef.new(shape: AlfrescoConfiguration, deprecated: true, location_name: "AlfrescoConfiguration", metadata: {"deprecatedMessage"=>"Deprecated AlfrescoConfiguration in favor of TemplateConfiguration"}))
+    DataSourceConfiguration.add_member(:alfresco_configuration, Shapes::ShapeRef.new(shape: AlfrescoConfiguration, deprecated: true, location_name: "AlfrescoConfiguration", metadata: {"deprecatedMessage" => "Deprecated AlfrescoConfiguration in favor of TemplateConfiguration"}))
     DataSourceConfiguration.add_member(:template_configuration, Shapes::ShapeRef.new(shape: TemplateConfiguration, location_name: "TemplateConfiguration"))
     DataSourceConfiguration.struct_class = Types::DataSourceConfiguration
 

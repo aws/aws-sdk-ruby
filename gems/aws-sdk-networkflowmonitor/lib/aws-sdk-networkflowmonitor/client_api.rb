@@ -148,7 +148,7 @@ module Aws::NetworkFlowMonitor
     CreateMonitorInput.add_member(:local_resources, Shapes::ShapeRef.new(shape: CreateMonitorInputLocalResourcesList, required: true, location_name: "localResources"))
     CreateMonitorInput.add_member(:remote_resources, Shapes::ShapeRef.new(shape: MonitorRemoteResources, location_name: "remoteResources"))
     CreateMonitorInput.add_member(:scope_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "scopeArn"))
-    CreateMonitorInput.add_member(:client_token, Shapes::ShapeRef.new(shape: UuidString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateMonitorInput.add_member(:client_token, Shapes::ShapeRef.new(shape: UuidString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateMonitorInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateMonitorInput.struct_class = Types::CreateMonitorInput
 
@@ -165,7 +165,7 @@ module Aws::NetworkFlowMonitor
     CreateMonitorOutput.struct_class = Types::CreateMonitorOutput
 
     CreateScopeInput.add_member(:targets, Shapes::ShapeRef.new(shape: CreateScopeInputTargetsList, required: true, location_name: "targets"))
-    CreateScopeInput.add_member(:client_token, Shapes::ShapeRef.new(shape: UuidString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateScopeInput.add_member(:client_token, Shapes::ShapeRef.new(shape: UuidString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateScopeInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateScopeInput.struct_class = Types::CreateScopeInput
 
@@ -457,7 +457,7 @@ module Aws::NetworkFlowMonitor
     UpdateMonitorInput.add_member(:local_resources_to_remove, Shapes::ShapeRef.new(shape: MonitorLocalResources, location_name: "localResourcesToRemove"))
     UpdateMonitorInput.add_member(:remote_resources_to_add, Shapes::ShapeRef.new(shape: MonitorRemoteResources, location_name: "remoteResourcesToAdd"))
     UpdateMonitorInput.add_member(:remote_resources_to_remove, Shapes::ShapeRef.new(shape: MonitorRemoteResources, location_name: "remoteResourcesToRemove"))
-    UpdateMonitorInput.add_member(:client_token, Shapes::ShapeRef.new(shape: UuidString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateMonitorInput.add_member(:client_token, Shapes::ShapeRef.new(shape: UuidString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateMonitorInput.struct_class = Types::UpdateMonitorInput
 
     UpdateMonitorOutput.add_member(:monitor_arn, Shapes::ShapeRef.new(shape: MonitorArn, required: true, location_name: "monitorArn"))

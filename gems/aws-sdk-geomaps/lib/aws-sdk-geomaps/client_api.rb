@@ -105,7 +105,7 @@ module Aws::GeoMaps
     GetStaticMapRequest.add_member(:padding, Shapes::ShapeRef.new(shape: Integer, location: "querystring", location_name: "padding"))
     GetStaticMapRequest.add_member(:political_view, Shapes::ShapeRef.new(shape: CountryCode, location: "querystring", location_name: "political-view"))
     GetStaticMapRequest.add_member(:points_of_interests, Shapes::ShapeRef.new(shape: MapFeatureMode, location: "querystring", location_name: "pois"))
-    GetStaticMapRequest.add_member(:radius, Shapes::ShapeRef.new(shape: DistanceMeters, location: "querystring", location_name: "radius", metadata: {"box"=>true}))
+    GetStaticMapRequest.add_member(:radius, Shapes::ShapeRef.new(shape: DistanceMeters, location: "querystring", location_name: "radius", metadata: {"box" => true}))
     GetStaticMapRequest.add_member(:file_name, Shapes::ShapeRef.new(shape: GetStaticMapRequestFileNameString, required: true, location: "uri", location_name: "FileName"))
     GetStaticMapRequest.add_member(:scale_bar_unit, Shapes::ShapeRef.new(shape: ScaleBarUnit, location: "querystring", location_name: "scale-unit"))
     GetStaticMapRequest.add_member(:style, Shapes::ShapeRef.new(shape: StaticMapStyle, location: "querystring", location_name: "style"))

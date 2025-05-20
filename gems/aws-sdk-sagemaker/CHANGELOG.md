@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.305.0 (2025-05-12)
+------------------
+
+* Feature - No API changes from previous release. This release migrated the model to Smithy keeping all features unchanged.
+
+1.304.0 (2025-05-07)
+------------------
+
+* Feature - SageMaker AI Studio users can now migrate to SageMaker Unified Studio, which offers a unified web-based development experience that integrates AWS data, analytics, artificial intelligence (AI), and machine learning (ML) services, as well as additional tools and resource
+
+1.303.0 (2025-05-01)
+------------------
+
+* Feature - Feature - Adding support for Scheduled and Rolling Update Software in Sagemaker Hyperpod.
+
+1.302.0 (2025-04-29)
+------------------
+
+* Feature - Introduced support for P5en instance types on SageMaker Studio for JupyterLab and CodeEditor applications.
+
 1.301.0 (2025-04-18)
 ------------------
 

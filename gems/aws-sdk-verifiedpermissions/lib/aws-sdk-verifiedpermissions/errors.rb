@@ -34,6 +34,7 @@ module Aws::VerifiedPermissions
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
   # * {ThrottlingException}
+  # * {TooManyTagsException}
   # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -201,6 +202,26 @@ module Aws::VerifiedPermissions
 
       def throttling?
         true
+      end
+    end
+
+    class TooManyTagsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::VerifiedPermissions::Types::TooManyTagsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def resource_name
+        @data[:resource_name]
       end
     end
 

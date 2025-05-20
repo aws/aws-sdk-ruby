@@ -111,7 +111,7 @@ module Aws::Invoicing
     GetInvoiceUnitResponse.add_member(:invoice_receiver, Shapes::ShapeRef.new(shape: AccountIdString, location_name: "InvoiceReceiver"))
     GetInvoiceUnitResponse.add_member(:name, Shapes::ShapeRef.new(shape: InvoiceUnitName, location_name: "Name"))
     GetInvoiceUnitResponse.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
-    GetInvoiceUnitResponse.add_member(:tax_inheritance_disabled, Shapes::ShapeRef.new(shape: TaxInheritanceDisabledFlag, location_name: "TaxInheritanceDisabled", metadata: {"box"=>true}))
+    GetInvoiceUnitResponse.add_member(:tax_inheritance_disabled, Shapes::ShapeRef.new(shape: TaxInheritanceDisabledFlag, location_name: "TaxInheritanceDisabled", metadata: {"box" => true}))
     GetInvoiceUnitResponse.add_member(:rule, Shapes::ShapeRef.new(shape: InvoiceUnitRule, location_name: "Rule"))
     GetInvoiceUnitResponse.add_member(:last_modified, Shapes::ShapeRef.new(shape: LastModifiedTimestamp, location_name: "LastModified"))
     GetInvoiceUnitResponse.struct_class = Types::GetInvoiceUnitResponse
@@ -132,7 +132,7 @@ module Aws::Invoicing
     InvoiceUnit.add_member(:invoice_receiver, Shapes::ShapeRef.new(shape: AccountIdString, location_name: "InvoiceReceiver"))
     InvoiceUnit.add_member(:name, Shapes::ShapeRef.new(shape: InvoiceUnitName, location_name: "Name"))
     InvoiceUnit.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
-    InvoiceUnit.add_member(:tax_inheritance_disabled, Shapes::ShapeRef.new(shape: TaxInheritanceDisabledFlag, location_name: "TaxInheritanceDisabled", metadata: {"box"=>true}))
+    InvoiceUnit.add_member(:tax_inheritance_disabled, Shapes::ShapeRef.new(shape: TaxInheritanceDisabledFlag, location_name: "TaxInheritanceDisabled", metadata: {"box" => true}))
     InvoiceUnit.add_member(:rule, Shapes::ShapeRef.new(shape: InvoiceUnitRule, location_name: "Rule"))
     InvoiceUnit.add_member(:last_modified, Shapes::ShapeRef.new(shape: LastModifiedTimestamp, location_name: "LastModified"))
     InvoiceUnit.struct_class = Types::InvoiceUnit
@@ -205,7 +205,7 @@ module Aws::Invoicing
 
     UpdateInvoiceUnitRequest.add_member(:invoice_unit_arn, Shapes::ShapeRef.new(shape: InvoiceUnitArnString, required: true, location_name: "InvoiceUnitArn"))
     UpdateInvoiceUnitRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
-    UpdateInvoiceUnitRequest.add_member(:tax_inheritance_disabled, Shapes::ShapeRef.new(shape: TaxInheritanceDisabledFlag, location_name: "TaxInheritanceDisabled", metadata: {"box"=>true}))
+    UpdateInvoiceUnitRequest.add_member(:tax_inheritance_disabled, Shapes::ShapeRef.new(shape: TaxInheritanceDisabledFlag, location_name: "TaxInheritanceDisabled", metadata: {"box" => true}))
     UpdateInvoiceUnitRequest.add_member(:rule, Shapes::ShapeRef.new(shape: InvoiceUnitRule, location_name: "Rule"))
     UpdateInvoiceUnitRequest.struct_class = Types::UpdateInvoiceUnitRequest
 

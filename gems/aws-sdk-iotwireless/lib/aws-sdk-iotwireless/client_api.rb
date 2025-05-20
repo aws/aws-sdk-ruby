@@ -740,7 +740,7 @@ module Aws::IoTWireless
     AssistPosition.member = Shapes::ShapeRef.new(shape: Coordinate)
 
     AssociateAwsAccountWithPartnerAccountRequest.add_member(:sidewalk, Shapes::ShapeRef.new(shape: SidewalkAccountInfo, required: true, location_name: "Sidewalk"))
-    AssociateAwsAccountWithPartnerAccountRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    AssociateAwsAccountWithPartnerAccountRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     AssociateAwsAccountWithPartnerAccountRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     AssociateAwsAccountWithPartnerAccountRequest.struct_class = Types::AssociateAwsAccountWithPartnerAccountRequest
 
@@ -850,7 +850,7 @@ module Aws::IoTWireless
     CreateDestinationRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateDestinationRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     CreateDestinationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateDestinationRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateDestinationRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateDestinationRequest.struct_class = Types::CreateDestinationRequest
 
     CreateDestinationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: DestinationArn, location_name: "Arn"))
@@ -860,7 +860,7 @@ module Aws::IoTWireless
     CreateDeviceProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: DeviceProfileName, location_name: "Name"))
     CreateDeviceProfileRequest.add_member(:lo_ra_wan, Shapes::ShapeRef.new(shape: LoRaWANDeviceProfile, location_name: "LoRaWAN"))
     CreateDeviceProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateDeviceProfileRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateDeviceProfileRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateDeviceProfileRequest.add_member(:sidewalk, Shapes::ShapeRef.new(shape: SidewalkCreateDeviceProfile, location_name: "Sidewalk"))
     CreateDeviceProfileRequest.struct_class = Types::CreateDeviceProfileRequest
 
@@ -870,7 +870,7 @@ module Aws::IoTWireless
 
     CreateFuotaTaskRequest.add_member(:name, Shapes::ShapeRef.new(shape: FuotaTaskName, location_name: "Name"))
     CreateFuotaTaskRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    CreateFuotaTaskRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateFuotaTaskRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateFuotaTaskRequest.add_member(:lo_ra_wan, Shapes::ShapeRef.new(shape: LoRaWANFuotaTask, location_name: "LoRaWAN"))
     CreateFuotaTaskRequest.add_member(:firmware_update_image, Shapes::ShapeRef.new(shape: FirmwareUpdateImage, required: true, location_name: "FirmwareUpdateImage"))
     CreateFuotaTaskRequest.add_member(:firmware_update_role, Shapes::ShapeRef.new(shape: FirmwareUpdateRole, required: true, location_name: "FirmwareUpdateRole"))
@@ -887,7 +887,7 @@ module Aws::IoTWireless
 
     CreateMulticastGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: MulticastGroupName, location_name: "Name"))
     CreateMulticastGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    CreateMulticastGroupRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateMulticastGroupRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateMulticastGroupRequest.add_member(:lo_ra_wan, Shapes::ShapeRef.new(shape: LoRaWANMulticast, required: true, location_name: "LoRaWAN"))
     CreateMulticastGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateMulticastGroupRequest.struct_class = Types::CreateMulticastGroupRequest
@@ -902,7 +902,7 @@ module Aws::IoTWireless
     CreateNetworkAnalyzerConfigurationRequest.add_member(:wireless_gateways, Shapes::ShapeRef.new(shape: WirelessGatewayList, location_name: "WirelessGateways"))
     CreateNetworkAnalyzerConfigurationRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateNetworkAnalyzerConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateNetworkAnalyzerConfigurationRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateNetworkAnalyzerConfigurationRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateNetworkAnalyzerConfigurationRequest.add_member(:multicast_groups, Shapes::ShapeRef.new(shape: NetworkAnalyzerMulticastGroupList, location_name: "MulticastGroups"))
     CreateNetworkAnalyzerConfigurationRequest.struct_class = Types::CreateNetworkAnalyzerConfigurationRequest
 
@@ -913,7 +913,7 @@ module Aws::IoTWireless
     CreateServiceProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: ServiceProfileName, location_name: "Name"))
     CreateServiceProfileRequest.add_member(:lo_ra_wan, Shapes::ShapeRef.new(shape: LoRaWANServiceProfile, location_name: "LoRaWAN"))
     CreateServiceProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateServiceProfileRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateServiceProfileRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateServiceProfileRequest.struct_class = Types::CreateServiceProfileRequest
 
     CreateServiceProfileResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ServiceProfileArn, location_name: "Arn"))
@@ -924,7 +924,7 @@ module Aws::IoTWireless
     CreateWirelessDeviceRequest.add_member(:name, Shapes::ShapeRef.new(shape: WirelessDeviceName, location_name: "Name"))
     CreateWirelessDeviceRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateWirelessDeviceRequest.add_member(:destination_name, Shapes::ShapeRef.new(shape: DestinationName, required: true, location_name: "DestinationName"))
-    CreateWirelessDeviceRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateWirelessDeviceRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateWirelessDeviceRequest.add_member(:lo_ra_wan, Shapes::ShapeRef.new(shape: LoRaWANDevice, location_name: "LoRaWAN"))
     CreateWirelessDeviceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateWirelessDeviceRequest.add_member(:positioning, Shapes::ShapeRef.new(shape: PositioningConfigStatus, location_name: "Positioning"))
@@ -939,7 +939,7 @@ module Aws::IoTWireless
     CreateWirelessGatewayRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateWirelessGatewayRequest.add_member(:lo_ra_wan, Shapes::ShapeRef.new(shape: LoRaWANGateway, required: true, location_name: "LoRaWAN"))
     CreateWirelessGatewayRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    CreateWirelessGatewayRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateWirelessGatewayRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateWirelessGatewayRequest.struct_class = Types::CreateWirelessGatewayRequest
 
     CreateWirelessGatewayResponse.add_member(:arn, Shapes::ShapeRef.new(shape: WirelessGatewayArn, location_name: "Arn"))
@@ -949,7 +949,7 @@ module Aws::IoTWireless
     CreateWirelessGatewayTaskDefinitionRequest.add_member(:auto_create_tasks, Shapes::ShapeRef.new(shape: AutoCreateTasks, required: true, location_name: "AutoCreateTasks"))
     CreateWirelessGatewayTaskDefinitionRequest.add_member(:name, Shapes::ShapeRef.new(shape: WirelessGatewayTaskName, location_name: "Name"))
     CreateWirelessGatewayTaskDefinitionRequest.add_member(:update, Shapes::ShapeRef.new(shape: UpdateWirelessGatewayTaskCreate, location_name: "Update"))
-    CreateWirelessGatewayTaskDefinitionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateWirelessGatewayTaskDefinitionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateWirelessGatewayTaskDefinitionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateWirelessGatewayTaskDefinitionRequest.struct_class = Types::CreateWirelessGatewayTaskDefinitionRequest
 
@@ -2131,7 +2131,7 @@ module Aws::IoTWireless
     StartMulticastGroupSessionResponse.struct_class = Types::StartMulticastGroupSessionResponse
 
     StartSingleWirelessDeviceImportTaskRequest.add_member(:destination_name, Shapes::ShapeRef.new(shape: DestinationName, required: true, location_name: "DestinationName"))
-    StartSingleWirelessDeviceImportTaskRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    StartSingleWirelessDeviceImportTaskRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     StartSingleWirelessDeviceImportTaskRequest.add_member(:device_name, Shapes::ShapeRef.new(shape: DeviceName, location_name: "DeviceName"))
     StartSingleWirelessDeviceImportTaskRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     StartSingleWirelessDeviceImportTaskRequest.add_member(:sidewalk, Shapes::ShapeRef.new(shape: SidewalkSingleStartImportInfo, required: true, location_name: "Sidewalk"))
@@ -2142,7 +2142,7 @@ module Aws::IoTWireless
     StartSingleWirelessDeviceImportTaskResponse.struct_class = Types::StartSingleWirelessDeviceImportTaskResponse
 
     StartWirelessDeviceImportTaskRequest.add_member(:destination_name, Shapes::ShapeRef.new(shape: DestinationName, required: true, location_name: "DestinationName"))
-    StartWirelessDeviceImportTaskRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    StartWirelessDeviceImportTaskRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     StartWirelessDeviceImportTaskRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     StartWirelessDeviceImportTaskRequest.add_member(:sidewalk, Shapes::ShapeRef.new(shape: SidewalkStartImportInfo, required: true, location_name: "Sidewalk"))
     StartWirelessDeviceImportTaskRequest.struct_class = Types::StartWirelessDeviceImportTaskRequest

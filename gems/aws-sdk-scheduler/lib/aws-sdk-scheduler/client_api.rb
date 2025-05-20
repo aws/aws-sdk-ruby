@@ -148,7 +148,7 @@ module Aws::Scheduler
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
 
-    CreateScheduleGroupInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateScheduleGroupInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateScheduleGroupInput.add_member(:name, Shapes::ShapeRef.new(shape: ScheduleGroupName, required: true, location: "uri", location_name: "Name"))
     CreateScheduleGroupInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateScheduleGroupInput.struct_class = Types::CreateScheduleGroupInput
@@ -157,7 +157,7 @@ module Aws::Scheduler
     CreateScheduleGroupOutput.struct_class = Types::CreateScheduleGroupOutput
 
     CreateScheduleInput.add_member(:action_after_completion, Shapes::ShapeRef.new(shape: ActionAfterCompletion, location_name: "ActionAfterCompletion"))
-    CreateScheduleInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateScheduleInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateScheduleInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateScheduleInput.add_member(:end_date, Shapes::ShapeRef.new(shape: EndDate, location_name: "EndDate"))
     CreateScheduleInput.add_member(:flexible_time_window, Shapes::ShapeRef.new(shape: FlexibleTimeWindow, required: true, location_name: "FlexibleTimeWindow"))
@@ -177,13 +177,13 @@ module Aws::Scheduler
     DeadLetterConfig.add_member(:arn, Shapes::ShapeRef.new(shape: DeadLetterConfigArnString, location_name: "Arn"))
     DeadLetterConfig.struct_class = Types::DeadLetterConfig
 
-    DeleteScheduleGroupInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteScheduleGroupInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteScheduleGroupInput.add_member(:name, Shapes::ShapeRef.new(shape: ScheduleGroupName, required: true, location: "uri", location_name: "Name"))
     DeleteScheduleGroupInput.struct_class = Types::DeleteScheduleGroupInput
 
     DeleteScheduleGroupOutput.struct_class = Types::DeleteScheduleGroupOutput
 
-    DeleteScheduleInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteScheduleInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteScheduleInput.add_member(:group_name, Shapes::ShapeRef.new(shape: ScheduleGroupName, location: "querystring", location_name: "groupName"))
     DeleteScheduleInput.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "Name"))
     DeleteScheduleInput.struct_class = Types::DeleteScheduleInput
@@ -382,7 +382,7 @@ module Aws::Scheduler
     UntagResourceOutput.struct_class = Types::UntagResourceOutput
 
     UpdateScheduleInput.add_member(:action_after_completion, Shapes::ShapeRef.new(shape: ActionAfterCompletion, location_name: "ActionAfterCompletion"))
-    UpdateScheduleInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateScheduleInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     UpdateScheduleInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     UpdateScheduleInput.add_member(:end_date, Shapes::ShapeRef.new(shape: EndDate, location_name: "EndDate"))
     UpdateScheduleInput.add_member(:flexible_time_window, Shapes::ShapeRef.new(shape: FlexibleTimeWindow, required: true, location_name: "FlexibleTimeWindow"))

@@ -51,10 +51,37 @@ module Aws::MediaPackageV2
     CreateOriginEndpointRequest = Shapes::StructureShape.new(name: 'CreateOriginEndpointRequest')
     CreateOriginEndpointRequestStartoverWindowSecondsInteger = Shapes::IntegerShape.new(name: 'CreateOriginEndpointRequestStartoverWindowSecondsInteger')
     CreateOriginEndpointResponse = Shapes::StructureShape.new(name: 'CreateOriginEndpointResponse')
+    DashBaseUrl = Shapes::StructureShape.new(name: 'DashBaseUrl')
+    DashBaseUrlDvbPriorityInteger = Shapes::IntegerShape.new(name: 'DashBaseUrlDvbPriorityInteger')
+    DashBaseUrlDvbWeightInteger = Shapes::IntegerShape.new(name: 'DashBaseUrlDvbWeightInteger')
+    DashBaseUrlServiceLocationString = Shapes::StringShape.new(name: 'DashBaseUrlServiceLocationString')
+    DashBaseUrlUrlString = Shapes::StringShape.new(name: 'DashBaseUrlUrlString')
+    DashBaseUrls = Shapes::ListShape.new(name: 'DashBaseUrls')
+    DashCompactness = Shapes::StringShape.new(name: 'DashCompactness')
     DashDrmSignaling = Shapes::StringShape.new(name: 'DashDrmSignaling')
+    DashDvbErrorMetrics = Shapes::ListShape.new(name: 'DashDvbErrorMetrics')
+    DashDvbFontDownload = Shapes::StructureShape.new(name: 'DashDvbFontDownload')
+    DashDvbFontDownloadFontFamilyString = Shapes::StringShape.new(name: 'DashDvbFontDownloadFontFamilyString')
+    DashDvbFontDownloadMimeTypeString = Shapes::StringShape.new(name: 'DashDvbFontDownloadMimeTypeString')
+    DashDvbFontDownloadUrlString = Shapes::StringShape.new(name: 'DashDvbFontDownloadUrlString')
+    DashDvbMetricsReporting = Shapes::StructureShape.new(name: 'DashDvbMetricsReporting')
+    DashDvbMetricsReportingProbabilityInteger = Shapes::IntegerShape.new(name: 'DashDvbMetricsReportingProbabilityInteger')
+    DashDvbMetricsReportingReportingUrlString = Shapes::StringShape.new(name: 'DashDvbMetricsReportingReportingUrlString')
+    DashDvbSettings = Shapes::StructureShape.new(name: 'DashDvbSettings')
     DashPeriodTrigger = Shapes::StringShape.new(name: 'DashPeriodTrigger')
     DashPeriodTriggers = Shapes::ListShape.new(name: 'DashPeriodTriggers')
+    DashProfile = Shapes::StringShape.new(name: 'DashProfile')
+    DashProfiles = Shapes::ListShape.new(name: 'DashProfiles')
+    DashProgramInformation = Shapes::StructureShape.new(name: 'DashProgramInformation')
+    DashProgramInformationCopyrightString = Shapes::StringShape.new(name: 'DashProgramInformationCopyrightString')
+    DashProgramInformationLanguageCodeString = Shapes::StringShape.new(name: 'DashProgramInformationLanguageCodeString')
+    DashProgramInformationMoreInformationUrlString = Shapes::StringShape.new(name: 'DashProgramInformationMoreInformationUrlString')
+    DashProgramInformationSourceString = Shapes::StringShape.new(name: 'DashProgramInformationSourceString')
+    DashProgramInformationTitleString = Shapes::StringShape.new(name: 'DashProgramInformationTitleString')
     DashSegmentTemplateFormat = Shapes::StringShape.new(name: 'DashSegmentTemplateFormat')
+    DashSubtitleConfiguration = Shapes::StructureShape.new(name: 'DashSubtitleConfiguration')
+    DashTtmlConfiguration = Shapes::StructureShape.new(name: 'DashTtmlConfiguration')
+    DashTtmlProfile = Shapes::StringShape.new(name: 'DashTtmlProfile')
     DashUtcTiming = Shapes::StructureShape.new(name: 'DashUtcTiming')
     DashUtcTimingMode = Shapes::StringShape.new(name: 'DashUtcTimingMode')
     DashUtcTimingTimingSourceString = Shapes::StringShape.new(name: 'DashUtcTimingTimingSourceString')
@@ -234,7 +261,7 @@ module Aws::MediaPackageV2
     ConflictException.struct_class = Types::ConflictException
 
     CreateChannelGroupRequest.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ChannelGroupName"))
-    CreateChannelGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "header", location_name: "x-amzn-client-token", metadata: {"idempotencyToken"=>true}))
+    CreateChannelGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "header", location_name: "x-amzn-client-token", metadata: {"idempotencyToken" => true}))
     CreateChannelGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     CreateChannelGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateChannelGroupRequest.struct_class = Types::CreateChannelGroupRequest
@@ -251,7 +278,7 @@ module Aws::MediaPackageV2
 
     CreateChannelRequest.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "ChannelGroupName"))
     CreateChannelRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ChannelName"))
-    CreateChannelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "header", location_name: "x-amzn-client-token", metadata: {"idempotencyToken"=>true}))
+    CreateChannelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "header", location_name: "x-amzn-client-token", metadata: {"idempotencyToken" => true}))
     CreateChannelRequest.add_member(:input_type, Shapes::ShapeRef.new(shape: InputType, location_name: "InputType"))
     CreateChannelRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     CreateChannelRequest.add_member(:input_switch_configuration, Shapes::ShapeRef.new(shape: InputSwitchConfiguration, location_name: "InputSwitchConfiguration"))
@@ -284,6 +311,12 @@ module Aws::MediaPackageV2
     CreateDashManifestConfiguration.add_member(:scte_dash, Shapes::ShapeRef.new(shape: ScteDash, location_name: "ScteDash"))
     CreateDashManifestConfiguration.add_member(:drm_signaling, Shapes::ShapeRef.new(shape: DashDrmSignaling, location_name: "DrmSignaling"))
     CreateDashManifestConfiguration.add_member(:utc_timing, Shapes::ShapeRef.new(shape: DashUtcTiming, location_name: "UtcTiming"))
+    CreateDashManifestConfiguration.add_member(:profiles, Shapes::ShapeRef.new(shape: DashProfiles, location_name: "Profiles"))
+    CreateDashManifestConfiguration.add_member(:base_urls, Shapes::ShapeRef.new(shape: DashBaseUrls, location_name: "BaseUrls"))
+    CreateDashManifestConfiguration.add_member(:program_information, Shapes::ShapeRef.new(shape: DashProgramInformation, location_name: "ProgramInformation"))
+    CreateDashManifestConfiguration.add_member(:dvb_settings, Shapes::ShapeRef.new(shape: DashDvbSettings, location_name: "DvbSettings"))
+    CreateDashManifestConfiguration.add_member(:compactness, Shapes::ShapeRef.new(shape: DashCompactness, location_name: "Compactness"))
+    CreateDashManifestConfiguration.add_member(:subtitle_configuration, Shapes::ShapeRef.new(shape: DashSubtitleConfiguration, location_name: "SubtitleConfiguration"))
     CreateDashManifestConfiguration.struct_class = Types::CreateDashManifestConfiguration
 
     CreateDashManifests.member = Shapes::ShapeRef.new(shape: CreateDashManifestConfiguration)
@@ -295,7 +328,7 @@ module Aws::MediaPackageV2
     CreateHarvestJobRequest.add_member(:harvested_manifests, Shapes::ShapeRef.new(shape: HarvestedManifests, required: true, location_name: "HarvestedManifests"))
     CreateHarvestJobRequest.add_member(:schedule_configuration, Shapes::ShapeRef.new(shape: HarvesterScheduleConfiguration, required: true, location_name: "ScheduleConfiguration"))
     CreateHarvestJobRequest.add_member(:destination, Shapes::ShapeRef.new(shape: Destination, required: true, location_name: "Destination"))
-    CreateHarvestJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "header", location_name: "x-amzn-client-token", metadata: {"idempotencyToken"=>true}))
+    CreateHarvestJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "header", location_name: "x-amzn-client-token", metadata: {"idempotencyToken" => true}))
     CreateHarvestJobRequest.add_member(:harvest_job_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "HarvestJobName"))
     CreateHarvestJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateHarvestJobRequest.struct_class = Types::CreateHarvestJobRequest
@@ -346,7 +379,7 @@ module Aws::MediaPackageV2
     CreateOriginEndpointRequest.add_member(:origin_endpoint_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "OriginEndpointName"))
     CreateOriginEndpointRequest.add_member(:container_type, Shapes::ShapeRef.new(shape: ContainerType, required: true, location_name: "ContainerType"))
     CreateOriginEndpointRequest.add_member(:segment, Shapes::ShapeRef.new(shape: Segment, location_name: "Segment"))
-    CreateOriginEndpointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "header", location_name: "x-amzn-client-token", metadata: {"idempotencyToken"=>true}))
+    CreateOriginEndpointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "header", location_name: "x-amzn-client-token", metadata: {"idempotencyToken" => true}))
     CreateOriginEndpointRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     CreateOriginEndpointRequest.add_member(:startover_window_seconds, Shapes::ShapeRef.new(shape: CreateOriginEndpointRequestStartoverWindowSecondsInteger, location_name: "StartoverWindowSeconds"))
     CreateOriginEndpointRequest.add_member(:hls_manifests, Shapes::ShapeRef.new(shape: CreateHlsManifests, location_name: "HlsManifests"))
@@ -374,7 +407,45 @@ module Aws::MediaPackageV2
     CreateOriginEndpointResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateOriginEndpointResponse.struct_class = Types::CreateOriginEndpointResponse
 
+    DashBaseUrl.add_member(:url, Shapes::ShapeRef.new(shape: DashBaseUrlUrlString, required: true, location_name: "Url"))
+    DashBaseUrl.add_member(:service_location, Shapes::ShapeRef.new(shape: DashBaseUrlServiceLocationString, location_name: "ServiceLocation"))
+    DashBaseUrl.add_member(:dvb_priority, Shapes::ShapeRef.new(shape: DashBaseUrlDvbPriorityInteger, location_name: "DvbPriority"))
+    DashBaseUrl.add_member(:dvb_weight, Shapes::ShapeRef.new(shape: DashBaseUrlDvbWeightInteger, location_name: "DvbWeight"))
+    DashBaseUrl.struct_class = Types::DashBaseUrl
+
+    DashBaseUrls.member = Shapes::ShapeRef.new(shape: DashBaseUrl)
+
+    DashDvbErrorMetrics.member = Shapes::ShapeRef.new(shape: DashDvbMetricsReporting)
+
+    DashDvbFontDownload.add_member(:url, Shapes::ShapeRef.new(shape: DashDvbFontDownloadUrlString, location_name: "Url"))
+    DashDvbFontDownload.add_member(:mime_type, Shapes::ShapeRef.new(shape: DashDvbFontDownloadMimeTypeString, location_name: "MimeType"))
+    DashDvbFontDownload.add_member(:font_family, Shapes::ShapeRef.new(shape: DashDvbFontDownloadFontFamilyString, location_name: "FontFamily"))
+    DashDvbFontDownload.struct_class = Types::DashDvbFontDownload
+
+    DashDvbMetricsReporting.add_member(:reporting_url, Shapes::ShapeRef.new(shape: DashDvbMetricsReportingReportingUrlString, required: true, location_name: "ReportingUrl"))
+    DashDvbMetricsReporting.add_member(:probability, Shapes::ShapeRef.new(shape: DashDvbMetricsReportingProbabilityInteger, location_name: "Probability"))
+    DashDvbMetricsReporting.struct_class = Types::DashDvbMetricsReporting
+
+    DashDvbSettings.add_member(:font_download, Shapes::ShapeRef.new(shape: DashDvbFontDownload, location_name: "FontDownload"))
+    DashDvbSettings.add_member(:error_metrics, Shapes::ShapeRef.new(shape: DashDvbErrorMetrics, location_name: "ErrorMetrics"))
+    DashDvbSettings.struct_class = Types::DashDvbSettings
+
     DashPeriodTriggers.member = Shapes::ShapeRef.new(shape: DashPeriodTrigger)
+
+    DashProfiles.member = Shapes::ShapeRef.new(shape: DashProfile)
+
+    DashProgramInformation.add_member(:title, Shapes::ShapeRef.new(shape: DashProgramInformationTitleString, location_name: "Title"))
+    DashProgramInformation.add_member(:source, Shapes::ShapeRef.new(shape: DashProgramInformationSourceString, location_name: "Source"))
+    DashProgramInformation.add_member(:copyright, Shapes::ShapeRef.new(shape: DashProgramInformationCopyrightString, location_name: "Copyright"))
+    DashProgramInformation.add_member(:language_code, Shapes::ShapeRef.new(shape: DashProgramInformationLanguageCodeString, location_name: "LanguageCode"))
+    DashProgramInformation.add_member(:more_information_url, Shapes::ShapeRef.new(shape: DashProgramInformationMoreInformationUrlString, location_name: "MoreInformationUrl"))
+    DashProgramInformation.struct_class = Types::DashProgramInformation
+
+    DashSubtitleConfiguration.add_member(:ttml_configuration, Shapes::ShapeRef.new(shape: DashTtmlConfiguration, location_name: "TtmlConfiguration"))
+    DashSubtitleConfiguration.struct_class = Types::DashSubtitleConfiguration
+
+    DashTtmlConfiguration.add_member(:ttml_profile, Shapes::ShapeRef.new(shape: DashTtmlProfile, required: true, location_name: "TtmlProfile"))
+    DashTtmlConfiguration.struct_class = Types::DashTtmlConfiguration
 
     DashUtcTiming.add_member(:timing_mode, Shapes::ShapeRef.new(shape: DashUtcTimingMode, location_name: "TimingMode"))
     DashUtcTiming.add_member(:timing_source, Shapes::ShapeRef.new(shape: DashUtcTimingTimingSourceString, location_name: "TimingSource"))
@@ -493,6 +564,12 @@ module Aws::MediaPackageV2
     GetDashManifestConfiguration.add_member(:scte_dash, Shapes::ShapeRef.new(shape: ScteDash, location_name: "ScteDash"))
     GetDashManifestConfiguration.add_member(:drm_signaling, Shapes::ShapeRef.new(shape: DashDrmSignaling, location_name: "DrmSignaling"))
     GetDashManifestConfiguration.add_member(:utc_timing, Shapes::ShapeRef.new(shape: DashUtcTiming, location_name: "UtcTiming"))
+    GetDashManifestConfiguration.add_member(:profiles, Shapes::ShapeRef.new(shape: DashProfiles, location_name: "Profiles"))
+    GetDashManifestConfiguration.add_member(:base_urls, Shapes::ShapeRef.new(shape: DashBaseUrls, location_name: "BaseUrls"))
+    GetDashManifestConfiguration.add_member(:program_information, Shapes::ShapeRef.new(shape: DashProgramInformation, location_name: "ProgramInformation"))
+    GetDashManifestConfiguration.add_member(:dvb_settings, Shapes::ShapeRef.new(shape: DashDvbSettings, location_name: "DvbSettings"))
+    GetDashManifestConfiguration.add_member(:compactness, Shapes::ShapeRef.new(shape: DashCompactness, location_name: "Compactness"))
+    GetDashManifestConfiguration.add_member(:subtitle_configuration, Shapes::ShapeRef.new(shape: DashSubtitleConfiguration, location_name: "SubtitleConfiguration"))
     GetDashManifestConfiguration.struct_class = Types::GetDashManifestConfiguration
 
     GetDashManifests.member = Shapes::ShapeRef.new(shape: GetDashManifestConfiguration)

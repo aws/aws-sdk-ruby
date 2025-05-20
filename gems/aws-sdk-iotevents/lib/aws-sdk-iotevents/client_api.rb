@@ -739,7 +739,7 @@ module Aws::IoTEvents
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
 
     SetTimerAction.add_member(:timer_name, Shapes::ShapeRef.new(shape: TimerName, required: true, location_name: "timerName"))
-    SetTimerAction.add_member(:seconds, Shapes::ShapeRef.new(shape: Seconds, deprecated: true, location_name: "seconds", metadata: {"deprecatedMessage"=>"seconds is deprecated. You can use durationExpression for SetTimerAction. The value of seconds can be used as a string expression for durationExpression."}))
+    SetTimerAction.add_member(:seconds, Shapes::ShapeRef.new(shape: Seconds, deprecated: true, location_name: "seconds", metadata: {"deprecatedMessage" => "seconds is deprecated. You can use durationExpression for SetTimerAction. The value of seconds can be used as a string expression for durationExpression."}))
     SetTimerAction.add_member(:duration_expression, Shapes::ShapeRef.new(shape: VariableValue, location_name: "durationExpression"))
     SetTimerAction.struct_class = Types::SetTimerAction
 

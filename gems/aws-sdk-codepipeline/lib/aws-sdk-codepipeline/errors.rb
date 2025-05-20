@@ -27,6 +27,7 @@ module Aws::CodePipeline
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {ActionExecutionNotFoundException}
   # * {ActionNotFoundException}
   # * {ActionTypeAlreadyExistsException}
   # * {ActionTypeNotFoundException}
@@ -74,6 +75,21 @@ module Aws::CodePipeline
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class ActionExecutionNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CodePipeline::Types::ActionExecutionNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
 
     class ActionNotFoundException < ServiceError
 

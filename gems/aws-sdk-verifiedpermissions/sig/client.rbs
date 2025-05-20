@@ -281,7 +281,8 @@ module Aws
                                    mode: ("OFF" | "STRICT")
                                  },
                                  ?description: ::String,
-                                 ?deletion_protection: ("ENABLED" | "DISABLED")
+                                 ?deletion_protection: ("ENABLED" | "DISABLED"),
+                                 ?tags: Hash[::String, ::String]
                                ) -> _CreatePolicyStoreResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePolicyStoreResponseSuccess
 
@@ -386,10 +387,13 @@ module Aws
         def last_updated_date: () -> ::Time
         def description: () -> ::String
         def deletion_protection: () -> ("ENABLED" | "DISABLED")
+        def cedar_version: () -> ("CEDAR_2" | "CEDAR_4")
+        def tags: () -> ::Hash[::String, ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#get_policy_store-instance_method
       def get_policy_store: (
-                              policy_store_id: ::String
+                              policy_store_id: ::String,
+                              ?tags: bool
                             ) -> _GetPolicyStoreResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPolicyStoreResponseSuccess
 
@@ -588,6 +592,16 @@ module Aws
                                  ) -> _ListPolicyTemplatesResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPolicyTemplatesResponseSuccess
 
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
       interface _PutSchemaResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutSchemaOutput]
         def policy_store_id: () -> ::String
@@ -603,6 +617,26 @@ module Aws
                         }
                       ) -> _PutSchemaResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutSchemaResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
 
       interface _UpdateIdentitySourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateIdentitySourceOutput]

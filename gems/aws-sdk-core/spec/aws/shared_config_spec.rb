@@ -258,6 +258,17 @@ module Aws
       end
     end
 
+    context 'disable_host_prefix_injection selection' do
+      it 'can resolve disable_host_prefix_injection from config file' do
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 'disable_host_prefix_injection'
+        )
+        expect(config.disable_host_prefix_injection).to eq('true')
+      end
+    end
+
     context 'retry_mode selection' do
       it 'can resolve retry_mode from config file' do
         config = SharedConfig.new(

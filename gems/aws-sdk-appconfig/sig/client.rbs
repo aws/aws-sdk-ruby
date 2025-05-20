@@ -829,6 +829,19 @@ module Aws
                                     configuration_version: ::String
                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppConfig/Client.html#wait_until-instance_method
+      def wait_until: (:deployment_complete waiter_name, 
+                    application_id: ::String,
+                    environment_id: ::String,
+                    deployment_number: ::Integer
+                  ) -> Client::_GetDeploymentResponseSuccess
+                    | (:deployment_complete waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetDeploymentResponseSuccess
+                    | (:environment_ready_for_deployment waiter_name, 
+                    application_id: ::String,
+                    environment_id: ::String
+                  ) -> Client::_GetEnvironmentResponseSuccess
+                    | (:environment_ready_for_deployment waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetEnvironmentResponseSuccess
     end
   end
 end

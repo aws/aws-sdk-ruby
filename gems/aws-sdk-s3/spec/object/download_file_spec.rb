@@ -221,6 +221,58 @@ module Aws
           end.to raise_error(Aws::Errors::ChecksumError)
         end
 
+        it 'does not download object when ETAG does not match during multipart get by ranges' do
+          allow(client).to receive(:head_object).with({
+            bucket: 'bucket',
+            key: 'single',
+            part_number: 1,
+          }).and_return(
+            client.stub_data(
+              :head_object,
+              content_length: 15 * one_meg,
+              parts_count: nil,
+              etag: 'test-etag'
+            )
+          )
+
+          client.stub_responses(:get_object, -> (ctx) {
+            expect(ctx.params[:if_match]).to eq('test-etag')
+            'PreconditionFailed'
+          })
+
+          thread = double(value: nil)
+          expect(Thread).to receive(:new).and_yield.and_return(thread)
+
+          expect do
+            single_obj.download_file(path)
+          end.to raise_error(Aws::S3::Errors::PreconditionFailed)
+        end
+
+        it 'does not download object when ETAG does not match during multipart get by parts' do
+          allow(client).to receive(:head_object).with({
+            bucket: 'bucket',
+            key: 'large'
+          }).and_return(
+            client.stub_data(
+              :head_object,
+              content_length: 20 * one_meg,
+              etag: 'test-etag'
+            )
+          )
+
+          client.stub_responses(:get_object, -> (ctx) {
+            expect(ctx.params[:if_match]).to eq('test-etag')
+            'PreconditionFailed'
+          })
+
+          thread = double(value: nil)
+          expect(Thread).to receive(:new).and_yield.and_return(thread)
+
+          expect do
+            large_obj.download_file(path)
+          end.to raise_error(Aws::S3::Errors::PreconditionFailed)
+        end
+
         it 'calls on_checksum_validated on single part' do
           callback_data = {called: 0}
           mutex = Mutex.new

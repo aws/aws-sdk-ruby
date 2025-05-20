@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.154.0 (2025-05-12)
+------------------
+
+* Feature - Add support to the AV1 rate control mode
+
+1.153.0 (2025-05-07)
+------------------
+
+* Feature - Enables Updating Anywhere Settings on a MediaLive Anywhere Channel.
+
+1.152.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.151.0 (2025-04-10)
 ------------------
 

@@ -125,7 +125,7 @@ module Aws::IoTDataPlane
     PublishRequest.add_member(:qos, Shapes::ShapeRef.new(shape: Qos, location: "querystring", location_name: "qos"))
     PublishRequest.add_member(:retain, Shapes::ShapeRef.new(shape: Retain, location: "querystring", location_name: "retain"))
     PublishRequest.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, location_name: "payload"))
-    PublishRequest.add_member(:user_properties, Shapes::ShapeRef.new(shape: UserProperties, location: "header", location_name: "x-amz-mqtt5-user-properties", metadata: {"jsonvalue"=>true}))
+    PublishRequest.add_member(:user_properties, Shapes::ShapeRef.new(shape: UserProperties, location: "header", location_name: "x-amz-mqtt5-user-properties", metadata: {"jsonvalue" => true}))
     PublishRequest.add_member(:payload_format_indicator, Shapes::ShapeRef.new(shape: PayloadFormatIndicator, location: "header", location_name: "x-amz-mqtt5-payload-format-indicator"))
     PublishRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location: "querystring", location_name: "contentType"))
     PublishRequest.add_member(:response_topic, Shapes::ShapeRef.new(shape: ResponseTopic, location: "querystring", location_name: "responseTopic"))

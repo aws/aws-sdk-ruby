@@ -184,7 +184,7 @@ module Aws
                                     channels_in: ::Integer?,
                                     channels_out: ::Integer?
                                   }?,
-                                  selector_type: ("PID" | "TRACK" | "LANGUAGE_CODE" | "HLS_RENDITION_GROUP")?,
+                                  selector_type: ("PID" | "TRACK" | "LANGUAGE_CODE" | "HLS_RENDITION_GROUP" | "ALL_PCM")?,
                                   tracks: Array[::Integer]?
                                 }]?,
                               caption_selectors: Hash[::String, {
@@ -215,7 +215,8 @@ module Aws
                                       }?,
                                       source_file: ::String?,
                                       time_delta: ::Integer?,
-                                      time_delta_units: ("SECONDS" | "MILLISECONDS")?
+                                      time_delta_units: ("SECONDS" | "MILLISECONDS")?,
+                                      upconvert_stl_to_teletext: ("UPCONVERT" | "DISABLED")?
                                     }?,
                                     source_type: ("ANCILLARY" | "DVB_SUB" | "EMBEDDED" | "SCTE20" | "SCC" | "TTML" | "STL" | "SRT" | "SMI" | "SMPTE_TT" | "TELETEXT" | "NULL_SOURCE" | "IMSC" | "WEBVTT")?,
                                     teletext_source_settings: {
@@ -301,6 +302,13 @@ module Aws
                               }?,
                               video_overlays: Array[
                                 {
+                                  crop: {
+                                    height: ::Integer?,
+                                    unit: ("PIXELS" | "PERCENTAGE")?,
+                                    width: ::Integer?,
+                                    x: ::Integer?,
+                                    y: ::Integer?
+                                  }?,
                                   end_timecode: ::String?,
                                   initial_position: {
                                     height: ::Integer?,
@@ -727,6 +735,7 @@ module Aws
                                   fragment_length_control: ("EXACT" | "GOP_MULTIPLE")?,
                                   manifest_encoding: ("UTF8" | "UTF16")?
                                 }?,
+                                per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                 type: ("HLS_GROUP_SETTINGS" | "DASH_ISO_GROUP_SETTINGS" | "FILE_GROUP_SETTINGS" | "MS_SMOOTH_GROUP_SETTINGS" | "CMAF_GROUP_SETTINGS")?
                               }?,
                               outputs: Array[
@@ -1142,6 +1151,7 @@ module Aws
                                         gop_size: ::Float?,
                                         max_bitrate: ::Integer?,
                                         number_b_frames_between_reference_frames: ::Integer?,
+                                        per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                         qvbr_settings: {
                                           qvbr_quality_level: ::Integer?,
                                           qvbr_quality_level_fine_tune: ::Float?
@@ -1160,6 +1170,7 @@ module Aws
                                         framerate_denominator: ::Integer?,
                                         framerate_numerator: ::Integer?,
                                         interlace_mode: ("PROGRESSIVE" | "TOP_FIELD" | "BOTTOM_FIELD" | "FOLLOW_TOP_FIELD" | "FOLLOW_BOTTOM_FIELD")?,
+                                        per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                         scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")?,
                                         slow_pal: ("DISABLED" | "ENABLED")?,
                                         telecine: ("NONE" | "HARD")?
@@ -1210,6 +1221,7 @@ module Aws
                                         par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
                                         par_denominator: ::Integer?,
                                         par_numerator: ::Integer?,
+                                        per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                         quality_tuning_level: ("SINGLE_PASS" | "SINGLE_PASS_HQ" | "MULTI_PASS_HQ")?,
                                         qvbr_settings: {
                                           max_average_bitrate: ::Integer?,
@@ -1264,6 +1276,7 @@ module Aws
                                         par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
                                         par_denominator: ::Integer?,
                                         par_numerator: ::Integer?,
+                                        per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                         quality_tuning_level: ("SINGLE_PASS" | "SINGLE_PASS_HQ" | "MULTI_PASS_HQ")?,
                                         qvbr_settings: {
                                           max_average_bitrate: ::Integer?,
@@ -1308,6 +1321,7 @@ module Aws
                                         par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
                                         par_denominator: ::Integer?,
                                         par_numerator: ::Integer?,
+                                        per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                         quality_tuning_level: ("SINGLE_PASS" | "MULTI_PASS")?,
                                         rate_control_mode: ("VBR" | "CBR")?,
                                         scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")?,
@@ -1330,6 +1344,7 @@ module Aws
                                         par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
                                         par_denominator: ::Integer?,
                                         par_numerator: ::Integer?,
+                                        per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                         scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")?,
                                         slow_pal: ("DISABLED" | "ENABLED")?,
                                         telecine: ("NONE" | "HARD")?
@@ -1393,6 +1408,7 @@ module Aws
                                         framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER" | "MAINTAIN_FRAME_COUNT")?,
                                         framerate_denominator: ::Integer?,
                                         framerate_numerator: ::Integer?,
+                                        per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                         profile: ("XAVC_HD_INTRA_CBG" | "XAVC_4K_INTRA_CBG" | "XAVC_4K_INTRA_VBR" | "XAVC_HD" | "XAVC_4K")?,
                                         slow_pal: ("DISABLED" | "ENABLED")?,
                                         softness: ::Integer?,
@@ -1666,7 +1682,7 @@ module Aws
                                              channels_in: ::Integer?,
                                              channels_out: ::Integer?
                                            }?,
-                                           selector_type: ("PID" | "TRACK" | "LANGUAGE_CODE" | "HLS_RENDITION_GROUP")?,
+                                           selector_type: ("PID" | "TRACK" | "LANGUAGE_CODE" | "HLS_RENDITION_GROUP" | "ALL_PCM")?,
                                            tracks: Array[::Integer]?
                                          }]?,
                                        caption_selectors: Hash[::String, {
@@ -1697,7 +1713,8 @@ module Aws
                                                }?,
                                                source_file: ::String?,
                                                time_delta: ::Integer?,
-                                               time_delta_units: ("SECONDS" | "MILLISECONDS")?
+                                               time_delta_units: ("SECONDS" | "MILLISECONDS")?,
+                                               upconvert_stl_to_teletext: ("UPCONVERT" | "DISABLED")?
                                              }?,
                                              source_type: ("ANCILLARY" | "DVB_SUB" | "EMBEDDED" | "SCTE20" | "SCC" | "TTML" | "STL" | "SRT" | "SMI" | "SMPTE_TT" | "TELETEXT" | "NULL_SOURCE" | "IMSC" | "WEBVTT")?,
                                              teletext_source_settings: {
@@ -1768,6 +1785,13 @@ module Aws
                                        timecode_start: ::String?,
                                        video_overlays: Array[
                                          {
+                                           crop: {
+                                             height: ::Integer?,
+                                             unit: ("PIXELS" | "PERCENTAGE")?,
+                                             width: ::Integer?,
+                                             x: ::Integer?,
+                                             y: ::Integer?
+                                           }?,
                                            end_timecode: ::String?,
                                            initial_position: {
                                              height: ::Integer?,
@@ -2194,6 +2218,7 @@ module Aws
                                            fragment_length_control: ("EXACT" | "GOP_MULTIPLE")?,
                                            manifest_encoding: ("UTF8" | "UTF16")?
                                          }?,
+                                         per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                          type: ("HLS_GROUP_SETTINGS" | "DASH_ISO_GROUP_SETTINGS" | "FILE_GROUP_SETTINGS" | "MS_SMOOTH_GROUP_SETTINGS" | "CMAF_GROUP_SETTINGS")?
                                        }?,
                                        outputs: Array[
@@ -2609,6 +2634,7 @@ module Aws
                                                  gop_size: ::Float?,
                                                  max_bitrate: ::Integer?,
                                                  number_b_frames_between_reference_frames: ::Integer?,
+                                                 per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                                  qvbr_settings: {
                                                    qvbr_quality_level: ::Integer?,
                                                    qvbr_quality_level_fine_tune: ::Float?
@@ -2627,6 +2653,7 @@ module Aws
                                                  framerate_denominator: ::Integer?,
                                                  framerate_numerator: ::Integer?,
                                                  interlace_mode: ("PROGRESSIVE" | "TOP_FIELD" | "BOTTOM_FIELD" | "FOLLOW_TOP_FIELD" | "FOLLOW_BOTTOM_FIELD")?,
+                                                 per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                                  scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")?,
                                                  slow_pal: ("DISABLED" | "ENABLED")?,
                                                  telecine: ("NONE" | "HARD")?
@@ -2677,6 +2704,7 @@ module Aws
                                                  par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
                                                  par_denominator: ::Integer?,
                                                  par_numerator: ::Integer?,
+                                                 per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                                  quality_tuning_level: ("SINGLE_PASS" | "SINGLE_PASS_HQ" | "MULTI_PASS_HQ")?,
                                                  qvbr_settings: {
                                                    max_average_bitrate: ::Integer?,
@@ -2731,6 +2759,7 @@ module Aws
                                                  par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
                                                  par_denominator: ::Integer?,
                                                  par_numerator: ::Integer?,
+                                                 per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                                  quality_tuning_level: ("SINGLE_PASS" | "SINGLE_PASS_HQ" | "MULTI_PASS_HQ")?,
                                                  qvbr_settings: {
                                                    max_average_bitrate: ::Integer?,
@@ -2775,6 +2804,7 @@ module Aws
                                                  par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
                                                  par_denominator: ::Integer?,
                                                  par_numerator: ::Integer?,
+                                                 per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                                  quality_tuning_level: ("SINGLE_PASS" | "MULTI_PASS")?,
                                                  rate_control_mode: ("VBR" | "CBR")?,
                                                  scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")?,
@@ -2797,6 +2827,7 @@ module Aws
                                                  par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
                                                  par_denominator: ::Integer?,
                                                  par_numerator: ::Integer?,
+                                                 per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                                  scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")?,
                                                  slow_pal: ("DISABLED" | "ENABLED")?,
                                                  telecine: ("NONE" | "HARD")?
@@ -2860,6 +2891,7 @@ module Aws
                                                  framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER" | "MAINTAIN_FRAME_COUNT")?,
                                                  framerate_denominator: ::Integer?,
                                                  framerate_numerator: ::Integer?,
+                                                 per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                                  profile: ("XAVC_HD_INTRA_CBG" | "XAVC_4K_INTRA_CBG" | "XAVC_4K_INTRA_VBR" | "XAVC_HD" | "XAVC_4K")?,
                                                  slow_pal: ("DISABLED" | "ENABLED")?,
                                                  softness: ::Integer?,
@@ -3450,6 +3482,7 @@ module Aws
                                    gop_size: ::Float?,
                                    max_bitrate: ::Integer?,
                                    number_b_frames_between_reference_frames: ::Integer?,
+                                   per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                    qvbr_settings: {
                                      qvbr_quality_level: ::Integer?,
                                      qvbr_quality_level_fine_tune: ::Float?
@@ -3468,6 +3501,7 @@ module Aws
                                    framerate_denominator: ::Integer?,
                                    framerate_numerator: ::Integer?,
                                    interlace_mode: ("PROGRESSIVE" | "TOP_FIELD" | "BOTTOM_FIELD" | "FOLLOW_TOP_FIELD" | "FOLLOW_BOTTOM_FIELD")?,
+                                   per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                    scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")?,
                                    slow_pal: ("DISABLED" | "ENABLED")?,
                                    telecine: ("NONE" | "HARD")?
@@ -3518,6 +3552,7 @@ module Aws
                                    par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
                                    par_denominator: ::Integer?,
                                    par_numerator: ::Integer?,
+                                   per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                    quality_tuning_level: ("SINGLE_PASS" | "SINGLE_PASS_HQ" | "MULTI_PASS_HQ")?,
                                    qvbr_settings: {
                                      max_average_bitrate: ::Integer?,
@@ -3572,6 +3607,7 @@ module Aws
                                    par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
                                    par_denominator: ::Integer?,
                                    par_numerator: ::Integer?,
+                                   per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                    quality_tuning_level: ("SINGLE_PASS" | "SINGLE_PASS_HQ" | "MULTI_PASS_HQ")?,
                                    qvbr_settings: {
                                      max_average_bitrate: ::Integer?,
@@ -3616,6 +3652,7 @@ module Aws
                                    par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
                                    par_denominator: ::Integer?,
                                    par_numerator: ::Integer?,
+                                   per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                    quality_tuning_level: ("SINGLE_PASS" | "MULTI_PASS")?,
                                    rate_control_mode: ("VBR" | "CBR")?,
                                    scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")?,
@@ -3638,6 +3675,7 @@ module Aws
                                    par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
                                    par_denominator: ::Integer?,
                                    par_numerator: ::Integer?,
+                                   per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                    scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")?,
                                    slow_pal: ("DISABLED" | "ENABLED")?,
                                    telecine: ("NONE" | "HARD")?
@@ -3701,6 +3739,7 @@ module Aws
                                    framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER" | "MAINTAIN_FRAME_COUNT")?,
                                    framerate_denominator: ::Integer?,
                                    framerate_numerator: ::Integer?,
+                                   per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                    profile: ("XAVC_HD_INTRA_CBG" | "XAVC_4K_INTRA_CBG" | "XAVC_4K_INTRA_VBR" | "XAVC_HD" | "XAVC_4K")?,
                                    slow_pal: ("DISABLED" | "ENABLED")?,
                                    softness: ::Integer?,
@@ -4226,7 +4265,7 @@ module Aws
                                              channels_in: ::Integer?,
                                              channels_out: ::Integer?
                                            }?,
-                                           selector_type: ("PID" | "TRACK" | "LANGUAGE_CODE" | "HLS_RENDITION_GROUP")?,
+                                           selector_type: ("PID" | "TRACK" | "LANGUAGE_CODE" | "HLS_RENDITION_GROUP" | "ALL_PCM")?,
                                            tracks: Array[::Integer]?
                                          }]?,
                                        caption_selectors: Hash[::String, {
@@ -4257,7 +4296,8 @@ module Aws
                                                }?,
                                                source_file: ::String?,
                                                time_delta: ::Integer?,
-                                               time_delta_units: ("SECONDS" | "MILLISECONDS")?
+                                               time_delta_units: ("SECONDS" | "MILLISECONDS")?,
+                                               upconvert_stl_to_teletext: ("UPCONVERT" | "DISABLED")?
                                              }?,
                                              source_type: ("ANCILLARY" | "DVB_SUB" | "EMBEDDED" | "SCTE20" | "SCC" | "TTML" | "STL" | "SRT" | "SMI" | "SMPTE_TT" | "TELETEXT" | "NULL_SOURCE" | "IMSC" | "WEBVTT")?,
                                              teletext_source_settings: {
@@ -4328,6 +4368,13 @@ module Aws
                                        timecode_start: ::String?,
                                        video_overlays: Array[
                                          {
+                                           crop: {
+                                             height: ::Integer?,
+                                             unit: ("PIXELS" | "PERCENTAGE")?,
+                                             width: ::Integer?,
+                                             x: ::Integer?,
+                                             y: ::Integer?
+                                           }?,
                                            end_timecode: ::String?,
                                            initial_position: {
                                              height: ::Integer?,
@@ -4754,6 +4801,7 @@ module Aws
                                            fragment_length_control: ("EXACT" | "GOP_MULTIPLE")?,
                                            manifest_encoding: ("UTF8" | "UTF16")?
                                          }?,
+                                         per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                          type: ("HLS_GROUP_SETTINGS" | "DASH_ISO_GROUP_SETTINGS" | "FILE_GROUP_SETTINGS" | "MS_SMOOTH_GROUP_SETTINGS" | "CMAF_GROUP_SETTINGS")?
                                        }?,
                                        outputs: Array[
@@ -5169,6 +5217,7 @@ module Aws
                                                  gop_size: ::Float?,
                                                  max_bitrate: ::Integer?,
                                                  number_b_frames_between_reference_frames: ::Integer?,
+                                                 per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                                  qvbr_settings: {
                                                    qvbr_quality_level: ::Integer?,
                                                    qvbr_quality_level_fine_tune: ::Float?
@@ -5187,6 +5236,7 @@ module Aws
                                                  framerate_denominator: ::Integer?,
                                                  framerate_numerator: ::Integer?,
                                                  interlace_mode: ("PROGRESSIVE" | "TOP_FIELD" | "BOTTOM_FIELD" | "FOLLOW_TOP_FIELD" | "FOLLOW_BOTTOM_FIELD")?,
+                                                 per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                                  scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")?,
                                                  slow_pal: ("DISABLED" | "ENABLED")?,
                                                  telecine: ("NONE" | "HARD")?
@@ -5237,6 +5287,7 @@ module Aws
                                                  par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
                                                  par_denominator: ::Integer?,
                                                  par_numerator: ::Integer?,
+                                                 per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                                  quality_tuning_level: ("SINGLE_PASS" | "SINGLE_PASS_HQ" | "MULTI_PASS_HQ")?,
                                                  qvbr_settings: {
                                                    max_average_bitrate: ::Integer?,
@@ -5291,6 +5342,7 @@ module Aws
                                                  par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
                                                  par_denominator: ::Integer?,
                                                  par_numerator: ::Integer?,
+                                                 per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                                  quality_tuning_level: ("SINGLE_PASS" | "SINGLE_PASS_HQ" | "MULTI_PASS_HQ")?,
                                                  qvbr_settings: {
                                                    max_average_bitrate: ::Integer?,
@@ -5335,6 +5387,7 @@ module Aws
                                                  par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
                                                  par_denominator: ::Integer?,
                                                  par_numerator: ::Integer?,
+                                                 per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                                  quality_tuning_level: ("SINGLE_PASS" | "MULTI_PASS")?,
                                                  rate_control_mode: ("VBR" | "CBR")?,
                                                  scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")?,
@@ -5357,6 +5410,7 @@ module Aws
                                                  par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
                                                  par_denominator: ::Integer?,
                                                  par_numerator: ::Integer?,
+                                                 per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                                  scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")?,
                                                  slow_pal: ("DISABLED" | "ENABLED")?,
                                                  telecine: ("NONE" | "HARD")?
@@ -5420,6 +5474,7 @@ module Aws
                                                  framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER" | "MAINTAIN_FRAME_COUNT")?,
                                                  framerate_denominator: ::Integer?,
                                                  framerate_numerator: ::Integer?,
+                                                 per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                                  profile: ("XAVC_HD_INTRA_CBG" | "XAVC_4K_INTRA_CBG" | "XAVC_4K_INTRA_VBR" | "XAVC_HD" | "XAVC_4K")?,
                                                  slow_pal: ("DISABLED" | "ENABLED")?,
                                                  softness: ::Integer?,
@@ -6009,6 +6064,7 @@ module Aws
                                    gop_size: ::Float?,
                                    max_bitrate: ::Integer?,
                                    number_b_frames_between_reference_frames: ::Integer?,
+                                   per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                    qvbr_settings: {
                                      qvbr_quality_level: ::Integer?,
                                      qvbr_quality_level_fine_tune: ::Float?
@@ -6027,6 +6083,7 @@ module Aws
                                    framerate_denominator: ::Integer?,
                                    framerate_numerator: ::Integer?,
                                    interlace_mode: ("PROGRESSIVE" | "TOP_FIELD" | "BOTTOM_FIELD" | "FOLLOW_TOP_FIELD" | "FOLLOW_BOTTOM_FIELD")?,
+                                   per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                    scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")?,
                                    slow_pal: ("DISABLED" | "ENABLED")?,
                                    telecine: ("NONE" | "HARD")?
@@ -6077,6 +6134,7 @@ module Aws
                                    par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
                                    par_denominator: ::Integer?,
                                    par_numerator: ::Integer?,
+                                   per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                    quality_tuning_level: ("SINGLE_PASS" | "SINGLE_PASS_HQ" | "MULTI_PASS_HQ")?,
                                    qvbr_settings: {
                                      max_average_bitrate: ::Integer?,
@@ -6131,6 +6189,7 @@ module Aws
                                    par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
                                    par_denominator: ::Integer?,
                                    par_numerator: ::Integer?,
+                                   per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                    quality_tuning_level: ("SINGLE_PASS" | "SINGLE_PASS_HQ" | "MULTI_PASS_HQ")?,
                                    qvbr_settings: {
                                      max_average_bitrate: ::Integer?,
@@ -6175,6 +6234,7 @@ module Aws
                                    par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
                                    par_denominator: ::Integer?,
                                    par_numerator: ::Integer?,
+                                   per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                    quality_tuning_level: ("SINGLE_PASS" | "MULTI_PASS")?,
                                    rate_control_mode: ("VBR" | "CBR")?,
                                    scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")?,
@@ -6197,6 +6257,7 @@ module Aws
                                    par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
                                    par_denominator: ::Integer?,
                                    par_numerator: ::Integer?,
+                                   per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                    scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")?,
                                    slow_pal: ("DISABLED" | "ENABLED")?,
                                    telecine: ("NONE" | "HARD")?
@@ -6260,6 +6321,7 @@ module Aws
                                    framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER" | "MAINTAIN_FRAME_COUNT")?,
                                    framerate_denominator: ::Integer?,
                                    framerate_numerator: ::Integer?,
+                                   per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR")]?,
                                    profile: ("XAVC_HD_INTRA_CBG" | "XAVC_4K_INTRA_CBG" | "XAVC_4K_INTRA_VBR" | "XAVC_HD" | "XAVC_4K")?,
                                    slow_pal: ("DISABLED" | "ENABLED")?,
                                    softness: ::Integer?,

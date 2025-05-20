@@ -895,7 +895,7 @@ module Aws::CodeCommit
     CreatePullRequestInput.add_member(:title, Shapes::ShapeRef.new(shape: Title, required: true, location_name: "title"))
     CreatePullRequestInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreatePullRequestInput.add_member(:targets, Shapes::ShapeRef.new(shape: TargetList, required: true, location_name: "targets"))
-    CreatePullRequestInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreatePullRequestInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     CreatePullRequestInput.struct_class = Types::CreatePullRequestInput
 
     CreatePullRequestOutput.add_member(:pull_request, Shapes::ShapeRef.new(shape: PullRequest, required: true, location_name: "pullRequest"))
@@ -1691,7 +1691,7 @@ module Aws::CodeCommit
     PostCommentForComparedCommitInput.add_member(:after_commit_id, Shapes::ShapeRef.new(shape: CommitId, required: true, location_name: "afterCommitId"))
     PostCommentForComparedCommitInput.add_member(:location, Shapes::ShapeRef.new(shape: Location, location_name: "location"))
     PostCommentForComparedCommitInput.add_member(:content, Shapes::ShapeRef.new(shape: Content, required: true, location_name: "content"))
-    PostCommentForComparedCommitInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    PostCommentForComparedCommitInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     PostCommentForComparedCommitInput.struct_class = Types::PostCommentForComparedCommitInput
 
     PostCommentForComparedCommitOutput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
@@ -1709,7 +1709,7 @@ module Aws::CodeCommit
     PostCommentForPullRequestInput.add_member(:after_commit_id, Shapes::ShapeRef.new(shape: CommitId, required: true, location_name: "afterCommitId"))
     PostCommentForPullRequestInput.add_member(:location, Shapes::ShapeRef.new(shape: Location, location_name: "location"))
     PostCommentForPullRequestInput.add_member(:content, Shapes::ShapeRef.new(shape: Content, required: true, location_name: "content"))
-    PostCommentForPullRequestInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    PostCommentForPullRequestInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     PostCommentForPullRequestInput.struct_class = Types::PostCommentForPullRequestInput
 
     PostCommentForPullRequestOutput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
@@ -1723,7 +1723,7 @@ module Aws::CodeCommit
     PostCommentForPullRequestOutput.struct_class = Types::PostCommentForPullRequestOutput
 
     PostCommentReplyInput.add_member(:in_reply_to, Shapes::ShapeRef.new(shape: CommentId, required: true, location_name: "inReplyTo"))
-    PostCommentReplyInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    PostCommentReplyInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
     PostCommentReplyInput.add_member(:content, Shapes::ShapeRef.new(shape: Content, required: true, location_name: "content"))
     PostCommentReplyInput.struct_class = Types::PostCommentReplyInput
 

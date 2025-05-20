@@ -236,7 +236,7 @@ module Aws::EMRServerless
     CreateApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "name"))
     CreateApplicationRequest.add_member(:release_label, Shapes::ShapeRef.new(shape: ReleaseLabel, required: true, location_name: "releaseLabel"))
     CreateApplicationRequest.add_member(:type, Shapes::ShapeRef.new(shape: EngineType, required: true, location_name: "type"))
-    CreateApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateApplicationRequest.add_member(:initial_capacity, Shapes::ShapeRef.new(shape: InitialCapacityConfigMap, location_name: "initialCapacity"))
     CreateApplicationRequest.add_member(:maximum_capacity, Shapes::ShapeRef.new(shape: MaximumAllowedResources, location_name: "maximumCapacity"))
     CreateApplicationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
@@ -338,7 +338,7 @@ module Aws::EMRServerless
     JobRun.add_member(:total_resource_utilization, Shapes::ShapeRef.new(shape: TotalResourceUtilization, location_name: "totalResourceUtilization"))
     JobRun.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
     JobRun.add_member(:total_execution_duration_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "totalExecutionDurationSeconds"))
-    JobRun.add_member(:execution_timeout_minutes, Shapes::ShapeRef.new(shape: Duration, location_name: "executionTimeoutMinutes", metadata: {"box"=>true}))
+    JobRun.add_member(:execution_timeout_minutes, Shapes::ShapeRef.new(shape: Duration, location_name: "executionTimeoutMinutes", metadata: {"box" => true}))
     JobRun.add_member(:billed_resource_utilization, Shapes::ShapeRef.new(shape: ResourceUtilization, location_name: "billedResourceUtilization"))
     JobRun.add_member(:mode, Shapes::ShapeRef.new(shape: JobRunMode, location_name: "mode"))
     JobRun.add_member(:retry_policy, Shapes::ShapeRef.new(shape: RetryPolicy, location_name: "retryPolicy"))
@@ -495,12 +495,12 @@ module Aws::EMRServerless
     StartApplicationResponse.struct_class = Types::StartApplicationResponse
 
     StartJobRunRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
-    StartJobRunRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    StartJobRunRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     StartJobRunRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "executionRoleArn"))
     StartJobRunRequest.add_member(:job_driver, Shapes::ShapeRef.new(shape: JobDriver, location_name: "jobDriver"))
     StartJobRunRequest.add_member(:configuration_overrides, Shapes::ShapeRef.new(shape: ConfigurationOverrides, location_name: "configurationOverrides"))
     StartJobRunRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    StartJobRunRequest.add_member(:execution_timeout_minutes, Shapes::ShapeRef.new(shape: Duration, location_name: "executionTimeoutMinutes", metadata: {"box"=>true}))
+    StartJobRunRequest.add_member(:execution_timeout_minutes, Shapes::ShapeRef.new(shape: Duration, location_name: "executionTimeoutMinutes", metadata: {"box" => true}))
     StartJobRunRequest.add_member(:name, Shapes::ShapeRef.new(shape: String256, location_name: "name"))
     StartJobRunRequest.add_member(:mode, Shapes::ShapeRef.new(shape: JobRunMode, location_name: "mode"))
     StartJobRunRequest.add_member(:retry_policy, Shapes::ShapeRef.new(shape: RetryPolicy, location_name: "retryPolicy"))
@@ -541,7 +541,7 @@ module Aws::EMRServerless
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateApplicationRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
-    UpdateApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateApplicationRequest.add_member(:initial_capacity, Shapes::ShapeRef.new(shape: InitialCapacityConfigMap, location_name: "initialCapacity"))
     UpdateApplicationRequest.add_member(:maximum_capacity, Shapes::ShapeRef.new(shape: MaximumAllowedResources, location_name: "maximumCapacity"))
     UpdateApplicationRequest.add_member(:auto_start_configuration, Shapes::ShapeRef.new(shape: AutoStartConfig, location_name: "autoStartConfiguration"))

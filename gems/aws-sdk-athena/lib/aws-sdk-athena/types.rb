@@ -622,6 +622,8 @@ module Aws::Athena
     #   Apache Hive metastore. `FEDERATED` is a federated catalog for which
     #   Athena creates the connection and the Lambda function for you based
     #   on the parameters that you pass.
+    #
+    #   For `FEDERATED` type, we do not support IAM identity center.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -3235,7 +3237,7 @@ module Aws::Athena
     #   statements. `DML` indicates DML (Data Manipulation Language) query
     #   statements, such as `CREATE TABLE AS SELECT`. `UTILITY` indicates
     #   query statements other than DDL and DML, such as `SHOW CREATE
-    #   TABLE`, or `DESCRIBE TABLE`.
+    #   TABLE`, `EXPLAIN`, `DESCRIBE`, or `SHOW TABLES`.
     #   @return [String]
     #
     # @!attribute [rw] result_configuration

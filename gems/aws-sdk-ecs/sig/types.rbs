@@ -1458,6 +1458,7 @@ module Aws::ECS
       attr_accessor volume_type: ::String
       attr_accessor size_in_gi_b: ::Integer
       attr_accessor snapshot_id: ::String
+      attr_accessor volume_initialization_rate: ::Integer
       attr_accessor iops: ::Integer
       attr_accessor throughput: ::Integer
       attr_accessor tag_specifications: ::Array[Types::EBSTagSpecification]
@@ -1739,6 +1740,7 @@ module Aws::ECS
       attr_accessor volume_type: ::String
       attr_accessor size_in_gi_b: ::Integer
       attr_accessor snapshot_id: ::String
+      attr_accessor volume_initialization_rate: ::Integer
       attr_accessor iops: ::Integer
       attr_accessor throughput: ::Integer
       attr_accessor tag_specifications: ::Array[Types::EBSTagSpecification]

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.100.0 (2025-05-16)
+------------------
+
+* Feature - CodePipeline now supports new API ListDeployActionExecutionTargets that lists the deployment target details for deploy action executions.
+
+1.99.0 (2025-05-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.98.0 (2025-05-08)
+------------------
+
+* Feature - Add support for Secrets Manager and Plaintext environment variable types in Commands action
+
+1.97.0 (2025-05-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.96.0 (2025-02-19)
 ------------------
 

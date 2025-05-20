@@ -49,12 +49,13 @@ module Aws::SSOAdmin
   end
   autoload :Client, 'aws-sdk-ssoadmin/client'
   autoload :Errors, 'aws-sdk-ssoadmin/errors'
+  autoload :Waiters, 'aws-sdk-ssoadmin/waiters'
   autoload :Resource, 'aws-sdk-ssoadmin/resource'
   autoload :EndpointParameters, 'aws-sdk-ssoadmin/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-ssoadmin/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-ssoadmin/endpoints'
 
-  GEM_VERSION = '1.51.0'
+  GEM_VERSION = '1.54.0'
 
 end
 

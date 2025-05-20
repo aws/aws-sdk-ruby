@@ -19,6 +19,7 @@ module Aws::VerifiedPermissions
     ActionIdentifier = Shapes::StructureShape.new(name: 'ActionIdentifier')
     ActionIdentifierList = Shapes::ListShape.new(name: 'ActionIdentifierList')
     ActionType = Shapes::StringShape.new(name: 'ActionType')
+    AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AttributeValue = Shapes::UnionShape.new(name: 'AttributeValue')
     Audience = Shapes::StringShape.new(name: 'Audience')
     Audiences = Shapes::ListShape.new(name: 'Audiences')
@@ -46,6 +47,7 @@ module Aws::VerifiedPermissions
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanAttribute = Shapes::BooleanShape.new(name: 'BooleanAttribute')
     CedarJson = Shapes::StringShape.new(name: 'CedarJson')
+    CedarVersion = Shapes::StringShape.new(name: 'CedarVersion')
     Claim = Shapes::StringShape.new(name: 'Claim')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
     ClientIds = Shapes::ListShape.new(name: 'ClientIds')
@@ -130,6 +132,8 @@ module Aws::VerifiedPermissions
     ListPolicyStoresOutput = Shapes::StructureShape.new(name: 'ListPolicyStoresOutput')
     ListPolicyTemplatesInput = Shapes::StructureShape.new(name: 'ListPolicyTemplatesInput')
     ListPolicyTemplatesOutput = Shapes::StructureShape.new(name: 'ListPolicyTemplatesOutput')
+    ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
+    ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
     LongAttribute = Shapes::IntegerShape.new(name: 'LongAttribute')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Namespace = Shapes::StringShape.new(name: 'Namespace')
@@ -189,12 +193,21 @@ module Aws::VerifiedPermissions
     StaticPolicyDescription = Shapes::StringShape.new(name: 'StaticPolicyDescription')
     String = Shapes::StringShape.new(name: 'String')
     StringAttribute = Shapes::StringShape.new(name: 'StringAttribute')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagMap = Shapes::MapShape.new(name: 'TagMap')
+    TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
+    TagResourceOutput = Shapes::StructureShape.new(name: 'TagResourceOutput')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     TemplateLinkedPolicyDefinition = Shapes::StructureShape.new(name: 'TemplateLinkedPolicyDefinition')
     TemplateLinkedPolicyDefinitionDetail = Shapes::StructureShape.new(name: 'TemplateLinkedPolicyDefinitionDetail')
     TemplateLinkedPolicyDefinitionItem = Shapes::StructureShape.new(name: 'TemplateLinkedPolicyDefinitionItem')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimestampFormat = Shapes::TimestampShape.new(name: 'TimestampFormat', timestampFormat: "iso8601")
     Token = Shapes::StringShape.new(name: 'Token')
+    TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
+    UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
+    UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
     UpdateCognitoGroupConfiguration = Shapes::StructureShape.new(name: 'UpdateCognitoGroupConfiguration')
     UpdateCognitoUserPoolConfiguration = Shapes::StructureShape.new(name: 'UpdateCognitoUserPoolConfiguration')
     UpdateConfiguration = Shapes::UnionShape.new(name: 'UpdateConfiguration')
@@ -399,7 +412,7 @@ module Aws::VerifiedPermissions
     ContextMap.key = Shapes::ShapeRef.new(shape: String)
     ContextMap.value = Shapes::ShapeRef.new(shape: AttributeValue)
 
-    CreateIdentitySourceInput.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateIdentitySourceInput.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateIdentitySourceInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
     CreateIdentitySourceInput.add_member(:configuration, Shapes::ShapeRef.new(shape: Configuration, required: true, location_name: "configuration"))
     CreateIdentitySourceInput.add_member(:principal_entity_type, Shapes::ShapeRef.new(shape: PrincipalEntityType, location_name: "principalEntityType"))
@@ -411,7 +424,7 @@ module Aws::VerifiedPermissions
     CreateIdentitySourceOutput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
     CreateIdentitySourceOutput.struct_class = Types::CreateIdentitySourceOutput
 
-    CreatePolicyInput.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreatePolicyInput.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreatePolicyInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
     CreatePolicyInput.add_member(:definition, Shapes::ShapeRef.new(shape: PolicyDefinition, required: true, location_name: "definition"))
     CreatePolicyInput.struct_class = Types::CreatePolicyInput
@@ -427,10 +440,11 @@ module Aws::VerifiedPermissions
     CreatePolicyOutput.add_member(:effect, Shapes::ShapeRef.new(shape: PolicyEffect, location_name: "effect"))
     CreatePolicyOutput.struct_class = Types::CreatePolicyOutput
 
-    CreatePolicyStoreInput.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreatePolicyStoreInput.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreatePolicyStoreInput.add_member(:validation_settings, Shapes::ShapeRef.new(shape: ValidationSettings, required: true, location_name: "validationSettings"))
     CreatePolicyStoreInput.add_member(:description, Shapes::ShapeRef.new(shape: PolicyStoreDescription, location_name: "description"))
     CreatePolicyStoreInput.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: DeletionProtection, location_name: "deletionProtection"))
+    CreatePolicyStoreInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreatePolicyStoreInput.struct_class = Types::CreatePolicyStoreInput
 
     CreatePolicyStoreOutput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
@@ -439,7 +453,7 @@ module Aws::VerifiedPermissions
     CreatePolicyStoreOutput.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "lastUpdatedDate"))
     CreatePolicyStoreOutput.struct_class = Types::CreatePolicyStoreOutput
 
-    CreatePolicyTemplateInput.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreatePolicyTemplateInput.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreatePolicyTemplateInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
     CreatePolicyTemplateInput.add_member(:description, Shapes::ShapeRef.new(shape: PolicyTemplateDescription, location_name: "description"))
     CreatePolicyTemplateInput.add_member(:statement, Shapes::ShapeRef.new(shape: PolicyStatement, required: true, location_name: "statement"))
@@ -519,7 +533,7 @@ module Aws::VerifiedPermissions
     GetIdentitySourceInput.struct_class = Types::GetIdentitySourceInput
 
     GetIdentitySourceOutput.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "createdDate"))
-    GetIdentitySourceOutput.add_member(:details, Shapes::ShapeRef.new(shape: IdentitySourceDetails, deprecated: true, location_name: "details", metadata: {"deprecatedMessage"=>"This attribute has been replaced by configuration.cognitoUserPoolConfiguration"}))
+    GetIdentitySourceOutput.add_member(:details, Shapes::ShapeRef.new(shape: IdentitySourceDetails, deprecated: true, location_name: "details", metadata: {"deprecatedMessage" => "This attribute has been replaced by configuration.cognitoUserPoolConfiguration"}))
     GetIdentitySourceOutput.add_member(:identity_source_id, Shapes::ShapeRef.new(shape: IdentitySourceId, required: true, location_name: "identitySourceId"))
     GetIdentitySourceOutput.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "lastUpdatedDate"))
     GetIdentitySourceOutput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
@@ -544,6 +558,7 @@ module Aws::VerifiedPermissions
     GetPolicyOutput.struct_class = Types::GetPolicyOutput
 
     GetPolicyStoreInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
+    GetPolicyStoreInput.add_member(:tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "tags"))
     GetPolicyStoreInput.struct_class = Types::GetPolicyStoreInput
 
     GetPolicyStoreOutput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
@@ -553,6 +568,8 @@ module Aws::VerifiedPermissions
     GetPolicyStoreOutput.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "lastUpdatedDate"))
     GetPolicyStoreOutput.add_member(:description, Shapes::ShapeRef.new(shape: PolicyStoreDescription, location_name: "description"))
     GetPolicyStoreOutput.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: DeletionProtection, location_name: "deletionProtection"))
+    GetPolicyStoreOutput.add_member(:cedar_version, Shapes::ShapeRef.new(shape: CedarVersion, location_name: "cedarVersion"))
+    GetPolicyStoreOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GetPolicyStoreOutput.struct_class = Types::GetPolicyStoreOutput
 
     GetPolicyTemplateInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
@@ -577,10 +594,10 @@ module Aws::VerifiedPermissions
     GetSchemaOutput.add_member(:namespaces, Shapes::ShapeRef.new(shape: NamespaceList, location_name: "namespaces"))
     GetSchemaOutput.struct_class = Types::GetSchemaOutput
 
-    IdentitySourceDetails.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, deprecated: true, location_name: "clientIds", metadata: {"deprecatedMessage"=>"This attribute has been replaced by configuration.cognitoUserPoolConfiguration.clientIds"}))
-    IdentitySourceDetails.add_member(:user_pool_arn, Shapes::ShapeRef.new(shape: UserPoolArn, deprecated: true, location_name: "userPoolArn", metadata: {"deprecatedMessage"=>"This attribute has been replaced by configuration.cognitoUserPoolConfiguration.userPoolArn"}))
-    IdentitySourceDetails.add_member(:discovery_url, Shapes::ShapeRef.new(shape: DiscoveryUrl, deprecated: true, location_name: "discoveryUrl", metadata: {"deprecatedMessage"=>"This attribute has been replaced by configuration.cognitoUserPoolConfiguration.issuer"}))
-    IdentitySourceDetails.add_member(:open_id_issuer, Shapes::ShapeRef.new(shape: OpenIdIssuer, deprecated: true, location_name: "openIdIssuer", metadata: {"deprecatedMessage"=>"This attribute has been replaced by configuration"}))
+    IdentitySourceDetails.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, deprecated: true, location_name: "clientIds", metadata: {"deprecatedMessage" => "This attribute has been replaced by configuration.cognitoUserPoolConfiguration.clientIds"}))
+    IdentitySourceDetails.add_member(:user_pool_arn, Shapes::ShapeRef.new(shape: UserPoolArn, deprecated: true, location_name: "userPoolArn", metadata: {"deprecatedMessage" => "This attribute has been replaced by configuration.cognitoUserPoolConfiguration.userPoolArn"}))
+    IdentitySourceDetails.add_member(:discovery_url, Shapes::ShapeRef.new(shape: DiscoveryUrl, deprecated: true, location_name: "discoveryUrl", metadata: {"deprecatedMessage" => "This attribute has been replaced by configuration.cognitoUserPoolConfiguration.issuer"}))
+    IdentitySourceDetails.add_member(:open_id_issuer, Shapes::ShapeRef.new(shape: OpenIdIssuer, deprecated: true, location_name: "openIdIssuer", metadata: {"deprecatedMessage" => "This attribute has been replaced by configuration"}))
     IdentitySourceDetails.struct_class = Types::IdentitySourceDetails
 
     IdentitySourceFilter.add_member(:principal_entity_type, Shapes::ShapeRef.new(shape: PrincipalEntityType, location_name: "principalEntityType"))
@@ -589,7 +606,7 @@ module Aws::VerifiedPermissions
     IdentitySourceFilters.member = Shapes::ShapeRef.new(shape: IdentitySourceFilter)
 
     IdentitySourceItem.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "createdDate"))
-    IdentitySourceItem.add_member(:details, Shapes::ShapeRef.new(shape: IdentitySourceItemDetails, deprecated: true, location_name: "details", metadata: {"deprecatedMessage"=>"This attribute has been replaced by configuration.cognitoUserPoolConfiguration"}))
+    IdentitySourceItem.add_member(:details, Shapes::ShapeRef.new(shape: IdentitySourceItemDetails, deprecated: true, location_name: "details", metadata: {"deprecatedMessage" => "This attribute has been replaced by configuration.cognitoUserPoolConfiguration"}))
     IdentitySourceItem.add_member(:identity_source_id, Shapes::ShapeRef.new(shape: IdentitySourceId, required: true, location_name: "identitySourceId"))
     IdentitySourceItem.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "lastUpdatedDate"))
     IdentitySourceItem.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
@@ -597,10 +614,10 @@ module Aws::VerifiedPermissions
     IdentitySourceItem.add_member(:configuration, Shapes::ShapeRef.new(shape: ConfigurationItem, location_name: "configuration"))
     IdentitySourceItem.struct_class = Types::IdentitySourceItem
 
-    IdentitySourceItemDetails.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, deprecated: true, location_name: "clientIds", metadata: {"deprecatedMessage"=>"This attribute has been replaced by configuration.cognitoUserPoolConfiguration.clientIds"}))
-    IdentitySourceItemDetails.add_member(:user_pool_arn, Shapes::ShapeRef.new(shape: UserPoolArn, deprecated: true, location_name: "userPoolArn", metadata: {"deprecatedMessage"=>"This attribute has been replaced by configuration.cognitoUserPoolConfiguration.userPoolArn"}))
-    IdentitySourceItemDetails.add_member(:discovery_url, Shapes::ShapeRef.new(shape: DiscoveryUrl, deprecated: true, location_name: "discoveryUrl", metadata: {"deprecatedMessage"=>"This attribute has been replaced by configuration.cognitoUserPoolConfiguration.issuer"}))
-    IdentitySourceItemDetails.add_member(:open_id_issuer, Shapes::ShapeRef.new(shape: OpenIdIssuer, deprecated: true, location_name: "openIdIssuer", metadata: {"deprecatedMessage"=>"This attribute has been replaced by configuration"}))
+    IdentitySourceItemDetails.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, deprecated: true, location_name: "clientIds", metadata: {"deprecatedMessage" => "This attribute has been replaced by configuration.cognitoUserPoolConfiguration.clientIds"}))
+    IdentitySourceItemDetails.add_member(:user_pool_arn, Shapes::ShapeRef.new(shape: UserPoolArn, deprecated: true, location_name: "userPoolArn", metadata: {"deprecatedMessage" => "This attribute has been replaced by configuration.cognitoUserPoolConfiguration.userPoolArn"}))
+    IdentitySourceItemDetails.add_member(:discovery_url, Shapes::ShapeRef.new(shape: DiscoveryUrl, deprecated: true, location_name: "discoveryUrl", metadata: {"deprecatedMessage" => "This attribute has been replaced by configuration.cognitoUserPoolConfiguration.issuer"}))
+    IdentitySourceItemDetails.add_member(:open_id_issuer, Shapes::ShapeRef.new(shape: OpenIdIssuer, deprecated: true, location_name: "openIdIssuer", metadata: {"deprecatedMessage" => "This attribute has been replaced by configuration"}))
     IdentitySourceItemDetails.struct_class = Types::IdentitySourceItemDetails
 
     IdentitySources.member = Shapes::ShapeRef.new(shape: IdentitySourceItem)
@@ -675,6 +692,12 @@ module Aws::VerifiedPermissions
     ListPolicyTemplatesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListPolicyTemplatesOutput.add_member(:policy_templates, Shapes::ShapeRef.new(shape: PolicyTemplatesList, required: true, location_name: "policyTemplates"))
     ListPolicyTemplatesOutput.struct_class = Types::ListPolicyTemplatesOutput
+
+    ListTagsForResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "resourceArn"))
+    ListTagsForResourceInput.struct_class = Types::ListTagsForResourceInput
+
+    ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
 
     NamespaceList.member = Shapes::ShapeRef.new(shape: Namespace)
 
@@ -870,6 +893,17 @@ module Aws::VerifiedPermissions
     StaticPolicyDefinitionItem.add_member(:description, Shapes::ShapeRef.new(shape: StaticPolicyDescription, location_name: "description"))
     StaticPolicyDefinitionItem.struct_class = Types::StaticPolicyDefinitionItem
 
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagMap.key = Shapes::ShapeRef.new(shape: TagKey)
+    TagMap.value = Shapes::ShapeRef.new(shape: TagValue)
+
+    TagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "resourceArn"))
+    TagResourceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "tags"))
+    TagResourceInput.struct_class = Types::TagResourceInput
+
+    TagResourceOutput.struct_class = Types::TagResourceOutput
+
     TemplateLinkedPolicyDefinition.add_member(:policy_template_id, Shapes::ShapeRef.new(shape: PolicyTemplateId, required: true, location_name: "policyTemplateId"))
     TemplateLinkedPolicyDefinition.add_member(:principal, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "principal"))
     TemplateLinkedPolicyDefinition.add_member(:resource, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "resource"))
@@ -889,6 +923,16 @@ module Aws::VerifiedPermissions
     ThrottlingException.add_member(:service_code, Shapes::ShapeRef.new(shape: String, location_name: "serviceCode"))
     ThrottlingException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, location_name: "quotaCode"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    TooManyTagsException.add_member(:resource_name, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "resourceName"))
+    TooManyTagsException.struct_class = Types::TooManyTagsException
+
+    UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "resourceArn"))
+    UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "tagKeys"))
+    UntagResourceInput.struct_class = Types::UntagResourceInput
+
+    UntagResourceOutput.struct_class = Types::UntagResourceOutput
 
     UpdateCognitoGroupConfiguration.add_member(:group_entity_type, Shapes::ShapeRef.new(shape: GroupEntityType, required: true, location_name: "groupEntityType"))
     UpdateCognitoGroupConfiguration.struct_class = Types::UpdateCognitoGroupConfiguration
@@ -1346,6 +1390,19 @@ module Aws::VerifiedPermissions
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:put_schema, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutSchema"
         o.http_method = "POST"
@@ -1355,6 +1412,33 @@ module Aws::VerifiedPermissions
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)

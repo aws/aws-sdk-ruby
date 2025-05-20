@@ -10,84 +10,6 @@
 module Aws::DataSync
   module Types
 
-    # @!attribute [rw] server_configuration
-    #   Specifies the server name and network port required to connect with
-    #   the management interface of your on-premises storage system.
-    #   @return [Types::DiscoveryServerConfiguration]
-    #
-    # @!attribute [rw] system_type
-    #   Specifies the type of on-premises storage system that you want
-    #   DataSync Discovery to collect information about.
-    #
-    #   <note markdown="1"> DataSync Discovery currently supports NetApp Fabric-Attached Storage
-    #   (FAS) and All Flash FAS (AFF) systems running ONTAP 9.7 or later.
-    #
-    #    </note>
-    #   @return [String]
-    #
-    # @!attribute [rw] agent_arns
-    #   Specifies the Amazon Resource Name (ARN) of the DataSync agent that
-    #   connects to and reads from your on-premises storage system's
-    #   management interface. You can only specify one ARN.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] cloud_watch_log_group_arn
-    #   Specifies the ARN of the Amazon CloudWatch log group for monitoring
-    #   and logging discovery job events.
-    #   @return [String]
-    #
-    # @!attribute [rw] tags
-    #   Specifies labels that help you categorize, filter, and search for
-    #   your Amazon Web Services resources. We recommend creating at least a
-    #   name tag for your on-premises storage system.
-    #   @return [Array<Types::TagListEntry>]
-    #
-    # @!attribute [rw] name
-    #   Specifies a familiar name for your on-premises storage system.
-    #   @return [String]
-    #
-    # @!attribute [rw] client_token
-    #   Specifies a client token to make sure requests with this API
-    #   operation are idempotent. If you don't specify a client token,
-    #   DataSync generates one for you automatically.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.
-    #   @return [String]
-    #
-    # @!attribute [rw] credentials
-    #   Specifies the user name and password for accessing your on-premises
-    #   storage system's management interface.
-    #   @return [Types::Credentials]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/AddStorageSystemRequest AWS API Documentation
-    #
-    class AddStorageSystemRequest < Struct.new(
-      :server_configuration,
-      :system_type,
-      :agent_arns,
-      :cloud_watch_log_group_arn,
-      :tags,
-      :name,
-      :client_token,
-      :credentials)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] storage_system_arn
-    #   The ARN of the on-premises storage system that you can use with
-    #   DataSync Discovery.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/AddStorageSystemResponse AWS API Documentation
-    #
-    class AddStorageSystemResponse < Struct.new(
-      :storage_system_arn)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Represents a single entry in a list (or array) of DataSync agents when
     # you call the [ListAgents][1] operation.
     #
@@ -180,38 +102,6 @@ module Aws::DataSync
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CancelTaskExecutionResponse AWS API Documentation
     #
     class CancelTaskExecutionResponse < Aws::EmptyStructure; end
-
-    # The storage capacity of an on-premises storage system resource (for
-    # example, a volume).
-    #
-    # @!attribute [rw] used
-    #   The amount of space that's being used in a storage system resource.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] provisioned
-    #   The total amount of space available in a storage system resource.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] logical_used
-    #   The amount of space that's being used in a storage system resource
-    #   without accounting for compression or deduplication.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] cluster_cloud_storage_used
-    #   The amount of space in the cluster that's in cloud storage (for
-    #   example, if you're using data tiering).
-    #   @return [Integer]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/Capacity AWS API Documentation
-    #
-    class Capacity < Struct.new(
-      :used,
-      :provisioned,
-      :logical_used,
-      :cluster_cloud_storage_used)
-      SENSITIVE = []
-      include Aws::Structure
-    end
 
     # CreateAgentRequest
     #
@@ -830,9 +720,7 @@ module Aws::DataSync
     # @!attribute [rw] kerberos_keytab
     #   The Kerberos key table (keytab) that contains mappings between the
     #   defined Kerberos principal and the encrypted keys. You can load the
-    #   keytab from a file by providing the file's address. If you're
-    #   using the CLI, it performs base64 encoding for you. Otherwise,
-    #   provide the base64-encoded text.
+    #   keytab from a file by providing the file's address.
     #
     #   <note markdown="1"> If `KERBEROS` is specified for `AuthenticationType`, this parameter
     #   is required.
@@ -1303,9 +1191,6 @@ module Aws::DataSync
     #   Specifies your Kerberos key table (keytab) file, which includes
     #   mappings between your Kerberos principal and encryption keys.
     #
-    #   The file must be base64 encoded. If you're using the CLI, the
-    #   encoding is done for you.
-    #
     #   To avoid task execution errors, make sure that the Kerberos
     #   principal that you use to create the keytab file matches exactly
     #   what you specify for `KerberosPrincipal`.
@@ -1516,37 +1401,6 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # The credentials that provide DataSync Discovery read access to your
-    # on-premises storage system's management interface.
-    #
-    # DataSync Discovery stores these credentials in [Secrets Manager][1].
-    # For more information, see [Accessing your on-premises storage
-    # system][2].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
-    # [2]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-configure-storage.html
-    #
-    # @!attribute [rw] username
-    #   Specifies the user name for your storage system's management
-    #   interface.
-    #   @return [String]
-    #
-    # @!attribute [rw] password
-    #   Specifies the password for your storage system's management
-    #   interface.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/Credentials AWS API Documentation
-    #
-    class Credentials < Struct.new(
-      :username,
-      :password)
-      SENSITIVE = [:username, :password]
-      include Aws::Structure
-    end
-
     # DeleteAgentRequest
     #
     # @!attribute [rw] agent_arn
@@ -1691,62 +1545,6 @@ module Aws::DataSync
       :endpoint_type,
       :private_link_config,
       :platform)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] discovery_job_arn
-    #   Specifies the Amazon Resource Name (ARN) of the discovery job that
-    #   you want information about.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeDiscoveryJobRequest AWS API Documentation
-    #
-    class DescribeDiscoveryJobRequest < Struct.new(
-      :discovery_job_arn)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] storage_system_arn
-    #   The ARN of the on-premises storage system you're running the
-    #   discovery job on.
-    #   @return [String]
-    #
-    # @!attribute [rw] discovery_job_arn
-    #   The ARN of the discovery job.
-    #   @return [String]
-    #
-    # @!attribute [rw] collection_duration_minutes
-    #   The number of minutes that the discovery job runs.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] status
-    #   Indicates the status of a discovery job. For more information, see
-    #   [Discovery job statuses][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-job-statuses.html#discovery-job-statuses-table
-    #   @return [String]
-    #
-    # @!attribute [rw] job_start_time
-    #   The time when the discovery job started.
-    #   @return [Time]
-    #
-    # @!attribute [rw] job_end_time
-    #   The time when the discovery job ended.
-    #   @return [Time]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeDiscoveryJobResponse AWS API Documentation
-    #
-    class DescribeDiscoveryJobResponse < Struct.new(
-      :storage_system_arn,
-      :discovery_job_arn,
-      :collection_duration_minutes,
-      :status,
-      :job_start_time,
-      :job_end_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2485,239 +2283,6 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # @!attribute [rw] storage_system_arn
-    #   Specifies the Amazon Resource Name (ARN) of an on-premises storage
-    #   system that you're using with DataSync Discovery.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeStorageSystemRequest AWS API Documentation
-    #
-    class DescribeStorageSystemRequest < Struct.new(
-      :storage_system_arn)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] discovery_job_arn
-    #   Specifies the Amazon Resource Name (ARN) of the discovery job that
-    #   collects information about your on-premises storage system.
-    #   @return [String]
-    #
-    # @!attribute [rw] resource_type
-    #   Specifies the kind of storage system resource that you want
-    #   information about.
-    #   @return [String]
-    #
-    # @!attribute [rw] resource_id
-    #   Specifies the universally unique identifier (UUID) of the storage
-    #   system resource that you want information about.
-    #   @return [String]
-    #
-    # @!attribute [rw] start_time
-    #   Specifies a time within the total duration that the discovery job
-    #   ran. To see information gathered during a certain time frame, use
-    #   this parameter with `EndTime`.
-    #   @return [Time]
-    #
-    # @!attribute [rw] end_time
-    #   Specifies a time within the total duration that the discovery job
-    #   ran. To see information gathered during a certain time frame, use
-    #   this parameter with `StartTime`.
-    #   @return [Time]
-    #
-    # @!attribute [rw] max_results
-    #   Specifies how many results that you want in the response.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] next_token
-    #   Specifies an opaque string that indicates the position to begin the
-    #   next list of results in the response.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeStorageSystemResourceMetricsRequest AWS API Documentation
-    #
-    class DescribeStorageSystemResourceMetricsRequest < Struct.new(
-      :discovery_job_arn,
-      :resource_type,
-      :resource_id,
-      :start_time,
-      :end_time,
-      :max_results,
-      :next_token)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] metrics
-    #   The details that your discovery job collected about your storage
-    #   system resource.
-    #   @return [Array<Types::ResourceMetrics>]
-    #
-    # @!attribute [rw] next_token
-    #   The opaque string that indicates the position to begin the next list
-    #   of results in the response.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeStorageSystemResourceMetricsResponse AWS API Documentation
-    #
-    class DescribeStorageSystemResourceMetricsResponse < Struct.new(
-      :metrics,
-      :next_token)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] discovery_job_arn
-    #   Specifies the Amazon Resource Name (ARN) of the discovery job
-    #   that's collecting data from your on-premises storage system.
-    #   @return [String]
-    #
-    # @!attribute [rw] resource_type
-    #   Specifies what kind of storage system resources that you want
-    #   information about.
-    #   @return [String]
-    #
-    # @!attribute [rw] resource_ids
-    #   Specifies the universally unique identifiers (UUIDs) of the storage
-    #   system resources that you want information about. You can't use
-    #   this parameter in combination with the `Filter` parameter.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] filter
-    #   Filters the storage system resources that you want returned. For
-    #   example, this might be volumes associated with a specific storage
-    #   virtual machine (SVM).
-    #   @return [Hash<String,Array<String>>]
-    #
-    # @!attribute [rw] max_results
-    #   Specifies the maximum number of storage system resources that you
-    #   want to list in a response.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] next_token
-    #   Specifies an opaque string that indicates the position to begin the
-    #   next list of results in the response.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeStorageSystemResourcesRequest AWS API Documentation
-    #
-    class DescribeStorageSystemResourcesRequest < Struct.new(
-      :discovery_job_arn,
-      :resource_type,
-      :resource_ids,
-      :filter,
-      :max_results,
-      :next_token)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] resource_details
-    #   The information collected about your storage system's resources. A
-    #   response can also include Amazon Web Services storage service
-    #   recommendations.
-    #
-    #   For more information, see [storage resource information][1]
-    #   collected by and [recommendations][2] provided by DataSync
-    #   Discovery.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-understand-findings.html
-    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-understand-recommendations.html
-    #   @return [Types::ResourceDetails]
-    #
-    # @!attribute [rw] next_token
-    #   The opaque string that indicates the position to begin the next list
-    #   of results in the response.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeStorageSystemResourcesResponse AWS API Documentation
-    #
-    class DescribeStorageSystemResourcesResponse < Struct.new(
-      :resource_details,
-      :next_token)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] storage_system_arn
-    #   The ARN of the on-premises storage system that the discovery job
-    #   looked at.
-    #   @return [String]
-    #
-    # @!attribute [rw] server_configuration
-    #   The server name and network port required to connect with your
-    #   on-premises storage system's management interface.
-    #   @return [Types::DiscoveryServerConfiguration]
-    #
-    # @!attribute [rw] system_type
-    #   The type of on-premises storage system.
-    #
-    #   <note markdown="1"> DataSync Discovery currently only supports NetApp Fabric-Attached
-    #   Storage (FAS) and All Flash FAS (AFF) systems running ONTAP 9.7 or
-    #   later.
-    #
-    #    </note>
-    #   @return [String]
-    #
-    # @!attribute [rw] agent_arns
-    #   The ARN of the DataSync agent that connects to and reads from your
-    #   on-premises storage system.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] name
-    #   The name that you gave your on-premises storage system when adding
-    #   it to DataSync Discovery.
-    #   @return [String]
-    #
-    # @!attribute [rw] error_message
-    #   Describes the connectivity error that the DataSync agent is
-    #   encountering with your on-premises storage system.
-    #   @return [String]
-    #
-    # @!attribute [rw] connectivity_status
-    #   Indicates whether your DataSync agent can connect to your
-    #   on-premises storage system.
-    #   @return [String]
-    #
-    # @!attribute [rw] cloud_watch_log_group_arn
-    #   The ARN of the Amazon CloudWatch log group that's used to monitor
-    #   and log discovery job events.
-    #   @return [String]
-    #
-    # @!attribute [rw] creation_time
-    #   The time when you added the on-premises storage system to DataSync
-    #   Discovery.
-    #   @return [Time]
-    #
-    # @!attribute [rw] secrets_manager_arn
-    #   The ARN of the secret that stores your on-premises storage system's
-    #   credentials. DataSync Discovery stores these credentials in [Secrets
-    #   Manager][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-configure-storage.html#discovery-add-storage
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeStorageSystemResponse AWS API Documentation
-    #
-    class DescribeStorageSystemResponse < Struct.new(
-      :storage_system_arn,
-      :server_configuration,
-      :system_type,
-      :agent_arns,
-      :name,
-      :error_message,
-      :connectivity_status,
-      :cloud_watch_log_group_arn,
-      :creation_time,
-      :secrets_manager_arn)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # DescribeTaskExecutionRequest
     #
     # @!attribute [rw] task_execution_arn
@@ -3231,52 +2796,6 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # The details about a specific DataSync discovery job.
-    #
-    # @!attribute [rw] discovery_job_arn
-    #   The Amazon Resource Name (ARN) of a discovery job.
-    #   @return [String]
-    #
-    # @!attribute [rw] status
-    #   The status of a discovery job. For more information, see [Discovery
-    #   job statuses][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-job-statuses.html#discovery-job-statuses-table
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DiscoveryJobListEntry AWS API Documentation
-    #
-    class DiscoveryJobListEntry < Struct.new(
-      :discovery_job_arn,
-      :status)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The network settings that DataSync Discovery uses to connect with your
-    # on-premises storage system's management interface.
-    #
-    # @!attribute [rw] server_hostname
-    #   The domain name or IP address of your storage system's management
-    #   interface.
-    #   @return [String]
-    #
-    # @!attribute [rw] server_port
-    #   The network port for accessing the storage system's management
-    #   interface.
-    #   @return [Integer]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DiscoveryServerConfiguration AWS API Documentation
-    #
-    class DiscoveryServerConfiguration < Struct.new(
-      :server_hostname,
-      :server_port)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # The subnet and security groups that DataSync uses to connect to one of
     # your Amazon EFS file system's [mount targets][1].
     #
@@ -3517,35 +3036,6 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # @!attribute [rw] discovery_job_arn
-    #   Specifies the Amazon Resource Name (ARN) of the discovery job that
-    #   collects information about your on-premises storage system.
-    #   @return [String]
-    #
-    # @!attribute [rw] resource_ids
-    #   Specifies the universally unique identifiers (UUIDs) of the
-    #   resources in your storage system that you want recommendations on.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] resource_type
-    #   Specifies the type of resource in your storage system that you want
-    #   recommendations on.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/GenerateRecommendationsRequest AWS API Documentation
-    #
-    class GenerateRecommendationsRequest < Struct.new(
-      :discovery_job_arn,
-      :resource_ids,
-      :resource_type)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/GenerateRecommendationsResponse AWS API Documentation
-    #
-    class GenerateRecommendationsResponse < Aws::EmptyStructure; end
-
     # The NameNode of the Hadoop Distributed File System (HDFS). The
     # NameNode manages the file system's namespace. The NameNode performs
     # operations such as opening, closing, and renaming files and
@@ -3568,37 +3058,6 @@ module Aws::DataSync
     class HdfsNameNode < Struct.new(
       :hostname,
       :port)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The IOPS peaks for an on-premises storage system resource. Each data
-    # point represents the 95th percentile peak value during a 1-hour
-    # interval.
-    #
-    # @!attribute [rw] read
-    #   Peak IOPS related to read operations.
-    #   @return [Float]
-    #
-    # @!attribute [rw] write
-    #   Peak IOPS related to write operations.
-    #   @return [Float]
-    #
-    # @!attribute [rw] other
-    #   Peak IOPS unrelated to read and write operations.
-    #   @return [Float]
-    #
-    # @!attribute [rw] total
-    #   Peak total IOPS on your on-premises storage system resource.
-    #   @return [Float]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/IOPS AWS API Documentation
-    #
-    class IOPS < Struct.new(
-      :read,
-      :write,
-      :other,
-      :total)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3641,32 +3100,6 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # The latency peaks for an on-premises storage system resource. Each
-    # data point represents the 95th percentile peak value during a 1-hour
-    # interval.
-    #
-    # @!attribute [rw] read
-    #   Peak latency for read operations.
-    #   @return [Float]
-    #
-    # @!attribute [rw] write
-    #   Peak latency for write operations.
-    #   @return [Float]
-    #
-    # @!attribute [rw] other
-    #   Peak latency for operations unrelated to read and write operations.
-    #   @return [Float]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/Latency AWS API Documentation
-    #
-    class Latency < Struct.new(
-      :read,
-      :write,
-      :other)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # ListAgentsRequest
     #
     # @!attribute [rw] max_results
@@ -3705,49 +3138,6 @@ module Aws::DataSync
     #
     class ListAgentsResponse < Struct.new(
       :agents,
-      :next_token)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] storage_system_arn
-    #   Specifies the Amazon Resource Name (ARN) of an on-premises storage
-    #   system. Use this parameter if you only want to list the discovery
-    #   jobs that are associated with a specific storage system.
-    #   @return [String]
-    #
-    # @!attribute [rw] max_results
-    #   Specifies how many results you want in the response.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] next_token
-    #   Specifies an opaque string that indicates the position to begin the
-    #   next list of results in the response.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListDiscoveryJobsRequest AWS API Documentation
-    #
-    class ListDiscoveryJobsRequest < Struct.new(
-      :storage_system_arn,
-      :max_results,
-      :next_token)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] discovery_jobs
-    #   The discovery jobs that you've run.
-    #   @return [Array<Types::DiscoveryJobListEntry>]
-    #
-    # @!attribute [rw] next_token
-    #   The opaque string that indicates the position to begin the next list
-    #   of results in the response.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListDiscoveryJobsResponse AWS API Documentation
-    #
-    class ListDiscoveryJobsResponse < Struct.new(
-      :discovery_jobs,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -3796,43 +3186,6 @@ module Aws::DataSync
     #
     class ListLocationsResponse < Struct.new(
       :locations,
-      :next_token)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] max_results
-    #   Specifies how many results you want in the response.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] next_token
-    #   Specifies an opaque string that indicates the position to begin the
-    #   next list of results in the response.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListStorageSystemsRequest AWS API Documentation
-    #
-    class ListStorageSystemsRequest < Struct.new(
-      :max_results,
-      :next_token)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] storage_systems
-    #   The Amazon Resource Names ARNs) of the on-premises storage systems
-    #   that you're using with DataSync Discovery.
-    #   @return [Array<Types::StorageSystemListEntry>]
-    #
-    # @!attribute [rw] next_token
-    #   The opaque string that indicates the position to begin the next list
-    #   of results in the response.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListStorageSystemsResponse AWS API Documentation
-    #
-    class ListStorageSystemsResponse < Struct.new(
-      :storage_systems,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -4114,354 +3467,6 @@ module Aws::DataSync
       :action,
       :format,
       :source)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The performance data that DataSync Discovery collects about an
-    # on-premises storage system resource.
-    #
-    # @!attribute [rw] iops_read
-    #   Peak IOPS related to read operations.
-    #   @return [Float]
-    #
-    # @!attribute [rw] iops_write
-    #   Peak IOPS related to write operations.
-    #   @return [Float]
-    #
-    # @!attribute [rw] iops_other
-    #   Peak IOPS unrelated to read and write operations.
-    #   @return [Float]
-    #
-    # @!attribute [rw] iops_total
-    #   Peak total IOPS on your on-premises storage system resource.
-    #   @return [Float]
-    #
-    # @!attribute [rw] throughput_read
-    #   Peak throughput related to read operations.
-    #   @return [Float]
-    #
-    # @!attribute [rw] throughput_write
-    #   Peak throughput related to write operations.
-    #   @return [Float]
-    #
-    # @!attribute [rw] throughput_other
-    #   Peak throughput unrelated to read and write operations.
-    #   @return [Float]
-    #
-    # @!attribute [rw] throughput_total
-    #   Peak total throughput on your on-premises storage system resource.
-    #   @return [Float]
-    #
-    # @!attribute [rw] latency_read
-    #   Peak latency for read operations.
-    #   @return [Float]
-    #
-    # @!attribute [rw] latency_write
-    #   Peak latency for write operations.
-    #   @return [Float]
-    #
-    # @!attribute [rw] latency_other
-    #   Peak latency for operations unrelated to read and write operations.
-    #   @return [Float]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/MaxP95Performance AWS API Documentation
-    #
-    class MaxP95Performance < Struct.new(
-      :iops_read,
-      :iops_write,
-      :iops_other,
-      :iops_total,
-      :throughput_read,
-      :throughput_write,
-      :throughput_other,
-      :throughput_total,
-      :latency_read,
-      :latency_write,
-      :latency_other)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The information that DataSync Discovery collects about an on-premises
-    # storage system cluster.
-    #
-    # @!attribute [rw] cifs_share_count
-    #   The number of CIFS shares in the cluster.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] nfs_exported_volumes
-    #   The number of NFS volumes in the cluster.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] resource_id
-    #   The universally unique identifier (UUID) of the cluster.
-    #   @return [String]
-    #
-    # @!attribute [rw] cluster_name
-    #   The name of the cluster.
-    #   @return [String]
-    #
-    # @!attribute [rw] max_p95_performance
-    #   The performance data that DataSync Discovery collects about the
-    #   cluster.
-    #   @return [Types::MaxP95Performance]
-    #
-    # @!attribute [rw] cluster_block_storage_size
-    #   The total storage space that's available in the cluster.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] cluster_block_storage_used
-    #   The storage space that's being used in a cluster.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] cluster_block_storage_logical_used
-    #   The storage space that's being used in the cluster without
-    #   accounting for compression or deduplication.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] recommendations
-    #   The Amazon Web Services storage services that DataSync Discovery
-    #   recommends for the cluster. For more information, see
-    #   [Recommendations provided by DataSync Discovery][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-understand-recommendations.html
-    #   @return [Array<Types::Recommendation>]
-    #
-    # @!attribute [rw] recommendation_status
-    #   Indicates whether DataSync Discovery recommendations for the cluster
-    #   are ready to view, incomplete, or can't be determined.
-    #
-    #   For more information, see [Recommendation statuses][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-job-statuses.html#recommendation-statuses-table
-    #   @return [String]
-    #
-    # @!attribute [rw] lun_count
-    #   The number of LUNs (logical unit numbers) in the cluster.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] cluster_cloud_storage_used
-    #   The amount of space in the cluster that's in cloud storage (for
-    #   example, if you're using data tiering).
-    #   @return [Integer]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/NetAppONTAPCluster AWS API Documentation
-    #
-    class NetAppONTAPCluster < Struct.new(
-      :cifs_share_count,
-      :nfs_exported_volumes,
-      :resource_id,
-      :cluster_name,
-      :max_p95_performance,
-      :cluster_block_storage_size,
-      :cluster_block_storage_used,
-      :cluster_block_storage_logical_used,
-      :recommendations,
-      :recommendation_status,
-      :lun_count,
-      :cluster_cloud_storage_used)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The information that DataSync Discovery collects about a storage
-    # virtual machine (SVM) in your on-premises storage system.
-    #
-    # @!attribute [rw] cluster_uuid
-    #   The universally unique identifier (UUID) of the cluster associated
-    #   with the SVM.
-    #   @return [String]
-    #
-    # @!attribute [rw] resource_id
-    #   The UUID of the SVM.
-    #   @return [String]
-    #
-    # @!attribute [rw] svm_name
-    #   The name of the SVM
-    #   @return [String]
-    #
-    # @!attribute [rw] cifs_share_count
-    #   The number of CIFS shares in the SVM.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] enabled_protocols
-    #   The data transfer protocols (such as NFS) configured for the SVM.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] total_capacity_used
-    #   The storage space that's being used in the SVM.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] total_capacity_provisioned
-    #   The total storage space that's available in the SVM.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] total_logical_capacity_used
-    #   The storage space that's being used in the SVM without accounting
-    #   for compression or deduplication.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] max_p95_performance
-    #   The performance data that DataSync Discovery collects about the SVM.
-    #   @return [Types::MaxP95Performance]
-    #
-    # @!attribute [rw] recommendations
-    #   The Amazon Web Services storage services that DataSync Discovery
-    #   recommends for the SVM. For more information, see [Recommendations
-    #   provided by DataSync Discovery][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-understand-recommendations.html
-    #   @return [Array<Types::Recommendation>]
-    #
-    # @!attribute [rw] nfs_exported_volumes
-    #   The number of NFS volumes in the SVM.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] recommendation_status
-    #   Indicates whether DataSync Discovery recommendations for the SVM are
-    #   ready to view, incomplete, or can't be determined.
-    #
-    #   For more information, see [Recommendation statuses][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-job-statuses.html#recommendation-statuses-table
-    #   @return [String]
-    #
-    # @!attribute [rw] total_snapshot_capacity_used
-    #   The amount of storage in the SVM that's being used for snapshots.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] lun_count
-    #   The number of LUNs (logical unit numbers) in the SVM.
-    #   @return [Integer]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/NetAppONTAPSVM AWS API Documentation
-    #
-    class NetAppONTAPSVM < Struct.new(
-      :cluster_uuid,
-      :resource_id,
-      :svm_name,
-      :cifs_share_count,
-      :enabled_protocols,
-      :total_capacity_used,
-      :total_capacity_provisioned,
-      :total_logical_capacity_used,
-      :max_p95_performance,
-      :recommendations,
-      :nfs_exported_volumes,
-      :recommendation_status,
-      :total_snapshot_capacity_used,
-      :lun_count)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The information that DataSync Discovery collects about a volume in
-    # your on-premises storage system.
-    #
-    # @!attribute [rw] volume_name
-    #   The name of the volume.
-    #   @return [String]
-    #
-    # @!attribute [rw] resource_id
-    #   The universally unique identifier (UUID) of the volume.
-    #   @return [String]
-    #
-    # @!attribute [rw] cifs_share_count
-    #   The number of CIFS shares in the volume.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] security_style
-    #   The volume's security style (such as Unix or NTFS).
-    #   @return [String]
-    #
-    # @!attribute [rw] svm_uuid
-    #   The UUID of the storage virtual machine (SVM) associated with the
-    #   volume.
-    #   @return [String]
-    #
-    # @!attribute [rw] svm_name
-    #   The name of the SVM associated with the volume.
-    #   @return [String]
-    #
-    # @!attribute [rw] capacity_used
-    #   The storage space that's being used in the volume.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] capacity_provisioned
-    #   The total storage space that's available in the volume.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] logical_capacity_used
-    #   The storage space that's being used in the volume without
-    #   accounting for compression or deduplication.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] nfs_exported
-    #   The number of NFS volumes in the volume.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] snapshot_capacity_used
-    #   The amount of storage in the volume that's being used for
-    #   snapshots.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] max_p95_performance
-    #   The performance data that DataSync Discovery collects about the
-    #   volume.
-    #   @return [Types::MaxP95Performance]
-    #
-    # @!attribute [rw] recommendations
-    #   The Amazon Web Services storage services that DataSync Discovery
-    #   recommends for the volume. For more information, see
-    #   [Recommendations provided by DataSync Discovery][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-understand-recommendations.html
-    #   @return [Array<Types::Recommendation>]
-    #
-    # @!attribute [rw] recommendation_status
-    #   Indicates whether DataSync Discovery recommendations for the volume
-    #   are ready to view, incomplete, or can't be determined.
-    #
-    #   For more information, see [Recommendation statuses][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-job-statuses.html#recommendation-statuses-table
-    #   @return [String]
-    #
-    # @!attribute [rw] lun_count
-    #   The number of LUNs (logical unit numbers) in the volume.
-    #   @return [Integer]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/NetAppONTAPVolume AWS API Documentation
-    #
-    class NetAppONTAPVolume < Struct.new(
-      :volume_name,
-      :resource_id,
-      :cifs_share_count,
-      :security_style,
-      :svm_uuid,
-      :svm_name,
-      :capacity_used,
-      :capacity_provisioned,
-      :logical_capacity_used,
-      :nfs_exported,
-      :snapshot_capacity_used,
-      :max_p95_performance,
-      :recommendations,
-      :recommendation_status,
-      :lun_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4881,37 +3886,6 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # The types of performance data that DataSync Discovery collects about
-    # an on-premises storage system resource.
-    #
-    # @!attribute [rw] iops
-    #   The IOPS peaks for an on-premises storage system resource. Each data
-    #   point represents the 95th percentile peak value during a 1-hour
-    #   interval.
-    #   @return [Types::IOPS]
-    #
-    # @!attribute [rw] throughput
-    #   The throughput peaks for an on-premises storage system resource.
-    #   Each data point represents the 95th percentile peak value during a
-    #   1-hour interval.
-    #   @return [Types::Throughput]
-    #
-    # @!attribute [rw] latency
-    #   The latency peaks for an on-premises storage system resource. Each
-    #   data point represents the 95th percentile peak value during a 1-hour
-    #   interval.
-    #   @return [Types::Latency]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/P95Metrics AWS API Documentation
-    #
-    class P95Metrics < Struct.new(
-      :iops,
-      :throughput,
-      :latency)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # The platform-related details about the DataSync agent, such as the
     # version number.
     #
@@ -4994,60 +3968,6 @@ module Aws::DataSync
       SENSITIVE = []
       include Aws::Structure
     end
-
-    # The details about an Amazon Web Services storage service that DataSync
-    # Discovery recommends for a resource in your on-premises storage
-    # system.
-    #
-    # For more information, see [Recommendations provided by DataSync
-    # Discovery][1].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/discovery-understand-recommendations.html
-    #
-    # @!attribute [rw] storage_type
-    #   A recommended Amazon Web Services storage service that you can
-    #   migrate data to based on information that DataSync Discovery
-    #   collects about your on-premises storage system.
-    #   @return [String]
-    #
-    # @!attribute [rw] storage_configuration
-    #   Information about how you can set up a recommended Amazon Web
-    #   Services storage service.
-    #   @return [Hash<String,String>]
-    #
-    # @!attribute [rw] estimated_monthly_storage_cost
-    #   The estimated monthly cost of the recommended Amazon Web Services
-    #   storage service.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/Recommendation AWS API Documentation
-    #
-    class Recommendation < Struct.new(
-      :storage_type,
-      :storage_configuration,
-      :estimated_monthly_storage_cost)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] storage_system_arn
-    #   Specifies the Amazon Resource Name (ARN) of the storage system that
-    #   you want to permanently remove from DataSync Discovery.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/RemoveStorageSystemRequest AWS API Documentation
-    #
-    class RemoveStorageSystemRequest < Struct.new(
-      :storage_system_arn)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/RemoveStorageSystemResponse AWS API Documentation
-    #
-    class RemoveStorageSystemResponse < Aws::EmptyStructure; end
 
     # Specifies where DataSync uploads your [task report][1].
     #
@@ -5212,73 +4132,6 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # Information provided by DataSync Discovery about the resources in your
-    # on-premises storage system.
-    #
-    # @!attribute [rw] net_app_ontapsv_ms
-    #   The information that DataSync Discovery collects about storage
-    #   virtual machines (SVMs) in your on-premises storage system.
-    #   @return [Array<Types::NetAppONTAPSVM>]
-    #
-    # @!attribute [rw] net_app_ontap_volumes
-    #   The information that DataSync Discovery collects about volumes in
-    #   your on-premises storage system.
-    #   @return [Array<Types::NetAppONTAPVolume>]
-    #
-    # @!attribute [rw] net_app_ontap_clusters
-    #   The information that DataSync Discovery collects about the cluster
-    #   in your on-premises storage system.
-    #   @return [Array<Types::NetAppONTAPCluster>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ResourceDetails AWS API Documentation
-    #
-    class ResourceDetails < Struct.new(
-      :net_app_ontapsv_ms,
-      :net_app_ontap_volumes,
-      :net_app_ontap_clusters)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Information, including performance data and capacity usage, provided
-    # by DataSync Discovery about a resource in your on-premises storage
-    # system.
-    #
-    # @!attribute [rw] timestamp
-    #   The time when DataSync Discovery collected this information from the
-    #   resource.
-    #   @return [Time]
-    #
-    # @!attribute [rw] p95_metrics
-    #   The types of performance data that DataSync Discovery collects about
-    #   the on-premises storage system resource.
-    #   @return [Types::P95Metrics]
-    #
-    # @!attribute [rw] capacity
-    #   The storage capacity of the on-premises storage system resource.
-    #   @return [Types::Capacity]
-    #
-    # @!attribute [rw] resource_id
-    #   The universally unique identifier (UUID) of the on-premises storage
-    #   system resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] resource_type
-    #   The type of on-premises storage system resource.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ResourceMetrics AWS API Documentation
-    #
-    class ResourceMetrics < Struct.new(
-      :timestamp,
-      :p95_metrics,
-      :capacity,
-      :resource_id,
-      :resource_type)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Specifies the Amazon Resource Name (ARN) of the Identity and Access
     # Management (IAM) role that DataSync uses to access your S3 bucket.
     #
@@ -5417,59 +4270,6 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # @!attribute [rw] storage_system_arn
-    #   Specifies the Amazon Resource Name (ARN) of the on-premises storage
-    #   system that you want to run the discovery job on.
-    #   @return [String]
-    #
-    # @!attribute [rw] collection_duration_minutes
-    #   Specifies in minutes how long you want the discovery job to run.
-    #
-    #   <note markdown="1"> For more accurate recommendations, we recommend a duration of at
-    #   least 14 days. Longer durations allow time to collect a sufficient
-    #   number of data points and provide a realistic representation of
-    #   storage performance and utilization.
-    #
-    #    </note>
-    #   @return [Integer]
-    #
-    # @!attribute [rw] client_token
-    #   Specifies a client token to make sure requests with this API
-    #   operation are idempotent. If you don't specify a client token,
-    #   DataSync generates one for you automatically.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.
-    #   @return [String]
-    #
-    # @!attribute [rw] tags
-    #   Specifies labels that help you categorize, filter, and search for
-    #   your Amazon Web Services resources.
-    #   @return [Array<Types::TagListEntry>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/StartDiscoveryJobRequest AWS API Documentation
-    #
-    class StartDiscoveryJobRequest < Struct.new(
-      :storage_system_arn,
-      :collection_duration_minutes,
-      :client_token,
-      :tags)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] discovery_job_arn
-    #   The ARN of the discovery job that you started.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/StartDiscoveryJobResponse AWS API Documentation
-    #
-    class StartDiscoveryJobResponse < Struct.new(
-      :discovery_job_arn)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # StartTaskExecutionRequest
     #
     # @!attribute [rw] task_arn
@@ -5583,45 +4383,6 @@ module Aws::DataSync
     #
     class StartTaskExecutionResponse < Struct.new(
       :task_execution_arn)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] discovery_job_arn
-    #   Specifies the Amazon Resource Name (ARN) of the discovery job that
-    #   you want to stop.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/StopDiscoveryJobRequest AWS API Documentation
-    #
-    class StopDiscoveryJobRequest < Struct.new(
-      :discovery_job_arn)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/StopDiscoveryJobResponse AWS API Documentation
-    #
-    class StopDiscoveryJobResponse < Aws::EmptyStructure; end
-
-    # Information that identifies an on-premises storage system that you're
-    # using with DataSync Discovery.
-    #
-    # @!attribute [rw] storage_system_arn
-    #   The Amazon Resource Names (ARN) of an on-premises storage system
-    #   that you added to DataSync Discovery.
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   The name of an on-premises storage system that you added to DataSync
-    #   Discovery.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/StorageSystemListEntry AWS API Documentation
-    #
-    class StorageSystemListEntry < Struct.new(
-      :storage_system_arn,
-      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6169,37 +4930,6 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # The throughput peaks for an on-premises storage system volume. Each
-    # data point represents the 95th percentile peak value during a 1-hour
-    # interval.
-    #
-    # @!attribute [rw] read
-    #   Peak throughput related to read operations.
-    #   @return [Float]
-    #
-    # @!attribute [rw] write
-    #   Peak throughput related to write operations.
-    #   @return [Float]
-    #
-    # @!attribute [rw] other
-    #   Peak throughput unrelated to read and write operations.
-    #   @return [Float]
-    #
-    # @!attribute [rw] total
-    #   Peak total throughput on your on-premises storage system resource.
-    #   @return [Float]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/Throughput AWS API Documentation
-    #
-    class Throughput < Struct.new(
-      :read,
-      :write,
-      :other,
-      :total)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # UntagResourceRequest
     #
     # @!attribute [rw] resource_arn
@@ -6246,30 +4976,6 @@ module Aws::DataSync
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateAgentResponse AWS API Documentation
     #
     class UpdateAgentResponse < Aws::EmptyStructure; end
-
-    # @!attribute [rw] discovery_job_arn
-    #   Specifies the Amazon Resource Name (ARN) of the discovery job that
-    #   you want to update.
-    #   @return [String]
-    #
-    # @!attribute [rw] collection_duration_minutes
-    #   Specifies in minutes how long that you want the discovery job to
-    #   run. (You can't set this parameter to less than the number of
-    #   minutes that the job has already run for.)
-    #   @return [Integer]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateDiscoveryJobRequest AWS API Documentation
-    #
-    class UpdateDiscoveryJobRequest < Struct.new(
-      :discovery_job_arn,
-      :collection_duration_minutes)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateDiscoveryJobResponse AWS API Documentation
-    #
-    class UpdateDiscoveryJobResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] location_arn
     #   Specifies the ARN of the Azure Blob Storage transfer location that
@@ -6626,9 +5332,7 @@ module Aws::DataSync
     # @!attribute [rw] kerberos_keytab
     #   The Kerberos key table (keytab) that contains mappings between the
     #   defined Kerberos principal and the encrypted keys. You can load the
-    #   keytab from a file by providing the file's address. If you use the
-    #   CLI, it performs base64 encoding for you. Otherwise, provide the
-    #   base64-encoded text.
+    #   keytab from a file by providing the file's address.
     #   @return [String]
     #
     # @!attribute [rw] kerberos_krb_5_conf
@@ -6990,9 +5694,6 @@ module Aws::DataSync
     #   Specifies your Kerberos key table (keytab) file, which includes
     #   mappings between your Kerberos principal and encryption keys.
     #
-    #   The file must be base64 encoded. If you're using the CLI, the
-    #   encoding is done for you.
-    #
     #   To avoid task execution errors, make sure that the Kerberos
     #   principal that you use to create the keytab file matches exactly
     #   what you specify for `KerberosPrincipal`.
@@ -7029,53 +5730,6 @@ module Aws::DataSync
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateLocationSmbResponse AWS API Documentation
     #
     class UpdateLocationSmbResponse < Aws::EmptyStructure; end
-
-    # @!attribute [rw] storage_system_arn
-    #   Specifies the ARN of the on-premises storage system that you want
-    #   reconfigure.
-    #   @return [String]
-    #
-    # @!attribute [rw] server_configuration
-    #   Specifies the server name and network port required to connect with
-    #   your on-premises storage system's management interface.
-    #   @return [Types::DiscoveryServerConfiguration]
-    #
-    # @!attribute [rw] agent_arns
-    #   Specifies the Amazon Resource Name (ARN) of the DataSync agent that
-    #   connects to and reads your on-premises storage system. You can only
-    #   specify one ARN.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] name
-    #   Specifies a familiar name for your on-premises storage system.
-    #   @return [String]
-    #
-    # @!attribute [rw] cloud_watch_log_group_arn
-    #   Specifies the ARN of the Amazon CloudWatch log group for monitoring
-    #   and logging discovery job events.
-    #   @return [String]
-    #
-    # @!attribute [rw] credentials
-    #   Specifies the user name and password for accessing your on-premises
-    #   storage system's management interface.
-    #   @return [Types::Credentials]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateStorageSystemRequest AWS API Documentation
-    #
-    class UpdateStorageSystemRequest < Struct.new(
-      :storage_system_arn,
-      :server_configuration,
-      :agent_arns,
-      :name,
-      :cloud_watch_log_group_arn,
-      :credentials)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateStorageSystemResponse AWS API Documentation
-    #
-    class UpdateStorageSystemResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] task_execution_arn
     #   Specifies the Amazon Resource Name (ARN) of the task execution that
