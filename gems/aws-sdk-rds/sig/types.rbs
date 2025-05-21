@@ -1303,6 +1303,13 @@ module Aws::RDS
     class DBLogFileNotFoundFault < Aws::EmptyStructure
     end
 
+    class DBMajorEngineVersion
+      attr_accessor engine: ::String
+      attr_accessor major_engine_version: ::String
+      attr_accessor supported_engine_lifecycles: ::Array[Types::SupportedEngineLifecycle]
+      SENSITIVE: []
+    end
+
     class DBParameterGroup
       attr_accessor db_parameter_group_name: ::String
       attr_accessor db_parameter_group_family: ::String
@@ -1988,6 +1995,20 @@ module Aws::RDS
 
     class DescribeDBLogFilesResponse
       attr_accessor describe_db_log_files: ::Array[Types::DescribeDBLogFilesDetails]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDBMajorEngineVersionsRequest
+      attr_accessor engine: ::String
+      attr_accessor major_engine_version: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_records: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeDBMajorEngineVersionsResponse
+      attr_accessor db_major_engine_versions: ::Array[Types::DBMajorEngineVersion]
       attr_accessor marker: ::String
       SENSITIVE: []
     end
@@ -4196,6 +4217,13 @@ module Aws::RDS
     end
 
     class SubscriptionNotFoundFault < Aws::EmptyStructure
+    end
+
+    class SupportedEngineLifecycle
+      attr_accessor lifecycle_support_name: ("open-source-rds-standard-support" | "open-source-rds-extended-support")
+      attr_accessor lifecycle_support_start_date: ::Time
+      attr_accessor lifecycle_support_end_date: ::Time
+      SENSITIVE: []
     end
 
     class SwitchoverBlueGreenDeploymentRequest

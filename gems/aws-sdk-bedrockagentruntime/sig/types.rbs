@@ -55,8 +55,9 @@ module Aws::BedrockAgentRuntime
     end
 
     class ActionGroupInvocationOutput
+      attr_accessor metadata: Types::Metadata
       attr_accessor text: ::String
-      SENSITIVE: [:text]
+      SENSITIVE: [:metadata, :text]
     end
 
     class AgentActionGroup
@@ -87,8 +88,9 @@ module Aws::BedrockAgentRuntime
     class AgentCollaboratorInvocationOutput
       attr_accessor agent_collaborator_alias_arn: ::String
       attr_accessor agent_collaborator_name: ::String
+      attr_accessor metadata: Types::Metadata
       attr_accessor output: Types::AgentCollaboratorOutputPayload
-      SENSITIVE: []
+      SENSITIVE: [:metadata]
     end
 
     class AgentCollaboratorOutputPayload
@@ -232,7 +234,8 @@ module Aws::BedrockAgentRuntime
       attr_accessor execution_output: ::String
       attr_accessor execution_timeout: bool
       attr_accessor files: ::Array[::String]
-      SENSITIVE: []
+      attr_accessor metadata: Types::Metadata
+      SENSITIVE: [:metadata]
     end
 
     class Collaborator
@@ -393,9 +396,11 @@ module Aws::BedrockAgentRuntime
     end
 
     class FailureTrace
+      attr_accessor failure_code: ::Integer
       attr_accessor failure_reason: ::String
+      attr_accessor metadata: Types::Metadata
       attr_accessor trace_id: ::String
-      SENSITIVE: [:failure_reason]
+      SENSITIVE: [:failure_reason, :metadata]
     end
 
     class FieldForReranking
@@ -423,8 +428,9 @@ module Aws::BedrockAgentRuntime
     end
 
     class FinalResponse
+      attr_accessor metadata: Types::Metadata
       attr_accessor text: ::String
-      SENSITIVE: [:text]
+      SENSITIVE: [:metadata, :text]
     end
 
     class FlowCompletionEvent
@@ -793,9 +799,10 @@ module Aws::BedrockAgentRuntime
     class GuardrailTrace
       attr_accessor action: ("INTERVENED" | "NONE")
       attr_accessor input_assessments: ::Array[Types::GuardrailAssessment]
+      attr_accessor metadata: Types::Metadata
       attr_accessor output_assessments: ::Array[Types::GuardrailAssessment]
       attr_accessor trace_id: ::String
-      SENSITIVE: []
+      SENSITIVE: [:metadata]
     end
 
     class GuardrailWordPolicyAssessment
@@ -1095,8 +1102,9 @@ module Aws::BedrockAgentRuntime
     end
 
     class KnowledgeBaseLookupOutput
+      attr_accessor metadata: Types::Metadata
       attr_accessor retrieved_references: ::Array[Types::RetrievedReference]
-      SENSITIVE: []
+      SENSITIVE: [:metadata]
     end
 
     class KnowledgeBaseQuery
@@ -1211,6 +1219,11 @@ module Aws::BedrockAgentRuntime
     end
 
     class Metadata
+      attr_accessor client_request_id: ::String
+      attr_accessor end_time: ::Time
+      attr_accessor operation_total_time_ms: ::Integer
+      attr_accessor start_time: ::Time
+      attr_accessor total_time_ms: ::Integer
       attr_accessor usage: Types::Usage
       SENSITIVE: [:usage]
     end

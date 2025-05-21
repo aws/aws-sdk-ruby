@@ -287,6 +287,7 @@ module Aws
                                   volume_type: ::String?,
                                   size_in_gi_b: ::Integer?,
                                   snapshot_id: ::String?,
+                                  volume_initialization_rate: ::Integer?,
                                   iops: ::Integer?,
                                   throughput: ::Integer?,
                                   tag_specifications: Array[
@@ -1253,6 +1254,7 @@ module Aws
                             volume_type: ::String?,
                             size_in_gi_b: ::Integer?,
                             snapshot_id: ::String?,
+                            volume_initialization_rate: ::Integer?,
                             iops: ::Integer?,
                             throughput: ::Integer?,
                             tag_specifications: Array[
@@ -1358,6 +1360,7 @@ module Aws
                               volume_type: ::String?,
                               size_in_gi_b: ::Integer?,
                               snapshot_id: ::String?,
+                              volume_initialization_rate: ::Integer?,
                               iops: ::Integer?,
                               throughput: ::Integer?,
                               tag_specifications: Array[
@@ -1739,6 +1742,7 @@ module Aws
                                   volume_type: ::String?,
                                   size_in_gi_b: ::Integer?,
                                   snapshot_id: ::String?,
+                                  volume_initialization_rate: ::Integer?,
                                   iops: ::Integer?,
                                   throughput: ::Integer?,
                                   tag_specifications: Array[

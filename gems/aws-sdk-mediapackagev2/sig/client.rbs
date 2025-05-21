@@ -324,6 +324,41 @@ module Aws
                                         utc_timing: {
                                           timing_mode: ("HTTP_HEAD" | "HTTP_ISO" | "HTTP_XSDATE" | "UTC_DIRECT")?,
                                           timing_source: ::String?
+                                        }?,
+                                        profiles: Array[("DVB_DASH")]?,
+                                        base_urls: Array[
+                                          {
+                                            url: ::String,
+                                            service_location: ::String?,
+                                            dvb_priority: ::Integer?,
+                                            dvb_weight: ::Integer?
+                                          },
+                                        ]?,
+                                        program_information: {
+                                          title: ::String?,
+                                          source: ::String?,
+                                          copyright: ::String?,
+                                          language_code: ::String?,
+                                          more_information_url: ::String?
+                                        }?,
+                                        dvb_settings: {
+                                          font_download: {
+                                            url: ::String?,
+                                            mime_type: ::String?,
+                                            font_family: ::String?
+                                          }?,
+                                          error_metrics: Array[
+                                            {
+                                              reporting_url: ::String,
+                                              probability: ::Integer?
+                                            },
+                                          ]?
+                                        }?,
+                                        compactness: ("STANDARD" | "NONE")?,
+                                        subtitle_configuration: {
+                                          ttml_configuration: {
+                                            ttml_profile: ("IMSC_1" | "EBU_TT_D_101")
+                                          }?
                                         }?
                                       },
                                     ],
@@ -813,6 +848,41 @@ module Aws
                                         utc_timing: {
                                           timing_mode: ("HTTP_HEAD" | "HTTP_ISO" | "HTTP_XSDATE" | "UTC_DIRECT")?,
                                           timing_source: ::String?
+                                        }?,
+                                        profiles: Array[("DVB_DASH")]?,
+                                        base_urls: Array[
+                                          {
+                                            url: ::String,
+                                            service_location: ::String?,
+                                            dvb_priority: ::Integer?,
+                                            dvb_weight: ::Integer?
+                                          },
+                                        ]?,
+                                        program_information: {
+                                          title: ::String?,
+                                          source: ::String?,
+                                          copyright: ::String?,
+                                          language_code: ::String?,
+                                          more_information_url: ::String?
+                                        }?,
+                                        dvb_settings: {
+                                          font_download: {
+                                            url: ::String?,
+                                            mime_type: ::String?,
+                                            font_family: ::String?
+                                          }?,
+                                          error_metrics: Array[
+                                            {
+                                              reporting_url: ::String,
+                                              probability: ::Integer?
+                                            },
+                                          ]?
+                                        }?,
+                                        compactness: ("STANDARD" | "NONE")?,
+                                        subtitle_configuration: {
+                                          ttml_configuration: {
+                                            ttml_profile: ("IMSC_1" | "EBU_TT_D_101")
+                                          }?
                                         }?
                                       },
                                     ],

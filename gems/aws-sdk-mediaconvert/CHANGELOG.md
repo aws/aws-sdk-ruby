@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.159.0 (2025-05-14)
+------------------
+
+* Feature - This update enables cropping for video overlays and adds a new STL to Teletext upconversion toggle to preserve styling.
+
 1.158.0 (2025-05-12)
 ------------------
 

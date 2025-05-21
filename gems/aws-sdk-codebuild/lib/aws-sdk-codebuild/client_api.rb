@@ -110,6 +110,8 @@ module Aws::CodeBuild
     DescribeCodeCoveragesOutput = Shapes::StructureShape.new(name: 'DescribeCodeCoveragesOutput')
     DescribeTestCasesInput = Shapes::StructureShape.new(name: 'DescribeTestCasesInput')
     DescribeTestCasesOutput = Shapes::StructureShape.new(name: 'DescribeTestCasesOutput')
+    DockerServer = Shapes::StructureShape.new(name: 'DockerServer')
+    DockerServerStatus = Shapes::StructureShape.new(name: 'DockerServerStatus')
     EnvironmentImage = Shapes::StructureShape.new(name: 'EnvironmentImage')
     EnvironmentImages = Shapes::ListShape.new(name: 'EnvironmentImages')
     EnvironmentLanguage = Shapes::StructureShape.new(name: 'EnvironmentLanguage')
@@ -747,6 +749,15 @@ module Aws::CodeBuild
     DescribeTestCasesOutput.add_member(:test_cases, Shapes::ShapeRef.new(shape: TestCases, location_name: "testCases"))
     DescribeTestCasesOutput.struct_class = Types::DescribeTestCasesOutput
 
+    DockerServer.add_member(:compute_type, Shapes::ShapeRef.new(shape: ComputeType, required: true, location_name: "computeType"))
+    DockerServer.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "securityGroupIds"))
+    DockerServer.add_member(:status, Shapes::ShapeRef.new(shape: DockerServerStatus, location_name: "status"))
+    DockerServer.struct_class = Types::DockerServer
+
+    DockerServerStatus.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
+    DockerServerStatus.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    DockerServerStatus.struct_class = Types::DockerServerStatus
+
     EnvironmentImage.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     EnvironmentImage.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     EnvironmentImage.add_member(:versions, Shapes::ShapeRef.new(shape: ImageVersions, location_name: "versions"))
@@ -1112,6 +1123,7 @@ module Aws::CodeBuild
     ProjectEnvironment.add_member(:certificate, Shapes::ShapeRef.new(shape: String, location_name: "certificate"))
     ProjectEnvironment.add_member(:registry_credential, Shapes::ShapeRef.new(shape: RegistryCredential, location_name: "registryCredential"))
     ProjectEnvironment.add_member(:image_pull_credentials_type, Shapes::ShapeRef.new(shape: ImagePullCredentialsType, location_name: "imagePullCredentialsType"))
+    ProjectEnvironment.add_member(:docker_server, Shapes::ShapeRef.new(shape: DockerServer, location_name: "dockerServer"))
     ProjectEnvironment.struct_class = Types::ProjectEnvironment
 
     ProjectFileSystemLocation.add_member(:type, Shapes::ShapeRef.new(shape: FileSystemType, location_name: "type"))

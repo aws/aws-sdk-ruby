@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.103.0 (2025-05-20)
+------------------
+
+* Feature - Remove Discovery APIs from the DataSync service
+
 1.102.0 (2025-05-12)
 ------------------
 

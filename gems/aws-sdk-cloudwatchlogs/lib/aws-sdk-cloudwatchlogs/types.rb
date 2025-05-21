@@ -2008,7 +2008,7 @@ module Aws::CloudWatchLogs
     end
 
     # @!attribute [rw] account_identifiers
-    #   When `includeLinkedAccounts` is set to `True`, use this parameter to
+    #   When `includeLinkedAccounts` is set to `true`, use this parameter to
     #   specify the list of accounts to search. You can specify as many as
     #   20 account IDs in the array.
     #   @return [Array<String>]
@@ -2050,7 +2050,7 @@ module Aws::CloudWatchLogs
     #   @return [Integer]
     #
     # @!attribute [rw] include_linked_accounts
-    #   If you are using a monitoring account, set this to `True` to have
+    #   If you are using a monitoring account, set this to `true` to have
     #   the operation return log groups in the accounts listed in
     #   `accountIdentifiers`.
     #
@@ -2058,9 +2058,15 @@ module Aws::CloudWatchLogs
     #   a null value, the operation returns all log groups in the monitoring
     #   account and all log groups in all source accounts that are linked to
     #   the monitoring account.
+    #
+    #   The default for this parameter is `false`.
     #   @return [Boolean]
     #
     # @!attribute [rw] log_group_class
+    #   Use this parameter to limit the results to only those log groups in
+    #   the specified log group class. If you omit this parameter, log
+    #   groups of all classes can be returned.
+    #
     #   Specifies the log group class for this log group. There are three
     #   classes:
     #
@@ -2083,6 +2089,18 @@ module Aws::CloudWatchLogs
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html
     #   @return [String]
     #
+    # @!attribute [rw] log_group_identifiers
+    #   Use this array to filter the list of log groups returned. If you
+    #   specify this parameter, the only other filter that you can choose to
+    #   specify is `includeLinkedAccounts`.
+    #
+    #   If you are using this operation in a monitoring account, you can
+    #   specify the ARNs of log groups in source accounts and in the
+    #   monitoring account itself. If you are using this operation in an
+    #   account that is not a cross-account monitoring account, you can
+    #   specify only log group names in the same account as the operation.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeLogGroupsRequest AWS API Documentation
     #
     class DescribeLogGroupsRequest < Struct.new(
@@ -2092,16 +2110,15 @@ module Aws::CloudWatchLogs
       :next_token,
       :limit,
       :include_linked_accounts,
-      :log_group_class)
+      :log_group_class,
+      :log_group_identifiers)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] log_groups
-    #   The log groups.
-    #
-    #   If the `retentionInDays` value is not included for a log group, then
-    #   that log group's events do not expire.
+    #   An array of structures, where each structure contains the
+    #   information about one log group.
     #   @return [Array<Types::LogGroup>]
     #
     # @!attribute [rw] next_token
@@ -3863,6 +3880,94 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # @!attribute [rw] log_group_name_pattern
+    #   Use this parameter to limit the returned log groups to only those
+    #   with names that match the pattern that you specify. This parameter
+    #   is a regular expression that can match prefixes and substrings, and
+    #   supports wildcard matching and matching multiple patterns, as in the
+    #   following examples.
+    #
+    #   * Use `^` to match log group names by prefix.
+    #
+    #   * For a substring match, specify the string to match. All matches
+    #     are case sensitive
+    #
+    #   * To match multiple patterns, separate them with a `|` as in the
+    #     example `^/aws/lambda|discovery`
+    #
+    #   You can specify as many as five different regular expression
+    #   patterns in this field, each of which must be between 3 and 24
+    #   characters. You can include the `^` symbol as many as five times,
+    #   and include the `|` symbol as many as four times.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_class
+    #   Use this parameter to limit the results to only those log groups in
+    #   the specified log group class. If you omit this parameter, log
+    #   groups of all classes can be returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_linked_accounts
+    #   If you are using a monitoring account, set this to `true` to have
+    #   the operation return log groups in the accounts listed in
+    #   `accountIdentifiers`.
+    #
+    #   If this parameter is set to `true` and `accountIdentifiers` contains
+    #   a null value, the operation returns all log groups in the monitoring
+    #   account and all log groups in all source accounts that are linked to
+    #   the monitoring account.
+    #
+    #   The default for this parameter is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] account_identifiers
+    #   When `includeLinkedAccounts` is set to `true`, use this parameter to
+    #   specify the list of accounts to search. You can specify as many as
+    #   20 account IDs in the array.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. The token expires
+    #   after 24 hours.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of log groups to return. If you omit this
+    #   parameter, the default is up to 50 log groups.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ListLogGroupsRequest AWS API Documentation
+    #
+    class ListLogGroupsRequest < Struct.new(
+      :log_group_name_pattern,
+      :log_group_class,
+      :include_linked_accounts,
+      :account_identifiers,
+      :next_token,
+      :limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] log_groups
+    #   An array of structures, where each structure contains the
+    #   information about one log group.
+    #   @return [Array<Types::LogGroupSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. The token expires
+    #   after 24 hours.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ListLogGroupsResponse AWS API Documentation
+    #
+    class ListLogGroupsResponse < Struct.new(
+      :log_groups,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The ARN of the resource that you want to view tags for.
     #
@@ -4295,6 +4400,36 @@ module Aws::CloudWatchLogs
     class LogGroupField < Struct.new(
       :name,
       :percent)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This structure contains information about one log group in your
+    # account.
+    #
+    # @!attribute [rw] log_group_name
+    #   The name of the log group.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_arn
+    #   The Amazon Resource Name (ARN) of the log group.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_class
+    #   The log group class for this log group. For details about the
+    #   features supported by each log group class, see [Log classes][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/LogGroupSummary AWS API Documentation
+    #
+    class LogGroupSummary < Struct.new(
+      :log_group_name,
+      :log_group_arn,
+      :log_group_class)
       SENSITIVE = []
       include Aws::Structure
     end

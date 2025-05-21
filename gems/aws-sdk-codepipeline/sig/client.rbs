@@ -517,6 +517,26 @@ module Aws
                              ) -> _ListActionTypesResponseSuccess
                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListActionTypesResponseSuccess
 
+      interface _ListDeployActionExecutionTargetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDeployActionExecutionTargetsOutput]
+        def targets: () -> ::Array[Types::DeployActionExecutionTarget]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#list_deploy_action_execution_targets-instance_method
+      def list_deploy_action_execution_targets: (
+                                                  ?pipeline_name: ::String,
+                                                  action_execution_id: ::String,
+                                                  ?filters: Array[
+                                                    {
+                                                      name: ("TARGET_STATUS")?,
+                                                      values: Array[::String]?
+                                                    },
+                                                  ],
+                                                  ?max_results: ::Integer,
+                                                  ?next_token: ::String
+                                                ) -> _ListDeployActionExecutionTargetsResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDeployActionExecutionTargetsResponseSuccess
+
       interface _ListPipelineExecutionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListPipelineExecutionsOutput]
         def pipeline_execution_summaries: () -> ::Array[Types::PipelineExecutionSummary]

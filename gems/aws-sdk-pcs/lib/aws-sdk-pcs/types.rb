@@ -34,6 +34,76 @@ module Aws::PCS
       include Aws::Structure
     end
 
+    # The accounting configuration includes configurable settings for Slurm
+    # accounting. It's a property of the **ClusterSlurmConfiguration**
+    # object.
+    #
+    # @!attribute [rw] mode
+    #   The default value for `mode` is `STANDARD`. A value of `STANDARD`
+    #   means Slurm accounting is enabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_purge_time_in_days
+    #   The default value for all purge settings for `slurmdbd.conf`. For
+    #   more information, see the [slurmdbd.conf documentation at
+    #   SchedMD][1].
+    #
+    #   The default value for `defaultPurgeTimeInDays` is `-1`.
+    #
+    #   A value of `-1` means there is no purge time and records persist as
+    #   long as the cluster exists.
+    #
+    #   `0` isn't a valid value.
+    #
+    #
+    #
+    #   [1]: https://slurm.schedmd.com/slurmdbd.conf.html
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/Accounting AWS API Documentation
+    #
+    class Accounting < Struct.new(
+      :mode,
+      :default_purge_time_in_days)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The accounting configuration includes configurable settings for Slurm
+    # accounting. It's a property of the **ClusterSlurmConfiguration**
+    # object.
+    #
+    # @!attribute [rw] mode
+    #   The default value for `mode` is `STANDARD`. A value of `STANDARD`
+    #   means Slurm accounting is enabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_purge_time_in_days
+    #   The default value for all purge settings for `slurmdbd.conf`. For
+    #   more information, see the [slurmdbd.conf documentation at
+    #   SchedMD][1].
+    #
+    #   The default value for `defaultPurgeTimeInDays` is `-1`.
+    #
+    #   A value of `-1` means there is no purge time and records persist as
+    #   long as the cluster exists.
+    #
+    #   `0` isn't a valid value.
+    #
+    #
+    #
+    #   [1]: https://slurm.schedmd.com/slurmdbd.conf.html
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/AccountingRequest AWS API Documentation
+    #
+    class AccountingRequest < Struct.new(
+      :mode,
+      :default_purge_time_in_days)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The cluster resource and configuration.
     #
     # @!attribute [rw] name
@@ -133,12 +203,18 @@ module Aws::PCS
     #   secret**.
     #   @return [Types::SlurmAuthKey]
     #
+    # @!attribute [rw] accounting
+    #   The accounting configuration includes configurable settings for
+    #   Slurm accounting.
+    #   @return [Types::Accounting]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/ClusterSlurmConfiguration AWS API Documentation
     #
     class ClusterSlurmConfiguration < Struct.new(
       :scale_down_idle_time_in_seconds,
       :slurm_custom_settings,
-      :auth_key)
+      :auth_key,
+      :accounting)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -156,11 +232,17 @@ module Aws::PCS
     #   settings.
     #   @return [Array<Types::SlurmCustomSetting>]
     #
+    # @!attribute [rw] accounting
+    #   The accounting configuration includes configurable settings for
+    #   Slurm accounting.
+    #   @return [Types::AccountingRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/ClusterSlurmConfigurationRequest AWS API Documentation
     #
     class ClusterSlurmConfigurationRequest < Struct.new(
       :scale_down_idle_time_in_seconds,
-      :slurm_custom_settings)
+      :slurm_custom_settings,
+      :accounting)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1496,7 +1578,7 @@ module Aws::PCS
     #   more information, see [Slurm versions in Amazon Web Services PCS][1]
     #   in the *Amazon Web Services PCS User Guide*.
     #
-    #   Valid Values: `23.11 | 24.05`
+    #   Valid Values: `23.11 | 24.05 | 24.11`
     #
     #
     #
@@ -1526,7 +1608,7 @@ module Aws::PCS
     #   more information, see [Slurm versions in Amazon Web Services PCS][1]
     #   in the *Amazon Web Services PCS User Guide*.
     #
-    #   Valid Values: `23.11 | 24.05`
+    #   Valid Values: `23.11 | 24.05 | 24.11`
     #
     #
     #

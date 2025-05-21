@@ -54,7 +54,7 @@ module Aws::BedrockDataAutomationRuntime
   autoload :EndpointProvider, 'aws-sdk-bedrockdataautomationruntime/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-bedrockdataautomationruntime/endpoints'
 
-  GEM_VERSION = '1.7.0'
+  GEM_VERSION = '1.8.0'
 
 end
 

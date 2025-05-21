@@ -2248,9 +2248,9 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
-    # Lists the specified log groups. You can list all your log groups or
-    # filter the results by prefix. The results are ASCII-sorted by log
-    # group name.
+    # Returns information about log groups. You can return all your log
+    # groups or filter the results by prefix. The results are ASCII-sorted
+    # by log group name.
     #
     # CloudWatch Logs doesn't support IAM policies that control access to
     # the `DescribeLogGroups` action by using the `aws:ResourceTag/key-name
@@ -2270,7 +2270,7 @@ module Aws::CloudWatchLogs
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html
     #
     # @option params [Array<String>] :account_identifiers
-    #   When `includeLinkedAccounts` is set to `True`, use this parameter to
+    #   When `includeLinkedAccounts` is set to `true`, use this parameter to
     #   specify the list of accounts to search. You can specify as many as 20
     #   account IDs in the array.
     #
@@ -2306,7 +2306,7 @@ module Aws::CloudWatchLogs
     #   the default is up to 50 items.
     #
     # @option params [Boolean] :include_linked_accounts
-    #   If you are using a monitoring account, set this to `True` to have the
+    #   If you are using a monitoring account, set this to `true` to have the
     #   operation return log groups in the accounts listed in
     #   `accountIdentifiers`.
     #
@@ -2315,7 +2315,13 @@ module Aws::CloudWatchLogs
     #   account and all log groups in all source accounts that are linked to
     #   the monitoring account.
     #
+    #   The default for this parameter is `false`.
+    #
     # @option params [String] :log_group_class
+    #   Use this parameter to limit the results to only those log groups in
+    #   the specified log group class. If you omit this parameter, log groups
+    #   of all classes can be returned.
+    #
     #   Specifies the log group class for this log group. There are three
     #   classes:
     #
@@ -2337,6 +2343,17 @@ module Aws::CloudWatchLogs
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html
     #
+    # @option params [Array<String>] :log_group_identifiers
+    #   Use this array to filter the list of log groups returned. If you
+    #   specify this parameter, the only other filter that you can choose to
+    #   specify is `includeLinkedAccounts`.
+    #
+    #   If you are using this operation in a monitoring account, you can
+    #   specify the ARNs of log groups in source accounts and in the
+    #   monitoring account itself. If you are using this operation in an
+    #   account that is not a cross-account monitoring account, you can
+    #   specify only log group names in the same account as the operation.
+    #
     # @return [Types::DescribeLogGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeLogGroupsResponse#log_groups #log_groups} => Array&lt;Types::LogGroup&gt;
@@ -2354,6 +2371,7 @@ module Aws::CloudWatchLogs
     #     limit: 1,
     #     include_linked_accounts: false,
     #     log_group_class: "STANDARD", # accepts STANDARD, INFREQUENT_ACCESS, DELIVERY
+    #     log_group_identifiers: ["LogGroupIdentifier"],
     #   })
     #
     # @example Response structure
@@ -3996,6 +4014,108 @@ module Aws::CloudWatchLogs
     # @param [Hash] params ({})
     def list_log_anomaly_detectors(params = {}, options = {})
       req = build_request(:list_log_anomaly_detectors, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of log groups in the Region in your account. If you are
+    # performing this action in a monitoring account, you can choose to also
+    # return log groups from source accounts that are linked to the
+    # monitoring account. For more information about using cross-account
+    # observability to set up monitoring accounts and source accounts, see [
+    # CloudWatch cross-account observability][1].
+    #
+    # You can optionally filter the list by log group class and by using
+    # regular expressions in your request to match strings in the log group
+    # names.
+    #
+    # This operation is paginated. By default, your first use of this
+    # operation returns 50 results, and includes a token to use in a
+    # subsequent operation to return more results.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html
+    #
+    # @option params [String] :log_group_name_pattern
+    #   Use this parameter to limit the returned log groups to only those with
+    #   names that match the pattern that you specify. This parameter is a
+    #   regular expression that can match prefixes and substrings, and
+    #   supports wildcard matching and matching multiple patterns, as in the
+    #   following examples.
+    #
+    #   * Use `^` to match log group names by prefix.
+    #
+    #   * For a substring match, specify the string to match. All matches are
+    #     case sensitive
+    #
+    #   * To match multiple patterns, separate them with a `|` as in the
+    #     example `^/aws/lambda|discovery`
+    #
+    #   You can specify as many as five different regular expression patterns
+    #   in this field, each of which must be between 3 and 24 characters. You
+    #   can include the `^` symbol as many as five times, and include the `|`
+    #   symbol as many as four times.
+    #
+    # @option params [String] :log_group_class
+    #   Use this parameter to limit the results to only those log groups in
+    #   the specified log group class. If you omit this parameter, log groups
+    #   of all classes can be returned.
+    #
+    # @option params [Boolean] :include_linked_accounts
+    #   If you are using a monitoring account, set this to `true` to have the
+    #   operation return log groups in the accounts listed in
+    #   `accountIdentifiers`.
+    #
+    #   If this parameter is set to `true` and `accountIdentifiers` contains a
+    #   null value, the operation returns all log groups in the monitoring
+    #   account and all log groups in all source accounts that are linked to
+    #   the monitoring account.
+    #
+    #   The default for this parameter is `false`.
+    #
+    # @option params [Array<String>] :account_identifiers
+    #   When `includeLinkedAccounts` is set to `true`, use this parameter to
+    #   specify the list of accounts to search. You can specify as many as 20
+    #   account IDs in the array.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. The token expires after
+    #   24 hours.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of log groups to return. If you omit this
+    #   parameter, the default is up to 50 log groups.
+    #
+    # @return [Types::ListLogGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLogGroupsResponse#log_groups #log_groups} => Array&lt;Types::LogGroupSummary&gt;
+    #   * {Types::ListLogGroupsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_log_groups({
+    #     log_group_name_pattern: "LogGroupNameRegexPattern",
+    #     log_group_class: "STANDARD", # accepts STANDARD, INFREQUENT_ACCESS, DELIVERY
+    #     include_linked_accounts: false,
+    #     account_identifiers: ["AccountId"],
+    #     next_token: "NextToken",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.log_groups #=> Array
+    #   resp.log_groups[0].log_group_name #=> String
+    #   resp.log_groups[0].log_group_arn #=> String
+    #   resp.log_groups[0].log_group_class #=> String, one of "STANDARD", "INFREQUENT_ACCESS", "DELIVERY"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ListLogGroups AWS API Documentation
+    #
+    # @overload list_log_groups(params = {})
+    # @param [Hash] params ({})
+    def list_log_groups(params = {}, options = {})
+      req = build_request(:list_log_groups, params)
       req.send_request(options)
     end
 
@@ -7078,7 +7198,7 @@ module Aws::CloudWatchLogs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.115.0'
+      context[:gem_version] = '1.116.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

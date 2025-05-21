@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2025-05-15)
+------------------
+
+* Feature - Amazon Bedrock Flows introduces DoWhile loops nodes, parallel node executions, and enhancements to knowledge base nodes.
+
 1.56.0 (2025-05-12)
 ------------------
 

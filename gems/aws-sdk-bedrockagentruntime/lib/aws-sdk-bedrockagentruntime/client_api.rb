@@ -292,6 +292,7 @@ module Aws::BedrockAgentRuntime
     ListSessionsResponse = Shapes::StructureShape.new(name: 'ListSessionsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    Long = Shapes::IntegerShape.new(name: 'Long')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxTokens = Shapes::IntegerShape.new(name: 'MaxTokens')
     MaximumLength = Shapes::IntegerShape.new(name: 'MaximumLength')
@@ -547,6 +548,7 @@ module Aws::BedrockAgentRuntime
     ActionGroupInvocationInput.add_member(:verb, Shapes::ShapeRef.new(shape: Verb, location_name: "verb"))
     ActionGroupInvocationInput.struct_class = Types::ActionGroupInvocationInput
 
+    ActionGroupInvocationOutput.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "metadata"))
     ActionGroupInvocationOutput.add_member(:text, Shapes::ShapeRef.new(shape: ActionGroupOutputString, location_name: "text"))
     ActionGroupInvocationOutput.struct_class = Types::ActionGroupInvocationOutput
 
@@ -579,6 +581,7 @@ module Aws::BedrockAgentRuntime
 
     AgentCollaboratorInvocationOutput.add_member(:agent_collaborator_alias_arn, Shapes::ShapeRef.new(shape: AgentAliasArn, location_name: "agentCollaboratorAliasArn"))
     AgentCollaboratorInvocationOutput.add_member(:agent_collaborator_name, Shapes::ShapeRef.new(shape: String, location_name: "agentCollaboratorName"))
+    AgentCollaboratorInvocationOutput.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "metadata"))
     AgentCollaboratorInvocationOutput.add_member(:output, Shapes::ShapeRef.new(shape: AgentCollaboratorOutputPayload, location_name: "output"))
     AgentCollaboratorInvocationOutput.struct_class = Types::AgentCollaboratorInvocationOutput
 
@@ -687,6 +690,7 @@ module Aws::BedrockAgentRuntime
     CodeInterpreterInvocationOutput.add_member(:execution_output, Shapes::ShapeRef.new(shape: String, location_name: "executionOutput"))
     CodeInterpreterInvocationOutput.add_member(:execution_timeout, Shapes::ShapeRef.new(shape: Boolean, location_name: "executionTimeout"))
     CodeInterpreterInvocationOutput.add_member(:files, Shapes::ShapeRef.new(shape: Files, location_name: "files"))
+    CodeInterpreterInvocationOutput.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "metadata"))
     CodeInterpreterInvocationOutput.struct_class = Types::CodeInterpreterInvocationOutput
 
     Collaborator.add_member(:action_groups, Shapes::ShapeRef.new(shape: AgentActionGroups, location_name: "actionGroups"))
@@ -808,7 +812,9 @@ module Aws::BedrockAgentRuntime
     ExternalSourcesRetrieveAndGenerateConfiguration.add_member(:sources, Shapes::ShapeRef.new(shape: ExternalSources, required: true, location_name: "sources"))
     ExternalSourcesRetrieveAndGenerateConfiguration.struct_class = Types::ExternalSourcesRetrieveAndGenerateConfiguration
 
+    FailureTrace.add_member(:failure_code, Shapes::ShapeRef.new(shape: Integer, location_name: "failureCode"))
     FailureTrace.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReasonString, location_name: "failureReason"))
+    FailureTrace.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "metadata"))
     FailureTrace.add_member(:trace_id, Shapes::ShapeRef.new(shape: TraceId, location_name: "traceId"))
     FailureTrace.struct_class = Types::FailureTrace
 
@@ -831,6 +837,7 @@ module Aws::BedrockAgentRuntime
     FilterAttribute.add_member(:value, Shapes::ShapeRef.new(shape: FilterValue, required: true, location_name: "value"))
     FilterAttribute.struct_class = Types::FilterAttribute
 
+    FinalResponse.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "metadata"))
     FinalResponse.add_member(:text, Shapes::ShapeRef.new(shape: FinalResponseString, location_name: "text"))
     FinalResponse.struct_class = Types::FinalResponse
 
@@ -1119,6 +1126,7 @@ module Aws::BedrockAgentRuntime
 
     GuardrailTrace.add_member(:action, Shapes::ShapeRef.new(shape: GuardrailAction, location_name: "action"))
     GuardrailTrace.add_member(:input_assessments, Shapes::ShapeRef.new(shape: GuardrailAssessmentList, location_name: "inputAssessments"))
+    GuardrailTrace.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "metadata"))
     GuardrailTrace.add_member(:output_assessments, Shapes::ShapeRef.new(shape: GuardrailAssessmentList, location_name: "outputAssessments"))
     GuardrailTrace.add_member(:trace_id, Shapes::ShapeRef.new(shape: TraceId, location_name: "traceId"))
     GuardrailTrace.struct_class = Types::GuardrailTrace
@@ -1360,6 +1368,7 @@ module Aws::BedrockAgentRuntime
     KnowledgeBaseLookupInput.add_member(:text, Shapes::ShapeRef.new(shape: KnowledgeBaseLookupInputString, location_name: "text"))
     KnowledgeBaseLookupInput.struct_class = Types::KnowledgeBaseLookupInput
 
+    KnowledgeBaseLookupOutput.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "metadata"))
     KnowledgeBaseLookupOutput.add_member(:retrieved_references, Shapes::ShapeRef.new(shape: RetrievedReferences, location_name: "retrievedReferences"))
     KnowledgeBaseLookupOutput.struct_class = Types::KnowledgeBaseLookupOutput
 
@@ -1447,6 +1456,11 @@ module Aws::BedrockAgentRuntime
 
     Messages.member = Shapes::ShapeRef.new(shape: Message)
 
+    Metadata.add_member(:client_request_id, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestId"))
+    Metadata.add_member(:end_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "endTime"))
+    Metadata.add_member(:operation_total_time_ms, Shapes::ShapeRef.new(shape: Long, location_name: "operationTotalTimeMs"))
+    Metadata.add_member(:start_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "startTime"))
+    Metadata.add_member(:total_time_ms, Shapes::ShapeRef.new(shape: Long, location_name: "totalTimeMs"))
     Metadata.add_member(:usage, Shapes::ShapeRef.new(shape: Usage, location_name: "usage"))
     Metadata.struct_class = Types::Metadata
 

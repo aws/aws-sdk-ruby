@@ -459,6 +459,7 @@ module Aws::BedrockAgent
 
     class CreateFlowAliasRequest
       attr_accessor client_token: ::String
+      attr_accessor concurrency_configuration: Types::FlowAliasConcurrencyConfiguration
       attr_accessor description: ::String
       attr_accessor flow_identifier: ::String
       attr_accessor name: ::String
@@ -469,6 +470,7 @@ module Aws::BedrockAgent
 
     class CreateFlowAliasResponse
       attr_accessor arn: ::String
+      attr_accessor concurrency_configuration: Types::FlowAliasConcurrencyConfiguration
       attr_accessor created_at: ::Time
       attr_accessor description: ::String
       attr_accessor flow_id: ::String
@@ -864,9 +866,20 @@ module Aws::BedrockAgent
       SENSITIVE: []
     end
 
+    class FieldForReranking
+      attr_accessor field_name: ::String
+      SENSITIVE: []
+    end
+
     class FixedSizeChunkingConfiguration
       attr_accessor max_tokens: ::Integer
       attr_accessor overlap_percentage: ::Integer
+      SENSITIVE: []
+    end
+
+    class FlowAliasConcurrencyConfiguration
+      attr_accessor max_concurrency: ::Integer
+      attr_accessor type: ("Automatic" | "Manual")
       SENSITIVE: []
     end
 
@@ -877,6 +890,7 @@ module Aws::BedrockAgent
 
     class FlowAliasSummary
       attr_accessor arn: ::String
+      attr_accessor concurrency_configuration: Types::FlowAliasConcurrencyConfiguration
       attr_accessor created_at: ::Time
       attr_accessor description: ::String
       attr_accessor flow_id: ::String
@@ -938,7 +952,7 @@ module Aws::BedrockAgent
       attr_accessor inputs: ::Array[Types::FlowNodeInput]
       attr_accessor name: ::String
       attr_accessor outputs: ::Array[Types::FlowNodeOutput]
-      attr_accessor type: ("Input" | "Output" | "KnowledgeBase" | "Condition" | "Lex" | "Prompt" | "LambdaFunction" | "Storage" | "Agent" | "Retrieval" | "Iterator" | "Collector" | "InlineCode")
+      attr_accessor type: ("Input" | "Output" | "KnowledgeBase" | "Condition" | "Lex" | "Prompt" | "LambdaFunction" | "Storage" | "Agent" | "Retrieval" | "Iterator" | "Collector" | "InlineCode" | "Loop" | "LoopInput" | "LoopController")
       SENSITIVE: []
     end
 
@@ -952,6 +966,9 @@ module Aws::BedrockAgent
       attr_accessor knowledge_base: Types::KnowledgeBaseFlowNodeConfiguration
       attr_accessor lambda_function: Types::LambdaFunctionFlowNodeConfiguration
       attr_accessor lex: Types::LexFlowNodeConfiguration
+      attr_accessor loop: Types::LoopFlowNodeConfiguration
+      attr_accessor loop_controller: Types::LoopControllerFlowNodeConfiguration
+      attr_accessor loop_input: Types::LoopInputFlowNodeConfiguration
       attr_accessor output: Types::OutputFlowNodeConfiguration
       attr_accessor prompt: Types::PromptFlowNodeConfiguration
       attr_accessor retrieval: Types::RetrievalFlowNodeConfiguration
@@ -977,6 +994,12 @@ module Aws::BedrockAgent
       end
       class Lex < FlowNodeConfiguration
       end
+      class Loop < FlowNodeConfiguration
+      end
+      class LoopController < FlowNodeConfiguration
+      end
+      class LoopInput < FlowNodeConfiguration
+      end
       class Output < FlowNodeConfiguration
       end
       class Prompt < FlowNodeConfiguration
@@ -990,6 +1013,7 @@ module Aws::BedrockAgent
     end
 
     class FlowNodeInput
+      attr_accessor category: ("LoopCondition" | "ReturnValueToLoopStart" | "ExitLoop")
       attr_accessor expression: ::String
       attr_accessor name: ::String
       attr_accessor type: ("String" | "Number" | "Boolean" | "Object" | "Array")
@@ -1018,7 +1042,7 @@ module Aws::BedrockAgent
       attr_accessor details: Types::FlowValidationDetails
       attr_accessor message: ::String
       attr_accessor severity: ("Warning" | "Error")
-      attr_accessor type: ("CyclicConnection" | "DuplicateConnections" | "DuplicateConditionExpression" | "UnreachableNode" | "UnknownConnectionSource" | "UnknownConnectionSourceOutput" | "UnknownConnectionTarget" | "UnknownConnectionTargetInput" | "UnknownConnectionCondition" | "MalformedConditionExpression" | "MalformedNodeInputExpression" | "MismatchedNodeInputType" | "MismatchedNodeOutputType" | "IncompatibleConnectionDataType" | "MissingConnectionConfiguration" | "MissingDefaultCondition" | "MissingEndingNodes" | "MissingNodeConfiguration" | "MissingNodeInput" | "MissingNodeOutput" | "MissingStartingNodes" | "MultipleNodeInputConnections" | "UnfulfilledNodeInput" | "UnsatisfiedConnectionConditions" | "Unspecified" | "UnknownNodeInput" | "UnknownNodeOutput")
+      attr_accessor type: ("CyclicConnection" | "DuplicateConnections" | "DuplicateConditionExpression" | "UnreachableNode" | "UnknownConnectionSource" | "UnknownConnectionSourceOutput" | "UnknownConnectionTarget" | "UnknownConnectionTargetInput" | "UnknownConnectionCondition" | "MalformedConditionExpression" | "MalformedNodeInputExpression" | "MismatchedNodeInputType" | "MismatchedNodeOutputType" | "IncompatibleConnectionDataType" | "MissingConnectionConfiguration" | "MissingDefaultCondition" | "MissingEndingNodes" | "MissingNodeConfiguration" | "MissingNodeInput" | "MissingNodeOutput" | "MissingStartingNodes" | "MultipleNodeInputConnections" | "UnfulfilledNodeInput" | "UnsatisfiedConnectionConditions" | "Unspecified" | "UnknownNodeInput" | "UnknownNodeOutput" | "MissingLoopInputNode" | "MissingLoopControllerNode" | "MultipleLoopInputNodes" | "MultipleLoopControllerNodes" | "LoopIncompatibleNodeType" | "InvalidLoopBoundary")
       SENSITIVE: []
     end
 
@@ -1027,6 +1051,8 @@ module Aws::BedrockAgent
       attr_accessor duplicate_condition_expression: Types::DuplicateConditionExpressionFlowValidationDetails
       attr_accessor duplicate_connections: Types::DuplicateConnectionsFlowValidationDetails
       attr_accessor incompatible_connection_data_type: Types::IncompatibleConnectionDataTypeFlowValidationDetails
+      attr_accessor invalid_loop_boundary: Types::InvalidLoopBoundaryFlowValidationDetails
+      attr_accessor loop_incompatible_node_type: Types::LoopIncompatibleNodeTypeFlowValidationDetails
       attr_accessor malformed_condition_expression: Types::MalformedConditionExpressionFlowValidationDetails
       attr_accessor malformed_node_input_expression: Types::MalformedNodeInputExpressionFlowValidationDetails
       attr_accessor mismatched_node_input_type: Types::MismatchedNodeInputTypeFlowValidationDetails
@@ -1034,10 +1060,14 @@ module Aws::BedrockAgent
       attr_accessor missing_connection_configuration: Types::MissingConnectionConfigurationFlowValidationDetails
       attr_accessor missing_default_condition: Types::MissingDefaultConditionFlowValidationDetails
       attr_accessor missing_ending_nodes: Types::MissingEndingNodesFlowValidationDetails
+      attr_accessor missing_loop_controller_node: Types::MissingLoopControllerNodeFlowValidationDetails
+      attr_accessor missing_loop_input_node: Types::MissingLoopInputNodeFlowValidationDetails
       attr_accessor missing_node_configuration: Types::MissingNodeConfigurationFlowValidationDetails
       attr_accessor missing_node_input: Types::MissingNodeInputFlowValidationDetails
       attr_accessor missing_node_output: Types::MissingNodeOutputFlowValidationDetails
       attr_accessor missing_starting_nodes: Types::MissingStartingNodesFlowValidationDetails
+      attr_accessor multiple_loop_controller_nodes: Types::MultipleLoopControllerNodesFlowValidationDetails
+      attr_accessor multiple_loop_input_nodes: Types::MultipleLoopInputNodesFlowValidationDetails
       attr_accessor multiple_node_input_connections: Types::MultipleNodeInputConnectionsFlowValidationDetails
       attr_accessor unfulfilled_node_input: Types::UnfulfilledNodeInputFlowValidationDetails
       attr_accessor unknown_connection_condition: Types::UnknownConnectionConditionFlowValidationDetails
@@ -1061,6 +1091,10 @@ module Aws::BedrockAgent
       end
       class IncompatibleConnectionDataType < FlowValidationDetails
       end
+      class InvalidLoopBoundary < FlowValidationDetails
+      end
+      class LoopIncompatibleNodeType < FlowValidationDetails
+      end
       class MalformedConditionExpression < FlowValidationDetails
       end
       class MalformedNodeInputExpression < FlowValidationDetails
@@ -1075,6 +1109,10 @@ module Aws::BedrockAgent
       end
       class MissingEndingNodes < FlowValidationDetails
       end
+      class MissingLoopControllerNode < FlowValidationDetails
+      end
+      class MissingLoopInputNode < FlowValidationDetails
+      end
       class MissingNodeConfiguration < FlowValidationDetails
       end
       class MissingNodeInput < FlowValidationDetails
@@ -1082,6 +1120,10 @@ module Aws::BedrockAgent
       class MissingNodeOutput < FlowValidationDetails
       end
       class MissingStartingNodes < FlowValidationDetails
+      end
+      class MultipleLoopControllerNodes < FlowValidationDetails
+      end
+      class MultipleLoopInputNodes < FlowValidationDetails
       end
       class MultipleNodeInputConnections < FlowValidationDetails
       end
@@ -1226,6 +1268,7 @@ module Aws::BedrockAgent
 
     class GetFlowAliasResponse
       attr_accessor arn: ::String
+      attr_accessor concurrency_configuration: Types::FlowAliasConcurrencyConfiguration
       attr_accessor created_at: ::Time
       attr_accessor description: ::String
       attr_accessor flow_id: ::String
@@ -1450,6 +1493,13 @@ module Aws::BedrockAgent
       SENSITIVE: []
     end
 
+    class InvalidLoopBoundaryFlowValidationDetails
+      attr_accessor connection: ::String
+      attr_accessor source: ::String
+      attr_accessor target: ::String
+      SENSITIVE: []
+    end
+
     class IteratorFlowNodeConfiguration < Aws::EmptyStructure
     end
 
@@ -1499,9 +1549,27 @@ module Aws::BedrockAgent
 
     class KnowledgeBaseFlowNodeConfiguration
       attr_accessor guardrail_configuration: Types::GuardrailConfiguration
+      attr_accessor inference_configuration: Types::PromptInferenceConfiguration
       attr_accessor knowledge_base_id: ::String
       attr_accessor model_id: ::String
+      attr_accessor number_of_results: ::Integer
+      attr_accessor orchestration_configuration: Types::KnowledgeBaseOrchestrationConfiguration
+      attr_accessor prompt_template: Types::KnowledgeBasePromptTemplate
+      attr_accessor reranking_configuration: Types::VectorSearchRerankingConfiguration
       SENSITIVE: []
+    end
+
+    class KnowledgeBaseOrchestrationConfiguration
+      attr_accessor additional_model_request_fields: ::Hash[::String, untyped]
+      attr_accessor inference_config: Types::PromptInferenceConfiguration
+      attr_accessor performance_config: Types::PerformanceConfiguration
+      attr_accessor prompt_template: Types::KnowledgeBasePromptTemplate
+      SENSITIVE: []
+    end
+
+    class KnowledgeBasePromptTemplate
+      attr_accessor text_prompt_template: ::String
+      SENSITIVE: [:text_prompt_template]
     end
 
     class KnowledgeBaseSummary
@@ -1720,6 +1788,27 @@ module Aws::BedrockAgent
       SENSITIVE: []
     end
 
+    class LoopControllerFlowNodeConfiguration
+      attr_accessor continue_condition: Types::FlowCondition
+      attr_accessor max_iterations: ::Integer
+      SENSITIVE: []
+    end
+
+    class LoopFlowNodeConfiguration
+      attr_accessor definition: Types::FlowDefinition
+      SENSITIVE: [:definition]
+    end
+
+    class LoopIncompatibleNodeTypeFlowValidationDetails
+      attr_accessor incompatible_node_name: ::String
+      attr_accessor incompatible_node_type: ("Input" | "Condition" | "Iterator" | "Collector")
+      attr_accessor node: ::String
+      SENSITIVE: []
+    end
+
+    class LoopInputFlowNodeConfiguration < Aws::EmptyStructure
+    end
+
     class MalformedConditionExpressionFlowValidationDetails
       attr_accessor cause: ::String
       attr_accessor condition: ::String
@@ -1762,6 +1851,12 @@ module Aws::BedrockAgent
       SENSITIVE: [:number_value, :string_value]
     end
 
+    class MetadataConfigurationForReranking
+      attr_accessor selection_mode: ("SELECTIVE" | "ALL")
+      attr_accessor selective_mode_configuration: Types::RerankingMetadataSelectiveModeConfiguration
+      SENSITIVE: []
+    end
+
     class MismatchedNodeInputTypeFlowValidationDetails
       attr_accessor expected_type: ("String" | "Number" | "Boolean" | "Object" | "Array")
       attr_accessor input: ::String
@@ -1787,6 +1882,16 @@ module Aws::BedrockAgent
     end
 
     class MissingEndingNodesFlowValidationDetails < Aws::EmptyStructure
+    end
+
+    class MissingLoopControllerNodeFlowValidationDetails
+      attr_accessor loop_node: ::String
+      SENSITIVE: []
+    end
+
+    class MissingLoopInputNodeFlowValidationDetails
+      attr_accessor loop_node: ::String
+      SENSITIVE: []
     end
 
     class MissingNodeConfigurationFlowValidationDetails
@@ -1825,6 +1930,16 @@ module Aws::BedrockAgent
       attr_accessor metadata_field: ::String
       attr_accessor text_field: ::String
       attr_accessor vector_field: ::String
+      SENSITIVE: []
+    end
+
+    class MultipleLoopControllerNodesFlowValidationDetails
+      attr_accessor loop_node: ::String
+      SENSITIVE: []
+    end
+
+    class MultipleLoopInputNodesFlowValidationDetails
+      attr_accessor loop_node: ::String
       SENSITIVE: []
     end
 
@@ -1918,6 +2033,11 @@ module Aws::BedrockAgent
     class PatternObjectFilterConfiguration
       attr_accessor filters: ::Array[Types::PatternObjectFilter]
       SENSITIVE: [:filters]
+    end
+
+    class PerformanceConfiguration
+      attr_accessor latency: ("standard" | "optimized")
+      SENSITIVE: []
     end
 
     class PineconeConfiguration
@@ -2207,6 +2327,20 @@ module Aws::BedrockAgent
       attr_accessor auth_configuration: Types::RedshiftServerlessAuthConfiguration
       attr_accessor workgroup_arn: ::String
       SENSITIVE: []
+    end
+
+    class RerankingMetadataSelectiveModeConfiguration
+      attr_accessor fields_to_exclude: ::Array[Types::FieldForReranking]
+      attr_accessor fields_to_include: ::Array[Types::FieldForReranking]
+      attr_accessor unknown: untyped
+      SENSITIVE: [:fields_to_exclude, :fields_to_include]
+
+      class FieldsToExclude < RerankingMetadataSelectiveModeConfiguration
+      end
+      class FieldsToInclude < RerankingMetadataSelectiveModeConfiguration
+      end
+      class Unknown < RerankingMetadataSelectiveModeConfiguration
+      end
     end
 
     class ResourceNotFoundException
@@ -2686,6 +2820,7 @@ module Aws::BedrockAgent
 
     class UpdateFlowAliasRequest
       attr_accessor alias_identifier: ::String
+      attr_accessor concurrency_configuration: Types::FlowAliasConcurrencyConfiguration
       attr_accessor description: ::String
       attr_accessor flow_identifier: ::String
       attr_accessor name: ::String
@@ -2695,6 +2830,7 @@ module Aws::BedrockAgent
 
     class UpdateFlowAliasResponse
       attr_accessor arn: ::String
+      attr_accessor concurrency_configuration: Types::FlowAliasConcurrencyConfiguration
       attr_accessor created_at: ::Time
       attr_accessor description: ::String
       attr_accessor flow_id: ::String
@@ -2808,6 +2944,25 @@ module Aws::BedrockAgent
       attr_accessor embedding_model_arn: ::String
       attr_accessor embedding_model_configuration: Types::EmbeddingModelConfiguration
       attr_accessor supplemental_data_storage_configuration: Types::SupplementalDataStorageConfiguration
+      SENSITIVE: []
+    end
+
+    class VectorSearchBedrockRerankingConfiguration
+      attr_accessor metadata_configuration: Types::MetadataConfigurationForReranking
+      attr_accessor model_configuration: Types::VectorSearchBedrockRerankingModelConfiguration
+      attr_accessor number_of_reranked_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class VectorSearchBedrockRerankingModelConfiguration
+      attr_accessor additional_model_request_fields: ::Hash[::String, untyped]
+      attr_accessor model_arn: ::String
+      SENSITIVE: []
+    end
+
+    class VectorSearchRerankingConfiguration
+      attr_accessor bedrock_reranking_configuration: Types::VectorSearchBedrockRerankingConfiguration
+      attr_accessor type: ("BEDROCK_RERANKING_MODEL")
       SENSITIVE: []
     end
 

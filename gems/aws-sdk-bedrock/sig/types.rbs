@@ -112,6 +112,7 @@ module Aws::Bedrock
       attr_accessor word_policy_config: Types::GuardrailWordPolicyConfig
       attr_accessor sensitive_information_policy_config: Types::GuardrailSensitiveInformationPolicyConfig
       attr_accessor contextual_grounding_policy_config: Types::GuardrailContextualGroundingPolicyConfig
+      attr_accessor cross_region_config: Types::GuardrailCrossRegionConfig
       attr_accessor blocked_input_messaging: ::String
       attr_accessor blocked_outputs_messaging: ::String
       attr_accessor kms_key_id: ::String
@@ -711,6 +712,7 @@ module Aws::Bedrock
       attr_accessor word_policy: Types::GuardrailWordPolicy
       attr_accessor sensitive_information_policy: Types::GuardrailSensitiveInformationPolicy
       attr_accessor contextual_grounding_policy: Types::GuardrailContextualGroundingPolicy
+      attr_accessor cross_region_details: Types::GuardrailCrossRegionDetails
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor status_reasons: ::Array[::String]
@@ -983,6 +985,17 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class GuardrailCrossRegionConfig
+      attr_accessor guardrail_profile_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GuardrailCrossRegionDetails
+      attr_accessor guardrail_profile_id: ::String
+      attr_accessor guardrail_profile_arn: ::String
+      SENSITIVE: []
+    end
+
     class GuardrailManagedWords
       attr_accessor type: ("PROFANITY")
       attr_accessor input_action: ("BLOCK" | "NONE")
@@ -1066,6 +1079,7 @@ module Aws::Bedrock
       attr_accessor version: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor cross_region_details: Types::GuardrailCrossRegionDetails
       SENSITIVE: [:name, :description]
     end
 
@@ -1970,6 +1984,7 @@ module Aws::Bedrock
       attr_accessor word_policy_config: Types::GuardrailWordPolicyConfig
       attr_accessor sensitive_information_policy_config: Types::GuardrailSensitiveInformationPolicyConfig
       attr_accessor contextual_grounding_policy_config: Types::GuardrailContextualGroundingPolicyConfig
+      attr_accessor cross_region_config: Types::GuardrailCrossRegionConfig
       attr_accessor blocked_input_messaging: ::String
       attr_accessor blocked_outputs_messaging: ::String
       attr_accessor kms_key_id: ::String

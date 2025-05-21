@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2025-05-19)
+------------------
+
+* Feature - CreateMultiRegionCluster and DeleteMultiRegionCluster APIs removed
+
+1.8.0 (2025-05-13)
+------------------
+
+* Feature - CreateMultiRegionClusters and DeleteMultiRegionClusters APIs marked as deprecated. Introduced new multi-Region clusters creation experience through multiRegionProperties parameter in CreateCluster API.
+
 1.7.0 (2025-05-12)
 ------------------
 

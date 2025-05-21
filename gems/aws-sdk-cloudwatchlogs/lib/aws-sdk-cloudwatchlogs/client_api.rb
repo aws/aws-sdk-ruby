@@ -131,6 +131,7 @@ module Aws::CloudWatchLogs
     DescribeIndexPoliciesRequest = Shapes::StructureShape.new(name: 'DescribeIndexPoliciesRequest')
     DescribeIndexPoliciesResponse = Shapes::StructureShape.new(name: 'DescribeIndexPoliciesResponse')
     DescribeLimit = Shapes::IntegerShape.new(name: 'DescribeLimit')
+    DescribeLogGroupsLogGroupIdentifiers = Shapes::ListShape.new(name: 'DescribeLogGroupsLogGroupIdentifiers')
     DescribeLogGroupsRequest = Shapes::StructureShape.new(name: 'DescribeLogGroupsRequest')
     DescribeLogGroupsResponse = Shapes::StructureShape.new(name: 'DescribeLogGroupsResponse')
     DescribeLogStreamsRequest = Shapes::StructureShape.new(name: 'DescribeLogStreamsRequest')
@@ -266,12 +267,15 @@ module Aws::CloudWatchLogs
     ListAnomaliesResponse = Shapes::StructureShape.new(name: 'ListAnomaliesResponse')
     ListIntegrationsRequest = Shapes::StructureShape.new(name: 'ListIntegrationsRequest')
     ListIntegrationsResponse = Shapes::StructureShape.new(name: 'ListIntegrationsResponse')
+    ListLimit = Shapes::IntegerShape.new(name: 'ListLimit')
     ListLogAnomalyDetectorsLimit = Shapes::IntegerShape.new(name: 'ListLogAnomalyDetectorsLimit')
     ListLogAnomalyDetectorsRequest = Shapes::StructureShape.new(name: 'ListLogAnomalyDetectorsRequest')
     ListLogAnomalyDetectorsResponse = Shapes::StructureShape.new(name: 'ListLogAnomalyDetectorsResponse')
     ListLogGroupsForQueryMaxResults = Shapes::IntegerShape.new(name: 'ListLogGroupsForQueryMaxResults')
     ListLogGroupsForQueryRequest = Shapes::StructureShape.new(name: 'ListLogGroupsForQueryRequest')
     ListLogGroupsForQueryResponse = Shapes::StructureShape.new(name: 'ListLogGroupsForQueryResponse')
+    ListLogGroupsRequest = Shapes::StructureShape.new(name: 'ListLogGroupsRequest')
+    ListLogGroupsResponse = Shapes::StructureShape.new(name: 'ListLogGroupsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListTagsLogGroupRequest = Shapes::StructureShape.new(name: 'ListTagsLogGroupRequest')
@@ -295,7 +299,10 @@ module Aws::CloudWatchLogs
     LogGroupIdentifiers = Shapes::ListShape.new(name: 'LogGroupIdentifiers')
     LogGroupName = Shapes::StringShape.new(name: 'LogGroupName')
     LogGroupNamePattern = Shapes::StringShape.new(name: 'LogGroupNamePattern')
+    LogGroupNameRegexPattern = Shapes::StringShape.new(name: 'LogGroupNameRegexPattern')
     LogGroupNames = Shapes::ListShape.new(name: 'LogGroupNames')
+    LogGroupSummaries = Shapes::ListShape.new(name: 'LogGroupSummaries')
+    LogGroupSummary = Shapes::StructureShape.new(name: 'LogGroupSummary')
     LogGroups = Shapes::ListShape.new(name: 'LogGroups')
     LogRecord = Shapes::MapShape.new(name: 'LogRecord')
     LogRecordPointer = Shapes::StringShape.new(name: 'LogRecordPointer')
@@ -892,6 +899,8 @@ module Aws::CloudWatchLogs
     DescribeIndexPoliciesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     DescribeIndexPoliciesResponse.struct_class = Types::DescribeIndexPoliciesResponse
 
+    DescribeLogGroupsLogGroupIdentifiers.member = Shapes::ShapeRef.new(shape: LogGroupIdentifier)
+
     DescribeLogGroupsRequest.add_member(:account_identifiers, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIdentifiers"))
     DescribeLogGroupsRequest.add_member(:log_group_name_prefix, Shapes::ShapeRef.new(shape: LogGroupName, location_name: "logGroupNamePrefix"))
     DescribeLogGroupsRequest.add_member(:log_group_name_pattern, Shapes::ShapeRef.new(shape: LogGroupNamePattern, location_name: "logGroupNamePattern"))
@@ -899,6 +908,7 @@ module Aws::CloudWatchLogs
     DescribeLogGroupsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: DescribeLimit, location_name: "limit"))
     DescribeLogGroupsRequest.add_member(:include_linked_accounts, Shapes::ShapeRef.new(shape: IncludeLinkedAccounts, location_name: "includeLinkedAccounts"))
     DescribeLogGroupsRequest.add_member(:log_group_class, Shapes::ShapeRef.new(shape: LogGroupClass, location_name: "logGroupClass"))
+    DescribeLogGroupsRequest.add_member(:log_group_identifiers, Shapes::ShapeRef.new(shape: DescribeLogGroupsLogGroupIdentifiers, location_name: "logGroupIdentifiers"))
     DescribeLogGroupsRequest.struct_class = Types::DescribeLogGroupsRequest
 
     DescribeLogGroupsResponse.add_member(:log_groups, Shapes::ShapeRef.new(shape: LogGroups, location_name: "logGroups"))
@@ -1248,6 +1258,18 @@ module Aws::CloudWatchLogs
     ListLogGroupsForQueryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListLogGroupsForQueryResponse.struct_class = Types::ListLogGroupsForQueryResponse
 
+    ListLogGroupsRequest.add_member(:log_group_name_pattern, Shapes::ShapeRef.new(shape: LogGroupNameRegexPattern, location_name: "logGroupNamePattern"))
+    ListLogGroupsRequest.add_member(:log_group_class, Shapes::ShapeRef.new(shape: LogGroupClass, location_name: "logGroupClass"))
+    ListLogGroupsRequest.add_member(:include_linked_accounts, Shapes::ShapeRef.new(shape: IncludeLinkedAccounts, location_name: "includeLinkedAccounts"))
+    ListLogGroupsRequest.add_member(:account_identifiers, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIdentifiers"))
+    ListLogGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListLogGroupsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: ListLimit, location_name: "limit"))
+    ListLogGroupsRequest.struct_class = Types::ListLogGroupsRequest
+
+    ListLogGroupsResponse.add_member(:log_groups, Shapes::ShapeRef.new(shape: LogGroupSummaries, location_name: "logGroups"))
+    ListLogGroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListLogGroupsResponse.struct_class = Types::ListLogGroupsResponse
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
@@ -1320,6 +1342,13 @@ module Aws::CloudWatchLogs
     LogGroupIdentifiers.member = Shapes::ShapeRef.new(shape: LogGroupIdentifier)
 
     LogGroupNames.member = Shapes::ShapeRef.new(shape: LogGroupName)
+
+    LogGroupSummaries.member = Shapes::ShapeRef.new(shape: LogGroupSummary)
+
+    LogGroupSummary.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, location_name: "logGroupName"))
+    LogGroupSummary.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "logGroupArn"))
+    LogGroupSummary.add_member(:log_group_class, Shapes::ShapeRef.new(shape: LogGroupClass, location_name: "logGroupClass"))
+    LogGroupSummary.struct_class = Types::LogGroupSummary
 
     LogGroups.member = Shapes::ShapeRef.new(shape: LogGroup)
 
@@ -2717,6 +2746,16 @@ module Aws::CloudWatchLogs
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_log_groups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListLogGroups"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListLogGroupsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListLogGroupsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:list_log_groups_for_query, Seahorse::Model::Operation.new.tap do |o|

@@ -15,6 +15,11 @@ module Aws::PCS
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    Accounting = Shapes::StructureShape.new(name: 'Accounting')
+    AccountingDefaultPurgeTimeInDaysInteger = Shapes::IntegerShape.new(name: 'AccountingDefaultPurgeTimeInDaysInteger')
+    AccountingMode = Shapes::StringShape.new(name: 'AccountingMode')
+    AccountingRequest = Shapes::StructureShape.new(name: 'AccountingRequest')
+    AccountingRequestDefaultPurgeTimeInDaysInteger = Shapes::IntegerShape.new(name: 'AccountingRequestDefaultPurgeTimeInDaysInteger')
     AmiId = Shapes::StringShape.new(name: 'AmiId')
     Arn = Shapes::StringShape.new(name: 'Arn')
     BootstrapId = Shapes::StringShape.new(name: 'BootstrapId')
@@ -135,6 +140,14 @@ module Aws::PCS
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
+    Accounting.add_member(:mode, Shapes::ShapeRef.new(shape: AccountingMode, required: true, location_name: "mode"))
+    Accounting.add_member(:default_purge_time_in_days, Shapes::ShapeRef.new(shape: AccountingDefaultPurgeTimeInDaysInteger, location_name: "defaultPurgeTimeInDays"))
+    Accounting.struct_class = Types::Accounting
+
+    AccountingRequest.add_member(:mode, Shapes::ShapeRef.new(shape: AccountingMode, required: true, location_name: "mode"))
+    AccountingRequest.add_member(:default_purge_time_in_days, Shapes::ShapeRef.new(shape: AccountingRequestDefaultPurgeTimeInDaysInteger, location_name: "defaultPurgeTimeInDays"))
+    AccountingRequest.struct_class = Types::AccountingRequest
+
     Cluster.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     Cluster.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
     Cluster.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "arn"))
@@ -154,10 +167,12 @@ module Aws::PCS
     ClusterSlurmConfiguration.add_member(:scale_down_idle_time_in_seconds, Shapes::ShapeRef.new(shape: ClusterSlurmConfigurationScaleDownIdleTimeInSecondsInteger, location_name: "scaleDownIdleTimeInSeconds"))
     ClusterSlurmConfiguration.add_member(:slurm_custom_settings, Shapes::ShapeRef.new(shape: SlurmCustomSettings, location_name: "slurmCustomSettings"))
     ClusterSlurmConfiguration.add_member(:auth_key, Shapes::ShapeRef.new(shape: SlurmAuthKey, location_name: "authKey"))
+    ClusterSlurmConfiguration.add_member(:accounting, Shapes::ShapeRef.new(shape: Accounting, location_name: "accounting"))
     ClusterSlurmConfiguration.struct_class = Types::ClusterSlurmConfiguration
 
     ClusterSlurmConfigurationRequest.add_member(:scale_down_idle_time_in_seconds, Shapes::ShapeRef.new(shape: ClusterSlurmConfigurationRequestScaleDownIdleTimeInSecondsInteger, location_name: "scaleDownIdleTimeInSeconds"))
     ClusterSlurmConfigurationRequest.add_member(:slurm_custom_settings, Shapes::ShapeRef.new(shape: SlurmCustomSettings, location_name: "slurmCustomSettings"))
+    ClusterSlurmConfigurationRequest.add_member(:accounting, Shapes::ShapeRef.new(shape: AccountingRequest, location_name: "accounting"))
     ClusterSlurmConfigurationRequest.struct_class = Types::ClusterSlurmConfigurationRequest
 
     ClusterSummary.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))

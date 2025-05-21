@@ -115,6 +115,7 @@ module Aws::MediaConvert
     CaptionSourceFramerate = Shapes::StructureShape.new(name: 'CaptionSourceFramerate')
     CaptionSourceSettings = Shapes::StructureShape.new(name: 'CaptionSourceSettings')
     CaptionSourceType = Shapes::StringShape.new(name: 'CaptionSourceType')
+    CaptionSourceUpconvertSTLToTeletext = Shapes::StringShape.new(name: 'CaptionSourceUpconvertSTLToTeletext')
     ChannelMapping = Shapes::StructureShape.new(name: 'ChannelMapping')
     ChromaPositionMode = Shapes::StringShape.new(name: 'ChromaPositionMode')
     ClipLimits = Shapes::StructureShape.new(name: 'ClipLimits')
@@ -666,6 +667,7 @@ module Aws::MediaConvert
     VideoDescription = Shapes::StructureShape.new(name: 'VideoDescription')
     VideoDetail = Shapes::StructureShape.new(name: 'VideoDetail')
     VideoOverlay = Shapes::StructureShape.new(name: 'VideoOverlay')
+    VideoOverlayCrop = Shapes::StructureShape.new(name: 'VideoOverlayCrop')
     VideoOverlayInput = Shapes::StructureShape.new(name: 'VideoOverlayInput')
     VideoOverlayInputClipping = Shapes::StructureShape.new(name: 'VideoOverlayInputClipping')
     VideoOverlayPlayBackMode = Shapes::StringShape.new(name: 'VideoOverlayPlayBackMode')
@@ -1622,6 +1624,7 @@ module Aws::MediaConvert
     FileSourceSettings.add_member(:source_file, Shapes::ShapeRef.new(shape: __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT, location_name: "sourceFile"))
     FileSourceSettings.add_member(:time_delta, Shapes::ShapeRef.new(shape: __integerMinNegative2147483648Max2147483647, location_name: "timeDelta"))
     FileSourceSettings.add_member(:time_delta_units, Shapes::ShapeRef.new(shape: FileSourceTimeDeltaUnits, location_name: "timeDeltaUnits"))
+    FileSourceSettings.add_member(:upconvert_stl_to_teletext, Shapes::ShapeRef.new(shape: CaptionSourceUpconvertSTLToTeletext, location_name: "upconvertSTLToTeletext"))
     FileSourceSettings.struct_class = Types::FileSourceSettings
 
     FlacSettings.add_member(:bit_depth, Shapes::ShapeRef.new(shape: __integerMin16Max24, location_name: "bitDepth"))
@@ -2760,6 +2763,7 @@ module Aws::MediaConvert
     VideoDetail.add_member(:width_in_px, Shapes::ShapeRef.new(shape: __integer, location_name: "widthInPx"))
     VideoDetail.struct_class = Types::VideoDetail
 
+    VideoOverlay.add_member(:crop, Shapes::ShapeRef.new(shape: VideoOverlayCrop, location_name: "crop"))
     VideoOverlay.add_member(:end_timecode, Shapes::ShapeRef.new(shape: __stringPattern010920405090509092, location_name: "endTimecode"))
     VideoOverlay.add_member(:initial_position, Shapes::ShapeRef.new(shape: VideoOverlayPosition, location_name: "initialPosition"))
     VideoOverlay.add_member(:input, Shapes::ShapeRef.new(shape: VideoOverlayInput, location_name: "input"))
@@ -2767,6 +2771,13 @@ module Aws::MediaConvert
     VideoOverlay.add_member(:start_timecode, Shapes::ShapeRef.new(shape: __stringPattern010920405090509092, location_name: "startTimecode"))
     VideoOverlay.add_member(:transitions, Shapes::ShapeRef.new(shape: __listOfVideoOverlayTransition, location_name: "transitions"))
     VideoOverlay.struct_class = Types::VideoOverlay
+
+    VideoOverlayCrop.add_member(:height, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "height"))
+    VideoOverlayCrop.add_member(:unit, Shapes::ShapeRef.new(shape: VideoOverlayUnit, location_name: "unit"))
+    VideoOverlayCrop.add_member(:width, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "width"))
+    VideoOverlayCrop.add_member(:x, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "x"))
+    VideoOverlayCrop.add_member(:y, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "y"))
+    VideoOverlayCrop.struct_class = Types::VideoOverlayCrop
 
     VideoOverlayInput.add_member(:file_input, Shapes::ShapeRef.new(shape: __stringPatternS3Https, location_name: "fileInput"))
     VideoOverlayInput.add_member(:input_clippings, Shapes::ShapeRef.new(shape: __listOfVideoOverlayInputClipping, location_name: "inputClippings"))

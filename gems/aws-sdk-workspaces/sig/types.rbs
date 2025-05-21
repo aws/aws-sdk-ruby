@@ -347,6 +347,7 @@ module Aws::WorkSpaces
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor application_settings: Types::ApplicationSettingsRequest
       attr_accessor timeout_settings: Types::TimeoutSettings
+      attr_accessor running_mode: ("AUTO_STOP" | "ALWAYS_ON")
       SENSITIVE: []
     end
 
@@ -829,7 +830,7 @@ module Aws::WorkSpaces
     end
 
     class ErrorDetails
-      attr_accessor error_code: ("OutdatedPowershellVersion" | "OfficeInstalled" | "PCoIPAgentInstalled" | "WindowsUpdatesEnabled" | "AutoMountDisabled" | "WorkspacesBYOLAccountNotFound" | "WorkspacesBYOLAccountDisabled" | "DHCPDisabled" | "DiskFreeSpace" | "AdditionalDrivesAttached" | "OSNotSupported" | "DomainJoined" | "AzureDomainJoined" | "FirewallEnabled" | "VMWareToolsInstalled" | "DiskSizeExceeded" | "IncompatiblePartitioning" | "PendingReboot" | "AutoLogonEnabled" | "RealTimeUniversalDisabled" | "MultipleBootPartition" | "Requires64BitOS" | "ZeroRearmCount" | "InPlaceUpgrade" | "AntiVirusInstalled" | "UEFINotSupported" | "UnknownError" | "AppXPackagesInstalled" | "ReservedStorageInUse" | "AdditionalDrivesPresent" | "WindowsUpdatesRequired" | "SysPrepFileMissing" | "UserProfileMissing" | "InsufficientDiskSpace" | "EnvironmentVariablesPathMissingEntries" | "DomainAccountServicesFound" | "InvalidIp" | "RemoteDesktopServicesDisabled" | "WindowsModulesInstallerDisabled" | "AmazonSsmAgentEnabled" | "UnsupportedSecurityProtocol" | "MultipleUserProfiles" | "StagedAppxPackage" | "UnsupportedOsUpgrade" | "InsufficientRearmCount")
+      attr_accessor error_code: ("OutdatedPowershellVersion" | "OfficeInstalled" | "PCoIPAgentInstalled" | "WindowsUpdatesEnabled" | "AutoMountDisabled" | "WorkspacesBYOLAccountNotFound" | "WorkspacesBYOLAccountDisabled" | "DHCPDisabled" | "DiskFreeSpace" | "AdditionalDrivesAttached" | "OSNotSupported" | "DomainJoined" | "AzureDomainJoined" | "FirewallEnabled" | "VMWareToolsInstalled" | "DiskSizeExceeded" | "IncompatiblePartitioning" | "PendingReboot" | "AutoLogonEnabled" | "RealTimeUniversalDisabled" | "MultipleBootPartition" | "Requires64BitOS" | "ZeroRearmCount" | "InPlaceUpgrade" | "AntiVirusInstalled" | "UEFINotSupported" | "UnknownError" | "AppXPackagesInstalled" | "ReservedStorageInUse" | "AdditionalDrivesPresent" | "WindowsUpdatesRequired" | "SysPrepFileMissing" | "UserProfileMissing" | "InsufficientDiskSpace" | "EnvironmentVariablesPathMissingEntries" | "DomainAccountServicesFound" | "InvalidIp" | "RemoteDesktopServicesDisabled" | "WindowsModulesInstallerDisabled" | "AmazonSsmAgentEnabled" | "UnsupportedSecurityProtocol" | "MultipleUserProfiles" | "StagedAppxPackage" | "UnsupportedOsUpgrade" | "InsufficientRearmCount" | "ProtocolOSIncompatibility" | "MemoryIntegrityIncompatibility" | "RestrictedDriveLetterInUse")
       attr_accessor error_message: ::String
       SENSITIVE: []
     end
@@ -1511,6 +1512,7 @@ module Aws::WorkSpaces
       attr_accessor capacity: Types::Capacity
       attr_accessor application_settings: Types::ApplicationSettingsRequest
       attr_accessor timeout_settings: Types::TimeoutSettings
+      attr_accessor running_mode: ("AUTO_STOP" | "ALWAYS_ON")
       SENSITIVE: []
     end
 
@@ -1734,6 +1736,7 @@ module Aws::WorkSpaces
       attr_accessor errors: ::Array[Types::WorkspacesPoolError]
       attr_accessor application_settings: Types::ApplicationSettingsResponse
       attr_accessor timeout_settings: Types::TimeoutSettings
+      attr_accessor running_mode: ("AUTO_STOP" | "ALWAYS_ON")
       SENSITIVE: []
     end
 

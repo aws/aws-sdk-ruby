@@ -89,17 +89,23 @@ module Aws::DSQL
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] multi_region_properties
+    #   The configuration settings when creating a multi-Region cluster,
+    #   including the witness region and linked cluster properties.
+    #   @return [Types::MultiRegionProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/CreateClusterInput AWS API Documentation
     #
     class CreateClusterInput < Struct.new(
       :deletion_protection_enabled,
       :tags,
-      :client_token)
+      :client_token,
+      :multi_region_properties)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Output Mixin
+    # The output of a created cluster.
     #
     # @!attribute [rw] identifier
     #   The ID of the created cluster.
@@ -117,6 +123,11 @@ module Aws::DSQL
     #   The time of when created the cluster.
     #   @return [Time]
     #
+    # @!attribute [rw] multi_region_properties
+    #   The multi-Region cluster configuration details that were set during
+    #   cluster creation
+    #   @return [Types::MultiRegionProperties]
+    #
     # @!attribute [rw] deletion_protection_enabled
     #   Whether deletion protection is enabled on this cluster.
     #   @return [Boolean]
@@ -128,58 +139,8 @@ module Aws::DSQL
       :arn,
       :status,
       :creation_time,
+      :multi_region_properties,
       :deletion_protection_enabled)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] linked_region_list
-    #   An array of the Regions in which you want to create additional
-    #   clusters.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] cluster_properties
-    #   A mapping of properties to use when creating linked clusters.
-    #   @return [Hash<String,Types::LinkedClusterProperties>]
-    #
-    # @!attribute [rw] witness_region
-    #   The witness Region of multi-Region clusters.
-    #   @return [String]
-    #
-    # @!attribute [rw] client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. Idempotency ensures that an API request
-    #   completes only once. With an idempotent request, if the original
-    #   request completes successfully. The subsequent retries with the same
-    #   client token return the result from the original successful request
-    #   and they have no additional effect.
-    #
-    #   If you don't specify a client token, the Amazon Web Services SDK
-    #   automatically generates one.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/CreateMultiRegionClustersInput AWS API Documentation
-    #
-    class CreateMultiRegionClustersInput < Struct.new(
-      :linked_region_list,
-      :cluster_properties,
-      :witness_region,
-      :client_token)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] linked_cluster_arns
-    #   An array that contains the ARNs of all linked clusters.
-    #   @return [Array<String>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/CreateMultiRegionClustersOutput AWS API Documentation
-    #
-    class CreateMultiRegionClustersOutput < Struct.new(
-      :linked_cluster_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -212,7 +173,7 @@ module Aws::DSQL
       include Aws::Structure
     end
 
-    # Output Mixin
+    # The output from a deleted cluster.
     #
     # @!attribute [rw] identifier
     #   The ID of the deleted cluster.
@@ -230,47 +191,13 @@ module Aws::DSQL
     #   The time of when the cluster was created.
     #   @return [Time]
     #
-    # @!attribute [rw] deletion_protection_enabled
-    #   Specifies whether deletion protection was enabled on the cluster.
-    #   @return [Boolean]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/DeleteClusterOutput AWS API Documentation
     #
     class DeleteClusterOutput < Struct.new(
       :identifier,
       :arn,
       :status,
-      :creation_time,
-      :deletion_protection_enabled)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] linked_cluster_arns
-    #   The ARNs of the clusters linked to the cluster you want to delete.
-    #   also deletes these clusters as part of the operation.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. Idempotency ensures that an API request
-    #   completes only once. With an idempotent request, if the original
-    #   request completes successfully. The subsequent retries with the same
-    #   client token return the result from the original successful request
-    #   and they have no additional effect.
-    #
-    #   If you don't specify a client token, the Amazon Web Services SDK
-    #   automatically generates one.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/DeleteMultiRegionClustersInput AWS API Documentation
-    #
-    class DeleteMultiRegionClustersInput < Struct.new(
-      :linked_cluster_arns,
-      :client_token)
+      :creation_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -287,7 +214,7 @@ module Aws::DSQL
       include Aws::Structure
     end
 
-    # Output Mixin
+    # The output of a cluster.
     #
     # @!attribute [rw] identifier
     #   The ID of the retrieved cluster.
@@ -309,14 +236,14 @@ module Aws::DSQL
     #   Whether deletion protection is enabled in this cluster.
     #   @return [Boolean]
     #
-    # @!attribute [rw] witness_region
-    #   The witness Region of the cluster. Applicable only for multi-Region
-    #   clusters.
-    #   @return [String]
+    # @!attribute [rw] multi_region_properties
+    #   Returns the current multi-Region cluster configuration, including
+    #   witness region and linked cluster information.
+    #   @return [Types::MultiRegionProperties]
     #
-    # @!attribute [rw] linked_cluster_arns
-    #   The ARNs of the clusters linked to the retrieved cluster.
-    #   @return [Array<String>]
+    # @!attribute [rw] tags
+    #   Map of tags.
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/GetClusterOutput AWS API Documentation
     #
@@ -326,8 +253,8 @@ module Aws::DSQL
       :status,
       :creation_time,
       :deletion_protection_enabled,
-      :witness_region,
-      :linked_cluster_arns)
+      :multi_region_properties,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -371,25 +298,6 @@ module Aws::DSQL
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Properties of linked clusters.
-    #
-    # @!attribute [rw] deletion_protection_enabled
-    #   Whether deletion protection is enabled.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] tags
-    #   A map of key and value pairs the linked cluster is tagged with.
-    #   @return [Hash<String,String>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/LinkedClusterProperties AWS API Documentation
-    #
-    class LinkedClusterProperties < Struct.new(
-      :deletion_protection_enabled,
-      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -459,17 +367,40 @@ module Aws::DSQL
       include Aws::Structure
     end
 
+    # Defines the structure for multi-Region cluster configurations,
+    # containing the witness region and linked cluster settings.
+    #
+    # @!attribute [rw] witness_region
+    #   The that serves as the witness region for a multi-Region cluster.
+    #   The witness region helps maintain cluster consistency and quorum.
+    #   @return [String]
+    #
+    # @!attribute [rw] clusters
+    #   The set of linked clusters that form the multi-Region cluster
+    #   configuration. Each linked cluster represents a database instance in
+    #   a different Region.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/MultiRegionProperties AWS API Documentation
+    #
+    class MultiRegionProperties < Struct.new(
+      :witness_region,
+      :clusters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The resource could not be found.
     #
     # @!attribute [rw] message
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   Hypothetical identifier of the resource which does not exist
+    #   The resource ID could not be found.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   Hypothetical type of the resource which does not exist
+    #   The resource type could not be found.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/ResourceNotFoundException AWS API Documentation
@@ -485,23 +416,23 @@ module Aws::DSQL
     # The service limit was exceeded.
     #
     # @!attribute [rw] message
-    #   Description of the error
+    #   The service exception for exceeding a quota.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   Identifier of the resource affected
+    #   The resource ID exceeds a quota.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   Type of the resource affected
+    #   The resource type exceeds a quota.
     #   @return [String]
     #
     # @!attribute [rw] service_code
-    #   Service Quotas requirement to identify originating service
+    #   The request exceeds a service quota.
     #   @return [String]
     #
     # @!attribute [rw] quota_code
-    #   Service Quotas requirement to identify originating quota
+    #   The service exceeds a quota.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/ServiceQuotaExceededException AWS API Documentation
@@ -536,19 +467,19 @@ module Aws::DSQL
     # The request was denied due to request throttling.
     #
     # @!attribute [rw] message
-    #   Description of the error
+    #   The message that the request was denied due to request throttling.
     #   @return [String]
     #
     # @!attribute [rw] service_code
-    #   Service Quotas requirement to identify originating service
+    #   The request exceeds a service quota.
     #   @return [String]
     #
     # @!attribute [rw] quota_code
-    #   Service Quotas requirement to identify originating quota
+    #   The request exceeds a request rate quota.
     #   @return [String]
     #
     # @!attribute [rw] retry_after_seconds
-    #   Advice to clients on when the call can be safely retried
+    #   The request exceeds a request rate quota. Retry after seconds.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/ThrottlingException AWS API Documentation
@@ -602,17 +533,23 @@ module Aws::DSQL
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] multi_region_properties
+    #   The new multi-Region cluster configuration settings to be applied
+    #   during an update operation.
+    #   @return [Types::MultiRegionProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/UpdateClusterInput AWS API Documentation
     #
     class UpdateClusterInput < Struct.new(
       :identifier,
       :deletion_protection_enabled,
-      :client_token)
+      :client_token,
+      :multi_region_properties)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Output Mixin
+    # The details of the cluster after it has been updated.
     #
     # @!attribute [rw] identifier
     #   The ID of the cluster to update.
@@ -630,29 +567,13 @@ module Aws::DSQL
     #   The time of when the cluster was created.
     #   @return [Time]
     #
-    # @!attribute [rw] deletion_protection_enabled
-    #   Whether deletion protection is enabled for the updated cluster.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] witness_region
-    #   The Region that receives all data you write to linked clusters.
-    #   @return [String]
-    #
-    # @!attribute [rw] linked_cluster_arns
-    #   The ARNs of the clusters linked to the updated cluster. Applicable
-    #   only for multi-Region clusters.
-    #   @return [Array<String>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/UpdateClusterOutput AWS API Documentation
     #
     class UpdateClusterOutput < Struct.new(
       :identifier,
       :arn,
       :status,
-      :creation_time,
-      :deletion_protection_enabled,
-      :witness_region,
-      :linked_cluster_arns)
+      :creation_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -664,11 +585,11 @@ module Aws::DSQL
     #   @return [String]
     #
     # @!attribute [rw] reason
-    #   Reason the request failed validation
+    #   The reason for the validation exception.
     #   @return [String]
     #
     # @!attribute [rw] field_list
-    #   List of fields that caused the error
+    #   A list of fields that didn't validate.
     #   @return [Array<Types::ValidationExceptionField>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/ValidationException AWS API Documentation

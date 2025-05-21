@@ -44,7 +44,7 @@ module Aws::BedrockDataAutomation
     class Blueprint
       attr_accessor blueprint_arn: ::String
       attr_accessor schema: ::String
-      attr_accessor type: ("DOCUMENT" | "IMAGE" | "AUDIO")
+      attr_accessor type: ("DOCUMENT" | "IMAGE" | "AUDIO" | "VIDEO")
       attr_accessor creation_time: ::Time
       attr_accessor last_modified_time: ::Time
       attr_accessor blueprint_name: ::String
@@ -86,7 +86,7 @@ module Aws::BedrockDataAutomation
 
     class CreateBlueprintRequest
       attr_accessor blueprint_name: ::String
-      attr_accessor type: ("DOCUMENT" | "IMAGE" | "AUDIO")
+      attr_accessor type: ("DOCUMENT" | "IMAGE" | "AUDIO" | "VIDEO")
       attr_accessor blueprint_stage: ("DEVELOPMENT" | "LIVE")
       attr_accessor schema: ::String
       attr_accessor client_token: ::String

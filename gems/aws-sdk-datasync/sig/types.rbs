@@ -8,23 +8,6 @@
 module Aws::DataSync
   module Types
 
-    class AddStorageSystemRequest
-      attr_accessor server_configuration: Types::DiscoveryServerConfiguration
-      attr_accessor system_type: ("NetAppONTAP")
-      attr_accessor agent_arns: ::Array[::String]
-      attr_accessor cloud_watch_log_group_arn: ::String
-      attr_accessor tags: ::Array[Types::TagListEntry]
-      attr_accessor name: ::String
-      attr_accessor client_token: ::String
-      attr_accessor credentials: Types::Credentials
-      SENSITIVE: []
-    end
-
-    class AddStorageSystemResponse
-      attr_accessor storage_system_arn: ::String
-      SENSITIVE: []
-    end
-
     class AgentListEntry
       attr_accessor agent_arn: ::String
       attr_accessor name: ::String
@@ -44,14 +27,6 @@ module Aws::DataSync
     end
 
     class CancelTaskExecutionResponse < Aws::EmptyStructure
-    end
-
-    class Capacity
-      attr_accessor used: ::Integer
-      attr_accessor provisioned: ::Integer
-      attr_accessor logical_used: ::Integer
-      attr_accessor cluster_cloud_storage_used: ::Integer
-      SENSITIVE: []
     end
 
     class CreateAgentRequest
@@ -272,12 +247,6 @@ module Aws::DataSync
       SENSITIVE: []
     end
 
-    class Credentials
-      attr_accessor username: ::String
-      attr_accessor password: ::String
-      SENSITIVE: [:username, :password]
-    end
-
     class DeleteAgentRequest
       attr_accessor agent_arn: ::String
       SENSITIVE: []
@@ -316,21 +285,6 @@ module Aws::DataSync
       attr_accessor endpoint_type: ("PUBLIC" | "PRIVATE_LINK" | "FIPS")
       attr_accessor private_link_config: Types::PrivateLinkConfig
       attr_accessor platform: Types::Platform
-      SENSITIVE: []
-    end
-
-    class DescribeDiscoveryJobRequest
-      attr_accessor discovery_job_arn: ::String
-      SENSITIVE: []
-    end
-
-    class DescribeDiscoveryJobResponse
-      attr_accessor storage_system_arn: ::String
-      attr_accessor discovery_job_arn: ::String
-      attr_accessor collection_duration_minutes: ::Integer
-      attr_accessor status: ("RUNNING" | "WARNING" | "TERMINATED" | "FAILED" | "STOPPED" | "COMPLETED" | "COMPLETED_WITH_ISSUES")
-      attr_accessor job_start_time: ::Time
-      attr_accessor job_end_time: ::Time
       SENSITIVE: []
     end
 
@@ -510,58 +464,6 @@ module Aws::DataSync
       SENSITIVE: []
     end
 
-    class DescribeStorageSystemRequest
-      attr_accessor storage_system_arn: ::String
-      SENSITIVE: []
-    end
-
-    class DescribeStorageSystemResourceMetricsRequest
-      attr_accessor discovery_job_arn: ::String
-      attr_accessor resource_type: ("SVM" | "VOLUME" | "CLUSTER")
-      attr_accessor resource_id: ::String
-      attr_accessor start_time: ::Time
-      attr_accessor end_time: ::Time
-      attr_accessor max_results: ::Integer
-      attr_accessor next_token: ::String
-      SENSITIVE: []
-    end
-
-    class DescribeStorageSystemResourceMetricsResponse
-      attr_accessor metrics: ::Array[Types::ResourceMetrics]
-      attr_accessor next_token: ::String
-      SENSITIVE: []
-    end
-
-    class DescribeStorageSystemResourcesRequest
-      attr_accessor discovery_job_arn: ::String
-      attr_accessor resource_type: ("SVM" | "VOLUME" | "CLUSTER")
-      attr_accessor resource_ids: ::Array[::String]
-      attr_accessor filter: ::Hash[("SVM"), ::Array[::String]]
-      attr_accessor max_results: ::Integer
-      attr_accessor next_token: ::String
-      SENSITIVE: []
-    end
-
-    class DescribeStorageSystemResourcesResponse
-      attr_accessor resource_details: Types::ResourceDetails
-      attr_accessor next_token: ::String
-      SENSITIVE: []
-    end
-
-    class DescribeStorageSystemResponse
-      attr_accessor storage_system_arn: ::String
-      attr_accessor server_configuration: Types::DiscoveryServerConfiguration
-      attr_accessor system_type: ("NetAppONTAP")
-      attr_accessor agent_arns: ::Array[::String]
-      attr_accessor name: ::String
-      attr_accessor error_message: ::String
-      attr_accessor connectivity_status: ("PASS" | "FAIL" | "UNKNOWN")
-      attr_accessor cloud_watch_log_group_arn: ::String
-      attr_accessor creation_time: ::Time
-      attr_accessor secrets_manager_arn: ::String
-      SENSITIVE: []
-    end
-
     class DescribeTaskExecutionRequest
       attr_accessor task_execution_arn: ::String
       SENSITIVE: []
@@ -624,18 +526,6 @@ module Aws::DataSync
       SENSITIVE: []
     end
 
-    class DiscoveryJobListEntry
-      attr_accessor discovery_job_arn: ::String
-      attr_accessor status: ("RUNNING" | "WARNING" | "TERMINATED" | "FAILED" | "STOPPED" | "COMPLETED" | "COMPLETED_WITH_ISSUES")
-      SENSITIVE: []
-    end
-
-    class DiscoveryServerConfiguration
-      attr_accessor server_hostname: ::String
-      attr_accessor server_port: ::Integer
-      SENSITIVE: []
-    end
-
     class Ec2Config
       attr_accessor subnet_arn: ::String
       attr_accessor security_group_arns: ::Array[::String]
@@ -681,27 +571,9 @@ module Aws::DataSync
       SENSITIVE: [:password]
     end
 
-    class GenerateRecommendationsRequest
-      attr_accessor discovery_job_arn: ::String
-      attr_accessor resource_ids: ::Array[::String]
-      attr_accessor resource_type: ("SVM" | "VOLUME" | "CLUSTER")
-      SENSITIVE: []
-    end
-
-    class GenerateRecommendationsResponse < Aws::EmptyStructure
-    end
-
     class HdfsNameNode
       attr_accessor hostname: ::String
       attr_accessor port: ::Integer
-      SENSITIVE: []
-    end
-
-    class IOPS
-      attr_accessor read: ::Float
-      attr_accessor write: ::Float
-      attr_accessor other: ::Float
-      attr_accessor total: ::Float
       SENSITIVE: []
     end
 
@@ -718,13 +590,6 @@ module Aws::DataSync
       SENSITIVE: []
     end
 
-    class Latency
-      attr_accessor read: ::Float
-      attr_accessor write: ::Float
-      attr_accessor other: ::Float
-      SENSITIVE: []
-    end
-
     class ListAgentsRequest
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -733,19 +598,6 @@ module Aws::DataSync
 
     class ListAgentsResponse
       attr_accessor agents: ::Array[Types::AgentListEntry]
-      attr_accessor next_token: ::String
-      SENSITIVE: []
-    end
-
-    class ListDiscoveryJobsRequest
-      attr_accessor storage_system_arn: ::String
-      attr_accessor max_results: ::Integer
-      attr_accessor next_token: ::String
-      SENSITIVE: []
-    end
-
-    class ListDiscoveryJobsResponse
-      attr_accessor discovery_jobs: ::Array[Types::DiscoveryJobListEntry]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -759,18 +611,6 @@ module Aws::DataSync
 
     class ListLocationsResponse
       attr_accessor locations: ::Array[Types::LocationListEntry]
-      attr_accessor next_token: ::String
-      SENSITIVE: []
-    end
-
-    class ListStorageSystemsRequest
-      attr_accessor max_results: ::Integer
-      attr_accessor next_token: ::String
-      SENSITIVE: []
-    end
-
-    class ListStorageSystemsResponse
-      attr_accessor storage_systems: ::Array[Types::StorageSystemListEntry]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -834,74 +674,6 @@ module Aws::DataSync
       SENSITIVE: []
     end
 
-    class MaxP95Performance
-      attr_accessor iops_read: ::Float
-      attr_accessor iops_write: ::Float
-      attr_accessor iops_other: ::Float
-      attr_accessor iops_total: ::Float
-      attr_accessor throughput_read: ::Float
-      attr_accessor throughput_write: ::Float
-      attr_accessor throughput_other: ::Float
-      attr_accessor throughput_total: ::Float
-      attr_accessor latency_read: ::Float
-      attr_accessor latency_write: ::Float
-      attr_accessor latency_other: ::Float
-      SENSITIVE: []
-    end
-
-    class NetAppONTAPCluster
-      attr_accessor cifs_share_count: ::Integer
-      attr_accessor nfs_exported_volumes: ::Integer
-      attr_accessor resource_id: ::String
-      attr_accessor cluster_name: ::String
-      attr_accessor max_p95_performance: Types::MaxP95Performance
-      attr_accessor cluster_block_storage_size: ::Integer
-      attr_accessor cluster_block_storage_used: ::Integer
-      attr_accessor cluster_block_storage_logical_used: ::Integer
-      attr_accessor recommendations: ::Array[Types::Recommendation]
-      attr_accessor recommendation_status: ("NONE" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
-      attr_accessor lun_count: ::Integer
-      attr_accessor cluster_cloud_storage_used: ::Integer
-      SENSITIVE: []
-    end
-
-    class NetAppONTAPSVM
-      attr_accessor cluster_uuid: ::String
-      attr_accessor resource_id: ::String
-      attr_accessor svm_name: ::String
-      attr_accessor cifs_share_count: ::Integer
-      attr_accessor enabled_protocols: ::Array[::String]
-      attr_accessor total_capacity_used: ::Integer
-      attr_accessor total_capacity_provisioned: ::Integer
-      attr_accessor total_logical_capacity_used: ::Integer
-      attr_accessor max_p95_performance: Types::MaxP95Performance
-      attr_accessor recommendations: ::Array[Types::Recommendation]
-      attr_accessor nfs_exported_volumes: ::Integer
-      attr_accessor recommendation_status: ("NONE" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
-      attr_accessor total_snapshot_capacity_used: ::Integer
-      attr_accessor lun_count: ::Integer
-      SENSITIVE: []
-    end
-
-    class NetAppONTAPVolume
-      attr_accessor volume_name: ::String
-      attr_accessor resource_id: ::String
-      attr_accessor cifs_share_count: ::Integer
-      attr_accessor security_style: ::String
-      attr_accessor svm_uuid: ::String
-      attr_accessor svm_name: ::String
-      attr_accessor capacity_used: ::Integer
-      attr_accessor capacity_provisioned: ::Integer
-      attr_accessor logical_capacity_used: ::Integer
-      attr_accessor nfs_exported: bool
-      attr_accessor snapshot_capacity_used: ::Integer
-      attr_accessor max_p95_performance: Types::MaxP95Performance
-      attr_accessor recommendations: ::Array[Types::Recommendation]
-      attr_accessor recommendation_status: ("NONE" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
-      attr_accessor lun_count: ::Integer
-      SENSITIVE: []
-    end
-
     class NfsMountOptions
       attr_accessor version: ("AUTOMATIC" | "NFS3" | "NFS4_0" | "NFS4_1")
       SENSITIVE: []
@@ -931,13 +703,6 @@ module Aws::DataSync
       SENSITIVE: []
     end
 
-    class P95Metrics
-      attr_accessor iops: Types::IOPS
-      attr_accessor throughput: Types::Throughput
-      attr_accessor latency: Types::Latency
-      SENSITIVE: []
-    end
-
     class Platform
       attr_accessor version: ::String
       SENSITIVE: []
@@ -955,21 +720,6 @@ module Aws::DataSync
       attr_accessor rpc_protection: ("DISABLED" | "AUTHENTICATION" | "INTEGRITY" | "PRIVACY")
       attr_accessor data_transfer_protection: ("DISABLED" | "AUTHENTICATION" | "INTEGRITY" | "PRIVACY")
       SENSITIVE: []
-    end
-
-    class Recommendation
-      attr_accessor storage_type: ::String
-      attr_accessor storage_configuration: ::Hash[::String, ::String]
-      attr_accessor estimated_monthly_storage_cost: ::String
-      SENSITIVE: []
-    end
-
-    class RemoveStorageSystemRequest
-      attr_accessor storage_system_arn: ::String
-      SENSITIVE: []
-    end
-
-    class RemoveStorageSystemResponse < Aws::EmptyStructure
     end
 
     class ReportDestination
@@ -1004,22 +754,6 @@ module Aws::DataSync
       SENSITIVE: []
     end
 
-    class ResourceDetails
-      attr_accessor net_app_ontapsv_ms: ::Array[Types::NetAppONTAPSVM]
-      attr_accessor net_app_ontap_volumes: ::Array[Types::NetAppONTAPVolume]
-      attr_accessor net_app_ontap_clusters: ::Array[Types::NetAppONTAPCluster]
-      SENSITIVE: []
-    end
-
-    class ResourceMetrics
-      attr_accessor timestamp: ::Time
-      attr_accessor p95_metrics: Types::P95Metrics
-      attr_accessor capacity: Types::Capacity
-      attr_accessor resource_id: ::String
-      attr_accessor resource_type: ("SVM" | "VOLUME" | "CLUSTER")
-      SENSITIVE: []
-    end
-
     class S3Config
       attr_accessor bucket_access_role_arn: ::String
       SENSITIVE: []
@@ -1043,19 +777,6 @@ module Aws::DataSync
       SENSITIVE: []
     end
 
-    class StartDiscoveryJobRequest
-      attr_accessor storage_system_arn: ::String
-      attr_accessor collection_duration_minutes: ::Integer
-      attr_accessor client_token: ::String
-      attr_accessor tags: ::Array[Types::TagListEntry]
-      SENSITIVE: []
-    end
-
-    class StartDiscoveryJobResponse
-      attr_accessor discovery_job_arn: ::String
-      SENSITIVE: []
-    end
-
     class StartTaskExecutionRequest
       attr_accessor task_arn: ::String
       attr_accessor override_options: Types::Options
@@ -1069,20 +790,6 @@ module Aws::DataSync
 
     class StartTaskExecutionResponse
       attr_accessor task_execution_arn: ::String
-      SENSITIVE: []
-    end
-
-    class StopDiscoveryJobRequest
-      attr_accessor discovery_job_arn: ::String
-      SENSITIVE: []
-    end
-
-    class StopDiscoveryJobResponse < Aws::EmptyStructure
-    end
-
-    class StorageSystemListEntry
-      attr_accessor storage_system_arn: ::String
-      attr_accessor name: ::String
       SENSITIVE: []
     end
 
@@ -1172,14 +879,6 @@ module Aws::DataSync
       SENSITIVE: []
     end
 
-    class Throughput
-      attr_accessor read: ::Float
-      attr_accessor write: ::Float
-      attr_accessor other: ::Float
-      attr_accessor total: ::Float
-      SENSITIVE: []
-    end
-
     class UntagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor keys: ::Array[::String]
@@ -1196,15 +895,6 @@ module Aws::DataSync
     end
 
     class UpdateAgentResponse < Aws::EmptyStructure
-    end
-
-    class UpdateDiscoveryJobRequest
-      attr_accessor discovery_job_arn: ::String
-      attr_accessor collection_duration_minutes: ::Integer
-      SENSITIVE: []
-    end
-
-    class UpdateDiscoveryJobResponse < Aws::EmptyStructure
     end
 
     class UpdateLocationAzureBlobRequest
@@ -1351,19 +1041,6 @@ module Aws::DataSync
     end
 
     class UpdateLocationSmbResponse < Aws::EmptyStructure
-    end
-
-    class UpdateStorageSystemRequest
-      attr_accessor storage_system_arn: ::String
-      attr_accessor server_configuration: Types::DiscoveryServerConfiguration
-      attr_accessor agent_arns: ::Array[::String]
-      attr_accessor name: ::String
-      attr_accessor cloud_watch_log_group_arn: ::String
-      attr_accessor credentials: Types::Credentials
-      SENSITIVE: []
-    end
-
-    class UpdateStorageSystemResponse < Aws::EmptyStructure
     end
 
     class UpdateTaskExecutionRequest

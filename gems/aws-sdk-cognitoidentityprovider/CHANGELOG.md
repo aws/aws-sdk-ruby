@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.122.0 (2025-05-14)
+------------------
+
+* Feature - Add exceptions to WebAuthn operations.
+
 1.121.0 (2025-05-12)
 ------------------
 

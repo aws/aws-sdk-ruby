@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.110.0 (2025-05-16)
+------------------
+
+* Feature - Added APIs for managing Application UIs: Access Persistent (serverless) UIs via CreatePersistentAppUI DescribePersistentAppUI & GetPersistentAppUIPresignedURL, and Cluster-based UIs through GetOnClusterAppUIPresignedURL. Supports Yarn, Spark History, and TEZ interfaces.
+
 1.109.0 (2025-05-12)
 ------------------
 

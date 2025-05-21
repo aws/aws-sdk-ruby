@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2025-05-16)
+------------------
+
+* Feature - Add support for VIDEO modality to BlueprintType enum.
+
 1.9.0 (2025-05-12)
 ------------------
 

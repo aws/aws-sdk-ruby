@@ -1015,6 +1015,18 @@ module Aws::Bedrock
     #   The contextual grounding policy configuration used to create a
     #   guardrail.
     #
+    # @option params [Types::GuardrailCrossRegionConfig] :cross_region_config
+    #   The system-defined guardrail profile that you're using with your
+    #   guardrail. Guardrail profiles define the destination Amazon Web
+    #   Services Regions where guardrail inference requests can be
+    #   automatically routed.
+    #
+    #   For more information, see the [Amazon Bedrock User Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+    #
     # @option params [required, String] :blocked_input_messaging
     #   The message to return when the guardrail blocks a prompt.
     #
@@ -1135,6 +1147,9 @@ module Aws::Bedrock
     #           enabled: false,
     #         },
     #       ],
+    #     },
+    #     cross_region_config: {
+    #       guardrail_profile_identifier: "GuardrailCrossRegionGuardrailProfileIdentifier", # required
     #     },
     #     blocked_input_messaging: "GuardrailBlockedMessaging", # required
     #     blocked_outputs_messaging: "GuardrailBlockedMessaging", # required
@@ -2595,6 +2610,7 @@ module Aws::Bedrock
     #   * {Types::GetGuardrailResponse#word_policy #word_policy} => Types::GuardrailWordPolicy
     #   * {Types::GetGuardrailResponse#sensitive_information_policy #sensitive_information_policy} => Types::GuardrailSensitiveInformationPolicy
     #   * {Types::GetGuardrailResponse#contextual_grounding_policy #contextual_grounding_policy} => Types::GuardrailContextualGroundingPolicy
+    #   * {Types::GetGuardrailResponse#cross_region_details #cross_region_details} => Types::GuardrailCrossRegionDetails
     #   * {Types::GetGuardrailResponse#created_at #created_at} => Time
     #   * {Types::GetGuardrailResponse#updated_at #updated_at} => Time
     #   * {Types::GetGuardrailResponse#status_reasons #status_reasons} => Array&lt;String&gt;
@@ -2673,6 +2689,8 @@ module Aws::Bedrock
     #   resp.contextual_grounding_policy.filters[0].threshold #=> Float
     #   resp.contextual_grounding_policy.filters[0].action #=> String, one of "BLOCK", "NONE"
     #   resp.contextual_grounding_policy.filters[0].enabled #=> Boolean
+    #   resp.cross_region_details.guardrail_profile_id #=> String
+    #   resp.cross_region_details.guardrail_profile_arn #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.status_reasons #=> Array
@@ -3573,6 +3591,8 @@ module Aws::Bedrock
     #   resp.guardrails[0].version #=> String
     #   resp.guardrails[0].created_at #=> Time
     #   resp.guardrails[0].updated_at #=> Time
+    #   resp.guardrails[0].cross_region_details.guardrail_profile_id #=> String
+    #   resp.guardrails[0].cross_region_details.guardrail_profile_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListGuardrails AWS API Documentation
@@ -4687,6 +4707,18 @@ module Aws::Bedrock
     #   The contextual grounding policy configuration used to update a
     #   guardrail.
     #
+    # @option params [Types::GuardrailCrossRegionConfig] :cross_region_config
+    #   The system-defined guardrail profile that you're using with your
+    #   guardrail. Guardrail profiles define the destination Amazon Web
+    #   Services Regions where guardrail inference requests can be
+    #   automatically routed.
+    #
+    #   For more information, see the [Amazon Bedrock User Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+    #
     # @option params [required, String] :blocked_input_messaging
     #   The message to return when the guardrail blocks a prompt.
     #
@@ -4791,6 +4823,9 @@ module Aws::Bedrock
     #           enabled: false,
     #         },
     #       ],
+    #     },
+    #     cross_region_config: {
+    #       guardrail_profile_identifier: "GuardrailCrossRegionGuardrailProfileIdentifier", # required
     #     },
     #     blocked_input_messaging: "GuardrailBlockedMessaging", # required
     #     blocked_outputs_messaging: "GuardrailBlockedMessaging", # required
@@ -4950,7 +4985,7 @@ module Aws::Bedrock
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

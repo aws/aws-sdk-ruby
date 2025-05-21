@@ -612,6 +612,11 @@ module Aws::CodeBuild
     #   resp.build_batches[0].environment.registry_credential.credential #=> String
     #   resp.build_batches[0].environment.registry_credential.credential_provider #=> String, one of "SECRETS_MANAGER"
     #   resp.build_batches[0].environment.image_pull_credentials_type #=> String, one of "CODEBUILD", "SERVICE_ROLE"
+    #   resp.build_batches[0].environment.docker_server.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB", "ATTRIBUTE_BASED_COMPUTE", "CUSTOM_INSTANCE_TYPE"
+    #   resp.build_batches[0].environment.docker_server.security_group_ids #=> Array
+    #   resp.build_batches[0].environment.docker_server.security_group_ids[0] #=> String
+    #   resp.build_batches[0].environment.docker_server.status.status #=> String
+    #   resp.build_batches[0].environment.docker_server.status.message #=> String
     #   resp.build_batches[0].service_role #=> String
     #   resp.build_batches[0].log_config.cloud_watch_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build_batches[0].log_config.cloud_watch_logs.group_name #=> String
@@ -791,6 +796,11 @@ module Aws::CodeBuild
     #   resp.builds[0].environment.registry_credential.credential #=> String
     #   resp.builds[0].environment.registry_credential.credential_provider #=> String, one of "SECRETS_MANAGER"
     #   resp.builds[0].environment.image_pull_credentials_type #=> String, one of "CODEBUILD", "SERVICE_ROLE"
+    #   resp.builds[0].environment.docker_server.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB", "ATTRIBUTE_BASED_COMPUTE", "CUSTOM_INSTANCE_TYPE"
+    #   resp.builds[0].environment.docker_server.security_group_ids #=> Array
+    #   resp.builds[0].environment.docker_server.security_group_ids[0] #=> String
+    #   resp.builds[0].environment.docker_server.status.status #=> String
+    #   resp.builds[0].environment.docker_server.status.message #=> String
     #   resp.builds[0].service_role #=> String
     #   resp.builds[0].logs.group_name #=> String
     #   resp.builds[0].logs.stream_name #=> String
@@ -1074,6 +1084,11 @@ module Aws::CodeBuild
     #   resp.projects[0].environment.registry_credential.credential #=> String
     #   resp.projects[0].environment.registry_credential.credential_provider #=> String, one of "SECRETS_MANAGER"
     #   resp.projects[0].environment.image_pull_credentials_type #=> String, one of "CODEBUILD", "SERVICE_ROLE"
+    #   resp.projects[0].environment.docker_server.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB", "ATTRIBUTE_BASED_COMPUTE", "CUSTOM_INSTANCE_TYPE"
+    #   resp.projects[0].environment.docker_server.security_group_ids #=> Array
+    #   resp.projects[0].environment.docker_server.security_group_ids[0] #=> String
+    #   resp.projects[0].environment.docker_server.status.status #=> String
+    #   resp.projects[0].environment.docker_server.status.message #=> String
     #   resp.projects[0].service_role #=> String
     #   resp.projects[0].timeout_in_minutes #=> Integer
     #   resp.projects[0].queued_timeout_in_minutes #=> Integer
@@ -1324,6 +1339,11 @@ module Aws::CodeBuild
     #   resp.sandboxes[0].environment.registry_credential.credential #=> String
     #   resp.sandboxes[0].environment.registry_credential.credential_provider #=> String, one of "SECRETS_MANAGER"
     #   resp.sandboxes[0].environment.image_pull_credentials_type #=> String, one of "CODEBUILD", "SERVICE_ROLE"
+    #   resp.sandboxes[0].environment.docker_server.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB", "ATTRIBUTE_BASED_COMPUTE", "CUSTOM_INSTANCE_TYPE"
+    #   resp.sandboxes[0].environment.docker_server.security_group_ids #=> Array
+    #   resp.sandboxes[0].environment.docker_server.security_group_ids[0] #=> String
+    #   resp.sandboxes[0].environment.docker_server.status.status #=> String
+    #   resp.sandboxes[0].environment.docker_server.status.message #=> String
     #   resp.sandboxes[0].file_system_locations #=> Array
     #   resp.sandboxes[0].file_system_locations[0].type #=> String, one of "EFS"
     #   resp.sandboxes[0].file_system_locations[0].location #=> String
@@ -1476,6 +1496,10 @@ module Aws::CodeBuild
     #
     #      </note>
     #
+    #   * `CUSTOM_INSTANCE_TYPE`: Specify the instance type for your compute
+    #     fleet. For a list of supported instance types, see [Supported
+    #     instance families ][2] in the *CodeBuild User Guide*.
+    #
     #   * `BUILD_GENERAL1_SMALL`: Use up to 4 GiB memory and 2 vCPUs for
     #     builds.
     #
@@ -1534,17 +1558,19 @@ module Aws::CodeBuild
     #   * For environment type `ARM_CONTAINER`, you can use up to 16 GiB
     #     memory and 8 vCPUs on ARM-based processors for builds.
     #
-    #   For more information, see [On-demand environment types][2] in the
+    #   For more information, see [On-demand environment types][3] in the
     #   *CodeBuild User Guide.*
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment-reserved-capacity.types
-    #   [2]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment.types
+    #   [2]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment-reserved-capacity.instance-types
+    #   [3]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment.types
     #
     # @option params [Types::ComputeConfiguration] :compute_configuration
     #   The compute configuration of the compute fleet. This is only required
-    #   if `computeType` is set to `ATTRIBUTE_BASED_COMPUTE`.
+    #   if `computeType` is set to `ATTRIBUTE_BASED_COMPUTE` or
+    #   `CUSTOM_INSTANCE_TYPE`.
     #
     # @option params [Types::ScalingConfigurationInput] :scaling_configuration
     #   The scaling configuration of the compute fleet.
@@ -1958,6 +1984,14 @@ module Aws::CodeBuild
     #         credential_provider: "SECRETS_MANAGER", # required, accepts SECRETS_MANAGER
     #       },
     #       image_pull_credentials_type: "CODEBUILD", # accepts CODEBUILD, SERVICE_ROLE
+    #       docker_server: {
+    #         compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE, BUILD_GENERAL1_XLARGE, BUILD_GENERAL1_2XLARGE, BUILD_LAMBDA_1GB, BUILD_LAMBDA_2GB, BUILD_LAMBDA_4GB, BUILD_LAMBDA_8GB, BUILD_LAMBDA_10GB, ATTRIBUTE_BASED_COMPUTE, CUSTOM_INSTANCE_TYPE
+    #         security_group_ids: ["NonEmptyString"],
+    #         status: {
+    #           status: "String",
+    #           message: "String",
+    #         },
+    #       },
     #     },
     #     service_role: "NonEmptyString", # required
     #     timeout_in_minutes: 1,
@@ -2090,6 +2124,11 @@ module Aws::CodeBuild
     #   resp.project.environment.registry_credential.credential #=> String
     #   resp.project.environment.registry_credential.credential_provider #=> String, one of "SECRETS_MANAGER"
     #   resp.project.environment.image_pull_credentials_type #=> String, one of "CODEBUILD", "SERVICE_ROLE"
+    #   resp.project.environment.docker_server.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB", "ATTRIBUTE_BASED_COMPUTE", "CUSTOM_INSTANCE_TYPE"
+    #   resp.project.environment.docker_server.security_group_ids #=> Array
+    #   resp.project.environment.docker_server.security_group_ids[0] #=> String
+    #   resp.project.environment.docker_server.status.status #=> String
+    #   resp.project.environment.docker_server.status.message #=> String
     #   resp.project.service_role #=> String
     #   resp.project.timeout_in_minutes #=> Integer
     #   resp.project.queued_timeout_in_minutes #=> Integer
@@ -3959,6 +3998,11 @@ module Aws::CodeBuild
     #   resp.build.environment.registry_credential.credential #=> String
     #   resp.build.environment.registry_credential.credential_provider #=> String, one of "SECRETS_MANAGER"
     #   resp.build.environment.image_pull_credentials_type #=> String, one of "CODEBUILD", "SERVICE_ROLE"
+    #   resp.build.environment.docker_server.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB", "ATTRIBUTE_BASED_COMPUTE", "CUSTOM_INSTANCE_TYPE"
+    #   resp.build.environment.docker_server.security_group_ids #=> Array
+    #   resp.build.environment.docker_server.security_group_ids[0] #=> String
+    #   resp.build.environment.docker_server.status.status #=> String
+    #   resp.build.environment.docker_server.status.message #=> String
     #   resp.build.service_role #=> String
     #   resp.build.logs.group_name #=> String
     #   resp.build.logs.stream_name #=> String
@@ -4127,6 +4171,11 @@ module Aws::CodeBuild
     #   resp.build_batch.environment.registry_credential.credential #=> String
     #   resp.build_batch.environment.registry_credential.credential_provider #=> String, one of "SECRETS_MANAGER"
     #   resp.build_batch.environment.image_pull_credentials_type #=> String, one of "CODEBUILD", "SERVICE_ROLE"
+    #   resp.build_batch.environment.docker_server.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB", "ATTRIBUTE_BASED_COMPUTE", "CUSTOM_INSTANCE_TYPE"
+    #   resp.build_batch.environment.docker_server.security_group_ids #=> Array
+    #   resp.build_batch.environment.docker_server.security_group_ids[0] #=> String
+    #   resp.build_batch.environment.docker_server.status.status #=> String
+    #   resp.build_batch.environment.docker_server.status.message #=> String
     #   resp.build_batch.service_role #=> String
     #   resp.build_batch.log_config.cloud_watch_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build_batch.log_config.cloud_watch_logs.group_name #=> String
@@ -4673,6 +4722,11 @@ module Aws::CodeBuild
     #   resp.build.environment.registry_credential.credential #=> String
     #   resp.build.environment.registry_credential.credential_provider #=> String, one of "SECRETS_MANAGER"
     #   resp.build.environment.image_pull_credentials_type #=> String, one of "CODEBUILD", "SERVICE_ROLE"
+    #   resp.build.environment.docker_server.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB", "ATTRIBUTE_BASED_COMPUTE", "CUSTOM_INSTANCE_TYPE"
+    #   resp.build.environment.docker_server.security_group_ids #=> Array
+    #   resp.build.environment.docker_server.security_group_ids[0] #=> String
+    #   resp.build.environment.docker_server.status.status #=> String
+    #   resp.build.environment.docker_server.status.message #=> String
     #   resp.build.service_role #=> String
     #   resp.build.logs.group_name #=> String
     #   resp.build.logs.stream_name #=> String
@@ -5161,6 +5215,11 @@ module Aws::CodeBuild
     #   resp.build_batch.environment.registry_credential.credential #=> String
     #   resp.build_batch.environment.registry_credential.credential_provider #=> String, one of "SECRETS_MANAGER"
     #   resp.build_batch.environment.image_pull_credentials_type #=> String, one of "CODEBUILD", "SERVICE_ROLE"
+    #   resp.build_batch.environment.docker_server.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB", "ATTRIBUTE_BASED_COMPUTE", "CUSTOM_INSTANCE_TYPE"
+    #   resp.build_batch.environment.docker_server.security_group_ids #=> Array
+    #   resp.build_batch.environment.docker_server.security_group_ids[0] #=> String
+    #   resp.build_batch.environment.docker_server.status.status #=> String
+    #   resp.build_batch.environment.docker_server.status.message #=> String
     #   resp.build_batch.service_role #=> String
     #   resp.build_batch.log_config.cloud_watch_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build_batch.log_config.cloud_watch_logs.group_name #=> String
@@ -5369,6 +5428,11 @@ module Aws::CodeBuild
     #   resp.sandbox.environment.registry_credential.credential #=> String
     #   resp.sandbox.environment.registry_credential.credential_provider #=> String, one of "SECRETS_MANAGER"
     #   resp.sandbox.environment.image_pull_credentials_type #=> String, one of "CODEBUILD", "SERVICE_ROLE"
+    #   resp.sandbox.environment.docker_server.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB", "ATTRIBUTE_BASED_COMPUTE", "CUSTOM_INSTANCE_TYPE"
+    #   resp.sandbox.environment.docker_server.security_group_ids #=> Array
+    #   resp.sandbox.environment.docker_server.security_group_ids[0] #=> String
+    #   resp.sandbox.environment.docker_server.status.status #=> String
+    #   resp.sandbox.environment.docker_server.status.message #=> String
     #   resp.sandbox.file_system_locations #=> Array
     #   resp.sandbox.file_system_locations[0].type #=> String, one of "EFS"
     #   resp.sandbox.file_system_locations[0].location #=> String
@@ -5563,6 +5627,11 @@ module Aws::CodeBuild
     #   resp.build.environment.registry_credential.credential #=> String
     #   resp.build.environment.registry_credential.credential_provider #=> String, one of "SECRETS_MANAGER"
     #   resp.build.environment.image_pull_credentials_type #=> String, one of "CODEBUILD", "SERVICE_ROLE"
+    #   resp.build.environment.docker_server.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB", "ATTRIBUTE_BASED_COMPUTE", "CUSTOM_INSTANCE_TYPE"
+    #   resp.build.environment.docker_server.security_group_ids #=> Array
+    #   resp.build.environment.docker_server.security_group_ids[0] #=> String
+    #   resp.build.environment.docker_server.status.status #=> String
+    #   resp.build.environment.docker_server.status.message #=> String
     #   resp.build.service_role #=> String
     #   resp.build.logs.group_name #=> String
     #   resp.build.logs.stream_name #=> String
@@ -5718,6 +5787,11 @@ module Aws::CodeBuild
     #   resp.build_batch.environment.registry_credential.credential #=> String
     #   resp.build_batch.environment.registry_credential.credential_provider #=> String, one of "SECRETS_MANAGER"
     #   resp.build_batch.environment.image_pull_credentials_type #=> String, one of "CODEBUILD", "SERVICE_ROLE"
+    #   resp.build_batch.environment.docker_server.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB", "ATTRIBUTE_BASED_COMPUTE", "CUSTOM_INSTANCE_TYPE"
+    #   resp.build_batch.environment.docker_server.security_group_ids #=> Array
+    #   resp.build_batch.environment.docker_server.security_group_ids[0] #=> String
+    #   resp.build_batch.environment.docker_server.status.status #=> String
+    #   resp.build_batch.environment.docker_server.status.message #=> String
     #   resp.build_batch.service_role #=> String
     #   resp.build_batch.log_config.cloud_watch_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.build_batch.log_config.cloud_watch_logs.group_name #=> String
@@ -5862,6 +5936,11 @@ module Aws::CodeBuild
     #   resp.sandbox.environment.registry_credential.credential #=> String
     #   resp.sandbox.environment.registry_credential.credential_provider #=> String, one of "SECRETS_MANAGER"
     #   resp.sandbox.environment.image_pull_credentials_type #=> String, one of "CODEBUILD", "SERVICE_ROLE"
+    #   resp.sandbox.environment.docker_server.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB", "ATTRIBUTE_BASED_COMPUTE", "CUSTOM_INSTANCE_TYPE"
+    #   resp.sandbox.environment.docker_server.security_group_ids #=> Array
+    #   resp.sandbox.environment.docker_server.security_group_ids[0] #=> String
+    #   resp.sandbox.environment.docker_server.status.status #=> String
+    #   resp.sandbox.environment.docker_server.status.message #=> String
     #   resp.sandbox.file_system_locations #=> Array
     #   resp.sandbox.file_system_locations[0].type #=> String, one of "EFS"
     #   resp.sandbox.file_system_locations[0].location #=> String
@@ -6012,6 +6091,10 @@ module Aws::CodeBuild
     #
     #      </note>
     #
+    #   * `CUSTOM_INSTANCE_TYPE`: Specify the instance type for your compute
+    #     fleet. For a list of supported instance types, see [Supported
+    #     instance families ][2] in the *CodeBuild User Guide*.
+    #
     #   * `BUILD_GENERAL1_SMALL`: Use up to 4 GiB memory and 2 vCPUs for
     #     builds.
     #
@@ -6070,17 +6153,19 @@ module Aws::CodeBuild
     #   * For environment type `ARM_CONTAINER`, you can use up to 16 GiB
     #     memory and 8 vCPUs on ARM-based processors for builds.
     #
-    #   For more information, see [On-demand environment types][2] in the
+    #   For more information, see [On-demand environment types][3] in the
     #   *CodeBuild User Guide.*
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment-reserved-capacity.types
-    #   [2]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment.types
+    #   [2]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment-reserved-capacity.instance-types
+    #   [3]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment.types
     #
     # @option params [Types::ComputeConfiguration] :compute_configuration
     #   The compute configuration of the compute fleet. This is only required
-    #   if `computeType` is set to `ATTRIBUTE_BASED_COMPUTE`.
+    #   if `computeType` is set to `ATTRIBUTE_BASED_COMPUTE` or
+    #   `CUSTOM_INSTANCE_TYPE`.
     #
     # @option params [Types::ScalingConfigurationInput] :scaling_configuration
     #   The scaling configuration of the compute fleet.
@@ -6497,6 +6582,14 @@ module Aws::CodeBuild
     #         credential_provider: "SECRETS_MANAGER", # required, accepts SECRETS_MANAGER
     #       },
     #       image_pull_credentials_type: "CODEBUILD", # accepts CODEBUILD, SERVICE_ROLE
+    #       docker_server: {
+    #         compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE, BUILD_GENERAL1_XLARGE, BUILD_GENERAL1_2XLARGE, BUILD_LAMBDA_1GB, BUILD_LAMBDA_2GB, BUILD_LAMBDA_4GB, BUILD_LAMBDA_8GB, BUILD_LAMBDA_10GB, ATTRIBUTE_BASED_COMPUTE, CUSTOM_INSTANCE_TYPE
+    #         security_group_ids: ["NonEmptyString"],
+    #         status: {
+    #           status: "String",
+    #           message: "String",
+    #         },
+    #       },
     #     },
     #     service_role: "NonEmptyString",
     #     timeout_in_minutes: 1,
@@ -6629,6 +6722,11 @@ module Aws::CodeBuild
     #   resp.project.environment.registry_credential.credential #=> String
     #   resp.project.environment.registry_credential.credential_provider #=> String, one of "SECRETS_MANAGER"
     #   resp.project.environment.image_pull_credentials_type #=> String, one of "CODEBUILD", "SERVICE_ROLE"
+    #   resp.project.environment.docker_server.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE", "BUILD_GENERAL1_XLARGE", "BUILD_GENERAL1_2XLARGE", "BUILD_LAMBDA_1GB", "BUILD_LAMBDA_2GB", "BUILD_LAMBDA_4GB", "BUILD_LAMBDA_8GB", "BUILD_LAMBDA_10GB", "ATTRIBUTE_BASED_COMPUTE", "CUSTOM_INSTANCE_TYPE"
+    #   resp.project.environment.docker_server.security_group_ids #=> Array
+    #   resp.project.environment.docker_server.security_group_ids[0] #=> String
+    #   resp.project.environment.docker_server.status.status #=> String
+    #   resp.project.environment.docker_server.status.message #=> String
     #   resp.project.service_role #=> String
     #   resp.project.timeout_in_minutes #=> Integer
     #   resp.project.queued_timeout_in_minutes #=> Integer
@@ -6971,7 +7069,7 @@ module Aws::CodeBuild
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.155.0'
+      context[:gem_version] = '1.156.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2025-05-16)
+------------------
+
+* Feature - This release introduces CreateSupportCase operation to SDK.
+
 1.55.0 (2025-05-12)
 ------------------
 

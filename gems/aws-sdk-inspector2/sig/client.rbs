@@ -293,6 +293,18 @@ module Aws
                                  value: ::String
                                },
                              ]?,
+                             ecr_image_in_use_count: Array[
+                               {
+                                 lower_inclusive: ::Float?,
+                                 upper_inclusive: ::Float?
+                               },
+                             ]?,
+                             ecr_image_last_in_use_at: Array[
+                               {
+                                 end_inclusive: ::Time?,
+                                 start_inclusive: ::Time?
+                               },
+                             ]?,
                              ecr_image_pushed_at: Array[
                                {
                                  end_inclusive: ::Time?,
@@ -588,6 +600,18 @@ module Aws
                                         {
                                           comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
                                           value: ::String
+                                        },
+                                      ]?,
+                                      ecr_image_in_use_count: Array[
+                                        {
+                                          lower_inclusive: ::Float?,
+                                          upper_inclusive: ::Float?
+                                        },
+                                      ]?,
+                                      ecr_image_last_in_use_at: Array[
+                                        {
+                                          end_inclusive: ::Time?,
+                                          start_inclusive: ::Time?
                                         },
                                       ]?,
                                       ecr_image_pushed_at: Array[
@@ -1032,6 +1056,21 @@ module Aws
                                        ) -> _GetCisScanResultDetailsResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCisScanResultDetailsResponseSuccess
 
+      interface _GetClustersForImageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetClustersForImageResponse]
+        def cluster: () -> ::Array[Types::ClusterInformation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#get_clusters_for_image-instance_method
+      def get_clusters_for_image: (
+                                    filter: {
+                                      resource_id: ::String
+                                    },
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _GetClustersForImageResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetClustersForImageResponseSuccess
+
       interface _GetConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetConfigurationResponse]
         def ec2_configuration: () -> Types::Ec2ConfigurationState
@@ -1387,6 +1426,18 @@ module Aws
                                  value: ::String?
                                },
                              ]?,
+                             ecr_image_in_use_count: Array[
+                               {
+                                 lower_inclusive: ::Integer?,
+                                 upper_inclusive: ::Integer?
+                               },
+                             ]?,
+                             ecr_image_last_in_use_at: Array[
+                               {
+                                 end_inclusive: ::Time?,
+                                 start_inclusive: ::Time?
+                               },
+                             ]?,
                              ecr_image_tags: Array[
                                {
                                  comparison: ("EQUALS" | "NOT_EQUALS"),
@@ -1492,6 +1543,18 @@ module Aws
                                             comparison: ("EQUALS"),
                                             key: ::String,
                                             value: ::String?
+                                          },
+                                        ]?,
+                                        ecr_image_in_use_count: Array[
+                                          {
+                                            lower_inclusive: ::Integer?,
+                                            upper_inclusive: ::Integer?
+                                          },
+                                        ]?,
+                                        ecr_image_last_in_use_at: Array[
+                                          {
+                                            end_inclusive: ::Time?,
+                                            start_inclusive: ::Time?
                                           },
                                         ]?,
                                         ecr_image_tags: Array[
@@ -1653,6 +1716,18 @@ module Aws
                                              {
                                                comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
                                                value: ::String
+                                             },
+                                           ]?,
+                                           in_use_count: Array[
+                                             {
+                                               lower_inclusive: ::Float?,
+                                               upper_inclusive: ::Float?
+                                             },
+                                           ]?,
+                                           last_in_use_at: Array[
+                                             {
+                                               end_inclusive: ::Time?,
+                                               start_inclusive: ::Time?
                                              },
                                            ]?,
                                            repositories: Array[
@@ -1895,6 +1970,18 @@ module Aws
                                {
                                  comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
                                  value: ::String
+                               },
+                             ]?,
+                             ecr_image_in_use_count: Array[
+                               {
+                                 lower_inclusive: ::Float?,
+                                 upper_inclusive: ::Float?
+                               },
+                             ]?,
+                             ecr_image_last_in_use_at: Array[
+                               {
+                                 end_inclusive: ::Time?,
+                                 start_inclusive: ::Time?
                                },
                              ]?,
                              ecr_image_pushed_at: Array[
@@ -2324,6 +2411,7 @@ module Aws
                                   },
                                   ?ecr_configuration: {
                                     pull_date_rescan_duration: ("DAYS_14" | "DAYS_30" | "DAYS_60" | "DAYS_90" | "DAYS_180")?,
+                                    pull_date_rescan_mode: ("LAST_PULL_DATE" | "LAST_IN_USE_AT")?,
                                     rescan_duration: ("LIFETIME" | "DAYS_30" | "DAYS_180" | "DAYS_14" | "DAYS_60" | "DAYS_90")
                                   }
                                 ) -> _UpdateConfigurationResponseSuccess
@@ -2428,6 +2516,18 @@ module Aws
                                {
                                  comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
                                  value: ::String
+                               },
+                             ]?,
+                             ecr_image_in_use_count: Array[
+                               {
+                                 lower_inclusive: ::Float?,
+                                 upper_inclusive: ::Float?
+                               },
+                             ]?,
+                             ecr_image_last_in_use_at: Array[
+                               {
+                                 end_inclusive: ::Time?,
+                                 start_inclusive: ::Time?
                                },
                              ]?,
                              ecr_image_pushed_at: Array[

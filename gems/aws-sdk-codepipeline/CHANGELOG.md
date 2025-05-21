@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.100.0 (2025-05-16)
+------------------
+
+* Feature - CodePipeline now supports new API ListDeployActionExecutionTargets that lists the deployment target details for deploy action executions.
+
 1.99.0 (2025-05-12)
 ------------------
 

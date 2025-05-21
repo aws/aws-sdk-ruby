@@ -493,6 +493,31 @@ module Aws::ServiceQuotas
       req.send_request(options)
     end
 
+    # Creates a Support case for an existing quota increase request. This
+    # call only creates a Support case if the request has a `Pending`
+    # status.
+    #
+    # @option params [required, String] :request_id
+    #   The ID of the pending quota increase request for which you want to
+    #   open a Support case.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_support_case({
+    #     request_id: "RequestId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/CreateSupportCase AWS API Documentation
+    #
+    # @overload create_support_case(params = {})
+    # @param [Hash] params ({})
+    def create_support_case(params = {}, options = {})
+      req = build_request(:create_support_case, params)
+      req.send_request(options)
+    end
+
     # Deletes the quota increase request for the specified quota from your
     # quota request template.
     #
@@ -1520,7 +1545,7 @@ module Aws::ServiceQuotas
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-servicequotas'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

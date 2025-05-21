@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2025-05-16)
+------------------
+
+* Feature - Add AssetProcessingConfiguration for video segment to InputConfiguration
+
 1.7.0 (2025-05-12)
 ------------------
 

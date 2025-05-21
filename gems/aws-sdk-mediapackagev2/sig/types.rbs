@@ -111,6 +111,12 @@ module Aws::MediaPackageV2
       attr_accessor scte_dash: Types::ScteDash
       attr_accessor drm_signaling: ("INDIVIDUAL" | "REFERENCED")
       attr_accessor utc_timing: Types::DashUtcTiming
+      attr_accessor profiles: ::Array[("DVB_DASH")]
+      attr_accessor base_urls: ::Array[Types::DashBaseUrl]
+      attr_accessor program_information: Types::DashProgramInformation
+      attr_accessor dvb_settings: Types::DashDvbSettings
+      attr_accessor compactness: ("STANDARD" | "NONE")
+      attr_accessor subtitle_configuration: Types::DashSubtitleConfiguration
       SENSITIVE: []
     end
 
@@ -205,6 +211,52 @@ module Aws::MediaPackageV2
       attr_accessor force_endpoint_error_configuration: Types::ForceEndpointErrorConfiguration
       attr_accessor etag: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DashBaseUrl
+      attr_accessor url: ::String
+      attr_accessor service_location: ::String
+      attr_accessor dvb_priority: ::Integer
+      attr_accessor dvb_weight: ::Integer
+      SENSITIVE: []
+    end
+
+    class DashDvbFontDownload
+      attr_accessor url: ::String
+      attr_accessor mime_type: ::String
+      attr_accessor font_family: ::String
+      SENSITIVE: []
+    end
+
+    class DashDvbMetricsReporting
+      attr_accessor reporting_url: ::String
+      attr_accessor probability: ::Integer
+      SENSITIVE: []
+    end
+
+    class DashDvbSettings
+      attr_accessor font_download: Types::DashDvbFontDownload
+      attr_accessor error_metrics: ::Array[Types::DashDvbMetricsReporting]
+      SENSITIVE: []
+    end
+
+    class DashProgramInformation
+      attr_accessor title: ::String
+      attr_accessor source: ::String
+      attr_accessor copyright: ::String
+      attr_accessor language_code: ::String
+      attr_accessor more_information_url: ::String
+      SENSITIVE: []
+    end
+
+    class DashSubtitleConfiguration
+      attr_accessor ttml_configuration: Types::DashTtmlConfiguration
+      SENSITIVE: []
+    end
+
+    class DashTtmlConfiguration
+      attr_accessor ttml_profile: ("IMSC_1" | "EBU_TT_D_101")
       SENSITIVE: []
     end
 
@@ -365,6 +417,12 @@ module Aws::MediaPackageV2
       attr_accessor scte_dash: Types::ScteDash
       attr_accessor drm_signaling: ("INDIVIDUAL" | "REFERENCED")
       attr_accessor utc_timing: Types::DashUtcTiming
+      attr_accessor profiles: ::Array[("DVB_DASH")]
+      attr_accessor base_urls: ::Array[Types::DashBaseUrl]
+      attr_accessor program_information: Types::DashProgramInformation
+      attr_accessor dvb_settings: Types::DashDvbSettings
+      attr_accessor compactness: ("STANDARD" | "NONE")
+      attr_accessor subtitle_configuration: Types::DashSubtitleConfiguration
       SENSITIVE: []
     end
 
@@ -841,7 +899,7 @@ module Aws::MediaPackageV2
 
     class ValidationException
       attr_accessor message: ::String
-      attr_accessor validation_exception_type: ("CONTAINER_TYPE_IMMUTABLE" | "INVALID_PAGINATION_TOKEN" | "INVALID_PAGINATION_MAX_RESULTS" | "INVALID_POLICY" | "INVALID_ROLE_ARN" | "MANIFEST_NAME_COLLISION" | "ENCRYPTION_METHOD_CONTAINER_TYPE_MISMATCH" | "CENC_IV_INCOMPATIBLE" | "ENCRYPTION_CONTRACT_WITHOUT_AUDIO_RENDITION_INCOMPATIBLE" | "ENCRYPTION_CONTRACT_UNENCRYPTED" | "ENCRYPTION_CONTRACT_SHARED" | "NUM_MANIFESTS_LOW" | "NUM_MANIFESTS_HIGH" | "MANIFEST_DRM_SYSTEMS_INCOMPATIBLE" | "DRM_SYSTEMS_ENCRYPTION_METHOD_INCOMPATIBLE" | "ROLE_ARN_NOT_ASSUMABLE" | "ROLE_ARN_LENGTH_OUT_OF_RANGE" | "ROLE_ARN_INVALID_FORMAT" | "URL_INVALID" | "URL_SCHEME" | "URL_USER_INFO" | "URL_PORT" | "URL_UNKNOWN_HOST" | "URL_LOCAL_ADDRESS" | "URL_LOOPBACK_ADDRESS" | "URL_LINK_LOCAL_ADDRESS" | "URL_MULTICAST_ADDRESS" | "MEMBER_INVALID" | "MEMBER_MISSING" | "MEMBER_MIN_VALUE" | "MEMBER_MAX_VALUE" | "MEMBER_MIN_LENGTH" | "MEMBER_MAX_LENGTH" | "MEMBER_INVALID_ENUM_VALUE" | "MEMBER_DOES_NOT_MATCH_PATTERN" | "INVALID_MANIFEST_FILTER" | "INVALID_TIME_DELAY_SECONDS" | "END_TIME_EARLIER_THAN_START_TIME" | "TS_CONTAINER_TYPE_WITH_DASH_MANIFEST" | "DIRECT_MODE_WITH_TIMING_SOURCE" | "NONE_MODE_WITH_TIMING_SOURCE" | "TIMING_SOURCE_MISSING" | "UPDATE_PERIOD_SMALLER_THAN_SEGMENT_DURATION" | "PERIOD_TRIGGERS_NONE_SPECIFIED_WITH_ADDITIONAL_VALUES" | "DRM_SIGNALING_MISMATCH_SEGMENT_ENCRYPTION_STATUS" | "ONLY_CMAF_INPUT_TYPE_ALLOW_FORCE_ENDPOINT_ERROR_CONFIGURATION" | "SOURCE_DISRUPTIONS_ENABLED_INCORRECTLY" | "HARVESTED_MANIFEST_HAS_START_END_FILTER_CONFIGURATION" | "HARVESTED_MANIFEST_NOT_FOUND_ON_ENDPOINT" | "TOO_MANY_IN_PROGRESS_HARVEST_JOBS" | "HARVEST_JOB_INELIGIBLE_FOR_CANCELLATION" | "INVALID_HARVEST_JOB_DURATION" | "HARVEST_JOB_S3_DESTINATION_MISSING_OR_INCOMPLETE" | "HARVEST_JOB_UNABLE_TO_WRITE_TO_S3_DESTINATION" | "HARVEST_JOB_CUSTOMER_ENDPOINT_READ_ACCESS_DENIED" | "CLIP_START_TIME_WITH_START_OR_END" | "START_TAG_TIME_OFFSET_INVALID" | "ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_INPUT_SWITCHING" | "ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_OUTPUT_CONFIGURATION")
+      attr_accessor validation_exception_type: ("CONTAINER_TYPE_IMMUTABLE" | "INVALID_PAGINATION_TOKEN" | "INVALID_PAGINATION_MAX_RESULTS" | "INVALID_POLICY" | "INVALID_ROLE_ARN" | "MANIFEST_NAME_COLLISION" | "ENCRYPTION_METHOD_CONTAINER_TYPE_MISMATCH" | "CENC_IV_INCOMPATIBLE" | "ENCRYPTION_CONTRACT_WITHOUT_AUDIO_RENDITION_INCOMPATIBLE" | "ENCRYPTION_CONTRACT_UNENCRYPTED" | "ENCRYPTION_CONTRACT_SHARED" | "NUM_MANIFESTS_LOW" | "NUM_MANIFESTS_HIGH" | "MANIFEST_DRM_SYSTEMS_INCOMPATIBLE" | "DRM_SYSTEMS_ENCRYPTION_METHOD_INCOMPATIBLE" | "ROLE_ARN_NOT_ASSUMABLE" | "ROLE_ARN_LENGTH_OUT_OF_RANGE" | "ROLE_ARN_INVALID_FORMAT" | "URL_INVALID" | "URL_SCHEME" | "URL_USER_INFO" | "URL_PORT" | "URL_UNKNOWN_HOST" | "URL_LOCAL_ADDRESS" | "URL_LOOPBACK_ADDRESS" | "URL_LINK_LOCAL_ADDRESS" | "URL_MULTICAST_ADDRESS" | "MEMBER_INVALID" | "MEMBER_MISSING" | "MEMBER_MIN_VALUE" | "MEMBER_MAX_VALUE" | "MEMBER_MIN_LENGTH" | "MEMBER_MAX_LENGTH" | "MEMBER_INVALID_ENUM_VALUE" | "MEMBER_DOES_NOT_MATCH_PATTERN" | "INVALID_MANIFEST_FILTER" | "INVALID_TIME_DELAY_SECONDS" | "END_TIME_EARLIER_THAN_START_TIME" | "TS_CONTAINER_TYPE_WITH_DASH_MANIFEST" | "DIRECT_MODE_WITH_TIMING_SOURCE" | "NONE_MODE_WITH_TIMING_SOURCE" | "TIMING_SOURCE_MISSING" | "UPDATE_PERIOD_SMALLER_THAN_SEGMENT_DURATION" | "PERIOD_TRIGGERS_NONE_SPECIFIED_WITH_ADDITIONAL_VALUES" | "DRM_SIGNALING_MISMATCH_SEGMENT_ENCRYPTION_STATUS" | "ONLY_CMAF_INPUT_TYPE_ALLOW_FORCE_ENDPOINT_ERROR_CONFIGURATION" | "SOURCE_DISRUPTIONS_ENABLED_INCORRECTLY" | "HARVESTED_MANIFEST_HAS_START_END_FILTER_CONFIGURATION" | "HARVESTED_MANIFEST_NOT_FOUND_ON_ENDPOINT" | "TOO_MANY_IN_PROGRESS_HARVEST_JOBS" | "HARVEST_JOB_INELIGIBLE_FOR_CANCELLATION" | "INVALID_HARVEST_JOB_DURATION" | "HARVEST_JOB_S3_DESTINATION_MISSING_OR_INCOMPLETE" | "HARVEST_JOB_UNABLE_TO_WRITE_TO_S3_DESTINATION" | "HARVEST_JOB_CUSTOMER_ENDPOINT_READ_ACCESS_DENIED" | "CLIP_START_TIME_WITH_START_OR_END" | "START_TAG_TIME_OFFSET_INVALID" | "ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_INPUT_SWITCHING" | "ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_OUTPUT_CONFIGURATION" | "INCOMPATIBLE_DASH_PROFILE_DVB_DASH_CONFIGURATION" | "DASH_DVB_ATTRIBUTES_WITHOUT_DVB_DASH_PROFILE" | "INCOMPATIBLE_DASH_COMPACTNESS_CONFIGURATION" | "INCOMPATIBLE_XML_ENCODING")
       SENSITIVE: []
     end
   end

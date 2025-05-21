@@ -3576,11 +3576,11 @@ module Aws::RDS
     #   support for that engine version. For more information, see the
     #   following sections:
     #
-    #   * Amazon Aurora - [Using Amazon RDS Extended Support][1] in the
-    #     *Amazon Aurora User Guide*
+    #   * Amazon Aurora - [Amazon RDS Extended Support with Amazon Aurora][1]
+    #     in the *Amazon Aurora User Guide*
     #
-    #   * Amazon RDS - [Using Amazon RDS Extended Support][2] in the *Amazon
-    #     RDS User Guide*
+    #   * Amazon RDS - [Amazon RDS Extended Support with Amazon RDS][2] in the
+    #     *Amazon RDS User Guide*
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #
@@ -5713,8 +5713,8 @@ module Aws::RDS
     #   You can use this setting to enroll your DB instance into Amazon RDS
     #   Extended Support. With RDS Extended Support, you can run the selected
     #   major engine version on your DB instance past the end of standard
-    #   support for that engine version. For more information, see [Using
-    #   Amazon RDS Extended Support][1] in the *Amazon RDS User Guide*.
+    #   support for that engine version. For more information, see [Amazon RDS
+    #   Extended Support with Amazon RDS][1] in the *Amazon RDS User Guide*.
     #
     #   Valid Values: `open-source-rds-extended-support |
     #   open-source-rds-extended-support-disabled`
@@ -8194,8 +8194,9 @@ module Aws::RDS
     #   You can use this setting to enroll your global cluster into Amazon RDS
     #   Extended Support. With RDS Extended Support, you can run the selected
     #   major engine version on your global cluster past the end of standard
-    #   support for that engine version. For more information, see [Using
-    #   Amazon RDS Extended Support][1] in the *Amazon Aurora User Guide*.
+    #   support for that engine version. For more information, see [Amazon RDS
+    #   Extended Support with Amazon Aurora][1] in the *Amazon Aurora User
+    #   Guide*.
     #
     #   Valid Values: `open-source-rds-extended-support |
     #   open-source-rds-extended-support-disabled`
@@ -13733,6 +13734,103 @@ module Aws::RDS
     # @param [Hash] params ({})
     def describe_db_log_files(params = {}, options = {})
       req = build_request(:describe_db_log_files, params)
+      req.send_request(options)
+    end
+
+    # Describes the properties of specific major versions of DB engines.
+    #
+    # @option params [String] :engine
+    #   The database engine to return major version details for.
+    #
+    #   Valid Values:
+    #
+    #   * `aurora-mysql`
+    #
+    #   * `aurora-postgresql`
+    #
+    #   * `custom-sqlserver-ee`
+    #
+    #   * `custom-sqlserver-se`
+    #
+    #   * `custom-sqlserver-web`
+    #
+    #   * `db2-ae`
+    #
+    #   * `db2-se`
+    #
+    #   * `mariadb`
+    #
+    #   * `mysql`
+    #
+    #   * `oracle-ee`
+    #
+    #   * `oracle-ee-cdb`
+    #
+    #   * `oracle-se2`
+    #
+    #   * `oracle-se2-cdb`
+    #
+    #   * `postgres`
+    #
+    #   * `sqlserver-ee`
+    #
+    #   * `sqlserver-se`
+    #
+    #   * `sqlserver-ex`
+    #
+    #   * `sqlserver-web`
+    #
+    # @option params [String] :major_engine_version
+    #   A specific database major engine version to return details for.
+    #
+    #   Example: `8.4`
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond the
+    #   marker, up to the value specified by `MaxRecords`.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more than
+    #   the `MaxRecords` value is available, a pagination token called a
+    #   marker is included in the response so you can retrieve the remaining
+    #   results.
+    #
+    #   Default: 100
+    #
+    # @return [Types::DescribeDBMajorEngineVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDBMajorEngineVersionsResponse#db_major_engine_versions #db_major_engine_versions} => Array&lt;Types::DBMajorEngineVersion&gt;
+    #   * {Types::DescribeDBMajorEngineVersionsResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_db_major_engine_versions({
+    #     engine: "Engine",
+    #     major_engine_version: "MajorEngineVersion",
+    #     marker: "Marker",
+    #     max_records: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_major_engine_versions #=> Array
+    #   resp.db_major_engine_versions[0].engine #=> String
+    #   resp.db_major_engine_versions[0].major_engine_version #=> String
+    #   resp.db_major_engine_versions[0].supported_engine_lifecycles #=> Array
+    #   resp.db_major_engine_versions[0].supported_engine_lifecycles[0].lifecycle_support_name #=> String, one of "open-source-rds-standard-support", "open-source-rds-extended-support"
+    #   resp.db_major_engine_versions[0].supported_engine_lifecycles[0].lifecycle_support_start_date #=> Time
+    #   resp.db_major_engine_versions[0].supported_engine_lifecycles[0].lifecycle_support_end_date #=> Time
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBMajorEngineVersions AWS API Documentation
+    #
+    # @overload describe_db_major_engine_versions(params = {})
+    # @param [Hash] params ({})
+    def describe_db_major_engine_versions(params = {}, options = {})
+      req = build_request(:describe_db_major_engine_versions, params)
       req.send_request(options)
     end
 
@@ -25403,11 +25501,11 @@ module Aws::RDS
     #   support for that engine version. For more information, see the
     #   following sections:
     #
-    #   * Amazon Aurora - [Using Amazon RDS Extended Support][1] in the
-    #     *Amazon Aurora User Guide*
+    #   * Amazon Aurora - [Amazon RDS Extended Support with Amazon Aurora][1]
+    #     in the *Amazon Aurora User Guide*
     #
-    #   * Amazon RDS - [Using Amazon RDS Extended Support][2] in the *Amazon
-    #     RDS User Guide*
+    #   * Amazon RDS - [Amazon RDS Extended Support with Amazon RDS][2] in the
+    #     *Amazon RDS User Guide*
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #
@@ -26221,11 +26319,11 @@ module Aws::RDS
     #   support for that engine version. For more information, see the
     #   following sections:
     #
-    #   * Amazon Aurora - [Using Amazon RDS Extended Support][1] in the
-    #     *Amazon Aurora User Guide*
+    #   * Amazon Aurora - [Amazon RDS Extended Support with Amazon Aurora][1]
+    #     in the *Amazon Aurora User Guide*
     #
-    #   * Amazon RDS - [Using Amazon RDS Extended Support][2] in the *Amazon
-    #     RDS User Guide*
+    #   * Amazon RDS - [Amazon RDS Extended Support with Amazon RDS][2] in the
+    #     *Amazon RDS User Guide*
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #
@@ -27029,11 +27127,11 @@ module Aws::RDS
     #   support for that engine version. For more information, see the
     #   following sections:
     #
-    #   * Amazon Aurora - [Using Amazon RDS Extended Support][1] in the
-    #     *Amazon Aurora User Guide*
+    #   * Amazon Aurora - [Amazon RDS Extended Support with Amazon Aurora][1]
+    #     in the *Amazon Aurora User Guide*
     #
-    #   * Amazon RDS - [Using Amazon RDS Extended Support][2] in the *Amazon
-    #     RDS User Guide*
+    #   * Amazon RDS - [Amazon RDS Extended Support with Amazon RDS][2] in the
+    #     *Amazon RDS User Guide*
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #
@@ -27940,8 +28038,8 @@ module Aws::RDS
     #   You can use this setting to enroll your DB instance into Amazon RDS
     #   Extended Support. With RDS Extended Support, you can run the selected
     #   major engine version on your DB instance past the end of standard
-    #   support for that engine version. For more information, see [Using
-    #   Amazon RDS Extended Support][1] in the *Amazon RDS User Guide*.
+    #   support for that engine version. For more information, see [Amazon RDS
+    #   Extended Support with Amazon RDS][1] in the *Amazon RDS User Guide*.
     #
     #   This setting applies only to RDS for MySQL and RDS for PostgreSQL. For
     #   Amazon Aurora DB instances, the life cycle type is managed by the DB
@@ -28827,8 +28925,8 @@ module Aws::RDS
     #   You can use this setting to enroll your DB instance into Amazon RDS
     #   Extended Support. With RDS Extended Support, you can run the selected
     #   major engine version on your DB instance past the end of standard
-    #   support for that engine version. For more information, see [Using
-    #   Amazon RDS Extended Support][1] in the *Amazon RDS User Guide*.
+    #   support for that engine version. For more information, see [Amazon RDS
+    #   Extended Support Amazon RDS][1] in the *Amazon RDS User Guide*.
     #
     #   This setting applies only to RDS for MySQL and RDS for PostgreSQL. For
     #   Amazon Aurora DB instances, the life cycle type is managed by the DB
@@ -29703,8 +29801,8 @@ module Aws::RDS
     #   You can use this setting to enroll your DB instance into Amazon RDS
     #   Extended Support. With RDS Extended Support, you can run the selected
     #   major engine version on your DB instance past the end of standard
-    #   support for that engine version. For more information, see [Using
-    #   Amazon RDS Extended Support][1] in the *Amazon RDS User Guide*.
+    #   support for that engine version. For more information, see [Amazon RDS
+    #   Extended Support with Amazon RDS][1] in the *Amazon RDS User Guide*.
     #
     #   This setting applies only to RDS for MySQL and RDS for PostgreSQL. For
     #   Amazon Aurora DB instances, the life cycle type is managed by the DB
@@ -30946,23 +31044,9 @@ module Aws::RDS
     #   operations. These can be set in the Amazon Web Services KMS key
     #   policy:
     #
-    #   * kms:Encrypt
-    #
-    #   * kms:Decrypt
-    #
-    #   * kms:GenerateDataKey
-    #
-    #   * kms:GenerateDataKeyWithoutPlaintext
-    #
-    #   * kms:ReEncryptFrom
-    #
-    #   * kms:ReEncryptTo
-    #
     #   * kms:CreateGrant
     #
     #   * kms:DescribeKey
-    #
-    #   * kms:RetireGrant
     #
     # @option params [String] :s3_prefix
     #   The Amazon S3 bucket prefix to use as the file name and path of the
@@ -32201,7 +32285,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.276.0'
+      context[:gem_version] = '1.277.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

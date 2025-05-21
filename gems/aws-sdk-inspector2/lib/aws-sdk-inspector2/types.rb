@@ -539,6 +539,16 @@ module Aws::Inspector2
     #   The image tags.
     #   @return [Array<Types::StringFilter>]
     #
+    # @!attribute [rw] in_use_count
+    #   The number of Amazon ECS tasks or Amazon EKS pods where the Amazon
+    #   ECR container image is in use.
+    #   @return [Array<Types::NumberFilter>]
+    #
+    # @!attribute [rw] last_in_use_at
+    #   The last time an Amazon ECR image was used in an Amazon ECS task or
+    #   Amazon EKS pod.
+    #   @return [Array<Types::DateFilter>]
+    #
     # @!attribute [rw] repositories
     #   The container repositories.
     #   @return [Array<Types::StringFilter>]
@@ -561,6 +571,8 @@ module Aws::Inspector2
       :architectures,
       :image_shas,
       :image_tags,
+      :in_use_count,
+      :last_in_use_at,
       :repositories,
       :resource_ids,
       :sort_by,
@@ -588,6 +600,16 @@ module Aws::Inspector2
     #   The container image stags.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] in_use_count
+    #   The number of Amazon ECS tasks or Amazon EKS pods where the Amazon
+    #   ECR container image is in use.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_in_use_at
+    #   The last time an Amazon ECR image was used in an Amazon ECS task or
+    #   Amazon EKS pod.
+    #   @return [Time]
+    #
     # @!attribute [rw] repository
     #   The container repository.
     #   @return [String]
@@ -607,6 +629,8 @@ module Aws::Inspector2
       :architecture,
       :image_sha,
       :image_tags,
+      :in_use_count,
+      :last_in_use_at,
       :repository,
       :resource_id,
       :severity_counts)
@@ -632,6 +656,16 @@ module Aws::Inspector2
     #   The image tags attached to the Amazon ECR container image.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] in_use_count
+    #   The number of Amazon ECS tasks or Amazon EKS pods where the Amazon
+    #   ECR container image is in use.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_in_use_at
+    #   The last time an Amazon ECR image was used in an Amazon ECS task or
+    #   Amazon EKS pod.
+    #   @return [Time]
+    #
     # @!attribute [rw] platform
     #   The platform of the Amazon ECR container image.
     #   @return [String]
@@ -656,10 +690,70 @@ module Aws::Inspector2
       :author,
       :image_hash,
       :image_tags,
+      :in_use_count,
+      :last_in_use_at,
       :platform,
       :pushed_at,
       :registry,
       :repository_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Metadata about tasks where an image was in use.
+    #
+    # @!attribute [rw] details_group
+    #   The details group information for a task in a cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_definition_arn
+    #   The task definition ARN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/AwsEcsMetadataDetails AWS API Documentation
+    #
+    class AwsEcsMetadataDetails < Struct.new(
+      :details_group,
+      :task_definition_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The metadata for an Amazon EKS pod where an Amazon ECR image is in
+    # use.
+    #
+    # @!attribute [rw] namespace
+    #   The namespace for an Amazon EKS cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] workload_info_list
+    #   The list of workloads.
+    #   @return [Array<Types::AwsEksWorkloadInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/AwsEksMetadataDetails AWS API Documentation
+    #
+    class AwsEksMetadataDetails < Struct.new(
+      :namespace,
+      :workload_info_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the workload.
+    #
+    # @!attribute [rw] name
+    #   The name of the workload.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The workload type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/AwsEksWorkloadInfo AWS API Documentation
+    #
+    class AwsEksWorkloadInfo < Struct.new(
+      :name,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1633,6 +1727,98 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # Details about the task or pod in the cluster.
+    #
+    # @!attribute [rw] cluster_metadata
+    #   The metadata for a cluster.
+    #   @return [Types::ClusterMetadata]
+    #
+    # @!attribute [rw] last_in_use
+    #   The last timestamp when Amazon Inspector recorded the image in use
+    #   in the task or pod in the cluster.
+    #   @return [Time]
+    #
+    # @!attribute [rw] running_unit_count
+    #   The number of tasks or pods where an image was running on the
+    #   cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stopped_unit_count
+    #   The number of tasks or pods where an image was stopped on the
+    #   cluster in the last 24 hours.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ClusterDetails AWS API Documentation
+    #
+    class ClusterDetails < Struct.new(
+      :cluster_metadata,
+      :last_in_use,
+      :running_unit_count,
+      :stopped_unit_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter criteria to be used.
+    #
+    # @!attribute [rw] resource_id
+    #   The resource Id to be used in the filter criteria.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ClusterForImageFilterCriteria AWS API Documentation
+    #
+    class ClusterForImageFilterCriteria < Struct.new(
+      :resource_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the cluster.
+    #
+    # @!attribute [rw] cluster_arn
+    #   The cluster ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_details
+    #   Details about the cluster.
+    #   @return [Array<Types::ClusterDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ClusterInformation AWS API Documentation
+    #
+    class ClusterInformation < Struct.new(
+      :cluster_arn,
+      :cluster_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The metadata for a cluster.
+    #
+    # @note ClusterMetadata is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ClusterMetadata corresponding to the set member.
+    #
+    # @!attribute [rw] aws_ecs_metadata_details
+    #   The details for an Amazon ECS cluster in the cluster metadata.
+    #   @return [Types::AwsEcsMetadataDetails]
+    #
+    # @!attribute [rw] aws_eks_metadata_details
+    #   The details for an Amazon EKS cluster in the cluster metadata.
+    #   @return [Types::AwsEksMetadataDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ClusterMetadata AWS API Documentation
+    #
+    class ClusterMetadata < Struct.new(
+      :aws_ecs_metadata_details,
+      :aws_eks_metadata_details,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AwsEcsMetadataDetails < ClusterMetadata; end
+      class AwsEksMetadataDetails < ClusterMetadata; end
+      class Unknown < ClusterMetadata; end
+    end
+
     # Contains information on where a code vulnerability is located in your
     # Lambda function.
     #
@@ -1923,6 +2109,14 @@ module Aws::Inspector2
     #   The Amazon EC2 instance tags to filter on.
     #   @return [Array<Types::CoverageMapFilter>]
     #
+    # @!attribute [rw] ecr_image_in_use_count
+    #   The number of Amazon ECR images in use.
+    #   @return [Array<Types::CoverageNumberFilter>]
+    #
+    # @!attribute [rw] ecr_image_last_in_use_at
+    #   The Amazon ECR image that was last in use.
+    #   @return [Array<Types::CoverageDateFilter>]
+    #
     # @!attribute [rw] ecr_image_tags
     #   The Amazon ECR image tags to filter on.
     #   @return [Array<Types::CoverageStringFilter>]
@@ -1994,6 +2188,8 @@ module Aws::Inspector2
     class CoverageFilterCriteria < Struct.new(
       :account_id,
       :ec2_instance_tags,
+      :ecr_image_in_use_count,
+      :ecr_image_last_in_use_at,
       :ecr_image_tags,
       :ecr_repository_name,
       :image_pulled_at,
@@ -2031,6 +2227,25 @@ module Aws::Inspector2
       :comparison,
       :key,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The coverage number to be used in the filter.
+    #
+    # @!attribute [rw] lower_inclusive
+    #   The lower inclusive for the coverage number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] upper_inclusive
+    #   The upper inclusive for the coverage number.&gt;
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CoverageNumberFilter AWS API Documentation
+    #
+    class CoverageNumberFilter < Struct.new(
+      :lower_inclusive,
+      :upper_inclusive)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2851,6 +3066,10 @@ module Aws::Inspector2
     #   The rescan duration configured for image pull date.
     #   @return [String]
     #
+    # @!attribute [rw] pull_date_rescan_mode
+    #   The pull date for the re-scan mode.
+    #   @return [String]
+    #
     # @!attribute [rw] rescan_duration
     #   The rescan duration configured for image push date.
     #   @return [String]
@@ -2859,6 +3078,7 @@ module Aws::Inspector2
     #
     class EcrConfiguration < Struct.new(
       :pull_date_rescan_duration,
+      :pull_date_rescan_mode,
       :rescan_duration)
       SENSITIVE = []
       include Aws::Structure
@@ -2886,6 +3106,16 @@ module Aws::Inspector2
     #   The date an image was last pulled at.
     #   @return [Time]
     #
+    # @!attribute [rw] in_use_count
+    #   The number of Amazon ECS tasks or Amazon EKS pods where the Amazon
+    #   ECR container image is in use.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_in_use_at
+    #   The last time an Amazon ECR image was used in an Amazon ECS task or
+    #   Amazon EKS pod.
+    #   @return [Time]
+    #
     # @!attribute [rw] tags
     #   Tags associated with the Amazon ECR image metadata.
     #   @return [Array<String>]
@@ -2894,6 +3124,8 @@ module Aws::Inspector2
     #
     class EcrContainerImageMetadata < Struct.new(
       :image_pulled_at,
+      :in_use_count,
+      :last_in_use_at,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -2931,6 +3163,10 @@ module Aws::Inspector2
     #   The rescan duration configured for image pull date.
     #   @return [String]
     #
+    # @!attribute [rw] pull_date_rescan_mode
+    #   The pull date for the re-scan mode.
+    #   @return [String]
+    #
     # @!attribute [rw] rescan_duration
     #   The rescan duration configured for image push date.      </p>
     #   @return [String]
@@ -2948,6 +3184,7 @@ module Aws::Inspector2
     #
     class EcrRescanDurationState < Struct.new(
       :pull_date_rescan_duration,
+      :pull_date_rescan_mode,
       :rescan_duration,
       :status,
       :updated_at)
@@ -3309,6 +3546,16 @@ module Aws::Inspector2
     #   Details of the Amazon ECR image hashes used to filter findings.
     #   @return [Array<Types::StringFilter>]
     #
+    # @!attribute [rw] ecr_image_in_use_count
+    #   Filter criteria indicating when details for an Amazon ECR image
+    #   include when an Amazon ECR image is in use.
+    #   @return [Array<Types::NumberFilter>]
+    #
+    # @!attribute [rw] ecr_image_last_in_use_at
+    #   Filter criteria indicating when an Amazon ECR image was last used in
+    #   an Amazon ECS cluster task or Amazon EKS cluster pod.
+    #   @return [Array<Types::DateFilter>]
+    #
     # @!attribute [rw] ecr_image_pushed_at
     #   Details on the Amazon ECR image push date and time used to filter
     #   findings.
@@ -3471,6 +3718,8 @@ module Aws::Inspector2
       :ec2_instance_vpc_id,
       :ecr_image_architecture,
       :ecr_image_hash,
+      :ecr_image_in_use_count,
+      :ecr_image_last_in_use_at,
       :ecr_image_pushed_at,
       :ecr_image_registry,
       :ecr_image_repository_name,
@@ -3979,6 +4228,49 @@ module Aws::Inspector2
     class GetCisScanResultDetailsResponse < Struct.new(
       :next_token,
       :scan_result_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filter
+    #   The resource Id for the Amazon ECR image.
+    #   @return [Types::ClusterForImageFilterCriteria]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned in a single page of
+    #   results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token from a previous request used to retrieve the
+    #   next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetClustersForImageRequest AWS API Documentation
+    #
+    class GetClustersForImageRequest < Struct.new(
+      :filter,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster
+    #   A unit of work inside of a cluster, which can include metadata about
+    #   the cluster.
+    #   @return [Array<Types::ClusterInformation>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token from a previous request used to retrieve the
+    #   next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetClustersForImageResponse AWS API Documentation
+    #
+    class GetClustersForImageResponse < Struct.new(
+      :cluster,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end

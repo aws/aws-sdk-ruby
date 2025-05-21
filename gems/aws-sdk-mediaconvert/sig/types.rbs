@@ -859,6 +859,7 @@ module Aws::MediaConvert
       attr_accessor source_file: ::String
       attr_accessor time_delta: ::Integer
       attr_accessor time_delta_units: ("SECONDS" | "MILLISECONDS")
+      attr_accessor upconvert_stl_to_teletext: ("UPCONVERT" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -2296,12 +2297,22 @@ module Aws::MediaConvert
     end
 
     class VideoOverlay
+      attr_accessor crop: Types::VideoOverlayCrop
       attr_accessor end_timecode: ::String
       attr_accessor initial_position: Types::VideoOverlayPosition
       attr_accessor input: Types::VideoOverlayInput
       attr_accessor playback: ("ONCE" | "REPEAT")
       attr_accessor start_timecode: ::String
       attr_accessor transitions: ::Array[Types::VideoOverlayTransition]
+      SENSITIVE: []
+    end
+
+    class VideoOverlayCrop
+      attr_accessor height: ::Integer
+      attr_accessor unit: ("PIXELS" | "PERCENTAGE")
+      attr_accessor width: ::Integer
+      attr_accessor x: ::Integer
+      attr_accessor y: ::Integer
       SENSITIVE: []
     end
 

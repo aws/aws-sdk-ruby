@@ -53,7 +53,13 @@ module Aws::ControlTower
     EnableControlOutput = Shapes::StructureShape.new(name: 'EnableControlOutput')
     EnabledBaselineBaselineIdentifiers = Shapes::ListShape.new(name: 'EnabledBaselineBaselineIdentifiers')
     EnabledBaselineDetails = Shapes::StructureShape.new(name: 'EnabledBaselineDetails')
+    EnabledBaselineDriftStatus = Shapes::StringShape.new(name: 'EnabledBaselineDriftStatus')
+    EnabledBaselineDriftStatusSummary = Shapes::StructureShape.new(name: 'EnabledBaselineDriftStatusSummary')
+    EnabledBaselineDriftStatuses = Shapes::ListShape.new(name: 'EnabledBaselineDriftStatuses')
+    EnabledBaselineDriftTypes = Shapes::StructureShape.new(name: 'EnabledBaselineDriftTypes')
+    EnabledBaselineEnablementStatuses = Shapes::ListShape.new(name: 'EnabledBaselineEnablementStatuses')
     EnabledBaselineFilter = Shapes::StructureShape.new(name: 'EnabledBaselineFilter')
+    EnabledBaselineInheritanceDrift = Shapes::StructureShape.new(name: 'EnabledBaselineInheritanceDrift')
     EnabledBaselineParameter = Shapes::StructureShape.new(name: 'EnabledBaselineParameter')
     EnabledBaselineParameterDocument = Shapes::DocumentShape.new(name: 'EnabledBaselineParameterDocument', document: true)
     EnabledBaselineParameterSummaries = Shapes::ListShape.new(name: 'EnabledBaselineParameterSummaries')
@@ -280,16 +286,32 @@ module Aws::ControlTower
     EnabledBaselineDetails.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
     EnabledBaselineDetails.add_member(:baseline_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "baselineIdentifier"))
     EnabledBaselineDetails.add_member(:baseline_version, Shapes::ShapeRef.new(shape: String, location_name: "baselineVersion"))
+    EnabledBaselineDetails.add_member(:drift_status_summary, Shapes::ShapeRef.new(shape: EnabledBaselineDriftStatusSummary, location_name: "driftStatusSummary"))
     EnabledBaselineDetails.add_member(:parameters, Shapes::ShapeRef.new(shape: EnabledBaselineParameterSummaries, location_name: "parameters"))
     EnabledBaselineDetails.add_member(:parent_identifier, Shapes::ShapeRef.new(shape: Arn, location_name: "parentIdentifier"))
     EnabledBaselineDetails.add_member(:status_summary, Shapes::ShapeRef.new(shape: EnablementStatusSummary, required: true, location_name: "statusSummary"))
     EnabledBaselineDetails.add_member(:target_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "targetIdentifier"))
     EnabledBaselineDetails.struct_class = Types::EnabledBaselineDetails
 
+    EnabledBaselineDriftStatusSummary.add_member(:types, Shapes::ShapeRef.new(shape: EnabledBaselineDriftTypes, location_name: "types"))
+    EnabledBaselineDriftStatusSummary.struct_class = Types::EnabledBaselineDriftStatusSummary
+
+    EnabledBaselineDriftStatuses.member = Shapes::ShapeRef.new(shape: EnabledBaselineDriftStatus)
+
+    EnabledBaselineDriftTypes.add_member(:inheritance, Shapes::ShapeRef.new(shape: EnabledBaselineInheritanceDrift, location_name: "inheritance"))
+    EnabledBaselineDriftTypes.struct_class = Types::EnabledBaselineDriftTypes
+
+    EnabledBaselineEnablementStatuses.member = Shapes::ShapeRef.new(shape: EnablementStatus)
+
     EnabledBaselineFilter.add_member(:baseline_identifiers, Shapes::ShapeRef.new(shape: EnabledBaselineBaselineIdentifiers, location_name: "baselineIdentifiers"))
+    EnabledBaselineFilter.add_member(:inheritance_drift_statuses, Shapes::ShapeRef.new(shape: EnabledBaselineDriftStatuses, location_name: "inheritanceDriftStatuses"))
     EnabledBaselineFilter.add_member(:parent_identifiers, Shapes::ShapeRef.new(shape: EnabledBaselineParentIdentifiers, location_name: "parentIdentifiers"))
+    EnabledBaselineFilter.add_member(:statuses, Shapes::ShapeRef.new(shape: EnabledBaselineEnablementStatuses, location_name: "statuses"))
     EnabledBaselineFilter.add_member(:target_identifiers, Shapes::ShapeRef.new(shape: EnabledBaselineTargetIdentifiers, location_name: "targetIdentifiers"))
     EnabledBaselineFilter.struct_class = Types::EnabledBaselineFilter
+
+    EnabledBaselineInheritanceDrift.add_member(:status, Shapes::ShapeRef.new(shape: EnabledBaselineDriftStatus, location_name: "status"))
+    EnabledBaselineInheritanceDrift.struct_class = Types::EnabledBaselineInheritanceDrift
 
     EnabledBaselineParameter.add_member(:key, Shapes::ShapeRef.new(shape: String, required: true, location_name: "key"))
     EnabledBaselineParameter.add_member(:value, Shapes::ShapeRef.new(shape: EnabledBaselineParameterDocument, required: true, location_name: "value"))
@@ -308,6 +330,7 @@ module Aws::ControlTower
     EnabledBaselineSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
     EnabledBaselineSummary.add_member(:baseline_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "baselineIdentifier"))
     EnabledBaselineSummary.add_member(:baseline_version, Shapes::ShapeRef.new(shape: String, location_name: "baselineVersion"))
+    EnabledBaselineSummary.add_member(:drift_status_summary, Shapes::ShapeRef.new(shape: EnabledBaselineDriftStatusSummary, location_name: "driftStatusSummary"))
     EnabledBaselineSummary.add_member(:parent_identifier, Shapes::ShapeRef.new(shape: Arn, location_name: "parentIdentifier"))
     EnabledBaselineSummary.add_member(:status_summary, Shapes::ShapeRef.new(shape: EnablementStatusSummary, required: true, location_name: "statusSummary"))
     EnabledBaselineSummary.add_member(:target_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "targetIdentifier"))
@@ -612,8 +635,8 @@ module Aws::ControlTower
         o.http_request_uri = "/create-landingzone"
         o.input = Shapes::ShapeRef.new(shape: CreateLandingZoneInput)
         o.output = Shapes::ShapeRef.new(shape: CreateLandingZoneOutput)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -625,12 +648,12 @@ module Aws::ControlTower
         o.http_request_uri = "/delete-landingzone"
         o.input = Shapes::ShapeRef.new(shape: DeleteLandingZoneInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteLandingZoneOutput)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:disable_baseline, Seahorse::Model::Operation.new.tap do |o|
@@ -639,13 +662,13 @@ module Aws::ControlTower
         o.http_request_uri = "/disable-baseline"
         o.input = Shapes::ShapeRef.new(shape: DisableBaselineInput)
         o.output = Shapes::ShapeRef.new(shape: DisableBaselineOutput)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:disable_control, Seahorse::Model::Operation.new.tap do |o|
@@ -654,13 +677,13 @@ module Aws::ControlTower
         o.http_request_uri = "/disable-control"
         o.input = Shapes::ShapeRef.new(shape: DisableControlInput)
         o.output = Shapes::ShapeRef.new(shape: DisableControlOutput)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:enable_baseline, Seahorse::Model::Operation.new.tap do |o|
@@ -669,13 +692,13 @@ module Aws::ControlTower
         o.http_request_uri = "/enable-baseline"
         o.input = Shapes::ShapeRef.new(shape: EnableBaselineInput)
         o.output = Shapes::ShapeRef.new(shape: EnableBaselineOutput)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:enable_control, Seahorse::Model::Operation.new.tap do |o|
@@ -684,13 +707,13 @@ module Aws::ControlTower
         o.http_request_uri = "/enable-control"
         o.input = Shapes::ShapeRef.new(shape: EnableControlInput)
         o.output = Shapes::ShapeRef.new(shape: EnableControlOutput)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_baseline, Seahorse::Model::Operation.new.tap do |o|
@@ -702,8 +725,8 @@ module Aws::ControlTower
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_baseline_operation, Seahorse::Model::Operation.new.tap do |o|
@@ -715,8 +738,8 @@ module Aws::ControlTower
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_control_operation, Seahorse::Model::Operation.new.tap do |o|
@@ -728,8 +751,8 @@ module Aws::ControlTower
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_enabled_baseline, Seahorse::Model::Operation.new.tap do |o|
@@ -741,8 +764,8 @@ module Aws::ControlTower
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_enabled_control, Seahorse::Model::Operation.new.tap do |o|
@@ -754,8 +777,8 @@ module Aws::ControlTower
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_landing_zone, Seahorse::Model::Operation.new.tap do |o|
@@ -767,8 +790,8 @@ module Aws::ControlTower
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_landing_zone_operation, Seahorse::Model::Operation.new.tap do |o|
@@ -780,8 +803,8 @@ module Aws::ControlTower
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:list_baselines, Seahorse::Model::Operation.new.tap do |o|
@@ -847,8 +870,8 @@ module Aws::ControlTower
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -910,13 +933,13 @@ module Aws::ControlTower
         o.http_request_uri = "/reset-enabled-baseline"
         o.input = Shapes::ShapeRef.new(shape: ResetEnabledBaselineInput)
         o.output = Shapes::ShapeRef.new(shape: ResetEnabledBaselineOutput)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:reset_enabled_control, Seahorse::Model::Operation.new.tap do |o|
@@ -925,13 +948,13 @@ module Aws::ControlTower
         o.http_request_uri = "/reset-enabled-control"
         o.input = Shapes::ShapeRef.new(shape: ResetEnabledControlInput)
         o.output = Shapes::ShapeRef.new(shape: ResetEnabledControlOutput)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:reset_landing_zone, Seahorse::Model::Operation.new.tap do |o|
@@ -940,12 +963,12 @@ module Aws::ControlTower
         o.http_request_uri = "/reset-landingzone"
         o.input = Shapes::ShapeRef.new(shape: ResetLandingZoneInput)
         o.output = Shapes::ShapeRef.new(shape: ResetLandingZoneOutput)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -976,13 +999,13 @@ module Aws::ControlTower
         o.http_request_uri = "/update-enabled-baseline"
         o.input = Shapes::ShapeRef.new(shape: UpdateEnabledBaselineInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateEnabledBaselineOutput)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_enabled_control, Seahorse::Model::Operation.new.tap do |o|
@@ -991,13 +1014,13 @@ module Aws::ControlTower
         o.http_request_uri = "/update-enabled-control"
         o.input = Shapes::ShapeRef.new(shape: UpdateEnabledControlInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateEnabledControlOutput)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_landing_zone, Seahorse::Model::Operation.new.tap do |o|
@@ -1006,12 +1029,12 @@ module Aws::ControlTower
         o.http_request_uri = "/update-landingzone"
         o.input = Shapes::ShapeRef.new(shape: UpdateLandingZoneInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateLandingZoneOutput)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
     end
 

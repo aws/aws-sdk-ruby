@@ -7322,7 +7322,8 @@ module Aws::EC2
     #   a time-based AMI copy. The specified completion duration applies to
     #   each of the snapshots associated with the AMI. Each snapshot
     #   associated with the AMI will be completed within the specified
-    #   completion duration, regardless of their size.
+    #   completion duration, with copy throughput automatically adjusted for
+    #   each snapshot based on its size to meet the timing target.
     #
     #   If you do not specify a value, the AMI copy operation is completed
     #   on a best-effort basis.
@@ -8713,6 +8714,85 @@ module Aws::EC2
     #
     class CreateDefaultVpcResult < Struct.new(
       :vpc)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the Amazon EC2 Mac instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] mac_credentials
+    #   Specifies the following credentials:
+    #
+    #   * **Internal disk administrative user**
+    #
+    #     * **Username** - Only the default administrative user
+    #       (`aws-managed-user`) is supported and it is used by default. You
+    #       can't specify a different administrative user.
+    #
+    #     * **Password** - If you did not change the default password for
+    #       `aws-managed-user`, specify the default password, which is
+    #       *blank*. Otherwise, specify your password.
+    #   * **Amazon EBS root volume administrative user**
+    #
+    #     * **Username** - If you did not change the default administrative
+    #       user, specify `ec2-user`. Otherwise, specify the username for
+    #       your administrative user.
+    #
+    #     * **Password** - Specify the password for the administrative user.
+    #
+    #   The credentials must be specified in the following JSON format:
+    #
+    #   `{ "internalDiskPassword":"internal-disk-admin_password",
+    #   "rootVolumeUsername":"root-volume-admin_username",
+    #   "rootVolumepassword":"root-volume-admin_password" }`
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to assign to the volume ownership delegation task.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateDelegateMacVolumeOwnershipTaskRequest AWS API Documentation
+    #
+    class CreateDelegateMacVolumeOwnershipTaskRequest < Struct.new(
+      :client_token,
+      :dry_run,
+      :instance_id,
+      :mac_credentials,
+      :tag_specifications)
+      SENSITIVE = [:mac_credentials]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] mac_modification_task
+    #   Information about the volume ownership delegation task.
+    #   @return [Types::MacModificationTask]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateDelegateMacVolumeOwnershipTaskResult AWS API Documentation
+    #
+    class CreateDelegateMacVolumeOwnershipTaskResult < Struct.new(
+      :mac_modification_task)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10627,6 +10707,101 @@ module Aws::EC2
     #
     class CreateLocalGatewayVirtualInterfaceResult < Struct.new(
       :local_gateway_virtual_interface)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the Amazon EC2 Mac instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] mac_credentials
+    #   **\[Apple silicon Mac instances only\]** Specifies the following
+    #   credentials:
+    #
+    #   * **Internal disk administrative user**
+    #
+    #     * **Username** - Only the default administrative user
+    #       (`aws-managed-user`) is supported and it is used by default. You
+    #       can't specify a different administrative user.
+    #
+    #     * **Password** - If you did not change the default password for
+    #       `aws-managed-user`, specify the default password, which is
+    #       *blank*. Otherwise, specify your password.
+    #   * **Amazon EBS root volume administrative user**
+    #
+    #     * **Username** - If you did not change the default administrative
+    #       user, specify `ec2-user`. Otherwise, specify the username for
+    #       your administrative user.
+    #
+    #     * **Password** - Specify the password for the administrative user.
+    #
+    #   The credentials must be specified in the following JSON format:
+    #
+    #   `{ "internalDiskPassword":"internal-disk-admin_password",
+    #   "rootVolumeUsername":"root-volume-admin_username",
+    #   "rootVolumepassword":"root-volume-admin_password" }`
+    #   @return [String]
+    #
+    # @!attribute [rw] mac_system_integrity_protection_configuration
+    #   Specifies the overrides to selectively enable or disable individual
+    #   SIP settings. The individual settings you specify here override the
+    #   overall SIP status you specify for
+    #   **MacSystemIntegrityProtectionStatus**.
+    #   @return [Types::MacSystemIntegrityProtectionConfigurationRequest]
+    #
+    # @!attribute [rw] mac_system_integrity_protection_status
+    #   Specifies the overall SIP status for the instance. To enable all SIP
+    #   settings, specify `enabled`. To disable all SIP settings, specify
+    #   `disabled`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   Specifies tags to apply to the SIP modification task.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateMacSystemIntegrityProtectionModificationTaskRequest AWS API Documentation
+    #
+    class CreateMacSystemIntegrityProtectionModificationTaskRequest < Struct.new(
+      :client_token,
+      :dry_run,
+      :instance_id,
+      :mac_credentials,
+      :mac_system_integrity_protection_configuration,
+      :mac_system_integrity_protection_status,
+      :tag_specifications)
+      SENSITIVE = [:mac_credentials]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] mac_modification_task
+    #   Information about the SIP modification task.
+    #   @return [Types::MacModificationTask]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateMacSystemIntegrityProtectionModificationTaskResult AWS API Documentation
+    #
+    class CreateMacSystemIntegrityProtectionModificationTaskResult < Struct.new(
+      :mac_modification_task)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22958,6 +23133,9 @@ module Aws::EC2
     #   * `processor-info.supported-features` - The supported CPU features
     #     (`amd-sev-snp`).
     #
+    #   * `reboot-migration-support` - Indicates whether enabling reboot
+    #     migration is supported (`supported` \| `unsupported`).
+    #
     #   * `supported-boot-mode` - The boot mode (`legacy-bios` \| `uefi`).
     #
     #   * `supported-root-device-type` - The root device type (`ebs` \|
@@ -24935,6 +25113,77 @@ module Aws::EC2
     #
     class DescribeMacHostsResult < Struct.new(
       :mac_hosts,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filters
+    #   Specifies one or more filters for the request:
+    #
+    #   * `instance-id` - The ID of the instance for which the task was
+    #     created.
+    #
+    #   * `task-state` - The state of the task (`successful` \| `failed` \|
+    #     `in-progress` \| `pending`).
+    #
+    #   * `mac-system-integrity-protection-configuration.sip-status` - The
+    #     overall SIP state requested in the task (`enabled` \| `disabled`).
+    #
+    #   * `start-time` - The date and time the task was created.
+    #
+    #   * `task-type` - The type of task (`sip-modification` \|
+    #     `volume-ownership-delegation`).
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] mac_modification_task_ids
+    #   The ID of task.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the returned `nextToken` value. This value can be between 5 and
+    #   500. If `maxResults` is given a larger value than 500, you receive
+    #   an error.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeMacModificationTasksRequest AWS API Documentation
+    #
+    class DescribeMacModificationTasksRequest < Struct.new(
+      :dry_run,
+      :filters,
+      :mac_modification_task_ids,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] mac_modification_tasks
+    #   Information about the tasks.
+    #   @return [Array<Types::MacModificationTask>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeMacModificationTasksResult AWS API Documentation
+    #
+    class DescribeMacModificationTasksResult < Struct.new(
+      :mac_modification_tasks,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -44646,10 +44895,33 @@ module Aws::EC2
     #   your instance.
     #   @return [String]
     #
+    # @!attribute [rw] reboot_migration
+    #   Specifies whether to attempt reboot migration during a
+    #   user-initiated reboot of an instance that has a scheduled
+    #   `system-reboot` event:
+    #
+    #   * `default` - Amazon EC2 attempts to migrate the instance to new
+    #     hardware (reboot migration). If successful, the `system-reboot`
+    #     event is cleared. If unsuccessful, an in-place reboot occurs and
+    #     the event remains scheduled.
+    #
+    #   * `disabled` - Amazon EC2 keeps the instance on the same hardware
+    #     (in-place reboot). The `system-reboot` event remains scheduled.
+    #
+    #   This setting only applies to supported instances that have a
+    #   scheduled reboot event. For more information, see [Enable or disable
+    #   reboot migration][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/schedevents_actions_reboot.html#reboot-migration
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceMaintenanceOptions AWS API Documentation
     #
     class InstanceMaintenanceOptions < Struct.new(
-      :auto_recovery)
+      :auto_recovery,
+      :reboot_migration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -46921,6 +47193,17 @@ module Aws::EC2
     #   clock (PHC) is supported.
     #   @return [String]
     #
+    # @!attribute [rw] reboot_migration_support
+    #   Indicates whether reboot migration during a user-initiated reboot is
+    #   supported for instances that have a scheduled `system-reboot` event.
+    #   For more information, see [Enable or disable reboot migration][1] in
+    #   the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/schedevents_actions_reboot.html#reboot-migration
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceTypeInfo AWS API Documentation
     #
     class InstanceTypeInfo < Struct.new(
@@ -46953,7 +47236,8 @@ module Aws::EC2
       :nitro_tpm_info,
       :media_accelerator_info,
       :neuron_info,
-      :phc_support)
+      :phc_support,
+      :reboot_migration_support)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -52005,6 +52289,154 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Information about a System Integrity Protection (SIP) modification
+    # task or volume ownership delegation task for an Amazon EC2 Mac
+    # instance.
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the Amazon EC2 Mac instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] mac_modification_task_id
+    #   The ID of task.
+    #   @return [String]
+    #
+    # @!attribute [rw] mac_system_integrity_protection_config
+    #   \[SIP modification tasks only\] Information about the SIP
+    #   configuration.
+    #   @return [Types::MacSystemIntegrityProtectionConfiguration]
+    #
+    # @!attribute [rw] start_time
+    #   The date and time the task was created, in the UTC timezone
+    #   (`YYYY-MM-DDThh:mm:ss.sssZ`).
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The tags assigned to the task.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] task_state
+    #   The state of the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_type
+    #   The type of task.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MacModificationTask AWS API Documentation
+    #
+    class MacModificationTask < Struct.new(
+      :instance_id,
+      :mac_modification_task_id,
+      :mac_system_integrity_protection_config,
+      :start_time,
+      :tags,
+      :task_state,
+      :task_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the configuration for a System Integrity Protection (SIP)
+    # modification task.
+    #
+    # @!attribute [rw] apple_internal
+    #   Indicates whether Apple Internal was enabled or disabled by the
+    #   task.
+    #   @return [String]
+    #
+    # @!attribute [rw] base_system
+    #   Indicates whether Base System was enabled or disabled by the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] debugging_restrictions
+    #   Indicates whether Debugging Restrictions was enabled or disabled by
+    #   the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] d_trace_restrictions
+    #   Indicates whether Dtrace Restrictions was enabled or disabled by the
+    #   task.
+    #   @return [String]
+    #
+    # @!attribute [rw] filesystem_protections
+    #   Indicates whether Filesystem Protections was enabled or disabled by
+    #   the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] kext_signing
+    #   Indicates whether Kext Signing was enabled or disabled by the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] nvram_protections
+    #   Indicates whether NVRAM Protections was enabled or disabled by the
+    #   task.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Indicates SIP was enabled or disabled by the task.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MacSystemIntegrityProtectionConfiguration AWS API Documentation
+    #
+    class MacSystemIntegrityProtectionConfiguration < Struct.new(
+      :apple_internal,
+      :base_system,
+      :debugging_restrictions,
+      :d_trace_restrictions,
+      :filesystem_protections,
+      :kext_signing,
+      :nvram_protections,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a custom configuration for a System Integrity Protection
+    # (SIP) modification task.
+    #
+    # @!attribute [rw] apple_internal
+    #   Enables or disables Apple Internal.
+    #   @return [String]
+    #
+    # @!attribute [rw] base_system
+    #   Enables or disables Base System.
+    #   @return [String]
+    #
+    # @!attribute [rw] debugging_restrictions
+    #   Enables or disables Debugging Restrictions.
+    #   @return [String]
+    #
+    # @!attribute [rw] d_trace_restrictions
+    #   Enables or disables Dtrace Restrictions.
+    #   @return [String]
+    #
+    # @!attribute [rw] filesystem_protections
+    #   Enables or disables Filesystem Protections.
+    #   @return [String]
+    #
+    # @!attribute [rw] kext_signing
+    #   Enables or disables Kext Signing.
+    #   @return [String]
+    #
+    # @!attribute [rw] nvram_protections
+    #   Enables or disables Nvram Protections.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MacSystemIntegrityProtectionConfigurationRequest AWS API Documentation
+    #
+    class MacSystemIntegrityProtectionConfigurationRequest < Struct.new(
+      :apple_internal,
+      :base_system,
+      :debugging_restrictions,
+      :d_trace_restrictions,
+      :filesystem_protections,
+      :kext_signing,
+      :nvram_protections)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details for Site-to-Site VPN tunnel endpoint maintenance events.
     #
     # @!attribute [rw] pending_maintenance
@@ -53614,6 +54046,28 @@ module Aws::EC2
     #   to default.
     #   @return [String]
     #
+    # @!attribute [rw] reboot_migration
+    #   Specifies whether to attempt reboot migration during a
+    #   user-initiated reboot of an instance that has a scheduled
+    #   `system-reboot` event:
+    #
+    #   * `default` - Amazon EC2 attempts to migrate the instance to new
+    #     hardware (reboot migration). If successful, the `system-reboot`
+    #     event is cleared. If unsuccessful, an in-place reboot occurs and
+    #     the event remains scheduled.
+    #
+    #   * `disabled` - Amazon EC2 keeps the instance on the same hardware
+    #     (in-place reboot). The `system-reboot` event remains scheduled.
+    #
+    #   This setting only applies to supported instances that have a
+    #   scheduled reboot event. For more information, see [Enable or disable
+    #   reboot migration][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/schedevents_actions_reboot.html#reboot-migration
+    #   @return [String]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -53626,6 +54080,7 @@ module Aws::EC2
     class ModifyInstanceMaintenanceOptionsRequest < Struct.new(
       :instance_id,
       :auto_recovery,
+      :reboot_migration,
       :dry_run)
       SENSITIVE = []
       include Aws::Structure
@@ -53640,11 +54095,34 @@ module Aws::EC2
     #   your instance.
     #   @return [String]
     #
+    # @!attribute [rw] reboot_migration
+    #   Specifies whether to attempt reboot migration during a
+    #   user-initiated reboot of an instance that has a scheduled
+    #   `system-reboot` event:
+    #
+    #   * `default` - Amazon EC2 attempts to migrate the instance to new
+    #     hardware (reboot migration). If successful, the `system-reboot`
+    #     event is cleared. If unsuccessful, an in-place reboot occurs and
+    #     the event remains scheduled.
+    #
+    #   * `disabled` - Amazon EC2 keeps the instance on the same hardware
+    #     (in-place reboot). The `system-reboot` event remains scheduled.
+    #
+    #   This setting only applies to supported instances that have a
+    #   scheduled reboot event. For more information, see [Enable or disable
+    #   reboot migration][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/schedevents_actions_reboot.html#reboot-migration
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceMaintenanceOptionsResult AWS API Documentation
     #
     class ModifyInstanceMaintenanceOptionsResult < Struct.new(
       :instance_id,
-      :auto_recovery)
+      :auto_recovery,
+      :reboot_migration)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1403,6 +1403,9 @@ module Aws::WorkSpaces
     # @option params [Types::TimeoutSettings] :timeout_settings
     #   Indicates the timeout settings of the pool.
     #
+    # @option params [String] :running_mode
+    #   The running mode for the pool.
+    #
     # @return [Types::CreateWorkspacesPoolResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWorkspacesPoolResult#workspaces_pool #workspaces_pool} => Types::WorkspacesPool
@@ -1432,6 +1435,7 @@ module Aws::WorkSpaces
     #       idle_disconnect_timeout_in_seconds: 1,
     #       max_user_duration_in_seconds: 1,
     #     },
+    #     running_mode: "AUTO_STOP", # accepts AUTO_STOP, ALWAYS_ON
     #   })
     #
     # @example Response structure
@@ -1457,6 +1461,7 @@ module Aws::WorkSpaces
     #   resp.workspaces_pool.timeout_settings.disconnect_timeout_in_seconds #=> Integer
     #   resp.workspaces_pool.timeout_settings.idle_disconnect_timeout_in_seconds #=> Integer
     #   resp.workspaces_pool.timeout_settings.max_user_duration_in_seconds #=> Integer
+    #   resp.workspaces_pool.running_mode #=> String, one of "AUTO_STOP", "ALWAYS_ON"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspacesPool AWS API Documentation
     #
@@ -2721,7 +2726,7 @@ module Aws::WorkSpaces
     #   resp.images[0].updates.update_available #=> Boolean
     #   resp.images[0].updates.description #=> String
     #   resp.images[0].error_details #=> Array
-    #   resp.images[0].error_details[0].error_code #=> String, one of "OutdatedPowershellVersion", "OfficeInstalled", "PCoIPAgentInstalled", "WindowsUpdatesEnabled", "AutoMountDisabled", "WorkspacesBYOLAccountNotFound", "WorkspacesBYOLAccountDisabled", "DHCPDisabled", "DiskFreeSpace", "AdditionalDrivesAttached", "OSNotSupported", "DomainJoined", "AzureDomainJoined", "FirewallEnabled", "VMWareToolsInstalled", "DiskSizeExceeded", "IncompatiblePartitioning", "PendingReboot", "AutoLogonEnabled", "RealTimeUniversalDisabled", "MultipleBootPartition", "Requires64BitOS", "ZeroRearmCount", "InPlaceUpgrade", "AntiVirusInstalled", "UEFINotSupported", "UnknownError", "AppXPackagesInstalled", "ReservedStorageInUse", "AdditionalDrivesPresent", "WindowsUpdatesRequired", "SysPrepFileMissing", "UserProfileMissing", "InsufficientDiskSpace", "EnvironmentVariablesPathMissingEntries", "DomainAccountServicesFound", "InvalidIp", "RemoteDesktopServicesDisabled", "WindowsModulesInstallerDisabled", "AmazonSsmAgentEnabled", "UnsupportedSecurityProtocol", "MultipleUserProfiles", "StagedAppxPackage", "UnsupportedOsUpgrade", "InsufficientRearmCount"
+    #   resp.images[0].error_details[0].error_code #=> String, one of "OutdatedPowershellVersion", "OfficeInstalled", "PCoIPAgentInstalled", "WindowsUpdatesEnabled", "AutoMountDisabled", "WorkspacesBYOLAccountNotFound", "WorkspacesBYOLAccountDisabled", "DHCPDisabled", "DiskFreeSpace", "AdditionalDrivesAttached", "OSNotSupported", "DomainJoined", "AzureDomainJoined", "FirewallEnabled", "VMWareToolsInstalled", "DiskSizeExceeded", "IncompatiblePartitioning", "PendingReboot", "AutoLogonEnabled", "RealTimeUniversalDisabled", "MultipleBootPartition", "Requires64BitOS", "ZeroRearmCount", "InPlaceUpgrade", "AntiVirusInstalled", "UEFINotSupported", "UnknownError", "AppXPackagesInstalled", "ReservedStorageInUse", "AdditionalDrivesPresent", "WindowsUpdatesRequired", "SysPrepFileMissing", "UserProfileMissing", "InsufficientDiskSpace", "EnvironmentVariablesPathMissingEntries", "DomainAccountServicesFound", "InvalidIp", "RemoteDesktopServicesDisabled", "WindowsModulesInstallerDisabled", "AmazonSsmAgentEnabled", "UnsupportedSecurityProtocol", "MultipleUserProfiles", "StagedAppxPackage", "UnsupportedOsUpgrade", "InsufficientRearmCount", "ProtocolOSIncompatibility", "MemoryIntegrityIncompatibility", "RestrictedDriveLetterInUse"
     #   resp.images[0].error_details[0].error_message #=> String
     #   resp.next_token #=> String
     #
@@ -3028,6 +3033,7 @@ module Aws::WorkSpaces
     #   resp.workspaces_pools[0].timeout_settings.disconnect_timeout_in_seconds #=> Integer
     #   resp.workspaces_pools[0].timeout_settings.idle_disconnect_timeout_in_seconds #=> Integer
     #   resp.workspaces_pools[0].timeout_settings.max_user_duration_in_seconds #=> Integer
+    #   resp.workspaces_pools[0].running_mode #=> String, one of "AUTO_STOP", "ALWAYS_ON"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesPools AWS API Documentation
@@ -4797,6 +4803,10 @@ module Aws::WorkSpaces
     # @option params [Types::TimeoutSettings] :timeout_settings
     #   Indicates the timeout settings of the specified pool.
     #
+    # @option params [String] :running_mode
+    #   The desired running mode for the pool. The running mode can only be
+    #   updated when the pool is in a stopped state.
+    #
     # @return [Types::UpdateWorkspacesPoolResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateWorkspacesPoolResult#workspaces_pool #workspaces_pool} => Types::WorkspacesPool
@@ -4820,6 +4830,7 @@ module Aws::WorkSpaces
     #       idle_disconnect_timeout_in_seconds: 1,
     #       max_user_duration_in_seconds: 1,
     #     },
+    #     running_mode: "AUTO_STOP", # accepts AUTO_STOP, ALWAYS_ON
     #   })
     #
     # @example Response structure
@@ -4845,6 +4856,7 @@ module Aws::WorkSpaces
     #   resp.workspaces_pool.timeout_settings.disconnect_timeout_in_seconds #=> Integer
     #   resp.workspaces_pool.timeout_settings.idle_disconnect_timeout_in_seconds #=> Integer
     #   resp.workspaces_pool.timeout_settings.max_user_duration_in_seconds #=> Integer
+    #   resp.workspaces_pool.running_mode #=> String, one of "AUTO_STOP", "ALWAYS_ON"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateWorkspacesPool AWS API Documentation
     #
@@ -4873,7 +4885,7 @@ module Aws::WorkSpaces
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.136.0'
+      context[:gem_version] = '1.137.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

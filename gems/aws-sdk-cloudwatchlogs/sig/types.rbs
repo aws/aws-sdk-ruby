@@ -478,6 +478,7 @@ module Aws::CloudWatchLogs
       attr_accessor limit: ::Integer
       attr_accessor include_linked_accounts: bool
       attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY")
+      attr_accessor log_group_identifiers: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -920,6 +921,22 @@ module Aws::CloudWatchLogs
       SENSITIVE: []
     end
 
+    class ListLogGroupsRequest
+      attr_accessor log_group_name_pattern: ::String
+      attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY")
+      attr_accessor include_linked_accounts: bool
+      attr_accessor account_identifiers: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListLogGroupsResponse
+      attr_accessor log_groups: ::Array[Types::LogGroupSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListTagsForResourceRequest
       attr_accessor resource_arn: ::String
       SENSITIVE: []
@@ -1006,6 +1023,13 @@ module Aws::CloudWatchLogs
     class LogGroupField
       attr_accessor name: ::String
       attr_accessor percent: ::Integer
+      SENSITIVE: []
+    end
+
+    class LogGroupSummary
+      attr_accessor log_group_name: ::String
+      attr_accessor log_group_arn: ::String
+      attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY")
       SENSITIVE: []
     end
 

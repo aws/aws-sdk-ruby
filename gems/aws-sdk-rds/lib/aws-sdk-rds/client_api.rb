@@ -206,6 +206,8 @@ module Aws::RDS
     DBInstanceStatusInfo = Shapes::StructureShape.new(name: 'DBInstanceStatusInfo')
     DBInstanceStatusInfoList = Shapes::ListShape.new(name: 'DBInstanceStatusInfoList')
     DBLogFileNotFoundFault = Shapes::StructureShape.new(name: 'DBLogFileNotFoundFault', error: {"code" => "DBLogFileNotFoundFault", "httpStatusCode" => 404, "senderFault" => true})
+    DBMajorEngineVersion = Shapes::StructureShape.new(name: 'DBMajorEngineVersion')
+    DBMajorEngineVersionsList = Shapes::ListShape.new(name: 'DBMajorEngineVersionsList')
     DBParameterGroup = Shapes::StructureShape.new(name: 'DBParameterGroup')
     DBParameterGroupAlreadyExistsFault = Shapes::StructureShape.new(name: 'DBParameterGroupAlreadyExistsFault', error: {"code" => "DBParameterGroupAlreadyExists", "httpStatusCode" => 400, "senderFault" => true})
     DBParameterGroupDetails = Shapes::StructureShape.new(name: 'DBParameterGroupDetails')
@@ -335,6 +337,8 @@ module Aws::RDS
     DescribeDBLogFilesList = Shapes::ListShape.new(name: 'DescribeDBLogFilesList')
     DescribeDBLogFilesMessage = Shapes::StructureShape.new(name: 'DescribeDBLogFilesMessage')
     DescribeDBLogFilesResponse = Shapes::StructureShape.new(name: 'DescribeDBLogFilesResponse')
+    DescribeDBMajorEngineVersionsRequest = Shapes::StructureShape.new(name: 'DescribeDBMajorEngineVersionsRequest')
+    DescribeDBMajorEngineVersionsResponse = Shapes::StructureShape.new(name: 'DescribeDBMajorEngineVersionsResponse')
     DescribeDBParameterGroupsMessage = Shapes::StructureShape.new(name: 'DescribeDBParameterGroupsMessage')
     DescribeDBParametersMessage = Shapes::StructureShape.new(name: 'DescribeDBParametersMessage')
     DescribeDBProxiesRequest = Shapes::StructureShape.new(name: 'DescribeDBProxiesRequest')
@@ -396,6 +400,7 @@ module Aws::RDS
     EnableHttpEndpointResponse = Shapes::StructureShape.new(name: 'EnableHttpEndpointResponse')
     EncryptionContextMap = Shapes::MapShape.new(name: 'EncryptionContextMap')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
+    Engine = Shapes::StringShape.new(name: 'Engine')
     EngineDefaults = Shapes::StructureShape.new(name: 'EngineDefaults')
     EngineFamily = Shapes::StringShape.new(name: 'EngineFamily')
     EngineModeList = Shapes::ListShape.new(name: 'EngineModeList')
@@ -495,6 +500,7 @@ module Aws::RDS
     KMSKeyNotAccessibleFault = Shapes::StructureShape.new(name: 'KMSKeyNotAccessibleFault', error: {"code" => "KMSKeyNotAccessibleFault", "httpStatusCode" => 400, "senderFault" => true})
     KeyList = Shapes::ListShape.new(name: 'KeyList')
     KmsKeyIdOrArn = Shapes::StringShape.new(name: 'KmsKeyIdOrArn')
+    LifecycleSupportName = Shapes::StringShape.new(name: 'LifecycleSupportName')
     LimitlessDatabase = Shapes::StructureShape.new(name: 'LimitlessDatabase')
     LimitlessDatabaseStatus = Shapes::StringShape.new(name: 'LimitlessDatabaseStatus')
     ListTagsForResourceMessage = Shapes::StructureShape.new(name: 'ListTagsForResourceMessage')
@@ -502,6 +508,7 @@ module Aws::RDS
     LogTypeList = Shapes::ListShape.new(name: 'LogTypeList')
     Long = Shapes::IntegerShape.new(name: 'Long')
     LongOptional = Shapes::IntegerShape.new(name: 'LongOptional')
+    MajorEngineVersion = Shapes::StringShape.new(name: 'MajorEngineVersion')
     Marker = Shapes::StringShape.new(name: 'Marker')
     MasterUserSecret = Shapes::StructureShape.new(name: 'MasterUserSecret')
     MaxDBShardGroupLimitReached = Shapes::StructureShape.new(name: 'MaxDBShardGroupLimitReached', error: {"code" => "MaxDBShardGroupLimitReached", "httpStatusCode" => 400, "senderFault" => true})
@@ -714,6 +721,8 @@ module Aws::RDS
     SubscriptionCategoryNotFoundFault = Shapes::StructureShape.new(name: 'SubscriptionCategoryNotFoundFault', error: {"code" => "SubscriptionCategoryNotFound", "httpStatusCode" => 404, "senderFault" => true})
     SubscriptionNotFoundFault = Shapes::StructureShape.new(name: 'SubscriptionNotFoundFault', error: {"code" => "SubscriptionNotFound", "httpStatusCode" => 404, "senderFault" => true})
     SupportedCharacterSetsList = Shapes::ListShape.new(name: 'SupportedCharacterSetsList')
+    SupportedEngineLifecycle = Shapes::StructureShape.new(name: 'SupportedEngineLifecycle')
+    SupportedEngineLifecycleList = Shapes::ListShape.new(name: 'SupportedEngineLifecycleList')
     SupportedTimezonesList = Shapes::ListShape.new(name: 'SupportedTimezonesList')
     SwitchoverBlueGreenDeploymentRequest = Shapes::StructureShape.new(name: 'SwitchoverBlueGreenDeploymentRequest')
     SwitchoverBlueGreenDeploymentResponse = Shapes::StructureShape.new(name: 'SwitchoverBlueGreenDeploymentResponse')
@@ -1873,6 +1882,13 @@ module Aws::RDS
 
     DBLogFileNotFoundFault.struct_class = Types::DBLogFileNotFoundFault
 
+    DBMajorEngineVersion.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
+    DBMajorEngineVersion.add_member(:major_engine_version, Shapes::ShapeRef.new(shape: String, location_name: "MajorEngineVersion"))
+    DBMajorEngineVersion.add_member(:supported_engine_lifecycles, Shapes::ShapeRef.new(shape: SupportedEngineLifecycleList, location_name: "SupportedEngineLifecycles"))
+    DBMajorEngineVersion.struct_class = Types::DBMajorEngineVersion
+
+    DBMajorEngineVersionsList.member = Shapes::ShapeRef.new(shape: DBMajorEngineVersion, location_name: "DBMajorEngineVersion")
+
     DBParameterGroup.add_member(:db_parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "DBParameterGroupName"))
     DBParameterGroup.add_member(:db_parameter_group_family, Shapes::ShapeRef.new(shape: String, location_name: "DBParameterGroupFamily"))
     DBParameterGroup.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
@@ -2407,6 +2423,16 @@ module Aws::RDS
     DescribeDBLogFilesResponse.add_member(:describe_db_log_files, Shapes::ShapeRef.new(shape: DescribeDBLogFilesList, location_name: "DescribeDBLogFiles"))
     DescribeDBLogFilesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DescribeDBLogFilesResponse.struct_class = Types::DescribeDBLogFilesResponse
+
+    DescribeDBMajorEngineVersionsRequest.add_member(:engine, Shapes::ShapeRef.new(shape: Engine, location_name: "Engine"))
+    DescribeDBMajorEngineVersionsRequest.add_member(:major_engine_version, Shapes::ShapeRef.new(shape: MajorEngineVersion, location_name: "MajorEngineVersion"))
+    DescribeDBMajorEngineVersionsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+    DescribeDBMajorEngineVersionsRequest.add_member(:max_records, Shapes::ShapeRef.new(shape: MaxRecords, location_name: "MaxRecords"))
+    DescribeDBMajorEngineVersionsRequest.struct_class = Types::DescribeDBMajorEngineVersionsRequest
+
+    DescribeDBMajorEngineVersionsResponse.add_member(:db_major_engine_versions, Shapes::ShapeRef.new(shape: DBMajorEngineVersionsList, location_name: "DBMajorEngineVersions"))
+    DescribeDBMajorEngineVersionsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeDBMajorEngineVersionsResponse.struct_class = Types::DescribeDBMajorEngineVersionsResponse
 
     DescribeDBParameterGroupsMessage.add_member(:db_parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "DBParameterGroupName"))
     DescribeDBParameterGroupsMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
@@ -4224,6 +4250,13 @@ module Aws::RDS
 
     SupportedCharacterSetsList.member = Shapes::ShapeRef.new(shape: CharacterSet, location_name: "CharacterSet")
 
+    SupportedEngineLifecycle.add_member(:lifecycle_support_name, Shapes::ShapeRef.new(shape: LifecycleSupportName, required: true, location_name: "LifecycleSupportName"))
+    SupportedEngineLifecycle.add_member(:lifecycle_support_start_date, Shapes::ShapeRef.new(shape: TStamp, required: true, location_name: "LifecycleSupportStartDate"))
+    SupportedEngineLifecycle.add_member(:lifecycle_support_end_date, Shapes::ShapeRef.new(shape: TStamp, required: true, location_name: "LifecycleSupportEndDate"))
+    SupportedEngineLifecycle.struct_class = Types::SupportedEngineLifecycle
+
+    SupportedEngineLifecycleList.member = Shapes::ShapeRef.new(shape: SupportedEngineLifecycle, location_name: "SupportedEngineLifecycle")
+
     SupportedTimezonesList.member = Shapes::ShapeRef.new(shape: Timezone, location_name: "Timezone")
 
     SwitchoverBlueGreenDeploymentRequest.add_member(:blue_green_deployment_identifier, Shapes::ShapeRef.new(shape: BlueGreenDeploymentIdentifier, required: true, location_name: "BlueGreenDeploymentIdentifier"))
@@ -5292,6 +5325,20 @@ module Aws::RDS
         o.output = Shapes::ShapeRef.new(shape: DescribeDBLogFilesResponse)
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotReadyFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_db_major_engine_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDBMajorEngineVersions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDBMajorEngineVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDBMajorEngineVersionsResponse)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_records",
           tokens: {

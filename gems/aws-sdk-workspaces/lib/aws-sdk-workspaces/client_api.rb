@@ -348,6 +348,7 @@ module Aws::WorkSpaces
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PendingCreateStandbyWorkspacesRequest = Shapes::StructureShape.new(name: 'PendingCreateStandbyWorkspacesRequest')
     PendingCreateStandbyWorkspacesRequestList = Shapes::ListShape.new(name: 'PendingCreateStandbyWorkspacesRequestList')
+    PoolsRunningMode = Shapes::StringShape.new(name: 'PoolsRunningMode')
     Protocol = Shapes::StringShape.new(name: 'Protocol')
     ProtocolList = Shapes::ListShape.new(name: 'ProtocolList')
     RebootRequest = Shapes::StructureShape.new(name: 'RebootRequest')
@@ -801,6 +802,7 @@ module Aws::WorkSpaces
     CreateWorkspacesPoolRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateWorkspacesPoolRequest.add_member(:application_settings, Shapes::ShapeRef.new(shape: ApplicationSettingsRequest, location_name: "ApplicationSettings"))
     CreateWorkspacesPoolRequest.add_member(:timeout_settings, Shapes::ShapeRef.new(shape: TimeoutSettings, location_name: "TimeoutSettings"))
+    CreateWorkspacesPoolRequest.add_member(:running_mode, Shapes::ShapeRef.new(shape: PoolsRunningMode, location_name: "RunningMode"))
     CreateWorkspacesPoolRequest.struct_class = Types::CreateWorkspacesPoolRequest
 
     CreateWorkspacesPoolResult.add_member(:workspaces_pool, Shapes::ShapeRef.new(shape: WorkspacesPool, location_name: "WorkspacesPool"))
@@ -1685,6 +1687,7 @@ module Aws::WorkSpaces
     UpdateWorkspacesPoolRequest.add_member(:capacity, Shapes::ShapeRef.new(shape: Capacity, location_name: "Capacity"))
     UpdateWorkspacesPoolRequest.add_member(:application_settings, Shapes::ShapeRef.new(shape: ApplicationSettingsRequest, location_name: "ApplicationSettings"))
     UpdateWorkspacesPoolRequest.add_member(:timeout_settings, Shapes::ShapeRef.new(shape: TimeoutSettings, location_name: "TimeoutSettings"))
+    UpdateWorkspacesPoolRequest.add_member(:running_mode, Shapes::ShapeRef.new(shape: PoolsRunningMode, location_name: "RunningMode"))
     UpdateWorkspacesPoolRequest.struct_class = Types::UpdateWorkspacesPoolRequest
 
     UpdateWorkspacesPoolResult.add_member(:workspaces_pool, Shapes::ShapeRef.new(shape: WorkspacesPool, location_name: "WorkspacesPool"))
@@ -1896,6 +1899,7 @@ module Aws::WorkSpaces
     WorkspacesPool.add_member(:errors, Shapes::ShapeRef.new(shape: WorkspacesPoolErrors, location_name: "Errors"))
     WorkspacesPool.add_member(:application_settings, Shapes::ShapeRef.new(shape: ApplicationSettingsResponse, location_name: "ApplicationSettings"))
     WorkspacesPool.add_member(:timeout_settings, Shapes::ShapeRef.new(shape: TimeoutSettings, location_name: "TimeoutSettings"))
+    WorkspacesPool.add_member(:running_mode, Shapes::ShapeRef.new(shape: PoolsRunningMode, required: true, location_name: "RunningMode"))
     WorkspacesPool.struct_class = Types::WorkspacesPool
 
     WorkspacesPoolError.add_member(:error_code, Shapes::ShapeRef.new(shape: WorkspacesPoolErrorCode, location_name: "ErrorCode"))

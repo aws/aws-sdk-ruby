@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.93.0 (2025-05-14)
+------------------
+
+* Feature - This release adds catalogARN support for s3 tables multi-catalog catalogARNs.
+
 1.92.0 (2025-05-12)
 ------------------
 

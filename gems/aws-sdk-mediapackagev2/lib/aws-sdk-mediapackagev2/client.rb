@@ -1301,7 +1301,29 @@ module Aws::MediaPackageV2
     #     container_type: "CMAF", 
     #     dash_manifests: [
     #       {
+    #         base_urls: [
+    #           {
+    #             dvb_priority: 1, 
+    #             dvb_weight: 3, 
+    #             service_location: "A", 
+    #             url: "http://example.com/", 
+    #           }, 
+    #         ], 
+    #         compactness: "STANDARD", 
     #         drm_signaling: "INDIVIDUAL", 
+    #         dvb_settings: {
+    #           error_metrics: [
+    #             {
+    #               probability: 500, 
+    #               reporting_url: "https://example.com/dvb-errors/errors", 
+    #             }, 
+    #           ], 
+    #           font_download: {
+    #             font_family: "SubtitleDisplay", 
+    #             mime_type: "application/font", 
+    #             url: "https://example.com/fonts/SubtitleDisplay.woff", 
+    #           }, 
+    #         }, 
     #         manifest_name: "exampleDashManifest1", 
     #         manifest_window_seconds: 300, 
     #         min_buffer_time_seconds: 30, 
@@ -1309,14 +1331,50 @@ module Aws::MediaPackageV2
     #         period_triggers: [
     #           "AVAILS", 
     #         ], 
+    #         profiles: [
+    #           "DVB_DASH", 
+    #         ], 
+    #         program_information: {
+    #           copyright: "(c) Example. All rights reserved", 
+    #           language_code: "en", 
+    #           more_information_url: "https://example.com/more-information", 
+    #           source: "exampleSource", 
+    #           title: "exampleTitle", 
+    #         }, 
     #         scte_dash: {
     #           ad_marker_dash: "XML", 
     #         }, 
     #         segment_template_format: "NUMBER_WITH_TIMELINE", 
     #         suggested_presentation_delay_seconds: 2, 
+    #         utc_timing: {
+    #           timing_mode: "HTTP_HEAD", 
+    #           timing_source: "example", 
+    #         }, 
     #       }, 
     #       {
+    #         base_urls: [
+    #           {
+    #             dvb_priority: 2, 
+    #             dvb_weight: 2, 
+    #             service_location: "B", 
+    #             url: "http://example2.com/", 
+    #           }, 
+    #         ], 
+    #         compactness: "STANDARD", 
     #         drm_signaling: "INDIVIDUAL", 
+    #         dvb_settings: {
+    #           error_metrics: [
+    #             {
+    #               probability: 600, 
+    #               reporting_url: "https://example2.com/dvb-errors/errors", 
+    #             }, 
+    #           ], 
+    #           font_download: {
+    #             font_family: "SubtitleDisplay", 
+    #             mime_type: "application/font", 
+    #             url: "https://example.com/fonts/SubtitleDisplay.woff", 
+    #           }, 
+    #         }, 
     #         manifest_name: "exampleDashManifest2", 
     #         manifest_window_seconds: 60, 
     #         min_buffer_time_seconds: 9, 
@@ -1327,11 +1385,25 @@ module Aws::MediaPackageV2
     #           "SOURCE_CHANGES", 
     #           "SOURCE_DISRUPTIONS", 
     #         ], 
+    #         profiles: [
+    #           "DVB_DASH", 
+    #         ], 
+    #         program_information: {
+    #           copyright: "(c) Example. All rights reserved", 
+    #           language_code: "en", 
+    #           more_information_url: "https://example2.com/more-information", 
+    #           source: "exampleSource2", 
+    #           title: "exampleTitle2", 
+    #         }, 
     #         scte_dash: {
     #           ad_marker_dash: "XML", 
     #         }, 
     #         segment_template_format: "NUMBER_WITH_TIMELINE", 
     #         suggested_presentation_delay_seconds: 12, 
+    #         utc_timing: {
+    #           timing_mode: "HTTP_HEAD", 
+    #           timing_source: "example", 
+    #         }, 
     #       }, 
     #     ], 
     #     force_endpoint_error_configuration: {
@@ -1430,7 +1502,29 @@ module Aws::MediaPackageV2
     #     created_at: Time.parse("2022-10-18T09:36:00.00Z"), 
     #     dash_manifests: [
     #       {
+    #         base_urls: [
+    #           {
+    #             dvb_priority: 1, 
+    #             dvb_weight: 3, 
+    #             service_location: "A", 
+    #             url: "http://example.com/", 
+    #           }, 
+    #         ], 
+    #         compactness: "STANDARD", 
     #         drm_signaling: "INDIVIDUAL", 
+    #         dvb_settings: {
+    #           error_metrics: [
+    #             {
+    #               probability: 500, 
+    #               reporting_url: "https://example.com/dvb-errors/errors", 
+    #             }, 
+    #           ], 
+    #           font_download: {
+    #             font_family: "SubtitleDisplay", 
+    #             mime_type: "application/font", 
+    #             url: "https://example.com/fonts/SubtitleDisplay.woff", 
+    #           }, 
+    #         }, 
     #         manifest_name: "exampleDashManifest1", 
     #         manifest_window_seconds: 300, 
     #         min_buffer_time_seconds: 30, 
@@ -1438,15 +1532,51 @@ module Aws::MediaPackageV2
     #         period_triggers: [
     #           "AVAILS", 
     #         ], 
+    #         profiles: [
+    #           "DVB_DASH", 
+    #         ], 
+    #         program_information: {
+    #           copyright: "(c) Example. All rights reserved", 
+    #           language_code: "en", 
+    #           more_information_url: "https://example.com/more-information", 
+    #           source: "exampleSource", 
+    #           title: "exampleTitle", 
+    #         }, 
     #         scte_dash: {
     #           ad_marker_dash: "XML", 
     #         }, 
     #         segment_template_format: "NUMBER_WITH_TIMELINE", 
     #         suggested_presentation_delay_seconds: 2, 
     #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointCMAF/exampleDashManifest1.mpd", 
+    #         utc_timing: {
+    #           timing_mode: "HTTP_HEAD", 
+    #           timing_source: "example", 
+    #         }, 
     #       }, 
     #       {
+    #         base_urls: [
+    #           {
+    #             dvb_priority: 2, 
+    #             dvb_weight: 2, 
+    #             service_location: "B", 
+    #             url: "http://example2.com/", 
+    #           }, 
+    #         ], 
+    #         compactness: "STANDARD", 
     #         drm_signaling: "INDIVIDUAL", 
+    #         dvb_settings: {
+    #           error_metrics: [
+    #             {
+    #               probability: 600, 
+    #               reporting_url: "https://example2.com/dvb-errors/errors", 
+    #             }, 
+    #           ], 
+    #           font_download: {
+    #             font_family: "SubtitleDisplay", 
+    #             mime_type: "application/font", 
+    #             url: "https://example.com/fonts/SubtitleDisplay.woff", 
+    #           }, 
+    #         }, 
     #         manifest_name: "exampleDashManifest2", 
     #         manifest_window_seconds: 60, 
     #         min_buffer_time_seconds: 9, 
@@ -1457,12 +1587,26 @@ module Aws::MediaPackageV2
     #           "SOURCE_CHANGES", 
     #           "SOURCE_DISRUPTIONS", 
     #         ], 
+    #         profiles: [
+    #           "DVB_DASH", 
+    #         ], 
+    #         program_information: {
+    #           copyright: "(c) Example. All rights reserved", 
+    #           language_code: "en", 
+    #           more_information_url: "https://example2.com/more-information", 
+    #           source: "exampleSource2", 
+    #           title: "exampleTitle2", 
+    #         }, 
     #         scte_dash: {
     #           ad_marker_dash: "XML", 
     #         }, 
     #         segment_template_format: "NUMBER_WITH_TIMELINE", 
     #         suggested_presentation_delay_seconds: 12, 
     #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointCMAF/exampleDashManifest2.mpd", 
+    #         utc_timing: {
+    #           timing_mode: "HTTP_HEAD", 
+    #           timing_source: "example", 
+    #         }, 
     #       }, 
     #     ], 
     #     etag: "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=", 
@@ -1666,6 +1810,41 @@ module Aws::MediaPackageV2
     #           timing_mode: "HTTP_HEAD", # accepts HTTP_HEAD, HTTP_ISO, HTTP_XSDATE, UTC_DIRECT
     #           timing_source: "DashUtcTimingTimingSourceString",
     #         },
+    #         profiles: ["DVB_DASH"], # accepts DVB_DASH
+    #         base_urls: [
+    #           {
+    #             url: "DashBaseUrlUrlString", # required
+    #             service_location: "DashBaseUrlServiceLocationString",
+    #             dvb_priority: 1,
+    #             dvb_weight: 1,
+    #           },
+    #         ],
+    #         program_information: {
+    #           title: "DashProgramInformationTitleString",
+    #           source: "DashProgramInformationSourceString",
+    #           copyright: "DashProgramInformationCopyrightString",
+    #           language_code: "DashProgramInformationLanguageCodeString",
+    #           more_information_url: "DashProgramInformationMoreInformationUrlString",
+    #         },
+    #         dvb_settings: {
+    #           font_download: {
+    #             url: "DashDvbFontDownloadUrlString",
+    #             mime_type: "DashDvbFontDownloadMimeTypeString",
+    #             font_family: "DashDvbFontDownloadFontFamilyString",
+    #           },
+    #           error_metrics: [
+    #             {
+    #               reporting_url: "DashDvbMetricsReportingReportingUrlString", # required
+    #               probability: 1,
+    #             },
+    #           ],
+    #         },
+    #         compactness: "STANDARD", # accepts STANDARD, NONE
+    #         subtitle_configuration: {
+    #           ttml_configuration: {
+    #             ttml_profile: "IMSC_1", # required, accepts IMSC_1, EBU_TT_D_101
+    #           },
+    #         },
     #       },
     #     ],
     #     force_endpoint_error_configuration: {
@@ -1754,6 +1933,26 @@ module Aws::MediaPackageV2
     #   resp.dash_manifests[0].drm_signaling #=> String, one of "INDIVIDUAL", "REFERENCED"
     #   resp.dash_manifests[0].utc_timing.timing_mode #=> String, one of "HTTP_HEAD", "HTTP_ISO", "HTTP_XSDATE", "UTC_DIRECT"
     #   resp.dash_manifests[0].utc_timing.timing_source #=> String
+    #   resp.dash_manifests[0].profiles #=> Array
+    #   resp.dash_manifests[0].profiles[0] #=> String, one of "DVB_DASH"
+    #   resp.dash_manifests[0].base_urls #=> Array
+    #   resp.dash_manifests[0].base_urls[0].url #=> String
+    #   resp.dash_manifests[0].base_urls[0].service_location #=> String
+    #   resp.dash_manifests[0].base_urls[0].dvb_priority #=> Integer
+    #   resp.dash_manifests[0].base_urls[0].dvb_weight #=> Integer
+    #   resp.dash_manifests[0].program_information.title #=> String
+    #   resp.dash_manifests[0].program_information.source #=> String
+    #   resp.dash_manifests[0].program_information.copyright #=> String
+    #   resp.dash_manifests[0].program_information.language_code #=> String
+    #   resp.dash_manifests[0].program_information.more_information_url #=> String
+    #   resp.dash_manifests[0].dvb_settings.font_download.url #=> String
+    #   resp.dash_manifests[0].dvb_settings.font_download.mime_type #=> String
+    #   resp.dash_manifests[0].dvb_settings.font_download.font_family #=> String
+    #   resp.dash_manifests[0].dvb_settings.error_metrics #=> Array
+    #   resp.dash_manifests[0].dvb_settings.error_metrics[0].reporting_url #=> String
+    #   resp.dash_manifests[0].dvb_settings.error_metrics[0].probability #=> Integer
+    #   resp.dash_manifests[0].compactness #=> String, one of "STANDARD", "NONE"
+    #   resp.dash_manifests[0].subtitle_configuration.ttml_configuration.ttml_profile #=> String, one of "IMSC_1", "EBU_TT_D_101"
     #   resp.force_endpoint_error_configuration.endpoint_error_conditions #=> Array
     #   resp.force_endpoint_error_configuration.endpoint_error_conditions[0] #=> String, one of "STALE_MANIFEST", "INCOMPLETE_MANIFEST", "MISSING_DRM_KEY", "SLATE_INPUT"
     #   resp.etag #=> String
@@ -2592,6 +2791,26 @@ module Aws::MediaPackageV2
     #   resp.dash_manifests[0].drm_signaling #=> String, one of "INDIVIDUAL", "REFERENCED"
     #   resp.dash_manifests[0].utc_timing.timing_mode #=> String, one of "HTTP_HEAD", "HTTP_ISO", "HTTP_XSDATE", "UTC_DIRECT"
     #   resp.dash_manifests[0].utc_timing.timing_source #=> String
+    #   resp.dash_manifests[0].profiles #=> Array
+    #   resp.dash_manifests[0].profiles[0] #=> String, one of "DVB_DASH"
+    #   resp.dash_manifests[0].base_urls #=> Array
+    #   resp.dash_manifests[0].base_urls[0].url #=> String
+    #   resp.dash_manifests[0].base_urls[0].service_location #=> String
+    #   resp.dash_manifests[0].base_urls[0].dvb_priority #=> Integer
+    #   resp.dash_manifests[0].base_urls[0].dvb_weight #=> Integer
+    #   resp.dash_manifests[0].program_information.title #=> String
+    #   resp.dash_manifests[0].program_information.source #=> String
+    #   resp.dash_manifests[0].program_information.copyright #=> String
+    #   resp.dash_manifests[0].program_information.language_code #=> String
+    #   resp.dash_manifests[0].program_information.more_information_url #=> String
+    #   resp.dash_manifests[0].dvb_settings.font_download.url #=> String
+    #   resp.dash_manifests[0].dvb_settings.font_download.mime_type #=> String
+    #   resp.dash_manifests[0].dvb_settings.font_download.font_family #=> String
+    #   resp.dash_manifests[0].dvb_settings.error_metrics #=> Array
+    #   resp.dash_manifests[0].dvb_settings.error_metrics[0].reporting_url #=> String
+    #   resp.dash_manifests[0].dvb_settings.error_metrics[0].probability #=> Integer
+    #   resp.dash_manifests[0].compactness #=> String, one of "STANDARD", "NONE"
+    #   resp.dash_manifests[0].subtitle_configuration.ttml_configuration.ttml_profile #=> String, one of "IMSC_1", "EBU_TT_D_101"
     #   resp.force_endpoint_error_configuration.endpoint_error_conditions #=> Array
     #   resp.force_endpoint_error_configuration.endpoint_error_conditions[0] #=> String, one of "STALE_MANIFEST", "INCOMPLETE_MANIFEST", "MISSING_DRM_KEY", "SLATE_INPUT"
     #   resp.etag #=> String
@@ -4047,6 +4266,41 @@ module Aws::MediaPackageV2
     #           timing_mode: "HTTP_HEAD", # accepts HTTP_HEAD, HTTP_ISO, HTTP_XSDATE, UTC_DIRECT
     #           timing_source: "DashUtcTimingTimingSourceString",
     #         },
+    #         profiles: ["DVB_DASH"], # accepts DVB_DASH
+    #         base_urls: [
+    #           {
+    #             url: "DashBaseUrlUrlString", # required
+    #             service_location: "DashBaseUrlServiceLocationString",
+    #             dvb_priority: 1,
+    #             dvb_weight: 1,
+    #           },
+    #         ],
+    #         program_information: {
+    #           title: "DashProgramInformationTitleString",
+    #           source: "DashProgramInformationSourceString",
+    #           copyright: "DashProgramInformationCopyrightString",
+    #           language_code: "DashProgramInformationLanguageCodeString",
+    #           more_information_url: "DashProgramInformationMoreInformationUrlString",
+    #         },
+    #         dvb_settings: {
+    #           font_download: {
+    #             url: "DashDvbFontDownloadUrlString",
+    #             mime_type: "DashDvbFontDownloadMimeTypeString",
+    #             font_family: "DashDvbFontDownloadFontFamilyString",
+    #           },
+    #           error_metrics: [
+    #             {
+    #               reporting_url: "DashDvbMetricsReportingReportingUrlString", # required
+    #               probability: 1,
+    #             },
+    #           ],
+    #         },
+    #         compactness: "STANDARD", # accepts STANDARD, NONE
+    #         subtitle_configuration: {
+    #           ttml_configuration: {
+    #             ttml_profile: "IMSC_1", # required, accepts IMSC_1, EBU_TT_D_101
+    #           },
+    #         },
     #       },
     #     ],
     #     force_endpoint_error_configuration: {
@@ -4138,6 +4392,26 @@ module Aws::MediaPackageV2
     #   resp.dash_manifests[0].drm_signaling #=> String, one of "INDIVIDUAL", "REFERENCED"
     #   resp.dash_manifests[0].utc_timing.timing_mode #=> String, one of "HTTP_HEAD", "HTTP_ISO", "HTTP_XSDATE", "UTC_DIRECT"
     #   resp.dash_manifests[0].utc_timing.timing_source #=> String
+    #   resp.dash_manifests[0].profiles #=> Array
+    #   resp.dash_manifests[0].profiles[0] #=> String, one of "DVB_DASH"
+    #   resp.dash_manifests[0].base_urls #=> Array
+    #   resp.dash_manifests[0].base_urls[0].url #=> String
+    #   resp.dash_manifests[0].base_urls[0].service_location #=> String
+    #   resp.dash_manifests[0].base_urls[0].dvb_priority #=> Integer
+    #   resp.dash_manifests[0].base_urls[0].dvb_weight #=> Integer
+    #   resp.dash_manifests[0].program_information.title #=> String
+    #   resp.dash_manifests[0].program_information.source #=> String
+    #   resp.dash_manifests[0].program_information.copyright #=> String
+    #   resp.dash_manifests[0].program_information.language_code #=> String
+    #   resp.dash_manifests[0].program_information.more_information_url #=> String
+    #   resp.dash_manifests[0].dvb_settings.font_download.url #=> String
+    #   resp.dash_manifests[0].dvb_settings.font_download.mime_type #=> String
+    #   resp.dash_manifests[0].dvb_settings.font_download.font_family #=> String
+    #   resp.dash_manifests[0].dvb_settings.error_metrics #=> Array
+    #   resp.dash_manifests[0].dvb_settings.error_metrics[0].reporting_url #=> String
+    #   resp.dash_manifests[0].dvb_settings.error_metrics[0].probability #=> Integer
+    #   resp.dash_manifests[0].compactness #=> String, one of "STANDARD", "NONE"
+    #   resp.dash_manifests[0].subtitle_configuration.ttml_configuration.ttml_profile #=> String, one of "IMSC_1", "EBU_TT_D_101"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/UpdateOriginEndpoint AWS API Documentation
     #
@@ -4166,7 +4440,7 @@ module Aws::MediaPackageV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediapackagev2'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

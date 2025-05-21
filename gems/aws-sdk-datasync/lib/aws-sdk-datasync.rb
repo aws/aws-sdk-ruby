@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:datasync)
 # structure.
 #
 #     data_sync = Aws::DataSync::Client.new
-#     resp = data_sync.add_storage_system(params)
+#     resp = data_sync.cancel_task_execution(params)
 #
 # See {Client} for more information.
 #
@@ -54,7 +54,7 @@ module Aws::DataSync
   autoload :EndpointProvider, 'aws-sdk-datasync/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-datasync/endpoints'
 
-  GEM_VERSION = '1.102.0'
+  GEM_VERSION = '1.103.0'
 
 end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2025-05-13)
+------------------
+
+* Feature - Changes for enhanced metadata in trace
+
 1.54.0 (2025-05-12)
 ------------------
 

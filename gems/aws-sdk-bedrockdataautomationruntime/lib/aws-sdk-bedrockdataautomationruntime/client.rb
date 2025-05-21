@@ -552,6 +552,16 @@ module Aws::BedrockDataAutomationRuntime
     #     client_token: "IdempotencyToken",
     #     input_configuration: { # required
     #       s3_uri: "S3Uri", # required
+    #       asset_processing_configuration: {
+    #         video: {
+    #           segment_configuration: {
+    #             timestamp_segment: {
+    #               start_time_millis: 1, # required
+    #               end_time_millis: 1, # required
+    #             },
+    #           },
+    #         },
+    #       },
     #     },
     #     output_configuration: { # required
     #       s3_uri: "S3Uri", # required
@@ -705,7 +715,7 @@ module Aws::BedrockDataAutomationRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockdataautomationruntime'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

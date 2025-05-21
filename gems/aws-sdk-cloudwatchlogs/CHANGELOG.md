@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.116.0 (2025-05-14)
+------------------
+
+* Feature - This release adds a new API "ListLogGroups" and an improvement in API "DescribeLogGroups"
+
 1.115.0 (2025-05-12)
 ------------------
 

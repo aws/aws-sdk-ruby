@@ -1582,6 +1582,8 @@ module Aws::DatabaseMigrationService
     #       database_mode: "default", # accepts default, babelfish
     #       babelfish_database_name: "String",
     #       disable_unicode_source_filter: false,
+    #       service_access_role_arn: "String",
+    #       authentication_method: "password", # accepts password, iam
     #     },
     #     my_sql_settings: {
     #       after_connect_script: "String",
@@ -1599,6 +1601,8 @@ module Aws::DatabaseMigrationService
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
     #       execute_timeout: 1,
+    #       service_access_role_arn: "String",
+    #       authentication_method: "password", # accepts password, iam
     #     },
     #     oracle_settings: {
     #       add_supplemental_logging: false,
@@ -1920,6 +1924,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.postgre_sql_settings.database_mode #=> String, one of "default", "babelfish"
     #   resp.endpoint.postgre_sql_settings.babelfish_database_name #=> String
     #   resp.endpoint.postgre_sql_settings.disable_unicode_source_filter #=> Boolean
+    #   resp.endpoint.postgre_sql_settings.service_access_role_arn #=> String
+    #   resp.endpoint.postgre_sql_settings.authentication_method #=> String, one of "password", "iam"
     #   resp.endpoint.my_sql_settings.after_connect_script #=> String
     #   resp.endpoint.my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
     #   resp.endpoint.my_sql_settings.database_name #=> String
@@ -1935,6 +1941,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.my_sql_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.my_sql_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.my_sql_settings.execute_timeout #=> Integer
+    #   resp.endpoint.my_sql_settings.service_access_role_arn #=> String
+    #   resp.endpoint.my_sql_settings.authentication_method #=> String, one of "password", "iam"
     #   resp.endpoint.oracle_settings.add_supplemental_logging #=> Boolean
     #   resp.endpoint.oracle_settings.archived_log_dest_id #=> Integer
     #   resp.endpoint.oracle_settings.additional_archived_log_dest_id #=> Integer
@@ -3820,6 +3828,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.postgre_sql_settings.database_mode #=> String, one of "default", "babelfish"
     #   resp.endpoint.postgre_sql_settings.babelfish_database_name #=> String
     #   resp.endpoint.postgre_sql_settings.disable_unicode_source_filter #=> Boolean
+    #   resp.endpoint.postgre_sql_settings.service_access_role_arn #=> String
+    #   resp.endpoint.postgre_sql_settings.authentication_method #=> String, one of "password", "iam"
     #   resp.endpoint.my_sql_settings.after_connect_script #=> String
     #   resp.endpoint.my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
     #   resp.endpoint.my_sql_settings.database_name #=> String
@@ -3835,6 +3845,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.my_sql_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.my_sql_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.my_sql_settings.execute_timeout #=> Integer
+    #   resp.endpoint.my_sql_settings.service_access_role_arn #=> String
+    #   resp.endpoint.my_sql_settings.authentication_method #=> String, one of "password", "iam"
     #   resp.endpoint.oracle_settings.add_supplemental_logging #=> Boolean
     #   resp.endpoint.oracle_settings.archived_log_dest_id #=> Integer
     #   resp.endpoint.oracle_settings.additional_archived_log_dest_id #=> Integer
@@ -4932,7 +4944,7 @@ module Aws::DatabaseMigrationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_conversion_configuration({
-    #     migration_project_identifier: "String", # required
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
     #   })
     #
     # @example Response structure
@@ -5597,6 +5609,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].postgre_sql_settings.database_mode #=> String, one of "default", "babelfish"
     #   resp.endpoints[0].postgre_sql_settings.babelfish_database_name #=> String
     #   resp.endpoints[0].postgre_sql_settings.disable_unicode_source_filter #=> Boolean
+    #   resp.endpoints[0].postgre_sql_settings.service_access_role_arn #=> String
+    #   resp.endpoints[0].postgre_sql_settings.authentication_method #=> String, one of "password", "iam"
     #   resp.endpoints[0].my_sql_settings.after_connect_script #=> String
     #   resp.endpoints[0].my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
     #   resp.endpoints[0].my_sql_settings.database_name #=> String
@@ -5612,6 +5626,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].my_sql_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoints[0].my_sql_settings.secrets_manager_secret_id #=> String
     #   resp.endpoints[0].my_sql_settings.execute_timeout #=> Integer
+    #   resp.endpoints[0].my_sql_settings.service_access_role_arn #=> String
+    #   resp.endpoints[0].my_sql_settings.authentication_method #=> String, one of "password", "iam"
     #   resp.endpoints[0].oracle_settings.add_supplemental_logging #=> Boolean
     #   resp.endpoints[0].oracle_settings.archived_log_dest_id #=> Integer
     #   resp.endpoints[0].oracle_settings.additional_archived_log_dest_id #=> Integer
@@ -5864,7 +5880,8 @@ module Aws::DatabaseMigrationService
     # @option params [Array<Types::Filter>] :filters
     #   Filters applied to event subscriptions.
     #
-    #   Valid filter names: event-subscription-arn \| event-subscription-id
+    #   Valid filter names: `event-subscription-arn` \|
+    #   `event-subscription-id`
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -6091,7 +6108,7 @@ module Aws::DatabaseMigrationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_extension_pack_associations({
-    #     migration_project_identifier: "String", # required
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
     #     filters: [
     #       {
     #         name: "String", # required
@@ -6615,7 +6632,7 @@ module Aws::DatabaseMigrationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_metadata_model_assessments({
-    #     migration_project_identifier: "String", # required
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
     #     filters: [
     #       {
     #         name: "String", # required
@@ -6714,7 +6731,7 @@ module Aws::DatabaseMigrationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_metadata_model_conversions({
-    #     migration_project_identifier: "String", # required
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
     #     filters: [
     #       {
     #         name: "String", # required
@@ -6812,7 +6829,7 @@ module Aws::DatabaseMigrationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_metadata_model_exports_as_script({
-    #     migration_project_identifier: "String", # required
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
     #     filters: [
     #       {
     #         name: "String", # required
@@ -6910,7 +6927,7 @@ module Aws::DatabaseMigrationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_metadata_model_exports_to_target({
-    #     migration_project_identifier: "String", # required
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
     #     filters: [
     #       {
     #         name: "String", # required
@@ -7005,7 +7022,7 @@ module Aws::DatabaseMigrationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_metadata_model_imports({
-    #     migration_project_identifier: "String", # required
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
     #     filters: [
     #       {
     #         name: "String", # required
@@ -7319,6 +7336,8 @@ module Aws::DatabaseMigrationService
     #   Filters applied to the limitations described in the form of key-value
     #   pairs.
     #
+    #   Valid filter names: `database-id` \| `engine-name`
+    #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, Fleet Advisor
@@ -7382,6 +7401,8 @@ module Aws::DatabaseMigrationService
     # @option params [Array<Types::Filter>] :filters
     #   Filters applied to the target engine recommendations described in the
     #   form of key-value pairs.
+    #
+    #   Valid filter names: `database-id` \| `engine-name`
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -7930,6 +7951,11 @@ module Aws::DatabaseMigrationService
     #   resp.replication_table_statistics[0].validation_suspended_records #=> Integer
     #   resp.replication_table_statistics[0].validation_state #=> String
     #   resp.replication_table_statistics[0].validation_state_details #=> String
+    #   resp.replication_table_statistics[0].resync_state #=> String
+    #   resp.replication_table_statistics[0].resync_rows_attempted #=> Integer
+    #   resp.replication_table_statistics[0].resync_rows_succeeded #=> Integer
+    #   resp.replication_table_statistics[0].resync_rows_failed #=> Integer
+    #   resp.replication_table_statistics[0].resync_progress #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationTableStatistics AWS API Documentation
     #
@@ -8291,6 +8317,9 @@ module Aws::DatabaseMigrationService
     # @option params [Array<Types::Filter>] :filters
     #   Filters applied to the replications.
     #
+    #   Valid filter names: `replication-config-arn` \|
+    #   `replication-config-id`
+    #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
@@ -8560,6 +8589,11 @@ module Aws::DatabaseMigrationService
     #   resp.table_statistics[0].validation_suspended_records #=> Integer
     #   resp.table_statistics[0].validation_state #=> String
     #   resp.table_statistics[0].validation_state_details #=> String
+    #   resp.table_statistics[0].resync_state #=> String
+    #   resp.table_statistics[0].resync_rows_attempted #=> Integer
+    #   resp.table_statistics[0].resync_rows_succeeded #=> Integer
+    #   resp.table_statistics[0].resync_rows_failed #=> Integer
+    #   resp.table_statistics[0].resync_progress #=> Float
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeTableStatistics AWS API Documentation
@@ -8622,7 +8656,7 @@ module Aws::DatabaseMigrationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.export_metadata_model_assessment({
-    #     migration_project_identifier: "String", # required
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
     #     selection_rules: "String", # required
     #     file_name: "String",
     #     assessment_report_types: ["pdf"], # accepts pdf, csv
@@ -8815,7 +8849,7 @@ module Aws::DatabaseMigrationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_conversion_configuration({
-    #     migration_project_identifier: "String", # required
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
     #     conversion_configuration: "String", # required
     #   })
     #
@@ -9676,6 +9710,8 @@ module Aws::DatabaseMigrationService
     #       database_mode: "default", # accepts default, babelfish
     #       babelfish_database_name: "String",
     #       disable_unicode_source_filter: false,
+    #       service_access_role_arn: "String",
+    #       authentication_method: "password", # accepts password, iam
     #     },
     #     my_sql_settings: {
     #       after_connect_script: "String",
@@ -9693,6 +9729,8 @@ module Aws::DatabaseMigrationService
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
     #       execute_timeout: 1,
+    #       service_access_role_arn: "String",
+    #       authentication_method: "password", # accepts password, iam
     #     },
     #     oracle_settings: {
     #       add_supplemental_logging: false,
@@ -10014,6 +10052,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.postgre_sql_settings.database_mode #=> String, one of "default", "babelfish"
     #   resp.endpoint.postgre_sql_settings.babelfish_database_name #=> String
     #   resp.endpoint.postgre_sql_settings.disable_unicode_source_filter #=> Boolean
+    #   resp.endpoint.postgre_sql_settings.service_access_role_arn #=> String
+    #   resp.endpoint.postgre_sql_settings.authentication_method #=> String, one of "password", "iam"
     #   resp.endpoint.my_sql_settings.after_connect_script #=> String
     #   resp.endpoint.my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
     #   resp.endpoint.my_sql_settings.database_name #=> String
@@ -10029,6 +10069,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.my_sql_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.my_sql_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.my_sql_settings.execute_timeout #=> Integer
+    #   resp.endpoint.my_sql_settings.service_access_role_arn #=> String
+    #   resp.endpoint.my_sql_settings.authentication_method #=> String, one of "password", "iam"
     #   resp.endpoint.oracle_settings.add_supplemental_logging #=> Boolean
     #   resp.endpoint.oracle_settings.archived_log_dest_id #=> Integer
     #   resp.endpoint.oracle_settings.additional_archived_log_dest_id #=> Integer
@@ -11538,7 +11580,7 @@ module Aws::DatabaseMigrationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_extension_pack_association({
-    #     migration_project_identifier: "String", # required
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
     #   })
     #
     # @example Response structure
@@ -11589,7 +11631,7 @@ module Aws::DatabaseMigrationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_metadata_model_assessment({
-    #     migration_project_identifier: "String", # required
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
     #     selection_rules: "String", # required
     #   })
     #
@@ -11637,7 +11679,7 @@ module Aws::DatabaseMigrationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_metadata_model_conversion({
-    #     migration_project_identifier: "String", # required
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
     #     selection_rules: "String", # required
     #   })
     #
@@ -11693,7 +11735,7 @@ module Aws::DatabaseMigrationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_metadata_model_export_as_script({
-    #     migration_project_identifier: "String", # required
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
     #     selection_rules: "String", # required
     #     origin: "SOURCE", # required, accepts SOURCE, TARGET
     #     file_name: "String",
@@ -11749,7 +11791,7 @@ module Aws::DatabaseMigrationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_metadata_model_export_to_target({
-    #     migration_project_identifier: "String", # required
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
     #     selection_rules: "String", # required
     #     overwrite_extension_pack: false,
     #   })
@@ -11810,7 +11852,7 @@ module Aws::DatabaseMigrationService
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_metadata_model_import({
-    #     migration_project_identifier: "String", # required
+    #     migration_project_identifier: "MigrationProjectIdentifier", # required
     #     selection_rules: "String", # required
     #     origin: "SOURCE", # required, accepts SOURCE, TARGET
     #     refresh: false,
@@ -12756,7 +12798,7 @@ module Aws::DatabaseMigrationService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.121.0'
+      context[:gem_version] = '1.122.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

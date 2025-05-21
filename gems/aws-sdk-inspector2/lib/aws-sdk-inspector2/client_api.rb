@@ -48,6 +48,15 @@ module Aws::Inspector2
     AwsEcrContainerAggregationResponse = Shapes::StructureShape.new(name: 'AwsEcrContainerAggregationResponse')
     AwsEcrContainerImageDetails = Shapes::StructureShape.new(name: 'AwsEcrContainerImageDetails')
     AwsEcrContainerSortBy = Shapes::StringShape.new(name: 'AwsEcrContainerSortBy')
+    AwsEcsMetadataDetails = Shapes::StructureShape.new(name: 'AwsEcsMetadataDetails')
+    AwsEcsMetadataDetailsDetailsGroupString = Shapes::StringShape.new(name: 'AwsEcsMetadataDetailsDetailsGroupString')
+    AwsEcsMetadataDetailsTaskDefinitionArnString = Shapes::StringShape.new(name: 'AwsEcsMetadataDetailsTaskDefinitionArnString')
+    AwsEksMetadataDetails = Shapes::StructureShape.new(name: 'AwsEksMetadataDetails')
+    AwsEksMetadataDetailsNamespaceString = Shapes::StringShape.new(name: 'AwsEksMetadataDetailsNamespaceString')
+    AwsEksWorkloadInfo = Shapes::StructureShape.new(name: 'AwsEksWorkloadInfo')
+    AwsEksWorkloadInfoList = Shapes::ListShape.new(name: 'AwsEksWorkloadInfoList')
+    AwsEksWorkloadInfoNameString = Shapes::StringShape.new(name: 'AwsEksWorkloadInfoNameString')
+    AwsEksWorkloadInfoTypeString = Shapes::StringShape.new(name: 'AwsEksWorkloadInfoTypeString')
     AwsLambdaFunctionDetails = Shapes::StructureShape.new(name: 'AwsLambdaFunctionDetails')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     BatchGetAccountStatusRequest = Shapes::StructureShape.new(name: 'BatchGetAccountStatusRequest')
@@ -143,6 +152,14 @@ module Aws::Inspector2
     CisaDateAdded = Shapes::TimestampShape.new(name: 'CisaDateAdded')
     CisaDateDue = Shapes::TimestampShape.new(name: 'CisaDateDue')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    ClusterDetails = Shapes::StructureShape.new(name: 'ClusterDetails')
+    ClusterForImageFilterCriteria = Shapes::StructureShape.new(name: 'ClusterForImageFilterCriteria')
+    ClusterForImageFilterCriteriaResourceIdString = Shapes::StringShape.new(name: 'ClusterForImageFilterCriteriaResourceIdString')
+    ClusterInformation = Shapes::StructureShape.new(name: 'ClusterInformation')
+    ClusterInformationClusterArnString = Shapes::StringShape.new(name: 'ClusterInformationClusterArnString')
+    ClusterInformationClusterDetailsList = Shapes::ListShape.new(name: 'ClusterInformationClusterDetailsList')
+    ClusterInformationList = Shapes::ListShape.new(name: 'ClusterInformationList')
+    ClusterMetadata = Shapes::UnionShape.new(name: 'ClusterMetadata')
     CodeFilePath = Shapes::StructureShape.new(name: 'CodeFilePath')
     CodeLine = Shapes::StructureShape.new(name: 'CodeLine')
     CodeLineContentString = Shapes::StringShape.new(name: 'CodeLineContentString')
@@ -166,6 +183,8 @@ module Aws::Inspector2
     CoverageMapComparison = Shapes::StringShape.new(name: 'CoverageMapComparison')
     CoverageMapFilter = Shapes::StructureShape.new(name: 'CoverageMapFilter')
     CoverageMapFilterList = Shapes::ListShape.new(name: 'CoverageMapFilterList')
+    CoverageNumberFilter = Shapes::StructureShape.new(name: 'CoverageNumberFilter')
+    CoverageNumberFilterList = Shapes::ListShape.new(name: 'CoverageNumberFilterList')
     CoverageResourceType = Shapes::StringShape.new(name: 'CoverageResourceType')
     CoverageStringComparison = Shapes::StringShape.new(name: 'CoverageStringComparison')
     CoverageStringFilter = Shapes::StructureShape.new(name: 'CoverageStringFilter')
@@ -239,6 +258,7 @@ module Aws::Inspector2
     EcrConfigurationState = Shapes::StructureShape.new(name: 'EcrConfigurationState')
     EcrContainerImageMetadata = Shapes::StructureShape.new(name: 'EcrContainerImageMetadata')
     EcrPullDateRescanDuration = Shapes::StringShape.new(name: 'EcrPullDateRescanDuration')
+    EcrPullDateRescanMode = Shapes::StringShape.new(name: 'EcrPullDateRescanMode')
     EcrRepositoryMetadata = Shapes::StructureShape.new(name: 'EcrRepositoryMetadata')
     EcrRescanDuration = Shapes::StringShape.new(name: 'EcrRescanDuration')
     EcrRescanDurationState = Shapes::StructureShape.new(name: 'EcrRescanDurationState')
@@ -312,6 +332,10 @@ module Aws::Inspector2
     GetCisScanResultDetailsMaxResults = Shapes::IntegerShape.new(name: 'GetCisScanResultDetailsMaxResults')
     GetCisScanResultDetailsRequest = Shapes::StructureShape.new(name: 'GetCisScanResultDetailsRequest')
     GetCisScanResultDetailsResponse = Shapes::StructureShape.new(name: 'GetCisScanResultDetailsResponse')
+    GetClustersForImageNextToken = Shapes::StringShape.new(name: 'GetClustersForImageNextToken')
+    GetClustersForImageRequest = Shapes::StructureShape.new(name: 'GetClustersForImageRequest')
+    GetClustersForImageRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'GetClustersForImageRequestMaxResultsInteger')
+    GetClustersForImageResponse = Shapes::StructureShape.new(name: 'GetClustersForImageResponse')
     GetConfigurationRequest = Shapes::StructureShape.new(name: 'GetConfigurationRequest')
     GetConfigurationResponse = Shapes::StructureShape.new(name: 'GetConfigurationResponse')
     GetDelegatedAdminAccountRequest = Shapes::StructureShape.new(name: 'GetDelegatedAdminAccountRequest')
@@ -751,6 +775,8 @@ module Aws::Inspector2
     AwsEcrContainerAggregation.add_member(:architectures, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "architectures"))
     AwsEcrContainerAggregation.add_member(:image_shas, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "imageShas"))
     AwsEcrContainerAggregation.add_member(:image_tags, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "imageTags"))
+    AwsEcrContainerAggregation.add_member(:in_use_count, Shapes::ShapeRef.new(shape: NumberFilterList, location_name: "inUseCount"))
+    AwsEcrContainerAggregation.add_member(:last_in_use_at, Shapes::ShapeRef.new(shape: DateFilterList, location_name: "lastInUseAt"))
     AwsEcrContainerAggregation.add_member(:repositories, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "repositories"))
     AwsEcrContainerAggregation.add_member(:resource_ids, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "resourceIds"))
     AwsEcrContainerAggregation.add_member(:sort_by, Shapes::ShapeRef.new(shape: AwsEcrContainerSortBy, location_name: "sortBy"))
@@ -761,6 +787,8 @@ module Aws::Inspector2
     AwsEcrContainerAggregationResponse.add_member(:architecture, Shapes::ShapeRef.new(shape: String, location_name: "architecture"))
     AwsEcrContainerAggregationResponse.add_member(:image_sha, Shapes::ShapeRef.new(shape: String, location_name: "imageSha"))
     AwsEcrContainerAggregationResponse.add_member(:image_tags, Shapes::ShapeRef.new(shape: StringList, location_name: "imageTags"))
+    AwsEcrContainerAggregationResponse.add_member(:in_use_count, Shapes::ShapeRef.new(shape: Long, location_name: "inUseCount"))
+    AwsEcrContainerAggregationResponse.add_member(:last_in_use_at, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "lastInUseAt"))
     AwsEcrContainerAggregationResponse.add_member(:repository, Shapes::ShapeRef.new(shape: String, location_name: "repository"))
     AwsEcrContainerAggregationResponse.add_member(:resource_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "resourceId"))
     AwsEcrContainerAggregationResponse.add_member(:severity_counts, Shapes::ShapeRef.new(shape: SeverityCounts, location_name: "severityCounts"))
@@ -770,11 +798,27 @@ module Aws::Inspector2
     AwsEcrContainerImageDetails.add_member(:author, Shapes::ShapeRef.new(shape: String, location_name: "author"))
     AwsEcrContainerImageDetails.add_member(:image_hash, Shapes::ShapeRef.new(shape: ImageHash, required: true, location_name: "imageHash"))
     AwsEcrContainerImageDetails.add_member(:image_tags, Shapes::ShapeRef.new(shape: ImageTagList, location_name: "imageTags"))
+    AwsEcrContainerImageDetails.add_member(:in_use_count, Shapes::ShapeRef.new(shape: Long, location_name: "inUseCount"))
+    AwsEcrContainerImageDetails.add_member(:last_in_use_at, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "lastInUseAt"))
     AwsEcrContainerImageDetails.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, location_name: "platform"))
     AwsEcrContainerImageDetails.add_member(:pushed_at, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "pushedAt"))
     AwsEcrContainerImageDetails.add_member(:registry, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "registry"))
     AwsEcrContainerImageDetails.add_member(:repository_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "repositoryName"))
     AwsEcrContainerImageDetails.struct_class = Types::AwsEcrContainerImageDetails
+
+    AwsEcsMetadataDetails.add_member(:details_group, Shapes::ShapeRef.new(shape: AwsEcsMetadataDetailsDetailsGroupString, required: true, location_name: "detailsGroup"))
+    AwsEcsMetadataDetails.add_member(:task_definition_arn, Shapes::ShapeRef.new(shape: AwsEcsMetadataDetailsTaskDefinitionArnString, required: true, location_name: "taskDefinitionArn"))
+    AwsEcsMetadataDetails.struct_class = Types::AwsEcsMetadataDetails
+
+    AwsEksMetadataDetails.add_member(:namespace, Shapes::ShapeRef.new(shape: AwsEksMetadataDetailsNamespaceString, location_name: "namespace"))
+    AwsEksMetadataDetails.add_member(:workload_info_list, Shapes::ShapeRef.new(shape: AwsEksWorkloadInfoList, location_name: "workloadInfoList"))
+    AwsEksMetadataDetails.struct_class = Types::AwsEksMetadataDetails
+
+    AwsEksWorkloadInfo.add_member(:name, Shapes::ShapeRef.new(shape: AwsEksWorkloadInfoNameString, required: true, location_name: "name"))
+    AwsEksWorkloadInfo.add_member(:type, Shapes::ShapeRef.new(shape: AwsEksWorkloadInfoTypeString, required: true, location_name: "type"))
+    AwsEksWorkloadInfo.struct_class = Types::AwsEksWorkloadInfo
+
+    AwsEksWorkloadInfoList.member = Shapes::ShapeRef.new(shape: AwsEksWorkloadInfo)
 
     AwsLambdaFunctionDetails.add_member(:architectures, Shapes::ShapeRef.new(shape: ArchitectureList, location_name: "architectures"))
     AwsLambdaFunctionDetails.add_member(:code_sha_256, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "codeSha256"))
@@ -1021,6 +1065,31 @@ module Aws::Inspector2
     CisaData.add_member(:date_due, Shapes::ShapeRef.new(shape: CisaDateDue, location_name: "dateDue"))
     CisaData.struct_class = Types::CisaData
 
+    ClusterDetails.add_member(:cluster_metadata, Shapes::ShapeRef.new(shape: ClusterMetadata, required: true, location_name: "clusterMetadata"))
+    ClusterDetails.add_member(:last_in_use, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastInUse"))
+    ClusterDetails.add_member(:running_unit_count, Shapes::ShapeRef.new(shape: Long, location_name: "runningUnitCount"))
+    ClusterDetails.add_member(:stopped_unit_count, Shapes::ShapeRef.new(shape: Long, location_name: "stoppedUnitCount"))
+    ClusterDetails.struct_class = Types::ClusterDetails
+
+    ClusterForImageFilterCriteria.add_member(:resource_id, Shapes::ShapeRef.new(shape: ClusterForImageFilterCriteriaResourceIdString, required: true, location_name: "resourceId"))
+    ClusterForImageFilterCriteria.struct_class = Types::ClusterForImageFilterCriteria
+
+    ClusterInformation.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ClusterInformationClusterArnString, required: true, location_name: "clusterArn"))
+    ClusterInformation.add_member(:cluster_details, Shapes::ShapeRef.new(shape: ClusterInformationClusterDetailsList, location_name: "clusterDetails"))
+    ClusterInformation.struct_class = Types::ClusterInformation
+
+    ClusterInformationClusterDetailsList.member = Shapes::ShapeRef.new(shape: ClusterDetails)
+
+    ClusterInformationList.member = Shapes::ShapeRef.new(shape: ClusterInformation)
+
+    ClusterMetadata.add_member(:aws_ecs_metadata_details, Shapes::ShapeRef.new(shape: AwsEcsMetadataDetails, location_name: "awsEcsMetadataDetails"))
+    ClusterMetadata.add_member(:aws_eks_metadata_details, Shapes::ShapeRef.new(shape: AwsEksMetadataDetails, location_name: "awsEksMetadataDetails"))
+    ClusterMetadata.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ClusterMetadata.add_member_subclass(:aws_ecs_metadata_details, Types::ClusterMetadata::AwsEcsMetadataDetails)
+    ClusterMetadata.add_member_subclass(:aws_eks_metadata_details, Types::ClusterMetadata::AwsEksMetadataDetails)
+    ClusterMetadata.add_member_subclass(:unknown, Types::ClusterMetadata::Unknown)
+    ClusterMetadata.struct_class = Types::ClusterMetadata
+
     CodeFilePath.add_member(:end_line, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "endLine"))
     CodeFilePath.add_member(:file_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "fileName"))
     CodeFilePath.add_member(:file_path, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "filePath"))
@@ -1083,6 +1152,8 @@ module Aws::Inspector2
 
     CoverageFilterCriteria.add_member(:account_id, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "accountId"))
     CoverageFilterCriteria.add_member(:ec2_instance_tags, Shapes::ShapeRef.new(shape: CoverageMapFilterList, location_name: "ec2InstanceTags"))
+    CoverageFilterCriteria.add_member(:ecr_image_in_use_count, Shapes::ShapeRef.new(shape: CoverageNumberFilterList, location_name: "ecrImageInUseCount"))
+    CoverageFilterCriteria.add_member(:ecr_image_last_in_use_at, Shapes::ShapeRef.new(shape: CoverageDateFilterList, location_name: "ecrImageLastInUseAt"))
     CoverageFilterCriteria.add_member(:ecr_image_tags, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "ecrImageTags"))
     CoverageFilterCriteria.add_member(:ecr_repository_name, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "ecrRepositoryName"))
     CoverageFilterCriteria.add_member(:image_pulled_at, Shapes::ShapeRef.new(shape: CoverageDateFilterList, location_name: "imagePulledAt"))
@@ -1104,6 +1175,12 @@ module Aws::Inspector2
     CoverageMapFilter.struct_class = Types::CoverageMapFilter
 
     CoverageMapFilterList.member = Shapes::ShapeRef.new(shape: CoverageMapFilter)
+
+    CoverageNumberFilter.add_member(:lower_inclusive, Shapes::ShapeRef.new(shape: Long, location_name: "lowerInclusive"))
+    CoverageNumberFilter.add_member(:upper_inclusive, Shapes::ShapeRef.new(shape: Long, location_name: "upperInclusive"))
+    CoverageNumberFilter.struct_class = Types::CoverageNumberFilter
+
+    CoverageNumberFilterList.member = Shapes::ShapeRef.new(shape: CoverageNumberFilter)
 
     CoverageStringFilter.add_member(:comparison, Shapes::ShapeRef.new(shape: CoverageStringComparison, required: true, location_name: "comparison"))
     CoverageStringFilter.add_member(:value, Shapes::ShapeRef.new(shape: CoverageStringInput, required: true, location_name: "value"))
@@ -1301,6 +1378,7 @@ module Aws::Inspector2
     Ec2ScanModeState.struct_class = Types::Ec2ScanModeState
 
     EcrConfiguration.add_member(:pull_date_rescan_duration, Shapes::ShapeRef.new(shape: EcrPullDateRescanDuration, location_name: "pullDateRescanDuration"))
+    EcrConfiguration.add_member(:pull_date_rescan_mode, Shapes::ShapeRef.new(shape: EcrPullDateRescanMode, location_name: "pullDateRescanMode"))
     EcrConfiguration.add_member(:rescan_duration, Shapes::ShapeRef.new(shape: EcrRescanDuration, required: true, location_name: "rescanDuration"))
     EcrConfiguration.struct_class = Types::EcrConfiguration
 
@@ -1308,6 +1386,8 @@ module Aws::Inspector2
     EcrConfigurationState.struct_class = Types::EcrConfigurationState
 
     EcrContainerImageMetadata.add_member(:image_pulled_at, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "imagePulledAt"))
+    EcrContainerImageMetadata.add_member(:in_use_count, Shapes::ShapeRef.new(shape: Long, location_name: "inUseCount"))
+    EcrContainerImageMetadata.add_member(:last_in_use_at, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "lastInUseAt"))
     EcrContainerImageMetadata.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     EcrContainerImageMetadata.struct_class = Types::EcrContainerImageMetadata
 
@@ -1316,6 +1396,7 @@ module Aws::Inspector2
     EcrRepositoryMetadata.struct_class = Types::EcrRepositoryMetadata
 
     EcrRescanDurationState.add_member(:pull_date_rescan_duration, Shapes::ShapeRef.new(shape: EcrPullDateRescanDuration, location_name: "pullDateRescanDuration"))
+    EcrRescanDurationState.add_member(:pull_date_rescan_mode, Shapes::ShapeRef.new(shape: EcrPullDateRescanMode, location_name: "pullDateRescanMode"))
     EcrRescanDurationState.add_member(:rescan_duration, Shapes::ShapeRef.new(shape: EcrRescanDuration, location_name: "rescanDuration"))
     EcrRescanDurationState.add_member(:status, Shapes::ShapeRef.new(shape: EcrRescanDurationStatus, location_name: "status"))
     EcrRescanDurationState.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "updatedAt"))
@@ -1400,6 +1481,8 @@ module Aws::Inspector2
     FilterCriteria.add_member(:ec2_instance_vpc_id, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "ec2InstanceVpcId"))
     FilterCriteria.add_member(:ecr_image_architecture, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "ecrImageArchitecture"))
     FilterCriteria.add_member(:ecr_image_hash, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "ecrImageHash"))
+    FilterCriteria.add_member(:ecr_image_in_use_count, Shapes::ShapeRef.new(shape: NumberFilterList, location_name: "ecrImageInUseCount"))
+    FilterCriteria.add_member(:ecr_image_last_in_use_at, Shapes::ShapeRef.new(shape: DateFilterList, location_name: "ecrImageLastInUseAt"))
     FilterCriteria.add_member(:ecr_image_pushed_at, Shapes::ShapeRef.new(shape: DateFilterList, location_name: "ecrImagePushedAt"))
     FilterCriteria.add_member(:ecr_image_registry, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "ecrImageRegistry"))
     FilterCriteria.add_member(:ecr_image_repository_name, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "ecrImageRepositoryName"))
@@ -1538,6 +1621,15 @@ module Aws::Inspector2
     GetCisScanResultDetailsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     GetCisScanResultDetailsResponse.add_member(:scan_result_details, Shapes::ShapeRef.new(shape: CisScanResultDetailsList, location_name: "scanResultDetails"))
     GetCisScanResultDetailsResponse.struct_class = Types::GetCisScanResultDetailsResponse
+
+    GetClustersForImageRequest.add_member(:filter, Shapes::ShapeRef.new(shape: ClusterForImageFilterCriteria, required: true, location_name: "filter"))
+    GetClustersForImageRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GetClustersForImageRequestMaxResultsInteger, location_name: "maxResults"))
+    GetClustersForImageRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: GetClustersForImageNextToken, location_name: "nextToken"))
+    GetClustersForImageRequest.struct_class = Types::GetClustersForImageRequest
+
+    GetClustersForImageResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: ClusterInformationList, required: true, location_name: "cluster"))
+    GetClustersForImageResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: GetClustersForImageNextToken, location_name: "nextToken"))
+    GetClustersForImageResponse.struct_class = Types::GetClustersForImageResponse
 
     GetConfigurationRequest.struct_class = Types::GetConfigurationRequest
 
@@ -2652,6 +2744,24 @@ module Aws::Inspector2
         o.output = Shapes::ShapeRef.new(shape: GetCisScanResultDetailsResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_clusters_for_image, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetClustersForImage"
+        o.http_method = "POST"
+        o.http_request_uri = "/cluster/get"
+        o.input = Shapes::ShapeRef.new(shape: GetClustersForImageRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetClustersForImageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(

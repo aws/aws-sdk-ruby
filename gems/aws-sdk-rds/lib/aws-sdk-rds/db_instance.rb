@@ -804,7 +804,7 @@ module Aws::RDS
       data[:multi_tenant]
     end
 
-    # The life cycle type for the DB instance.
+    # The lifecycle type for the DB instance.
     #
     # For more information, see CreateDBInstance.
     # @return [String]
@@ -2255,8 +2255,8 @@ module Aws::RDS
     #   You can use this setting to enroll your DB instance into Amazon RDS
     #   Extended Support. With RDS Extended Support, you can run the selected
     #   major engine version on your DB instance past the end of standard
-    #   support for that engine version. For more information, see [Using
-    #   Amazon RDS Extended Support][1] in the *Amazon RDS User Guide*.
+    #   support for that engine version. For more information, see [Amazon RDS
+    #   Extended Support with Amazon RDS][1] in the *Amazon RDS User Guide*.
     #
     #   Valid Values: `open-source-rds-extended-support |
     #   open-source-rds-extended-support-disabled`
@@ -4898,8 +4898,8 @@ module Aws::RDS
     #   You can use this setting to enroll your DB instance into Amazon RDS
     #   Extended Support. With RDS Extended Support, you can run the selected
     #   major engine version on your DB instance past the end of standard
-    #   support for that engine version. For more information, see [Using
-    #   Amazon RDS Extended Support][1] in the *Amazon RDS User Guide*.
+    #   support for that engine version. For more information, see [Amazon RDS
+    #   Extended Support with Amazon RDS][1] in the *Amazon RDS User Guide*.
     #
     #   This setting applies only to RDS for MySQL and RDS for PostgreSQL. For
     #   Amazon Aurora DB instances, the life cycle type is managed by the DB

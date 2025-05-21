@@ -414,7 +414,8 @@ module Aws
                                  ?next_token: ::String,
                                  ?limit: ::Integer,
                                  ?include_linked_accounts: bool,
-                                 ?log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY")
+                                 ?log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY"),
+                                 ?log_group_identifiers: Array[::String]
                                ) -> _DescribeLogGroupsResponseSuccess
                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLogGroupsResponseSuccess
 
@@ -726,6 +727,22 @@ module Aws
                                         ?next_token: ::String
                                       ) -> _ListLogAnomalyDetectorsResponseSuccess
                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLogAnomalyDetectorsResponseSuccess
+
+      interface _ListLogGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLogGroupsResponse]
+        def log_groups: () -> ::Array[Types::LogGroupSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#list_log_groups-instance_method
+      def list_log_groups: (
+                             ?log_group_name_pattern: ::String,
+                             ?log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY"),
+                             ?include_linked_accounts: bool,
+                             ?account_identifiers: Array[::String],
+                             ?next_token: ::String,
+                             ?limit: ::Integer
+                           ) -> _ListLogGroupsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLogGroupsResponseSuccess
 
       interface _ListLogGroupsForQueryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListLogGroupsForQueryResponse]

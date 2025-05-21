@@ -1630,6 +1630,7 @@ module Aws::ECS
     #           volume_type: "EBSVolumeType",
     #           size_in_gi_b: 1,
     #           snapshot_id: "EBSSnapshotId",
+    #           volume_initialization_rate: 1,
     #           iops: 1,
     #           throughput: 1,
     #           tag_specifications: [
@@ -1791,6 +1792,7 @@ module Aws::ECS
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.volume_type #=> String
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.size_in_gi_b #=> Integer
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.snapshot_id #=> String
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.volume_initialization_rate #=> Integer
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.iops #=> Integer
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.throughput #=> Integer
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications #=> Array
@@ -2724,6 +2726,7 @@ module Aws::ECS
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.volume_type #=> String
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.size_in_gi_b #=> Integer
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.snapshot_id #=> String
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.volume_initialization_rate #=> Integer
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.iops #=> Integer
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.throughput #=> Integer
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications #=> Array
@@ -2852,7 +2855,7 @@ module Aws::ECS
     #             environment: [
     #             ], 
     #             essential: true, 
-    #             image: "ubuntu", 
+    #             image: "public.ecr.aws/docker/library/ubuntu:latest", 
     #             memory: 100, 
     #             mount_points: [
     #             ], 
@@ -3388,10 +3391,10 @@ module Aws::ECS
     #
     # @example Example: To deregister a revision of a task definition
     #
-    #   # This example deregisters the first revision of the curler task definition
+    #   # This example deregisters the first revision of the fargate-task task definition
     #
     #   resp = client.deregister_task_definition({
-    #     task_definition: "curler:1", 
+    #     task_definition: "fargate-task:1", 
     #   })
     #
     #   resp.to_h outputs the following:
@@ -3399,30 +3402,23 @@ module Aws::ECS
     #     task_definition: {
     #       container_definitions: [
     #         {
-    #           name: "curler", 
-    #           command: [
-    #             "curl -v http://example.com/", 
-    #           ], 
-    #           cpu: 100, 
-    #           entry_point: [
-    #           ], 
-    #           environment: [
-    #           ], 
+    #           name: "nginx", 
+    #           cpu: 256, 
     #           essential: true, 
-    #           image: "curl:latest", 
-    #           memory: 256, 
-    #           mount_points: [
-    #           ], 
+    #           image: "public.ecr.aws/docker/library/nginx:latest", 
+    #           memory: 128, 
     #           port_mappings: [
-    #           ], 
-    #           volumes_from: [
+    #             {
+    #               container_port: 80, 
+    #               host_port: 80, 
+    #               protocol: "tcp", 
+    #             }, 
     #           ], 
     #         }, 
     #       ], 
-    #       family: "curler", 
-    #       revision: 1, 
+    #       family: "fargate-task", 
     #       status: "INACTIVE", 
-    #       task_definition_arn: "arn:aws:ecs:us-west-2:123456789012:task-definition/curler:1", 
+    #       task_definition_arn: "arn:aws:ecs:us-west-2:123456789012:task-definition/fargate-task:1", 
     #       volumes: [
     #       ], 
     #     }, 
@@ -4363,6 +4359,7 @@ module Aws::ECS
     #   resp.service_revisions[0].volume_configurations[0].managed_ebs_volume.volume_type #=> String
     #   resp.service_revisions[0].volume_configurations[0].managed_ebs_volume.size_in_gi_b #=> Integer
     #   resp.service_revisions[0].volume_configurations[0].managed_ebs_volume.snapshot_id #=> String
+    #   resp.service_revisions[0].volume_configurations[0].managed_ebs_volume.volume_initialization_rate #=> Integer
     #   resp.service_revisions[0].volume_configurations[0].managed_ebs_volume.iops #=> Integer
     #   resp.service_revisions[0].volume_configurations[0].managed_ebs_volume.throughput #=> Integer
     #   resp.service_revisions[0].volume_configurations[0].managed_ebs_volume.tag_specifications #=> Array
@@ -4613,6 +4610,7 @@ module Aws::ECS
     #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.volume_type #=> String
     #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.size_in_gi_b #=> Integer
     #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.snapshot_id #=> String
+    #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.volume_initialization_rate #=> Integer
     #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.iops #=> Integer
     #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.throughput #=> Integer
     #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications #=> Array
@@ -8119,7 +8117,7 @@ module Aws::ECS
     #         ], 
     #         cpu: 10, 
     #         essential: true, 
-    #         image: "busybox", 
+    #         image: "public.ecr.aws/docker/library/busybox:latest", 
     #         memory: 10, 
     #       }, 
     #     ], 
@@ -8143,7 +8141,7 @@ module Aws::ECS
     #           environment: [
     #           ], 
     #           essential: true, 
-    #           image: "busybox", 
+    #           image: "public.ecr.aws/docker/library/busybox:latest", 
     #           memory: 10, 
     #           mount_points: [
     #           ], 
@@ -9048,6 +9046,7 @@ module Aws::ECS
     #           volume_type: "EBSVolumeType",
     #           size_in_gi_b: 1,
     #           snapshot_id: "EBSSnapshotId",
+    #           volume_initialization_rate: 1,
     #           iops: 1,
     #           throughput: 1,
     #           tag_specifications: [
@@ -9480,6 +9479,7 @@ module Aws::ECS
     #           volume_type: "EBSVolumeType",
     #           size_in_gi_b: 1,
     #           snapshot_id: "EBSSnapshotId",
+    #           volume_initialization_rate: 1,
     #           iops: 1,
     #           throughput: 1,
     #           tag_specifications: [
@@ -11847,6 +11847,7 @@ module Aws::ECS
     #           volume_type: "EBSVolumeType",
     #           size_in_gi_b: 1,
     #           snapshot_id: "EBSSnapshotId",
+    #           volume_initialization_rate: 1,
     #           iops: 1,
     #           throughput: 1,
     #           tag_specifications: [
@@ -12008,6 +12009,7 @@ module Aws::ECS
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.volume_type #=> String
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.size_in_gi_b #=> Integer
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.snapshot_id #=> String
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.volume_initialization_rate #=> Integer
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.iops #=> Integer
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.throughput #=> Integer
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications #=> Array
@@ -12537,7 +12539,7 @@ module Aws::ECS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.190.0'
+      context[:gem_version] = '1.192.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.277.0 (2025-05-20)
+------------------
+
+* Feature - This release introduces the new DescribeDBMajorEngineVersions API for describing the properties of specific major versions of database engines.
+
 1.276.0 (2025-05-12)
 ------------------
 

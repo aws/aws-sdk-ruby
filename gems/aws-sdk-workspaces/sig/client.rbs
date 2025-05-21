@@ -394,7 +394,8 @@ module Aws
                                       disconnect_timeout_in_seconds: ::Integer?,
                                       idle_disconnect_timeout_in_seconds: ::Integer?,
                                       max_user_duration_in_seconds: ::Integer?
-                                    }
+                                    },
+                                    ?running_mode: ("AUTO_STOP" | "ALWAYS_ON")
                                   ) -> _CreateWorkspacesPoolResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkspacesPoolResponseSuccess
 
@@ -1391,7 +1392,8 @@ module Aws
                                       disconnect_timeout_in_seconds: ::Integer?,
                                       idle_disconnect_timeout_in_seconds: ::Integer?,
                                       max_user_duration_in_seconds: ::Integer?
-                                    }
+                                    },
+                                    ?running_mode: ("AUTO_STOP" | "ALWAYS_ON")
                                   ) -> _UpdateWorkspacesPoolResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkspacesPoolResponseSuccess
     end

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.218.0 (2025-05-20)
+------------------
+
+* Feature - Enhanced AWS Glue ListConnectionTypes API Model with additional metadata fields.
+
+1.217.0 (2025-05-16)
+------------------
+
+* Feature - Changes include (1) Excel as S3 Source type and XML and Tableau's Hyper as S3 Sink types, (2) targeted number of partitions parameter in S3 sinks and (3) new compression types in CSV/JSON and Parquet S3 sinks.
+
 1.216.0 (2025-05-12)
 ------------------
 

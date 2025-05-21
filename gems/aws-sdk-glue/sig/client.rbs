@@ -1092,6 +1092,35 @@ module Aws
                                 },
                               ]?
                             }?,
+                            s3_excel_source: {
+                              name: ::String,
+                              paths: Array[::String],
+                              compression_type: ("snappy" | "lzo" | "gzip" | "brotli" | "lz4" | "uncompressed" | "none")?,
+                              exclusions: Array[::String]?,
+                              group_size: ::String?,
+                              group_files: ::String?,
+                              recurse: bool?,
+                              max_band: ::Integer?,
+                              max_files_in_band: ::Integer?,
+                              additional_options: {
+                                bounded_size: ::Integer?,
+                                bounded_files: ::Integer?,
+                                enable_sample_path: bool?,
+                                sample_path: ::String?
+                              }?,
+                              number_rows: ::Integer?,
+                              skip_footer: ::Integer?,
+                              output_schemas: Array[
+                                {
+                                  columns: Array[
+                                    {
+                                      name: ::String,
+                                      type: ::String?
+                                    },
+                                  ]?
+                                },
+                              ]?
+                            }?,
                             s3_json_source: {
                               name: ::String,
                               paths: Array[::String],
@@ -1124,7 +1153,7 @@ module Aws
                             s3_parquet_source: {
                               name: ::String,
                               paths: Array[::String],
-                              compression_type: ("snappy" | "lzo" | "gzip" | "uncompressed" | "none")?,
+                              compression_type: ("snappy" | "lzo" | "gzip" | "brotli" | "lz4" | "uncompressed" | "none")?,
                               exclusions: Array[::String]?,
                               group_size: ::String?,
                               group_files: ::String?,
@@ -1237,7 +1266,23 @@ module Aws
                                 Array[::String],
                               ]?,
                               path: ::String,
-                              compression: ("snappy" | "lzo" | "gzip" | "uncompressed" | "none")?,
+                              compression: ("snappy" | "lzo" | "gzip" | "brotli" | "lz4" | "uncompressed" | "none")?,
+                              number_target_partitions: ::String?,
+                              schema_change_policy: {
+                                enable_update_catalog: bool?,
+                                update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?,
+                                table: ::String?,
+                                database: ::String?
+                              }?
+                            }?,
+                            s3_hyper_direct_target: {
+                              name: ::String,
+                              inputs: Array[::String],
+                              partition_keys: Array[
+                                Array[::String],
+                              ]?,
+                              path: ::String,
+                              compression: ("uncompressed")?,
                               schema_change_policy: {
                                 enable_update_catalog: bool?,
                                 update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?,
@@ -1253,13 +1298,32 @@ module Aws
                               ]?,
                               path: ::String,
                               compression: ::String?,
-                              format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta"),
+                              number_target_partitions: ::String?,
+                              format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta" | "iceberg" | "hyper" | "xml"),
                               schema_change_policy: {
                                 enable_update_catalog: bool?,
                                 update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?,
                                 table: ::String?,
                                 database: ::String?
                               }?
+                            }?,
+                            s3_iceberg_direct_target: {
+                              name: ::String,
+                              inputs: Array[::String],
+                              partition_keys: Array[
+                                Array[::String],
+                              ]?,
+                              path: ::String,
+                              format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta" | "iceberg" | "hyper" | "xml"),
+                              additional_options: Hash[::String, ::String]?,
+                              schema_change_policy: {
+                                enable_update_catalog: bool?,
+                                update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?,
+                                table: ::String?,
+                                database: ::String?
+                              }?,
+                              compression: ("gzip" | "lzo" | "uncompressed" | "snappy"),
+                              number_target_partitions: ::String?
                             }?,
                             apply_mapping: {
                               name: ::String,
@@ -1759,10 +1823,11 @@ module Aws
                               inputs: Array[::String],
                               path: ::String,
                               compression: ("gzip" | "lzo" | "uncompressed" | "snappy"),
+                              number_target_partitions: ::String?,
                               partition_keys: Array[
                                 Array[::String],
                               ]?,
-                              format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta"),
+                              format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta" | "iceberg" | "hyper" | "xml"),
                               additional_options: Hash[::String, ::String],
                               schema_change_policy: {
                                 enable_update_catalog: bool?,
@@ -1854,7 +1919,8 @@ module Aws
                               ]?,
                               path: ::String,
                               compression: ("uncompressed" | "snappy"),
-                              format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta"),
+                              number_target_partitions: ::String?,
+                              format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta" | "iceberg" | "hyper" | "xml"),
                               additional_options: Hash[::String, ::String]?,
                               schema_change_policy: {
                                 enable_update_catalog: bool?,
@@ -6068,6 +6134,35 @@ module Aws
                                   },
                                 ]?
                               }?,
+                              s3_excel_source: {
+                                name: ::String,
+                                paths: Array[::String],
+                                compression_type: ("snappy" | "lzo" | "gzip" | "brotli" | "lz4" | "uncompressed" | "none")?,
+                                exclusions: Array[::String]?,
+                                group_size: ::String?,
+                                group_files: ::String?,
+                                recurse: bool?,
+                                max_band: ::Integer?,
+                                max_files_in_band: ::Integer?,
+                                additional_options: {
+                                  bounded_size: ::Integer?,
+                                  bounded_files: ::Integer?,
+                                  enable_sample_path: bool?,
+                                  sample_path: ::String?
+                                }?,
+                                number_rows: ::Integer?,
+                                skip_footer: ::Integer?,
+                                output_schemas: Array[
+                                  {
+                                    columns: Array[
+                                      {
+                                        name: ::String,
+                                        type: ::String?
+                                      },
+                                    ]?
+                                  },
+                                ]?
+                              }?,
                               s3_json_source: {
                                 name: ::String,
                                 paths: Array[::String],
@@ -6100,7 +6195,7 @@ module Aws
                               s3_parquet_source: {
                                 name: ::String,
                                 paths: Array[::String],
-                                compression_type: ("snappy" | "lzo" | "gzip" | "uncompressed" | "none")?,
+                                compression_type: ("snappy" | "lzo" | "gzip" | "brotli" | "lz4" | "uncompressed" | "none")?,
                                 exclusions: Array[::String]?,
                                 group_size: ::String?,
                                 group_files: ::String?,
@@ -6213,7 +6308,23 @@ module Aws
                                   Array[::String],
                                 ]?,
                                 path: ::String,
-                                compression: ("snappy" | "lzo" | "gzip" | "uncompressed" | "none")?,
+                                compression: ("snappy" | "lzo" | "gzip" | "brotli" | "lz4" | "uncompressed" | "none")?,
+                                number_target_partitions: ::String?,
+                                schema_change_policy: {
+                                  enable_update_catalog: bool?,
+                                  update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?,
+                                  table: ::String?,
+                                  database: ::String?
+                                }?
+                              }?,
+                              s3_hyper_direct_target: {
+                                name: ::String,
+                                inputs: Array[::String],
+                                partition_keys: Array[
+                                  Array[::String],
+                                ]?,
+                                path: ::String,
+                                compression: ("uncompressed")?,
                                 schema_change_policy: {
                                   enable_update_catalog: bool?,
                                   update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?,
@@ -6229,13 +6340,32 @@ module Aws
                                 ]?,
                                 path: ::String,
                                 compression: ::String?,
-                                format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta"),
+                                number_target_partitions: ::String?,
+                                format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta" | "iceberg" | "hyper" | "xml"),
                                 schema_change_policy: {
                                   enable_update_catalog: bool?,
                                   update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?,
                                   table: ::String?,
                                   database: ::String?
                                 }?
+                              }?,
+                              s3_iceberg_direct_target: {
+                                name: ::String,
+                                inputs: Array[::String],
+                                partition_keys: Array[
+                                  Array[::String],
+                                ]?,
+                                path: ::String,
+                                format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta" | "iceberg" | "hyper" | "xml"),
+                                additional_options: Hash[::String, ::String]?,
+                                schema_change_policy: {
+                                  enable_update_catalog: bool?,
+                                  update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?,
+                                  table: ::String?,
+                                  database: ::String?
+                                }?,
+                                compression: ("gzip" | "lzo" | "uncompressed" | "snappy"),
+                                number_target_partitions: ::String?
                               }?,
                               apply_mapping: {
                                 name: ::String,
@@ -6735,10 +6865,11 @@ module Aws
                                 inputs: Array[::String],
                                 path: ::String,
                                 compression: ("gzip" | "lzo" | "uncompressed" | "snappy"),
+                                number_target_partitions: ::String?,
                                 partition_keys: Array[
                                   Array[::String],
                                 ]?,
-                                format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta"),
+                                format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta" | "iceberg" | "hyper" | "xml"),
                                 additional_options: Hash[::String, ::String],
                                 schema_change_policy: {
                                   enable_update_catalog: bool?,
@@ -6830,7 +6961,8 @@ module Aws
                                 ]?,
                                 path: ::String,
                                 compression: ("uncompressed" | "snappy"),
-                                format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta"),
+                                number_target_partitions: ::String?,
+                                format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta" | "iceberg" | "hyper" | "xml"),
                                 additional_options: Hash[::String, ::String]?,
                                 schema_change_policy: {
                                   enable_update_catalog: bool?,

@@ -1232,6 +1232,18 @@
         {"shape":"DBInstanceNotReadyFault"}
       ]
     },
+    "DescribeDBMajorEngineVersions":{
+      "name":"DescribeDBMajorEngineVersions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeDBMajorEngineVersionsRequest"},
+      "output":{
+        "shape":"DescribeDBMajorEngineVersionsResponse",
+        "resultWrapper":"DescribeDBMajorEngineVersionsResult"
+      }
+    },
     "DescribeDBParameterGroups":{
       "name":"DescribeDBParameterGroups",
       "http":{
@@ -4990,6 +5002,21 @@
       },
       "exception":true
     },
+    "DBMajorEngineVersion":{
+      "type":"structure",
+      "members":{
+        "Engine":{"shape":"String"},
+        "MajorEngineVersion":{"shape":"String"},
+        "SupportedEngineLifecycles":{"shape":"SupportedEngineLifecycleList"}
+      }
+    },
+    "DBMajorEngineVersionsList":{
+      "type":"list",
+      "member":{
+        "shape":"DBMajorEngineVersion",
+        "locationName":"DBMajorEngineVersion"
+      }
+    },
     "DBParameterGroup":{
       "type":"structure",
       "members":{
@@ -6149,6 +6176,22 @@
         "Marker":{"shape":"String"}
       }
     },
+    "DescribeDBMajorEngineVersionsRequest":{
+      "type":"structure",
+      "members":{
+        "Engine":{"shape":"Engine"},
+        "MajorEngineVersion":{"shape":"MajorEngineVersion"},
+        "Marker":{"shape":"Marker"},
+        "MaxRecords":{"shape":"MaxRecords"}
+      }
+    },
+    "DescribeDBMajorEngineVersionsResponse":{
+      "type":"structure",
+      "members":{
+        "DBMajorEngineVersions":{"shape":"DBMajorEngineVersionsList"},
+        "Marker":{"shape":"String"}
+      }
+    },
     "DescribeDBParameterGroupsMessage":{
       "type":"structure",
       "members":{
@@ -6677,6 +6720,11 @@
         "Port":{"shape":"Integer"},
         "HostedZoneId":{"shape":"String"}
       }
+    },
+    "Engine":{
+      "type":"string",
+      "max":50,
+      "min":1
     },
     "EngineDefaults":{
       "type":"structure",
@@ -7564,6 +7612,13 @@
       "min":1,
       "pattern":"[a-zA-Z0-9_:\\-\\/]+"
     },
+    "LifecycleSupportName":{
+      "type":"string",
+      "enum":[
+        "open-source-rds-standard-support",
+        "open-source-rds-extended-support"
+      ]
+    },
     "LimitlessDatabase":{
       "type":"structure",
       "members":{
@@ -7608,6 +7663,11 @@
     },
     "Long":{"type":"long"},
     "LongOptional":{"type":"long"},
+    "MajorEngineVersion":{
+      "type":"string",
+      "max":50,
+      "min":1
+    },
     "Marker":{
       "type":"string",
       "max":340,
@@ -9799,6 +9859,26 @@
       "member":{
         "shape":"CharacterSet",
         "locationName":"CharacterSet"
+      }
+    },
+    "SupportedEngineLifecycle":{
+      "type":"structure",
+      "required":[
+        "LifecycleSupportName",
+        "LifecycleSupportStartDate",
+        "LifecycleSupportEndDate"
+      ],
+      "members":{
+        "LifecycleSupportName":{"shape":"LifecycleSupportName"},
+        "LifecycleSupportStartDate":{"shape":"TStamp"},
+        "LifecycleSupportEndDate":{"shape":"TStamp"}
+      }
+    },
+    "SupportedEngineLifecycleList":{
+      "type":"list",
+      "member":{
+        "shape":"SupportedEngineLifecycle",
+        "locationName":"SupportedEngineLifecycle"
       }
     },
     "SupportedTimezonesList":{

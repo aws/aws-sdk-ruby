@@ -2015,6 +2015,75 @@ module Aws::CodePipeline
       req.send_request(options)
     end
 
+    # Lists the targets for the deploy action.
+    #
+    # @option params [String] :pipeline_name
+    #   The name of the pipeline with the deploy action.
+    #
+    # @option params [required, String] :action_execution_id
+    #   The execution ID for the deploy action.
+    #
+    # @option params [Array<Types::TargetFilter>] :filters
+    #   Filters the targets for a specified deploy action.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. To retrieve
+    #   the remaining results, make another call with the returned nextToken
+    #   value.
+    #
+    # @option params [String] :next_token
+    #   An identifier that was returned from the previous list action types
+    #   call, which can be used to return the next set of action types in the
+    #   list.
+    #
+    # @return [Types::ListDeployActionExecutionTargetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDeployActionExecutionTargetsOutput#targets #targets} => Array&lt;Types::DeployActionExecutionTarget&gt;
+    #   * {Types::ListDeployActionExecutionTargetsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_deploy_action_execution_targets({
+    #     pipeline_name: "PipelineName",
+    #     action_execution_id: "ActionExecutionId", # required
+    #     filters: [
+    #       {
+    #         name: "TARGET_STATUS", # accepts TARGET_STATUS
+    #         values: ["TargetFilterValue"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.targets #=> Array
+    #   resp.targets[0].target_id #=> String
+    #   resp.targets[0].target_type #=> String
+    #   resp.targets[0].status #=> String
+    #   resp.targets[0].start_time #=> Time
+    #   resp.targets[0].end_time #=> Time
+    #   resp.targets[0].events #=> Array
+    #   resp.targets[0].events[0].name #=> String
+    #   resp.targets[0].events[0].status #=> String
+    #   resp.targets[0].events[0].start_time #=> Time
+    #   resp.targets[0].events[0].end_time #=> Time
+    #   resp.targets[0].events[0].context.ssm_command_id #=> String
+    #   resp.targets[0].events[0].context.message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListDeployActionExecutionTargets AWS API Documentation
+    #
+    # @overload list_deploy_action_execution_targets(params = {})
+    # @param [Hash] params ({})
+    def list_deploy_action_execution_targets(params = {}, options = {})
+      req = build_request(:list_deploy_action_execution_targets, params)
+      req.send_request(options)
+    end
+
     # Gets a summary of the most recent executions for a pipeline.
     #
     # <note markdown="1"> When applying the filter for pipeline executions that have succeeded
@@ -3698,7 +3767,7 @@ module Aws::CodePipeline
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.99.0'
+      context[:gem_version] = '1.100.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

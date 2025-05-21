@@ -510,7 +510,8 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] configuration
-    #   The execute command configuration for the cluster.
+    #   The execute command and managed storage configuration for the
+    #   cluster.
     #   @return [Types::ClusterConfiguration]
     #
     # @!attribute [rw] status
@@ -970,7 +971,7 @@ module Aws::ECS
     #   @return [Integer]
     #
     # @!attribute [rw] reason
-    #   A short (255 max characters) human-readable string to provide
+    #   A short (1024 max characters) human-readable string to provide
     #   additional details about a running or stopped container.
     #   @return [String]
     #
@@ -7241,17 +7242,40 @@ module Aws::ECS
     # The managed storage configuration for the cluster.
     #
     # @!attribute [rw] kms_key_id
-    #   Specify a Key Management Service key ID to encrypt the managed
-    #   storage.
+    #   Specify a Key Management Service key ID to encrypt Amazon ECS
+    #   managed storage.
+    #
+    #   When you specify a `kmsKeyId`, Amazon ECS uses the key to encrypt
+    #   data volumes managed by Amazon ECS that are attached to tasks in the
+    #   cluster. The following data volumes are managed by Amazon ECS:
+    #   Amazon EBS. For more information about encryption of Amazon EBS
+    #   volumes attached to Amazon ECS tasks, see [Encrypt data stored in
+    #   Amazon EBS volumes for Amazon ECS][1] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
     #
     #   The key must be a single Region key.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-kms-encryption.html
     #   @return [String]
     #
     # @!attribute [rw] fargate_ephemeral_storage_kms_key_id
-    #   Specify the Key Management Service key ID for the Fargate ephemeral
+    #   Specify the Key Management Service key ID for Fargate ephemeral
     #   storage.
     #
+    #   When you specify a `fargateEphemeralStorageKmsKeyId`, Amazon Web
+    #   Services Fargate uses the key to encrypt data at rest in ephemeral
+    #   storage. For more information about Fargate ephemeral storage
+    #   encryption, see [Customer managed keys for Amazon Web Services
+    #   Fargate ephemeral storage for Amazon ECS][1] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
+    #
     #   The key must be a single Region key.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-storage-encryption.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ManagedStorageConfiguration AWS API Documentation
@@ -10335,10 +10359,12 @@ module Aws::ECS
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volumes-configuration
     #
     # @!attribute [rw] encrypted
-    #   Indicates whether the volume should be encrypted. If no value is
-    #   specified, encryption is turned on by default. This parameter maps
-    #   1:1 with the `Encrypted` parameter of the [CreateVolume API][1] in
-    #   the *Amazon EC2 API Reference*.
+    #   Indicates whether the volume should be encrypted. If you turn on
+    #   Region-level Amazon EBS encryption by default but set this value as
+    #   `false`, the setting is overridden and the volume is encrypted with
+    #   the KMS key specified for Amazon EBS encryption by default. This
+    #   parameter maps 1:1 with the `Encrypted` parameter of the
+    #   [CreateVolume API][1] in the *Amazon EC2 API Reference*.
     #
     #
     #
@@ -10347,12 +10373,14 @@ module Aws::ECS
     #
     # @!attribute [rw] kms_key_id
     #   The Amazon Resource Name (ARN) identifier of the Amazon Web Services
-    #   Key Management Service key to use for Amazon EBS encryption. When
-    #   encryption is turned on and no Amazon Web Services Key Management
-    #   Service key is specified, the default Amazon Web Services managed
-    #   key for Amazon EBS volumes is used. This parameter maps 1:1 with the
-    #   `KmsKeyId` parameter of the [CreateVolume API][1] in the *Amazon EC2
-    #   API Reference*.
+    #   Key Management Service key to use for Amazon EBS encryption. When a
+    #   key is specified using this parameter, it overrides Amazon EBS
+    #   default encryption or any KMS key that you specified for
+    #   cluster-level managed storage encryption. This parameter maps 1:1
+    #   with the `KmsKeyId` parameter of the [CreateVolume API][1] in the
+    #   *Amazon EC2 API Reference*. For more information about encrypting
+    #   Amazon EBS volumes attached to tasks, see [Encrypt data stored in
+    #   Amazon EBS volumes attached to Amazon ECS tasks][2].
     #
     #   Amazon Web Services authenticates the Amazon Web Services Key
     #   Management Service key asynchronously. Therefore, if you specify an
@@ -10362,6 +10390,7 @@ module Aws::ECS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-kms-encryption.html
     #   @return [String]
     #
     # @!attribute [rw] volume_type
@@ -10417,15 +10446,28 @@ module Aws::ECS
     #   @return [Integer]
     #
     # @!attribute [rw] snapshot_id
-    #   The snapshot that Amazon ECS uses to create the volume. You must
-    #   specify either a snapshot ID or a volume size. This parameter maps
-    #   1:1 with the `SnapshotId` parameter of the [CreateVolume API][1] in
-    #   the *Amazon EC2 API Reference*.
+    #   The snapshot that Amazon ECS uses to create volumes for attachment
+    #   to tasks maintained by the service. You must specify either
+    #   `snapshotId` or `sizeInGiB` in your volume configuration. This
+    #   parameter maps 1:1 with the `SnapshotId` parameter of the
+    #   [CreateVolume API][1] in the *Amazon EC2 API Reference*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html
     #   @return [String]
+    #
+    # @!attribute [rw] volume_initialization_rate
+    #   The rate, in MiB/s, at which data is fetched from a snapshot of an
+    #   existing EBS volume to create new volumes for attachment to the
+    #   tasks maintained by the service. This property can be specified only
+    #   if you specify a `snapshotId`. For more information, see [Initialize
+    #   Amazon EBS volumes][1] in the *Amazon EBS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html
+    #   @return [Integer]
     #
     # @!attribute [rw] iops
     #   The number of I/O operations per second (IOPS). For `gp3`, `io1`,
@@ -10495,7 +10537,7 @@ module Aws::ECS
     #   The filesystem type for the volume. For volumes created from a
     #   snapshot, you must specify the same filesystem type that the volume
     #   was using when the snapshot was created. If there is a filesystem
-    #   type mismatch, the task will fail to start.
+    #   type mismatch, the tasks will fail to start.
     #
     #   The available Linux filesystem types are  `ext3`, `ext4`, and `xfs`.
     #   If no value is specified, the `xfs` filesystem type is used by
@@ -10512,6 +10554,7 @@ module Aws::ECS
       :volume_type,
       :size_in_gi_b,
       :snapshot_id,
+      :volume_initialization_rate,
       :iops,
       :throughput,
       :tag_specifications,
@@ -11320,7 +11363,9 @@ module Aws::ECS
     #   "kernel.shmmni" | "kernel.shm_rmid_forced"`, and `Sysctls` that
     #   start with `"fs.mqueue.*"`
     #
-    #   Valid network namespace values: `Sysctls` that start with `"net.*"`
+    #   Valid network namespace values: `Sysctls` that start with `"net.*"`.
+    #   Only namespaced `Sysctls` that exist within the container starting
+    #   with "net.* are accepted.
     #
     #   All of these values are supported by Fargate.
     #   @return [String]
@@ -12294,10 +12339,12 @@ module Aws::ECS
     # Amazon EBS volume, with one volume created for each task.
     #
     # @!attribute [rw] encrypted
-    #   Indicates whether the volume should be encrypted. If no value is
-    #   specified, encryption is turned on by default. This parameter maps
-    #   1:1 with the `Encrypted` parameter of the [CreateVolume API][1] in
-    #   the *Amazon EC2 API Reference*.
+    #   Indicates whether the volume should be encrypted. If you turn on
+    #   Region-level Amazon EBS encryption by default but set this value as
+    #   `false`, the setting is overridden and the volume is encrypted with
+    #   the KMS key specified for Amazon EBS encryption by default. This
+    #   parameter maps 1:1 with the `Encrypted` parameter of the
+    #   [CreateVolume API][1] in the *Amazon EC2 API Reference*.
     #
     #
     #
@@ -12306,12 +12353,14 @@ module Aws::ECS
     #
     # @!attribute [rw] kms_key_id
     #   The Amazon Resource Name (ARN) identifier of the Amazon Web Services
-    #   Key Management Service key to use for Amazon EBS encryption. When
-    #   encryption is turned on and no Amazon Web Services Key Management
-    #   Service key is specified, the default Amazon Web Services managed
-    #   key for Amazon EBS volumes is used. This parameter maps 1:1 with the
-    #   `KmsKeyId` parameter of the [CreateVolume API][1] in the *Amazon EC2
-    #   API Reference*.
+    #   Key Management Service key to use for Amazon EBS encryption. When a
+    #   key is specified using this parameter, it overrides Amazon EBS
+    #   default encryption or any KMS key that you specified for
+    #   cluster-level managed storage encryption. This parameter maps 1:1
+    #   with the `KmsKeyId` parameter of the [CreateVolume API][1] in the
+    #   *Amazon EC2 API Reference*. For more information about encrypting
+    #   Amazon EBS volumes attached to a task, see [Encrypt data stored in
+    #   Amazon EBS volumes attached to Amazon ECS tasks][2].
     #
     #   Amazon Web Services authenticates the Amazon Web Services Key
     #   Management Service key asynchronously. Therefore, if you specify an
@@ -12321,6 +12370,7 @@ module Aws::ECS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-kms-encryption.html
     #   @return [String]
     #
     # @!attribute [rw] volume_type
@@ -12385,6 +12435,18 @@ module Aws::ECS
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html
     #   @return [String]
+    #
+    # @!attribute [rw] volume_initialization_rate
+    #   The rate, in MiB/s, at which data is fetched from a snapshot of an
+    #   existing Amazon EBS volume to create a new volume for attachment to
+    #   the task. This property can be specified only if you specify a
+    #   `snapshotId`. For more information, see [Initialize Amazon EBS
+    #   volumes][1] in the *Amazon EBS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html
+    #   @return [Integer]
     #
     # @!attribute [rw] iops
     #   The number of I/O operations per second (IOPS). For `gp3`, `io1`,
@@ -12474,6 +12536,7 @@ module Aws::ECS
       :volume_type,
       :size_in_gi_b,
       :snapshot_id,
+      :volume_initialization_rate,
       :iops,
       :throughput,
       :tag_specifications,

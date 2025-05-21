@@ -1168,6 +1168,10 @@ module Aws::WorkSpaces
     #   Indicates the timeout settings of the pool.
     #   @return [Types::TimeoutSettings]
     #
+    # @!attribute [rw] running_mode
+    #   The running mode for the pool.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspacesPoolRequest AWS API Documentation
     #
     class CreateWorkspacesPoolRequest < Struct.new(
@@ -1178,7 +1182,8 @@ module Aws::WorkSpaces
       :capacity,
       :tags,
       :application_settings,
-      :timeout_settings)
+      :timeout_settings,
+      :running_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5021,6 +5026,11 @@ module Aws::WorkSpaces
     #   Indicates the timeout settings of the specified pool.
     #   @return [Types::TimeoutSettings]
     #
+    # @!attribute [rw] running_mode
+    #   The desired running mode for the pool. The running mode can only be
+    #   updated when the pool is in a stopped state.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateWorkspacesPoolRequest AWS API Documentation
     #
     class UpdateWorkspacesPoolRequest < Struct.new(
@@ -5030,7 +5040,8 @@ module Aws::WorkSpaces
       :directory_id,
       :capacity,
       :application_settings,
-      :timeout_settings)
+      :timeout_settings,
+      :running_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6117,7 +6128,7 @@ module Aws::WorkSpaces
     #   @return [Types::CapacityStatus]
     #
     # @!attribute [rw] pool_name
-    #   The name of the pool,
+    #   The name of the pool.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -6156,6 +6167,10 @@ module Aws::WorkSpaces
     #   connected to a new session with a new pool instance.
     #   @return [Types::TimeoutSettings]
     #
+    # @!attribute [rw] running_mode
+    #   The running mode of the pool.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspacesPool AWS API Documentation
     #
     class WorkspacesPool < Struct.new(
@@ -6170,7 +6185,8 @@ module Aws::WorkSpaces
       :directory_id,
       :errors,
       :application_settings,
-      :timeout_settings)
+      :timeout_settings,
+      :running_mode)
       SENSITIVE = []
       include Aws::Structure
     end

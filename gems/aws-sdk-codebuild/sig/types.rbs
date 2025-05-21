@@ -512,6 +512,19 @@ module Aws::CodeBuild
       SENSITIVE: []
     end
 
+    class DockerServer
+      attr_accessor compute_type: ("BUILD_GENERAL1_SMALL" | "BUILD_GENERAL1_MEDIUM" | "BUILD_GENERAL1_LARGE" | "BUILD_GENERAL1_XLARGE" | "BUILD_GENERAL1_2XLARGE" | "BUILD_LAMBDA_1GB" | "BUILD_LAMBDA_2GB" | "BUILD_LAMBDA_4GB" | "BUILD_LAMBDA_8GB" | "BUILD_LAMBDA_10GB" | "ATTRIBUTE_BASED_COMPUTE" | "CUSTOM_INSTANCE_TYPE")
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor status: Types::DockerServerStatus
+      SENSITIVE: []
+    end
+
+    class DockerServerStatus
+      attr_accessor status: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class EnvironmentImage
       attr_accessor name: ::String
       attr_accessor description: ::String
@@ -955,6 +968,7 @@ module Aws::CodeBuild
       attr_accessor certificate: ::String
       attr_accessor registry_credential: Types::RegistryCredential
       attr_accessor image_pull_credentials_type: ("CODEBUILD" | "SERVICE_ROLE")
+      attr_accessor docker_server: Types::DockerServer
       SENSITIVE: []
     end
 

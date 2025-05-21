@@ -43,6 +43,14 @@ module Aws::OAM
     #
     #   * `$AccountEmailNoDomain` is the email address of the account
     #     without the domain name
+    #
+    #   <note markdown="1"> In the Amazon Web Services GovCloud (US-East) and Amazon Web
+    #   Services GovCloud (US-West) Regions, the only supported option is to
+    #   use custom labels, and the `$AccountName`, `$AccountEmail`, and
+    #   `$AccountEmailNoDomain` variables all resolve as *account-id*
+    #   instead of the specified variable.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] link_configuration
@@ -242,10 +250,22 @@ module Aws::OAM
     #   The ARN of the link to retrieve information for.
     #   @return [String]
     #
+    # @!attribute [rw] include_tags
+    #   Specifies whether to include the tags associated with the link in
+    #   the response. When `IncludeTags` is set to `true` and the caller has
+    #   the required permission, `oam:ListTagsForResource`, the API will
+    #   return the tags for the specified resource. If the caller doesn't
+    #   have the required permission, `oam:ListTagsForResource`, the API
+    #   will raise an exception.
+    #
+    #   The default value is `false`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/oam-2022-06-10/GetLinkInput AWS API Documentation
     #
     class GetLinkInput < Struct.new(
-      :identifier)
+      :identifier,
+      :include_tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -306,10 +326,22 @@ module Aws::OAM
     #   The ARN of the sink to retrieve information for.
     #   @return [String]
     #
+    # @!attribute [rw] include_tags
+    #   Specifies whether to include the tags associated with the sink in
+    #   the response. When `IncludeTags` is set to `true` and the caller has
+    #   the required permission, `oam:ListTagsForResource`, the API will
+    #   return the tags for the specified resource. If the caller doesn't
+    #   have the required permission, `oam:ListTagsForResource`, the API
+    #   will raise an exception.
+    #
+    #   The default value is `false`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/oam-2022-06-10/GetSinkInput AWS API Documentation
     #
     class GetSinkInput < Struct.new(
-      :identifier)
+      :identifier,
+      :include_tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -970,6 +1002,18 @@ module Aws::OAM
     #   The ARN of the link that you want to update.
     #   @return [String]
     #
+    # @!attribute [rw] include_tags
+    #   Specifies whether to include the tags associated with the link in
+    #   the response after the update operation. When `IncludeTags` is set
+    #   to `true` and the caller has the required permission,
+    #   `oam:ListTagsForResource`, the API will return the tags for the
+    #   specified resource. If the caller doesn't have the required
+    #   permission, `oam:ListTagsForResource`, the API will raise an
+    #   exception.
+    #
+    #   The default value is `false`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] link_configuration
     #   Use this structure to filter which metric namespaces and which log
     #   groups are to be shared from the source account to the monitoring
@@ -988,6 +1032,7 @@ module Aws::OAM
     #
     class UpdateLinkInput < Struct.new(
       :identifier,
+      :include_tags,
       :link_configuration,
       :resource_types)
       SENSITIVE = []

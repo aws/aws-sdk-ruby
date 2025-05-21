@@ -124,6 +124,11 @@ module Aws::CodePipeline
       SENSITIVE: []
     end
 
+    class ActionExecutionNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class ActionExecutionOutput
       attr_accessor output_artifacts: ::Array[Types::ArtifactDetail]
       attr_accessor execution_result: Types::ActionExecutionResult
@@ -404,6 +409,31 @@ module Aws::CodePipeline
     end
 
     class DeleteWebhookOutput < Aws::EmptyStructure
+    end
+
+    class DeployActionExecutionTarget
+      attr_accessor target_id: ::String
+      attr_accessor target_type: ::String
+      attr_accessor status: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor events: ::Array[Types::DeployTargetEvent]
+      SENSITIVE: []
+    end
+
+    class DeployTargetEvent
+      attr_accessor name: ::String
+      attr_accessor status: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor context: Types::DeployTargetEventContext
+      SENSITIVE: []
+    end
+
+    class DeployTargetEventContext
+      attr_accessor ssm_command_id: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class DeregisterWebhookWithThirdPartyInput
@@ -720,6 +750,21 @@ module Aws::CodePipeline
 
     class ListActionTypesOutput
       attr_accessor action_types: ::Array[Types::ActionType]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeployActionExecutionTargetsInput
+      attr_accessor pipeline_name: ::String
+      attr_accessor action_execution_id: ::String
+      attr_accessor filters: ::Array[Types::TargetFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeployActionExecutionTargetsOutput
+      attr_accessor targets: ::Array[Types::DeployActionExecutionTarget]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -1362,6 +1407,12 @@ module Aws::CodePipeline
     end
 
     class TagResourceOutput < Aws::EmptyStructure
+    end
+
+    class TargetFilter
+      attr_accessor name: ("TARGET_STATUS")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
     end
 
     class ThirdPartyJob

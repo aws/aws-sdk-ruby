@@ -1018,6 +1018,18 @@ module Aws::Inspector2
     #           value: "StringInput", # required
     #         },
     #       ],
+    #       ecr_image_in_use_count: [
+    #         {
+    #           lower_inclusive: 1.0,
+    #           upper_inclusive: 1.0,
+    #         },
+    #       ],
+    #       ecr_image_last_in_use_at: [
+    #         {
+    #           end_inclusive: Time.now,
+    #           start_inclusive: Time.now,
+    #         },
+    #       ],
     #       ecr_image_pushed_at: [
     #         {
     #           end_inclusive: Time.now,
@@ -1341,6 +1353,18 @@ module Aws::Inspector2
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       ecr_image_in_use_count: [
+    #         {
+    #           lower_inclusive: 1.0,
+    #           upper_inclusive: 1.0,
+    #         },
+    #       ],
+    #       ecr_image_last_in_use_at: [
+    #         {
+    #           end_inclusive: Time.now,
+    #           start_inclusive: Time.now,
     #         },
     #       ],
     #       ecr_image_pushed_at: [
@@ -2104,6 +2128,61 @@ module Aws::Inspector2
       req.send_request(options)
     end
 
+    # Returns a list of clusters and metadata associated with an image.
+    #
+    # @option params [required, Types::ClusterForImageFilterCriteria] :filter
+    #   The resource Id for the Amazon ECR image.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned in a single page of
+    #   results.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from a previous request used to retrieve the next
+    #   page of results.
+    #
+    # @return [Types::GetClustersForImageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetClustersForImageResponse#cluster #cluster} => Array&lt;Types::ClusterInformation&gt;
+    #   * {Types::GetClustersForImageResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_clusters_for_image({
+    #     filter: { # required
+    #       resource_id: "ClusterForImageFilterCriteriaResourceIdString", # required
+    #     },
+    #     max_results: 1,
+    #     next_token: "GetClustersForImageNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster #=> Array
+    #   resp.cluster[0].cluster_arn #=> String
+    #   resp.cluster[0].cluster_details #=> Array
+    #   resp.cluster[0].cluster_details[0].cluster_metadata.aws_ecs_metadata_details.details_group #=> String
+    #   resp.cluster[0].cluster_details[0].cluster_metadata.aws_ecs_metadata_details.task_definition_arn #=> String
+    #   resp.cluster[0].cluster_details[0].cluster_metadata.aws_eks_metadata_details.namespace #=> String
+    #   resp.cluster[0].cluster_details[0].cluster_metadata.aws_eks_metadata_details.workload_info_list #=> Array
+    #   resp.cluster[0].cluster_details[0].cluster_metadata.aws_eks_metadata_details.workload_info_list[0].name #=> String
+    #   resp.cluster[0].cluster_details[0].cluster_metadata.aws_eks_metadata_details.workload_info_list[0].type #=> String
+    #   resp.cluster[0].cluster_details[0].last_in_use #=> Time
+    #   resp.cluster[0].cluster_details[0].running_unit_count #=> Integer
+    #   resp.cluster[0].cluster_details[0].stopped_unit_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetClustersForImage AWS API Documentation
+    #
+    # @overload get_clusters_for_image(params = {})
+    # @param [Hash] params ({})
+    def get_clusters_for_image(params = {}, options = {})
+      req = build_request(:get_clusters_for_image, params)
+      req.send_request(options)
+    end
+
     # Retrieves setting configurations for Inspector scans.
     #
     # @return [Types::GetConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2116,6 +2195,7 @@ module Aws::Inspector2
     #   resp.ec2_configuration.scan_mode_state.scan_mode #=> String, one of "EC2_SSM_AGENT_BASED", "EC2_HYBRID"
     #   resp.ec2_configuration.scan_mode_state.scan_mode_status #=> String, one of "SUCCESS", "PENDING"
     #   resp.ecr_configuration.rescan_duration_state.pull_date_rescan_duration #=> String, one of "DAYS_14", "DAYS_30", "DAYS_60", "DAYS_90", "DAYS_180"
+    #   resp.ecr_configuration.rescan_duration_state.pull_date_rescan_mode #=> String, one of "LAST_PULL_DATE", "LAST_IN_USE_AT"
     #   resp.ecr_configuration.rescan_duration_state.rescan_duration #=> String, one of "LIFETIME", "DAYS_30", "DAYS_180", "DAYS_14", "DAYS_60", "DAYS_90"
     #   resp.ecr_configuration.rescan_duration_state.status #=> String, one of "SUCCESS", "PENDING", "FAILED"
     #   resp.ecr_configuration.rescan_duration_state.updated_at #=> Time
@@ -2270,6 +2350,12 @@ module Aws::Inspector2
     #   resp.filter_criteria.ecr_image_hash #=> Array
     #   resp.filter_criteria.ecr_image_hash[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filter_criteria.ecr_image_hash[0].value #=> String
+    #   resp.filter_criteria.ecr_image_in_use_count #=> Array
+    #   resp.filter_criteria.ecr_image_in_use_count[0].lower_inclusive #=> Float
+    #   resp.filter_criteria.ecr_image_in_use_count[0].upper_inclusive #=> Float
+    #   resp.filter_criteria.ecr_image_last_in_use_at #=> Array
+    #   resp.filter_criteria.ecr_image_last_in_use_at[0].end_inclusive #=> Time
+    #   resp.filter_criteria.ecr_image_last_in_use_at[0].start_inclusive #=> Time
     #   resp.filter_criteria.ecr_image_pushed_at #=> Array
     #   resp.filter_criteria.ecr_image_pushed_at[0].end_inclusive #=> Time
     #   resp.filter_criteria.ecr_image_pushed_at[0].start_inclusive #=> Time
@@ -3025,6 +3111,18 @@ module Aws::Inspector2
     #           value: "NonEmptyString",
     #         },
     #       ],
+    #       ecr_image_in_use_count: [
+    #         {
+    #           lower_inclusive: 1,
+    #           upper_inclusive: 1,
+    #         },
+    #       ],
+    #       ecr_image_last_in_use_at: [
+    #         {
+    #           end_inclusive: Time.now,
+    #           start_inclusive: Time.now,
+    #         },
+    #       ],
     #       ecr_image_tags: [
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
@@ -3120,6 +3218,8 @@ module Aws::Inspector2
     #   resp.covered_resources[0].resource_metadata.ec2.tags #=> Hash
     #   resp.covered_resources[0].resource_metadata.ec2.tags["MapKey"] #=> String
     #   resp.covered_resources[0].resource_metadata.ecr_image.image_pulled_at #=> Time
+    #   resp.covered_resources[0].resource_metadata.ecr_image.in_use_count #=> Integer
+    #   resp.covered_resources[0].resource_metadata.ecr_image.last_in_use_at #=> Time
     #   resp.covered_resources[0].resource_metadata.ecr_image.tags #=> Array
     #   resp.covered_resources[0].resource_metadata.ecr_image.tags[0] #=> String
     #   resp.covered_resources[0].resource_metadata.ecr_repository.name #=> String
@@ -3132,7 +3232,7 @@ module Aws::Inspector2
     #   resp.covered_resources[0].resource_metadata.lambda_function.runtime #=> String, one of "NODEJS", "NODEJS_12_X", "NODEJS_14_X", "NODEJS_16_X", "JAVA_8", "JAVA_8_AL2", "JAVA_11", "PYTHON_3_7", "PYTHON_3_8", "PYTHON_3_9", "UNSUPPORTED", "NODEJS_18_X", "GO_1_X", "JAVA_17", "PYTHON_3_10", "PYTHON_3_11", "DOTNETCORE_3_1", "DOTNET_6", "DOTNET_7", "RUBY_2_7", "RUBY_3_2"
     #   resp.covered_resources[0].resource_type #=> String, one of "AWS_EC2_INSTANCE", "AWS_ECR_CONTAINER_IMAGE", "AWS_ECR_REPOSITORY", "AWS_LAMBDA_FUNCTION"
     #   resp.covered_resources[0].scan_mode #=> String, one of "EC2_SSM_AGENT_BASED", "EC2_AGENTLESS"
-    #   resp.covered_resources[0].scan_status.reason #=> String, one of "PENDING_INITIAL_SCAN", "ACCESS_DENIED", "INTERNAL_ERROR", "UNMANAGED_EC2_INSTANCE", "UNSUPPORTED_OS", "SCAN_ELIGIBILITY_EXPIRED", "RESOURCE_TERMINATED", "SUCCESSFUL", "NO_RESOURCES_FOUND", "IMAGE_SIZE_EXCEEDED", "SCAN_FREQUENCY_MANUAL", "SCAN_FREQUENCY_SCAN_ON_PUSH", "EC2_INSTANCE_STOPPED", "PENDING_DISABLE", "NO_INVENTORY", "STALE_INVENTORY", "EXCLUDED_BY_TAG", "UNSUPPORTED_RUNTIME", "UNSUPPORTED_MEDIA_TYPE", "UNSUPPORTED_CONFIG_FILE", "DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED", "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED", "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED", "DEEP_INSPECTION_NO_INVENTORY", "AGENTLESS_INSTANCE_STORAGE_LIMIT_EXCEEDED", "AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED"
+    #   resp.covered_resources[0].scan_status.reason #=> String, one of "PENDING_INITIAL_SCAN", "ACCESS_DENIED", "INTERNAL_ERROR", "UNMANAGED_EC2_INSTANCE", "UNSUPPORTED_OS", "SCAN_ELIGIBILITY_EXPIRED", "RESOURCE_TERMINATED", "SUCCESSFUL", "NO_RESOURCES_FOUND", "IMAGE_SIZE_EXCEEDED", "SCAN_FREQUENCY_MANUAL", "SCAN_FREQUENCY_SCAN_ON_PUSH", "EC2_INSTANCE_STOPPED", "PENDING_DISABLE", "NO_INVENTORY", "STALE_INVENTORY", "EXCLUDED_BY_TAG", "UNSUPPORTED_RUNTIME", "UNSUPPORTED_MEDIA_TYPE", "UNSUPPORTED_CONFIG_FILE", "DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED", "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED", "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED", "DEEP_INSPECTION_NO_INVENTORY", "AGENTLESS_INSTANCE_STORAGE_LIMIT_EXCEEDED", "AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED", "PENDING_REVIVAL_SCAN"
     #   resp.covered_resources[0].scan_status.status_code #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.covered_resources[0].scan_type #=> String, one of "NETWORK", "PACKAGE", "CODE"
     #   resp.next_token #=> String
@@ -3185,6 +3285,18 @@ module Aws::Inspector2
     #           comparison: "EQUALS", # required, accepts EQUALS
     #           key: "NonEmptyString", # required
     #           value: "NonEmptyString",
+    #         },
+    #       ],
+    #       ecr_image_in_use_count: [
+    #         {
+    #           lower_inclusive: 1,
+    #           upper_inclusive: 1,
+    #         },
+    #       ],
+    #       ecr_image_last_in_use_at: [
+    #         {
+    #           end_inclusive: Time.now,
+    #           start_inclusive: Time.now,
     #         },
     #       ],
     #       ecr_image_tags: [
@@ -3412,6 +3524,12 @@ module Aws::Inspector2
     #   resp.filters[0].criteria.ecr_image_hash #=> Array
     #   resp.filters[0].criteria.ecr_image_hash[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filters[0].criteria.ecr_image_hash[0].value #=> String
+    #   resp.filters[0].criteria.ecr_image_in_use_count #=> Array
+    #   resp.filters[0].criteria.ecr_image_in_use_count[0].lower_inclusive #=> Float
+    #   resp.filters[0].criteria.ecr_image_in_use_count[0].upper_inclusive #=> Float
+    #   resp.filters[0].criteria.ecr_image_last_in_use_at #=> Array
+    #   resp.filters[0].criteria.ecr_image_last_in_use_at[0].end_inclusive #=> Time
+    #   resp.filters[0].criteria.ecr_image_last_in_use_at[0].start_inclusive #=> Time
     #   resp.filters[0].criteria.ecr_image_pushed_at #=> Array
     #   resp.filters[0].criteria.ecr_image_pushed_at[0].end_inclusive #=> Time
     #   resp.filters[0].criteria.ecr_image_pushed_at[0].start_inclusive #=> Time
@@ -3619,6 +3737,18 @@ module Aws::Inspector2
     #             value: "StringInput", # required
     #           },
     #         ],
+    #         in_use_count: [
+    #           {
+    #             lower_inclusive: 1.0,
+    #             upper_inclusive: 1.0,
+    #           },
+    #         ],
+    #         last_in_use_at: [
+    #           {
+    #             end_inclusive: Time.now,
+    #             start_inclusive: Time.now,
+    #           },
+    #         ],
     #         repositories: [
     #           {
     #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
@@ -3810,6 +3940,8 @@ module Aws::Inspector2
     #   resp.responses[0].aws_ecr_container_aggregation.image_sha #=> String
     #   resp.responses[0].aws_ecr_container_aggregation.image_tags #=> Array
     #   resp.responses[0].aws_ecr_container_aggregation.image_tags[0] #=> String
+    #   resp.responses[0].aws_ecr_container_aggregation.in_use_count #=> Integer
+    #   resp.responses[0].aws_ecr_container_aggregation.last_in_use_at #=> Time
     #   resp.responses[0].aws_ecr_container_aggregation.repository #=> String
     #   resp.responses[0].aws_ecr_container_aggregation.resource_id #=> String
     #   resp.responses[0].aws_ecr_container_aggregation.severity_counts.all #=> Integer
@@ -3988,6 +4120,18 @@ module Aws::Inspector2
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       ecr_image_in_use_count: [
+    #         {
+    #           lower_inclusive: 1.0,
+    #           upper_inclusive: 1.0,
+    #         },
+    #       ],
+    #       ecr_image_last_in_use_at: [
+    #         {
+    #           end_inclusive: Time.now,
+    #           start_inclusive: Time.now,
     #         },
     #       ],
     #       ecr_image_pushed_at: [
@@ -4305,6 +4449,8 @@ module Aws::Inspector2
     #   resp.findings[0].resources[0].details.aws_ecr_container_image.image_hash #=> String
     #   resp.findings[0].resources[0].details.aws_ecr_container_image.image_tags #=> Array
     #   resp.findings[0].resources[0].details.aws_ecr_container_image.image_tags[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_ecr_container_image.in_use_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ecr_container_image.last_in_use_at #=> Time
     #   resp.findings[0].resources[0].details.aws_ecr_container_image.platform #=> String
     #   resp.findings[0].resources[0].details.aws_ecr_container_image.pushed_at #=> Time
     #   resp.findings[0].resources[0].details.aws_ecr_container_image.registry #=> String
@@ -4886,6 +5032,7 @@ module Aws::Inspector2
     #     },
     #     ecr_configuration: {
     #       pull_date_rescan_duration: "DAYS_14", # accepts DAYS_14, DAYS_30, DAYS_60, DAYS_90, DAYS_180
+    #       pull_date_rescan_mode: "LAST_PULL_DATE", # accepts LAST_PULL_DATE, LAST_IN_USE_AT
     #       rescan_duration: "LIFETIME", # required, accepts LIFETIME, DAYS_30, DAYS_180, DAYS_14, DAYS_60, DAYS_90
     #     },
     #   })
@@ -5077,6 +5224,18 @@ module Aws::Inspector2
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       ecr_image_in_use_count: [
+    #         {
+    #           lower_inclusive: 1.0,
+    #           upper_inclusive: 1.0,
+    #         },
+    #       ],
+    #       ecr_image_last_in_use_at: [
+    #         {
+    #           end_inclusive: Time.now,
+    #           start_inclusive: Time.now,
     #         },
     #       ],
     #       ecr_image_pushed_at: [
@@ -5394,7 +5553,7 @@ module Aws::Inspector2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-inspector2'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

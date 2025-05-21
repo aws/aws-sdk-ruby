@@ -24,6 +24,9 @@ module Aws::BedrockAgent
     ActionGroupState = Shapes::StringShape.new(name: 'ActionGroupState')
     ActionGroupSummaries = Shapes::ListShape.new(name: 'ActionGroupSummaries')
     ActionGroupSummary = Shapes::StructureShape.new(name: 'ActionGroupSummary')
+    AdditionalModelRequestFields = Shapes::MapShape.new(name: 'AdditionalModelRequestFields')
+    AdditionalModelRequestFieldsKey = Shapes::StringShape.new(name: 'AdditionalModelRequestFieldsKey')
+    AdditionalModelRequestFieldsValue = Shapes::DocumentShape.new(name: 'AdditionalModelRequestFieldsValue', document: true)
     Agent = Shapes::StructureShape.new(name: 'Agent')
     AgentActionGroup = Shapes::StructureShape.new(name: 'AgentActionGroup')
     AgentAlias = Shapes::StructureShape.new(name: 'AgentAlias')
@@ -68,6 +71,7 @@ module Aws::BedrockAgent
     BedrockFoundationModelConfiguration = Shapes::StructureShape.new(name: 'BedrockFoundationModelConfiguration')
     BedrockFoundationModelContextEnrichmentConfiguration = Shapes::StructureShape.new(name: 'BedrockFoundationModelContextEnrichmentConfiguration')
     BedrockModelArn = Shapes::StringShape.new(name: 'BedrockModelArn')
+    BedrockRerankingModelArn = Shapes::StringShape.new(name: 'BedrockRerankingModelArn')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BucketOwnerAccountId = Shapes::StringShape.new(name: 'BucketOwnerAccountId')
     ByteContentBlob = Shapes::BlobShape.new(name: 'ByteContentBlob')
@@ -82,6 +86,7 @@ module Aws::BedrockAgent
     CollaborationInstruction = Shapes::StringShape.new(name: 'CollaborationInstruction')
     CollectorFlowNodeConfiguration = Shapes::StructureShape.new(name: 'CollectorFlowNodeConfiguration')
     ColumnName = Shapes::StringShape.new(name: 'ColumnName')
+    ConcurrencyType = Shapes::StringShape.new(name: 'ConcurrencyType')
     ConditionFlowNodeConfiguration = Shapes::StructureShape.new(name: 'ConditionFlowNodeConfiguration')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConfluenceAuthType = Shapes::StringShape.new(name: 'ConfluenceAuthType')
@@ -185,7 +190,10 @@ module Aws::BedrockAgent
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
     FailureReasons = Shapes::ListShape.new(name: 'FailureReasons')
+    FieldForReranking = Shapes::StructureShape.new(name: 'FieldForReranking')
+    FieldForRerankingFieldNameString = Shapes::StringShape.new(name: 'FieldForRerankingFieldNameString')
     FieldName = Shapes::StringShape.new(name: 'FieldName')
+    FieldsForReranking = Shapes::ListShape.new(name: 'FieldsForReranking')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FilterPattern = Shapes::StringShape.new(name: 'FilterPattern')
     FilteredObjectType = Shapes::StringShape.new(name: 'FilteredObjectType')
@@ -193,6 +201,8 @@ module Aws::BedrockAgent
     FixedSizeChunkingConfigurationMaxTokensInteger = Shapes::IntegerShape.new(name: 'FixedSizeChunkingConfigurationMaxTokensInteger')
     FixedSizeChunkingConfigurationOverlapPercentageInteger = Shapes::IntegerShape.new(name: 'FixedSizeChunkingConfigurationOverlapPercentageInteger')
     FlowAliasArn = Shapes::StringShape.new(name: 'FlowAliasArn')
+    FlowAliasConcurrencyConfiguration = Shapes::StructureShape.new(name: 'FlowAliasConcurrencyConfiguration')
+    FlowAliasConcurrencyConfigurationMaxConcurrencyInteger = Shapes::IntegerShape.new(name: 'FlowAliasConcurrencyConfigurationMaxConcurrencyInteger')
     FlowAliasId = Shapes::StringShape.new(name: 'FlowAliasId')
     FlowAliasIdentifier = Shapes::StringShape.new(name: 'FlowAliasIdentifier')
     FlowAliasRoutingConfiguration = Shapes::ListShape.new(name: 'FlowAliasRoutingConfiguration')
@@ -221,6 +231,7 @@ module Aws::BedrockAgent
     FlowNodeConfiguration = Shapes::UnionShape.new(name: 'FlowNodeConfiguration')
     FlowNodeIODataType = Shapes::StringShape.new(name: 'FlowNodeIODataType')
     FlowNodeInput = Shapes::StructureShape.new(name: 'FlowNodeInput')
+    FlowNodeInputCategory = Shapes::StringShape.new(name: 'FlowNodeInputCategory')
     FlowNodeInputExpression = Shapes::StringShape.new(name: 'FlowNodeInputExpression')
     FlowNodeInputName = Shapes::StringShape.new(name: 'FlowNodeInputName')
     FlowNodeInputs = Shapes::ListShape.new(name: 'FlowNodeInputs')
@@ -285,6 +296,7 @@ module Aws::BedrockAgent
     Id = Shapes::StringShape.new(name: 'Id')
     IncludeExclude = Shapes::StringShape.new(name: 'IncludeExclude')
     IncompatibleConnectionDataTypeFlowValidationDetails = Shapes::StructureShape.new(name: 'IncompatibleConnectionDataTypeFlowValidationDetails')
+    IncompatibleLoopNodeType = Shapes::StringShape.new(name: 'IncompatibleLoopNodeType')
     InferenceConfiguration = Shapes::StructureShape.new(name: 'InferenceConfiguration')
     IngestKnowledgeBaseDocumentsRequest = Shapes::StructureShape.new(name: 'IngestKnowledgeBaseDocumentsRequest')
     IngestKnowledgeBaseDocumentsResponse = Shapes::StructureShape.new(name: 'IngestKnowledgeBaseDocumentsResponse')
@@ -309,6 +321,7 @@ module Aws::BedrockAgent
     Instruction = Shapes::StringShape.new(name: 'Instruction')
     IntermediateStorage = Shapes::StructureShape.new(name: 'IntermediateStorage')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    InvalidLoopBoundaryFlowValidationDetails = Shapes::StructureShape.new(name: 'InvalidLoopBoundaryFlowValidationDetails')
     IteratorFlowNodeConfiguration = Shapes::StructureShape.new(name: 'IteratorFlowNodeConfiguration')
     KendraIndexArn = Shapes::StringShape.new(name: 'KendraIndexArn')
     KendraKnowledgeBaseConfiguration = Shapes::StructureShape.new(name: 'KendraKnowledgeBaseConfiguration')
@@ -322,14 +335,18 @@ module Aws::BedrockAgent
     KnowledgeBaseDocumentDetails = Shapes::ListShape.new(name: 'KnowledgeBaseDocumentDetails')
     KnowledgeBaseDocuments = Shapes::ListShape.new(name: 'KnowledgeBaseDocuments')
     KnowledgeBaseFlowNodeConfiguration = Shapes::StructureShape.new(name: 'KnowledgeBaseFlowNodeConfiguration')
+    KnowledgeBaseFlowNodeConfigurationNumberOfResultsInteger = Shapes::IntegerShape.new(name: 'KnowledgeBaseFlowNodeConfigurationNumberOfResultsInteger')
     KnowledgeBaseId = Shapes::StringShape.new(name: 'KnowledgeBaseId')
     KnowledgeBaseModelIdentifier = Shapes::StringShape.new(name: 'KnowledgeBaseModelIdentifier')
+    KnowledgeBaseOrchestrationConfiguration = Shapes::StructureShape.new(name: 'KnowledgeBaseOrchestrationConfiguration')
+    KnowledgeBasePromptTemplate = Shapes::StructureShape.new(name: 'KnowledgeBasePromptTemplate')
     KnowledgeBaseRoleArn = Shapes::StringShape.new(name: 'KnowledgeBaseRoleArn')
     KnowledgeBaseState = Shapes::StringShape.new(name: 'KnowledgeBaseState')
     KnowledgeBaseStatus = Shapes::StringShape.new(name: 'KnowledgeBaseStatus')
     KnowledgeBaseStorageType = Shapes::StringShape.new(name: 'KnowledgeBaseStorageType')
     KnowledgeBaseSummaries = Shapes::ListShape.new(name: 'KnowledgeBaseSummaries')
     KnowledgeBaseSummary = Shapes::StructureShape.new(name: 'KnowledgeBaseSummary')
+    KnowledgeBaseTextPrompt = Shapes::StringShape.new(name: 'KnowledgeBaseTextPrompt')
     KnowledgeBaseType = Shapes::StringShape.new(name: 'KnowledgeBaseType')
     LambdaArn = Shapes::StringShape.new(name: 'LambdaArn')
     LambdaFunctionFlowNodeConfiguration = Shapes::StructureShape.new(name: 'LambdaFunctionFlowNodeConfiguration')
@@ -366,6 +383,11 @@ module Aws::BedrockAgent
     ListPromptsResponse = Shapes::StructureShape.new(name: 'ListPromptsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    LoopControllerFlowNodeConfiguration = Shapes::StructureShape.new(name: 'LoopControllerFlowNodeConfiguration')
+    LoopControllerFlowNodeConfigurationMaxIterationsInteger = Shapes::IntegerShape.new(name: 'LoopControllerFlowNodeConfigurationMaxIterationsInteger')
+    LoopFlowNodeConfiguration = Shapes::StructureShape.new(name: 'LoopFlowNodeConfiguration')
+    LoopIncompatibleNodeTypeFlowValidationDetails = Shapes::StructureShape.new(name: 'LoopIncompatibleNodeTypeFlowValidationDetails')
+    LoopInputFlowNodeConfiguration = Shapes::StructureShape.new(name: 'LoopInputFlowNodeConfiguration')
     MalformedConditionExpressionFlowValidationDetails = Shapes::StructureShape.new(name: 'MalformedConditionExpressionFlowValidationDetails')
     MalformedNodeInputExpressionFlowValidationDetails = Shapes::StructureShape.new(name: 'MalformedNodeInputExpressionFlowValidationDetails')
     MaxRecentSessions = Shapes::IntegerShape.new(name: 'MaxRecentSessions')
@@ -378,6 +400,7 @@ module Aws::BedrockAgent
     MetadataAttribute = Shapes::StructureShape.new(name: 'MetadataAttribute')
     MetadataAttributeValue = Shapes::StructureShape.new(name: 'MetadataAttributeValue')
     MetadataAttributeValueStringListValueList = Shapes::ListShape.new(name: 'MetadataAttributeValueStringListValueList')
+    MetadataConfigurationForReranking = Shapes::StructureShape.new(name: 'MetadataConfigurationForReranking')
     MetadataSourceType = Shapes::StringShape.new(name: 'MetadataSourceType')
     MetadataValueType = Shapes::StringShape.new(name: 'MetadataValueType')
     Microsoft365TenantId = Shapes::StringShape.new(name: 'Microsoft365TenantId')
@@ -386,6 +409,8 @@ module Aws::BedrockAgent
     MissingConnectionConfigurationFlowValidationDetails = Shapes::StructureShape.new(name: 'MissingConnectionConfigurationFlowValidationDetails')
     MissingDefaultConditionFlowValidationDetails = Shapes::StructureShape.new(name: 'MissingDefaultConditionFlowValidationDetails')
     MissingEndingNodesFlowValidationDetails = Shapes::StructureShape.new(name: 'MissingEndingNodesFlowValidationDetails')
+    MissingLoopControllerNodeFlowValidationDetails = Shapes::StructureShape.new(name: 'MissingLoopControllerNodeFlowValidationDetails')
+    MissingLoopInputNodeFlowValidationDetails = Shapes::StructureShape.new(name: 'MissingLoopInputNodeFlowValidationDetails')
     MissingNodeConfigurationFlowValidationDetails = Shapes::StructureShape.new(name: 'MissingNodeConfigurationFlowValidationDetails')
     MissingNodeInputFlowValidationDetails = Shapes::StructureShape.new(name: 'MissingNodeInputFlowValidationDetails')
     MissingNodeOutputFlowValidationDetails = Shapes::StructureShape.new(name: 'MissingNodeOutputFlowValidationDetails')
@@ -398,6 +423,8 @@ module Aws::BedrockAgent
     MongoDbAtlasEndpointServiceName = Shapes::StringShape.new(name: 'MongoDbAtlasEndpointServiceName')
     MongoDbAtlasFieldMapping = Shapes::StructureShape.new(name: 'MongoDbAtlasFieldMapping')
     MongoDbAtlasIndexName = Shapes::StringShape.new(name: 'MongoDbAtlasIndexName')
+    MultipleLoopControllerNodesFlowValidationDetails = Shapes::StructureShape.new(name: 'MultipleLoopControllerNodesFlowValidationDetails')
+    MultipleLoopInputNodesFlowValidationDetails = Shapes::StructureShape.new(name: 'MultipleLoopInputNodesFlowValidationDetails')
     MultipleNodeInputConnectionsFlowValidationDetails = Shapes::StructureShape.new(name: 'MultipleNodeInputConnectionsFlowValidationDetails')
     Name = Shapes::StringShape.new(name: 'Name')
     NaturalLanguageString = Shapes::StringShape.new(name: 'NaturalLanguageString')
@@ -432,6 +459,8 @@ module Aws::BedrockAgent
     PatternObjectFilterConfiguration = Shapes::StructureShape.new(name: 'PatternObjectFilterConfiguration')
     PatternObjectFilterList = Shapes::ListShape.new(name: 'PatternObjectFilterList')
     Payload = Shapes::StringShape.new(name: 'Payload')
+    PerformanceConfigLatency = Shapes::StringShape.new(name: 'PerformanceConfigLatency')
+    PerformanceConfiguration = Shapes::StructureShape.new(name: 'PerformanceConfiguration')
     PineconeConfiguration = Shapes::StructureShape.new(name: 'PineconeConfiguration')
     PineconeConnectionString = Shapes::StringShape.new(name: 'PineconeConnectionString')
     PineconeFieldMapping = Shapes::StructureShape.new(name: 'PineconeFieldMapping')
@@ -514,6 +543,8 @@ module Aws::BedrockAgent
     RedshiftServerlessConfiguration = Shapes::StructureShape.new(name: 'RedshiftServerlessConfiguration')
     RelayConversationHistory = Shapes::StringShape.new(name: 'RelayConversationHistory')
     RequireConfirmation = Shapes::StringShape.new(name: 'RequireConfirmation')
+    RerankingMetadataSelectionMode = Shapes::StringShape.new(name: 'RerankingMetadataSelectionMode')
+    RerankingMetadataSelectiveModeConfiguration = Shapes::UnionShape.new(name: 'RerankingMetadataSelectiveModeConfiguration')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RetrievalFlowNodeConfiguration = Shapes::StructureShape.new(name: 'RetrievalFlowNodeConfiguration')
     RetrievalFlowNodeS3Configuration = Shapes::StructureShape.new(name: 'RetrievalFlowNodeS3Configuration')
@@ -645,6 +676,11 @@ module Aws::BedrockAgent
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
     VectorIngestionConfiguration = Shapes::StructureShape.new(name: 'VectorIngestionConfiguration')
     VectorKnowledgeBaseConfiguration = Shapes::StructureShape.new(name: 'VectorKnowledgeBaseConfiguration')
+    VectorSearchBedrockRerankingConfiguration = Shapes::StructureShape.new(name: 'VectorSearchBedrockRerankingConfiguration')
+    VectorSearchBedrockRerankingConfigurationNumberOfRerankedResultsInteger = Shapes::IntegerShape.new(name: 'VectorSearchBedrockRerankingConfigurationNumberOfRerankedResultsInteger')
+    VectorSearchBedrockRerankingModelConfiguration = Shapes::StructureShape.new(name: 'VectorSearchBedrockRerankingModelConfiguration')
+    VectorSearchRerankingConfiguration = Shapes::StructureShape.new(name: 'VectorSearchRerankingConfiguration')
+    VectorSearchRerankingConfigurationType = Shapes::StringShape.new(name: 'VectorSearchRerankingConfigurationType')
     Version = Shapes::StringShape.new(name: 'Version')
     WebCrawlerConfiguration = Shapes::StructureShape.new(name: 'WebCrawlerConfiguration')
     WebCrawlerLimits = Shapes::StructureShape.new(name: 'WebCrawlerLimits')
@@ -685,6 +721,9 @@ module Aws::BedrockAgent
     ActionGroupSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     ActionGroupSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     ActionGroupSummary.struct_class = Types::ActionGroupSummary
+
+    AdditionalModelRequestFields.key = Shapes::ShapeRef.new(shape: AdditionalModelRequestFieldsKey)
+    AdditionalModelRequestFields.value = Shapes::ShapeRef.new(shape: AdditionalModelRequestFieldsValue)
 
     Agent.add_member(:agent_arn, Shapes::ShapeRef.new(shape: AgentArn, required: true, location_name: "agentArn"))
     Agent.add_member(:agent_collaboration, Shapes::ShapeRef.new(shape: AgentCollaboration, location_name: "agentCollaboration"))
@@ -1019,6 +1058,7 @@ module Aws::BedrockAgent
     CreateDataSourceResponse.struct_class = Types::CreateDataSourceResponse
 
     CreateFlowAliasRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateFlowAliasRequest.add_member(:concurrency_configuration, Shapes::ShapeRef.new(shape: FlowAliasConcurrencyConfiguration, location_name: "concurrencyConfiguration"))
     CreateFlowAliasRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateFlowAliasRequest.add_member(:flow_identifier, Shapes::ShapeRef.new(shape: FlowIdentifier, required: true, location: "uri", location_name: "flowIdentifier"))
     CreateFlowAliasRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
@@ -1027,6 +1067,7 @@ module Aws::BedrockAgent
     CreateFlowAliasRequest.struct_class = Types::CreateFlowAliasRequest
 
     CreateFlowAliasResponse.add_member(:arn, Shapes::ShapeRef.new(shape: FlowAliasArn, required: true, location_name: "arn"))
+    CreateFlowAliasResponse.add_member(:concurrency_configuration, Shapes::ShapeRef.new(shape: FlowAliasConcurrencyConfiguration, location_name: "concurrencyConfiguration"))
     CreateFlowAliasResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     CreateFlowAliasResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateFlowAliasResponse.add_member(:flow_id, Shapes::ShapeRef.new(shape: FlowId, required: true, location_name: "flowId"))
@@ -1330,11 +1371,20 @@ module Aws::BedrockAgent
 
     FailureReasons.member = Shapes::ShapeRef.new(shape: FailureReason)
 
+    FieldForReranking.add_member(:field_name, Shapes::ShapeRef.new(shape: FieldForRerankingFieldNameString, required: true, location_name: "fieldName"))
+    FieldForReranking.struct_class = Types::FieldForReranking
+
+    FieldsForReranking.member = Shapes::ShapeRef.new(shape: FieldForReranking)
+
     FilterList.member = Shapes::ShapeRef.new(shape: FilterPattern)
 
     FixedSizeChunkingConfiguration.add_member(:max_tokens, Shapes::ShapeRef.new(shape: FixedSizeChunkingConfigurationMaxTokensInteger, required: true, location_name: "maxTokens"))
     FixedSizeChunkingConfiguration.add_member(:overlap_percentage, Shapes::ShapeRef.new(shape: FixedSizeChunkingConfigurationOverlapPercentageInteger, required: true, location_name: "overlapPercentage"))
     FixedSizeChunkingConfiguration.struct_class = Types::FixedSizeChunkingConfiguration
+
+    FlowAliasConcurrencyConfiguration.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: FlowAliasConcurrencyConfigurationMaxConcurrencyInteger, location_name: "maxConcurrency"))
+    FlowAliasConcurrencyConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: ConcurrencyType, required: true, location_name: "type"))
+    FlowAliasConcurrencyConfiguration.struct_class = Types::FlowAliasConcurrencyConfiguration
 
     FlowAliasRoutingConfiguration.member = Shapes::ShapeRef.new(shape: FlowAliasRoutingConfigurationListItem)
 
@@ -1344,6 +1394,7 @@ module Aws::BedrockAgent
     FlowAliasSummaries.member = Shapes::ShapeRef.new(shape: FlowAliasSummary)
 
     FlowAliasSummary.add_member(:arn, Shapes::ShapeRef.new(shape: FlowAliasArn, required: true, location_name: "arn"))
+    FlowAliasSummary.add_member(:concurrency_configuration, Shapes::ShapeRef.new(shape: FlowAliasConcurrencyConfiguration, location_name: "concurrencyConfiguration"))
     FlowAliasSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     FlowAliasSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     FlowAliasSummary.add_member(:flow_id, Shapes::ShapeRef.new(shape: FlowId, required: true, location_name: "flowId"))
@@ -1403,6 +1454,9 @@ module Aws::BedrockAgent
     FlowNodeConfiguration.add_member(:knowledge_base, Shapes::ShapeRef.new(shape: KnowledgeBaseFlowNodeConfiguration, location_name: "knowledgeBase"))
     FlowNodeConfiguration.add_member(:lambda_function, Shapes::ShapeRef.new(shape: LambdaFunctionFlowNodeConfiguration, location_name: "lambdaFunction"))
     FlowNodeConfiguration.add_member(:lex, Shapes::ShapeRef.new(shape: LexFlowNodeConfiguration, location_name: "lex"))
+    FlowNodeConfiguration.add_member(:loop, Shapes::ShapeRef.new(shape: LoopFlowNodeConfiguration, location_name: "loop"))
+    FlowNodeConfiguration.add_member(:loop_controller, Shapes::ShapeRef.new(shape: LoopControllerFlowNodeConfiguration, location_name: "loopController"))
+    FlowNodeConfiguration.add_member(:loop_input, Shapes::ShapeRef.new(shape: LoopInputFlowNodeConfiguration, location_name: "loopInput"))
     FlowNodeConfiguration.add_member(:output, Shapes::ShapeRef.new(shape: OutputFlowNodeConfiguration, location_name: "output"))
     FlowNodeConfiguration.add_member(:prompt, Shapes::ShapeRef.new(shape: PromptFlowNodeConfiguration, location_name: "prompt"))
     FlowNodeConfiguration.add_member(:retrieval, Shapes::ShapeRef.new(shape: RetrievalFlowNodeConfiguration, location_name: "retrieval"))
@@ -1417,6 +1471,9 @@ module Aws::BedrockAgent
     FlowNodeConfiguration.add_member_subclass(:knowledge_base, Types::FlowNodeConfiguration::KnowledgeBase)
     FlowNodeConfiguration.add_member_subclass(:lambda_function, Types::FlowNodeConfiguration::LambdaFunction)
     FlowNodeConfiguration.add_member_subclass(:lex, Types::FlowNodeConfiguration::Lex)
+    FlowNodeConfiguration.add_member_subclass(:loop, Types::FlowNodeConfiguration::Loop)
+    FlowNodeConfiguration.add_member_subclass(:loop_controller, Types::FlowNodeConfiguration::LoopController)
+    FlowNodeConfiguration.add_member_subclass(:loop_input, Types::FlowNodeConfiguration::LoopInput)
     FlowNodeConfiguration.add_member_subclass(:output, Types::FlowNodeConfiguration::Output)
     FlowNodeConfiguration.add_member_subclass(:prompt, Types::FlowNodeConfiguration::Prompt)
     FlowNodeConfiguration.add_member_subclass(:retrieval, Types::FlowNodeConfiguration::Retrieval)
@@ -1424,6 +1481,7 @@ module Aws::BedrockAgent
     FlowNodeConfiguration.add_member_subclass(:unknown, Types::FlowNodeConfiguration::Unknown)
     FlowNodeConfiguration.struct_class = Types::FlowNodeConfiguration
 
+    FlowNodeInput.add_member(:category, Shapes::ShapeRef.new(shape: FlowNodeInputCategory, location_name: "category"))
     FlowNodeInput.add_member(:expression, Shapes::ShapeRef.new(shape: FlowNodeInputExpression, required: true, location_name: "expression"))
     FlowNodeInput.add_member(:name, Shapes::ShapeRef.new(shape: FlowNodeInputName, required: true, location_name: "name"))
     FlowNodeInput.add_member(:type, Shapes::ShapeRef.new(shape: FlowNodeIODataType, required: true, location_name: "type"))
@@ -1461,6 +1519,8 @@ module Aws::BedrockAgent
     FlowValidationDetails.add_member(:duplicate_condition_expression, Shapes::ShapeRef.new(shape: DuplicateConditionExpressionFlowValidationDetails, location_name: "duplicateConditionExpression"))
     FlowValidationDetails.add_member(:duplicate_connections, Shapes::ShapeRef.new(shape: DuplicateConnectionsFlowValidationDetails, location_name: "duplicateConnections"))
     FlowValidationDetails.add_member(:incompatible_connection_data_type, Shapes::ShapeRef.new(shape: IncompatibleConnectionDataTypeFlowValidationDetails, location_name: "incompatibleConnectionDataType"))
+    FlowValidationDetails.add_member(:invalid_loop_boundary, Shapes::ShapeRef.new(shape: InvalidLoopBoundaryFlowValidationDetails, location_name: "invalidLoopBoundary"))
+    FlowValidationDetails.add_member(:loop_incompatible_node_type, Shapes::ShapeRef.new(shape: LoopIncompatibleNodeTypeFlowValidationDetails, location_name: "loopIncompatibleNodeType"))
     FlowValidationDetails.add_member(:malformed_condition_expression, Shapes::ShapeRef.new(shape: MalformedConditionExpressionFlowValidationDetails, location_name: "malformedConditionExpression"))
     FlowValidationDetails.add_member(:malformed_node_input_expression, Shapes::ShapeRef.new(shape: MalformedNodeInputExpressionFlowValidationDetails, location_name: "malformedNodeInputExpression"))
     FlowValidationDetails.add_member(:mismatched_node_input_type, Shapes::ShapeRef.new(shape: MismatchedNodeInputTypeFlowValidationDetails, location_name: "mismatchedNodeInputType"))
@@ -1468,10 +1528,14 @@ module Aws::BedrockAgent
     FlowValidationDetails.add_member(:missing_connection_configuration, Shapes::ShapeRef.new(shape: MissingConnectionConfigurationFlowValidationDetails, location_name: "missingConnectionConfiguration"))
     FlowValidationDetails.add_member(:missing_default_condition, Shapes::ShapeRef.new(shape: MissingDefaultConditionFlowValidationDetails, location_name: "missingDefaultCondition"))
     FlowValidationDetails.add_member(:missing_ending_nodes, Shapes::ShapeRef.new(shape: MissingEndingNodesFlowValidationDetails, location_name: "missingEndingNodes"))
+    FlowValidationDetails.add_member(:missing_loop_controller_node, Shapes::ShapeRef.new(shape: MissingLoopControllerNodeFlowValidationDetails, location_name: "missingLoopControllerNode"))
+    FlowValidationDetails.add_member(:missing_loop_input_node, Shapes::ShapeRef.new(shape: MissingLoopInputNodeFlowValidationDetails, location_name: "missingLoopInputNode"))
     FlowValidationDetails.add_member(:missing_node_configuration, Shapes::ShapeRef.new(shape: MissingNodeConfigurationFlowValidationDetails, location_name: "missingNodeConfiguration"))
     FlowValidationDetails.add_member(:missing_node_input, Shapes::ShapeRef.new(shape: MissingNodeInputFlowValidationDetails, location_name: "missingNodeInput"))
     FlowValidationDetails.add_member(:missing_node_output, Shapes::ShapeRef.new(shape: MissingNodeOutputFlowValidationDetails, location_name: "missingNodeOutput"))
     FlowValidationDetails.add_member(:missing_starting_nodes, Shapes::ShapeRef.new(shape: MissingStartingNodesFlowValidationDetails, location_name: "missingStartingNodes"))
+    FlowValidationDetails.add_member(:multiple_loop_controller_nodes, Shapes::ShapeRef.new(shape: MultipleLoopControllerNodesFlowValidationDetails, location_name: "multipleLoopControllerNodes"))
+    FlowValidationDetails.add_member(:multiple_loop_input_nodes, Shapes::ShapeRef.new(shape: MultipleLoopInputNodesFlowValidationDetails, location_name: "multipleLoopInputNodes"))
     FlowValidationDetails.add_member(:multiple_node_input_connections, Shapes::ShapeRef.new(shape: MultipleNodeInputConnectionsFlowValidationDetails, location_name: "multipleNodeInputConnections"))
     FlowValidationDetails.add_member(:unfulfilled_node_input, Shapes::ShapeRef.new(shape: UnfulfilledNodeInputFlowValidationDetails, location_name: "unfulfilledNodeInput"))
     FlowValidationDetails.add_member(:unknown_connection_condition, Shapes::ShapeRef.new(shape: UnknownConnectionConditionFlowValidationDetails, location_name: "unknownConnectionCondition"))
@@ -1489,6 +1553,8 @@ module Aws::BedrockAgent
     FlowValidationDetails.add_member_subclass(:duplicate_condition_expression, Types::FlowValidationDetails::DuplicateConditionExpression)
     FlowValidationDetails.add_member_subclass(:duplicate_connections, Types::FlowValidationDetails::DuplicateConnections)
     FlowValidationDetails.add_member_subclass(:incompatible_connection_data_type, Types::FlowValidationDetails::IncompatibleConnectionDataType)
+    FlowValidationDetails.add_member_subclass(:invalid_loop_boundary, Types::FlowValidationDetails::InvalidLoopBoundary)
+    FlowValidationDetails.add_member_subclass(:loop_incompatible_node_type, Types::FlowValidationDetails::LoopIncompatibleNodeType)
     FlowValidationDetails.add_member_subclass(:malformed_condition_expression, Types::FlowValidationDetails::MalformedConditionExpression)
     FlowValidationDetails.add_member_subclass(:malformed_node_input_expression, Types::FlowValidationDetails::MalformedNodeInputExpression)
     FlowValidationDetails.add_member_subclass(:mismatched_node_input_type, Types::FlowValidationDetails::MismatchedNodeInputType)
@@ -1496,10 +1562,14 @@ module Aws::BedrockAgent
     FlowValidationDetails.add_member_subclass(:missing_connection_configuration, Types::FlowValidationDetails::MissingConnectionConfiguration)
     FlowValidationDetails.add_member_subclass(:missing_default_condition, Types::FlowValidationDetails::MissingDefaultCondition)
     FlowValidationDetails.add_member_subclass(:missing_ending_nodes, Types::FlowValidationDetails::MissingEndingNodes)
+    FlowValidationDetails.add_member_subclass(:missing_loop_controller_node, Types::FlowValidationDetails::MissingLoopControllerNode)
+    FlowValidationDetails.add_member_subclass(:missing_loop_input_node, Types::FlowValidationDetails::MissingLoopInputNode)
     FlowValidationDetails.add_member_subclass(:missing_node_configuration, Types::FlowValidationDetails::MissingNodeConfiguration)
     FlowValidationDetails.add_member_subclass(:missing_node_input, Types::FlowValidationDetails::MissingNodeInput)
     FlowValidationDetails.add_member_subclass(:missing_node_output, Types::FlowValidationDetails::MissingNodeOutput)
     FlowValidationDetails.add_member_subclass(:missing_starting_nodes, Types::FlowValidationDetails::MissingStartingNodes)
+    FlowValidationDetails.add_member_subclass(:multiple_loop_controller_nodes, Types::FlowValidationDetails::MultipleLoopControllerNodes)
+    FlowValidationDetails.add_member_subclass(:multiple_loop_input_nodes, Types::FlowValidationDetails::MultipleLoopInputNodes)
     FlowValidationDetails.add_member_subclass(:multiple_node_input_connections, Types::FlowValidationDetails::MultipleNodeInputConnections)
     FlowValidationDetails.add_member_subclass(:unfulfilled_node_input, Types::FlowValidationDetails::UnfulfilledNodeInput)
     FlowValidationDetails.add_member_subclass(:unknown_connection_condition, Types::FlowValidationDetails::UnknownConnectionCondition)
@@ -1596,6 +1666,7 @@ module Aws::BedrockAgent
     GetFlowAliasRequest.struct_class = Types::GetFlowAliasRequest
 
     GetFlowAliasResponse.add_member(:arn, Shapes::ShapeRef.new(shape: FlowAliasArn, required: true, location_name: "arn"))
+    GetFlowAliasResponse.add_member(:concurrency_configuration, Shapes::ShapeRef.new(shape: FlowAliasConcurrencyConfiguration, location_name: "concurrencyConfiguration"))
     GetFlowAliasResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     GetFlowAliasResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     GetFlowAliasResponse.add_member(:flow_id, Shapes::ShapeRef.new(shape: FlowId, required: true, location_name: "flowId"))
@@ -1770,6 +1841,11 @@ module Aws::BedrockAgent
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
+    InvalidLoopBoundaryFlowValidationDetails.add_member(:connection, Shapes::ShapeRef.new(shape: FlowConnectionName, required: true, location_name: "connection"))
+    InvalidLoopBoundaryFlowValidationDetails.add_member(:source, Shapes::ShapeRef.new(shape: FlowNodeName, required: true, location_name: "source"))
+    InvalidLoopBoundaryFlowValidationDetails.add_member(:target, Shapes::ShapeRef.new(shape: FlowNodeName, required: true, location_name: "target"))
+    InvalidLoopBoundaryFlowValidationDetails.struct_class = Types::InvalidLoopBoundaryFlowValidationDetails
+
     IteratorFlowNodeConfiguration.struct_class = Types::IteratorFlowNodeConfiguration
 
     KendraKnowledgeBaseConfiguration.add_member(:kendra_index_arn, Shapes::ShapeRef.new(shape: KendraIndexArn, required: true, location_name: "kendraIndexArn"))
@@ -1811,9 +1887,23 @@ module Aws::BedrockAgent
     KnowledgeBaseDocuments.member = Shapes::ShapeRef.new(shape: KnowledgeBaseDocument)
 
     KnowledgeBaseFlowNodeConfiguration.add_member(:guardrail_configuration, Shapes::ShapeRef.new(shape: GuardrailConfiguration, location_name: "guardrailConfiguration"))
+    KnowledgeBaseFlowNodeConfiguration.add_member(:inference_configuration, Shapes::ShapeRef.new(shape: PromptInferenceConfiguration, location_name: "inferenceConfiguration"))
     KnowledgeBaseFlowNodeConfiguration.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: KnowledgeBaseId, required: true, location_name: "knowledgeBaseId"))
     KnowledgeBaseFlowNodeConfiguration.add_member(:model_id, Shapes::ShapeRef.new(shape: KnowledgeBaseModelIdentifier, location_name: "modelId"))
+    KnowledgeBaseFlowNodeConfiguration.add_member(:number_of_results, Shapes::ShapeRef.new(shape: KnowledgeBaseFlowNodeConfigurationNumberOfResultsInteger, location_name: "numberOfResults"))
+    KnowledgeBaseFlowNodeConfiguration.add_member(:orchestration_configuration, Shapes::ShapeRef.new(shape: KnowledgeBaseOrchestrationConfiguration, location_name: "orchestrationConfiguration"))
+    KnowledgeBaseFlowNodeConfiguration.add_member(:prompt_template, Shapes::ShapeRef.new(shape: KnowledgeBasePromptTemplate, location_name: "promptTemplate"))
+    KnowledgeBaseFlowNodeConfiguration.add_member(:reranking_configuration, Shapes::ShapeRef.new(shape: VectorSearchRerankingConfiguration, location_name: "rerankingConfiguration"))
     KnowledgeBaseFlowNodeConfiguration.struct_class = Types::KnowledgeBaseFlowNodeConfiguration
+
+    KnowledgeBaseOrchestrationConfiguration.add_member(:additional_model_request_fields, Shapes::ShapeRef.new(shape: AdditionalModelRequestFields, location_name: "additionalModelRequestFields"))
+    KnowledgeBaseOrchestrationConfiguration.add_member(:inference_config, Shapes::ShapeRef.new(shape: PromptInferenceConfiguration, location_name: "inferenceConfig"))
+    KnowledgeBaseOrchestrationConfiguration.add_member(:performance_config, Shapes::ShapeRef.new(shape: PerformanceConfiguration, location_name: "performanceConfig"))
+    KnowledgeBaseOrchestrationConfiguration.add_member(:prompt_template, Shapes::ShapeRef.new(shape: KnowledgeBasePromptTemplate, location_name: "promptTemplate"))
+    KnowledgeBaseOrchestrationConfiguration.struct_class = Types::KnowledgeBaseOrchestrationConfiguration
+
+    KnowledgeBasePromptTemplate.add_member(:text_prompt_template, Shapes::ShapeRef.new(shape: KnowledgeBaseTextPrompt, location_name: "textPromptTemplate"))
+    KnowledgeBasePromptTemplate.struct_class = Types::KnowledgeBasePromptTemplate
 
     KnowledgeBaseSummaries.member = Shapes::ShapeRef.new(shape: KnowledgeBaseSummary)
 
@@ -1967,6 +2057,20 @@ module Aws::BedrockAgent
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    LoopControllerFlowNodeConfiguration.add_member(:continue_condition, Shapes::ShapeRef.new(shape: FlowCondition, required: true, location_name: "continueCondition"))
+    LoopControllerFlowNodeConfiguration.add_member(:max_iterations, Shapes::ShapeRef.new(shape: LoopControllerFlowNodeConfigurationMaxIterationsInteger, location_name: "maxIterations"))
+    LoopControllerFlowNodeConfiguration.struct_class = Types::LoopControllerFlowNodeConfiguration
+
+    LoopFlowNodeConfiguration.add_member(:definition, Shapes::ShapeRef.new(shape: FlowDefinition, required: true, location_name: "definition"))
+    LoopFlowNodeConfiguration.struct_class = Types::LoopFlowNodeConfiguration
+
+    LoopIncompatibleNodeTypeFlowValidationDetails.add_member(:incompatible_node_name, Shapes::ShapeRef.new(shape: FlowNodeName, required: true, location_name: "incompatibleNodeName"))
+    LoopIncompatibleNodeTypeFlowValidationDetails.add_member(:incompatible_node_type, Shapes::ShapeRef.new(shape: IncompatibleLoopNodeType, required: true, location_name: "incompatibleNodeType"))
+    LoopIncompatibleNodeTypeFlowValidationDetails.add_member(:node, Shapes::ShapeRef.new(shape: FlowNodeName, required: true, location_name: "node"))
+    LoopIncompatibleNodeTypeFlowValidationDetails.struct_class = Types::LoopIncompatibleNodeTypeFlowValidationDetails
+
+    LoopInputFlowNodeConfiguration.struct_class = Types::LoopInputFlowNodeConfiguration
+
     MalformedConditionExpressionFlowValidationDetails.add_member(:cause, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "cause"))
     MalformedConditionExpressionFlowValidationDetails.add_member(:condition, Shapes::ShapeRef.new(shape: FlowConditionName, required: true, location_name: "condition"))
     MalformedConditionExpressionFlowValidationDetails.add_member(:node, Shapes::ShapeRef.new(shape: FlowNodeName, required: true, location_name: "node"))
@@ -2001,6 +2105,10 @@ module Aws::BedrockAgent
 
     MetadataAttributeValueStringListValueList.member = Shapes::ShapeRef.new(shape: StringValue)
 
+    MetadataConfigurationForReranking.add_member(:selection_mode, Shapes::ShapeRef.new(shape: RerankingMetadataSelectionMode, required: true, location_name: "selectionMode"))
+    MetadataConfigurationForReranking.add_member(:selective_mode_configuration, Shapes::ShapeRef.new(shape: RerankingMetadataSelectiveModeConfiguration, location_name: "selectiveModeConfiguration"))
+    MetadataConfigurationForReranking.struct_class = Types::MetadataConfigurationForReranking
+
     MismatchedNodeInputTypeFlowValidationDetails.add_member(:expected_type, Shapes::ShapeRef.new(shape: FlowNodeIODataType, required: true, location_name: "expectedType"))
     MismatchedNodeInputTypeFlowValidationDetails.add_member(:input, Shapes::ShapeRef.new(shape: FlowNodeInputName, required: true, location_name: "input"))
     MismatchedNodeInputTypeFlowValidationDetails.add_member(:node, Shapes::ShapeRef.new(shape: FlowNodeName, required: true, location_name: "node"))
@@ -2018,6 +2126,12 @@ module Aws::BedrockAgent
     MissingDefaultConditionFlowValidationDetails.struct_class = Types::MissingDefaultConditionFlowValidationDetails
 
     MissingEndingNodesFlowValidationDetails.struct_class = Types::MissingEndingNodesFlowValidationDetails
+
+    MissingLoopControllerNodeFlowValidationDetails.add_member(:loop_node, Shapes::ShapeRef.new(shape: FlowNodeName, required: true, location_name: "loopNode"))
+    MissingLoopControllerNodeFlowValidationDetails.struct_class = Types::MissingLoopControllerNodeFlowValidationDetails
+
+    MissingLoopInputNodeFlowValidationDetails.add_member(:loop_node, Shapes::ShapeRef.new(shape: FlowNodeName, required: true, location_name: "loopNode"))
+    MissingLoopInputNodeFlowValidationDetails.struct_class = Types::MissingLoopInputNodeFlowValidationDetails
 
     MissingNodeConfigurationFlowValidationDetails.add_member(:node, Shapes::ShapeRef.new(shape: FlowNodeName, required: true, location_name: "node"))
     MissingNodeConfigurationFlowValidationDetails.struct_class = Types::MissingNodeConfigurationFlowValidationDetails
@@ -2046,6 +2160,12 @@ module Aws::BedrockAgent
     MongoDbAtlasFieldMapping.add_member(:text_field, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "textField"))
     MongoDbAtlasFieldMapping.add_member(:vector_field, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "vectorField"))
     MongoDbAtlasFieldMapping.struct_class = Types::MongoDbAtlasFieldMapping
+
+    MultipleLoopControllerNodesFlowValidationDetails.add_member(:loop_node, Shapes::ShapeRef.new(shape: FlowNodeName, required: true, location_name: "loopNode"))
+    MultipleLoopControllerNodesFlowValidationDetails.struct_class = Types::MultipleLoopControllerNodesFlowValidationDetails
+
+    MultipleLoopInputNodesFlowValidationDetails.add_member(:loop_node, Shapes::ShapeRef.new(shape: FlowNodeName, required: true, location_name: "loopNode"))
+    MultipleLoopInputNodesFlowValidationDetails.struct_class = Types::MultipleLoopInputNodesFlowValidationDetails
 
     MultipleNodeInputConnectionsFlowValidationDetails.add_member(:input, Shapes::ShapeRef.new(shape: FlowNodeInputName, required: true, location_name: "input"))
     MultipleNodeInputConnectionsFlowValidationDetails.add_member(:node, Shapes::ShapeRef.new(shape: FlowNodeName, required: true, location_name: "node"))
@@ -2113,6 +2233,9 @@ module Aws::BedrockAgent
     PatternObjectFilterConfiguration.struct_class = Types::PatternObjectFilterConfiguration
 
     PatternObjectFilterList.member = Shapes::ShapeRef.new(shape: PatternObjectFilter)
+
+    PerformanceConfiguration.add_member(:latency, Shapes::ShapeRef.new(shape: PerformanceConfigLatency, location_name: "latency"))
+    PerformanceConfiguration.struct_class = Types::PerformanceConfiguration
 
     PineconeConfiguration.add_member(:connection_string, Shapes::ShapeRef.new(shape: PineconeConnectionString, required: true, location_name: "connectionString"))
     PineconeConfiguration.add_member(:credentials_secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "credentialsSecretArn"))
@@ -2330,6 +2453,14 @@ module Aws::BedrockAgent
     RedshiftServerlessConfiguration.add_member(:auth_configuration, Shapes::ShapeRef.new(shape: RedshiftServerlessAuthConfiguration, required: true, location_name: "authConfiguration"))
     RedshiftServerlessConfiguration.add_member(:workgroup_arn, Shapes::ShapeRef.new(shape: WorkgroupArn, required: true, location_name: "workgroupArn"))
     RedshiftServerlessConfiguration.struct_class = Types::RedshiftServerlessConfiguration
+
+    RerankingMetadataSelectiveModeConfiguration.add_member(:fields_to_exclude, Shapes::ShapeRef.new(shape: FieldsForReranking, location_name: "fieldsToExclude"))
+    RerankingMetadataSelectiveModeConfiguration.add_member(:fields_to_include, Shapes::ShapeRef.new(shape: FieldsForReranking, location_name: "fieldsToInclude"))
+    RerankingMetadataSelectiveModeConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RerankingMetadataSelectiveModeConfiguration.add_member_subclass(:fields_to_exclude, Types::RerankingMetadataSelectiveModeConfiguration::FieldsToExclude)
+    RerankingMetadataSelectiveModeConfiguration.add_member_subclass(:fields_to_include, Types::RerankingMetadataSelectiveModeConfiguration::FieldsToInclude)
+    RerankingMetadataSelectiveModeConfiguration.add_member_subclass(:unknown, Types::RerankingMetadataSelectiveModeConfiguration::Unknown)
+    RerankingMetadataSelectiveModeConfiguration.struct_class = Types::RerankingMetadataSelectiveModeConfiguration
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
@@ -2669,6 +2800,7 @@ module Aws::BedrockAgent
     UpdateDataSourceResponse.struct_class = Types::UpdateDataSourceResponse
 
     UpdateFlowAliasRequest.add_member(:alias_identifier, Shapes::ShapeRef.new(shape: FlowAliasIdentifier, required: true, location: "uri", location_name: "aliasIdentifier"))
+    UpdateFlowAliasRequest.add_member(:concurrency_configuration, Shapes::ShapeRef.new(shape: FlowAliasConcurrencyConfiguration, location_name: "concurrencyConfiguration"))
     UpdateFlowAliasRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateFlowAliasRequest.add_member(:flow_identifier, Shapes::ShapeRef.new(shape: FlowIdentifier, required: true, location: "uri", location_name: "flowIdentifier"))
     UpdateFlowAliasRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
@@ -2676,6 +2808,7 @@ module Aws::BedrockAgent
     UpdateFlowAliasRequest.struct_class = Types::UpdateFlowAliasRequest
 
     UpdateFlowAliasResponse.add_member(:arn, Shapes::ShapeRef.new(shape: FlowAliasArn, required: true, location_name: "arn"))
+    UpdateFlowAliasResponse.add_member(:concurrency_configuration, Shapes::ShapeRef.new(shape: FlowAliasConcurrencyConfiguration, location_name: "concurrencyConfiguration"))
     UpdateFlowAliasResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     UpdateFlowAliasResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateFlowAliasResponse.add_member(:flow_id, Shapes::ShapeRef.new(shape: FlowId, required: true, location_name: "flowId"))
@@ -2766,6 +2899,19 @@ module Aws::BedrockAgent
     VectorKnowledgeBaseConfiguration.add_member(:embedding_model_configuration, Shapes::ShapeRef.new(shape: EmbeddingModelConfiguration, location_name: "embeddingModelConfiguration"))
     VectorKnowledgeBaseConfiguration.add_member(:supplemental_data_storage_configuration, Shapes::ShapeRef.new(shape: SupplementalDataStorageConfiguration, location_name: "supplementalDataStorageConfiguration"))
     VectorKnowledgeBaseConfiguration.struct_class = Types::VectorKnowledgeBaseConfiguration
+
+    VectorSearchBedrockRerankingConfiguration.add_member(:metadata_configuration, Shapes::ShapeRef.new(shape: MetadataConfigurationForReranking, location_name: "metadataConfiguration"))
+    VectorSearchBedrockRerankingConfiguration.add_member(:model_configuration, Shapes::ShapeRef.new(shape: VectorSearchBedrockRerankingModelConfiguration, required: true, location_name: "modelConfiguration"))
+    VectorSearchBedrockRerankingConfiguration.add_member(:number_of_reranked_results, Shapes::ShapeRef.new(shape: VectorSearchBedrockRerankingConfigurationNumberOfRerankedResultsInteger, location_name: "numberOfRerankedResults"))
+    VectorSearchBedrockRerankingConfiguration.struct_class = Types::VectorSearchBedrockRerankingConfiguration
+
+    VectorSearchBedrockRerankingModelConfiguration.add_member(:additional_model_request_fields, Shapes::ShapeRef.new(shape: AdditionalModelRequestFields, location_name: "additionalModelRequestFields"))
+    VectorSearchBedrockRerankingModelConfiguration.add_member(:model_arn, Shapes::ShapeRef.new(shape: BedrockRerankingModelArn, required: true, location_name: "modelArn"))
+    VectorSearchBedrockRerankingModelConfiguration.struct_class = Types::VectorSearchBedrockRerankingModelConfiguration
+
+    VectorSearchRerankingConfiguration.add_member(:bedrock_reranking_configuration, Shapes::ShapeRef.new(shape: VectorSearchBedrockRerankingConfiguration, location_name: "bedrockRerankingConfiguration"))
+    VectorSearchRerankingConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: VectorSearchRerankingConfigurationType, required: true, location_name: "type"))
+    VectorSearchRerankingConfiguration.struct_class = Types::VectorSearchRerankingConfiguration
 
     WebCrawlerConfiguration.add_member(:crawler_limits, Shapes::ShapeRef.new(shape: WebCrawlerLimits, location_name: "crawlerLimits"))
     WebCrawlerConfiguration.add_member(:exclusion_filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "exclusionFilters"))

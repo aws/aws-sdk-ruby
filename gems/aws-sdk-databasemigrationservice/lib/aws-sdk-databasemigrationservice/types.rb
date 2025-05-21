@@ -3350,7 +3350,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] filters
     #   Filters applied to event subscriptions.
     #
-    #   Valid filter names: event-subscription-arn \| event-subscription-id
+    #   Valid filter names: `event-subscription-arn` \|
+    #   `event-subscription-id`
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -4379,6 +4380,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] filters
     #   Filters applied to the limitations described in the form of
     #   key-value pairs.
+    #
+    #   Valid filter names: `database-id` \| `engine-name`
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -4435,6 +4438,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] filters
     #   Filters applied to the target engine recommendations described in
     #   the form of key-value pairs.
+    #
+    #   Valid filter names: `database-id` \| `engine-name`
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -5003,6 +5008,9 @@ module Aws::DatabaseMigrationService
 
     # @!attribute [rw] filters
     #   Filters applied to the replications.
+    #
+    #   Valid filter names: `replication-config-arn` \|
+    #   `replication-config-id`
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -8869,6 +8877,17 @@ module Aws::DatabaseMigrationService
     #   endpoint.
     #   @return [Integer]
     #
+    # @!attribute [rw] service_access_role_arn
+    #   The IAM role you can use to authenticate when connecting to your
+    #   endpoint. Ensure to include `iam:PassRole` and `rds-db:connect`
+    #   actions in permission policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_method
+    #   This attribute allows you to specify the authentication method as
+    #   "iam auth".
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MySQLSettings AWS API Documentation
     #
     class MySQLSettings < Struct.new(
@@ -8886,7 +8905,9 @@ module Aws::DatabaseMigrationService
       :username,
       :secrets_manager_access_role_arn,
       :secrets_manager_secret_id,
-      :execute_timeout)
+      :execute_timeout,
+      :service_access_role_arn,
+      :authentication_method)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -9902,6 +9923,17 @@ module Aws::DatabaseMigrationService
     #   filter is on a text column in the Source database that is indexed.
     #   @return [Boolean]
     #
+    # @!attribute [rw] service_access_role_arn
+    #   The IAM role arn you can use to authenticate the connection to your
+    #   endpoint. Ensure to include `iam:PassRole` and `rds-db:connect`
+    #   actions in permission policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_method
+    #   This attribute allows you to specify the authentication method as
+    #   "iam auth".
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/PostgreSQLSettings AWS API Documentation
     #
     class PostgreSQLSettings < Struct.new(
@@ -9929,7 +9961,9 @@ module Aws::DatabaseMigrationService
       :map_long_varchar_as,
       :database_mode,
       :babelfish_database_name,
-      :disable_unicode_source_filter)
+      :disable_unicode_source_filter,
+      :service_access_role_arn,
+      :authentication_method)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -14198,6 +14232,46 @@ module Aws::DatabaseMigrationService
     #   Additional details about the state of validation.
     #   @return [String]
     #
+    # @!attribute [rw] resync_state
+    #   Records the current state of table resynchronization in the
+    #   migration task.
+    #
+    #   This parameter can have the following values:
+    #
+    #   * Not enabled – Resync is not enabled for the table in the migration
+    #     task.
+    #
+    #   * Pending – The tables are waiting for resync.
+    #
+    #   * In progress – Resync in progress for some records in the table.
+    #
+    #   * No primary key – The table could not be resynced because it has no
+    #     primary key.
+    #
+    #   * Last resync at: `date/time` – Resync session is finished at time.
+    #     Time provided in UTC format.
+    #   @return [String]
+    #
+    # @!attribute [rw] resync_rows_attempted
+    #   Records the total number of mismatched data rows where the system
+    #   attempted to apply fixes in the target database.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resync_rows_succeeded
+    #   Records the total number of mismatched data rows where fixes were
+    #   successfully applied in the target database.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resync_rows_failed
+    #   Records the total number of mismatched data rows where fix attempts
+    #   failed in the target database.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resync_progress
+    #   Calculates the percentage of failed validations that were
+    #   successfully resynced to the system.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/TableStatistics AWS API Documentation
     #
     class TableStatistics < Struct.new(
@@ -14223,7 +14297,12 @@ module Aws::DatabaseMigrationService
       :validation_failed_records,
       :validation_suspended_records,
       :validation_state,
-      :validation_state_details)
+      :validation_state_details,
+      :resync_state,
+      :resync_rows_attempted,
+      :resync_rows_succeeded,
+      :resync_rows_failed,
+      :resync_progress)
       SENSITIVE = []
       include Aws::Structure
     end

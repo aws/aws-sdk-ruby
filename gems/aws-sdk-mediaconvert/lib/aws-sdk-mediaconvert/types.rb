@@ -1175,8 +1175,8 @@ module Aws::MediaConvert
     #   metrics. You can specify per frame metrics for output groups or for
     #   individual outputs. When you do, MediaConvert writes a CSV
     #   (Comma-Separated Values) file to your S3 output destination, named
-    #   after the video, video codec, and metric type. For example:
-    #   video\_h264\_PSNR.csv Jobs that generate per frame metrics will take
+    #   after the output name and metric type. For example:
+    #   videofile\_PSNR.csv Jobs that generate per frame metrics will take
     #   longer to complete, depending on the resolution and complexity of
     #   your output. For example, some 4K jobs might take up to twice as
     #   long to complete. Note that when analyzing the video quality of your
@@ -1365,8 +1365,8 @@ module Aws::MediaConvert
     #   metrics. You can specify per frame metrics for output groups or for
     #   individual outputs. When you do, MediaConvert writes a CSV
     #   (Comma-Separated Values) file to your S3 output destination, named
-    #   after the video, video codec, and metric type. For example:
-    #   video\_h264\_PSNR.csv Jobs that generate per frame metrics will take
+    #   after the output name and metric type. For example:
+    #   videofile\_PSNR.csv Jobs that generate per frame metrics will take
     #   longer to complete, depending on the resolution and complexity of
     #   your output. For example, some 4K jobs might take up to twice as
     #   long to complete. Note that when analyzing the video quality of your
@@ -5309,6 +5309,15 @@ module Aws::MediaConvert
     #   value for Time delta units, MediaConvert uses seconds by default.
     #   @return [String]
     #
+    # @!attribute [rw] upconvert_stl_to_teletext
+    #   Specify whether this set of input captions appears in your outputs
+    #   in both STL and Teletext format. If you choose Upconvert,
+    #   MediaConvert includes the captions data in two ways: it passes the
+    #   STL data through using the Teletext compatibility bytes fields of
+    #   the Teletext wrapper, and it also translates the STL data into
+    #   Teletext.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/FileSourceSettings AWS API Documentation
     #
     class FileSourceSettings < Struct.new(
@@ -5318,7 +5327,8 @@ module Aws::MediaConvert
       :framerate,
       :source_file,
       :time_delta,
-      :time_delta_units)
+      :time_delta_units,
+      :upconvert_stl_to_teletext)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6015,8 +6025,8 @@ module Aws::MediaConvert
     #   metrics. You can specify per frame metrics for output groups or for
     #   individual outputs. When you do, MediaConvert writes a CSV
     #   (Comma-Separated Values) file to your S3 output destination, named
-    #   after the video, video codec, and metric type. For example:
-    #   video\_h264\_PSNR.csv Jobs that generate per frame metrics will take
+    #   after the output name and metric type. For example:
+    #   videofile\_PSNR.csv Jobs that generate per frame metrics will take
     #   longer to complete, depending on the resolution and complexity of
     #   your output. For example, some 4K jobs might take up to twice as
     #   long to complete. Note that when analyzing the video quality of your
@@ -6612,8 +6622,8 @@ module Aws::MediaConvert
     #   metrics. You can specify per frame metrics for output groups or for
     #   individual outputs. When you do, MediaConvert writes a CSV
     #   (Comma-Separated Values) file to your S3 output destination, named
-    #   after the video, video codec, and metric type. For example:
-    #   video\_h264\_PSNR.csv Jobs that generate per frame metrics will take
+    #   after the output name and metric type. For example:
+    #   videofile\_PSNR.csv Jobs that generate per frame metrics will take
     #   longer to complete, depending on the resolution and complexity of
     #   your output. For example, some 4K jobs might take up to twice as
     #   long to complete. Note that when analyzing the video quality of your
@@ -10732,8 +10742,8 @@ module Aws::MediaConvert
     #   metrics. You can specify per frame metrics for output groups or for
     #   individual outputs. When you do, MediaConvert writes a CSV
     #   (Comma-Separated Values) file to your S3 output destination, named
-    #   after the video, video codec, and metric type. For example:
-    #   video\_h264\_PSNR.csv Jobs that generate per frame metrics will take
+    #   after the output name and metric type. For example:
+    #   videofile\_PSNR.csv Jobs that generate per frame metrics will take
     #   longer to complete, depending on the resolution and complexity of
     #   your output. For example, some 4K jobs might take up to twice as
     #   long to complete. Note that when analyzing the video quality of your
@@ -11663,8 +11673,8 @@ module Aws::MediaConvert
     #   metrics. You can specify per frame metrics for output groups or for
     #   individual outputs. When you do, MediaConvert writes a CSV
     #   (Comma-Separated Values) file to your S3 output destination, named
-    #   after the video, video codec, and metric type. For example:
-    #   video\_h264\_PSNR.csv Jobs that generate per frame metrics will take
+    #   after the output name and metric type. For example:
+    #   videofile\_PSNR.csv Jobs that generate per frame metrics will take
     #   longer to complete, depending on the resolution and complexity of
     #   your output. For example, some 4K jobs might take up to twice as
     #   long to complete. Note that when analyzing the video quality of your
@@ -12036,8 +12046,8 @@ module Aws::MediaConvert
     #   metrics. You can specify per frame metrics for output groups or for
     #   individual outputs. When you do, MediaConvert writes a CSV
     #   (Comma-Separated Values) file to your S3 output destination, named
-    #   after the video, video codec, and metric type. For example:
-    #   video\_h264\_PSNR.csv Jobs that generate per frame metrics will take
+    #   after the output name and metric type. For example:
+    #   videofile\_PSNR.csv Jobs that generate per frame metrics will take
     #   longer to complete, depending on the resolution and complexity of
     #   your output. For example, some 4K jobs might take up to twice as
     #   long to complete. Note that when analyzing the video quality of your
@@ -13945,6 +13955,13 @@ module Aws::MediaConvert
     # information, see
     # https://docs.aws.amazon.com/mediaconvert/latest/ug/video-overlays.html
     #
+    # @!attribute [rw] crop
+    #   Specify a rectangle of content to crop and use from your video
+    #   overlay's input video. When you do, MediaConvert uses the cropped
+    #   dimensions that you specify under X offset, Y offset, Width, and
+    #   Height.
+    #   @return [Types::VideoOverlayCrop]
+    #
     # @!attribute [rw] end_timecode
     #   Enter the end timecode in the base input video for this overlay.
     #   Your overlay will be active through this frame. To display your
@@ -14003,12 +14020,86 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VideoOverlay AWS API Documentation
     #
     class VideoOverlay < Struct.new(
+      :crop,
       :end_timecode,
       :initial_position,
       :input,
       :playback,
       :start_timecode,
       :transitions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specify a rectangle of content to crop and use from your video
+    # overlay's input video. When you do, MediaConvert uses the cropped
+    # dimensions that you specify under X offset, Y offset, Width, and
+    # Height.
+    #
+    # @!attribute [rw] height
+    #   Specify the height of the video overlay cropping rectangle. To use
+    #   the same height as your overlay input video: Keep blank, or enter 0.
+    #   To specify a different height for the cropping rectangle: Enter an
+    #   integer representing the Unit type that you choose, either Pixels or
+    #   Percentage. For example, when you enter 100 and choose Pixels, the
+    #   cropping rectangle will 100 pixels high. When you enter 10, choose
+    #   Percentage, and your overlay input video is 1920x1080, the cropping
+    #   rectangle will be 108 pixels high.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unit
+    #   Specify the Unit type to use when you enter a value for X position,
+    #   Y position, Width, or Height. You can choose Pixels or Percentage.
+    #   Leave blank to use the default value, Pixels.
+    #   @return [String]
+    #
+    # @!attribute [rw] width
+    #   Specify the width of the video overlay cropping rectangle. To use
+    #   the same width as your overlay input video: Keep blank, or enter 0.
+    #   To specify a different width for the cropping rectangle: Enter an
+    #   integer representing the Unit type that you choose, either Pixels or
+    #   Percentage. For example, when you enter 100 and choose Pixels, the
+    #   cropping rectangle will 100 pixels wide. When you enter 10, choose
+    #   Percentage, and your overlay input video is 1920x1080, the cropping
+    #   rectangle will be 192 pixels wide.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] x
+    #   Specify the distance between the cropping rectangle and the left
+    #   edge of your overlay video's frame. To position the cropping
+    #   rectangle along the left edge: Keep blank, or enter 0. To position
+    #   the cropping rectangle to the right, relative to the left edge of
+    #   your overlay video's frame: Enter an integer representing the Unit
+    #   type that you choose, either Pixels or Percentage. For example, when
+    #   you enter 10 and choose Pixels, the cropping rectangle will be
+    #   positioned 10 pixels from the left edge of the overlay video's
+    #   frame. When you enter 10, choose Percentage, and your overlay input
+    #   video is 1920x1080, the cropping rectangle will be positioned 192
+    #   pixels from the left edge of the overlay video's frame.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] y
+    #   Specify the distance between the cropping rectangle and the top edge
+    #   of your overlay video's frame. To position the cropping rectangle
+    #   along the top edge: Keep blank, or enter 0. To position the cropping
+    #   rectangle down, relative to the top edge of your overlay video's
+    #   frame: Enter an integer representing the Unit type that you choose,
+    #   either Pixels or Percentage. For example, when you enter 10 and
+    #   choose Pixels, the cropping rectangle will be positioned 10 pixels
+    #   from the top edge of the overlay video's frame. When you enter 10,
+    #   choose Percentage, and your overlay input video is 1920x1080, the
+    #   cropping rectangle will be positioned 108 pixels from the top edge
+    #   of the overlay video's frame.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VideoOverlayCrop AWS API Documentation
+    #
+    class VideoOverlayCrop < Struct.new(
+      :height,
+      :unit,
+      :width,
+      :x,
+      :y)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15197,8 +15288,8 @@ module Aws::MediaConvert
     #   metrics. You can specify per frame metrics for output groups or for
     #   individual outputs. When you do, MediaConvert writes a CSV
     #   (Comma-Separated Values) file to your S3 output destination, named
-    #   after the video, video codec, and metric type. For example:
-    #   video\_h264\_PSNR.csv Jobs that generate per frame metrics will take
+    #   after the output name and metric type. For example:
+    #   videofile\_PSNR.csv Jobs that generate per frame metrics will take
     #   longer to complete, depending on the resolution and complexity of
     #   your output. For example, some 4K jobs might take up to twice as
     #   long to complete. Note that when analyzing the video quality of your

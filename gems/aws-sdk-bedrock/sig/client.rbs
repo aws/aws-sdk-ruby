@@ -517,6 +517,9 @@ module Aws
                                   },
                                 ]
                               },
+                              ?cross_region_config: {
+                                guardrail_profile_identifier: ::String
+                              },
                               blocked_input_messaging: ::String,
                               blocked_outputs_messaging: ::String,
                               ?kms_key_id: ::String,
@@ -964,6 +967,7 @@ module Aws
         def word_policy: () -> Types::GuardrailWordPolicy
         def sensitive_information_policy: () -> Types::GuardrailSensitiveInformationPolicy
         def contextual_grounding_policy: () -> Types::GuardrailContextualGroundingPolicy
+        def cross_region_details: () -> Types::GuardrailCrossRegionDetails
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
         def status_reasons: () -> ::Array[::String]
@@ -1581,6 +1585,9 @@ module Aws
                                     enabled: bool?
                                   },
                                 ]
+                              },
+                              ?cross_region_config: {
+                                guardrail_profile_identifier: ::String
                               },
                               blocked_input_messaging: ::String,
                               blocked_outputs_messaging: ::String,

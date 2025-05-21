@@ -1507,6 +1507,20 @@ module Aws
                                  ) -> _DescribeDBLogFilesResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDBLogFilesResponseSuccess
 
+      interface _DescribeDBMajorEngineVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDBMajorEngineVersionsResponse]
+        def db_major_engine_versions: () -> ::Array[Types::DBMajorEngineVersion]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#describe_db_major_engine_versions-instance_method
+      def describe_db_major_engine_versions: (
+                                               ?engine: ::String,
+                                               ?major_engine_version: ::String,
+                                               ?marker: ::String,
+                                               ?max_records: ::Integer
+                                             ) -> _DescribeDBMajorEngineVersionsResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDBMajorEngineVersionsResponseSuccess
+
       interface _DescribeDBParameterGroupsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DBParameterGroupsMessage]
         def marker: () -> ::String

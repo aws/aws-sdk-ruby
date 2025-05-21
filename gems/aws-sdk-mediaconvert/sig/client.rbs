@@ -215,7 +215,8 @@ module Aws
                                       }?,
                                       source_file: ::String?,
                                       time_delta: ::Integer?,
-                                      time_delta_units: ("SECONDS" | "MILLISECONDS")?
+                                      time_delta_units: ("SECONDS" | "MILLISECONDS")?,
+                                      upconvert_stl_to_teletext: ("UPCONVERT" | "DISABLED")?
                                     }?,
                                     source_type: ("ANCILLARY" | "DVB_SUB" | "EMBEDDED" | "SCTE20" | "SCC" | "TTML" | "STL" | "SRT" | "SMI" | "SMPTE_TT" | "TELETEXT" | "NULL_SOURCE" | "IMSC" | "WEBVTT")?,
                                     teletext_source_settings: {
@@ -301,6 +302,13 @@ module Aws
                               }?,
                               video_overlays: Array[
                                 {
+                                  crop: {
+                                    height: ::Integer?,
+                                    unit: ("PIXELS" | "PERCENTAGE")?,
+                                    width: ::Integer?,
+                                    x: ::Integer?,
+                                    y: ::Integer?
+                                  }?,
                                   end_timecode: ::String?,
                                   initial_position: {
                                     height: ::Integer?,
@@ -1705,7 +1713,8 @@ module Aws
                                                }?,
                                                source_file: ::String?,
                                                time_delta: ::Integer?,
-                                               time_delta_units: ("SECONDS" | "MILLISECONDS")?
+                                               time_delta_units: ("SECONDS" | "MILLISECONDS")?,
+                                               upconvert_stl_to_teletext: ("UPCONVERT" | "DISABLED")?
                                              }?,
                                              source_type: ("ANCILLARY" | "DVB_SUB" | "EMBEDDED" | "SCTE20" | "SCC" | "TTML" | "STL" | "SRT" | "SMI" | "SMPTE_TT" | "TELETEXT" | "NULL_SOURCE" | "IMSC" | "WEBVTT")?,
                                              teletext_source_settings: {
@@ -1776,6 +1785,13 @@ module Aws
                                        timecode_start: ::String?,
                                        video_overlays: Array[
                                          {
+                                           crop: {
+                                             height: ::Integer?,
+                                             unit: ("PIXELS" | "PERCENTAGE")?,
+                                             width: ::Integer?,
+                                             x: ::Integer?,
+                                             y: ::Integer?
+                                           }?,
                                            end_timecode: ::String?,
                                            initial_position: {
                                              height: ::Integer?,
@@ -4280,7 +4296,8 @@ module Aws
                                                }?,
                                                source_file: ::String?,
                                                time_delta: ::Integer?,
-                                               time_delta_units: ("SECONDS" | "MILLISECONDS")?
+                                               time_delta_units: ("SECONDS" | "MILLISECONDS")?,
+                                               upconvert_stl_to_teletext: ("UPCONVERT" | "DISABLED")?
                                              }?,
                                              source_type: ("ANCILLARY" | "DVB_SUB" | "EMBEDDED" | "SCTE20" | "SCC" | "TTML" | "STL" | "SRT" | "SMI" | "SMPTE_TT" | "TELETEXT" | "NULL_SOURCE" | "IMSC" | "WEBVTT")?,
                                              teletext_source_settings: {
@@ -4351,6 +4368,13 @@ module Aws
                                        timecode_start: ::String?,
                                        video_overlays: Array[
                                          {
+                                           crop: {
+                                             height: ::Integer?,
+                                             unit: ("PIXELS" | "PERCENTAGE")?,
+                                             width: ::Integer?,
+                                             x: ::Integer?,
+                                             y: ::Integer?
+                                           }?,
                                            end_timecode: ::String?,
                                            initial_position: {
                                              height: ::Integer?,

@@ -1729,6 +1729,10 @@ module Aws::CodeBuild
     #
     #      </note>
     #
+    #   * `CUSTOM_INSTANCE_TYPE`: Specify the instance type for your compute
+    #     fleet. For a list of supported instance types, see [Supported
+    #     instance families ][2] in the *CodeBuild User Guide*.
+    #
     #   * `BUILD_GENERAL1_SMALL`: Use up to 4 GiB memory and 2 vCPUs for
     #     builds.
     #
@@ -1787,18 +1791,20 @@ module Aws::CodeBuild
     #   * For environment type `ARM_CONTAINER`, you can use up to 16 GiB
     #     memory and 8 vCPUs on ARM-based processors for builds.
     #
-    #   For more information, see [On-demand environment types][2] in the
+    #   For more information, see [On-demand environment types][3] in the
     #   *CodeBuild User Guide.*
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment-reserved-capacity.types
-    #   [2]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment.types
+    #   [2]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment-reserved-capacity.instance-types
+    #   [3]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment.types
     #   @return [String]
     #
     # @!attribute [rw] compute_configuration
     #   The compute configuration of the compute fleet. This is only
-    #   required if `computeType` is set to `ATTRIBUTE_BASED_COMPUTE`.
+    #   required if `computeType` is set to `ATTRIBUTE_BASED_COMPUTE` or
+    #   `CUSTOM_INSTANCE_TYPE`.
     #   @return [Types::ComputeConfiguration]
     #
     # @!attribute [rw] scaling_configuration
@@ -2554,6 +2560,71 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # Contains docker server information.
+    #
+    # @!attribute [rw] compute_type
+    #   Information about the compute resources the docker server uses.
+    #   Available values include:
+    #
+    #   * `BUILD_GENERAL1_SMALL`: Use up to 4 GiB memory and 2 vCPUs for
+    #     your docker server.
+    #
+    #   * `BUILD_GENERAL1_MEDIUM`: Use up to 8 GiB memory and 4 vCPUs for
+    #     your docker server.
+    #
+    #   * `BUILD_GENERAL1_LARGE`: Use up to 16 GiB memory and 8 vCPUs for
+    #     your docker server.
+    #
+    #   * `BUILD_GENERAL1_XLARGE`: Use up to 64 GiB memory and 32 vCPUs for
+    #     your docker server.
+    #
+    #   * `BUILD_GENERAL1_2XLARGE`: Use up to 128 GiB memory and 64 vCPUs
+    #     for your docker server.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   A list of one or more security groups IDs.
+    #
+    #   <note markdown="1"> Security groups configured for Docker servers should allow ingress
+    #   network traffic from the VPC configured in the project. They should
+    #   allow ingress on port 9876.
+    #
+    #    </note>
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] status
+    #   A DockerServerStatus object to use for this docker server.
+    #   @return [Types::DockerServerStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DockerServer AWS API Documentation
+    #
+    class DockerServer < Struct.new(
+      :compute_type,
+      :security_group_ids,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the status of the docker server.
+    #
+    # @!attribute [rw] status
+    #   The status of the docker server.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message associated with the status of a docker server.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DockerServerStatus AWS API Documentation
+    #
+    class DockerServerStatus < Struct.new(
+      :status,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a Docker image that is managed by CodeBuild.
     #
     # @!attribute [rw] name
@@ -2822,6 +2893,10 @@ module Aws::CodeBuild
     #
     #      </note>
     #
+    #   * `CUSTOM_INSTANCE_TYPE`: Specify the instance type for your compute
+    #     fleet. For a list of supported instance types, see [Supported
+    #     instance families ][2] in the *CodeBuild User Guide*.
+    #
     #   * `BUILD_GENERAL1_SMALL`: Use up to 4 GiB memory and 2 vCPUs for
     #     builds.
     #
@@ -2880,18 +2955,20 @@ module Aws::CodeBuild
     #   * For environment type `ARM_CONTAINER`, you can use up to 16 GiB
     #     memory and 8 vCPUs on ARM-based processors for builds.
     #
-    #   For more information, see [On-demand environment types][2] in the
+    #   For more information, see [On-demand environment types][3] in the
     #   *CodeBuild User Guide.*
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment-reserved-capacity.types
-    #   [2]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment.types
+    #   [2]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment-reserved-capacity.instance-types
+    #   [3]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment.types
     #   @return [String]
     #
     # @!attribute [rw] compute_configuration
     #   The compute configuration of the compute fleet. This is only
-    #   required if `computeType` is set to `ATTRIBUTE_BASED_COMPUTE`.
+    #   required if `computeType` is set to `ATTRIBUTE_BASED_COMPUTE` or
+    #   `CUSTOM_INSTANCE_TYPE`.
     #   @return [Types::ComputeConfiguration]
     #
     # @!attribute [rw] scaling_configuration
@@ -5059,6 +5136,10 @@ module Aws::CodeBuild
     #   you must use CODEBUILD credentials.
     #   @return [String]
     #
+    # @!attribute [rw] docker_server
+    #   A DockerServer object to use for this build project.
+    #   @return [Types::DockerServer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectEnvironment AWS API Documentation
     #
     class ProjectEnvironment < Struct.new(
@@ -5071,7 +5152,8 @@ module Aws::CodeBuild
       :privileged_mode,
       :certificate,
       :registry_credential,
-      :image_pull_credentials_type)
+      :image_pull_credentials_type,
+      :docker_server)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7433,6 +7515,10 @@ module Aws::CodeBuild
     #
     #      </note>
     #
+    #   * `CUSTOM_INSTANCE_TYPE`: Specify the instance type for your compute
+    #     fleet. For a list of supported instance types, see [Supported
+    #     instance families ][2] in the *CodeBuild User Guide*.
+    #
     #   * `BUILD_GENERAL1_SMALL`: Use up to 4 GiB memory and 2 vCPUs for
     #     builds.
     #
@@ -7491,18 +7577,20 @@ module Aws::CodeBuild
     #   * For environment type `ARM_CONTAINER`, you can use up to 16 GiB
     #     memory and 8 vCPUs on ARM-based processors for builds.
     #
-    #   For more information, see [On-demand environment types][2] in the
+    #   For more information, see [On-demand environment types][3] in the
     #   *CodeBuild User Guide.*
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment-reserved-capacity.types
-    #   [2]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment.types
+    #   [2]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment-reserved-capacity.instance-types
+    #   [3]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html#environment.types
     #   @return [String]
     #
     # @!attribute [rw] compute_configuration
     #   The compute configuration of the compute fleet. This is only
-    #   required if `computeType` is set to `ATTRIBUTE_BASED_COMPUTE`.
+    #   required if `computeType` is set to `ATTRIBUTE_BASED_COMPUTE` or
+    #   `CUSTOM_INSTANCE_TYPE`.
     #   @return [Types::ComputeConfiguration]
     #
     # @!attribute [rw] scaling_configuration

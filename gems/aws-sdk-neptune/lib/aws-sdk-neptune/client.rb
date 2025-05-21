@@ -1028,7 +1028,7 @@ module Aws::Neptune
     #   The version number of the database engine to use for the new DB
     #   cluster.
     #
-    #   Example: `1.0.2.1`
+    #   Example: `1.2.1.0`
     #
     # @option params [Integer] :port
     #   The port number on which the instances in the DB cluster accept
@@ -1167,25 +1167,26 @@ module Aws::Neptune
     #   should be added.
     #
     # @option params [String] :storage_type
-    #   The storage type to associate with the DB cluster.
+    #   The storage type for the new DB cluster.
     #
     #   Valid Values:
     #
-    #   * `standard | iopt1`
+    #   * <b> <code>standard</code> </b>   –   ( *the default* ) Configures
+    #     cost-effective database storage for applications with moderate to
+    #     small I/O usage. When set to `standard`, the storage type is not
+    #     returned in the response.
     #
-    #   ^
+    #   * <b> <code>iopt1</code> </b>   –   Enables [I/O-Optimized storage][1]
+    #     that's designed to meet the needs of I/O-intensive graph workloads
+    #     that require predictable pricing with low I/O latency and consistent
+    #     I/O throughput.
     #
-    #   Default:
+    #     Neptune I/O-Optimized storage is only available starting with engine
+    #     release 1.3.0.0.
     #
-    #   * `standard`
     #
-    #   ^
     #
-    #   <note markdown="1"> When you create a Neptune cluster with the storage type set to
-    #   `iopt1`, the storage type is returned in the response. The storage
-    #   type isn't returned when you set it to `standard`.
-    #
-    #    </note>
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/storage-types.html#provisioned-iops-storage
     #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -1744,9 +1745,8 @@ module Aws::Neptune
     #   Type: String
     #
     # @option params [String] :storage_type
-    #   Specifies the storage type to be associated with the DB instance.
-    #
-    #   Not applicable. Storage is managed by the DB Cluster.
+    #   Not applicable. In Neptune the storage type is managed at the DB
+    #   Cluster level.
     #
     # @option params [String] :tde_credential_arn
     #   The ARN from the key store with which to associate the instance for
@@ -2347,6 +2347,10 @@ module Aws::Neptune
     #   resp.global_cluster.global_cluster_members[0].readers #=> Array
     #   resp.global_cluster.global_cluster_members[0].readers[0] #=> String
     #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
+    #   resp.global_cluster.failover_state.status #=> String, one of "pending", "failing-over", "cancelling"
+    #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
+    #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
+    #   resp.global_cluster.failover_state.is_data_loss_allowed #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/CreateGlobalCluster AWS API Documentation
     #
@@ -2969,6 +2973,10 @@ module Aws::Neptune
     #   resp.global_cluster.global_cluster_members[0].readers #=> Array
     #   resp.global_cluster.global_cluster_members[0].readers[0] #=> String
     #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
+    #   resp.global_cluster.failover_state.status #=> String, one of "pending", "failing-over", "cancelling"
+    #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
+    #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
+    #   resp.global_cluster.failover_state.is_data_loss_allowed #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DeleteGlobalCluster AWS API Documentation
     #
@@ -4568,6 +4576,10 @@ module Aws::Neptune
     #   resp.global_clusters[0].global_cluster_members[0].readers #=> Array
     #   resp.global_clusters[0].global_cluster_members[0].readers[0] #=> String
     #   resp.global_clusters[0].global_cluster_members[0].is_writer #=> Boolean
+    #   resp.global_clusters[0].failover_state.status #=> String, one of "pending", "failing-over", "cancelling"
+    #   resp.global_clusters[0].failover_state.from_db_cluster_arn #=> String
+    #   resp.global_clusters[0].failover_state.to_db_cluster_arn #=> String
+    #   resp.global_clusters[0].failover_state.is_data_loss_allowed #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DescribeGlobalClusters AWS API Documentation
     #
@@ -4955,6 +4967,22 @@ module Aws::Neptune
     #   The Amazon Resource Name (ARN) of the secondary Neptune DB cluster
     #   that you want to promote to primary for the global database.
     #
+    # @option params [Boolean] :allow_data_loss
+    #   Specifies whether to allow data loss for this global database cluster
+    #   operation. Allowing data loss triggers a global failover operation.
+    #
+    #   If you don't specify `AllowDataLoss`, the global database cluster
+    #   operation defaults to a switchover.
+    #
+    #   Constraints:Can't be specified together with the `Switchover`
+    #   parameter.
+    #
+    # @option params [Boolean] :switchover
+    #   Specifies whether to switch over this global database cluster.
+    #
+    #   Constraints:Can't be specified together with the `AllowDataLoss`
+    #   parameter.
+    #
     # @return [Types::FailoverGlobalClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::FailoverGlobalClusterResult#global_cluster #global_cluster} => Types::GlobalCluster
@@ -4964,6 +4992,8 @@ module Aws::Neptune
     #   resp = client.failover_global_cluster({
     #     global_cluster_identifier: "GlobalClusterIdentifier", # required
     #     target_db_cluster_identifier: "String", # required
+    #     allow_data_loss: false,
+    #     switchover: false,
     #   })
     #
     # @example Response structure
@@ -4981,6 +5011,10 @@ module Aws::Neptune
     #   resp.global_cluster.global_cluster_members[0].readers #=> Array
     #   resp.global_cluster.global_cluster_members[0].readers[0] #=> String
     #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
+    #   resp.global_cluster.failover_state.status #=> String, one of "pending", "failing-over", "cancelling"
+    #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
+    #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
+    #   resp.global_cluster.failover_state.is_data_loss_allowed #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/FailoverGlobalCluster AWS API Documentation
     #
@@ -5222,15 +5256,21 @@ module Aws::Neptune
     #
     #   Valid Values:
     #
-    #   * `standard | iopt1`
+    #   * <b> <code>standard</code> </b>   –   ( *the default* ) Configures
+    #     cost-effective database storage for applications with moderate to
+    #     small I/O usage.
     #
-    #   ^
+    #   * <b> <code>iopt1</code> </b>   –   Enables [I/O-Optimized storage][1]
+    #     that's designed to meet the needs of I/O-intensive graph workloads
+    #     that require predictable pricing with low I/O latency and consistent
+    #     I/O throughput.
     #
-    #   Default:
+    #     Neptune I/O-Optimized storage is only available starting with engine
+    #     release 1.3.0.0.
     #
-    #   * `standard`
     #
-    #   ^
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/storage-types.html#provisioned-iops-storage
     #
     # @return [Types::ModifyDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5761,7 +5801,8 @@ module Aws::Neptune
     #   Example: `mydbinstance`
     #
     # @option params [String] :storage_type
-    #   Not supported.
+    #   Not applicable. In Neptune the storage type is managed at the DB
+    #   Cluster level.
     #
     # @option params [String] :tde_credential_arn
     #   The ARN from the key store with which to associate the instance for
@@ -6306,6 +6347,10 @@ module Aws::Neptune
     #   resp.global_cluster.global_cluster_members[0].readers #=> Array
     #   resp.global_cluster.global_cluster_members[0].readers[0] #=> String
     #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
+    #   resp.global_cluster.failover_state.status #=> String, one of "pending", "failing-over", "cancelling"
+    #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
+    #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
+    #   resp.global_cluster.failover_state.is_data_loss_allowed #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ModifyGlobalCluster AWS API Documentation
     #
@@ -6598,6 +6643,10 @@ module Aws::Neptune
     #   resp.global_cluster.global_cluster_members[0].readers #=> Array
     #   resp.global_cluster.global_cluster_members[0].readers[0] #=> String
     #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
+    #   resp.global_cluster.failover_state.status #=> String, one of "pending", "failing-over", "cancelling"
+    #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
+    #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
+    #   resp.global_cluster.failover_state.is_data_loss_allowed #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RemoveFromGlobalCluster AWS API Documentation
     #
@@ -7613,6 +7662,76 @@ module Aws::Neptune
       req.send_request(options)
     end
 
+    # Switches over the specified secondary DB cluster to be the new primary
+    # DB cluster in the global database cluster. Switchover operations were
+    # previously called "managed planned failovers."
+    #
+    # Promotes the specified secondary cluster to assume full read/write
+    # capabilities and demotes the current primary cluster to a secondary
+    # (read-only) cluster, maintaining the original replication topology.
+    # All secondary clusters are synchronized with the primary at the
+    # beginning of the process so the new primary continues operations for
+    # the global database without losing any data. Your database is
+    # unavailable for a short time while the primary and selected secondary
+    # clusters are assuming their new roles.
+    #
+    # <note markdown="1"> This operation is intended for controlled environments, for operations
+    # such as "regional rotation" or to fall back to the original primary
+    # after a global database failover.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :global_cluster_identifier
+    #   The identifier of the global database cluster to switch over. This
+    #   parameter isn't case-sensitive.
+    #
+    #   Constraints: Must match the identifier of an existing global database
+    #   cluster.
+    #
+    # @option params [required, String] :target_db_cluster_identifier
+    #   The Amazon Resource Name (ARN) of the secondary Neptune DB cluster
+    #   that you want to promote to primary for the global database.
+    #
+    # @return [Types::SwitchoverGlobalClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SwitchoverGlobalClusterResult#global_cluster #global_cluster} => Types::GlobalCluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.switchover_global_cluster({
+    #     global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #     target_db_cluster_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.global_cluster.global_cluster_identifier #=> String
+    #   resp.global_cluster.global_cluster_resource_id #=> String
+    #   resp.global_cluster.global_cluster_arn #=> String
+    #   resp.global_cluster.status #=> String
+    #   resp.global_cluster.engine #=> String
+    #   resp.global_cluster.engine_version #=> String
+    #   resp.global_cluster.storage_encrypted #=> Boolean
+    #   resp.global_cluster.deletion_protection #=> Boolean
+    #   resp.global_cluster.global_cluster_members #=> Array
+    #   resp.global_cluster.global_cluster_members[0].db_cluster_arn #=> String
+    #   resp.global_cluster.global_cluster_members[0].readers #=> Array
+    #   resp.global_cluster.global_cluster_members[0].readers[0] #=> String
+    #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
+    #   resp.global_cluster.failover_state.status #=> String, one of "pending", "failing-over", "cancelling"
+    #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
+    #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
+    #   resp.global_cluster.failover_state.is_data_loss_allowed #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/SwitchoverGlobalCluster AWS API Documentation
+    #
+    # @overload switchover_global_cluster(params = {})
+    # @param [Hash] params ({})
+    def switchover_global_cluster(params = {}, options = {})
+      req = build_request(:switchover_global_cluster, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -7631,7 +7750,7 @@ module Aws::Neptune
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-neptune'
-      context[:gem_version] = '1.84.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

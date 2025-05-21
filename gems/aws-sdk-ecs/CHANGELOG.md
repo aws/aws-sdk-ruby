@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.192.0 (2025-05-16)
+------------------
+
+* Feature - This is an Amazon ECs documentation only release to support the change of the container exit "reason" field from 255 characters to 1024 characters.
+
+1.191.0 (2025-05-13)
+------------------
+
+* Feature - This release extends functionality for Amazon EBS volumes attached to Amazon ECS tasks by adding support for the new EBS volumeInitializationRate parameter in ECS RunTask/StartTask/CreateService/UpdateService APIs.
+
 1.190.0 (2025-05-12)
 ------------------
 

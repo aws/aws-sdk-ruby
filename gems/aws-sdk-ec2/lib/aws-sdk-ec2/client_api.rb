@@ -468,6 +468,8 @@ module Aws::EC2
     CreateDefaultSubnetResult = Shapes::StructureShape.new(name: 'CreateDefaultSubnetResult')
     CreateDefaultVpcRequest = Shapes::StructureShape.new(name: 'CreateDefaultVpcRequest')
     CreateDefaultVpcResult = Shapes::StructureShape.new(name: 'CreateDefaultVpcResult')
+    CreateDelegateMacVolumeOwnershipTaskRequest = Shapes::StructureShape.new(name: 'CreateDelegateMacVolumeOwnershipTaskRequest')
+    CreateDelegateMacVolumeOwnershipTaskResult = Shapes::StructureShape.new(name: 'CreateDelegateMacVolumeOwnershipTaskResult')
     CreateDhcpOptionsRequest = Shapes::StructureShape.new(name: 'CreateDhcpOptionsRequest')
     CreateDhcpOptionsResult = Shapes::StructureShape.new(name: 'CreateDhcpOptionsResult')
     CreateEgressOnlyInternetGatewayRequest = Shapes::StructureShape.new(name: 'CreateEgressOnlyInternetGatewayRequest')
@@ -519,6 +521,8 @@ module Aws::EC2
     CreateLocalGatewayVirtualInterfaceGroupResult = Shapes::StructureShape.new(name: 'CreateLocalGatewayVirtualInterfaceGroupResult')
     CreateLocalGatewayVirtualInterfaceRequest = Shapes::StructureShape.new(name: 'CreateLocalGatewayVirtualInterfaceRequest')
     CreateLocalGatewayVirtualInterfaceResult = Shapes::StructureShape.new(name: 'CreateLocalGatewayVirtualInterfaceResult')
+    CreateMacSystemIntegrityProtectionModificationTaskRequest = Shapes::StructureShape.new(name: 'CreateMacSystemIntegrityProtectionModificationTaskRequest')
+    CreateMacSystemIntegrityProtectionModificationTaskResult = Shapes::StructureShape.new(name: 'CreateMacSystemIntegrityProtectionModificationTaskResult')
     CreateManagedPrefixListRequest = Shapes::StructureShape.new(name: 'CreateManagedPrefixListRequest')
     CreateManagedPrefixListResult = Shapes::StructureShape.new(name: 'CreateManagedPrefixListResult')
     CreateNatGatewayRequest = Shapes::StructureShape.new(name: 'CreateNatGatewayRequest')
@@ -1047,6 +1051,9 @@ module Aws::EC2
     DescribeMacHostsRequest = Shapes::StructureShape.new(name: 'DescribeMacHostsRequest')
     DescribeMacHostsRequestMaxResults = Shapes::IntegerShape.new(name: 'DescribeMacHostsRequestMaxResults')
     DescribeMacHostsResult = Shapes::StructureShape.new(name: 'DescribeMacHostsResult')
+    DescribeMacModificationTasksMaxResults = Shapes::IntegerShape.new(name: 'DescribeMacModificationTasksMaxResults')
+    DescribeMacModificationTasksRequest = Shapes::StructureShape.new(name: 'DescribeMacModificationTasksRequest')
+    DescribeMacModificationTasksResult = Shapes::StructureShape.new(name: 'DescribeMacModificationTasksResult')
     DescribeManagedPrefixListsRequest = Shapes::StructureShape.new(name: 'DescribeManagedPrefixListsRequest')
     DescribeManagedPrefixListsResult = Shapes::StructureShape.new(name: 'DescribeManagedPrefixListsResult')
     DescribeMovingAddressesMaxResults = Shapes::IntegerShape.new(name: 'DescribeMovingAddressesMaxResults')
@@ -1914,6 +1921,7 @@ module Aws::EC2
     InstanceNetworkPerformanceOptionsRequest = Shapes::StructureShape.new(name: 'InstanceNetworkPerformanceOptionsRequest')
     InstancePrivateIpAddress = Shapes::StructureShape.new(name: 'InstancePrivateIpAddress')
     InstancePrivateIpAddressList = Shapes::ListShape.new(name: 'InstancePrivateIpAddressList')
+    InstanceRebootMigrationState = Shapes::StringShape.new(name: 'InstanceRebootMigrationState')
     InstanceRequirements = Shapes::StructureShape.new(name: 'InstanceRequirements')
     InstanceRequirementsRequest = Shapes::StructureShape.new(name: 'InstanceRequirementsRequest')
     InstanceRequirementsWithMetadataRequest = Shapes::StructureShape.new(name: 'InstanceRequirementsWithMetadataRequest')
@@ -2242,7 +2250,16 @@ module Aws::EC2
     Long = Shapes::IntegerShape.new(name: 'Long')
     MacHost = Shapes::StructureShape.new(name: 'MacHost')
     MacHostList = Shapes::ListShape.new(name: 'MacHostList')
+    MacModificationTask = Shapes::StructureShape.new(name: 'MacModificationTask')
+    MacModificationTaskId = Shapes::StringShape.new(name: 'MacModificationTaskId')
+    MacModificationTaskIdList = Shapes::ListShape.new(name: 'MacModificationTaskIdList')
+    MacModificationTaskList = Shapes::ListShape.new(name: 'MacModificationTaskList')
+    MacModificationTaskState = Shapes::StringShape.new(name: 'MacModificationTaskState')
+    MacModificationTaskType = Shapes::StringShape.new(name: 'MacModificationTaskType')
     MacOSVersionStringList = Shapes::ListShape.new(name: 'MacOSVersionStringList')
+    MacSystemIntegrityProtectionConfiguration = Shapes::StructureShape.new(name: 'MacSystemIntegrityProtectionConfiguration')
+    MacSystemIntegrityProtectionConfigurationRequest = Shapes::StructureShape.new(name: 'MacSystemIntegrityProtectionConfigurationRequest')
+    MacSystemIntegrityProtectionSettingStatus = Shapes::StringShape.new(name: 'MacSystemIntegrityProtectionSettingStatus')
     MaintenanceDetails = Shapes::StructureShape.new(name: 'MaintenanceDetails')
     ManagedBy = Shapes::StringShape.new(name: 'ManagedBy')
     ManagedPrefixList = Shapes::StructureShape.new(name: 'ManagedPrefixList')
@@ -2706,6 +2723,7 @@ module Aws::EC2
     RdsDbProxyArn = Shapes::StringShape.new(name: 'RdsDbProxyArn')
     ReasonCodesList = Shapes::ListShape.new(name: 'ReasonCodesList')
     RebootInstancesRequest = Shapes::StructureShape.new(name: 'RebootInstancesRequest')
+    RebootMigrationSupport = Shapes::StringShape.new(name: 'RebootMigrationSupport')
     RecurringCharge = Shapes::StructureShape.new(name: 'RecurringCharge')
     RecurringChargeFrequency = Shapes::StringShape.new(name: 'RecurringChargeFrequency')
     RecurringChargesList = Shapes::ListShape.new(name: 'RecurringChargesList')
@@ -2993,6 +3011,7 @@ module Aws::EC2
     SecurityGroupVpcAssociationState = Shapes::StringShape.new(name: 'SecurityGroupVpcAssociationState')
     SelfServicePortal = Shapes::StringShape.new(name: 'SelfServicePortal')
     SendDiagnosticInterruptRequest = Shapes::StructureShape.new(name: 'SendDiagnosticInterruptRequest')
+    SensitiveMacCredentials = Shapes::StringShape.new(name: 'SensitiveMacCredentials')
     SensitiveUrl = Shapes::StringShape.new(name: 'SensitiveUrl')
     SensitiveUserData = Shapes::StringShape.new(name: 'SensitiveUserData')
     ServiceConfiguration = Shapes::StructureShape.new(name: 'ServiceConfiguration')
@@ -5147,6 +5166,16 @@ module Aws::EC2
     CreateDefaultVpcResult.add_member(:vpc, Shapes::ShapeRef.new(shape: Vpc, location_name: "vpc"))
     CreateDefaultVpcResult.struct_class = Types::CreateDefaultVpcResult
 
+    CreateDelegateMacVolumeOwnershipTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateDelegateMacVolumeOwnershipTaskRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateDelegateMacVolumeOwnershipTaskRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    CreateDelegateMacVolumeOwnershipTaskRequest.add_member(:mac_credentials, Shapes::ShapeRef.new(shape: SensitiveMacCredentials, required: true, location_name: "MacCredentials"))
+    CreateDelegateMacVolumeOwnershipTaskRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateDelegateMacVolumeOwnershipTaskRequest.struct_class = Types::CreateDelegateMacVolumeOwnershipTaskRequest
+
+    CreateDelegateMacVolumeOwnershipTaskResult.add_member(:mac_modification_task, Shapes::ShapeRef.new(shape: MacModificationTask, location_name: "macModificationTask"))
+    CreateDelegateMacVolumeOwnershipTaskResult.struct_class = Types::CreateDelegateMacVolumeOwnershipTaskResult
+
     CreateDhcpOptionsRequest.add_member(:dhcp_configurations, Shapes::ShapeRef.new(shape: NewDhcpConfigurationList, required: true, location_name: "dhcpConfiguration"))
     CreateDhcpOptionsRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateDhcpOptionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -5447,6 +5476,18 @@ module Aws::EC2
 
     CreateLocalGatewayVirtualInterfaceResult.add_member(:local_gateway_virtual_interface, Shapes::ShapeRef.new(shape: LocalGatewayVirtualInterface, location_name: "localGatewayVirtualInterface"))
     CreateLocalGatewayVirtualInterfaceResult.struct_class = Types::CreateLocalGatewayVirtualInterfaceResult
+
+    CreateMacSystemIntegrityProtectionModificationTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateMacSystemIntegrityProtectionModificationTaskRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateMacSystemIntegrityProtectionModificationTaskRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    CreateMacSystemIntegrityProtectionModificationTaskRequest.add_member(:mac_credentials, Shapes::ShapeRef.new(shape: SensitiveMacCredentials, location_name: "MacCredentials"))
+    CreateMacSystemIntegrityProtectionModificationTaskRequest.add_member(:mac_system_integrity_protection_configuration, Shapes::ShapeRef.new(shape: MacSystemIntegrityProtectionConfigurationRequest, location_name: "MacSystemIntegrityProtectionConfiguration"))
+    CreateMacSystemIntegrityProtectionModificationTaskRequest.add_member(:mac_system_integrity_protection_status, Shapes::ShapeRef.new(shape: MacSystemIntegrityProtectionSettingStatus, required: true, location_name: "MacSystemIntegrityProtectionStatus"))
+    CreateMacSystemIntegrityProtectionModificationTaskRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateMacSystemIntegrityProtectionModificationTaskRequest.struct_class = Types::CreateMacSystemIntegrityProtectionModificationTaskRequest
+
+    CreateMacSystemIntegrityProtectionModificationTaskResult.add_member(:mac_modification_task, Shapes::ShapeRef.new(shape: MacModificationTask, location_name: "macModificationTask"))
+    CreateMacSystemIntegrityProtectionModificationTaskResult.struct_class = Types::CreateMacSystemIntegrityProtectionModificationTaskResult
 
     CreateManagedPrefixListRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateManagedPrefixListRequest.add_member(:prefix_list_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "PrefixListName"))
@@ -7797,6 +7838,17 @@ module Aws::EC2
     DescribeMacHostsResult.add_member(:mac_hosts, Shapes::ShapeRef.new(shape: MacHostList, location_name: "macHostSet"))
     DescribeMacHostsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeMacHostsResult.struct_class = Types::DescribeMacHostsResult
+
+    DescribeMacModificationTasksRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeMacModificationTasksRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeMacModificationTasksRequest.add_member(:mac_modification_task_ids, Shapes::ShapeRef.new(shape: MacModificationTaskIdList, location_name: "MacModificationTaskId"))
+    DescribeMacModificationTasksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeMacModificationTasksMaxResults, location_name: "MaxResults"))
+    DescribeMacModificationTasksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeMacModificationTasksRequest.struct_class = Types::DescribeMacModificationTasksRequest
+
+    DescribeMacModificationTasksResult.add_member(:mac_modification_tasks, Shapes::ShapeRef.new(shape: MacModificationTaskList, location_name: "macModificationTaskSet"))
+    DescribeMacModificationTasksResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeMacModificationTasksResult.struct_class = Types::DescribeMacModificationTasksResult
 
     DescribeManagedPrefixListsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DescribeManagedPrefixListsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
@@ -11202,6 +11254,7 @@ module Aws::EC2
     InstanceList.member = Shapes::ShapeRef.new(shape: Instance, location_name: "item")
 
     InstanceMaintenanceOptions.add_member(:auto_recovery, Shapes::ShapeRef.new(shape: InstanceAutoRecoveryState, location_name: "autoRecovery"))
+    InstanceMaintenanceOptions.add_member(:reboot_migration, Shapes::ShapeRef.new(shape: InstanceRebootMigrationState, location_name: "rebootMigration"))
     InstanceMaintenanceOptions.struct_class = Types::InstanceMaintenanceOptions
 
     InstanceMaintenanceOptionsRequest.add_member(:auto_recovery, Shapes::ShapeRef.new(shape: InstanceAutoRecoveryState, location_name: "AutoRecovery"))
@@ -11483,6 +11536,7 @@ module Aws::EC2
     InstanceTypeInfo.add_member(:media_accelerator_info, Shapes::ShapeRef.new(shape: MediaAcceleratorInfo, location_name: "mediaAcceleratorInfo"))
     InstanceTypeInfo.add_member(:neuron_info, Shapes::ShapeRef.new(shape: NeuronInfo, location_name: "neuronInfo"))
     InstanceTypeInfo.add_member(:phc_support, Shapes::ShapeRef.new(shape: PhcSupport, location_name: "phcSupport"))
+    InstanceTypeInfo.add_member(:reboot_migration_support, Shapes::ShapeRef.new(shape: RebootMigrationSupport, location_name: "rebootMigrationSupport"))
     InstanceTypeInfo.struct_class = Types::InstanceTypeInfo
 
     InstanceTypeInfoFromInstanceRequirements.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
@@ -12451,7 +12505,39 @@ module Aws::EC2
 
     MacHostList.member = Shapes::ShapeRef.new(shape: MacHost, location_name: "item")
 
+    MacModificationTask.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "instanceId"))
+    MacModificationTask.add_member(:mac_modification_task_id, Shapes::ShapeRef.new(shape: MacModificationTaskId, location_name: "macModificationTaskId"))
+    MacModificationTask.add_member(:mac_system_integrity_protection_config, Shapes::ShapeRef.new(shape: MacSystemIntegrityProtectionConfiguration, location_name: "macSystemIntegrityProtectionConfig"))
+    MacModificationTask.add_member(:start_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "startTime"))
+    MacModificationTask.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    MacModificationTask.add_member(:task_state, Shapes::ShapeRef.new(shape: MacModificationTaskState, location_name: "taskState"))
+    MacModificationTask.add_member(:task_type, Shapes::ShapeRef.new(shape: MacModificationTaskType, location_name: "taskType"))
+    MacModificationTask.struct_class = Types::MacModificationTask
+
+    MacModificationTaskIdList.member = Shapes::ShapeRef.new(shape: MacModificationTaskId, location_name: "item")
+
+    MacModificationTaskList.member = Shapes::ShapeRef.new(shape: MacModificationTask, location_name: "item")
+
     MacOSVersionStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
+
+    MacSystemIntegrityProtectionConfiguration.add_member(:apple_internal, Shapes::ShapeRef.new(shape: MacSystemIntegrityProtectionSettingStatus, location_name: "appleInternal"))
+    MacSystemIntegrityProtectionConfiguration.add_member(:base_system, Shapes::ShapeRef.new(shape: MacSystemIntegrityProtectionSettingStatus, location_name: "baseSystem"))
+    MacSystemIntegrityProtectionConfiguration.add_member(:debugging_restrictions, Shapes::ShapeRef.new(shape: MacSystemIntegrityProtectionSettingStatus, location_name: "debuggingRestrictions"))
+    MacSystemIntegrityProtectionConfiguration.add_member(:d_trace_restrictions, Shapes::ShapeRef.new(shape: MacSystemIntegrityProtectionSettingStatus, location_name: "dTraceRestrictions"))
+    MacSystemIntegrityProtectionConfiguration.add_member(:filesystem_protections, Shapes::ShapeRef.new(shape: MacSystemIntegrityProtectionSettingStatus, location_name: "filesystemProtections"))
+    MacSystemIntegrityProtectionConfiguration.add_member(:kext_signing, Shapes::ShapeRef.new(shape: MacSystemIntegrityProtectionSettingStatus, location_name: "kextSigning"))
+    MacSystemIntegrityProtectionConfiguration.add_member(:nvram_protections, Shapes::ShapeRef.new(shape: MacSystemIntegrityProtectionSettingStatus, location_name: "nvramProtections"))
+    MacSystemIntegrityProtectionConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: MacSystemIntegrityProtectionSettingStatus, location_name: "status"))
+    MacSystemIntegrityProtectionConfiguration.struct_class = Types::MacSystemIntegrityProtectionConfiguration
+
+    MacSystemIntegrityProtectionConfigurationRequest.add_member(:apple_internal, Shapes::ShapeRef.new(shape: MacSystemIntegrityProtectionSettingStatus, location_name: "AppleInternal"))
+    MacSystemIntegrityProtectionConfigurationRequest.add_member(:base_system, Shapes::ShapeRef.new(shape: MacSystemIntegrityProtectionSettingStatus, location_name: "BaseSystem"))
+    MacSystemIntegrityProtectionConfigurationRequest.add_member(:debugging_restrictions, Shapes::ShapeRef.new(shape: MacSystemIntegrityProtectionSettingStatus, location_name: "DebuggingRestrictions"))
+    MacSystemIntegrityProtectionConfigurationRequest.add_member(:d_trace_restrictions, Shapes::ShapeRef.new(shape: MacSystemIntegrityProtectionSettingStatus, location_name: "DTraceRestrictions"))
+    MacSystemIntegrityProtectionConfigurationRequest.add_member(:filesystem_protections, Shapes::ShapeRef.new(shape: MacSystemIntegrityProtectionSettingStatus, location_name: "FilesystemProtections"))
+    MacSystemIntegrityProtectionConfigurationRequest.add_member(:kext_signing, Shapes::ShapeRef.new(shape: MacSystemIntegrityProtectionSettingStatus, location_name: "KextSigning"))
+    MacSystemIntegrityProtectionConfigurationRequest.add_member(:nvram_protections, Shapes::ShapeRef.new(shape: MacSystemIntegrityProtectionSettingStatus, location_name: "NvramProtections"))
+    MacSystemIntegrityProtectionConfigurationRequest.struct_class = Types::MacSystemIntegrityProtectionConfigurationRequest
 
     MaintenanceDetails.add_member(:pending_maintenance, Shapes::ShapeRef.new(shape: String, location_name: "pendingMaintenance"))
     MaintenanceDetails.add_member(:maintenance_auto_applied_after, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "maintenanceAutoAppliedAfter"))
@@ -12719,11 +12805,13 @@ module Aws::EC2
 
     ModifyInstanceMaintenanceOptionsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     ModifyInstanceMaintenanceOptionsRequest.add_member(:auto_recovery, Shapes::ShapeRef.new(shape: InstanceAutoRecoveryState, location_name: "AutoRecovery"))
+    ModifyInstanceMaintenanceOptionsRequest.add_member(:reboot_migration, Shapes::ShapeRef.new(shape: InstanceRebootMigrationState, location_name: "RebootMigration"))
     ModifyInstanceMaintenanceOptionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ModifyInstanceMaintenanceOptionsRequest.struct_class = Types::ModifyInstanceMaintenanceOptionsRequest
 
     ModifyInstanceMaintenanceOptionsResult.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
     ModifyInstanceMaintenanceOptionsResult.add_member(:auto_recovery, Shapes::ShapeRef.new(shape: InstanceAutoRecoveryState, location_name: "autoRecovery"))
+    ModifyInstanceMaintenanceOptionsResult.add_member(:reboot_migration, Shapes::ShapeRef.new(shape: InstanceRebootMigrationState, location_name: "rebootMigration"))
     ModifyInstanceMaintenanceOptionsResult.struct_class = Types::ModifyInstanceMaintenanceOptionsResult
 
     ModifyInstanceMetadataDefaultsRequest.add_member(:http_tokens, Shapes::ShapeRef.new(shape: MetadataDefaultHttpTokensState, location_name: "HttpTokens"))
@@ -17964,6 +18052,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: CreateDefaultVpcResult)
       end)
 
+      api.add_operation(:create_delegate_mac_volume_ownership_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDelegateMacVolumeOwnershipTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateDelegateMacVolumeOwnershipTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateDelegateMacVolumeOwnershipTaskResult)
+      end)
+
       api.add_operation(:create_dhcp_options, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateDhcpOptions"
         o.http_method = "POST"
@@ -18154,6 +18250,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateLocalGatewayVirtualInterfaceGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateLocalGatewayVirtualInterfaceGroupResult)
+      end)
+
+      api.add_operation(:create_mac_system_integrity_protection_modification_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateMacSystemIntegrityProtectionModificationTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateMacSystemIntegrityProtectionModificationTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateMacSystemIntegrityProtectionModificationTaskResult)
       end)
 
       api.add_operation(:create_managed_prefix_list, Seahorse::Model::Operation.new.tap do |o|
@@ -20288,6 +20392,20 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeMacHostsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeMacHostsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_mac_modification_tasks, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeMacModificationTasks"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeMacModificationTasksRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeMacModificationTasksResult)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

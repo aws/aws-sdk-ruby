@@ -878,6 +878,60 @@ module Aws::EMR
       req.send_request(options)
     end
 
+    # Creates a persistent application user interface.
+    #
+    # @option params [required, String] :target_resource_arn
+    #   The unique Amazon Resource Name (ARN) of the target resource.
+    #
+    # @option params [Types::EMRContainersConfig] :emr_containers_config
+    #   The EMR containers configuration.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags for the persistent application user interface.
+    #
+    # @option params [String] :x_referer
+    #   The cross reference for the persistent application user interface.
+    #
+    # @option params [String] :profiler_type
+    #   The profiler type for the persistent application user interface. Valid
+    #   values are SHS, TEZUI, or YTS.
+    #
+    # @return [Types::CreatePersistentAppUIOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePersistentAppUIOutput#persistent_app_ui_id #persistent_app_ui_id} => String
+    #   * {Types::CreatePersistentAppUIOutput#runtime_role_enabled_cluster #runtime_role_enabled_cluster} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_persistent_app_ui({
+    #     target_resource_arn: "ArnType", # required
+    #     emr_containers_config: {
+    #       job_run_id: "XmlStringMaxLen256",
+    #     },
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #     x_referer: "String",
+    #     profiler_type: "SHS", # accepts SHS, TEZUI, YTS
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.persistent_app_ui_id #=> String
+    #   resp.runtime_role_enabled_cluster #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CreatePersistentAppUI AWS API Documentation
+    #
+    # @overload create_persistent_app_ui(params = {})
+    # @param [Hash] params ({})
+    def create_persistent_app_ui(params = {}, options = {})
+      req = build_request(:create_persistent_app_ui, params)
+      req.send_request(options)
+    end
+
     # Creates a security configuration, which is stored in the service and
     # can be specified when a cluster is created.
     #
@@ -1511,6 +1565,44 @@ module Aws::EMR
       req.send_request(options)
     end
 
+    # Describes a persistent application user interface.
+    #
+    # @option params [required, String] :persistent_app_ui_id
+    #   The identifier for the persistent application user interface.
+    #
+    # @return [Types::DescribePersistentAppUIOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePersistentAppUIOutput#persistent_app_ui #persistent_app_ui} => Types::PersistentAppUI
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_persistent_app_ui({
+    #     persistent_app_ui_id: "XmlStringMaxLen256", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.persistent_app_ui.persistent_app_ui_id #=> String
+    #   resp.persistent_app_ui.persistent_app_ui_type_list #=> Array
+    #   resp.persistent_app_ui.persistent_app_ui_type_list[0] #=> String, one of "SHS", "TEZ", "YTS"
+    #   resp.persistent_app_ui.persistent_app_ui_status #=> String
+    #   resp.persistent_app_ui.author_id #=> String
+    #   resp.persistent_app_ui.creation_time #=> Time
+    #   resp.persistent_app_ui.last_modified_time #=> Time
+    #   resp.persistent_app_ui.last_state_change_reason #=> String
+    #   resp.persistent_app_ui.tags #=> Array
+    #   resp.persistent_app_ui.tags[0].key #=> String
+    #   resp.persistent_app_ui.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribePersistentAppUI AWS API Documentation
+    #
+    # @overload describe_persistent_app_ui(params = {})
+    # @param [Hash] params ({})
+    def describe_persistent_app_ui(params = {}, options = {})
+      req = build_request(:describe_persistent_app_ui, params)
+      req.send_request(options)
+    end
+
     # Provides Amazon EMR release label details, such as the releases
     # available the Region where the API request is run, and the available
     # applications for a specific Amazon EMR release label. Can also list
@@ -1834,6 +1926,107 @@ module Aws::EMR
     # @param [Hash] params ({})
     def get_managed_scaling_policy(params = {}, options = {})
       req = build_request(:get_managed_scaling_policy, params)
+      req.send_request(options)
+    end
+
+    # The presigned URL properties for the cluster's application user
+    # interface.
+    #
+    # @option params [required, String] :cluster_id
+    #   The cluster ID associated with the cluster's application user
+    #   interface presigned URL.
+    #
+    # @option params [String] :on_cluster_app_ui_type
+    #   The application UI type associated with the cluster's application
+    #   user interface presigned URL.
+    #
+    # @option params [String] :application_id
+    #   The application ID associated with the cluster's application user
+    #   interface presigned URL.
+    #
+    # @option params [Boolean] :dry_run
+    #   Determines if the user interface presigned URL is for a dry run.
+    #
+    # @option params [String] :execution_role_arn
+    #   The execution role ARN associated with the cluster's application user
+    #   interface presigned URL.
+    #
+    # @return [Types::GetOnClusterAppUIPresignedURLOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetOnClusterAppUIPresignedURLOutput#presigned_url_ready #presigned_url_ready} => Boolean
+    #   * {Types::GetOnClusterAppUIPresignedURLOutput#presigned_url #presigned_url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_on_cluster_app_ui_presigned_url({
+    #     cluster_id: "XmlStringMaxLen256", # required
+    #     on_cluster_app_ui_type: "SparkHistoryServer", # accepts SparkHistoryServer, YarnTimelineService, TezUI, ApplicationMaster, JobHistoryServer, ResourceManager
+    #     application_id: "XmlStringMaxLen256",
+    #     dry_run: false,
+    #     execution_role_arn: "ArnType",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.presigned_url_ready #=> Boolean
+    #   resp.presigned_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetOnClusterAppUIPresignedURL AWS API Documentation
+    #
+    # @overload get_on_cluster_app_ui_presigned_url(params = {})
+    # @param [Hash] params ({})
+    def get_on_cluster_app_ui_presigned_url(params = {}, options = {})
+      req = build_request(:get_on_cluster_app_ui_presigned_url, params)
+      req.send_request(options)
+    end
+
+    # The presigned URL properties for the cluster's application user
+    # interface.
+    #
+    # @option params [required, String] :persistent_app_ui_id
+    #   The persistent application user interface ID associated with the
+    #   presigned URL.
+    #
+    # @option params [String] :persistent_app_ui_type
+    #   The persistent application user interface type associated with the
+    #   presigned URL.
+    #
+    # @option params [String] :application_id
+    #   The application ID associated with the presigned URL.
+    #
+    # @option params [Boolean] :auth_proxy_call
+    #   A boolean that represents if the caller is an authentication proxy
+    #   call.
+    #
+    # @option params [String] :execution_role_arn
+    #   The execution role ARN associated with the presigned URL.
+    #
+    # @return [Types::GetPersistentAppUIPresignedURLOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPersistentAppUIPresignedURLOutput#presigned_url_ready #presigned_url_ready} => Boolean
+    #   * {Types::GetPersistentAppUIPresignedURLOutput#presigned_url #presigned_url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_persistent_app_ui_presigned_url({
+    #     persistent_app_ui_id: "XmlStringMaxLen256", # required
+    #     persistent_app_ui_type: "SHS", # accepts SHS, TEZ, YTS
+    #     application_id: "XmlStringMaxLen256",
+    #     auth_proxy_call: false,
+    #     execution_role_arn: "ArnType",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.presigned_url_ready #=> Boolean
+    #   resp.presigned_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetPersistentAppUIPresignedURL AWS API Documentation
+    #
+    # @overload get_persistent_app_ui_presigned_url(params = {})
+    # @param [Hash] params ({})
+    def get_persistent_app_ui_presigned_url(params = {}, options = {})
+      req = build_request(:get_persistent_app_ui_presigned_url, params)
       req.send_request(options)
     end
 
@@ -4304,7 +4497,7 @@ module Aws::EMR
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.109.0'
+      context[:gem_version] = '1.110.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

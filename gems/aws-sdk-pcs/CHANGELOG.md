@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2025-05-15)
+------------------
+
+* Feature - This release adds support for Slurm accounting. For more information, see the Slurm accounting topic in the AWS PCS User Guide. Slurm accounting is supported for Slurm 24.11 and later. This release also adds 24.11 as a valid value for the version parameter of the Scheduler data type.
+
 1.18.0 (2025-05-12)
 ------------------
 

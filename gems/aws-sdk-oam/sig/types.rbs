@@ -67,6 +67,7 @@ module Aws::OAM
 
     class GetLinkInput
       attr_accessor identifier: ::String
+      attr_accessor include_tags: bool
       SENSITIVE: []
     end
 
@@ -84,6 +85,7 @@ module Aws::OAM
 
     class GetSinkInput
       attr_accessor identifier: ::String
+      attr_accessor include_tags: bool
       SENSITIVE: []
     end
 
@@ -261,6 +263,7 @@ module Aws::OAM
 
     class UpdateLinkInput
       attr_accessor identifier: ::String
+      attr_accessor include_tags: bool
       attr_accessor link_configuration: Types::LinkConfiguration
       attr_accessor resource_types: ::Array[("AWS::CloudWatch::Metric" | "AWS::Logs::LogGroup" | "AWS::XRay::Trace" | "AWS::ApplicationInsights::Application" | "AWS::InternetMonitor::Monitor" | "AWS::ApplicationSignals::Service" | "AWS::ApplicationSignals::ServiceLevelObjective")]
       SENSITIVE: []

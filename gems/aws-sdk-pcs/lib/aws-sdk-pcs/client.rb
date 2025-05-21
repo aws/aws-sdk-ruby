@@ -556,6 +556,10 @@ module Aws::PCS
     #           parameter_value: "String", # required
     #         },
     #       ],
+    #       accounting: {
+    #         mode: "STANDARD", # required, accepts STANDARD, NONE
+    #         default_purge_time_in_days: 1,
+    #       },
     #     },
     #     client_token: "SBClientToken",
     #     tags: {
@@ -580,6 +584,8 @@ module Aws::PCS
     #   resp.cluster.slurm_configuration.slurm_custom_settings[0].parameter_value #=> String
     #   resp.cluster.slurm_configuration.auth_key.secret_arn #=> String
     #   resp.cluster.slurm_configuration.auth_key.secret_version #=> String
+    #   resp.cluster.slurm_configuration.accounting.mode #=> String, one of "STANDARD", "NONE"
+    #   resp.cluster.slurm_configuration.accounting.default_purge_time_in_days #=> Integer
     #   resp.cluster.networking.subnet_ids #=> Array
     #   resp.cluster.networking.subnet_ids[0] #=> String
     #   resp.cluster.networking.security_group_ids #=> Array
@@ -1000,6 +1006,8 @@ module Aws::PCS
     #   resp.cluster.slurm_configuration.slurm_custom_settings[0].parameter_value #=> String
     #   resp.cluster.slurm_configuration.auth_key.secret_arn #=> String
     #   resp.cluster.slurm_configuration.auth_key.secret_version #=> String
+    #   resp.cluster.slurm_configuration.accounting.mode #=> String, one of "STANDARD", "NONE"
+    #   resp.cluster.slurm_configuration.accounting.default_purge_time_in_days #=> Integer
     #   resp.cluster.networking.subnet_ids #=> Array
     #   resp.cluster.networking.subnet_ids[0] #=> String
     #   resp.cluster.networking.security_group_ids #=> Array
@@ -1315,7 +1323,7 @@ module Aws::PCS
 
     # This API action isn't intended for you to use.
     #
-    # Amazon Web Services PCS uses this API action to register the compute
+    #  Amazon Web Services PCS uses this API action to register the compute
     # nodes it launches in your account.
     #
     # @option params [required, String] :cluster_identifier
@@ -1646,7 +1654,7 @@ module Aws::PCS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pcs'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -748,6 +748,14 @@ module Aws::LicenseManager
     # @option params [required, Array<String>] :allowed_operations
     #   Allowed operations for the grant.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags to add to the grant. For more information about tagging support
+    #   in License Manager, see the [TagResource][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/license-manager/latest/APIReference/API_TagResource.html
+    #
     # @return [Types::CreateGrantResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateGrantResponse#grant_arn #grant_arn} => String
@@ -763,6 +771,12 @@ module Aws::LicenseManager
     #     principals: ["Arn"], # required
     #     home_region: "String", # required
     #     allowed_operations: ["CreateGrant"], # required, accepts CreateGrant, CheckoutLicense, CheckoutBorrowLicense, CheckInLicense, ExtendConsumptionLicense, ListPurchasedLicenses, CreateToken
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -888,6 +902,14 @@ module Aws::LicenseManager
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags to add to the license. For more information about tagging support
+    #   in License Manager, see the [TagResource][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/license-manager/latest/APIReference/API_TagResource.html
+    #
     # @return [Types::CreateLicenseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateLicenseResponse#license_arn #license_arn} => String
@@ -937,6 +959,12 @@ module Aws::LicenseManager
     #       },
     #     ],
     #     client_token: "ClientToken", # required
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -988,9 +1016,8 @@ module Aws::LicenseManager
     #   * `Cores` dimension: `allowedTenancy` \| `licenseAffinityToHost` \|
     #     `maximumCores` \| `minimumCores`
     #
-    #   * `Instances` dimension: `allowedTenancy` \| `maximumCores` \|
-    #     `minimumCores` \| `maximumSockets` \| `minimumSockets` \|
-    #     `maximumVcpus` \| `minimumVcpus`
+    #   * `Instances` dimension: `allowedTenancy` \| `maximumVcpus` \|
+    #     `minimumVcpus`
     #
     #   * `Sockets` dimension: `allowedTenancy` \| `licenseAffinityToHost` \|
     #     `maximumSockets` \| `minimumSockets`
@@ -2071,15 +2098,13 @@ module Aws::LicenseManager
     #
     #   * `licenseCountingType` - The dimension for which licenses are
     #     counted. Possible values are `vCPU` \| `Instance` \| `Core` \|
-    #     `Socket`. Logical operators are `EQUALS` \| `NOT_EQUALS`.
+    #     `Socket`.
     #
     #   * `enforceLicenseCount` - A Boolean value that indicates whether hard
-    #     license enforcement is used. Logical operators are `EQUALS` \|
-    #     `NOT_EQUALS`.
+    #     license enforcement is used.
     #
     #   * `usagelimitExceeded` - A Boolean value that indicates whether the
-    #     available licenses have been exceeded. Logical operators are
-    #     `EQUALS` \| `NOT_EQUALS`.
+    #     available licenses have been exceeded.
     #
     # @return [Types::ListLicenseConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2825,10 +2850,16 @@ module Aws::LicenseManager
       req.send_request(options)
     end
 
-    # Lists the tags for the specified license configuration.
+    # Lists the tags for the specified resource. For more information about
+    # tagging support in License Manager, see the [TagResource][1]
+    # operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/license-manager/latest/APIReference/API_TagResource.html
     #
     # @option params [required, String] :resource_arn
-    #   Amazon Resource Name (ARN) of the license configuration.
+    #   Amazon Resource Name (ARN) of the resource.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2934,14 +2965,11 @@ module Aws::LicenseManager
     #   operators are supported:
     #
     #   * `resourceArn` - The ARN of the license configuration resource.
-    #     Logical operators are `EQUALS` \| `NOT_EQUALS`.
     #
     #   * `resourceType` - The resource type (`EC2_INSTANCE` \| `EC2_HOST` \|
-    #     `EC2_AMI` \| `SYSTEMS_MANAGER_MANAGED_INSTANCE`). Logical operators
-    #     are `EQUALS` \| `NOT_EQUALS`.
+    #     `EC2_AMI` \| `SYSTEMS_MANAGER_MANAGED_INSTANCE`).
     #
     #   * `resourceAccount` - The ID of the account that owns the resource.
-    #     Logical operators are `EQUALS` \| `NOT_EQUALS`.
     #
     # @return [Types::ListUsageForLicenseConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3014,10 +3042,32 @@ module Aws::LicenseManager
       req.send_request(options)
     end
 
-    # Adds the specified tags to the specified license configuration.
+    # Adds the specified tags to the specified resource. The following
+    # resources support tagging in License Manager:
+    #
+    # * Licenses
+    #
+    # * Grants
+    #
+    # * License configurations
+    #
+    # * Report generators
     #
     # @option params [required, String] :resource_arn
-    #   Amazon Resource Name (ARN) of the license configuration.
+    #   Amazon Resource Name (ARN) of the resource. The following examples
+    #   provide an example ARN for each supported resource in License Manager:
+    #
+    #   * Licenses -
+    #     `arn:aws:license-manager::111122223333:license:l-EXAMPLE2da7646d6861033667f20e895`
+    #
+    #   * Grants -
+    #     `arn:aws:license-manager::111122223333:grant:g-EXAMPLE7b19f4a0ab73679b0beb52707`
+    #
+    #   * License configurations -
+    #     `arn:aws:license-manager:us-east-1:111122223333:license-configuration:lic-EXAMPLE6a788d4c8acd4264ff0ecf2ed2d`
+    #
+    #   * Report generators -
+    #     `arn:aws:license-manager:us-east-1:111122223333:report-generator:r-EXAMPLE825b4a4f8fe5a3e0c88824e5fc6`
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   One or more tags.
@@ -3045,10 +3095,10 @@ module Aws::LicenseManager
       req.send_request(options)
     end
 
-    # Removes the specified tags from the specified license configuration.
+    # Removes the specified tags from the specified resource.
     #
     # @option params [required, String] :resource_arn
-    #   Amazon Resource Name (ARN) of the license configuration.
+    #   Amazon Resource Name (ARN) of the resource.
     #
     # @option params [required, Array<String>] :tag_keys
     #   Keys identifying the tags to remove.
@@ -3300,7 +3350,7 @@ module Aws::LicenseManager
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-licensemanager'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

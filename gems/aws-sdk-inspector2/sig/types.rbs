@@ -184,6 +184,8 @@ module Aws::Inspector2
       attr_accessor architectures: ::Array[Types::StringFilter]
       attr_accessor image_shas: ::Array[Types::StringFilter]
       attr_accessor image_tags: ::Array[Types::StringFilter]
+      attr_accessor in_use_count: ::Array[Types::NumberFilter]
+      attr_accessor last_in_use_at: ::Array[Types::DateFilter]
       attr_accessor repositories: ::Array[Types::StringFilter]
       attr_accessor resource_ids: ::Array[Types::StringFilter]
       attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL")
@@ -196,6 +198,8 @@ module Aws::Inspector2
       attr_accessor architecture: ::String
       attr_accessor image_sha: ::String
       attr_accessor image_tags: ::Array[::String]
+      attr_accessor in_use_count: ::Integer
+      attr_accessor last_in_use_at: ::Time
       attr_accessor repository: ::String
       attr_accessor resource_id: ::String
       attr_accessor severity_counts: Types::SeverityCounts
@@ -207,10 +211,30 @@ module Aws::Inspector2
       attr_accessor author: ::String
       attr_accessor image_hash: ::String
       attr_accessor image_tags: ::Array[::String]
+      attr_accessor in_use_count: ::Integer
+      attr_accessor last_in_use_at: ::Time
       attr_accessor platform: ::String
       attr_accessor pushed_at: ::Time
       attr_accessor registry: ::String
       attr_accessor repository_name: ::String
+      SENSITIVE: []
+    end
+
+    class AwsEcsMetadataDetails
+      attr_accessor details_group: ::String
+      attr_accessor task_definition_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AwsEksMetadataDetails
+      attr_accessor namespace: ::String
+      attr_accessor workload_info_list: ::Array[Types::AwsEksWorkloadInfo]
+      SENSITIVE: []
+    end
+
+    class AwsEksWorkloadInfo
+      attr_accessor name: ::String
+      attr_accessor type: ::String
       SENSITIVE: []
     end
 
@@ -490,6 +514,39 @@ module Aws::Inspector2
       SENSITIVE: []
     end
 
+    class ClusterDetails
+      attr_accessor cluster_metadata: Types::ClusterMetadata
+      attr_accessor last_in_use: ::Time
+      attr_accessor running_unit_count: ::Integer
+      attr_accessor stopped_unit_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ClusterForImageFilterCriteria
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class ClusterInformation
+      attr_accessor cluster_arn: ::String
+      attr_accessor cluster_details: ::Array[Types::ClusterDetails]
+      SENSITIVE: []
+    end
+
+    class ClusterMetadata
+      attr_accessor aws_ecs_metadata_details: Types::AwsEcsMetadataDetails
+      attr_accessor aws_eks_metadata_details: Types::AwsEksMetadataDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AwsEcsMetadataDetails < ClusterMetadata
+      end
+      class AwsEksMetadataDetails < ClusterMetadata
+      end
+      class Unknown < ClusterMetadata
+      end
+    end
+
     class CodeFilePath
       attr_accessor end_line: ::Integer
       attr_accessor file_name: ::String
@@ -561,6 +618,8 @@ module Aws::Inspector2
     class CoverageFilterCriteria
       attr_accessor account_id: ::Array[Types::CoverageStringFilter]
       attr_accessor ec2_instance_tags: ::Array[Types::CoverageMapFilter]
+      attr_accessor ecr_image_in_use_count: ::Array[Types::CoverageNumberFilter]
+      attr_accessor ecr_image_last_in_use_at: ::Array[Types::CoverageDateFilter]
       attr_accessor ecr_image_tags: ::Array[Types::CoverageStringFilter]
       attr_accessor ecr_repository_name: ::Array[Types::CoverageStringFilter]
       attr_accessor image_pulled_at: ::Array[Types::CoverageDateFilter]
@@ -581,6 +640,12 @@ module Aws::Inspector2
       attr_accessor comparison: ("EQUALS")
       attr_accessor key: ::String
       attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class CoverageNumberFilter
+      attr_accessor lower_inclusive: ::Integer
+      attr_accessor upper_inclusive: ::Integer
       SENSITIVE: []
     end
 
@@ -834,6 +899,7 @@ module Aws::Inspector2
 
     class EcrConfiguration
       attr_accessor pull_date_rescan_duration: ("DAYS_14" | "DAYS_30" | "DAYS_60" | "DAYS_90" | "DAYS_180")
+      attr_accessor pull_date_rescan_mode: ("LAST_PULL_DATE" | "LAST_IN_USE_AT")
       attr_accessor rescan_duration: ("LIFETIME" | "DAYS_30" | "DAYS_180" | "DAYS_14" | "DAYS_60" | "DAYS_90")
       SENSITIVE: []
     end
@@ -845,6 +911,8 @@ module Aws::Inspector2
 
     class EcrContainerImageMetadata
       attr_accessor image_pulled_at: ::Time
+      attr_accessor in_use_count: ::Integer
+      attr_accessor last_in_use_at: ::Time
       attr_accessor tags: ::Array[::String]
       SENSITIVE: []
     end
@@ -857,6 +925,7 @@ module Aws::Inspector2
 
     class EcrRescanDurationState
       attr_accessor pull_date_rescan_duration: ("DAYS_14" | "DAYS_30" | "DAYS_60" | "DAYS_90" | "DAYS_180")
+      attr_accessor pull_date_rescan_mode: ("LAST_PULL_DATE" | "LAST_IN_USE_AT")
       attr_accessor rescan_duration: ("LIFETIME" | "DAYS_30" | "DAYS_180" | "DAYS_14" | "DAYS_60" | "DAYS_90")
       attr_accessor status: ("SUCCESS" | "PENDING" | "FAILED")
       attr_accessor updated_at: ::Time
@@ -957,6 +1026,8 @@ module Aws::Inspector2
       attr_accessor ec2_instance_vpc_id: ::Array[Types::StringFilter]
       attr_accessor ecr_image_architecture: ::Array[Types::StringFilter]
       attr_accessor ecr_image_hash: ::Array[Types::StringFilter]
+      attr_accessor ecr_image_in_use_count: ::Array[Types::NumberFilter]
+      attr_accessor ecr_image_last_in_use_at: ::Array[Types::DateFilter]
       attr_accessor ecr_image_pushed_at: ::Array[Types::DateFilter]
       attr_accessor ecr_image_registry: ::Array[Types::StringFilter]
       attr_accessor ecr_image_repository_name: ::Array[Types::StringFilter]
@@ -1102,6 +1173,19 @@ module Aws::Inspector2
     class GetCisScanResultDetailsResponse
       attr_accessor next_token: ::String
       attr_accessor scan_result_details: ::Array[Types::CisScanResultDetails]
+      SENSITIVE: []
+    end
+
+    class GetClustersForImageRequest
+      attr_accessor filter: Types::ClusterForImageFilterCriteria
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetClustersForImageResponse
+      attr_accessor cluster: ::Array[Types::ClusterInformation]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -1704,7 +1788,7 @@ module Aws::Inspector2
     end
 
     class ScanStatus
-      attr_accessor reason: ("PENDING_INITIAL_SCAN" | "ACCESS_DENIED" | "INTERNAL_ERROR" | "UNMANAGED_EC2_INSTANCE" | "UNSUPPORTED_OS" | "SCAN_ELIGIBILITY_EXPIRED" | "RESOURCE_TERMINATED" | "SUCCESSFUL" | "NO_RESOURCES_FOUND" | "IMAGE_SIZE_EXCEEDED" | "SCAN_FREQUENCY_MANUAL" | "SCAN_FREQUENCY_SCAN_ON_PUSH" | "EC2_INSTANCE_STOPPED" | "PENDING_DISABLE" | "NO_INVENTORY" | "STALE_INVENTORY" | "EXCLUDED_BY_TAG" | "UNSUPPORTED_RUNTIME" | "UNSUPPORTED_MEDIA_TYPE" | "UNSUPPORTED_CONFIG_FILE" | "DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED" | "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED" | "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED" | "DEEP_INSPECTION_NO_INVENTORY" | "AGENTLESS_INSTANCE_STORAGE_LIMIT_EXCEEDED" | "AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED")
+      attr_accessor reason: ("PENDING_INITIAL_SCAN" | "ACCESS_DENIED" | "INTERNAL_ERROR" | "UNMANAGED_EC2_INSTANCE" | "UNSUPPORTED_OS" | "SCAN_ELIGIBILITY_EXPIRED" | "RESOURCE_TERMINATED" | "SUCCESSFUL" | "NO_RESOURCES_FOUND" | "IMAGE_SIZE_EXCEEDED" | "SCAN_FREQUENCY_MANUAL" | "SCAN_FREQUENCY_SCAN_ON_PUSH" | "EC2_INSTANCE_STOPPED" | "PENDING_DISABLE" | "NO_INVENTORY" | "STALE_INVENTORY" | "EXCLUDED_BY_TAG" | "UNSUPPORTED_RUNTIME" | "UNSUPPORTED_MEDIA_TYPE" | "UNSUPPORTED_CONFIG_FILE" | "DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED" | "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED" | "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED" | "DEEP_INSPECTION_NO_INVENTORY" | "AGENTLESS_INSTANCE_STORAGE_LIMIT_EXCEEDED" | "AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED" | "PENDING_REVIVAL_SCAN")
       attr_accessor status_code: ("ACTIVE" | "INACTIVE")
       SENSITIVE: []
     end

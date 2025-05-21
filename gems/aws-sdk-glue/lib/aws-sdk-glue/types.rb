@@ -2536,6 +2536,11 @@ module Aws::Glue
     #   Amazon S3.
     #   @return [Types::S3CsvSource]
     #
+    # @!attribute [rw] s3_excel_source
+    #   Defines configuration parameters for reading Excel files from Amazon
+    #   S3.
+    #   @return [Types::S3ExcelSource]
+    #
     # @!attribute [rw] s3_json_source
     #   Specifies a JSON data store stored in Amazon S3.
     #   @return [Types::S3JsonSource]
@@ -2579,9 +2584,19 @@ module Aws::Glue
     #   columnar storage.
     #   @return [Types::S3GlueParquetTarget]
     #
+    # @!attribute [rw] s3_hyper_direct_target
+    #   Defines configuration parameters for writing data to Amazon S3 using
+    #   HyperDirect optimization.
+    #   @return [Types::S3HyperDirectTarget]
+    #
     # @!attribute [rw] s3_direct_target
     #   Specifies a data target that writes to Amazon S3.
     #   @return [Types::S3DirectTarget]
+    #
+    # @!attribute [rw] s3_iceberg_direct_target
+    #   Defines configuration parameters for writing data to Amazon S3 as an
+    #   Apache Iceberg table.
+    #   @return [Types::S3IcebergDirectTarget]
     #
     # @!attribute [rw] apply_mapping
     #   Specifies a transform that maps data property keys in the data
@@ -2844,6 +2859,7 @@ module Aws::Glue
       :redshift_source,
       :s3_catalog_source,
       :s3_csv_source,
+      :s3_excel_source,
       :s3_json_source,
       :s3_parquet_source,
       :relational_catalog_source,
@@ -2854,7 +2870,9 @@ module Aws::Glue
       :redshift_target,
       :s3_catalog_target,
       :s3_glue_parquet_target,
+      :s3_hyper_direct_target,
       :s3_direct_target,
+      :s3_iceberg_direct_target,
       :apply_mapping,
       :select_fields,
       :drop_fields,
@@ -4219,21 +4237,87 @@ module Aws::Glue
     #   The name of the connection type.
     #   @return [String]
     #
+    # @!attribute [rw] display_name
+    #   The human-readable name for the connection type that is displayed in
+    #   the Glue console.
+    #   @return [String]
+    #
+    # @!attribute [rw] vendor
+    #   The name of the vendor or provider that created or maintains this
+    #   connection type.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   A description of the connection type.
     #   @return [String]
+    #
+    # @!attribute [rw] categories
+    #   A list of categories that this connection type belongs to.
+    #   Categories help users filter and find appropriate connection types
+    #   based on their use cases.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] capabilities
     #   The supported authentication types, data interface types (compute
     #   environments), and data operations of the connector.
     #   @return [Types::Capabilities]
     #
+    # @!attribute [rw] logo_url
+    #   The URL of the logo associated with a connection type.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_type_variants
+    #   A list of variants available for this connection type. Different
+    #   variants may provide specialized configurations for specific use
+    #   cases or implementations of the same general connection type.
+    #   @return [Array<Types::ConnectionTypeVariant>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConnectionTypeBrief AWS API Documentation
     #
     class ConnectionTypeBrief < Struct.new(
       :connection_type,
+      :display_name,
+      :vendor,
       :description,
-      :capabilities)
+      :categories,
+      :capabilities,
+      :logo_url,
+      :connection_type_variants)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a variant of a connection type in Glue Data Catalog.
+    # Connection type variants provide specific configurations and behaviors
+    # for different implementations of the same general connection type.
+    #
+    # @!attribute [rw] connection_type_variant_name
+    #   The unique identifier for the connection type variant. This name is
+    #   used internally to identify the specific variant of a connection
+    #   type.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The human-readable name for the connection type variant that is
+    #   displayed in the Glue console.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A detailed description of the connection type variant, including its
+    #   purpose, use cases, and any specific configuration requirements.
+    #   @return [String]
+    #
+    # @!attribute [rw] logo_url
+    #   The URL of the logo associated with a connection type variant.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConnectionTypeVariant AWS API Documentation
+    #
+    class ConnectionTypeVariant < Struct.new(
+      :connection_type_variant_name,
+      :display_name,
+      :description,
+      :logo_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21965,6 +22049,11 @@ module Aws::Glue
     #   are `"gzip"` and `"bzip"`).
     #   @return [String]
     #
+    # @!attribute [rw] number_target_partitions
+    #   Specifies the number of target partitions for distributing Delta
+    #   Lake dataset files across Amazon S3.
+    #   @return [String]
+    #
     # @!attribute [rw] format
     #   Specifies the data output format for the target.
     #   @return [String]
@@ -21985,6 +22074,7 @@ module Aws::Glue
       :partition_keys,
       :path,
       :compression,
+      :number_target_partitions,
       :format,
       :additional_options,
       :schema_change_policy)
@@ -22081,6 +22171,11 @@ module Aws::Glue
     #   are `"gzip"` and `"bzip"`).
     #   @return [String]
     #
+    # @!attribute [rw] number_target_partitions
+    #   Specifies the number of target partitions when writing data directly
+    #   to Amazon S3.
+    #   @return [String]
+    #
     # @!attribute [rw] format
     #   Specifies the data output format for the target.
     #   @return [String]
@@ -22097,6 +22192,7 @@ module Aws::Glue
       :partition_keys,
       :path,
       :compression,
+      :number_target_partitions,
       :format,
       :schema_change_policy)
       SENSITIVE = []
@@ -22120,6 +22216,80 @@ module Aws::Glue
     class S3Encryption < Struct.new(
       :s3_encryption_mode,
       :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies an S3 Excel data source.
+    #
+    # @!attribute [rw] name
+    #   The name of the S3 Excel data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] paths
+    #   The S3 paths where the Excel files are located.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] compression_type
+    #   The compression format used for the Excel files.
+    #   @return [String]
+    #
+    # @!attribute [rw] exclusions
+    #   Patterns to exclude specific files or paths from processing.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] group_size
+    #   Defines the size of file groups for batch processing.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_files
+    #   Specifies how files should be grouped for processing.
+    #   @return [String]
+    #
+    # @!attribute [rw] recurse
+    #   Indicates whether to recursively process subdirectories.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_band
+    #   The maximum number of processing bands to use.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_files_in_band
+    #   The maximum number of files to process in each band.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] additional_options
+    #   Additional configuration options for S3 direct source processing.
+    #   @return [Types::S3DirectSourceAdditionalOptions]
+    #
+    # @!attribute [rw] number_rows
+    #   The number of rows to process from each Excel file.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] skip_footer
+    #   The number of rows to skip at the end of each Excel file.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] output_schemas
+    #   The AWS Glue schemas to apply to the processed data.
+    #   @return [Array<Types::GlueSchema>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3ExcelSource AWS API Documentation
+    #
+    class S3ExcelSource < Struct.new(
+      :name,
+      :paths,
+      :compression_type,
+      :exclusions,
+      :group_size,
+      :group_files,
+      :recurse,
+      :max_band,
+      :max_files_in_band,
+      :additional_options,
+      :number_rows,
+      :skip_footer,
+      :output_schemas)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22149,6 +22319,11 @@ module Aws::Glue
     #   are `"gzip"` and `"bzip"`).
     #   @return [String]
     #
+    # @!attribute [rw] number_target_partitions
+    #   Specifies the number of target partitions for Parquet files when
+    #   writing to Amazon S3 using AWS Glue.
+    #   @return [String]
+    #
     # @!attribute [rw] schema_change_policy
     #   A policy that specifies update behavior for the crawler.
     #   @return [Types::DirectSchemaChangePolicy]
@@ -22161,6 +22336,7 @@ module Aws::Glue
       :partition_keys,
       :path,
       :compression,
+      :number_target_partitions,
       :schema_change_policy)
       SENSITIVE = []
       include Aws::Structure
@@ -22231,6 +22407,11 @@ module Aws::Glue
     #   are `"gzip"` and `"bzip"`).
     #   @return [String]
     #
+    # @!attribute [rw] number_target_partitions
+    #   Specifies the number of target partitions for distributing Hudi
+    #   dataset files across Amazon S3.
+    #   @return [String]
+    #
     # @!attribute [rw] partition_keys
     #   Specifies native partitioning using a sequence of keys.
     #   @return [Array<Array<String>>]
@@ -22254,6 +22435,7 @@ module Aws::Glue
       :inputs,
       :path,
       :compression,
+      :number_target_partitions,
       :partition_keys,
       :format,
       :additional_options,
@@ -22292,6 +22474,106 @@ module Aws::Glue
       :additional_hudi_options,
       :additional_options,
       :output_schemas)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a HyperDirect data target that writes to Amazon S3.
+    #
+    # @!attribute [rw] name
+    #   The unique identifier for the HyperDirect target node.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   Specifies the input source for the HyperDirect target.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] partition_keys
+    #   Defines the partitioning strategy for the output data.
+    #   @return [Array<Array<String>>]
+    #
+    # @!attribute [rw] path
+    #   The S3 location where the output data will be written.
+    #   @return [String]
+    #
+    # @!attribute [rw] compression
+    #   The compression type to apply to the output data.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_change_policy
+    #   Defines how schema changes are handled during write operations.
+    #   @return [Types::DirectSchemaChangePolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3HyperDirectTarget AWS API Documentation
+    #
+    class S3HyperDirectTarget < Struct.new(
+      :name,
+      :inputs,
+      :partition_keys,
+      :path,
+      :compression,
+      :schema_change_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a target that writes to an Iceberg data source in Amazon S3.
+    #
+    # @!attribute [rw] name
+    #   Specifies the unique identifier for the Iceberg target node in your
+    #   data pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   Defines the single input source that provides data to this Iceberg
+    #   target.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] partition_keys
+    #   Specifies the columns used to partition the Iceberg table data in
+    #   S3.
+    #   @return [Array<Array<String>>]
+    #
+    # @!attribute [rw] path
+    #   Defines the S3 location where the Iceberg table data will be stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] format
+    #   Specifies the file format used for storing Iceberg table data (e.g.,
+    #   Parquet, ORC).
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_options
+    #   Provides additional configuration options for customizing the
+    #   Iceberg table behavior.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] schema_change_policy
+    #   Defines how schema changes are handled when writing data to the
+    #   Iceberg table.
+    #   @return [Types::DirectSchemaChangePolicy]
+    #
+    # @!attribute [rw] compression
+    #   Specifies the compression codec used for Iceberg table files in S3.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_target_partitions
+    #   Sets the number of target partitions for distributing Iceberg table
+    #   files across S3.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3IcebergDirectTarget AWS API Documentation
+    #
+    class S3IcebergDirectTarget < Struct.new(
+      :name,
+      :inputs,
+      :partition_keys,
+      :path,
+      :format,
+      :additional_options,
+      :schema_change_policy,
+      :compression,
+      :number_target_partitions)
       SENSITIVE = []
       include Aws::Structure
     end
