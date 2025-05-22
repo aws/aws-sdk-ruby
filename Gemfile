@@ -17,7 +17,7 @@ if defined?(JRUBY_VERSION)
 end
 
 # protocol parsers
-gem 'json', '>= 2.4.0' # due to load_file support
+gem 'json', '>= 2.4.0' # due to load_file support, see: https://github.com/ruby/json/issues/696
 gem 'nokogiri', '>= 1.6.8.1'
 gem 'oga'
 gem 'rexml'
@@ -33,8 +33,8 @@ group :benchmark do
 
   # required for uploading report/putting metrics
   gem 'aws-sdk-cloudwatch', require: false
-  gem 'aws-sdk-s3', require: false
   gem 'aws-sdk-lambda', require: false
+  gem 'aws-sdk-s3', require: false
 end
 
 group :build do
@@ -68,8 +68,8 @@ end
 group :test do
   gem 'addressable'
   gem 'cucumber'
-  gem 'webmock'
   gem 'multipart-post'
-  gem 'rspec'
   gem 'opentelemetry-sdk'
+  gem 'rspec'
+  gem 'webmock'
 end
