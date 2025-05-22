@@ -43,13 +43,12 @@ jobs:
         run: bundle exec rake rbs:test
 
   test:
-    # change to ubuntu-latest once Ruby 2.5 and JRuby 9.2 is dropped
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         # Supported ruby versions
-        ruby: [2.5, 2.6, 2.7, '3.0', 3.1, 3.2, 3.3, 3.4, jruby-9.2, jruby-9.3, jruby-9.4]
+        ruby: [2.7, '3.0', 3.1, 3.2, 3.3, 3.4, jruby-9.4, jruby-10.0]
         env: [KITCHEN_SINK, CRT]
 
     steps:
