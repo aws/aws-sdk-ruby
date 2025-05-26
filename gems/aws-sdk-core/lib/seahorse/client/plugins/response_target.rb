@@ -27,12 +27,12 @@ module Seahorse
           private
 
           def add_event_listeners(context, target)
-            context.http_response.on_data do
+            context.http_response.on_headers(200..299) do
               # In a fresh response body will be a StringIO
               # However, when a request is retried we may have
               # an existing ManagedFile or BlockIO and those
               # should be reused.
-              if context.http_response.body.is_a?(StringIO)
+              if context.http_response.body.is_a? StringIO
                 context.http_response.body = io(target, context.http_response.headers)
               end
             end
