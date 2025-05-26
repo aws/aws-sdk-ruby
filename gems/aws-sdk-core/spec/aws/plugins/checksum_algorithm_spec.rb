@@ -271,7 +271,7 @@ module Aws
         end
 
         it 'validation_list does not include unknown algorithms' do
-          expect_any_instance_of(ChecksumAlgorithm::ChecksumHandler)
+          expect_any_instance_of(ChecksumAlgorithm::ResponseChecksumHandler)
             .to receive(:operation_response_algorithms).and_return(%w[UNKNOWN CRC32])
           resp = client.http_checksum_operation
           expect(resp.context[:http_checksum][:validation_list]).to eq %w[CRC32]

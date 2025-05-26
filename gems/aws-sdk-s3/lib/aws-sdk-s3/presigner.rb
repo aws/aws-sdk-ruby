@@ -196,7 +196,6 @@ module Aws
         http_req = req.context.http_request
         req.handlers.remove(Seahorse::Client::Plugins::ContentLength::Handler)
         req.handlers.remove(Aws::Rest::ContentTypeHandler)
-        req.handlers.remove(Aws::Plugins::ChecksumAlgorithm::OptionHandler)
         req.handlers.remove(Aws::Plugins::ChecksumAlgorithm::RequestChecksumHandler)
         req.handlers.remove(Aws::Plugins::ChecksumAlgorithm::ResponseChecksumHandler)
         req.handlers.remove(Aws::Plugins::InvocationId::Handler)
