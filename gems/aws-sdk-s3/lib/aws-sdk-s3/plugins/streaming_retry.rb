@@ -62,18 +62,16 @@ module Aws
         class Handler < Seahorse::Client::Handler
 
           def call(context)
-            target = context.params[:response_target] || context[:response_target]
-
             # retry is only supported when range is NOT set on the initial request
-            if supported_target?(target) && !context.params[:range]
-              add_event_listeners(context, target)
+            if supported_target?(context) && !context.params[:range]
+              add_event_listeners(context)
             end
             @handler.call(context)
           end
 
           private
 
-          def add_event_listeners(context, target)
+          def add_event_listeners(context)
             context.http_response.on_headers(200..299) do
               case context.http_response.body
               when Seahorse::Client::BlockIO then
@@ -123,8 +121,8 @@ module Aws
               context.http_response.body.is_a?(RetryableManagedFile)
           end
 
-          def supported_target?(target)
-            case target
+          def supported_target?(context)
+            case context[:response_target]
             when Proc, String, Pathname then true
             else false
             end
