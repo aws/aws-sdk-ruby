@@ -152,9 +152,12 @@ module Aws
 
       def add_handlers(handlers, _config)
         handlers.add(OptionHandler, step: :initialize)
+        # Priority is set high to ensure listeners are registered before
+        # response target listeners, in case any mutation is done when writing out.
+        handlers.add(ResponseChecksumHandler, priority: 95, step: :initialize)
         # Priority is set low to ensure the checksum is computed AFTER the
         # request is built but before it is signed.
-        handlers.add(ChecksumHandler, priority: 15, step: :build)
+        handlers.add(RequestChecksumHandler, priority: 15)
       end
 
       class OptionHandler < Seahorse::Client::Handler
@@ -179,7 +182,90 @@ module Aws
         end
       end
 
-      class ChecksumHandler < Seahorse::Client::Handler
+      class ResponseChecksumHandler < Seahorse::Client::Handler
+        def call(context)
+          if should_verify_response_checksum?(context)
+            add_verify_response_checksum_handlers(context)
+          end
+          @handler.call(context)
+        end
+
+        private
+
+        def should_verify_response_checksum?(context)
+          request_validation_mode(context) == 'ENABLED'
+        end
+
+        def request_validation_mode(context)
+          return unless context.operation.http_checksum
+
+          input_member = context.operation.http_checksum['requestValidationModeMember']
+          context.params[input_member.to_sym] if input_member
+        end
+
+        # Add events to the http_response to verify the checksum as its read
+        # This prevents the body from being read multiple times
+        # verification is done only once a successful response has completed
+        def add_verify_response_checksum_handlers(context)
+          checksum_context = {}
+          add_verify_response_headers_handler(context, checksum_context)
+          add_verify_response_data_handler(context, checksum_context)
+          add_verify_response_success_handler(context, checksum_context)
+        end
+
+        def add_verify_response_headers_handler(context, checksum_context)
+          validation_list = CHECKSUM_ALGORITHM_PRIORITIES &
+                            operation_response_algorithms(context)
+          context[:http_checksum][:validation_list] = validation_list
+
+          context.http_response.on_headers do |_status, headers|
+            header_name, algorithm = response_header_to_verify(
+              headers,
+              validation_list
+            )
+            next unless header_name
+
+            expected = headers[header_name]
+            next if context[:http_checksum][:skip_on_suffix] && /-\d+$/.match(expected)
+
+            checksum_context[:algorithm] = algorithm
+            checksum_context[:header_name] = header_name
+            checksum_context[:digest] = ChecksumAlgorithm.digest_for_algorithm(algorithm)
+            checksum_context[:expected] = expected
+          end
+        end
+
+        def add_verify_response_data_handler(context, checksum_context)
+          context.http_response.on_data do |chunk|
+            checksum_context[:digest]&.update(chunk)
+          end
+        end
+
+        def add_verify_response_success_handler(context, checksum_context)
+          context.http_response.on_success do
+            next unless checksum_context[:digest]
+
+            computed = checksum_context[:digest].base64digest
+            if computed == checksum_context[:expected]
+              context[:http_checksum][:validated] = checksum_context[:algorithm]
+            else
+              raise Aws::Errors::ChecksumError,
+                    "Checksum validation failed on #{checksum_context[:header_name]} "\
+                      "computed: #{computed}, expected: #{checksum_context[:expected]}"
+            end
+          end
+        end
+
+        def response_header_to_verify(headers, validation_list)
+          validation_list.each do |algorithm|
+            header_name = "x-amz-checksum-#{algorithm.downcase}"
+            return [header_name, algorithm] if headers[header_name]
+          end
+          nil
+        end
+      end
+
+      class RequestChecksumHandler < Seahorse::Client::Handler
         def call(context)
           algorithm = nil
           if should_calculate_request_checksum?(context)
@@ -193,10 +279,6 @@ module Aws
 
             context[:http_checksum][:request_algorithm] = request_algorithm
             calculate_request_checksum(context, request_algorithm)
-          end
-
-          if should_verify_response_checksum?(context)
-            add_verify_response_checksum_handlers(context)
           end
 
           with_metrics(context.config, algorithm) { @handler.call(context) }
@@ -256,13 +338,6 @@ module Aws
           input_member = context.operation.http_checksum['requestAlgorithmMember']
           shape = context.operation.input.shape.member(input_member)
           shape.location_name if shape && shape.location == 'header'
-        end
-
-        def request_validation_mode(context)
-          return unless context.operation.http_checksum
-
-          input_member = context.operation.http_checksum['requestValidationModeMember']
-          context.params[input_member.to_sym] if input_member
         end
 
         def operation_response_algorithms(context)
@@ -381,71 +456,6 @@ module Aws
             checksum_properties[:algorithm],
             location_name
           )
-        end
-
-        def should_verify_response_checksum?(context)
-          request_validation_mode(context) == 'ENABLED'
-        end
-
-        # Add events to the http_response to verify the checksum as its read
-        # This prevents the body from being read multiple times
-        # verification is done only once a successful response has completed
-        def add_verify_response_checksum_handlers(context)
-          checksum_context = {}
-          add_verify_response_headers_handler(context, checksum_context)
-          add_verify_response_data_handler(context, checksum_context)
-          add_verify_response_success_handler(context, checksum_context)
-        end
-
-        def add_verify_response_headers_handler(context, checksum_context)
-          validation_list = CHECKSUM_ALGORITHM_PRIORITIES &
-                            operation_response_algorithms(context)
-          context[:http_checksum][:validation_list] = validation_list
-
-          context.http_response.on_headers do |_status, headers|
-            header_name, algorithm = response_header_to_verify(
-              headers,
-              validation_list
-            )
-            next unless header_name
-
-            expected = headers[header_name]
-            next if context[:http_checksum][:skip_on_suffix] && /-\d+$/.match(expected)
-
-            checksum_context[:algorithm] = algorithm
-            checksum_context[:header_name] = header_name
-            checksum_context[:digest] = ChecksumAlgorithm.digest_for_algorithm(algorithm)
-            checksum_context[:expected] = expected
-          end
-        end
-
-        def add_verify_response_data_handler(context, checksum_context)
-          context.http_response.on_data do |chunk|
-            checksum_context[:digest]&.update(chunk)
-          end
-        end
-
-        def add_verify_response_success_handler(context, checksum_context)
-          context.http_response.on_success do
-            next unless checksum_context[:digest]
-
-            computed = checksum_context[:digest].base64digest
-            if computed == checksum_context[:expected]
-              context[:http_checksum][:validated] = checksum_context[:algorithm]
-            else
-              raise Aws::Errors::ChecksumError,
-                    "Checksum validation failed on #{checksum_context[:header_name]} "\
-                    "computed: #{computed}, expected: #{checksum_context[:expected]}"
-            end
-          end
-        end
-
-        def response_header_to_verify(headers, validation_list)
-          validation_list.each do |algorithm|
-            header_name = "x-amz-checksum-#{algorithm.downcase}"
-            return [header_name, algorithm] if headers[header_name]
-          end
-          nil
         end
       end
 
