@@ -171,6 +171,7 @@ module Aws
           if should_verify_response_checksum?(context)
             add_verify_response_checksum_handlers(context)
           end
+
           @handler.call(context)
         end
 
