@@ -3,8 +3,8 @@
 require_relative '../spec_helper'
 
 module Aws
-  module Plugins
-    describe ChecksumAlgorithm do
+  module S3
+    describe Client do
       let(:creds) { Aws::Credentials.new('akid', 'secret') }
       let(:client) { S3::Client.new(stub_responses: true) }
       let(:bucket) { 'bucket' }
