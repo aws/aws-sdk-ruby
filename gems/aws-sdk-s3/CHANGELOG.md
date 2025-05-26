@@ -1,11 +1,8 @@
 Unreleased Changes
 ------------------
 
-* Issue - Add response checksum algorithm listeners before the response target listeners so that checksums are validated prior to potential mutation.
-
 1.186.1 (2025-05-15)
 ------------------
-
 * Issue - Abort multipart download if object is modified during download.
 
 1.186.0 (2025-05-12)

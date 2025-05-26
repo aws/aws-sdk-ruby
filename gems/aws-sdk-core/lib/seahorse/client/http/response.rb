@@ -66,8 +66,8 @@ module Seahorse
         # @param [string] chunk
         def signal_data(chunk)
           unless chunk == ''
-            @body.write(chunk)
             emit(:data, chunk)
+            @body.write(chunk)
           end
         end
 
