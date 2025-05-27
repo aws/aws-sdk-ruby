@@ -32,6 +32,11 @@ module Aws::PrometheusService
       SENSITIVE: []
     end
 
+    class CloudWatchLogDestination
+      attr_accessor log_group_arn: ::String
+      SENSITIVE: []
+    end
+
     class ConflictException
       attr_accessor message: ::String
       attr_accessor resource_id: ::String
@@ -60,6 +65,18 @@ module Aws::PrometheusService
 
     class CreateLoggingConfigurationResponse
       attr_accessor status: Types::LoggingConfigurationStatus
+      SENSITIVE: []
+    end
+
+    class CreateQueryLoggingConfigurationRequest
+      attr_accessor client_token: ::String
+      attr_accessor destinations: ::Array[Types::LoggingDestination]
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateQueryLoggingConfigurationResponse
+      attr_accessor status: Types::QueryLoggingConfigurationStatus
       SENSITIVE: []
     end
 
@@ -128,6 +145,12 @@ module Aws::PrometheusService
       SENSITIVE: []
     end
 
+    class DeleteQueryLoggingConfigurationRequest
+      attr_accessor client_token: ::String
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
     class DeleteRuleGroupsNamespaceRequest
       attr_accessor client_token: ::String
       attr_accessor name: ::String
@@ -170,6 +193,16 @@ module Aws::PrometheusService
 
     class DescribeLoggingConfigurationResponse
       attr_accessor logging_configuration: Types::LoggingConfigurationMetadata
+      SENSITIVE: []
+    end
+
+    class DescribeQueryLoggingConfigurationRequest
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeQueryLoggingConfigurationResponse
+      attr_accessor query_logging_configuration: Types::QueryLoggingConfigurationMetadata
       SENSITIVE: []
     end
 
@@ -322,6 +355,17 @@ module Aws::PrometheusService
       SENSITIVE: []
     end
 
+    class LoggingDestination
+      attr_accessor cloud_watch_logs: Types::CloudWatchLogDestination
+      attr_accessor filters: Types::LoggingFilter
+      SENSITIVE: []
+    end
+
+    class LoggingFilter
+      attr_accessor qsp_threshold: ::Integer
+      SENSITIVE: []
+    end
+
     class PutAlertManagerDefinitionRequest
       attr_accessor client_token: ::String
       attr_accessor data: ::String
@@ -347,6 +391,21 @@ module Aws::PrometheusService
       attr_accessor name: ::String
       attr_accessor status: Types::RuleGroupsNamespaceStatus
       attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class QueryLoggingConfigurationMetadata
+      attr_accessor created_at: ::Time
+      attr_accessor destinations: ::Array[Types::LoggingDestination]
+      attr_accessor modified_at: ::Time
+      attr_accessor status: Types::QueryLoggingConfigurationStatus
+      attr_accessor workspace: ::String
+      SENSITIVE: []
+    end
+
+    class QueryLoggingConfigurationStatus
+      attr_accessor status_code: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATION_FAILED" | "UPDATE_FAILED")
+      attr_accessor status_reason: ::String
       SENSITIVE: []
     end
 
@@ -494,6 +553,18 @@ module Aws::PrometheusService
 
     class UpdateLoggingConfigurationResponse
       attr_accessor status: Types::LoggingConfigurationStatus
+      SENSITIVE: []
+    end
+
+    class UpdateQueryLoggingConfigurationRequest
+      attr_accessor client_token: ::String
+      attr_accessor destinations: ::Array[Types::LoggingDestination]
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateQueryLoggingConfigurationResponse
+      attr_accessor status: Types::QueryLoggingConfigurationStatus
       SENSITIVE: []
     end
 

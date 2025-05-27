@@ -3980,6 +3980,7 @@ module Aws::Glue
     class IntegrationPartition
       attr_accessor field_name: ::String
       attr_accessor function_spec: ::String
+      attr_accessor conversion_spec: ::String
       SENSITIVE: []
     end
 

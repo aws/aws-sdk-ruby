@@ -84,11 +84,13 @@ module Aws
         def status: () -> ("CREATING" | "ACTIVE" | "IDLE" | "INACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "FAILED" | "PENDING_SETUP" | "PENDING_DELETE")
         def creation_time: () -> ::Time
         def multi_region_properties: () -> Types::MultiRegionProperties
+        def encryption_details: () -> Types::EncryptionDetails
         def deletion_protection_enabled: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DSQL/Client.html#create_cluster-instance_method
       def create_cluster: (
                             ?deletion_protection_enabled: bool,
+                            ?kms_encryption_key: ::String,
                             ?tags: Hash[::String, ::String],
                             ?client_token: ::String,
                             ?multi_region_properties: {
@@ -121,6 +123,7 @@ module Aws
         def deletion_protection_enabled: () -> bool
         def multi_region_properties: () -> Types::MultiRegionProperties
         def tags: () -> ::Hash[::String, ::String]
+        def encryption_details: () -> Types::EncryptionDetails
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DSQL/Client.html#get_cluster-instance_method
       def get_cluster: (
@@ -185,6 +188,7 @@ module Aws
       def update_cluster: (
                             identifier: ::String,
                             ?deletion_protection_enabled: bool,
+                            ?kms_encryption_key: ::String,
                             ?client_token: ::String,
                             ?multi_region_properties: {
                               witness_region: ::String?,

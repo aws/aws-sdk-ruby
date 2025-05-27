@@ -533,6 +533,11 @@ module Aws::DSQL
     #   If enabled, you can't delete your cluster. You must first disable
     #   this property before you can delete your cluster.
     #
+    # @option params [String] :kms_encryption_key
+    #   The KMS key that encrypts and protects the data on your cluster. You
+    #   can specify the ARN, ID, or alias of an existing key or have Amazon
+    #   Web Services create a default key for you.
+    #
     # @option params [Hash<String,String>] :tags
     #   A map of key and value pairs to use to tag your cluster.
     #
@@ -561,6 +566,7 @@ module Aws::DSQL
     #   * {Types::CreateClusterOutput#status #status} => String
     #   * {Types::CreateClusterOutput#creation_time #creation_time} => Time
     #   * {Types::CreateClusterOutput#multi_region_properties #multi_region_properties} => Types::MultiRegionProperties
+    #   * {Types::CreateClusterOutput#encryption_details #encryption_details} => Types::EncryptionDetails
     #   * {Types::CreateClusterOutput#deletion_protection_enabled #deletion_protection_enabled} => Boolean
     #
     #
@@ -577,6 +583,7 @@ module Aws::DSQL
     #
     #   resp = client.create_cluster({
     #     deletion_protection_enabled: false,
+    #     kms_encryption_key: "KmsEncryptionKey",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -596,6 +603,9 @@ module Aws::DSQL
     #   resp.multi_region_properties.witness_region #=> String
     #   resp.multi_region_properties.clusters #=> Array
     #   resp.multi_region_properties.clusters[0] #=> String
+    #   resp.encryption_details.encryption_type #=> String, one of "AWS_OWNED_KMS_KEY", "CUSTOMER_MANAGED_KMS_KEY"
+    #   resp.encryption_details.kms_key_arn #=> String
+    #   resp.encryption_details.encryption_status #=> String, one of "ENABLED", "UPDATING", "KMS_KEY_INACCESSIBLE", "ENABLING"
     #   resp.deletion_protection_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/CreateCluster AWS API Documentation
@@ -677,6 +687,7 @@ module Aws::DSQL
     #   * {Types::GetClusterOutput#deletion_protection_enabled #deletion_protection_enabled} => Boolean
     #   * {Types::GetClusterOutput#multi_region_properties #multi_region_properties} => Types::MultiRegionProperties
     #   * {Types::GetClusterOutput#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetClusterOutput#encryption_details #encryption_details} => Types::EncryptionDetails
     #
     #
     # @example Example: Get Cluster
@@ -703,6 +714,9 @@ module Aws::DSQL
     #   resp.multi_region_properties.clusters[0] #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.encryption_details.encryption_type #=> String, one of "AWS_OWNED_KMS_KEY", "CUSTOMER_MANAGED_KMS_KEY"
+    #   resp.encryption_details.kms_key_arn #=> String
+    #   resp.encryption_details.encryption_status #=> String, one of "ENABLED", "UPDATING", "KMS_KEY_INACCESSIBLE", "ENABLING"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -994,6 +1008,11 @@ module Aws::DSQL
     # @option params [Boolean] :deletion_protection_enabled
     #   Specifies whether to enable deletion protection in your cluster.
     #
+    # @option params [String] :kms_encryption_key
+    #   The KMS key that encrypts and protects the data on your cluster. You
+    #   can specify the ARN, ID, or alias of an existing key or have Amazon
+    #   Web Services create a default key for you.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -1032,6 +1051,7 @@ module Aws::DSQL
     #   resp = client.update_cluster({
     #     identifier: "ClusterId", # required
     #     deletion_protection_enabled: false,
+    #     kms_encryption_key: "KmsEncryptionKey",
     #     client_token: "ClientToken",
     #     multi_region_properties: {
     #       witness_region: "Region",
@@ -1073,7 +1093,7 @@ module Aws::DSQL
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-dsql'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

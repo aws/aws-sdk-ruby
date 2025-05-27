@@ -925,7 +925,8 @@ module Aws
                                                    partition_spec: Array[
                                                      {
                                                        field_name: ::String?,
-                                                       function_spec: ::String?
+                                                       function_spec: ::String?,
+                                                       conversion_spec: ::String?
                                                      },
                                                    ]?,
                                                    target_table_name: ::String?
@@ -5967,7 +5968,8 @@ module Aws
                                                    partition_spec: Array[
                                                      {
                                                        field_name: ::String?,
-                                                       function_spec: ::String?
+                                                       function_spec: ::String?,
+                                                       conversion_spec: ::String?
                                                      },
                                                    ]?,
                                                    target_table_name: ::String?
