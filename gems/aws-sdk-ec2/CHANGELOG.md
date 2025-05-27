@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.527.0 (2025-05-23)
+------------------
+
+* Feature - This release adds support for the C7i-flex, M7i-flex, I7i, I7ie, I8g, P6-b200, Trn2, C8gd, M8gd and R8gd instances
+
 1.526.0 (2025-05-21)
 ------------------
 

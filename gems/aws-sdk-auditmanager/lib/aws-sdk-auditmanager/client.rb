@@ -767,17 +767,17 @@ module Aws::AuditManager
     #   The wrapper that contains the Amazon Web Services accounts that are in
     #   scope for the assessment.
     #
-    #   <note markdown="1"> You no longer need to specify which Amazon Web Services are in scope
-    #   when you create or update an assessment. Audit Manager infers the
-    #   services in scope by examining your assessment controls and their data
-    #   sources, and then mapping this information to the relevant Amazon Web
-    #   Services.
+    #   <note markdown="1"> You no longer need to specify which Amazon Web Services services are
+    #   in scope when you create or update an assessment. Audit Manager infers
+    #   the services in scope by examining your assessment controls and their
+    #   data sources, and then mapping this information to the relevant Amazon
+    #   Web Services services.
     #
     #    If an underlying data source changes for your assessment, we
     #   automatically update the services scope as needed to reflect the
-    #   correct Amazon Web Services. This ensures that your assessment
-    #   collects accurate and comprehensive evidence about all of the relevant
-    #   services in your AWS environment.
+    #   correct Amazon Web Services services. This ensures that your
+    #   assessment collects accurate and comprehensive evidence about all of
+    #   the relevant services in your AWS environment.
     #
     #    </note>
     #
@@ -2313,14 +2313,14 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Gets a list of the Amazon Web Services from which Audit Manager can
-    # collect evidence.
+    # Gets a list of the Amazon Web Services services from which Audit
+    # Manager can collect evidence.
     #
-    # Audit Manager defines which Amazon Web Services are in scope for an
-    # assessment. Audit Manager infers this scope by examining the
+    # Audit Manager defines which Amazon Web Services services are in scope
+    # for an assessment. Audit Manager infers this scope by examining the
     # assessment’s controls and their data sources, and then mapping this
     # information to one or more of the corresponding Amazon Web Services
-    # that are in this list.
+    # services that are in this list.
     #
     # <note markdown="1"> For information about why it's no longer possible to specify services
     # in scope manually, see [I can't edit the services in scope for my
@@ -4057,7 +4057,7 @@ module Aws::AuditManager
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-auditmanager'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

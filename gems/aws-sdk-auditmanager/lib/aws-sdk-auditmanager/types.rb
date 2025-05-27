@@ -36,15 +36,16 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # An Amazon Web Service such as Amazon S3 or CloudTrail.
+    # An Amazon Web Services service such as Amazon S3 or CloudTrail.
     #
-    # For an example of how to find an Amazon Web Service name and how to
-    # define it in your assessment scope, see the following:
+    # For an example of how to find an Amazon Web Services service name and
+    # how to define it in your assessment scope, see the following:
     #
-    # * [Finding an Amazon Web Service name to use in your assessment
-    #   scope][1]
+    # * [Finding an Amazon Web Services service name to use in your
+    #   assessment scope][1]
     #
-    # * [Defining an Amazon Web Service name in your assessment scope][2]
+    # * [Defining an Amazon Web Services service name in your assessment
+    #   scope][2]
     #
     #
     #
@@ -52,7 +53,7 @@ module Aws::AuditManager
     # [2]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_GetServicesInScope.html#API_GetServicesInScope_Example_3
     #
     # @!attribute [rw] service_name
-    #   The name of the Amazon Web Service.
+    #   The name of the Amazon Web Services service.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/AWSService AWS API Documentation
@@ -248,7 +249,8 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] data_source
-    #   The Amazon Web Service that the evidence was collected from.
+    #   The Amazon Web Services service that the evidence was collected
+    #   from.
     #   @return [String]
     #
     # @!attribute [rw] author
@@ -275,7 +277,8 @@ module Aws::AuditManager
     # @!attribute [rw] evidence_by_type_configuration_data_count
     #   The number of evidence that falls under the configuration data
     #   category. This evidence is collected from configuration snapshots of
-    #   other Amazon Web Services such as Amazon EC2, Amazon S3, or IAM.
+    #   other Amazon Web Services services such as Amazon EC2, Amazon S3, or
+    #   IAM.
     #   @return [Integer]
     #
     # @!attribute [rw] evidence_by_type_manual_count
@@ -1676,17 +1679,17 @@ module Aws::AuditManager
     #   The wrapper that contains the Amazon Web Services accounts that are
     #   in scope for the assessment.
     #
-    #   <note markdown="1"> You no longer need to specify which Amazon Web Services are in scope
-    #   when you create or update an assessment. Audit Manager infers the
-    #   services in scope by examining your assessment controls and their
-    #   data sources, and then mapping this information to the relevant
-    #   Amazon Web Services.
+    #   <note markdown="1"> You no longer need to specify which Amazon Web Services services are
+    #   in scope when you create or update an assessment. Audit Manager
+    #   infers the services in scope by examining your assessment controls
+    #   and their data sources, and then mapping this information to the
+    #   relevant Amazon Web Services services.
     #
     #    If an underlying data source changes for your assessment, we
     #   automatically update the services scope as needed to reflect the
-    #   correct Amazon Web Services. This ensures that your assessment
-    #   collects accurate and comprehensive evidence about all of the
-    #   relevant services in your AWS environment.
+    #   correct Amazon Web Services services. This ensures that your
+    #   assessment collects accurate and comprehensive evidence about all of
+    #   the relevant services in your AWS environment.
     #
     #    </note>
     #   @return [Types::Scope]
@@ -2260,7 +2263,7 @@ module Aws::AuditManager
     #   @return [Time]
     #
     # @!attribute [rw] event_source
-    #   The Amazon Web Service that the evidence is collected from.
+    #   The Amazon Web Services service that the evidence is collected from.
     #   @return [String]
     #
     # @!attribute [rw] event_name
@@ -3111,7 +3114,8 @@ module Aws::AuditManager
     class GetServicesInScopeRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] service_metadata
-    #   The metadata that's associated with the Amazon Web Service.
+    #   The metadata that's associated with the Amazon Web Services
+    #   service.
     #   @return [Array<Types::ServiceMetadata>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetServicesInScopeResponse AWS API Documentation
@@ -4080,17 +4084,17 @@ module Aws::AuditManager
     # The wrapper that contains the Amazon Web Services accounts that are in
     # scope for the assessment.
     #
-    # <note markdown="1"> You no longer need to specify which Amazon Web Services are in scope
-    # when you create or update an assessment. Audit Manager infers the
-    # services in scope by examining your assessment controls and their data
-    # sources, and then mapping this information to the relevant Amazon Web
-    # Services.
+    # <note markdown="1"> You no longer need to specify which Amazon Web Services services are
+    # in scope when you create or update an assessment. Audit Manager infers
+    # the services in scope by examining your assessment controls and their
+    # data sources, and then mapping this information to the relevant Amazon
+    # Web Services services.
     #
     #  If an underlying data source changes for your assessment, we
     # automatically update the services scope as needed to reflect the
-    # correct Amazon Web Services. This ensures that your assessment
-    # collects accurate and comprehensive evidence about all of the relevant
-    # services in your AWS environment.
+    # correct Amazon Web Services services. This ensures that your
+    # assessment collects accurate and comprehensive evidence about all of
+    # the relevant services in your AWS environment.
     #
     #  </note>
     #
@@ -4104,8 +4108,9 @@ module Aws::AuditManager
     #   the assessment.
     #
     #   This API parameter is no longer supported. If you use this parameter
-    #   to specify one or more Amazon Web Services, Audit Manager ignores
-    #   this input. Instead, the value for `awsServices` will show as empty.
+    #   to specify one or more Amazon Web Services services, Audit Manager
+    #   ignores this input. Instead, the value for `awsServices` will show
+    #   as empty.
     #   @return [Array<Types::AWSService>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/Scope AWS API Documentation
@@ -4117,23 +4122,23 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # The metadata that's associated with the Amazon Web Service.
+    # The metadata that's associated with the Amazon Web Services service.
     #
     # @!attribute [rw] name
-    #   The name of the Amazon Web Service.
+    #   The name of the Amazon Web Services service.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The display name of the Amazon Web Service.
+    #   The display name of the Amazon Web Services service.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the Amazon Web Service.
+    #   The description of the Amazon Web Services service.
     #   @return [String]
     #
     # @!attribute [rw] category
-    #   The category that the Amazon Web Service belongs to, such as
-    #   compute, storage, or database.
+    #   The category that the Amazon Web Services service belongs to, such
+    #   as compute, storage, or database.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ServiceMetadata AWS API Documentation
@@ -4354,8 +4359,8 @@ module Aws::AuditManager
     #   4.  For CloudTrail: Make sure that the `keywordValue` is written as
     #       `serviceprefix_ActionName`. For example,
     #       `cloudtrail_StartLogging`. For accuracy, we recommend that you
-    #       review the Amazon Web Service prefix and action names in the
-    #       [Service Authorization Reference][10].
+    #       review the Amazon Web Services service prefix and action names
+    #       in the [Service Authorization Reference][10].
     #
     #
     #

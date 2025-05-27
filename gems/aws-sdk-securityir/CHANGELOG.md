@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2025-05-23)
+------------------
+
+* Feature - Update PrincipalId pattern documentation to reflect what user should receive back from the API call
+
 1.5.0 (2025-05-12)
 ------------------
 

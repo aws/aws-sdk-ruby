@@ -101,6 +101,27 @@ module Aws
                                         ) -> _CreateLoggingConfigurationResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLoggingConfigurationResponseSuccess
 
+      interface _CreateQueryLoggingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateQueryLoggingConfigurationResponse]
+        def status: () -> Types::QueryLoggingConfigurationStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#create_query_logging_configuration-instance_method
+      def create_query_logging_configuration: (
+                                                ?client_token: ::String,
+                                                destinations: Array[
+                                                  {
+                                                    cloud_watch_logs: {
+                                                      log_group_arn: ::String
+                                                    },
+                                                    filters: {
+                                                      qsp_threshold: ::Integer
+                                                    }
+                                                  },
+                                                ],
+                                                workspace_id: ::String
+                                              ) -> _CreateQueryLoggingConfigurationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateQueryLoggingConfigurationResponseSuccess
+
       interface _CreateRuleGroupsNamespaceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateRuleGroupsNamespaceResponse]
         def arn: () -> ::String
@@ -183,6 +204,13 @@ module Aws
                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#delete_query_logging_configuration-instance_method
+      def delete_query_logging_configuration: (
+                                                ?client_token: ::String,
+                                                workspace_id: ::String
+                                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#delete_rule_groups_namespace-instance_method
       def delete_rule_groups_namespace: (
                                           ?client_token: ::String,
@@ -229,6 +257,16 @@ module Aws
                                             workspace_id: ::String
                                           ) -> _DescribeLoggingConfigurationResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLoggingConfigurationResponseSuccess
+
+      interface _DescribeQueryLoggingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeQueryLoggingConfigurationResponse]
+        def query_logging_configuration: () -> Types::QueryLoggingConfigurationMetadata
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#describe_query_logging_configuration-instance_method
+      def describe_query_logging_configuration: (
+                                                  workspace_id: ::String
+                                                ) -> _DescribeQueryLoggingConfigurationResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeQueryLoggingConfigurationResponseSuccess
 
       interface _DescribeRuleGroupsNamespaceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRuleGroupsNamespaceResponse]
@@ -389,6 +427,27 @@ module Aws
                                           workspace_id: ::String
                                         ) -> _UpdateLoggingConfigurationResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLoggingConfigurationResponseSuccess
+
+      interface _UpdateQueryLoggingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateQueryLoggingConfigurationResponse]
+        def status: () -> Types::QueryLoggingConfigurationStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#update_query_logging_configuration-instance_method
+      def update_query_logging_configuration: (
+                                                ?client_token: ::String,
+                                                destinations: Array[
+                                                  {
+                                                    cloud_watch_logs: {
+                                                      log_group_arn: ::String
+                                                    },
+                                                    filters: {
+                                                      qsp_threshold: ::Integer
+                                                    }
+                                                  },
+                                                ],
+                                                workspace_id: ::String
+                                              ) -> _UpdateQueryLoggingConfigurationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateQueryLoggingConfigurationResponseSuccess
 
       interface _UpdateScraperResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateScraperResponse]

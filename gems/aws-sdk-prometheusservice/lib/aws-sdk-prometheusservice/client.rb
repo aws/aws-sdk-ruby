@@ -521,9 +521,13 @@ module Aws::PrometheusService
       req.send_request(options)
     end
 
-    # The `CreateLoggingConfiguration` operation creates a logging
-    # configuration for the workspace. Use this operation to set the
+    # The `CreateLoggingConfiguration` operation creates rules and alerting
+    # logging configuration for the workspace. Use this operation to set the
     # CloudWatch log group to which the logs will be published to.
+    #
+    # <note markdown="1"> These logging configurations are only for rules and alerting logs.
+    #
+    #  </note>
     #
     # @option params [String] :client_token
     #   A unique identifier that you can provide to ensure the idempotency of
@@ -563,6 +567,60 @@ module Aws::PrometheusService
     # @param [Hash] params ({})
     def create_logging_configuration(params = {}, options = {})
       req = build_request(:create_logging_configuration, params)
+      req.send_request(options)
+    end
+
+    # Creates a query logging configuration for the specified workspace.
+    # This operation enables logging of queries that exceed the specified
+    # QSP threshold.
+    #
+    # @option params [String] :client_token
+    #   (Optional) A unique, case-sensitive identifier that you can provide to
+    #   ensure the idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Array<Types::LoggingDestination>] :destinations
+    #   The destinations where query logs will be sent. Only CloudWatch Logs
+    #   destination is supported. The list must contain exactly one element.
+    #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace for which to create the query logging
+    #   configuration.
+    #
+    # @return [Types::CreateQueryLoggingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateQueryLoggingConfigurationResponse#status #status} => Types::QueryLoggingConfigurationStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_query_logging_configuration({
+    #     client_token: "IdempotencyToken",
+    #     destinations: [ # required
+    #       {
+    #         cloud_watch_logs: { # required
+    #           log_group_arn: "LogGroupArn", # required
+    #         },
+    #         filters: { # required
+    #           qsp_threshold: 1, # required
+    #         },
+    #       },
+    #     ],
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status.status_code #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATION_FAILED", "UPDATE_FAILED"
+    #   resp.status.status_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateQueryLoggingConfiguration AWS API Documentation
+    #
+    # @overload create_query_logging_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_query_logging_configuration(params = {}, options = {})
+      req = build_request(:create_query_logging_configuration, params)
       req.send_request(options)
     end
 
@@ -657,6 +715,11 @@ module Aws::PrometheusService
     #
     # The `scrapeConfiguration` parameter contains the base-64 encoded YAML
     # configuration for the scraper.
+    #
+    # When creating a scraper, the service creates a `Network Interface` in
+    # each **Availability Zone** that are passed into `CreateScraper`
+    # through subnets. These network interfaces are used to connect to the
+    # Amazon EKS cluster within the VPC for scraping metrics.
     #
     # <note markdown="1"> For more information about collectors, including what metrics are
     # collected, and how to configure the scraper, see [Using an Amazon Web
@@ -856,7 +919,11 @@ module Aws::PrometheusService
       req.send_request(options)
     end
 
-    # Deletes the logging configuration for a workspace.
+    # Deletes the rules and alerting logging configuration for a workspace.
+    #
+    # <note markdown="1"> These logging configurations are only for rules and alerting logs.
+    #
+    #  </note>
     #
     # @option params [String] :client_token
     #   A unique identifier that you can provide to ensure the idempotency of
@@ -884,6 +951,37 @@ module Aws::PrometheusService
     # @param [Hash] params ({})
     def delete_logging_configuration(params = {}, options = {})
       req = build_request(:delete_logging_configuration, params)
+      req.send_request(options)
+    end
+
+    # Deletes the query logging configuration for the specified workspace.
+    #
+    # @option params [String] :client_token
+    #   (Optional) A unique, case-sensitive identifier that you can provide to
+    #   ensure the idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace from which to delete the query logging
+    #   configuration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_query_logging_configuration({
+    #     client_token: "IdempotencyToken",
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DeleteQueryLoggingConfiguration AWS API Documentation
+    #
+    # @overload delete_query_logging_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_query_logging_configuration(params = {}, options = {})
+      req = build_request(:delete_query_logging_configuration, params)
       req.send_request(options)
     end
 
@@ -1031,8 +1129,12 @@ module Aws::PrometheusService
       req.send_request(options)
     end
 
-    # Returns complete information about the current logging configuration
-    # of the workspace.
+    # Returns complete information about the current rules and alerting
+    # logging configuration of the workspace.
+    #
+    # <note markdown="1"> These logging configurations are only for rules and alerting logs.
+    #
+    #  </note>
     #
     # @option params [required, String] :workspace_id
     #   The ID of the workspace to describe the logging configuration for.
@@ -1062,6 +1164,43 @@ module Aws::PrometheusService
     # @param [Hash] params ({})
     def describe_logging_configuration(params = {}, options = {})
       req = build_request(:describe_logging_configuration, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the details of the query logging configuration for the
+    # specified workspace.
+    #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace for which to retrieve the query logging
+    #   configuration.
+    #
+    # @return [Types::DescribeQueryLoggingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeQueryLoggingConfigurationResponse#query_logging_configuration #query_logging_configuration} => Types::QueryLoggingConfigurationMetadata
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_query_logging_configuration({
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.query_logging_configuration.created_at #=> Time
+    #   resp.query_logging_configuration.destinations #=> Array
+    #   resp.query_logging_configuration.destinations[0].cloud_watch_logs.log_group_arn #=> String
+    #   resp.query_logging_configuration.destinations[0].filters.qsp_threshold #=> Integer
+    #   resp.query_logging_configuration.modified_at #=> Time
+    #   resp.query_logging_configuration.status.status_code #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATION_FAILED", "UPDATE_FAILED"
+    #   resp.query_logging_configuration.status.status_reason #=> String
+    #   resp.query_logging_configuration.workspace #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DescribeQueryLoggingConfiguration AWS API Documentation
+    #
+    # @overload describe_query_logging_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_query_logging_configuration(params = {}, options = {})
+      req = build_request(:describe_query_logging_configuration, params)
       req.send_request(options)
     end
 
@@ -1688,8 +1827,12 @@ module Aws::PrometheusService
       req.send_request(options)
     end
 
-    # Updates the log group ARN or the workspace ID of the current logging
-    # configuration.
+    # Updates the log group ARN or the workspace ID of the current rules and
+    # alerting logging configuration.
+    #
+    # <note markdown="1"> These logging configurations are only for rules and alerting logs.
+    #
+    #  </note>
     #
     # @option params [String] :client_token
     #   A unique identifier that you can provide to ensure the idempotency of
@@ -1728,6 +1871,58 @@ module Aws::PrometheusService
     # @param [Hash] params ({})
     def update_logging_configuration(params = {}, options = {})
       req = build_request(:update_logging_configuration, params)
+      req.send_request(options)
+    end
+
+    # Updates the query logging configuration for the specified workspace.
+    #
+    # @option params [String] :client_token
+    #   (Optional) A unique, case-sensitive identifier that you can provide to
+    #   ensure the idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Array<Types::LoggingDestination>] :destinations
+    #   The destinations where query logs will be sent. Only CloudWatch Logs
+    #   destination is supported. The list must contain exactly one element.
+    #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace for which to update the query logging
+    #   configuration.
+    #
+    # @return [Types::UpdateQueryLoggingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateQueryLoggingConfigurationResponse#status #status} => Types::QueryLoggingConfigurationStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_query_logging_configuration({
+    #     client_token: "IdempotencyToken",
+    #     destinations: [ # required
+    #       {
+    #         cloud_watch_logs: { # required
+    #           log_group_arn: "LogGroupArn", # required
+    #         },
+    #         filters: { # required
+    #           qsp_threshold: 1, # required
+    #         },
+    #       },
+    #     ],
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status.status_code #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATION_FAILED", "UPDATE_FAILED"
+    #   resp.status.status_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/UpdateQueryLoggingConfiguration AWS API Documentation
+    #
+    # @overload update_query_logging_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_query_logging_configuration(params = {}, options = {})
+      req = build_request(:update_query_logging_configuration, params)
       req.send_request(options)
     end
 
@@ -1867,9 +2062,9 @@ module Aws::PrometheusService
     #
     # @option params [Array<Types::LimitsPerLabelSet>] :limits_per_label_set
     #   This is an array of structures, where each structure defines a label
-    #   set for the workspace, and defines the ingestion limit for active time
-    #   series for each of those label sets. Each label name in a label set
-    #   must be unique.
+    #   set for the workspace, and defines the active time series limit for
+    #   each of those label sets. Each label name in a label set must be
+    #   unique.
     #
     # @option params [Integer] :retention_period_in_days
     #   Specifies how many days that metrics will be retained in the
@@ -1937,7 +2132,7 @@ module Aws::PrometheusService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-prometheusservice'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

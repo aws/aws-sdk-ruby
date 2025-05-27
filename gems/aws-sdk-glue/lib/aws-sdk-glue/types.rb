@@ -5880,7 +5880,13 @@ module Aws::Glue
     end
 
     # @!attribute [rw] resource_arn
-    #   The connection ARN of the source, or the database ARN of the target.
+    #   The Amazon Resource Name (ARN) of the target table for which to
+    #   create integration table properties. Currently, this API only
+    #   supports creating integration table properties for target tables,
+    #   and the provided ARN should be the ARN of the target table in the
+    #   Glue Data Catalog. Support for creating integration table properties
+    #   for source connections (using the connection ARN) is not yet
+    #   implemented and will be added in a future release.
     #   @return [String]
     #
     # @!attribute [rw] table_name
@@ -12567,7 +12573,13 @@ module Aws::Glue
     end
 
     # @!attribute [rw] resource_arn
-    #   The connection ARN of the source, or the database ARN of the target.
+    #   The Amazon Resource Name (ARN) of the target table for which to
+    #   retrieve integration table properties. Currently, this API only
+    #   supports retrieving properties for target tables, and the provided
+    #   ARN should be the ARN of the target table in the Glue Data Catalog.
+    #   Support for retrieving integration table properties for source
+    #   connections (using the connection ARN) is not yet implemented and
+    #   will be added in a future release.
     #   @return [String]
     #
     # @!attribute [rw] table_name
@@ -12584,7 +12596,13 @@ module Aws::Glue
     end
 
     # @!attribute [rw] resource_arn
-    #   The connection ARN of the source, or the database ARN of the target.
+    #   The Amazon Resource Name (ARN) of the target table for which to
+    #   retrieve integration table properties. Currently, this API only
+    #   supports retrieving properties for target tables, and the provided
+    #   ARN should be the ARN of the target table in the Glue Data Catalog.
+    #   Support for retrieving integration table properties for source
+    #   connections (using the connection ARN) is not yet implemented and
+    #   will be added in a future release.
     #   @return [String]
     #
     # @!attribute [rw] table_name
@@ -15926,11 +15944,42 @@ module Aws::Glue
     #   target destination.
     #   @return [String]
     #
+    # @!attribute [rw] conversion_spec
+    #   Specifies the timestamp format of the source data. Valid values are:
+    #
+    #   * `epoch_sec` - Unix epoch timestamp in seconds
+    #
+    #   * `epoch_milli` - Unix epoch timestamp in milliseconds
+    #
+    #   * `iso` - ISO 8601 formatted timestamp
+    #
+    #   <note markdown="1"> Only specify `ConversionSpec` when using timestamp-based partition
+    #   functions (year, month, day, or hour). Glue Zero-ETL uses this
+    #   parameter to correctly transform source data into timestamp format
+    #   before partitioning.
+    #
+    #    Do not use high-cardinality columns with the `identity` partition
+    #   function. High-cardinality columns include:
+    #
+    #    * Primary keys
+    #
+    #   * Timestamp fields (such as `LastModifiedTimestamp`, `CreatedDate`)
+    #
+    #   * System-generated timestamps
+    #
+    #    Using high-cardinality columns with identity partitioning creates
+    #   many small partitions, which can significantly degrade ingestion
+    #   performance.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IntegrationPartition AWS API Documentation
     #
     class IntegrationPartition < Struct.new(
       :field_name,
-      :function_spec)
+      :function_spec,
+      :conversion_spec)
       SENSITIVE = []
       include Aws::Structure
     end

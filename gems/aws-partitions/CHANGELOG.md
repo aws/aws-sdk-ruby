@@ -3,6 +3,12 @@ Unreleased Changes
 
 * Feature - AWS SDK for Ruby no longer supports Ruby runtime versions 2.5 and 2.6.
 
+1.1107.0 (2025-05-23)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+
 1.1106.0 (2025-05-20)
 ------------------
 

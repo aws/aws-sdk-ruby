@@ -3960,7 +3960,13 @@ module Aws::Glue
     # `TargetTableConfig` respectively.
     #
     # @option params [required, String] :resource_arn
-    #   The connection ARN of the source, or the database ARN of the target.
+    #   The Amazon Resource Name (ARN) of the target table for which to create
+    #   integration table properties. Currently, this API only supports
+    #   creating integration table properties for target tables, and the
+    #   provided ARN should be the ARN of the target table in the Glue Data
+    #   Catalog. Support for creating integration table properties for source
+    #   connections (using the connection ARN) is not yet implemented and will
+    #   be added in a future release.
     #
     # @option params [required, String] :table_name
     #   The name of the table to be replicated.
@@ -3992,6 +3998,7 @@ module Aws::Glue
     #         {
     #           field_name: "String128",
     #           function_spec: "String128",
+    #           conversion_spec: "String128",
     #         },
     #       ],
     #       target_table_name: "String128",
@@ -9074,7 +9081,13 @@ module Aws::Glue
     # properties for filtering and partition for source and target tables.
     #
     # @option params [required, String] :resource_arn
-    #   The connection ARN of the source, or the database ARN of the target.
+    #   The Amazon Resource Name (ARN) of the target table for which to
+    #   retrieve integration table properties. Currently, this API only
+    #   supports retrieving properties for target tables, and the provided ARN
+    #   should be the ARN of the target table in the Glue Data Catalog.
+    #   Support for retrieving integration table properties for source
+    #   connections (using the connection ARN) is not yet implemented and will
+    #   be added in a future release.
     #
     # @option params [required, String] :table_name
     #   The name of the table to be replicated.
@@ -9107,6 +9120,7 @@ module Aws::Glue
     #   resp.target_table_config.partition_spec #=> Array
     #   resp.target_table_config.partition_spec[0].field_name #=> String
     #   resp.target_table_config.partition_spec[0].function_spec #=> String
+    #   resp.target_table_config.partition_spec[0].conversion_spec #=> String
     #   resp.target_table_config.target_table_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetIntegrationTableProperties AWS API Documentation
@@ -19279,6 +19293,7 @@ module Aws::Glue
     #         {
     #           field_name: "String128",
     #           function_spec: "String128",
+    #           conversion_spec: "String128",
     #         },
     #       ],
     #       target_table_name: "String128",
@@ -20274,7 +20289,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.218.0'
+      context[:gem_version] = '1.219.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

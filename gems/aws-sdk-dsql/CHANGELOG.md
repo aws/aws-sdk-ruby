@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2025-05-22)
+------------------
+
+* Feature - Features: support for customer managed encryption keys
+
 1.9.0 (2025-05-19)
 ------------------
 
