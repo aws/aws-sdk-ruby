@@ -18,7 +18,7 @@ end
 
 # protocol parsers
 gem 'json', '>= 2.4.0' # due to load_file support, see: https://github.com/ruby/json/issues/696
-gem 'nokogiri', '>= 1.6.8.1'
+gem 'nokogiri'
 gem 'oga'
 gem 'rexml'
 # These protocol parsers do not have java gems
