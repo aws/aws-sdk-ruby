@@ -23,7 +23,8 @@ module Aws
              body: body,
              headers: {'x-amz-checksum-crc32' => digest},
              status_code: 200
-           }])
+           }]
+        )
         resp = client.get_object(bucket: bucket, key: key)
         expect(resp.context[:http_checksum][:validated]).to eq 'CRC32'
       end
@@ -35,7 +36,8 @@ module Aws
              body: body,
              headers: {'x-amz-checksum-crc32' => 'invalid_value'},
              status_code: 200
-           }])
+           }]
+        )
         expect do
           client.get_object(bucket: bucket, key: key)
         end.to raise_error(Aws::Errors::ChecksumError)
@@ -48,7 +50,8 @@ module Aws
              body: body_part_1,
              headers: {'x-amz-checksum-crc32' => digest_part_1},
              status_code: 200
-           }])
+           }]
+        )
         resp = client.get_object(bucket: bucket, key: key, range: "bytes=0-6")
         expect(resp.context[:http_checksum][:validated]).to eq 'CRC32'
       end
@@ -60,7 +63,8 @@ module Aws
              body: body_part_1,
              headers: {'x-amz-checksum-crc32' => digest_part_1},
              status_code: 200
-           }])
+           }]
+        )
         resp = client.get_object(bucket: bucket, key: key, part_number: 1)
         expect(resp.context[:http_checksum][:validated]).to eq 'CRC32'
       end
@@ -72,7 +76,8 @@ module Aws
              body: body,
              headers: {'x-amz-checksum-crc32' => digest},
              status_code: 200
-           }])
+           }]
+        )
         resp = client.get_object(bucket: bucket, key: key) do |chunk|
           chunk.upcase!
         end
