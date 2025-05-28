@@ -44,7 +44,7 @@ end
 
 group :development do
   gem 'byebug', platforms: :ruby
-  gem 'rubocop', '1.51.0'
+  gem 'rubocop', '>= 1.75.0'
 end
 
 group :docs do
