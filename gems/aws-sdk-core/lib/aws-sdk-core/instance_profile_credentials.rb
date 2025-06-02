@@ -53,10 +53,10 @@ module Aws
     # @option options [String] :endpoint_mode ('IPv4') The endpoint mode for
     #   the instance metadata service. This is either 'IPv4' ('169.254.169.254')
     #   or 'IPv6' ('[fd00:ec2::254]').
-    # @option options [Boolean] :disable_imds_v1 (false) Disable the use of the
-    #  legacy EC2 Metadata Service v1.
+    # @option options [Boolean] :disable_imds_v1 (false) Deprecated. The legacy
+    #  EC2 Metadata Service v1 has been retired. Only IMDSv2 is supported.
     # @option options [String] :ip_address ('169.254.169.254') Deprecated. Use
-    #   :endpoint instead. The IP address for the endpoint.
+    #   `:endpoint` instead. The IP address for the endpoint.
     # @option options [Integer] :port (80)
     # @option options [Float] :http_open_timeout (1)
     # @option options [Float] :http_read_timeout (1)
@@ -66,22 +66,19 @@ module Aws
     #   a Proc that accepts the number of failures.
     # @option options [IO] :http_debug_output (nil) HTTP wire
     #   traces are sent to this object.  You can specify something
-    #   like $stdout.
+    #   like `$stdout`.
     # @option options [Integer] :token_ttl Time-to-Live in seconds for EC2
     #   Metadata Token used for fetching Metadata Profile Credentials, defaults
     #   to 21600 seconds
     # @option options [Callable] before_refresh Proc called before
     #   credentials are refreshed. `before_refresh` is called
-    #   with an instance of this object when
-    #   AWS credentials are required and need to be refreshed.
+    #   with an instance of this object when AWS credentials are required
+    #   and need to be refreshed.
     def initialize(options = {})
       @retries = options[:retries] || 1
       endpoint_mode = resolve_endpoint_mode(options)
       @endpoint = resolve_endpoint(options, endpoint_mode)
       @port = options[:port] || 80
-      @disable_imds_v1 = resolve_disable_v1(options)
-      # Flag for if v2 flow fails, skip future attempts
-      @imds_v1_fallback = false
       @http_open_timeout = options[:http_open_timeout] || 1
       @http_read_timeout = options[:http_read_timeout] || 1
       @http_debug_output = options[:http_debug_output]
@@ -127,16 +124,6 @@ module Aws
               ':endpoint_mode is not valid, expected IPv4 or IPv6, '\
               "got: #{endpoint_mode}"
       end
-    end
-
-    def resolve_disable_v1(options)
-      value = options[:disable_imds_v1]
-      value ||= ENV['AWS_EC2_METADATA_V1_DISABLED']
-      value ||= Aws.shared_config.ec2_metadata_v1_disabled(
-        profile: options[:profile]
-      )
-      value = value.to_s.downcase if value
-      Aws::Util.str_2_bool(value) || false
     end
 
     def backoff(backoff)
@@ -206,12 +193,11 @@ module Aws
             open_connection do |conn|
               # attempt to fetch token to start secure flow first
               # and rescue to failover
-              fetch_token(conn) unless @imds_v1_fallback
+              fetch_token(conn)
               token = @token.value if token_set?
 
               # disable insecure flow if we couldn't get token
-              # and imds v1 is disabled
-              raise TokenRetrivalError if token.nil? && @disable_imds_v1
+              raise TokenRetrivalError if token.nil?
 
               _get_credentials(conn, token)
             end
@@ -237,10 +223,8 @@ module Aws
       # token attempt failed, reset token
       # fallback to non-token mode
       @token = nil
-      @imds_v1_fallback = true
     end
 
-    # token is optional - if nil, uses v1 (insecure) flow
     def _get_credentials(conn, token)
       metadata = http_get(conn, METADATA_PATH_BASE, token)
       profile_name = metadata.lines.first.strip
@@ -249,7 +233,6 @@ module Aws
       # Token has expired, reset it
       # The next retry should fetch it
       @token = nil
-      @imds_v1_fallback = false
       raise Non200Response
     end
 
