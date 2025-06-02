@@ -109,6 +109,7 @@ module Aws::Synthetics
       attr_accessor memory_in_mb: ::Integer
       attr_accessor active_tracing: bool
       attr_accessor environment_variables: ::Hash[::String, ::String]
+      attr_accessor ephemeral_storage: ::Integer
       SENSITIVE: []
     end
 
@@ -116,6 +117,7 @@ module Aws::Synthetics
       attr_accessor timeout_in_seconds: ::Integer
       attr_accessor memory_in_mb: ::Integer
       attr_accessor active_tracing: bool
+      attr_accessor ephemeral_storage: ::Integer
       SENSITIVE: []
     end
 
@@ -123,6 +125,7 @@ module Aws::Synthetics
       attr_accessor state: ("RUNNING" | "PASSED" | "FAILED")
       attr_accessor state_reason: ::String
       attr_accessor state_reason_code: ("CANARY_FAILURE" | "EXECUTION_FAILURE")
+      attr_accessor test_result: ("PASSED" | "FAILED" | "UNKNOWN")
       SENSITIVE: []
     end
 

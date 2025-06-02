@@ -55,7 +55,7 @@ module Aws::DataExchange
   autoload :EndpointProvider, 'aws-sdk-dataexchange/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-dataexchange/endpoints'
 
-  GEM_VERSION = '1.66.0'
+  GEM_VERSION = '1.67.0'
 
 end
 

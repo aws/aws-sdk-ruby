@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2025-05-29)
+------------------
+
+* Feature - This release adds Tag support for Event Action resource, through which customers can create event actions with Tags and retrieve event actions with Tags.
+
 1.66.0 (2025-05-12)
 ------------------
 

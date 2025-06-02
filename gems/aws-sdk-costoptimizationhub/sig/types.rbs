@@ -215,6 +215,7 @@ module Aws::CostOptimizationHub
     class GetPreferencesResponse
       attr_accessor savings_estimation_mode: ("BeforeDiscounts" | "AfterDiscounts")
       attr_accessor member_account_discount_visibility: ("All" | "None")
+      attr_accessor preferred_commitment: Types::PreferredCommitment
       SENSITIVE: []
     end
 
@@ -373,6 +374,12 @@ module Aws::CostOptimizationHub
     class OrderBy
       attr_accessor dimension: ::String
       attr_accessor order: ("Asc" | "Desc")
+      SENSITIVE: []
+    end
+
+    class PreferredCommitment
+      attr_accessor term: ("OneYear" | "ThreeYears")
+      attr_accessor payment_option: ("AllUpfront" | "PartialUpfront" | "NoUpfront")
       SENSITIVE: []
     end
 
@@ -638,12 +645,14 @@ module Aws::CostOptimizationHub
     class UpdatePreferencesRequest
       attr_accessor savings_estimation_mode: ("BeforeDiscounts" | "AfterDiscounts")
       attr_accessor member_account_discount_visibility: ("All" | "None")
+      attr_accessor preferred_commitment: Types::PreferredCommitment
       SENSITIVE: []
     end
 
     class UpdatePreferencesResponse
       attr_accessor savings_estimation_mode: ("BeforeDiscounts" | "AfterDiscounts")
       attr_accessor member_account_discount_visibility: ("All" | "None")
+      attr_accessor preferred_commitment: Types::PreferredCommitment
       SENSITIVE: []
     end
 

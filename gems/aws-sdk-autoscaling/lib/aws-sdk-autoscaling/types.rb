@@ -900,7 +900,7 @@ module Aws::AutoScaling
     # @!attribute [rw] device_name
     #   The device name assigned to the volume (for example, `/dev/sdh` or
     #   `xvdh`). For more information, see [Device naming on Linux
-    #   instances][1] in the *Amazon EC2 User Guide for Linux Instances*.
+    #   instances][1] in the *Amazon EC2 User Guide*.
     #
     #   <note markdown="1"> To define a block device mapping, set the device name and exactly
     #   one of the following properties: `Ebs`, `NoDevice`, or
@@ -1279,7 +1279,7 @@ module Aws::AutoScaling
     # @!attribute [rw] placement_group
     #   The name of the placement group into which to launch your instances.
     #   For more information, see [Placement groups][1] in the *Amazon EC2
-    #   User Guide for Linux Instances*.
+    #   User Guide*.
     #
     #   <note markdown="1"> A *cluster* placement group is a logical grouping of instances
     #   within a single Availability Zone. You cannot specify multiple
@@ -1528,7 +1528,7 @@ module Aws::AutoScaling
     # @!attribute [rw] image_id
     #   The ID of the Amazon Machine Image (AMI) that was assigned during
     #   registration. For more information, see [Find a Linux AMI][1] in the
-    #   *Amazon EC2 User Guide for Linux Instances*.
+    #   *Amazon EC2 User Guide*.
     #
     #   If you specify `InstanceId`, an `ImageId` is not required.
     #
@@ -1539,8 +1539,7 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] key_name
     #   The name of the key pair. For more information, see [Amazon EC2 key
-    #   pairs and Amazon EC2 instances][1] in the *Amazon EC2 User Guide for
-    #   Linux Instances*.
+    #   pairs and Amazon EC2 instances][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -1601,7 +1600,7 @@ module Aws::AutoScaling
     # @!attribute [rw] instance_type
     #   Specifies the instance type of the EC2 instance. For information
     #   about available instance types, see [Available instance types][1] in
-    #   the *Amazon EC2 User Guide for Linux Instances*.
+    #   the *Amazon EC2 User Guide*.
     #
     #   If you specify `InstanceId`, an `InstanceType` is not required.
     #
@@ -1615,7 +1614,7 @@ module Aws::AutoScaling
     #
     #   <note markdown="1"> We recommend that you use PV-GRUB instead of kernels and RAM disks.
     #   For more information, see [User provided kernels][1] in the *Amazon
-    #   EC2 User Guide for Linux Instances*.
+    #   EC2 User Guide*.
     #
     #    </note>
     #
@@ -1629,7 +1628,7 @@ module Aws::AutoScaling
     #
     #   <note markdown="1"> We recommend that you use PV-GRUB instead of kernels and RAM disks.
     #   For more information, see [User provided kernels][1] in the *Amazon
-    #   EC2 User Guide for Linux Instances*.
+    #   EC2 User Guide*.
     #
     #    </note>
     #
@@ -1643,7 +1642,7 @@ module Aws::AutoScaling
     #   attach to the instances at launch. By default, the block devices
     #   specified in the block device mapping for the AMI are used. For more
     #   information, see [Block device mappings][1] in the *Amazon EC2 User
-    #   Guide for Linux Instances*.
+    #   Guide*.
     #
     #
     #
@@ -1708,8 +1707,7 @@ module Aws::AutoScaling
     #   with all instance types. Additional fees are incurred when you
     #   enable EBS optimization for an instance type that is not
     #   EBS-optimized by default. For more information, see [Amazon
-    #   EBS-optimized instances][1] in the *Amazon EC2 User Guide for Linux
-    #   Instances*.
+    #   EBS-optimized instances][1] in the *Amazon EC2 User Guide*.
     #
     #   The default value is `false`.
     #
@@ -3793,7 +3791,7 @@ module Aws::AutoScaling
     # Scaling User Guide*. For help determining which instance types match
     # your attributes before you apply them to your Auto Scaling group, see
     # [Preview instance types with specified attributes][2] in the *Amazon
-    # EC2 User Guide for Linux Instances*.
+    # EC2 User Guide*.
     #
     #
     #
@@ -3818,6 +3816,8 @@ module Aws::AutoScaling
     #
     #   * For instance types with Amazon Web Services CPUs, specify
     #     `amazon-web-services`.
+    #
+    #   * For instance types with Apple CPUs, specify `apple`.
     #
     #   <note markdown="1"> Don't confuse the CPU hardware manufacturer with the CPU hardware
     #   architecture. Instances will be launched with a compatible CPU
@@ -3863,8 +3863,7 @@ module Aws::AutoScaling
     #     current generation includes EC2 instance types currently
     #     recommended for use. This typically includes the latest two to
     #     three generations in each instance family. For more information,
-    #     see [Instance types][1] in the *Amazon EC2 User Guide for Linux
-    #     Instances*.
+    #     see [Instance types][1] in the *Amazon EC2 User Guide*.
     #
     #   * For previous generation instance types, specify `previous`.
     #
@@ -3975,8 +3974,7 @@ module Aws::AutoScaling
     # @!attribute [rw] burstable_performance
     #   Indicates whether burstable performance instance types are included,
     #   excluded, or required. For more information, see [Burstable
-    #   performance instances][1] in the *Amazon EC2 User Guide for Linux
-    #   Instances*.
+    #   performance instances][1] in the *Amazon EC2 User Guide*.
     #
     #   Default: `excluded`
     #
@@ -4002,8 +4000,7 @@ module Aws::AutoScaling
     # @!attribute [rw] local_storage
     #   Indicates whether instance types with instance store volumes are
     #   included, excluded, or required. For more information, see [Amazon
-    #   EC2 instance store][1] in the *Amazon EC2 User Guide for Linux
-    #   Instances*.
+    #   EC2 instance store][1] in the *Amazon EC2 User Guide*.
     #
     #   Default: `included`
     #
@@ -4034,8 +4031,7 @@ module Aws::AutoScaling
     # @!attribute [rw] baseline_ebs_bandwidth_mbps
     #   The minimum and maximum baseline bandwidth performance for an
     #   instance type, in Mbps. For more information, see [Amazon
-    #   EBS–optimized instances][1] in the *Amazon EC2 User Guide for Linux
-    #   Instances*.
+    #   EBS–optimized instances][1] in the *Amazon EC2 User Guide*.
     #
     #   Default: No minimum or maximum limits
     #
@@ -4383,7 +4379,7 @@ module Aws::AutoScaling
     # @!attribute [rw] image_id
     #   The ID of the Amazon Machine Image (AMI) to use to launch your EC2
     #   instances. For more information, see [Find a Linux AMI][1] in the
-    #   *Amazon EC2 User Guide for Linux Instances*.
+    #   *Amazon EC2 User Guide*.
     #
     #
     #
@@ -4394,7 +4390,7 @@ module Aws::AutoScaling
     #   The name of the key pair.
     #
     #   For more information, see [Amazon EC2 key pairs and Amazon EC2
-    #   instances][1] in the *Amazon EC2 User Guide for Linux Instances*.
+    #   instances][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -4422,22 +4418,21 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] user_data
     #   The user data to make available to the launched EC2 instances. For
-    #   more information, see [Instance metadata and user data][1] (Linux)
-    #   and [Instance metadata and user data][2] (Windows). If you are using
-    #   a command line tool, base64-encoding is performed for you, and you
-    #   can load the text from a file. Otherwise, you must provide
-    #   base64-encoded text. User data is limited to 16 KB.
+    #   more information, see [Instance metadata and user data][1] in the
+    #   *Amazon EC2 User Guide*. If you are using a command line tool,
+    #   base64-encoding is performed for you, and you can load the text from
+    #   a file. Otherwise, you must provide base64-encoded text. User data
+    #   is limited to 16 KB.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html
     #   @return [String]
     #
     # @!attribute [rw] instance_type
     #   The instance type for the instances. For information about available
     #   instance types, see [Available instance types][1] in the *Amazon EC2
-    #   User Guide for Linux Instances*.
+    #   User Guide*.
     #
     #
     #
@@ -4457,7 +4452,7 @@ module Aws::AutoScaling
     #   attach to the instances at launch. By default, the block devices
     #   specified in the block device mapping for the AMI are used. For more
     #   information, see [Block device mappings][1] in the *Amazon EC2 User
-    #   Guide for Linux Instances*.
+    #   Guide*.
     #
     #
     #
@@ -4507,8 +4502,7 @@ module Aws::AutoScaling
     # @!attribute [rw] ebs_optimized
     #   Specifies whether the launch configuration is optimized for EBS I/O
     #   (`true`) or not (`false`). For more information, see [Amazon
-    #   EBS-optimized instances][1] in the *Amazon EC2 User Guide for Linux
-    #   Instances*.
+    #   EBS-optimized instances][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -4680,7 +4674,7 @@ module Aws::AutoScaling
     #   The instance type, such as `m3.xlarge`. You must specify an instance
     #   type that is supported in your requested Region and Availability
     #   Zones. For more information, see [Instance types][1] in the *Amazon
-    #   EC2 User Guide for Linux Instances*.
+    #   EC2 User Guide*.
     #
     #   You can specify up to 40 instance types per Auto Scaling group.
     #
@@ -5449,7 +5443,7 @@ module Aws::AutoScaling
     # types that support the specified minimum bandwidth, but the actual
     # bandwidth of your instance might go below the specified minimum at
     # times. For more information, see [Available instance bandwidth][2] in
-    # the *Amazon EC2 User Guide for Linux Instances*.
+    # the *Amazon EC2 User Guide*.
     #
     #  </note>
     #
@@ -8092,8 +8086,7 @@ module Aws::AutoScaling
     #   The name of an existing placement group into which to launch your
     #   instances. To remove the placement group setting, pass an empty
     #   string for `placement-group`. For more information about placement
-    #   groups, see [Placement groups][1] in the *Amazon EC2 User Guide for
-    #   Linux Instances*.
+    #   groups, see [Placement groups][1] in the *Amazon EC2 User Guide*.
     #
     #   <note markdown="1"> A *cluster* placement group is a logical grouping of instances
     #   within a single Availability Zone. You cannot specify multiple

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2025-05-27)
+------------------
+
+* Feature - AWS Deadline Cloud service-managed fleets now support storage profiles. With storage profiles, you can map file paths between a workstation and the worker hosts running the job.
+
 1.25.0 (2025-05-12)
 ------------------
 

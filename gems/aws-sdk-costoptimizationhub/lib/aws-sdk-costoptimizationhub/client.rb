@@ -486,11 +486,14 @@ module Aws::CostOptimizationHub
     #
     #   * {Types::GetPreferencesResponse#savings_estimation_mode #savings_estimation_mode} => String
     #   * {Types::GetPreferencesResponse#member_account_discount_visibility #member_account_discount_visibility} => String
+    #   * {Types::GetPreferencesResponse#preferred_commitment #preferred_commitment} => Types::PreferredCommitment
     #
     # @example Response structure
     #
     #   resp.savings_estimation_mode #=> String, one of "BeforeDiscounts", "AfterDiscounts"
     #   resp.member_account_discount_visibility #=> String, one of "All", "None"
+    #   resp.preferred_commitment.term #=> String, one of "OneYear", "ThreeYears"
+    #   resp.preferred_commitment.payment_option #=> String, one of "AllUpfront", "PartialUpfront", "NoUpfront"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cost-optimization-hub-2022-07-26/GetPreferences AWS API Documentation
     #
@@ -1371,22 +1374,34 @@ module Aws::CostOptimizationHub
     # @option params [String] :member_account_discount_visibility
     #   Sets the "member account discount visibility" preference.
     #
+    # @option params [Types::PreferredCommitment] :preferred_commitment
+    #   Sets the preferences for how Reserved Instances and Savings Plans
+    #   cost-saving opportunities are prioritized in terms of payment option
+    #   and term length.
+    #
     # @return [Types::UpdatePreferencesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdatePreferencesResponse#savings_estimation_mode #savings_estimation_mode} => String
     #   * {Types::UpdatePreferencesResponse#member_account_discount_visibility #member_account_discount_visibility} => String
+    #   * {Types::UpdatePreferencesResponse#preferred_commitment #preferred_commitment} => Types::PreferredCommitment
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_preferences({
     #     savings_estimation_mode: "BeforeDiscounts", # accepts BeforeDiscounts, AfterDiscounts
     #     member_account_discount_visibility: "All", # accepts All, None
+    #     preferred_commitment: {
+    #       term: "OneYear", # accepts OneYear, ThreeYears
+    #       payment_option: "AllUpfront", # accepts AllUpfront, PartialUpfront, NoUpfront
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.savings_estimation_mode #=> String, one of "BeforeDiscounts", "AfterDiscounts"
     #   resp.member_account_discount_visibility #=> String, one of "All", "None"
+    #   resp.preferred_commitment.term #=> String, one of "OneYear", "ThreeYears"
+    #   resp.preferred_commitment.payment_option #=> String, one of "AllUpfront", "PartialUpfront", "NoUpfront"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cost-optimization-hub-2022-07-26/UpdatePreferences AWS API Documentation
     #
@@ -1415,7 +1430,7 @@ module Aws::CostOptimizationHub
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-costoptimizationhub'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

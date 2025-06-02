@@ -1310,7 +1310,8 @@ module Aws
                                domain_id: ::String?,
                                project_id: ::String?,
                                environment_id: ::String?,
-                               project_s3_path: ::String?
+                               project_s3_path: ::String?,
+                               single_sign_on_application_arn: ::String?
                              }?
                            },
                            subnet_ids: Array[::String],
@@ -1592,7 +1593,11 @@ module Aws
                                         routing_config: {
                                           routing_strategy: ("LEAST_OUTSTANDING_REQUESTS" | "RANDOM")
                                         }?,
-                                        inference_ami_version: ("al2-ami-sagemaker-inference-gpu-2" | "al2-ami-sagemaker-inference-gpu-2-1" | "al2-ami-sagemaker-inference-gpu-3-1" | "al2-ami-sagemaker-inference-neuron-2")?
+                                        inference_ami_version: ("al2-ami-sagemaker-inference-gpu-2" | "al2-ami-sagemaker-inference-gpu-2-1" | "al2-ami-sagemaker-inference-gpu-3-1" | "al2-ami-sagemaker-inference-neuron-2")?,
+                                        capacity_reservation_config: {
+                                          capacity_reservation_preference: ("capacity-reservations-only")?,
+                                          ml_reservation_arn: ::String?
+                                        }?
                                       },
                                     ],
                                     ?data_capture_config: {
@@ -1693,7 +1698,11 @@ module Aws
                                         routing_config: {
                                           routing_strategy: ("LEAST_OUTSTANDING_REQUESTS" | "RANDOM")
                                         }?,
-                                        inference_ami_version: ("al2-ami-sagemaker-inference-gpu-2" | "al2-ami-sagemaker-inference-gpu-2-1" | "al2-ami-sagemaker-inference-gpu-3-1" | "al2-ami-sagemaker-inference-neuron-2")?
+                                        inference_ami_version: ("al2-ami-sagemaker-inference-gpu-2" | "al2-ami-sagemaker-inference-gpu-2-1" | "al2-ami-sagemaker-inference-gpu-3-1" | "al2-ami-sagemaker-inference-neuron-2")?,
+                                        capacity_reservation_config: {
+                                          capacity_reservation_preference: ("capacity-reservations-only")?,
+                                          ml_reservation_arn: ::String?
+                                        }?
                                       },
                                     ],
                                     ?execution_role_arn: ::String,
@@ -5864,6 +5873,7 @@ module Aws
         def mlflow_version: () -> ::String
         def role_arn: () -> ::String
         def tracking_server_status: () -> ("Creating" | "Created" | "CreateFailed" | "Updating" | "Updated" | "UpdateFailed" | "Deleting" | "DeleteFailed" | "Stopping" | "Stopped" | "StopFailed" | "Starting" | "Started" | "StartFailed" | "MaintenanceInProgress" | "MaintenanceComplete" | "MaintenanceFailed")
+        def tracking_server_maintenance_status: () -> ("MaintenanceInProgress" | "MaintenanceComplete" | "MaintenanceFailed")
         def is_active: () -> ("Active" | "Inactive")
         def tracking_server_url: () -> ::String
         def weekly_maintenance_window_start: () -> ::String
@@ -9004,7 +9014,8 @@ module Aws
                                domain_id: ::String?,
                                project_id: ::String?,
                                environment_id: ::String?,
-                               project_s3_path: ::String?
+                               project_s3_path: ::String?,
+                               single_sign_on_application_arn: ::String?
                              }?
                            },
                            ?app_security_group_management: ("Service" | "Customer"),

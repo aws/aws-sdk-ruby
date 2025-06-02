@@ -169,6 +169,7 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#deregister-instance_method
       def deregister: (
+                        ?delete_associated_snapshots: bool,
                         ?dry_run: bool
                       ) -> Types::DeregisterImageResult
                     | (?Hash[Symbol, untyped]) -> Types::DeregisterImageResult

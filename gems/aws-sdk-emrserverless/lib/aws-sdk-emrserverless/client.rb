@@ -1202,6 +1202,11 @@ module Aws::EMRServerless
     # @option params [required, String] :execution_role_arn
     #   The execution role ARN for the job run.
     #
+    # @option params [Types::JobRunExecutionIamPolicy] :execution_iam_policy
+    #   You can pass an optional IAM policy. The resulting job IAM role
+    #   permissions will be an intersection of this policy and the policy
+    #   associated with your job execution role.
+    #
     # @option params [Types::JobDriver] :job_driver
     #   The job driver for the job run.
     #
@@ -1236,6 +1241,10 @@ module Aws::EMRServerless
     #     application_id: "ApplicationId", # required
     #     client_token: "ClientToken", # required
     #     execution_role_arn: "IAMRoleArn", # required
+    #     execution_iam_policy: {
+    #       policy: "PolicyDocument",
+    #       policy_arns: ["Arn"],
+    #     },
     #     job_driver: {
     #       spark_submit: {
     #         entry_point: "EntryPointPath", # required
@@ -1648,7 +1657,7 @@ module Aws::EMRServerless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-emrserverless'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

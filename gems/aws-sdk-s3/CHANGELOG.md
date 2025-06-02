@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+1.188.0 (2025-05-29)
+------------------
+
+* Feature - Adding checksum support for S3 PutBucketOwnershipControls API.
+
+1.187.0 (2025-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+* Issue - Signal data in http response listeners prior to writing, so that data can be inspected or verified before potential mutation.
+
 1.186.1 (2025-05-15)
 ------------------
 * Issue - Abort multipart download if object is modified during download.

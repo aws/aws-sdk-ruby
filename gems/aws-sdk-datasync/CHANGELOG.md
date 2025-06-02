@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.104.0 (2025-05-29)
+------------------
+
+* Feature - AgentArns field is made optional for Object Storage and Azure Blob location create requests. Location credentials are now managed via Secrets Manager, and may be encrypted with service managed or customer managed keys. Authentication is now optional for Azure Blob locations.
+
 1.103.0 (2025-05-20)
 ------------------
 

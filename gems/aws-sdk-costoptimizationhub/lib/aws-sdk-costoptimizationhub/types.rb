@@ -795,11 +795,18 @@ module Aws::CostOptimizationHub
     #   preference.
     #   @return [String]
     #
+    # @!attribute [rw] preferred_commitment
+    #   Retrieves the current preferences for how Reserved Instances and
+    #   Savings Plans cost-saving opportunities are prioritized in terms of
+    #   payment option and term length.
+    #   @return [Types::PreferredCommitment]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cost-optimization-hub-2022-07-26/GetPreferencesResponse AWS API Documentation
     #
     class GetPreferencesResponse < Struct.new(
       :savings_estimation_mode,
-      :member_account_discount_visibility)
+      :member_account_discount_visibility,
+      :preferred_commitment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1184,8 +1191,9 @@ module Aws::CostOptimizationHub
 
     # The MemoryDB reserved instances recommendation details.
     #
-    # <note markdown="1"> MemoryDB reserved instances are referred to as "MemoryDB reserved
-    # nodes" in customer-facing documentation.
+    # <note markdown="1"> While the API reference uses "MemoryDB reserved instances", the user
+    # guide and other documentation refer to them as "MemoryDB reserved
+    # nodes", as the terms are used interchangeably.
     #
     #  </note>
     #
@@ -1210,8 +1218,9 @@ module Aws::CostOptimizationHub
     # The MemoryDB reserved instances configuration used for
     # recommendations.
     #
-    # <note markdown="1"> MemoryDB reserved instances are referred to as "MemoryDB reserved
-    # nodes" in customer-facing documentation.
+    # <note markdown="1"> While the API reference uses "MemoryDB reserved instances", the user
+    # guide and other documentation refer to them as "MemoryDB reserved
+    # nodes", as the terms are used interchangeably.
     #
     #  </note>
     #
@@ -1415,6 +1424,30 @@ module Aws::CostOptimizationHub
     class OrderBy < Struct.new(
       :dimension,
       :order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The preferred configuration for Reserved Instances and Savings Plans
+    # commitment-based discounts, consisting of a payment option and a
+    # commitment duration.
+    #
+    # @!attribute [rw] term
+    #   The preferred length of the commitment period. If the value is null,
+    #   it will default to `ThreeYears` (highest savings) where applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_option
+    #   The preferred upfront payment structure for commitments. If the
+    #   value is null, it will default to `AllUpfront` (highest savings)
+    #   where applicable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cost-optimization-hub-2022-07-26/PreferredCommitment AWS API Documentation
+    #
+    class PreferredCommitment < Struct.new(
+      :term,
+      :payment_option)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2299,11 +2332,18 @@ module Aws::CostOptimizationHub
     #   Sets the "member account discount visibility" preference.
     #   @return [String]
     #
+    # @!attribute [rw] preferred_commitment
+    #   Sets the preferences for how Reserved Instances and Savings Plans
+    #   cost-saving opportunities are prioritized in terms of payment option
+    #   and term length.
+    #   @return [Types::PreferredCommitment]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cost-optimization-hub-2022-07-26/UpdatePreferencesRequest AWS API Documentation
     #
     class UpdatePreferencesRequest < Struct.new(
       :savings_estimation_mode,
-      :member_account_discount_visibility)
+      :member_account_discount_visibility,
+      :preferred_commitment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2317,11 +2357,18 @@ module Aws::CostOptimizationHub
     #   preference.
     #   @return [String]
     #
+    # @!attribute [rw] preferred_commitment
+    #   Shows the updated preferences for how Reserved Instances and Savings
+    #   Plans cost-saving opportunities are prioritized in terms of payment
+    #   option and term length.
+    #   @return [Types::PreferredCommitment]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cost-optimization-hub-2022-07-26/UpdatePreferencesResponse AWS API Documentation
     #
     class UpdatePreferencesResponse < Struct.new(
       :savings_estimation_mode,
-      :member_account_discount_visibility)
+      :member_account_discount_visibility,
+      :preferred_commitment)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -764,6 +764,7 @@ module Aws::NetworkFirewall
     #   resp.firewall.tags[0].value #=> String
     #   resp.firewall.encryption_configuration.key_id #=> String
     #   resp.firewall.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
+    #   resp.firewall.number_of_associations #=> Integer
     #   resp.firewall.enabled_analysis_types #=> Array
     #   resp.firewall.enabled_analysis_types[0] #=> String, one of "TLS_SNI", "HTTP_HOST"
     #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY"
@@ -1404,6 +1405,84 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
+    # Creates a firewall endpoint for an Network Firewall firewall. This
+    # type of firewall endpoint is independent of the firewall endpoints
+    # that you specify in the `Firewall` itself, and you define it in
+    # addition to those endpoints after the firewall has been created. You
+    # can define a VPC endpoint association using a different VPC than the
+    # one you used in the firewall specifications.
+    #
+    # @option params [required, String] :firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #
+    # @option params [required, String] :vpc_id
+    #   The unique identifier of the VPC where you want to create a firewall
+    #   endpoint.
+    #
+    # @option params [required, Types::SubnetMapping] :subnet_mapping
+    #   The ID for a subnet that's used in an association with a firewall.
+    #   This is used in CreateFirewall, AssociateSubnets, and
+    #   CreateVpcEndpointAssociation. Network Firewall creates an instance of
+    #   the associated firewall in each subnet that you specify, to filter
+    #   traffic in the subnet's Availability Zone.
+    #
+    # @option params [String] :description
+    #   A description of the VPC endpoint association.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The key:value pairs to associate with the resource.
+    #
+    # @return [Types::CreateVpcEndpointAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateVpcEndpointAssociationResponse#vpc_endpoint_association #vpc_endpoint_association} => Types::VpcEndpointAssociation
+    #   * {Types::CreateVpcEndpointAssociationResponse#vpc_endpoint_association_status #vpc_endpoint_association_status} => Types::VpcEndpointAssociationStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_vpc_endpoint_association({
+    #     firewall_arn: "ResourceArn", # required
+    #     vpc_id: "VpcId", # required
+    #     subnet_mapping: { # required
+    #       subnet_id: "CollectionMember_String", # required
+    #       ip_address_type: "DUALSTACK", # accepts DUALSTACK, IPV4, IPV6
+    #     },
+    #     description: "Description",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_endpoint_association.vpc_endpoint_association_id #=> String
+    #   resp.vpc_endpoint_association.vpc_endpoint_association_arn #=> String
+    #   resp.vpc_endpoint_association.firewall_arn #=> String
+    #   resp.vpc_endpoint_association.vpc_id #=> String
+    #   resp.vpc_endpoint_association.subnet_mapping.subnet_id #=> String
+    #   resp.vpc_endpoint_association.subnet_mapping.ip_address_type #=> String, one of "DUALSTACK", "IPV4", "IPV6"
+    #   resp.vpc_endpoint_association.description #=> String
+    #   resp.vpc_endpoint_association.tags #=> Array
+    #   resp.vpc_endpoint_association.tags[0].key #=> String
+    #   resp.vpc_endpoint_association.tags[0].value #=> String
+    #   resp.vpc_endpoint_association_status.status #=> String, one of "PROVISIONING", "DELETING", "READY"
+    #   resp.vpc_endpoint_association_status.association_sync_state #=> Hash
+    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.subnet_id #=> String
+    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.endpoint_id #=> String
+    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "FAILED", "ERROR", "SCALING", "READY"
+    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.status_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateVpcEndpointAssociation AWS API Documentation
+    #
+    # @overload create_vpc_endpoint_association(params = {})
+    # @param [Hash] params ({})
+    def create_vpc_endpoint_association(params = {}, options = {})
+      req = build_request(:create_vpc_endpoint_association, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified Firewall and its FirewallStatus. This operation
     # requires the firewall's `DeleteProtection` flag to be `FALSE`. You
     # can't revert this operation.
@@ -1462,6 +1541,7 @@ module Aws::NetworkFirewall
     #   resp.firewall.tags[0].value #=> String
     #   resp.firewall.encryption_configuration.key_id #=> String
     #   resp.firewall.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
+    #   resp.firewall.number_of_associations #=> Integer
     #   resp.firewall.enabled_analysis_types #=> Array
     #   resp.firewall.enabled_analysis_types[0] #=> String, one of "TLS_SNI", "HTTP_HOST"
     #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY"
@@ -1689,6 +1769,59 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
+    # Deletes the specified VpcEndpointAssociation.
+    #
+    # You can check whether an endpoint association is in use by reviewing
+    # the route tables for the Availability Zones where you have the
+    # endpoint subnet mapping. You can retrieve the subnet mapping by
+    # calling DescribeVpcEndpointAssociation. You define and update the
+    # route tables through Amazon VPC. As needed, update the route tables
+    # for the Availability Zone to remove the firewall endpoint for the
+    # association. When the route tables no longer use the firewall
+    # endpoint, you can remove the endpoint association safely.
+    #
+    # @option params [required, String] :vpc_endpoint_association_arn
+    #   The Amazon Resource Name (ARN) of a VPC endpoint association.
+    #
+    # @return [Types::DeleteVpcEndpointAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteVpcEndpointAssociationResponse#vpc_endpoint_association #vpc_endpoint_association} => Types::VpcEndpointAssociation
+    #   * {Types::DeleteVpcEndpointAssociationResponse#vpc_endpoint_association_status #vpc_endpoint_association_status} => Types::VpcEndpointAssociationStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_vpc_endpoint_association({
+    #     vpc_endpoint_association_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_endpoint_association.vpc_endpoint_association_id #=> String
+    #   resp.vpc_endpoint_association.vpc_endpoint_association_arn #=> String
+    #   resp.vpc_endpoint_association.firewall_arn #=> String
+    #   resp.vpc_endpoint_association.vpc_id #=> String
+    #   resp.vpc_endpoint_association.subnet_mapping.subnet_id #=> String
+    #   resp.vpc_endpoint_association.subnet_mapping.ip_address_type #=> String, one of "DUALSTACK", "IPV4", "IPV6"
+    #   resp.vpc_endpoint_association.description #=> String
+    #   resp.vpc_endpoint_association.tags #=> Array
+    #   resp.vpc_endpoint_association.tags[0].key #=> String
+    #   resp.vpc_endpoint_association.tags[0].value #=> String
+    #   resp.vpc_endpoint_association_status.status #=> String, one of "PROVISIONING", "DELETING", "READY"
+    #   resp.vpc_endpoint_association_status.association_sync_state #=> Hash
+    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.subnet_id #=> String
+    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.endpoint_id #=> String
+    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "FAILED", "ERROR", "SCALING", "READY"
+    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.status_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteVpcEndpointAssociation AWS API Documentation
+    #
+    # @overload delete_vpc_endpoint_association(params = {})
+    # @param [Hash] params ({})
+    def delete_vpc_endpoint_association(params = {}, options = {})
+      req = build_request(:delete_vpc_endpoint_association, params)
+      req.send_request(options)
+    end
+
     # Returns the data objects for the specified firewall.
     #
     # @option params [String] :firewall_name
@@ -1735,6 +1868,7 @@ module Aws::NetworkFirewall
     #   resp.firewall.tags[0].value #=> String
     #   resp.firewall.encryption_configuration.key_id #=> String
     #   resp.firewall.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
+    #   resp.firewall.number_of_associations #=> Integer
     #   resp.firewall.enabled_analysis_types #=> Array
     #   resp.firewall.enabled_analysis_types[0] #=> String, one of "TLS_SNI", "HTTP_HOST"
     #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY"
@@ -1758,6 +1892,44 @@ module Aws::NetworkFirewall
     # @param [Hash] params ({})
     def describe_firewall(params = {}, options = {})
       req = build_request(:describe_firewall, params)
+      req.send_request(options)
+    end
+
+    # Returns the high-level information about a firewall, including the
+    # Availability Zones where the Firewall is currently in use.
+    #
+    # @option params [String] :firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #
+    # @return [Types::DescribeFirewallMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFirewallMetadataResponse#firewall_arn #firewall_arn} => String
+    #   * {Types::DescribeFirewallMetadataResponse#firewall_policy_arn #firewall_policy_arn} => String
+    #   * {Types::DescribeFirewallMetadataResponse#description #description} => String
+    #   * {Types::DescribeFirewallMetadataResponse#status #status} => String
+    #   * {Types::DescribeFirewallMetadataResponse#supported_availability_zones #supported_availability_zones} => Hash&lt;String,Types::AvailabilityZoneMetadata&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_firewall_metadata({
+    #     firewall_arn: "ResourceArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.firewall_arn #=> String
+    #   resp.firewall_policy_arn #=> String
+    #   resp.description #=> String
+    #   resp.status #=> String, one of "PROVISIONING", "DELETING", "READY"
+    #   resp.supported_availability_zones #=> Hash
+    #   resp.supported_availability_zones["AvailabilityZone"].ip_address_type #=> String, one of "DUALSTACK", "IPV4", "IPV6"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeFirewallMetadata AWS API Documentation
+    #
+    # @overload describe_firewall_metadata(params = {})
+    # @param [Hash] params ({})
+    def describe_firewall_metadata(params = {}, options = {})
+      req = build_request(:describe_firewall_metadata, params)
       req.send_request(options)
     end
 
@@ -1850,6 +2022,13 @@ module Aws::NetworkFirewall
     #   Defines the scope a flow operation. You can use up to 20 filters to
     #   configure a single flow operation.
     #
+    # @option params [String] :vpc_endpoint_association_arn
+    #   The Amazon Resource Name (ARN) of a VPC endpoint association.
+    #
+    # @option params [String] :vpc_endpoint_id
+    #   A unique identifier for the primary endpoint associated with a
+    #   firewall.
+    #
     # @option params [required, String] :flow_operation_id
     #   A unique identifier for the flow operation. This ID is returned in the
     #   responses to start and list commands. You provide to describe
@@ -1859,6 +2038,8 @@ module Aws::NetworkFirewall
     #
     #   * {Types::DescribeFlowOperationResponse#firewall_arn #firewall_arn} => String
     #   * {Types::DescribeFlowOperationResponse#availability_zone #availability_zone} => String
+    #   * {Types::DescribeFlowOperationResponse#vpc_endpoint_association_arn #vpc_endpoint_association_arn} => String
+    #   * {Types::DescribeFlowOperationResponse#vpc_endpoint_id #vpc_endpoint_id} => String
     #   * {Types::DescribeFlowOperationResponse#flow_operation_id #flow_operation_id} => String
     #   * {Types::DescribeFlowOperationResponse#flow_operation_type #flow_operation_type} => String
     #   * {Types::DescribeFlowOperationResponse#flow_operation_status #flow_operation_status} => String
@@ -1871,6 +2052,8 @@ module Aws::NetworkFirewall
     #   resp = client.describe_flow_operation({
     #     firewall_arn: "ResourceArn", # required
     #     availability_zone: "AvailabilityZone",
+    #     vpc_endpoint_association_arn: "ResourceArn",
+    #     vpc_endpoint_id: "VpcEndpointId",
     #     flow_operation_id: "FlowOperationId", # required
     #   })
     #
@@ -1878,6 +2061,8 @@ module Aws::NetworkFirewall
     #
     #   resp.firewall_arn #=> String
     #   resp.availability_zone #=> String
+    #   resp.vpc_endpoint_association_arn #=> String
+    #   resp.vpc_endpoint_id #=> String
     #   resp.flow_operation_id #=> String
     #   resp.flow_operation_type #=> String, one of "FLOW_FLUSH", "FLOW_CAPTURE"
     #   resp.flow_operation_status #=> String, one of "COMPLETED", "IN_PROGRESS", "FAILED", "COMPLETED_WITH_ERRORS"
@@ -2249,6 +2434,50 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
+    # Returns the data object for the specified VPC endpoint association.
+    #
+    # @option params [required, String] :vpc_endpoint_association_arn
+    #   The Amazon Resource Name (ARN) of a VPC endpoint association.
+    #
+    # @return [Types::DescribeVpcEndpointAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeVpcEndpointAssociationResponse#vpc_endpoint_association #vpc_endpoint_association} => Types::VpcEndpointAssociation
+    #   * {Types::DescribeVpcEndpointAssociationResponse#vpc_endpoint_association_status #vpc_endpoint_association_status} => Types::VpcEndpointAssociationStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_vpc_endpoint_association({
+    #     vpc_endpoint_association_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_endpoint_association.vpc_endpoint_association_id #=> String
+    #   resp.vpc_endpoint_association.vpc_endpoint_association_arn #=> String
+    #   resp.vpc_endpoint_association.firewall_arn #=> String
+    #   resp.vpc_endpoint_association.vpc_id #=> String
+    #   resp.vpc_endpoint_association.subnet_mapping.subnet_id #=> String
+    #   resp.vpc_endpoint_association.subnet_mapping.ip_address_type #=> String, one of "DUALSTACK", "IPV4", "IPV6"
+    #   resp.vpc_endpoint_association.description #=> String
+    #   resp.vpc_endpoint_association.tags #=> Array
+    #   resp.vpc_endpoint_association.tags[0].key #=> String
+    #   resp.vpc_endpoint_association.tags[0].value #=> String
+    #   resp.vpc_endpoint_association_status.status #=> String, one of "PROVISIONING", "DELETING", "READY"
+    #   resp.vpc_endpoint_association_status.association_sync_state #=> Hash
+    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.subnet_id #=> String
+    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.endpoint_id #=> String
+    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "FAILED", "ERROR", "SCALING", "READY"
+    #   resp.vpc_endpoint_association_status.association_sync_state["AvailabilityZone"].attachment.status_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeVpcEndpointAssociation AWS API Documentation
+    #
+    # @overload describe_vpc_endpoint_association(params = {})
+    # @param [Hash] params ({})
+    def describe_vpc_endpoint_association(params = {}, options = {})
+      req = build_request(:describe_vpc_endpoint_association, params)
+      req.send_request(options)
+    end
+
     # Removes the specified subnet associations from the firewall. This
     # removes the firewall endpoints from the subnets and removes any
     # network filtering protections that the endpoints were providing.
@@ -2602,10 +2831,19 @@ module Aws::NetworkFirewall
     #   Defines the scope a flow operation. You can use up to 20 filters to
     #   configure a single flow operation.
     #
+    # @option params [String] :vpc_endpoint_id
+    #   A unique identifier for the primary endpoint associated with a
+    #   firewall.
+    #
+    # @option params [String] :vpc_endpoint_association_arn
+    #   The Amazon Resource Name (ARN) of a VPC endpoint association.
+    #
     # @return [Types::ListFlowOperationResultsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListFlowOperationResultsResponse#firewall_arn #firewall_arn} => String
     #   * {Types::ListFlowOperationResultsResponse#availability_zone #availability_zone} => String
+    #   * {Types::ListFlowOperationResultsResponse#vpc_endpoint_association_arn #vpc_endpoint_association_arn} => String
+    #   * {Types::ListFlowOperationResultsResponse#vpc_endpoint_id #vpc_endpoint_id} => String
     #   * {Types::ListFlowOperationResultsResponse#flow_operation_id #flow_operation_id} => String
     #   * {Types::ListFlowOperationResultsResponse#flow_operation_status #flow_operation_status} => String
     #   * {Types::ListFlowOperationResultsResponse#status_message #status_message} => String
@@ -2623,12 +2861,16 @@ module Aws::NetworkFirewall
     #     next_token: "PaginationToken",
     #     max_results: 1,
     #     availability_zone: "AvailabilityZone",
+    #     vpc_endpoint_id: "VpcEndpointId",
+    #     vpc_endpoint_association_arn: "ResourceArn",
     #   })
     #
     # @example Response structure
     #
     #   resp.firewall_arn #=> String
     #   resp.availability_zone #=> String
+    #   resp.vpc_endpoint_association_arn #=> String
+    #   resp.vpc_endpoint_id #=> String
     #   resp.flow_operation_id #=> String
     #   resp.flow_operation_status #=> String, one of "COMPLETED", "IN_PROGRESS", "FAILED", "COMPLETED_WITH_ERRORS"
     #   resp.status_message #=> String
@@ -2676,6 +2918,13 @@ module Aws::NetworkFirewall
     #   Defines the scope a flow operation. You can use up to 20 filters to
     #   configure a single flow operation.
     #
+    # @option params [String] :vpc_endpoint_association_arn
+    #   The Amazon Resource Name (ARN) of a VPC endpoint association.
+    #
+    # @option params [String] :vpc_endpoint_id
+    #   A unique identifier for the primary endpoint associated with a
+    #   firewall.
+    #
     # @option params [String] :flow_operation_type
     #   An optional string that defines whether any or all operation types are
     #   returned.
@@ -2705,6 +2954,8 @@ module Aws::NetworkFirewall
     #   resp = client.list_flow_operations({
     #     firewall_arn: "ResourceArn", # required
     #     availability_zone: "AvailabilityZone",
+    #     vpc_endpoint_association_arn: "ResourceArn",
+    #     vpc_endpoint_id: "VpcEndpointId",
     #     flow_operation_type: "FLOW_FLUSH", # accepts FLOW_FLUSH, FLOW_CAPTURE
     #     next_token: "PaginationToken",
     #     max_results: 1,
@@ -2897,44 +3148,106 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
-    # Creates or updates an IAM policy for your rule group or firewall
-    # policy. Use this to share rule groups and firewall policies between
-    # accounts. This operation works in conjunction with the Amazon Web
-    # Services Resource Access Manager (RAM) service to manage resource
-    # sharing for Network Firewall.
+    # Retrieves the metadata for the VPC endpoint associations that you have
+    # defined. If you specify a fireawll, this returns only the endpoint
+    # associations for that firewall.
     #
-    # Use this operation to create or update a resource policy for your rule
-    # group or firewall policy. In the policy, you specify the accounts that
-    # you want to share the resource with and the operations that you want
-    # the accounts to be able to perform.
+    # Depending on your setting for max results and the number of
+    # associations, a single call might not return the full list.
+    #
+    # @option params [String] :next_token
+    #   When you request a list of objects with a `MaxResults` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   maximum you requested, Network Firewall returns a `NextToken` value in
+    #   the response. To retrieve the next batch of objects, use the token
+    #   returned from the prior request in your next request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects that you want Network Firewall to return
+    #   for this request. If more objects are available, in the response,
+    #   Network Firewall provides a `NextToken` value that you can use in a
+    #   subsequent call to get the next batch of objects.
+    #
+    # @option params [String] :firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #
+    #   If you don't specify this, Network Firewall retrieves all VPC
+    #   endpoint associations that you have defined.
+    #
+    # @return [Types::ListVpcEndpointAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListVpcEndpointAssociationsResponse#next_token #next_token} => String
+    #   * {Types::ListVpcEndpointAssociationsResponse#vpc_endpoint_associations #vpc_endpoint_associations} => Array&lt;Types::VpcEndpointAssociationMetadata&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_vpc_endpoint_associations({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #     firewall_arn: "ResourceArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.vpc_endpoint_associations #=> Array
+    #   resp.vpc_endpoint_associations[0].vpc_endpoint_association_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListVpcEndpointAssociations AWS API Documentation
+    #
+    # @overload list_vpc_endpoint_associations(params = {})
+    # @param [Hash] params ({})
+    def list_vpc_endpoint_associations(params = {}, options = {})
+      req = build_request(:list_vpc_endpoint_associations, params)
+      req.send_request(options)
+    end
+
+    # Creates or updates an IAM policy for your rule group, firewall policy,
+    # or firewall. Use this to share these resources between accounts. This
+    # operation works in conjunction with the Amazon Web Services Resource
+    # Access Manager (RAM) service to manage resource sharing for Network
+    # Firewall.
+    #
+    # For information about using sharing with Network Firewall resources,
+    # see [Sharing Network Firewall resources][1] in the *Network Firewall
+    # Developer Guide*.
+    #
+    # Use this operation to create or update a resource policy for your
+    # Network Firewall rule group, firewall policy, or firewall. In the
+    # resource policy, you specify the accounts that you want to share the
+    # Network Firewall resource with and the operations that you want the
+    # accounts to be able to perform.
     #
     # When you add an account in the resource policy, you then run the
     # following Resource Access Manager (RAM) operations to access and
-    # accept the shared rule group or firewall policy.
+    # accept the shared resource.
     #
-    # * [GetResourceShareInvitations][1] - Returns the Amazon Resource Names
+    # * [GetResourceShareInvitations][2] - Returns the Amazon Resource Names
     #   (ARNs) of the resource share invitations.
     #
-    # * [AcceptResourceShareInvitation][2] - Accepts the share invitation
+    # * [AcceptResourceShareInvitation][3] - Accepts the share invitation
     #   for a specified resource share.
     #
     # For additional information about resource sharing using RAM, see
-    # [Resource Access Manager User Guide][3].
+    # [Resource Access Manager User Guide][4].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ram/latest/APIReference/API_GetResourceShareInvitations.html
-    # [2]: https://docs.aws.amazon.com/ram/latest/APIReference/API_AcceptResourceShareInvitation.html
-    # [3]: https://docs.aws.amazon.com/ram/latest/userguide/what-is.html
+    # [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/sharing.html
+    # [2]: https://docs.aws.amazon.com/ram/latest/APIReference/API_GetResourceShareInvitations.html
+    # [3]: https://docs.aws.amazon.com/ram/latest/APIReference/API_AcceptResourceShareInvitation.html
+    # [4]: https://docs.aws.amazon.com/ram/latest/userguide/what-is.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the account that you want to share
-    #   rule groups and firewall policies with.
+    #   your Network Firewall resources with.
     #
     # @option params [required, String] :policy
     #   The IAM policy statement that lists the accounts that you want to
-    #   share your rule group or firewall policy with and the operations that
-    #   you want the accounts to be able to perform.
+    #   share your Network Firewall resources with and the operations that you
+    #   want the accounts to be able to perform.
     #
     #   For a rule group resource, you can specify the following operations in
     #   the Actions section of the statement:
@@ -2952,9 +3265,18 @@ module Aws::NetworkFirewall
     #
     #   * network-firewall:ListFirewallPolicies
     #
+    #   For a firewall resource, you can specify the following operations in
+    #   the Actions section of the statement:
+    #
+    #   * network-firewall:CreateVpcEndpointAssociation
+    #
+    #   * network-firewall:DescribeFirewallMetadata
+    #
+    #   * network-firewall:ListFirewalls
+    #
     #   In the Resource section of the statement, you specify the ARNs for the
-    #   rule groups and firewall policies that you want to share with the
-    #   account that you specified in `Arn`.
+    #   Network Firewall resources that you want to share with the account
+    #   that you specified in `Arn`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3047,6 +3369,13 @@ module Aws::NetworkFirewall
     #   Defines the scope a flow operation. You can use up to 20 filters to
     #   configure a single flow operation.
     #
+    # @option params [String] :vpc_endpoint_association_arn
+    #   The Amazon Resource Name (ARN) of a VPC endpoint association.
+    #
+    # @option params [String] :vpc_endpoint_id
+    #   A unique identifier for the primary endpoint associated with a
+    #   firewall.
+    #
     # @option params [Integer] :minimum_flow_age_in_seconds
     #   The reqested `FlowOperation` ignores flows with an age (in seconds)
     #   lower than `MinimumFlowAgeInSeconds`. You provide this for start
@@ -3072,6 +3401,8 @@ module Aws::NetworkFirewall
     #   resp = client.start_flow_capture({
     #     firewall_arn: "ResourceArn", # required
     #     availability_zone: "AvailabilityZone",
+    #     vpc_endpoint_association_arn: "ResourceArn",
+    #     vpc_endpoint_id: "VpcEndpointId",
     #     minimum_flow_age_in_seconds: 1,
     #     flow_filters: [ # required
     #       {
@@ -3123,6 +3454,13 @@ module Aws::NetworkFirewall
     #   Defines the scope a flow operation. You can use up to 20 filters to
     #   configure a single flow operation.
     #
+    # @option params [String] :vpc_endpoint_association_arn
+    #   The Amazon Resource Name (ARN) of a VPC endpoint association.
+    #
+    # @option params [String] :vpc_endpoint_id
+    #   A unique identifier for the primary endpoint associated with a
+    #   firewall.
+    #
     # @option params [Integer] :minimum_flow_age_in_seconds
     #   The reqested `FlowOperation` ignores flows with an age (in seconds)
     #   lower than `MinimumFlowAgeInSeconds`. You provide this for start
@@ -3143,6 +3481,8 @@ module Aws::NetworkFirewall
     #   resp = client.start_flow_flush({
     #     firewall_arn: "ResourceArn", # required
     #     availability_zone: "AvailabilityZone",
+    #     vpc_endpoint_association_arn: "ResourceArn",
+    #     vpc_endpoint_id: "VpcEndpointId",
     #     minimum_flow_age_in_seconds: 1,
     #     flow_filters: [ # required
     #       {
@@ -4359,7 +4699,7 @@ module Aws::NetworkFirewall
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-networkfirewall'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1463,7 +1463,7 @@ module Aws::BCMPricingCalculator
     #   resp = client.create_workload_estimate({
     #     name: "WorkloadEstimateName", # required
     #     client_token: "ClientToken",
-    #     rate_type: "BEFORE_DISCOUNTS", # accepts BEFORE_DISCOUNTS, AFTER_DISCOUNTS
+    #     rate_type: "BEFORE_DISCOUNTS", # accepts BEFORE_DISCOUNTS, AFTER_DISCOUNTS, AFTER_DISCOUNTS_AND_COMMITMENTS
     #     tags: {
     #       "ResourceTagKey" => "ResourceTagValue",
     #     },
@@ -1475,7 +1475,7 @@ module Aws::BCMPricingCalculator
     #   resp.name #=> String
     #   resp.created_at #=> Time
     #   resp.expires_at #=> Time
-    #   resp.rate_type #=> String, one of "BEFORE_DISCOUNTS", "AFTER_DISCOUNTS"
+    #   resp.rate_type #=> String, one of "BEFORE_DISCOUNTS", "AFTER_DISCOUNTS", "AFTER_DISCOUNTS_AND_COMMITMENTS"
     #   resp.rate_timestamp #=> Time
     #   resp.status #=> String, one of "UPDATING", "VALID", "INVALID", "ACTION_NEEDED"
     #   resp.total_cost #=> Float
@@ -1660,11 +1660,11 @@ module Aws::BCMPricingCalculator
     # @example Response structure
     #
     #   resp.management_account_rate_type_selections #=> Array
-    #   resp.management_account_rate_type_selections[0] #=> String, one of "BEFORE_DISCOUNTS", "AFTER_DISCOUNTS"
+    #   resp.management_account_rate_type_selections[0] #=> String, one of "BEFORE_DISCOUNTS", "AFTER_DISCOUNTS", "AFTER_DISCOUNTS_AND_COMMITMENTS"
     #   resp.member_account_rate_type_selections #=> Array
-    #   resp.member_account_rate_type_selections[0] #=> String, one of "BEFORE_DISCOUNTS", "AFTER_DISCOUNTS"
+    #   resp.member_account_rate_type_selections[0] #=> String, one of "BEFORE_DISCOUNTS", "AFTER_DISCOUNTS", "AFTER_DISCOUNTS_AND_COMMITMENTS"
     #   resp.standalone_account_rate_type_selections #=> Array
-    #   resp.standalone_account_rate_type_selections[0] #=> String, one of "BEFORE_DISCOUNTS", "AFTER_DISCOUNTS"
+    #   resp.standalone_account_rate_type_selections[0] #=> String, one of "BEFORE_DISCOUNTS", "AFTER_DISCOUNTS", "AFTER_DISCOUNTS_AND_COMMITMENTS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/GetPreferences AWS API Documentation
     #
@@ -1705,7 +1705,7 @@ module Aws::BCMPricingCalculator
     #   resp.name #=> String
     #   resp.created_at #=> Time
     #   resp.expires_at #=> Time
-    #   resp.rate_type #=> String, one of "BEFORE_DISCOUNTS", "AFTER_DISCOUNTS"
+    #   resp.rate_type #=> String, one of "BEFORE_DISCOUNTS", "AFTER_DISCOUNTS", "AFTER_DISCOUNTS_AND_COMMITMENTS"
     #   resp.rate_timestamp #=> Time
     #   resp.status #=> String, one of "UPDATING", "VALID", "INVALID", "ACTION_NEEDED"
     #   resp.total_cost #=> Float
@@ -2429,7 +2429,7 @@ module Aws::BCMPricingCalculator
     #   resp.items[0].name #=> String
     #   resp.items[0].created_at #=> Time
     #   resp.items[0].expires_at #=> Time
-    #   resp.items[0].rate_type #=> String, one of "BEFORE_DISCOUNTS", "AFTER_DISCOUNTS"
+    #   resp.items[0].rate_type #=> String, one of "BEFORE_DISCOUNTS", "AFTER_DISCOUNTS", "AFTER_DISCOUNTS_AND_COMMITMENTS"
     #   resp.items[0].rate_timestamp #=> Time
     #   resp.items[0].status #=> String, one of "UPDATING", "VALID", "INVALID", "ACTION_NEEDED"
     #   resp.items[0].total_cost #=> Float
@@ -2628,19 +2628,19 @@ module Aws::BCMPricingCalculator
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_preferences({
-    #     management_account_rate_type_selections: ["BEFORE_DISCOUNTS"], # accepts BEFORE_DISCOUNTS, AFTER_DISCOUNTS
-    #     member_account_rate_type_selections: ["BEFORE_DISCOUNTS"], # accepts BEFORE_DISCOUNTS, AFTER_DISCOUNTS
-    #     standalone_account_rate_type_selections: ["BEFORE_DISCOUNTS"], # accepts BEFORE_DISCOUNTS, AFTER_DISCOUNTS
+    #     management_account_rate_type_selections: ["BEFORE_DISCOUNTS"], # accepts BEFORE_DISCOUNTS, AFTER_DISCOUNTS, AFTER_DISCOUNTS_AND_COMMITMENTS
+    #     member_account_rate_type_selections: ["BEFORE_DISCOUNTS"], # accepts BEFORE_DISCOUNTS, AFTER_DISCOUNTS, AFTER_DISCOUNTS_AND_COMMITMENTS
+    #     standalone_account_rate_type_selections: ["BEFORE_DISCOUNTS"], # accepts BEFORE_DISCOUNTS, AFTER_DISCOUNTS, AFTER_DISCOUNTS_AND_COMMITMENTS
     #   })
     #
     # @example Response structure
     #
     #   resp.management_account_rate_type_selections #=> Array
-    #   resp.management_account_rate_type_selections[0] #=> String, one of "BEFORE_DISCOUNTS", "AFTER_DISCOUNTS"
+    #   resp.management_account_rate_type_selections[0] #=> String, one of "BEFORE_DISCOUNTS", "AFTER_DISCOUNTS", "AFTER_DISCOUNTS_AND_COMMITMENTS"
     #   resp.member_account_rate_type_selections #=> Array
-    #   resp.member_account_rate_type_selections[0] #=> String, one of "BEFORE_DISCOUNTS", "AFTER_DISCOUNTS"
+    #   resp.member_account_rate_type_selections[0] #=> String, one of "BEFORE_DISCOUNTS", "AFTER_DISCOUNTS", "AFTER_DISCOUNTS_AND_COMMITMENTS"
     #   resp.standalone_account_rate_type_selections #=> Array
-    #   resp.standalone_account_rate_type_selections[0] #=> String, one of "BEFORE_DISCOUNTS", "AFTER_DISCOUNTS"
+    #   resp.standalone_account_rate_type_selections[0] #=> String, one of "BEFORE_DISCOUNTS", "AFTER_DISCOUNTS", "AFTER_DISCOUNTS_AND_COMMITMENTS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/UpdatePreferences AWS API Documentation
     #
@@ -2689,7 +2689,7 @@ module Aws::BCMPricingCalculator
     #   resp.name #=> String
     #   resp.created_at #=> Time
     #   resp.expires_at #=> Time
-    #   resp.rate_type #=> String, one of "BEFORE_DISCOUNTS", "AFTER_DISCOUNTS"
+    #   resp.rate_type #=> String, one of "BEFORE_DISCOUNTS", "AFTER_DISCOUNTS", "AFTER_DISCOUNTS_AND_COMMITMENTS"
     #   resp.rate_timestamp #=> Time
     #   resp.status #=> String, one of "UPDATING", "VALID", "INVALID", "ACTION_NEEDED"
     #   resp.total_cost #=> Float
@@ -2723,7 +2723,7 @@ module Aws::BCMPricingCalculator
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bcmpricingcalculator'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

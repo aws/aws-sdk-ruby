@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.105.0 (2025-05-29)
+------------------
+
+* Feature - CloudTrail Feature Release: Support for Enriched Events with Configurable Context for Event Data Store
+
 1.104.0 (2025-05-12)
 ------------------
 

@@ -3153,6 +3153,7 @@ module Aws::SageMaker
     #         project_id: "UnifiedStudioProjectId",
     #         environment_id: "UnifiedStudioEnvironmentId",
     #         project_s3_path: "S3Uri",
+    #         single_sign_on_application_arn: "SingleSignOnApplicationArn",
     #       },
     #     },
     #     subnet_ids: ["SubnetId"], # required
@@ -3846,6 +3847,10 @@ module Aws::SageMaker
     #           routing_strategy: "LEAST_OUTSTANDING_REQUESTS", # required, accepts LEAST_OUTSTANDING_REQUESTS, RANDOM
     #         },
     #         inference_ami_version: "al2-ami-sagemaker-inference-gpu-2", # accepts al2-ami-sagemaker-inference-gpu-2, al2-ami-sagemaker-inference-gpu-2-1, al2-ami-sagemaker-inference-gpu-3-1, al2-ami-sagemaker-inference-neuron-2
+    #         capacity_reservation_config: {
+    #           capacity_reservation_preference: "capacity-reservations-only", # accepts capacity-reservations-only
+    #           ml_reservation_arn: "MlReservationArn",
+    #         },
     #       },
     #     ],
     #     data_capture_config: {
@@ -3947,6 +3952,10 @@ module Aws::SageMaker
     #           routing_strategy: "LEAST_OUTSTANDING_REQUESTS", # required, accepts LEAST_OUTSTANDING_REQUESTS, RANDOM
     #         },
     #         inference_ami_version: "al2-ami-sagemaker-inference-gpu-2", # accepts al2-ami-sagemaker-inference-gpu-2, al2-ami-sagemaker-inference-gpu-2-1, al2-ami-sagemaker-inference-gpu-3-1, al2-ami-sagemaker-inference-neuron-2
+    #         capacity_reservation_config: {
+    #           capacity_reservation_preference: "capacity-reservations-only", # accepts capacity-reservations-only
+    #           ml_reservation_arn: "MlReservationArn",
+    #         },
     #       },
     #     ],
     #     execution_role_arn: "RoleArn",
@@ -13731,6 +13740,7 @@ module Aws::SageMaker
     #   resp.domain_settings.unified_studio_settings.project_id #=> String
     #   resp.domain_settings.unified_studio_settings.environment_id #=> String
     #   resp.domain_settings.unified_studio_settings.project_s3_path #=> String
+    #   resp.domain_settings.unified_studio_settings.single_sign_on_application_arn #=> String
     #   resp.app_network_access_type #=> String, one of "PublicInternetOnly", "VpcOnly"
     #   resp.home_efs_file_system_kms_key_id #=> String
     #   resp.subnet_ids #=> Array
@@ -13995,6 +14005,16 @@ module Aws::SageMaker
     #   resp.production_variants[0].managed_instance_scaling.min_instance_count #=> Integer
     #   resp.production_variants[0].managed_instance_scaling.max_instance_count #=> Integer
     #   resp.production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM"
+    #   resp.production_variants[0].capacity_reservation_config.ml_reservation_arn #=> String
+    #   resp.production_variants[0].capacity_reservation_config.capacity_reservation_preference #=> String, one of "capacity-reservations-only"
+    #   resp.production_variants[0].capacity_reservation_config.total_instance_count #=> Integer
+    #   resp.production_variants[0].capacity_reservation_config.available_instance_count #=> Integer
+    #   resp.production_variants[0].capacity_reservation_config.used_by_current_endpoint #=> Integer
+    #   resp.production_variants[0].capacity_reservation_config.ec2_capacity_reservations #=> Array
+    #   resp.production_variants[0].capacity_reservation_config.ec2_capacity_reservations[0].ec2_capacity_reservation_id #=> String
+    #   resp.production_variants[0].capacity_reservation_config.ec2_capacity_reservations[0].total_instance_count #=> Integer
+    #   resp.production_variants[0].capacity_reservation_config.ec2_capacity_reservations[0].available_instance_count #=> Integer
+    #   resp.production_variants[0].capacity_reservation_config.ec2_capacity_reservations[0].used_by_current_endpoint #=> Integer
     #   resp.data_capture_config.enable_capture #=> Boolean
     #   resp.data_capture_config.capture_status #=> String, one of "Started", "Stopped"
     #   resp.data_capture_config.current_sampling_percentage #=> Integer
@@ -14129,6 +14149,16 @@ module Aws::SageMaker
     #   resp.shadow_production_variants[0].managed_instance_scaling.min_instance_count #=> Integer
     #   resp.shadow_production_variants[0].managed_instance_scaling.max_instance_count #=> Integer
     #   resp.shadow_production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM"
+    #   resp.shadow_production_variants[0].capacity_reservation_config.ml_reservation_arn #=> String
+    #   resp.shadow_production_variants[0].capacity_reservation_config.capacity_reservation_preference #=> String, one of "capacity-reservations-only"
+    #   resp.shadow_production_variants[0].capacity_reservation_config.total_instance_count #=> Integer
+    #   resp.shadow_production_variants[0].capacity_reservation_config.available_instance_count #=> Integer
+    #   resp.shadow_production_variants[0].capacity_reservation_config.used_by_current_endpoint #=> Integer
+    #   resp.shadow_production_variants[0].capacity_reservation_config.ec2_capacity_reservations #=> Array
+    #   resp.shadow_production_variants[0].capacity_reservation_config.ec2_capacity_reservations[0].ec2_capacity_reservation_id #=> String
+    #   resp.shadow_production_variants[0].capacity_reservation_config.ec2_capacity_reservations[0].total_instance_count #=> Integer
+    #   resp.shadow_production_variants[0].capacity_reservation_config.ec2_capacity_reservations[0].available_instance_count #=> Integer
+    #   resp.shadow_production_variants[0].capacity_reservation_config.ec2_capacity_reservations[0].used_by_current_endpoint #=> Integer
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -14197,6 +14227,8 @@ module Aws::SageMaker
     #   resp.production_variants[0].managed_instance_scaling.max_instance_count #=> Integer
     #   resp.production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM"
     #   resp.production_variants[0].inference_ami_version #=> String, one of "al2-ami-sagemaker-inference-gpu-2", "al2-ami-sagemaker-inference-gpu-2-1", "al2-ami-sagemaker-inference-gpu-3-1", "al2-ami-sagemaker-inference-neuron-2"
+    #   resp.production_variants[0].capacity_reservation_config.capacity_reservation_preference #=> String, one of "capacity-reservations-only"
+    #   resp.production_variants[0].capacity_reservation_config.ml_reservation_arn #=> String
     #   resp.data_capture_config.enable_capture #=> Boolean
     #   resp.data_capture_config.initial_sampling_percentage #=> Integer
     #   resp.data_capture_config.destination_s3_uri #=> String
@@ -14261,6 +14293,8 @@ module Aws::SageMaker
     #   resp.shadow_production_variants[0].managed_instance_scaling.max_instance_count #=> Integer
     #   resp.shadow_production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM"
     #   resp.shadow_production_variants[0].inference_ami_version #=> String, one of "al2-ami-sagemaker-inference-gpu-2", "al2-ami-sagemaker-inference-gpu-2-1", "al2-ami-sagemaker-inference-gpu-3-1", "al2-ami-sagemaker-inference-neuron-2"
+    #   resp.shadow_production_variants[0].capacity_reservation_config.capacity_reservation_preference #=> String, one of "capacity-reservations-only"
+    #   resp.shadow_production_variants[0].capacity_reservation_config.ml_reservation_arn #=> String
     #   resp.execution_role_arn #=> String
     #   resp.vpc_config.security_group_ids #=> Array
     #   resp.vpc_config.security_group_ids[0] #=> String
@@ -15564,6 +15598,7 @@ module Aws::SageMaker
     #   * {Types::DescribeMlflowTrackingServerResponse#mlflow_version #mlflow_version} => String
     #   * {Types::DescribeMlflowTrackingServerResponse#role_arn #role_arn} => String
     #   * {Types::DescribeMlflowTrackingServerResponse#tracking_server_status #tracking_server_status} => String
+    #   * {Types::DescribeMlflowTrackingServerResponse#tracking_server_maintenance_status #tracking_server_maintenance_status} => String
     #   * {Types::DescribeMlflowTrackingServerResponse#is_active #is_active} => String
     #   * {Types::DescribeMlflowTrackingServerResponse#tracking_server_url #tracking_server_url} => String
     #   * {Types::DescribeMlflowTrackingServerResponse#weekly_maintenance_window_start #weekly_maintenance_window_start} => String
@@ -15588,6 +15623,7 @@ module Aws::SageMaker
     #   resp.mlflow_version #=> String
     #   resp.role_arn #=> String
     #   resp.tracking_server_status #=> String, one of "Creating", "Created", "CreateFailed", "Updating", "Updated", "UpdateFailed", "Deleting", "DeleteFailed", "Stopping", "Stopped", "StopFailed", "Starting", "Started", "StartFailed", "MaintenanceInProgress", "MaintenanceComplete", "MaintenanceFailed"
+    #   resp.tracking_server_maintenance_status #=> String, one of "MaintenanceInProgress", "MaintenanceComplete", "MaintenanceFailed"
     #   resp.is_active #=> String, one of "Active", "Inactive"
     #   resp.tracking_server_url #=> String
     #   resp.weekly_maintenance_window_start #=> String
@@ -27111,6 +27147,7 @@ module Aws::SageMaker
     #         project_id: "UnifiedStudioProjectId",
     #         environment_id: "UnifiedStudioEnvironmentId",
     #         project_s3_path: "S3Uri",
+    #         single_sign_on_application_arn: "SingleSignOnApplicationArn",
     #       },
     #     },
     #     app_security_group_management: "Service", # accepts Service, Customer
@@ -29938,7 +29975,7 @@ module Aws::SageMaker
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.305.0'
+      context[:gem_version] = '1.307.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

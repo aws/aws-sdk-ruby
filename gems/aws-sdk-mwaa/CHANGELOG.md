@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2025-05-29)
+------------------
+
+* Feature - Amazon MWAA now lets you choose a worker replacement strategy when updating an environment. This release adds two worker replacement strategies: FORCED (default), which stops workers immediately, and GRACEFUL, which allows workers to finish current tasks before shutting down.
+
 1.57.0 (2025-05-12)
 ------------------
 

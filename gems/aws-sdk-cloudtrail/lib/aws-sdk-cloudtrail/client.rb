@@ -1788,6 +1788,45 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # Retrieves the current event configuration settings for the specified
+    # event data store, including details about maximum event size and
+    # context key selectors configured for the event data store.
+    #
+    # @option params [String] :event_data_store
+    #   The Amazon Resource Name (ARN) or ID suffix of the ARN of the event
+    #   data store for which you want to retrieve event configuration
+    #   settings.
+    #
+    # @return [Types::GetEventConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEventConfigurationResponse#event_data_store_arn #event_data_store_arn} => String
+    #   * {Types::GetEventConfigurationResponse#max_event_size #max_event_size} => String
+    #   * {Types::GetEventConfigurationResponse#context_key_selectors #context_key_selectors} => Array&lt;Types::ContextKeySelector&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_event_configuration({
+    #     event_data_store: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_data_store_arn #=> String
+    #   resp.max_event_size #=> String, one of "Standard", "Large"
+    #   resp.context_key_selectors #=> Array
+    #   resp.context_key_selectors[0].type #=> String, one of "TagContext", "RequestContext"
+    #   resp.context_key_selectors[0].equals #=> Array
+    #   resp.context_key_selectors[0].equals[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetEventConfiguration AWS API Documentation
+    #
+    # @overload get_event_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_event_configuration(params = {}, options = {})
+      req = build_request(:get_event_configuration, params)
+      req.send_request(options)
+    end
+
     # Returns information about an event data store specified as either an
     # ARN or the ID portion of the ARN.
     #
@@ -3033,6 +3072,60 @@ module Aws::CloudTrail
     # @param [Hash] params ({})
     def lookup_events(params = {}, options = {})
       req = build_request(:lookup_events, params)
+      req.send_request(options)
+    end
+
+    # Updates the event configuration settings for the specified event data
+    # store. You can update the maximum event size and context key
+    # selectors.
+    #
+    # @option params [String] :event_data_store
+    #   The Amazon Resource Name (ARN) or ID suffix of the ARN of the event
+    #   data store for which you want to update event configuration settings.
+    #
+    # @option params [required, String] :max_event_size
+    #   The maximum allowed size for events to be stored in the specified
+    #   event data store. If you are using context key selectors, MaxEventSize
+    #   must be set to Large.
+    #
+    # @option params [required, Array<Types::ContextKeySelector>] :context_key_selectors
+    #   A list of context key selectors that will be included to provide
+    #   enriched event data.
+    #
+    # @return [Types::PutEventConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutEventConfigurationResponse#event_data_store_arn #event_data_store_arn} => String
+    #   * {Types::PutEventConfigurationResponse#max_event_size #max_event_size} => String
+    #   * {Types::PutEventConfigurationResponse#context_key_selectors #context_key_selectors} => Array&lt;Types::ContextKeySelector&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_event_configuration({
+    #     event_data_store: "String",
+    #     max_event_size: "Standard", # required, accepts Standard, Large
+    #     context_key_selectors: [ # required
+    #       {
+    #         type: "TagContext", # required, accepts TagContext, RequestContext
+    #         equals: ["OperatorTargetListMember"], # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_data_store_arn #=> String
+    #   resp.max_event_size #=> String, one of "Standard", "Large"
+    #   resp.context_key_selectors #=> Array
+    #   resp.context_key_selectors[0].type #=> String, one of "TagContext", "RequestContext"
+    #   resp.context_key_selectors[0].equals #=> Array
+    #   resp.context_key_selectors[0].equals[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutEventConfiguration AWS API Documentation
+    #
+    # @overload put_event_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_event_configuration(params = {}, options = {})
+      req = build_request(:put_event_configuration, params)
       req.send_request(options)
     end
 
@@ -4585,7 +4678,7 @@ module Aws::CloudTrail
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.104.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

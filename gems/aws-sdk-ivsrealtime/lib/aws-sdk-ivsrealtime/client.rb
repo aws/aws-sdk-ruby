@@ -745,6 +745,7 @@ module Aws::IVSRealTime
     #       hls_configuration: {
     #         target_segment_duration_seconds: 1,
     #       },
+    #       record_participant_replicas: false,
     #     },
     #   })
     #
@@ -764,6 +765,7 @@ module Aws::IVSRealTime
     #   resp.stage.auto_participant_recording_configuration.thumbnail_configuration.recording_mode #=> String, one of "INTERVAL", "DISABLED"
     #   resp.stage.auto_participant_recording_configuration.recording_reconnect_window_seconds #=> Integer
     #   resp.stage.auto_participant_recording_configuration.hls_configuration.target_segment_duration_seconds #=> Integer
+    #   resp.stage.auto_participant_recording_configuration.record_participant_replicas #=> Boolean
     #   resp.stage.endpoints.events #=> String
     #   resp.stage.endpoints.whip #=> String
     #   resp.stage.endpoints.rtmp #=> String
@@ -1196,6 +1198,10 @@ module Aws::IVSRealTime
     #   resp.participant.recording_s3_prefix #=> String
     #   resp.participant.recording_state #=> String, one of "STARTING", "ACTIVE", "STOPPING", "STOPPED", "FAILED", "DISABLED"
     #   resp.participant.protocol #=> String, one of "UNKNOWN", "WHIP", "RTMP", "RTMPS"
+    #   resp.participant.replication_type #=> String, one of "SOURCE", "REPLICA", "NONE"
+    #   resp.participant.replication_state #=> String, one of "ACTIVE", "STOPPED"
+    #   resp.participant.source_stage_arn #=> String
+    #   resp.participant.source_session_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GetParticipant AWS API Documentation
     #
@@ -1270,6 +1276,7 @@ module Aws::IVSRealTime
     #   resp.stage.auto_participant_recording_configuration.thumbnail_configuration.recording_mode #=> String, one of "INTERVAL", "DISABLED"
     #   resp.stage.auto_participant_recording_configuration.recording_reconnect_window_seconds #=> Integer
     #   resp.stage.auto_participant_recording_configuration.hls_configuration.target_segment_duration_seconds #=> Integer
+    #   resp.stage.auto_participant_recording_configuration.record_participant_replicas #=> Boolean
     #   resp.stage.endpoints.events #=> String
     #   resp.stage.endpoints.whip #=> String
     #   resp.stage.endpoints.rtmp #=> String
@@ -1598,11 +1605,14 @@ module Aws::IVSRealTime
     # @example Response structure
     #
     #   resp.events #=> Array
-    #   resp.events[0].name #=> String, one of "JOINED", "LEFT", "PUBLISH_STARTED", "PUBLISH_STOPPED", "SUBSCRIBE_STARTED", "SUBSCRIBE_STOPPED", "PUBLISH_ERROR", "SUBSCRIBE_ERROR", "JOIN_ERROR"
+    #   resp.events[0].name #=> String, one of "JOINED", "LEFT", "PUBLISH_STARTED", "PUBLISH_STOPPED", "SUBSCRIBE_STARTED", "SUBSCRIBE_STOPPED", "PUBLISH_ERROR", "SUBSCRIBE_ERROR", "JOIN_ERROR", "REPLICATION_STARTED", "REPLICATION_STOPPED"
     #   resp.events[0].participant_id #=> String
     #   resp.events[0].event_time #=> Time
     #   resp.events[0].remote_participant_id #=> String
     #   resp.events[0].error_code #=> String, one of "INSUFFICIENT_CAPABILITIES", "QUOTA_EXCEEDED", "PUBLISHER_NOT_FOUND", "BITRATE_EXCEEDED", "RESOLUTION_EXCEEDED", "STREAM_DURATION_EXCEEDED", "INVALID_AUDIO_CODEC", "INVALID_VIDEO_CODEC", "INVALID_PROTOCOL", "INVALID_STREAM_KEY", "REUSE_OF_STREAM_KEY", "B_FRAME_PRESENT", "INVALID_INPUT", "INTERNAL_SERVER_EXCEPTION"
+    #   resp.events[0].destination_stage_arn #=> String
+    #   resp.events[0].destination_session_id #=> String
+    #   resp.events[0].replica #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListParticipantEvents AWS API Documentation
@@ -1611,6 +1621,63 @@ module Aws::IVSRealTime
     # @param [Hash] params ({})
     def list_participant_events(params = {}, options = {})
       req = build_request(:list_participant_events, params)
+      req.send_request(options)
+    end
+
+    # Lists all the replicas for a participant from a source stage.
+    #
+    # @option params [required, String] :source_stage_arn
+    #   ARN of the stage where the participant is publishing.
+    #
+    # @option params [required, String] :participant_id
+    #   Participant ID of the publisher that has been replicated. This is
+    #   assigned by IVS and returned by CreateParticipantToken or the `jti`
+    #   (JWT ID) used to [create a self signed token][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started-distribute-tokens.html#getting-started-distribute-tokens-self-signed
+    #
+    # @option params [String] :next_token
+    #   The first participant to retrieve. This is used for pagination; see
+    #   the `nextToken` response field.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return. Default: 50.
+    #
+    # @return [Types::ListParticipantReplicasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListParticipantReplicasResponse#replicas #replicas} => Array&lt;Types::ParticipantReplica&gt;
+    #   * {Types::ListParticipantReplicasResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_participant_replicas({
+    #     source_stage_arn: "StageArn", # required
+    #     participant_id: "ParticipantId", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replicas #=> Array
+    #   resp.replicas[0].source_stage_arn #=> String
+    #   resp.replicas[0].participant_id #=> String
+    #   resp.replicas[0].source_session_id #=> String
+    #   resp.replicas[0].destination_stage_arn #=> String
+    #   resp.replicas[0].destination_session_id #=> String
+    #   resp.replicas[0].replication_state #=> String, one of "ACTIVE", "STOPPED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListParticipantReplicas AWS API Documentation
+    #
+    # @overload list_participant_replicas(params = {})
+    # @param [Hash] params ({})
+    def list_participant_replicas(params = {}, options = {})
+      req = build_request(:list_participant_replicas, params)
       req.send_request(options)
     end
 
@@ -1683,6 +1750,10 @@ module Aws::IVSRealTime
     #   resp.participants[0].first_join_time #=> Time
     #   resp.participants[0].published #=> Boolean
     #   resp.participants[0].recording_state #=> String, one of "STARTING", "ACTIVE", "STOPPING", "STOPPED", "FAILED", "DISABLED"
+    #   resp.participants[0].replication_type #=> String, one of "SOURCE", "REPLICA", "NONE"
+    #   resp.participants[0].replication_state #=> String, one of "ACTIVE", "STOPPED"
+    #   resp.participants[0].source_stage_arn #=> String
+    #   resp.participants[0].source_session_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListParticipants AWS API Documentation
@@ -2056,6 +2127,81 @@ module Aws::IVSRealTime
       req.send_request(options)
     end
 
+    # Starts replicating a publishing participant from a source stage to a
+    # destination stage.
+    #
+    # @option params [required, String] :source_stage_arn
+    #   ARN of the stage where the participant is publishing.
+    #
+    # @option params [required, String] :destination_stage_arn
+    #   ARN of the stage to which the participant will be replicated.
+    #
+    # @option params [required, String] :participant_id
+    #   Participant ID of the publisher that will be replicated. This is
+    #   assigned by IVS and returned by CreateParticipantToken or the `jti`
+    #   (JWT ID) used to [create a self signed token][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started-distribute-tokens.html#getting-started-distribute-tokens-self-signed
+    #
+    # @option params [Integer] :reconnect_window_seconds
+    #   If the participant disconnects and then reconnects within the
+    #   specified interval, replication will continue to be `ACTIVE`. Default:
+    #   0.
+    #
+    # @option params [Hash<String,String>] :attributes
+    #   Application-provided attributes to set on the replicated participant
+    #   in the destination stage. Map keys and values can contain UTF-8
+    #   encoded text. The maximum length of this field is 1 KB total. *This
+    #   field is exposed to all stage participants and should not be used for
+    #   personally identifying, confidential, or sensitive information.*
+    #
+    #   These attributes are merged with any attributes set for this
+    #   participant when creating the token. If there is overlap in keys, the
+    #   values in these attributes are replaced.
+    #
+    # @return [Types::StartParticipantReplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartParticipantReplicationResponse#access_control_allow_origin #access_control_allow_origin} => String
+    #   * {Types::StartParticipantReplicationResponse#access_control_expose_headers #access_control_expose_headers} => String
+    #   * {Types::StartParticipantReplicationResponse#cache_control #cache_control} => String
+    #   * {Types::StartParticipantReplicationResponse#content_security_policy #content_security_policy} => String
+    #   * {Types::StartParticipantReplicationResponse#strict_transport_security #strict_transport_security} => String
+    #   * {Types::StartParticipantReplicationResponse#x_content_type_options #x_content_type_options} => String
+    #   * {Types::StartParticipantReplicationResponse#x_frame_options #x_frame_options} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_participant_replication({
+    #     source_stage_arn: "StageArn", # required
+    #     destination_stage_arn: "StageArn", # required
+    #     participant_id: "ParticipantId", # required
+    #     reconnect_window_seconds: 1,
+    #     attributes: {
+    #       "String" => "String",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.access_control_allow_origin #=> String
+    #   resp.access_control_expose_headers #=> String
+    #   resp.cache_control #=> String
+    #   resp.content_security_policy #=> String
+    #   resp.strict_transport_security #=> String
+    #   resp.x_content_type_options #=> String
+    #   resp.x_frame_options #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/StartParticipantReplication AWS API Documentation
+    #
+    # @overload start_participant_replication(params = {})
+    # @param [Hash] params ({})
+    def start_participant_replication(params = {}, options = {})
+      req = build_request(:start_participant_replication, params)
+      req.send_request(options)
+    end
+
     # Stops and deletes a Composition resource. Any broadcast from the
     # Composition resource is stopped.
     #
@@ -2076,6 +2222,60 @@ module Aws::IVSRealTime
     # @param [Hash] params ({})
     def stop_composition(params = {}, options = {})
       req = build_request(:stop_composition, params)
+      req.send_request(options)
+    end
+
+    # Stops a replicated participant session.
+    #
+    # @option params [required, String] :source_stage_arn
+    #   ARN of the stage where the participant is publishing.
+    #
+    # @option params [required, String] :destination_stage_arn
+    #   ARN of the stage where the participant has been replicated.
+    #
+    # @option params [required, String] :participant_id
+    #   Participant ID of the publisher that has been replicated. This is
+    #   assigned by IVS and returned by CreateParticipantToken or the `jti`
+    #   (JWT ID) used to [ create a self signed token][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started-distribute-tokens.html#getting-started-distribute-tokens-self-signed
+    #
+    # @return [Types::StopParticipantReplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopParticipantReplicationResponse#access_control_allow_origin #access_control_allow_origin} => String
+    #   * {Types::StopParticipantReplicationResponse#access_control_expose_headers #access_control_expose_headers} => String
+    #   * {Types::StopParticipantReplicationResponse#cache_control #cache_control} => String
+    #   * {Types::StopParticipantReplicationResponse#content_security_policy #content_security_policy} => String
+    #   * {Types::StopParticipantReplicationResponse#strict_transport_security #strict_transport_security} => String
+    #   * {Types::StopParticipantReplicationResponse#x_content_type_options #x_content_type_options} => String
+    #   * {Types::StopParticipantReplicationResponse#x_frame_options #x_frame_options} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_participant_replication({
+    #     source_stage_arn: "StageArn", # required
+    #     destination_stage_arn: "StageArn", # required
+    #     participant_id: "ParticipantId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.access_control_allow_origin #=> String
+    #   resp.access_control_expose_headers #=> String
+    #   resp.cache_control #=> String
+    #   resp.content_security_policy #=> String
+    #   resp.strict_transport_security #=> String
+    #   resp.x_content_type_options #=> String
+    #   resp.x_frame_options #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/StopParticipantReplication AWS API Documentation
+    #
+    # @overload stop_participant_replication(params = {})
+    # @param [Hash] params ({})
+    def stop_participant_replication(params = {}, options = {})
+      req = build_request(:stop_participant_replication, params)
       req.send_request(options)
     end
 
@@ -2230,6 +2430,7 @@ module Aws::IVSRealTime
     #       hls_configuration: {
     #         target_segment_duration_seconds: 1,
     #       },
+    #       record_participant_replicas: false,
     #     },
     #   })
     #
@@ -2249,6 +2450,7 @@ module Aws::IVSRealTime
     #   resp.stage.auto_participant_recording_configuration.thumbnail_configuration.recording_mode #=> String, one of "INTERVAL", "DISABLED"
     #   resp.stage.auto_participant_recording_configuration.recording_reconnect_window_seconds #=> Integer
     #   resp.stage.auto_participant_recording_configuration.hls_configuration.target_segment_duration_seconds #=> Integer
+    #   resp.stage.auto_participant_recording_configuration.record_participant_replicas #=> Boolean
     #   resp.stage.endpoints.events #=> String
     #   resp.stage.endpoints.whip #=> String
     #   resp.stage.endpoints.rtmp #=> String
@@ -2281,7 +2483,7 @@ module Aws::IVSRealTime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ivsrealtime'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

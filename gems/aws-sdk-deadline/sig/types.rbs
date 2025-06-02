@@ -2202,6 +2202,7 @@ module Aws::Deadline
     class ServiceManagedEc2FleetConfiguration
       attr_accessor instance_capabilities: Types::ServiceManagedEc2InstanceCapabilities
       attr_accessor instance_market_options: Types::ServiceManagedEc2InstanceMarketOptions
+      attr_accessor storage_profile_id: ::String
       SENSITIVE: []
     end
 

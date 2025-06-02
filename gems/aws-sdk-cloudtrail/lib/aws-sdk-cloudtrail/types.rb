@@ -371,6 +371,28 @@ module Aws::CloudTrail
     #
     class ConflictException < Aws::EmptyStructure; end
 
+    # An object that contains information types to be included in CloudTrail
+    # enriched events.
+    #
+    # @!attribute [rw] type
+    #   Specifies the type of the event record field in ContextKeySelector.
+    #   Valid values include RequestContext, TagContext.
+    #   @return [String]
+    #
+    # @!attribute [rw] equals
+    #   A list of keys defined by Type to be included in CloudTrail enriched
+    #   events.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ContextKeySelector AWS API Documentation
+    #
+    class ContextKeySelector < Struct.new(
+      :type,
+      :equals)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the channel.
     #   @return [String]
@@ -2035,6 +2057,45 @@ module Aws::CloudTrail
     end
 
     # @!attribute [rw] event_data_store
+    #   The Amazon Resource Name (ARN) or ID suffix of the ARN of the event
+    #   data store for which you want to retrieve event configuration
+    #   settings.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetEventConfigurationRequest AWS API Documentation
+    #
+    class GetEventConfigurationRequest < Struct.new(
+      :event_data_store)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_data_store_arn
+    #   The Amazon Resource Name (ARN) or ID suffix of the ARN of the event
+    #   data store for which the event configuration settings are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_event_size
+    #   The maximum allowed size for events stored in the specified event
+    #   data store.
+    #   @return [String]
+    #
+    # @!attribute [rw] context_key_selectors
+    #   The list of context key selectors that are configured for the event
+    #   data store.
+    #   @return [Array<Types::ContextKeySelector>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetEventConfigurationResponse AWS API Documentation
+    #
+    class GetEventConfigurationResponse < Struct.new(
+      :event_data_store_arn,
+      :max_event_size,
+      :context_key_selectors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_data_store
     #   The ARN (or ID suffix of the ARN) of the event data store about
     #   which you want information.
     #   @return [String]
@@ -2893,6 +2954,15 @@ module Aws::CloudTrail
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InsufficientEncryptionPolicyException AWS API Documentation
     #
     class InsufficientEncryptionPolicyException < Aws::EmptyStructure; end
+
+    # The task can't be completed because you are signed in with an account
+    # that lacks permissions to view or create a service-linked role. Sign
+    # in with an account that has the required permissions and then try
+    # again.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InsufficientIAMAccessPermissionException AWS API Documentation
+    #
+    class InsufficientIAMAccessPermissionException < Aws::EmptyStructure; end
 
     # This exception is thrown when the policy on the S3 bucket is not
     # sufficient.
@@ -3933,6 +4003,58 @@ module Aws::CloudTrail
       :validity_start_time,
       :validity_end_time,
       :fingerprint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_data_store
+    #   The Amazon Resource Name (ARN) or ID suffix of the ARN of the event
+    #   data store for which you want to update event configuration
+    #   settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_event_size
+    #   The maximum allowed size for events to be stored in the specified
+    #   event data store. If you are using context key selectors,
+    #   MaxEventSize must be set to Large.
+    #   @return [String]
+    #
+    # @!attribute [rw] context_key_selectors
+    #   A list of context key selectors that will be included to provide
+    #   enriched event data.
+    #   @return [Array<Types::ContextKeySelector>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutEventConfigurationRequest AWS API Documentation
+    #
+    class PutEventConfigurationRequest < Struct.new(
+      :event_data_store,
+      :max_event_size,
+      :context_key_selectors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_data_store_arn
+    #   The Amazon Resource Name (ARN) or ID suffix of the ARN of the event
+    #   data store for which the event configuration settings were updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_event_size
+    #   The maximum allowed size for events stored in the specified event
+    #   data store.
+    #   @return [String]
+    #
+    # @!attribute [rw] context_key_selectors
+    #   The list of context key selectors that are configured for the event
+    #   data store.
+    #   @return [Array<Types::ContextKeySelector>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutEventConfigurationResponse AWS API Documentation
+    #
+    class PutEventConfigurationResponse < Struct.new(
+      :event_data_store_arn,
+      :max_event_size,
+      :context_key_selectors)
       SENSITIVE = []
       include Aws::Structure
     end

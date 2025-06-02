@@ -4341,6 +4341,7 @@ module Aws
                                        ]?
                                      },
                                    ],
+                                   ?pre_shared_key_storage: ::String,
                                    ?dry_run: bool,
                                    ?options: {
                                      enable_acceleration: bool?,
@@ -5351,10 +5352,13 @@ module Aws
 
       interface _DeregisterImageResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterImageResult]
+        def return: () -> bool
+        def delete_snapshot_results: () -> ::Array[Types::DeleteSnapshotReturnCode]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#deregister_image-instance_method
       def deregister_image: (
                               image_id: ::String,
+                              ?delete_associated_snapshots: bool,
                               ?dry_run: bool
                             ) -> _DeregisterImageResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterImageResponseSuccess
@@ -9416,6 +9420,18 @@ module Aws
                                                                 ) -> _ExportVerifiedAccessInstanceClientConfigurationResponseSuccess
                                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportVerifiedAccessInstanceClientConfigurationResponseSuccess
 
+      interface _GetActiveVpnTunnelStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetActiveVpnTunnelStatusResult]
+        def active_vpn_tunnel_status: () -> Types::ActiveVpnTunnelStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#get_active_vpn_tunnel_status-instance_method
+      def get_active_vpn_tunnel_status: (
+                                          vpn_connection_id: ::String,
+                                          vpn_tunnel_outside_ip_address: ::String,
+                                          ?dry_run: bool
+                                        ) -> _GetActiveVpnTunnelStatusResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetActiveVpnTunnelStatusResponseSuccess
+
       interface _GetAllowedImagesSettingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAllowedImagesSettingsResult]
         def state: () -> ::String
@@ -10406,6 +10422,7 @@ module Aws
                                                             vpn_connection_id: ::String,
                                                             vpn_connection_device_type_id: ::String,
                                                             ?internet_key_exchange_version: ::String,
+                                                            ?sample_type: ::String,
                                                             ?dry_run: bool
                                                           ) -> _GetVpnConnectionDeviceSampleConfigurationResponseSuccess
                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVpnConnectionDeviceSampleConfigurationResponseSuccess
@@ -12311,7 +12328,8 @@ module Aws
                                          enable_tunnel_lifecycle_control: bool?
                                        },
                                        ?dry_run: bool,
-                                       ?skip_tunnel_replacement: bool
+                                       ?skip_tunnel_replacement: bool,
+                                       ?pre_shared_key_storage: ::String
                                      ) -> _ModifyVpnTunnelOptionsResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyVpnTunnelOptionsResponseSuccess
 

@@ -94,6 +94,14 @@ module Aws::CostExplorer
       SENSITIVE: []
     end
 
+    class ComparisonMetricValue
+      attr_accessor baseline_time_period_amount: ::String
+      attr_accessor comparison_time_period_amount: ::String
+      attr_accessor difference: ::String
+      attr_accessor unit: ::String
+      SENSITIVE: []
+    end
+
     class CostAllocationTag
       attr_accessor tag_key: ::String
       attr_accessor type: ("AWSGenerated" | "UserDefined")
@@ -115,6 +123,12 @@ module Aws::CostExplorer
     class CostAllocationTagStatusEntry
       attr_accessor tag_key: ::String
       attr_accessor status: ("Active" | "Inactive")
+      SENSITIVE: []
+    end
+
+    class CostAndUsageComparison
+      attr_accessor cost_and_usage_selector: Types::Expression
+      attr_accessor metrics: ::Hash[::String, Types::ComparisonMetricValue]
       SENSITIVE: []
     end
 
@@ -181,6 +195,20 @@ module Aws::CostExplorer
       attr_accessor key: ::String
       attr_accessor values: ::Array[::String]
       attr_accessor match_options: ::Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]
+      SENSITIVE: []
+    end
+
+    class CostComparisonDriver
+      attr_accessor cost_selector: Types::Expression
+      attr_accessor metrics: ::Hash[::String, Types::ComparisonMetricValue]
+      attr_accessor cost_drivers: ::Array[Types::CostDriver]
+      SENSITIVE: []
+    end
+
+    class CostDriver
+      attr_accessor type: ::String
+      attr_accessor name: ::String
+      attr_accessor metrics: ::Hash[::String, Types::ComparisonMetricValue]
       SENSITIVE: []
     end
 
@@ -522,6 +550,25 @@ module Aws::CostExplorer
       SENSITIVE: []
     end
 
+    class GetCostAndUsageComparisonsRequest
+      attr_accessor billing_view_arn: ::String
+      attr_accessor baseline_time_period: Types::DateInterval
+      attr_accessor comparison_time_period: Types::DateInterval
+      attr_accessor metric_for_comparison: ::String
+      attr_accessor filter: Types::Expression
+      attr_accessor group_by: ::Array[Types::GroupDefinition]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCostAndUsageComparisonsResponse
+      attr_accessor cost_and_usage_comparisons: ::Array[Types::CostAndUsageComparison]
+      attr_accessor total_cost_and_usage: ::Hash[::String, Types::ComparisonMetricValue]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
     class GetCostAndUsageRequest
       attr_accessor time_period: Types::DateInterval
       attr_accessor granularity: ("DAILY" | "MONTHLY" | "HOURLY")
@@ -578,6 +625,24 @@ module Aws::CostExplorer
       attr_accessor cost_category_values: ::Array[::String]
       attr_accessor return_size: ::Integer
       attr_accessor total_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetCostComparisonDriversRequest
+      attr_accessor billing_view_arn: ::String
+      attr_accessor baseline_time_period: Types::DateInterval
+      attr_accessor comparison_time_period: Types::DateInterval
+      attr_accessor metric_for_comparison: ::String
+      attr_accessor filter: Types::Expression
+      attr_accessor group_by: ::Array[Types::GroupDefinition]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCostComparisonDriversResponse
+      attr_accessor cost_comparison_drivers: ::Array[Types::CostComparisonDriver]
+      attr_accessor next_page_token: ::String
       SENSITIVE: []
     end
 

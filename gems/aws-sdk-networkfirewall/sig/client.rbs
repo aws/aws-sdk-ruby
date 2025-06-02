@@ -415,6 +415,29 @@ module Aws
                                                ) -> _CreateTLSInspectionConfigurationResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTLSInspectionConfigurationResponseSuccess
 
+      interface _CreateVpcEndpointAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVpcEndpointAssociationResponse]
+        def vpc_endpoint_association: () -> Types::VpcEndpointAssociation
+        def vpc_endpoint_association_status: () -> Types::VpcEndpointAssociationStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#create_vpc_endpoint_association-instance_method
+      def create_vpc_endpoint_association: (
+                                             firewall_arn: ::String,
+                                             vpc_id: ::String,
+                                             subnet_mapping: {
+                                               subnet_id: ::String,
+                                               ip_address_type: ("DUALSTACK" | "IPV4" | "IPV6")?
+                                             },
+                                             ?description: ::String,
+                                             ?tags: Array[
+                                               {
+                                                 key: ::String,
+                                                 value: ::String
+                                               },
+                                             ]
+                                           ) -> _CreateVpcEndpointAssociationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVpcEndpointAssociationResponseSuccess
+
       interface _DeleteFirewallResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFirewallResponse]
         def firewall: () -> Types::Firewall
@@ -470,6 +493,17 @@ module Aws
                                                ) -> _DeleteTLSInspectionConfigurationResponseSuccess
                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTLSInspectionConfigurationResponseSuccess
 
+      interface _DeleteVpcEndpointAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVpcEndpointAssociationResponse]
+        def vpc_endpoint_association: () -> Types::VpcEndpointAssociation
+        def vpc_endpoint_association_status: () -> Types::VpcEndpointAssociationStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#delete_vpc_endpoint_association-instance_method
+      def delete_vpc_endpoint_association: (
+                                             vpc_endpoint_association_arn: ::String
+                                           ) -> _DeleteVpcEndpointAssociationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVpcEndpointAssociationResponseSuccess
+
       interface _DescribeFirewallResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFirewallResponse]
         def update_token: () -> ::String
@@ -482,6 +516,20 @@ module Aws
                                ?firewall_arn: ::String
                              ) -> _DescribeFirewallResponseSuccess
                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFirewallResponseSuccess
+
+      interface _DescribeFirewallMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFirewallMetadataResponse]
+        def firewall_arn: () -> ::String
+        def firewall_policy_arn: () -> ::String
+        def description: () -> ::String
+        def status: () -> ("PROVISIONING" | "DELETING" | "READY")
+        def supported_availability_zones: () -> ::Hash[::String, Types::AvailabilityZoneMetadata]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#describe_firewall_metadata-instance_method
+      def describe_firewall_metadata: (
+                                        ?firewall_arn: ::String
+                                      ) -> _DescribeFirewallMetadataResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFirewallMetadataResponseSuccess
 
       interface _DescribeFirewallPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFirewallPolicyResponse]
@@ -500,6 +548,8 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFlowOperationResponse]
         def firewall_arn: () -> ::String
         def availability_zone: () -> ::String
+        def vpc_endpoint_association_arn: () -> ::String
+        def vpc_endpoint_id: () -> ::String
         def flow_operation_id: () -> ::String
         def flow_operation_type: () -> ("FLOW_FLUSH" | "FLOW_CAPTURE")
         def flow_operation_status: () -> ("COMPLETED" | "IN_PROGRESS" | "FAILED" | "COMPLETED_WITH_ERRORS")
@@ -511,6 +561,8 @@ module Aws
       def describe_flow_operation: (
                                      firewall_arn: ::String,
                                      ?availability_zone: ::String,
+                                     ?vpc_endpoint_association_arn: ::String,
+                                     ?vpc_endpoint_id: ::String,
                                      flow_operation_id: ::String
                                    ) -> _DescribeFlowOperationResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFlowOperationResponseSuccess
@@ -582,6 +634,17 @@ module Aws
                                                    ?tls_inspection_configuration_name: ::String
                                                  ) -> _DescribeTLSInspectionConfigurationResponseSuccess
                                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTLSInspectionConfigurationResponseSuccess
+
+      interface _DescribeVpcEndpointAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeVpcEndpointAssociationResponse]
+        def vpc_endpoint_association: () -> Types::VpcEndpointAssociation
+        def vpc_endpoint_association_status: () -> Types::VpcEndpointAssociationStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#describe_vpc_endpoint_association-instance_method
+      def describe_vpc_endpoint_association: (
+                                               vpc_endpoint_association_arn: ::String
+                                             ) -> _DescribeVpcEndpointAssociationResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeVpcEndpointAssociationResponseSuccess
 
       interface _DisassociateSubnetsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateSubnetsResponse]
@@ -662,6 +725,8 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::ListFlowOperationResultsResponse]
         def firewall_arn: () -> ::String
         def availability_zone: () -> ::String
+        def vpc_endpoint_association_arn: () -> ::String
+        def vpc_endpoint_id: () -> ::String
         def flow_operation_id: () -> ::String
         def flow_operation_status: () -> ("COMPLETED" | "IN_PROGRESS" | "FAILED" | "COMPLETED_WITH_ERRORS")
         def status_message: () -> ::String
@@ -675,7 +740,9 @@ module Aws
                                          flow_operation_id: ::String,
                                          ?next_token: ::String,
                                          ?max_results: ::Integer,
-                                         ?availability_zone: ::String
+                                         ?availability_zone: ::String,
+                                         ?vpc_endpoint_id: ::String,
+                                         ?vpc_endpoint_association_arn: ::String
                                        ) -> _ListFlowOperationResultsResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFlowOperationResultsResponseSuccess
 
@@ -688,6 +755,8 @@ module Aws
       def list_flow_operations: (
                                   firewall_arn: ::String,
                                   ?availability_zone: ::String,
+                                  ?vpc_endpoint_association_arn: ::String,
+                                  ?vpc_endpoint_id: ::String,
                                   ?flow_operation_type: ("FLOW_FLUSH" | "FLOW_CAPTURE"),
                                   ?next_token: ::String,
                                   ?max_results: ::Integer
@@ -734,6 +803,19 @@ module Aws
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
 
+      interface _ListVpcEndpointAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVpcEndpointAssociationsResponse]
+        def next_token: () -> ::String
+        def vpc_endpoint_associations: () -> ::Array[Types::VpcEndpointAssociationMetadata]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#list_vpc_endpoint_associations-instance_method
+      def list_vpc_endpoint_associations: (
+                                            ?next_token: ::String,
+                                            ?max_results: ::Integer,
+                                            ?firewall_arn: ::String
+                                          ) -> _ListVpcEndpointAssociationsResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVpcEndpointAssociationsResponseSuccess
+
       interface _PutResourcePolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutResourcePolicyResponse]
       end
@@ -766,6 +848,8 @@ module Aws
       def start_flow_capture: (
                                 firewall_arn: ::String,
                                 ?availability_zone: ::String,
+                                ?vpc_endpoint_association_arn: ::String,
+                                ?vpc_endpoint_id: ::String,
                                 ?minimum_flow_age_in_seconds: ::Integer,
                                 flow_filters: Array[
                                   {
@@ -793,6 +877,8 @@ module Aws
       def start_flow_flush: (
                               firewall_arn: ::String,
                               ?availability_zone: ::String,
+                              ?vpc_endpoint_association_arn: ::String,
+                              ?vpc_endpoint_id: ::String,
                               ?minimum_flow_age_in_seconds: ::Integer,
                               flow_filters: Array[
                                 {

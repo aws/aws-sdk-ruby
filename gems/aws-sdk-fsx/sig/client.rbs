@@ -330,6 +330,11 @@ module Aws
                                   metadata_configuration: {
                                     iops: ::Integer?,
                                     mode: ("AUTOMATIC" | "USER_PROVISIONED")
+                                  }?,
+                                  throughput_capacity: ::Integer?,
+                                  data_read_cache_configuration: {
+                                    sizing_mode: ("NO_CACHE" | "USER_PROVISIONED" | "PROPORTIONAL_TO_THROUGHPUT_CAPACITY")?,
+                                    size_gi_b: ::Integer?
                                   }?
                                 },
                                 ?ontap_configuration: {
@@ -465,6 +470,11 @@ module Aws
                                               metadata_configuration: {
                                                 iops: ::Integer?,
                                                 mode: ("AUTOMATIC" | "USER_PROVISIONED")
+                                              }?,
+                                              throughput_capacity: ::Integer?,
+                                              data_read_cache_configuration: {
+                                                sizing_mode: ("NO_CACHE" | "USER_PROVISIONED" | "PROPORTIONAL_TO_THROUGHPUT_CAPACITY")?,
+                                                size_gi_b: ::Integer?
                                               }?
                                             },
                                             ?storage_type: ("SSD" | "HDD" | "INTELLIGENT_TIERING"),
@@ -1186,6 +1196,11 @@ module Aws
                                   metadata_configuration: {
                                     iops: ::Integer?,
                                     mode: ("AUTOMATIC" | "USER_PROVISIONED")?
+                                  }?,
+                                  throughput_capacity: ::Integer?,
+                                  data_read_cache_configuration: {
+                                    sizing_mode: ("NO_CACHE" | "USER_PROVISIONED" | "PROPORTIONAL_TO_THROUGHPUT_CAPACITY")?,
+                                    size_gi_b: ::Integer?
                                   }?
                                 },
                                 ?ontap_configuration: {

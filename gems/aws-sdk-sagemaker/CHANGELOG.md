@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.307.0 (2025-05-30)
+------------------
+
+* Feature - Release new parameter CapacityReservationConfig in ProductionVariant
+
+1.306.0 (2025-05-29)
+------------------
+
+* Feature - Add maintenance status field to DescribeMlflowTrackingServer API response
+
 1.305.0 (2025-05-12)
 ------------------
 

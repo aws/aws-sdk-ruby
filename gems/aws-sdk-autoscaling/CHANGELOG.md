@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.136.0 (2025-05-29)
+------------------
+
+* Feature - Add support for "apple" CpuManufacturer in ABIS
+
 1.135.0 (2025-05-12)
 ------------------
 

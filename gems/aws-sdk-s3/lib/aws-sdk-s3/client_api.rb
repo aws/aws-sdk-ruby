@@ -2299,6 +2299,7 @@ module Aws::S3
     PutBucketOwnershipControlsRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
     PutBucketOwnershipControlsRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     PutBucketOwnershipControlsRequest.add_member(:ownership_controls, Shapes::ShapeRef.new(shape: OwnershipControls, required: true, location_name: "OwnershipControls", metadata: {"xmlNamespace" => {"uri" => "http://s3.amazonaws.com/doc/2006-03-01/"}}))
+    PutBucketOwnershipControlsRequest.add_member(:checksum_algorithm, Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location: "header", location_name: "x-amz-sdk-checksum-algorithm"))
     PutBucketOwnershipControlsRequest.struct_class = Types::PutBucketOwnershipControlsRequest
     PutBucketOwnershipControlsRequest[:payload] = :ownership_controls
     PutBucketOwnershipControlsRequest[:payload_member] = PutBucketOwnershipControlsRequest.member(:ownership_controls)
@@ -3753,6 +3754,11 @@ module Aws::S3
         o.http_method = "PUT"
         o.http_request_uri = "/?ownershipControls"
         o.http_checksum = {
+          "requestAlgorithmMember" => "checksum_algorithm",
+          "requestChecksumRequired" => true,
+        }
+        o.http_checksum = {
+          "requestAlgorithmMember" => "checksum_algorithm",
           "requestChecksumRequired" => true,
         }
         o.input = Shapes::ShapeRef.new(shape: PutBucketOwnershipControlsRequest)

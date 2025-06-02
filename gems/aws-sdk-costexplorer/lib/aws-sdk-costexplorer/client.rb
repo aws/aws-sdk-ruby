@@ -1552,6 +1552,240 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
+    # Retrieves cost and usage comparisons for your account between two
+    # periods within the last 13 months. If you have enabled multi-year data
+    # at monthly granularity, you can go back up to 38 months.
+    #
+    # @option params [String] :billing_view_arn
+    #   The Amazon Resource Name (ARN) that uniquely identifies a specific
+    #   billing view. The ARN is used to specify which particular billing view
+    #   you want to interact with or retrieve information from when making API
+    #   calls related to Amazon Web Services Billing and Cost Management
+    #   features. The BillingViewArn can be retrieved by calling the
+    #   ListBillingViews API.
+    #
+    # @option params [required, Types::DateInterval] :baseline_time_period
+    #   The reference time period for comparison. This time period serves as
+    #   the baseline against which other cost and usage data will be compared.
+    #   The interval must start and end on the first day of a month, with a
+    #   duration of exactly one month.
+    #
+    # @option params [required, Types::DateInterval] :comparison_time_period
+    #   The comparison time period for analysis. This time period's cost and
+    #   usage data will be compared against the baseline time period. The
+    #   interval must start and end on the first day of a month, with a
+    #   duration of exactly one month.
+    #
+    # @option params [required, String] :metric_for_comparison
+    #   The cost and usage metric to compare. Valid values are
+    #   `AmortizedCost`, `BlendedCost`, `NetAmortizedCost`,
+    #   `NetUnblendedCost`, `NormalizedUsageAmount`, `UnblendedCost`, and
+    #   `UsageQuantity`.
+    #
+    # @option params [Types::Expression] :filter
+    #   Use `Expression` to filter in various Cost Explorer APIs.
+    #
+    #   Not all `Expression` types are supported in each API. Refer to the
+    #   documentation for each specific API to see what is supported.
+    #
+    #   There are two patterns:
+    #
+    #   * Simple dimension values.
+    #
+    #     * There are three types of simple dimension values:
+    #       `CostCategories`, `Tags`, and `Dimensions`.
+    #
+    #       * Specify the `CostCategories` field to define a filter that acts
+    #         on Cost Categories.
+    #
+    #       * Specify the `Tags` field to define a filter that acts on Cost
+    #         Allocation Tags.
+    #
+    #       * Specify the `Dimensions` field to define a filter that acts on
+    #         the [ `DimensionValues` ][1].
+    #     * For each filter type, you can set the dimension name and values
+    #       for the filters that you plan to use.
+    #
+    #       * For example, you can filter for `REGION==us-east-1 OR
+    #         REGION==us-west-1`. For `GetRightsizingRecommendation`, the
+    #         Region is a full name (for example, `REGION==US East (N.
+    #         Virginia)`.
+    #
+    #       * The corresponding `Expression` for this example is as follows:
+    #         `{ "Dimensions": { "Key": "REGION", "Values": [ "us-east-1",
+    #         "us-west-1" ] } }`
+    #
+    #       * As shown in the previous example, lists of dimension values are
+    #         combined with `OR` when applying the filter.
+    #     * You can also set different match options to further control how
+    #       the filter behaves. Not all APIs support match options. Refer to
+    #       the documentation for each specific API to see what is supported.
+    #
+    #       * For example, you can filter for linked account names that start
+    #         with "a".
+    #
+    #       * The corresponding `Expression` for this example is as follows:
+    #         `{ "Dimensions": { "Key": "LINKED_ACCOUNT_NAME", "MatchOptions":
+    #         [ "STARTS_WITH" ], "Values": [ "a" ] } }`
+    #   * Compound `Expression` types with logical operations.
+    #
+    #     * You can use multiple `Expression` types and the logical operators
+    #       `AND/OR/NOT` to create a list of one or more `Expression` objects.
+    #       By doing this, you can filter by more advanced options.
+    #
+    #     * For example, you can filter by `((REGION == us-east-1 OR REGION ==
+    #       us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=
+    #       DataTransfer)`.
+    #
+    #     * The corresponding `Expression` for this example is as follows: `{
+    #       "And": [ {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [
+    #       "us-east-1", "us-west-1" ] }}, {"Tags": { "Key": "TagName",
+    #       "Values": ["Value1"] } } ]}, {"Not": {"Dimensions": { "Key":
+    #       "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] } `
+    #     <note markdown="1"> Because each `Expression` can have only one operator, the service
+    #     returns an error if more than one is specified. The following
+    #     example shows an `Expression` object that creates an error: ` {
+    #     "And": [ ... ], "Dimensions": { "Key": "USAGE_TYPE", "Values": [
+    #     "DataTransfer" ] } } `
+    #
+    #      The following is an example of the corresponding error message:
+    #     `"Expression has more than one roots. Only one root operator is
+    #     allowed for each expression: And, Or, Not, Dimensions, Tags,
+    #     CostCategories"`
+    #
+    #      </note>
+    #
+    #   <note markdown="1"> For the `GetRightsizingRecommendation` action, a combination of OR and
+    #   NOT isn't supported. OR isn't supported between different
+    #   dimensions, or dimensions and tags. NOT operators aren't supported.
+    #   Dimensions are also limited to `LINKED_ACCOUNT`, `REGION`, or
+    #   `RIGHTSIZING_TYPE`.
+    #
+    #    For the `GetReservationPurchaseRecommendation` action, only NOT is
+    #   supported. AND and OR aren't supported. Dimensions are limited to
+    #   `LINKED_ACCOUNT`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
+    #
+    # @option params [Array<Types::GroupDefinition>] :group_by
+    #   You can group results using the attributes `DIMENSION`, `TAG`, and
+    #   `COST_CATEGORY`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results that are returned for the request.
+    #
+    # @option params [String] :next_page_token
+    #   The token to retrieve the next set of paginated results.
+    #
+    # @return [Types::GetCostAndUsageComparisonsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCostAndUsageComparisonsResponse#cost_and_usage_comparisons #cost_and_usage_comparisons} => Array&lt;Types::CostAndUsageComparison&gt;
+    #   * {Types::GetCostAndUsageComparisonsResponse#total_cost_and_usage #total_cost_and_usage} => Hash&lt;String,Types::ComparisonMetricValue&gt;
+    #   * {Types::GetCostAndUsageComparisonsResponse#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_cost_and_usage_comparisons({
+    #     billing_view_arn: "BillingViewArn",
+    #     baseline_time_period: { # required
+    #       start: "YearMonthDay", # required
+    #       end: "YearMonthDay", # required
+    #     },
+    #     comparison_time_period: { # required
+    #       start: "YearMonthDay", # required
+    #       end: "YearMonthDay", # required
+    #     },
+    #     metric_for_comparison: "MetricName", # required
+    #     filter: {
+    #       or: [
+    #         {
+    #           # recursive Expression
+    #         },
+    #       ],
+    #       and: [
+    #         {
+    #           # recursive Expression
+    #         },
+    #       ],
+    #       not: {
+    #         # recursive Expression
+    #       },
+    #       dimensions: {
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE, INVOICING_ENTITY, ANOMALY_TOTAL_IMPACT_ABSOLUTE, ANOMALY_TOTAL_IMPACT_PERCENTAGE
+    #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE, GREATER_THAN_OR_EQUAL
+    #       },
+    #       tags: {
+    #         key: "TagKey",
+    #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE, GREATER_THAN_OR_EQUAL
+    #       },
+    #       cost_categories: {
+    #         key: "CostCategoryName",
+    #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE, GREATER_THAN_OR_EQUAL
+    #       },
+    #     },
+    #     group_by: [
+    #       {
+    #         type: "DIMENSION", # accepts DIMENSION, TAG, COST_CATEGORY
+    #         key: "GroupDefinitionKey",
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_page_token: "NextPageToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cost_and_usage_comparisons #=> Array
+    #   resp.cost_and_usage_comparisons[0].cost_and_usage_selector.or #=> Array
+    #   resp.cost_and_usage_comparisons[0].cost_and_usage_selector.or[0] #=> Types::Expression
+    #   resp.cost_and_usage_comparisons[0].cost_and_usage_selector.and #=> Array
+    #   resp.cost_and_usage_comparisons[0].cost_and_usage_selector.and[0] #=> Types::Expression
+    #   resp.cost_and_usage_comparisons[0].cost_and_usage_selector.not #=> Types::Expression
+    #   resp.cost_and_usage_comparisons[0].cost_and_usage_selector.dimensions.key #=> String, one of "AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE"
+    #   resp.cost_and_usage_comparisons[0].cost_and_usage_selector.dimensions.values #=> Array
+    #   resp.cost_and_usage_comparisons[0].cost_and_usage_selector.dimensions.values[0] #=> String
+    #   resp.cost_and_usage_comparisons[0].cost_and_usage_selector.dimensions.match_options #=> Array
+    #   resp.cost_and_usage_comparisons[0].cost_and_usage_selector.dimensions.match_options[0] #=> String, one of "EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"
+    #   resp.cost_and_usage_comparisons[0].cost_and_usage_selector.tags.key #=> String
+    #   resp.cost_and_usage_comparisons[0].cost_and_usage_selector.tags.values #=> Array
+    #   resp.cost_and_usage_comparisons[0].cost_and_usage_selector.tags.values[0] #=> String
+    #   resp.cost_and_usage_comparisons[0].cost_and_usage_selector.tags.match_options #=> Array
+    #   resp.cost_and_usage_comparisons[0].cost_and_usage_selector.tags.match_options[0] #=> String, one of "EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"
+    #   resp.cost_and_usage_comparisons[0].cost_and_usage_selector.cost_categories.key #=> String
+    #   resp.cost_and_usage_comparisons[0].cost_and_usage_selector.cost_categories.values #=> Array
+    #   resp.cost_and_usage_comparisons[0].cost_and_usage_selector.cost_categories.values[0] #=> String
+    #   resp.cost_and_usage_comparisons[0].cost_and_usage_selector.cost_categories.match_options #=> Array
+    #   resp.cost_and_usage_comparisons[0].cost_and_usage_selector.cost_categories.match_options[0] #=> String, one of "EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"
+    #   resp.cost_and_usage_comparisons[0].metrics #=> Hash
+    #   resp.cost_and_usage_comparisons[0].metrics["MetricName"].baseline_time_period_amount #=> String
+    #   resp.cost_and_usage_comparisons[0].metrics["MetricName"].comparison_time_period_amount #=> String
+    #   resp.cost_and_usage_comparisons[0].metrics["MetricName"].difference #=> String
+    #   resp.cost_and_usage_comparisons[0].metrics["MetricName"].unit #=> String
+    #   resp.total_cost_and_usage #=> Hash
+    #   resp.total_cost_and_usage["MetricName"].baseline_time_period_amount #=> String
+    #   resp.total_cost_and_usage["MetricName"].comparison_time_period_amount #=> String
+    #   resp.total_cost_and_usage["MetricName"].difference #=> String
+    #   resp.total_cost_and_usage["MetricName"].unit #=> String
+    #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetCostAndUsageComparisons AWS API Documentation
+    #
+    # @overload get_cost_and_usage_comparisons(params = {})
+    # @param [Hash] params ({})
+    def get_cost_and_usage_comparisons(params = {}, options = {})
+      req = build_request(:get_cost_and_usage_comparisons, params)
+      req.send_request(options)
+    end
+
     # Retrieves cost and usage metrics with resources for your account. You
     # can specify which cost and usage-related metric, such as
     # `BlendedCosts` or `UsageQuantity`, that you want the request to
@@ -1974,6 +2208,244 @@ module Aws::CostExplorer
     # @param [Hash] params ({})
     def get_cost_categories(params = {}, options = {})
       req = build_request(:get_cost_categories, params)
+      req.send_request(options)
+    end
+
+    # Retrieves key factors driving cost changes between two time periods
+    # within the last 13 months, such as usage changes, discount changes,
+    # and commitment-based savings. If you have enabled multi-year data at
+    # monthly granularity, you can go back up to 38 months.
+    #
+    # @option params [String] :billing_view_arn
+    #   The Amazon Resource Name (ARN) that uniquely identifies a specific
+    #   billing view. The ARN is used to specify which particular billing view
+    #   you want to interact with or retrieve information from when making API
+    #   calls related to Amazon Web Services Billing and Cost Management
+    #   features. The BillingViewArn can be retrieved by calling the
+    #   ListBillingViews API.
+    #
+    # @option params [required, Types::DateInterval] :baseline_time_period
+    #   The reference time period for comparison. This time period serves as
+    #   the baseline against which other cost and usage data will be compared.
+    #   The interval must start and end on the first day of a month, with a
+    #   duration of exactly one month.
+    #
+    # @option params [required, Types::DateInterval] :comparison_time_period
+    #   The comparison time period for analysis. This time period's cost and
+    #   usage data will be compared against the baseline time period. The
+    #   interval must start and end on the first day of a month, with a
+    #   duration of exactly one month.
+    #
+    # @option params [required, String] :metric_for_comparison
+    #   The cost and usage metric to compare. Valid values are
+    #   `AmortizedCost`, `BlendedCost`, `NetAmortizedCost`,
+    #   `NetUnblendedCost`, `NormalizedUsageAmount`, `UnblendedCost`, and
+    #   `UsageQuantity`.
+    #
+    # @option params [Types::Expression] :filter
+    #   Use `Expression` to filter in various Cost Explorer APIs.
+    #
+    #   Not all `Expression` types are supported in each API. Refer to the
+    #   documentation for each specific API to see what is supported.
+    #
+    #   There are two patterns:
+    #
+    #   * Simple dimension values.
+    #
+    #     * There are three types of simple dimension values:
+    #       `CostCategories`, `Tags`, and `Dimensions`.
+    #
+    #       * Specify the `CostCategories` field to define a filter that acts
+    #         on Cost Categories.
+    #
+    #       * Specify the `Tags` field to define a filter that acts on Cost
+    #         Allocation Tags.
+    #
+    #       * Specify the `Dimensions` field to define a filter that acts on
+    #         the [ `DimensionValues` ][1].
+    #     * For each filter type, you can set the dimension name and values
+    #       for the filters that you plan to use.
+    #
+    #       * For example, you can filter for `REGION==us-east-1 OR
+    #         REGION==us-west-1`. For `GetRightsizingRecommendation`, the
+    #         Region is a full name (for example, `REGION==US East (N.
+    #         Virginia)`.
+    #
+    #       * The corresponding `Expression` for this example is as follows:
+    #         `{ "Dimensions": { "Key": "REGION", "Values": [ "us-east-1",
+    #         "us-west-1" ] } }`
+    #
+    #       * As shown in the previous example, lists of dimension values are
+    #         combined with `OR` when applying the filter.
+    #     * You can also set different match options to further control how
+    #       the filter behaves. Not all APIs support match options. Refer to
+    #       the documentation for each specific API to see what is supported.
+    #
+    #       * For example, you can filter for linked account names that start
+    #         with "a".
+    #
+    #       * The corresponding `Expression` for this example is as follows:
+    #         `{ "Dimensions": { "Key": "LINKED_ACCOUNT_NAME", "MatchOptions":
+    #         [ "STARTS_WITH" ], "Values": [ "a" ] } }`
+    #   * Compound `Expression` types with logical operations.
+    #
+    #     * You can use multiple `Expression` types and the logical operators
+    #       `AND/OR/NOT` to create a list of one or more `Expression` objects.
+    #       By doing this, you can filter by more advanced options.
+    #
+    #     * For example, you can filter by `((REGION == us-east-1 OR REGION ==
+    #       us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=
+    #       DataTransfer)`.
+    #
+    #     * The corresponding `Expression` for this example is as follows: `{
+    #       "And": [ {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [
+    #       "us-east-1", "us-west-1" ] }}, {"Tags": { "Key": "TagName",
+    #       "Values": ["Value1"] } } ]}, {"Not": {"Dimensions": { "Key":
+    #       "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] } `
+    #     <note markdown="1"> Because each `Expression` can have only one operator, the service
+    #     returns an error if more than one is specified. The following
+    #     example shows an `Expression` object that creates an error: ` {
+    #     "And": [ ... ], "Dimensions": { "Key": "USAGE_TYPE", "Values": [
+    #     "DataTransfer" ] } } `
+    #
+    #      The following is an example of the corresponding error message:
+    #     `"Expression has more than one roots. Only one root operator is
+    #     allowed for each expression: And, Or, Not, Dimensions, Tags,
+    #     CostCategories"`
+    #
+    #      </note>
+    #
+    #   <note markdown="1"> For the `GetRightsizingRecommendation` action, a combination of OR and
+    #   NOT isn't supported. OR isn't supported between different
+    #   dimensions, or dimensions and tags. NOT operators aren't supported.
+    #   Dimensions are also limited to `LINKED_ACCOUNT`, `REGION`, or
+    #   `RIGHTSIZING_TYPE`.
+    #
+    #    For the `GetReservationPurchaseRecommendation` action, only NOT is
+    #   supported. AND and OR aren't supported. Dimensions are limited to
+    #   `LINKED_ACCOUNT`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
+    #
+    # @option params [Array<Types::GroupDefinition>] :group_by
+    #   You can group results using the attributes `DIMENSION`, `TAG`, and
+    #   `COST_CATEGORY`. Note that `SERVICE` and `USAGE_TYPE` dimensions are
+    #   automatically included in the cost comparison drivers analysis.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results that are returned for the request.
+    #
+    # @option params [String] :next_page_token
+    #   The token to retrieve the next set of paginated results.
+    #
+    # @return [Types::GetCostComparisonDriversResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCostComparisonDriversResponse#cost_comparison_drivers #cost_comparison_drivers} => Array&lt;Types::CostComparisonDriver&gt;
+    #   * {Types::GetCostComparisonDriversResponse#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_cost_comparison_drivers({
+    #     billing_view_arn: "BillingViewArn",
+    #     baseline_time_period: { # required
+    #       start: "YearMonthDay", # required
+    #       end: "YearMonthDay", # required
+    #     },
+    #     comparison_time_period: { # required
+    #       start: "YearMonthDay", # required
+    #       end: "YearMonthDay", # required
+    #     },
+    #     metric_for_comparison: "MetricName", # required
+    #     filter: {
+    #       or: [
+    #         {
+    #           # recursive Expression
+    #         },
+    #       ],
+    #       and: [
+    #         {
+    #           # recursive Expression
+    #         },
+    #       ],
+    #       not: {
+    #         # recursive Expression
+    #       },
+    #       dimensions: {
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION, AGREEMENT_END_DATE_TIME_AFTER, AGREEMENT_END_DATE_TIME_BEFORE, INVOICING_ENTITY, ANOMALY_TOTAL_IMPACT_ABSOLUTE, ANOMALY_TOTAL_IMPACT_PERCENTAGE
+    #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE, GREATER_THAN_OR_EQUAL
+    #       },
+    #       tags: {
+    #         key: "TagKey",
+    #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE, GREATER_THAN_OR_EQUAL
+    #       },
+    #       cost_categories: {
+    #         key: "CostCategoryName",
+    #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, ABSENT, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE, GREATER_THAN_OR_EQUAL
+    #       },
+    #     },
+    #     group_by: [
+    #       {
+    #         type: "DIMENSION", # accepts DIMENSION, TAG, COST_CATEGORY
+    #         key: "GroupDefinitionKey",
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_page_token: "NextPageToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cost_comparison_drivers #=> Array
+    #   resp.cost_comparison_drivers[0].cost_selector.or #=> Array
+    #   resp.cost_comparison_drivers[0].cost_selector.or[0] #=> Types::Expression
+    #   resp.cost_comparison_drivers[0].cost_selector.and #=> Array
+    #   resp.cost_comparison_drivers[0].cost_selector.and[0] #=> Types::Expression
+    #   resp.cost_comparison_drivers[0].cost_selector.not #=> Types::Expression
+    #   resp.cost_comparison_drivers[0].cost_selector.dimensions.key #=> String, one of "AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "AGREEMENT_END_DATE_TIME_AFTER", "AGREEMENT_END_DATE_TIME_BEFORE", "INVOICING_ENTITY", "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "ANOMALY_TOTAL_IMPACT_PERCENTAGE"
+    #   resp.cost_comparison_drivers[0].cost_selector.dimensions.values #=> Array
+    #   resp.cost_comparison_drivers[0].cost_selector.dimensions.values[0] #=> String
+    #   resp.cost_comparison_drivers[0].cost_selector.dimensions.match_options #=> Array
+    #   resp.cost_comparison_drivers[0].cost_selector.dimensions.match_options[0] #=> String, one of "EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"
+    #   resp.cost_comparison_drivers[0].cost_selector.tags.key #=> String
+    #   resp.cost_comparison_drivers[0].cost_selector.tags.values #=> Array
+    #   resp.cost_comparison_drivers[0].cost_selector.tags.values[0] #=> String
+    #   resp.cost_comparison_drivers[0].cost_selector.tags.match_options #=> Array
+    #   resp.cost_comparison_drivers[0].cost_selector.tags.match_options[0] #=> String, one of "EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"
+    #   resp.cost_comparison_drivers[0].cost_selector.cost_categories.key #=> String
+    #   resp.cost_comparison_drivers[0].cost_selector.cost_categories.values #=> Array
+    #   resp.cost_comparison_drivers[0].cost_selector.cost_categories.values[0] #=> String
+    #   resp.cost_comparison_drivers[0].cost_selector.cost_categories.match_options #=> Array
+    #   resp.cost_comparison_drivers[0].cost_selector.cost_categories.match_options[0] #=> String, one of "EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE", "GREATER_THAN_OR_EQUAL"
+    #   resp.cost_comparison_drivers[0].metrics #=> Hash
+    #   resp.cost_comparison_drivers[0].metrics["MetricName"].baseline_time_period_amount #=> String
+    #   resp.cost_comparison_drivers[0].metrics["MetricName"].comparison_time_period_amount #=> String
+    #   resp.cost_comparison_drivers[0].metrics["MetricName"].difference #=> String
+    #   resp.cost_comparison_drivers[0].metrics["MetricName"].unit #=> String
+    #   resp.cost_comparison_drivers[0].cost_drivers #=> Array
+    #   resp.cost_comparison_drivers[0].cost_drivers[0].type #=> String
+    #   resp.cost_comparison_drivers[0].cost_drivers[0].name #=> String
+    #   resp.cost_comparison_drivers[0].cost_drivers[0].metrics #=> Hash
+    #   resp.cost_comparison_drivers[0].cost_drivers[0].metrics["MetricName"].baseline_time_period_amount #=> String
+    #   resp.cost_comparison_drivers[0].cost_drivers[0].metrics["MetricName"].comparison_time_period_amount #=> String
+    #   resp.cost_comparison_drivers[0].cost_drivers[0].metrics["MetricName"].difference #=> String
+    #   resp.cost_comparison_drivers[0].cost_drivers[0].metrics["MetricName"].unit #=> String
+    #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetCostComparisonDrivers AWS API Documentation
+    #
+    # @overload get_cost_comparison_drivers(params = {})
+    # @param [Hash] params ({})
+    def get_cost_comparison_drivers(params = {}, options = {})
+      req = build_request(:get_cost_comparison_drivers, params)
       req.send_request(options)
     end
 
@@ -5634,7 +6106,7 @@ module Aws::CostExplorer
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.125.0'
+      context[:gem_version] = '1.126.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

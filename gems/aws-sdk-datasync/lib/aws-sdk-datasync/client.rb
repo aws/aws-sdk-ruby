@@ -591,18 +591,18 @@ module Aws::DataSync
 
     # Creates a transfer *location* for a Microsoft Azure Blob Storage
     # container. DataSync can use this location as a transfer source or
-    # destination.
+    # destination. You can make transfers with or without a [DataSync
+    # agent][1] that connects to your container.
     #
     # Before you begin, make sure you know [how DataSync accesses Azure Blob
-    # Storage][1] and works with [access tiers][2] and [blob types][3]. You
-    # also need a [DataSync agent][4] that can connect to your container.
+    # Storage][2] and works with [access tiers][3] and [blob types][4].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#azure-blob-access
-    # [2]: https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#azure-blob-access-tiers
-    # [3]: https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#blob-types
-    # [4]: https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#azure-blob-creating-agent
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#azure-blob-creating-agent
+    # [2]: https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#azure-blob-access
+    # [3]: https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#azure-blob-access-tiers
+    # [4]: https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#blob-types
     #
     # @option params [required, String] :container_url
     #   Specifies the URL of the Azure Blob Storage container involved in your
@@ -616,6 +616,13 @@ module Aws::DataSync
     # @option params [Types::AzureBlobSasConfiguration] :sas_configuration
     #   Specifies the SAS configuration that allows DataSync to access your
     #   Azure Blob Storage.
+    #
+    #   <note markdown="1"> If you provide an authentication token using `SasConfiguration`, but
+    #   do not provide secret configuration details using `CmkSecretConfig` or
+    #   `CustomSecretConfig`, then DataSync stores the token using your Amazon
+    #   Web Services account's secrets manager secret.
+    #
+    #    </note>
     #
     # @option params [String] :blob_type
     #   Specifies the type of blob that you want your objects or files to be
@@ -641,12 +648,20 @@ module Aws::DataSync
     #   Specifies path segments if you want to limit your transfer to a
     #   virtual directory in your container (for example, `/my/images`).
     #
-    # @option params [required, Array<String>] :agent_arns
-    #   Specifies the Amazon Resource Name (ARN) of the DataSync agent that
-    #   can connect with your Azure Blob Storage container.
+    # @option params [Array<String>] :agent_arns
+    #   (Optional) Specifies the Amazon Resource Name (ARN) of the DataSync
+    #   agent that can connect with your Azure Blob Storage container. If you
+    #   are setting up an agentless cross-cloud transfer, you do not need to
+    #   specify a value for this parameter.
     #
     #   You can specify more than one agent. For more information, see [Using
     #   multiple agents for your transfer][1].
+    #
+    #   <note markdown="1"> Make sure you configure this parameter correctly when you first create
+    #   your storage location. You cannot add or remove agents from a storage
+    #   location after you create it.
+    #
+    #    </note>
     #
     #
     #
@@ -657,6 +672,41 @@ module Aws::DataSync
     #   Amazon Web Services resources. We recommend creating at least a name
     #   tag for your transfer location.
     #
+    # @option params [Types::CmkSecretConfig] :cmk_secret_config
+    #   Specifies configuration information for a DataSync-managed secret,
+    #   which includes the authentication token that DataSync uses to access a
+    #   specific AzureBlob storage location, with a customer-managed KMS key.
+    #
+    #   When you include this paramater as part of a `CreateLocationAzureBlob`
+    #   request, you provide only the KMS key ARN. DataSync uses this KMS key
+    #   together with the authentication token you specify for
+    #   `SasConfiguration` to create a DataSync-managed secret to store the
+    #   location access credentials.
+    #
+    #   Make sure the DataSync has permission to access the KMS key that you
+    #   specify.
+    #
+    #   <note markdown="1"> You can use either `CmkSecretConfig` (with `SasConfiguration`) or
+    #   `CustomSecretConfig` (without `SasConfiguration`) to provide
+    #   credentials for a `CreateLocationAzureBlob` request. Do not provide
+    #   both parameters for the same request.
+    #
+    #    </note>
+    #
+    # @option params [Types::CustomSecretConfig] :custom_secret_config
+    #   Specifies configuration information for a customer-managed Secrets
+    #   Manager secret where the authentication token for an AzureBlob storage
+    #   location is stored in plain text. This configuration includes the
+    #   secret ARN, and the ARN for an IAM role that provides access to the
+    #   secret.
+    #
+    #   <note markdown="1"> You can use either `CmkSecretConfig` (with `SasConfiguration`) or
+    #   `CustomSecretConfig` (without `SasConfiguration`) to provide
+    #   credentials for a `CreateLocationAzureBlob` request. Do not provide
+    #   both parameters for the same request.
+    #
+    #    </note>
+    #
     # @return [Types::CreateLocationAzureBlobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateLocationAzureBlobResponse#location_arn #location_arn} => String
@@ -665,20 +715,28 @@ module Aws::DataSync
     #
     #   resp = client.create_location_azure_blob({
     #     container_url: "AzureBlobContainerUrl", # required
-    #     authentication_type: "SAS", # required, accepts SAS
+    #     authentication_type: "SAS", # required, accepts SAS, NONE
     #     sas_configuration: {
     #       token: "AzureBlobSasToken", # required
     #     },
     #     blob_type: "BLOCK", # accepts BLOCK
     #     access_tier: "HOT", # accepts HOT, COOL, ARCHIVE
     #     subdirectory: "AzureBlobSubdirectory",
-    #     agent_arns: ["AgentArn"], # required
+    #     agent_arns: ["AgentArn"],
     #     tags: [
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue",
     #       },
     #     ],
+    #     cmk_secret_config: {
+    #       secret_arn: "SecretArn",
+    #       kms_key_arn: "KmsKeyArn",
+    #     },
+    #     custom_secret_config: {
+    #       secret_arn: "SecretArn",
+    #       secret_access_role_arn: "IamRoleArnOrEmptyString",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1397,14 +1455,15 @@ module Aws::DataSync
 
     # Creates a transfer *location* for an object storage system. DataSync
     # can use this location as a source or destination for transferring
-    # data.
+    # data. You can make transfers with or without a [DataSync agent][1].
     #
-    # Before you begin, make sure that you understand the [prerequisites][1]
+    # Before you begin, make sure that you understand the [prerequisites][2]
     # for DataSync to work with object storage systems.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html#create-object-location-prerequisites
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/do-i-need-datasync-agent.html#when-agent-required
+    # [2]: https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html#create-object-location-prerequisites
     #
     # @option params [required, String] :server_hostname
     #   Specifies the domain name or IP version 4 (IPv4) address of the object
@@ -1436,9 +1495,17 @@ module Aws::DataSync
     #   Specifies the secret key (for example, a password) if credentials are
     #   required to authenticate with the object storage server.
     #
-    # @option params [required, Array<String>] :agent_arns
-    #   Specifies the Amazon Resource Names (ARNs) of the DataSync agents that
-    #   can connect with your object storage system.
+    # @option params [Array<String>] :agent_arns
+    #   (Optional) Specifies the Amazon Resource Names (ARNs) of the DataSync
+    #   agents that can connect with your object storage system. If you are
+    #   setting up an agentless cross-cloud transfer, you do not need to
+    #   specify a value for this parameter.
+    #
+    #   <note markdown="1"> Make sure you configure this parameter correctly when you first create
+    #   your storage location. You cannot add or remove agents from a storage
+    #   location after you create it.
+    #
+    #    </note>
     #
     # @option params [Array<Types::TagListEntry>] :tags
     #   Specifies the key-value pair that represents a tag that you want to
@@ -1470,6 +1537,41 @@ module Aws::DataSync
     #
     #   To use this parameter, configure `ServerProtocol` to `HTTPS`.
     #
+    # @option params [Types::CmkSecretConfig] :cmk_secret_config
+    #   Specifies configuration information for a DataSync-managed secret,
+    #   which includes the `SecretKey` that DataSync uses to access a specific
+    #   object storage location, with a customer-managed KMS key.
+    #
+    #   When you include this paramater as part of a
+    #   `CreateLocationObjectStorage` request, you provide only the KMS key
+    #   ARN. DataSync uses this KMS key together with the value you specify
+    #   for the `SecretKey` parameter to create a DataSync-managed secret to
+    #   store the location access credentials.
+    #
+    #   Make sure the DataSync has permission to access the KMS key that you
+    #   specify.
+    #
+    #   <note markdown="1"> You can use either `CmkSecretConfig` (with `SecretKey`) or
+    #   `CustomSecretConfig` (without `SecretKey`) to provide credentials for
+    #   a `CreateLocationObjectStorage` request. Do not provide both
+    #   parameters for the same request.
+    #
+    #    </note>
+    #
+    # @option params [Types::CustomSecretConfig] :custom_secret_config
+    #   Specifies configuration information for a customer-managed Secrets
+    #   Manager secret where the secret key for a specific object storage
+    #   location is stored in plain text. This configuration includes the
+    #   secret ARN, and the ARN for an IAM role that provides access to the
+    #   secret.
+    #
+    #   <note markdown="1"> You can use either `CmkSecretConfig` (with `SecretKey`) or
+    #   `CustomSecretConfig` (without `SecretKey`) to provide credentials for
+    #   a `CreateLocationObjectStorage` request. Do not provide both
+    #   parameters for the same request.
+    #
+    #    </note>
+    #
     # @return [Types::CreateLocationObjectStorageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateLocationObjectStorageResponse#location_arn #location_arn} => String
@@ -1484,7 +1586,7 @@ module Aws::DataSync
     #     bucket_name: "ObjectStorageBucketName", # required
     #     access_key: "ObjectStorageAccessKey",
     #     secret_key: "ObjectStorageSecretKey",
-    #     agent_arns: ["AgentArn"], # required
+    #     agent_arns: ["AgentArn"],
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -1492,6 +1594,14 @@ module Aws::DataSync
     #       },
     #     ],
     #     server_certificate: "data",
+    #     cmk_secret_config: {
+    #       secret_arn: "SecretArn",
+    #       kms_key_arn: "KmsKeyArn",
+    #     },
+    #     custom_secret_config: {
+    #       secret_arn: "SecretArn",
+    #       secret_access_role_arn: "IamRoleArnOrEmptyString",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1905,7 +2015,9 @@ module Aws::DataSync
     #     higher performance than Basic mode. Enhanced mode tasks optimize the
     #     data transfer process by listing, preparing, transferring, and
     #     verifying data in parallel. Enhanced mode is currently available for
-    #     transfers between Amazon S3 locations.
+    #     transfers between Amazon S3 locations, transfers between Azure Blob
+    #     and Amazon S3 without an agent, and transfers between other clouds
+    #     and Amazon S3 without an agent.
     #
     #     <note markdown="1"> To create an Enhanced mode task, the IAM role that you use to call
     #     the `CreateTask` operation must have the
@@ -2176,6 +2288,9 @@ module Aws::DataSync
     #   * {Types::DescribeLocationAzureBlobResponse#access_tier #access_tier} => String
     #   * {Types::DescribeLocationAzureBlobResponse#agent_arns #agent_arns} => Array&lt;String&gt;
     #   * {Types::DescribeLocationAzureBlobResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeLocationAzureBlobResponse#managed_secret_config #managed_secret_config} => Types::ManagedSecretConfig
+    #   * {Types::DescribeLocationAzureBlobResponse#cmk_secret_config #cmk_secret_config} => Types::CmkSecretConfig
+    #   * {Types::DescribeLocationAzureBlobResponse#custom_secret_config #custom_secret_config} => Types::CustomSecretConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -2187,12 +2302,17 @@ module Aws::DataSync
     #
     #   resp.location_arn #=> String
     #   resp.location_uri #=> String
-    #   resp.authentication_type #=> String, one of "SAS"
+    #   resp.authentication_type #=> String, one of "SAS", "NONE"
     #   resp.blob_type #=> String, one of "BLOCK"
     #   resp.access_tier #=> String, one of "HOT", "COOL", "ARCHIVE"
     #   resp.agent_arns #=> Array
     #   resp.agent_arns[0] #=> String
     #   resp.creation_time #=> Time
+    #   resp.managed_secret_config.secret_arn #=> String
+    #   resp.cmk_secret_config.secret_arn #=> String
+    #   resp.cmk_secret_config.kms_key_arn #=> String
+    #   resp.custom_secret_config.secret_arn #=> String
+    #   resp.custom_secret_config.secret_access_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationAzureBlob AWS API Documentation
     #
@@ -2536,6 +2656,9 @@ module Aws::DataSync
     #   * {Types::DescribeLocationObjectStorageResponse#agent_arns #agent_arns} => Array&lt;String&gt;
     #   * {Types::DescribeLocationObjectStorageResponse#creation_time #creation_time} => Time
     #   * {Types::DescribeLocationObjectStorageResponse#server_certificate #server_certificate} => String
+    #   * {Types::DescribeLocationObjectStorageResponse#managed_secret_config #managed_secret_config} => Types::ManagedSecretConfig
+    #   * {Types::DescribeLocationObjectStorageResponse#cmk_secret_config #cmk_secret_config} => Types::CmkSecretConfig
+    #   * {Types::DescribeLocationObjectStorageResponse#custom_secret_config #custom_secret_config} => Types::CustomSecretConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -2554,6 +2677,11 @@ module Aws::DataSync
     #   resp.agent_arns[0] #=> String
     #   resp.creation_time #=> Time
     #   resp.server_certificate #=> String
+    #   resp.managed_secret_config.secret_arn #=> String
+    #   resp.cmk_secret_config.secret_arn #=> String
+    #   resp.cmk_secret_config.kms_key_arn #=> String
+    #   resp.custom_secret_config.secret_arn #=> String
+    #   resp.custom_secret_config.secret_access_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationObjectStorage AWS API Documentation
     #
@@ -2805,6 +2933,8 @@ module Aws::DataSync
     #   * {Types::DescribeTaskExecutionResponse#files_prepared #files_prepared} => Integer
     #   * {Types::DescribeTaskExecutionResponse#files_listed #files_listed} => Types::TaskExecutionFilesListedDetail
     #   * {Types::DescribeTaskExecutionResponse#files_failed #files_failed} => Types::TaskExecutionFilesFailedDetail
+    #   * {Types::DescribeTaskExecutionResponse#launch_time #launch_time} => Time
+    #   * {Types::DescribeTaskExecutionResponse#end_time #end_time} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -2884,6 +3014,8 @@ module Aws::DataSync
     #   resp.files_failed.transfer #=> Integer
     #   resp.files_failed.verify #=> Integer
     #   resp.files_failed.delete #=> Integer
+    #   resp.launch_time #=> Time
+    #   resp.end_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeTaskExecution AWS API Documentation
     #
@@ -3482,15 +3614,34 @@ module Aws::DataSync
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#azure-blob-access-tiers
     #
     # @option params [Array<String>] :agent_arns
-    #   Specifies the Amazon Resource Name (ARN) of the DataSync agent that
-    #   can connect with your Azure Blob Storage container.
+    #   (Optional) Specifies the Amazon Resource Name (ARN) of the DataSync
+    #   agent that can connect with your Azure Blob Storage container. If you
+    #   are setting up an agentless cross-cloud transfer, you do not need to
+    #   specify a value for this parameter.
     #
     #   You can specify more than one agent. For more information, see [Using
     #   multiple agents for your transfer][1].
     #
+    #   <note markdown="1"> You cannot add or remove agents from a storage location after you
+    #   initially create it.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/multiple-agents.html
+    #
+    # @option params [Types::CmkSecretConfig] :cmk_secret_config
+    #   Specifies configuration information for a DataSync-managed secret,
+    #   such as an authentication token or set of credentials that DataSync
+    #   uses to access a specific transfer location, and a customer-managed
+    #   KMS key.
+    #
+    # @option params [Types::CustomSecretConfig] :custom_secret_config
+    #   Specifies configuration information for a customer-managed secret,
+    #   such as an authentication token or set of credentials that DataSync
+    #   uses to access a specific transfer location, and a customer-managed
+    #   KMS key.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3499,13 +3650,21 @@ module Aws::DataSync
     #   resp = client.update_location_azure_blob({
     #     location_arn: "LocationArn", # required
     #     subdirectory: "AzureBlobSubdirectory",
-    #     authentication_type: "SAS", # accepts SAS
+    #     authentication_type: "SAS", # accepts SAS, NONE
     #     sas_configuration: {
     #       token: "AzureBlobSasToken", # required
     #     },
     #     blob_type: "BLOCK", # accepts BLOCK
     #     access_tier: "HOT", # accepts HOT, COOL, ARCHIVE
     #     agent_arns: ["AgentArn"],
+    #     cmk_secret_config: {
+    #       secret_arn: "SecretArn",
+    #       kms_key_arn: "KmsKeyArn",
+    #     },
+    #     custom_secret_config: {
+    #       secret_arn: "SecretArn",
+    #       secret_access_role_arn: "IamRoleArnOrEmptyString",
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateLocationAzureBlob AWS API Documentation
@@ -4041,8 +4200,15 @@ module Aws::DataSync
     #   required to authenticate with the object storage server.
     #
     # @option params [Array<String>] :agent_arns
-    #   Specifies the Amazon Resource Names (ARNs) of the DataSync agents that
-    #   can connect with your object storage system.
+    #   (Optional) Specifies the Amazon Resource Names (ARNs) of the DataSync
+    #   agents that can connect with your object storage system. If you are
+    #   setting up an agentless cross-cloud transfer, you do not need to
+    #   specify a value for this parameter.
+    #
+    #   <note markdown="1"> You cannot add or remove agents from a storage location after you
+    #   initially create it.
+    #
+    #    </note>
     #
     # @option params [String, StringIO, File] :server_certificate
     #   Specifies a certificate chain for DataSync to authenticate with your
@@ -4072,6 +4238,18 @@ module Aws::DataSync
     #   Updating this parameter doesn't interfere with tasks that you have in
     #   progress.
     #
+    # @option params [Types::CmkSecretConfig] :cmk_secret_config
+    #   Specifies configuration information for a DataSync-managed secret,
+    #   such as an authentication token or set of credentials that DataSync
+    #   uses to access a specific transfer location, and a customer-managed
+    #   KMS key.
+    #
+    # @option params [Types::CustomSecretConfig] :custom_secret_config
+    #   Specifies configuration information for a customer-managed secret,
+    #   such as an authentication token or set of credentials that DataSync
+    #   uses to access a specific transfer location, and a customer-managed
+    #   KMS key.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -4086,6 +4264,14 @@ module Aws::DataSync
     #     secret_key: "ObjectStorageSecretKey",
     #     agent_arns: ["AgentArn"],
     #     server_certificate: "data",
+    #     cmk_secret_config: {
+    #       secret_arn: "SecretArn",
+    #       kms_key_arn: "KmsKeyArn",
+    #     },
+    #     custom_secret_config: {
+    #       secret_arn: "SecretArn",
+    #       secret_access_role_arn: "IamRoleArnOrEmptyString",
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateLocationObjectStorage AWS API Documentation
@@ -4609,7 +4795,7 @@ module Aws::DataSync
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.103.0'
+      context[:gem_version] = '1.104.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

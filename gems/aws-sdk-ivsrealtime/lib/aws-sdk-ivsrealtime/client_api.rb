@@ -116,6 +116,8 @@ module Aws::IVSRealTime
     ListIngestConfigurationsResponse = Shapes::StructureShape.new(name: 'ListIngestConfigurationsResponse')
     ListParticipantEventsRequest = Shapes::StructureShape.new(name: 'ListParticipantEventsRequest')
     ListParticipantEventsResponse = Shapes::StructureShape.new(name: 'ListParticipantEventsResponse')
+    ListParticipantReplicasRequest = Shapes::StructureShape.new(name: 'ListParticipantReplicasRequest')
+    ListParticipantReplicasResponse = Shapes::StructureShape.new(name: 'ListParticipantReplicasResponse')
     ListParticipantsRequest = Shapes::StructureShape.new(name: 'ListParticipantsRequest')
     ListParticipantsResponse = Shapes::StructureShape.new(name: 'ListParticipantsResponse')
     ListPublicKeysRequest = Shapes::StructureShape.new(name: 'ListPublicKeysRequest')
@@ -132,6 +134,7 @@ module Aws::IVSRealTime
     MaxEncoderConfigurationResults = Shapes::IntegerShape.new(name: 'MaxEncoderConfigurationResults')
     MaxIngestConfigurationResults = Shapes::IntegerShape.new(name: 'MaxIngestConfigurationResults')
     MaxParticipantEventResults = Shapes::IntegerShape.new(name: 'MaxParticipantEventResults')
+    MaxParticipantReplicaResults = Shapes::IntegerShape.new(name: 'MaxParticipantReplicaResults')
     MaxParticipantResults = Shapes::IntegerShape.new(name: 'MaxParticipantResults')
     MaxPublicKeyResults = Shapes::IntegerShape.new(name: 'MaxPublicKeyResults')
     MaxStageResults = Shapes::IntegerShape.new(name: 'MaxStageResults')
@@ -154,6 +157,8 @@ module Aws::IVSRealTime
     ParticipantRecordingS3Prefix = Shapes::StringShape.new(name: 'ParticipantRecordingS3Prefix')
     ParticipantRecordingState = Shapes::StringShape.new(name: 'ParticipantRecordingState')
     ParticipantRecordingTargetSegmentDurationSeconds = Shapes::IntegerShape.new(name: 'ParticipantRecordingTargetSegmentDurationSeconds')
+    ParticipantReplica = Shapes::StructureShape.new(name: 'ParticipantReplica')
+    ParticipantReplicaList = Shapes::ListShape.new(name: 'ParticipantReplicaList')
     ParticipantState = Shapes::StringShape.new(name: 'ParticipantState')
     ParticipantSummary = Shapes::StructureShape.new(name: 'ParticipantSummary')
     ParticipantThumbnailConfiguration = Shapes::StructureShape.new(name: 'ParticipantThumbnailConfiguration')
@@ -184,8 +189,13 @@ module Aws::IVSRealTime
     PublicKeyName = Shapes::StringShape.new(name: 'PublicKeyName')
     PublicKeySummary = Shapes::StructureShape.new(name: 'PublicKeySummary')
     Published = Shapes::BooleanShape.new(name: 'Published')
+    ReconnectWindowSeconds = Shapes::IntegerShape.new(name: 'ReconnectWindowSeconds')
+    RecordParticipantReplicas = Shapes::BooleanShape.new(name: 'RecordParticipantReplicas')
     RecordingConfiguration = Shapes::StructureShape.new(name: 'RecordingConfiguration')
     RecordingConfigurationFormat = Shapes::StringShape.new(name: 'RecordingConfigurationFormat')
+    Replica = Shapes::BooleanShape.new(name: 'Replica')
+    ReplicationState = Shapes::StringShape.new(name: 'ReplicationState')
+    ReplicationType = Shapes::StringShape.new(name: 'ReplicationType')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
@@ -206,8 +216,12 @@ module Aws::IVSRealTime
     StageSummaryList = Shapes::ListShape.new(name: 'StageSummaryList')
     StartCompositionRequest = Shapes::StructureShape.new(name: 'StartCompositionRequest')
     StartCompositionResponse = Shapes::StructureShape.new(name: 'StartCompositionResponse')
+    StartParticipantReplicationRequest = Shapes::StructureShape.new(name: 'StartParticipantReplicationRequest')
+    StartParticipantReplicationResponse = Shapes::StructureShape.new(name: 'StartParticipantReplicationResponse')
     StopCompositionRequest = Shapes::StructureShape.new(name: 'StopCompositionRequest')
     StopCompositionResponse = Shapes::StructureShape.new(name: 'StopCompositionResponse')
+    StopParticipantReplicationRequest = Shapes::StructureShape.new(name: 'StopParticipantReplicationRequest')
+    StopParticipantReplicationResponse = Shapes::StructureShape.new(name: 'StopParticipantReplicationResponse')
     StorageConfiguration = Shapes::StructureShape.new(name: 'StorageConfiguration')
     StorageConfigurationArn = Shapes::StringShape.new(name: 'StorageConfigurationArn')
     StorageConfigurationName = Shapes::StringShape.new(name: 'StorageConfigurationName')
@@ -256,6 +270,7 @@ module Aws::IVSRealTime
     AutoParticipantRecordingConfiguration.add_member(:thumbnail_configuration, Shapes::ShapeRef.new(shape: ParticipantThumbnailConfiguration, location_name: "thumbnailConfiguration"))
     AutoParticipantRecordingConfiguration.add_member(:recording_reconnect_window_seconds, Shapes::ShapeRef.new(shape: ParticipantRecordingReconnectWindowSeconds, location_name: "recordingReconnectWindowSeconds"))
     AutoParticipantRecordingConfiguration.add_member(:hls_configuration, Shapes::ShapeRef.new(shape: ParticipantRecordingHlsConfiguration, location_name: "hlsConfiguration"))
+    AutoParticipantRecordingConfiguration.add_member(:record_participant_replicas, Shapes::ShapeRef.new(shape: RecordParticipantReplicas, location_name: "recordParticipantReplicas"))
     AutoParticipantRecordingConfiguration.struct_class = Types::AutoParticipantRecordingConfiguration
 
     ChannelDestinationConfiguration.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelArn, required: true, location_name: "channelArn"))
@@ -432,6 +447,9 @@ module Aws::IVSRealTime
     Event.add_member(:event_time, Shapes::ShapeRef.new(shape: Time, location_name: "eventTime"))
     Event.add_member(:remote_participant_id, Shapes::ShapeRef.new(shape: ParticipantId, location_name: "remoteParticipantId"))
     Event.add_member(:error_code, Shapes::ShapeRef.new(shape: EventErrorCode, location_name: "errorCode"))
+    Event.add_member(:destination_stage_arn, Shapes::ShapeRef.new(shape: StageArn, location_name: "destinationStageArn"))
+    Event.add_member(:destination_session_id, Shapes::ShapeRef.new(shape: StageSessionId, location_name: "destinationSessionId"))
+    Event.add_member(:replica, Shapes::ShapeRef.new(shape: Replica, location_name: "replica"))
     Event.struct_class = Types::Event
 
     EventList.member = Shapes::ShapeRef.new(shape: Event)
@@ -579,6 +597,16 @@ module Aws::IVSRealTime
     ListParticipantEventsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListParticipantEventsResponse.struct_class = Types::ListParticipantEventsResponse
 
+    ListParticipantReplicasRequest.add_member(:source_stage_arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "sourceStageArn"))
+    ListParticipantReplicasRequest.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, required: true, location_name: "participantId"))
+    ListParticipantReplicasRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListParticipantReplicasRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxParticipantReplicaResults, location_name: "maxResults"))
+    ListParticipantReplicasRequest.struct_class = Types::ListParticipantReplicasRequest
+
+    ListParticipantReplicasResponse.add_member(:replicas, Shapes::ShapeRef.new(shape: ParticipantReplicaList, required: true, location_name: "replicas"))
+    ListParticipantReplicasResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListParticipantReplicasResponse.struct_class = Types::ListParticipantReplicasResponse
+
     ListParticipantsRequest.add_member(:stage_arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "stageArn"))
     ListParticipantsRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: StageSessionId, required: true, location_name: "sessionId"))
     ListParticipantsRequest.add_member(:filter_by_user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "filterByUserId"))
@@ -648,6 +676,10 @@ module Aws::IVSRealTime
     Participant.add_member(:recording_s3_prefix, Shapes::ShapeRef.new(shape: ParticipantRecordingS3Prefix, location_name: "recordingS3Prefix"))
     Participant.add_member(:recording_state, Shapes::ShapeRef.new(shape: ParticipantRecordingState, location_name: "recordingState"))
     Participant.add_member(:protocol, Shapes::ShapeRef.new(shape: ParticipantProtocol, location_name: "protocol"))
+    Participant.add_member(:replication_type, Shapes::ShapeRef.new(shape: ReplicationType, location_name: "replicationType"))
+    Participant.add_member(:replication_state, Shapes::ShapeRef.new(shape: ReplicationState, location_name: "replicationState"))
+    Participant.add_member(:source_stage_arn, Shapes::ShapeRef.new(shape: StageArn, location_name: "sourceStageArn"))
+    Participant.add_member(:source_session_id, Shapes::ShapeRef.new(shape: StageSessionId, location_name: "sourceSessionId"))
     Participant.struct_class = Types::Participant
 
     ParticipantAttributes.key = Shapes::ShapeRef.new(shape: String)
@@ -660,12 +692,26 @@ module Aws::IVSRealTime
 
     ParticipantRecordingMediaTypeList.member = Shapes::ShapeRef.new(shape: ParticipantRecordingMediaType)
 
+    ParticipantReplica.add_member(:source_stage_arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "sourceStageArn"))
+    ParticipantReplica.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, required: true, location_name: "participantId"))
+    ParticipantReplica.add_member(:source_session_id, Shapes::ShapeRef.new(shape: StageSessionId, required: true, location_name: "sourceSessionId"))
+    ParticipantReplica.add_member(:destination_stage_arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "destinationStageArn"))
+    ParticipantReplica.add_member(:destination_session_id, Shapes::ShapeRef.new(shape: StageSessionId, required: true, location_name: "destinationSessionId"))
+    ParticipantReplica.add_member(:replication_state, Shapes::ShapeRef.new(shape: ReplicationState, required: true, location_name: "replicationState"))
+    ParticipantReplica.struct_class = Types::ParticipantReplica
+
+    ParticipantReplicaList.member = Shapes::ShapeRef.new(shape: ParticipantReplica)
+
     ParticipantSummary.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, location_name: "participantId"))
     ParticipantSummary.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "userId"))
     ParticipantSummary.add_member(:state, Shapes::ShapeRef.new(shape: ParticipantState, location_name: "state"))
     ParticipantSummary.add_member(:first_join_time, Shapes::ShapeRef.new(shape: Time, location_name: "firstJoinTime"))
     ParticipantSummary.add_member(:published, Shapes::ShapeRef.new(shape: Published, location_name: "published"))
     ParticipantSummary.add_member(:recording_state, Shapes::ShapeRef.new(shape: ParticipantRecordingState, location_name: "recordingState"))
+    ParticipantSummary.add_member(:replication_type, Shapes::ShapeRef.new(shape: ReplicationType, location_name: "replicationType"))
+    ParticipantSummary.add_member(:replication_state, Shapes::ShapeRef.new(shape: ReplicationState, location_name: "replicationState"))
+    ParticipantSummary.add_member(:source_stage_arn, Shapes::ShapeRef.new(shape: StageArn, location_name: "sourceStageArn"))
+    ParticipantSummary.add_member(:source_session_id, Shapes::ShapeRef.new(shape: StageSessionId, location_name: "sourceSessionId"))
     ParticipantSummary.struct_class = Types::ParticipantSummary
 
     ParticipantThumbnailConfiguration.add_member(:target_interval_seconds, Shapes::ShapeRef.new(shape: ThumbnailIntervalSeconds, location_name: "targetIntervalSeconds"))
@@ -816,10 +862,40 @@ module Aws::IVSRealTime
     StartCompositionResponse.add_member(:composition, Shapes::ShapeRef.new(shape: Composition, location_name: "composition"))
     StartCompositionResponse.struct_class = Types::StartCompositionResponse
 
+    StartParticipantReplicationRequest.add_member(:source_stage_arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "sourceStageArn"))
+    StartParticipantReplicationRequest.add_member(:destination_stage_arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "destinationStageArn"))
+    StartParticipantReplicationRequest.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, required: true, location_name: "participantId"))
+    StartParticipantReplicationRequest.add_member(:reconnect_window_seconds, Shapes::ShapeRef.new(shape: ReconnectWindowSeconds, location_name: "reconnectWindowSeconds"))
+    StartParticipantReplicationRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: ParticipantAttributes, location_name: "attributes"))
+    StartParticipantReplicationRequest.struct_class = Types::StartParticipantReplicationRequest
+
+    StartParticipantReplicationResponse.add_member(:access_control_allow_origin, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Access-Control-Allow-Origin"))
+    StartParticipantReplicationResponse.add_member(:access_control_expose_headers, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Access-Control-Expose-Headers"))
+    StartParticipantReplicationResponse.add_member(:cache_control, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Cache-Control"))
+    StartParticipantReplicationResponse.add_member(:content_security_policy, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Content-Security-Policy"))
+    StartParticipantReplicationResponse.add_member(:strict_transport_security, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Strict-Transport-Security"))
+    StartParticipantReplicationResponse.add_member(:x_content_type_options, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "X-Content-Type-Options"))
+    StartParticipantReplicationResponse.add_member(:x_frame_options, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "X-Frame-Options"))
+    StartParticipantReplicationResponse.struct_class = Types::StartParticipantReplicationResponse
+
     StopCompositionRequest.add_member(:arn, Shapes::ShapeRef.new(shape: CompositionArn, required: true, location_name: "arn"))
     StopCompositionRequest.struct_class = Types::StopCompositionRequest
 
     StopCompositionResponse.struct_class = Types::StopCompositionResponse
+
+    StopParticipantReplicationRequest.add_member(:source_stage_arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "sourceStageArn"))
+    StopParticipantReplicationRequest.add_member(:destination_stage_arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "destinationStageArn"))
+    StopParticipantReplicationRequest.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, required: true, location_name: "participantId"))
+    StopParticipantReplicationRequest.struct_class = Types::StopParticipantReplicationRequest
+
+    StopParticipantReplicationResponse.add_member(:access_control_allow_origin, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Access-Control-Allow-Origin"))
+    StopParticipantReplicationResponse.add_member(:access_control_expose_headers, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Access-Control-Expose-Headers"))
+    StopParticipantReplicationResponse.add_member(:cache_control, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Cache-Control"))
+    StopParticipantReplicationResponse.add_member(:content_security_policy, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Content-Security-Policy"))
+    StopParticipantReplicationResponse.add_member(:strict_transport_security, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Strict-Transport-Security"))
+    StopParticipantReplicationResponse.add_member(:x_content_type_options, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "X-Content-Type-Options"))
+    StopParticipantReplicationResponse.add_member(:x_frame_options, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "X-Frame-Options"))
+    StopParticipantReplicationResponse.struct_class = Types::StopParticipantReplicationResponse
 
     StorageConfiguration.add_member(:arn, Shapes::ShapeRef.new(shape: StorageConfigurationArn, required: true, location_name: "arn"))
     StorageConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: StorageConfigurationName, location_name: "name"))
@@ -1232,6 +1308,22 @@ module Aws::IVSRealTime
         )
       end)
 
+      api.add_operation(:list_participant_replicas, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListParticipantReplicas"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListParticipantReplicas"
+        o.input = Shapes::ShapeRef.new(shape: ListParticipantReplicasRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListParticipantReplicasResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_participants, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListParticipants"
         o.http_method = "POST"
@@ -1342,6 +1434,21 @@ module Aws::IVSRealTime
         o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
       end)
 
+      api.add_operation(:start_participant_replication, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartParticipantReplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/StartParticipantReplication"
+        o.input = Shapes::ShapeRef.new(shape: StartParticipantReplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartParticipantReplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
+      end)
+
       api.add_operation(:stop_composition, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StopComposition"
         o.http_method = "POST"
@@ -1354,6 +1461,18 @@ module Aws::IVSRealTime
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:stop_participant_replication, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopParticipantReplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/StopParticipantReplication"
+        o.input = Shapes::ShapeRef.new(shape: StopParticipantReplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopParticipantReplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

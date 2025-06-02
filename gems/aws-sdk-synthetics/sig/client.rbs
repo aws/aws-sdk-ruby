@@ -114,7 +114,8 @@ module Aws
                              timeout_in_seconds: ::Integer?,
                              memory_in_mb: ::Integer?,
                              active_tracing: bool?,
-                             environment_variables: Hash[::String, ::String]?
+                             environment_variables: Hash[::String, ::String]?,
+                             ephemeral_storage: ::Integer?
                            },
                            ?success_retention_period_in_days: ::Integer,
                            ?failure_retention_period_in_days: ::Integer,
@@ -326,7 +327,8 @@ module Aws
                                     timeout_in_seconds: ::Integer?,
                                     memory_in_mb: ::Integer?,
                                     active_tracing: bool?,
-                                    environment_variables: Hash[::String, ::String]?
+                                    environment_variables: Hash[::String, ::String]?,
+                                    ephemeral_storage: ::Integer?
                                   },
                                   ?vpc_config: {
                                     subnet_ids: Array[::String]?,
@@ -411,7 +413,8 @@ module Aws
                              timeout_in_seconds: ::Integer?,
                              memory_in_mb: ::Integer?,
                              active_tracing: bool?,
-                             environment_variables: Hash[::String, ::String]?
+                             environment_variables: Hash[::String, ::String]?,
+                             ephemeral_storage: ::Integer?
                            },
                            ?success_retention_period_in_days: ::Integer,
                            ?failure_retention_period_in_days: ::Integer,

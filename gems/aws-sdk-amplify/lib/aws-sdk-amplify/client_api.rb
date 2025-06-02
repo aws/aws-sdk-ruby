@@ -44,6 +44,7 @@ module Aws::Amplify
     BranchArn = Shapes::StringShape.new(name: 'BranchArn')
     BranchName = Shapes::StringShape.new(name: 'BranchName')
     Branches = Shapes::ListShape.new(name: 'Branches')
+    BuildComputeType = Shapes::StringShape.new(name: 'BuildComputeType')
     BuildSpec = Shapes::StringShape.new(name: 'BuildSpec')
     CacheConfig = Shapes::StructureShape.new(name: 'CacheConfig')
     CacheConfigType = Shapes::StringShape.new(name: 'CacheConfigType')
@@ -140,6 +141,7 @@ module Aws::Amplify
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
     Job = Shapes::StructureShape.new(name: 'Job')
     JobArn = Shapes::StringShape.new(name: 'JobArn')
+    JobConfig = Shapes::StructureShape.new(name: 'JobConfig')
     JobId = Shapes::StringShape.new(name: 'JobId')
     JobReason = Shapes::StringShape.new(name: 'JobReason')
     JobStatus = Shapes::StringShape.new(name: 'JobStatus')
@@ -269,6 +271,7 @@ module Aws::Amplify
     App.add_member(:cache_config, Shapes::ShapeRef.new(shape: CacheConfig, location_name: "cacheConfig"))
     App.add_member(:webhook_create_time, Shapes::ShapeRef.new(shape: webhookCreateTime, location_name: "webhookCreateTime"))
     App.add_member(:waf_configuration, Shapes::ShapeRef.new(shape: WafConfiguration, location_name: "wafConfiguration"))
+    App.add_member(:job_config, Shapes::ShapeRef.new(shape: JobConfig, location_name: "jobConfig"))
     App.struct_class = Types::App
 
     Apps.member = Shapes::ShapeRef.new(shape: App)
@@ -379,6 +382,7 @@ module Aws::Amplify
     CreateAppRequest.add_member(:enable_auto_branch_creation, Shapes::ShapeRef.new(shape: EnableAutoBranchCreation, location_name: "enableAutoBranchCreation"))
     CreateAppRequest.add_member(:auto_branch_creation_patterns, Shapes::ShapeRef.new(shape: AutoBranchCreationPatterns, location_name: "autoBranchCreationPatterns"))
     CreateAppRequest.add_member(:auto_branch_creation_config, Shapes::ShapeRef.new(shape: AutoBranchCreationConfig, location_name: "autoBranchCreationConfig"))
+    CreateAppRequest.add_member(:job_config, Shapes::ShapeRef.new(shape: JobConfig, location_name: "jobConfig"))
     CreateAppRequest.add_member(:cache_config, Shapes::ShapeRef.new(shape: CacheConfig, location_name: "cacheConfig"))
     CreateAppRequest.struct_class = Types::CreateAppRequest
 
@@ -592,6 +596,9 @@ module Aws::Amplify
     Job.add_member(:steps, Shapes::ShapeRef.new(shape: Steps, required: true, location_name: "steps"))
     Job.struct_class = Types::Job
 
+    JobConfig.add_member(:build_compute_type, Shapes::ShapeRef.new(shape: BuildComputeType, required: true, location_name: "buildComputeType"))
+    JobConfig.struct_class = Types::JobConfig
+
     JobSummaries.member = Shapes::ShapeRef.new(shape: JobSummary)
 
     JobSummary.add_member(:job_arn, Shapes::ShapeRef.new(shape: JobArn, required: true, location_name: "jobArn"))
@@ -797,6 +804,7 @@ module Aws::Amplify
     UpdateAppRequest.add_member(:repository, Shapes::ShapeRef.new(shape: Repository, location_name: "repository"))
     UpdateAppRequest.add_member(:oauth_token, Shapes::ShapeRef.new(shape: OauthToken, location_name: "oauthToken"))
     UpdateAppRequest.add_member(:access_token, Shapes::ShapeRef.new(shape: AccessToken, location_name: "accessToken"))
+    UpdateAppRequest.add_member(:job_config, Shapes::ShapeRef.new(shape: JobConfig, location_name: "jobConfig"))
     UpdateAppRequest.add_member(:cache_config, Shapes::ShapeRef.new(shape: CacheConfig, location_name: "cacheConfig"))
     UpdateAppRequest.struct_class = Types::UpdateAppRequest
 

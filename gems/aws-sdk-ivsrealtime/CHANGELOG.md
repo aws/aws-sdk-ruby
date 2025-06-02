@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2025-05-29)
+------------------
+
+* Feature - IVS Real-Time now offers customers the participant replication that allow customers to copy a participant from one stage to another.
+
 1.42.0 (2025-05-12)
 ------------------
 

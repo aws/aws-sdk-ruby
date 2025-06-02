@@ -2398,6 +2398,7 @@ module Aws::Deadline
 
     ServiceManagedEc2FleetConfiguration.add_member(:instance_capabilities, Shapes::ShapeRef.new(shape: ServiceManagedEc2InstanceCapabilities, required: true, location_name: "instanceCapabilities"))
     ServiceManagedEc2FleetConfiguration.add_member(:instance_market_options, Shapes::ShapeRef.new(shape: ServiceManagedEc2InstanceMarketOptions, required: true, location_name: "instanceMarketOptions"))
+    ServiceManagedEc2FleetConfiguration.add_member(:storage_profile_id, Shapes::ShapeRef.new(shape: StorageProfileId, location_name: "storageProfileId"))
     ServiceManagedEc2FleetConfiguration.struct_class = Types::ServiceManagedEc2FleetConfiguration
 
     ServiceManagedEc2InstanceCapabilities.add_member(:v_cpu_count, Shapes::ShapeRef.new(shape: VCpuCountRange, required: true, location_name: "vCpuCount"))

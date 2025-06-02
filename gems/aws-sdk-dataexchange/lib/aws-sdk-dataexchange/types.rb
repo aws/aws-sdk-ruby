@@ -646,11 +646,16 @@ module Aws::DataExchange
     #   What occurs to start an action.
     #   @return [Types::Event]
     #
+    # @!attribute [rw] tags
+    #   Key-value pairs that you can associate with the event action.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/CreateEventActionRequest AWS API Documentation
     #
     class CreateEventActionRequest < Struct.new(
       :action,
-      :event)
+      :event,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -676,6 +681,10 @@ module Aws::DataExchange
     #   The unique identifier for the event action.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags for the event action.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] updated_at
     #   The date and time that the event action was last updated, in ISO
     #   8601 format.
@@ -689,6 +698,7 @@ module Aws::DataExchange
       :created_at,
       :event,
       :id,
+      :tags,
       :updated_at)
       SENSITIVE = []
       include Aws::Structure
@@ -1762,6 +1772,10 @@ module Aws::DataExchange
     #   The unique identifier for the event action.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags for the event action.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] updated_at
     #   The date and time that the event action was last updated, in ISO
     #   8601 format.
@@ -1775,6 +1789,7 @@ module Aws::DataExchange
       :created_at,
       :event,
       :id,
+      :tags,
       :updated_at)
       SENSITIVE = []
       include Aws::Structure

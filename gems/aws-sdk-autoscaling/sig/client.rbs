@@ -210,7 +210,7 @@ module Aws
                                                    min: ::Integer,
                                                    max: ::Integer?
                                                  },
-                                                 cpu_manufacturers: Array[("intel" | "amd" | "amazon-web-services")]?,
+                                                 cpu_manufacturers: Array[("intel" | "amd" | "amazon-web-services" | "apple")]?,
                                                  memory_gi_b_per_v_cpu: {
                                                    min: ::Float?,
                                                    max: ::Float?
@@ -1158,7 +1158,7 @@ module Aws
                                                   min: ::Integer,
                                                   max: ::Integer?
                                                 },
-                                                cpu_manufacturers: Array[("intel" | "amd" | "amazon-web-services")]?,
+                                                cpu_manufacturers: Array[("intel" | "amd" | "amazon-web-services" | "apple")]?,
                                                 memory_gi_b_per_v_cpu: {
                                                   min: ::Float?,
                                                   max: ::Float?
@@ -1294,7 +1294,7 @@ module Aws
                                                    min: ::Integer,
                                                    max: ::Integer?
                                                  },
-                                                 cpu_manufacturers: Array[("intel" | "amd" | "amazon-web-services")]?,
+                                                 cpu_manufacturers: Array[("intel" | "amd" | "amazon-web-services" | "apple")]?,
                                                  memory_gi_b_per_v_cpu: {
                                                    min: ::Float?,
                                                    max: ::Float?

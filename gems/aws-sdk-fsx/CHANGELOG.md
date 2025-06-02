@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.113.0 (2025-05-29)
+------------------
+
+* Feature - FSx API changes to support the public launch of new Intelligent Tiering storage class on Amazon FSx for Lustre
+
 1.112.0 (2025-05-12)
 ------------------
 

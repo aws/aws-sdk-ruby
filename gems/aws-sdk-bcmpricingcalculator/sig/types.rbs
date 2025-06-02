@@ -479,7 +479,7 @@ module Aws::BCMPricingCalculator
     class CreateWorkloadEstimateRequest
       attr_accessor name: ::String
       attr_accessor client_token: ::String
-      attr_accessor rate_type: ("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")
+      attr_accessor rate_type: ("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS" | "AFTER_DISCOUNTS_AND_COMMITMENTS")
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -489,7 +489,7 @@ module Aws::BCMPricingCalculator
       attr_accessor name: ::String
       attr_accessor created_at: ::Time
       attr_accessor expires_at: ::Time
-      attr_accessor rate_type: ("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")
+      attr_accessor rate_type: ("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS" | "AFTER_DISCOUNTS_AND_COMMITMENTS")
       attr_accessor rate_timestamp: ::Time
       attr_accessor status: ("UPDATING" | "VALID" | "INVALID" | "ACTION_NEEDED")
       attr_accessor total_cost: ::Float
@@ -587,9 +587,9 @@ module Aws::BCMPricingCalculator
     end
 
     class GetPreferencesResponse
-      attr_accessor management_account_rate_type_selections: ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
-      attr_accessor member_account_rate_type_selections: ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
-      attr_accessor standalone_account_rate_type_selections: ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
+      attr_accessor management_account_rate_type_selections: ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS" | "AFTER_DISCOUNTS_AND_COMMITMENTS")]
+      attr_accessor member_account_rate_type_selections: ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS" | "AFTER_DISCOUNTS_AND_COMMITMENTS")]
+      attr_accessor standalone_account_rate_type_selections: ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS" | "AFTER_DISCOUNTS_AND_COMMITMENTS")]
       SENSITIVE: []
     end
 
@@ -603,7 +603,7 @@ module Aws::BCMPricingCalculator
       attr_accessor name: ::String
       attr_accessor created_at: ::Time
       attr_accessor expires_at: ::Time
-      attr_accessor rate_type: ("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")
+      attr_accessor rate_type: ("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS" | "AFTER_DISCOUNTS_AND_COMMITMENTS")
       attr_accessor rate_timestamp: ::Time
       attr_accessor status: ("UPDATING" | "VALID" | "INVALID" | "ACTION_NEEDED")
       attr_accessor total_cost: ::Float
@@ -904,16 +904,16 @@ module Aws::BCMPricingCalculator
     end
 
     class UpdatePreferencesRequest
-      attr_accessor management_account_rate_type_selections: ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
-      attr_accessor member_account_rate_type_selections: ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
-      attr_accessor standalone_account_rate_type_selections: ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
+      attr_accessor management_account_rate_type_selections: ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS" | "AFTER_DISCOUNTS_AND_COMMITMENTS")]
+      attr_accessor member_account_rate_type_selections: ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS" | "AFTER_DISCOUNTS_AND_COMMITMENTS")]
+      attr_accessor standalone_account_rate_type_selections: ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS" | "AFTER_DISCOUNTS_AND_COMMITMENTS")]
       SENSITIVE: []
     end
 
     class UpdatePreferencesResponse
-      attr_accessor management_account_rate_type_selections: ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
-      attr_accessor member_account_rate_type_selections: ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
-      attr_accessor standalone_account_rate_type_selections: ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
+      attr_accessor management_account_rate_type_selections: ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS" | "AFTER_DISCOUNTS_AND_COMMITMENTS")]
+      attr_accessor member_account_rate_type_selections: ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS" | "AFTER_DISCOUNTS_AND_COMMITMENTS")]
+      attr_accessor standalone_account_rate_type_selections: ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS" | "AFTER_DISCOUNTS_AND_COMMITMENTS")]
       SENSITIVE: []
     end
 
@@ -929,7 +929,7 @@ module Aws::BCMPricingCalculator
       attr_accessor name: ::String
       attr_accessor created_at: ::Time
       attr_accessor expires_at: ::Time
-      attr_accessor rate_type: ("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")
+      attr_accessor rate_type: ("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS" | "AFTER_DISCOUNTS_AND_COMMITMENTS")
       attr_accessor rate_timestamp: ::Time
       attr_accessor status: ("UPDATING" | "VALID" | "INVALID" | "ACTION_NEEDED")
       attr_accessor total_cost: ::Float
@@ -975,7 +975,7 @@ module Aws::BCMPricingCalculator
       attr_accessor name: ::String
       attr_accessor created_at: ::Time
       attr_accessor expires_at: ::Time
-      attr_accessor rate_type: ("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")
+      attr_accessor rate_type: ("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS" | "AFTER_DISCOUNTS_AND_COMMITMENTS")
       attr_accessor rate_timestamp: ::Time
       attr_accessor status: ("UPDATING" | "VALID" | "INVALID" | "ACTION_NEEDED")
       attr_accessor total_cost: ::Float

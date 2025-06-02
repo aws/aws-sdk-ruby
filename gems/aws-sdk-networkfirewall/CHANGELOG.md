@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2025-05-28)
+------------------
+
+* Feature - You can now use VPC endpoint associations to create multiple firewall endpoints for a single firewall.
+
 1.65.0 (2025-05-12)
 ------------------
 

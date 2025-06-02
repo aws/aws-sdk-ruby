@@ -704,6 +704,9 @@ module Aws::DataExchange
     # @option params [required, Types::Event] :event
     #   What occurs to start an action.
     #
+    # @option params [Hash<String,String>] :tags
+    #   Key-value pairs that you can associate with the event action.
+    #
     # @return [Types::CreateEventActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEventActionResponse#action #action} => Types::Action
@@ -711,6 +714,7 @@ module Aws::DataExchange
     #   * {Types::CreateEventActionResponse#created_at #created_at} => Time
     #   * {Types::CreateEventActionResponse#event #event} => Types::Event
     #   * {Types::CreateEventActionResponse#id #id} => String
+    #   * {Types::CreateEventActionResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::CreateEventActionResponse#updated_at #updated_at} => Time
     #
     # @example Request syntax with placeholder values
@@ -733,6 +737,9 @@ module Aws::DataExchange
     #         data_set_id: "Id", # required
     #       },
     #     },
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #   })
     #
     # @example Response structure
@@ -745,6 +752,8 @@ module Aws::DataExchange
     #   resp.created_at #=> Time
     #   resp.event.revision_published.data_set_id #=> String
     #   resp.id #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #   resp.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/CreateEventAction AWS API Documentation
@@ -1385,6 +1394,7 @@ module Aws::DataExchange
     #   * {Types::GetEventActionResponse#created_at #created_at} => Time
     #   * {Types::GetEventActionResponse#event #event} => Types::Event
     #   * {Types::GetEventActionResponse#id #id} => String
+    #   * {Types::GetEventActionResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetEventActionResponse#updated_at #updated_at} => Time
     #
     # @example Request syntax with placeholder values
@@ -1403,6 +1413,8 @@ module Aws::DataExchange
     #   resp.created_at #=> Time
     #   resp.event.revision_published.data_set_id #=> String
     #   resp.id #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #   resp.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/GetEventAction AWS API Documentation
@@ -2741,7 +2753,7 @@ module Aws::DataExchange
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-dataexchange'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

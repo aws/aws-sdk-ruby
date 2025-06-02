@@ -1968,7 +1968,7 @@ module Aws::EC2
     #   The full path to your AMI manifest in Amazon S3 storage. The specified
     #   bucket must have the `aws-exec-read` canned access control list (ACL)
     #   to ensure that it can be accessed by Amazon EC2. For more information,
-    #   see [Canned ACLs][1] in the *Amazon S3 Service Developer Guide*.
+    #   see [Canned ACL][1] in the *Amazon S3 Service Developer Guide*.
     #
     #
     #
@@ -1981,8 +1981,9 @@ module Aws::EC2
     #   you can publish AMIs that include billable software and list them on
     #   the Amazon Web Services Marketplace. You must first register as a
     #   seller on the Amazon Web Services Marketplace. For more information,
-    #   see [Getting started as a seller][1] and [AMI-based products][2] in
-    #   the *Amazon Web Services Marketplace Seller Guide*.
+    #   see [Getting started as an Amazon Web Services Marketplace seller][1]
+    #   and [AMI-based products in Amazon Web Services Marketplace][2] in the
+    #   *Amazon Web Services Marketplace Seller Guide*.
     #
     #
     #
@@ -1997,8 +1998,8 @@ module Aws::EC2
     #
     #    </note>
     #
-    #   For more information, see [Boot modes][1] in the *Amazon EC2 User
-    #   Guide*.
+    #   For more information, see [Instance launch behavior with Amazon EC2
+    #   boot modes][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -2014,8 +2015,8 @@ module Aws::EC2
     #   Base64 representation of the non-volatile UEFI variable store. To
     #   retrieve the UEFI data, use the [GetInstanceUefiData][1] command. You
     #   can inspect and modify the UEFI data by using the [python-uefivars
-    #   tool][2] on GitHub. For more information, see [UEFI Secure Boot][3] in
-    #   the *Amazon EC2 User Guide*.
+    #   tool][2] on GitHub. For more information, see [UEFI Secure Boot for
+    #   Amazon EC2 instances][3] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -2082,8 +2083,8 @@ module Aws::EC2
     #   If you create an AMI on an Outpost, then all backing snapshots must be
     #   on the same Outpost or in the Region of that Outpost. AMIs on an
     #   Outpost that include local snapshots can be used to launch instances
-    #   on the same Outpost only. For more information, [Amazon EBS local
-    #   snapshots on Outposts][1] in the *Amazon EBS User Guide*.
+    #   on the same Outpost only. For more information, [Create AMIs from
+    #   local snapshots][1] in the *Amazon EBS User Guide*.
     #
     #
     #

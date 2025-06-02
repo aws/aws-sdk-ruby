@@ -169,6 +169,10 @@ module Aws::Amplify
     #   direct integration with WAF.
     #   @return [Types::WafConfiguration]
     #
+    # @!attribute [rw] job_config
+    #   The configuration details that apply to the jobs for an Amplify app.
+    #   @return [Types::JobConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/App AWS API Documentation
     #
     class App < Struct.new(
@@ -199,7 +203,8 @@ module Aws::Amplify
       :repository_clone_method,
       :cache_config,
       :webhook_create_time,
-      :waf_configuration)
+      :waf_configuration,
+      :job_config)
       SENSITIVE = [:basic_auth_credentials, :build_spec]
       include Aws::Structure
     end
@@ -839,6 +844,11 @@ module Aws::Amplify
     #   The automated branch creation configuration for an Amplify app.
     #   @return [Types::AutoBranchCreationConfig]
     #
+    # @!attribute [rw] job_config
+    #   Describes the configuration details that apply to the jobs for an
+    #   Amplify app.
+    #   @return [Types::JobConfig]
+    #
     # @!attribute [rw] cache_config
     #   The cache configuration for the Amplify app.
     #   @return [Types::CacheConfig]
@@ -866,6 +876,7 @@ module Aws::Amplify
       :enable_auto_branch_creation,
       :auto_branch_creation_patterns,
       :auto_branch_creation_config,
+      :job_config,
       :cache_config)
       SENSITIVE = [:oauth_token, :access_token, :basic_auth_credentials, :build_spec]
       include Aws::Structure
@@ -1928,6 +1939,56 @@ module Aws::Amplify
       include Aws::Structure
     end
 
+    # Describes the configuration details that apply to the jobs for an
+    # Amplify app.
+    #
+    # Use `JobConfig` to apply configuration to jobs, such as customizing
+    # the build instance size when you create or update an Amplify app. For
+    # more information about customizable build instances, see [Custom build
+    # instances][1] in the *Amplify User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amplify/latest/userguide/custom-build-instance.html
+    #
+    # @!attribute [rw] build_compute_type
+    #   Specifies the size of the build instance. Amplify supports three
+    #   instance sizes: `STANDARD_8GB`, `LARGE_16GB`, and `XLARGE_72GB`. If
+    #   you don't specify a value, Amplify uses the `STANDARD_8GB` default.
+    #
+    #   The following list describes the CPU, memory, and storage capacity
+    #   for each build instance type:
+    #
+    #   STANDARD\_8GB
+    #   : * vCPUs: 4
+    #
+    #     * Memory: 8 GiB
+    #
+    #     * Disk space: 128 GB
+    #
+    #   LARGE\_16GB
+    #   : * vCPUs: 8
+    #
+    #     * Memory: 16 GiB
+    #
+    #     * Disk space: 128 GB
+    #
+    #   XLARGE\_72GB
+    #   : * vCPUs: 36
+    #
+    #     * Memory: 72 GiB
+    #
+    #     * Disk space: 256 GB
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/JobConfig AWS API Documentation
+    #
+    class JobConfig < Struct.new(
+      :build_compute_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the summary for an execution job for an Amplify app.
     #
     # @!attribute [rw] job_arn
@@ -2927,6 +2988,11 @@ module Aws::Amplify
     #   [1]: https://docs.aws.amazon.com/amplify/latest/userguide/setting-up-GitHub-access.html#migrating-to-github-app-auth
     #   @return [String]
     #
+    # @!attribute [rw] job_config
+    #   Describes the configuration details that apply to the jobs for an
+    #   Amplify app.
+    #   @return [Types::JobConfig]
+    #
     # @!attribute [rw] cache_config
     #   The cache configuration for the Amplify app.
     #   @return [Types::CacheConfig]
@@ -2954,6 +3020,7 @@ module Aws::Amplify
       :repository,
       :oauth_token,
       :access_token,
+      :job_config,
       :cache_config)
       SENSITIVE = [:basic_auth_credentials, :build_spec, :oauth_token, :access_token]
       include Aws::Structure

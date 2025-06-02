@@ -40,6 +40,7 @@ module Aws::Synthetics
     CanaryRunState = Shapes::StringShape.new(name: 'CanaryRunState')
     CanaryRunStateReasonCode = Shapes::StringShape.new(name: 'CanaryRunStateReasonCode')
     CanaryRunStatus = Shapes::StructureShape.new(name: 'CanaryRunStatus')
+    CanaryRunTestResult = Shapes::StringShape.new(name: 'CanaryRunTestResult')
     CanaryRunTimeline = Shapes::StructureShape.new(name: 'CanaryRunTimeline')
     CanaryRuns = Shapes::ListShape.new(name: 'CanaryRuns')
     CanaryScheduleInput = Shapes::StructureShape.new(name: 'CanaryScheduleInput')
@@ -73,6 +74,7 @@ module Aws::Synthetics
     EnvironmentVariableName = Shapes::StringShape.new(name: 'EnvironmentVariableName')
     EnvironmentVariableValue = Shapes::StringShape.new(name: 'EnvironmentVariableValue')
     EnvironmentVariablesMap = Shapes::MapShape.new(name: 'EnvironmentVariablesMap')
+    EphemeralStorageSize = Shapes::IntegerShape.new(name: 'EphemeralStorageSize')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     FunctionArn = Shapes::StringShape.new(name: 'FunctionArn')
     GetCanaryRequest = Shapes::StructureShape.new(name: 'GetCanaryRequest')
@@ -241,16 +243,19 @@ module Aws::Synthetics
     CanaryRunConfigInput.add_member(:memory_in_mb, Shapes::ShapeRef.new(shape: MaxSize3008, location_name: "MemoryInMB"))
     CanaryRunConfigInput.add_member(:active_tracing, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "ActiveTracing"))
     CanaryRunConfigInput.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariablesMap, location_name: "EnvironmentVariables"))
+    CanaryRunConfigInput.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: EphemeralStorageSize, location_name: "EphemeralStorage"))
     CanaryRunConfigInput.struct_class = Types::CanaryRunConfigInput
 
     CanaryRunConfigOutput.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: MaxFifteenMinutesInSeconds, location_name: "TimeoutInSeconds"))
     CanaryRunConfigOutput.add_member(:memory_in_mb, Shapes::ShapeRef.new(shape: MaxSize3008, location_name: "MemoryInMB"))
     CanaryRunConfigOutput.add_member(:active_tracing, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "ActiveTracing"))
+    CanaryRunConfigOutput.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: EphemeralStorageSize, location_name: "EphemeralStorage"))
     CanaryRunConfigOutput.struct_class = Types::CanaryRunConfigOutput
 
     CanaryRunStatus.add_member(:state, Shapes::ShapeRef.new(shape: CanaryRunState, location_name: "State"))
     CanaryRunStatus.add_member(:state_reason, Shapes::ShapeRef.new(shape: String, location_name: "StateReason"))
     CanaryRunStatus.add_member(:state_reason_code, Shapes::ShapeRef.new(shape: CanaryRunStateReasonCode, location_name: "StateReasonCode"))
+    CanaryRunStatus.add_member(:test_result, Shapes::ShapeRef.new(shape: CanaryRunTestResult, location_name: "TestResult"))
     CanaryRunStatus.struct_class = Types::CanaryRunStatus
 
     CanaryRunTimeline.add_member(:started, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Started"))

@@ -29,6 +29,12 @@ module Aws::DataSync
     class CancelTaskExecutionResponse < Aws::EmptyStructure
     end
 
+    class CmkSecretConfig
+      attr_accessor secret_arn: ::String
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
     class CreateAgentRequest
       attr_accessor activation_key: ::String
       attr_accessor agent_name: ::String
@@ -46,13 +52,15 @@ module Aws::DataSync
 
     class CreateLocationAzureBlobRequest
       attr_accessor container_url: ::String
-      attr_accessor authentication_type: ("SAS")
+      attr_accessor authentication_type: ("SAS" | "NONE")
       attr_accessor sas_configuration: Types::AzureBlobSasConfiguration
       attr_accessor blob_type: ("BLOCK")
       attr_accessor access_tier: ("HOT" | "COOL" | "ARCHIVE")
       attr_accessor subdirectory: ::String
       attr_accessor agent_arns: ::Array[::String]
       attr_accessor tags: ::Array[Types::TagListEntry]
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig
+      attr_accessor custom_secret_config: Types::CustomSecretConfig
       SENSITIVE: []
     end
 
@@ -181,6 +189,8 @@ module Aws::DataSync
       attr_accessor agent_arns: ::Array[::String]
       attr_accessor tags: ::Array[Types::TagListEntry]
       attr_accessor server_certificate: ::String
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig
+      attr_accessor custom_secret_config: Types::CustomSecretConfig
       SENSITIVE: [:secret_key]
     end
 
@@ -247,6 +257,12 @@ module Aws::DataSync
       SENSITIVE: []
     end
 
+    class CustomSecretConfig
+      attr_accessor secret_arn: ::String
+      attr_accessor secret_access_role_arn: ::String
+      SENSITIVE: []
+    end
+
     class DeleteAgentRequest
       attr_accessor agent_arn: ::String
       SENSITIVE: []
@@ -296,11 +312,14 @@ module Aws::DataSync
     class DescribeLocationAzureBlobResponse
       attr_accessor location_arn: ::String
       attr_accessor location_uri: ::String
-      attr_accessor authentication_type: ("SAS")
+      attr_accessor authentication_type: ("SAS" | "NONE")
       attr_accessor blob_type: ("BLOCK")
       attr_accessor access_tier: ("HOT" | "COOL" | "ARCHIVE")
       attr_accessor agent_arns: ::Array[::String]
       attr_accessor creation_time: ::Time
+      attr_accessor managed_secret_config: Types::ManagedSecretConfig
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig
+      attr_accessor custom_secret_config: Types::CustomSecretConfig
       SENSITIVE: []
     end
 
@@ -427,6 +446,9 @@ module Aws::DataSync
       attr_accessor agent_arns: ::Array[::String]
       attr_accessor creation_time: ::Time
       attr_accessor server_certificate: ::String
+      attr_accessor managed_secret_config: Types::ManagedSecretConfig
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig
+      attr_accessor custom_secret_config: Types::CustomSecretConfig
       SENSITIVE: []
     end
 
@@ -494,6 +516,8 @@ module Aws::DataSync
       attr_accessor files_prepared: ::Integer
       attr_accessor files_listed: Types::TaskExecutionFilesListedDetail
       attr_accessor files_failed: Types::TaskExecutionFilesFailedDetail
+      attr_accessor launch_time: ::Time
+      attr_accessor end_time: ::Time
       SENSITIVE: []
     end
 
@@ -664,6 +688,11 @@ module Aws::DataSync
     class LocationListEntry
       attr_accessor location_arn: ::String
       attr_accessor location_uri: ::String
+      SENSITIVE: []
+    end
+
+    class ManagedSecretConfig
+      attr_accessor secret_arn: ::String
       SENSITIVE: []
     end
 
@@ -900,11 +929,13 @@ module Aws::DataSync
     class UpdateLocationAzureBlobRequest
       attr_accessor location_arn: ::String
       attr_accessor subdirectory: ::String
-      attr_accessor authentication_type: ("SAS")
+      attr_accessor authentication_type: ("SAS" | "NONE")
       attr_accessor sas_configuration: Types::AzureBlobSasConfiguration
       attr_accessor blob_type: ("BLOCK")
       attr_accessor access_tier: ("HOT" | "COOL" | "ARCHIVE")
       attr_accessor agent_arns: ::Array[::String]
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig
+      attr_accessor custom_secret_config: Types::CustomSecretConfig
       SENSITIVE: []
     end
 
@@ -1006,6 +1037,8 @@ module Aws::DataSync
       attr_accessor secret_key: ::String
       attr_accessor agent_arns: ::Array[::String]
       attr_accessor server_certificate: ::String
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig
+      attr_accessor custom_secret_config: Types::CustomSecretConfig
       SENSITIVE: [:secret_key]
     end
 

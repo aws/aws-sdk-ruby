@@ -16730,6 +16730,11 @@ module Aws::SageMaker
     #   The current creation status of the described MLflow Tracking Server.
     #   @return [String]
     #
+    # @!attribute [rw] tracking_server_maintenance_status
+    #   The current maintenance status of the described MLflow Tracking
+    #   Server.
+    #   @return [String]
+    #
     # @!attribute [rw] is_active
     #   Whether the described MLflow Tracking Server is currently active.
     #   @return [String]
@@ -16779,6 +16784,7 @@ module Aws::SageMaker
       :mlflow_version,
       :role_arn,
       :tracking_server_status,
+      :tracking_server_maintenance_status,
       :is_active,
       :tracking_server_url,
       :weekly_maintenance_window_start,
@@ -20477,6 +20483,40 @@ module Aws::SageMaker
     #
     class EbsStorageSettings < Struct.new(
       :ebs_volume_size_in_gb)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The EC2 capacity reservations that are shared to an ML capacity
+    # reservation.
+    #
+    # @!attribute [rw] ec2_capacity_reservation_id
+    #   The unique identifier for an EC2 capacity reservation that's part
+    #   of the ML capacity reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_instance_count
+    #   The number of instances that you allocated to the EC2 capacity
+    #   reservation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] available_instance_count
+    #   The number of instances that are currently available in the EC2
+    #   capacity reservation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] used_by_current_endpoint
+    #   The number of instances from the EC2 capacity reservation that are
+    #   being used by the endpoint.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Ec2CapacityReservation AWS API Documentation
+    #
+    class Ec2CapacityReservation < Struct.new(
+      :ec2_capacity_reservation_id,
+      :total_instance_count,
+      :available_instance_count,
+      :used_by_current_endpoint)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -39470,6 +39510,11 @@ module Aws::SageMaker
     #     * Neuron driver version: 2.19
     #   @return [String]
     #
+    # @!attribute [rw] capacity_reservation_config
+    #   Settings for the capacity reservation for the compute instances that
+    #   SageMaker AI reserves for an endpoint.
+    #   @return [Types::ProductionVariantCapacityReservationConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariant AWS API Documentation
     #
     class ProductionVariant < Struct.new(
@@ -39487,7 +39532,89 @@ module Aws::SageMaker
       :enable_ssm_access,
       :managed_instance_scaling,
       :routing_config,
-      :inference_ami_version)
+      :inference_ami_version,
+      :capacity_reservation_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings for the capacity reservation for the compute instances that
+    # SageMaker AI reserves for an endpoint.
+    #
+    # @!attribute [rw] capacity_reservation_preference
+    #   Options that you can choose for the capacity reservation. SageMaker
+    #   AI supports the following options:
+    #
+    #   capacity-reservations-only
+    #
+    #   : SageMaker AI launches instances only into an ML capacity
+    #     reservation. If no capacity is available, the instances fail to
+    #     launch.
+    #   @return [String]
+    #
+    # @!attribute [rw] ml_reservation_arn
+    #   The Amazon Resource Name (ARN) that uniquely identifies the ML
+    #   capacity reservation that SageMaker AI applies when it deploys the
+    #   endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariantCapacityReservationConfig AWS API Documentation
+    #
+    class ProductionVariantCapacityReservationConfig < Struct.new(
+      :capacity_reservation_preference,
+      :ml_reservation_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about an ML capacity reservation.
+    #
+    # @!attribute [rw] ml_reservation_arn
+    #   The Amazon Resource Name (ARN) that uniquely identifies the ML
+    #   capacity reservation that SageMaker AI applies when it deploys the
+    #   endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_reservation_preference
+    #   The option that you chose for the capacity reservation. SageMaker AI
+    #   supports the following options:
+    #
+    #   capacity-reservations-only
+    #
+    #   : SageMaker AI launches instances only into an ML capacity
+    #     reservation. If no capacity is available, the instances fail to
+    #     launch.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_instance_count
+    #   The number of instances that you allocated to the ML capacity
+    #   reservation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] available_instance_count
+    #   The number of instances that are currently available in the ML
+    #   capacity reservation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] used_by_current_endpoint
+    #   The number of instances from the ML capacity reservation that are
+    #   being used by the endpoint.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ec2_capacity_reservations
+    #   The EC2 capacity reservations that are shared to this ML capacity
+    #   reservation, if any.
+    #   @return [Array<Types::Ec2CapacityReservation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariantCapacityReservationSummary AWS API Documentation
+    #
+    class ProductionVariantCapacityReservationSummary < Struct.new(
+      :ml_reservation_arn,
+      :capacity_reservation_preference,
+      :total_instance_count,
+      :available_instance_count,
+      :used_by_current_endpoint,
+      :ec2_capacity_reservations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -39758,6 +39885,11 @@ module Aws::SageMaker
     #   the instances that the endpoint hosts.
     #   @return [Types::ProductionVariantRoutingConfig]
     #
+    # @!attribute [rw] capacity_reservation_config
+    #   Settings for the capacity reservation for the compute instances that
+    #   SageMaker AI reserves for an endpoint.
+    #   @return [Types::ProductionVariantCapacityReservationSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariantSummary AWS API Documentation
     #
     class ProductionVariantSummary < Struct.new(
@@ -39771,7 +39903,8 @@ module Aws::SageMaker
       :current_serverless_config,
       :desired_serverless_config,
       :managed_instance_scaling,
-      :routing_config)
+      :routing_config,
+      :capacity_reservation_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -47864,6 +47997,11 @@ module Aws::SageMaker
     #   other artifacts for the project that corresponds to the domain.
     #   @return [String]
     #
+    # @!attribute [rw] single_sign_on_application_arn
+    #   The ARN of the application managed by SageMaker AI and SageMaker
+    #   Unified Studio in the Amazon Web Services IAM Identity Center.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UnifiedStudioSettings AWS API Documentation
     #
     class UnifiedStudioSettings < Struct.new(
@@ -47873,7 +48011,8 @@ module Aws::SageMaker
       :domain_id,
       :project_id,
       :environment_id,
-      :project_s3_path)
+      :project_s3_path,
+      :single_sign_on_application_arn)
       SENSITIVE = []
       include Aws::Structure
     end

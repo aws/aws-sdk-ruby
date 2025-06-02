@@ -10,6 +10,33 @@
 module Aws::NetworkFirewall
   module Types
 
+    # The status of the firewall endpoint defined by a
+    # `VpcEndpointAssociation`.
+    #
+    # @!attribute [rw] attachment
+    #   The definition and status of the firewall endpoint for a single
+    #   subnet. In each configured subnet, Network Firewall instantiates a
+    #   firewall endpoint to handle network traffic.
+    #
+    #   This data type is used for any firewall endpoint type:
+    #
+    #   * For `Firewall.SubnetMappings`, this `Attachment` is part of the
+    #     `FirewallStatus` sync states information. You define firewall
+    #     subnets using `CreateFirewall` and `AssociateSubnets`.
+    #
+    #   * For `VpcEndpointAssociation`, this `Attachment` is part of the
+    #     `VpcEndpointAssociationStatus` sync states information. You define
+    #     these subnets using `CreateVpcEndpointAssociation`.
+    #   @return [Types::Attachment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/AZSyncState AWS API Documentation
+    #
+    class AZSyncState < Struct.new(
+      :attachment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A custom action to use in stateless rule actions settings. This is
     # used in CustomAction.
     #
@@ -410,9 +437,19 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # The configuration and status for a single subnet that you've
-    # specified for use by the Network Firewall firewall. This is part of
-    # the FirewallStatus.
+    # The definition and status of the firewall endpoint for a single
+    # subnet. In each configured subnet, Network Firewall instantiates a
+    # firewall endpoint to handle network traffic.
+    #
+    # This data type is used for any firewall endpoint type:
+    #
+    # * For `Firewall.SubnetMappings`, this `Attachment` is part of the
+    #   `FirewallStatus` sync states information. You define firewall
+    #   subnets using `CreateFirewall` and `AssociateSubnets`.
+    #
+    # * For `VpcEndpointAssociation`, this `Attachment` is part of the
+    #   `VpcEndpointAssociationStatus` sync states information. You define
+    #   these subnets using `CreateVpcEndpointAssociation`.
     #
     # @!attribute [rw] subnet_id
     #   The unique identifier of the subnet that you've specified to be
@@ -427,12 +464,11 @@ module Aws::NetworkFirewall
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The current status of the firewall endpoint in the subnet. This
-    #   value reflects both the instantiation of the endpoint in the VPC
-    #   subnet and the sync states that are reported in the `Config`
-    #   settings. When this value is `READY`, the endpoint is available and
-    #   configured properly to handle network traffic. When the endpoint
-    #   isn't available for traffic, this value will reflect its state, for
+    #   The current status of the firewall endpoint instantiation in the
+    #   subnet.
+    #
+    #   When this value is `READY`, the endpoint is available to handle
+    #   network traffic. Otherwise, this value reflects its state, for
     #   example `CREATING` or `DELETING`.
     #   @return [String]
     #
@@ -459,6 +495,22 @@ module Aws::NetworkFirewall
       :endpoint_id,
       :status,
       :status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # High-level information about an Availability Zone where the firewall
+    # has an endpoint defined.
+    #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type of the Firewall subnet in the Availability Zone.
+    #   You can't change the IP address type after you create the subnet.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/AvailabilityZoneMetadata AWS API Documentation
+    #
+    class AvailabilityZoneMetadata < Struct.new(
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -729,6 +781,12 @@ module Aws::NetworkFirewall
     #   Detailed information about the current status of a Firewall. You can
     #   retrieve this for a firewall by calling DescribeFirewall and
     #   providing the firewall name and ARN.
+    #
+    #   The firewall status indicates a combined status. It indicates
+    #   whether all subnets are up-to-date with the latest firewall
+    #   configurations, which is based on the sync states config values, and
+    #   also whether all subnets have their endpoints fully enabled, based
+    #   on their sync states attachment values.
     #   @return [Types::FirewallStatus]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateFirewallResponse AWS API Documentation
@@ -1016,6 +1074,65 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # @!attribute [rw] firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The unique identifier of the VPC where you want to create a firewall
+    #   endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_mapping
+    #   The ID for a subnet that's used in an association with a firewall.
+    #   This is used in CreateFirewall, AssociateSubnets, and
+    #   CreateVpcEndpointAssociation. Network Firewall creates an instance
+    #   of the associated firewall in each subnet that you specify, to
+    #   filter traffic in the subnet's Availability Zone.
+    #   @return [Types::SubnetMapping]
+    #
+    # @!attribute [rw] description
+    #   A description of the VPC endpoint association.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The key:value pairs to associate with the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateVpcEndpointAssociationRequest AWS API Documentation
+    #
+    class CreateVpcEndpointAssociationRequest < Struct.new(
+      :firewall_arn,
+      :vpc_id,
+      :subnet_mapping,
+      :description,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpc_endpoint_association
+    #   The configuration settings for the VPC endpoint association. These
+    #   settings include the firewall and the VPC and subnet to use for the
+    #   firewall endpoint.
+    #   @return [Types::VpcEndpointAssociation]
+    #
+    # @!attribute [rw] vpc_endpoint_association_status
+    #   Detailed information about the current status of a
+    #   VpcEndpointAssociation. You can retrieve this by calling
+    #   DescribeVpcEndpointAssociation and providing the VPC endpoint
+    #   association ARN.
+    #   @return [Types::VpcEndpointAssociationStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateVpcEndpointAssociationResponse AWS API Documentation
+    #
+    class CreateVpcEndpointAssociationResponse < Struct.new(
+      :vpc_endpoint_association,
+      :vpc_endpoint_association_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An optional, non-standard action to use for stateless packet handling.
     # You can define this in addition to the standard action that you must
     # specify.
@@ -1113,21 +1230,33 @@ module Aws::NetworkFirewall
     end
 
     # @!attribute [rw] firewall
-    #   The firewall defines the configuration settings for an Network
-    #   Firewall firewall. These settings include the firewall policy, the
-    #   subnets in your VPC to use for the firewall endpoints, and any tags
-    #   that are attached to the firewall Amazon Web Services resource.
+    #   A firewall defines the behavior of a firewall, the main VPC where
+    #   the firewall is used, the Availability Zones where the firewall can
+    #   be used, and one subnet to use for a firewall endpoint within each
+    #   of the Availability Zones. The Availability Zones are defined
+    #   implicitly in the subnet specifications.
+    #
+    #   In addition to the firewall endpoints that you define in this
+    #   `Firewall` specification, you can create firewall endpoints in
+    #   `VpcEndpointAssociation` resources for any VPC, in any Availability
+    #   Zone where the firewall is already in use.
     #
     #   The status of the firewall, for example whether it's ready to
     #   filter network traffic, is provided in the corresponding
-    #   FirewallStatus. You can retrieve both objects by calling
-    #   DescribeFirewall.
+    #   FirewallStatus. You can retrieve both the firewall and firewall
+    #   status by calling DescribeFirewall.
     #   @return [Types::Firewall]
     #
     # @!attribute [rw] firewall_status
     #   Detailed information about the current status of a Firewall. You can
     #   retrieve this for a firewall by calling DescribeFirewall and
     #   providing the firewall name and ARN.
+    #
+    #   The firewall status indicates a combined status. It indicates
+    #   whether all subnets are up-to-date with the latest firewall
+    #   configurations, which is based on the sync states config values, and
+    #   also whether all subnets have their endpoints fully enabled, based
+    #   on their sync states attachment values.
     #   @return [Types::FirewallStatus]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteFirewallResponse AWS API Documentation
@@ -1242,6 +1371,91 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # @!attribute [rw] vpc_endpoint_association_arn
+    #   The Amazon Resource Name (ARN) of a VPC endpoint association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteVpcEndpointAssociationRequest AWS API Documentation
+    #
+    class DeleteVpcEndpointAssociationRequest < Struct.new(
+      :vpc_endpoint_association_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpc_endpoint_association
+    #   The configuration settings for the VPC endpoint association. These
+    #   settings include the firewall and the VPC and subnet to use for the
+    #   firewall endpoint.
+    #   @return [Types::VpcEndpointAssociation]
+    #
+    # @!attribute [rw] vpc_endpoint_association_status
+    #   Detailed information about the current status of a
+    #   VpcEndpointAssociation. You can retrieve this by calling
+    #   DescribeVpcEndpointAssociation and providing the VPC endpoint
+    #   association ARN.
+    #   @return [Types::VpcEndpointAssociationStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteVpcEndpointAssociationResponse AWS API Documentation
+    #
+    class DeleteVpcEndpointAssociationResponse < Struct.new(
+      :vpc_endpoint_association,
+      :vpc_endpoint_association_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeFirewallMetadataRequest AWS API Documentation
+    #
+    class DescribeFirewallMetadataRequest < Struct.new(
+      :firewall_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_policy_arn
+    #   The Amazon Resource Name (ARN) of the firewall policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the firewall.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The readiness of the configured firewall to handle network traffic
+    #   across all of the Availability Zones where you have it configured.
+    #   This setting is `READY` only when the
+    #   `ConfigurationSyncStateSummary` value is `IN_SYNC` and the
+    #   `Attachment` `Status` values for all of the configured subnets are
+    #   `READY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] supported_availability_zones
+    #   The Availability Zones that the firewall currently supports. This
+    #   includes all Availability Zones for which the firewall has a subnet
+    #   defined.
+    #   @return [Hash<String,Types::AvailabilityZoneMetadata>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeFirewallMetadataResponse AWS API Documentation
+    #
+    class DescribeFirewallMetadataResponse < Struct.new(
+      :firewall_arn,
+      :firewall_policy_arn,
+      :description,
+      :status,
+      :supported_availability_zones)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] firewall_policy_name
     #   The descriptive name of the firewall policy. You can't change the
     #   name of a firewall policy after you create it.
@@ -1350,6 +1564,12 @@ module Aws::NetworkFirewall
     #   Detailed information about the current status of a Firewall. You can
     #   retrieve this for a firewall by calling DescribeFirewall and
     #   providing the firewall name and ARN.
+    #
+    #   The firewall status indicates a combined status. It indicates
+    #   whether all subnets are up-to-date with the latest firewall
+    #   configurations, which is based on the sync states config values, and
+    #   also whether all subnets have their endpoints fully enabled, based
+    #   on their sync states attachment values.
     #   @return [Types::FirewallStatus]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeFirewallResponse AWS API Documentation
@@ -1374,6 +1594,15 @@ module Aws::NetworkFirewall
     #   configure a single flow operation.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_endpoint_association_arn
+    #   The Amazon Resource Name (ARN) of a VPC endpoint association.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   A unique identifier for the primary endpoint associated with a
+    #   firewall.
+    #   @return [String]
+    #
     # @!attribute [rw] flow_operation_id
     #   A unique identifier for the flow operation. This ID is returned in
     #   the responses to start and list commands. You provide to describe
@@ -1385,6 +1614,8 @@ module Aws::NetworkFirewall
     class DescribeFlowOperationRequest < Struct.new(
       :firewall_arn,
       :availability_zone,
+      :vpc_endpoint_association_arn,
+      :vpc_endpoint_id,
       :flow_operation_id)
       SENSITIVE = []
       include Aws::Structure
@@ -1400,6 +1631,15 @@ module Aws::NetworkFirewall
     #
     #   Defines the scope a flow operation. You can use up to 20 filters to
     #   configure a single flow operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_association_arn
+    #   The Amazon Resource Name (ARN) of a VPC endpoint association.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   A unique identifier for the primary endpoint associated with a
+    #   firewall.
     #   @return [String]
     #
     # @!attribute [rw] flow_operation_id
@@ -1443,6 +1683,8 @@ module Aws::NetworkFirewall
     class DescribeFlowOperationResponse < Struct.new(
       :firewall_arn,
       :availability_zone,
+      :vpc_endpoint_association_arn,
+      :vpc_endpoint_id,
       :flow_operation_id,
       :flow_operation_type,
       :flow_operation_status,
@@ -1784,6 +2026,40 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # @!attribute [rw] vpc_endpoint_association_arn
+    #   The Amazon Resource Name (ARN) of a VPC endpoint association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeVpcEndpointAssociationRequest AWS API Documentation
+    #
+    class DescribeVpcEndpointAssociationRequest < Struct.new(
+      :vpc_endpoint_association_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpc_endpoint_association
+    #   The configuration settings for the VPC endpoint association. These
+    #   settings include the firewall and the VPC and subnet to use for the
+    #   firewall endpoint.
+    #   @return [Types::VpcEndpointAssociation]
+    #
+    # @!attribute [rw] vpc_endpoint_association_status
+    #   Detailed information about the current status of a
+    #   VpcEndpointAssociation. You can retrieve this by calling
+    #   DescribeVpcEndpointAssociation and providing the VPC endpoint
+    #   association ARN.
+    #   @return [Types::VpcEndpointAssociationStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeVpcEndpointAssociationResponse AWS API Documentation
+    #
+    class DescribeVpcEndpointAssociationResponse < Struct.new(
+      :vpc_endpoint_association,
+      :vpc_endpoint_association_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The value to use in an Amazon CloudWatch custom metric dimension. This
     # is used in the `PublishMetrics` CustomAction. A CloudWatch custom
     # metric dimension is a name/value pair that's part of the identity of
@@ -1947,14 +2223,21 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # The firewall defines the configuration settings for an Network
-    # Firewall firewall. These settings include the firewall policy, the
-    # subnets in your VPC to use for the firewall endpoints, and any tags
-    # that are attached to the firewall Amazon Web Services resource.
+    # A firewall defines the behavior of a firewall, the main VPC where the
+    # firewall is used, the Availability Zones where the firewall can be
+    # used, and one subnet to use for a firewall endpoint within each of the
+    # Availability Zones. The Availability Zones are defined implicitly in
+    # the subnet specifications.
+    #
+    # In addition to the firewall endpoints that you define in this
+    # `Firewall` specification, you can create firewall endpoints in
+    # `VpcEndpointAssociation` resources for any VPC, in any Availability
+    # Zone where the firewall is already in use.
     #
     # The status of the firewall, for example whether it's ready to filter
     # network traffic, is provided in the corresponding FirewallStatus. You
-    # can retrieve both objects by calling DescribeFirewall.
+    # can retrieve both the firewall and firewall status by calling
+    # DescribeFirewall.
     #
     # @!attribute [rw] firewall_name
     #   The descriptive name of the firewall. You can't change the name of
@@ -1978,8 +2261,23 @@ module Aws::NetworkFirewall
     #   @return [String]
     #
     # @!attribute [rw] subnet_mappings
-    #   The public subnets that Network Firewall is using for the firewall.
-    #   Each subnet must belong to a different Availability Zone.
+    #   The primary public subnets that Network Firewall is using for the
+    #   firewall. Network Firewall creates a firewall endpoint in each
+    #   subnet. Create a subnet mapping for each Availability Zone where you
+    #   want to use the firewall.
+    #
+    #   These subnets are all defined for a single, primary VPC, and each
+    #   must belong to a different Availability Zone. Each of these subnets
+    #   establishes the availability of the firewall in its Availability
+    #   Zone.
+    #
+    #   In addition to these subnets, you can define other endpoints for the
+    #   firewall in `VpcEndpointAssociation` resources. You can define these
+    #   additional endpoints for any VPC, and for any of the Availability
+    #   Zones where the firewall resource already has a subnet mapping. VPC
+    #   endpoint associations give you the ability to protect multiple VPCs
+    #   using a single firewall, and to define multiple firewall endpoints
+    #   for a VPC in a single Availability Zone.
     #   @return [Array<Types::SubnetMapping>]
     #
     # @!attribute [rw] delete_protection
@@ -2022,6 +2320,11 @@ module Aws::NetworkFirewall
     #   configuration settings for your firewall.
     #   @return [Types::EncryptionConfiguration]
     #
+    # @!attribute [rw] number_of_associations
+    #   The number of `VpcEndpointAssociation` resources that use this
+    #   firewall.
+    #   @return [Integer]
+    #
     # @!attribute [rw] enabled_analysis_types
     #   An optional setting indicating the specific traffic analysis types
     #   to enable on the firewall.
@@ -2042,6 +2345,7 @@ module Aws::NetworkFirewall
       :firewall_id,
       :tags,
       :encryption_configuration,
+      :number_of_associations,
       :enabled_analysis_types)
       SENSITIVE = []
       include Aws::Structure
@@ -2289,9 +2593,15 @@ module Aws::NetworkFirewall
     # retrieve this for a firewall by calling DescribeFirewall and providing
     # the firewall name and ARN.
     #
+    # The firewall status indicates a combined status. It indicates whether
+    # all subnets are up-to-date with the latest firewall configurations,
+    # which is based on the sync states config values, and also whether all
+    # subnets have their endpoints fully enabled, based on their sync states
+    # attachment values.
+    #
     # @!attribute [rw] status
     #   The readiness of the configured firewall to handle network traffic
-    #   across all of the Availability Zones where you've configured it.
+    #   across all of the Availability Zones where you have it configured.
     #   This setting is `READY` only when the
     #   `ConfigurationSyncStateSummary` value is `IN_SYNC` and the
     #   `Attachment` `Status` values for all of the configured subnets are
@@ -2300,34 +2610,35 @@ module Aws::NetworkFirewall
     #
     # @!attribute [rw] configuration_sync_state_summary
     #   The configuration sync state for the firewall. This summarizes the
-    #   sync states reported in the `Config` settings for all of the
-    #   Availability Zones where you have configured the firewall.
+    #   `Config` settings in the `SyncStates` for this firewall status
+    #   object.
     #
     #   When you create a firewall or update its configuration, for example
     #   by adding a rule group to its firewall policy, Network Firewall
-    #   distributes the configuration changes to all zones where the
-    #   firewall is in use. This summary indicates whether the configuration
-    #   changes have been applied everywhere.
+    #   distributes the configuration changes to all Availability Zones that
+    #   have subnets defined for the firewall. This summary indicates
+    #   whether the configuration changes have been applied everywhere.
     #
     #   This status must be `IN_SYNC` for the firewall to be ready for use,
     #   but it doesn't indicate that the firewall is ready. The `Status`
-    #   setting indicates firewall readiness.
+    #   setting indicates firewall readiness. It's based on this setting
+    #   and the readiness of the firewall endpoints to take traffic.
     #   @return [String]
     #
     # @!attribute [rw] sync_states
-    #   The subnets that you've configured for use by the Network Firewall
-    #   firewall. This contains one array element per Availability Zone
-    #   where you've configured a subnet. These objects provide details of
-    #   the information that is summarized in the
-    #   `ConfigurationSyncStateSummary` and `Status`, broken down by zone
-    #   and configuration object.
+    #   Status for the subnets that you've configured in the firewall. This
+    #   contains one array element per Availability Zone where you've
+    #   configured a subnet in the firewall.
+    #
+    #   These objects provide detailed information for the settings
+    #   `ConfigurationSyncStateSummary` and `Status`.
     #   @return [Hash<String,Types::SyncState>]
     #
     # @!attribute [rw] capacity_usage_summary
     #   Describes the capacity usage of the resources contained in a
-    #   firewall's reference sets. Network Firewall calclulates the
-    #   capacity usage by taking an aggregated count of all of the resources
-    #   used by all of the reference sets in a firewall.
+    #   firewall's reference sets. Network Firewall calculates the capacity
+    #   usage by taking an aggregated count of all of the resources used by
+    #   all of the reference sets in a firewall.
     #   @return [Types::CapacityUsageSummary]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/FirewallStatus AWS API Documentation
@@ -3126,6 +3437,15 @@ module Aws::NetworkFirewall
     #   configure a single flow operation.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_endpoint_id
+    #   A unique identifier for the primary endpoint associated with a
+    #   firewall.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_association_arn
+    #   The Amazon Resource Name (ARN) of a VPC endpoint association.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListFlowOperationResultsRequest AWS API Documentation
     #
     class ListFlowOperationResultsRequest < Struct.new(
@@ -3133,7 +3453,9 @@ module Aws::NetworkFirewall
       :flow_operation_id,
       :next_token,
       :max_results,
-      :availability_zone)
+      :availability_zone,
+      :vpc_endpoint_id,
+      :vpc_endpoint_association_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3148,6 +3470,12 @@ module Aws::NetworkFirewall
     #
     #   Defines the scope a flow operation. You can use up to 20 filters to
     #   configure a single flow operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_association_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_id
     #   @return [String]
     #
     # @!attribute [rw] flow_operation_id
@@ -3195,6 +3523,8 @@ module Aws::NetworkFirewall
     class ListFlowOperationResultsResponse < Struct.new(
       :firewall_arn,
       :availability_zone,
+      :vpc_endpoint_association_arn,
+      :vpc_endpoint_id,
       :flow_operation_id,
       :flow_operation_status,
       :status_message,
@@ -3215,6 +3545,15 @@ module Aws::NetworkFirewall
     #
     #   Defines the scope a flow operation. You can use up to 20 filters to
     #   configure a single flow operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_association_arn
+    #   The Amazon Resource Name (ARN) of a VPC endpoint association.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   A unique identifier for the primary endpoint associated with a
+    #   firewall.
     #   @return [String]
     #
     # @!attribute [rw] flow_operation_type
@@ -3242,6 +3581,8 @@ module Aws::NetworkFirewall
     class ListFlowOperationsRequest < Struct.new(
       :firewall_arn,
       :availability_zone,
+      :vpc_endpoint_association_arn,
+      :vpc_endpoint_id,
       :flow_operation_type,
       :next_token,
       :max_results)
@@ -3436,6 +3777,64 @@ module Aws::NetworkFirewall
     class ListTagsForResourceResponse < Struct.new(
       :next_token,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   When you request a list of objects with a `MaxResults` setting, if
+    #   the number of objects that are still available for retrieval exceeds
+    #   the maximum you requested, Network Firewall returns a `NextToken`
+    #   value in the response. To retrieve the next batch of objects, use
+    #   the token returned from the prior request in your next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects that you want Network Firewall to
+    #   return for this request. If more objects are available, in the
+    #   response, Network Firewall provides a `NextToken` value that you can
+    #   use in a subsequent call to get the next batch of objects.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #
+    #   If you don't specify this, Network Firewall retrieves all VPC
+    #   endpoint associations that you have defined.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListVpcEndpointAssociationsRequest AWS API Documentation
+    #
+    class ListVpcEndpointAssociationsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :firewall_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   When you request a list of objects with a `MaxResults` setting, if
+    #   the number of objects that are still available for retrieval exceeds
+    #   the maximum you requested, Network Firewall returns a `NextToken`
+    #   value in the response. To retrieve the next batch of objects, use
+    #   the token returned from the prior request in your next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_associations
+    #   The VPC endpoint assocation metadata objects for the firewall that
+    #   you specified. If you didn't specify a firewall, this is all VPC
+    #   endpoint associations that you have defined.
+    #
+    #   Depending on your setting for max results and the number of
+    #   firewalls you have, a single call might not be the full list.
+    #   @return [Array<Types::VpcEndpointAssociationMetadata>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListVpcEndpointAssociationsResponse AWS API Documentation
+    #
+    class ListVpcEndpointAssociationsResponse < Struct.new(
+      :next_token,
+      :vpc_endpoint_associations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3702,13 +4101,13 @@ module Aws::NetworkFirewall
 
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the account that you want to share
-    #   rule groups and firewall policies with.
+    #   your Network Firewall resources with.
     #   @return [String]
     #
     # @!attribute [rw] policy
     #   The IAM policy statement that lists the accounts that you want to
-    #   share your rule group or firewall policy with and the operations
-    #   that you want the accounts to be able to perform.
+    #   share your Network Firewall resources with and the operations that
+    #   you want the accounts to be able to perform.
     #
     #   For a rule group resource, you can specify the following operations
     #   in the Actions section of the statement:
@@ -3726,9 +4125,18 @@ module Aws::NetworkFirewall
     #
     #   * network-firewall:ListFirewallPolicies
     #
+    #   For a firewall resource, you can specify the following operations in
+    #   the Actions section of the statement:
+    #
+    #   * network-firewall:CreateVpcEndpointAssociation
+    #
+    #   * network-firewall:DescribeFirewallMetadata
+    #
+    #   * network-firewall:ListFirewalls
+    #
     #   In the Resource section of the statement, you specify the ARNs for
-    #   the rule groups and firewall policies that you want to share with
-    #   the account that you specified in `Arn`.
+    #   the Network Firewall resources that you want to share with the
+    #   account that you specified in `Arn`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/PutResourcePolicyRequest AWS API Documentation
@@ -4437,6 +4845,15 @@ module Aws::NetworkFirewall
     #   configure a single flow operation.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_endpoint_association_arn
+    #   The Amazon Resource Name (ARN) of a VPC endpoint association.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   A unique identifier for the primary endpoint associated with a
+    #   firewall.
+    #   @return [String]
+    #
     # @!attribute [rw] minimum_flow_age_in_seconds
     #   The reqested `FlowOperation` ignores flows with an age (in seconds)
     #   lower than `MinimumFlowAgeInSeconds`. You provide this for start
@@ -4458,6 +4875,8 @@ module Aws::NetworkFirewall
     class StartFlowCaptureRequest < Struct.new(
       :firewall_arn,
       :availability_zone,
+      :vpc_endpoint_association_arn,
+      :vpc_endpoint_id,
       :minimum_flow_age_in_seconds,
       :flow_filters)
       SENSITIVE = []
@@ -4505,6 +4924,15 @@ module Aws::NetworkFirewall
     #   configure a single flow operation.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_endpoint_association_arn
+    #   The Amazon Resource Name (ARN) of a VPC endpoint association.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   A unique identifier for the primary endpoint associated with a
+    #   firewall.
+    #   @return [String]
+    #
     # @!attribute [rw] minimum_flow_age_in_seconds
     #   The reqested `FlowOperation` ignores flows with an age (in seconds)
     #   lower than `MinimumFlowAgeInSeconds`. You provide this for start
@@ -4521,6 +4949,8 @@ module Aws::NetworkFirewall
     class StartFlowFlushRequest < Struct.new(
       :firewall_arn,
       :availability_zone,
+      :vpc_endpoint_association_arn,
+      :vpc_endpoint_id,
       :minimum_flow_age_in_seconds,
       :flow_filters)
       SENSITIVE = []
@@ -4845,10 +5275,11 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # The ID for a subnet that you want to associate with the firewall. This
-    # is used with CreateFirewall and AssociateSubnets. Network Firewall
-    # creates an instance of the associated firewall in each subnet that you
-    # specify, to filter traffic in the subnet's Availability Zone.
+    # The ID for a subnet that's used in an association with a firewall.
+    # This is used in CreateFirewall, AssociateSubnets, and
+    # CreateVpcEndpointAssociation. Network Firewall creates an instance of
+    # the associated firewall in each subnet that you specify, to filter
+    # traffic in the subnet's Availability Zone.
     #
     # @!attribute [rw] subnet_id
     #   The unique identifier for the subnet.
@@ -4869,7 +5300,7 @@ module Aws::NetworkFirewall
     end
 
     # The status of the firewall endpoint and firewall policy configuration
-    # for a single VPC subnet.
+    # for a single VPC subnet. This is part of the FirewallStatus.
     #
     # For each VPC subnet that you associate with a firewall, Network
     # Firewall does the following:
@@ -4886,11 +5317,10 @@ module Aws::NetworkFirewall
     # complete.
     #
     # @!attribute [rw] attachment
-    #   The attachment status of the firewall's association with a single
-    #   VPC subnet. For each configured subnet, Network Firewall creates the
-    #   attachment by instantiating the firewall endpoint in the subnet so
-    #   that it's ready to take traffic. This is part of the
-    #   FirewallStatus.
+    #   The configuration and status for a single firewall subnet. For each
+    #   configured subnet, Network Firewall creates the attachment by
+    #   instantiating the firewall endpoint in the subnet so that it's
+    #   ready to take traffic.
     #   @return [Types::Attachment]
     #
     # @!attribute [rw] config
@@ -4899,7 +5329,7 @@ module Aws::NetworkFirewall
     #   are configured in the firewall policy. Each time you add a subnet or
     #   modify the associated firewall policy, Network Firewall synchronizes
     #   the rules in the endpoint, so it can properly filter network
-    #   traffic. This is part of the FirewallStatus.
+    #   traffic.
     #   @return [Hash<String,Types::PerObjectStatus>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/SyncState AWS API Documentation
@@ -6226,6 +6656,139 @@ module Aws::NetworkFirewall
     class UpdateTLSInspectionConfigurationResponse < Struct.new(
       :update_token,
       :tls_inspection_configuration_response)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A VPC endpoint association defines a single subnet to use for a
+    # firewall endpoint for a `Firewall`. You can define VPC endpoint
+    # associations only in the Availability Zones that already have a subnet
+    # mapping defined in the `Firewall` resource.
+    #
+    # <note markdown="1"> You can retrieve the list of Availability Zones that are available for
+    # use by calling `DescribeFirewallMetadata`.
+    #
+    #  </note>
+    #
+    # To manage firewall endpoints, first, in the `Firewall` specification,
+    # you specify a single VPC and one subnet for each of the Availability
+    # Zones where you want to use the firewall. Then you can define
+    # additional endpoints as VPC endpoint associations.
+    #
+    # You can use VPC endpoint associations to expand the protections of the
+    # firewall as follows:
+    #
+    # * **Protect multiple VPCs with a single firewall** - You can use the
+    #   firewall to protect other VPCs, either in your account or in
+    #   accounts where the firewall is shared. You can only specify
+    #   Availability Zones that already have a firewall endpoint defined in
+    #   the `Firewall` subnet mappings.
+    #
+    # * **Define multiple firewall endpoints for a VPC in an Availability
+    #   Zone** - You can create additional firewall endpoints for the VPC
+    #   that you have defined in the firewall, in any Availability Zone that
+    #   already has an endpoint defined in the `Firewall` subnet mappings.
+    #   You can create multiple VPC endpoint associations for any other VPC
+    #   where you use the firewall.
+    #
+    # You can use Resource Access Manager to share a `Firewall` that you own
+    # with other accounts, which gives them the ability to use the firewall
+    # to create VPC endpoint associations. For information about sharing a
+    # firewall, see `PutResourcePolicy` in this guide and see [Sharing
+    # Network Firewall resources][1] in the *Network Firewall Developer
+    # Guide*.
+    #
+    # The status of the VPC endpoint association, which indicates whether
+    # it's ready to filter network traffic, is provided in the
+    # corresponding VpcEndpointAssociationStatus. You can retrieve both the
+    # association and its status by calling DescribeVpcEndpointAssociation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/sharing.html
+    #
+    # @!attribute [rw] vpc_endpoint_association_id
+    #   The unique identifier of the VPC endpoint association.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_association_arn
+    #   The Amazon Resource Name (ARN) of a VPC endpoint association.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The unique identifier of the VPC for the endpoint association.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_mapping
+    #   The ID for a subnet that's used in an association with a firewall.
+    #   This is used in CreateFirewall, AssociateSubnets, and
+    #   CreateVpcEndpointAssociation. Network Firewall creates an instance
+    #   of the associated firewall in each subnet that you specify, to
+    #   filter traffic in the subnet's Availability Zone.
+    #   @return [Types::SubnetMapping]
+    #
+    # @!attribute [rw] description
+    #   A description of the VPC endpoint association.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The key:value pairs to associate with the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/VpcEndpointAssociation AWS API Documentation
+    #
+    class VpcEndpointAssociation < Struct.new(
+      :vpc_endpoint_association_id,
+      :vpc_endpoint_association_arn,
+      :firewall_arn,
+      :vpc_id,
+      :subnet_mapping,
+      :description,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # High-level information about a VPC endpoint association, returned by
+    # `ListVpcEndpointAssociations`. You can use the information provided in
+    # the metadata to retrieve and manage a VPC endpoint association.
+    #
+    # @!attribute [rw] vpc_endpoint_association_arn
+    #   The Amazon Resource Name (ARN) of a VPC endpoint association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/VpcEndpointAssociationMetadata AWS API Documentation
+    #
+    class VpcEndpointAssociationMetadata < Struct.new(
+      :vpc_endpoint_association_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Detailed information about the current status of a
+    # VpcEndpointAssociation. You can retrieve this by calling
+    # DescribeVpcEndpointAssociation and providing the VPC endpoint
+    # association ARN.
+    #
+    # @!attribute [rw] status
+    #   The readiness of the configured firewall endpoint to handle network
+    #   traffic.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_sync_state
+    #   The list of the Availability Zone sync states for all subnets that
+    #   are defined by the firewall.
+    #   @return [Hash<String,Types::AZSyncState>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/VpcEndpointAssociationStatus AWS API Documentation
+    #
+    class VpcEndpointAssociationStatus < Struct.new(
+      :status,
+      :association_sync_state)
       SENSITIVE = []
       include Aws::Structure
     end

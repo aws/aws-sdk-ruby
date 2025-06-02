@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2025-05-28)
+------------------
+
+* Feature - Allow for more than 2 characters for location codes in EventBridge ARNs
+
 1.81.0 (2025-05-12)
 ------------------
 

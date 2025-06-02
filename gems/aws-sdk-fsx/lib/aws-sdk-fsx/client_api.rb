@@ -263,6 +263,8 @@ module Aws::FSx
     LustreLogCreateConfiguration = Shapes::StructureShape.new(name: 'LustreLogCreateConfiguration')
     LustreNoSquashNid = Shapes::StringShape.new(name: 'LustreNoSquashNid')
     LustreNoSquashNids = Shapes::ListShape.new(name: 'LustreNoSquashNids')
+    LustreReadCacheConfiguration = Shapes::StructureShape.new(name: 'LustreReadCacheConfiguration')
+    LustreReadCacheSizingMode = Shapes::StringShape.new(name: 'LustreReadCacheSizingMode')
     LustreRootSquash = Shapes::StringShape.new(name: 'LustreRootSquash')
     LustreRootSquashConfiguration = Shapes::StructureShape.new(name: 'LustreRootSquashConfiguration')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -399,6 +401,7 @@ module Aws::FSx
     Tags = Shapes::ListShape.new(name: 'Tags')
     TaskId = Shapes::StringShape.new(name: 'TaskId')
     TaskIds = Shapes::ListShape.new(name: 'TaskIds')
+    ThroughputCapacityMbps = Shapes::IntegerShape.new(name: 'ThroughputCapacityMbps')
     ThroughputCapacityPerHAPair = Shapes::IntegerShape.new(name: 'ThroughputCapacityPerHAPair')
     TieringPolicy = Shapes::StructureShape.new(name: 'TieringPolicy')
     TieringPolicyName = Shapes::StringShape.new(name: 'TieringPolicyName')
@@ -697,6 +700,8 @@ module Aws::FSx
     CreateFileSystemLustreConfiguration.add_member(:log_configuration, Shapes::ShapeRef.new(shape: LustreLogCreateConfiguration, location_name: "LogConfiguration"))
     CreateFileSystemLustreConfiguration.add_member(:root_squash_configuration, Shapes::ShapeRef.new(shape: LustreRootSquashConfiguration, location_name: "RootSquashConfiguration"))
     CreateFileSystemLustreConfiguration.add_member(:metadata_configuration, Shapes::ShapeRef.new(shape: CreateFileSystemLustreMetadataConfiguration, location_name: "MetadataConfiguration"))
+    CreateFileSystemLustreConfiguration.add_member(:throughput_capacity, Shapes::ShapeRef.new(shape: ThroughputCapacityMbps, location_name: "ThroughputCapacity"))
+    CreateFileSystemLustreConfiguration.add_member(:data_read_cache_configuration, Shapes::ShapeRef.new(shape: LustreReadCacheConfiguration, location_name: "DataReadCacheConfiguration"))
     CreateFileSystemLustreConfiguration.struct_class = Types::CreateFileSystemLustreConfiguration
 
     CreateFileSystemLustreMetadataConfiguration.add_member(:iops, Shapes::ShapeRef.new(shape: MetadataIops, location_name: "Iops"))
@@ -1343,6 +1348,8 @@ module Aws::FSx
     LustreFileSystemConfiguration.add_member(:root_squash_configuration, Shapes::ShapeRef.new(shape: LustreRootSquashConfiguration, location_name: "RootSquashConfiguration"))
     LustreFileSystemConfiguration.add_member(:metadata_configuration, Shapes::ShapeRef.new(shape: FileSystemLustreMetadataConfiguration, location_name: "MetadataConfiguration"))
     LustreFileSystemConfiguration.add_member(:efa_enabled, Shapes::ShapeRef.new(shape: Flag, location_name: "EfaEnabled"))
+    LustreFileSystemConfiguration.add_member(:throughput_capacity, Shapes::ShapeRef.new(shape: ThroughputCapacityMbps, location_name: "ThroughputCapacity"))
+    LustreFileSystemConfiguration.add_member(:data_read_cache_configuration, Shapes::ShapeRef.new(shape: LustreReadCacheConfiguration, location_name: "DataReadCacheConfiguration"))
     LustreFileSystemConfiguration.struct_class = Types::LustreFileSystemConfiguration
 
     LustreLogConfiguration.add_member(:level, Shapes::ShapeRef.new(shape: LustreAccessAuditLogLevel, required: true, location_name: "Level"))
@@ -1354,6 +1361,10 @@ module Aws::FSx
     LustreLogCreateConfiguration.struct_class = Types::LustreLogCreateConfiguration
 
     LustreNoSquashNids.member = Shapes::ShapeRef.new(shape: LustreNoSquashNid)
+
+    LustreReadCacheConfiguration.add_member(:sizing_mode, Shapes::ShapeRef.new(shape: LustreReadCacheSizingMode, location_name: "SizingMode"))
+    LustreReadCacheConfiguration.add_member(:size_gi_b, Shapes::ShapeRef.new(shape: StorageCapacity, location_name: "SizeGiB"))
+    LustreReadCacheConfiguration.struct_class = Types::LustreReadCacheConfiguration
 
     LustreRootSquashConfiguration.add_member(:root_squash, Shapes::ShapeRef.new(shape: LustreRootSquash, location_name: "RootSquash"))
     LustreRootSquashConfiguration.add_member(:no_squash_nids, Shapes::ShapeRef.new(shape: LustreNoSquashNids, location_name: "NoSquashNids"))
@@ -1714,6 +1725,8 @@ module Aws::FSx
     UpdateFileSystemLustreConfiguration.add_member(:root_squash_configuration, Shapes::ShapeRef.new(shape: LustreRootSquashConfiguration, location_name: "RootSquashConfiguration"))
     UpdateFileSystemLustreConfiguration.add_member(:per_unit_storage_throughput, Shapes::ShapeRef.new(shape: PerUnitStorageThroughput, location_name: "PerUnitStorageThroughput"))
     UpdateFileSystemLustreConfiguration.add_member(:metadata_configuration, Shapes::ShapeRef.new(shape: UpdateFileSystemLustreMetadataConfiguration, location_name: "MetadataConfiguration"))
+    UpdateFileSystemLustreConfiguration.add_member(:throughput_capacity, Shapes::ShapeRef.new(shape: ThroughputCapacityMbps, location_name: "ThroughputCapacity"))
+    UpdateFileSystemLustreConfiguration.add_member(:data_read_cache_configuration, Shapes::ShapeRef.new(shape: LustreReadCacheConfiguration, location_name: "DataReadCacheConfiguration"))
     UpdateFileSystemLustreConfiguration.struct_class = Types::UpdateFileSystemLustreConfiguration
 
     UpdateFileSystemLustreMetadataConfiguration.add_member(:iops, Shapes::ShapeRef.new(shape: MetadataIops, location_name: "Iops"))

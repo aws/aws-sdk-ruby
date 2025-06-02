@@ -105,6 +105,12 @@ module Aws::CloudTrail
     class ConflictException < Aws::EmptyStructure
     end
 
+    class ContextKeySelector
+      attr_accessor type: ("TagContext" | "RequestContext")
+      attr_accessor equals: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class CreateChannelRequest
       attr_accessor name: ::String
       attr_accessor source: ::String
@@ -438,6 +444,18 @@ module Aws::CloudTrail
       SENSITIVE: []
     end
 
+    class GetEventConfigurationRequest
+      attr_accessor event_data_store: ::String
+      SENSITIVE: []
+    end
+
+    class GetEventConfigurationResponse
+      attr_accessor event_data_store_arn: ::String
+      attr_accessor max_event_size: ("Standard" | "Large")
+      attr_accessor context_key_selectors: ::Array[Types::ContextKeySelector]
+      SENSITIVE: []
+    end
+
     class GetEventDataStoreRequest
       attr_accessor event_data_store: ::String
       SENSITIVE: []
@@ -634,6 +652,9 @@ module Aws::CloudTrail
     end
 
     class InsufficientEncryptionPolicyException < Aws::EmptyStructure
+    end
+
+    class InsufficientIAMAccessPermissionException < Aws::EmptyStructure
     end
 
     class InsufficientS3BucketPolicyException < Aws::EmptyStructure
@@ -928,6 +949,20 @@ module Aws::CloudTrail
       attr_accessor validity_start_time: ::Time
       attr_accessor validity_end_time: ::Time
       attr_accessor fingerprint: ::String
+      SENSITIVE: []
+    end
+
+    class PutEventConfigurationRequest
+      attr_accessor event_data_store: ::String
+      attr_accessor max_event_size: ("Standard" | "Large")
+      attr_accessor context_key_selectors: ::Array[Types::ContextKeySelector]
+      SENSITIVE: []
+    end
+
+    class PutEventConfigurationResponse
+      attr_accessor event_data_store_arn: ::String
+      attr_accessor max_event_size: ("Standard" | "Large")
+      attr_accessor context_key_selectors: ::Array[Types::ContextKeySelector]
       SENSITIVE: []
     end
 

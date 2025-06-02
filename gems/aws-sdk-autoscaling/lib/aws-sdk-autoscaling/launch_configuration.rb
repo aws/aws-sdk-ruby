@@ -43,7 +43,7 @@ module Aws::AutoScaling
 
     # The ID of the Amazon Machine Image (AMI) to use to launch your EC2
     # instances. For more information, see [Find a Linux AMI][1] in the
-    # *Amazon EC2 User Guide for Linux Instances*.
+    # *Amazon EC2 User Guide*.
     #
     #
     #
@@ -56,7 +56,7 @@ module Aws::AutoScaling
     # The name of the key pair.
     #
     # For more information, see [Amazon EC2 key pairs and Amazon EC2
-    # instances][1] in the *Amazon EC2 User Guide for Linux Instances*.
+    # instances][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -92,16 +92,15 @@ module Aws::AutoScaling
     end
 
     # The user data to make available to the launched EC2 instances. For
-    # more information, see [Instance metadata and user data][1] (Linux) and
-    # [Instance metadata and user data][2] (Windows). If you are using a
-    # command line tool, base64-encoding is performed for you, and you can
-    # load the text from a file. Otherwise, you must provide base64-encoded
-    # text. User data is limited to 16 KB.
+    # more information, see [Instance metadata and user data][1] in the
+    # *Amazon EC2 User Guide*. If you are using a command line tool,
+    # base64-encoding is performed for you, and you can load the text from a
+    # file. Otherwise, you must provide base64-encoded text. User data is
+    # limited to 16 KB.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html
     # @return [String]
     def user_data
       data[:user_data]
@@ -109,7 +108,7 @@ module Aws::AutoScaling
 
     # The instance type for the instances. For information about available
     # instance types, see [Available instance types][1] in the *Amazon EC2
-    # User Guide for Linux Instances*.
+    # User Guide*.
     #
     #
     #
@@ -135,7 +134,7 @@ module Aws::AutoScaling
     # attach to the instances at launch. By default, the block devices
     # specified in the block device mapping for the AMI are used. For more
     # information, see [Block device mappings][1] in the *Amazon EC2 User
-    # Guide for Linux Instances*.
+    # Guide*.
     #
     #
     #
@@ -195,8 +194,7 @@ module Aws::AutoScaling
 
     # Specifies whether the launch configuration is optimized for EBS I/O
     # (`true`) or not (`false`). For more information, see [Amazon
-    # EBS-optimized instances][1] in the *Amazon EC2 User Guide for Linux
-    # Instances*.
+    # EBS-optimized instances][1] in the *Amazon EC2 User Guide*.
     #
     #
     #

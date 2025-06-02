@@ -1039,6 +1039,28 @@ module Aws::EMRServerless
       include Aws::Structure
     end
 
+    # Optional IAM policy. The resulting job IAM role permissions will be an
+    # intersection of the policies passed and the policy associated with
+    # your job execution role.
+    #
+    # @!attribute [rw] policy
+    #   An IAM inline policy to use as an execution IAM policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_arns
+    #   A list of Amazon Resource Names (ARNs) to use as an execution IAM
+    #   policy.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/JobRunExecutionIamPolicy AWS API Documentation
+    #
+    class JobRunExecutionIamPolicy < Struct.new(
+      :policy,
+      :policy_arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The summary of attributes associated with a job run.
     #
     # @!attribute [rw] application_id
@@ -1594,6 +1616,12 @@ module Aws::EMRServerless
     #   The execution role ARN for the job run.
     #   @return [String]
     #
+    # @!attribute [rw] execution_iam_policy
+    #   You can pass an optional IAM policy. The resulting job IAM role
+    #   permissions will be an intersection of this policy and the policy
+    #   associated with your job execution role.
+    #   @return [Types::JobRunExecutionIamPolicy]
+    #
     # @!attribute [rw] job_driver
     #   The job driver for the job run.
     #   @return [Types::JobDriver]
@@ -1629,6 +1657,7 @@ module Aws::EMRServerless
       :application_id,
       :client_token,
       :execution_role_arn,
+      :execution_iam_policy,
       :job_driver,
       :configuration_overrides,
       :tags,

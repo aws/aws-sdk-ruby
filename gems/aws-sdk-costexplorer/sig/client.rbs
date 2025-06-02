@@ -419,6 +419,59 @@ module Aws
                               ) -> _GetCostAndUsageResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCostAndUsageResponseSuccess
 
+      interface _GetCostAndUsageComparisonsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCostAndUsageComparisonsResponse]
+        def cost_and_usage_comparisons: () -> ::Array[Types::CostAndUsageComparison]
+        def total_cost_and_usage: () -> ::Hash[::String, Types::ComparisonMetricValue]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#get_cost_and_usage_comparisons-instance_method
+      def get_cost_and_usage_comparisons: (
+                                            ?billing_view_arn: ::String,
+                                            baseline_time_period: {
+                                              start: ::String,
+                                              end: ::String
+                                            },
+                                            comparison_time_period: {
+                                              start: ::String,
+                                              end: ::String
+                                            },
+                                            metric_for_comparison: ::String,
+                                            ?filter: {
+                                              or: Array[
+                                                untyped,
+                                              ]?,
+                                              and: Array[
+                                                untyped,
+                                              ]?,
+                                              not: untyped?,
+                                              dimensions: {
+                                                key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "AGREEMENT_END_DATE_TIME_AFTER" | "AGREEMENT_END_DATE_TIME_BEFORE" | "INVOICING_ENTITY" | "ANOMALY_TOTAL_IMPACT_ABSOLUTE" | "ANOMALY_TOTAL_IMPACT_PERCENTAGE")?,
+                                                values: Array[::String]?,
+                                                match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                              }?,
+                                              tags: {
+                                                key: ::String?,
+                                                values: Array[::String]?,
+                                                match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                              }?,
+                                              cost_categories: {
+                                                key: ::String?,
+                                                values: Array[::String]?,
+                                                match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                              }?
+                                            },
+                                            ?group_by: Array[
+                                              {
+                                                type: ("DIMENSION" | "TAG" | "COST_CATEGORY")?,
+                                                key: ::String?
+                                              },
+                                            ],
+                                            ?max_results: ::Integer,
+                                            ?next_page_token: ::String
+                                          ) -> _GetCostAndUsageComparisonsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCostAndUsageComparisonsResponseSuccess
+
       interface _GetCostAndUsageWithResourcesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetCostAndUsageWithResourcesResponse]
         def next_page_token: () -> ::String
@@ -520,6 +573,58 @@ module Aws
                                  ?next_page_token: ::String
                                ) -> _GetCostCategoriesResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCostCategoriesResponseSuccess
+
+      interface _GetCostComparisonDriversResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCostComparisonDriversResponse]
+        def cost_comparison_drivers: () -> ::Array[Types::CostComparisonDriver]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#get_cost_comparison_drivers-instance_method
+      def get_cost_comparison_drivers: (
+                                         ?billing_view_arn: ::String,
+                                         baseline_time_period: {
+                                           start: ::String,
+                                           end: ::String
+                                         },
+                                         comparison_time_period: {
+                                           start: ::String,
+                                           end: ::String
+                                         },
+                                         metric_for_comparison: ::String,
+                                         ?filter: {
+                                           or: Array[
+                                             untyped,
+                                           ]?,
+                                           and: Array[
+                                             untyped,
+                                           ]?,
+                                           not: untyped?,
+                                           dimensions: {
+                                             key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "AGREEMENT_END_DATE_TIME_AFTER" | "AGREEMENT_END_DATE_TIME_BEFORE" | "INVOICING_ENTITY" | "ANOMALY_TOTAL_IMPACT_ABSOLUTE" | "ANOMALY_TOTAL_IMPACT_PERCENTAGE")?,
+                                             values: Array[::String]?,
+                                             match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                           }?,
+                                           tags: {
+                                             key: ::String?,
+                                             values: Array[::String]?,
+                                             match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                           }?,
+                                           cost_categories: {
+                                             key: ::String?,
+                                             values: Array[::String]?,
+                                             match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]?
+                                           }?
+                                         },
+                                         ?group_by: Array[
+                                           {
+                                             type: ("DIMENSION" | "TAG" | "COST_CATEGORY")?,
+                                             key: ::String?
+                                           },
+                                         ],
+                                         ?max_results: ::Integer,
+                                         ?next_page_token: ::String
+                                       ) -> _GetCostComparisonDriversResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCostComparisonDriversResponseSuccess
 
       interface _GetCostForecastResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetCostForecastResponse]

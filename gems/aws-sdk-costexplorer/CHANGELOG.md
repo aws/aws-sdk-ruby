@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.126.0 (2025-05-27)
+------------------
+
+* Feature - This release introduces Cost Comparison feature (GetCostAndUsageComparisons, GetCostComparisonDrivers) allowing you find cost variations across multiple dimensions and identify key drivers of spending changes.
+
 1.125.0 (2025-05-12)
 ------------------
 

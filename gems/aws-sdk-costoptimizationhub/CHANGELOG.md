@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2025-05-28)
+------------------
+
+* Feature - This release allows customers to modify their preferred commitment term and payment options.
+
 1.25.0 (2025-05-12)
 ------------------
 

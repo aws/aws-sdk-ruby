@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2025-05-29)
+------------------
+
+* Feature - Add AFTER_DISCOUNTS_AND_COMMITMENTS to Workload Estimate Rate Type. Set ListWorkLoadEstimateUsage maxResults range to minimum of 0 and maximum of 300.
+
 1.9.0 (2025-05-12)
 ------------------
 

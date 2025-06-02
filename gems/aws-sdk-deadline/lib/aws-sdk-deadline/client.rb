@@ -1292,6 +1292,7 @@ module Aws::Deadline
     #         instance_market_options: { # required
     #           type: "on-demand", # required, accepts on-demand, spot
     #         },
+    #         storage_profile_id: "StorageProfileId",
     #       },
     #     },
     #     tags: {
@@ -2667,6 +2668,7 @@ module Aws::Deadline
     #   resp.configuration.service_managed_ec2.instance_capabilities.custom_attributes[0].values #=> Array
     #   resp.configuration.service_managed_ec2.instance_capabilities.custom_attributes[0].values[0] #=> String
     #   resp.configuration.service_managed_ec2.instance_market_options.type #=> String, one of "on-demand", "spot"
+    #   resp.configuration.service_managed_ec2.storage_profile_id #=> String
     #   resp.host_configuration.script_body #=> String
     #   resp.host_configuration.script_timeout_seconds #=> Integer
     #   resp.capabilities.amounts #=> Array
@@ -4073,6 +4075,7 @@ module Aws::Deadline
     #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.custom_attributes[0].values #=> Array
     #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.custom_attributes[0].values[0] #=> String
     #   resp.fleets[0].configuration.service_managed_ec2.instance_market_options.type #=> String, one of "on-demand", "spot"
+    #   resp.fleets[0].configuration.service_managed_ec2.storage_profile_id #=> String
     #   resp.fleets[0].created_at #=> Time
     #   resp.fleets[0].created_by #=> String
     #   resp.fleets[0].updated_at #=> Time
@@ -6265,6 +6268,7 @@ module Aws::Deadline
     #         instance_market_options: { # required
     #           type: "on-demand", # required, accepts on-demand, spot
     #         },
+    #         storage_profile_id: "StorageProfileId",
     #       },
     #     },
     #     host_configuration: {
@@ -7058,7 +7062,7 @@ module Aws::Deadline
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-deadline'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

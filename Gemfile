@@ -6,7 +6,9 @@ gem 'rake', require: false
 # SDK feature dependencies
 gem 'aws-crt' if ENV['CRT']
 gem 'base64'
-gem 'bigdecimal'
+# temp version constraint due to JRuby 9.4:
+# see: https://github.com/ruby/bigdecimal/issues/331
+gem 'bigdecimal', '3.1.9'
 gem 'csv'
 gem 'http-2'
 gem 'jmespath'

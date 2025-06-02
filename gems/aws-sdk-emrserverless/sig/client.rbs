@@ -292,6 +292,10 @@ module Aws
                            application_id: ::String,
                            client_token: ::String,
                            execution_role_arn: ::String,
+                           ?execution_iam_policy: {
+                             policy: ::String?,
+                             policy_arns: Array[::String]?
+                           },
                            ?job_driver: {
                              spark_submit: {
                                entry_point: ::String,

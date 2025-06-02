@@ -82,6 +82,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GetPreferencesResponse]
         def savings_estimation_mode: () -> ("BeforeDiscounts" | "AfterDiscounts")
         def member_account_discount_visibility: () -> ("All" | "None")
+        def preferred_commitment: () -> Types::PreferredCommitment
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostOptimizationHub/Client.html#get_preferences-instance_method
       def get_preferences: (
@@ -221,11 +222,16 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePreferencesResponse]
         def savings_estimation_mode: () -> ("BeforeDiscounts" | "AfterDiscounts")
         def member_account_discount_visibility: () -> ("All" | "None")
+        def preferred_commitment: () -> Types::PreferredCommitment
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostOptimizationHub/Client.html#update_preferences-instance_method
       def update_preferences: (
                                 ?savings_estimation_mode: ("BeforeDiscounts" | "AfterDiscounts"),
-                                ?member_account_discount_visibility: ("All" | "None")
+                                ?member_account_discount_visibility: ("All" | "None"),
+                                ?preferred_commitment: {
+                                  term: ("OneYear" | "ThreeYears")?,
+                                  payment_option: ("AllUpfront" | "PartialUpfront" | "NoUpfront")?
+                                }
                               ) -> _UpdatePreferencesResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePreferencesResponseSuccess
     end

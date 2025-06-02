@@ -79,6 +79,8 @@ module Aws::CostOptimizationHub
     OpenSearchReservedInstancesConfiguration = Shapes::StructureShape.new(name: 'OpenSearchReservedInstancesConfiguration')
     Order = Shapes::StringShape.new(name: 'Order')
     OrderBy = Shapes::StructureShape.new(name: 'OrderBy')
+    PaymentOption = Shapes::StringShape.new(name: 'PaymentOption')
+    PreferredCommitment = Shapes::StructureShape.new(name: 'PreferredCommitment')
     PrimitiveBoolean = Shapes::BooleanShape.new(name: 'PrimitiveBoolean')
     RdsDbInstance = Shapes::StructureShape.new(name: 'RdsDbInstance')
     RdsDbInstanceConfiguration = Shapes::StructureShape.new(name: 'RdsDbInstanceConfiguration')
@@ -117,6 +119,7 @@ module Aws::CostOptimizationHub
     SummaryMetricsResult = Shapes::StructureShape.new(name: 'SummaryMetricsResult')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagList = Shapes::ListShape.new(name: 'TagList')
+    Term = Shapes::StringShape.new(name: 'Term')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UpdateEnrollmentStatusRequest = Shapes::StructureShape.new(name: 'UpdateEnrollmentStatusRequest')
@@ -291,6 +294,7 @@ module Aws::CostOptimizationHub
 
     GetPreferencesResponse.add_member(:savings_estimation_mode, Shapes::ShapeRef.new(shape: SavingsEstimationMode, location_name: "savingsEstimationMode"))
     GetPreferencesResponse.add_member(:member_account_discount_visibility, Shapes::ShapeRef.new(shape: MemberAccountDiscountVisibility, location_name: "memberAccountDiscountVisibility"))
+    GetPreferencesResponse.add_member(:preferred_commitment, Shapes::ShapeRef.new(shape: PreferredCommitment, location_name: "preferredCommitment"))
     GetPreferencesResponse.struct_class = Types::GetPreferencesResponse
 
     GetRecommendationRequest.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "recommendationId"))
@@ -418,6 +422,10 @@ module Aws::CostOptimizationHub
     OrderBy.add_member(:dimension, Shapes::ShapeRef.new(shape: String, location_name: "dimension"))
     OrderBy.add_member(:order, Shapes::ShapeRef.new(shape: Order, location_name: "order"))
     OrderBy.struct_class = Types::OrderBy
+
+    PreferredCommitment.add_member(:term, Shapes::ShapeRef.new(shape: Term, location_name: "term"))
+    PreferredCommitment.add_member(:payment_option, Shapes::ShapeRef.new(shape: PaymentOption, location_name: "paymentOption"))
+    PreferredCommitment.struct_class = Types::PreferredCommitment
 
     RdsDbInstance.add_member(:configuration, Shapes::ShapeRef.new(shape: RdsDbInstanceConfiguration, location_name: "configuration"))
     RdsDbInstance.add_member(:cost_calculation, Shapes::ShapeRef.new(shape: ResourceCostCalculation, location_name: "costCalculation"))
@@ -627,10 +635,12 @@ module Aws::CostOptimizationHub
 
     UpdatePreferencesRequest.add_member(:savings_estimation_mode, Shapes::ShapeRef.new(shape: SavingsEstimationMode, location_name: "savingsEstimationMode"))
     UpdatePreferencesRequest.add_member(:member_account_discount_visibility, Shapes::ShapeRef.new(shape: MemberAccountDiscountVisibility, location_name: "memberAccountDiscountVisibility"))
+    UpdatePreferencesRequest.add_member(:preferred_commitment, Shapes::ShapeRef.new(shape: PreferredCommitment, location_name: "preferredCommitment"))
     UpdatePreferencesRequest.struct_class = Types::UpdatePreferencesRequest
 
     UpdatePreferencesResponse.add_member(:savings_estimation_mode, Shapes::ShapeRef.new(shape: SavingsEstimationMode, location_name: "savingsEstimationMode"))
     UpdatePreferencesResponse.add_member(:member_account_discount_visibility, Shapes::ShapeRef.new(shape: MemberAccountDiscountVisibility, location_name: "memberAccountDiscountVisibility"))
+    UpdatePreferencesResponse.add_member(:preferred_commitment, Shapes::ShapeRef.new(shape: PreferredCommitment, location_name: "preferredCommitment"))
     UpdatePreferencesResponse.struct_class = Types::UpdatePreferencesResponse
 
     Usage.add_member(:usage_type, Shapes::ShapeRef.new(shape: String, location_name: "usageType"))

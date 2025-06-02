@@ -543,13 +543,14 @@ module Aws::Synthetics
     #
     # @option params [required, Types::CanaryCodeInput] :code
     #   A structure that includes the entry point from which the canary should
-    #   start running your script. If the script is stored in an S3 bucket,
-    #   the bucket name, key, and version are also included.
+    #   start running your script. If the script is stored in an Amazon S3
+    #   bucket, the bucket name, key, and version are also included.
     #
     # @option params [required, String] :artifact_s3_location
     #   The location in Amazon S3 where Synthetics stores artifacts from the
     #   test runs of this canary. Artifacts include the log file, screenshots,
-    #   and HAR files. The name of the S3 bucket can't include a period (.).
+    #   and HAR files. The name of the Amazon S3 bucket can't include a
+    #   period (.).
     #
     # @option params [required, String] :execution_role_arn
     #   The ARN of the IAM role to be used to run the canary. This role must
@@ -698,6 +699,7 @@ module Aws::Synthetics
     #       environment_variables: {
     #         "EnvironmentVariableName" => "EnvironmentVariableValue",
     #       },
+    #       ephemeral_storage: 1,
     #     },
     #     success_retention_period_in_days: 1,
     #     failure_retention_period_in_days: 1,
@@ -733,6 +735,7 @@ module Aws::Synthetics
     #   resp.canary.run_config.timeout_in_seconds #=> Integer
     #   resp.canary.run_config.memory_in_mb #=> Integer
     #   resp.canary.run_config.active_tracing #=> Boolean
+    #   resp.canary.run_config.ephemeral_storage #=> Integer
     #   resp.canary.success_retention_period_in_days #=> Integer
     #   resp.canary.failure_retention_period_in_days #=> Integer
     #   resp.canary.status.state #=> String, one of "CREATING", "READY", "STARTING", "RUNNING", "UPDATING", "STOPPING", "STOPPED", "ERROR", "DELETING"
@@ -1018,6 +1021,7 @@ module Aws::Synthetics
     #   resp.canaries[0].run_config.timeout_in_seconds #=> Integer
     #   resp.canaries[0].run_config.memory_in_mb #=> Integer
     #   resp.canaries[0].run_config.active_tracing #=> Boolean
+    #   resp.canaries[0].run_config.ephemeral_storage #=> Integer
     #   resp.canaries[0].success_retention_period_in_days #=> Integer
     #   resp.canaries[0].failure_retention_period_in_days #=> Integer
     #   resp.canaries[0].status.state #=> String, one of "CREATING", "READY", "STARTING", "RUNNING", "UPDATING", "STOPPING", "STOPPED", "ERROR", "DELETING"
@@ -1132,6 +1136,7 @@ module Aws::Synthetics
     #   resp.canaries_last_run[0].last_run.status.state #=> String, one of "RUNNING", "PASSED", "FAILED"
     #   resp.canaries_last_run[0].last_run.status.state_reason #=> String
     #   resp.canaries_last_run[0].last_run.status.state_reason_code #=> String, one of "CANARY_FAILURE", "EXECUTION_FAILURE"
+    #   resp.canaries_last_run[0].last_run.status.test_result #=> String, one of "PASSED", "FAILED", "UNKNOWN"
     #   resp.canaries_last_run[0].last_run.timeline.started #=> Time
     #   resp.canaries_last_run[0].last_run.timeline.completed #=> Time
     #   resp.canaries_last_run[0].last_run.timeline.metric_timestamp_for_run_and_retries #=> Time
@@ -1265,6 +1270,7 @@ module Aws::Synthetics
     #   resp.canary.run_config.timeout_in_seconds #=> Integer
     #   resp.canary.run_config.memory_in_mb #=> Integer
     #   resp.canary.run_config.active_tracing #=> Boolean
+    #   resp.canary.run_config.ephemeral_storage #=> Integer
     #   resp.canary.success_retention_period_in_days #=> Integer
     #   resp.canary.failure_retention_period_in_days #=> Integer
     #   resp.canary.status.state #=> String, one of "CREATING", "READY", "STARTING", "RUNNING", "UPDATING", "STOPPING", "STOPPED", "ERROR", "DELETING"
@@ -1370,6 +1376,7 @@ module Aws::Synthetics
     #   resp.canary_runs[0].status.state #=> String, one of "RUNNING", "PASSED", "FAILED"
     #   resp.canary_runs[0].status.state_reason #=> String
     #   resp.canary_runs[0].status.state_reason_code #=> String, one of "CANARY_FAILURE", "EXECUTION_FAILURE"
+    #   resp.canary_runs[0].status.test_result #=> String, one of "PASSED", "FAILED", "UNKNOWN"
     #   resp.canary_runs[0].timeline.started #=> Time
     #   resp.canary_runs[0].timeline.completed #=> Time
     #   resp.canary_runs[0].timeline.metric_timestamp_for_run_and_retries #=> Time
@@ -1644,8 +1651,8 @@ module Aws::Synthetics
     #   Use this structure to input your script code for the canary. This
     #   structure contains the Lambda handler with the location where the
     #   canary should start running the script. If the script is stored in an
-    #   S3 bucket, the bucket name, key, and version are also included. If the
-    #   script was passed into the canary directly, the script code is
+    #   Amazon S3 bucket, the bucket name, key, and version are also included.
+    #   If the script was passed into the canary directly, the script code is
     #   contained in the value of `Zipfile`.
     #
     #   If you are uploading your canary scripts with an Amazon S3 bucket,
@@ -1694,8 +1701,9 @@ module Aws::Synthetics
     #   permissions:
     #
     # @option params [Integer] :success_retention_period_in_days
-    #   The number of days to retain data on the failed runs for this canary.
-    #   The valid range is 1 to 455 days.
+    #   The number of days to retain data about successful runs of this
+    #   canary. If you omit this field, the default of 31 days is used. The
+    #   valid range is 1 to 455 days.
     #
     #   This setting affects the range of information returned by
     #   [GetCanaryRuns][1], as well as the range of information displayed in
@@ -1706,8 +1714,9 @@ module Aws::Synthetics
     #   [1]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanaryRuns.html
     #
     # @option params [Integer] :failure_retention_period_in_days
-    #   The number of days to retain data on the failed runs for this canary.
-    #   The valid range is 1 to 455 days.
+    #   The number of days to retain data about failed runs of this canary. If
+    #   you omit this field, the default of 31 days is used. The valid range
+    #   is 1 to 455 days.
     #
     #   This setting affects the range of information returned by
     #   [GetCanaryRuns][1], as well as the range of information displayed in
@@ -1744,9 +1753,9 @@ module Aws::Synthetics
     #
     # @option params [String] :provisioned_resource_cleanup
     #   Specifies whether to also delete the Lambda functions and layers used
-    #   by this canary when the canary is deleted. If the value of this
-    #   parameter is `AUTOMATIC`, it means that the Lambda functions and
-    #   layers will be deleted when the canary is deleted.
+    #   by this canary when the canary is deleted. If you omit this parameter,
+    #   the default of `AUTOMATIC` is used, which means that the Lambda
+    #   functions and layers will be deleted when the canary is deleted.
     #
     #   If the value of this parameter is `OFF`, then the value of the
     #   `DeleteLambda` parameter of the [DeleteCanary][1] operation determines
@@ -1779,6 +1788,7 @@ module Aws::Synthetics
     #       environment_variables: {
     #         "EnvironmentVariableName" => "EnvironmentVariableValue",
     #       },
+    #       ephemeral_storage: 1,
     #     },
     #     vpc_config: {
     #       subnet_ids: ["SubnetId"],
@@ -1965,8 +1975,8 @@ module Aws::Synthetics
     #
     # @option params [Types::CanaryCodeInput] :code
     #   A structure that includes the entry point from which the canary should
-    #   start running your script. If the script is stored in an S3 bucket,
-    #   the bucket name, key, and version are also included.
+    #   start running your script. If the script is stored in an Amazon S3
+    #   bucket, the bucket name, key, and version are also included.
     #
     # @option params [String] :execution_role_arn
     #   The ARN of the IAM role to be used to run the canary. This role must
@@ -2060,7 +2070,8 @@ module Aws::Synthetics
     # @option params [String] :artifact_s3_location
     #   The location in Amazon S3 where Synthetics stores artifacts from the
     #   test runs of this canary. Artifacts include the log file, screenshots,
-    #   and HAR files. The name of the S3 bucket can't include a period (.).
+    #   and HAR files. The name of the Amazon S3 bucket can't include a
+    #   period (.).
     #
     # @option params [Types::ArtifactConfigInput] :artifact_config
     #   A structure that contains the configuration for canary artifacts,
@@ -2118,6 +2129,7 @@ module Aws::Synthetics
     #       environment_variables: {
     #         "EnvironmentVariableName" => "EnvironmentVariableValue",
     #       },
+    #       ephemeral_storage: 1,
     #     },
     #     success_retention_period_in_days: 1,
     #     failure_retention_period_in_days: 1,
@@ -2173,7 +2185,7 @@ module Aws::Synthetics
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-synthetics'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

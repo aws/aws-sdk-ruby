@@ -8,6 +8,11 @@
 module Aws::NetworkFirewall
   module Types
 
+    class AZSyncState
+      attr_accessor attachment: Types::Attachment
+      SENSITIVE: []
+    end
+
     class ActionDefinition
       attr_accessor publish_metric_action: Types::PublishMetricAction
       SENSITIVE: []
@@ -80,6 +85,11 @@ module Aws::NetworkFirewall
       attr_accessor endpoint_id: ::String
       attr_accessor status: ("CREATING" | "DELETING" | "FAILED" | "ERROR" | "SCALING" | "READY")
       attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class AvailabilityZoneMetadata
+      attr_accessor ip_address_type: ("DUALSTACK" | "IPV4" | "IPV6")
       SENSITIVE: []
     end
 
@@ -174,6 +184,21 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
+    class CreateVpcEndpointAssociationRequest
+      attr_accessor firewall_arn: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_mapping: Types::SubnetMapping
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateVpcEndpointAssociationResponse
+      attr_accessor vpc_endpoint_association: Types::VpcEndpointAssociation
+      attr_accessor vpc_endpoint_association_status: Types::VpcEndpointAssociationStatus
+      SENSITIVE: []
+    end
+
     class CustomAction
       attr_accessor action_name: ::String
       attr_accessor action_definition: Types::ActionDefinition
@@ -234,6 +259,31 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
+    class DeleteVpcEndpointAssociationRequest
+      attr_accessor vpc_endpoint_association_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVpcEndpointAssociationResponse
+      attr_accessor vpc_endpoint_association: Types::VpcEndpointAssociation
+      attr_accessor vpc_endpoint_association_status: Types::VpcEndpointAssociationStatus
+      SENSITIVE: []
+    end
+
+    class DescribeFirewallMetadataRequest
+      attr_accessor firewall_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFirewallMetadataResponse
+      attr_accessor firewall_arn: ::String
+      attr_accessor firewall_policy_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("PROVISIONING" | "DELETING" | "READY")
+      attr_accessor supported_availability_zones: ::Hash[::String, Types::AvailabilityZoneMetadata]
+      SENSITIVE: []
+    end
+
     class DescribeFirewallPolicyRequest
       attr_accessor firewall_policy_name: ::String
       attr_accessor firewall_policy_arn: ::String
@@ -263,6 +313,8 @@ module Aws::NetworkFirewall
     class DescribeFlowOperationRequest
       attr_accessor firewall_arn: ::String
       attr_accessor availability_zone: ::String
+      attr_accessor vpc_endpoint_association_arn: ::String
+      attr_accessor vpc_endpoint_id: ::String
       attr_accessor flow_operation_id: ::String
       SENSITIVE: []
     end
@@ -270,6 +322,8 @@ module Aws::NetworkFirewall
     class DescribeFlowOperationResponse
       attr_accessor firewall_arn: ::String
       attr_accessor availability_zone: ::String
+      attr_accessor vpc_endpoint_association_arn: ::String
+      attr_accessor vpc_endpoint_id: ::String
       attr_accessor flow_operation_id: ::String
       attr_accessor flow_operation_type: ("FLOW_FLUSH" | "FLOW_CAPTURE")
       attr_accessor flow_operation_status: ("COMPLETED" | "IN_PROGRESS" | "FAILED" | "COMPLETED_WITH_ERRORS")
@@ -347,6 +401,17 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
+    class DescribeVpcEndpointAssociationRequest
+      attr_accessor vpc_endpoint_association_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeVpcEndpointAssociationResponse
+      attr_accessor vpc_endpoint_association: Types::VpcEndpointAssociation
+      attr_accessor vpc_endpoint_association_status: Types::VpcEndpointAssociationStatus
+      SENSITIVE: []
+    end
+
     class Dimension
       attr_accessor value: ::String
       SENSITIVE: []
@@ -387,6 +452,7 @@ module Aws::NetworkFirewall
       attr_accessor firewall_id: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor number_of_associations: ::Integer
       attr_accessor enabled_analysis_types: ::Array[("TLS_SNI" | "HTTP_HOST")]
       SENSITIVE: []
     end
@@ -609,12 +675,16 @@ module Aws::NetworkFirewall
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       attr_accessor availability_zone: ::String
+      attr_accessor vpc_endpoint_id: ::String
+      attr_accessor vpc_endpoint_association_arn: ::String
       SENSITIVE: []
     end
 
     class ListFlowOperationResultsResponse
       attr_accessor firewall_arn: ::String
       attr_accessor availability_zone: ::String
+      attr_accessor vpc_endpoint_association_arn: ::String
+      attr_accessor vpc_endpoint_id: ::String
       attr_accessor flow_operation_id: ::String
       attr_accessor flow_operation_status: ("COMPLETED" | "IN_PROGRESS" | "FAILED" | "COMPLETED_WITH_ERRORS")
       attr_accessor status_message: ::String
@@ -627,6 +697,8 @@ module Aws::NetworkFirewall
     class ListFlowOperationsRequest
       attr_accessor firewall_arn: ::String
       attr_accessor availability_zone: ::String
+      attr_accessor vpc_endpoint_association_arn: ::String
+      attr_accessor vpc_endpoint_id: ::String
       attr_accessor flow_operation_type: ("FLOW_FLUSH" | "FLOW_CAPTURE")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
@@ -676,6 +748,19 @@ module Aws::NetworkFirewall
     class ListTagsForResourceResponse
       attr_accessor next_token: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListVpcEndpointAssociationsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor firewall_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListVpcEndpointAssociationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor vpc_endpoint_associations: ::Array[Types::VpcEndpointAssociationMetadata]
       SENSITIVE: []
     end
 
@@ -866,6 +951,8 @@ module Aws::NetworkFirewall
     class StartFlowCaptureRequest
       attr_accessor firewall_arn: ::String
       attr_accessor availability_zone: ::String
+      attr_accessor vpc_endpoint_association_arn: ::String
+      attr_accessor vpc_endpoint_id: ::String
       attr_accessor minimum_flow_age_in_seconds: ::Integer
       attr_accessor flow_filters: ::Array[Types::FlowFilter]
       SENSITIVE: []
@@ -881,6 +968,8 @@ module Aws::NetworkFirewall
     class StartFlowFlushRequest
       attr_accessor firewall_arn: ::String
       attr_accessor availability_zone: ::String
+      attr_accessor vpc_endpoint_association_arn: ::String
+      attr_accessor vpc_endpoint_id: ::String
       attr_accessor minimum_flow_age_in_seconds: ::Integer
       attr_accessor flow_filters: ::Array[Types::FlowFilter]
       SENSITIVE: []
@@ -1194,6 +1283,28 @@ module Aws::NetworkFirewall
     class UpdateTLSInspectionConfigurationResponse
       attr_accessor update_token: ::String
       attr_accessor tls_inspection_configuration_response: Types::TLSInspectionConfigurationResponse
+      SENSITIVE: []
+    end
+
+    class VpcEndpointAssociation
+      attr_accessor vpc_endpoint_association_id: ::String
+      attr_accessor vpc_endpoint_association_arn: ::String
+      attr_accessor firewall_arn: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_mapping: Types::SubnetMapping
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class VpcEndpointAssociationMetadata
+      attr_accessor vpc_endpoint_association_arn: ::String
+      SENSITIVE: []
+    end
+
+    class VpcEndpointAssociationStatus
+      attr_accessor status: ("PROVISIONING" | "DELETING" | "READY")
+      attr_accessor association_sync_state: ::Hash[::String, Types::AZSyncState]
       SENSITIVE: []
     end
   end

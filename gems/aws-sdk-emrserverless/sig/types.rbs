@@ -268,6 +268,12 @@ module Aws::EMRServerless
       SENSITIVE: []
     end
 
+    class JobRunExecutionIamPolicy
+      attr_accessor policy: ::String
+      attr_accessor policy_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class JobRunSummary
       attr_accessor application_id: ::String
       attr_accessor id: ::String
@@ -428,6 +434,7 @@ module Aws::EMRServerless
       attr_accessor application_id: ::String
       attr_accessor client_token: ::String
       attr_accessor execution_role_arn: ::String
+      attr_accessor execution_iam_policy: Types::JobRunExecutionIamPolicy
       attr_accessor job_driver: Types::JobDriver
       attr_accessor configuration_overrides: Types::ConfigurationOverrides
       attr_accessor tags: ::Hash[::String, ::String]

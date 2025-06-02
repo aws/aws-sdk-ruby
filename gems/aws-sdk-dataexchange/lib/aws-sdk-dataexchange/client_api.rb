@@ -357,6 +357,7 @@ module Aws::DataExchange
 
     CreateEventActionRequest.add_member(:action, Shapes::ShapeRef.new(shape: Action, required: true, location_name: "Action"))
     CreateEventActionRequest.add_member(:event, Shapes::ShapeRef.new(shape: Event, required: true, location_name: "Event"))
+    CreateEventActionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "Tags"))
     CreateEventActionRequest.struct_class = Types::CreateEventActionRequest
 
     CreateEventActionResponse.add_member(:action, Shapes::ShapeRef.new(shape: Action, location_name: "Action"))
@@ -364,6 +365,7 @@ module Aws::DataExchange
     CreateEventActionResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     CreateEventActionResponse.add_member(:event, Shapes::ShapeRef.new(shape: Event, location_name: "Event"))
     CreateEventActionResponse.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
+    CreateEventActionResponse.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "Tags"))
     CreateEventActionResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
     CreateEventActionResponse.struct_class = Types::CreateEventActionResponse
 
@@ -582,6 +584,7 @@ module Aws::DataExchange
     GetEventActionResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     GetEventActionResponse.add_member(:event, Shapes::ShapeRef.new(shape: Event, location_name: "Event"))
     GetEventActionResponse.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
+    GetEventActionResponse.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "Tags"))
     GetEventActionResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
     GetEventActionResponse.struct_class = Types::GetEventActionResponse
 

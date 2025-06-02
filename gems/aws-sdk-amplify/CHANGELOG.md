@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2025-05-29)
+------------------
+
+* Feature - Add support for customizable build instance sizes. CreateApp and UpdateApp operations now accept a new JobConfig parameter composed of BuildComputeType.
+
 1.84.0 (2025-05-12)
 ------------------
 

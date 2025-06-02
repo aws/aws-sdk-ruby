@@ -14,6 +14,7 @@ module Aws::NetworkFirewall
 
     include Seahorse::Model
 
+    AZSyncState = Shapes::StructureShape.new(name: 'AZSyncState')
     ActionDefinition = Shapes::StructureShape.new(name: 'ActionDefinition')
     ActionName = Shapes::StringShape.new(name: 'ActionName')
     Address = Shapes::StructureShape.new(name: 'Address')
@@ -32,9 +33,11 @@ module Aws::NetworkFirewall
     AssociateFirewallPolicyResponse = Shapes::StructureShape.new(name: 'AssociateFirewallPolicyResponse')
     AssociateSubnetsRequest = Shapes::StructureShape.new(name: 'AssociateSubnetsRequest')
     AssociateSubnetsResponse = Shapes::StructureShape.new(name: 'AssociateSubnetsResponse')
+    AssociationSyncState = Shapes::MapShape.new(name: 'AssociationSyncState')
     Attachment = Shapes::StructureShape.new(name: 'Attachment')
     AttachmentStatus = Shapes::StringShape.new(name: 'AttachmentStatus')
     AvailabilityZone = Shapes::StringShape.new(name: 'AvailabilityZone')
+    AvailabilityZoneMetadata = Shapes::StructureShape.new(name: 'AvailabilityZoneMetadata')
     AzSubnet = Shapes::StringShape.new(name: 'AzSubnet')
     AzSubnets = Shapes::ListShape.new(name: 'AzSubnets')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
@@ -55,6 +58,8 @@ module Aws::NetworkFirewall
     CreateRuleGroupResponse = Shapes::StructureShape.new(name: 'CreateRuleGroupResponse')
     CreateTLSInspectionConfigurationRequest = Shapes::StructureShape.new(name: 'CreateTLSInspectionConfigurationRequest')
     CreateTLSInspectionConfigurationResponse = Shapes::StructureShape.new(name: 'CreateTLSInspectionConfigurationResponse')
+    CreateVpcEndpointAssociationRequest = Shapes::StructureShape.new(name: 'CreateVpcEndpointAssociationRequest')
+    CreateVpcEndpointAssociationResponse = Shapes::StructureShape.new(name: 'CreateVpcEndpointAssociationResponse')
     CustomAction = Shapes::StructureShape.new(name: 'CustomAction')
     CustomActions = Shapes::ListShape.new(name: 'CustomActions')
     DeleteFirewallPolicyRequest = Shapes::StructureShape.new(name: 'DeleteFirewallPolicyRequest')
@@ -67,6 +72,10 @@ module Aws::NetworkFirewall
     DeleteRuleGroupResponse = Shapes::StructureShape.new(name: 'DeleteRuleGroupResponse')
     DeleteTLSInspectionConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteTLSInspectionConfigurationRequest')
     DeleteTLSInspectionConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteTLSInspectionConfigurationResponse')
+    DeleteVpcEndpointAssociationRequest = Shapes::StructureShape.new(name: 'DeleteVpcEndpointAssociationRequest')
+    DeleteVpcEndpointAssociationResponse = Shapes::StructureShape.new(name: 'DeleteVpcEndpointAssociationResponse')
+    DescribeFirewallMetadataRequest = Shapes::StructureShape.new(name: 'DescribeFirewallMetadataRequest')
+    DescribeFirewallMetadataResponse = Shapes::StructureShape.new(name: 'DescribeFirewallMetadataResponse')
     DescribeFirewallPolicyRequest = Shapes::StructureShape.new(name: 'DescribeFirewallPolicyRequest')
     DescribeFirewallPolicyResponse = Shapes::StructureShape.new(name: 'DescribeFirewallPolicyResponse')
     DescribeFirewallRequest = Shapes::StructureShape.new(name: 'DescribeFirewallRequest')
@@ -83,6 +92,8 @@ module Aws::NetworkFirewall
     DescribeRuleGroupResponse = Shapes::StructureShape.new(name: 'DescribeRuleGroupResponse')
     DescribeTLSInspectionConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeTLSInspectionConfigurationRequest')
     DescribeTLSInspectionConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeTLSInspectionConfigurationResponse')
+    DescribeVpcEndpointAssociationRequest = Shapes::StructureShape.new(name: 'DescribeVpcEndpointAssociationRequest')
+    DescribeVpcEndpointAssociationResponse = Shapes::StructureShape.new(name: 'DescribeVpcEndpointAssociationResponse')
     Description = Shapes::StringShape.new(name: 'Description')
     Destination = Shapes::StringShape.new(name: 'Destination')
     Dimension = Shapes::StructureShape.new(name: 'Dimension')
@@ -165,6 +176,8 @@ module Aws::NetworkFirewall
     ListTLSInspectionConfigurationsResponse = Shapes::StructureShape.new(name: 'ListTLSInspectionConfigurationsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ListVpcEndpointAssociationsRequest = Shapes::StructureShape.new(name: 'ListVpcEndpointAssociationsRequest')
+    ListVpcEndpointAssociationsResponse = Shapes::StructureShape.new(name: 'ListVpcEndpointAssociationsResponse')
     LogDestinationConfig = Shapes::StructureShape.new(name: 'LogDestinationConfig')
     LogDestinationConfigs = Shapes::ListShape.new(name: 'LogDestinationConfigs')
     LogDestinationMap = Shapes::MapShape.new(name: 'LogDestinationMap')
@@ -264,6 +277,7 @@ module Aws::NetworkFirewall
     StreamExceptionPolicy = Shapes::StringShape.new(name: 'StreamExceptionPolicy')
     SubnetMapping = Shapes::StructureShape.new(name: 'SubnetMapping')
     SubnetMappings = Shapes::ListShape.new(name: 'SubnetMappings')
+    SupportedAvailabilityZones = Shapes::MapShape.new(name: 'SupportedAvailabilityZones')
     SyncState = Shapes::StructureShape.new(name: 'SyncState')
     SyncStateConfig = Shapes::MapShape.new(name: 'SyncStateConfig')
     SyncStates = Shapes::MapShape.new(name: 'SyncStates')
@@ -314,8 +328,16 @@ module Aws::NetworkFirewall
     UpdateToken = Shapes::StringShape.new(name: 'UpdateToken')
     VariableDefinition = Shapes::StringShape.new(name: 'VariableDefinition')
     VariableDefinitionList = Shapes::ListShape.new(name: 'VariableDefinitionList')
+    VpcEndpointAssociation = Shapes::StructureShape.new(name: 'VpcEndpointAssociation')
+    VpcEndpointAssociationMetadata = Shapes::StructureShape.new(name: 'VpcEndpointAssociationMetadata')
+    VpcEndpointAssociationStatus = Shapes::StructureShape.new(name: 'VpcEndpointAssociationStatus')
+    VpcEndpointAssociations = Shapes::ListShape.new(name: 'VpcEndpointAssociations')
+    VpcEndpointId = Shapes::StringShape.new(name: 'VpcEndpointId')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
     VpcIds = Shapes::ListShape.new(name: 'VpcIds')
+
+    AZSyncState.add_member(:attachment, Shapes::ShapeRef.new(shape: Attachment, location_name: "Attachment"))
+    AZSyncState.struct_class = Types::AZSyncState
 
     ActionDefinition.add_member(:publish_metric_action, Shapes::ShapeRef.new(shape: PublishMetricAction, location_name: "PublishMetricAction"))
     ActionDefinition.struct_class = Types::ActionDefinition
@@ -374,11 +396,17 @@ module Aws::NetworkFirewall
     AssociateSubnetsResponse.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
     AssociateSubnetsResponse.struct_class = Types::AssociateSubnetsResponse
 
+    AssociationSyncState.key = Shapes::ShapeRef.new(shape: AvailabilityZone)
+    AssociationSyncState.value = Shapes::ShapeRef.new(shape: AZSyncState)
+
     Attachment.add_member(:subnet_id, Shapes::ShapeRef.new(shape: AzSubnet, location_name: "SubnetId"))
     Attachment.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: EndpointId, location_name: "EndpointId"))
     Attachment.add_member(:status, Shapes::ShapeRef.new(shape: AttachmentStatus, location_name: "Status"))
     Attachment.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "StatusMessage"))
     Attachment.struct_class = Types::Attachment
+
+    AvailabilityZoneMetadata.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IPAddressType, location_name: "IPAddressType"))
+    AvailabilityZoneMetadata.struct_class = Types::AvailabilityZoneMetadata
 
     AzSubnets.member = Shapes::ShapeRef.new(shape: AzSubnet)
 
@@ -453,6 +481,17 @@ module Aws::NetworkFirewall
     CreateTLSInspectionConfigurationResponse.add_member(:tls_inspection_configuration_response, Shapes::ShapeRef.new(shape: TLSInspectionConfigurationResponse, required: true, location_name: "TLSInspectionConfigurationResponse"))
     CreateTLSInspectionConfigurationResponse.struct_class = Types::CreateTLSInspectionConfigurationResponse
 
+    CreateVpcEndpointAssociationRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "FirewallArn"))
+    CreateVpcEndpointAssociationRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "VpcId"))
+    CreateVpcEndpointAssociationRequest.add_member(:subnet_mapping, Shapes::ShapeRef.new(shape: SubnetMapping, required: true, location_name: "SubnetMapping"))
+    CreateVpcEndpointAssociationRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    CreateVpcEndpointAssociationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateVpcEndpointAssociationRequest.struct_class = Types::CreateVpcEndpointAssociationRequest
+
+    CreateVpcEndpointAssociationResponse.add_member(:vpc_endpoint_association, Shapes::ShapeRef.new(shape: VpcEndpointAssociation, location_name: "VpcEndpointAssociation"))
+    CreateVpcEndpointAssociationResponse.add_member(:vpc_endpoint_association_status, Shapes::ShapeRef.new(shape: VpcEndpointAssociationStatus, location_name: "VpcEndpointAssociationStatus"))
+    CreateVpcEndpointAssociationResponse.struct_class = Types::CreateVpcEndpointAssociationResponse
+
     CustomAction.add_member(:action_name, Shapes::ShapeRef.new(shape: ActionName, required: true, location_name: "ActionName"))
     CustomAction.add_member(:action_definition, Shapes::ShapeRef.new(shape: ActionDefinition, required: true, location_name: "ActionDefinition"))
     CustomAction.struct_class = Types::CustomAction
@@ -494,6 +533,23 @@ module Aws::NetworkFirewall
     DeleteTLSInspectionConfigurationResponse.add_member(:tls_inspection_configuration_response, Shapes::ShapeRef.new(shape: TLSInspectionConfigurationResponse, required: true, location_name: "TLSInspectionConfigurationResponse"))
     DeleteTLSInspectionConfigurationResponse.struct_class = Types::DeleteTLSInspectionConfigurationResponse
 
+    DeleteVpcEndpointAssociationRequest.add_member(:vpc_endpoint_association_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "VpcEndpointAssociationArn"))
+    DeleteVpcEndpointAssociationRequest.struct_class = Types::DeleteVpcEndpointAssociationRequest
+
+    DeleteVpcEndpointAssociationResponse.add_member(:vpc_endpoint_association, Shapes::ShapeRef.new(shape: VpcEndpointAssociation, location_name: "VpcEndpointAssociation"))
+    DeleteVpcEndpointAssociationResponse.add_member(:vpc_endpoint_association_status, Shapes::ShapeRef.new(shape: VpcEndpointAssociationStatus, location_name: "VpcEndpointAssociationStatus"))
+    DeleteVpcEndpointAssociationResponse.struct_class = Types::DeleteVpcEndpointAssociationResponse
+
+    DescribeFirewallMetadataRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
+    DescribeFirewallMetadataRequest.struct_class = Types::DescribeFirewallMetadataRequest
+
+    DescribeFirewallMetadataResponse.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
+    DescribeFirewallMetadataResponse.add_member(:firewall_policy_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallPolicyArn"))
+    DescribeFirewallMetadataResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    DescribeFirewallMetadataResponse.add_member(:status, Shapes::ShapeRef.new(shape: FirewallStatusValue, location_name: "Status"))
+    DescribeFirewallMetadataResponse.add_member(:supported_availability_zones, Shapes::ShapeRef.new(shape: SupportedAvailabilityZones, location_name: "SupportedAvailabilityZones"))
+    DescribeFirewallMetadataResponse.struct_class = Types::DescribeFirewallMetadataResponse
+
     DescribeFirewallPolicyRequest.add_member(:firewall_policy_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "FirewallPolicyName"))
     DescribeFirewallPolicyRequest.add_member(:firewall_policy_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallPolicyArn"))
     DescribeFirewallPolicyRequest.struct_class = Types::DescribeFirewallPolicyRequest
@@ -514,11 +570,15 @@ module Aws::NetworkFirewall
 
     DescribeFlowOperationRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "FirewallArn"))
     DescribeFlowOperationRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
+    DescribeFlowOperationRequest.add_member(:vpc_endpoint_association_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "VpcEndpointAssociationArn"))
+    DescribeFlowOperationRequest.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "VpcEndpointId"))
     DescribeFlowOperationRequest.add_member(:flow_operation_id, Shapes::ShapeRef.new(shape: FlowOperationId, required: true, location_name: "FlowOperationId"))
     DescribeFlowOperationRequest.struct_class = Types::DescribeFlowOperationRequest
 
     DescribeFlowOperationResponse.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
     DescribeFlowOperationResponse.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
+    DescribeFlowOperationResponse.add_member(:vpc_endpoint_association_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "VpcEndpointAssociationArn"))
+    DescribeFlowOperationResponse.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "VpcEndpointId"))
     DescribeFlowOperationResponse.add_member(:flow_operation_id, Shapes::ShapeRef.new(shape: FlowOperationId, location_name: "FlowOperationId"))
     DescribeFlowOperationResponse.add_member(:flow_operation_type, Shapes::ShapeRef.new(shape: FlowOperationType, location_name: "FlowOperationType"))
     DescribeFlowOperationResponse.add_member(:flow_operation_status, Shapes::ShapeRef.new(shape: FlowOperationStatus, location_name: "FlowOperationStatus"))
@@ -575,6 +635,13 @@ module Aws::NetworkFirewall
     DescribeTLSInspectionConfigurationResponse.add_member(:tls_inspection_configuration_response, Shapes::ShapeRef.new(shape: TLSInspectionConfigurationResponse, required: true, location_name: "TLSInspectionConfigurationResponse"))
     DescribeTLSInspectionConfigurationResponse.struct_class = Types::DescribeTLSInspectionConfigurationResponse
 
+    DescribeVpcEndpointAssociationRequest.add_member(:vpc_endpoint_association_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "VpcEndpointAssociationArn"))
+    DescribeVpcEndpointAssociationRequest.struct_class = Types::DescribeVpcEndpointAssociationRequest
+
+    DescribeVpcEndpointAssociationResponse.add_member(:vpc_endpoint_association, Shapes::ShapeRef.new(shape: VpcEndpointAssociation, location_name: "VpcEndpointAssociation"))
+    DescribeVpcEndpointAssociationResponse.add_member(:vpc_endpoint_association_status, Shapes::ShapeRef.new(shape: VpcEndpointAssociationStatus, location_name: "VpcEndpointAssociationStatus"))
+    DescribeVpcEndpointAssociationResponse.struct_class = Types::DescribeVpcEndpointAssociationResponse
+
     Dimension.add_member(:value, Shapes::ShapeRef.new(shape: DimensionValue, required: true, location_name: "Value"))
     Dimension.struct_class = Types::Dimension
 
@@ -610,6 +677,7 @@ module Aws::NetworkFirewall
     Firewall.add_member(:firewall_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "FirewallId"))
     Firewall.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     Firewall.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
+    Firewall.add_member(:number_of_associations, Shapes::ShapeRef.new(shape: NumberOfAssociations, location_name: "NumberOfAssociations"))
     Firewall.add_member(:enabled_analysis_types, Shapes::ShapeRef.new(shape: EnabledAnalysisTypes, location_name: "EnabledAnalysisTypes"))
     Firewall.struct_class = Types::Firewall
 
@@ -791,10 +859,14 @@ module Aws::NetworkFirewall
     ListFlowOperationResultsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListFlowOperationResultsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location_name: "MaxResults"))
     ListFlowOperationResultsRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
+    ListFlowOperationResultsRequest.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "VpcEndpointId"))
+    ListFlowOperationResultsRequest.add_member(:vpc_endpoint_association_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "VpcEndpointAssociationArn"))
     ListFlowOperationResultsRequest.struct_class = Types::ListFlowOperationResultsRequest
 
     ListFlowOperationResultsResponse.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
     ListFlowOperationResultsResponse.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
+    ListFlowOperationResultsResponse.add_member(:vpc_endpoint_association_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "VpcEndpointAssociationArn"))
+    ListFlowOperationResultsResponse.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "VpcEndpointId"))
     ListFlowOperationResultsResponse.add_member(:flow_operation_id, Shapes::ShapeRef.new(shape: FlowOperationId, location_name: "FlowOperationId"))
     ListFlowOperationResultsResponse.add_member(:flow_operation_status, Shapes::ShapeRef.new(shape: FlowOperationStatus, location_name: "FlowOperationStatus"))
     ListFlowOperationResultsResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusReason, location_name: "StatusMessage"))
@@ -805,6 +877,8 @@ module Aws::NetworkFirewall
 
     ListFlowOperationsRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "FirewallArn"))
     ListFlowOperationsRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
+    ListFlowOperationsRequest.add_member(:vpc_endpoint_association_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "VpcEndpointAssociationArn"))
+    ListFlowOperationsRequest.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "VpcEndpointId"))
     ListFlowOperationsRequest.add_member(:flow_operation_type, Shapes::ShapeRef.new(shape: FlowOperationType, location_name: "FlowOperationType"))
     ListFlowOperationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListFlowOperationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location_name: "MaxResults"))
@@ -841,6 +915,15 @@ module Aws::NetworkFirewall
     ListTagsForResourceResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    ListVpcEndpointAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListVpcEndpointAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location_name: "MaxResults"))
+    ListVpcEndpointAssociationsRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
+    ListVpcEndpointAssociationsRequest.struct_class = Types::ListVpcEndpointAssociationsRequest
+
+    ListVpcEndpointAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListVpcEndpointAssociationsResponse.add_member(:vpc_endpoint_associations, Shapes::ShapeRef.new(shape: VpcEndpointAssociations, location_name: "VpcEndpointAssociations"))
+    ListVpcEndpointAssociationsResponse.struct_class = Types::ListVpcEndpointAssociationsResponse
 
     LogDestinationConfig.add_member(:log_type, Shapes::ShapeRef.new(shape: LogType, required: true, location_name: "LogType"))
     LogDestinationConfig.add_member(:log_destination_type, Shapes::ShapeRef.new(shape: LogDestinationType, required: true, location_name: "LogDestinationType"))
@@ -1003,6 +1086,8 @@ module Aws::NetworkFirewall
 
     StartFlowCaptureRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "FirewallArn"))
     StartFlowCaptureRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
+    StartFlowCaptureRequest.add_member(:vpc_endpoint_association_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "VpcEndpointAssociationArn"))
+    StartFlowCaptureRequest.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "VpcEndpointId"))
     StartFlowCaptureRequest.add_member(:minimum_flow_age_in_seconds, Shapes::ShapeRef.new(shape: Age, location_name: "MinimumFlowAgeInSeconds"))
     StartFlowCaptureRequest.add_member(:flow_filters, Shapes::ShapeRef.new(shape: FlowFilters, required: true, location_name: "FlowFilters"))
     StartFlowCaptureRequest.struct_class = Types::StartFlowCaptureRequest
@@ -1014,6 +1099,8 @@ module Aws::NetworkFirewall
 
     StartFlowFlushRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "FirewallArn"))
     StartFlowFlushRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
+    StartFlowFlushRequest.add_member(:vpc_endpoint_association_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "VpcEndpointAssociationArn"))
+    StartFlowFlushRequest.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "VpcEndpointId"))
     StartFlowFlushRequest.add_member(:minimum_flow_age_in_seconds, Shapes::ShapeRef.new(shape: Age, location_name: "MinimumFlowAgeInSeconds"))
     StartFlowFlushRequest.add_member(:flow_filters, Shapes::ShapeRef.new(shape: FlowFilters, required: true, location_name: "FlowFilters"))
     StartFlowFlushRequest.struct_class = Types::StartFlowFlushRequest
@@ -1073,6 +1160,9 @@ module Aws::NetworkFirewall
     SubnetMapping.struct_class = Types::SubnetMapping
 
     SubnetMappings.member = Shapes::ShapeRef.new(shape: SubnetMapping)
+
+    SupportedAvailabilityZones.key = Shapes::ShapeRef.new(shape: AvailabilityZone)
+    SupportedAvailabilityZones.value = Shapes::ShapeRef.new(shape: AvailabilityZoneMetadata)
 
     SyncState.add_member(:attachment, Shapes::ShapeRef.new(shape: Attachment, location_name: "Attachment"))
     SyncState.add_member(:config, Shapes::ShapeRef.new(shape: SyncStateConfig, location_name: "Config"))
@@ -1275,6 +1365,24 @@ module Aws::NetworkFirewall
 
     VariableDefinitionList.member = Shapes::ShapeRef.new(shape: VariableDefinition)
 
+    VpcEndpointAssociation.add_member(:vpc_endpoint_association_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "VpcEndpointAssociationId"))
+    VpcEndpointAssociation.add_member(:vpc_endpoint_association_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "VpcEndpointAssociationArn"))
+    VpcEndpointAssociation.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "FirewallArn"))
+    VpcEndpointAssociation.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "VpcId"))
+    VpcEndpointAssociation.add_member(:subnet_mapping, Shapes::ShapeRef.new(shape: SubnetMapping, required: true, location_name: "SubnetMapping"))
+    VpcEndpointAssociation.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    VpcEndpointAssociation.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    VpcEndpointAssociation.struct_class = Types::VpcEndpointAssociation
+
+    VpcEndpointAssociationMetadata.add_member(:vpc_endpoint_association_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "VpcEndpointAssociationArn"))
+    VpcEndpointAssociationMetadata.struct_class = Types::VpcEndpointAssociationMetadata
+
+    VpcEndpointAssociationStatus.add_member(:status, Shapes::ShapeRef.new(shape: FirewallStatusValue, required: true, location_name: "Status"))
+    VpcEndpointAssociationStatus.add_member(:association_sync_state, Shapes::ShapeRef.new(shape: AssociationSyncState, location_name: "AssociationSyncState"))
+    VpcEndpointAssociationStatus.struct_class = Types::VpcEndpointAssociationStatus
+
+    VpcEndpointAssociations.member = Shapes::ShapeRef.new(shape: VpcEndpointAssociationMetadata)
+
     VpcIds.member = Shapes::ShapeRef.new(shape: VpcId)
 
 
@@ -1381,6 +1489,21 @@ module Aws::NetworkFirewall
         o.errors << Shapes::ShapeRef.new(shape: InsufficientCapacityException)
       end)
 
+      api.add_operation(:create_vpc_endpoint_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateVpcEndpointAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateVpcEndpointAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateVpcEndpointAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientCapacityException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+      end)
+
       api.add_operation(:delete_firewall, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteFirewall"
         o.http_method = "POST"
@@ -1449,12 +1572,37 @@ module Aws::NetworkFirewall
         o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
       end)
 
+      api.add_operation(:delete_vpc_endpoint_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteVpcEndpointAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteVpcEndpointAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteVpcEndpointAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+      end)
+
       api.add_operation(:describe_firewall, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeFirewall"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeFirewallRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeFirewallResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:describe_firewall_metadata, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeFirewallMetadata"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeFirewallMetadataRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeFirewallMetadataResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1539,6 +1687,18 @@ module Aws::NetworkFirewall
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeTLSInspectionConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeTLSInspectionConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:describe_vpc_endpoint_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeVpcEndpointAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeVpcEndpointAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeVpcEndpointAssociationResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1709,6 +1869,23 @@ module Aws::NetworkFirewall
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_vpc_endpoint_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListVpcEndpointAssociations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListVpcEndpointAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListVpcEndpointAssociationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
