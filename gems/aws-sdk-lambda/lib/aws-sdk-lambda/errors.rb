@@ -4,7 +4,7 @@
 
 module Aws::Lambda
   # When this service returns an error response, the SDK constructs and raises an error.
-  # These errors all extend Aws::Lambda::Errors::ServiceError < {Smithy::Client::Errors::ServiceError}
+  # These errors all extend Aws::Lambda::Errors::ServiceError < {Smithy::Client::ServiceError}
   #
   # You can rescue all errors using the ServiceError:
   #
@@ -16,7 +16,7 @@ module Aws::Lambda
   #
   # ## Request Context
   #
-  # ServiceError objects have a {Smithy::Client::Errors::ServiceError#context #context} method
+  # ServiceError objects have a {Smithy::Client::ServiceError#context #context} method
   # that returns information about the request that generated the error.
   # See {Smithy::Client::HandlerContext} for more information.
   #
@@ -64,10 +64,10 @@ module Aws::Lambda
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
   module Errors
-    extend Smithy::Client::Errors::DynamicErrors
+    extend Smithy::Client::DynamicErrors
 
     # <p>The specified code signing configuration does not exist.</p>
-    class CodeSigningConfigNotFoundException < Smithy::Client::Errors::ServiceError
+    class CodeSigningConfigNotFoundException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::CodeSigningConfigNotFoundException] data
@@ -85,7 +85,7 @@ module Aws::Lambda
     end
 
     # <p>Your Amazon Web Services account has exceeded its maximum total code size. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html">Lambda quotas</a>.</p>
-    class CodeStorageExceededException < Smithy::Client::Errors::ServiceError
+    class CodeStorageExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::CodeStorageExceededException] data
@@ -105,7 +105,7 @@ module Aws::Lambda
 
     # <p>The code signature failed one or more of the validation checks for signature mismatch or expiry, and the code
     #       signing policy is set to ENFORCE. Lambda blocks the deployment.</p>
-    class CodeVerificationFailedException < Smithy::Client::Errors::ServiceError
+    class CodeVerificationFailedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::CodeVerificationFailedException] data
@@ -123,7 +123,7 @@ module Aws::Lambda
     end
 
     # <p>Need additional permissions to configure VPC settings.</p>
-    class EC2AccessDeniedException < Smithy::Client::Errors::ServiceError
+    class EC2AccessDeniedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::EC2AccessDeniedException] data
@@ -142,7 +142,7 @@ module Aws::Lambda
 
     # <p>Amazon EC2 throttled Lambda during Lambda function initialization using
     #       the execution role provided for the function.</p>
-    class EC2ThrottledException < Smithy::Client::Errors::ServiceError
+    class EC2ThrottledException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::EC2ThrottledException] data
@@ -161,7 +161,7 @@ module Aws::Lambda
 
     # <p>Lambda received an unexpected Amazon EC2 client exception while setting up for the
     #         Lambda function.</p>
-    class EC2UnexpectedException < Smithy::Client::Errors::ServiceError
+    class EC2UnexpectedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::EC2UnexpectedException] data
@@ -183,7 +183,7 @@ module Aws::Lambda
     end
 
     # <p>An error occurred when reading from or writing to a connected file system.</p>
-    class EFSIOException < Smithy::Client::Errors::ServiceError
+    class EFSIOException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::EFSIOException] data
@@ -201,7 +201,7 @@ module Aws::Lambda
     end
 
     # <p>The Lambda function couldn't make a network connection to the configured file system.</p>
-    class EFSMountConnectivityException < Smithy::Client::Errors::ServiceError
+    class EFSMountConnectivityException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::EFSMountConnectivityException] data
@@ -220,7 +220,7 @@ module Aws::Lambda
 
     # <p>The Lambda function couldn't mount the configured file system due to a permission or configuration
     #       issue.</p>
-    class EFSMountFailureException < Smithy::Client::Errors::ServiceError
+    class EFSMountFailureException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::EFSMountFailureException] data
@@ -239,7 +239,7 @@ module Aws::Lambda
 
     # <p>The Lambda function made a network connection to the configured file system, but the mount
     #       operation timed out.</p>
-    class EFSMountTimeoutException < Smithy::Client::Errors::ServiceError
+    class EFSMountTimeoutException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::EFSMountTimeoutException] data
@@ -259,7 +259,7 @@ module Aws::Lambda
     # <p>Lambda couldn't create an elastic network interface in the VPC, specified as part of Lambda function configuration, because the limit for network interfaces has been reached. For more
     #       information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html">Lambda
     #         quotas</a>.</p>
-    class ENILimitReachedException < Smithy::Client::Errors::ServiceError
+    class ENILimitReachedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::ENILimitReachedException] data
@@ -278,7 +278,7 @@ module Aws::Lambda
 
     # <p>The code signature failed the integrity check. If the integrity check fails, then Lambda blocks
     #       deployment, even if the code signing policy is set to WARN.</p>
-    class InvalidCodeSignatureException < Smithy::Client::Errors::ServiceError
+    class InvalidCodeSignatureException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::InvalidCodeSignatureException] data
@@ -296,7 +296,7 @@ module Aws::Lambda
     end
 
     # <p>One of the parameters in the request is not valid.</p>
-    class InvalidParameterValueException < Smithy::Client::Errors::ServiceError
+    class InvalidParameterValueException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::InvalidParameterValueException] data
@@ -317,7 +317,7 @@ module Aws::Lambda
 
     # <p>The request body could not be parsed as JSON, or a request header is invalid. For example, the 'x-amzn-RequestId'
     #       header is not a valid UUID string.</p>
-    class InvalidRequestContentException < Smithy::Client::Errors::ServiceError
+    class InvalidRequestContentException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::InvalidRequestContentException] data
@@ -337,7 +337,7 @@ module Aws::Lambda
     end
 
     # <p>The runtime or runtime version specified is not supported.</p>
-    class InvalidRuntimeException < Smithy::Client::Errors::ServiceError
+    class InvalidRuntimeException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::InvalidRuntimeException] data
@@ -355,7 +355,7 @@ module Aws::Lambda
     end
 
     # <p>The security group ID provided in the Lambda function VPC configuration is not valid.</p>
-    class InvalidSecurityGroupIDException < Smithy::Client::Errors::ServiceError
+    class InvalidSecurityGroupIDException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::InvalidSecurityGroupIDException] data
@@ -373,7 +373,7 @@ module Aws::Lambda
     end
 
     # <p>The subnet ID provided in the Lambda function VPC configuration is not valid.</p>
-    class InvalidSubnetIDException < Smithy::Client::Errors::ServiceError
+    class InvalidSubnetIDException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::InvalidSubnetIDException] data
@@ -391,7 +391,7 @@ module Aws::Lambda
     end
 
     # <p>Lambda could not unzip the deployment package.</p>
-    class InvalidZipFileException < Smithy::Client::Errors::ServiceError
+    class InvalidZipFileException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::InvalidZipFileException] data
@@ -410,7 +410,7 @@ module Aws::Lambda
 
     # <p>Lambda couldn't decrypt the environment variables because KMS access was denied.
     #       Check the Lambda function's KMS permissions.</p>
-    class KMSAccessDeniedException < Smithy::Client::Errors::ServiceError
+    class KMSAccessDeniedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::KMSAccessDeniedException] data
@@ -429,7 +429,7 @@ module Aws::Lambda
 
     # <p>Lambda couldn't decrypt the environment variables because the KMS key used is
     #       disabled. Check the Lambda function's KMS key settings.</p>
-    class KMSDisabledException < Smithy::Client::Errors::ServiceError
+    class KMSDisabledException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::KMSDisabledException] data
@@ -447,7 +447,7 @@ module Aws::Lambda
     end
 
     # <p>Lambda couldn't decrypt the environment variables because the state of the KMS key used is not valid for Decrypt. Check the function's KMS key settings.</p>
-    class KMSInvalidStateException < Smithy::Client::Errors::ServiceError
+    class KMSInvalidStateException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::KMSInvalidStateException] data
@@ -466,7 +466,7 @@ module Aws::Lambda
 
     # <p>Lambda couldn't decrypt the environment variables because the KMS key was not
     #       found. Check the function's KMS key settings.</p>
-    class KMSNotFoundException < Smithy::Client::Errors::ServiceError
+    class KMSNotFoundException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::KMSNotFoundException] data
@@ -484,7 +484,7 @@ module Aws::Lambda
     end
 
     # <p>The permissions policy for the resource is too large. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html">Lambda quotas</a>.</p>
-    class PolicyLengthExceededException < Smithy::Client::Errors::ServiceError
+    class PolicyLengthExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::PolicyLengthExceededException] data
@@ -512,7 +512,7 @@ module Aws::Lambda
     #                   <b>For all other API operations:</b> Call <code>GetFunction</code> or <code>GetAlias</code> to retrieve the latest RevisionId for your resource.</p>
     #             </li>
     #          </ul>
-    class PreconditionFailedException < Smithy::Client::Errors::ServiceError
+    class PreconditionFailedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::PreconditionFailedException] data
@@ -532,7 +532,7 @@ module Aws::Lambda
     end
 
     # <p>The specified configuration does not exist.</p>
-    class ProvisionedConcurrencyConfigNotFoundException < Smithy::Client::Errors::ServiceError
+    class ProvisionedConcurrencyConfigNotFoundException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::ProvisionedConcurrencyConfigNotFoundException] data
@@ -550,7 +550,7 @@ module Aws::Lambda
     end
 
     # <p>Lambda has detected your function being invoked in a recursive loop with other Amazon Web Services resources and stopped your function's invocation.</p>
-    class RecursiveInvocationException < Smithy::Client::Errors::ServiceError
+    class RecursiveInvocationException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::RecursiveInvocationException] data
@@ -571,7 +571,7 @@ module Aws::Lambda
 
     # <p>The request payload exceeded the <code>Invoke</code> request body JSON input quota. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html">Lambda
     #       quotas</a>.</p>
-    class RequestTooLargeException < Smithy::Client::Errors::ServiceError
+    class RequestTooLargeException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::RequestTooLargeException] data
@@ -589,7 +589,7 @@ module Aws::Lambda
     end
 
     # <p>The resource already exists, or another operation is in progress.</p>
-    class ResourceConflictException < Smithy::Client::Errors::ServiceError
+    class ResourceConflictException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::ResourceConflictException] data
@@ -610,7 +610,7 @@ module Aws::Lambda
 
     # <p>The operation conflicts with the resource's availability. For example, you tried to update an event source
     #       mapping in the CREATING state, or you tried to delete an event source mapping currently UPDATING.</p>
-    class ResourceInUseException < Smithy::Client::Errors::ServiceError
+    class ResourceInUseException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::ResourceInUseException] data
@@ -628,7 +628,7 @@ module Aws::Lambda
     end
 
     # <p>The resource specified in the request does not exist.</p>
-    class ResourceNotFoundException < Smithy::Client::Errors::ServiceError
+    class ResourceNotFoundException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::ResourceNotFoundException] data
@@ -647,7 +647,7 @@ module Aws::Lambda
 
     # <p>The function is inactive and its VPC connection is no longer available. Wait for the VPC connection to
     #       reestablish and try again.</p>
-    class ResourceNotReadyException < Smithy::Client::Errors::ServiceError
+    class ResourceNotReadyException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::ResourceNotReadyException] data
@@ -667,7 +667,7 @@ module Aws::Lambda
     end
 
     # <p>The Lambda service encountered an internal error.</p>
-    class ServiceException < Smithy::Client::Errors::ServiceError
+    class ServiceException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::ServiceException] data
@@ -686,7 +686,7 @@ module Aws::Lambda
 
     # <p>The <code>afterRestore()</code>
     #             <a href="https://docs.aws.amazon.com/lambda/latest/dg/snapstart-runtime-hooks.html">runtime hook</a> encountered an error. For more information, check the Amazon CloudWatch logs.</p>
-    class SnapStartException < Smithy::Client::Errors::ServiceError
+    class SnapStartException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::SnapStartException] data
@@ -704,7 +704,7 @@ module Aws::Lambda
     end
 
     # <p>Lambda is initializing your function. You can invoke the function when the <a href="https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html">function state</a> becomes <code>Active</code>.</p>
-    class SnapStartNotReadyException < Smithy::Client::Errors::ServiceError
+    class SnapStartNotReadyException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::SnapStartNotReadyException] data
@@ -722,7 +722,7 @@ module Aws::Lambda
     end
 
     # <p>Lambda couldn't restore the snapshot within the timeout limit.</p>
-    class SnapStartTimeoutException < Smithy::Client::Errors::ServiceError
+    class SnapStartTimeoutException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::SnapStartTimeoutException] data
@@ -741,7 +741,7 @@ module Aws::Lambda
 
     # <p>Lambda couldn't set up VPC access for the Lambda function because one or more
     #       configured subnets has no available IP addresses.</p>
-    class SubnetIPAddressLimitReachedException < Smithy::Client::Errors::ServiceError
+    class SubnetIPAddressLimitReachedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::SubnetIPAddressLimitReachedException] data
@@ -759,7 +759,7 @@ module Aws::Lambda
     end
 
     # <p>The request throughput limit was exceeded. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html#api-requests">Lambda quotas</a>.</p>
-    class TooManyRequestsException < Smithy::Client::Errors::ServiceError
+    class TooManyRequestsException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::TooManyRequestsException] data
@@ -786,7 +786,7 @@ module Aws::Lambda
     end
 
     # <p>The content type of the <code>Invoke</code> request body is not JSON.</p>
-    class UnsupportedMediaTypeException < Smithy::Client::Errors::ServiceError
+    class UnsupportedMediaTypeException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::UnsupportedMediaTypeException] data

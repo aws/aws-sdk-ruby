@@ -1,157 +1,157 @@
 module Aws::Lambda
   module Errors
-    class CodeSigningConfigNotFoundException < Smithy::Client::Errors::ServiceError
+    class CodeSigningConfigNotFoundException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class CodeStorageExceededException < Smithy::Client::Errors::ServiceError
+    class CodeStorageExceededException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class CodeVerificationFailedException < Smithy::Client::Errors::ServiceError
+    class CodeVerificationFailedException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class EC2AccessDeniedException < Smithy::Client::Errors::ServiceError
+    class EC2AccessDeniedException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class EC2ThrottledException < Smithy::Client::Errors::ServiceError
+    class EC2ThrottledException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class EC2UnexpectedException < Smithy::Client::Errors::ServiceError
+    class EC2UnexpectedException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
       def ec2_error_code: () -> String?
     end
-    class EFSIOException < Smithy::Client::Errors::ServiceError
+    class EFSIOException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class EFSMountConnectivityException < Smithy::Client::Errors::ServiceError
+    class EFSMountConnectivityException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class EFSMountFailureException < Smithy::Client::Errors::ServiceError
+    class EFSMountFailureException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class EFSMountTimeoutException < Smithy::Client::Errors::ServiceError
+    class EFSMountTimeoutException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class ENILimitReachedException < Smithy::Client::Errors::ServiceError
+    class ENILimitReachedException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class InvalidCodeSignatureException < Smithy::Client::Errors::ServiceError
+    class InvalidCodeSignatureException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class InvalidParameterValueException < Smithy::Client::Errors::ServiceError
+    class InvalidParameterValueException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class InvalidRequestContentException < Smithy::Client::Errors::ServiceError
+    class InvalidRequestContentException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class InvalidRuntimeException < Smithy::Client::Errors::ServiceError
+    class InvalidRuntimeException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class InvalidSecurityGroupIDException < Smithy::Client::Errors::ServiceError
+    class InvalidSecurityGroupIDException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class InvalidSubnetIDException < Smithy::Client::Errors::ServiceError
+    class InvalidSubnetIDException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class InvalidZipFileException < Smithy::Client::Errors::ServiceError
+    class InvalidZipFileException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class KMSAccessDeniedException < Smithy::Client::Errors::ServiceError
+    class KMSAccessDeniedException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class KMSDisabledException < Smithy::Client::Errors::ServiceError
+    class KMSDisabledException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class KMSInvalidStateException < Smithy::Client::Errors::ServiceError
+    class KMSInvalidStateException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class KMSNotFoundException < Smithy::Client::Errors::ServiceError
+    class KMSNotFoundException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class PolicyLengthExceededException < Smithy::Client::Errors::ServiceError
+    class PolicyLengthExceededException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class PreconditionFailedException < Smithy::Client::Errors::ServiceError
+    class PreconditionFailedException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class ProvisionedConcurrencyConfigNotFoundException < Smithy::Client::Errors::ServiceError
+    class ProvisionedConcurrencyConfigNotFoundException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class RecursiveInvocationException < Smithy::Client::Errors::ServiceError
+    class RecursiveInvocationException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class RequestTooLargeException < Smithy::Client::Errors::ServiceError
+    class RequestTooLargeException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class ResourceConflictException < Smithy::Client::Errors::ServiceError
+    class ResourceConflictException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class ResourceInUseException < Smithy::Client::Errors::ServiceError
+    class ResourceInUseException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class ResourceNotFoundException < Smithy::Client::Errors::ServiceError
+    class ResourceNotFoundException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class ResourceNotReadyException < Smithy::Client::Errors::ServiceError
+    class ResourceNotReadyException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class ServiceException < Smithy::Client::Errors::ServiceError
+    class ServiceException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class SnapStartException < Smithy::Client::Errors::ServiceError
+    class SnapStartException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class SnapStartNotReadyException < Smithy::Client::Errors::ServiceError
+    class SnapStartNotReadyException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class SnapStartTimeoutException < Smithy::Client::Errors::ServiceError
+    class SnapStartTimeoutException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class SubnetIPAddressLimitReachedException < Smithy::Client::Errors::ServiceError
+    class SubnetIPAddressLimitReachedException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
-    class TooManyRequestsException < Smithy::Client::Errors::ServiceError
+    class TooManyRequestsException < Smithy::Client::ServiceError
       def retry_after_seconds: () -> String?
       def type: () -> String?
       def message: () -> String?
       def reason: () -> String?
     end
-    class UnsupportedMediaTypeException < Smithy::Client::Errors::ServiceError
+    class UnsupportedMediaTypeException < Smithy::Client::ServiceError
       def type: () -> String?
       def message: () -> String?
     end
