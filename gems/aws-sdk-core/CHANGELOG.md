@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix undefined `flattened_list?` and `flattened_map?` methods in RPCv2 parser.
+
 3.225.0 (2025-06-02)
 ------------------
 
