@@ -114,7 +114,6 @@ module Aws
       end
 
       it 'defaults flattened list to empty array' do
-        puts client.foo.inspect
         expect(client.foo.flattened_list).to be_a(Array)
       end
 
