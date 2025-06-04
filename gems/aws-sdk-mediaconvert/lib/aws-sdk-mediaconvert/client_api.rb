@@ -484,6 +484,7 @@ module Aws::MediaConvert
     Mp2Settings = Shapes::StructureShape.new(name: 'Mp2Settings')
     Mp3RateControlMode = Shapes::StringShape.new(name: 'Mp3RateControlMode')
     Mp3Settings = Shapes::StructureShape.new(name: 'Mp3Settings')
+    Mp4C2paManifest = Shapes::StringShape.new(name: 'Mp4C2paManifest')
     Mp4CslgAtom = Shapes::StringShape.new(name: 'Mp4CslgAtom')
     Mp4FreeSpaceBox = Shapes::StringShape.new(name: 'Mp4FreeSpaceBox')
     Mp4MoovPlacement = Shapes::StringShape.new(name: 'Mp4MoovPlacement')
@@ -920,6 +921,7 @@ module Aws::MediaConvert
     __stringMin1Max256 = Shapes::StringShape.new(name: '__stringMin1Max256')
     __stringMin1Max50 = Shapes::StringShape.new(name: '__stringMin1Max50')
     __stringMin1Max50PatternAZAZ09 = Shapes::StringShape.new(name: '__stringMin1Max50PatternAZAZ09')
+    __stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932 = Shapes::StringShape.new(name: '__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932')
     __stringMin24Max512PatternAZaZ0902 = Shapes::StringShape.new(name: '__stringMin24Max512PatternAZaZ0902')
     __stringMin32Max32Pattern09aFAF32 = Shapes::StringShape.new(name: '__stringMin32Max32Pattern09aFAF32')
     __stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12 = Shapes::StringShape.new(name: '__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12')
@@ -2266,11 +2268,14 @@ module Aws::MediaConvert
     Mp3Settings.struct_class = Types::Mp3Settings
 
     Mp4Settings.add_member(:audio_duration, Shapes::ShapeRef.new(shape: CmfcAudioDuration, location_name: "audioDuration"))
+    Mp4Settings.add_member(:c2pa_manifest, Shapes::ShapeRef.new(shape: Mp4C2paManifest, location_name: "c2paManifest"))
+    Mp4Settings.add_member(:certificate_secret, Shapes::ShapeRef.new(shape: __stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09, location_name: "certificateSecret"))
     Mp4Settings.add_member(:cslg_atom, Shapes::ShapeRef.new(shape: Mp4CslgAtom, location_name: "cslgAtom"))
     Mp4Settings.add_member(:ctts_version, Shapes::ShapeRef.new(shape: __integerMin0Max1, location_name: "cttsVersion"))
     Mp4Settings.add_member(:free_space_box, Shapes::ShapeRef.new(shape: Mp4FreeSpaceBox, location_name: "freeSpaceBox"))
     Mp4Settings.add_member(:moov_placement, Shapes::ShapeRef.new(shape: Mp4MoovPlacement, location_name: "moovPlacement"))
     Mp4Settings.add_member(:mp_4_major_brand, Shapes::ShapeRef.new(shape: __string, location_name: "mp4MajorBrand"))
+    Mp4Settings.add_member(:signing_kms_key, Shapes::ShapeRef.new(shape: __stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932, location_name: "signingKmsKey"))
     Mp4Settings.struct_class = Types::Mp4Settings
 
     MpdSettings.add_member(:accessibility_caption_hints, Shapes::ShapeRef.new(shape: MpdAccessibilityCaptionHints, location_name: "accessibilityCaptionHints"))

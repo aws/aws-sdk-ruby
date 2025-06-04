@@ -2103,6 +2103,7 @@ module Aws::NetworkFirewall
     #
     #   * {Types::DescribeLoggingConfigurationResponse#firewall_arn #firewall_arn} => String
     #   * {Types::DescribeLoggingConfigurationResponse#logging_configuration #logging_configuration} => Types::LoggingConfiguration
+    #   * {Types::DescribeLoggingConfigurationResponse#enable_monitoring_dashboard #enable_monitoring_dashboard} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -2119,6 +2120,7 @@ module Aws::NetworkFirewall
     #   resp.logging_configuration.log_destination_configs[0].log_destination_type #=> String, one of "S3", "CloudWatchLogs", "KinesisDataFirehose"
     #   resp.logging_configuration.log_destination_configs[0].log_destination #=> Hash
     #   resp.logging_configuration.log_destination_configs[0].log_destination["HashMapKey"] #=> String
+    #   resp.enable_monitoring_dashboard #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeLoggingConfiguration AWS API Documentation
     #
@@ -4143,11 +4145,25 @@ module Aws::NetworkFirewall
     #   Defines how Network Firewall performs logging for a firewall. If you
     #   omit this setting, Network Firewall disables logging for the firewall.
     #
+    # @option params [Boolean] :enable_monitoring_dashboard
+    #   A boolean that lets you enable or disable the detailed firewall
+    #   monitoring dashboard on the firewall.
+    #
+    #   The monitoring dashboard provides comprehensive visibility into your
+    #   firewall's flow logs and alert logs. After you enable detailed
+    #   monitoring, you can access these dashboards directly from the
+    #   **Monitoring** page of the Network Firewall console.
+    #
+    #   Specify `TRUE` to enable the the detailed monitoring dashboard on the
+    #   firewall. Specify `FALSE` to disable the the detailed monitoring
+    #   dashboard on the firewall.
+    #
     # @return [Types::UpdateLoggingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateLoggingConfigurationResponse#firewall_arn #firewall_arn} => String
     #   * {Types::UpdateLoggingConfigurationResponse#firewall_name #firewall_name} => String
     #   * {Types::UpdateLoggingConfigurationResponse#logging_configuration #logging_configuration} => Types::LoggingConfiguration
+    #   * {Types::UpdateLoggingConfigurationResponse#enable_monitoring_dashboard #enable_monitoring_dashboard} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -4165,6 +4181,7 @@ module Aws::NetworkFirewall
     #         },
     #       ],
     #     },
+    #     enable_monitoring_dashboard: false,
     #   })
     #
     # @example Response structure
@@ -4176,6 +4193,7 @@ module Aws::NetworkFirewall
     #   resp.logging_configuration.log_destination_configs[0].log_destination_type #=> String, one of "S3", "CloudWatchLogs", "KinesisDataFirehose"
     #   resp.logging_configuration.log_destination_configs[0].log_destination #=> Hash
     #   resp.logging_configuration.log_destination_configs[0].log_destination["HashMapKey"] #=> String
+    #   resp.enable_monitoring_dashboard #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateLoggingConfiguration AWS API Documentation
     #
@@ -4699,7 +4717,7 @@ module Aws::NetworkFirewall
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-networkfirewall'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

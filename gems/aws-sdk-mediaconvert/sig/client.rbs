@@ -1093,11 +1093,14 @@ module Aws
                                     }?,
                                     mp_4_settings: {
                                       audio_duration: ("DEFAULT_CODEC_DURATION" | "MATCH_VIDEO_DURATION")?,
+                                      c2pa_manifest: ("INCLUDE" | "EXCLUDE")?,
+                                      certificate_secret: ::String?,
                                       cslg_atom: ("INCLUDE" | "EXCLUDE")?,
                                       ctts_version: ::Integer?,
                                       free_space_box: ("INCLUDE" | "EXCLUDE")?,
                                       moov_placement: ("PROGRESSIVE_DOWNLOAD" | "NORMAL")?,
-                                      mp_4_major_brand: ::String?
+                                      mp_4_major_brand: ::String?,
+                                      signing_kms_key: ::String?
                                     }?,
                                     mpd_settings: {
                                       accessibility_caption_hints: ("INCLUDE" | "EXCLUDE")?,
@@ -2576,11 +2579,14 @@ module Aws
                                              }?,
                                              mp_4_settings: {
                                                audio_duration: ("DEFAULT_CODEC_DURATION" | "MATCH_VIDEO_DURATION")?,
+                                               c2pa_manifest: ("INCLUDE" | "EXCLUDE")?,
+                                               certificate_secret: ::String?,
                                                cslg_atom: ("INCLUDE" | "EXCLUDE")?,
                                                ctts_version: ::Integer?,
                                                free_space_box: ("INCLUDE" | "EXCLUDE")?,
                                                moov_placement: ("PROGRESSIVE_DOWNLOAD" | "NORMAL")?,
-                                               mp_4_major_brand: ::String?
+                                               mp_4_major_brand: ::String?,
+                                               signing_kms_key: ::String?
                                              }?,
                                              mpd_settings: {
                                                accessibility_caption_hints: ("INCLUDE" | "EXCLUDE")?,
@@ -3438,11 +3444,14 @@ module Aws
                                }?,
                                mp_4_settings: {
                                  audio_duration: ("DEFAULT_CODEC_DURATION" | "MATCH_VIDEO_DURATION")?,
+                                 c2pa_manifest: ("INCLUDE" | "EXCLUDE")?,
+                                 certificate_secret: ::String?,
                                  cslg_atom: ("INCLUDE" | "EXCLUDE")?,
                                  ctts_version: ::Integer?,
                                  free_space_box: ("INCLUDE" | "EXCLUDE")?,
                                  moov_placement: ("PROGRESSIVE_DOWNLOAD" | "NORMAL")?,
-                                 mp_4_major_brand: ::String?
+                                 mp_4_major_brand: ::String?,
+                                 signing_kms_key: ::String?
                                }?,
                                mpd_settings: {
                                  accessibility_caption_hints: ("INCLUDE" | "EXCLUDE")?,
@@ -5159,11 +5168,14 @@ module Aws
                                              }?,
                                              mp_4_settings: {
                                                audio_duration: ("DEFAULT_CODEC_DURATION" | "MATCH_VIDEO_DURATION")?,
+                                               c2pa_manifest: ("INCLUDE" | "EXCLUDE")?,
+                                               certificate_secret: ::String?,
                                                cslg_atom: ("INCLUDE" | "EXCLUDE")?,
                                                ctts_version: ::Integer?,
                                                free_space_box: ("INCLUDE" | "EXCLUDE")?,
                                                moov_placement: ("PROGRESSIVE_DOWNLOAD" | "NORMAL")?,
-                                               mp_4_major_brand: ::String?
+                                               mp_4_major_brand: ::String?,
+                                               signing_kms_key: ::String?
                                              }?,
                                              mpd_settings: {
                                                accessibility_caption_hints: ("INCLUDE" | "EXCLUDE")?,
@@ -6020,11 +6032,14 @@ module Aws
                                }?,
                                mp_4_settings: {
                                  audio_duration: ("DEFAULT_CODEC_DURATION" | "MATCH_VIDEO_DURATION")?,
+                                 c2pa_manifest: ("INCLUDE" | "EXCLUDE")?,
+                                 certificate_secret: ::String?,
                                  cslg_atom: ("INCLUDE" | "EXCLUDE")?,
                                  ctts_version: ::Integer?,
                                  free_space_box: ("INCLUDE" | "EXCLUDE")?,
                                  moov_placement: ("PROGRESSIVE_DOWNLOAD" | "NORMAL")?,
-                                 mp_4_major_brand: ::String?
+                                 mp_4_major_brand: ::String?,
+                                 signing_kms_key: ::String?
                                }?,
                                mpd_settings: {
                                  accessibility_caption_hints: ("INCLUDE" | "EXCLUDE")?,

@@ -3540,6 +3540,27 @@ module Aws::MediaConnect
     #   An indication of whether the output is transmitting data or not.
     #   @return [String]
     #
+    # @!attribute [rw] peer_ip_address
+    #   The IP address of the device that is currently receiving content
+    #   from this output.
+    #
+    #   <note markdown="1"> * For outputs that use protocols where you specify the destination
+    #     (such as SRT Caller or Zixi Push), this value matches the
+    #     configured destination address.
+    #
+    #   * For outputs that use listener protocols (such as SRT Listener),
+    #     this value shows the address of the connected receiver.
+    #
+    #   * Peer IP addresses aren't available for entitlements, managed
+    #     MediaLive outputs, NDI outputs, and CDI/ST2110 outputs.
+    #
+    #   * The peer IP address might not be visible for flows that haven't
+    #     been started yet, or flows that were started before May 2025. In
+    #     these cases, restart your flow to see the peer IP address.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Output AWS API Documentation
     #
     class Output < Struct.new(
@@ -3558,7 +3579,8 @@ module Aws::MediaConnect
       :vpc_interface_attachment,
       :bridge_arn,
       :bridge_ports,
-      :output_status)
+      :output_status,
+      :peer_ip_address)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4233,6 +4255,26 @@ module Aws::MediaConnect
     #   bridge.
     #   @return [Types::GatewayBridgeSource]
     #
+    # @!attribute [rw] peer_ip_address
+    #   The IP address of the device that is currently sending content to
+    #   this source.
+    #
+    #   <note markdown="1"> * For sources that use protocols where you specify the origin (such
+    #     as SRT Caller), this value matches the configured origin address.
+    #
+    #   * For sources that use listener protocols (such as SRT Listener or
+    #     RTP), this value shows the address of the connected sender.
+    #
+    #   * Peer IP addresses aren't available for entitlements and
+    #     CDI/ST2110 sources.
+    #
+    #   * The peer IP address might not be visible for flows that haven't
+    #     been started yet, or flows that were started before May 2025. In
+    #     these cases, restart your flow to see the peer IP address.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Source AWS API Documentation
     #
     class Source < Struct.new(
@@ -4250,7 +4292,8 @@ module Aws::MediaConnect
       :transport,
       :vpc_interface_name,
       :whitelist_cidr,
-      :gateway_bridge_source)
+      :gateway_bridge_source,
+      :peer_ip_address)
       SENSITIVE = []
       include Aws::Structure
     end

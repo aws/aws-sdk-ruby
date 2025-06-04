@@ -153,6 +153,7 @@ module Aws
   autoload :ElasticsearchService, 'aws-sdk-elasticsearchservice'
   autoload :EntityResolution, 'aws-sdk-entityresolution'
   autoload :EventBridge, 'aws-sdk-eventbridge'
+  autoload :Evs, 'aws-sdk-evs'
   autoload :FIS, 'aws-sdk-fis'
   autoload :FMS, 'aws-sdk-fms'
   autoload :FSx, 'aws-sdk-fsx'

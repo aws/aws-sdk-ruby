@@ -102,6 +102,7 @@ module Aws::NetworkFirewall
     DisassociateSubnetsRequest = Shapes::StructureShape.new(name: 'DisassociateSubnetsRequest')
     DisassociateSubnetsResponse = Shapes::StructureShape.new(name: 'DisassociateSubnetsResponse')
     Domain = Shapes::StringShape.new(name: 'Domain')
+    EnableMonitoringDashboard = Shapes::BooleanShape.new(name: 'EnableMonitoringDashboard')
     EnabledAnalysisType = Shapes::StringShape.new(name: 'EnabledAnalysisType')
     EnabledAnalysisTypes = Shapes::ListShape.new(name: 'EnabledAnalysisTypes')
     EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
@@ -593,6 +594,7 @@ module Aws::NetworkFirewall
 
     DescribeLoggingConfigurationResponse.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
     DescribeLoggingConfigurationResponse.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "LoggingConfiguration"))
+    DescribeLoggingConfigurationResponse.add_member(:enable_monitoring_dashboard, Shapes::ShapeRef.new(shape: EnableMonitoringDashboard, location_name: "EnableMonitoringDashboard"))
     DescribeLoggingConfigurationResponse.struct_class = Types::DescribeLoggingConfigurationResponse
 
     DescribeResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
@@ -1315,11 +1317,13 @@ module Aws::NetworkFirewall
     UpdateLoggingConfigurationRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
     UpdateLoggingConfigurationRequest.add_member(:firewall_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "FirewallName"))
     UpdateLoggingConfigurationRequest.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "LoggingConfiguration"))
+    UpdateLoggingConfigurationRequest.add_member(:enable_monitoring_dashboard, Shapes::ShapeRef.new(shape: EnableMonitoringDashboard, location_name: "EnableMonitoringDashboard"))
     UpdateLoggingConfigurationRequest.struct_class = Types::UpdateLoggingConfigurationRequest
 
     UpdateLoggingConfigurationResponse.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
     UpdateLoggingConfigurationResponse.add_member(:firewall_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "FirewallName"))
     UpdateLoggingConfigurationResponse.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "LoggingConfiguration"))
+    UpdateLoggingConfigurationResponse.add_member(:enable_monitoring_dashboard, Shapes::ShapeRef.new(shape: EnableMonitoringDashboard, location_name: "EnableMonitoringDashboard"))
     UpdateLoggingConfigurationResponse.struct_class = Types::UpdateLoggingConfigurationResponse
 
     UpdateRuleGroupRequest.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, required: true, location_name: "UpdateToken"))

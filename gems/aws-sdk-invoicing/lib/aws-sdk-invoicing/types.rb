@@ -28,6 +28,35 @@ module Aws::Invoicing
       include Aws::Structure
     end
 
+    # Details about how the total amount was calculated and categorized.
+    #
+    # @!attribute [rw] sub_total_amount
+    #   The total of a set of the breakdown.
+    #   @return [String]
+    #
+    # @!attribute [rw] discounts
+    #   The discounted amount.
+    #   @return [Types::DiscountsBreakdown]
+    #
+    # @!attribute [rw] taxes
+    #   The tax amount.
+    #   @return [Types::TaxesBreakdown]
+    #
+    # @!attribute [rw] fees
+    #   The fee amount.
+    #   @return [Types::FeesBreakdown]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/AmountBreakdown AWS API Documentation
+    #
+    class AmountBreakdown < Struct.new(
+      :sub_total_amount,
+      :discounts,
+      :taxes,
+      :fees)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] account_ids
     #   Retrieves the corresponding invoice profile data for these account
     #   IDs.
@@ -49,6 +78,26 @@ module Aws::Invoicing
     #
     class BatchGetInvoiceProfileResponse < Struct.new(
       :profiles)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The billing period for which you want to retrieve invoice-related
+    # documents.
+    #
+    # @!attribute [rw] month
+    #   The billing period month.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] year
+    #   The billing period year.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/BillingPeriod AWS API Documentation
+    #
+    class BillingPeriod < Struct.new(
+      :month,
+      :year)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -109,6 +158,56 @@ module Aws::Invoicing
       include Aws::Structure
     end
 
+    # The details of currency exchange.
+    #
+    # @!attribute [rw] source_currency_code
+    #   The exchange source currency.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_currency_code
+    #   The exchange target currency.
+    #   @return [String]
+    #
+    # @!attribute [rw] rate
+    #   The currency exchange rate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/CurrencyExchangeDetails AWS API Documentation
+    #
+    class CurrencyExchangeDetails < Struct.new(
+      :source_currency_code,
+      :target_currency_code,
+      :rate)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The time period that you want invoice-related documents for.
+    #
+    # @!attribute [rw] start_date
+    #   The beginning of the time period that you want invoice-related
+    #   documents for. The start date is inclusive. For example, if `start`
+    #   is `2019-01-01`, AWS retrieves invoices starting at `2019-01-01` up
+    #   to the end date.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date
+    #   The end of the time period that you want invoice-related documents
+    #   for. The end date is exclusive. For example, if `end` is
+    #   `2019-01-10`, Amazon Web Services retrieves invoice-related
+    #   documents from the start date up to, but not including,
+    #   `2018-01-10`.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/DateInterval AWS API Documentation
+    #
+    class DateInterval < Struct.new(
+      :start_date,
+      :end_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] invoice_unit_arn
     #   The ARN to identify an invoice unit. This information can't be
     #   modified or deleted.
@@ -131,6 +230,106 @@ module Aws::Invoicing
     #
     class DeleteInvoiceUnitResponse < Struct.new(
       :invoice_unit_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The discounts details.
+    #
+    # @!attribute [rw] breakdown
+    #   The list of discounts information.
+    #   @return [Array<Types::DiscountsBreakdownAmount>]
+    #
+    # @!attribute [rw] total_amount
+    #   The discount's total amount.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/DiscountsBreakdown AWS API Documentation
+    #
+    class DiscountsBreakdown < Struct.new(
+      :breakdown,
+      :total_amount)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The discounted amount.
+    #
+    # @!attribute [rw] description
+    #   The list of discounts information.
+    #   @return [String]
+    #
+    # @!attribute [rw] amount
+    #   The discounted amount.
+    #   @return [String]
+    #
+    # @!attribute [rw] rate
+    #   The details for the discount rate..
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/DiscountsBreakdownAmount AWS API Documentation
+    #
+    class DiscountsBreakdownAmount < Struct.new(
+      :description,
+      :amount,
+      :rate)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The organization name providing Amazon Web Services services.
+    #
+    # @!attribute [rw] invoicing_entity
+    #   The name of the entity that issues the Amazon Web Services invoice.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/Entity AWS API Documentation
+    #
+    class Entity < Struct.new(
+      :invoicing_entity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of fees.
+    #
+    # @!attribute [rw] breakdown
+    #   The list of fees information.
+    #   @return [Array<Types::FeesBreakdownAmount>]
+    #
+    # @!attribute [rw] total_amount
+    #   The total amount of fees.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/FeesBreakdown AWS API Documentation
+    #
+    class FeesBreakdown < Struct.new(
+      :breakdown,
+      :total_amount)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The fee amount.
+    #
+    # @!attribute [rw] description
+    #   The list of fees information.
+    #   @return [String]
+    #
+    # @!attribute [rw] amount
+    #   The fee amount.
+    #   @return [String]
+    #
+    # @!attribute [rw] rate
+    #   Details about the rate amount.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/FeesBreakdownAmount AWS API Documentation
+    #
+    class FeesBreakdownAmount < Struct.new(
+      :description,
+      :amount,
+      :rate)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -266,6 +465,40 @@ module Aws::Invoicing
       include Aws::Structure
     end
 
+    # The amount charged after taxes, in the preferred currency.
+    #
+    # @!attribute [rw] total_amount
+    #   The invoice currency amount.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_amount_before_tax
+    #   Details about the invoice total amount before tax.
+    #   @return [String]
+    #
+    # @!attribute [rw] currency_code
+    #   The currency dominion of the invoice document.
+    #   @return [String]
+    #
+    # @!attribute [rw] amount_breakdown
+    #   Details about the invoice currency amount.
+    #   @return [Types::AmountBreakdown]
+    #
+    # @!attribute [rw] currency_exchange_details
+    #   The details of currency exchange.
+    #   @return [Types::CurrencyExchangeDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/InvoiceCurrencyAmount AWS API Documentation
+    #
+    class InvoiceCurrencyAmount < Struct.new(
+      :total_amount,
+      :total_amount_before_tax,
+      :currency_code,
+      :amount_breakdown,
+      :currency_exchange_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains high-level information about the invoice receiver.
     #
     # @!attribute [rw] account_id
@@ -302,6 +535,118 @@ module Aws::Invoicing
       :issuer,
       :tax_registration_number)
       SENSITIVE = [:receiver_address, :receiver_email, :tax_registration_number]
+      include Aws::Structure
+    end
+
+    # Filters for your invoice summaries.
+    #
+    # @!attribute [rw] time_interval
+    #   The date range for invoice summary retrieval.
+    #   @return [Types::DateInterval]
+    #
+    # @!attribute [rw] billing_period
+    #   The billing period associated with the invoice documents.
+    #   @return [Types::BillingPeriod]
+    #
+    # @!attribute [rw] invoicing_entity
+    #   The name of the entity that issues the Amazon Web Services invoice.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/InvoiceSummariesFilter AWS API Documentation
+    #
+    class InvoiceSummariesFilter < Struct.new(
+      :time_interval,
+      :billing_period,
+      :invoicing_entity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the invoice summary.
+    #
+    # @!attribute [rw] resource_type
+    #   The query identifier type (`INVOICE_ID` or `ACCOUNT_ID`).
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the query identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/InvoiceSummariesSelector AWS API Documentation
+    #
+    class InvoiceSummariesSelector < Struct.new(
+      :resource_type,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The invoice that the API retrieved.
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] invoice_id
+    #   The invoice ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] issued_date
+    #   The issued date of the invoice.
+    #   @return [Time]
+    #
+    # @!attribute [rw] due_date
+    #   The invoice due date.
+    #   @return [Time]
+    #
+    # @!attribute [rw] entity
+    #   The organization name providing Amazon Web Services services.
+    #   @return [Types::Entity]
+    #
+    # @!attribute [rw] billing_period
+    #   The billing period of the invoice-related document.
+    #   @return [Types::BillingPeriod]
+    #
+    # @!attribute [rw] invoice_type
+    #   The type of invoice.
+    #   @return [String]
+    #
+    # @!attribute [rw] original_invoice_id
+    #   The initial or original invoice ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] purchase_order_number
+    #   The purchase order number associated to the invoice.
+    #   @return [String]
+    #
+    # @!attribute [rw] base_currency_amount
+    #   The summary with the product and service currency.
+    #   @return [Types::InvoiceCurrencyAmount]
+    #
+    # @!attribute [rw] tax_currency_amount
+    #   The summary with the tax currency.
+    #   @return [Types::InvoiceCurrencyAmount]
+    #
+    # @!attribute [rw] payment_currency_amount
+    #   The summary with the customer configured currency.
+    #   @return [Types::InvoiceCurrencyAmount]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/InvoiceSummary AWS API Documentation
+    #
+    class InvoiceSummary < Struct.new(
+      :account_id,
+      :invoice_id,
+      :issued_date,
+      :due_date,
+      :entity,
+      :billing_period,
+      :invoice_type,
+      :original_invoice_id,
+      :purchase_order_number,
+      :base_currency_amount,
+      :tax_currency_amount,
+      :payment_currency_amount)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -371,6 +716,58 @@ module Aws::Invoicing
     #
     class InvoiceUnitRule < Struct.new(
       :linked_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] selector
+    #   The option to retrieve details for a specific invoice by providing
+    #   its unique ID. Alternatively, access information for all invoices
+    #   linked to the account by providing an account ID.
+    #   @return [Types::InvoiceSummariesSelector]
+    #
+    # @!attribute [rw] filter
+    #   Filters you can use to customize your invoice summary.
+    #   @return [Types::InvoiceSummariesFilter]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next set of results. Amazon Web Services
+    #   provides the token when the response from a previous call has more
+    #   results than the maximum page size.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of invoice summaries a paginated response can
+    #   contain.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/ListInvoiceSummariesRequest AWS API Documentation
+    #
+    class ListInvoiceSummariesRequest < Struct.new(
+      :selector,
+      :filter,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] invoice_summaries
+    #   List of key (summary level) invoice details without line item
+    #   details.
+    #   @return [Array<Types::InvoiceSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next set of results. Amazon Web Services
+    #   provides the token when the response from a previous call has more
+    #   results than the maximum page size.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/ListInvoiceSummariesResponse AWS API Documentation
+    #
+    class ListInvoiceSummariesResponse < Struct.new(
+      :invoice_summaries,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -578,6 +975,49 @@ module Aws::Invoicing
     # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # The details of the taxes.
+    #
+    # @!attribute [rw] breakdown
+    #   A list of tax information.
+    #   @return [Array<Types::TaxesBreakdownAmount>]
+    #
+    # @!attribute [rw] total_amount
+    #   The total amount for your taxes.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/TaxesBreakdown AWS API Documentation
+    #
+    class TaxesBreakdown < Struct.new(
+      :breakdown,
+      :total_amount)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The tax amount.
+    #
+    # @!attribute [rw] description
+    #   The details of the taxes.
+    #   @return [String]
+    #
+    # @!attribute [rw] amount
+    #   The tax amount.
+    #   @return [String]
+    #
+    # @!attribute [rw] rate
+    #   The details of the tax rate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/TaxesBreakdownAmount AWS API Documentation
+    #
+    class TaxesBreakdownAmount < Struct.new(
+      :description,
+      :amount,
+      :rate)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The request was denied due to request throttling.
     #

@@ -392,6 +392,7 @@ module Aws
             'ElasticsearchService' => 'es',
             'EntityResolution' => 'entityresolution',
             'EventBridge' => 'events',
+            'Evs' => 'evs',
             'FIS' => 'fis',
             'FMS' => 'fms',
             'FSx' => 'fsx',

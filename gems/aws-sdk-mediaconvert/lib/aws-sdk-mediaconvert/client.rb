@@ -1062,11 +1062,14 @@ module Aws::MediaConvert
     #         },
     #         mp_4_settings: {
     #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
+    #           c2pa_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #           certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #           cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           ctts_version: 1,
     #           free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #           mp_4_major_brand: "__string",
+    #           signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #         },
     #         mpd_settings: {
     #           accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -1816,11 +1819,14 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mov_settings.padding_control #=> String, one of "OMNEON", "NONE"
     #   resp.preset.settings.container_settings.mov_settings.reference #=> String, one of "SELF_CONTAINED", "EXTERNAL"
     #   resp.preset.settings.container_settings.mp_4_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
+    #   resp.preset.settings.container_settings.mp_4_settings.c2pa_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.preset.settings.container_settings.mp_4_settings.certificate_secret #=> String
     #   resp.preset.settings.container_settings.mp_4_settings.cslg_atom #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.mp_4_settings.ctts_version #=> Integer
     #   resp.preset.settings.container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.preset.settings.container_settings.mp_4_settings.mp_4_major_brand #=> String
+    #   resp.preset.settings.container_settings.mp_4_settings.signing_kms_key #=> String
     #   resp.preset.settings.container_settings.mpd_settings.accessibility_caption_hints #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.mpd_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.preset.settings.container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
@@ -2815,11 +2821,14 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mov_settings.padding_control #=> String, one of "OMNEON", "NONE"
     #   resp.preset.settings.container_settings.mov_settings.reference #=> String, one of "SELF_CONTAINED", "EXTERNAL"
     #   resp.preset.settings.container_settings.mp_4_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
+    #   resp.preset.settings.container_settings.mp_4_settings.c2pa_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.preset.settings.container_settings.mp_4_settings.certificate_secret #=> String
     #   resp.preset.settings.container_settings.mp_4_settings.cslg_atom #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.mp_4_settings.ctts_version #=> Integer
     #   resp.preset.settings.container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.preset.settings.container_settings.mp_4_settings.mp_4_major_brand #=> String
+    #   resp.preset.settings.container_settings.mp_4_settings.signing_kms_key #=> String
     #   resp.preset.settings.container_settings.mpd_settings.accessibility_caption_hints #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.mpd_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.preset.settings.container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
@@ -3682,11 +3691,14 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.mov_settings.padding_control #=> String, one of "OMNEON", "NONE"
     #   resp.presets[0].settings.container_settings.mov_settings.reference #=> String, one of "SELF_CONTAINED", "EXTERNAL"
     #   resp.presets[0].settings.container_settings.mp_4_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
+    #   resp.presets[0].settings.container_settings.mp_4_settings.c2pa_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.presets[0].settings.container_settings.mp_4_settings.certificate_secret #=> String
     #   resp.presets[0].settings.container_settings.mp_4_settings.cslg_atom #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.presets[0].settings.container_settings.mp_4_settings.ctts_version #=> Integer
     #   resp.presets[0].settings.container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.presets[0].settings.container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.presets[0].settings.container_settings.mp_4_settings.mp_4_major_brand #=> String
+    #   resp.presets[0].settings.container_settings.mp_4_settings.signing_kms_key #=> String
     #   resp.presets[0].settings.container_settings.mpd_settings.accessibility_caption_hints #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.presets[0].settings.container_settings.mpd_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.presets[0].settings.container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
@@ -4872,11 +4884,14 @@ module Aws::MediaConvert
     #         },
     #         mp_4_settings: {
     #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
+    #           c2pa_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #           certificate_secret: "__stringMin1Max2048PatternArnAZSecretsmanagerWD12SecretAZAZ09",
     #           cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           ctts_version: 1,
     #           free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #           mp_4_major_brand: "__string",
+    #           signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #         },
     #         mpd_settings: {
     #           accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -5623,11 +5638,14 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mov_settings.padding_control #=> String, one of "OMNEON", "NONE"
     #   resp.preset.settings.container_settings.mov_settings.reference #=> String, one of "SELF_CONTAINED", "EXTERNAL"
     #   resp.preset.settings.container_settings.mp_4_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
+    #   resp.preset.settings.container_settings.mp_4_settings.c2pa_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.preset.settings.container_settings.mp_4_settings.certificate_secret #=> String
     #   resp.preset.settings.container_settings.mp_4_settings.cslg_atom #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.mp_4_settings.ctts_version #=> Integer
     #   resp.preset.settings.container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.preset.settings.container_settings.mp_4_settings.mp_4_major_brand #=> String
+    #   resp.preset.settings.container_settings.mp_4_settings.signing_kms_key #=> String
     #   resp.preset.settings.container_settings.mpd_settings.accessibility_caption_hints #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.mpd_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.preset.settings.container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
@@ -6104,7 +6122,7 @@ module Aws::MediaConvert
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.160.0'
+      context[:gem_version] = '1.161.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

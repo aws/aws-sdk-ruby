@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2025-06-04)
+------------------
+
+* Feature - Added new Invoicing ListInvoiceSummaries API Operation
+
 1.6.0 (2025-06-02)
 ------------------
 

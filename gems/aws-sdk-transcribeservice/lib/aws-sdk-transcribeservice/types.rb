@@ -633,6 +633,24 @@ module Aws::TranscribeService
     #   * GIRPP: Provides summaries based on the patients progress toward
     #     goals. Examples of sections include Goal, Intervention, Response,
     #     Progress, and Plan.
+    #
+    #   * BIRP: Focuses on the patient's behavioral patterns and responses.
+    #     Examples of sections include Behavior, Intervention, Response, and
+    #     Plan.
+    #
+    #   * SIRP: Emphasizes the situational context of therapy. Examples of
+    #     sections include Situation, Intervention, Response, and Plan.
+    #
+    #   * DAP: Provides a simplified format for clinical documentation.
+    #     Examples of sections include Data, Assessment, and Plan.
+    #
+    #   * BEHAVIORAL\_SOAP: Behavioral health focused documentation format.
+    #     Examples of sections include Subjective, Objective, Assessment,
+    #     and Plan.
+    #
+    #   * PHYSICAL\_SOAP: Physical health focused documentation format.
+    #     Examples of sections include Subjective, Objective, Assessment,
+    #     and Plan.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ClinicalNoteGenerationSettings AWS API Documentation

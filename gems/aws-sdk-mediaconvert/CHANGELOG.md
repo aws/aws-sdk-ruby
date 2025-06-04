@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.161.0 (2025-06-04)
+------------------
+
+* Feature - This release includes support for embedding and signing C2PA content credentials in MP4 outputs.
+
 1.160.0 (2025-06-02)
 ------------------
 

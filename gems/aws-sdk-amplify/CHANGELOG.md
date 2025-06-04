@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2025-06-04)
+------------------
+
+* Feature - Update documentation for cacheConfig in CreateApp API
+
 1.86.0 (2025-06-02)
 ------------------
 

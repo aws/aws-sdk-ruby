@@ -941,6 +941,7 @@ module Aws::MediaConnect
       attr_accessor bridge_arn: ::String
       attr_accessor bridge_ports: ::Array[::Integer]
       attr_accessor output_status: ("ENABLED" | "DISABLED")
+      attr_accessor peer_ip_address: ::String
       SENSITIVE: []
     end
 
@@ -1120,6 +1121,7 @@ module Aws::MediaConnect
       attr_accessor vpc_interface_name: ::String
       attr_accessor whitelist_cidr: ::String
       attr_accessor gateway_bridge_source: Types::GatewayBridgeSource
+      attr_accessor peer_ip_address: ::String
       SENSITIVE: []
     end
 

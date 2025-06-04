@@ -548,6 +548,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Elastic File System                            | Aws::EFS                                 | aws-sdk-efs                                 | 2015-02-01  |
 | Amazon Elastic Kubernetes Service                     | Aws::EKS                                 | aws-sdk-eks                                 | 2017-11-01  |
 | Amazon Elastic Transcoder                             | Aws::ElasticTranscoder                   | aws-sdk-elastictranscoder                   | 2012-09-25  |
+| Amazon Elastic VMware Service                         | Aws::Evs                                 | aws-sdk-evs                                 | 2023-07-27  |
 | Amazon Elasticsearch Service                          | Aws::ElasticsearchService                | aws-sdk-elasticsearchservice                | 2015-01-01  |
 | Amazon EventBridge                                    | Aws::EventBridge                         | aws-sdk-eventbridge                         | 2015-10-07  |
 | Amazon EventBridge Pipes                              | Aws::Pipes                               | aws-sdk-pipes                               | 2015-10-07  |

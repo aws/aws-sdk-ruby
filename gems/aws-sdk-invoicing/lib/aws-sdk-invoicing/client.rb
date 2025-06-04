@@ -769,6 +769,648 @@ module Aws::Invoicing
       req.send_request(options)
     end
 
+    # Retrieves your invoice details programmatically, without line item
+    # details.
+    #
+    # @option params [required, Types::InvoiceSummariesSelector] :selector
+    #   The option to retrieve details for a specific invoice by providing its
+    #   unique ID. Alternatively, access information for all invoices linked
+    #   to the account by providing an account ID.
+    #
+    # @option params [Types::InvoiceSummariesFilter] :filter
+    #   Filters you can use to customize your invoice summary.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next set of results. Amazon Web Services
+    #   provides the token when the response from a previous call has more
+    #   results than the maximum page size.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of invoice summaries a paginated response can
+    #   contain.
+    #
+    # @return [Types::ListInvoiceSummariesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInvoiceSummariesResponse#invoice_summaries #invoice_summaries} => Array&lt;Types::InvoiceSummary&gt;
+    #   * {Types::ListInvoiceSummariesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: ListInvoiceSummaries with InvoiceId as selector
+    #
+    #   resp = client.list_invoice_summaries({
+    #     selector: {
+    #       resource_type: "INVOICE_ID", 
+    #       value: "1111111111", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     invoice_summaries: [
+    #       {
+    #         account_id: "111111111111", 
+    #         base_currency_amount: {
+    #           amount_breakdown: {
+    #             discounts: {
+    #               total_amount: "1.00", 
+    #             }, 
+    #             sub_total_amount: "1.00", 
+    #             taxes: {
+    #               total_amount: "1.00", 
+    #             }, 
+    #           }, 
+    #           currency_code: "USD", 
+    #           total_amount: "1.00", 
+    #           total_amount_before_tax: "1.00", 
+    #         }, 
+    #         billing_period: {
+    #           month: 1, 
+    #           year: 2025, 
+    #         }, 
+    #         due_date: Time.parse("2025-04-01T01:00:00.000Z"), 
+    #         entity: {
+    #           invoicing_entity: "Amazon Web Services, Inc.", 
+    #         }, 
+    #         invoice_id: "1111111111", 
+    #         invoice_type: "INVOICE", 
+    #         issued_date: Time.parse("2025-04-01T01:00:00.000Z"), 
+    #         payment_currency_amount: {
+    #           amount_breakdown: {
+    #             discounts: {
+    #               total_amount: "1.00", 
+    #             }, 
+    #             sub_total_amount: "1.00", 
+    #             taxes: {
+    #               breakdown: [
+    #                 {
+    #                   amount: "1", 
+    #                   description: "VAT", 
+    #                   rate: "1.0", 
+    #                 }, 
+    #               ], 
+    #               total_amount: "1.00", 
+    #             }, 
+    #           }, 
+    #           currency_code: "USD", 
+    #           currency_exchange_details: {
+    #             rate: "1.0", 
+    #             source_currency_code: "USD", 
+    #             target_currency_code: "USD", 
+    #           }, 
+    #           total_amount: "1.00", 
+    #           total_amount_before_tax: "1.00", 
+    #         }, 
+    #         tax_currency_amount: {
+    #           amount_breakdown: {
+    #             discounts: {
+    #               total_amount: "1.00", 
+    #             }, 
+    #             sub_total_amount: "1.00", 
+    #             taxes: {
+    #               breakdown: [
+    #                 {
+    #                   amount: "1", 
+    #                   description: "VAT", 
+    #                   rate: "1.0", 
+    #                 }, 
+    #               ], 
+    #               total_amount: "1.00", 
+    #             }, 
+    #           }, 
+    #           currency_code: "USD", 
+    #           currency_exchange_details: {
+    #             rate: "1.0", 
+    #             source_currency_code: "USD", 
+    #             target_currency_code: "USD", 
+    #           }, 
+    #           total_amount: "1.00", 
+    #           total_amount_before_tax: "1.00", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: ListInvoiceSummaries with AccountId as selector and billing period
+    #
+    #   resp = client.list_invoice_summaries({
+    #     filter: {
+    #       billing_period: {
+    #         month: 1, 
+    #         year: 2025, 
+    #       }, 
+    #     }, 
+    #     selector: {
+    #       resource_type: "ACCOUNT_ID", 
+    #       value: "111111111111", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     invoice_summaries: [
+    #       {
+    #         account_id: "111111111111", 
+    #         base_currency_amount: {
+    #           amount_breakdown: {
+    #             discounts: {
+    #               total_amount: "1.00", 
+    #             }, 
+    #             sub_total_amount: "1.00", 
+    #             taxes: {
+    #               total_amount: "1.00", 
+    #             }, 
+    #           }, 
+    #           currency_code: "USD", 
+    #           total_amount: "1.00", 
+    #           total_amount_before_tax: "1.00", 
+    #         }, 
+    #         billing_period: {
+    #           month: 1, 
+    #           year: 2025, 
+    #         }, 
+    #         due_date: Time.parse("2025-04-01T01:00:00.000Z"), 
+    #         entity: {
+    #           invoicing_entity: "Amazon Web Services, Inc.", 
+    #         }, 
+    #         invoice_id: "1111111111", 
+    #         invoice_type: "INVOICE", 
+    #         issued_date: Time.parse("2025-04-01T01:00:00.000Z"), 
+    #         payment_currency_amount: {
+    #           amount_breakdown: {
+    #             discounts: {
+    #               total_amount: "1.00", 
+    #             }, 
+    #             sub_total_amount: "1.00", 
+    #             taxes: {
+    #               breakdown: [
+    #                 {
+    #                   amount: "1", 
+    #                   description: "VAT", 
+    #                   rate: "1.0", 
+    #                 }, 
+    #               ], 
+    #               total_amount: "1.00", 
+    #             }, 
+    #           }, 
+    #           currency_code: "USD", 
+    #           currency_exchange_details: {
+    #             rate: "1.0", 
+    #             source_currency_code: "USD", 
+    #             target_currency_code: "USD", 
+    #           }, 
+    #           total_amount: "1.00", 
+    #           total_amount_before_tax: "1.00", 
+    #         }, 
+    #         tax_currency_amount: {
+    #           amount_breakdown: {
+    #             discounts: {
+    #               total_amount: "1.00", 
+    #             }, 
+    #             sub_total_amount: "1.00", 
+    #             taxes: {
+    #               breakdown: [
+    #                 {
+    #                   amount: "1", 
+    #                   description: "VAT", 
+    #                   rate: "1.0", 
+    #                 }, 
+    #               ], 
+    #               total_amount: "1.00", 
+    #             }, 
+    #           }, 
+    #           currency_code: "USD", 
+    #           currency_exchange_details: {
+    #             rate: "1.0", 
+    #             source_currency_code: "USD", 
+    #             target_currency_code: "USD", 
+    #           }, 
+    #           total_amount: "1.00", 
+    #           total_amount_before_tax: "1.00", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: ListInvoiceSummaries with AccountId as selector and time interval
+    #
+    #   resp = client.list_invoice_summaries({
+    #     filter: {
+    #       time_interval: {
+    #         end_date: Time.parse(1592639007), 
+    #         start_date: Time.parse(1590997407), 
+    #       }, 
+    #     }, 
+    #     selector: {
+    #       resource_type: "ACCOUNT_ID", 
+    #       value: "111111111111", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     invoice_summaries: [
+    #       {
+    #         account_id: "111111111111", 
+    #         base_currency_amount: {
+    #           amount_breakdown: {
+    #             discounts: {
+    #               total_amount: "1.00", 
+    #             }, 
+    #             sub_total_amount: "1.00", 
+    #             taxes: {
+    #               total_amount: "1.00", 
+    #             }, 
+    #           }, 
+    #           currency_code: "USD", 
+    #           total_amount: "1.00", 
+    #           total_amount_before_tax: "1.00", 
+    #         }, 
+    #         billing_period: {
+    #           month: 1, 
+    #           year: 2025, 
+    #         }, 
+    #         due_date: Time.parse("2025-04-01T01:00:00.000Z"), 
+    #         entity: {
+    #           invoicing_entity: "Amazon Web Services, Inc.", 
+    #         }, 
+    #         invoice_id: "1111111111", 
+    #         invoice_type: "INVOICE", 
+    #         issued_date: Time.parse("2025-04-01T01:00:00.000Z"), 
+    #         payment_currency_amount: {
+    #           amount_breakdown: {
+    #             discounts: {
+    #               total_amount: "1.00", 
+    #             }, 
+    #             sub_total_amount: "1.00", 
+    #             taxes: {
+    #               breakdown: [
+    #                 {
+    #                   amount: "1", 
+    #                   description: "VAT", 
+    #                   rate: "1.0", 
+    #                 }, 
+    #               ], 
+    #               total_amount: "1.00", 
+    #             }, 
+    #           }, 
+    #           currency_code: "USD", 
+    #           currency_exchange_details: {
+    #             rate: "1.0", 
+    #             source_currency_code: "USD", 
+    #             target_currency_code: "USD", 
+    #           }, 
+    #           total_amount: "1.00", 
+    #           total_amount_before_tax: "1.00", 
+    #         }, 
+    #         tax_currency_amount: {
+    #           amount_breakdown: {
+    #             discounts: {
+    #               total_amount: "1.00", 
+    #             }, 
+    #             sub_total_amount: "1.00", 
+    #             taxes: {
+    #               breakdown: [
+    #                 {
+    #                   amount: "1", 
+    #                   description: "VAT", 
+    #                   rate: "1.0", 
+    #                 }, 
+    #               ], 
+    #               total_amount: "1.00", 
+    #             }, 
+    #           }, 
+    #           currency_code: "USD", 
+    #           currency_exchange_details: {
+    #             rate: "1.0", 
+    #             source_currency_code: "USD", 
+    #             target_currency_code: "USD", 
+    #           }, 
+    #           total_amount: "1.00", 
+    #           total_amount_before_tax: "1.00", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: ListInvoiceSummaries with AccountId as selector and a billing period and max results
+    #
+    #   resp = client.list_invoice_summaries({
+    #     filter: {
+    #       billing_period: {
+    #         month: 1, 
+    #         year: 2025, 
+    #       }, 
+    #     }, 
+    #     max_results: 1, 
+    #     selector: {
+    #       resource_type: "ACCOUNT_ID", 
+    #       value: "111111111111", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     invoice_summaries: [
+    #       {
+    #         account_id: "111111111111", 
+    #         base_currency_amount: {
+    #           amount_breakdown: {
+    #             discounts: {
+    #               total_amount: "1.00", 
+    #             }, 
+    #             sub_total_amount: "1.00", 
+    #             taxes: {
+    #               total_amount: "1.00", 
+    #             }, 
+    #           }, 
+    #           currency_code: "USD", 
+    #           total_amount: "1.00", 
+    #           total_amount_before_tax: "1.00", 
+    #         }, 
+    #         billing_period: {
+    #           month: 1, 
+    #           year: 2025, 
+    #         }, 
+    #         due_date: Time.parse("2025-04-01T01:00:00.000Z"), 
+    #         entity: {
+    #           invoicing_entity: "Amazon Web Services, Inc.", 
+    #         }, 
+    #         invoice_id: "1111111111", 
+    #         invoice_type: "INVOICE", 
+    #         issued_date: Time.parse("2025-04-01T01:00:00.000Z"), 
+    #         payment_currency_amount: {
+    #           amount_breakdown: {
+    #             discounts: {
+    #               total_amount: "1.00", 
+    #             }, 
+    #             sub_total_amount: "1.00", 
+    #             taxes: {
+    #               breakdown: [
+    #                 {
+    #                   amount: "1", 
+    #                   description: "VAT", 
+    #                   rate: "1.0", 
+    #                 }, 
+    #               ], 
+    #               total_amount: "1.00", 
+    #             }, 
+    #           }, 
+    #           currency_code: "USD", 
+    #           currency_exchange_details: {
+    #             rate: "1.0", 
+    #             source_currency_code: "USD", 
+    #             target_currency_code: "USD", 
+    #           }, 
+    #           total_amount: "1.00", 
+    #           total_amount_before_tax: "1.00", 
+    #         }, 
+    #         tax_currency_amount: {
+    #           amount_breakdown: {
+    #             discounts: {
+    #               total_amount: "1.00", 
+    #             }, 
+    #             sub_total_amount: "1.00", 
+    #             taxes: {
+    #               breakdown: [
+    #                 {
+    #                   amount: "1", 
+    #                   description: "VAT", 
+    #                   rate: "1.0", 
+    #                 }, 
+    #               ], 
+    #               total_amount: "1.00", 
+    #             }, 
+    #           }, 
+    #           currency_code: "USD", 
+    #           currency_exchange_details: {
+    #             rate: "1.0", 
+    #             source_currency_code: "USD", 
+    #             target_currency_code: "USD", 
+    #           }, 
+    #           total_amount: "1.00", 
+    #           total_amount_before_tax: "1.00", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     next_token: "abcde12345", 
+    #   }
+    #
+    # @example Example: ListInvoiceSummaries with AccountId as selector and a billing period and next token
+    #
+    #   resp = client.list_invoice_summaries({
+    #     filter: {
+    #       billing_period: {
+    #         month: 1, 
+    #         year: 2025, 
+    #       }, 
+    #     }, 
+    #     next_token: "abcde12345", 
+    #     selector: {
+    #       resource_type: "ACCOUNT_ID", 
+    #       value: "111111111111", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     invoice_summaries: [
+    #       {
+    #         account_id: "111111111111", 
+    #         base_currency_amount: {
+    #           amount_breakdown: {
+    #             discounts: {
+    #               total_amount: "1.00", 
+    #             }, 
+    #             sub_total_amount: "1.00", 
+    #             taxes: {
+    #               total_amount: "1.00", 
+    #             }, 
+    #           }, 
+    #           currency_code: "USD", 
+    #           total_amount: "1.00", 
+    #           total_amount_before_tax: "1.00", 
+    #         }, 
+    #         billing_period: {
+    #           month: 1, 
+    #           year: 2025, 
+    #         }, 
+    #         due_date: Time.parse("2025-04-01T01:00:00.000Z"), 
+    #         entity: {
+    #           invoicing_entity: "Amazon Web Services, Inc.", 
+    #         }, 
+    #         invoice_id: "1111111111", 
+    #         invoice_type: "INVOICE", 
+    #         issued_date: Time.parse("2025-04-01T01:00:00.000Z"), 
+    #         payment_currency_amount: {
+    #           amount_breakdown: {
+    #             discounts: {
+    #               total_amount: "1.00", 
+    #             }, 
+    #             sub_total_amount: "1.00", 
+    #             taxes: {
+    #               breakdown: [
+    #                 {
+    #                   amount: "1", 
+    #                   description: "VAT", 
+    #                   rate: "1.0", 
+    #                 }, 
+    #               ], 
+    #               total_amount: "1.00", 
+    #             }, 
+    #           }, 
+    #           currency_code: "USD", 
+    #           currency_exchange_details: {
+    #             rate: "1.0", 
+    #             source_currency_code: "USD", 
+    #             target_currency_code: "USD", 
+    #           }, 
+    #           total_amount: "1.00", 
+    #           total_amount_before_tax: "1.00", 
+    #         }, 
+    #         tax_currency_amount: {
+    #           amount_breakdown: {
+    #             discounts: {
+    #               total_amount: "1.00", 
+    #             }, 
+    #             sub_total_amount: "1.00", 
+    #             taxes: {
+    #               breakdown: [
+    #                 {
+    #                   amount: "1", 
+    #                   description: "VAT", 
+    #                   rate: "1.0", 
+    #                 }, 
+    #               ], 
+    #               total_amount: "1.00", 
+    #             }, 
+    #           }, 
+    #           currency_code: "USD", 
+    #           currency_exchange_details: {
+    #             rate: "1.0", 
+    #             source_currency_code: "USD", 
+    #             target_currency_code: "USD", 
+    #           }, 
+    #           total_amount: "1.00", 
+    #           total_amount_before_tax: "1.00", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_invoice_summaries({
+    #     selector: { # required
+    #       resource_type: "ACCOUNT_ID", # required, accepts ACCOUNT_ID, INVOICE_ID
+    #       value: "StringWithoutNewLine", # required
+    #     },
+    #     filter: {
+    #       time_interval: {
+    #         start_date: Time.now, # required
+    #         end_date: Time.now, # required
+    #       },
+    #       billing_period: {
+    #         month: 1, # required
+    #         year: 1, # required
+    #       },
+    #       invoicing_entity: "BasicString",
+    #     },
+    #     next_token: "NextTokenString",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.invoice_summaries #=> Array
+    #   resp.invoice_summaries[0].account_id #=> String
+    #   resp.invoice_summaries[0].invoice_id #=> String
+    #   resp.invoice_summaries[0].issued_date #=> Time
+    #   resp.invoice_summaries[0].due_date #=> Time
+    #   resp.invoice_summaries[0].entity.invoicing_entity #=> String
+    #   resp.invoice_summaries[0].billing_period.month #=> Integer
+    #   resp.invoice_summaries[0].billing_period.year #=> Integer
+    #   resp.invoice_summaries[0].invoice_type #=> String, one of "INVOICE", "CREDIT_MEMO"
+    #   resp.invoice_summaries[0].original_invoice_id #=> String
+    #   resp.invoice_summaries[0].purchase_order_number #=> String
+    #   resp.invoice_summaries[0].base_currency_amount.total_amount #=> String
+    #   resp.invoice_summaries[0].base_currency_amount.total_amount_before_tax #=> String
+    #   resp.invoice_summaries[0].base_currency_amount.currency_code #=> String
+    #   resp.invoice_summaries[0].base_currency_amount.amount_breakdown.sub_total_amount #=> String
+    #   resp.invoice_summaries[0].base_currency_amount.amount_breakdown.discounts.breakdown #=> Array
+    #   resp.invoice_summaries[0].base_currency_amount.amount_breakdown.discounts.breakdown[0].description #=> String
+    #   resp.invoice_summaries[0].base_currency_amount.amount_breakdown.discounts.breakdown[0].amount #=> String
+    #   resp.invoice_summaries[0].base_currency_amount.amount_breakdown.discounts.breakdown[0].rate #=> String
+    #   resp.invoice_summaries[0].base_currency_amount.amount_breakdown.discounts.total_amount #=> String
+    #   resp.invoice_summaries[0].base_currency_amount.amount_breakdown.taxes.breakdown #=> Array
+    #   resp.invoice_summaries[0].base_currency_amount.amount_breakdown.taxes.breakdown[0].description #=> String
+    #   resp.invoice_summaries[0].base_currency_amount.amount_breakdown.taxes.breakdown[0].amount #=> String
+    #   resp.invoice_summaries[0].base_currency_amount.amount_breakdown.taxes.breakdown[0].rate #=> String
+    #   resp.invoice_summaries[0].base_currency_amount.amount_breakdown.taxes.total_amount #=> String
+    #   resp.invoice_summaries[0].base_currency_amount.amount_breakdown.fees.breakdown #=> Array
+    #   resp.invoice_summaries[0].base_currency_amount.amount_breakdown.fees.breakdown[0].description #=> String
+    #   resp.invoice_summaries[0].base_currency_amount.amount_breakdown.fees.breakdown[0].amount #=> String
+    #   resp.invoice_summaries[0].base_currency_amount.amount_breakdown.fees.breakdown[0].rate #=> String
+    #   resp.invoice_summaries[0].base_currency_amount.amount_breakdown.fees.total_amount #=> String
+    #   resp.invoice_summaries[0].base_currency_amount.currency_exchange_details.source_currency_code #=> String
+    #   resp.invoice_summaries[0].base_currency_amount.currency_exchange_details.target_currency_code #=> String
+    #   resp.invoice_summaries[0].base_currency_amount.currency_exchange_details.rate #=> String
+    #   resp.invoice_summaries[0].tax_currency_amount.total_amount #=> String
+    #   resp.invoice_summaries[0].tax_currency_amount.total_amount_before_tax #=> String
+    #   resp.invoice_summaries[0].tax_currency_amount.currency_code #=> String
+    #   resp.invoice_summaries[0].tax_currency_amount.amount_breakdown.sub_total_amount #=> String
+    #   resp.invoice_summaries[0].tax_currency_amount.amount_breakdown.discounts.breakdown #=> Array
+    #   resp.invoice_summaries[0].tax_currency_amount.amount_breakdown.discounts.breakdown[0].description #=> String
+    #   resp.invoice_summaries[0].tax_currency_amount.amount_breakdown.discounts.breakdown[0].amount #=> String
+    #   resp.invoice_summaries[0].tax_currency_amount.amount_breakdown.discounts.breakdown[0].rate #=> String
+    #   resp.invoice_summaries[0].tax_currency_amount.amount_breakdown.discounts.total_amount #=> String
+    #   resp.invoice_summaries[0].tax_currency_amount.amount_breakdown.taxes.breakdown #=> Array
+    #   resp.invoice_summaries[0].tax_currency_amount.amount_breakdown.taxes.breakdown[0].description #=> String
+    #   resp.invoice_summaries[0].tax_currency_amount.amount_breakdown.taxes.breakdown[0].amount #=> String
+    #   resp.invoice_summaries[0].tax_currency_amount.amount_breakdown.taxes.breakdown[0].rate #=> String
+    #   resp.invoice_summaries[0].tax_currency_amount.amount_breakdown.taxes.total_amount #=> String
+    #   resp.invoice_summaries[0].tax_currency_amount.amount_breakdown.fees.breakdown #=> Array
+    #   resp.invoice_summaries[0].tax_currency_amount.amount_breakdown.fees.breakdown[0].description #=> String
+    #   resp.invoice_summaries[0].tax_currency_amount.amount_breakdown.fees.breakdown[0].amount #=> String
+    #   resp.invoice_summaries[0].tax_currency_amount.amount_breakdown.fees.breakdown[0].rate #=> String
+    #   resp.invoice_summaries[0].tax_currency_amount.amount_breakdown.fees.total_amount #=> String
+    #   resp.invoice_summaries[0].tax_currency_amount.currency_exchange_details.source_currency_code #=> String
+    #   resp.invoice_summaries[0].tax_currency_amount.currency_exchange_details.target_currency_code #=> String
+    #   resp.invoice_summaries[0].tax_currency_amount.currency_exchange_details.rate #=> String
+    #   resp.invoice_summaries[0].payment_currency_amount.total_amount #=> String
+    #   resp.invoice_summaries[0].payment_currency_amount.total_amount_before_tax #=> String
+    #   resp.invoice_summaries[0].payment_currency_amount.currency_code #=> String
+    #   resp.invoice_summaries[0].payment_currency_amount.amount_breakdown.sub_total_amount #=> String
+    #   resp.invoice_summaries[0].payment_currency_amount.amount_breakdown.discounts.breakdown #=> Array
+    #   resp.invoice_summaries[0].payment_currency_amount.amount_breakdown.discounts.breakdown[0].description #=> String
+    #   resp.invoice_summaries[0].payment_currency_amount.amount_breakdown.discounts.breakdown[0].amount #=> String
+    #   resp.invoice_summaries[0].payment_currency_amount.amount_breakdown.discounts.breakdown[0].rate #=> String
+    #   resp.invoice_summaries[0].payment_currency_amount.amount_breakdown.discounts.total_amount #=> String
+    #   resp.invoice_summaries[0].payment_currency_amount.amount_breakdown.taxes.breakdown #=> Array
+    #   resp.invoice_summaries[0].payment_currency_amount.amount_breakdown.taxes.breakdown[0].description #=> String
+    #   resp.invoice_summaries[0].payment_currency_amount.amount_breakdown.taxes.breakdown[0].amount #=> String
+    #   resp.invoice_summaries[0].payment_currency_amount.amount_breakdown.taxes.breakdown[0].rate #=> String
+    #   resp.invoice_summaries[0].payment_currency_amount.amount_breakdown.taxes.total_amount #=> String
+    #   resp.invoice_summaries[0].payment_currency_amount.amount_breakdown.fees.breakdown #=> Array
+    #   resp.invoice_summaries[0].payment_currency_amount.amount_breakdown.fees.breakdown[0].description #=> String
+    #   resp.invoice_summaries[0].payment_currency_amount.amount_breakdown.fees.breakdown[0].amount #=> String
+    #   resp.invoice_summaries[0].payment_currency_amount.amount_breakdown.fees.breakdown[0].rate #=> String
+    #   resp.invoice_summaries[0].payment_currency_amount.amount_breakdown.fees.total_amount #=> String
+    #   resp.invoice_summaries[0].payment_currency_amount.currency_exchange_details.source_currency_code #=> String
+    #   resp.invoice_summaries[0].payment_currency_amount.currency_exchange_details.target_currency_code #=> String
+    #   resp.invoice_summaries[0].payment_currency_amount.currency_exchange_details.rate #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/ListInvoiceSummaries AWS API Documentation
+    #
+    # @overload list_invoice_summaries(params = {})
+    # @param [Hash] params ({})
+    def list_invoice_summaries(params = {}, options = {})
+      req = build_request(:list_invoice_summaries, params)
+      req.send_request(options)
+    end
+
     # This fetches a list of all invoice unit definitions for a given
     # account, as of the provided `AsOf` date.
     #
@@ -1185,7 +1827,7 @@ module Aws::Invoicing
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-invoicing'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1688,7 +1688,7 @@ module Aws::TranscribeService
     #   resp.medical_scribe_job.settings.vocabulary_name #=> String
     #   resp.medical_scribe_job.settings.vocabulary_filter_name #=> String
     #   resp.medical_scribe_job.settings.vocabulary_filter_method #=> String, one of "remove", "mask", "tag"
-    #   resp.medical_scribe_job.settings.clinical_note_generation_settings.note_template #=> String, one of "HISTORY_AND_PHYSICAL", "GIRPP"
+    #   resp.medical_scribe_job.settings.clinical_note_generation_settings.note_template #=> String, one of "HISTORY_AND_PHYSICAL", "GIRPP", "BIRP", "SIRP", "DAP", "BEHAVIORAL_SOAP", "PHYSICAL_SOAP"
     #   resp.medical_scribe_job.data_access_role_arn #=> String
     #   resp.medical_scribe_job.channel_definitions #=> Array
     #   resp.medical_scribe_job.channel_definitions[0].channel_id #=> Integer
@@ -3163,7 +3163,7 @@ module Aws::TranscribeService
     #       vocabulary_filter_name: "VocabularyFilterName",
     #       vocabulary_filter_method: "remove", # accepts remove, mask, tag
     #       clinical_note_generation_settings: {
-    #         note_template: "HISTORY_AND_PHYSICAL", # accepts HISTORY_AND_PHYSICAL, GIRPP
+    #         note_template: "HISTORY_AND_PHYSICAL", # accepts HISTORY_AND_PHYSICAL, GIRPP, BIRP, SIRP, DAP, BEHAVIORAL_SOAP, PHYSICAL_SOAP
     #       },
     #     },
     #     channel_definitions: [
@@ -3199,7 +3199,7 @@ module Aws::TranscribeService
     #   resp.medical_scribe_job.settings.vocabulary_name #=> String
     #   resp.medical_scribe_job.settings.vocabulary_filter_name #=> String
     #   resp.medical_scribe_job.settings.vocabulary_filter_method #=> String, one of "remove", "mask", "tag"
-    #   resp.medical_scribe_job.settings.clinical_note_generation_settings.note_template #=> String, one of "HISTORY_AND_PHYSICAL", "GIRPP"
+    #   resp.medical_scribe_job.settings.clinical_note_generation_settings.note_template #=> String, one of "HISTORY_AND_PHYSICAL", "GIRPP", "BIRP", "SIRP", "DAP", "BEHAVIORAL_SOAP", "PHYSICAL_SOAP"
     #   resp.medical_scribe_job.data_access_role_arn #=> String
     #   resp.medical_scribe_job.channel_definitions #=> Array
     #   resp.medical_scribe_job.channel_definitions[0].channel_id #=> Integer
@@ -4565,7 +4565,7 @@ module Aws::TranscribeService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.120.0'
+      context[:gem_version] = '1.121.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.1111.0 (2025-06-04)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::Evs`.
+
 1.1110.0 (2025-06-02)
 ------------------
 

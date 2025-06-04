@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2025-06-04)
+------------------
+
+* Feature - You can now monitor flow and alert log metrics from the Network Firewall console.
+
 1.67.0 (2025-06-02)
 ------------------
 

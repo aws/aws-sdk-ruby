@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.309.0 (2025-06-04)
+------------------
+
+* Feature - Added support for p6-b200 instance type in SageMaker Training Jobs and Training Plans.
+
 1.308.0 (2025-06-02)
 ------------------
 

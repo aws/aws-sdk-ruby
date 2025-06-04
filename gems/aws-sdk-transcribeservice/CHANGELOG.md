@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.121.0 (2025-06-04)
+------------------
+
+* Feature - AWS Healthscribe now supports new templates for the clinical note summary: BIRP, SIRP, DAP, BEHAVIORAL_SOAP, and PHYSICAL_SOAP
+
 1.120.0 (2025-06-02)
 ------------------
 
