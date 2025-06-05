@@ -152,7 +152,6 @@ module Aws
     end
 
     # GET request fetch profile and credentials
-    # Note - identical
     def http_get(connection, path, token)
       headers = {
         'User-Agent' => "aws-sdk-ruby3/#{CORE_GEM_VERSION}",
@@ -163,13 +162,12 @@ module Aws
 
       case response.code.to_i
       when 200 then response.body
-      when 401 then raise TokenExpiredError # retry
-      when 404 then raise MetadataNotFoundError #do not retry
+      when 401 then raise TokenExpiredError
+      when 404 then raise MetadataNotFoundError
       end
     end
 
     # PUT request fetch token with ttl
-    # Note - identical b
     def http_put(connection, ttl)
       headers = {
         'User-Agent' => "aws-sdk-ruby3/#{CORE_GEM_VERSION}",
@@ -200,11 +198,6 @@ module Aws
       http.start
       yield(http).tap { http.finish }
     end
-
-
-    # FYI:
-    # NO_RETRIES = [MetadataNotFoundError, TokenRetrievalError, RequestForbiddenError]
-    # RETRIES = [TokenExpiredError]
 
     def retry_errors(&_block)
       retries = 0
