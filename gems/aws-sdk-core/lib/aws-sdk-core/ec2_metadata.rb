@@ -71,6 +71,8 @@ module Aws
       @mutex = Mutex.new
     end
 
+    attr_reader :retries
+
     # Fetches a given metadata category using a String path, and returns the
     #   result as a String. A path starts with the API version (usually
     #   "/latest/"). See the instance data categories for possible paths.
@@ -108,18 +110,21 @@ module Aws
     # @see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-identity-documents.html
     # @param [String] path The full path to the metadata.
     def get(path)
-      retry_errors(max_retries: @retries) do
+      retry_errors do
         @mutex.synchronize do
-          fetch_token unless @token && !@token.expired?
+          fetch_token unless token_set?
         end
-
-        open_connection do |conn|
-          http_get(conn, path, @token.value)
+        open_connection do |c|
+          http_get(c, path, @token.value)
         end
       end
     end
 
     private
+
+    def token_set?
+      @token && !@token.expired?
+    end
 
     def resolve_endpoint(endpoint, endpoint_mode)
       return endpoint if endpoint
@@ -129,7 +134,7 @@ module Aws
       when 'ipv6' then 'http://[fd00:ec2::254]'
       else
         raise ArgumentError,
-              ':endpoint_mode is not valid, expected IPv4 or IPv6, '\
+              '`:endpoint_mode` is not valid, expected IPv4 or IPv6, '\
               "got: #{endpoint_mode}"
       end
     end
@@ -138,10 +143,16 @@ module Aws
       open_connection do |conn|
         created_time = Time.now
         token_value, token_ttl = http_put(conn, @token_ttl)
-        @token = Token.new(value: token_value, ttl: token_ttl, created_time: created_time)
+        @token = Token.new(
+          value: token_value,
+          ttl: token_ttl,
+          created_time: created_time
+        )
       end
     end
 
+    # GET request fetch profile and credentials
+    # Note - identical
     def http_get(connection, path, token)
       headers = {
         'User-Agent' => "aws-sdk-ruby3/#{CORE_GEM_VERSION}",
@@ -151,15 +162,14 @@ module Aws
       response = connection.request(request)
 
       case response.code.to_i
-      when 200
-        response.body
-      when 401
-        raise TokenExpiredError
-      when 404
-        raise MetadataNotFoundError
+      when 200 then response.body
+      when 401 then raise TokenExpiredError # retry
+      when 404 then raise MetadataNotFoundError #do not retry
       end
     end
 
+    # PUT request fetch token with ttl
+    # Note - identical b
     def http_put(connection, ttl)
       headers = {
         'User-Agent' => "aws-sdk-ruby3/#{CORE_GEM_VERSION}",
@@ -191,8 +201,12 @@ module Aws
       yield(http).tap { http.finish }
     end
 
-    def retry_errors(options = {}, &_block)
-      max_retries = options[:max_retries]
+
+    # FYI:
+    # NO_RETRIES = [MetadataNotFoundError, TokenRetrievalError, RequestForbiddenError]
+    # RETRIES = [TokenExpiredError]
+
+    def retry_errors(&_block)
       retries = 0
       begin
         yield
@@ -201,9 +215,10 @@ module Aws
         raise
       # StandardError is not ideal but it covers Net::HTTP errors.
       # https://gist.github.com/tenderlove/245188
-      rescue StandardError, TokenExpiredError
-        raise unless retries < max_retries
+      rescue StandardError, TokenExpiredError => e
+        raise unless retries < @retries
 
+        @token = nil if e.is_a?(TokenExpiredError)
         @backoff.call(retries)
         retries += 1
         retry
