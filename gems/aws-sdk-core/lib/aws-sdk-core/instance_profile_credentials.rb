@@ -20,7 +20,7 @@ module Aws
 
     # Path base for GET request for profile and credentials
     # @api private
-    METADATA_PATH_BASE = '/latest/meta-data/iam/security-credentials/'.freeze
+    METADATA_PATH_BASE = '/latest/meta-data/iam/security-credentials/'
 
     # @param [Hash] options
     # @option options [Aws::EC2Metadata] :client A custom EC2 metadata client to
@@ -34,7 +34,7 @@ module Aws
     #   the instance metadata service. This is either 'IPv4' ('169.254.169.254')
     #   or 'IPv6' ('[fd00:ec2::254]').
     # @option options [Boolean] :disable_imds_v1 (false) Deprecated. The legacy
-    #  EC2 Metadata Service v1 has been retired. Only IMDSv2 is supported.
+    #   EC2 Metadata Service v1 has been retired. Only IMDSv2 is supported.
     # @option options [String] :ip_address ('169.254.169.254') Deprecated. Use
     #   `:endpoint` instead. The IP address for the endpoint.
     # @option options [Integer] :port (80)
@@ -57,7 +57,7 @@ module Aws
     def initialize(options = {})
       @client = options[:client] || create_client(options)
       @no_refresh_until = nil
-      @async_refresh = false # not sure if i can delete this
+      @async_refresh = false
       @metrics = ['CREDENTIALS_IMDS']
       super
     end
