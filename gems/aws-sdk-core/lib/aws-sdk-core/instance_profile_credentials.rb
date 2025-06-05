@@ -33,8 +33,8 @@ module Aws
     # @option options [String] :endpoint_mode ('IPv4') The endpoint mode for
     #   the instance metadata service. This is either 'IPv4' ('169.254.169.254')
     #   or 'IPv6' ('[fd00:ec2::254]').
-    # @option options [Boolean] :disable_imds_v1 (false) Disable the use of the
-    #  legacy EC2 Metadata Service v1.
+    # @option options [Boolean] :disable_imds_v1 (false) Deprecated. The legacy
+    #  EC2 Metadata Service v1 has been retired. Only IMDSv2 is supported.
     # @option options [String] :ip_address ('169.254.169.254') Deprecated. Use
     #   `:endpoint` instead. The IP address for the endpoint.
     # @option options [Integer] :port (80)
@@ -117,7 +117,14 @@ module Aws
         warn_expired_credentials
         return
       end
-      new_creds = fetch_credentials
+      new_creds =
+        begin
+          retry_errors([Aws::Json::ParseError]) do
+            Aws::Json.load(fetch_credentials)
+          end
+        rescue Aws::Json::ParseError
+          raise Aws::Errors::MetadataParserError
+        end
 
       if !empty_credentials?(@credentials) &&
          (!new_creds['AccessKeyId'] || new_creds['AccessKeyId'].empty?)
@@ -129,17 +136,12 @@ module Aws
     end
 
     def fetch_credentials
-      if metadata_disabled?
-        return '{}'
-      end
-
       metadata = @client.get(METADATA_PATH_BASE)
       profile_name = metadata.lines.first.strip
-
-      ::JSON.parse(@client.get(METADATA_PATH_BASE + profile_name))
+      @client.get(METADATA_PATH_BASE + profile_name)
     rescue StandardError => e
       warn("Error retrieving instance profile credentials: #{e}")
-      {}
+      '{}'
     end
 
     def update_credentials(creds)
@@ -169,6 +171,18 @@ module Aws
     # Compute an offset for refresh with jitter
     def refresh_offset
       rand(300..360)
+    end
+
+    def retry_errors(error_classes, max_retries: 3, &_block)
+      retries = 0
+      begin
+        yield
+      rescue *error_classes
+        raise unless retries < max_retries
+
+        retries += 1
+        retry
+      end
     end
   end
 end
