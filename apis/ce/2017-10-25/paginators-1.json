@@ -18,11 +18,26 @@
       "limit_key": "MaxResults",
       "result_key": "AnomalySubscriptions"
     },
+    "GetCostAndUsage": {
+      "input_token": "NextPageToken",
+      "output_token": "NextPageToken",
+      "result_key": "ResultsByTime"
+    },
     "GetCostAndUsageComparisons": {
       "input_token": "NextPageToken",
       "output_token": "NextPageToken",
       "limit_key": "MaxResults",
       "result_key": "CostAndUsageComparisons"
+    },
+    "GetCostAndUsageWithResources": {
+      "input_token": "NextPageToken",
+      "output_token": "NextPageToken",
+      "result_key": "ResultsByTime"
+    },
+    "GetCostCategories": {
+      "input_token": "NextPageToken",
+      "output_token": "NextPageToken",
+      "limit_key": "MaxResults"
     },
     "GetCostComparisonDrivers": {
       "input_token": "NextPageToken",
@@ -30,15 +45,59 @@
       "limit_key": "MaxResults",
       "result_key": "CostComparisonDrivers"
     },
+    "GetDimensionValues": {
+      "input_token": "NextPageToken",
+      "output_token": "NextPageToken",
+      "limit_key": "MaxResults",
+      "result_key": "DimensionValues"
+    },
+    "GetReservationCoverage": {
+      "input_token": "NextPageToken",
+      "output_token": "NextPageToken",
+      "limit_key": "MaxResults",
+      "result_key": "CoveragesByTime"
+    },
+    "GetReservationPurchaseRecommendation": {
+      "input_token": "NextPageToken",
+      "output_token": "NextPageToken",
+      "limit_key": "PageSize",
+      "result_key": "Recommendations"
+    },
+    "GetReservationUtilization": {
+      "input_token": "NextPageToken",
+      "output_token": "NextPageToken",
+      "limit_key": "MaxResults",
+      "result_key": "UtilizationsByTime"
+    },
+    "GetRightsizingRecommendation": {
+      "input_token": "NextPageToken",
+      "output_token": "NextPageToken",
+      "limit_key": "PageSize",
+      "result_key": "RightsizingRecommendations"
+    },
     "GetSavingsPlansCoverage": {
       "input_token": "NextToken",
       "output_token": "NextToken",
-      "limit_key": "MaxResults"
+      "limit_key": "MaxResults",
+      "result_key": "SavingsPlansCoverages"
+    },
+    "GetSavingsPlansPurchaseRecommendation": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "PageSize",
+      "result_key": "SavingsPlansPurchaseRecommendation"
     },
     "GetSavingsPlansUtilizationDetails": {
       "input_token": "NextToken",
       "output_token": "NextToken",
-      "limit_key": "MaxResults"
+      "limit_key": "MaxResults",
+      "result_key": "SavingsPlansUtilizationDetails"
+    },
+    "GetTags": {
+      "input_token": "NextPageToken",
+      "output_token": "NextPageToken",
+      "limit_key": "MaxResults",
+      "result_key": "Tags"
     },
     "ListCostAllocationTagBackfillHistory": {
       "input_token": "NextToken",
@@ -54,6 +113,12 @@
       "input_token": "NextToken",
       "output_token": "NextToken",
       "limit_key": "MaxResults"
+    },
+    "ListSavingsPlansPurchaseRecommendationGeneration": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "PageSize",
+      "result_key": "GenerationSummaryList"
     }
   }
 }
