@@ -56,7 +56,6 @@ module Aws
     #   and need to be refreshed.
     def initialize(options = {})
       @client = options[:client] || create_client(options)
-
       @no_refresh_until = nil
       @async_refresh = false # not sure if i can delete this
       @metrics = ['CREDENTIALS_IMDS']
@@ -101,7 +100,14 @@ module Aws
         warn_expired_credentials
         return
       end
-      new_creds = fetch_credentials
+      new_creds =
+        begin
+          retry_errors([Aws::Json::ParseError]) do
+            Aws::Json.load(fetch_credentials)
+          end
+        rescue Aws::Json::ParseError
+          raise Aws::Errors::MetadataParserError
+        end
 
       if !empty_credentials?(@credentials) &&
          (!new_creds['AccessKeyId'] || new_creds['AccessKeyId'].empty?)
@@ -113,13 +119,14 @@ module Aws
     end
 
     def fetch_credentials
+      return '{}' if _metadata_disabled?
+
       metadata = @client.get(METADATA_PATH_BASE)
       profile_name = metadata.lines.first.strip
-
-      ::JSON.parse(@client.get(METADATA_PATH_BASE + profile_name))
+      @client.get(METADATA_PATH_BASE + profile_name)
     rescue StandardError => e
       warn("Error retrieving instance profile credentials: #{e}")
-      {}
+      '{}'
     end
 
     def update_credentials(creds)
@@ -153,6 +160,18 @@ module Aws
     # Compute an offset for refresh with jitter
     def refresh_offset
       rand(300..360)
+    end
+
+    def retry_errors(error_classes, max_retries: 3, &_block)
+      retries = 0
+      begin
+        yield
+      rescue *error_classes
+        raise unless retries < max_retries
+
+        retries += 1
+        retry
+      end
     end
   end
 end

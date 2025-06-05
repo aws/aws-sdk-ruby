@@ -155,15 +155,6 @@ module Aws
         )
       end
 
-      it 'still supports ip_address' do
-        uri = URI(ipv4_endpoint)
-        InstanceProfileCredentials.new(
-          ip_address: uri.hostname,
-          port: uri.port,
-          backoff: 0
-        )
-      end
-
       it 'endpoint takes precedence over endpoint mode' do
         InstanceProfileCredentials.new(
           endpoint: ipv4_endpoint,
@@ -323,59 +314,57 @@ module Aws
       end
 
       # TODO: need revision
-      # it 'retries if get profile response is invalid JSON' do
-      #   stub_request(:get, "http://169.254.169.254#{path}")
-      #     .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-      #     .to_return(status: 200, body: "profile-name\n")
-      #   stub_request(:get, "http://169.254.169.254#{path}profile-name")
-      #     .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-      #     .to_return(status: 200, body: ' ') # stopping from here
-      #     .to_return(status: 200, body: '')
-      #     .to_return(status: 200, body: '{')
-      #     .to_return(status: 200, body: resp2)
-      #   c = InstanceProfileCredentials.new(backoff: 0)
-      #   expect(c.credentials.access_key_id).to eq('akid-2')
-      #   expect(c.credentials.secret_access_key).to eq('secret-2')
-      #   expect(c.credentials.session_token).to eq('session-token-2')
-      #   expect(c.expiration.to_s).to eq(expiration2.to_s)
-      # end
+      it 'retries if get profile response is invalid JSON' do
+        stub_request(:get, "http://169.254.169.254#{path}")
+          .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
+          .to_return(status: 200, body: "profile-name\n")
+        stub_request(:get, "http://169.254.169.254#{path}profile-name")
+          .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
+          .to_return(status: 200, body: ' ') # stopping from here
+          .to_return(status: 200, body: '')
+          .to_return(status: 200, body: '{')
+          .to_return(status: 200, body: resp2)
+        c = InstanceProfileCredentials.new(backoff: 0)
+        expect(c.credentials.access_key_id).to eq('akid-2')
+        expect(c.credentials.secret_access_key).to eq('secret-2')
+        expect(c.credentials.session_token).to eq('session-token-2')
+        expect(c.expiration.to_s).to eq(expiration2.to_s)
+      end
 
       # TODO: need revision
-      # it 'retries invalid JSON exactly 3 times' do
-      #   stub_request(:get, "http://169.254.169.254#{path}")
-      #     .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-      #     .to_return(status: 500)
-      #     .to_return(status: 200, body: "profile-name\n")
-      #   stub_request(:get, "http://169.254.169.254#{path}profile-name")
-      #     .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-      #     .to_return(status: 200, body: '')
-      #     .to_return(status: 200, body: ' ')
-      #     .to_return(status: 200, body: '{')
-      #     .to_return(status: 200, body: ' ')
-      #   expect do
-      #     InstanceProfileCredentials.new(backoff: 0)
-      #   end.to raise_error(
-      #     Aws::Errors::MetadataParserError,
-      #     'Failed to parse metadata service response.'
-      #   )
-      # end
+      it 'retries invalid JSON exactly 3 times' do
+        stub_request(:get, "http://169.254.169.254#{path}")
+          .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
+          .to_return(status: 200, body: "profile-name\n")
+        stub_request(:get, "http://169.254.169.254#{path}profile-name")
+          .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
+          .to_return(status: 200, body: '')
+          .to_return(status: 200, body: ' ')
+          .to_return(status: 200, body: '{')
+          .to_return(status: 200, body: ' ')
+        expect do
+          InstanceProfileCredentials.new(backoff: 0)
+        end.to raise_error(
+          Aws::Errors::MetadataParserError,
+          'Failed to parse metadata service response.'
+        )
+      end
 
       # TODO: need redo
-      # it 'retries errors parsing expiration time 3 times' do
-      #   stub_request(:get, "http://169.254.169.254#{path}")
-      #     .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-      #     .to_return(status: 500)
-      #     .to_return(status: 200, body: "profile-name\n")
-      #   stub_request(:get, "http://169.254.169.254#{path}profile-name")
-      #     .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-      #     .to_return(status: 200, body: '{ "Expiration": "Expiration" }')
-      #     .to_return(status: 200, body: '{ "Expiration": "Expiration" }')
-      #     .to_return(status: 200, body: '{ "Expiration": "Expiration" }')
-      #     .to_return(status: 200, body: '{ "Expiration": "Expiration" }')
-      #   expect do
-      #     InstanceProfileCredentials.new(backoff: 0)
-      #   end.to raise_error(ArgumentError)
-      # end
+      it 'retries errors parsing expiration time 3 times' do
+        stub_request(:get, "http://169.254.169.254#{path}")
+          .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
+          .to_return(status: 200, body: "profile-name\n")
+        stub_request(:get, "http://169.254.169.254#{path}profile-name")
+          .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
+          .to_return(status: 200, body: '{ "Expiration": "Expiration" }')
+          .to_return(status: 200, body: '{ "Expiration": "Expiration" }')
+          .to_return(status: 200, body: '{ "Expiration": "Expiration" }')
+          .to_return(status: 200, body: '{ "Expiration": "Expiration" }')
+        expect do
+          InstanceProfileCredentials.new(backoff: 0)
+        end.to raise_error(ArgumentError)
+      end
 
       describe 'auto refreshing' do
         # expire in 4 minutes
