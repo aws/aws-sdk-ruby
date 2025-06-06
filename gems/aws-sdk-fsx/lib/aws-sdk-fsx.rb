@@ -54,7 +54,7 @@ module Aws::FSx
   autoload :EndpointProvider, 'aws-sdk-fsx/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-fsx/endpoints'
 
-  GEM_VERSION = '1.113.0'
+  GEM_VERSION = '1.114.0'
 
 end
 

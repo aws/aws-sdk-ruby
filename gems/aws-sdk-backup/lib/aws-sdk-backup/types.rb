@@ -153,7 +153,38 @@ module Aws::Backup
     #   @return [String]
     #
     # @!attribute [rw] backup_size_in_bytes
-    #   The size, in bytes, of a backup.
+    #   The size, in bytes, of a backup (recovery point).
+    #
+    #   This value can render differently depending on the resource type as
+    #   Backup pulls in data information from other Amazon Web Services
+    #   services. For example, the value returned may show a value of `0`,
+    #   which may differ from the anticipated value.
+    #
+    #   The expected behavior for values by resource type are described as
+    #   follows:
+    #
+    #   * Amazon Aurora, Amazon DocumentDB, and Amazon Neptune do not have
+    #     this value populate from the operation `GetBackupJobStatus`.
+    #
+    #   * For Amazon DynamoDB with advanced features, this value refers to
+    #     the size of the recovery point (backup).
+    #
+    #   * Amazon EC2 and Amazon EBS show volume size (provisioned storage)
+    #     returned as part of this value. Amazon EBS does not return backup
+    #     size information; snapshot size will have the same value as the
+    #     original resource that was backed up.
+    #
+    #   * For Amazon EFS, this value refers to the delta bytes transferred
+    #     during a backup.
+    #
+    #   * Amazon FSx does not populate this value from the operation
+    #     `GetBackupJobStatus` for FSx file systems.
+    #
+    #   * An Amazon RDS instance will show as `0`.
+    #
+    #   * For virtual machines running VMware, this value is passed to
+    #     Backup through an asynchronous workflow, which can mean this
+    #     displayed value can under-represent the actual backup size.
     #   @return [Integer]
     #
     # @!attribute [rw] iam_role_arn
@@ -532,13 +563,19 @@ module Aws::Backup
     #
     # @!attribute [rw] schedule_expression
     #   A cron expression in UTC specifying when Backup initiates a backup
-    #   job. For more information about Amazon Web Services cron
-    #   expressions, see [Schedule Expressions for Rules][1] in the *Amazon
-    #   CloudWatch Events User Guide.*. Two examples of Amazon Web Services
-    #   cron expressions are ` 15 * ? * * *` (take a backup every hour at 15
-    #   minutes past the hour) and `0 12 * * ? *` (take a backup every day
-    #   at 12 noon UTC). For a table of examples, click the preceding link
-    #   and scroll down the page.
+    #   job. When no CRON expression is provided, Backup will use the
+    #   default expression `cron(0 5 ? * * *)`.
+    #
+    #   For more information about Amazon Web Services cron expressions, see
+    #   [Schedule Expressions for Rules][1] in the *Amazon CloudWatch Events
+    #   User Guide*.
+    #
+    #   Two examples of Amazon Web Services cron expressions are ` 15 * ? *
+    #   * *` (take a backup every hour at 15 minutes past the hour) and `0
+    #   12 * * ? *` (take a backup every day at 12 noon UTC).
+    #
+    #   For a table of examples, click the preceding link and scroll down
+    #   the page.
     #
     #
     #
@@ -661,7 +698,8 @@ module Aws::Backup
     #
     # @!attribute [rw] schedule_expression
     #   A CRON expression in UTC specifying when Backup initiates a backup
-    #   job.
+    #   job. When no CRON expression is provided, Backup will use the
+    #   default expression `cron(0 5 ? * * *)`.
     #   @return [String]
     #
     # @!attribute [rw] start_window_minutes
@@ -2515,7 +2553,38 @@ module Aws::Backup
     #   @return [String]
     #
     # @!attribute [rw] backup_size_in_bytes
-    #   The size, in bytes, of a backup.
+    #   The size, in bytes, of a backup (recovery point).
+    #
+    #   This value can render differently depending on the resource type as
+    #   Backup pulls in data information from other Amazon Web Services
+    #   services. For example, the value returned may show a value of `0`,
+    #   which may differ from the anticipated value.
+    #
+    #   The expected behavior for values by resource type are described as
+    #   follows:
+    #
+    #   * Amazon Aurora, Amazon DocumentDB, and Amazon Neptune do not have
+    #     this value populate from the operation `GetBackupJobStatus`.
+    #
+    #   * For Amazon DynamoDB with advanced features, this value refers to
+    #     the size of the recovery point (backup).
+    #
+    #   * Amazon EC2 and Amazon EBS show volume size (provisioned storage)
+    #     returned as part of this value. Amazon EBS does not return backup
+    #     size information; snapshot size will have the same value as the
+    #     original resource that was backed up.
+    #
+    #   * For Amazon EFS, this value refers to the delta bytes transferred
+    #     during a backup.
+    #
+    #   * Amazon FSx does not populate this value from the operation
+    #     `GetBackupJobStatus` for FSx file systems.
+    #
+    #   * An Amazon RDS instance will show as `0`.
+    #
+    #   * For virtual machines running VMware, this value is passed to
+    #     Backup through an asynchronous workflow, which can mean this
+    #     displayed value can under-represent the actual backup size.
     #   @return [Integer]
     #
     # @!attribute [rw] iam_role_arn
@@ -2706,6 +2775,14 @@ module Aws::Backup
     #
     # @!attribute [rw] number_of_recovery_points
     #   The number of recovery points that are stored in a backup vault.
+    #
+    #   Recovery point count value displayed in the console can be an
+    #   approximation. Use [ `ListRecoveryPointsByBackupVault` ][1] API to
+    #   obtain the exact count.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_ListRecoveryPointsByBackupVault.html
     #   @return [Integer]
     #
     # @!attribute [rw] locked
@@ -3062,43 +3139,51 @@ module Aws::Backup
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   A status code specifying the state of the recovery point.
+    #   A status code specifying the state of the recovery point. For more
+    #   information, see [ Recovery point status][1] in the *Backup
+    #   Developer Guide*.
     #
-    #   `PARTIAL` status indicates Backup could not create the recovery
-    #   point before the backup window closed. To increase your backup plan
-    #   window using the API, see [UpdateBackupPlan][1]. You can also
-    #   increase your backup plan window using the Console by choosing and
-    #   editing your backup plan.
+    #   * `CREATING` status indicates that an Backup job has been initiated
+    #     for a resource. The backup process has started and is actively
+    #     processing a backup job for the associated recovery point.
     #
-    #   `EXPIRED` status indicates that the recovery point has exceeded its
-    #   retention period, but Backup lacks permission or is otherwise unable
-    #   to delete it. To manually delete these recovery points, see [ Step
-    #   3: Delete the recovery points][2] in the *Clean up resources*
-    #   section of *Getting started*.
+    #   * `AVAILABLE` status indicates that the backup was successfully
+    #     created for the recovery point. The backup process has completed
+    #     without any issues, and the recovery point is now ready for use.
     #
-    #   `STOPPED` status occurs on a continuous backup where a user has
-    #   taken some action that causes the continuous backup to be disabled.
-    #   This can be caused by the removal of permissions, turning off
-    #   versioning, turning off events being sent to EventBridge, or
-    #   disabling the EventBridge rules that are put in place by Backup. For
-    #   recovery points of Amazon S3, Amazon RDS, and Amazon Aurora
-    #   resources, this status occurs when the retention period of a
-    #   continuous backup rule is changed.
+    #   * `PARTIAL` status indicates a composite recovery point has one or
+    #     more nested recovery points that were not in the backup.
     #
-    #   To resolve `STOPPED` status, ensure that all requested permissions
-    #   are in place and that versioning is enabled on the S3 bucket. Once
-    #   these conditions are met, the next instance of a backup rule running
-    #   will result in a new continuous recovery point being created. The
-    #   recovery points with STOPPED status do not need to be deleted.
+    #   * `EXPIRED` status indicates that the recovery point has exceeded
+    #     its retention period, but Backup lacks permission or is otherwise
+    #     unable to delete it. To manually delete these recovery points, see
+    #     [ Step 3: Delete the recovery points][2] in the *Clean up
+    #     resources* section of *Getting started*.
     #
-    #   For SAP HANA on Amazon EC2 `STOPPED` status occurs due to user
-    #   action, application misconfiguration, or backup failure. To ensure
-    #   that future continuous backups succeed, refer to the recovery point
-    #   status and check SAP HANA for details.
+    #   * `STOPPED` status occurs on a continuous backup where a user has
+    #     taken some action that causes the continuous backup to be
+    #     disabled. This can be caused by the removal of permissions,
+    #     turning off versioning, turning off events being sent to
+    #     EventBridge, or disabling the EventBridge rules that are put in
+    #     place by Backup. For recovery points of Amazon S3, Amazon RDS, and
+    #     Amazon Aurora resources, this status occurs when the retention
+    #     period of a continuous backup rule is changed.
+    #
+    #     To resolve `STOPPED` status, ensure that all requested permissions
+    #     are in place and that versioning is enabled on the S3 bucket. Once
+    #     these conditions are met, the next instance of a backup rule
+    #     running will result in a new continuous recovery point being
+    #     created. The recovery points with STOPPED status do not need to be
+    #     deleted.
+    #
+    #     For SAP HANA on Amazon EC2 `STOPPED` status occurs due to user
+    #     action, application misconfiguration, or backup failure. To ensure
+    #     that future continuous backups succeed, refer to the recovery
+    #     point status and check SAP HANA for details.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_UpdateBackupPlan.html
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/applicationstackbackups.html#cfnrecoverypointstatus
     #   [2]: https://docs.aws.amazon.com/aws-backup/latest/devguide/gs-cleanup-resources.html#cleanup-backups
     #   @return [String]
     #
@@ -6724,7 +6809,8 @@ module Aws::Backup
     #
     #   The following events are supported:
     #
-    #   * `BACKUP_JOB_STARTED` \| `BACKUP_JOB_COMPLETED`
+    #   * `BACKUP_JOB_STARTED` \| `BACKUP_JOB_COMPLETED` \|
+    #     `BACKUP_JOB_FAILED`
     #
     #   * `COPY_JOB_STARTED` \| `COPY_JOB_SUCCESSFUL` \| `COPY_JOB_FAILED`
     #
@@ -6732,6 +6818,9 @@ module Aws::Backup
     #     `RECOVERY_POINT_MODIFIED`
     #
     #   * `S3_BACKUP_OBJECT_FAILED` \| `S3_RESTORE_OBJECT_FAILED`
+    #
+    #   * `RECOVERY_POINT_INDEX_COMPLETED` \| `RECOVERY_POINT_INDEX_DELETED`
+    #     \| `RECOVERY_POINT_INDEXING_FAILED`
     #
     #   <note markdown="1"> The list below includes both supported events and deprecated events
     #   that are no longer in use (for reference). Deprecated events do not
@@ -7692,7 +7781,8 @@ module Aws::Backup
     #
     # @!attribute [rw] schedule_expression
     #   A CRON expression in specified timezone when a restore testing plan
-    #   is executed.
+    #   is executed. When no CRON expression is provided, Backup will use
+    #   the default expression `cron(0 5 ? * * *)`.
     #   @return [String]
     #
     # @!attribute [rw] schedule_expression_timezone
@@ -7773,7 +7863,8 @@ module Aws::Backup
     #
     # @!attribute [rw] schedule_expression
     #   A CRON expression in specified timezone when a restore testing plan
-    #   is executed.
+    #   is executed. When no CRON expression is provided, Backup will use
+    #   the default expression `cron(0 5 ? * * *)`.
     #   @return [String]
     #
     # @!attribute [rw] schedule_expression_timezone
@@ -7844,7 +7935,8 @@ module Aws::Backup
     #
     # @!attribute [rw] schedule_expression
     #   A CRON expression in specified timezone when a restore testing plan
-    #   is executed.
+    #   is executed. When no CRON expression is provided, Backup will use
+    #   the default expression `cron(0 5 ? * * *)`.
     #   @return [String]
     #
     # @!attribute [rw] schedule_expression_timezone
@@ -7889,7 +7981,8 @@ module Aws::Backup
     #
     # @!attribute [rw] schedule_expression
     #   A CRON expression in specified timezone when a restore testing plan
-    #   is executed.
+    #   is executed. When no CRON expression is provided, Backup will use
+    #   the default expression `cron(0 5 ? * * *)`.
     #   @return [String]
     #
     # @!attribute [rw] schedule_expression_timezone
@@ -8074,7 +8167,7 @@ module Aws::Backup
     #   @return [String]
     #
     # @!attribute [rw] validation_window_hours
-    #   This is amount of hours (1 to 168) available to run a validation
+    #   This is amount of hours (0 to 168) available to run a validation
     #   script on the data. The data will be deleted upon the completion of
     #   the validation script or the end of the specified retention period,
     #   whichever comes first.
@@ -8762,14 +8855,7 @@ module Aws::Backup
     end
 
     # @!attribute [rw] resource_arn
-    #   An ARN that uniquely identifies a resource. The format of the ARN
-    #   depends on the type of the tagged resource.
-    #
-    #   ARNs that do not include `backup` are incompatible with tagging.
-    #   `TagResource` and `UntagResource` with invalid ARNs will result in
-    #   an error. Acceptable ARN content can include
-    #   `arn:aws:backup:us-east`. Invalid ARN content may look like
-    #   `arn:aws:ec2:us-east`.
+    #   The ARN that uniquely identifies the resource.
     #   @return [String]
     #
     # @!attribute [rw] tags

@@ -1893,12 +1893,21 @@ module Aws::Athena
     #   The maximum number of results (rows) to return in this request.
     #   @return [Integer]
     #
+    # @!attribute [rw] query_result_type
+    #   When you set this to `DATA_ROWS` or empty, `GetQueryResults` returns
+    #   the query results in rows. If set to `DATA_MANIFEST`, it returns the
+    #   manifest file in rows. Only the query types `CREATE TABLE AS
+    #   SELECT`, `UNLOAD`, and `INSERT` can generate a manifest file. If you
+    #   use `DATA_MANIFEST` for other query types, the query will fail.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetQueryResultsInput AWS API Documentation
     #
     class GetQueryResultsInput < Struct.new(
       :query_execution_id,
       :next_token,
-      :max_results)
+      :max_results,
+      :query_result_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3029,6 +3038,80 @@ module Aws::Athena
       include Aws::Structure
     end
 
+    # The configuration for storing results in Athena owned storage, which
+    # includes whether this feature is enabled; whether encryption
+    # configuration, if any, is used for encrypting query results.
+    #
+    # @!attribute [rw] enabled
+    #   If set to true, allows you to store query results in Athena owned
+    #   storage. If set to false, workgroup member stores query results in
+    #   location specified under `ResultConfiguration$OutputLocation`. The
+    #   default is false. A workgroup cannot have the
+    #   `ResultConfiguration$OutputLocation` parameter when you set this
+    #   field to true.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   If you encrypt query and calculation results in Athena owned
+    #   storage, this field indicates the encryption option (for example,
+    #   SSE\_KMS or CSE\_KMS) and key information.
+    #   @return [Types::ManagedQueryResultsEncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ManagedQueryResultsConfiguration AWS API Documentation
+    #
+    class ManagedQueryResultsConfiguration < Struct.new(
+      :enabled,
+      :encryption_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Updates the configuration for managed query results.
+    #
+    # @!attribute [rw] enabled
+    #   If set to true, specifies that Athena manages query results in
+    #   Athena owned storage.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   If you encrypt query and calculation results in Athena owned
+    #   storage, this field indicates the encryption option (for example,
+    #   SSE\_KMS or CSE\_KMS) and key information.
+    #   @return [Types::ManagedQueryResultsEncryptionConfiguration]
+    #
+    # @!attribute [rw] remove_encryption_configuration
+    #   If set to true, it removes workgroup from Athena owned storage. The
+    #   existing query results are cleaned up after 24hrs. You must provide
+    #   query results in location specified under
+    #   `ResultConfiguration$OutputLocation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ManagedQueryResultsConfigurationUpdates AWS API Documentation
+    #
+    class ManagedQueryResultsConfigurationUpdates < Struct.new(
+      :enabled,
+      :encryption_configuration,
+      :remove_encryption_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # If you encrypt query and calculation results in Athena owned storage,
+    # this field indicates the encryption option (for example, SSE\_KMS or
+    # CSE\_KMS) and key information.
+    #
+    # @!attribute [rw] kms_key
+    #   The ARN of an KMS key for encrypting managed query results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ManagedQueryResultsEncryptionConfiguration AWS API Documentation
+    #
+    class ManagedQueryResultsEncryptionConfiguration < Struct.new(
+      :kms_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An exception that Athena received when it called a custom metastore.
     # Occurs if the error is not caused by user input
     # (`InvalidRequestException`) or from the Athena platform
@@ -3237,8 +3320,14 @@ module Aws::Athena
     #   statements. `DML` indicates DML (Data Manipulation Language) query
     #   statements, such as `CREATE TABLE AS SELECT`. `UTILITY` indicates
     #   query statements other than DDL and DML, such as `SHOW CREATE
-    #   TABLE`, `EXPLAIN`, `DESCRIBE`, or `SHOW TABLES`.
+    #   TABLE`, or `DESCRIBE TABLE`.
     #   @return [String]
+    #
+    # @!attribute [rw] managed_query_results_configuration
+    #   The configuration for storing results in Athena owned storage, which
+    #   includes whether this feature is enabled; whether encryption
+    #   configuration, if any, is used for encrypting query results.
+    #   @return [Types::ManagedQueryResultsConfiguration]
     #
     # @!attribute [rw] result_configuration
     #   The location in Amazon S3 where query and calculation results are
@@ -3299,6 +3388,7 @@ module Aws::Athena
       :query_execution_id,
       :query,
       :statement_type,
+      :managed_query_results_configuration,
       :result_configuration,
       :result_reuse_configuration,
       :query_execution_context,
@@ -5081,6 +5171,12 @@ module Aws::Athena
     #   issues an error that no output location is provided.
     #   @return [Types::ResultConfiguration]
     #
+    # @!attribute [rw] managed_query_results_configuration
+    #   The configuration for storing results in Athena owned storage, which
+    #   includes whether this feature is enabled; whether encryption
+    #   configuration, if any, is used for encrypting query results.
+    #   @return [Types::ManagedQueryResultsConfiguration]
+    #
     # @!attribute [rw] enforce_work_group_configuration
     #   If set to "true", the settings for the workgroup override
     #   client-side settings. If set to "false", client-side settings are
@@ -5167,6 +5263,7 @@ module Aws::Athena
     #
     class WorkGroupConfiguration < Struct.new(
       :result_configuration,
+      :managed_query_results_configuration,
       :enforce_work_group_configuration,
       :publish_cloud_watch_metrics_enabled,
       :bytes_scanned_cutoff_per_query,
@@ -5206,6 +5303,11 @@ module Aws::Athena
     #   workgroup that will be updated. Includes the updated results
     #   location and an updated option for encrypting query results.
     #   @return [Types::ResultConfigurationUpdates]
+    #
+    # @!attribute [rw] managed_query_results_configuration_updates
+    #   Updates configuration information for managed query results in the
+    #   workgroup.
+    #   @return [Types::ManagedQueryResultsConfigurationUpdates]
     #
     # @!attribute [rw] publish_cloud_watch_metrics_enabled
     #   Indicates whether this workgroup enables publishing metrics to
@@ -5292,6 +5394,7 @@ module Aws::Athena
     class WorkGroupConfigurationUpdates < Struct.new(
       :enforce_work_group_configuration,
       :result_configuration_updates,
+      :managed_query_results_configuration_updates,
       :publish_cloud_watch_metrics_enabled,
       :bytes_scanned_cutoff_per_query,
       :remove_bytes_scanned_cutoff_per_query,

@@ -571,6 +571,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLoggingConfigurationResponse]
         def firewall_arn: () -> ::String
         def logging_configuration: () -> Types::LoggingConfiguration
+        def enable_monitoring_dashboard: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#describe_logging_configuration-instance_method
       def describe_logging_configuration: (
@@ -1075,6 +1076,7 @@ module Aws
         def firewall_arn: () -> ::String
         def firewall_name: () -> ::String
         def logging_configuration: () -> Types::LoggingConfiguration
+        def enable_monitoring_dashboard: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#update_logging_configuration-instance_method
       def update_logging_configuration: (
@@ -1088,7 +1090,8 @@ module Aws
                                                 log_destination: Hash[::String, ::String]
                                               },
                                             ]
-                                          }
+                                          },
+                                          ?enable_monitoring_dashboard: bool
                                         ) -> _UpdateLoggingConfigurationResponseSuccess
                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLoggingConfigurationResponseSuccess
 

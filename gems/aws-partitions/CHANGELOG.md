@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.1111.0 (2025-06-04)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::Evs`.
+
+1.1110.0 (2025-06-02)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 * Feature - AWS SDK for Ruby no longer supports Ruby runtime versions 2.5 and 2.6.
 
 1.1109.0 (2025-05-30)

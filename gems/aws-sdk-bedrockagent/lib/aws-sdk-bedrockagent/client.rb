@@ -965,7 +965,7 @@ module Aws::BedrockAgent
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
     #
     # @option params [Hash<String,String>] :parent_action_group_signature_params
     #   The configuration settings for a computer use action.
@@ -977,7 +977,7 @@ module Aws::BedrockAgent
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
     #
     # @return [Types::CreateAgentActionGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1127,6 +1127,7 @@ module Aws::BedrockAgent
     #   resp.agent_alias.agent_alias_name #=> String
     #   resp.agent_alias.agent_alias_status #=> String, one of "CREATING", "PREPARED", "FAILED", "UPDATING", "DELETING", "DISSOCIATED"
     #   resp.agent_alias.agent_id #=> String
+    #   resp.agent_alias.alias_invocation_state #=> String, one of "ACCEPT_INVOCATIONS", "REJECT_INVOCATIONS"
     #   resp.agent_alias.client_token #=> String
     #   resp.agent_alias.created_at #=> Time
     #   resp.agent_alias.description #=> String
@@ -3561,6 +3562,7 @@ module Aws::BedrockAgent
     #   resp.agent_alias.agent_alias_name #=> String
     #   resp.agent_alias.agent_alias_status #=> String, one of "CREATING", "PREPARED", "FAILED", "UPDATING", "DELETING", "DISSOCIATED"
     #   resp.agent_alias.agent_id #=> String
+    #   resp.agent_alias.alias_invocation_state #=> String, one of "ACCEPT_INVOCATIONS", "REJECT_INVOCATIONS"
     #   resp.agent_alias.client_token #=> String
     #   resp.agent_alias.created_at #=> Time
     #   resp.agent_alias.description #=> String
@@ -4790,6 +4792,7 @@ module Aws::BedrockAgent
     #   resp.agent_alias_summaries[0].agent_alias_id #=> String
     #   resp.agent_alias_summaries[0].agent_alias_name #=> String
     #   resp.agent_alias_summaries[0].agent_alias_status #=> String, one of "CREATING", "PREPARED", "FAILED", "UPDATING", "DELETING", "DISSOCIATED"
+    #   resp.agent_alias_summaries[0].alias_invocation_state #=> String, one of "ACCEPT_INVOCATIONS", "REJECT_INVOCATIONS"
     #   resp.agent_alias_summaries[0].created_at #=> Time
     #   resp.agent_alias_summaries[0].description #=> String
     #   resp.agent_alias_summaries[0].routing_configuration #=> Array
@@ -6086,7 +6089,7 @@ module Aws::BedrockAgent
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
     #   [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html
     #
     # @option params [Hash<String,String>] :parent_action_group_signature_params
@@ -6099,7 +6102,7 @@ module Aws::BedrockAgent
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
     #
     # @return [Types::UpdateAgentActionGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6195,6 +6198,13 @@ module Aws::BedrockAgent
     # @option params [required, String] :agent_id
     #   The unique identifier of the agent.
     #
+    # @option params [String] :alias_invocation_state
+    #   The invocation state for the agent alias. To pause the agent alias,
+    #   set the value to `REJECT_INVOCATIONS`. To start the agent alias
+    #   running again, set the value to `ACCEPT_INVOCATIONS`. Use the
+    #   `GetAgentAlias`, or `ListAgentAliases`, operation to get the
+    #   invocation state of an agent alias.
+    #
     # @option params [String] :description
     #   Specifies a new description for the alias.
     #
@@ -6211,6 +6221,7 @@ module Aws::BedrockAgent
     #     agent_alias_id: "AgentAliasId", # required
     #     agent_alias_name: "Name", # required
     #     agent_id: "Id", # required
+    #     alias_invocation_state: "ACCEPT_INVOCATIONS", # accepts ACCEPT_INVOCATIONS, REJECT_INVOCATIONS
     #     description: "Description",
     #     routing_configuration: [
     #       {
@@ -6233,6 +6244,7 @@ module Aws::BedrockAgent
     #   resp.agent_alias.agent_alias_name #=> String
     #   resp.agent_alias.agent_alias_status #=> String, one of "CREATING", "PREPARED", "FAILED", "UPDATING", "DELETING", "DISSOCIATED"
     #   resp.agent_alias.agent_id #=> String
+    #   resp.agent_alias.alias_invocation_state #=> String, one of "ACCEPT_INVOCATIONS", "REJECT_INVOCATIONS"
     #   resp.agent_alias.client_token #=> String
     #   resp.agent_alias.created_at #=> Time
     #   resp.agent_alias.description #=> String
@@ -8065,7 +8077,7 @@ module Aws::BedrockAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

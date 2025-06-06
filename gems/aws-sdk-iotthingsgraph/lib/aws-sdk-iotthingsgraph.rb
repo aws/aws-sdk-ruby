@@ -54,7 +54,7 @@ module Aws::IoTThingsGraph
   autoload :EndpointProvider, 'aws-sdk-iotthingsgraph/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-iotthingsgraph/endpoints'
 
-  GEM_VERSION = '1.55.0'
+  GEM_VERSION = '1.56.0'
 
 end
 

@@ -572,7 +572,7 @@ module Aws::PCS
     #   resp.cluster.name #=> String
     #   resp.cluster.id #=> String
     #   resp.cluster.arn #=> String
-    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED"
+    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "SUSPENDING", "SUSPENDED"
     #   resp.cluster.created_at #=> Time
     #   resp.cluster.modified_at #=> Time
     #   resp.cluster.scheduler.type #=> String, one of "SLURM"
@@ -751,7 +751,7 @@ module Aws::PCS
     #   resp.compute_node_group.cluster_id #=> String
     #   resp.compute_node_group.created_at #=> Time
     #   resp.compute_node_group.modified_at #=> Time
-    #   resp.compute_node_group.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "DELETED"
+    #   resp.compute_node_group.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "DELETED", "SUSPENDING", "SUSPENDED"
     #   resp.compute_node_group.ami_id #=> String
     #   resp.compute_node_group.subnet_ids #=> Array
     #   resp.compute_node_group.subnet_ids[0] #=> String
@@ -838,7 +838,7 @@ module Aws::PCS
     #   resp.queue.cluster_id #=> String
     #   resp.queue.created_at #=> Time
     #   resp.queue.modified_at #=> Time
-    #   resp.queue.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED"
+    #   resp.queue.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "SUSPENDING", "SUSPENDED"
     #   resp.queue.compute_node_group_configurations #=> Array
     #   resp.queue.compute_node_group_configurations[0].compute_node_group_id #=> String
     #   resp.queue.error_info #=> Array
@@ -994,7 +994,7 @@ module Aws::PCS
     #   resp.cluster.name #=> String
     #   resp.cluster.id #=> String
     #   resp.cluster.arn #=> String
-    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED"
+    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "SUSPENDING", "SUSPENDED"
     #   resp.cluster.created_at #=> Time
     #   resp.cluster.modified_at #=> Time
     #   resp.cluster.scheduler.type #=> String, one of "SLURM"
@@ -1059,7 +1059,7 @@ module Aws::PCS
     #   resp.compute_node_group.cluster_id #=> String
     #   resp.compute_node_group.created_at #=> Time
     #   resp.compute_node_group.modified_at #=> Time
-    #   resp.compute_node_group.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "DELETED"
+    #   resp.compute_node_group.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "DELETED", "SUSPENDING", "SUSPENDED"
     #   resp.compute_node_group.ami_id #=> String
     #   resp.compute_node_group.subnet_ids #=> Array
     #   resp.compute_node_group.subnet_ids[0] #=> String
@@ -1116,7 +1116,7 @@ module Aws::PCS
     #   resp.queue.cluster_id #=> String
     #   resp.queue.created_at #=> Time
     #   resp.queue.modified_at #=> Time
-    #   resp.queue.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED"
+    #   resp.queue.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "SUSPENDING", "SUSPENDED"
     #   resp.queue.compute_node_group_configurations #=> Array
     #   resp.queue.compute_node_group_configurations[0].compute_node_group_id #=> String
     #   resp.queue.error_info #=> Array
@@ -1170,7 +1170,7 @@ module Aws::PCS
     #   resp.clusters[0].arn #=> String
     #   resp.clusters[0].created_at #=> Time
     #   resp.clusters[0].modified_at #=> Time
-    #   resp.clusters[0].status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED"
+    #   resp.clusters[0].status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "SUSPENDING", "SUSPENDED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/ListClusters AWS API Documentation
@@ -1225,7 +1225,7 @@ module Aws::PCS
     #   resp.compute_node_groups[0].cluster_id #=> String
     #   resp.compute_node_groups[0].created_at #=> Time
     #   resp.compute_node_groups[0].modified_at #=> Time
-    #   resp.compute_node_groups[0].status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "DELETED"
+    #   resp.compute_node_groups[0].status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "DELETED", "SUSPENDING", "SUSPENDED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/ListComputeNodeGroups AWS API Documentation
@@ -1280,7 +1280,7 @@ module Aws::PCS
     #   resp.queues[0].cluster_id #=> String
     #   resp.queues[0].created_at #=> Time
     #   resp.queues[0].modified_at #=> Time
-    #   resp.queues[0].status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED"
+    #   resp.queues[0].status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "SUSPENDING", "SUSPENDED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/ListQueues AWS API Documentation
@@ -1541,7 +1541,7 @@ module Aws::PCS
     #   resp.compute_node_group.cluster_id #=> String
     #   resp.compute_node_group.created_at #=> Time
     #   resp.compute_node_group.modified_at #=> Time
-    #   resp.compute_node_group.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "DELETED"
+    #   resp.compute_node_group.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "DELETED", "SUSPENDING", "SUSPENDED"
     #   resp.compute_node_group.ami_id #=> String
     #   resp.compute_node_group.subnet_ids #=> Array
     #   resp.compute_node_group.subnet_ids[0] #=> String
@@ -1620,7 +1620,7 @@ module Aws::PCS
     #   resp.queue.cluster_id #=> String
     #   resp.queue.created_at #=> Time
     #   resp.queue.modified_at #=> Time
-    #   resp.queue.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED"
+    #   resp.queue.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "SUSPENDING", "SUSPENDED"
     #   resp.queue.compute_node_group_configurations #=> Array
     #   resp.queue.compute_node_group_configurations[0].compute_node_group_id #=> String
     #   resp.queue.error_info #=> Array
@@ -1654,7 +1654,7 @@ module Aws::PCS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pcs'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

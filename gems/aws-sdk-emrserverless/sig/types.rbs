@@ -62,6 +62,7 @@ module Aws::EMRServerless
     class CancelJobRunRequest
       attr_accessor application_id: ::String
       attr_accessor job_run_id: ::String
+      attr_accessor shutdown_grace_period_in_seconds: ::Integer
       SENSITIVE: []
     end
 

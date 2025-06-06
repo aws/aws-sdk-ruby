@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2025-06-02)
+------------------
+
+* Feature - Add support for generating match IDs in near real-time.
+
 1.30.0 (2025-05-12)
 ------------------
 

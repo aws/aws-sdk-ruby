@@ -54,6 +54,40 @@ module Aws::CostOptimizationHub
       include Aws::Structure
     end
 
+    # Contains the details of an Aurora DB cluster storage.
+    #
+    # @!attribute [rw] configuration
+    #   The Aurora DB cluster storage configuration used for
+    #   recommendations.
+    #   @return [Types::AuroraDbClusterStorageConfiguration]
+    #
+    # @!attribute [rw] cost_calculation
+    #   Cost impact of the resource recommendation.
+    #   @return [Types::ResourceCostCalculation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cost-optimization-hub-2022-07-26/AuroraDbClusterStorage AWS API Documentation
+    #
+    class AuroraDbClusterStorage < Struct.new(
+      :configuration,
+      :cost_calculation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Aurora DB cluster storage configuration used for recommendations.
+    #
+    # @!attribute [rw] storage_type
+    #   The storage type to associate with the Aurora DB cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cost-optimization-hub-2022-07-26/AuroraDbClusterStorageConfiguration AWS API Documentation
+    #
+    class AuroraDbClusterStorageConfiguration < Struct.new(
+      :storage_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the Amazon Elastic Block Store performance configuration of
     # the current and recommended resource configuration for a
     # recommendation.
@@ -2026,6 +2060,10 @@ module Aws::CostOptimizationHub
     #   The DB instance storage recommendation details.
     #   @return [Types::RdsDbInstanceStorage]
     #
+    # @!attribute [rw] aurora_db_cluster_storage
+    #   The Aurora DB cluster storage recommendation details.
+    #   @return [Types::AuroraDbClusterStorage]
+    #
     # @!attribute [rw] dynamo_db_reserved_capacity
     #   The DynamoDB reserved capacity recommendation details.
     #   @return [Types::DynamoDbReservedCapacity]
@@ -2052,6 +2090,7 @@ module Aws::CostOptimizationHub
       :sage_maker_savings_plans,
       :rds_db_instance,
       :rds_db_instance_storage,
+      :aurora_db_cluster_storage,
       :dynamo_db_reserved_capacity,
       :memory_db_reserved_instances,
       :unknown)
@@ -2074,6 +2113,7 @@ module Aws::CostOptimizationHub
       class SageMakerSavingsPlans < ResourceDetails; end
       class RdsDbInstance < ResourceDetails; end
       class RdsDbInstanceStorage < ResourceDetails; end
+      class AuroraDbClusterStorage < ResourceDetails; end
       class DynamoDbReservedCapacity < ResourceDetails; end
       class MemoryDbReservedInstances < ResourceDetails; end
       class Unknown < ResourceDetails; end

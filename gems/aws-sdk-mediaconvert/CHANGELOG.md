@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.161.0 (2025-06-04)
+------------------
+
+* Feature - This release includes support for embedding and signing C2PA content credentials in MP4 outputs.
+
+1.160.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.159.0 (2025-05-14)
 ------------------
 

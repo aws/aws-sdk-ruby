@@ -1,0 +1,324 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Evs
+  module Types
+
+    class Check
+      attr_accessor type: ("KEY_REUSE" | "KEY_COVERAGE" | "REACHABILITY" | "HOST_COUNT")
+      attr_accessor result: ("PASSED" | "FAILED" | "UNKNOWN")
+      attr_accessor impaired_since: ::Time
+      SENSITIVE: []
+    end
+
+    class ConnectivityInfo
+      attr_accessor private_route_server_peerings: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateEnvironmentHostRequest
+      attr_accessor client_token: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor host: Types::HostInfoForCreate
+      SENSITIVE: []
+    end
+
+    class CreateEnvironmentHostResponse
+      attr_accessor environment_summary: Types::EnvironmentSummary
+      attr_accessor host: Types::Host
+      SENSITIVE: []
+    end
+
+    class CreateEnvironmentRequest
+      attr_accessor client_token: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor service_access_security_groups: Types::ServiceAccessSecurityGroups
+      attr_accessor vpc_id: ::String
+      attr_accessor service_access_subnet_id: ::String
+      attr_accessor vcf_version: ("VCF-5.2.1")
+      attr_accessor terms_accepted: bool
+      attr_accessor license_info: ::Array[Types::LicenseInfo]
+      attr_accessor initial_vlans: Types::InitialVlans
+      attr_accessor hosts: ::Array[Types::HostInfoForCreate]
+      attr_accessor connectivity_info: Types::ConnectivityInfo
+      attr_accessor vcf_hostnames: Types::VcfHostnames
+      attr_accessor site_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateEnvironmentResponse
+      attr_accessor environment: Types::Environment
+      SENSITIVE: []
+    end
+
+    class DeleteEnvironmentHostRequest
+      attr_accessor client_token: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor host_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEnvironmentHostResponse
+      attr_accessor environment_summary: Types::EnvironmentSummary
+      attr_accessor host: Types::Host
+      SENSITIVE: []
+    end
+
+    class DeleteEnvironmentRequest
+      attr_accessor client_token: ::String
+      attr_accessor environment_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEnvironmentResponse
+      attr_accessor environment: Types::Environment
+      SENSITIVE: []
+    end
+
+    class Environment
+      attr_accessor environment_id: ::String
+      attr_accessor environment_state: ("CREATING" | "CREATED" | "DELETING" | "DELETED" | "CREATE_FAILED")
+      attr_accessor state_details: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor environment_arn: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor service_access_subnet_id: ::String
+      attr_accessor vcf_version: ("VCF-5.2.1")
+      attr_accessor terms_accepted: bool
+      attr_accessor license_info: ::Array[Types::LicenseInfo]
+      attr_accessor site_id: ::String
+      attr_accessor environment_status: ("PASSED" | "FAILED" | "UNKNOWN")
+      attr_accessor checks: ::Array[Types::Check]
+      attr_accessor connectivity_info: Types::ConnectivityInfo
+      attr_accessor vcf_hostnames: Types::VcfHostnames
+      attr_accessor kms_key_id: ::String
+      attr_accessor service_access_security_groups: Types::ServiceAccessSecurityGroups
+      attr_accessor credentials: ::Array[Types::Secret]
+      SENSITIVE: []
+    end
+
+    class EnvironmentSummary
+      attr_accessor environment_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor vcf_version: ("VCF-5.2.1")
+      attr_accessor environment_status: ("PASSED" | "FAILED" | "UNKNOWN")
+      attr_accessor environment_state: ("CREATING" | "CREATED" | "DELETING" | "DELETED" | "CREATE_FAILED")
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor environment_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetEnvironmentRequest
+      attr_accessor environment_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetEnvironmentResponse
+      attr_accessor environment: Types::Environment
+      SENSITIVE: []
+    end
+
+    class Host
+      attr_accessor host_name: ::String
+      attr_accessor ip_address: ::String
+      attr_accessor key_name: ::String
+      attr_accessor instance_type: ("i4i.metal")
+      attr_accessor placement_group_id: ::String
+      attr_accessor dedicated_host_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor host_state: ("CREATING" | "CREATED" | "UPDATING" | "DELETING" | "DELETED" | "CREATE_FAILED" | "UPDATE_FAILED")
+      attr_accessor state_details: ::String
+      attr_accessor ec2_instance_id: ::String
+      attr_accessor network_interfaces: ::Array[Types::NetworkInterface]
+      SENSITIVE: []
+    end
+
+    class HostInfoForCreate
+      attr_accessor host_name: ::String
+      attr_accessor key_name: ::String
+      attr_accessor instance_type: ("i4i.metal")
+      attr_accessor placement_group_id: ::String
+      attr_accessor dedicated_host_id: ::String
+      SENSITIVE: []
+    end
+
+    class InitialVlanInfo
+      attr_accessor cidr: ::String
+      SENSITIVE: []
+    end
+
+    class InitialVlans
+      attr_accessor vmk_management: Types::InitialVlanInfo
+      attr_accessor vm_management: Types::InitialVlanInfo
+      attr_accessor v_motion: Types::InitialVlanInfo
+      attr_accessor v_san: Types::InitialVlanInfo
+      attr_accessor v_tep: Types::InitialVlanInfo
+      attr_accessor edge_v_tep: Types::InitialVlanInfo
+      attr_accessor nsx_uplink: Types::InitialVlanInfo
+      attr_accessor hcx: Types::InitialVlanInfo
+      attr_accessor expansion_vlan_1: Types::InitialVlanInfo
+      attr_accessor expansion_vlan_2: Types::InitialVlanInfo
+      SENSITIVE: []
+    end
+
+    class LicenseInfo
+      attr_accessor solution_key: ::String
+      attr_accessor vsan_key: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentHostsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor environment_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentHostsResponse
+      attr_accessor next_token: ::String
+      attr_accessor environment_hosts: ::Array[Types::Host]
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentVlansRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor environment_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentVlansResponse
+      attr_accessor next_token: ::String
+      attr_accessor environment_vlans: ::Array[Types::Vlan]
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor state: ::Array[("CREATING" | "CREATED" | "DELETING" | "DELETED" | "CREATE_FAILED")]
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentsResponse
+      attr_accessor next_token: ::String
+      attr_accessor environment_summaries: ::Array[Types::EnvironmentSummary]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class NetworkInterface
+      attr_accessor network_interface_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class Secret
+      attr_accessor secret_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceAccessSecurityGroups
+      attr_accessor security_groups: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TagPolicyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("unknownOperation" | "cannotParse" | "fieldValidationFailed" | "other")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VcfHostnames
+      attr_accessor v_center: ::String
+      attr_accessor nsx: ::String
+      attr_accessor nsx_manager_1: ::String
+      attr_accessor nsx_manager_2: ::String
+      attr_accessor nsx_manager_3: ::String
+      attr_accessor nsx_edge_1: ::String
+      attr_accessor nsx_edge_2: ::String
+      attr_accessor sddc_manager: ::String
+      attr_accessor cloud_builder: ::String
+      SENSITIVE: []
+    end
+
+    class Vlan
+      attr_accessor vlan_id: ::Integer
+      attr_accessor cidr: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor function_name: ::String
+      attr_accessor subnet_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor vlan_state: ("CREATING" | "CREATED" | "DELETING" | "DELETED" | "CREATE_FAILED")
+      attr_accessor state_details: ::String
+      SENSITIVE: []
+    end
+  end
+end

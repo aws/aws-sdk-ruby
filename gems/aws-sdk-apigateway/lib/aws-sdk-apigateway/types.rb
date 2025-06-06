@@ -896,6 +896,12 @@ module Aws::APIGateway
     #   configuration. Supported only for private custom domain names.
     #   @return [String]
     #
+    # @!attribute [rw] routing_mode
+    #   The routing mode for this domain name. The routing mode determines
+    #   how API Gateway sends traffic from your custom domain name to your
+    #   private APIs.
+    #   @return [String]
+    #
     class CreateDomainNameRequest < Struct.new(
       :domain_name,
       :certificate_name,
@@ -910,7 +916,8 @@ module Aws::APIGateway
       :security_policy,
       :mutual_tls_authentication,
       :ownership_verification_certificate_arn,
-      :policy)
+      :policy,
+      :routing_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2015,6 +2022,12 @@ module Aws::APIGateway
     #   configuration. Supported only for private custom domain names.
     #   @return [String]
     #
+    # @!attribute [rw] routing_mode
+    #   The routing mode for this domain name. The routing mode determines
+    #   how API Gateway sends traffic from your custom domain name to your
+    #   private APIs.
+    #   @return [String]
+    #
     class DomainName < Struct.new(
       :domain_name,
       :domain_name_id,
@@ -2036,7 +2049,8 @@ module Aws::APIGateway
       :mutual_tls_authentication,
       :ownership_verification_certificate_arn,
       :management_policy,
-      :policy)
+      :policy,
+      :routing_mode)
       SENSITIVE = []
       include Aws::Structure
     end

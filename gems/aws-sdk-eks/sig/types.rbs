@@ -807,7 +807,7 @@ module Aws::EKS
     class Insight
       attr_accessor id: ::String
       attr_accessor name: ::String
-      attr_accessor category: ("UPGRADE_READINESS")
+      attr_accessor category: ("UPGRADE_READINESS" | "MISCONFIGURATION")
       attr_accessor kubernetes_version: ::String
       attr_accessor last_refresh_time: ::Time
       attr_accessor last_transition_time: ::Time
@@ -842,7 +842,7 @@ module Aws::EKS
     class InsightSummary
       attr_accessor id: ::String
       attr_accessor name: ::String
-      attr_accessor category: ("UPGRADE_READINESS")
+      attr_accessor category: ("UPGRADE_READINESS" | "MISCONFIGURATION")
       attr_accessor kubernetes_version: ::String
       attr_accessor last_refresh_time: ::Time
       attr_accessor last_transition_time: ::Time
@@ -852,7 +852,7 @@ module Aws::EKS
     end
 
     class InsightsFilter
-      attr_accessor categories: ::Array[("UPGRADE_READINESS")]
+      attr_accessor categories: ::Array[("UPGRADE_READINESS" | "MISCONFIGURATION")]
       attr_accessor kubernetes_versions: ::Array[::String]
       attr_accessor statuses: ::Array[("PASSING" | "WARNING" | "ERROR" | "UNKNOWN")]
       SENSITIVE: []

@@ -112,7 +112,7 @@ module Aws::ComputeOptimizer
     end
 
     class DeleteRecommendationPreferencesRequest
-      attr_accessor resource_type: ("Ec2Instance" | "AutoScalingGroup" | "EbsVolume" | "LambdaFunction" | "NotApplicable" | "EcsService" | "License" | "RdsDBInstance" | "Idle")
+      attr_accessor resource_type: ("Ec2Instance" | "AutoScalingGroup" | "EbsVolume" | "LambdaFunction" | "NotApplicable" | "EcsService" | "License" | "RdsDBInstance" | "AuroraDBClusterStorage" | "Idle")
       attr_accessor scope: Types::Scope
       attr_accessor recommendation_preference_names: ::Array[("EnhancedInfrastructureMetrics" | "InferredWorkloadTypes" | "ExternalMetricsPreference" | "LookBackPeriodPreference" | "PreferredResources" | "UtilizationPreferences")]
       SENSITIVE: []
@@ -409,7 +409,7 @@ module Aws::ComputeOptimizer
     class ExportRDSDatabaseRecommendationsRequest
       attr_accessor account_ids: ::Array[::String]
       attr_accessor filters: ::Array[Types::RDSDBRecommendationFilter]
-      attr_accessor fields_to_export: ::Array[("ResourceArn" | "AccountId" | "Engine" | "EngineVersion" | "Idle" | "MultiAZDBInstance" | "CurrentDBInstanceClass" | "CurrentStorageConfigurationStorageType" | "CurrentStorageConfigurationAllocatedStorage" | "CurrentStorageConfigurationMaxAllocatedStorage" | "CurrentStorageConfigurationIOPS" | "CurrentStorageConfigurationStorageThroughput" | "CurrentInstanceOnDemandHourlyPrice" | "CurrentStorageOnDemandMonthlyPrice" | "LookbackPeriodInDays" | "CurrentInstancePerformanceRisk" | "UtilizationMetricsCpuMaximum" | "UtilizationMetricsMemoryMaximum" | "UtilizationMetricsEBSVolumeStorageSpaceUtilizationMaximum" | "UtilizationMetricsNetworkReceiveThroughputMaximum" | "UtilizationMetricsNetworkTransmitThroughputMaximum" | "UtilizationMetricsEBSVolumeReadIOPSMaximum" | "UtilizationMetricsEBSVolumeWriteIOPSMaximum" | "UtilizationMetricsEBSVolumeReadThroughputMaximum" | "UtilizationMetricsEBSVolumeWriteThroughputMaximum" | "UtilizationMetricsDatabaseConnectionsMaximum" | "UtilizationMetricsStorageNetworkReceiveThroughputMaximum" | "UtilizationMetricsStorageNetworkTransmitThroughputMaximum" | "UtilizationMetricsAuroraMemoryHealthStateMaximum" | "UtilizationMetricsAuroraMemoryNumDeclinedSqlTotalMaximum" | "UtilizationMetricsAuroraMemoryNumKillConnTotalMaximum" | "UtilizationMetricsAuroraMemoryNumKillQueryTotalMaximum" | "UtilizationMetricsReadIOPSEphemeralStorageMaximum" | "UtilizationMetricsWriteIOPSEphemeralStorageMaximum" | "InstanceFinding" | "InstanceFindingReasonCodes" | "StorageFinding" | "StorageFindingReasonCodes" | "InstanceRecommendationOptionsDBInstanceClass" | "InstanceRecommendationOptionsRank" | "InstanceRecommendationOptionsPerformanceRisk" | "InstanceRecommendationOptionsProjectedUtilizationMetricsCpuMaximum" | "StorageRecommendationOptionsStorageType" | "StorageRecommendationOptionsAllocatedStorage" | "StorageRecommendationOptionsMaxAllocatedStorage" | "StorageRecommendationOptionsIOPS" | "StorageRecommendationOptionsStorageThroughput" | "StorageRecommendationOptionsRank" | "InstanceRecommendationOptionsInstanceOnDemandHourlyPrice" | "InstanceRecommendationOptionsSavingsOpportunityPercentage" | "InstanceRecommendationOptionsEstimatedMonthlySavingsCurrency" | "InstanceRecommendationOptionsEstimatedMonthlySavingsValue" | "InstanceRecommendationOptionsSavingsOpportunityAfterDiscountsPercentage" | "InstanceRecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts" | "InstanceRecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts" | "StorageRecommendationOptionsOnDemandMonthlyPrice" | "StorageRecommendationOptionsSavingsOpportunityPercentage" | "StorageRecommendationOptionsEstimatedMonthlySavingsCurrency" | "StorageRecommendationOptionsEstimatedMonthlySavingsValue" | "StorageRecommendationOptionsSavingsOpportunityAfterDiscountsPercentage" | "StorageRecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts" | "StorageRecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts" | "EffectiveRecommendationPreferencesCpuVendorArchitectures" | "EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics" | "EffectiveRecommendationPreferencesLookBackPeriod" | "EffectiveRecommendationPreferencesSavingsEstimationMode" | "LastRefreshTimestamp" | "Tags" | "DBClusterIdentifier" | "PromotionTier")]
+      attr_accessor fields_to_export: ::Array[("ResourceArn" | "AccountId" | "Engine" | "EngineVersion" | "Idle" | "MultiAZDBInstance" | "ClusterWriter" | "CurrentDBInstanceClass" | "CurrentStorageConfigurationStorageType" | "CurrentStorageConfigurationAllocatedStorage" | "CurrentStorageConfigurationMaxAllocatedStorage" | "CurrentStorageConfigurationIOPS" | "CurrentStorageConfigurationStorageThroughput" | "CurrentStorageEstimatedMonthlyVolumeIOPsCostVariation" | "CurrentInstanceOnDemandHourlyPrice" | "CurrentStorageOnDemandMonthlyPrice" | "LookbackPeriodInDays" | "CurrentStorageEstimatedClusterInstanceOnDemandMonthlyCost" | "CurrentStorageEstimatedClusterStorageOnDemandMonthlyCost" | "CurrentStorageEstimatedClusterStorageIOOnDemandMonthlyCost" | "CurrentInstancePerformanceRisk" | "UtilizationMetricsCpuMaximum" | "UtilizationMetricsMemoryMaximum" | "UtilizationMetricsEBSVolumeStorageSpaceUtilizationMaximum" | "UtilizationMetricsNetworkReceiveThroughputMaximum" | "UtilizationMetricsNetworkTransmitThroughputMaximum" | "UtilizationMetricsEBSVolumeReadIOPSMaximum" | "UtilizationMetricsEBSVolumeWriteIOPSMaximum" | "UtilizationMetricsEBSVolumeReadThroughputMaximum" | "UtilizationMetricsEBSVolumeWriteThroughputMaximum" | "UtilizationMetricsDatabaseConnectionsMaximum" | "UtilizationMetricsStorageNetworkReceiveThroughputMaximum" | "UtilizationMetricsStorageNetworkTransmitThroughputMaximum" | "UtilizationMetricsAuroraMemoryHealthStateMaximum" | "UtilizationMetricsAuroraMemoryNumDeclinedSqlTotalMaximum" | "UtilizationMetricsAuroraMemoryNumKillConnTotalMaximum" | "UtilizationMetricsAuroraMemoryNumKillQueryTotalMaximum" | "UtilizationMetricsReadIOPSEphemeralStorageMaximum" | "UtilizationMetricsWriteIOPSEphemeralStorageMaximum" | "UtilizationMetricsVolumeBytesUsedAverage" | "UtilizationMetricsVolumeReadIOPsAverage" | "UtilizationMetricsVolumeWriteIOPsAverage" | "InstanceFinding" | "InstanceFindingReasonCodes" | "StorageFinding" | "StorageFindingReasonCodes" | "InstanceRecommendationOptionsDBInstanceClass" | "InstanceRecommendationOptionsRank" | "InstanceRecommendationOptionsPerformanceRisk" | "InstanceRecommendationOptionsProjectedUtilizationMetricsCpuMaximum" | "StorageRecommendationOptionsStorageType" | "StorageRecommendationOptionsAllocatedStorage" | "StorageRecommendationOptionsMaxAllocatedStorage" | "StorageRecommendationOptionsIOPS" | "StorageRecommendationOptionsStorageThroughput" | "StorageRecommendationOptionsRank" | "StorageRecommendationOptionsEstimatedMonthlyVolumeIOPsCostVariation" | "InstanceRecommendationOptionsInstanceOnDemandHourlyPrice" | "InstanceRecommendationOptionsSavingsOpportunityPercentage" | "InstanceRecommendationOptionsEstimatedMonthlySavingsCurrency" | "InstanceRecommendationOptionsEstimatedMonthlySavingsValue" | "InstanceRecommendationOptionsSavingsOpportunityAfterDiscountsPercentage" | "InstanceRecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts" | "InstanceRecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts" | "StorageRecommendationOptionsOnDemandMonthlyPrice" | "StorageRecommendationOptionsEstimatedClusterInstanceOnDemandMonthlyCost" | "StorageRecommendationOptionsEstimatedClusterStorageOnDemandMonthlyCost" | "StorageRecommendationOptionsEstimatedClusterStorageIOOnDemandMonthlyCost" | "StorageRecommendationOptionsSavingsOpportunityPercentage" | "StorageRecommendationOptionsEstimatedMonthlySavingsCurrency" | "StorageRecommendationOptionsEstimatedMonthlySavingsValue" | "StorageRecommendationOptionsSavingsOpportunityAfterDiscountsPercentage" | "StorageRecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts" | "StorageRecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts" | "EffectiveRecommendationPreferencesCpuVendorArchitectures" | "EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics" | "EffectiveRecommendationPreferencesLookBackPeriod" | "EffectiveRecommendationPreferencesSavingsEstimationMode" | "LastRefreshTimestamp" | "Tags" | "DBClusterIdentifier" | "PromotionTier")]
       attr_accessor s3_destination_config: Types::S3DestinationConfig
       attr_accessor file_format: ("Csv")
       attr_accessor include_member_accounts: bool
@@ -662,7 +662,7 @@ module Aws::ComputeOptimizer
     end
 
     class GetRecommendationPreferencesRequest
-      attr_accessor resource_type: ("Ec2Instance" | "AutoScalingGroup" | "EbsVolume" | "LambdaFunction" | "NotApplicable" | "EcsService" | "License" | "RdsDBInstance" | "Idle")
+      attr_accessor resource_type: ("Ec2Instance" | "AutoScalingGroup" | "EbsVolume" | "LambdaFunction" | "NotApplicable" | "EcsService" | "License" | "RdsDBInstance" | "AuroraDBClusterStorage" | "Idle")
       attr_accessor scope: Types::Scope
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
@@ -992,7 +992,7 @@ module Aws::ComputeOptimizer
     end
 
     class PutRecommendationPreferencesRequest
-      attr_accessor resource_type: ("Ec2Instance" | "AutoScalingGroup" | "EbsVolume" | "LambdaFunction" | "NotApplicable" | "EcsService" | "License" | "RdsDBInstance" | "Idle")
+      attr_accessor resource_type: ("Ec2Instance" | "AutoScalingGroup" | "EbsVolume" | "LambdaFunction" | "NotApplicable" | "EcsService" | "License" | "RdsDBInstance" | "AuroraDBClusterStorage" | "Idle")
       attr_accessor scope: Types::Scope
       attr_accessor enhanced_infrastructure_metrics: ("Active" | "Inactive")
       attr_accessor inferred_workload_types: ("Active" | "Inactive")
@@ -1028,10 +1028,11 @@ module Aws::ComputeOptimizer
       attr_accessor db_cluster_identifier: ::String
       attr_accessor idle: ("True" | "False")
       attr_accessor instance_finding: ("Optimized" | "Underprovisioned" | "Overprovisioned")
-      attr_accessor storage_finding: ("Optimized" | "Underprovisioned" | "Overprovisioned")
+      attr_accessor storage_finding: ("Optimized" | "Underprovisioned" | "Overprovisioned" | "NotOptimized")
       attr_accessor instance_finding_reason_codes: ::Array[("CPUOverprovisioned" | "NetworkBandwidthOverprovisioned" | "EBSIOPSOverprovisioned" | "EBSIOPSUnderprovisioned" | "EBSThroughputOverprovisioned" | "CPUUnderprovisioned" | "NetworkBandwidthUnderprovisioned" | "EBSThroughputUnderprovisioned" | "NewGenerationDBInstanceClassAvailable" | "NewEngineVersionAvailable" | "DBClusterWriterUnderprovisioned" | "MemoryUnderprovisioned" | "InstanceStorageReadIOPSUnderprovisioned" | "InstanceStorageWriteIOPSUnderprovisioned")]
       attr_accessor current_instance_performance_risk: ("VeryLow" | "Low" | "Medium" | "High")
-      attr_accessor storage_finding_reason_codes: ::Array[("EBSVolumeAllocatedStorageUnderprovisioned" | "EBSVolumeThroughputUnderprovisioned" | "EBSVolumeIOPSOverprovisioned" | "EBSVolumeThroughputOverprovisioned" | "NewGenerationStorageTypeAvailable")]
+      attr_accessor current_storage_estimated_monthly_volume_io_ps_cost_variation: ("None" | "Low" | "Medium" | "High")
+      attr_accessor storage_finding_reason_codes: ::Array[("EBSVolumeAllocatedStorageUnderprovisioned" | "EBSVolumeThroughputUnderprovisioned" | "EBSVolumeIOPSOverprovisioned" | "EBSVolumeThroughputOverprovisioned" | "NewGenerationStorageTypeAvailable" | "DBClusterStorageOptionAvailable" | "DBClusterStorageSavingsAvailable")]
       attr_accessor instance_recommendation_options: ::Array[Types::RDSDBInstanceRecommendationOption]
       attr_accessor storage_recommendation_options: ::Array[Types::RDSDBStorageRecommendationOption]
       attr_accessor utilization_metrics: ::Array[Types::RDSDBUtilizationMetric]
@@ -1053,18 +1054,19 @@ module Aws::ComputeOptimizer
       attr_accessor rank: ::Integer
       attr_accessor savings_opportunity: Types::SavingsOpportunity
       attr_accessor savings_opportunity_after_discounts: Types::RDSStorageSavingsOpportunityAfterDiscounts
+      attr_accessor estimated_monthly_volume_io_ps_cost_variation: ("None" | "Low" | "Medium" | "High")
       SENSITIVE: []
     end
 
     class RDSDBUtilizationMetric
-      attr_accessor name: ("CPU" | "Memory" | "EBSVolumeStorageSpaceUtilization" | "NetworkReceiveThroughput" | "NetworkTransmitThroughput" | "EBSVolumeReadIOPS" | "EBSVolumeWriteIOPS" | "EBSVolumeReadThroughput" | "EBSVolumeWriteThroughput" | "DatabaseConnections" | "StorageNetworkReceiveThroughput" | "StorageNetworkTransmitThroughput" | "AuroraMemoryHealthState" | "AuroraMemoryNumDeclinedSql" | "AuroraMemoryNumKillConnTotal" | "AuroraMemoryNumKillQueryTotal" | "ReadIOPSEphemeralStorage" | "WriteIOPSEphemeralStorage")
+      attr_accessor name: ("CPU" | "Memory" | "EBSVolumeStorageSpaceUtilization" | "NetworkReceiveThroughput" | "NetworkTransmitThroughput" | "EBSVolumeReadIOPS" | "EBSVolumeWriteIOPS" | "EBSVolumeReadThroughput" | "EBSVolumeWriteThroughput" | "DatabaseConnections" | "StorageNetworkReceiveThroughput" | "StorageNetworkTransmitThroughput" | "AuroraMemoryHealthState" | "AuroraMemoryNumDeclinedSql" | "AuroraMemoryNumKillConnTotal" | "AuroraMemoryNumKillQueryTotal" | "ReadIOPSEphemeralStorage" | "WriteIOPSEphemeralStorage" | "VolumeReadIOPs" | "VolumeBytesUsed" | "VolumeWriteIOPs")
       attr_accessor statistic: ("Maximum" | "Minimum" | "Average")
       attr_accessor value: ::Float
       SENSITIVE: []
     end
 
     class RDSDatabaseProjectedMetric
-      attr_accessor name: ("CPU" | "Memory" | "EBSVolumeStorageSpaceUtilization" | "NetworkReceiveThroughput" | "NetworkTransmitThroughput" | "EBSVolumeReadIOPS" | "EBSVolumeWriteIOPS" | "EBSVolumeReadThroughput" | "EBSVolumeWriteThroughput" | "DatabaseConnections" | "StorageNetworkReceiveThroughput" | "StorageNetworkTransmitThroughput" | "AuroraMemoryHealthState" | "AuroraMemoryNumDeclinedSql" | "AuroraMemoryNumKillConnTotal" | "AuroraMemoryNumKillQueryTotal" | "ReadIOPSEphemeralStorage" | "WriteIOPSEphemeralStorage")
+      attr_accessor name: ("CPU" | "Memory" | "EBSVolumeStorageSpaceUtilization" | "NetworkReceiveThroughput" | "NetworkTransmitThroughput" | "EBSVolumeReadIOPS" | "EBSVolumeWriteIOPS" | "EBSVolumeReadThroughput" | "EBSVolumeWriteThroughput" | "DatabaseConnections" | "StorageNetworkReceiveThroughput" | "StorageNetworkTransmitThroughput" | "AuroraMemoryHealthState" | "AuroraMemoryNumDeclinedSql" | "AuroraMemoryNumKillConnTotal" | "AuroraMemoryNumKillQueryTotal" | "ReadIOPSEphemeralStorage" | "WriteIOPSEphemeralStorage" | "VolumeReadIOPs" | "VolumeBytesUsed" | "VolumeWriteIOPs")
       attr_accessor timestamps: ::Array[::Time]
       attr_accessor values: ::Array[::Float]
       SENSITIVE: []
@@ -1123,7 +1125,7 @@ module Aws::ComputeOptimizer
     class RecommendationExportJob
       attr_accessor job_id: ::String
       attr_accessor destination: Types::ExportDestination
-      attr_accessor resource_type: ("Ec2Instance" | "AutoScalingGroup" | "EbsVolume" | "LambdaFunction" | "NotApplicable" | "EcsService" | "License" | "RdsDBInstance" | "Idle")
+      attr_accessor resource_type: ("Ec2Instance" | "AutoScalingGroup" | "EbsVolume" | "LambdaFunction" | "NotApplicable" | "EcsService" | "License" | "RdsDBInstance" | "AuroraDBClusterStorage" | "Idle")
       attr_accessor status: ("Queued" | "InProgress" | "Complete" | "Failed")
       attr_accessor creation_timestamp: ::Time
       attr_accessor last_updated_timestamp: ::Time
@@ -1138,7 +1140,7 @@ module Aws::ComputeOptimizer
 
     class RecommendationPreferencesDetail
       attr_accessor scope: Types::Scope
-      attr_accessor resource_type: ("Ec2Instance" | "AutoScalingGroup" | "EbsVolume" | "LambdaFunction" | "NotApplicable" | "EcsService" | "License" | "RdsDBInstance" | "Idle")
+      attr_accessor resource_type: ("Ec2Instance" | "AutoScalingGroup" | "EbsVolume" | "LambdaFunction" | "NotApplicable" | "EcsService" | "License" | "RdsDBInstance" | "AuroraDBClusterStorage" | "Idle")
       attr_accessor enhanced_infrastructure_metrics: ("Active" | "Inactive")
       attr_accessor inferred_workload_types: ("Active" | "Inactive")
       attr_accessor external_metrics_preference: Types::ExternalMetricsPreference
@@ -1151,14 +1153,14 @@ module Aws::ComputeOptimizer
 
     class RecommendationSource
       attr_accessor recommendation_source_arn: ::String
-      attr_accessor recommendation_source_type: ("Ec2Instance" | "AutoScalingGroup" | "EbsVolume" | "LambdaFunction" | "EcsService" | "License" | "RdsDBInstance" | "RdsDBInstanceStorage")
+      attr_accessor recommendation_source_type: ("Ec2Instance" | "AutoScalingGroup" | "EbsVolume" | "LambdaFunction" | "EcsService" | "License" | "RdsDBInstance" | "RdsDBInstanceStorage" | "AuroraDBClusterStorage")
       SENSITIVE: []
     end
 
     class RecommendationSummary
       attr_accessor summaries: ::Array[Types::Summary]
       attr_accessor idle_summaries: ::Array[Types::IdleSummary]
-      attr_accessor recommendation_resource_type: ("Ec2Instance" | "AutoScalingGroup" | "EbsVolume" | "LambdaFunction" | "EcsService" | "License" | "RdsDBInstance" | "RdsDBInstanceStorage")
+      attr_accessor recommendation_resource_type: ("Ec2Instance" | "AutoScalingGroup" | "EbsVolume" | "LambdaFunction" | "EcsService" | "License" | "RdsDBInstance" | "RdsDBInstanceStorage" | "AuroraDBClusterStorage")
       attr_accessor account_id: ::String
       attr_accessor savings_opportunity: Types::SavingsOpportunity
       attr_accessor idle_savings_opportunity: Types::SavingsOpportunity

@@ -230,23 +230,23 @@
     "Double": {
       "base": null,
       "refs": {
-        "Entity$StartTime": "<p>The start time, in milliseconds, of the utterance that was identified as PII.</p>",
-        "Entity$EndTime": "<p>The end time, in milliseconds, of the utterance that was identified as PII.</p>",
-        "Item$StartTime": "<p>The start time, in milliseconds, of the transcribed item.</p>",
-        "Item$EndTime": "<p>The end time, in milliseconds, of the transcribed item.</p>",
+        "Entity$StartTime": "<p>The start time of the utterance that was identified as PII in seconds, with millisecond precision (e.g., 1.056)</p>",
+        "Entity$EndTime": "<p>The end time of the utterance that was identified as PII in seconds, with millisecond precision (e.g., 1.056)</p>",
+        "Item$StartTime": "<p>The start time of the transcribed item in seconds, with millisecond precision (e.g., 1.056)</p>",
+        "Item$EndTime": "<p>The end time of the transcribed item in seconds, with millisecond precision (e.g., 1.056)</p>",
         "LanguageWithScore$Score": "<p>The confidence score associated with the identified language code. Confidence scores are values between zero and one; larger values indicate a higher confidence in the identified language.</p>",
-        "MedicalEntity$StartTime": "<p>The start time, in milliseconds, of the utterance that was identified as PHI.</p>",
-        "MedicalEntity$EndTime": "<p>The end time, in milliseconds, of the utterance that was identified as PHI.</p>",
-        "MedicalItem$StartTime": "<p>The start time, in milliseconds, of the transcribed item.</p>",
-        "MedicalItem$EndTime": "<p>The end time, in milliseconds, of the transcribed item.</p>",
-        "MedicalResult$StartTime": "<p>The start time, in milliseconds, of the <code>Result</code>.</p>",
-        "MedicalResult$EndTime": "<p>The end time, in milliseconds, of the <code>Result</code>.</p>",
+        "MedicalEntity$StartTime": "<p>The start time, in seconds, of the utterance that was identified as PHI.</p>",
+        "MedicalEntity$EndTime": "<p>The end time, in seconds, of the utterance that was identified as PHI.</p>",
+        "MedicalItem$StartTime": "<p>The start time, in seconds, of the transcribed item.</p>",
+        "MedicalItem$EndTime": "<p>The end time, in seconds, of the transcribed item.</p>",
+        "MedicalResult$StartTime": "<p>The start time, in seconds, of the <code>Result</code>.</p>",
+        "MedicalResult$EndTime": "<p>The end time, in seconds, of the <code>Result</code>.</p>",
         "MedicalScribeTranscriptItem$BeginAudioTime": "<p>The start time, in milliseconds, of the transcribed item.</p>",
         "MedicalScribeTranscriptItem$EndAudioTime": "<p>The end time, in milliseconds, of the transcribed item.</p>",
         "MedicalScribeTranscriptSegment$BeginAudioTime": "<p>The start time, in milliseconds, of the segment.</p>",
         "MedicalScribeTranscriptSegment$EndAudioTime": "<p>The end time, in milliseconds, of the segment.</p>",
-        "Result$StartTime": "<p>The start time, in milliseconds, of the <code>Result</code>.</p>",
-        "Result$EndTime": "<p>The end time, in milliseconds, of the <code>Result</code>.</p>"
+        "Result$StartTime": "<p>The start time of the <code>Result</code> in seconds, with millisecond precision (e.g., 1.056).</p>",
+        "Result$EndTime": "<p>The end time of the <code>Result</code> in seconds, with millisecond precision (e.g., 1.056).</p>"
       }
     },
     "Entity": {
@@ -263,13 +263,11 @@
     },
     "GetMedicalScribeStreamRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetMedicalScribeStreamResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "IamRoleArn": {
       "base": null,
@@ -546,7 +544,7 @@
     "MedicalScribeNoteTemplate": {
       "base": null,
       "refs": {
-        "ClinicalNoteGenerationSettings$NoteTemplate": "<p>Specify one of the following templates to use for the clinical note summary. The default is <code>HISTORY_AND_PHYSICAL</code>.</p> <ul> <li> <p>HISTORY_AND_PHYSICAL: Provides summaries for key sections of the clinical documentation. Sections include Chief Complaint, History of Present Illness, Review of Systems, Past Medical History, Assessment, and Plan.</p> </li> <li> <p>GIRPP: Provides summaries based on the patients progress toward goals. Sections include Goal, Intervention, Response, Progress, and Plan.</p> </li> </ul>"
+        "ClinicalNoteGenerationSettings$NoteTemplate": "<p>Specify one of the following templates to use for the clinical note summary. The default is <code>HISTORY_AND_PHYSICAL</code>.</p> <ul> <li> <p>HISTORY_AND_PHYSICAL: Provides summaries for key sections of the clinical documentation. Examples of sections include Chief Complaint, History of Present Illness, Review of Systems, Past Medical History, Assessment, and Plan. </p> </li> <li> <p>GIRPP: Provides summaries based on the patients progress toward goals. Examples of sections include Goal, Intervention, Response, Progress, and Plan.</p> </li> <li> <p>BIRP: Focuses on the patient's behavioral patterns and responses. Examples of sections include Behavior, Intervention, Response, and Plan.</p> </li> <li> <p>SIRP: Emphasizes the situational context of therapy. Examples of sections include Situation, Intervention, Response, and Plan.</p> </li> <li> <p>DAP: Provides a simplified format for clinical documentation. Examples of sections include Data, Assessment, and Plan.</p> </li> <li> <p>BEHAVIORAL_SOAP: Behavioral health focused documentation format. Examples of sections include Subjective, Objective, Assessment, and Plan.</p> </li> <li> <p>PHYSICAL_SOAP: Physical health focused documentation format. Examples of sections include Subjective, Objective, Assessment, and Plan.</p> </li> </ul>"
       }
     },
     "MedicalScribeParticipantRole": {
@@ -732,8 +730,7 @@
     },
     "ResourceNotFoundException": {
       "base": "<p>The request references a resource which doesn't exist.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "Result": {
       "base": "<p>The <code>Result</code> associated with a <code/>.</p> <p>Contains a set of transcription results from one or more audio segments, along with additional information per your request parameters. This can include information relating to alternative transcriptions, channel identification, partial result stabilization, language identification, and other transcription-related data.</p>",
@@ -793,43 +790,35 @@
     },
     "StartCallAnalyticsStreamTranscriptionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartCallAnalyticsStreamTranscriptionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartMedicalScribeStreamRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartMedicalScribeStreamResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartMedicalStreamTranscriptionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartMedicalStreamTranscriptionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartStreamTranscriptionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartStreamTranscriptionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "String": {
       "base": null,

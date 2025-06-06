@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2025-06-02)
+------------------
+
+* Feature - Introduces SUSPENDING and SUSPENDED states for clusters, compute node groups, and queues.
+
 1.19.0 (2025-05-15)
 ------------------
 

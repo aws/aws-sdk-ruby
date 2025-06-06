@@ -54,7 +54,7 @@ module Aws::Organizations
   autoload :EndpointProvider, 'aws-sdk-organizations/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-organizations/endpoints'
 
-  GEM_VERSION = '1.115.0'
+  GEM_VERSION = '1.116.0'
 
 end
 

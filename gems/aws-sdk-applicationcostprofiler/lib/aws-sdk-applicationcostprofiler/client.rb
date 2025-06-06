@@ -741,7 +741,7 @@ module Aws::ApplicationCostProfiler
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-applicationcostprofiler'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

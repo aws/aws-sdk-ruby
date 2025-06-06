@@ -59,6 +59,12 @@ module Aws::EntityResolution
     ErrorDetails = Shapes::StructureShape.new(name: 'ErrorDetails')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExceedsLimitException = Shapes::StructureShape.new(name: 'ExceedsLimitException')
+    FailedRecord = Shapes::StructureShape.new(name: 'FailedRecord')
+    FailedRecordInputSourceARNString = Shapes::StringShape.new(name: 'FailedRecordInputSourceARNString')
+    FailedRecordsList = Shapes::ListShape.new(name: 'FailedRecordsList')
+    GenerateMatchIdInput = Shapes::StructureShape.new(name: 'GenerateMatchIdInput')
+    GenerateMatchIdInputRecordsList = Shapes::ListShape.new(name: 'GenerateMatchIdInputRecordsList')
+    GenerateMatchIdOutput = Shapes::StructureShape.new(name: 'GenerateMatchIdOutput')
     GetIdMappingJobInput = Shapes::StructureShape.new(name: 'GetIdMappingJobInput')
     GetIdMappingJobOutput = Shapes::StructureShape.new(name: 'GetIdMappingJobOutput')
     GetIdMappingWorkflowInput = Shapes::StructureShape.new(name: 'GetIdMappingWorkflowInput')
@@ -146,7 +152,12 @@ module Aws::EntityResolution
     ListSchemaMappingsOutput = Shapes::StructureShape.new(name: 'ListSchemaMappingsOutput')
     ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
     ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
+    MatchGroup = Shapes::StructureShape.new(name: 'MatchGroup')
+    MatchGroupsList = Shapes::ListShape.new(name: 'MatchGroupsList')
     MatchPurpose = Shapes::StringShape.new(name: 'MatchPurpose')
+    MatchedRecord = Shapes::StructureShape.new(name: 'MatchedRecord')
+    MatchedRecordInputSourceARNString = Shapes::StringShape.new(name: 'MatchedRecordInputSourceARNString')
+    MatchedRecordsList = Shapes::ListShape.new(name: 'MatchedRecordsList')
     MatchingWorkflowArn = Shapes::StringShape.new(name: 'MatchingWorkflowArn')
     MatchingWorkflowList = Shapes::ListShape.new(name: 'MatchingWorkflowList')
     MatchingWorkflowSummary = Shapes::StructureShape.new(name: 'MatchingWorkflowSummary')
@@ -160,6 +171,7 @@ module Aws::EntityResolution
     OutputSourceOutputList = Shapes::ListShape.new(name: 'OutputSourceOutputList')
     PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
     PolicyToken = Shapes::StringShape.new(name: 'PolicyToken')
+    ProcessingType = Shapes::StringShape.new(name: 'ProcessingType')
     ProviderComponentSchema = Shapes::StructureShape.new(name: 'ProviderComponentSchema')
     ProviderEndpointConfiguration = Shapes::UnionShape.new(name: 'ProviderEndpointConfiguration')
     ProviderIdNameSpaceConfiguration = Shapes::StructureShape.new(name: 'ProviderIdNameSpaceConfiguration')
@@ -174,9 +186,14 @@ module Aws::EntityResolution
     ProviderServiceSummary = Shapes::StructureShape.new(name: 'ProviderServiceSummary')
     PutPolicyInput = Shapes::StructureShape.new(name: 'PutPolicyInput')
     PutPolicyOutput = Shapes::StructureShape.new(name: 'PutPolicyOutput')
+    Record = Shapes::StructureShape.new(name: 'Record')
     RecordAttributeMap = Shapes::MapShape.new(name: 'RecordAttributeMap')
     RecordAttributeMapKeyString = Shapes::StringShape.new(name: 'RecordAttributeMapKeyString')
+    RecordAttributeMapString255 = Shapes::MapShape.new(name: 'RecordAttributeMapString255')
+    RecordAttributeMapString255KeyString = Shapes::StringShape.new(name: 'RecordAttributeMapString255KeyString')
+    RecordAttributeMapString255ValueString = Shapes::StringShape.new(name: 'RecordAttributeMapString255ValueString')
     RecordAttributeMapValueString = Shapes::StringShape.new(name: 'RecordAttributeMapValueString')
+    RecordInputSourceARNString = Shapes::StringShape.new(name: 'RecordInputSourceARNString')
     RecordMatchingModel = Shapes::StringShape.new(name: 'RecordMatchingModel')
     RecordMatchingModelList = Shapes::ListShape.new(name: 'RecordMatchingModelList')
     RequiredBucketActionsList = Shapes::ListShape.new(name: 'RequiredBucketActionsList')
@@ -219,6 +236,7 @@ module Aws::EntityResolution
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    UniqueId = Shapes::StringShape.new(name: 'UniqueId')
     UniqueIdList = Shapes::ListShape.new(name: 'UniqueIdList')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
@@ -389,6 +407,24 @@ module Aws::EntityResolution
     ExceedsLimitException.add_member(:quota_name, Shapes::ShapeRef.new(shape: String, location_name: "quotaName"))
     ExceedsLimitException.add_member(:quota_value, Shapes::ShapeRef.new(shape: Integer, location_name: "quotaValue"))
     ExceedsLimitException.struct_class = Types::ExceedsLimitException
+
+    FailedRecord.add_member(:input_source_arn, Shapes::ShapeRef.new(shape: FailedRecordInputSourceARNString, required: true, location_name: "inputSourceARN"))
+    FailedRecord.add_member(:unique_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "uniqueId"))
+    FailedRecord.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "errorMessage"))
+    FailedRecord.struct_class = Types::FailedRecord
+
+    FailedRecordsList.member = Shapes::ShapeRef.new(shape: FailedRecord)
+
+    GenerateMatchIdInput.add_member(:workflow_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location: "uri", location_name: "workflowName"))
+    GenerateMatchIdInput.add_member(:records, Shapes::ShapeRef.new(shape: GenerateMatchIdInputRecordsList, required: true, location_name: "records"))
+    GenerateMatchIdInput.add_member(:processing_type, Shapes::ShapeRef.new(shape: ProcessingType, location_name: "processingType"))
+    GenerateMatchIdInput.struct_class = Types::GenerateMatchIdInput
+
+    GenerateMatchIdInputRecordsList.member = Shapes::ShapeRef.new(shape: Record)
+
+    GenerateMatchIdOutput.add_member(:match_groups, Shapes::ShapeRef.new(shape: MatchGroupsList, required: true, location_name: "matchGroups"))
+    GenerateMatchIdOutput.add_member(:failed_records, Shapes::ShapeRef.new(shape: FailedRecordsList, required: true, location_name: "failedRecords"))
+    GenerateMatchIdOutput.struct_class = Types::GenerateMatchIdOutput
 
     GetIdMappingJobInput.add_member(:workflow_name, Shapes::ShapeRef.new(shape: EntityNameOrIdMappingWorkflowArn, required: true, location: "uri", location_name: "workflowName"))
     GetIdMappingJobInput.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
@@ -694,6 +730,19 @@ module Aws::EntityResolution
     ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "tags"))
     ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
 
+    MatchGroup.add_member(:records, Shapes::ShapeRef.new(shape: MatchedRecordsList, required: true, location_name: "records"))
+    MatchGroup.add_member(:match_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "matchId"))
+    MatchGroup.add_member(:match_rule, Shapes::ShapeRef.new(shape: String, required: true, location_name: "matchRule"))
+    MatchGroup.struct_class = Types::MatchGroup
+
+    MatchGroupsList.member = Shapes::ShapeRef.new(shape: MatchGroup)
+
+    MatchedRecord.add_member(:input_source_arn, Shapes::ShapeRef.new(shape: MatchedRecordInputSourceARNString, required: true, location_name: "inputSourceARN"))
+    MatchedRecord.add_member(:record_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "recordId"))
+    MatchedRecord.struct_class = Types::MatchedRecord
+
+    MatchedRecordsList.member = Shapes::ShapeRef.new(shape: MatchedRecord)
+
     MatchingWorkflowList.member = Shapes::ShapeRef.new(shape: MatchingWorkflowSummary)
 
     MatchingWorkflowSummary.add_member(:workflow_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "workflowName"))
@@ -786,8 +835,16 @@ module Aws::EntityResolution
     PutPolicyOutput.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyDocument, location_name: "policy"))
     PutPolicyOutput.struct_class = Types::PutPolicyOutput
 
+    Record.add_member(:input_source_arn, Shapes::ShapeRef.new(shape: RecordInputSourceARNString, required: true, location_name: "inputSourceARN"))
+    Record.add_member(:unique_id, Shapes::ShapeRef.new(shape: UniqueId, required: true, location_name: "uniqueId"))
+    Record.add_member(:record_attribute_map, Shapes::ShapeRef.new(shape: RecordAttributeMapString255, required: true, location_name: "recordAttributeMap"))
+    Record.struct_class = Types::Record
+
     RecordAttributeMap.key = Shapes::ShapeRef.new(shape: RecordAttributeMapKeyString)
     RecordAttributeMap.value = Shapes::ShapeRef.new(shape: RecordAttributeMapValueString)
+
+    RecordAttributeMapString255.key = Shapes::ShapeRef.new(shape: RecordAttributeMapString255KeyString)
+    RecordAttributeMapString255.value = Shapes::ShapeRef.new(shape: RecordAttributeMapString255ValueString)
 
     RecordMatchingModelList.member = Shapes::ShapeRef.new(shape: RecordMatchingModel)
 
@@ -1108,6 +1165,19 @@ module Aws::EntityResolution
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:generate_match_id, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GenerateMatchId"
+        o.http_method = "POST"
+        o.http_request_uri = "/matchingworkflows/{workflowName}/generateMatches"
+        o.input = Shapes::ShapeRef.new(shape: GenerateMatchIdInput)
+        o.output = Shapes::ShapeRef.new(shape: GenerateMatchIdOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 

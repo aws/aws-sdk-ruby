@@ -1864,6 +1864,7 @@ module Aws
                                 agent_alias_id: ::String,
                                 agent_alias_name: ::String,
                                 agent_id: ::String,
+                                ?alias_invocation_state: ("ACCEPT_INVOCATIONS" | "REJECT_INVOCATIONS"),
                                 ?description: ::String,
                                 ?routing_configuration: Array[
                                   {

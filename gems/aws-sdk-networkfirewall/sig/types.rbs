@@ -342,6 +342,7 @@ module Aws::NetworkFirewall
     class DescribeLoggingConfigurationResponse
       attr_accessor firewall_arn: ::String
       attr_accessor logging_configuration: Types::LoggingConfiguration
+      attr_accessor enable_monitoring_dashboard: bool
       SENSITIVE: []
     end
 
@@ -1223,6 +1224,7 @@ module Aws::NetworkFirewall
       attr_accessor firewall_arn: ::String
       attr_accessor firewall_name: ::String
       attr_accessor logging_configuration: Types::LoggingConfiguration
+      attr_accessor enable_monitoring_dashboard: bool
       SENSITIVE: []
     end
 
@@ -1230,6 +1232,7 @@ module Aws::NetworkFirewall
       attr_accessor firewall_arn: ::String
       attr_accessor firewall_name: ::String
       attr_accessor logging_configuration: Types::LoggingConfiguration
+      attr_accessor enable_monitoring_dashboard: bool
       SENSITIVE: []
     end
 

@@ -127,6 +127,7 @@ module Aws::EMRServerless
     SecurityGroupString = Shapes::StringShape.new(name: 'SecurityGroupString')
     SensitivePropertiesMap = Shapes::MapShape.new(name: 'SensitivePropertiesMap')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    ShutdownGracePeriodInSeconds = Shapes::IntegerShape.new(name: 'ShutdownGracePeriodInSeconds')
     SparkSubmit = Shapes::StructureShape.new(name: 'SparkSubmit')
     SparkSubmitParameters = Shapes::StringShape.new(name: 'SparkSubmitParameters')
     StartApplicationRequest = Shapes::StructureShape.new(name: 'StartApplicationRequest')
@@ -210,6 +211,7 @@ module Aws::EMRServerless
 
     CancelJobRunRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
     CancelJobRunRequest.add_member(:job_run_id, Shapes::ShapeRef.new(shape: JobRunId, required: true, location: "uri", location_name: "jobRunId"))
+    CancelJobRunRequest.add_member(:shutdown_grace_period_in_seconds, Shapes::ShapeRef.new(shape: ShutdownGracePeriodInSeconds, location: "querystring", location_name: "shutdownGracePeriodInSeconds"))
     CancelJobRunRequest.struct_class = Types::CancelJobRunRequest
 
     CancelJobRunResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "applicationId"))

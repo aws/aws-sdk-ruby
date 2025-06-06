@@ -599,6 +599,8 @@ module Aws::Athena
     #   resp.query_executions[0].query_execution_id #=> String
     #   resp.query_executions[0].query #=> String
     #   resp.query_executions[0].statement_type #=> String, one of "DDL", "DML", "UTILITY"
+    #   resp.query_executions[0].managed_query_results_configuration.enabled #=> Boolean
+    #   resp.query_executions[0].managed_query_results_configuration.encryption_configuration.kms_key #=> String
     #   resp.query_executions[0].result_configuration.output_location #=> String
     #   resp.query_executions[0].result_configuration.encryption_configuration.encryption_option #=> String, one of "SSE_S3", "SSE_KMS", "CSE_KMS"
     #   resp.query_executions[0].result_configuration.encryption_configuration.kms_key #=> String
@@ -1089,6 +1091,12 @@ module Aws::Athena
     #         expected_bucket_owner: "AwsAccountId",
     #         acl_configuration: {
     #           s3_acl_option: "BUCKET_OWNER_FULL_CONTROL", # required, accepts BUCKET_OWNER_FULL_CONTROL
+    #         },
+    #       },
+    #       managed_query_results_configuration: {
+    #         enabled: false, # required
+    #         encryption_configuration: {
+    #           kms_key: "KmsKey", # required
     #         },
     #       },
     #       enforce_work_group_configuration: false,
@@ -1728,6 +1736,8 @@ module Aws::Athena
     #   resp.query_execution.query_execution_id #=> String
     #   resp.query_execution.query #=> String
     #   resp.query_execution.statement_type #=> String, one of "DDL", "DML", "UTILITY"
+    #   resp.query_execution.managed_query_results_configuration.enabled #=> Boolean
+    #   resp.query_execution.managed_query_results_configuration.encryption_configuration.kms_key #=> String
     #   resp.query_execution.result_configuration.output_location #=> String
     #   resp.query_execution.result_configuration.encryption_configuration.encryption_option #=> String, one of "SSE_S3", "SSE_KMS", "CSE_KMS"
     #   resp.query_execution.result_configuration.encryption_configuration.kms_key #=> String
@@ -1806,6 +1816,13 @@ module Aws::Athena
     # @option params [Integer] :max_results
     #   The maximum number of results (rows) to return in this request.
     #
+    # @option params [String] :query_result_type
+    #   When you set this to `DATA_ROWS` or empty, `GetQueryResults` returns
+    #   the query results in rows. If set to `DATA_MANIFEST`, it returns the
+    #   manifest file in rows. Only the query types `CREATE TABLE AS SELECT`,
+    #   `UNLOAD`, and `INSERT` can generate a manifest file. If you use
+    #   `DATA_MANIFEST` for other query types, the query will fail.
+    #
     # @return [Types::GetQueryResultsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetQueryResultsOutput#update_count #update_count} => Integer
@@ -1820,6 +1837,7 @@ module Aws::Athena
     #     query_execution_id: "QueryExecutionId", # required
     #     next_token: "Token",
     #     max_results: 1,
+    #     query_result_type: "DATA_MANIFEST", # accepts DATA_MANIFEST, DATA_ROWS
     #   })
     #
     # @example Response structure
@@ -2085,6 +2103,8 @@ module Aws::Athena
     #   resp.work_group.configuration.result_configuration.encryption_configuration.kms_key #=> String
     #   resp.work_group.configuration.result_configuration.expected_bucket_owner #=> String
     #   resp.work_group.configuration.result_configuration.acl_configuration.s3_acl_option #=> String, one of "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.work_group.configuration.managed_query_results_configuration.enabled #=> Boolean
+    #   resp.work_group.configuration.managed_query_results_configuration.encryption_configuration.kms_key #=> String
     #   resp.work_group.configuration.enforce_work_group_configuration #=> Boolean
     #   resp.work_group.configuration.publish_cloud_watch_metrics_enabled #=> Boolean
     #   resp.work_group.configuration.bytes_scanned_cutoff_per_query #=> Integer
@@ -3783,6 +3803,13 @@ module Aws::Athena
     #         },
     #         remove_acl_configuration: false,
     #       },
+    #       managed_query_results_configuration_updates: {
+    #         enabled: false,
+    #         encryption_configuration: {
+    #           kms_key: "KmsKey", # required
+    #         },
+    #         remove_encryption_configuration: false,
+    #       },
     #       publish_cloud_watch_metrics_enabled: false,
     #       bytes_scanned_cutoff_per_query: 1,
     #       remove_bytes_scanned_cutoff_per_query: false,
@@ -3834,7 +3861,7 @@ module Aws::Athena
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.104.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

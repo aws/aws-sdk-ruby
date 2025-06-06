@@ -1511,7 +1511,7 @@ module Aws::MediaPackageVod
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediapackagevod'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

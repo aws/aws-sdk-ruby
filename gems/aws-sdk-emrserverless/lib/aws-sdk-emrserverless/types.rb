@@ -252,11 +252,17 @@ module Aws::EMRServerless
     #   The ID of the job run to cancel.
     #   @return [String]
     #
+    # @!attribute [rw] shutdown_grace_period_in_seconds
+    #   The duration (in seconds) to wait before forcefully terminating the
+    #   job after cancellation is requested.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/CancelJobRunRequest AWS API Documentation
     #
     class CancelJobRunRequest < Struct.new(
       :application_id,
-      :job_run_id)
+      :job_run_id,
+      :shutdown_grace_period_in_seconds)
       SENSITIVE = []
       include Aws::Structure
     end

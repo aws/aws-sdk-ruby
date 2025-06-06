@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2025-06-02)
+------------------
+
+* Feature - Support for Java runtime handler pattern.
+
 1.66.0 (2025-05-28)
 ------------------
 

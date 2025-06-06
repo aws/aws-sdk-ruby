@@ -54,7 +54,7 @@ module Aws::WellArchitected
   autoload :EndpointProvider, 'aws-sdk-wellarchitected/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-wellarchitected/endpoints'
 
-  GEM_VERSION = '1.53.0'
+  GEM_VERSION = '1.54.0'
 
 end
 

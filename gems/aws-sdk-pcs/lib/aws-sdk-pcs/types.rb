@@ -125,6 +125,19 @@ module Aws::PCS
     #   cluster.
     #
     #    </note>
+    #
+    #   The resource enters the `SUSPENDING` and `SUSPENDED` states when the
+    #   scheduler is beyond end of life and we have suspended the cluster.
+    #   When in these states, you can't use the cluster. The cluster
+    #   controller is down and all compute instances are terminated. The
+    #   resources still count toward your service quotas. You can delete a
+    #   resource if its status is `SUSPENDED`. For more information, see
+    #   [Frequently asked questions about Slurm versions in PCS][1] in the
+    #   *PCS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions_faq.html
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -276,6 +289,19 @@ module Aws::PCS
     #   cluster.
     #
     #    </note>
+    #
+    #   The resource enters the `SUSPENDING` and `SUSPENDED` states when the
+    #   scheduler is beyond end of life and we have suspended the cluster.
+    #   When in these states, you can't use the cluster. The cluster
+    #   controller is down and all compute instances are terminated. The
+    #   resources still count toward your service quotas. You can delete a
+    #   resource if its status is `SUSPENDED`. For more information, see
+    #   [Frequently asked questions about Slurm versions in PCS][1] in the
+    #   *PCS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions_faq.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/ClusterSummary AWS API Documentation
@@ -324,6 +350,19 @@ module Aws::PCS
     #   compute node group.
     #
     #    </note>
+    #
+    #   The resource enters the `SUSPENDING` and `SUSPENDED` states when the
+    #   scheduler is beyond end of life and we have suspended the cluster.
+    #   When in these states, you can't use the cluster. The cluster
+    #   controller is down and all compute instances are terminated. The
+    #   resources still count toward your service quotas. You can delete a
+    #   resource if its status is `SUSPENDED`. For more information, see
+    #   [Frequently asked questions about Slurm versions in PCS][1] in the
+    #   *PCS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions_faq.html
     #   @return [String]
     #
     # @!attribute [rw] ami_id
@@ -494,6 +533,19 @@ module Aws::PCS
     #   compute node group.
     #
     #    </note>
+    #
+    #   The resource enters the `SUSPENDING` and `SUSPENDED` states when the
+    #   scheduler is beyond end of life and we have suspended the cluster.
+    #   When in these states, you can't use the cluster. The cluster
+    #   controller is down and all compute instances are terminated. The
+    #   resources still count toward your service quotas. You can delete a
+    #   resource if its status is `SUSPENDED`. For more information, see
+    #   [Frequently asked questions about Slurm versions in PCS][1] in the
+    #   *PCS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions_faq.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/ComputeNodeGroupSummary AWS API Documentation
@@ -1378,6 +1430,19 @@ module Aws::PCS
     #   queue.
     #
     #    </note>
+    #
+    #   The resource enters the `SUSPENDING` and `SUSPENDED` states when the
+    #   scheduler is beyond end of life and we have suspended the cluster.
+    #   When in these states, you can't use the cluster. The cluster
+    #   controller is down and all compute instances are terminated. The
+    #   resources still count toward your service quotas. You can delete a
+    #   resource if its status is `SUSPENDED`. For more information, see
+    #   [Frequently asked questions about Slurm versions in PCS][1] in the
+    #   *PCS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions_faq.html
     #   @return [String]
     #
     # @!attribute [rw] compute_node_group_configurations
@@ -1438,6 +1503,19 @@ module Aws::PCS
     #   queue.
     #
     #    </note>
+    #
+    #   The resource enters the `SUSPENDING` and `SUSPENDED` states when the
+    #   scheduler is beyond end of life and we have suspended the cluster.
+    #   When in these states, you can't use the cluster. The cluster
+    #   controller is down and all compute instances are terminated. The
+    #   resources still count toward your service quotas. You can delete a
+    #   resource if its status is `SUSPENDED`. For more information, see
+    #   [Frequently asked questions about Slurm versions in PCS][1] in the
+    #   *PCS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions_faq.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/QueueSummary AWS API Documentation

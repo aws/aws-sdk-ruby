@@ -501,6 +501,7 @@ module Aws::Athena
       attr_accessor query_execution_id: ::String
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
+      attr_accessor query_result_type: ("DATA_MANIFEST" | "DATA_ROWS")
       SENSITIVE: []
     end
 
@@ -818,6 +819,24 @@ module Aws::Athena
       SENSITIVE: []
     end
 
+    class ManagedQueryResultsConfiguration
+      attr_accessor enabled: bool
+      attr_accessor encryption_configuration: Types::ManagedQueryResultsEncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class ManagedQueryResultsConfigurationUpdates
+      attr_accessor enabled: bool
+      attr_accessor encryption_configuration: Types::ManagedQueryResultsEncryptionConfiguration
+      attr_accessor remove_encryption_configuration: bool
+      SENSITIVE: []
+    end
+
+    class ManagedQueryResultsEncryptionConfiguration
+      attr_accessor kms_key: ::String
+      SENSITIVE: []
+    end
+
     class MetadataException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -877,6 +896,7 @@ module Aws::Athena
       attr_accessor query_execution_id: ::String
       attr_accessor query: ::String
       attr_accessor statement_type: ("DDL" | "DML" | "UTILITY")
+      attr_accessor managed_query_results_configuration: Types::ManagedQueryResultsConfiguration
       attr_accessor result_configuration: Types::ResultConfiguration
       attr_accessor result_reuse_configuration: Types::ResultReuseConfiguration
       attr_accessor query_execution_context: Types::QueryExecutionContext
@@ -1290,6 +1310,7 @@ module Aws::Athena
 
     class WorkGroupConfiguration
       attr_accessor result_configuration: Types::ResultConfiguration
+      attr_accessor managed_query_results_configuration: Types::ManagedQueryResultsConfiguration
       attr_accessor enforce_work_group_configuration: bool
       attr_accessor publish_cloud_watch_metrics_enabled: bool
       attr_accessor bytes_scanned_cutoff_per_query: ::Integer
@@ -1307,6 +1328,7 @@ module Aws::Athena
     class WorkGroupConfigurationUpdates
       attr_accessor enforce_work_group_configuration: bool
       attr_accessor result_configuration_updates: Types::ResultConfigurationUpdates
+      attr_accessor managed_query_results_configuration_updates: Types::ManagedQueryResultsConfigurationUpdates
       attr_accessor publish_cloud_watch_metrics_enabled: bool
       attr_accessor bytes_scanned_cutoff_per_query: ::Integer
       attr_accessor remove_bytes_scanned_cutoff_per_query: bool

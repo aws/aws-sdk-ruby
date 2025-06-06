@@ -55,7 +55,7 @@ module Aws::Deadline
   autoload :EndpointProvider, 'aws-sdk-deadline/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-deadline/endpoints'
 
-  GEM_VERSION = '1.26.0'
+  GEM_VERSION = '1.27.0'
 
 end
 

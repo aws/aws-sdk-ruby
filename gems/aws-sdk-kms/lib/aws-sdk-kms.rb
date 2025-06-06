@@ -54,7 +54,7 @@ module Aws::KMS
   autoload :EndpointProvider, 'aws-sdk-kms/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-kms/endpoints'
 
-  GEM_VERSION = '1.101.0'
+  GEM_VERSION = '1.102.0'
 
 end
 

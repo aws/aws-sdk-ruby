@@ -22,6 +22,8 @@ module Aws::CostOptimizationHub
     ActionType = Shapes::StringShape.new(name: 'ActionType')
     ActionTypeList = Shapes::ListShape.new(name: 'ActionTypeList')
     AllocationStrategy = Shapes::StringShape.new(name: 'AllocationStrategy')
+    AuroraDbClusterStorage = Shapes::StructureShape.new(name: 'AuroraDbClusterStorage')
+    AuroraDbClusterStorageConfiguration = Shapes::StructureShape.new(name: 'AuroraDbClusterStorageConfiguration')
     BlockStoragePerformanceConfiguration = Shapes::StructureShape.new(name: 'BlockStoragePerformanceConfiguration')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ComputeConfiguration = Shapes::StructureShape.new(name: 'ComputeConfiguration')
@@ -147,6 +149,13 @@ module Aws::CostOptimizationHub
     AccountIdList.member = Shapes::ShapeRef.new(shape: AccountId)
 
     ActionTypeList.member = Shapes::ShapeRef.new(shape: ActionType)
+
+    AuroraDbClusterStorage.add_member(:configuration, Shapes::ShapeRef.new(shape: AuroraDbClusterStorageConfiguration, location_name: "configuration"))
+    AuroraDbClusterStorage.add_member(:cost_calculation, Shapes::ShapeRef.new(shape: ResourceCostCalculation, location_name: "costCalculation"))
+    AuroraDbClusterStorage.struct_class = Types::AuroraDbClusterStorage
+
+    AuroraDbClusterStorageConfiguration.add_member(:storage_type, Shapes::ShapeRef.new(shape: String, location_name: "storageType"))
+    AuroraDbClusterStorageConfiguration.struct_class = Types::AuroraDbClusterStorageConfiguration
 
     BlockStoragePerformanceConfiguration.add_member(:iops, Shapes::ShapeRef.new(shape: Double, location_name: "iops"))
     BlockStoragePerformanceConfiguration.add_member(:throughput, Shapes::ShapeRef.new(shape: Double, location_name: "throughput"))
@@ -552,6 +561,7 @@ module Aws::CostOptimizationHub
     ResourceDetails.add_member(:sage_maker_savings_plans, Shapes::ShapeRef.new(shape: SageMakerSavingsPlans, location_name: "sageMakerSavingsPlans"))
     ResourceDetails.add_member(:rds_db_instance, Shapes::ShapeRef.new(shape: RdsDbInstance, location_name: "rdsDbInstance"))
     ResourceDetails.add_member(:rds_db_instance_storage, Shapes::ShapeRef.new(shape: RdsDbInstanceStorage, location_name: "rdsDbInstanceStorage"))
+    ResourceDetails.add_member(:aurora_db_cluster_storage, Shapes::ShapeRef.new(shape: AuroraDbClusterStorage, location_name: "auroraDbClusterStorage"))
     ResourceDetails.add_member(:dynamo_db_reserved_capacity, Shapes::ShapeRef.new(shape: DynamoDbReservedCapacity, location_name: "dynamoDbReservedCapacity"))
     ResourceDetails.add_member(:memory_db_reserved_instances, Shapes::ShapeRef.new(shape: MemoryDbReservedInstances, location_name: "memoryDbReservedInstances"))
     ResourceDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -570,6 +580,7 @@ module Aws::CostOptimizationHub
     ResourceDetails.add_member_subclass(:sage_maker_savings_plans, Types::ResourceDetails::SageMakerSavingsPlans)
     ResourceDetails.add_member_subclass(:rds_db_instance, Types::ResourceDetails::RdsDbInstance)
     ResourceDetails.add_member_subclass(:rds_db_instance_storage, Types::ResourceDetails::RdsDbInstanceStorage)
+    ResourceDetails.add_member_subclass(:aurora_db_cluster_storage, Types::ResourceDetails::AuroraDbClusterStorage)
     ResourceDetails.add_member_subclass(:dynamo_db_reserved_capacity, Types::ResourceDetails::DynamoDbReservedCapacity)
     ResourceDetails.add_member_subclass(:memory_db_reserved_instances, Types::ResourceDetails::MemoryDbReservedInstances)
     ResourceDetails.add_member_subclass(:unknown, Types::ResourceDetails::Unknown)

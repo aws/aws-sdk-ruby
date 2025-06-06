@@ -1644,11 +1644,14 @@ module Aws::MediaConvert
 
     class Mp4Settings
       attr_accessor audio_duration: ("DEFAULT_CODEC_DURATION" | "MATCH_VIDEO_DURATION")
+      attr_accessor c2pa_manifest: ("INCLUDE" | "EXCLUDE")
+      attr_accessor certificate_secret: ::String
       attr_accessor cslg_atom: ("INCLUDE" | "EXCLUDE")
       attr_accessor ctts_version: ::Integer
       attr_accessor free_space_box: ("INCLUDE" | "EXCLUDE")
       attr_accessor moov_placement: ("PROGRESSIVE_DOWNLOAD" | "NORMAL")
       attr_accessor mp_4_major_brand: ::String
+      attr_accessor signing_kms_key: ::String
       SENSITIVE: []
     end
 

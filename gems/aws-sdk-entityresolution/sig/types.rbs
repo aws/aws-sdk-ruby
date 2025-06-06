@@ -213,6 +213,26 @@ module Aws::EntityResolution
       SENSITIVE: []
     end
 
+    class FailedRecord
+      attr_accessor input_source_arn: ::String
+      attr_accessor unique_id: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class GenerateMatchIdInput
+      attr_accessor workflow_name: ::String
+      attr_accessor records: ::Array[Types::Record]
+      attr_accessor processing_type: ("CONSISTENT" | "EVENTUAL" | "EVENTUAL_NO_LOOKUP")
+      SENSITIVE: []
+    end
+
+    class GenerateMatchIdOutput
+      attr_accessor match_groups: ::Array[Types::MatchGroup]
+      attr_accessor failed_records: ::Array[Types::FailedRecord]
+      SENSITIVE: []
+    end
+
     class GetIdMappingJobInput
       attr_accessor workflow_name: ::String
       attr_accessor job_id: ::String
@@ -595,6 +615,19 @@ module Aws::EntityResolution
       SENSITIVE: []
     end
 
+    class MatchGroup
+      attr_accessor records: ::Array[Types::MatchedRecord]
+      attr_accessor match_id: ::String
+      attr_accessor match_rule: ::String
+      SENSITIVE: []
+    end
+
+    class MatchedRecord
+      attr_accessor input_source_arn: ::String
+      attr_accessor record_id: ::String
+      SENSITIVE: []
+    end
+
     class MatchingWorkflowSummary
       attr_accessor workflow_name: ::String
       attr_accessor workflow_arn: ::String
@@ -706,6 +739,13 @@ module Aws::EntityResolution
       attr_accessor token: ::String
       attr_accessor policy: ::String
       SENSITIVE: []
+    end
+
+    class Record
+      attr_accessor input_source_arn: ::String
+      attr_accessor unique_id: ::String
+      attr_accessor record_attribute_map: ::Hash[::String, ::String]
+      SENSITIVE: [:record_attribute_map]
     end
 
     class ResolutionTechniques

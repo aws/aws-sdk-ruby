@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.193.0 (2025-06-02)
+------------------
+
+* Feature - Updates Amazon ECS documentation to include note for upcoming default log driver mode change.
+
 1.192.0 (2025-05-16)
 ------------------
 
