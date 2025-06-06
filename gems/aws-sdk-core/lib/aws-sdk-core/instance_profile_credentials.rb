@@ -7,13 +7,14 @@ module Aws
   # An auto-refreshing credential provider that loads credentials from
   # EC2 instances using IMDSv2.
   #
-  #     instance_credentials = Aws::InstanceProfileCredentials.new(
-  #       client: Aws::EC2Metadata.new(...)
+  #     ec2_metadata = Aws::EC2Metadata.new # with customized opts
+  #     instance_creds = Aws::InstanceProfileCredentials.new(
+  #       client: ec2_metadata
   #     )
-  #     ec2_client = Aws::EC2::Client.new(credentials: instance_credentials)
+  #     ec2_client = Aws::EC2::Client.new(credentials: instance_creds)
   #
   # If you omit the `:client` option, a new {Aws::EC2Metadata} will
-  # be created.
+  # be created with options provided.
   class InstanceProfileCredentials
     include CredentialProvider
     include RefreshingCredentials
@@ -24,8 +25,16 @@ module Aws
 
     # @param [Hash] options
     # @option options [Aws::EC2Metadata] :client A custom EC2 metadata client to
-    #  use for loading credentials from IMDSv2. If not provided, a default
-    #  {Aws::EC2Metadata} client will be constructed with given options.
+    #   use for loading credentials from IMDSv2. If not provided, a default
+    #   {Aws::EC2Metadata} client will be constructed with passed options.
+    # @option options [String] :ec2_instance_profile_name (nil) When set, this
+    #   provider skips querying IMDS for the name of the active profile. When
+    #   `:instance_profile_name` are not configured directory, the following
+    #   locations will be searched before defaulting to `nil`:
+    #
+    #   * `ENV['AWS_EC2_INSTANCE_PROFILE_NAME']`
+    #   * `~/.aws/config`
+    #
     # @option options [Integer] :retries (3) Number of times to retry
     #   when retrieving credentials.
     # @option options [String] :endpoint ('http://169.254.169.254') The IMDS
@@ -56,6 +65,8 @@ module Aws
     #   and need to be refreshed.
     def initialize(options = {})
       @client = options[:client] || create_client(options)
+      @disable_ec2_metadata = resolve_disable_ec2_metadata(options)
+      @ec2_instance_profile_name = resolve_ec2_instance_profile_name(options)
       @no_refresh_until = nil
       @async_refresh = false
       @metrics = ['CREDENTIALS_IMDS']
@@ -78,21 +89,34 @@ module Aws
       EC2Metadata.new(options)
     end
 
-    def resolve_endpoint_mode(options)
-      value = options[:endpoint_mode]
-      value ||= ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE']
-      value ||= Aws.shared_config.ec2_metadata_service_endpoint_mode(
-        profile: options[:profile]
-      )
-      value || 'IPv4'
+    def resolve_disable_ec2_metadata(options)
+      value =
+        ENV['AWS_EC2_METADATA_DISABLED'] ||
+        Aws.shared_config.disable_ec2_metadata(profile: options[:profile]) ||
+        'false'
+      Aws::Util.str_2_bool(value)
+    end
+
+    def resolve_ec2_instance_profile_name(options)
+      options[:ec2_instance_profile_name] ||
+        ENV['AWS_EC2_INSTANCE_PROFILE_NAME'] ||
+        Aws.shared_config.ec2_instance_profile_name(profile: options[:profile])
     end
 
     def resolve_endpoint(options)
-      value = options[:endpoint]
-      value ||= ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT']
-      value || Aws.shared_config.ec2_metadata_service_endpoint(
-        profile: options[:profile]
-      )
+      options[:endpoint] ||
+        ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT'] ||
+        Aws.shared_config.ec2_metadata_service_endpoint(
+          profile: options[:profile]
+        )
+    end
+
+    def resolve_endpoint_mode(options)
+      options[:endpoint_mode] ||
+        ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE'] ||
+        Aws.shared_config.ec2_metadata_service_endpoint_mode(
+          profile: options[:profile]
+        ) || 'IPv4'
     end
 
     def refresh
@@ -119,10 +143,16 @@ module Aws
     end
 
     def fetch_credentials
-      return '{}' if metadata_disabled?
+      return '{}' if @disable_ec2_metadata
 
-      metadata = @client.get(METADATA_PATH_BASE)
-      profile_name = metadata.lines.first.strip
+      profile_name =
+        if @ec2_instance_profile_name
+          @ec2_instance_profile_name
+        else
+          metadata = @client.get(METADATA_PATH_BASE)
+          metadata.lines.first.strip
+        end
+
       @client.get(METADATA_PATH_BASE + profile_name)
     rescue StandardError => e
       warn("Error retrieving instance profile credentials: #{e}")
@@ -141,10 +171,6 @@ module Aws
 
       @no_refresh_until = Time.now + refresh_offset
       warn_expired_credentials
-    end
-
-    def metadata_disabled?
-      ENV.fetch('AWS_EC2_METADATA_DISABLED', 'false').downcase == 'true'
     end
 
     def warn_expired_credentials
