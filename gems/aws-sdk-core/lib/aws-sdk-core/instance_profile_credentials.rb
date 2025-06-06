@@ -39,9 +39,9 @@ module Aws
     #   when retrieving credentials.
     # @option options [String] :endpoint ('http://169.254.169.254') The IMDS
     #   endpoint. This option has precedence over the `:endpoint_mode`.
-    # @option options [String] :endpoint_mode ('IPv4') The endpoint mode for
-    #   the instance metadata service. This is either 'IPv4' ('169.254.169.254')
-    #   or 'IPv6' ('[fd00:ec2::254]').
+    # @option options [String] :endpoint_mode ('IPv4') The endpoint mode for the
+    #   instance metadata service. This is either `'IPv4' ('169.254.169.254')`
+    #   or `'IPv6' ('[fd00:ec2::254]')`.
     # @option options [Boolean] :disable_imds_v1 (false) Deprecated. The legacy
     #   EC2 Metadata Service v1 has been retired. Only IMDSv2 is supported.
     # @option options [String] :ip_address ('169.254.169.254') Deprecated. Use
@@ -74,7 +74,7 @@ module Aws
     end
 
     # @return [Integer] Number of times to retry when retrieving credentials
-    #   from the instance metadata service. Defaults to 0 when resolving from
+    #   from the instance metadata service. Defaults to `0` when resolving from
     #   the default credential chain ({Aws::CredentialProviderChain}).
     def retries
       @client.retries

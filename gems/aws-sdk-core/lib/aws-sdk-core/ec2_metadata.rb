@@ -40,10 +40,10 @@ module Aws
     # @option options [Integer] :retries (3) The number of retries for failed
     #   requests.
     # @option options [String] :endpoint ('http://169.254.169.254') The IMDS
-    #   endpoint. This option has precedence over the :endpoint_mode.
+    #   endpoint. This option has precedence over the `:endpoint_mode`.
     # @option options [String] :endpoint_mode ('IPv4') The endpoint mode for
-    #   the instance metadata service. This is either 'IPv4'
-    #   ('http://169.254.169.254') or 'IPv6' ('http://[fd00:ec2::254]').
+    #   the instance metadata service. This is either `'IPv4'
+    #   ('http://169.254.169.254')` or `'IPv6' ('http://[fd00:ec2::254]')`.
     # @option options [Integer] :port (80) The IMDS endpoint port.
     # @option options [Integer] :http_open_timeout (1) The number of seconds to
     #   wait for the connection to open.
