@@ -182,10 +182,8 @@ module Aws
           response.body,
           response.header['x-aws-ec2-metadata-token-ttl-seconds'].to_i
         ]
-      when 400
-        raise TokenRetrievalError
-      when 403
-        raise RequestForbiddenError
+      when 400 then raise TokenRetrievalError
+      when 403 then raise RequestForbiddenError
       end
     end
 

@@ -119,7 +119,7 @@ module Aws
     end
 
     def fetch_credentials
-      return '{}' if _metadata_disabled?
+      return '{}' if metadata_disabled?
 
       metadata = @client.get(METADATA_PATH_BASE)
       profile_name = metadata.lines.first.strip
@@ -143,7 +143,7 @@ module Aws
       warn_expired_credentials
     end
 
-    def _metadata_disabled?
+    def metadata_disabled?
       ENV.fetch('AWS_EC2_METADATA_DISABLED', 'false').downcase == 'true'
     end
 
