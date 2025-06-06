@@ -9,11 +9,12 @@ describe 'Protocols Resolution:' do
     }.to raise_error(/unsupported protocol/)
   end
 
+  # Prioritize JSON over CBOR due to better performance.
   context 'with smithy rpc protocol support' do
-    it 'selects smithy rpc v2 with priority' do
+    it 'selects json with priority over smithy rpc v2' do
       SpecHelper.generate_service(['ProtocolsRpcJson'], multiple_files: false)
       client = ProtocolsRpcJson::Client.new(stub_responses: true)
-      expect(client.handlers).to include(Aws::RpcV2::Handler)
+      expect(client.handlers).to include(Aws::Json::Handler)
       Object.send(:remove_const, :ProtocolsRpcJson)
     end
 
@@ -24,14 +25,14 @@ describe 'Protocols Resolution:' do
       Object.send(:remove_const, :ProtocolsRpc)
     end
 
-    it 'selects smithy rpc v2 out of a list' do
-      SpecHelper.generate_service(['ProtocolsRpcJsonQuery'], multiple_files: false)
-      client = ProtocolsRpcJsonQuery::Client.new(stub_responses: true)
+    it 'selects smithy rpc v2 out of a list without json' do
+      SpecHelper.generate_service(['ProtocolsRpcQuery'], multiple_files: false)
+      client = ProtocolsRpcQuery::Client.new(stub_responses: true)
       expect(client.handlers).to include(Aws::RpcV2::Handler)
-      Object.send(:remove_const, :ProtocolsRpcJsonQuery)
+      Object.send(:remove_const, :ProtocolsRpcQuery)
     end
 
-    it 'selects json as fallback if smithy rpc v2 is not modeled' do
+    it 'selects json if smithy rpc v2 is not modeled' do
       SpecHelper.generate_service(['ProtocolsJsonQuery'], multiple_files: false)
       client = ProtocolsJsonQuery::Client.new(stub_responses: true)
       expect(client.handlers).to include(Aws::Json::Handler)
@@ -53,7 +54,7 @@ describe 'Protocols Resolution:' do
       stub_const('AwsSdkCodeGenerator::Service::SUPPORTED_PROTOCOLS', protocols)
     end
 
-    it 'selects json as a fallback' do
+    it 'selects json with priority' do
       SpecHelper.generate_service(['ProtocolsRpcJson'], multiple_files: false)
       client = ProtocolsRpcJson::Client.new(stub_responses: true)
       expect(client.handlers).to include(Aws::Json::Handler)
