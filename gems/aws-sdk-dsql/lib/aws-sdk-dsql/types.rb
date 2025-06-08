@@ -70,6 +70,12 @@ module Aws::DSQL
     #   this property before you can delete your cluster.
     #   @return [Boolean]
     #
+    # @!attribute [rw] kms_encryption_key
+    #   The KMS key that encrypts and protects the data on your cluster. You
+    #   can specify the ARN, ID, or alias of an existing key or have Amazon
+    #   Web Services create a default key for you.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   A map of key and value pairs to use to tag your cluster.
     #   @return [Hash<String,String>]
@@ -98,6 +104,7 @@ module Aws::DSQL
     #
     class CreateClusterInput < Struct.new(
       :deletion_protection_enabled,
+      :kms_encryption_key,
       :tags,
       :client_token,
       :multi_region_properties)
@@ -128,6 +135,12 @@ module Aws::DSQL
     #   cluster creation
     #   @return [Types::MultiRegionProperties]
     #
+    # @!attribute [rw] encryption_details
+    #   The encryption configuration for the cluster that was specified
+    #   during the creation process, including the KMS key identifier and
+    #   encryption state.
+    #   @return [Types::EncryptionDetails]
+    #
     # @!attribute [rw] deletion_protection_enabled
     #   Whether deletion protection is enabled on this cluster.
     #   @return [Boolean]
@@ -140,6 +153,7 @@ module Aws::DSQL
       :status,
       :creation_time,
       :multi_region_properties,
+      :encryption_details,
       :deletion_protection_enabled)
       SENSITIVE = []
       include Aws::Structure
@@ -202,6 +216,31 @@ module Aws::DSQL
       include Aws::Structure
     end
 
+    # Configuration details about encryption for the cluster including the
+    # KMS key ARN, encryption type, and encryption status.
+    #
+    # @!attribute [rw] encryption_type
+    #   The type of encryption that protects the data on your cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The ARN of the KMS key that encrypts data in the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_status
+    #   The status of encryption for the cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/EncryptionDetails AWS API Documentation
+    #
+    class EncryptionDetails < Struct.new(
+      :encryption_type,
+      :kms_key_arn,
+      :encryption_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] identifier
     #   The ID of the cluster to retrieve.
     #   @return [String]
@@ -245,6 +284,10 @@ module Aws::DSQL
     #   Map of tags.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] encryption_details
+    #   The current encryption configuration details for the cluster.
+    #   @return [Types::EncryptionDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/GetClusterOutput AWS API Documentation
     #
     class GetClusterOutput < Struct.new(
@@ -254,7 +297,8 @@ module Aws::DSQL
       :creation_time,
       :deletion_protection_enabled,
       :multi_region_properties,
-      :tags)
+      :tags,
+      :encryption_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -518,6 +562,12 @@ module Aws::DSQL
     #   Specifies whether to enable deletion protection in your cluster.
     #   @return [Boolean]
     #
+    # @!attribute [rw] kms_encryption_key
+    #   The KMS key that encrypts and protects the data on your cluster. You
+    #   can specify the ARN, ID, or alias of an existing key or have Amazon
+    #   Web Services create a default key for you.
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -543,6 +593,7 @@ module Aws::DSQL
     class UpdateClusterInput < Struct.new(
       :identifier,
       :deletion_protection_enabled,
+      :kms_encryption_key,
       :client_token,
       :multi_region_properties)
       SENSITIVE = []

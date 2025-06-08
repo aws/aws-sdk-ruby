@@ -231,6 +231,7 @@ module Aws::APIGateway
     Resources = Shapes::StructureShape.new(name: 'Resources')
     RestApi = Shapes::StructureShape.new(name: 'RestApi')
     RestApis = Shapes::StructureShape.new(name: 'RestApis')
+    RoutingMode = Shapes::StringShape.new(name: 'RoutingMode')
     SdkConfigurationProperty = Shapes::StructureShape.new(name: 'SdkConfigurationProperty')
     SdkResponse = Shapes::StructureShape.new(name: 'SdkResponse')
     SdkType = Shapes::StructureShape.new(name: 'SdkType')
@@ -443,6 +444,7 @@ module Aws::APIGateway
     CreateDomainNameRequest.add_member(:mutual_tls_authentication, Shapes::ShapeRef.new(shape: MutualTlsAuthenticationInput, location_name: "mutualTlsAuthentication"))
     CreateDomainNameRequest.add_member(:ownership_verification_certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "ownershipVerificationCertificateArn"))
     CreateDomainNameRequest.add_member(:policy, Shapes::ShapeRef.new(shape: String, location_name: "policy"))
+    CreateDomainNameRequest.add_member(:routing_mode, Shapes::ShapeRef.new(shape: RoutingMode, location_name: "routingMode"))
     CreateDomainNameRequest.struct_class = Types::CreateDomainNameRequest
 
     CreateModelRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
@@ -662,6 +664,7 @@ module Aws::APIGateway
     DomainName.add_member(:ownership_verification_certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "ownershipVerificationCertificateArn"))
     DomainName.add_member(:management_policy, Shapes::ShapeRef.new(shape: String, location_name: "managementPolicy"))
     DomainName.add_member(:policy, Shapes::ShapeRef.new(shape: String, location_name: "policy"))
+    DomainName.add_member(:routing_mode, Shapes::ShapeRef.new(shape: RoutingMode, location_name: "routingMode"))
     DomainName.struct_class = Types::DomainName
 
     DomainNameAccessAssociation.add_member(:domain_name_access_association_arn, Shapes::ShapeRef.new(shape: String, location_name: "domainNameAccessAssociationArn"))

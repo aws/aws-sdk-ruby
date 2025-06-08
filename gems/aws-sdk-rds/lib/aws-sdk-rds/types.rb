@@ -1070,7 +1070,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be between 0 and 3600.
+    #   * Must be between 0 and 300.
     #
     #   ^
     #   @return [Integer]
@@ -1090,13 +1090,11 @@ module Aws::RDS
     #   specify one or more SQL statements for the proxy to run when opening
     #   each new database connection. The setting is typically used with
     #   `SET` statements to make sure that each connection has identical
-    #   settings. Make sure that the query you add is valid. To include
-    #   multiple variables in a single `SET` statement, use comma
-    #   separators.
+    #   settings. Make sure the query added here is valid. This is an
+    #   optional field, so you can choose to leave it empty. For including
+    #   multiple variables in a single SET statement, use a comma separator.
     #
     #   For example: `SET variable1=value1, variable2=value2`
-    #
-    #   For multiple statements, use semicolons as the separator.
     #
     #   Default: no initialization query
     #   @return [String]
@@ -1152,12 +1150,13 @@ module Aws::RDS
     #
     # @!attribute [rw] init_query
     #   One or more SQL statements for the proxy to run when opening each
-    #   new database connection. Typically used with `SET` statements to
-    #   make sure that each connection has identical settings such as time
-    #   zone and character set. This setting is empty by default. For
-    #   multiple statements, use semicolons as the separator. You can also
-    #   include multiple variables in a single `SET` statement, such as `SET
-    #   x=1, y=2`.
+    #   new database connection. The setting is typically used with `SET`
+    #   statements to make sure that each connection has identical settings.
+    #   The query added here must be valid. For including multiple variables
+    #   in a single SET statement, use a comma separator. This is an
+    #   optional field.
+    #
+    #   For example: `SET variable1=value1, variable2=value2`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ConnectionPoolConfigurationInfo AWS API Documentation
@@ -6031,17 +6030,17 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] compute_redundancy
-    #   Specifies whether to create standby DB shard groups for the DB shard
-    #   group. Valid values are the following:
+    #   Specifies whether to create standby standby DB data access shard for
+    #   the DB shard group. Valid values are the following:
     #
-    #   * 0 - Creates a DB shard group without a standby DB shard group.
-    #     This is the default value.
+    #   * 0 - Creates a DB shard group without a standby DB data access
+    #     shard. This is the default value.
     #
-    #   * 1 - Creates a DB shard group with a standby DB shard group in a
-    #     different Availability Zone (AZ).
+    #   * 1 - Creates a DB shard group with a standby DB data access shard
+    #     in a different Availability Zone (AZ).
     #
-    #   * 2 - Creates a DB shard group with two standby DB shard groups in
-    #     two different AZs.
+    #   * 2 - Creates a DB shard group with two standby DB data access shard
+    #     in two different AZs.
     #   @return [Integer]
     #
     # @!attribute [rw] max_acu
@@ -7220,6 +7219,12 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] global_cluster_identifier
+    #   Contains a user-supplied global database cluster identifier. This
+    #   identifier is the unique key that identifies a global database
+    #   cluster.
+    #   @return [String]
+    #
     # @!attribute [rw] global_write_forwarding_status
     #   The status of write forwarding for a secondary cluster in an Aurora
     #   global database.
@@ -7512,6 +7517,7 @@ module Aws::RDS
       :cross_account_clone,
       :domain_memberships,
       :tag_list,
+      :global_cluster_identifier,
       :global_write_forwarding_status,
       :global_write_forwarding_requested,
       :pending_modified_values,
@@ -11432,7 +11438,10 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] subnets
-    #   Contains a list of `Subnet` elements.
+    #   Contains a list of `Subnet` elements. The list of subnets shown here
+    #   might not reflect the current state of your VPC. For the most
+    #   up-to-date information, we recommend checking your VPC configuration
+    #   directly.
     #   @return [Array<Types::Subnet>]
     #
     # @!attribute [rw] db_subnet_group_arn

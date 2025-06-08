@@ -285,8 +285,10 @@ module Aws::CloudWatch
     #   The name of the metric to filter against. Only the metrics with names
     #   that match exactly will be returned.
     # @option options [Array<Types::DimensionFilter>] :dimensions
-    #   The dimensions to filter against. Only the dimensions that match
-    #   exactly will be returned.
+    #   The dimensions to filter against. Only the dimension with names that
+    #   match exactly will be returned. If you specify one dimension name and
+    #   a metric has that dimension and also other dimensions, it will be
+    #   returned.
     # @option options [String] :recently_active
     #   To filter the results to show only metrics that have had data points
     #   published in the past three hours, specify this parameter with a value

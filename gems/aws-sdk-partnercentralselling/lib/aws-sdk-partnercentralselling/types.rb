@@ -126,7 +126,7 @@ module Aws::PartnerCentralSelling
     class AccountReceiver < Struct.new(
       :alias,
       :aws_account_id)
-      SENSITIVE = [:aws_account_id]
+      SENSITIVE = [:alias, :aws_account_id]
       include Aws::Structure
     end
 
@@ -997,7 +997,7 @@ module Aws::PartnerCentralSelling
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of objects specifying each tag name and value.
+    #   A map of the key-value pairs of the tag or tags to assign.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/CreateResourceSnapshotJobRequest AWS API Documentation
@@ -1341,7 +1341,7 @@ module Aws::PartnerCentralSelling
       :country_code,
       :industry,
       :website_url)
-      SENSITIVE = [:country_code, :website_url]
+      SENSITIVE = [:company_name, :country_code, :website_url]
       include Aws::Structure
     end
 
@@ -1504,7 +1504,7 @@ module Aws::PartnerCentralSelling
       :account_id,
       :company_name,
       :website_url)
-      SENSITIVE = [:account_id]
+      SENSITIVE = [:account_id, :company_name]
       include Aws::Structure
     end
 
@@ -1529,7 +1529,7 @@ module Aws::PartnerCentralSelling
     class EngagementMemberSummary < Struct.new(
       :company_name,
       :website_url)
-      SENSITIVE = []
+      SENSITIVE = [:company_name]
       include Aws::Structure
     end
 
@@ -1928,7 +1928,7 @@ module Aws::PartnerCentralSelling
       :sender_aws_account_id,
       :sender_company_name,
       :status)
-      SENSITIVE = [:sender_aws_account_id]
+      SENSITIVE = [:invitation_message, :sender_aws_account_id]
       include Aws::Structure
     end
 
@@ -2497,7 +2497,7 @@ module Aws::PartnerCentralSelling
       :message,
       :payload,
       :receiver)
-      SENSITIVE = []
+      SENSITIVE = [:message]
       include Aws::Structure
     end
 
@@ -3443,7 +3443,7 @@ module Aws::PartnerCentralSelling
     #   @return [String]
     #
     # @!attribute [rw] sort
-    #   An object that specifies the sort order of the results.
+    #   Specifies the sorting parameters for listing Engagements.
     #   @return [Types::EngagementSort]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/ListEngagementsRequest AWS API Documentation
@@ -5010,7 +5010,7 @@ module Aws::PartnerCentralSelling
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of objects specifying each tag name and value.
+    #   A map of the key-value pairs of the tag or tags to assign.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/StartEngagementByAcceptingInvitationTaskRequest AWS API Documentation
@@ -5111,7 +5111,7 @@ module Aws::PartnerCentralSelling
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of objects specifying each tag name and value.
+    #   A map of the key-value pairs of the tag or tags to assign.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/StartEngagementFromOpportunityTaskRequest AWS API Documentation
@@ -5310,8 +5310,7 @@ module Aws::PartnerCentralSelling
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A map of the key-value pairs of the tag or tags to assign to the
-    #   resource.
+    #   A map of the key-value pairs of the tag or tags to assign.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/TagResourceRequest AWS API Documentation

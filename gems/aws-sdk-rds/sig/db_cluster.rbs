@@ -183,6 +183,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#tag_list-instance_method
       def tag_list: () -> ::Array[Types::Tag]
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#global_cluster_identifier-instance_method
+      def global_cluster_identifier: () -> ::String
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#global_write_forwarding_status-instance_method
       def global_write_forwarding_status: () -> ("enabled" | "disabled" | "enabling" | "disabling" | "unknown")
 

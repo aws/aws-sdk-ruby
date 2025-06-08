@@ -592,7 +592,7 @@ module Aws::S3Tables
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The name of the namespace the table is associated with.     </p>
+    #   The name of the namespace the table is associated with.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -718,12 +718,17 @@ module Aws::S3Tables
     #   The name of the table.
     #   @return [String]
     #
+    # @!attribute [rw] table_arn
+    #   The Amazon Resource Name (ARN) of the table.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/GetTableRequest AWS API Documentation
     #
     class GetTableRequest < Struct.new(
       :table_bucket_arn,
       :namespace,
-      :name)
+      :name,
+      :table_arn)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1123,6 +1123,8 @@ module Aws::WAFV2
     #                 ja4_fingerprint: {
     #                   fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #                 },
+    #                 asn: {
+    #                 },
     #               },
     #             ],
     #           },
@@ -1386,6 +1388,13 @@ module Aws::WAFV2
     #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
+    #           },
+    #           asn_match_statement: {
+    #             asn_list: [1], # required
+    #             forwarded_ip_config: {
+    #               header_name: "ForwardedIPHeaderName", # required
+    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #             },
     #           },
     #         },
     #         action: {
@@ -2332,6 +2341,8 @@ module Aws::WAFV2
     #                 ja4_fingerprint: {
     #                   fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #                 },
+    #                 asn: {
+    #                 },
     #               },
     #             ],
     #           },
@@ -2595,6 +2606,13 @@ module Aws::WAFV2
     #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
+    #           },
+    #           asn_match_statement: {
+    #             asn_list: [1], # required
+    #             forwarded_ip_config: {
+    #               header_name: "ForwardedIPHeaderName", # required
+    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #             },
     #           },
     #         },
     #         action: {
@@ -3396,6 +3414,8 @@ module Aws::WAFV2
     #                 ja4_fingerprint: {
     #                   fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #                 },
+    #                 asn: {
+    #                 },
     #               },
     #             ],
     #           },
@@ -3659,6 +3679,13 @@ module Aws::WAFV2
     #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
+    #           },
+    #           asn_match_statement: {
+    #             asn_list: [1], # required
+    #             forwarded_ip_config: {
+    #               header_name: "ForwardedIPHeaderName", # required
+    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #             },
     #           },
     #         },
     #         action: {
@@ -5380,6 +5407,10 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.regex_match_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.regex_match_statement.text_transformations[0].priority #=> Integer
     #   resp.rule_group.rules[0].statement.regex_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.rule_group.rules[0].statement.asn_match_statement.asn_list #=> Array
+    #   resp.rule_group.rules[0].statement.asn_match_statement.asn_list[0] #=> Integer
+    #   resp.rule_group.rules[0].statement.asn_match_statement.forwarded_ip_config.header_name #=> String
+    #   resp.rule_group.rules[0].statement.asn_match_statement.forwarded_ip_config.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].action.block.custom_response.response_code #=> Integer
     #   resp.rule_group.rules[0].action.block.custom_response.custom_response_body_key #=> String
     #   resp.rule_group.rules[0].action.block.custom_response.response_headers #=> Array
@@ -7892,6 +7923,8 @@ module Aws::WAFV2
     #                 ja4_fingerprint: {
     #                   fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #                 },
+    #                 asn: {
+    #                 },
     #               },
     #             ],
     #           },
@@ -8155,6 +8188,13 @@ module Aws::WAFV2
     #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
     #               },
     #             ],
+    #           },
+    #           asn_match_statement: {
+    #             asn_list: [1], # required
+    #             forwarded_ip_config: {
+    #               header_name: "ForwardedIPHeaderName", # required
+    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #             },
     #           },
     #         },
     #         action: {
@@ -9001,6 +9041,8 @@ module Aws::WAFV2
     #                 ja4_fingerprint: {
     #                   fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
     #                 },
+    #                 asn: {
+    #                 },
     #               },
     #             ],
     #           },
@@ -9265,6 +9307,13 @@ module Aws::WAFV2
     #               },
     #             ],
     #           },
+    #           asn_match_statement: {
+    #             asn_list: [1], # required
+    #             forwarded_ip_config: {
+    #               header_name: "ForwardedIPHeaderName", # required
+    #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
+    #             },
+    #           },
     #         },
     #         action: {
     #           block: {
@@ -9432,7 +9481,7 @@ module Aws::WAFV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.108.0'
+      context[:gem_version] = '1.110.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

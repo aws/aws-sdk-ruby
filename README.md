@@ -428,7 +428,6 @@ RubyGems.org page under "LINKS" section.
 | AWS Parallel Computing Service                        | Aws::PCS                                 | aws-sdk-pcs                                 | 2023-02-10  |
 | AWS Performance Insights                              | Aws::PI                                  | aws-sdk-pi                                  | 2018-02-27  |
 | AWS Price List Service                                | Aws::Pricing                             | aws-sdk-pricing                             | 2017-10-15  |
-| AWS Private 5G                                        | Aws::PrivateNetworks                     | aws-sdk-privatenetworks                     | 2021-12-03  |
 | AWS Proton                                            | Aws::Proton                              | aws-sdk-proton                              | 2020-07-20  |
 | AWS RDS DataService                                   | Aws::RDSDataService                      | aws-sdk-rdsdataservice                      | 2018-08-01  |
 | AWS Resilience Hub                                    | Aws::ResilienceHub                       | aws-sdk-resiliencehub                       | 2020-04-30  |
@@ -549,6 +548,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Elastic File System                            | Aws::EFS                                 | aws-sdk-efs                                 | 2015-02-01  |
 | Amazon Elastic Kubernetes Service                     | Aws::EKS                                 | aws-sdk-eks                                 | 2017-11-01  |
 | Amazon Elastic Transcoder                             | Aws::ElasticTranscoder                   | aws-sdk-elastictranscoder                   | 2012-09-25  |
+| Amazon Elastic VMware Service                         | Aws::Evs                                 | aws-sdk-evs                                 | 2023-07-27  |
 | Amazon Elasticsearch Service                          | Aws::ElasticsearchService                | aws-sdk-elasticsearchservice                | 2015-01-01  |
 | Amazon EventBridge                                    | Aws::EventBridge                         | aws-sdk-eventbridge                         | 2015-10-07  |
 | Amazon EventBridge Pipes                              | Aws::Pipes                               | aws-sdk-pipes                               | 2015-10-07  |

@@ -32,6 +32,7 @@ module Aws::DataSync
     BytesPerSecond = Shapes::IntegerShape.new(name: 'BytesPerSecond')
     CancelTaskExecutionRequest = Shapes::StructureShape.new(name: 'CancelTaskExecutionRequest')
     CancelTaskExecutionResponse = Shapes::StructureShape.new(name: 'CancelTaskExecutionResponse')
+    CmkSecretConfig = Shapes::StructureShape.new(name: 'CmkSecretConfig')
     CreateAgentRequest = Shapes::StructureShape.new(name: 'CreateAgentRequest')
     CreateAgentResponse = Shapes::StructureShape.new(name: 'CreateAgentResponse')
     CreateLocationAzureBlobRequest = Shapes::StructureShape.new(name: 'CreateLocationAzureBlobRequest')
@@ -58,6 +59,7 @@ module Aws::DataSync
     CreateLocationSmbResponse = Shapes::StructureShape.new(name: 'CreateLocationSmbResponse')
     CreateTaskRequest = Shapes::StructureShape.new(name: 'CreateTaskRequest')
     CreateTaskResponse = Shapes::StructureShape.new(name: 'CreateTaskResponse')
+    CustomSecretConfig = Shapes::StructureShape.new(name: 'CustomSecretConfig')
     DeleteAgentRequest = Shapes::StructureShape.new(name: 'DeleteAgentRequest')
     DeleteAgentResponse = Shapes::StructureShape.new(name: 'DeleteAgentResponse')
     DeleteLocationRequest = Shapes::StructureShape.new(name: 'DeleteLocationRequest')
@@ -134,12 +136,14 @@ module Aws::DataSync
     HdfsSubdirectory = Shapes::StringShape.new(name: 'HdfsSubdirectory')
     HdfsUser = Shapes::StringShape.new(name: 'HdfsUser')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
+    IamRoleArnOrEmptyString = Shapes::StringShape.new(name: 'IamRoleArnOrEmptyString')
     InputTagList = Shapes::ListShape.new(name: 'InputTagList')
     InternalException = Shapes::StructureShape.new(name: 'InternalException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     KerberosKeytabFile = Shapes::BlobShape.new(name: 'KerberosKeytabFile')
     KerberosKrb5ConfFile = Shapes::BlobShape.new(name: 'KerberosKrb5ConfFile')
     KerberosPrincipal = Shapes::StringShape.new(name: 'KerberosPrincipal')
+    KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     KmsKeyProviderUri = Shapes::StringShape.new(name: 'KmsKeyProviderUri')
     ListAgentsRequest = Shapes::StructureShape.new(name: 'ListAgentsRequest')
     ListAgentsResponse = Shapes::StructureShape.new(name: 'ListAgentsResponse')
@@ -160,6 +164,7 @@ module Aws::DataSync
     LocationUri = Shapes::StringShape.new(name: 'LocationUri')
     LogGroupArn = Shapes::StringShape.new(name: 'LogGroupArn')
     LogLevel = Shapes::StringShape.new(name: 'LogLevel')
+    ManagedSecretConfig = Shapes::StructureShape.new(name: 'ManagedSecretConfig')
     ManifestAction = Shapes::StringShape.new(name: 'ManifestAction')
     ManifestConfig = Shapes::StructureShape.new(name: 'ManifestConfig')
     ManifestFormat = Shapes::StringShape.new(name: 'ManifestFormat')
@@ -209,6 +214,7 @@ module Aws::DataSync
     ScheduleDisabledReason = Shapes::StringShape.new(name: 'ScheduleDisabledReason')
     ScheduleExpressionCron = Shapes::StringShape.new(name: 'ScheduleExpressionCron')
     ScheduleStatus = Shapes::StringShape.new(name: 'ScheduleStatus')
+    SecretArn = Shapes::StringShape.new(name: 'SecretArn')
     ServerHostname = Shapes::StringShape.new(name: 'ServerHostname')
     ServerIpAddress = Shapes::StringShape.new(name: 'ServerIpAddress')
     SmbAuthenticationType = Shapes::StringShape.new(name: 'SmbAuthenticationType')
@@ -309,6 +315,10 @@ module Aws::DataSync
 
     CancelTaskExecutionResponse.struct_class = Types::CancelTaskExecutionResponse
 
+    CmkSecretConfig.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
+    CmkSecretConfig.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
+    CmkSecretConfig.struct_class = Types::CmkSecretConfig
+
     CreateAgentRequest.add_member(:activation_key, Shapes::ShapeRef.new(shape: ActivationKey, required: true, location_name: "ActivationKey"))
     CreateAgentRequest.add_member(:agent_name, Shapes::ShapeRef.new(shape: TagValue, location_name: "AgentName"))
     CreateAgentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
@@ -326,8 +336,10 @@ module Aws::DataSync
     CreateLocationAzureBlobRequest.add_member(:blob_type, Shapes::ShapeRef.new(shape: AzureBlobType, location_name: "BlobType"))
     CreateLocationAzureBlobRequest.add_member(:access_tier, Shapes::ShapeRef.new(shape: AzureAccessTier, location_name: "AccessTier"))
     CreateLocationAzureBlobRequest.add_member(:subdirectory, Shapes::ShapeRef.new(shape: AzureBlobSubdirectory, location_name: "Subdirectory"))
-    CreateLocationAzureBlobRequest.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, required: true, location_name: "AgentArns"))
+    CreateLocationAzureBlobRequest.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
     CreateLocationAzureBlobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
+    CreateLocationAzureBlobRequest.add_member(:cmk_secret_config, Shapes::ShapeRef.new(shape: CmkSecretConfig, location_name: "CmkSecretConfig"))
+    CreateLocationAzureBlobRequest.add_member(:custom_secret_config, Shapes::ShapeRef.new(shape: CustomSecretConfig, location_name: "CustomSecretConfig"))
     CreateLocationAzureBlobRequest.struct_class = Types::CreateLocationAzureBlobRequest
 
     CreateLocationAzureBlobResponse.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
@@ -421,9 +433,11 @@ module Aws::DataSync
     CreateLocationObjectStorageRequest.add_member(:bucket_name, Shapes::ShapeRef.new(shape: ObjectStorageBucketName, required: true, location_name: "BucketName"))
     CreateLocationObjectStorageRequest.add_member(:access_key, Shapes::ShapeRef.new(shape: ObjectStorageAccessKey, location_name: "AccessKey"))
     CreateLocationObjectStorageRequest.add_member(:secret_key, Shapes::ShapeRef.new(shape: ObjectStorageSecretKey, location_name: "SecretKey"))
-    CreateLocationObjectStorageRequest.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, required: true, location_name: "AgentArns"))
+    CreateLocationObjectStorageRequest.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
     CreateLocationObjectStorageRequest.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
     CreateLocationObjectStorageRequest.add_member(:server_certificate, Shapes::ShapeRef.new(shape: ObjectStorageCertificate, location_name: "ServerCertificate"))
+    CreateLocationObjectStorageRequest.add_member(:cmk_secret_config, Shapes::ShapeRef.new(shape: CmkSecretConfig, location_name: "CmkSecretConfig"))
+    CreateLocationObjectStorageRequest.add_member(:custom_secret_config, Shapes::ShapeRef.new(shape: CustomSecretConfig, location_name: "CustomSecretConfig"))
     CreateLocationObjectStorageRequest.struct_class = Types::CreateLocationObjectStorageRequest
 
     CreateLocationObjectStorageResponse.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
@@ -475,6 +489,10 @@ module Aws::DataSync
     CreateTaskResponse.add_member(:task_arn, Shapes::ShapeRef.new(shape: TaskArn, location_name: "TaskArn"))
     CreateTaskResponse.struct_class = Types::CreateTaskResponse
 
+    CustomSecretConfig.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
+    CustomSecretConfig.add_member(:secret_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArnOrEmptyString, location_name: "SecretAccessRoleArn"))
+    CustomSecretConfig.struct_class = Types::CustomSecretConfig
+
     DeleteAgentRequest.add_member(:agent_arn, Shapes::ShapeRef.new(shape: AgentArn, required: true, location_name: "AgentArn"))
     DeleteAgentRequest.struct_class = Types::DeleteAgentRequest
 
@@ -513,6 +531,9 @@ module Aws::DataSync
     DescribeLocationAzureBlobResponse.add_member(:access_tier, Shapes::ShapeRef.new(shape: AzureAccessTier, location_name: "AccessTier"))
     DescribeLocationAzureBlobResponse.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
     DescribeLocationAzureBlobResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
+    DescribeLocationAzureBlobResponse.add_member(:managed_secret_config, Shapes::ShapeRef.new(shape: ManagedSecretConfig, location_name: "ManagedSecretConfig"))
+    DescribeLocationAzureBlobResponse.add_member(:cmk_secret_config, Shapes::ShapeRef.new(shape: CmkSecretConfig, location_name: "CmkSecretConfig"))
+    DescribeLocationAzureBlobResponse.add_member(:custom_secret_config, Shapes::ShapeRef.new(shape: CustomSecretConfig, location_name: "CustomSecretConfig"))
     DescribeLocationAzureBlobResponse.struct_class = Types::DescribeLocationAzureBlobResponse
 
     DescribeLocationEfsRequest.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, required: true, location_name: "LocationArn"))
@@ -607,6 +628,9 @@ module Aws::DataSync
     DescribeLocationObjectStorageResponse.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
     DescribeLocationObjectStorageResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
     DescribeLocationObjectStorageResponse.add_member(:server_certificate, Shapes::ShapeRef.new(shape: ObjectStorageCertificate, location_name: "ServerCertificate"))
+    DescribeLocationObjectStorageResponse.add_member(:managed_secret_config, Shapes::ShapeRef.new(shape: ManagedSecretConfig, location_name: "ManagedSecretConfig"))
+    DescribeLocationObjectStorageResponse.add_member(:cmk_secret_config, Shapes::ShapeRef.new(shape: CmkSecretConfig, location_name: "CmkSecretConfig"))
+    DescribeLocationObjectStorageResponse.add_member(:custom_secret_config, Shapes::ShapeRef.new(shape: CustomSecretConfig, location_name: "CustomSecretConfig"))
     DescribeLocationObjectStorageResponse.struct_class = Types::DescribeLocationObjectStorageResponse
 
     DescribeLocationS3Request.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, required: true, location_name: "LocationArn"))
@@ -662,6 +686,8 @@ module Aws::DataSync
     DescribeTaskExecutionResponse.add_member(:files_prepared, Shapes::ShapeRef.new(shape: long, location_name: "FilesPrepared"))
     DescribeTaskExecutionResponse.add_member(:files_listed, Shapes::ShapeRef.new(shape: TaskExecutionFilesListedDetail, location_name: "FilesListed"))
     DescribeTaskExecutionResponse.add_member(:files_failed, Shapes::ShapeRef.new(shape: TaskExecutionFilesFailedDetail, location_name: "FilesFailed"))
+    DescribeTaskExecutionResponse.add_member(:launch_time, Shapes::ShapeRef.new(shape: Time, location_name: "LaunchTime"))
+    DescribeTaskExecutionResponse.add_member(:end_time, Shapes::ShapeRef.new(shape: Time, location_name: "EndTime"))
     DescribeTaskExecutionResponse.struct_class = Types::DescribeTaskExecutionResponse
 
     DescribeTaskRequest.add_member(:task_arn, Shapes::ShapeRef.new(shape: TaskArn, required: true, location_name: "TaskArn"))
@@ -803,6 +829,9 @@ module Aws::DataSync
     LocationListEntry.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
     LocationListEntry.add_member(:location_uri, Shapes::ShapeRef.new(shape: LocationUri, location_name: "LocationUri"))
     LocationListEntry.struct_class = Types::LocationListEntry
+
+    ManagedSecretConfig.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
+    ManagedSecretConfig.struct_class = Types::ManagedSecretConfig
 
     ManifestConfig.add_member(:action, Shapes::ShapeRef.new(shape: ManifestAction, location_name: "Action"))
     ManifestConfig.add_member(:format, Shapes::ShapeRef.new(shape: ManifestFormat, location_name: "Format"))
@@ -992,6 +1021,8 @@ module Aws::DataSync
     UpdateLocationAzureBlobRequest.add_member(:blob_type, Shapes::ShapeRef.new(shape: AzureBlobType, location_name: "BlobType"))
     UpdateLocationAzureBlobRequest.add_member(:access_tier, Shapes::ShapeRef.new(shape: AzureAccessTier, location_name: "AccessTier"))
     UpdateLocationAzureBlobRequest.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
+    UpdateLocationAzureBlobRequest.add_member(:cmk_secret_config, Shapes::ShapeRef.new(shape: CmkSecretConfig, location_name: "CmkSecretConfig"))
+    UpdateLocationAzureBlobRequest.add_member(:custom_secret_config, Shapes::ShapeRef.new(shape: CustomSecretConfig, location_name: "CustomSecretConfig"))
     UpdateLocationAzureBlobRequest.struct_class = Types::UpdateLocationAzureBlobRequest
 
     UpdateLocationAzureBlobResponse.struct_class = Types::UpdateLocationAzureBlobResponse
@@ -1069,6 +1100,8 @@ module Aws::DataSync
     UpdateLocationObjectStorageRequest.add_member(:secret_key, Shapes::ShapeRef.new(shape: ObjectStorageSecretKey, location_name: "SecretKey"))
     UpdateLocationObjectStorageRequest.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
     UpdateLocationObjectStorageRequest.add_member(:server_certificate, Shapes::ShapeRef.new(shape: ObjectStorageCertificate, location_name: "ServerCertificate"))
+    UpdateLocationObjectStorageRequest.add_member(:cmk_secret_config, Shapes::ShapeRef.new(shape: CmkSecretConfig, location_name: "CmkSecretConfig"))
+    UpdateLocationObjectStorageRequest.add_member(:custom_secret_config, Shapes::ShapeRef.new(shape: CustomSecretConfig, location_name: "CustomSecretConfig"))
     UpdateLocationObjectStorageRequest.struct_class = Types::UpdateLocationObjectStorageRequest
 
     UpdateLocationObjectStorageResponse.struct_class = Types::UpdateLocationObjectStorageResponse

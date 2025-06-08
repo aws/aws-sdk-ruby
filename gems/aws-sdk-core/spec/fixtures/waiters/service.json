@@ -11,43 +11,59 @@
         "method":"POST",
         "requestUri":"/"
       },
-      "input":{"shape":"DescribeTableInput"},
-      "output":{"shape":"DescribeTableOutput"},
+      "input":{"shape":"OperationInput"},
+      "output":{"shape":"OperationOutput"},
       "errors":[
         {"shape":"ResourceNotFoundException"}
       ]
     }
   },
   "shapes": {
-    "DescribeTableInput":{
+    "OperationInput":{
       "type":"structure",
       "members":{}
     },
-    "DescribeTableOutput":{
+    "OperationOutput":{
       "type":"structure",
       "members":{
-        "Table":{"shape":"TableDescription"},
-        "TableList":{"shape":"TableList"}
+        "ComplexObject":{"shape":"ComplexObject"},
+        "NumberList":{"shape":"NumberList"},
+        "BooleanList":{"shape":"BooleanList"},
+        "ObjectList":{"shape":"ObjectList"},
+        "NestedList":{"shape":"NestedList"},
+        "Boolean":{"shape":"BooleanMember"}
       }
     },
-    "TableDescription":{
+    "ComplexObject":{
       "type":"structure",
       "members":{
-        "TableStatus":{"shape":"TableStatus"}
+        "ObjectMember":{"shape":"ComplexObject"},
+        "StringMember":{"shape":"StringMember"},
+        "NumberMember":{"shape":"NumberMember"},
+        "BooleanMember":{"shape":"BooleanMember"},
+        "ArrayMember":{"shape":"NumberList"},
+        "ObjectArrayMember":{"shape":"ObjectList"}
       }
     },
-    "TableStatus":{
-      "type":"string",
-      "enum":[
-        "CREATING",
-        "UPDATING",
-        "ACTIVE",
-        "FAILED"
-      ]
-    },
-    "TableList":{
+    "StringMember": {"type":"string"},
+    "NumberMember":{"type":"integer"},
+    "BooleanMember":{"type":"boolean"},
+    "NumberList": {
       "type":"list",
-      "member":{"shape":"TableDescription"}
+      "member":{"shape":"NumberListMember"}
+    },
+    "NumberListMember":{"type":"integer"},
+    "ObjectList": {
+      "type":"list",
+      "member":{"shape":"ComplexObject"}
+    },
+    "BooleanList": {
+      "type":"list",
+      "member":{"shape":"BooleanMember"}
+    },
+    "NestedList": {
+      "type":"list",
+      "member":{"shape":"NumberList"}
     },
     "ResourceNotFoundException":{
       "type":"structure",

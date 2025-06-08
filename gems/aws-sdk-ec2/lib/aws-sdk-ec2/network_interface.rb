@@ -103,10 +103,37 @@ module Aws::EC2
       data[:owner_id]
     end
 
-    # The private DNS name.
+    # The private hostname. For more information, see [EC2 instance
+    # hostnames, DNS names, and domains][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html
     # @return [String]
     def private_dns_name
       data[:private_dns_name]
+    end
+
+    # A public hostname. For more information, see [EC2 instance hostnames,
+    # DNS names, and domains][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html
+    # @return [String]
+    def public_dns_name
+      data[:public_dns_name]
+    end
+
+    # Public hostname type options. For more information, see [EC2 instance
+    # hostnames, DNS names, and domains][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html
+    # @return [Types::PublicIpDnsNameOptions]
+    def public_ip_dns_name_options
+      data[:public_ip_dns_name_options]
     end
 
     # The IPv4 address of the network interface within the subnet.

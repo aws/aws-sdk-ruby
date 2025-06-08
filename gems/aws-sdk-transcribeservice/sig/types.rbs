@@ -95,7 +95,7 @@ module Aws::TranscribeService
     end
 
     class ClinicalNoteGenerationSettings
-      attr_accessor note_template: ("HISTORY_AND_PHYSICAL" | "GIRPP")
+      attr_accessor note_template: ("HISTORY_AND_PHYSICAL" | "GIRPP" | "BIRP" | "SIRP" | "DAP" | "BEHAVIORAL_SOAP" | "PHYSICAL_SOAP")
       SENSITIVE: []
     end
 

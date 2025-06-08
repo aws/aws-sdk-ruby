@@ -1187,7 +1187,90 @@ module Aws::EntityResolution
       req.send_request(options)
     end
 
-    # Gets the status, metrics, and errors (if there are any) that are
+    # Generates or retrieves Match IDs for records using a rule-based
+    # matching workflow. When you call this operation, it processes your
+    # records against the workflow's matching rules to identify potential
+    # matches. For existing records, it retrieves their Match IDs and
+    # associated rules. For records without matches, it generates new Match
+    # IDs. The operation saves results to Amazon S3.
+    #
+    # The processing type (`processingType`) you choose affects both the
+    # accuracy and response time of the operation. Additional charges apply
+    # for each API call, whether made through the Entity Resolution console
+    # or directly via the API. The rule-based matching workflow must exist
+    # and be active before calling this operation.
+    #
+    # @option params [required, String] :workflow_name
+    #   The name of the rule-based matching workflow.
+    #
+    # @option params [required, Array<Types::Record>] :records
+    #   The records to match.
+    #
+    # @option params [String] :processing_type
+    #   The processing mode that determines how Match IDs are generated and
+    #   results are saved. Each mode provides different levels of accuracy,
+    #   response time, and completeness of results.
+    #
+    #   If not specified, defaults to `CONSISTENT`.
+    #
+    #   `CONSISTENT`: Performs immediate lookup and matching against all
+    #   existing records, with results saved synchronously. Provides highest
+    #   accuracy but slower response time.
+    #
+    #   `EVENTUAL` (shown as *Background* in the console): Performs initial
+    #   match ID lookup or generation immediately, with record updates
+    #   processed asynchronously in the background. Offers faster initial
+    #   response time, with complete matching results available later in S3.
+    #
+    #   `EVENTUAL_NO_LOOKUP` (shown as *Quick ID generation* in the console):
+    #   Generates new match IDs without checking existing matches, with
+    #   updates processed asynchronously. Provides fastest response time but
+    #   should only be used for records known to be unique.
+    #
+    # @return [Types::GenerateMatchIdOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GenerateMatchIdOutput#match_groups #match_groups} => Array&lt;Types::MatchGroup&gt;
+    #   * {Types::GenerateMatchIdOutput#failed_records #failed_records} => Array&lt;Types::FailedRecord&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.generate_match_id({
+    #     workflow_name: "EntityName", # required
+    #     records: [ # required
+    #       {
+    #         input_source_arn: "RecordInputSourceARNString", # required
+    #         unique_id: "UniqueId", # required
+    #         record_attribute_map: { # required
+    #           "RecordAttributeMapString255KeyString" => "RecordAttributeMapString255ValueString",
+    #         },
+    #       },
+    #     ],
+    #     processing_type: "CONSISTENT", # accepts CONSISTENT, EVENTUAL, EVENTUAL_NO_LOOKUP
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.match_groups #=> Array
+    #   resp.match_groups[0].records #=> Array
+    #   resp.match_groups[0].records[0].input_source_arn #=> String
+    #   resp.match_groups[0].records[0].record_id #=> String
+    #   resp.match_groups[0].match_id #=> String
+    #   resp.match_groups[0].match_rule #=> String
+    #   resp.failed_records #=> Array
+    #   resp.failed_records[0].input_source_arn #=> String
+    #   resp.failed_records[0].unique_id #=> String
+    #   resp.failed_records[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/GenerateMatchId AWS API Documentation
+    #
+    # @overload generate_match_id(params = {})
+    # @param [Hash] params ({})
+    def generate_match_id(params = {}, options = {})
+      req = build_request(:generate_match_id, params)
+      req.send_request(options)
+    end
+
+    # Returns the status, metrics, and errors (if there are any) that are
     # associated with a job.
     #
     # @option params [required, String] :workflow_name
@@ -1410,7 +1493,7 @@ module Aws::EntityResolution
       req.send_request(options)
     end
 
-    # Gets the status, metrics, and errors (if there are any) that are
+    # Returns the status, metrics, and errors (if there are any) that are
     # associated with a job.
     #
     # @option params [required, String] :workflow_name
@@ -2626,7 +2709,7 @@ module Aws::EntityResolution
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-entityresolution'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

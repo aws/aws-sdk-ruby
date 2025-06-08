@@ -19,6 +19,7 @@ module Aws::WAFV2
     APIKeySummary = Shapes::StructureShape.new(name: 'APIKeySummary')
     APIKeyTokenDomains = Shapes::ListShape.new(name: 'APIKeyTokenDomains')
     APIKeyVersion = Shapes::IntegerShape.new(name: 'APIKeyVersion')
+    ASN = Shapes::IntegerShape.new(name: 'ASN')
     AWSManagedRulesACFPRuleSet = Shapes::StructureShape.new(name: 'AWSManagedRulesACFPRuleSet')
     AWSManagedRulesATPRuleSet = Shapes::StructureShape.new(name: 'AWSManagedRulesATPRuleSet')
     AWSManagedRulesBotControlRuleSet = Shapes::StructureShape.new(name: 'AWSManagedRulesBotControlRuleSet')
@@ -31,6 +32,8 @@ module Aws::WAFV2
     AllQueryArguments = Shapes::StructureShape.new(name: 'AllQueryArguments')
     AllowAction = Shapes::StructureShape.new(name: 'AllowAction')
     AndStatement = Shapes::StructureShape.new(name: 'AndStatement')
+    AsnList = Shapes::ListShape.new(name: 'AsnList')
+    AsnMatchStatement = Shapes::StructureShape.new(name: 'AsnMatchStatement')
     AssociateWebACLRequest = Shapes::StructureShape.new(name: 'AssociateWebACLRequest')
     AssociateWebACLResponse = Shapes::StructureShape.new(name: 'AssociateWebACLResponse')
     AssociatedResourceType = Shapes::StringShape.new(name: 'AssociatedResourceType')
@@ -292,6 +295,7 @@ module Aws::WAFV2
     RateBasedStatementCustomKeys = Shapes::ListShape.new(name: 'RateBasedStatementCustomKeys')
     RateBasedStatementManagedKeysIPSet = Shapes::StructureShape.new(name: 'RateBasedStatementManagedKeysIPSet')
     RateLimit = Shapes::IntegerShape.new(name: 'RateLimit')
+    RateLimitAsn = Shapes::StructureShape.new(name: 'RateLimitAsn')
     RateLimitCookie = Shapes::StructureShape.new(name: 'RateLimitCookie')
     RateLimitForwardedIP = Shapes::StructureShape.new(name: 'RateLimitForwardedIP')
     RateLimitHTTPMethod = Shapes::StructureShape.new(name: 'RateLimitHTTPMethod')
@@ -480,6 +484,12 @@ module Aws::WAFV2
 
     AndStatement.add_member(:statements, Shapes::ShapeRef.new(shape: Statements, required: true, location_name: "Statements"))
     AndStatement.struct_class = Types::AndStatement
+
+    AsnList.member = Shapes::ShapeRef.new(shape: ASN)
+
+    AsnMatchStatement.add_member(:asn_list, Shapes::ShapeRef.new(shape: AsnList, required: true, location_name: "AsnList"))
+    AsnMatchStatement.add_member(:forwarded_ip_config, Shapes::ShapeRef.new(shape: ForwardedIPConfig, location_name: "ForwardedIPConfig"))
+    AsnMatchStatement.struct_class = Types::AsnMatchStatement
 
     AssociateWebACLRequest.add_member(:web_acl_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "WebACLArn"))
     AssociateWebACLRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
@@ -1282,6 +1292,7 @@ module Aws::WAFV2
     RateBasedStatementCustomKey.add_member(:uri_path, Shapes::ShapeRef.new(shape: RateLimitUriPath, location_name: "UriPath"))
     RateBasedStatementCustomKey.add_member(:ja3_fingerprint, Shapes::ShapeRef.new(shape: RateLimitJA3Fingerprint, location_name: "JA3Fingerprint"))
     RateBasedStatementCustomKey.add_member(:ja4_fingerprint, Shapes::ShapeRef.new(shape: RateLimitJA4Fingerprint, location_name: "JA4Fingerprint"))
+    RateBasedStatementCustomKey.add_member(:asn, Shapes::ShapeRef.new(shape: RateLimitAsn, location_name: "ASN"))
     RateBasedStatementCustomKey.struct_class = Types::RateBasedStatementCustomKey
 
     RateBasedStatementCustomKeys.member = Shapes::ShapeRef.new(shape: RateBasedStatementCustomKey)
@@ -1289,6 +1300,8 @@ module Aws::WAFV2
     RateBasedStatementManagedKeysIPSet.add_member(:ip_address_version, Shapes::ShapeRef.new(shape: IPAddressVersion, location_name: "IPAddressVersion"))
     RateBasedStatementManagedKeysIPSet.add_member(:addresses, Shapes::ShapeRef.new(shape: IPAddresses, location_name: "Addresses"))
     RateBasedStatementManagedKeysIPSet.struct_class = Types::RateBasedStatementManagedKeysIPSet
+
+    RateLimitAsn.struct_class = Types::RateLimitAsn
 
     RateLimitCookie.add_member(:name, Shapes::ShapeRef.new(shape: FieldToMatchData, required: true, location_name: "Name"))
     RateLimitCookie.add_member(:text_transformations, Shapes::ShapeRef.new(shape: TextTransformations, required: true, location_name: "TextTransformations"))
@@ -1529,6 +1542,7 @@ module Aws::WAFV2
     Statement.add_member(:managed_rule_group_statement, Shapes::ShapeRef.new(shape: ManagedRuleGroupStatement, location_name: "ManagedRuleGroupStatement"))
     Statement.add_member(:label_match_statement, Shapes::ShapeRef.new(shape: LabelMatchStatement, location_name: "LabelMatchStatement"))
     Statement.add_member(:regex_match_statement, Shapes::ShapeRef.new(shape: RegexMatchStatement, location_name: "RegexMatchStatement"))
+    Statement.add_member(:asn_match_statement, Shapes::ShapeRef.new(shape: AsnMatchStatement, location_name: "AsnMatchStatement"))
     Statement.struct_class = Types::Statement
 
     Statements.member = Shapes::ShapeRef.new(shape: Statement)

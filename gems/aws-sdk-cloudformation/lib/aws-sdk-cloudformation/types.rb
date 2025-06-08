@@ -7624,7 +7624,7 @@ module Aws::CloudFormation
     #   *CloudFormation User Guide*.
     #
     #   To scan all resource types within a service, you can use a wildcard,
-    #   represented by an asterisk (`*`). You can place a asterisk at only
+    #   represented by an asterisk (`*`). You can place an asterisk at only
     #   the end of the string, for example, `AWS::S3::*`.
     #
     #

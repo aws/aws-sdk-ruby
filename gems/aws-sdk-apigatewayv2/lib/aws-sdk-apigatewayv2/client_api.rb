@@ -64,6 +64,8 @@ module Aws::ApiGatewayV2
     CreateRouteResponseRequest = Shapes::StructureShape.new(name: 'CreateRouteResponseRequest')
     CreateRouteResponseResponse = Shapes::StructureShape.new(name: 'CreateRouteResponseResponse')
     CreateRouteResult = Shapes::StructureShape.new(name: 'CreateRouteResult')
+    CreateRoutingRuleRequest = Shapes::StructureShape.new(name: 'CreateRoutingRuleRequest')
+    CreateRoutingRuleResponse = Shapes::StructureShape.new(name: 'CreateRoutingRuleResponse')
     CreateStageInput = Shapes::StructureShape.new(name: 'CreateStageInput')
     CreateStageRequest = Shapes::StructureShape.new(name: 'CreateStageRequest')
     CreateStageResponse = Shapes::StructureShape.new(name: 'CreateStageResponse')
@@ -84,6 +86,7 @@ module Aws::ApiGatewayV2
     DeleteRouteRequestParameterRequest = Shapes::StructureShape.new(name: 'DeleteRouteRequestParameterRequest')
     DeleteRouteResponseRequest = Shapes::StructureShape.new(name: 'DeleteRouteResponseRequest')
     DeleteRouteSettingsRequest = Shapes::StructureShape.new(name: 'DeleteRouteSettingsRequest')
+    DeleteRoutingRuleRequest = Shapes::StructureShape.new(name: 'DeleteRoutingRuleRequest')
     DeleteStageRequest = Shapes::StructureShape.new(name: 'DeleteStageRequest')
     DeleteVpcLinkRequest = Shapes::StructureShape.new(name: 'DeleteVpcLinkRequest')
     DeleteVpcLinkResponse = Shapes::StructureShape.new(name: 'DeleteVpcLinkResponse')
@@ -141,6 +144,8 @@ module Aws::ApiGatewayV2
     GetRouteResult = Shapes::StructureShape.new(name: 'GetRouteResult')
     GetRoutesRequest = Shapes::StructureShape.new(name: 'GetRoutesRequest')
     GetRoutesResponse = Shapes::StructureShape.new(name: 'GetRoutesResponse')
+    GetRoutingRuleRequest = Shapes::StructureShape.new(name: 'GetRoutingRuleRequest')
+    GetRoutingRuleResponse = Shapes::StructureShape.new(name: 'GetRoutingRuleResponse')
     GetStageRequest = Shapes::StructureShape.new(name: 'GetStageRequest')
     GetStageResponse = Shapes::StructureShape.new(name: 'GetStageResponse')
     GetStagesRequest = Shapes::StructureShape.new(name: 'GetStagesRequest')
@@ -168,7 +173,10 @@ module Aws::ApiGatewayV2
     IpAddressType = Shapes::StringShape.new(name: 'IpAddressType')
     JWTConfiguration = Shapes::StructureShape.new(name: 'JWTConfiguration')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListRoutingRulesRequest = Shapes::StructureShape.new(name: 'ListRoutingRulesRequest')
+    ListRoutingRulesResponse = Shapes::StructureShape.new(name: 'ListRoutingRulesResponse')
     LoggingLevel = Shapes::StringShape.new(name: 'LoggingLevel')
+    MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Model = Shapes::StructureShape.new(name: 'Model')
     Models = Shapes::StructureShape.new(name: 'Models')
     MutualTlsAuthentication = Shapes::StructureShape.new(name: 'MutualTlsAuthentication')
@@ -178,6 +186,8 @@ module Aws::ApiGatewayV2
     ParameterConstraints = Shapes::StructureShape.new(name: 'ParameterConstraints')
     PassthroughBehavior = Shapes::StringShape.new(name: 'PassthroughBehavior')
     ProtocolType = Shapes::StringShape.new(name: 'ProtocolType')
+    PutRoutingRuleRequest = Shapes::StructureShape.new(name: 'PutRoutingRuleRequest')
+    PutRoutingRuleResponse = Shapes::StructureShape.new(name: 'PutRoutingRuleResponse')
     ReimportApiInput = Shapes::StructureShape.new(name: 'ReimportApiInput')
     ReimportApiRequest = Shapes::StructureShape.new(name: 'ReimportApiRequest')
     ReimportApiResponse = Shapes::StructureShape.new(name: 'ReimportApiResponse')
@@ -191,6 +201,17 @@ module Aws::ApiGatewayV2
     RouteSettings = Shapes::StructureShape.new(name: 'RouteSettings')
     RouteSettingsMap = Shapes::MapShape.new(name: 'RouteSettingsMap')
     Routes = Shapes::StructureShape.new(name: 'Routes')
+    RoutingMode = Shapes::StringShape.new(name: 'RoutingMode')
+    RoutingRule = Shapes::StructureShape.new(name: 'RoutingRule')
+    RoutingRuleAction = Shapes::StructureShape.new(name: 'RoutingRuleAction')
+    RoutingRuleActionInvokeApi = Shapes::StructureShape.new(name: 'RoutingRuleActionInvokeApi')
+    RoutingRuleCondition = Shapes::StructureShape.new(name: 'RoutingRuleCondition')
+    RoutingRuleInput = Shapes::StructureShape.new(name: 'RoutingRuleInput')
+    RoutingRuleMatchBasePaths = Shapes::StructureShape.new(name: 'RoutingRuleMatchBasePaths')
+    RoutingRuleMatchHeaderValue = Shapes::StructureShape.new(name: 'RoutingRuleMatchHeaderValue')
+    RoutingRuleMatchHeaders = Shapes::StructureShape.new(name: 'RoutingRuleMatchHeaders')
+    RoutingRulePriority = Shapes::IntegerShape.new(name: 'RoutingRulePriority')
+    RoutingRules = Shapes::StructureShape.new(name: 'RoutingRules')
     SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
     SecurityPolicy = Shapes::StringShape.new(name: 'SecurityPolicy')
     SelectionExpression = Shapes::StringShape.new(name: 'SelectionExpression')
@@ -272,6 +293,11 @@ module Aws::ApiGatewayV2
     __listOfModel = Shapes::ListShape.new(name: '__listOfModel')
     __listOfRoute = Shapes::ListShape.new(name: '__listOfRoute')
     __listOfRouteResponse = Shapes::ListShape.new(name: '__listOfRouteResponse')
+    __listOfRoutingRule = Shapes::ListShape.new(name: '__listOfRoutingRule')
+    __listOfRoutingRuleAction = Shapes::ListShape.new(name: '__listOfRoutingRuleAction')
+    __listOfRoutingRuleCondition = Shapes::ListShape.new(name: '__listOfRoutingRuleCondition')
+    __listOfRoutingRuleMatchHeaderValue = Shapes::ListShape.new(name: '__listOfRoutingRuleMatchHeaderValue')
+    __listOfSelectionKey = Shapes::ListShape.new(name: '__listOfSelectionKey')
     __listOfStage = Shapes::ListShape.new(name: '__listOfStage')
     __listOfVpcLink = Shapes::ListShape.new(name: '__listOfVpcLink')
     __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
@@ -484,19 +510,23 @@ module Aws::ApiGatewayV2
     CreateDomainNameInput.add_member(:domain_name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And512, required: true, location_name: "domainName"))
     CreateDomainNameInput.add_member(:domain_name_configurations, Shapes::ShapeRef.new(shape: DomainNameConfigurations, location_name: "domainNameConfigurations"))
     CreateDomainNameInput.add_member(:mutual_tls_authentication, Shapes::ShapeRef.new(shape: MutualTlsAuthenticationInput, location_name: "mutualTlsAuthentication"))
+    CreateDomainNameInput.add_member(:routing_mode, Shapes::ShapeRef.new(shape: RoutingMode, location_name: "routingMode"))
     CreateDomainNameInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateDomainNameInput.struct_class = Types::CreateDomainNameInput
 
     CreateDomainNameRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And512, required: true, location_name: "domainName"))
     CreateDomainNameRequest.add_member(:domain_name_configurations, Shapes::ShapeRef.new(shape: DomainNameConfigurations, location_name: "domainNameConfigurations"))
     CreateDomainNameRequest.add_member(:mutual_tls_authentication, Shapes::ShapeRef.new(shape: MutualTlsAuthenticationInput, location_name: "mutualTlsAuthentication"))
+    CreateDomainNameRequest.add_member(:routing_mode, Shapes::ShapeRef.new(shape: RoutingMode, location_name: "routingMode"))
     CreateDomainNameRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateDomainNameRequest.struct_class = Types::CreateDomainNameRequest
 
     CreateDomainNameResponse.add_member(:api_mapping_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "apiMappingSelectionExpression"))
     CreateDomainNameResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And512, location_name: "domainName"))
+    CreateDomainNameResponse.add_member(:domain_name_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "domainNameArn"))
     CreateDomainNameResponse.add_member(:domain_name_configurations, Shapes::ShapeRef.new(shape: DomainNameConfigurations, location_name: "domainNameConfigurations"))
     CreateDomainNameResponse.add_member(:mutual_tls_authentication, Shapes::ShapeRef.new(shape: MutualTlsAuthentication, location_name: "mutualTlsAuthentication"))
+    CreateDomainNameResponse.add_member(:routing_mode, Shapes::ShapeRef.new(shape: RoutingMode, location_name: "routingMode"))
     CreateDomainNameResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateDomainNameResponse.struct_class = Types::CreateDomainNameResponse
 
@@ -668,6 +698,20 @@ module Aws::ApiGatewayV2
     CreateRouteResult.add_member(:target, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, location_name: "target"))
     CreateRouteResult.struct_class = Types::CreateRouteResult
 
+    CreateRoutingRuleRequest.add_member(:actions, Shapes::ShapeRef.new(shape: __listOfRoutingRuleAction, required: true, location_name: "actions"))
+    CreateRoutingRuleRequest.add_member(:conditions, Shapes::ShapeRef.new(shape: __listOfRoutingRuleCondition, required: true, location_name: "conditions"))
+    CreateRoutingRuleRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "domainName"))
+    CreateRoutingRuleRequest.add_member(:domain_name_id, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "domainNameId"))
+    CreateRoutingRuleRequest.add_member(:priority, Shapes::ShapeRef.new(shape: RoutingRulePriority, required: true, location_name: "priority"))
+    CreateRoutingRuleRequest.struct_class = Types::CreateRoutingRuleRequest
+
+    CreateRoutingRuleResponse.add_member(:actions, Shapes::ShapeRef.new(shape: __listOfRoutingRuleAction, location_name: "actions"))
+    CreateRoutingRuleResponse.add_member(:conditions, Shapes::ShapeRef.new(shape: __listOfRoutingRuleCondition, location_name: "conditions"))
+    CreateRoutingRuleResponse.add_member(:priority, Shapes::ShapeRef.new(shape: RoutingRulePriority, location_name: "priority"))
+    CreateRoutingRuleResponse.add_member(:routing_rule_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "routingRuleArn"))
+    CreateRoutingRuleResponse.add_member(:routing_rule_id, Shapes::ShapeRef.new(shape: Id, location_name: "routingRuleId"))
+    CreateRoutingRuleResponse.struct_class = Types::CreateRoutingRuleResponse
+
     CreateStageInput.add_member(:access_log_settings, Shapes::ShapeRef.new(shape: AccessLogSettings, location_name: "accessLogSettings"))
     CreateStageInput.add_member(:auto_deploy, Shapes::ShapeRef.new(shape: __boolean, location_name: "autoDeploy"))
     CreateStageInput.add_member(:client_certificate_id, Shapes::ShapeRef.new(shape: Id, location_name: "clientCertificateId"))
@@ -789,6 +833,11 @@ module Aws::ApiGatewayV2
     DeleteRouteSettingsRequest.add_member(:stage_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "stageName"))
     DeleteRouteSettingsRequest.struct_class = Types::DeleteRouteSettingsRequest
 
+    DeleteRoutingRuleRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "domainName"))
+    DeleteRoutingRuleRequest.add_member(:domain_name_id, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "domainNameId"))
+    DeleteRoutingRuleRequest.add_member(:routing_rule_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "routingRuleId"))
+    DeleteRoutingRuleRequest.struct_class = Types::DeleteRoutingRuleRequest
+
     DeleteStageRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "apiId"))
     DeleteStageRequest.add_member(:stage_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "stageName"))
     DeleteStageRequest.struct_class = Types::DeleteStageRequest
@@ -812,8 +861,10 @@ module Aws::ApiGatewayV2
 
     DomainName.add_member(:api_mapping_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "apiMappingSelectionExpression"))
     DomainName.add_member(:domain_name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And512, required: true, location_name: "domainName"))
+    DomainName.add_member(:domain_name_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "domainNameArn"))
     DomainName.add_member(:domain_name_configurations, Shapes::ShapeRef.new(shape: DomainNameConfigurations, location_name: "domainNameConfigurations"))
     DomainName.add_member(:mutual_tls_authentication, Shapes::ShapeRef.new(shape: MutualTlsAuthentication, location_name: "mutualTlsAuthentication"))
+    DomainName.add_member(:routing_mode, Shapes::ShapeRef.new(shape: RoutingMode, location_name: "routingMode"))
     DomainName.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DomainName.struct_class = Types::DomainName
 
@@ -950,8 +1001,10 @@ module Aws::ApiGatewayV2
 
     GetDomainNameResponse.add_member(:api_mapping_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "apiMappingSelectionExpression"))
     GetDomainNameResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And512, location_name: "domainName"))
+    GetDomainNameResponse.add_member(:domain_name_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "domainNameArn"))
     GetDomainNameResponse.add_member(:domain_name_configurations, Shapes::ShapeRef.new(shape: DomainNameConfigurations, location_name: "domainNameConfigurations"))
     GetDomainNameResponse.add_member(:mutual_tls_authentication, Shapes::ShapeRef.new(shape: MutualTlsAuthentication, location_name: "mutualTlsAuthentication"))
+    GetDomainNameResponse.add_member(:routing_mode, Shapes::ShapeRef.new(shape: RoutingMode, location_name: "routingMode"))
     GetDomainNameResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     GetDomainNameResponse.struct_class = Types::GetDomainNameResponse
 
@@ -1098,6 +1151,18 @@ module Aws::ApiGatewayV2
     GetRoutesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     GetRoutesResponse.struct_class = Types::GetRoutesResponse
 
+    GetRoutingRuleRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "domainName"))
+    GetRoutingRuleRequest.add_member(:domain_name_id, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "domainNameId"))
+    GetRoutingRuleRequest.add_member(:routing_rule_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "routingRuleId"))
+    GetRoutingRuleRequest.struct_class = Types::GetRoutingRuleRequest
+
+    GetRoutingRuleResponse.add_member(:actions, Shapes::ShapeRef.new(shape: __listOfRoutingRuleAction, location_name: "actions"))
+    GetRoutingRuleResponse.add_member(:conditions, Shapes::ShapeRef.new(shape: __listOfRoutingRuleCondition, location_name: "conditions"))
+    GetRoutingRuleResponse.add_member(:priority, Shapes::ShapeRef.new(shape: RoutingRulePriority, location_name: "priority"))
+    GetRoutingRuleResponse.add_member(:routing_rule_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "routingRuleArn"))
+    GetRoutingRuleResponse.add_member(:routing_rule_id, Shapes::ShapeRef.new(shape: Id, location_name: "routingRuleId"))
+    GetRoutingRuleResponse.struct_class = Types::GetRoutingRuleResponse
+
     GetStageRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "apiId"))
     GetStageRequest.add_member(:stage_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "stageName"))
     GetStageRequest.struct_class = Types::GetStageRequest
@@ -1233,6 +1298,16 @@ module Aws::ApiGatewayV2
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     LimitExceededException.struct_class = Types::LimitExceededException
 
+    ListRoutingRulesRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "domainName"))
+    ListRoutingRulesRequest.add_member(:domain_name_id, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "domainNameId"))
+    ListRoutingRulesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListRoutingRulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListRoutingRulesRequest.struct_class = Types::ListRoutingRulesRequest
+
+    ListRoutingRulesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListRoutingRulesResponse.add_member(:routing_rules, Shapes::ShapeRef.new(shape: __listOfRoutingRule, location_name: "routingRules"))
+    ListRoutingRulesResponse.struct_class = Types::ListRoutingRulesResponse
+
     Model.add_member(:content_type, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And256, location_name: "contentType"))
     Model.add_member(:description, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "description"))
     Model.add_member(:model_id, Shapes::ShapeRef.new(shape: Id, location_name: "modelId"))
@@ -1259,6 +1334,21 @@ module Aws::ApiGatewayV2
 
     ParameterConstraints.add_member(:required, Shapes::ShapeRef.new(shape: __boolean, location_name: "required"))
     ParameterConstraints.struct_class = Types::ParameterConstraints
+
+    PutRoutingRuleRequest.add_member(:actions, Shapes::ShapeRef.new(shape: __listOfRoutingRuleAction, required: true, location_name: "actions"))
+    PutRoutingRuleRequest.add_member(:conditions, Shapes::ShapeRef.new(shape: __listOfRoutingRuleCondition, required: true, location_name: "conditions"))
+    PutRoutingRuleRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "domainName"))
+    PutRoutingRuleRequest.add_member(:domain_name_id, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "domainNameId"))
+    PutRoutingRuleRequest.add_member(:priority, Shapes::ShapeRef.new(shape: RoutingRulePriority, required: true, location_name: "priority"))
+    PutRoutingRuleRequest.add_member(:routing_rule_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "routingRuleId"))
+    PutRoutingRuleRequest.struct_class = Types::PutRoutingRuleRequest
+
+    PutRoutingRuleResponse.add_member(:actions, Shapes::ShapeRef.new(shape: __listOfRoutingRuleAction, location_name: "actions"))
+    PutRoutingRuleResponse.add_member(:conditions, Shapes::ShapeRef.new(shape: __listOfRoutingRuleCondition, location_name: "conditions"))
+    PutRoutingRuleResponse.add_member(:priority, Shapes::ShapeRef.new(shape: RoutingRulePriority, location_name: "priority"))
+    PutRoutingRuleResponse.add_member(:routing_rule_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "routingRuleArn"))
+    PutRoutingRuleResponse.add_member(:routing_rule_id, Shapes::ShapeRef.new(shape: Id, location_name: "routingRuleId"))
+    PutRoutingRuleResponse.struct_class = Types::PutRoutingRuleResponse
 
     ReimportApiInput.add_member(:body, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "body"))
     ReimportApiInput.struct_class = Types::ReimportApiInput
@@ -1340,6 +1430,44 @@ module Aws::ApiGatewayV2
     Routes.add_member(:items, Shapes::ShapeRef.new(shape: __listOfRoute, location_name: "items"))
     Routes.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     Routes.struct_class = Types::Routes
+
+    RoutingRule.add_member(:actions, Shapes::ShapeRef.new(shape: __listOfRoutingRuleAction, location_name: "actions"))
+    RoutingRule.add_member(:conditions, Shapes::ShapeRef.new(shape: __listOfRoutingRuleCondition, location_name: "conditions"))
+    RoutingRule.add_member(:priority, Shapes::ShapeRef.new(shape: RoutingRulePriority, location_name: "priority"))
+    RoutingRule.add_member(:routing_rule_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "routingRuleArn"))
+    RoutingRule.add_member(:routing_rule_id, Shapes::ShapeRef.new(shape: Id, location_name: "routingRuleId"))
+    RoutingRule.struct_class = Types::RoutingRule
+
+    RoutingRuleAction.add_member(:invoke_api, Shapes::ShapeRef.new(shape: RoutingRuleActionInvokeApi, required: true, location_name: "invokeApi"))
+    RoutingRuleAction.struct_class = Types::RoutingRuleAction
+
+    RoutingRuleActionInvokeApi.add_member(:api_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "apiId"))
+    RoutingRuleActionInvokeApi.add_member(:stage, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, required: true, location_name: "stage"))
+    RoutingRuleActionInvokeApi.add_member(:strip_base_path, Shapes::ShapeRef.new(shape: __boolean, location_name: "stripBasePath"))
+    RoutingRuleActionInvokeApi.struct_class = Types::RoutingRuleActionInvokeApi
+
+    RoutingRuleCondition.add_member(:match_base_paths, Shapes::ShapeRef.new(shape: RoutingRuleMatchBasePaths, location_name: "matchBasePaths"))
+    RoutingRuleCondition.add_member(:match_headers, Shapes::ShapeRef.new(shape: RoutingRuleMatchHeaders, location_name: "matchHeaders"))
+    RoutingRuleCondition.struct_class = Types::RoutingRuleCondition
+
+    RoutingRuleInput.add_member(:actions, Shapes::ShapeRef.new(shape: __listOfRoutingRuleAction, required: true, location_name: "actions"))
+    RoutingRuleInput.add_member(:conditions, Shapes::ShapeRef.new(shape: __listOfRoutingRuleCondition, required: true, location_name: "conditions"))
+    RoutingRuleInput.add_member(:priority, Shapes::ShapeRef.new(shape: RoutingRulePriority, required: true, location_name: "priority"))
+    RoutingRuleInput.struct_class = Types::RoutingRuleInput
+
+    RoutingRuleMatchBasePaths.add_member(:any_of, Shapes::ShapeRef.new(shape: __listOfSelectionKey, required: true, location_name: "anyOf"))
+    RoutingRuleMatchBasePaths.struct_class = Types::RoutingRuleMatchBasePaths
+
+    RoutingRuleMatchHeaderValue.add_member(:header, Shapes::ShapeRef.new(shape: SelectionKey, required: true, location_name: "header"))
+    RoutingRuleMatchHeaderValue.add_member(:value_glob, Shapes::ShapeRef.new(shape: SelectionExpression, required: true, location_name: "valueGlob"))
+    RoutingRuleMatchHeaderValue.struct_class = Types::RoutingRuleMatchHeaderValue
+
+    RoutingRuleMatchHeaders.add_member(:any_of, Shapes::ShapeRef.new(shape: __listOfRoutingRuleMatchHeaderValue, required: true, location_name: "anyOf"))
+    RoutingRuleMatchHeaders.struct_class = Types::RoutingRuleMatchHeaders
+
+    RoutingRules.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    RoutingRules.add_member(:routing_rules, Shapes::ShapeRef.new(shape: __listOfRoutingRule, location_name: "routingRules"))
+    RoutingRules.struct_class = Types::RoutingRules
 
     SecurityGroupIdList.member = Shapes::ShapeRef.new(shape: __string)
 
@@ -1523,17 +1651,21 @@ module Aws::ApiGatewayV2
 
     UpdateDomainNameInput.add_member(:domain_name_configurations, Shapes::ShapeRef.new(shape: DomainNameConfigurations, location_name: "domainNameConfigurations"))
     UpdateDomainNameInput.add_member(:mutual_tls_authentication, Shapes::ShapeRef.new(shape: MutualTlsAuthenticationInput, location_name: "mutualTlsAuthentication"))
+    UpdateDomainNameInput.add_member(:routing_mode, Shapes::ShapeRef.new(shape: RoutingMode, location_name: "routingMode"))
     UpdateDomainNameInput.struct_class = Types::UpdateDomainNameInput
 
     UpdateDomainNameRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "domainName"))
     UpdateDomainNameRequest.add_member(:domain_name_configurations, Shapes::ShapeRef.new(shape: DomainNameConfigurations, location_name: "domainNameConfigurations"))
     UpdateDomainNameRequest.add_member(:mutual_tls_authentication, Shapes::ShapeRef.new(shape: MutualTlsAuthenticationInput, location_name: "mutualTlsAuthentication"))
+    UpdateDomainNameRequest.add_member(:routing_mode, Shapes::ShapeRef.new(shape: RoutingMode, location_name: "routingMode"))
     UpdateDomainNameRequest.struct_class = Types::UpdateDomainNameRequest
 
     UpdateDomainNameResponse.add_member(:api_mapping_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "apiMappingSelectionExpression"))
     UpdateDomainNameResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And512, location_name: "domainName"))
+    UpdateDomainNameResponse.add_member(:domain_name_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "domainNameArn"))
     UpdateDomainNameResponse.add_member(:domain_name_configurations, Shapes::ShapeRef.new(shape: DomainNameConfigurations, location_name: "domainNameConfigurations"))
     UpdateDomainNameResponse.add_member(:mutual_tls_authentication, Shapes::ShapeRef.new(shape: MutualTlsAuthentication, location_name: "mutualTlsAuthentication"))
+    UpdateDomainNameResponse.add_member(:routing_mode, Shapes::ShapeRef.new(shape: RoutingMode, location_name: "routingMode"))
     UpdateDomainNameResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     UpdateDomainNameResponse.struct_class = Types::UpdateDomainNameResponse
 
@@ -1801,6 +1933,16 @@ module Aws::ApiGatewayV2
 
     __listOfRouteResponse.member = Shapes::ShapeRef.new(shape: RouteResponse)
 
+    __listOfRoutingRule.member = Shapes::ShapeRef.new(shape: RoutingRule)
+
+    __listOfRoutingRuleAction.member = Shapes::ShapeRef.new(shape: RoutingRuleAction)
+
+    __listOfRoutingRuleCondition.member = Shapes::ShapeRef.new(shape: RoutingRuleCondition)
+
+    __listOfRoutingRuleMatchHeaderValue.member = Shapes::ShapeRef.new(shape: RoutingRuleMatchHeaderValue)
+
+    __listOfSelectionKey.member = Shapes::ShapeRef.new(shape: SelectionKey)
+
     __listOfStage.member = Shapes::ShapeRef.new(shape: Stage)
 
     __listOfVpcLink.member = Shapes::ShapeRef.new(shape: VpcLink)
@@ -1941,6 +2083,18 @@ module Aws::ApiGatewayV2
         o.http_request_uri = "/v2/apis/{apiId}/routes/{routeId}/routeresponses"
         o.input = Shapes::ShapeRef.new(shape: CreateRouteResponseRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateRouteResponseResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:create_routing_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRoutingRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/domainnames/{domainName}/routingrules"
+        o.input = Shapes::ShapeRef.new(shape: CreateRoutingRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateRoutingRuleResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -2108,6 +2262,17 @@ module Aws::ApiGatewayV2
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:delete_routing_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRoutingRule"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v2/domainnames/{domainName}/routingrules/{routingRuleId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRoutingRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
       api.add_operation(:delete_stage, Seahorse::Model::Operation.new.tap do |o|
@@ -2372,6 +2537,34 @@ module Aws::ApiGatewayV2
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
+      api.add_operation(:get_routing_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRoutingRule"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/domainnames/{domainName}/routingrules/{routingRuleId}"
+        o.input = Shapes::ShapeRef.new(shape: GetRoutingRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRoutingRuleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:list_routing_rules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRoutingRules"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/domainnames/{domainName}/routingrules"
+        o.input = Shapes::ShapeRef.new(shape: ListRoutingRulesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRoutingRulesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:get_stage, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetStage"
         o.http_method = "GET"
@@ -2431,6 +2624,18 @@ module Aws::ApiGatewayV2
         o.http_request_uri = "/v2/apis"
         o.input = Shapes::ShapeRef.new(shape: ImportApiRequest)
         o.output = Shapes::ShapeRef.new(shape: ImportApiResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:put_routing_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutRoutingRule"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v2/domainnames/{domainName}/routingrules/{routingRuleId}"
+        o.input = Shapes::ShapeRef.new(shape: PutRoutingRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutRoutingRuleResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)

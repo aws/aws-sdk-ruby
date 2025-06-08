@@ -361,6 +361,41 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # A rule statement that inspects web traffic based on the Autonomous
+    # System Number (ASN) associated with the request's IP address.
+    #
+    # For additional details, see [ASN match rule statement][1] in the [WAF
+    # Developer Guide][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-statement-type-asn-match.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    #
+    # @!attribute [rw] asn_list
+    #   Contains one or more Autonomous System Numbers (ASNs). ASNs are
+    #   unique identifiers assigned to large internet networks managed by
+    #   organizations such as internet service providers, enterprises,
+    #   universities, or government agencies.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] forwarded_ip_config
+    #   The configuration for inspecting IP addresses to match against an
+    #   ASN in an HTTP header that you specify, instead of using the IP
+    #   address that's reported by the web request origin. Commonly, this
+    #   is the X-Forwarded-For (XFF) header, but you can specify any header
+    #   name.
+    #   @return [Types::ForwardedIPConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/AsnMatchStatement AWS API Documentation
+    #
+    class AsnMatchStatement < Struct.new(
+      :asn_list,
+      :forwarded_ip_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] web_acl_arn
     #   The Amazon Resource Name (ARN) of the web ACL that you want to
     #   associate with the resource.
@@ -2849,8 +2884,8 @@ module Aws::WAFV2
     #
     #  </note>
     #
-    # This configuration is used for GeoMatchStatement and
-    # RateBasedStatement. For IPSetReferenceStatement, use
+    # This configuration is used for GeoMatchStatement, AsnMatchStatement,
+    # and RateBasedStatement. For IPSetReferenceStatement, use
     # IPSetForwardedIPConfig instead.
     #
     # WAF only evaluates the first IP address found in the specified HTTP
@@ -3803,11 +3838,12 @@ module Aws::WAFV2
     # `host:user-agent:accept:authorization:referer`.
     #
     # @!attribute [rw] oversize_handling
-    #   What WAF should do if the headers of the request are more numerous
-    #   or larger than WAF can inspect. WAF does not support inspecting the
-    #   entire contents of request headers when they exceed 8 KB (8192
-    #   bytes) or 200 total headers. The underlying host service forwards a
-    #   maximum of 200 headers and at most 8 KB of header contents to WAF.
+    #   What WAF should do if the headers determined by your match scope are
+    #   more numerous or larger than WAF can inspect. WAF does not support
+    #   inspecting the entire contents of request headers when they exceed 8
+    #   KB (8192 bytes) or 200 total headers. The underlying host service
+    #   forwards a maximum of 200 headers and at most 8 KB of header
+    #   contents to WAF.
     #
     #   The options for oversize handling are the following:
     #
@@ -3866,11 +3902,12 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] oversize_handling
-    #   What WAF should do if the headers of the request are more numerous
-    #   or larger than WAF can inspect. WAF does not support inspecting the
-    #   entire contents of request headers when they exceed 8 KB (8192
-    #   bytes) or 200 total headers. The underlying host service forwards a
-    #   maximum of 200 headers and at most 8 KB of header contents to WAF.
+    #   What WAF should do if the headers determined by your match scope are
+    #   more numerous or larger than WAF can inspect. WAF does not support
+    #   inspecting the entire contents of request headers when they exceed 8
+    #   KB (8192 bytes) or 200 total headers. The underlying host service
+    #   forwards a maximum of 200 headers and at most 8 KB of header
+    #   contents to WAF.
     #
     #   The options for oversize handling are the following:
     #
@@ -6747,6 +6784,12 @@ module Aws::WAFV2
     #   defines an aggregation instance.
     #   @return [Types::RateLimitJA4Fingerprint]
     #
+    # @!attribute [rw] asn
+    #   Use an Autonomous System Number (ASN) derived from the request's
+    #   originating or forwarded IP address as an aggregate key. Each
+    #   distinct ASN contributes to the aggregation instance.
+    #   @return [Types::RateLimitAsn]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RateBasedStatementCustomKey AWS API Documentation
     #
     class RateBasedStatementCustomKey < Struct.new(
@@ -6760,7 +6803,8 @@ module Aws::WAFV2
       :label_namespace,
       :uri_path,
       :ja3_fingerprint,
-      :ja4_fingerprint)
+      :ja4_fingerprint,
+      :asn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6799,6 +6843,18 @@ module Aws::WAFV2
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Specifies an Autonomous System Number (ASN) derived from the
+    # request's originating or forwarded IP address as an aggregate key for
+    # a rate-based rule. Each distinct ASN contributes to the aggregation
+    # instance. If you use a single ASN as your custom key, then each ASN
+    # fully defines an aggregation instance.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RateLimitAsn AWS API Documentation
+    #
+    class RateLimitAsn < Aws::EmptyStructure; end
 
     # Specifies a cookie as an aggregate key for a rate-based rule. Each
     # distinct value in the cookie contributes to the aggregation instance.
@@ -8786,6 +8842,19 @@ module Aws::WAFV2
     #   against a single regular expression.
     #   @return [Types::RegexMatchStatement]
     #
+    # @!attribute [rw] asn_match_statement
+    #   A rule statement that inspects web traffic based on the Autonomous
+    #   System Number (ASN) associated with the request's IP address.
+    #
+    #   For additional details, see [ASN match rule statement][1] in the
+    #   [WAF Developer Guide][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-statement-type-asn-match.html
+    #   [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    #   @return [Types::AsnMatchStatement]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/Statement AWS API Documentation
     #
     class Statement < Struct.new(
@@ -8803,7 +8872,8 @@ module Aws::WAFV2
       :not_statement,
       :managed_rule_group_statement,
       :label_match_statement,
-      :regex_match_statement)
+      :regex_match_statement,
+      :asn_match_statement)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -28,6 +28,7 @@ module Aws::DSQL
 
     class CreateClusterInput
       attr_accessor deletion_protection_enabled: bool
+      attr_accessor kms_encryption_key: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor client_token: ::String
       attr_accessor multi_region_properties: Types::MultiRegionProperties
@@ -40,6 +41,7 @@ module Aws::DSQL
       attr_accessor status: ("CREATING" | "ACTIVE" | "IDLE" | "INACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "FAILED" | "PENDING_SETUP" | "PENDING_DELETE")
       attr_accessor creation_time: ::Time
       attr_accessor multi_region_properties: Types::MultiRegionProperties
+      attr_accessor encryption_details: Types::EncryptionDetails
       attr_accessor deletion_protection_enabled: bool
       SENSITIVE: []
     end
@@ -58,6 +60,13 @@ module Aws::DSQL
       SENSITIVE: []
     end
 
+    class EncryptionDetails
+      attr_accessor encryption_type: ("AWS_OWNED_KMS_KEY" | "CUSTOMER_MANAGED_KMS_KEY")
+      attr_accessor kms_key_arn: ::String
+      attr_accessor encryption_status: ("ENABLED" | "UPDATING" | "KMS_KEY_INACCESSIBLE" | "ENABLING")
+      SENSITIVE: []
+    end
+
     class GetClusterInput
       attr_accessor identifier: ::String
       SENSITIVE: []
@@ -71,6 +80,7 @@ module Aws::DSQL
       attr_accessor deletion_protection_enabled: bool
       attr_accessor multi_region_properties: Types::MultiRegionProperties
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor encryption_details: Types::EncryptionDetails
       SENSITIVE: []
     end
 
@@ -157,6 +167,7 @@ module Aws::DSQL
     class UpdateClusterInput
       attr_accessor identifier: ::String
       attr_accessor deletion_protection_enabled: bool
+      attr_accessor kms_encryption_key: ::String
       attr_accessor client_token: ::String
       attr_accessor multi_region_properties: Types::MultiRegionProperties
       SENSITIVE: []

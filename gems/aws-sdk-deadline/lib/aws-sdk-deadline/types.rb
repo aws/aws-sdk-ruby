@@ -8009,11 +8009,16 @@ module Aws::Deadline
     #   The Amazon EC2 market type.
     #   @return [Types::ServiceManagedEc2InstanceMarketOptions]
     #
+    # @!attribute [rw] storage_profile_id
+    #   The storage profile ID.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/deadline-2023-10-12/ServiceManagedEc2FleetConfiguration AWS API Documentation
     #
     class ServiceManagedEc2FleetConfiguration < Struct.new(
       :instance_capabilities,
-      :instance_market_options)
+      :instance_market_options,
+      :storage_profile_id)
       SENSITIVE = []
       include Aws::Structure
     end

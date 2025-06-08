@@ -3906,6 +3906,7 @@ module Aws::RDS
     #   resp.db_cluster.tag_list #=> Array
     #   resp.db_cluster.tag_list[0].key #=> String
     #   resp.db_cluster.tag_list[0].value #=> String
+    #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
@@ -7520,17 +7521,17 @@ module Aws::RDS
     #   The name of the primary DB cluster for the DB shard group.
     #
     # @option params [Integer] :compute_redundancy
-    #   Specifies whether to create standby DB shard groups for the DB shard
-    #   group. Valid values are the following:
+    #   Specifies whether to create standby standby DB data access shard for
+    #   the DB shard group. Valid values are the following:
     #
-    #   * 0 - Creates a DB shard group without a standby DB shard group. This
-    #     is the default value.
+    #   * 0 - Creates a DB shard group without a standby DB data access shard.
+    #     This is the default value.
     #
-    #   * 1 - Creates a DB shard group with a standby DB shard group in a
-    #     different Availability Zone (AZ).
+    #   * 1 - Creates a DB shard group with a standby DB data access shard in
+    #     a different Availability Zone (AZ).
     #
-    #   * 2 - Creates a DB shard group with two standby DB shard groups in two
-    #     different AZs.
+    #   * 2 - Creates a DB shard group with two standby DB data access shard
+    #     in two different AZs.
     #
     # @option params [required, Float] :max_acu
     #   The maximum capacity of the DB shard group in Aurora capacity units
@@ -9350,6 +9351,7 @@ module Aws::RDS
     #   resp.db_cluster.tag_list #=> Array
     #   resp.db_cluster.tag_list[0].key #=> String
     #   resp.db_cluster.tag_list[0].value #=> String
+    #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
@@ -12802,6 +12804,7 @@ module Aws::RDS
     #   resp.db_clusters[0].tag_list #=> Array
     #   resp.db_clusters[0].tag_list[0].key #=> String
     #   resp.db_clusters[0].tag_list[0].value #=> String
+    #   resp.db_clusters[0].global_cluster_identifier #=> String
     #   resp.db_clusters[0].global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_clusters[0].global_write_forwarding_requested #=> Boolean
     #   resp.db_clusters[0].pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
@@ -17912,6 +17915,17 @@ module Aws::RDS
     #
     # This command doesn't apply to RDS Custom.
     #
+    # <note markdown="1"> This operation uses resources on database instances. Because of this,
+    # we recommend publishing database logs to CloudWatch and then using the
+    # GetLogEvents operation. For more information, see [GetLogEvents][1] in
+    # the *Amazon CloudWatch Logs API Reference*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogEvents.html
+    #
     # @option params [required, String] :db_instance_identifier
     #   The customer-assigned name of the DB instance that contains the log
     #   files you want to list.
@@ -18226,6 +18240,7 @@ module Aws::RDS
     #   resp.db_cluster.tag_list #=> Array
     #   resp.db_cluster.tag_list[0].key #=> String
     #   resp.db_cluster.tag_list[0].value #=> String
+    #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
@@ -19952,6 +19967,7 @@ module Aws::RDS
     #   resp.db_cluster.tag_list #=> Array
     #   resp.db_cluster.tag_list[0].key #=> String
     #   resp.db_cluster.tag_list[0].value #=> String
+    #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
@@ -23832,6 +23848,7 @@ module Aws::RDS
     #   resp.db_cluster.tag_list #=> Array
     #   resp.db_cluster.tag_list[0].key #=> String
     #   resp.db_cluster.tag_list[0].value #=> String
+    #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
@@ -24135,6 +24152,7 @@ module Aws::RDS
     #   resp.db_cluster.tag_list #=> Array
     #   resp.db_cluster.tag_list[0].key #=> String
     #   resp.db_cluster.tag_list[0].value #=> String
+    #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
@@ -25737,6 +25755,7 @@ module Aws::RDS
     #   resp.db_cluster.tag_list #=> Array
     #   resp.db_cluster.tag_list[0].key #=> String
     #   resp.db_cluster.tag_list[0].value #=> String
+    #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
@@ -26561,6 +26580,7 @@ module Aws::RDS
     #   resp.db_cluster.tag_list #=> Array
     #   resp.db_cluster.tag_list[0].key #=> String
     #   resp.db_cluster.tag_list[0].value #=> String
+    #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
@@ -27368,6 +27388,7 @@ module Aws::RDS
     #   resp.db_cluster.tag_list #=> Array
     #   resp.db_cluster.tag_list[0].key #=> String
     #   resp.db_cluster.tag_list[0].value #=> String
+    #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
@@ -30541,6 +30562,7 @@ module Aws::RDS
     #   resp.db_cluster.tag_list #=> Array
     #   resp.db_cluster.tag_list[0].key #=> String
     #   resp.db_cluster.tag_list[0].value #=> String
+    #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
@@ -31375,6 +31397,7 @@ module Aws::RDS
     #   resp.db_cluster.tag_list #=> Array
     #   resp.db_cluster.tag_list[0].key #=> String
     #   resp.db_cluster.tag_list[0].value #=> String
+    #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
@@ -32285,7 +32308,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.277.0'
+      context[:gem_version] = '1.279.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

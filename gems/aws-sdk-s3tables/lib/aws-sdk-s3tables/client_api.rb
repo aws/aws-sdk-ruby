@@ -282,9 +282,10 @@ module Aws::S3Tables
     GetTablePolicyResponse.add_member(:resource_policy, Shapes::ShapeRef.new(shape: ResourcePolicy, required: true, location_name: "resourcePolicy"))
     GetTablePolicyResponse.struct_class = Types::GetTablePolicyResponse
 
-    GetTableRequest.add_member(:table_bucket_arn, Shapes::ShapeRef.new(shape: TableBucketARN, required: true, location: "uri", location_name: "tableBucketARN"))
-    GetTableRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: NamespaceName, required: true, location: "uri", location_name: "namespace"))
-    GetTableRequest.add_member(:name, Shapes::ShapeRef.new(shape: TableName, required: true, location: "uri", location_name: "name"))
+    GetTableRequest.add_member(:table_bucket_arn, Shapes::ShapeRef.new(shape: TableBucketARN, location: "querystring", location_name: "tableBucketARN"))
+    GetTableRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: NamespaceName, location: "querystring", location_name: "namespace"))
+    GetTableRequest.add_member(:name, Shapes::ShapeRef.new(shape: TableName, location: "querystring", location_name: "name"))
+    GetTableRequest.add_member(:table_arn, Shapes::ShapeRef.new(shape: TableARN, location: "querystring", location_name: "tableArn"))
     GetTableRequest.struct_class = Types::GetTableRequest
 
     GetTableResponse.add_member(:name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "name"))
@@ -654,7 +655,7 @@ module Aws::S3Tables
       api.add_operation(:get_table, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetTable"
         o.http_method = "GET"
-        o.http_request_uri = "/tables/{tableBucketARN}/{namespace}/{name}"
+        o.http_request_uri = "/get-table"
         o.input = Shapes::ShapeRef.new(shape: GetTableRequest)
         o.output = Shapes::ShapeRef.new(shape: GetTableResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)

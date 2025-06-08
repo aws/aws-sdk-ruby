@@ -386,7 +386,7 @@ module Aws::BedrockAgent
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] parent_action_signature
@@ -471,6 +471,13 @@ module Aws::BedrockAgent
     #   The unique identifier of the agent.
     #   @return [String]
     #
+    # @!attribute [rw] alias_invocation_state
+    #   The invocation state for the agent alias. If the agent alias is
+    #   running, the value is `ACCEPT_INVOCATIONS`. If the agent alias is
+    #   paused, the value is `REJECT_INVOCATIONS`. Use the
+    #   `UpdateAgentAlias` operation to change the invocation state.
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier to ensure that the API request
     #   completes no more than one time. If this token matches a previous
@@ -512,6 +519,7 @@ module Aws::BedrockAgent
       :agent_alias_name,
       :agent_alias_status,
       :agent_id,
+      :alias_invocation_state,
       :client_token,
       :created_at,
       :description,
@@ -583,6 +591,13 @@ module Aws::BedrockAgent
     #   The status of the alias.
     #   @return [String]
     #
+    # @!attribute [rw] alias_invocation_state
+    #   The invocation state for the agent alias. If the agent alias is
+    #   running, the value is `ACCEPT_INVOCATIONS`. If the agent alias is
+    #   paused, the value is `REJECT_INVOCATIONS`. Use the
+    #   `UpdateAgentAlias` operation to change the invocation state.
+    #   @return [String]
+    #
     # @!attribute [rw] created_at
     #   The time at which the alias of the agent was created.
     #   @return [Time]
@@ -606,6 +621,7 @@ module Aws::BedrockAgent
       :agent_alias_id,
       :agent_alias_name,
       :agent_alias_status,
+      :alias_invocation_state,
       :created_at,
       :description,
       :routing_configuration,
@@ -1773,7 +1789,7 @@ module Aws::BedrockAgent
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
     #   @return [String]
     #
     # @!attribute [rw] parent_action_group_signature_params
@@ -1786,7 +1802,7 @@ module Aws::BedrockAgent
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateAgentActionGroupRequest AWS API Documentation
@@ -7118,7 +7134,11 @@ module Aws::BedrockAgent
     #   inputs from nodes outside the loop and from previous loop
     #   iterations.
     #
-    # * Body nodes - These can be
+    # * Body nodes - The processing nodes that execute within each loop
+    #   iteration. These can be nodes for handling data in your flow, such
+    #   as a prompt or Lambda function nodes. Some node types aren't
+    #   supported inside a DoWhile loop body. For more information, see
+    #   [LoopIncompatibleNodeTypeFlowValidationDetails][1].
     #
     # * `LoopController` - The node that evaluates whether the loop should
     #   continue or exit based on a condition.
@@ -7126,6 +7146,10 @@ module Aws::BedrockAgent
     # These nodes work together to create a loop that runs at least once and
     # continues until a specified condition is met or a maximum number of
     # iterations is reached.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_LoopIncompatibleNodeTypeFlowValidationDetails.html
     #
     # @!attribute [rw] definition
     #   The definition of the DoWhile loop nodes and connections between
@@ -8268,7 +8292,7 @@ module Aws::BedrockAgent
     #   skips that step. The default state for each `promptType` is as
     #   follows.
     #
-    #   * `PRE_PROCESSING` – `ENABLED`
+    #   * `PRE_PROCESSING` – `DISABLED`
     #
     #   * `ORCHESTRATION` – `ENABLED`
     #
@@ -10552,7 +10576,7 @@ module Aws::BedrockAgent
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
     #   [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html
     #   @return [String]
     #
@@ -10566,7 +10590,7 @@ module Aws::BedrockAgent
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agent-computer-use.html
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-computer-use.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateAgentActionGroupRequest AWS API Documentation
@@ -10611,6 +10635,14 @@ module Aws::BedrockAgent
     #   The unique identifier of the agent.
     #   @return [String]
     #
+    # @!attribute [rw] alias_invocation_state
+    #   The invocation state for the agent alias. To pause the agent alias,
+    #   set the value to `REJECT_INVOCATIONS`. To start the agent alias
+    #   running again, set the value to `ACCEPT_INVOCATIONS`. Use the
+    #   `GetAgentAlias`, or `ListAgentAliases`, operation to get the
+    #   invocation state of an agent alias.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   Specifies a new description for the alias.
     #   @return [String]
@@ -10625,6 +10657,7 @@ module Aws::BedrockAgent
       :agent_alias_id,
       :agent_alias_name,
       :agent_id,
+      :alias_invocation_state,
       :description,
       :routing_configuration)
       SENSITIVE = []

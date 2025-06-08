@@ -137,6 +137,33 @@ module Aws
                             ) -> _GetInvoiceUnitResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInvoiceUnitResponseSuccess
 
+      interface _ListInvoiceSummariesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInvoiceSummariesResponse]
+        def invoice_summaries: () -> ::Array[Types::InvoiceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Invoicing/Client.html#list_invoice_summaries-instance_method
+      def list_invoice_summaries: (
+                                    selector: {
+                                      resource_type: ("ACCOUNT_ID" | "INVOICE_ID"),
+                                      value: ::String
+                                    },
+                                    ?filter: {
+                                      time_interval: {
+                                        start_date: ::Time,
+                                        end_date: ::Time
+                                      }?,
+                                      billing_period: {
+                                        month: ::Integer,
+                                        year: ::Integer
+                                      }?,
+                                      invoicing_entity: ::String?
+                                    },
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListInvoiceSummariesResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInvoiceSummariesResponseSuccess
+
       interface _ListInvoiceUnitsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListInvoiceUnitsResponse]
         def invoice_units: () -> ::Array[Types::InvoiceUnit]

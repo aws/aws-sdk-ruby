@@ -85,7 +85,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRServerless/Client.html#cancel_job_run-instance_method
       def cancel_job_run: (
                             application_id: ::String,
-                            job_run_id: ::String
+                            job_run_id: ::String,
+                            ?shutdown_grace_period_in_seconds: ::Integer
                           ) -> _CancelJobRunResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelJobRunResponseSuccess
 
@@ -292,6 +293,10 @@ module Aws
                            application_id: ::String,
                            client_token: ::String,
                            execution_role_arn: ::String,
+                           ?execution_iam_policy: {
+                             policy: ::String?,
+                             policy_arns: Array[::String]?
+                           },
                            ?job_driver: {
                              spark_submit: {
                                entry_point: ::String,

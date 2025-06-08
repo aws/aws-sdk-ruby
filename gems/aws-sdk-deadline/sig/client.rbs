@@ -382,7 +382,8 @@ module Aws
                               },
                               instance_market_options: {
                                 type: ("on-demand" | "spot")
-                              }
+                              },
+                              storage_profile_id: ::String?
                             }?
                           },
                           ?tags: Hash[::String, ::String],
@@ -2011,7 +2012,8 @@ module Aws
                               },
                               instance_market_options: {
                                 type: ("on-demand" | "spot")
-                              }
+                              },
+                              storage_profile_id: ::String?
                             }?
                           },
                           ?host_configuration: {

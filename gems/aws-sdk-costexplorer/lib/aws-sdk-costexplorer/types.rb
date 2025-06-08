@@ -496,6 +496,39 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
+    # Contains cost or usage metric values for comparing two time periods.
+    # Each value includes amounts for the baseline and comparison time
+    # periods, their difference, and the unit of measurement.
+    #
+    # @!attribute [rw] baseline_time_period_amount
+    #   The numeric value for the baseline time period measurement.
+    #   @return [String]
+    #
+    # @!attribute [rw] comparison_time_period_amount
+    #   The numeric value for the comparison time period measurement.
+    #   @return [String]
+    #
+    # @!attribute [rw] difference
+    #   The calculated difference between `ComparisonTimePeriodAmount` and
+    #   `BaselineTimePeriodAmount`.
+    #   @return [String]
+    #
+    # @!attribute [rw] unit
+    #   The unit of measurement applicable to all numeric values in this
+    #   comparison.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ComparisonMetricValue AWS API Documentation
+    #
+    class ComparisonMetricValue < Struct.new(
+      :baseline_time_period_amount,
+      :comparison_time_period_amount,
+      :difference,
+      :unit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The cost allocation tag structure. This includes detailed metadata for
     # the `CostAllocationTag` object.
     #
@@ -587,6 +620,114 @@ module Aws::CostExplorer
     class CostAllocationTagStatusEntry < Struct.new(
       :tag_key,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a comparison of cost and usage metrics between two time
+    # periods.
+    #
+    # @!attribute [rw] cost_and_usage_selector
+    #   Use `Expression` to filter in various Cost Explorer APIs.
+    #
+    #   Not all `Expression` types are supported in each API. Refer to the
+    #   documentation for each specific API to see what is supported.
+    #
+    #   There are two patterns:
+    #
+    #   * Simple dimension values.
+    #
+    #     * There are three types of simple dimension values:
+    #       `CostCategories`, `Tags`, and `Dimensions`.
+    #
+    #       * Specify the `CostCategories` field to define a filter that
+    #         acts on Cost Categories.
+    #
+    #       * Specify the `Tags` field to define a filter that acts on Cost
+    #         Allocation Tags.
+    #
+    #       * Specify the `Dimensions` field to define a filter that acts on
+    #         the [ `DimensionValues` ][1].
+    #     * For each filter type, you can set the dimension name and values
+    #       for the filters that you plan to use.
+    #
+    #       * For example, you can filter for `REGION==us-east-1 OR
+    #         REGION==us-west-1`. For `GetRightsizingRecommendation`, the
+    #         Region is a full name (for example, `REGION==US East (N.
+    #         Virginia)`.
+    #
+    #       * The corresponding `Expression` for this example is as follows:
+    #         `{ "Dimensions": { "Key": "REGION", "Values": [ "us-east-1",
+    #         "us-west-1" ] } }`
+    #
+    #       * As shown in the previous example, lists of dimension values
+    #         are combined with `OR` when applying the filter.
+    #     * You can also set different match options to further control how
+    #       the filter behaves. Not all APIs support match options. Refer to
+    #       the documentation for each specific API to see what is
+    #       supported.
+    #
+    #       * For example, you can filter for linked account names that
+    #         start with "a".
+    #
+    #       * The corresponding `Expression` for this example is as follows:
+    #         `{ "Dimensions": { "Key": "LINKED_ACCOUNT_NAME",
+    #         "MatchOptions": [ "STARTS_WITH" ], "Values": [ "a" ] } }`
+    #   * Compound `Expression` types with logical operations.
+    #
+    #     * You can use multiple `Expression` types and the logical
+    #       operators `AND/OR/NOT` to create a list of one or more
+    #       `Expression` objects. By doing this, you can filter by more
+    #       advanced options.
+    #
+    #     * For example, you can filter by `((REGION == us-east-1 OR REGION
+    #       == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=
+    #       DataTransfer)`.
+    #
+    #     * The corresponding `Expression` for this example is as follows:
+    #       `{ "And": [ {"Or": [ {"Dimensions": { "Key": "REGION", "Values":
+    #       [ "us-east-1", "us-west-1" ] }}, {"Tags": { "Key": "TagName",
+    #       "Values": ["Value1"] } } ]}, {"Not": {"Dimensions": { "Key":
+    #       "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] } `
+    #     <note markdown="1"> Because each `Expression` can have only one operator, the service
+    #     returns an error if more than one is specified. The following
+    #     example shows an `Expression` object that creates an error: ` {
+    #     "And": [ ... ], "Dimensions": { "Key": "USAGE_TYPE", "Values": [
+    #     "DataTransfer" ] } } `
+    #
+    #      The following is an example of the corresponding error message:
+    #     `"Expression has more than one roots. Only one root operator is
+    #     allowed for each expression: And, Or, Not, Dimensions, Tags,
+    #     CostCategories"`
+    #
+    #      </note>
+    #
+    #   <note markdown="1"> For the `GetRightsizingRecommendation` action, a combination of OR
+    #   and NOT isn't supported. OR isn't supported between different
+    #   dimensions, or dimensions and tags. NOT operators aren't supported.
+    #   Dimensions are also limited to `LINKED_ACCOUNT`, `REGION`, or
+    #   `RIGHTSIZING_TYPE`.
+    #
+    #    For the `GetReservationPurchaseRecommendation` action, only NOT is
+    #   supported. AND and OR aren't supported. Dimensions are limited to
+    #   `LINKED_ACCOUNT`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
+    #   @return [Types::Expression]
+    #
+    # @!attribute [rw] metrics
+    #   A mapping of metric names to their comparison values.
+    #   @return [Hash<String,Types::ComparisonMetricValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CostAndUsageComparison AWS API Documentation
+    #
+    class CostAndUsageComparison < Struct.new(
+      :cost_and_usage_selector,
+      :metrics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -903,6 +1044,155 @@ module Aws::CostExplorer
       :key,
       :values,
       :match_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a collection of cost drivers and their associated metrics
+    # for cost comparison analysis.
+    #
+    # @!attribute [rw] cost_selector
+    #   Use `Expression` to filter in various Cost Explorer APIs.
+    #
+    #   Not all `Expression` types are supported in each API. Refer to the
+    #   documentation for each specific API to see what is supported.
+    #
+    #   There are two patterns:
+    #
+    #   * Simple dimension values.
+    #
+    #     * There are three types of simple dimension values:
+    #       `CostCategories`, `Tags`, and `Dimensions`.
+    #
+    #       * Specify the `CostCategories` field to define a filter that
+    #         acts on Cost Categories.
+    #
+    #       * Specify the `Tags` field to define a filter that acts on Cost
+    #         Allocation Tags.
+    #
+    #       * Specify the `Dimensions` field to define a filter that acts on
+    #         the [ `DimensionValues` ][1].
+    #     * For each filter type, you can set the dimension name and values
+    #       for the filters that you plan to use.
+    #
+    #       * For example, you can filter for `REGION==us-east-1 OR
+    #         REGION==us-west-1`. For `GetRightsizingRecommendation`, the
+    #         Region is a full name (for example, `REGION==US East (N.
+    #         Virginia)`.
+    #
+    #       * The corresponding `Expression` for this example is as follows:
+    #         `{ "Dimensions": { "Key": "REGION", "Values": [ "us-east-1",
+    #         "us-west-1" ] } }`
+    #
+    #       * As shown in the previous example, lists of dimension values
+    #         are combined with `OR` when applying the filter.
+    #     * You can also set different match options to further control how
+    #       the filter behaves. Not all APIs support match options. Refer to
+    #       the documentation for each specific API to see what is
+    #       supported.
+    #
+    #       * For example, you can filter for linked account names that
+    #         start with "a".
+    #
+    #       * The corresponding `Expression` for this example is as follows:
+    #         `{ "Dimensions": { "Key": "LINKED_ACCOUNT_NAME",
+    #         "MatchOptions": [ "STARTS_WITH" ], "Values": [ "a" ] } }`
+    #   * Compound `Expression` types with logical operations.
+    #
+    #     * You can use multiple `Expression` types and the logical
+    #       operators `AND/OR/NOT` to create a list of one or more
+    #       `Expression` objects. By doing this, you can filter by more
+    #       advanced options.
+    #
+    #     * For example, you can filter by `((REGION == us-east-1 OR REGION
+    #       == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=
+    #       DataTransfer)`.
+    #
+    #     * The corresponding `Expression` for this example is as follows:
+    #       `{ "And": [ {"Or": [ {"Dimensions": { "Key": "REGION", "Values":
+    #       [ "us-east-1", "us-west-1" ] }}, {"Tags": { "Key": "TagName",
+    #       "Values": ["Value1"] } } ]}, {"Not": {"Dimensions": { "Key":
+    #       "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] } `
+    #     <note markdown="1"> Because each `Expression` can have only one operator, the service
+    #     returns an error if more than one is specified. The following
+    #     example shows an `Expression` object that creates an error: ` {
+    #     "And": [ ... ], "Dimensions": { "Key": "USAGE_TYPE", "Values": [
+    #     "DataTransfer" ] } } `
+    #
+    #      The following is an example of the corresponding error message:
+    #     `"Expression has more than one roots. Only one root operator is
+    #     allowed for each expression: And, Or, Not, Dimensions, Tags,
+    #     CostCategories"`
+    #
+    #      </note>
+    #
+    #   <note markdown="1"> For the `GetRightsizingRecommendation` action, a combination of OR
+    #   and NOT isn't supported. OR isn't supported between different
+    #   dimensions, or dimensions and tags. NOT operators aren't supported.
+    #   Dimensions are also limited to `LINKED_ACCOUNT`, `REGION`, or
+    #   `RIGHTSIZING_TYPE`.
+    #
+    #    For the `GetReservationPurchaseRecommendation` action, only NOT is
+    #   supported. AND and OR aren't supported. Dimensions are limited to
+    #   `LINKED_ACCOUNT`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
+    #   @return [Types::Expression]
+    #
+    # @!attribute [rw] metrics
+    #   A mapping of metric names to their comparison values.
+    #   @return [Hash<String,Types::ComparisonMetricValue>]
+    #
+    # @!attribute [rw] cost_drivers
+    #   An array of cost drivers, each representing a cost difference
+    #   between the baseline and comparison time periods. Each entry also
+    #   includes a metric delta (for example, usage change) that contributed
+    #   to the cost variance, along with the identifier and type of change.
+    #   @return [Array<Types::CostDriver>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CostComparisonDriver AWS API Documentation
+    #
+    class CostComparisonDriver < Struct.new(
+      :cost_selector,
+      :metrics,
+      :cost_drivers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents factors that contribute to cost variations between the
+    # baseline and comparison time periods, including the type of driver, an
+    # identifier of the driver, and associated metrics.
+    #
+    # @!attribute [rw] type
+    #   The category or classification of the cost driver.
+    #
+    #   Values include: BUNDLED\_DISCOUNT, CREDIT, OUT\_OF\_CYCLE\_CHARGE,
+    #   REFUND, RECURRING\_RESERVATION\_FEE, RESERVATION\_USAGE,
+    #   RI\_VOLUME\_DISCOUNT, SAVINGS\_PLAN\_USAGE, SAVINGS\_PLAN\_NEGATION,
+    #   SAVINGS\_PLAN\_RECURRING\_FEE, SUPPORT\_FEE, TAX,
+    #   UPFRONT\_RESERVATION\_FEE, USAGE\_CHANGE, COMMITMENT
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The specific identifier of the cost driver.
+    #   @return [String]
+    #
+    # @!attribute [rw] metrics
+    #   A mapping of metric names to their comparison values, measuring the
+    #   impact of this cost driver.
+    #   @return [Hash<String,Types::ComparisonMetricValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CostDriver AWS API Documentation
+    #
+    class CostDriver < Struct.new(
+      :type,
+      :name,
+      :metrics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2336,6 +2626,182 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
+    # @!attribute [rw] billing_view_arn
+    #   The Amazon Resource Name (ARN) that uniquely identifies a specific
+    #   billing view. The ARN is used to specify which particular billing
+    #   view you want to interact with or retrieve information from when
+    #   making API calls related to Amazon Web Services Billing and Cost
+    #   Management features. The BillingViewArn can be retrieved by calling
+    #   the ListBillingViews API.
+    #   @return [String]
+    #
+    # @!attribute [rw] baseline_time_period
+    #   The reference time period for comparison. This time period serves as
+    #   the baseline against which other cost and usage data will be
+    #   compared. The interval must start and end on the first day of a
+    #   month, with a duration of exactly one month.
+    #   @return [Types::DateInterval]
+    #
+    # @!attribute [rw] comparison_time_period
+    #   The comparison time period for analysis. This time period's cost
+    #   and usage data will be compared against the baseline time period.
+    #   The interval must start and end on the first day of a month, with a
+    #   duration of exactly one month.
+    #   @return [Types::DateInterval]
+    #
+    # @!attribute [rw] metric_for_comparison
+    #   The cost and usage metric to compare. Valid values are
+    #   `AmortizedCost`, `BlendedCost`, `NetAmortizedCost`,
+    #   `NetUnblendedCost`, `NormalizedUsageAmount`, `UnblendedCost`, and
+    #   `UsageQuantity`.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   Use `Expression` to filter in various Cost Explorer APIs.
+    #
+    #   Not all `Expression` types are supported in each API. Refer to the
+    #   documentation for each specific API to see what is supported.
+    #
+    #   There are two patterns:
+    #
+    #   * Simple dimension values.
+    #
+    #     * There are three types of simple dimension values:
+    #       `CostCategories`, `Tags`, and `Dimensions`.
+    #
+    #       * Specify the `CostCategories` field to define a filter that
+    #         acts on Cost Categories.
+    #
+    #       * Specify the `Tags` field to define a filter that acts on Cost
+    #         Allocation Tags.
+    #
+    #       * Specify the `Dimensions` field to define a filter that acts on
+    #         the [ `DimensionValues` ][1].
+    #     * For each filter type, you can set the dimension name and values
+    #       for the filters that you plan to use.
+    #
+    #       * For example, you can filter for `REGION==us-east-1 OR
+    #         REGION==us-west-1`. For `GetRightsizingRecommendation`, the
+    #         Region is a full name (for example, `REGION==US East (N.
+    #         Virginia)`.
+    #
+    #       * The corresponding `Expression` for this example is as follows:
+    #         `{ "Dimensions": { "Key": "REGION", "Values": [ "us-east-1",
+    #         "us-west-1" ] } }`
+    #
+    #       * As shown in the previous example, lists of dimension values
+    #         are combined with `OR` when applying the filter.
+    #     * You can also set different match options to further control how
+    #       the filter behaves. Not all APIs support match options. Refer to
+    #       the documentation for each specific API to see what is
+    #       supported.
+    #
+    #       * For example, you can filter for linked account names that
+    #         start with "a".
+    #
+    #       * The corresponding `Expression` for this example is as follows:
+    #         `{ "Dimensions": { "Key": "LINKED_ACCOUNT_NAME",
+    #         "MatchOptions": [ "STARTS_WITH" ], "Values": [ "a" ] } }`
+    #   * Compound `Expression` types with logical operations.
+    #
+    #     * You can use multiple `Expression` types and the logical
+    #       operators `AND/OR/NOT` to create a list of one or more
+    #       `Expression` objects. By doing this, you can filter by more
+    #       advanced options.
+    #
+    #     * For example, you can filter by `((REGION == us-east-1 OR REGION
+    #       == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=
+    #       DataTransfer)`.
+    #
+    #     * The corresponding `Expression` for this example is as follows:
+    #       `{ "And": [ {"Or": [ {"Dimensions": { "Key": "REGION", "Values":
+    #       [ "us-east-1", "us-west-1" ] }}, {"Tags": { "Key": "TagName",
+    #       "Values": ["Value1"] } } ]}, {"Not": {"Dimensions": { "Key":
+    #       "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] } `
+    #     <note markdown="1"> Because each `Expression` can have only one operator, the service
+    #     returns an error if more than one is specified. The following
+    #     example shows an `Expression` object that creates an error: ` {
+    #     "And": [ ... ], "Dimensions": { "Key": "USAGE_TYPE", "Values": [
+    #     "DataTransfer" ] } } `
+    #
+    #      The following is an example of the corresponding error message:
+    #     `"Expression has more than one roots. Only one root operator is
+    #     allowed for each expression: And, Or, Not, Dimensions, Tags,
+    #     CostCategories"`
+    #
+    #      </note>
+    #
+    #   <note markdown="1"> For the `GetRightsizingRecommendation` action, a combination of OR
+    #   and NOT isn't supported. OR isn't supported between different
+    #   dimensions, or dimensions and tags. NOT operators aren't supported.
+    #   Dimensions are also limited to `LINKED_ACCOUNT`, `REGION`, or
+    #   `RIGHTSIZING_TYPE`.
+    #
+    #    For the `GetReservationPurchaseRecommendation` action, only NOT is
+    #   supported. AND and OR aren't supported. Dimensions are limited to
+    #   `LINKED_ACCOUNT`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
+    #   @return [Types::Expression]
+    #
+    # @!attribute [rw] group_by
+    #   You can group results using the attributes `DIMENSION`, `TAG`, and
+    #   `COST_CATEGORY`.
+    #   @return [Array<Types::GroupDefinition>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results that are returned for the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_page_token
+    #   The token to retrieve the next set of paginated results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetCostAndUsageComparisonsRequest AWS API Documentation
+    #
+    class GetCostAndUsageComparisonsRequest < Struct.new(
+      :billing_view_arn,
+      :baseline_time_period,
+      :comparison_time_period,
+      :metric_for_comparison,
+      :filter,
+      :group_by,
+      :max_results,
+      :next_page_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cost_and_usage_comparisons
+    #   An array of comparison results showing cost and usage metrics
+    #   between `BaselineTimePeriod` and `ComparisonTimePeriod`.
+    #   @return [Array<Types::CostAndUsageComparison>]
+    #
+    # @!attribute [rw] total_cost_and_usage
+    #   A summary of the total cost and usage, comparing amounts between
+    #   `BaselineTimePeriod` and `ComparisonTimePeriod` and their
+    #   differences. This total represents the aggregate total across all
+    #   paginated results, if the response spans multiple pages.
+    #   @return [Hash<String,Types::ComparisonMetricValue>]
+    #
+    # @!attribute [rw] next_page_token
+    #   The token to retrieve the next set of paginated results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetCostAndUsageComparisonsResponse AWS API Documentation
+    #
+    class GetCostAndUsageComparisonsResponse < Struct.new(
+      :cost_and_usage_comparisons,
+      :total_cost_and_usage,
+      :next_page_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] time_period
     #   Sets the start date and end date for retrieving Amazon Web Services
     #   costs. The start date is inclusive, but the end date is exclusive.
@@ -2810,6 +3276,176 @@ module Aws::CostExplorer
       :cost_category_values,
       :return_size,
       :total_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] billing_view_arn
+    #   The Amazon Resource Name (ARN) that uniquely identifies a specific
+    #   billing view. The ARN is used to specify which particular billing
+    #   view you want to interact with or retrieve information from when
+    #   making API calls related to Amazon Web Services Billing and Cost
+    #   Management features. The BillingViewArn can be retrieved by calling
+    #   the ListBillingViews API.
+    #   @return [String]
+    #
+    # @!attribute [rw] baseline_time_period
+    #   The reference time period for comparison. This time period serves as
+    #   the baseline against which other cost and usage data will be
+    #   compared. The interval must start and end on the first day of a
+    #   month, with a duration of exactly one month.
+    #   @return [Types::DateInterval]
+    #
+    # @!attribute [rw] comparison_time_period
+    #   The comparison time period for analysis. This time period's cost
+    #   and usage data will be compared against the baseline time period.
+    #   The interval must start and end on the first day of a month, with a
+    #   duration of exactly one month.
+    #   @return [Types::DateInterval]
+    #
+    # @!attribute [rw] metric_for_comparison
+    #   The cost and usage metric to compare. Valid values are
+    #   `AmortizedCost`, `BlendedCost`, `NetAmortizedCost`,
+    #   `NetUnblendedCost`, `NormalizedUsageAmount`, `UnblendedCost`, and
+    #   `UsageQuantity`.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   Use `Expression` to filter in various Cost Explorer APIs.
+    #
+    #   Not all `Expression` types are supported in each API. Refer to the
+    #   documentation for each specific API to see what is supported.
+    #
+    #   There are two patterns:
+    #
+    #   * Simple dimension values.
+    #
+    #     * There are three types of simple dimension values:
+    #       `CostCategories`, `Tags`, and `Dimensions`.
+    #
+    #       * Specify the `CostCategories` field to define a filter that
+    #         acts on Cost Categories.
+    #
+    #       * Specify the `Tags` field to define a filter that acts on Cost
+    #         Allocation Tags.
+    #
+    #       * Specify the `Dimensions` field to define a filter that acts on
+    #         the [ `DimensionValues` ][1].
+    #     * For each filter type, you can set the dimension name and values
+    #       for the filters that you plan to use.
+    #
+    #       * For example, you can filter for `REGION==us-east-1 OR
+    #         REGION==us-west-1`. For `GetRightsizingRecommendation`, the
+    #         Region is a full name (for example, `REGION==US East (N.
+    #         Virginia)`.
+    #
+    #       * The corresponding `Expression` for this example is as follows:
+    #         `{ "Dimensions": { "Key": "REGION", "Values": [ "us-east-1",
+    #         "us-west-1" ] } }`
+    #
+    #       * As shown in the previous example, lists of dimension values
+    #         are combined with `OR` when applying the filter.
+    #     * You can also set different match options to further control how
+    #       the filter behaves. Not all APIs support match options. Refer to
+    #       the documentation for each specific API to see what is
+    #       supported.
+    #
+    #       * For example, you can filter for linked account names that
+    #         start with "a".
+    #
+    #       * The corresponding `Expression` for this example is as follows:
+    #         `{ "Dimensions": { "Key": "LINKED_ACCOUNT_NAME",
+    #         "MatchOptions": [ "STARTS_WITH" ], "Values": [ "a" ] } }`
+    #   * Compound `Expression` types with logical operations.
+    #
+    #     * You can use multiple `Expression` types and the logical
+    #       operators `AND/OR/NOT` to create a list of one or more
+    #       `Expression` objects. By doing this, you can filter by more
+    #       advanced options.
+    #
+    #     * For example, you can filter by `((REGION == us-east-1 OR REGION
+    #       == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=
+    #       DataTransfer)`.
+    #
+    #     * The corresponding `Expression` for this example is as follows:
+    #       `{ "And": [ {"Or": [ {"Dimensions": { "Key": "REGION", "Values":
+    #       [ "us-east-1", "us-west-1" ] }}, {"Tags": { "Key": "TagName",
+    #       "Values": ["Value1"] } } ]}, {"Not": {"Dimensions": { "Key":
+    #       "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] } `
+    #     <note markdown="1"> Because each `Expression` can have only one operator, the service
+    #     returns an error if more than one is specified. The following
+    #     example shows an `Expression` object that creates an error: ` {
+    #     "And": [ ... ], "Dimensions": { "Key": "USAGE_TYPE", "Values": [
+    #     "DataTransfer" ] } } `
+    #
+    #      The following is an example of the corresponding error message:
+    #     `"Expression has more than one roots. Only one root operator is
+    #     allowed for each expression: And, Or, Not, Dimensions, Tags,
+    #     CostCategories"`
+    #
+    #      </note>
+    #
+    #   <note markdown="1"> For the `GetRightsizingRecommendation` action, a combination of OR
+    #   and NOT isn't supported. OR isn't supported between different
+    #   dimensions, or dimensions and tags. NOT operators aren't supported.
+    #   Dimensions are also limited to `LINKED_ACCOUNT`, `REGION`, or
+    #   `RIGHTSIZING_TYPE`.
+    #
+    #    For the `GetReservationPurchaseRecommendation` action, only NOT is
+    #   supported. AND and OR aren't supported. Dimensions are limited to
+    #   `LINKED_ACCOUNT`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html
+    #   @return [Types::Expression]
+    #
+    # @!attribute [rw] group_by
+    #   You can group results using the attributes `DIMENSION`, `TAG`, and
+    #   `COST_CATEGORY`. Note that `SERVICE` and `USAGE_TYPE` dimensions are
+    #   automatically included in the cost comparison drivers analysis.
+    #   @return [Array<Types::GroupDefinition>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results that are returned for the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_page_token
+    #   The token to retrieve the next set of paginated results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetCostComparisonDriversRequest AWS API Documentation
+    #
+    class GetCostComparisonDriversRequest < Struct.new(
+      :billing_view_arn,
+      :baseline_time_period,
+      :comparison_time_period,
+      :metric_for_comparison,
+      :filter,
+      :group_by,
+      :max_results,
+      :next_page_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cost_comparison_drivers
+    #   An array of comparison results showing factors that drive
+    #   significant cost differences between `BaselineTimePeriod` and
+    #   `ComparisonTimePeriod`.
+    #   @return [Array<Types::CostComparisonDriver>]
+    #
+    # @!attribute [rw] next_page_token
+    #   The token to retrieve the next set of paginated results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetCostComparisonDriversResponse AWS API Documentation
+    #
+    class GetCostComparisonDriversResponse < Struct.new(
+      :cost_comparison_drivers,
+      :next_page_token)
       SENSITIVE = []
       include Aws::Structure
     end

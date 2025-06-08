@@ -637,7 +637,7 @@ module Aws
                                         vocabulary_filter_name: ::String?,
                                         vocabulary_filter_method: ("remove" | "mask" | "tag")?,
                                         clinical_note_generation_settings: {
-                                          note_template: ("HISTORY_AND_PHYSICAL" | "GIRPP")?
+                                          note_template: ("HISTORY_AND_PHYSICAL" | "GIRPP" | "BIRP" | "SIRP" | "DAP" | "BEHAVIORAL_SOAP" | "PHYSICAL_SOAP")?
                                         }?
                                       },
                                       ?channel_definitions: Array[

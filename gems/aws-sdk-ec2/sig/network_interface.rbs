@@ -51,6 +51,12 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#private_dns_name-instance_method
       def private_dns_name: () -> ::String
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#public_dns_name-instance_method
+      def public_dns_name: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#public_ip_dns_name_options-instance_method
+      def public_ip_dns_name_options: () -> Types::PublicIpDnsNameOptions
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/NetworkInterface.html#private_ip_address-instance_method
       def private_ip_address: () -> ::String
 

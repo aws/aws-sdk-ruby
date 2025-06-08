@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.279.0 (2025-06-06)
+------------------
+
+* Feature - Include Global Cluster Identifier in DBCluster if the DBCluster is a Global Cluster Member.
+
+1.278.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.277.0 (2025-05-20)
 ------------------
 

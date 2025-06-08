@@ -114,20 +114,28 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#create_location_azure_blob-instance_method
       def create_location_azure_blob: (
                                         container_url: ::String,
-                                        authentication_type: ("SAS"),
+                                        authentication_type: ("SAS" | "NONE"),
                                         ?sas_configuration: {
                                           token: ::String
                                         },
                                         ?blob_type: ("BLOCK"),
                                         ?access_tier: ("HOT" | "COOL" | "ARCHIVE"),
                                         ?subdirectory: ::String,
-                                        agent_arns: Array[::String],
+                                        ?agent_arns: Array[::String],
                                         ?tags: Array[
                                           {
                                             key: ::String,
                                             value: ::String?
                                           },
-                                        ]
+                                        ],
+                                        ?cmk_secret_config: {
+                                          secret_arn: ::String?,
+                                          kms_key_arn: ::String?
+                                        },
+                                        ?custom_secret_config: {
+                                          secret_arn: ::String?,
+                                          secret_access_role_arn: ::String?
+                                        }
                                       ) -> _CreateLocationAzureBlobResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLocationAzureBlobResponseSuccess
 
@@ -331,14 +339,22 @@ module Aws
                                             bucket_name: ::String,
                                             ?access_key: ::String,
                                             ?secret_key: ::String,
-                                            agent_arns: Array[::String],
+                                            ?agent_arns: Array[::String],
                                             ?tags: Array[
                                               {
                                                 key: ::String,
                                                 value: ::String?
                                               },
                                             ],
-                                            ?server_certificate: ::String
+                                            ?server_certificate: ::String,
+                                            ?cmk_secret_config: {
+                                              secret_arn: ::String?,
+                                              kms_key_arn: ::String?
+                                            },
+                                            ?custom_secret_config: {
+                                              secret_arn: ::String?,
+                                              secret_access_role_arn: ::String?
+                                            }
                                           ) -> _CreateLocationObjectStorageResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLocationObjectStorageResponseSuccess
 
@@ -532,11 +548,14 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLocationAzureBlobResponse]
         def location_arn: () -> ::String
         def location_uri: () -> ::String
-        def authentication_type: () -> ("SAS")
+        def authentication_type: () -> ("SAS" | "NONE")
         def blob_type: () -> ("BLOCK")
         def access_tier: () -> ("HOT" | "COOL" | "ARCHIVE")
         def agent_arns: () -> ::Array[::String]
         def creation_time: () -> ::Time
+        def managed_secret_config: () -> Types::ManagedSecretConfig
+        def cmk_secret_config: () -> Types::CmkSecretConfig
+        def custom_secret_config: () -> Types::CustomSecretConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_location_azure_blob-instance_method
       def describe_location_azure_blob: (
@@ -663,6 +682,9 @@ module Aws
         def agent_arns: () -> ::Array[::String]
         def creation_time: () -> ::Time
         def server_certificate: () -> ::String
+        def managed_secret_config: () -> Types::ManagedSecretConfig
+        def cmk_secret_config: () -> Types::CmkSecretConfig
+        def custom_secret_config: () -> Types::CustomSecretConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_location_object_storage-instance_method
       def describe_location_object_storage: (
@@ -759,6 +781,8 @@ module Aws
         def files_prepared: () -> ::Integer
         def files_listed: () -> Types::TaskExecutionFilesListedDetail
         def files_failed: () -> Types::TaskExecutionFilesFailedDetail
+        def launch_time: () -> ::Time
+        def end_time: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_task_execution-instance_method
       def describe_task_execution: (
@@ -967,13 +991,21 @@ module Aws
       def update_location_azure_blob: (
                                         location_arn: ::String,
                                         ?subdirectory: ::String,
-                                        ?authentication_type: ("SAS"),
+                                        ?authentication_type: ("SAS" | "NONE"),
                                         ?sas_configuration: {
                                           token: ::String
                                         },
                                         ?blob_type: ("BLOCK"),
                                         ?access_tier: ("HOT" | "COOL" | "ARCHIVE"),
-                                        ?agent_arns: Array[::String]
+                                        ?agent_arns: Array[::String],
+                                        ?cmk_secret_config: {
+                                          secret_arn: ::String?,
+                                          kms_key_arn: ::String?
+                                        },
+                                        ?custom_secret_config: {
+                                          secret_arn: ::String?,
+                                          secret_access_role_arn: ::String?
+                                        }
                                       ) -> _UpdateLocationAzureBlobResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLocationAzureBlobResponseSuccess
 
@@ -1122,7 +1154,15 @@ module Aws
                                             ?access_key: ::String,
                                             ?secret_key: ::String,
                                             ?agent_arns: Array[::String],
-                                            ?server_certificate: ::String
+                                            ?server_certificate: ::String,
+                                            ?cmk_secret_config: {
+                                              secret_arn: ::String?,
+                                              kms_key_arn: ::String?
+                                            },
+                                            ?custom_secret_config: {
+                                              secret_arn: ::String?,
+                                              secret_access_role_arn: ::String?
+                                            }
                                           ) -> _UpdateLocationObjectStorageResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLocationObjectStorageResponseSuccess
 

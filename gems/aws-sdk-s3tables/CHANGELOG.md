@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2025-06-06)
+------------------
+
+* Feature - S3 Tables now supports getting details about a table via its table ARN.
+
+1.8.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.7.0 (2025-05-12)
 ------------------
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2025-06-03)
+------------------
+
+* Feature - Adds support to create routing rules and set the routing mode for a custom domain name.
+
+1.76.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.75.0 (2025-05-12)
 ------------------
 

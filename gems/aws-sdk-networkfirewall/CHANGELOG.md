@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2025-06-04)
+------------------
+
+* Feature - You can now monitor flow and alert log metrics from the Network Firewall console.
+
+1.67.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.66.0 (2025-05-28)
+------------------
+
+* Feature - You can now use VPC endpoint associations to create multiple firewall endpoints for a single firewall.
+
 1.65.0 (2025-05-12)
 ------------------
 

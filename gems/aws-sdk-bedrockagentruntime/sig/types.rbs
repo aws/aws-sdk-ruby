@@ -261,6 +261,13 @@ module Aws::BedrockAgentRuntime
       SENSITIVE: [:collaborator_instruction, :collaborator_name]
     end
 
+    class ConditionResultEvent
+      attr_accessor node_name: ::String
+      attr_accessor satisfied_conditions: ::Array[Types::SatisfiedCondition]
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
     class ConflictException
       attr_accessor message: ::String
       attr_accessor event_type: untyped
@@ -439,6 +446,85 @@ module Aws::BedrockAgentRuntime
       SENSITIVE: []
     end
 
+    class FlowExecutionContent
+      attr_accessor document: untyped
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Document < FlowExecutionContent
+      end
+      class Unknown < FlowExecutionContent
+      end
+    end
+
+    class FlowExecutionError
+      attr_accessor error: ("ExecutionTimedOut")
+      attr_accessor message: ::String
+      attr_accessor node_name: ::String
+      SENSITIVE: []
+    end
+
+    class FlowExecutionEvent
+      attr_accessor condition_result_event: Types::ConditionResultEvent
+      attr_accessor flow_failure_event: Types::FlowFailureEvent
+      attr_accessor flow_input_event: Types::FlowExecutionInputEvent
+      attr_accessor flow_output_event: Types::FlowExecutionOutputEvent
+      attr_accessor node_failure_event: Types::NodeFailureEvent
+      attr_accessor node_input_event: Types::NodeInputEvent
+      attr_accessor node_output_event: Types::NodeOutputEvent
+      attr_accessor unknown: untyped
+      SENSITIVE: [:condition_result_event, :flow_failure_event, :flow_input_event, :flow_output_event, :node_failure_event, :node_input_event, :node_output_event]
+
+      class ConditionResultEvent < FlowExecutionEvent
+      end
+      class FlowFailureEvent < FlowExecutionEvent
+      end
+      class FlowInputEvent < FlowExecutionEvent
+      end
+      class FlowOutputEvent < FlowExecutionEvent
+      end
+      class NodeFailureEvent < FlowExecutionEvent
+      end
+      class NodeInputEvent < FlowExecutionEvent
+      end
+      class NodeOutputEvent < FlowExecutionEvent
+      end
+      class Unknown < FlowExecutionEvent
+      end
+    end
+
+    class FlowExecutionInputEvent
+      attr_accessor fields: ::Array[Types::FlowInputField]
+      attr_accessor node_name: ::String
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class FlowExecutionOutputEvent
+      attr_accessor fields: ::Array[Types::FlowOutputField]
+      attr_accessor node_name: ::String
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class FlowExecutionSummary
+      attr_accessor created_at: ::Time
+      attr_accessor ended_at: ::Time
+      attr_accessor execution_arn: ::String
+      attr_accessor flow_alias_identifier: ::String
+      attr_accessor flow_identifier: ::String
+      attr_accessor flow_version: ::String
+      attr_accessor status: ("Running" | "Succeeded" | "Failed" | "TimedOut" | "Aborted")
+      SENSITIVE: []
+    end
+
+    class FlowFailureEvent
+      attr_accessor error_code: ("VALIDATION" | "INTERNAL_SERVER" | "NODE_EXECUTION_FAILED")
+      attr_accessor error_message: ::String
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
     class FlowInput
       attr_accessor content: Types::FlowInputContent
       attr_accessor node_input_name: ::String
@@ -456,6 +542,12 @@ module Aws::BedrockAgentRuntime
       end
       class Unknown < FlowInputContent
       end
+    end
+
+    class FlowInputField
+      attr_accessor content: Types::FlowExecutionContent
+      attr_accessor name: ::String
+      SENSITIVE: [:content]
     end
 
     class FlowMultiTurnInputContent
@@ -494,6 +586,12 @@ module Aws::BedrockAgentRuntime
       attr_accessor node_type: ("FlowInputNode" | "FlowOutputNode" | "LambdaFunctionNode" | "KnowledgeBaseNode" | "PromptNode" | "ConditionNode" | "LexNode")
       attr_accessor event_type: untyped
       SENSITIVE: []
+    end
+
+    class FlowOutputField
+      attr_accessor content: Types::FlowExecutionContent
+      attr_accessor name: ::String
+      SENSITIVE: [:content]
     end
 
     class FlowTrace
@@ -681,6 +779,42 @@ module Aws::BedrockAgentRuntime
     class GetAgentMemoryResponse
       attr_accessor memory_contents: ::Array[Types::Memory]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetExecutionFlowSnapshotRequest
+      attr_accessor execution_identifier: ::String
+      attr_accessor flow_alias_identifier: ::String
+      attr_accessor flow_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetExecutionFlowSnapshotResponse
+      attr_accessor customer_encryption_key_arn: ::String
+      attr_accessor definition: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor flow_alias_identifier: ::String
+      attr_accessor flow_identifier: ::String
+      attr_accessor flow_version: ::String
+      SENSITIVE: []
+    end
+
+    class GetFlowExecutionRequest
+      attr_accessor execution_identifier: ::String
+      attr_accessor flow_alias_identifier: ::String
+      attr_accessor flow_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetFlowExecutionResponse
+      attr_accessor ended_at: ::Time
+      attr_accessor errors: ::Array[Types::FlowExecutionError]
+      attr_accessor execution_arn: ::String
+      attr_accessor flow_alias_identifier: ::String
+      attr_accessor flow_identifier: ::String
+      attr_accessor flow_version: ::String
+      attr_accessor started_at: ::Time
+      attr_accessor status: ("Running" | "Succeeded" | "Failed" | "TimedOut" | "Aborted")
       SENSITIVE: []
     end
 
@@ -1019,6 +1153,7 @@ module Aws::BedrockAgentRuntime
       attr_accessor end_session: bool
       attr_accessor input_text: ::String
       attr_accessor memory_id: ::String
+      attr_accessor prompt_creation_configurations: Types::PromptCreationConfigurations
       attr_accessor session_id: ::String
       attr_accessor session_state: Types::SessionState
       attr_accessor source_arn: ::String
@@ -1069,6 +1204,7 @@ module Aws::BedrockAgentRuntime
       attr_accessor instruction: ::String
       attr_accessor knowledge_bases: ::Array[Types::KnowledgeBase]
       attr_accessor orchestration_type: ("DEFAULT" | "CUSTOM_ORCHESTRATION")
+      attr_accessor prompt_creation_configurations: Types::PromptCreationConfigurations
       attr_accessor prompt_override_configuration: Types::PromptOverrideConfiguration
       attr_accessor session_id: ::String
       attr_accessor streaming_configurations: Types::StreamingConfigurations
@@ -1141,6 +1277,36 @@ module Aws::BedrockAgentRuntime
       attr_accessor override_search_type: ("HYBRID" | "SEMANTIC")
       attr_accessor reranking_configuration: Types::VectorSearchRerankingConfiguration
       SENSITIVE: [:filter]
+    end
+
+    class ListFlowExecutionEventsRequest
+      attr_accessor event_type: ("Node" | "Flow")
+      attr_accessor execution_identifier: ::String
+      attr_accessor flow_alias_identifier: ::String
+      attr_accessor flow_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFlowExecutionEventsResponse
+      attr_accessor flow_execution_events: ::Array[Types::FlowExecutionEvent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFlowExecutionsRequest
+      attr_accessor flow_alias_identifier: ::String
+      attr_accessor flow_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFlowExecutionsResponse
+      attr_accessor flow_execution_summaries: ::Array[Types::FlowExecutionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
     end
 
     class ListInvocationStepsRequest
@@ -1262,6 +1428,51 @@ module Aws::BedrockAgentRuntime
     class ModelPerformanceConfiguration
       attr_accessor performance_config: Types::PerformanceConfiguration
       SENSITIVE: []
+    end
+
+    class NodeExecutionContent
+      attr_accessor document: untyped
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Document < NodeExecutionContent
+      end
+      class Unknown < NodeExecutionContent
+      end
+    end
+
+    class NodeFailureEvent
+      attr_accessor error_code: ("VALIDATION" | "DEPENDENCY_FAILED" | "BAD_GATEWAY" | "INTERNAL_SERVER")
+      attr_accessor error_message: ::String
+      attr_accessor node_name: ::String
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class NodeInputEvent
+      attr_accessor fields: ::Array[Types::NodeInputField]
+      attr_accessor node_name: ::String
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class NodeInputField
+      attr_accessor content: Types::NodeExecutionContent
+      attr_accessor name: ::String
+      SENSITIVE: [:content]
+    end
+
+    class NodeOutputEvent
+      attr_accessor fields: ::Array[Types::NodeOutputField]
+      attr_accessor node_name: ::String
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class NodeOutputField
+      attr_accessor content: Types::NodeExecutionContent
+      attr_accessor name: ::String
+      SENSITIVE: [:content]
     end
 
     class Observation
@@ -1455,6 +1666,12 @@ module Aws::BedrockAgentRuntime
       attr_accessor prompt_state: ("ENABLED" | "DISABLED")
       attr_accessor prompt_type: ("PRE_PROCESSING" | "ORCHESTRATION" | "KNOWLEDGE_BASE_RESPONSE_GENERATION" | "POST_PROCESSING" | "ROUTING_CLASSIFIER")
       SENSITIVE: [:base_prompt_template]
+    end
+
+    class PromptCreationConfigurations
+      attr_accessor exclude_previous_thinking_steps: bool
+      attr_accessor previous_conversation_turns_to_include: ::Integer
+      SENSITIVE: []
     end
 
     class PromptOverrideConfiguration
@@ -1868,6 +2085,11 @@ module Aws::BedrockAgentRuntime
       SENSITIVE: []
     end
 
+    class SatisfiedCondition
+      attr_accessor condition_name: ::String
+      SENSITIVE: []
+    end
+
     class ServiceQuotaExceededException
       attr_accessor message: ::String
       attr_accessor event_type: untyped
@@ -1897,6 +2119,33 @@ module Aws::BedrockAgentRuntime
     class Span
       attr_accessor end: ::Integer
       attr_accessor start: ::Integer
+      SENSITIVE: []
+    end
+
+    class StartFlowExecutionRequest
+      attr_accessor flow_alias_identifier: ::String
+      attr_accessor flow_execution_name: ::String
+      attr_accessor flow_identifier: ::String
+      attr_accessor inputs: ::Array[Types::FlowInput]
+      attr_accessor model_performance_configuration: Types::ModelPerformanceConfiguration
+      SENSITIVE: []
+    end
+
+    class StartFlowExecutionResponse
+      attr_accessor execution_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StopFlowExecutionRequest
+      attr_accessor execution_identifier: ::String
+      attr_accessor flow_alias_identifier: ::String
+      attr_accessor flow_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class StopFlowExecutionResponse
+      attr_accessor execution_arn: ::String
+      attr_accessor status: ("Running" | "Succeeded" | "Failed" | "TimedOut" | "Aborted")
       SENSITIVE: []
     end
 

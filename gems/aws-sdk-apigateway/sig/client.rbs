@@ -235,6 +235,7 @@ module Aws
         def ownership_verification_certificate_arn: () -> ::String
         def management_policy: () -> ::String
         def policy: () -> ::String
+        def routing_mode: () -> ("BASE_PATH_MAPPING_ONLY" | "ROUTING_RULE_ONLY" | "ROUTING_RULE_THEN_BASE_PATH_MAPPING")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#create_domain_name-instance_method
       def create_domain_name: (
@@ -258,7 +259,8 @@ module Aws
                                   truststore_version: ::String?
                                 },
                                 ?ownership_verification_certificate_arn: ::String,
-                                ?policy: ::String
+                                ?policy: ::String,
+                                ?routing_mode: ("BASE_PATH_MAPPING_ONLY" | "ROUTING_RULE_ONLY" | "ROUTING_RULE_THEN_BASE_PATH_MAPPING")
                               ) -> _CreateDomainNameResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainNameResponseSuccess
 
@@ -907,6 +909,7 @@ module Aws
         def ownership_verification_certificate_arn: () -> ::String
         def management_policy: () -> ::String
         def policy: () -> ::String
+        def routing_mode: () -> ("BASE_PATH_MAPPING_ONLY" | "ROUTING_RULE_ONLY" | "ROUTING_RULE_THEN_BASE_PATH_MAPPING")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_domain_name-instance_method
       def get_domain_name: (
@@ -1873,6 +1876,7 @@ module Aws
         def ownership_verification_certificate_arn: () -> ::String
         def management_policy: () -> ::String
         def policy: () -> ::String
+        def routing_mode: () -> ("BASE_PATH_MAPPING_ONLY" | "ROUTING_RULE_ONLY" | "ROUTING_RULE_THEN_BASE_PATH_MAPPING")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#update_domain_name-instance_method
       def update_domain_name: (

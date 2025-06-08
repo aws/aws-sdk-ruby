@@ -4780,6 +4780,7 @@ module Aws::Glue
 
     IntegrationPartition.add_member(:field_name, Shapes::ShapeRef.new(shape: String128, location_name: "FieldName"))
     IntegrationPartition.add_member(:function_spec, Shapes::ShapeRef.new(shape: String128, location_name: "FunctionSpec"))
+    IntegrationPartition.add_member(:conversion_spec, Shapes::ShapeRef.new(shape: String128, location_name: "ConversionSpec"))
     IntegrationPartition.struct_class = Types::IntegrationPartition
 
     IntegrationPartitionSpecList.member = Shapes::ShapeRef.new(shape: IntegrationPartition)

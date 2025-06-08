@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.133.0 (2025-06-05)
+------------------
+
+* Feature - Add new warning type 'EXCLUDED_PROPERTIES'
+
+1.132.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.131.0 (2025-05-12)
 ------------------
 

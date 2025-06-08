@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.138.0 (2025-06-02)
+------------------
+
+* Feature - Add support for filtering ListInsights API calls on MISCONFIGURATION insight category
+
 1.137.0 (2025-05-12)
 ------------------
 

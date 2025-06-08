@@ -54,7 +54,7 @@ module Aws::EntityResolution
   autoload :EndpointProvider, 'aws-sdk-entityresolution/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-entityresolution/endpoints'
 
-  GEM_VERSION = '1.30.0'
+  GEM_VERSION = '1.31.0'
 
 end
 

@@ -480,6 +480,14 @@ module Aws::RDS
       data[:tag_list]
     end
 
+    # Contains a user-supplied global database cluster identifier. This
+    # identifier is the unique key that identifies a global database
+    # cluster.
+    # @return [String]
+    def global_cluster_identifier
+      data[:global_cluster_identifier]
+    end
+
     # The status of write forwarding for a secondary cluster in an Aurora
     # global database.
     # @return [String]

@@ -2008,6 +2008,7 @@ module Aws::S3
       attr_accessor content_md5: ::String
       attr_accessor expected_bucket_owner: ::String
       attr_accessor ownership_controls: Types::OwnershipControls
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME")
       SENSITIVE: []
     end
 

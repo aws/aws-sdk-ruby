@@ -53,7 +53,10 @@ module Aws::RDS
       data[:subnet_group_status]
     end
 
-    # Contains a list of `Subnet` elements.
+    # Contains a list of `Subnet` elements. The list of subnets shown here
+    # might not reflect the current state of your VPC. For the most
+    # up-to-date information, we recommend checking your VPC configuration
+    # directly.
     # @return [Array<Types::Subnet>]
     def subnets
       data[:subnets]

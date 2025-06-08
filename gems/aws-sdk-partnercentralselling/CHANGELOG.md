@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.9.0 (2025-05-21)
+------------------
+
+* Feature - Modified validation to allow expectedCustomerSpend array with zero elements in Partner Opportunity operations.
+
 1.8.0 (2025-05-12)
 ------------------
 

@@ -35,11 +35,17 @@ module Aws::S3
 
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AbortMultipartUploadOutput AWS API Documentation
@@ -964,11 +970,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CompleteMultipartUploadOutput AWS API Documentation
@@ -1513,11 +1525,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CopyObjectOutput AWS API Documentation
@@ -2621,10 +2639,10 @@ module Aws::S3
     #
     #   <b>Directory buckets </b> - The location type is Availability Zone
     #   or Local Zone. To use the Local Zone location type, your account
-    #   must be enabled for Dedicated Local Zones. Otherwise, you get an
-    #   HTTP `403 Forbidden` error with the error code `AccessDenied`. To
-    #   learn more, see [Enable accounts for Dedicated Local Zones][1] in
-    #   the *Amazon S3 User Guide*.
+    #   must be enabled for Local Zones. Otherwise, you get an HTTP `403
+    #   Forbidden` error with the error code `AccessDenied`. To learn more,
+    #   see [Enable accounts for Local Zones][1] in the *Amazon S3 User
+    #   Guide*.
     #
     #   <note markdown="1"> This functionality is only supported by directory buckets.
     #
@@ -2938,11 +2956,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] checksum_algorithm
@@ -4348,11 +4372,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObjectOutput AWS API Documentation
@@ -4613,11 +4643,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] errors
@@ -5983,11 +6019,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAccelerateConfigurationOutput AWS API Documentation
@@ -6960,11 +7002,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectAclOutput AWS API Documentation
@@ -7078,11 +7126,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] etag
@@ -7257,12 +7311,24 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] max_parts
-    #   Sets the maximum number of parts to return.
+    #   Sets the maximum number of parts to return. For more information,
+    #   see [Uploading and copying objects using multipart upload in Amazon
+    #   S3 ][1] in the *Amazon Simple Storage Service user guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html
     #   @return [Integer]
     #
     # @!attribute [rw] part_number_marker
     #   Specifies the part after which listing should begin. Only parts with
-    #   higher part numbers will be listed.
+    #   higher part numbers will be listed. For more information, see
+    #   [Uploading and copying objects using multipart upload in Amazon S3
+    #   ][1] in the *Amazon Simple Storage Service user guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html
     #   @return [Integer]
     #
     # @!attribute [rw] sse_customer_algorithm
@@ -7734,11 +7800,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] replication_status
@@ -8377,11 +8449,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectTorrentOutput AWS API Documentation
@@ -8976,11 +9054,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] replication_status
@@ -9987,9 +10071,10 @@ module Aws::S3
     #
     # @!attribute [rw] filter
     #   The `Filter` is used to identify objects that a Lifecycle Rule
-    #   applies to. A `Filter` must have exactly one of `Prefix`, `Tag`, or
-    #   `And` specified. `Filter` is required if the `LifecycleRule` does
-    #   not contain a `Prefix` element.
+    #   applies to. A `Filter` must have exactly one of `Prefix`, `Tag`,
+    #   `ObjectSizeGreaterThan`, `ObjectSizeLessThan`, or `And` specified.
+    #   `Filter` is required if the `LifecycleRule` does not contain a
+    #   `Prefix` element.
     #
     #   <note markdown="1"> `Tag` filters are not supported for directory buckets.
     #
@@ -10633,11 +10718,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListMultipartUploadsOutput AWS API Documentation
@@ -10932,11 +11023,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectVersionsOutput AWS API Documentation
@@ -11164,11 +11261,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectsOutput AWS API Documentation
@@ -11437,11 +11540,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectsV2Output AWS API Documentation
@@ -11744,11 +11853,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] checksum_algorithm
@@ -14011,13 +14126,31 @@ module Aws::S3
     #   or ObjectWriter) that you want to apply to this Amazon S3 bucket.
     #   @return [Types::OwnershipControls]
     #
+    # @!attribute [rw] checksum_algorithm
+    #   Indicates the algorithm used to create the checksum for the object
+    #   when you use the SDK. This header will not provide any additional
+    #   functionality if you don't use the SDK. When you send this header,
+    #   there must be a corresponding `x-amz-checksum-algorithm ` header
+    #   sent. Otherwise, Amazon S3 fails the request with the HTTP status
+    #   code `400 Bad Request`. For more information, see [Checking object
+    #   integrity][1] in the *Amazon S3 User Guide*.
+    #
+    #   If you provide an individual checksum, Amazon S3 ignores any
+    #   provided `ChecksumAlgorithm` parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketOwnershipControlsRequest AWS API Documentation
     #
     class PutBucketOwnershipControlsRequest < Struct.new(
       :bucket,
       :content_md5,
       :expected_bucket_owner,
-      :ownership_controls)
+      :ownership_controls,
+      :checksum_algorithm)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14445,11 +14578,17 @@ module Aws::S3
 
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectAclOutput AWS API Documentation
@@ -14631,11 +14770,17 @@ module Aws::S3
 
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectLegalHoldOutput AWS API Documentation
@@ -14749,11 +14894,17 @@ module Aws::S3
 
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectLockConfigurationOutput AWS API Documentation
@@ -15043,11 +15194,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectOutput AWS API Documentation
@@ -15819,11 +15976,17 @@ module Aws::S3
 
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectRetentionOutput AWS API Documentation
@@ -16630,11 +16793,17 @@ module Aws::S3
 
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] restore_output_path
@@ -18057,11 +18226,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPartCopyOutput AWS API Documentation
@@ -18525,11 +18700,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPartOutput AWS API Documentation
@@ -19119,11 +19300,17 @@ module Aws::S3
     #
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
-    #   for the request.
+    #   for the request. For more information, see [Using Requester Pays
+    #   buckets for storage transfers and usage][1] in the *Amazon Simple
+    #   Storage Service user guide*.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] restore

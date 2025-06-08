@@ -54,7 +54,7 @@ module Aws::ARCZonalShift
   autoload :EndpointProvider, 'aws-sdk-arczonalshift/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-arczonalshift/endpoints'
 
-  GEM_VERSION = '1.33.0'
+  GEM_VERSION = '1.34.0'
 
 end
 

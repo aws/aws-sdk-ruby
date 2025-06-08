@@ -370,7 +370,7 @@ module Aws
         def name: () -> ::String
         def created_at: () -> ::Time
         def expires_at: () -> ::Time
-        def rate_type: () -> ("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")
+        def rate_type: () -> ("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS" | "AFTER_DISCOUNTS_AND_COMMITMENTS")
         def rate_timestamp: () -> ::Time
         def status: () -> ("UPDATING" | "VALID" | "INVALID" | "ACTION_NEEDED")
         def total_cost: () -> ::Float
@@ -381,7 +381,7 @@ module Aws
       def create_workload_estimate: (
                                       name: ::String,
                                       ?client_token: ::String,
-                                      ?rate_type: ("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS"),
+                                      ?rate_type: ("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS" | "AFTER_DISCOUNTS_AND_COMMITMENTS"),
                                       ?tags: Hash[::String, ::String]
                                     ) -> _CreateWorkloadEstimateResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkloadEstimateResponseSuccess
@@ -448,9 +448,9 @@ module Aws
 
       interface _GetPreferencesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetPreferencesResponse]
-        def management_account_rate_type_selections: () -> ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
-        def member_account_rate_type_selections: () -> ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
-        def standalone_account_rate_type_selections: () -> ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
+        def management_account_rate_type_selections: () -> ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS" | "AFTER_DISCOUNTS_AND_COMMITMENTS")]
+        def member_account_rate_type_selections: () -> ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS" | "AFTER_DISCOUNTS_AND_COMMITMENTS")]
+        def standalone_account_rate_type_selections: () -> ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS" | "AFTER_DISCOUNTS_AND_COMMITMENTS")]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BCMPricingCalculator/Client.html#get_preferences-instance_method
       def get_preferences: (
@@ -463,7 +463,7 @@ module Aws
         def name: () -> ::String
         def created_at: () -> ::Time
         def expires_at: () -> ::Time
-        def rate_type: () -> ("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")
+        def rate_type: () -> ("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS" | "AFTER_DISCOUNTS_AND_COMMITMENTS")
         def rate_timestamp: () -> ::Time
         def status: () -> ("UPDATING" | "VALID" | "INVALID" | "ACTION_NEEDED")
         def total_cost: () -> ::Float
@@ -745,15 +745,15 @@ module Aws
 
       interface _UpdatePreferencesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePreferencesResponse]
-        def management_account_rate_type_selections: () -> ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
-        def member_account_rate_type_selections: () -> ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
-        def standalone_account_rate_type_selections: () -> ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
+        def management_account_rate_type_selections: () -> ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS" | "AFTER_DISCOUNTS_AND_COMMITMENTS")]
+        def member_account_rate_type_selections: () -> ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS" | "AFTER_DISCOUNTS_AND_COMMITMENTS")]
+        def standalone_account_rate_type_selections: () -> ::Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS" | "AFTER_DISCOUNTS_AND_COMMITMENTS")]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BCMPricingCalculator/Client.html#update_preferences-instance_method
       def update_preferences: (
-                                ?management_account_rate_type_selections: Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")],
-                                ?member_account_rate_type_selections: Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")],
-                                ?standalone_account_rate_type_selections: Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")]
+                                ?management_account_rate_type_selections: Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS" | "AFTER_DISCOUNTS_AND_COMMITMENTS")],
+                                ?member_account_rate_type_selections: Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS" | "AFTER_DISCOUNTS_AND_COMMITMENTS")],
+                                ?standalone_account_rate_type_selections: Array[("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS" | "AFTER_DISCOUNTS_AND_COMMITMENTS")]
                               ) -> _UpdatePreferencesResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePreferencesResponseSuccess
 
@@ -763,7 +763,7 @@ module Aws
         def name: () -> ::String
         def created_at: () -> ::Time
         def expires_at: () -> ::Time
-        def rate_type: () -> ("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS")
+        def rate_type: () -> ("BEFORE_DISCOUNTS" | "AFTER_DISCOUNTS" | "AFTER_DISCOUNTS_AND_COMMITMENTS")
         def rate_timestamp: () -> ::Time
         def status: () -> ("UPDATING" | "VALID" | "INVALID" | "ACTION_NEEDED")
         def total_cost: () -> ::Float

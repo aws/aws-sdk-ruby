@@ -65,6 +65,12 @@ module Aws::WAFV2
       SENSITIVE: []
     end
 
+    class AsnMatchStatement
+      attr_accessor asn_list: ::Array[::Integer]
+      attr_accessor forwarded_ip_config: Types::ForwardedIPConfig
+      SENSITIVE: []
+    end
+
     class AssociateWebACLRequest
       attr_accessor web_acl_arn: ::String
       attr_accessor resource_arn: ::String
@@ -1124,6 +1130,7 @@ module Aws::WAFV2
       attr_accessor uri_path: Types::RateLimitUriPath
       attr_accessor ja3_fingerprint: Types::RateLimitJA3Fingerprint
       attr_accessor ja4_fingerprint: Types::RateLimitJA4Fingerprint
+      attr_accessor asn: Types::RateLimitAsn
       SENSITIVE: []
     end
 
@@ -1131,6 +1138,9 @@ module Aws::WAFV2
       attr_accessor ip_address_version: ("IPV4" | "IPV6")
       attr_accessor addresses: ::Array[::String]
       SENSITIVE: []
+    end
+
+    class RateLimitAsn < Aws::EmptyStructure
     end
 
     class RateLimitCookie
@@ -1405,6 +1415,7 @@ module Aws::WAFV2
       attr_accessor managed_rule_group_statement: Types::ManagedRuleGroupStatement
       attr_accessor label_match_statement: Types::LabelMatchStatement
       attr_accessor regex_match_statement: Types::RegexMatchStatement
+      attr_accessor asn_match_statement: Types::AsnMatchStatement
       SENSITIVE: []
     end
 

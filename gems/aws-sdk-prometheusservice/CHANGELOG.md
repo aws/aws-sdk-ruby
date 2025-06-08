@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.52.0 (2025-05-22)
+------------------
+
+* Feature - Add QueryLoggingConfiguration APIs for Amazon Managed Prometheus
+
 1.51.0 (2025-05-12)
 ------------------
 

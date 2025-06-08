@@ -813,7 +813,21 @@ module Aws::MediaConvert
     #   @return [Types::RemixSettings]
     #
     # @!attribute [rw] selector_type
-    #   Specifies the type of the audio selector.
+    #   Specify how MediaConvert selects audio content within your input.
+    #   The default is Track. PID: Select audio by specifying the Packet
+    #   Identifier (PID) values for MPEG Transport Stream inputs. Use this
+    #   when you know the exact PID values of your audio streams. Track:
+    #   Default. Select audio by track number. This is the most common
+    #   option and works with most input container formats. Language code:
+    #   Select audio by language using ISO 639-2 or ISO 639-3 three-letter
+    #   language codes. Use this when your source has embedded language
+    #   metadata and you want to select tracks based on their language. HLS
+    #   rendition group: Select audio from an HLS rendition group. Use this
+    #   when your input is an HLS package with multiple audio renditions and
+    #   you want to select specific rendition groups. All PCM: Select all
+    #   uncompressed PCM audio tracks from your input automatically. This is
+    #   useful when you want to include all PCM audio tracks without
+    #   specifying individual track numbers.
     #   @return [String]
     #
     # @!attribute [rw] tracks
@@ -10364,6 +10378,23 @@ module Aws::MediaConvert
     #   output audio codec.
     #   @return [String]
     #
+    # @!attribute [rw] c2pa_manifest
+    #   When enabled, a C2PA compliant manifest will be generated, signed
+    #   and embeded in the output. For more information on C2PA, see
+    #   https://c2pa.org/specifications/specifications/2.1/index.html
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_secret
+    #   Specify the name or ARN of the AWS Secrets Manager secret that
+    #   contains your C2PA public certificate chain in PEM format. Provide a
+    #   valid secret name or ARN. Note that your MediaConvert service role
+    #   must allow access to this secret. The public certificate chain is
+    #   added to the COSE header (x5chain) for signature validation. Include
+    #   the signer's certificate and all intermediate certificates. Do not
+    #   include the root certificate. For details on COSE, see:
+    #   https://opensource.contentauthenticity.org/docs/manifest/signing-manifests
+    #   @return [String]
+    #
     # @!attribute [rw] cslg_atom
     #   When enabled, file composition times will start at zero, composition
     #   times in the 'ctts' (composition time to sample) box for B-frames
@@ -10398,15 +10429,24 @@ module Aws::MediaConvert
     #   necessary to specify.
     #   @return [String]
     #
+    # @!attribute [rw] signing_kms_key
+    #   Specify the ID or ARN of the AWS KMS key used to sign the C2PA
+    #   manifest in your MP4 output. Provide a valid KMS key ARN. Note that
+    #   your MediaConvert service role must allow access to this key.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Mp4Settings AWS API Documentation
     #
     class Mp4Settings < Struct.new(
       :audio_duration,
+      :c2pa_manifest,
+      :certificate_secret,
       :cslg_atom,
       :ctts_version,
       :free_space_box,
       :moov_placement,
-      :mp_4_major_brand)
+      :mp_4_major_brand,
+      :signing_kms_key)
       SENSITIVE = []
       include Aws::Structure
     end

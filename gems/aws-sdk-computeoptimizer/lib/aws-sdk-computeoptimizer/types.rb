@@ -509,24 +509,24 @@ module Aws::ComputeOptimizer
     # The configuration of the recommended RDS storage.
     #
     # @!attribute [rw] storage_type
-    #   The type of RDS storage.
+    #   The type of DB storage.
     #   @return [String]
     #
     # @!attribute [rw] allocated_storage
-    #   The size of the RDS storage in gigabytes (GB).
+    #   The size of the DB storage in gigabytes (GB).
     #   @return [Integer]
     #
     # @!attribute [rw] iops
-    #   The provisioned IOPs of the RDS storage.
+    #   The provisioned IOPs of the DB storage.
     #   @return [Integer]
     #
     # @!attribute [rw] max_allocated_storage
     #   The maximum limit in gibibytes (GiB) to which Amazon RDS can
-    #   automatically scale the storage of the RDS instance.
+    #   automatically scale the storage of the DB instance.
     #   @return [Integer]
     #
     # @!attribute [rw] storage_throughput
-    #   The storage throughput of the RDS storage.
+    #   The storage throughput of the DB storage.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/DBStorageConfiguration AWS API Documentation
@@ -2381,8 +2381,8 @@ module Aws::ComputeOptimizer
     end
 
     # @!attribute [rw] account_ids
-    #   The Amazon Web Services account IDs for the export Amazon RDS
-    #   recommendations.
+    #   The Amazon Web Services account IDs for the export Amazon Aurora and
+    #   RDS database recommendations.
     #
     #   If your account is the management account or the delegated
     #   administrator of an organization, use this parameter to specify the
@@ -2400,7 +2400,7 @@ module Aws::ComputeOptimizer
     #
     # @!attribute [rw] filters
     #   An array of objects to specify a filter that exports a more specific
-    #   set of Amazon RDS recommendations.
+    #   set of Amazon Aurora and RDS recommendations.
     #   @return [Array<Types::RDSDBRecommendationFilter>]
     #
     # @!attribute [rw] fields_to_export
@@ -3532,7 +3532,7 @@ module Aws::ComputeOptimizer
     end
 
     # @!attribute [rw] resource_arn
-    #   The ARN that identifies the Amazon RDS.
+    #   The ARN that identifies the Amazon Aurora or RDS database.
     #
     #   The following is the format of the ARN:
     #
@@ -3589,7 +3589,7 @@ module Aws::ComputeOptimizer
     end
 
     # @!attribute [rw] resource_arns
-    #   The ARN that identifies the Amazon RDS.
+    #   The ARN that identifies the Amazon Aurora or RDS database.
     #
     #   The following is the format of the ARN:
     #
@@ -3601,12 +3601,13 @@ module Aws::ComputeOptimizer
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token to advance to the next page of Amazon RDS recommendations.
+    #   The token to advance to the next page of Amazon Aurora and RDS
+    #   database recommendations.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of Amazon RDS recommendations to return with a
-    #   single request.
+    #   The maximum number of Amazon Aurora and RDS database recommendations
+    #   to return with a single request.
     #
     #   To retrieve the remaining results, make another request with the
     #   returned `nextToken` value.
@@ -3614,16 +3615,17 @@ module Aws::ComputeOptimizer
     #
     # @!attribute [rw] filters
     #   An array of objects to specify a filter that returns a more specific
-    #   list of Amazon RDS recommendations.
+    #   list of Amazon Aurora and RDS database recommendations.
     #   @return [Array<Types::RDSDBRecommendationFilter>]
     #
     # @!attribute [rw] account_ids
-    #   Return the Amazon RDS recommendations to the specified Amazon Web
-    #   Services account IDs.
+    #   Return the Amazon Aurora and RDS database recommendations to the
+    #   specified Amazon Web Services account IDs.
     #
     #   If your account is the management account or the delegated
     #   administrator of an organization, use this parameter to return the
-    #   Amazon RDS recommendations to specific member accounts.
+    #   Amazon Aurora and RDS database recommendations to specific member
+    #   accounts.
     #
     #   You can only specify one account ID per request.
     #   @return [Array<String>]
@@ -3650,11 +3652,13 @@ module Aws::ComputeOptimizer
     end
 
     # @!attribute [rw] next_token
-    #   The token to advance to the next page of Amazon RDS recommendations.
+    #   The token to advance to the next page of Amazon Aurora and RDS
+    #   database recommendations.
     #   @return [String]
     #
     # @!attribute [rw] rds_db_recommendations
-    #   An array of objects that describe the Amazon RDS recommendations.
+    #   An array of objects that describe the Amazon Aurora and RDS database
+    #   recommendations.
     #   @return [Array<Types::RDSDBRecommendation>]
     #
     # @!attribute [rw] errors
@@ -5912,24 +5916,24 @@ module Aws::ComputeOptimizer
     #
     class PutRecommendationPreferencesResponse < Aws::EmptyStructure; end
 
-    # Describes the recommendation options for an Amazon RDS instance.
+    # Describes the recommendation options for a DB instance.
     #
     # @!attribute [rw] db_instance_class
     #   Describes the DB instance class recommendation option for your
-    #   Amazon RDS instance.
+    #   Amazon Aurora or RDS database.
     #   @return [String]
     #
     # @!attribute [rw] projected_utilization_metrics
     #   An array of objects that describe the projected utilization metrics
-    #   of the RDS instance recommendation option.
+    #   of the DB instance recommendation option.
     #   @return [Array<Types::RDSDBUtilizationMetric>]
     #
     # @!attribute [rw] performance_risk
-    #   The performance risk of the RDS instance recommendation option.
+    #   The performance risk of the DB instance recommendation option.
     #   @return [Float]
     #
     # @!attribute [rw] rank
-    #   The rank identifier of the RDS instance recommendation option.
+    #   The rank identifier of the DB instance recommendation option.
     #   @return [Integer]
     #
     # @!attribute [rw] savings_opportunity
@@ -5959,8 +5963,8 @@ module Aws::ComputeOptimizer
     #   @return [Types::SavingsOpportunity]
     #
     # @!attribute [rw] savings_opportunity_after_discounts
-    #   Describes the savings opportunity for Amazon RDS recommendations or
-    #   for the recommendation option.
+    #   Describes the savings opportunity for Amazon Aurora and RDS database
+    #   recommendations or for the recommendation option.
     #
     #   Savings opportunity represents the estimated monthly savings after
     #   applying Savings Plans discounts. You can achieve this by
@@ -5980,10 +5984,10 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # Describes an Amazon RDS recommendation.
+    # Describes an Amazon Aurora and RDS database recommendation.
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the current Amazon RDS.
+    #   The ARN of the current Amazon Aurora or RDS database.
     #
     #   The following is the format of the ARN:
     #
@@ -5991,11 +5995,12 @@ module Aws::ComputeOptimizer
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The Amazon Web Services account ID of the Amazon RDS.
+    #   The Amazon Web Services account ID of the Amazon Aurora or RDS
+    #   database.
     #   @return [String]
     #
     # @!attribute [rw] engine
-    #   The engine of the RDS instance.
+    #   The engine of the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] engine_version
@@ -6007,11 +6012,11 @@ module Aws::ComputeOptimizer
     #   @return [Integer]
     #
     # @!attribute [rw] current_db_instance_class
-    #   The DB instance class of the current RDS instance.
+    #   The DB instance class of the current Aurora or RDS DB instance.
     #   @return [String]
     #
     # @!attribute [rw] current_storage_configuration
-    #   The configuration of the current RDS storage.
+    #   The configuration of the current DB storage.
     #   @return [Types::DBStorageConfiguration]
     #
     # @!attribute [rw] db_cluster_identifier
@@ -6019,87 +6024,82 @@ module Aws::ComputeOptimizer
     #   @return [String]
     #
     # @!attribute [rw] idle
-    #   This indicates if the RDS instance is idle or not.
+    #   This indicates if the DB instance is idle or not.
     #   @return [String]
     #
     # @!attribute [rw] instance_finding
-    #   The finding classification of an Amazon RDS instance.
+    #   The finding classification of an Amazon Aurora and RDS DB instance.
     #
-    #   Findings for Amazon RDS instance include:
+    #   For more information about finding classifications, see [ Finding
+    #   classifications for Aurora and RDS databases][1] in the *Compute
+    #   Optimizer User Guide*.
     #
-    #   * <b> <code>Underprovisioned</code> </b> — When Compute Optimizer
-    #     detects that there’s not enough resource specifications, an Amazon
-    #     RDS is considered under-provisioned.
     #
-    #   * <b> <code>Overprovisioned</code> </b> — When Compute Optimizer
-    #     detects that there’s excessive resource specifications, an Amazon
-    #     RDS is considered over-provisioned.
     #
-    #   * <b> <code>Optimized</code> </b> — When the specifications of your
-    #     Amazon RDS instance meet the performance requirements of your
-    #     workload, the service is considered optimized.
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/view-rds-recommendations.html#rds-recommendations-findings
     #   @return [String]
     #
     # @!attribute [rw] storage_finding
-    #   The finding classification of Amazon RDS storage.
+    #   The finding classification of Amazon RDS DB instance storage.
     #
-    #   Findings for Amazon RDS instance include:
+    #   For more information about finding classifications, see [ Finding
+    #   classifications for Aurora and RDS databases][1] in the *Compute
+    #   Optimizer User Guide*.
     #
-    #   * <b> <code>Underprovisioned</code> </b> — When Compute Optimizer
-    #     detects that there’s not enough storage, an Amazon RDS is
-    #     considered under-provisioned.
     #
-    #   * <b> <code>Overprovisioned</code> </b> — When Compute Optimizer
-    #     detects that there’s excessive storage, an Amazon RDS is
-    #     considered over-provisioned.
     #
-    #   * <b> <code>Optimized</code> </b> — When the storage of your Amazon
-    #     RDS meet the performance requirements of your workload, the
-    #     service is considered optimized.
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/view-rds-recommendations.html#rds-recommendations-findings
     #   @return [String]
     #
     # @!attribute [rw] instance_finding_reason_codes
-    #   The reason for the finding classification of an Amazon RDS instance.
+    #   The reason for the finding classification of a DB instance.
     #   @return [Array<String>]
     #
     # @!attribute [rw] current_instance_performance_risk
     #   The performance risk for the current DB instance.
     #   @return [String]
     #
+    # @!attribute [rw] current_storage_estimated_monthly_volume_io_ps_cost_variation
+    #   The level of variation in monthly I/O costs for the current DB
+    #   storage configuration.
+    #   @return [String]
+    #
     # @!attribute [rw] storage_finding_reason_codes
-    #   The reason for the finding classification of Amazon RDS storage.
+    #   The reason for the finding classification of RDS DB instance
+    #   storage.
     #   @return [Array<String>]
     #
     # @!attribute [rw] instance_recommendation_options
     #   An array of objects that describe the recommendation options for the
-    #   Amazon RDS instance.
+    #   RDS DB instance.
     #   @return [Array<Types::RDSDBInstanceRecommendationOption>]
     #
     # @!attribute [rw] storage_recommendation_options
-    #   An array of objects that describe the recommendation options for
-    #   Amazon RDS storage.
+    #   An array of objects that describe the recommendation options for DB
+    #   instance storage.
     #   @return [Array<Types::RDSDBStorageRecommendationOption>]
     #
     # @!attribute [rw] utilization_metrics
-    #   An array of objects that describe the utilization metrics of the
-    #   Amazon RDS.
+    #   An array of objects that describe the utilization metrics of the DB
+    #   instance.
     #   @return [Array<Types::RDSDBUtilizationMetric>]
     #
     # @!attribute [rw] effective_recommendation_preferences
-    #   Describes the effective recommendation preferences for Amazon RDS.
+    #   Describes the effective recommendation preferences for DB instances.
     #   @return [Types::RDSEffectiveRecommendationPreferences]
     #
     # @!attribute [rw] lookback_period_in_days
-    #   The number of days the Amazon RDS utilization metrics were analyzed.
+    #   The number of days the DB instance utilization metrics were
+    #   analyzed.
     #   @return [Float]
     #
     # @!attribute [rw] last_refresh_timestamp
-    #   The timestamp of when the Amazon RDS recommendation was last
+    #   The timestamp of when the DB instance recommendation was last
     #   generated.
     #   @return [Time]
     #
     # @!attribute [rw] tags
-    #   A list of tags assigned to your Amazon RDS recommendations.
+    #   A list of tags assigned to your DB instance recommendations.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/RDSDBRecommendation AWS API Documentation
@@ -6118,6 +6118,7 @@ module Aws::ComputeOptimizer
       :storage_finding,
       :instance_finding_reason_codes,
       :current_instance_performance_risk,
+      :current_storage_estimated_monthly_volume_io_ps_cost_variation,
       :storage_finding_reason_codes,
       :instance_recommendation_options,
       :storage_recommendation_options,
@@ -6130,7 +6131,7 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # Describes a filter that returns a more specific list of Amazon RDS
+    # Describes a filter that returns a more specific list of DB instance
     # recommendations. Use this filter with the GetECSServiceRecommendations
     # action.
     #
@@ -6140,22 +6141,22 @@ module Aws::ComputeOptimizer
     #   Specify `Finding` to return recommendations with a specific finding
     #   classification.
     #
-    #   You can filter your Amazon RDS recommendations by `tag:key` and
+    #   You can filter your DB instance recommendations by `tag:key` and
     #   `tag-key` tags.
     #
     #   A `tag:key` is a key and value combination of a tag assigned to your
-    #   Amazon RDS recommendations. Use the tag key in the filter name and
-    #   the tag value as the filter value. For example, to find all Amazon
-    #   RDS service recommendations that have a tag with the key of `Owner`
-    #   and the value of `TeamA`, specify `tag:Owner` for the filter name
-    #   and `TeamA` for the filter value.
+    #   DB instance recommendations. Use the tag key in the filter name and
+    #   the tag value as the filter value. For example, to find all DB
+    #   instance recommendations that have a tag with the key of `Owner` and
+    #   the value of `TeamA`, specify `tag:Owner` for the filter name and
+    #   `TeamA` for the filter value.
     #
-    #   A `tag-key` is the key of a tag assigned to your Amazon RDS
-    #   recommendations. Use this filter to find all of your Amazon RDS
+    #   A `tag-key` is the key of a tag assigned to your DB instance
+    #   recommendations. Use this filter to find all of your DB instance
     #   recommendations that have a tag with a specific key. This doesn’t
-    #   consider the tag value. For example, you can find your Amazon RDS
-    #   service recommendations with a tag key value of `Owner` or without
-    #   any tag keys assigned.
+    #   consider the tag value. For example, you can find your DB instance
+    #   recommendations with a tag key value of `Owner` or without any tag
+    #   keys assigned.
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -6171,14 +6172,14 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # Describes the recommendation options for Amazon RDS storage.
+    # Describes the recommendation options for DB storage.
     #
     # @!attribute [rw] storage_configuration
     #   The recommended storage configuration.
     #   @return [Types::DBStorageConfiguration]
     #
     # @!attribute [rw] rank
-    #   The rank identifier of the RDS storage recommendation option.
+    #   The rank identifier of the DB storage recommendation option.
     #   @return [Integer]
     #
     # @!attribute [rw] savings_opportunity
@@ -6208,13 +6209,18 @@ module Aws::ComputeOptimizer
     #   @return [Types::SavingsOpportunity]
     #
     # @!attribute [rw] savings_opportunity_after_discounts
-    #   Describes the savings opportunity for Amazon RDS storage
-    #   recommendations or for the recommendation option.
+    #   Describes the savings opportunity for DB storage recommendations or
+    #   for the recommendation option.
     #
     #   Savings opportunity represents the estimated monthly savings after
     #   applying Savings Plans discounts. You can achieve this by
     #   implementing a given Compute Optimizer recommendation.
     #   @return [Types::RDSStorageSavingsOpportunityAfterDiscounts]
+    #
+    # @!attribute [rw] estimated_monthly_volume_io_ps_cost_variation
+    #   The projected level of variation in monthly I/O costs for the DB
+    #   storage recommendation option.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/RDSDBStorageRecommendationOption AWS API Documentation
     #
@@ -6222,16 +6228,17 @@ module Aws::ComputeOptimizer
       :storage_configuration,
       :rank,
       :savings_opportunity,
-      :savings_opportunity_after_discounts)
+      :savings_opportunity_after_discounts,
+      :estimated_monthly_volume_io_ps_cost_variation)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Describes the utilization metric of an Amazon RDS.
+    # Describes the utilization metric of an Amazon Aurora and RDS database.
     #
-    # To determine the performance difference between your current Amazon
-    # RDS and the recommended option, compare the utilization metric data of
-    # your service against its projected utilization metric data.
+    # To determine the performance difference between your current DB
+    # instance and the recommended option, compare the utilization metric
+    # data of your service against its projected utilization metric data.
     #
     # @!attribute [rw] name
     #   The name of the utilization metric.
@@ -6272,12 +6279,12 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # Describes the projected metrics of an Amazon RDS recommendation
-    # option.
+    # Describes the projected metrics of an Amazon Aurora and RDS database
+    # recommendation option.
     #
     # To determine the performance difference between your current Amazon
-    # RDS and the recommended option, compare the metric data of your
-    # service against its projected metric data.
+    # Aurora and RDS database and the recommended option, compare the metric
+    # data of your service against its projected metric data.
     #
     # @!attribute [rw] name
     #   The name of the projected metric.
@@ -6301,19 +6308,21 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # Describes the projected metrics of an Amazon RDS recommendation
-    # option.
+    # Describes the projected metrics of an Amazon Aurora and RDS database
+    # recommendation option.
     #
     # To determine the performance difference between your current Amazon
-    # RDS and the recommended option, compare the metric data of your
-    # service against its projected metric data.
+    # Aurora and RDS database and the recommended option, compare the metric
+    # data of your service against its projected metric data.
     #
     # @!attribute [rw] recommended_db_instance_class
-    #   The recommended DB instance class for the Amazon RDS.
+    #   The recommended DB instance class for the Amazon Aurora or RDS
+    #   database.
     #   @return [String]
     #
     # @!attribute [rw] rank
-    #   The rank identifier of the RDS instance recommendation option.
+    #   The rank identifier of the Amazon Aurora or RDS DB instance
+    #   recommendation option.
     #   @return [Integer]
     #
     # @!attribute [rw] projected_metrics
@@ -6330,10 +6339,11 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # Describes the effective recommendation preferences for Amazon RDS.
+    # Describes the effective recommendation preferences for Amazon Aurora
+    # and RDS databases.
     #
     # @!attribute [rw] cpu_vendor_architectures
-    #   Describes the CPU vendor and architecture for Amazon RDS
+    #   Describes the CPU vendor and architecture for DB instance
     #   recommendations.
     #   @return [Array<String>]
     #
@@ -6354,13 +6364,13 @@ module Aws::ComputeOptimizer
     #   @return [String]
     #
     # @!attribute [rw] look_back_period
-    #   The number of days the utilization metrics of the Amazon RDS are
+    #   The number of days the utilization metrics of the DB instance are
     #   analyzed.
     #   @return [String]
     #
     # @!attribute [rw] savings_estimation_mode
     #   Describes the savings estimation mode preference applied for
-    #   calculating savings opportunity for Amazon RDS.
+    #   calculating savings opportunity for DB instances.
     #   @return [Types::RDSSavingsEstimationMode]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/RDSEffectiveRecommendationPreferences AWS API Documentation
@@ -6374,16 +6384,16 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # Describes the estimated monthly savings possible for Amazon RDS
-    # instances by adopting Compute Optimizer recommendations. This is based
-    # on Amazon RDS pricing after applying Savings Plans discounts.
+    # Describes the estimated monthly savings possible for DB instances by
+    # adopting Compute Optimizer recommendations. This is based on DB
+    # instance pricing after applying Savings Plans discounts.
     #
     # @!attribute [rw] currency
     #   The currency of the estimated monthly savings.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value of the estimated monthly savings for Amazon RDS instances.
+    #   The value of the estimated monthly savings for DB instances.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/RDSInstanceEstimatedMonthlySavings AWS API Documentation
@@ -6395,8 +6405,8 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # Describes the savings opportunity for Amazon RDS instance
-    # recommendations after applying Savings Plans discounts.
+    # Describes the savings opportunity for DB instance recommendations
+    # after applying Savings Plans discounts.
     #
     # Savings opportunity represents the estimated monthly savings after
     # applying Savings Plans discounts. You can achieve this by implementing
@@ -6404,14 +6414,13 @@ module Aws::ComputeOptimizer
     #
     # @!attribute [rw] savings_opportunity_percentage
     #   The estimated monthly savings possible as a percentage of monthly
-    #   cost by adopting Compute Optimizer’s Amazon RDS instance
-    #   recommendations. This includes any applicable Savings Plans
-    #   discounts.
+    #   cost by adopting Compute Optimizer’s DB instance recommendations.
+    #   This includes any applicable Savings Plans discounts.
     #   @return [Float]
     #
     # @!attribute [rw] estimated_monthly_savings
     #   The estimated monthly savings possible by adopting Compute
-    #   Optimizer’s Amazon RDS instance recommendations. This includes any
+    #   Optimizer’s DB instance recommendations. This includes any
     #   applicable Savings Plans discounts.
     #   @return [Types::RDSInstanceEstimatedMonthlySavings]
     #
@@ -6425,11 +6434,11 @@ module Aws::ComputeOptimizer
     end
 
     # Describes the savings estimation mode used for calculating savings
-    # opportunity for Amazon RDS.
+    # opportunity for DB instances.
     #
     # @!attribute [rw] source
-    #   Describes the source for calculating the savings opportunity for
-    #   Amazon RDS.
+    #   Describes the source for calculating the savings opportunity for DB
+    #   instances.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/RDSSavingsEstimationMode AWS API Documentation
@@ -6440,16 +6449,16 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # Describes the estimated monthly savings possible for Amazon RDS
+    # Describes the estimated monthly savings possible for DB instance
     # storage by adopting Compute Optimizer recommendations. This is based
-    # on Amazon RDS pricing after applying Savings Plans discounts.
+    # on DB instance pricing after applying Savings Plans discounts.
     #
     # @!attribute [rw] currency
     #   The currency of the estimated monthly savings.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value of the estimated monthly savings for Amazon RDS storage.
+    #   The value of the estimated monthly savings for DB instance storage.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/RDSStorageEstimatedMonthlySavings AWS API Documentation
@@ -6470,14 +6479,14 @@ module Aws::ComputeOptimizer
     #
     # @!attribute [rw] savings_opportunity_percentage
     #   The estimated monthly savings possible as a percentage of monthly
-    #   cost by adopting Compute Optimizer’s Amazon RDS storage
+    #   cost by adopting Compute Optimizer’s DB instance storage
     #   recommendations. This includes any applicable Savings Plans
     #   discounts.
     #   @return [Float]
     #
     # @!attribute [rw] estimated_monthly_savings
     #   The estimated monthly savings possible by adopting Compute
-    #   Optimizer’s Amazon RDS storage recommendations. This includes any
+    #   Optimizer’s DB instance storage recommendations. This includes any
     #   applicable Savings Plans discounts.
     #   @return [Types::RDSStorageEstimatedMonthlySavings]
     #

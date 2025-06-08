@@ -225,6 +225,12 @@ module Aws
                                      s3_acl_option: ("BUCKET_OWNER_FULL_CONTROL")
                                    }?
                                  }?,
+                                 managed_query_results_configuration: {
+                                   enabled: bool,
+                                   encryption_configuration: {
+                                     kms_key: ::String
+                                   }?
+                                 }?,
                                  enforce_work_group_configuration: bool?,
                                  publish_cloud_watch_metrics_enabled: bool?,
                                  bytes_scanned_cutoff_per_query: ::Integer?,
@@ -459,7 +465,8 @@ module Aws
       def get_query_results: (
                                query_execution_id: ::String,
                                ?next_token: ::String,
-                               ?max_results: ::Integer
+                               ?max_results: ::Integer,
+                               ?query_result_type: ("DATA_MANIFEST" | "DATA_ROWS")
                              ) -> _GetQueryResultsResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQueryResultsResponseSuccess
 
@@ -989,6 +996,13 @@ module Aws
                                      s3_acl_option: ("BUCKET_OWNER_FULL_CONTROL")
                                    }?,
                                    remove_acl_configuration: bool?
+                                 }?,
+                                 managed_query_results_configuration_updates: {
+                                   enabled: bool?,
+                                   encryption_configuration: {
+                                     kms_key: ::String
+                                   }?,
+                                   remove_encryption_configuration: bool?
                                  }?,
                                  publish_cloud_watch_metrics_enabled: bool?,
                                  bytes_scanned_cutoff_per_query: ::Integer?,

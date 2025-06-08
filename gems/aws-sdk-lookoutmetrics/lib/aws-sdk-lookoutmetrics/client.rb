@@ -2137,7 +2137,7 @@ module Aws::LookoutMetrics
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lookoutmetrics'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

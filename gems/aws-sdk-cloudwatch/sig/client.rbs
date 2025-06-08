@@ -607,7 +607,8 @@ module Aws
                                   key: ::String,
                                   value: ::String
                                 },
-                              ]
+                              ],
+                              ?apply_on_transformed_logs: bool
                             ) -> _PutInsightRuleResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutInsightRuleResponseSuccess
 

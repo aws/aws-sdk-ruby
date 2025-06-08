@@ -80,6 +80,7 @@ module Aws::BedrockAgentRuntime
     CollaboratorConfiguration = Shapes::StructureShape.new(name: 'CollaboratorConfiguration')
     CollaboratorConfigurations = Shapes::ListShape.new(name: 'CollaboratorConfigurations')
     Collaborators = Shapes::ListShape.new(name: 'Collaborators')
+    ConditionResultEvent = Shapes::StructureShape.new(name: 'ConditionResultEvent')
     ConfirmationState = Shapes::StringShape.new(name: 'ConfirmationState')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContentBlock = Shapes::UnionShape.new(name: 'ContentBlock')
@@ -134,15 +135,36 @@ module Aws::BedrockAgentRuntime
     FlowAliasIdentifier = Shapes::StringShape.new(name: 'FlowAliasIdentifier')
     FlowCompletionEvent = Shapes::StructureShape.new(name: 'FlowCompletionEvent')
     FlowCompletionReason = Shapes::StringShape.new(name: 'FlowCompletionReason')
+    FlowErrorCode = Shapes::StringShape.new(name: 'FlowErrorCode')
+    FlowExecutionContent = Shapes::UnionShape.new(name: 'FlowExecutionContent')
+    FlowExecutionError = Shapes::StructureShape.new(name: 'FlowExecutionError')
+    FlowExecutionErrorType = Shapes::StringShape.new(name: 'FlowExecutionErrorType')
+    FlowExecutionErrors = Shapes::ListShape.new(name: 'FlowExecutionErrors')
+    FlowExecutionEvent = Shapes::UnionShape.new(name: 'FlowExecutionEvent')
+    FlowExecutionEventType = Shapes::StringShape.new(name: 'FlowExecutionEventType')
+    FlowExecutionEvents = Shapes::ListShape.new(name: 'FlowExecutionEvents')
     FlowExecutionId = Shapes::StringShape.new(name: 'FlowExecutionId')
+    FlowExecutionIdentifier = Shapes::StringShape.new(name: 'FlowExecutionIdentifier')
+    FlowExecutionInputEvent = Shapes::StructureShape.new(name: 'FlowExecutionInputEvent')
+    FlowExecutionName = Shapes::StringShape.new(name: 'FlowExecutionName')
+    FlowExecutionOutputEvent = Shapes::StructureShape.new(name: 'FlowExecutionOutputEvent')
+    FlowExecutionRoleArn = Shapes::StringShape.new(name: 'FlowExecutionRoleArn')
+    FlowExecutionStatus = Shapes::StringShape.new(name: 'FlowExecutionStatus')
+    FlowExecutionSummaries = Shapes::ListShape.new(name: 'FlowExecutionSummaries')
+    FlowExecutionSummary = Shapes::StructureShape.new(name: 'FlowExecutionSummary')
+    FlowFailureEvent = Shapes::StructureShape.new(name: 'FlowFailureEvent')
     FlowIdentifier = Shapes::StringShape.new(name: 'FlowIdentifier')
     FlowInput = Shapes::StructureShape.new(name: 'FlowInput')
     FlowInputContent = Shapes::UnionShape.new(name: 'FlowInputContent')
+    FlowInputField = Shapes::StructureShape.new(name: 'FlowInputField')
+    FlowInputFields = Shapes::ListShape.new(name: 'FlowInputFields')
     FlowInputs = Shapes::ListShape.new(name: 'FlowInputs')
     FlowMultiTurnInputContent = Shapes::UnionShape.new(name: 'FlowMultiTurnInputContent')
     FlowMultiTurnInputRequestEvent = Shapes::StructureShape.new(name: 'FlowMultiTurnInputRequestEvent')
     FlowOutputContent = Shapes::UnionShape.new(name: 'FlowOutputContent')
     FlowOutputEvent = Shapes::StructureShape.new(name: 'FlowOutputEvent')
+    FlowOutputField = Shapes::StructureShape.new(name: 'FlowOutputField')
+    FlowOutputFields = Shapes::ListShape.new(name: 'FlowOutputFields')
     FlowResponseStream = Shapes::StructureShape.new(name: 'FlowResponseStream')
     FlowTrace = Shapes::UnionShape.new(name: 'FlowTrace')
     FlowTraceCondition = Shapes::StructureShape.new(name: 'FlowTraceCondition')
@@ -176,6 +198,10 @@ module Aws::BedrockAgentRuntime
     GenerationConfiguration = Shapes::StructureShape.new(name: 'GenerationConfiguration')
     GetAgentMemoryRequest = Shapes::StructureShape.new(name: 'GetAgentMemoryRequest')
     GetAgentMemoryResponse = Shapes::StructureShape.new(name: 'GetAgentMemoryResponse')
+    GetExecutionFlowSnapshotRequest = Shapes::StructureShape.new(name: 'GetExecutionFlowSnapshotRequest')
+    GetExecutionFlowSnapshotResponse = Shapes::StructureShape.new(name: 'GetExecutionFlowSnapshotResponse')
+    GetFlowExecutionRequest = Shapes::StructureShape.new(name: 'GetFlowExecutionRequest')
+    GetFlowExecutionResponse = Shapes::StructureShape.new(name: 'GetFlowExecutionResponse')
     GetInvocationStepRequest = Shapes::StructureShape.new(name: 'GetInvocationStepRequest')
     GetInvocationStepResponse = Shapes::StructureShape.new(name: 'GetInvocationStepResponse')
     GetSessionRequest = Shapes::StructureShape.new(name: 'GetSessionRequest')
@@ -284,6 +310,10 @@ module Aws::BedrockAgentRuntime
     KnowledgeBases = Shapes::ListShape.new(name: 'KnowledgeBases')
     LambdaArn = Shapes::StringShape.new(name: 'LambdaArn')
     LambdaResourceArn = Shapes::StringShape.new(name: 'LambdaResourceArn')
+    ListFlowExecutionEventsRequest = Shapes::StructureShape.new(name: 'ListFlowExecutionEventsRequest')
+    ListFlowExecutionEventsResponse = Shapes::StructureShape.new(name: 'ListFlowExecutionEventsResponse')
+    ListFlowExecutionsRequest = Shapes::StructureShape.new(name: 'ListFlowExecutionsRequest')
+    ListFlowExecutionsResponse = Shapes::StructureShape.new(name: 'ListFlowExecutionsResponse')
     ListInvocationStepsRequest = Shapes::StructureShape.new(name: 'ListInvocationStepsRequest')
     ListInvocationStepsResponse = Shapes::StructureShape.new(name: 'ListInvocationStepsResponse')
     ListInvocationsRequest = Shapes::StructureShape.new(name: 'ListInvocationsRequest')
@@ -316,8 +346,17 @@ module Aws::BedrockAgentRuntime
     ModelPerformanceConfiguration = Shapes::StructureShape.new(name: 'ModelPerformanceConfiguration')
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NodeErrorCode = Shapes::StringShape.new(name: 'NodeErrorCode')
+    NodeExecutionContent = Shapes::UnionShape.new(name: 'NodeExecutionContent')
+    NodeFailureEvent = Shapes::StructureShape.new(name: 'NodeFailureEvent')
+    NodeInputEvent = Shapes::StructureShape.new(name: 'NodeInputEvent')
+    NodeInputField = Shapes::StructureShape.new(name: 'NodeInputField')
+    NodeInputFields = Shapes::ListShape.new(name: 'NodeInputFields')
     NodeInputName = Shapes::StringShape.new(name: 'NodeInputName')
     NodeName = Shapes::StringShape.new(name: 'NodeName')
+    NodeOutputEvent = Shapes::StructureShape.new(name: 'NodeOutputEvent')
+    NodeOutputField = Shapes::StructureShape.new(name: 'NodeOutputField')
+    NodeOutputFields = Shapes::ListShape.new(name: 'NodeOutputFields')
     NodeOutputName = Shapes::StringShape.new(name: 'NodeOutputName')
     NodeType = Shapes::StringShape.new(name: 'NodeType')
     NonBlankString = Shapes::StringShape.new(name: 'NonBlankString')
@@ -358,6 +397,8 @@ module Aws::BedrockAgentRuntime
     PreProcessingTrace = Shapes::UnionShape.new(name: 'PreProcessingTrace')
     PromptConfiguration = Shapes::StructureShape.new(name: 'PromptConfiguration')
     PromptConfigurations = Shapes::ListShape.new(name: 'PromptConfigurations')
+    PromptCreationConfigurations = Shapes::StructureShape.new(name: 'PromptCreationConfigurations')
+    PromptCreationConfigurationsPreviousConversationTurnsToIncludeInteger = Shapes::IntegerShape.new(name: 'PromptCreationConfigurationsPreviousConversationTurnsToIncludeInteger')
     PromptOverrideConfiguration = Shapes::StructureShape.new(name: 'PromptOverrideConfiguration')
     PromptSessionAttributesMap = Shapes::MapShape.new(name: 'PromptSessionAttributesMap')
     PromptState = Shapes::StringShape.new(name: 'PromptState')
@@ -456,6 +497,8 @@ module Aws::BedrockAgentRuntime
     S3ObjectFile = Shapes::StructureShape.new(name: 'S3ObjectFile')
     S3ObjectKey = Shapes::StringShape.new(name: 'S3ObjectKey')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
+    SatisfiedCondition = Shapes::StructureShape.new(name: 'SatisfiedCondition')
+    SatisfiedConditions = Shapes::ListShape.new(name: 'SatisfiedConditions')
     SearchType = Shapes::StringShape.new(name: 'SearchType')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SessionArn = Shapes::StringShape.new(name: 'SessionArn')
@@ -474,6 +517,10 @@ module Aws::BedrockAgentRuntime
     Span = Shapes::StructureShape.new(name: 'Span')
     SpanEndInteger = Shapes::IntegerShape.new(name: 'SpanEndInteger')
     SpanStartInteger = Shapes::IntegerShape.new(name: 'SpanStartInteger')
+    StartFlowExecutionRequest = Shapes::StructureShape.new(name: 'StartFlowExecutionRequest')
+    StartFlowExecutionResponse = Shapes::StructureShape.new(name: 'StartFlowExecutionResponse')
+    StopFlowExecutionRequest = Shapes::StructureShape.new(name: 'StopFlowExecutionRequest')
+    StopFlowExecutionResponse = Shapes::StructureShape.new(name: 'StopFlowExecutionResponse')
     StopSequences = Shapes::ListShape.new(name: 'StopSequences')
     StreamingConfigurations = Shapes::StructureShape.new(name: 'StreamingConfigurations')
     StreamingConfigurationsApplyGuardrailIntervalInteger = Shapes::IntegerShape.new(name: 'StreamingConfigurationsApplyGuardrailIntervalInteger')
@@ -518,6 +565,7 @@ module Aws::BedrockAgentRuntime
     VectorSearchRerankingConfiguration = Shapes::StructureShape.new(name: 'VectorSearchRerankingConfiguration')
     VectorSearchRerankingConfigurationType = Shapes::StringShape.new(name: 'VectorSearchRerankingConfigurationType')
     Verb = Shapes::StringShape.new(name: 'Verb')
+    Version = Shapes::StringShape.new(name: 'Version')
 
     APISchema.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, location_name: "payload"))
     APISchema.add_member(:s3, Shapes::ShapeRef.new(shape: S3Identifier, location_name: "s3"))
@@ -716,6 +764,11 @@ module Aws::BedrockAgentRuntime
 
     Collaborators.member = Shapes::ShapeRef.new(shape: Collaborator)
 
+    ConditionResultEvent.add_member(:node_name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "nodeName"))
+    ConditionResultEvent.add_member(:satisfied_conditions, Shapes::ShapeRef.new(shape: SatisfiedConditions, required: true, location_name: "satisfiedConditions"))
+    ConditionResultEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "timestamp"))
+    ConditionResultEvent.struct_class = Types::ConditionResultEvent
+
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
 
@@ -844,6 +897,65 @@ module Aws::BedrockAgentRuntime
     FlowCompletionEvent.add_member(:completion_reason, Shapes::ShapeRef.new(shape: FlowCompletionReason, required: true, location_name: "completionReason"))
     FlowCompletionEvent.struct_class = Types::FlowCompletionEvent
 
+    FlowExecutionContent.add_member(:document, Shapes::ShapeRef.new(shape: Document, location_name: "document"))
+    FlowExecutionContent.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    FlowExecutionContent.add_member_subclass(:document, Types::FlowExecutionContent::Document)
+    FlowExecutionContent.add_member_subclass(:unknown, Types::FlowExecutionContent::Unknown)
+    FlowExecutionContent.struct_class = Types::FlowExecutionContent
+
+    FlowExecutionError.add_member(:error, Shapes::ShapeRef.new(shape: FlowExecutionErrorType, location_name: "error"))
+    FlowExecutionError.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    FlowExecutionError.add_member(:node_name, Shapes::ShapeRef.new(shape: NodeName, location_name: "nodeName"))
+    FlowExecutionError.struct_class = Types::FlowExecutionError
+
+    FlowExecutionErrors.member = Shapes::ShapeRef.new(shape: FlowExecutionError)
+
+    FlowExecutionEvent.add_member(:condition_result_event, Shapes::ShapeRef.new(shape: ConditionResultEvent, location_name: "conditionResultEvent"))
+    FlowExecutionEvent.add_member(:flow_failure_event, Shapes::ShapeRef.new(shape: FlowFailureEvent, location_name: "flowFailureEvent"))
+    FlowExecutionEvent.add_member(:flow_input_event, Shapes::ShapeRef.new(shape: FlowExecutionInputEvent, location_name: "flowInputEvent"))
+    FlowExecutionEvent.add_member(:flow_output_event, Shapes::ShapeRef.new(shape: FlowExecutionOutputEvent, location_name: "flowOutputEvent"))
+    FlowExecutionEvent.add_member(:node_failure_event, Shapes::ShapeRef.new(shape: NodeFailureEvent, location_name: "nodeFailureEvent"))
+    FlowExecutionEvent.add_member(:node_input_event, Shapes::ShapeRef.new(shape: NodeInputEvent, location_name: "nodeInputEvent"))
+    FlowExecutionEvent.add_member(:node_output_event, Shapes::ShapeRef.new(shape: NodeOutputEvent, location_name: "nodeOutputEvent"))
+    FlowExecutionEvent.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    FlowExecutionEvent.add_member_subclass(:condition_result_event, Types::FlowExecutionEvent::ConditionResultEvent)
+    FlowExecutionEvent.add_member_subclass(:flow_failure_event, Types::FlowExecutionEvent::FlowFailureEvent)
+    FlowExecutionEvent.add_member_subclass(:flow_input_event, Types::FlowExecutionEvent::FlowInputEvent)
+    FlowExecutionEvent.add_member_subclass(:flow_output_event, Types::FlowExecutionEvent::FlowOutputEvent)
+    FlowExecutionEvent.add_member_subclass(:node_failure_event, Types::FlowExecutionEvent::NodeFailureEvent)
+    FlowExecutionEvent.add_member_subclass(:node_input_event, Types::FlowExecutionEvent::NodeInputEvent)
+    FlowExecutionEvent.add_member_subclass(:node_output_event, Types::FlowExecutionEvent::NodeOutputEvent)
+    FlowExecutionEvent.add_member_subclass(:unknown, Types::FlowExecutionEvent::Unknown)
+    FlowExecutionEvent.struct_class = Types::FlowExecutionEvent
+
+    FlowExecutionEvents.member = Shapes::ShapeRef.new(shape: FlowExecutionEvent)
+
+    FlowExecutionInputEvent.add_member(:fields, Shapes::ShapeRef.new(shape: FlowInputFields, required: true, location_name: "fields"))
+    FlowExecutionInputEvent.add_member(:node_name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "nodeName"))
+    FlowExecutionInputEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "timestamp"))
+    FlowExecutionInputEvent.struct_class = Types::FlowExecutionInputEvent
+
+    FlowExecutionOutputEvent.add_member(:fields, Shapes::ShapeRef.new(shape: FlowOutputFields, required: true, location_name: "fields"))
+    FlowExecutionOutputEvent.add_member(:node_name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "nodeName"))
+    FlowExecutionOutputEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "timestamp"))
+    FlowExecutionOutputEvent.struct_class = Types::FlowExecutionOutputEvent
+
+    FlowExecutionSummaries.member = Shapes::ShapeRef.new(shape: FlowExecutionSummary)
+
+    FlowExecutionSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
+    FlowExecutionSummary.add_member(:ended_at, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "endedAt"))
+    FlowExecutionSummary.add_member(:execution_arn, Shapes::ShapeRef.new(shape: FlowExecutionIdentifier, required: true, location_name: "executionArn"))
+    FlowExecutionSummary.add_member(:flow_alias_identifier, Shapes::ShapeRef.new(shape: FlowAliasIdentifier, required: true, location_name: "flowAliasIdentifier"))
+    FlowExecutionSummary.add_member(:flow_identifier, Shapes::ShapeRef.new(shape: FlowIdentifier, required: true, location_name: "flowIdentifier"))
+    FlowExecutionSummary.add_member(:flow_version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "flowVersion"))
+    FlowExecutionSummary.add_member(:status, Shapes::ShapeRef.new(shape: FlowExecutionStatus, required: true, location_name: "status"))
+    FlowExecutionSummary.struct_class = Types::FlowExecutionSummary
+
+    FlowFailureEvent.add_member(:error_code, Shapes::ShapeRef.new(shape: FlowErrorCode, required: true, location_name: "errorCode"))
+    FlowFailureEvent.add_member(:error_message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "errorMessage"))
+    FlowFailureEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "timestamp"))
+    FlowFailureEvent.struct_class = Types::FlowFailureEvent
+
     FlowInput.add_member(:content, Shapes::ShapeRef.new(shape: FlowInputContent, required: true, location_name: "content"))
     FlowInput.add_member(:node_input_name, Shapes::ShapeRef.new(shape: NodeInputName, location_name: "nodeInputName"))
     FlowInput.add_member(:node_name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "nodeName"))
@@ -855,6 +967,12 @@ module Aws::BedrockAgentRuntime
     FlowInputContent.add_member_subclass(:document, Types::FlowInputContent::Document)
     FlowInputContent.add_member_subclass(:unknown, Types::FlowInputContent::Unknown)
     FlowInputContent.struct_class = Types::FlowInputContent
+
+    FlowInputField.add_member(:content, Shapes::ShapeRef.new(shape: FlowExecutionContent, required: true, location_name: "content"))
+    FlowInputField.add_member(:name, Shapes::ShapeRef.new(shape: NodeInputName, required: true, location_name: "name"))
+    FlowInputField.struct_class = Types::FlowInputField
+
+    FlowInputFields.member = Shapes::ShapeRef.new(shape: FlowInputField)
 
     FlowInputs.member = Shapes::ShapeRef.new(shape: FlowInput)
 
@@ -879,6 +997,12 @@ module Aws::BedrockAgentRuntime
     FlowOutputEvent.add_member(:node_name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "nodeName"))
     FlowOutputEvent.add_member(:node_type, Shapes::ShapeRef.new(shape: NodeType, required: true, location_name: "nodeType"))
     FlowOutputEvent.struct_class = Types::FlowOutputEvent
+
+    FlowOutputField.add_member(:content, Shapes::ShapeRef.new(shape: FlowExecutionContent, required: true, location_name: "content"))
+    FlowOutputField.add_member(:name, Shapes::ShapeRef.new(shape: NodeOutputName, required: true, location_name: "name"))
+    FlowOutputField.struct_class = Types::FlowOutputField
+
+    FlowOutputFields.member = Shapes::ShapeRef.new(shape: FlowOutputField)
 
     FlowResponseStream.add_member(:access_denied_exception, Shapes::ShapeRef.new(shape: AccessDeniedException, location_name: "accessDeniedException"))
     FlowResponseStream.add_member(:bad_gateway_exception, Shapes::ShapeRef.new(shape: BadGatewayException, location_name: "badGatewayException"))
@@ -1032,6 +1156,34 @@ module Aws::BedrockAgentRuntime
     GetAgentMemoryResponse.add_member(:memory_contents, Shapes::ShapeRef.new(shape: Memories, location_name: "memoryContents"))
     GetAgentMemoryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     GetAgentMemoryResponse.struct_class = Types::GetAgentMemoryResponse
+
+    GetExecutionFlowSnapshotRequest.add_member(:execution_identifier, Shapes::ShapeRef.new(shape: FlowExecutionIdentifier, required: true, location: "uri", location_name: "executionIdentifier"))
+    GetExecutionFlowSnapshotRequest.add_member(:flow_alias_identifier, Shapes::ShapeRef.new(shape: FlowAliasIdentifier, required: true, location: "uri", location_name: "flowAliasIdentifier"))
+    GetExecutionFlowSnapshotRequest.add_member(:flow_identifier, Shapes::ShapeRef.new(shape: FlowIdentifier, required: true, location: "uri", location_name: "flowIdentifier"))
+    GetExecutionFlowSnapshotRequest.struct_class = Types::GetExecutionFlowSnapshotRequest
+
+    GetExecutionFlowSnapshotResponse.add_member(:customer_encryption_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "customerEncryptionKeyArn"))
+    GetExecutionFlowSnapshotResponse.add_member(:definition, Shapes::ShapeRef.new(shape: String, required: true, location_name: "definition"))
+    GetExecutionFlowSnapshotResponse.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: FlowExecutionRoleArn, required: true, location_name: "executionRoleArn"))
+    GetExecutionFlowSnapshotResponse.add_member(:flow_alias_identifier, Shapes::ShapeRef.new(shape: FlowAliasIdentifier, required: true, location_name: "flowAliasIdentifier"))
+    GetExecutionFlowSnapshotResponse.add_member(:flow_identifier, Shapes::ShapeRef.new(shape: FlowIdentifier, required: true, location_name: "flowIdentifier"))
+    GetExecutionFlowSnapshotResponse.add_member(:flow_version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "flowVersion"))
+    GetExecutionFlowSnapshotResponse.struct_class = Types::GetExecutionFlowSnapshotResponse
+
+    GetFlowExecutionRequest.add_member(:execution_identifier, Shapes::ShapeRef.new(shape: FlowExecutionIdentifier, required: true, location: "uri", location_name: "executionIdentifier"))
+    GetFlowExecutionRequest.add_member(:flow_alias_identifier, Shapes::ShapeRef.new(shape: FlowAliasIdentifier, required: true, location: "uri", location_name: "flowAliasIdentifier"))
+    GetFlowExecutionRequest.add_member(:flow_identifier, Shapes::ShapeRef.new(shape: FlowIdentifier, required: true, location: "uri", location_name: "flowIdentifier"))
+    GetFlowExecutionRequest.struct_class = Types::GetFlowExecutionRequest
+
+    GetFlowExecutionResponse.add_member(:ended_at, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "endedAt"))
+    GetFlowExecutionResponse.add_member(:errors, Shapes::ShapeRef.new(shape: FlowExecutionErrors, location_name: "errors"))
+    GetFlowExecutionResponse.add_member(:execution_arn, Shapes::ShapeRef.new(shape: FlowExecutionIdentifier, required: true, location_name: "executionArn"))
+    GetFlowExecutionResponse.add_member(:flow_alias_identifier, Shapes::ShapeRef.new(shape: FlowAliasIdentifier, required: true, location_name: "flowAliasIdentifier"))
+    GetFlowExecutionResponse.add_member(:flow_identifier, Shapes::ShapeRef.new(shape: FlowIdentifier, required: true, location_name: "flowIdentifier"))
+    GetFlowExecutionResponse.add_member(:flow_version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "flowVersion"))
+    GetFlowExecutionResponse.add_member(:started_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "startedAt"))
+    GetFlowExecutionResponse.add_member(:status, Shapes::ShapeRef.new(shape: FlowExecutionStatus, required: true, location_name: "status"))
+    GetFlowExecutionResponse.struct_class = Types::GetFlowExecutionResponse
 
     GetInvocationStepRequest.add_member(:invocation_identifier, Shapes::ShapeRef.new(shape: InvocationIdentifier, required: true, location_name: "invocationIdentifier"))
     GetInvocationStepRequest.add_member(:invocation_step_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "invocationStepId"))
@@ -1295,6 +1447,7 @@ module Aws::BedrockAgentRuntime
     InvokeAgentRequest.add_member(:end_session, Shapes::ShapeRef.new(shape: Boolean, location_name: "endSession"))
     InvokeAgentRequest.add_member(:input_text, Shapes::ShapeRef.new(shape: InputText, location_name: "inputText"))
     InvokeAgentRequest.add_member(:memory_id, Shapes::ShapeRef.new(shape: MemoryId, location_name: "memoryId"))
+    InvokeAgentRequest.add_member(:prompt_creation_configurations, Shapes::ShapeRef.new(shape: PromptCreationConfigurations, location_name: "promptCreationConfigurations"))
     InvokeAgentRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, required: true, location: "uri", location_name: "sessionId"))
     InvokeAgentRequest.add_member(:session_state, Shapes::ShapeRef.new(shape: SessionState, location_name: "sessionState"))
     InvokeAgentRequest.add_member(:source_arn, Shapes::ShapeRef.new(shape: AWSResourceARN, location: "header", location_name: "x-amz-source-arn"))
@@ -1341,6 +1494,7 @@ module Aws::BedrockAgentRuntime
     InvokeInlineAgentRequest.add_member(:instruction, Shapes::ShapeRef.new(shape: Instruction, required: true, location_name: "instruction"))
     InvokeInlineAgentRequest.add_member(:knowledge_bases, Shapes::ShapeRef.new(shape: KnowledgeBases, location_name: "knowledgeBases"))
     InvokeInlineAgentRequest.add_member(:orchestration_type, Shapes::ShapeRef.new(shape: OrchestrationType, location_name: "orchestrationType"))
+    InvokeInlineAgentRequest.add_member(:prompt_creation_configurations, Shapes::ShapeRef.new(shape: PromptCreationConfigurations, location_name: "promptCreationConfigurations"))
     InvokeInlineAgentRequest.add_member(:prompt_override_configuration, Shapes::ShapeRef.new(shape: PromptOverrideConfiguration, location_name: "promptOverrideConfiguration"))
     InvokeInlineAgentRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, required: true, location: "uri", location_name: "sessionId"))
     InvokeInlineAgentRequest.add_member(:streaming_configurations, Shapes::ShapeRef.new(shape: StreamingConfigurations, location_name: "streamingConfigurations"))
@@ -1401,6 +1555,28 @@ module Aws::BedrockAgentRuntime
     KnowledgeBaseVectorSearchConfiguration.struct_class = Types::KnowledgeBaseVectorSearchConfiguration
 
     KnowledgeBases.member = Shapes::ShapeRef.new(shape: KnowledgeBase)
+
+    ListFlowExecutionEventsRequest.add_member(:event_type, Shapes::ShapeRef.new(shape: FlowExecutionEventType, required: true, location: "querystring", location_name: "eventType"))
+    ListFlowExecutionEventsRequest.add_member(:execution_identifier, Shapes::ShapeRef.new(shape: FlowExecutionIdentifier, required: true, location: "uri", location_name: "executionIdentifier"))
+    ListFlowExecutionEventsRequest.add_member(:flow_alias_identifier, Shapes::ShapeRef.new(shape: FlowAliasIdentifier, required: true, location: "uri", location_name: "flowAliasIdentifier"))
+    ListFlowExecutionEventsRequest.add_member(:flow_identifier, Shapes::ShapeRef.new(shape: FlowIdentifier, required: true, location: "uri", location_name: "flowIdentifier"))
+    ListFlowExecutionEventsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListFlowExecutionEventsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListFlowExecutionEventsRequest.struct_class = Types::ListFlowExecutionEventsRequest
+
+    ListFlowExecutionEventsResponse.add_member(:flow_execution_events, Shapes::ShapeRef.new(shape: FlowExecutionEvents, required: true, location_name: "flowExecutionEvents"))
+    ListFlowExecutionEventsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListFlowExecutionEventsResponse.struct_class = Types::ListFlowExecutionEventsResponse
+
+    ListFlowExecutionsRequest.add_member(:flow_alias_identifier, Shapes::ShapeRef.new(shape: FlowAliasIdentifier, location: "querystring", location_name: "flowAliasIdentifier"))
+    ListFlowExecutionsRequest.add_member(:flow_identifier, Shapes::ShapeRef.new(shape: FlowIdentifier, required: true, location: "uri", location_name: "flowIdentifier"))
+    ListFlowExecutionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListFlowExecutionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListFlowExecutionsRequest.struct_class = Types::ListFlowExecutionsRequest
+
+    ListFlowExecutionsResponse.add_member(:flow_execution_summaries, Shapes::ShapeRef.new(shape: FlowExecutionSummaries, required: true, location_name: "flowExecutionSummaries"))
+    ListFlowExecutionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListFlowExecutionsResponse.struct_class = Types::ListFlowExecutionsResponse
 
     ListInvocationStepsRequest.add_member(:invocation_identifier, Shapes::ShapeRef.new(shape: InvocationIdentifier, location_name: "invocationIdentifier"))
     ListInvocationStepsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -1490,6 +1666,40 @@ module Aws::BedrockAgentRuntime
 
     ModelPerformanceConfiguration.add_member(:performance_config, Shapes::ShapeRef.new(shape: PerformanceConfiguration, location_name: "performanceConfig"))
     ModelPerformanceConfiguration.struct_class = Types::ModelPerformanceConfiguration
+
+    NodeExecutionContent.add_member(:document, Shapes::ShapeRef.new(shape: Document, location_name: "document"))
+    NodeExecutionContent.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    NodeExecutionContent.add_member_subclass(:document, Types::NodeExecutionContent::Document)
+    NodeExecutionContent.add_member_subclass(:unknown, Types::NodeExecutionContent::Unknown)
+    NodeExecutionContent.struct_class = Types::NodeExecutionContent
+
+    NodeFailureEvent.add_member(:error_code, Shapes::ShapeRef.new(shape: NodeErrorCode, required: true, location_name: "errorCode"))
+    NodeFailureEvent.add_member(:error_message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "errorMessage"))
+    NodeFailureEvent.add_member(:node_name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "nodeName"))
+    NodeFailureEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "timestamp"))
+    NodeFailureEvent.struct_class = Types::NodeFailureEvent
+
+    NodeInputEvent.add_member(:fields, Shapes::ShapeRef.new(shape: NodeInputFields, required: true, location_name: "fields"))
+    NodeInputEvent.add_member(:node_name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "nodeName"))
+    NodeInputEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "timestamp"))
+    NodeInputEvent.struct_class = Types::NodeInputEvent
+
+    NodeInputField.add_member(:content, Shapes::ShapeRef.new(shape: NodeExecutionContent, required: true, location_name: "content"))
+    NodeInputField.add_member(:name, Shapes::ShapeRef.new(shape: NodeInputName, required: true, location_name: "name"))
+    NodeInputField.struct_class = Types::NodeInputField
+
+    NodeInputFields.member = Shapes::ShapeRef.new(shape: NodeInputField)
+
+    NodeOutputEvent.add_member(:fields, Shapes::ShapeRef.new(shape: NodeOutputFields, required: true, location_name: "fields"))
+    NodeOutputEvent.add_member(:node_name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "nodeName"))
+    NodeOutputEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "timestamp"))
+    NodeOutputEvent.struct_class = Types::NodeOutputEvent
+
+    NodeOutputField.add_member(:content, Shapes::ShapeRef.new(shape: NodeExecutionContent, required: true, location_name: "content"))
+    NodeOutputField.add_member(:name, Shapes::ShapeRef.new(shape: NodeOutputName, required: true, location_name: "name"))
+    NodeOutputField.struct_class = Types::NodeOutputField
+
+    NodeOutputFields.member = Shapes::ShapeRef.new(shape: NodeOutputField)
 
     Observation.add_member(:action_group_invocation_output, Shapes::ShapeRef.new(shape: ActionGroupInvocationOutput, location_name: "actionGroupInvocationOutput"))
     Observation.add_member(:agent_collaborator_invocation_output, Shapes::ShapeRef.new(shape: AgentCollaboratorInvocationOutput, location_name: "agentCollaboratorInvocationOutput"))
@@ -1641,6 +1851,10 @@ module Aws::BedrockAgentRuntime
     PromptConfiguration.struct_class = Types::PromptConfiguration
 
     PromptConfigurations.member = Shapes::ShapeRef.new(shape: PromptConfiguration)
+
+    PromptCreationConfigurations.add_member(:exclude_previous_thinking_steps, Shapes::ShapeRef.new(shape: Boolean, location_name: "excludePreviousThinkingSteps"))
+    PromptCreationConfigurations.add_member(:previous_conversation_turns_to_include, Shapes::ShapeRef.new(shape: PromptCreationConfigurationsPreviousConversationTurnsToIncludeInteger, location_name: "previousConversationTurnsToInclude"))
+    PromptCreationConfigurations.struct_class = Types::PromptCreationConfigurations
 
     PromptOverrideConfiguration.add_member(:override_lambda, Shapes::ShapeRef.new(shape: LambdaResourceArn, location_name: "overrideLambda"))
     PromptOverrideConfiguration.add_member(:prompt_configurations, Shapes::ShapeRef.new(shape: PromptConfigurations, required: true, location_name: "promptConfigurations"))
@@ -1968,6 +2182,11 @@ module Aws::BedrockAgentRuntime
     S3ObjectFile.add_member(:uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "uri"))
     S3ObjectFile.struct_class = Types::S3ObjectFile
 
+    SatisfiedCondition.add_member(:condition_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "conditionName"))
+    SatisfiedCondition.struct_class = Types::SatisfiedCondition
+
+    SatisfiedConditions.member = Shapes::ShapeRef.new(shape: SatisfiedCondition)
+
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
@@ -1998,6 +2217,25 @@ module Aws::BedrockAgentRuntime
     Span.add_member(:end, Shapes::ShapeRef.new(shape: SpanEndInteger, location_name: "end"))
     Span.add_member(:start, Shapes::ShapeRef.new(shape: SpanStartInteger, location_name: "start"))
     Span.struct_class = Types::Span
+
+    StartFlowExecutionRequest.add_member(:flow_alias_identifier, Shapes::ShapeRef.new(shape: FlowAliasIdentifier, required: true, location: "uri", location_name: "flowAliasIdentifier"))
+    StartFlowExecutionRequest.add_member(:flow_execution_name, Shapes::ShapeRef.new(shape: FlowExecutionName, location_name: "flowExecutionName"))
+    StartFlowExecutionRequest.add_member(:flow_identifier, Shapes::ShapeRef.new(shape: FlowIdentifier, required: true, location: "uri", location_name: "flowIdentifier"))
+    StartFlowExecutionRequest.add_member(:inputs, Shapes::ShapeRef.new(shape: FlowInputs, required: true, location_name: "inputs"))
+    StartFlowExecutionRequest.add_member(:model_performance_configuration, Shapes::ShapeRef.new(shape: ModelPerformanceConfiguration, location_name: "modelPerformanceConfiguration"))
+    StartFlowExecutionRequest.struct_class = Types::StartFlowExecutionRequest
+
+    StartFlowExecutionResponse.add_member(:execution_arn, Shapes::ShapeRef.new(shape: FlowExecutionIdentifier, location_name: "executionArn"))
+    StartFlowExecutionResponse.struct_class = Types::StartFlowExecutionResponse
+
+    StopFlowExecutionRequest.add_member(:execution_identifier, Shapes::ShapeRef.new(shape: FlowExecutionIdentifier, required: true, location: "uri", location_name: "executionIdentifier"))
+    StopFlowExecutionRequest.add_member(:flow_alias_identifier, Shapes::ShapeRef.new(shape: FlowAliasIdentifier, required: true, location: "uri", location_name: "flowAliasIdentifier"))
+    StopFlowExecutionRequest.add_member(:flow_identifier, Shapes::ShapeRef.new(shape: FlowIdentifier, required: true, location: "uri", location_name: "flowIdentifier"))
+    StopFlowExecutionRequest.struct_class = Types::StopFlowExecutionRequest
+
+    StopFlowExecutionResponse.add_member(:execution_arn, Shapes::ShapeRef.new(shape: FlowExecutionIdentifier, location_name: "executionArn"))
+    StopFlowExecutionResponse.add_member(:status, Shapes::ShapeRef.new(shape: FlowExecutionStatus, required: true, location_name: "status"))
+    StopFlowExecutionResponse.struct_class = Types::StopFlowExecutionResponse
 
     StopSequences.member = Shapes::ShapeRef.new(shape: String)
 
@@ -2242,6 +2480,32 @@ module Aws::BedrockAgentRuntime
         )
       end)
 
+      api.add_operation(:get_execution_flow_snapshot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetExecutionFlowSnapshot"
+        o.http_method = "GET"
+        o.http_request_uri = "/flows/{flowIdentifier}/aliases/{flowAliasIdentifier}/executions/{executionIdentifier}/flowsnapshot"
+        o.input = Shapes::ShapeRef.new(shape: GetExecutionFlowSnapshotRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetExecutionFlowSnapshotResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:get_flow_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetFlowExecution"
+        o.http_method = "GET"
+        o.http_request_uri = "/flows/{flowIdentifier}/aliases/{flowAliasIdentifier}/executions/{executionIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetFlowExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetFlowExecutionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:get_invocation_step, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetInvocationStep"
         o.http_method = "POST"
@@ -2318,6 +2582,44 @@ module Aws::BedrockAgentRuntime
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:list_flow_execution_events, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFlowExecutionEvents"
+        o.http_method = "GET"
+        o.http_request_uri = "/flows/{flowIdentifier}/aliases/{flowAliasIdentifier}/executions/{executionIdentifier}/events"
+        o.input = Shapes::ShapeRef.new(shape: ListFlowExecutionEventsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListFlowExecutionEventsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_flow_executions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFlowExecutions"
+        o.http_method = "GET"
+        o.http_request_uri = "/flows/{flowIdentifier}/executions"
+        o.input = Shapes::ShapeRef.new(shape: ListFlowExecutionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListFlowExecutionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_invocation_steps, Seahorse::Model::Operation.new.tap do |o|
@@ -2494,6 +2796,39 @@ module Aws::BedrockAgentRuntime
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:start_flow_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartFlowExecution"
+        o.http_method = "POST"
+        o.http_request_uri = "/flows/{flowIdentifier}/aliases/{flowAliasIdentifier}/executions"
+        o.input = Shapes::ShapeRef.new(shape: StartFlowExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartFlowExecutionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:stop_flow_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopFlowExecution"
+        o.http_method = "POST"
+        o.http_request_uri = "/flows/{flowIdentifier}/aliases/{flowAliasIdentifier}/executions/{executionIdentifier}/stop"
+        o.input = Shapes::ShapeRef.new(shape: StopFlowExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopFlowExecutionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

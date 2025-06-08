@@ -242,6 +242,7 @@ module Aws::BCMPricingCalculator
     WorkloadEstimateUpdateUsageErrorCode = Shapes::StringShape.new(name: 'WorkloadEstimateUpdateUsageErrorCode')
     WorkloadEstimateUsageItem = Shapes::StructureShape.new(name: 'WorkloadEstimateUsageItem')
     WorkloadEstimateUsageItems = Shapes::ListShape.new(name: 'WorkloadEstimateUsageItems')
+    WorkloadEstimateUsageMaxResults = Shapes::IntegerShape.new(name: 'WorkloadEstimateUsageMaxResults')
     WorkloadEstimateUsageQuantity = Shapes::StructureShape.new(name: 'WorkloadEstimateUsageQuantity')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -889,7 +890,7 @@ module Aws::BCMPricingCalculator
     ListWorkloadEstimateUsageRequest.add_member(:workload_estimate_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "workloadEstimateId"))
     ListWorkloadEstimateUsageRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ListUsageFilters, location_name: "filters"))
     ListWorkloadEstimateUsageRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "nextToken"))
-    ListWorkloadEstimateUsageRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListWorkloadEstimateUsageRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: WorkloadEstimateUsageMaxResults, location_name: "maxResults"))
     ListWorkloadEstimateUsageRequest.struct_class = Types::ListWorkloadEstimateUsageRequest
 
     ListWorkloadEstimateUsageResponse.add_member(:items, Shapes::ShapeRef.new(shape: WorkloadEstimateUsageItems, location_name: "items"))

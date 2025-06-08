@@ -59,6 +59,7 @@ module Aws::CloudTrail
   # * {InsightNotEnabledException}
   # * {InsufficientDependencyServiceAccessPermissionException}
   # * {InsufficientEncryptionPolicyException}
+  # * {InsufficientIAMAccessPermissionException}
   # * {InsufficientS3BucketPolicyException}
   # * {InsufficientSnsTopicPolicyException}
   # * {InvalidCloudWatchLogsLogGroupArnException}
@@ -434,6 +435,16 @@ module Aws::CloudTrail
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudTrail::Types::InsufficientEncryptionPolicyException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class InsufficientIAMAccessPermissionException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudTrail::Types::InsufficientIAMAccessPermissionException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

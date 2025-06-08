@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.67.0 (2025-05-29)
+------------------
+
+* Feature - This release adds Tag support for Event Action resource, through which customers can create event actions with Tags and retrieve event actions with Tags.
+
 1.66.0 (2025-05-12)
 ------------------
 

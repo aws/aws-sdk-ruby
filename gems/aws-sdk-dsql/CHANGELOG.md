@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.10.0 (2025-05-22)
+------------------
+
+* Feature - Features: support for customer managed encryption keys
+
 1.9.0 (2025-05-19)
 ------------------
 

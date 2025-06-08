@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+3.229.0 (2025-06-04)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-evs` gem.
+
+3.228.0 (2025-06-02)
+------------------
+
+* Feature - AWS SDK for Ruby no longer supports Ruby runtime versions 2.5 and 2.6.
+
+3.227.0 (2025-05-21)
+------------------
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-privatenetworks` gem.
+
 3.226.0 (2025-04-29)
 ------------------
 

@@ -535,6 +535,63 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Contains information about the current security configuration of an
+    # active VPN tunnel.
+    #
+    # @!attribute [rw] phase_1_encryption_algorithm
+    #   The encryption algorithm negotiated in Phase 1 IKE negotiations.
+    #   @return [String]
+    #
+    # @!attribute [rw] phase_2_encryption_algorithm
+    #   The encryption algorithm negotiated in Phase 2 IKE negotiations.
+    #   @return [String]
+    #
+    # @!attribute [rw] phase_1_integrity_algorithm
+    #   The integrity algorithm negotiated in Phase 1 IKE negotiations.
+    #   @return [String]
+    #
+    # @!attribute [rw] phase_2_integrity_algorithm
+    #   The integrity algorithm negotiated in Phase 2 IKE negotiations.
+    #   @return [String]
+    #
+    # @!attribute [rw] phase_1_dh_group
+    #   The Diffie-Hellman group number being used in Phase 1 IKE
+    #   negotiations.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] phase_2_dh_group
+    #   The Diffie-Hellman group number being used in Phase 2 IKE
+    #   negotiations.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ike_version
+    #   The version of the Internet Key Exchange (IKE) protocol being used.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_status
+    #   The current provisioning status of the VPN tunnel.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_status_reason
+    #   The reason for the current provisioning status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ActiveVpnTunnelStatus AWS API Documentation
+    #
+    class ActiveVpnTunnelStatus < Struct.new(
+      :phase_1_encryption_algorithm,
+      :phase_2_encryption_algorithm,
+      :phase_1_integrity_algorithm,
+      :phase_2_integrity_algorithm,
+      :phase_1_dh_group,
+      :phase_2_dh_group,
+      :ike_version,
+      :provisioning_status,
+      :provisioning_status_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Add an operating Region to an IPAM. Operating Regions are Amazon Web
     # Services Regions where the IPAM is allowed to manage IP address CIDRs.
     # IPAM only discovers and monitors resources in the Amazon Web Services
@@ -7200,8 +7257,8 @@ module Aws::EC2
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier you provide to ensure idempotency
-    #   of the request. For more information, see [Ensuring idempotency][1]
-    #   in the *Amazon EC2 API Reference*.
+    #   of the request. For more information, see [Ensuring idempotency in
+    #   Amazon EC2 API requests][1] in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -7328,7 +7385,8 @@ module Aws::EC2
     #   If you do not specify a value, the AMI copy operation is completed
     #   on a best-effort basis.
     #
-    #   For more information, see [ Time-based copies][1].
+    #   For more information, see [Time-based copies for Amazon EBS
+    #   snapshots and EBS-backed AMIs][1].
     #
     #
     #
@@ -15207,6 +15265,12 @@ module Aws::EC2
     #   The tags to apply to the VPN connection.
     #   @return [Array<Types::TagSpecification>]
     #
+    # @!attribute [rw] pre_shared_key_storage
+    #   Specifies the storage mode for the pre-shared key (PSK). Valid
+    #   values are `Standard`" (stored in the Site-to-Site VPN service) or
+    #   `SecretsManager` (stored in Amazon Web Services Secrets Manager).
+    #   @return [String]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -15226,6 +15290,7 @@ module Aws::EC2
       :vpn_gateway_id,
       :transit_gateway_id,
       :tag_specifications,
+      :pre_shared_key_storage,
       :dry_run,
       :options)
       SENSITIVE = []
@@ -17339,6 +17404,49 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The snapshot ID and its deletion result code.
+    #
+    # @!attribute [rw] snapshot_id
+    #   The ID of the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] return_code
+    #   The result code from the snapshot deletion attempt. Possible values:
+    #
+    #   * `success` - The snapshot was successfully deleted.
+    #
+    #   * `skipped` - The snapshot was not deleted because it's associated
+    #     with other AMIs.
+    #
+    #   * `missing-permissions` - The snapshot was not deleted because the
+    #     role lacks `DeleteSnapshot` permissions. For more information, see
+    #     [How Amazon EBS works with IAM][1].
+    #
+    #   * `internal-error` - The snapshot was not deleted due to a server
+    #     error.
+    #
+    #   * `client-error` - The snapshot was not deleted due to a client
+    #     configuration error.
+    #
+    #   For details about an error, check the `DeleteSnapshot` event in the
+    #   CloudTrail event history. For more information, see [View event
+    #   history][2] in the *Amazon Web Services CloudTrail User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/security_iam_service-with-iam.html
+    #   [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/tutorial-event-history.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteSnapshotReturnCode AWS API Documentation
+    #
+    class DeleteSnapshotReturnCode < Struct.new(
+      :snapshot_id,
+      :return_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the parameters for DeleteSpotDatafeedSubscription.
     #
     # @!attribute [rw] dry_run
@@ -18548,6 +18656,18 @@ module Aws::EC2
     #   The ID of the AMI.
     #   @return [String]
     #
+    # @!attribute [rw] delete_associated_snapshots
+    #   Specifies whether to delete the snapshots associated with the AMI
+    #   during deregistration.
+    #
+    #   <note markdown="1"> If a snapshot is associated with multiple AMIs, it is not deleted,
+    #   regardless of this setting.
+    #
+    #    </note>
+    #
+    #   Default: The snapshots are not deleted.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -18559,14 +18679,30 @@ module Aws::EC2
     #
     class DeregisterImageRequest < Struct.new(
       :image_id,
+      :delete_associated_snapshots,
       :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] delete_snapshot_results
+    #   The deletion result for each snapshot associated with the AMI,
+    #   including the snapshot ID and its success or error code.
+    #   @return [Array<Types::DeleteSnapshotReturnCode>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeregisterImageResult AWS API Documentation
     #
-    class DeregisterImageResult < Aws::EmptyStructure; end
+    class DeregisterImageResult < Struct.new(
+      :return,
+      :delete_snapshot_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -38419,6 +38555,44 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] vpn_connection_id
+    #   The ID of the VPN connection for which to retrieve the active tunnel
+    #   status.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpn_tunnel_outside_ip_address
+    #   The external IP address of the VPN tunnel for which to retrieve the
+    #   active status.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetActiveVpnTunnelStatusRequest AWS API Documentation
+    #
+    class GetActiveVpnTunnelStatusRequest < Struct.new(
+      :vpn_connection_id,
+      :vpn_tunnel_outside_ip_address,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] active_vpn_tunnel_status
+    #   Information about the current security configuration of the VPN
+    #   tunnel.
+    #   @return [Types::ActiveVpnTunnelStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetActiveVpnTunnelStatusResult AWS API Documentation
+    #
+    class GetActiveVpnTunnelStatusResult < Struct.new(
+      :active_vpn_tunnel_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -41357,6 +41531,12 @@ module Aws::EC2
     #   versions: `ikev1` or `ikev2`.
     #   @return [String]
     #
+    # @!attribute [rw] sample_type
+    #   The type of sample configuration to generate. Valid values are
+    #   "compatibility" (includes IKEv1) or "recommended" (throws
+    #   UnsupportedOperationException for IKEv1).
+    #   @return [String]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -41370,6 +41550,7 @@ module Aws::EC2
       :vpn_connection_id,
       :vpn_connection_device_type_id,
       :internet_key_exchange_version,
+      :sample_type,
       :dry_run)
       SENSITIVE = []
       include Aws::Structure
@@ -42267,8 +42448,9 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] boot_mode
-    #   The boot mode of the image. For more information, see [Boot
-    #   modes][1] in the *Amazon EC2 User Guide*.
+    #   The boot mode of the image. For more information, see [Instance
+    #   launch behavior with Amazon EC2 boot modes][1] in the *Amazon EC2
+    #   User Guide*.
     #
     #
     #
@@ -42356,8 +42538,8 @@ module Aws::EC2
     #   CopyImage, or CreateRestoreImageTask. The ID does not appear if the
     #   AMI was created using any other API. For some older AMIs, the ID
     #   might not be available. For more information, see [Identify the
-    #   source AMI used to create a new AMI][1] in the *Amazon EC2 User
-    #   Guide*.
+    #   source AMI used to create a new Amazon EC2 AMI][1] in the *Amazon
+    #   EC2 User Guide*.
     #
     #
     #
@@ -42371,8 +42553,8 @@ module Aws::EC2
     #   CopyImage, or CreateRestoreImageTask. The Region does not appear if
     #   the AMI was created using any other API. For some older AMIs, the
     #   Region might not be available. For more information, see [Identify
-    #   the source AMI used to create a new AMI][1] in the *Amazon EC2 User
-    #   Guide*.
+    #   the source AMI used to create a new Amazon EC2 AMI][1] in the
+    #   *Amazon EC2 User Guide*.
     #
     #
     #
@@ -42509,7 +42691,8 @@ module Aws::EC2
     #   retrieve the UEFI data, use the [GetInstanceUefiData][1] command.
     #   You can inspect and modify the UEFI data by using the
     #   [python-uefivars tool][2] on GitHub. For more information, see [UEFI
-    #   Secure Boot][3] in the *Amazon EC2 User Guide*.
+    #   Secure Boot for Amazon EC2 instances][3] in the *Amazon EC2 User
+    #   Guide*.
     #
     #
     #
@@ -55160,6 +55343,65 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] network_interface_id
+    #   A network interface ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] hostname_type
+    #   The public hostname type. For more information, see [EC2 instance
+    #   hostnames, DNS names, and domains][1] in the *Amazon EC2 User
+    #   Guide*.
+    #
+    #   * `public-dual-stack-dns-name`: A dual-stack public hostname for a
+    #     network interface. Requests from within the VPC resolve to both
+    #     the private IPv4 address and the IPv6 Global Unicast Address of
+    #     the network interface. Requests from the internet resolve to both
+    #     the public IPv4 and the IPv6 GUA address of the network interface.
+    #
+    #   * `public-ipv4-dns-name`: An IPv4-enabled public hostname for a
+    #     network interface. Requests from within the VPC resolve to the
+    #     private primary IPv4 address of the network interface. Requests
+    #     from the internet resolve to the public IPv4 address of the
+    #     network interface.
+    #
+    #   * `public-ipv6-dns-name`: An IPv6-enabled public hostname for a
+    #     network interface. Requests from within the VPC or from the
+    #     internet resolve to the IPv6 GUA of the network interface.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the operation,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyPublicIpDnsNameOptionsRequest AWS API Documentation
+    #
+    class ModifyPublicIpDnsNameOptionsRequest < Struct.new(
+      :network_interface_id,
+      :hostname_type,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] successful
+    #   Whether or not the request was successful.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyPublicIpDnsNameOptionsResult AWS API Documentation
+    #
+    class ModifyPublicIpDnsNameOptionsResult < Struct.new(
+      :successful)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the parameters for ModifyReservedInstances.
     #
     # @!attribute [rw] reserved_instances_ids
@@ -57618,6 +57860,12 @@ module Aws::EC2
     #   Valid values: `True` \| `False`
     #   @return [Boolean]
     #
+    # @!attribute [rw] pre_shared_key_storage
+    #   Specifies the storage mode for the pre-shared key (PSK). Valid
+    #   values are `Standard` (stored in Site-to-Site VPN service) or
+    #   `SecretsManager` (stored in Amazon Web Services Secrets Manager).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnTunnelOptionsRequest AWS API Documentation
     #
     class ModifyVpnTunnelOptionsRequest < Struct.new(
@@ -57625,7 +57873,8 @@ module Aws::EC2
       :vpn_tunnel_outside_ip_address,
       :tunnel_options,
       :dry_run,
-      :skip_tunnel_replacement)
+      :skip_tunnel_replacement,
+      :pre_shared_key_storage)
       SENSITIVE = [:tunnel_options]
       include Aws::Structure
     end
@@ -58974,8 +59223,34 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] private_dns_name
-    #   The private DNS name.
+    #   The private hostname. For more information, see [EC2 instance
+    #   hostnames, DNS names, and domains][1] in the *Amazon EC2 User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html
     #   @return [String]
+    #
+    # @!attribute [rw] public_dns_name
+    #   A public hostname. For more information, see [EC2 instance
+    #   hostnames, DNS names, and domains][1] in the *Amazon EC2 User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html
+    #   @return [String]
+    #
+    # @!attribute [rw] public_ip_dns_name_options
+    #   Public hostname type options. For more information, see [EC2
+    #   instance hostnames, DNS names, and domains][1] in the *Amazon EC2
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html
+    #   @return [Types::PublicIpDnsNameOptions]
     #
     # @!attribute [rw] private_ip_address
     #   The IPv4 address of the network interface within the subnet.
@@ -59061,6 +59336,8 @@ module Aws::EC2
       :outpost_arn,
       :owner_id,
       :private_dns_name,
+      :public_dns_name,
+      :public_ip_dns_name_options,
       :private_ip_address,
       :private_ip_addresses,
       :ipv_4_prefixes,
@@ -59270,6 +59547,18 @@ module Aws::EC2
     #   The IPv6 address.
     #   @return [String]
     #
+    # @!attribute [rw] public_ipv_6_dns_name
+    #   An IPv6-enabled public hostname for a network interface. Requests
+    #   from within the VPC or from the internet resolve to the IPv6 GUA of
+    #   the network interface. For more information, see [EC2 instance
+    #   hostnames, DNS names, and domains][1] in the *Amazon EC2 User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html
+    #   @return [String]
+    #
     # @!attribute [rw] is_primary_ipv_6
     #   Determines if an IPv6 address associated with a network interface is
     #   the primary IPv6 address. When you enable an IPv6 GUA address to be
@@ -59287,6 +59576,7 @@ module Aws::EC2
     #
     class NetworkInterfaceIpv6Address < Struct.new(
       :ipv_6_address,
+      :public_ipv_6_dns_name,
       :is_primary_ipv_6)
       SENSITIVE = []
       include Aws::Structure
@@ -61497,6 +61787,55 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Public hostname type options. For more information, see [EC2 instance
+    # hostnames, DNS names, and domains][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html
+    #
+    # @!attribute [rw] dns_hostname_type
+    #   The public hostname type. For more information, see [EC2 instance
+    #   hostnames, DNS names, and domains][1] in the *Amazon EC2 User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html
+    #   @return [String]
+    #
+    # @!attribute [rw] public_ipv_4_dns_name
+    #   An IPv4-enabled public hostname for a network interface. Requests
+    #   from within the VPC resolve to the private primary IPv4 address of
+    #   the network interface. Requests from the internet resolve to the
+    #   public IPv4 address of the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_ipv_6_dns_name
+    #   An IPv6-enabled public hostname for a network interface. Requests
+    #   from within the VPC or from the internet resolve to the IPv6 GUA of
+    #   the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_dual_stack_dns_name
+    #   A dual-stack public hostname for a network interface. Requests from
+    #   within the VPC resolve to both the private IPv4 address and the IPv6
+    #   Global Unicast Address of the network interface. Requests from the
+    #   internet resolve to both the public IPv4 and the IPv6 GUA address of
+    #   the network interface.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PublicIpDnsNameOptions AWS API Documentation
+    #
+    class PublicIpDnsNameOptions < Struct.new(
+      :dns_hostname_type,
+      :public_ipv_4_dns_name,
+      :public_ipv_6_dns_name,
+      :public_dual_stack_dns_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an IPv4 address pool.
     #
     # @!attribute [rw] pool_id
@@ -62056,8 +62395,8 @@ module Aws::EC2
     #   The full path to your AMI manifest in Amazon S3 storage. The
     #   specified bucket must have the `aws-exec-read` canned access control
     #   list (ACL) to ensure that it can be accessed by Amazon EC2. For more
-    #   information, see [Canned ACLs][1] in the *Amazon S3 Service
-    #   Developer Guide*.
+    #   information, see [Canned ACL][1] in the *Amazon S3 Service Developer
+    #   Guide*.
     #
     #
     #
@@ -62072,8 +62411,10 @@ module Aws::EC2
     #   you can publish AMIs that include billable software and list them on
     #   the Amazon Web Services Marketplace. You must first register as a
     #   seller on the Amazon Web Services Marketplace. For more information,
-    #   see [Getting started as a seller][1] and [AMI-based products][2] in
-    #   the *Amazon Web Services Marketplace Seller Guide*.
+    #   see [Getting started as an Amazon Web Services Marketplace
+    #   seller][1] and [AMI-based products in Amazon Web Services
+    #   Marketplace][2] in the *Amazon Web Services Marketplace Seller
+    #   Guide*.
     #
     #
     #
@@ -62090,8 +62431,8 @@ module Aws::EC2
     #
     #    </note>
     #
-    #   For more information, see [Boot modes][1] in the *Amazon EC2 User
-    #   Guide*.
+    #   For more information, see [Instance launch behavior with Amazon EC2
+    #   boot modes][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -62112,7 +62453,8 @@ module Aws::EC2
     #   retrieve the UEFI data, use the [GetInstanceUefiData][1] command.
     #   You can inspect and modify the UEFI data by using the
     #   [python-uefivars tool][2] on GitHub. For more information, see [UEFI
-    #   Secure Boot][3] in the *Amazon EC2 User Guide*.
+    #   Secure Boot for Amazon EC2 instances][3] in the *Amazon EC2 User
+    #   Guide*.
     #
     #
     #
@@ -62201,8 +62543,8 @@ module Aws::EC2
     #   If you create an AMI on an Outpost, then all backing snapshots must
     #   be on the same Outpost or in the Region of that Outpost. AMIs on an
     #   Outpost that include local snapshots can be used to launch instances
-    #   on the same Outpost only. For more information, [Amazon EBS local
-    #   snapshots on Outposts][1] in the *Amazon EBS User Guide*.
+    #   on the same Outpost only. For more information, [Create AMIs from
+    #   local snapshots][1] in the *Amazon EBS User Guide*.
     #
     #
     #
@@ -77164,6 +77506,11 @@ module Aws::EC2
     #   Information about the VPN tunnel.
     #   @return [Array<Types::VgwTelemetry>]
     #
+    # @!attribute [rw] pre_shared_key_arn
+    #   The Amazon Resource Name (ARN) of the Secrets Manager secret storing
+    #   the pre-shared key(s) for the VPN connection.
+    #   @return [String]
+    #
     # @!attribute [rw] vpn_connection_id
     #   The ID of the VPN connection.
     #   @return [String]
@@ -77205,6 +77552,7 @@ module Aws::EC2
       :routes,
       :tags,
       :vgw_telemetry,
+      :pre_shared_key_arn,
       :vpn_connection_id,
       :state,
       :customer_gateway_configuration,

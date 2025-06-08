@@ -46,6 +46,8 @@ module Aws::CostExplorer
     BillExpirationException = Shapes::StructureShape.new(name: 'BillExpirationException')
     BillingViewArn = Shapes::StringShape.new(name: 'BillingViewArn')
     CommitmentPurchaseAnalysisConfiguration = Shapes::StructureShape.new(name: 'CommitmentPurchaseAnalysisConfiguration')
+    ComparisonMetricValue = Shapes::StructureShape.new(name: 'ComparisonMetricValue')
+    ComparisonMetrics = Shapes::MapShape.new(name: 'ComparisonMetrics')
     Context = Shapes::StringShape.new(name: 'Context')
     CostAllocationTag = Shapes::StructureShape.new(name: 'CostAllocationTag')
     CostAllocationTagBackfillRequest = Shapes::StructureShape.new(name: 'CostAllocationTagBackfillRequest')
@@ -58,6 +60,9 @@ module Aws::CostExplorer
     CostAllocationTagStatusList = Shapes::ListShape.new(name: 'CostAllocationTagStatusList')
     CostAllocationTagType = Shapes::StringShape.new(name: 'CostAllocationTagType')
     CostAllocationTagsMaxResults = Shapes::IntegerShape.new(name: 'CostAllocationTagsMaxResults')
+    CostAndUsageComparison = Shapes::StructureShape.new(name: 'CostAndUsageComparison')
+    CostAndUsageComparisons = Shapes::ListShape.new(name: 'CostAndUsageComparisons')
+    CostAndUsageComparisonsMaxResults = Shapes::IntegerShape.new(name: 'CostAndUsageComparisonsMaxResults')
     CostCategory = Shapes::StructureShape.new(name: 'CostCategory')
     CostCategoryInheritedValueDimension = Shapes::StructureShape.new(name: 'CostCategoryInheritedValueDimension')
     CostCategoryInheritedValueDimensionName = Shapes::StringShape.new(name: 'CostCategoryInheritedValueDimensionName')
@@ -85,6 +90,11 @@ module Aws::CostExplorer
     CostCategoryValue = Shapes::StringShape.new(name: 'CostCategoryValue')
     CostCategoryValues = Shapes::StructureShape.new(name: 'CostCategoryValues')
     CostCategoryValuesList = Shapes::ListShape.new(name: 'CostCategoryValuesList')
+    CostComparisonDriver = Shapes::StructureShape.new(name: 'CostComparisonDriver')
+    CostComparisonDrivers = Shapes::ListShape.new(name: 'CostComparisonDrivers')
+    CostComparisonDriversMaxResults = Shapes::IntegerShape.new(name: 'CostComparisonDriversMaxResults')
+    CostDriver = Shapes::StructureShape.new(name: 'CostDriver')
+    CostDrivers = Shapes::ListShape.new(name: 'CostDrivers')
     Coverage = Shapes::StructureShape.new(name: 'Coverage')
     CoverageByTime = Shapes::StructureShape.new(name: 'CoverageByTime')
     CoverageCost = Shapes::StructureShape.new(name: 'CoverageCost')
@@ -150,12 +160,16 @@ module Aws::CostExplorer
     GetApproximateUsageRecordsResponse = Shapes::StructureShape.new(name: 'GetApproximateUsageRecordsResponse')
     GetCommitmentPurchaseAnalysisRequest = Shapes::StructureShape.new(name: 'GetCommitmentPurchaseAnalysisRequest')
     GetCommitmentPurchaseAnalysisResponse = Shapes::StructureShape.new(name: 'GetCommitmentPurchaseAnalysisResponse')
+    GetCostAndUsageComparisonsRequest = Shapes::StructureShape.new(name: 'GetCostAndUsageComparisonsRequest')
+    GetCostAndUsageComparisonsResponse = Shapes::StructureShape.new(name: 'GetCostAndUsageComparisonsResponse')
     GetCostAndUsageRequest = Shapes::StructureShape.new(name: 'GetCostAndUsageRequest')
     GetCostAndUsageResponse = Shapes::StructureShape.new(name: 'GetCostAndUsageResponse')
     GetCostAndUsageWithResourcesRequest = Shapes::StructureShape.new(name: 'GetCostAndUsageWithResourcesRequest')
     GetCostAndUsageWithResourcesResponse = Shapes::StructureShape.new(name: 'GetCostAndUsageWithResourcesResponse')
     GetCostCategoriesRequest = Shapes::StructureShape.new(name: 'GetCostCategoriesRequest')
     GetCostCategoriesResponse = Shapes::StructureShape.new(name: 'GetCostCategoriesResponse')
+    GetCostComparisonDriversRequest = Shapes::StructureShape.new(name: 'GetCostComparisonDriversRequest')
+    GetCostComparisonDriversResponse = Shapes::StructureShape.new(name: 'GetCostComparisonDriversResponse')
     GetCostForecastRequest = Shapes::StructureShape.new(name: 'GetCostForecastRequest')
     GetCostForecastResponse = Shapes::StructureShape.new(name: 'GetCostForecastResponse')
     GetDimensionValuesRequest = Shapes::StructureShape.new(name: 'GetDimensionValuesRequest')
@@ -463,6 +477,15 @@ module Aws::CostExplorer
     CommitmentPurchaseAnalysisConfiguration.add_member(:savings_plans_purchase_analysis_configuration, Shapes::ShapeRef.new(shape: SavingsPlansPurchaseAnalysisConfiguration, location_name: "SavingsPlansPurchaseAnalysisConfiguration"))
     CommitmentPurchaseAnalysisConfiguration.struct_class = Types::CommitmentPurchaseAnalysisConfiguration
 
+    ComparisonMetricValue.add_member(:baseline_time_period_amount, Shapes::ShapeRef.new(shape: GenericString, location_name: "BaselineTimePeriodAmount"))
+    ComparisonMetricValue.add_member(:comparison_time_period_amount, Shapes::ShapeRef.new(shape: GenericString, location_name: "ComparisonTimePeriodAmount"))
+    ComparisonMetricValue.add_member(:difference, Shapes::ShapeRef.new(shape: GenericString, location_name: "Difference"))
+    ComparisonMetricValue.add_member(:unit, Shapes::ShapeRef.new(shape: GenericString, location_name: "Unit"))
+    ComparisonMetricValue.struct_class = Types::ComparisonMetricValue
+
+    ComparisonMetrics.key = Shapes::ShapeRef.new(shape: MetricName)
+    ComparisonMetrics.value = Shapes::ShapeRef.new(shape: ComparisonMetricValue)
+
     CostAllocationTag.add_member(:tag_key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "TagKey"))
     CostAllocationTag.add_member(:type, Shapes::ShapeRef.new(shape: CostAllocationTagType, required: true, location_name: "Type"))
     CostAllocationTag.add_member(:status, Shapes::ShapeRef.new(shape: CostAllocationTagStatus, required: true, location_name: "Status"))
@@ -488,6 +511,12 @@ module Aws::CostExplorer
     CostAllocationTagStatusEntry.struct_class = Types::CostAllocationTagStatusEntry
 
     CostAllocationTagStatusList.member = Shapes::ShapeRef.new(shape: CostAllocationTagStatusEntry)
+
+    CostAndUsageComparison.add_member(:cost_and_usage_selector, Shapes::ShapeRef.new(shape: Expression, location_name: "CostAndUsageSelector"))
+    CostAndUsageComparison.add_member(:metrics, Shapes::ShapeRef.new(shape: ComparisonMetrics, location_name: "Metrics"))
+    CostAndUsageComparison.struct_class = Types::CostAndUsageComparison
+
+    CostAndUsageComparisons.member = Shapes::ShapeRef.new(shape: CostAndUsageComparison)
 
     CostCategory.add_member(:cost_category_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CostCategoryArn"))
     CostCategory.add_member(:effective_start, Shapes::ShapeRef.new(shape: ZonedDateTime, required: true, location_name: "EffectiveStart"))
@@ -556,6 +585,20 @@ module Aws::CostExplorer
     CostCategoryValues.struct_class = Types::CostCategoryValues
 
     CostCategoryValuesList.member = Shapes::ShapeRef.new(shape: CostCategoryValue)
+
+    CostComparisonDriver.add_member(:cost_selector, Shapes::ShapeRef.new(shape: Expression, location_name: "CostSelector"))
+    CostComparisonDriver.add_member(:metrics, Shapes::ShapeRef.new(shape: ComparisonMetrics, location_name: "Metrics"))
+    CostComparisonDriver.add_member(:cost_drivers, Shapes::ShapeRef.new(shape: CostDrivers, location_name: "CostDrivers"))
+    CostComparisonDriver.struct_class = Types::CostComparisonDriver
+
+    CostComparisonDrivers.member = Shapes::ShapeRef.new(shape: CostComparisonDriver)
+
+    CostDriver.add_member(:type, Shapes::ShapeRef.new(shape: GenericString, location_name: "Type"))
+    CostDriver.add_member(:name, Shapes::ShapeRef.new(shape: GenericString, location_name: "Name"))
+    CostDriver.add_member(:metrics, Shapes::ShapeRef.new(shape: ComparisonMetrics, location_name: "Metrics"))
+    CostDriver.struct_class = Types::CostDriver
+
+    CostDrivers.member = Shapes::ShapeRef.new(shape: CostDriver)
 
     Coverage.add_member(:coverage_hours, Shapes::ShapeRef.new(shape: CoverageHours, location_name: "CoverageHours"))
     Coverage.add_member(:coverage_normalized_units, Shapes::ShapeRef.new(shape: CoverageNormalizedUnits, location_name: "CoverageNormalizedUnits"))
@@ -815,6 +858,21 @@ module Aws::CostExplorer
     GetCommitmentPurchaseAnalysisResponse.add_member(:commitment_purchase_analysis_configuration, Shapes::ShapeRef.new(shape: CommitmentPurchaseAnalysisConfiguration, required: true, location_name: "CommitmentPurchaseAnalysisConfiguration"))
     GetCommitmentPurchaseAnalysisResponse.struct_class = Types::GetCommitmentPurchaseAnalysisResponse
 
+    GetCostAndUsageComparisonsRequest.add_member(:billing_view_arn, Shapes::ShapeRef.new(shape: BillingViewArn, location_name: "BillingViewArn"))
+    GetCostAndUsageComparisonsRequest.add_member(:baseline_time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "BaselineTimePeriod"))
+    GetCostAndUsageComparisonsRequest.add_member(:comparison_time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "ComparisonTimePeriod"))
+    GetCostAndUsageComparisonsRequest.add_member(:metric_for_comparison, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricForComparison"))
+    GetCostAndUsageComparisonsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
+    GetCostAndUsageComparisonsRequest.add_member(:group_by, Shapes::ShapeRef.new(shape: GroupDefinitions, location_name: "GroupBy"))
+    GetCostAndUsageComparisonsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CostAndUsageComparisonsMaxResults, location_name: "MaxResults", metadata: {"box" => true}))
+    GetCostAndUsageComparisonsRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
+    GetCostAndUsageComparisonsRequest.struct_class = Types::GetCostAndUsageComparisonsRequest
+
+    GetCostAndUsageComparisonsResponse.add_member(:cost_and_usage_comparisons, Shapes::ShapeRef.new(shape: CostAndUsageComparisons, location_name: "CostAndUsageComparisons"))
+    GetCostAndUsageComparisonsResponse.add_member(:total_cost_and_usage, Shapes::ShapeRef.new(shape: ComparisonMetrics, location_name: "TotalCostAndUsage"))
+    GetCostAndUsageComparisonsResponse.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
+    GetCostAndUsageComparisonsResponse.struct_class = Types::GetCostAndUsageComparisonsResponse
+
     GetCostAndUsageRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
     GetCostAndUsageRequest.add_member(:granularity, Shapes::ShapeRef.new(shape: Granularity, required: true, location_name: "Granularity"))
     GetCostAndUsageRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
@@ -861,6 +919,20 @@ module Aws::CostExplorer
     GetCostCategoriesResponse.add_member(:return_size, Shapes::ShapeRef.new(shape: PageSize, required: true, location_name: "ReturnSize"))
     GetCostCategoriesResponse.add_member(:total_size, Shapes::ShapeRef.new(shape: PageSize, required: true, location_name: "TotalSize"))
     GetCostCategoriesResponse.struct_class = Types::GetCostCategoriesResponse
+
+    GetCostComparisonDriversRequest.add_member(:billing_view_arn, Shapes::ShapeRef.new(shape: BillingViewArn, location_name: "BillingViewArn"))
+    GetCostComparisonDriversRequest.add_member(:baseline_time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "BaselineTimePeriod"))
+    GetCostComparisonDriversRequest.add_member(:comparison_time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "ComparisonTimePeriod"))
+    GetCostComparisonDriversRequest.add_member(:metric_for_comparison, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricForComparison"))
+    GetCostComparisonDriversRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
+    GetCostComparisonDriversRequest.add_member(:group_by, Shapes::ShapeRef.new(shape: GroupDefinitions, location_name: "GroupBy"))
+    GetCostComparisonDriversRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CostComparisonDriversMaxResults, location_name: "MaxResults", metadata: {"box" => true}))
+    GetCostComparisonDriversRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
+    GetCostComparisonDriversRequest.struct_class = Types::GetCostComparisonDriversRequest
+
+    GetCostComparisonDriversResponse.add_member(:cost_comparison_drivers, Shapes::ShapeRef.new(shape: CostComparisonDrivers, location_name: "CostComparisonDrivers"))
+    GetCostComparisonDriversResponse.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
+    GetCostComparisonDriversResponse.struct_class = Types::GetCostComparisonDriversResponse
 
     GetCostForecastRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
     GetCostForecastRequest.add_member(:metric, Shapes::ShapeRef.new(shape: Metric, required: true, location_name: "Metric"))
@@ -1854,6 +1926,24 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:get_cost_and_usage_comparisons, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCostAndUsageComparisons"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetCostAndUsageComparisonsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCostAndUsageComparisonsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_page_token" => "next_page_token"
+          }
+        )
+      end)
+
       api.add_operation(:get_cost_and_usage_with_resources, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetCostAndUsageWithResources"
         o.http_method = "POST"
@@ -1880,6 +1970,24 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: RequestChangedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_cost_comparison_drivers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCostComparisonDrivers"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetCostComparisonDriversRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCostComparisonDriversResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_page_token" => "next_page_token"
+          }
+        )
       end)
 
       api.add_operation(:get_cost_forecast, Seahorse::Model::Operation.new.tap do |o|

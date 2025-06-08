@@ -45,6 +45,7 @@ module Aws::CloudWatch
     CompositeAlarm = Shapes::StructureShape.new(name: 'CompositeAlarm')
     CompositeAlarms = Shapes::ListShape.new(name: 'CompositeAlarms')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException', error: {"code" => "ConcurrentModificationException", "httpStatusCode" => 429, "senderFault" => true})
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     Counts = Shapes::ListShape.new(name: 'Counts')
     DashboardArn = Shapes::StringShape.new(name: 'DashboardArn')
     DashboardBody = Shapes::StringShape.new(name: 'DashboardBody')
@@ -154,6 +155,7 @@ module Aws::CloudWatch
     InsightRuleMetricName = Shapes::StringShape.new(name: 'InsightRuleMetricName')
     InsightRuleName = Shapes::StringShape.new(name: 'InsightRuleName')
     InsightRuleNames = Shapes::ListShape.new(name: 'InsightRuleNames')
+    InsightRuleOnTransformedLogs = Shapes::BooleanShape.new(name: 'InsightRuleOnTransformedLogs')
     InsightRuleOrderBy = Shapes::StringShape.new(name: 'InsightRuleOrderBy')
     InsightRuleSchema = Shapes::StringShape.new(name: 'InsightRuleSchema')
     InsightRuleState = Shapes::StringShape.new(name: 'InsightRuleState')
@@ -354,6 +356,9 @@ module Aws::CloudWatch
     CompositeAlarms.member = Shapes::ShapeRef.new(shape: CompositeAlarm)
 
     ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
+
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ConflictException.struct_class = Types::ConflictException
 
     Counts.member = Shapes::ShapeRef.new(shape: DatapointValue)
 
@@ -619,6 +624,7 @@ module Aws::CloudWatch
     InsightRule.add_member(:schema, Shapes::ShapeRef.new(shape: InsightRuleSchema, required: true, location_name: "Schema"))
     InsightRule.add_member(:definition, Shapes::ShapeRef.new(shape: InsightRuleDefinition, required: true, location_name: "Definition"))
     InsightRule.add_member(:managed_rule, Shapes::ShapeRef.new(shape: InsightRuleIsManaged, location_name: "ManagedRule"))
+    InsightRule.add_member(:apply_on_transformed_logs, Shapes::ShapeRef.new(shape: InsightRuleOnTransformedLogs, location_name: "ApplyOnTransformedLogs"))
     InsightRule.struct_class = Types::InsightRule
 
     InsightRuleContributor.add_member(:keys, Shapes::ShapeRef.new(shape: InsightRuleContributorKeys, required: true, location_name: "Keys"))
@@ -916,6 +922,7 @@ module Aws::CloudWatch
     PutInsightRuleInput.add_member(:rule_state, Shapes::ShapeRef.new(shape: InsightRuleState, location_name: "RuleState"))
     PutInsightRuleInput.add_member(:rule_definition, Shapes::ShapeRef.new(shape: InsightRuleDefinition, required: true, location_name: "RuleDefinition"))
     PutInsightRuleInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    PutInsightRuleInput.add_member(:apply_on_transformed_logs, Shapes::ShapeRef.new(shape: InsightRuleOnTransformedLogs, location_name: "ApplyOnTransformedLogs"))
     PutInsightRuleInput.struct_class = Types::PutInsightRuleInput
 
     PutInsightRuleOutput.struct_class = Types::PutInsightRuleOutput
@@ -1089,6 +1096,7 @@ module Aws::CloudWatch
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: DashboardNotFoundError)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceFault)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:delete_insight_rules, Seahorse::Model::Operation.new.tap do |o|
@@ -1396,6 +1404,7 @@ module Aws::CloudWatch
         o.output = Shapes::ShapeRef.new(shape: PutDashboardOutput)
         o.errors << Shapes::ShapeRef.new(shape: DashboardInvalidInputError)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceFault)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:put_insight_rule, Seahorse::Model::Operation.new.tap do |o|
@@ -1498,6 +1507,7 @@ module Aws::CloudWatch
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceFault)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1510,6 +1520,7 @@ module Aws::CloudWatch
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceFault)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
     end
 

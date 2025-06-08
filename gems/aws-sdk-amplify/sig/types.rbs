@@ -37,6 +37,7 @@ module Aws::Amplify
       attr_accessor cache_config: Types::CacheConfig
       attr_accessor webhook_create_time: ::Time
       attr_accessor waf_configuration: Types::WafConfiguration
+      attr_accessor job_config: Types::JobConfig
       SENSITIVE: [:basic_auth_credentials, :build_spec]
     end
 
@@ -153,6 +154,7 @@ module Aws::Amplify
       attr_accessor enable_auto_branch_creation: bool
       attr_accessor auto_branch_creation_patterns: ::Array[::String]
       attr_accessor auto_branch_creation_config: Types::AutoBranchCreationConfig
+      attr_accessor job_config: Types::JobConfig
       attr_accessor cache_config: Types::CacheConfig
       SENSITIVE: [:oauth_token, :access_token, :basic_auth_credentials, :build_spec]
     end
@@ -440,6 +442,11 @@ module Aws::Amplify
       SENSITIVE: []
     end
 
+    class JobConfig
+      attr_accessor build_compute_type: ("STANDARD_8GB" | "LARGE_16GB" | "XLARGE_72GB")
+      SENSITIVE: []
+    end
+
     class JobSummary
       attr_accessor job_arn: ::String
       attr_accessor job_id: ::String
@@ -698,6 +705,7 @@ module Aws::Amplify
       attr_accessor repository: ::String
       attr_accessor oauth_token: ::String
       attr_accessor access_token: ::String
+      attr_accessor job_config: Types::JobConfig
       attr_accessor cache_config: Types::CacheConfig
       SENSITIVE: [:basic_auth_credentials, :build_spec, :oauth_token, :access_token]
     end

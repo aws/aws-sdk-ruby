@@ -163,6 +163,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-elasticsearchservice', '~> 1')
   spec.add_dependency('aws-sdk-entityresolution', '~> 1')
   spec.add_dependency('aws-sdk-eventbridge', '~> 1')
+  spec.add_dependency('aws-sdk-evs', '~> 1')
   spec.add_dependency('aws-sdk-fis', '~> 1')
   spec.add_dependency('aws-sdk-fms', '~> 1')
   spec.add_dependency('aws-sdk-fsx', '~> 1')
@@ -315,7 +316,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-pipes', '~> 1')
   spec.add_dependency('aws-sdk-polly', '~> 1')
   spec.add_dependency('aws-sdk-pricing', '~> 1')
-  spec.add_dependency('aws-sdk-privatenetworks', '~> 1')
   spec.add_dependency('aws-sdk-prometheusservice', '~> 1')
   spec.add_dependency('aws-sdk-proton', '~> 1')
   spec.add_dependency('aws-sdk-qapps', '~> 1')
@@ -425,5 +425,5 @@ Gem::Specification.new do |spec|
     'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/aws-sdk-resources/CHANGELOG.md'
   }
 
-  spec.required_ruby_version = '>= 2.5'
+  spec.required_ruby_version = '>= 2.7'
 end

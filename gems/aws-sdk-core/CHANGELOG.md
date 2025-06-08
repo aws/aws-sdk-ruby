@@ -3,6 +3,21 @@ Unreleased Changes
 
 * Issue - Only load required `cgi` modules for Ruby 3.5.
 
+3.225.1 (2025-06-05)
+------------------
+
+* Issue - Fix RPCv2 parser to handle flattened list and flattened map members correctly for `AwsQueryCompatible` services.
+
+3.225.0 (2025-06-02)
+------------------
+
+* Feature - AWS SDK for Ruby no longer supports Ruby runtime versions 2.5 and 2.6.
+
+3.224.1 (2025-05-28)
+------------------
+
+* Issue - Signal data in http response listeners prior to writing, so that data can be inspected or verified before potential mutation.
+
 3.224.0 (2025-05-12)
 ------------------
 

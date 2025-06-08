@@ -30,12 +30,17 @@ module Aws::DSQL
     DeleteClusterInput = Shapes::StructureShape.new(name: 'DeleteClusterInput')
     DeleteClusterOutput = Shapes::StructureShape.new(name: 'DeleteClusterOutput')
     DeletionProtectionEnabled = Shapes::BooleanShape.new(name: 'DeletionProtectionEnabled')
+    EncryptionDetails = Shapes::StructureShape.new(name: 'EncryptionDetails')
+    EncryptionStatus = Shapes::StringShape.new(name: 'EncryptionStatus')
+    EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
     GetClusterInput = Shapes::StructureShape.new(name: 'GetClusterInput')
     GetClusterOutput = Shapes::StructureShape.new(name: 'GetClusterOutput')
     GetVpcEndpointServiceNameInput = Shapes::StructureShape.new(name: 'GetVpcEndpointServiceNameInput')
     GetVpcEndpointServiceNameOutput = Shapes::StructureShape.new(name: 'GetVpcEndpointServiceNameOutput')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    KmsEncryptionKey = Shapes::StringShape.new(name: 'KmsEncryptionKey')
+    KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     ListClustersInput = Shapes::StructureShape.new(name: 'ListClustersInput')
     ListClustersOutput = Shapes::StructureShape.new(name: 'ListClustersOutput')
     ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
@@ -79,6 +84,7 @@ module Aws::DSQL
     ConflictException.struct_class = Types::ConflictException
 
     CreateClusterInput.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: DeletionProtectionEnabled, location_name: "deletionProtectionEnabled"))
+    CreateClusterInput.add_member(:kms_encryption_key, Shapes::ShapeRef.new(shape: KmsEncryptionKey, location_name: "kmsEncryptionKey"))
     CreateClusterInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateClusterInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateClusterInput.add_member(:multi_region_properties, Shapes::ShapeRef.new(shape: MultiRegionProperties, location_name: "multiRegionProperties"))
@@ -89,6 +95,7 @@ module Aws::DSQL
     CreateClusterOutput.add_member(:status, Shapes::ShapeRef.new(shape: ClusterStatus, required: true, location_name: "status"))
     CreateClusterOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: ClusterCreationTime, required: true, location_name: "creationTime"))
     CreateClusterOutput.add_member(:multi_region_properties, Shapes::ShapeRef.new(shape: MultiRegionProperties, location_name: "multiRegionProperties"))
+    CreateClusterOutput.add_member(:encryption_details, Shapes::ShapeRef.new(shape: EncryptionDetails, location_name: "encryptionDetails"))
     CreateClusterOutput.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: DeletionProtectionEnabled, required: true, location_name: "deletionProtectionEnabled"))
     CreateClusterOutput.struct_class = Types::CreateClusterOutput
 
@@ -102,6 +109,11 @@ module Aws::DSQL
     DeleteClusterOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: ClusterCreationTime, required: true, location_name: "creationTime"))
     DeleteClusterOutput.struct_class = Types::DeleteClusterOutput
 
+    EncryptionDetails.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionType, required: true, location_name: "encryptionType"))
+    EncryptionDetails.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
+    EncryptionDetails.add_member(:encryption_status, Shapes::ShapeRef.new(shape: EncryptionStatus, required: true, location_name: "encryptionStatus"))
+    EncryptionDetails.struct_class = Types::EncryptionDetails
+
     GetClusterInput.add_member(:identifier, Shapes::ShapeRef.new(shape: ClusterId, required: true, location: "uri", location_name: "identifier"))
     GetClusterInput.struct_class = Types::GetClusterInput
 
@@ -112,6 +124,7 @@ module Aws::DSQL
     GetClusterOutput.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: DeletionProtectionEnabled, required: true, location_name: "deletionProtectionEnabled"))
     GetClusterOutput.add_member(:multi_region_properties, Shapes::ShapeRef.new(shape: MultiRegionProperties, location_name: "multiRegionProperties"))
     GetClusterOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    GetClusterOutput.add_member(:encryption_details, Shapes::ShapeRef.new(shape: EncryptionDetails, location_name: "encryptionDetails"))
     GetClusterOutput.struct_class = Types::GetClusterOutput
 
     GetVpcEndpointServiceNameInput.add_member(:identifier, Shapes::ShapeRef.new(shape: ClusterId, required: true, location: "uri", location_name: "identifier"))
@@ -175,6 +188,7 @@ module Aws::DSQL
 
     UpdateClusterInput.add_member(:identifier, Shapes::ShapeRef.new(shape: ClusterId, required: true, location: "uri", location_name: "identifier"))
     UpdateClusterInput.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: DeletionProtectionEnabled, location_name: "deletionProtectionEnabled"))
+    UpdateClusterInput.add_member(:kms_encryption_key, Shapes::ShapeRef.new(shape: KmsEncryptionKey, location_name: "kmsEncryptionKey"))
     UpdateClusterInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateClusterInput.add_member(:multi_region_properties, Shapes::ShapeRef.new(shape: MultiRegionProperties, location_name: "multiRegionProperties"))
     UpdateClusterInput.struct_class = Types::UpdateClusterInput

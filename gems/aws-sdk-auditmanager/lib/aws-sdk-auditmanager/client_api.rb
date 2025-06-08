@@ -362,7 +362,7 @@ module Aws::AuditManager
 
     AssessmentControl.add_member(:id, Shapes::ShapeRef.new(shape: UUID, location_name: "id"))
     AssessmentControl.add_member(:name, Shapes::ShapeRef.new(shape: ControlName, location_name: "name"))
-    AssessmentControl.add_member(:description, Shapes::ShapeRef.new(shape: ControlDescription, location_name: "description"))
+    AssessmentControl.add_member(:description, Shapes::ShapeRef.new(shape: ControlDescription, deprecated: true, location_name: "description", metadata: {"deprecatedMessage" => "This data type will be deprecated on May 19, 2025. To view the assessment control description, use GetControl.", "deprecatedSince" => "2025-05-19"}))
     AssessmentControl.add_member(:status, Shapes::ShapeRef.new(shape: ControlStatus, location_name: "status"))
     AssessmentControl.add_member(:response, Shapes::ShapeRef.new(shape: ControlResponse, location_name: "response"))
     AssessmentControl.add_member(:comments, Shapes::ShapeRef.new(shape: ControlComments, location_name: "comments"))
@@ -2108,6 +2108,7 @@ module Aws::AuditManager
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:update_assessment_control, Seahorse::Model::Operation.new.tap do |o|

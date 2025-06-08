@@ -755,7 +755,7 @@ module Aws
       def list_insights: (
                            cluster_name: ::String,
                            ?filter: {
-                             categories: Array[("UPGRADE_READINESS")]?,
+                             categories: Array[("UPGRADE_READINESS" | "MISCONFIGURATION")]?,
                              kubernetes_versions: Array[::String]?,
                              statuses: Array[("PASSING" | "WARNING" | "ERROR" | "UNKNOWN")]?
                            },

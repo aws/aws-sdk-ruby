@@ -3699,7 +3699,16 @@ module Aws::EKS
     # The criteria to use for the insights.
     #
     # @!attribute [rw] categories
-    #   The categories to use to filter insights.
+    #   The categories to use to filter insights. The following lists the
+    #   available categories:
+    #
+    #   * `UPGRADE_READINESS`: Amazon EKS identifies issues that could
+    #     impact your ability to upgrade to new versions of Kubernetes.
+    #     These are called upgrade insights.
+    #
+    #   * `MISCONFIGURATION`: Amazon EKS identifies misconfiguration in your
+    #     EKS Hybrid Nodes setup that could impair functionality of your
+    #     cluster or workloads. These are called configuration insights.
     #   @return [Array<String>]
     #
     # @!attribute [rw] kubernetes_versions

@@ -121,6 +121,9 @@ module Aws
                           enable_pull_request_preview: bool?,
                           pull_request_environment_name: ::String?
                         },
+                        ?job_config: {
+                          build_compute_type: ("STANDARD_8GB" | "LARGE_16GB" | "XLARGE_72GB")
+                        },
                         ?cache_config: {
                           type: ("AMPLIFY_MANAGED" | "AMPLIFY_MANAGED_NO_COOKIES")
                         }
@@ -587,6 +590,9 @@ module Aws
                         ?repository: ::String,
                         ?oauth_token: ::String,
                         ?access_token: ::String,
+                        ?job_config: {
+                          build_compute_type: ("STANDARD_8GB" | "LARGE_16GB" | "XLARGE_72GB")
+                        },
                         ?cache_config: {
                           type: ("AMPLIFY_MANAGED" | "AMPLIFY_MANAGED_NO_COOKIES")
                         }

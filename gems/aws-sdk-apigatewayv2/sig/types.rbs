@@ -251,6 +251,7 @@ module Aws::ApiGatewayV2
       attr_accessor domain_name: ::String
       attr_accessor domain_name_configurations: ::Array[Types::DomainNameConfiguration]
       attr_accessor mutual_tls_authentication: Types::MutualTlsAuthenticationInput
+      attr_accessor routing_mode: ("API_MAPPING_ONLY" | "ROUTING_RULE_ONLY" | "ROUTING_RULE_THEN_API_MAPPING")
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -259,6 +260,7 @@ module Aws::ApiGatewayV2
       attr_accessor domain_name: ::String
       attr_accessor domain_name_configurations: ::Array[Types::DomainNameConfiguration]
       attr_accessor mutual_tls_authentication: Types::MutualTlsAuthenticationInput
+      attr_accessor routing_mode: ("API_MAPPING_ONLY" | "ROUTING_RULE_ONLY" | "ROUTING_RULE_THEN_API_MAPPING")
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -266,8 +268,10 @@ module Aws::ApiGatewayV2
     class CreateDomainNameResponse
       attr_accessor api_mapping_selection_expression: ::String
       attr_accessor domain_name: ::String
+      attr_accessor domain_name_arn: ::String
       attr_accessor domain_name_configurations: ::Array[Types::DomainNameConfiguration]
       attr_accessor mutual_tls_authentication: Types::MutualTlsAuthentication
+      attr_accessor routing_mode: ("API_MAPPING_ONLY" | "ROUTING_RULE_ONLY" | "ROUTING_RULE_THEN_API_MAPPING")
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -470,6 +474,24 @@ module Aws::ApiGatewayV2
       SENSITIVE: []
     end
 
+    class CreateRoutingRuleRequest
+      attr_accessor actions: ::Array[Types::RoutingRuleAction]
+      attr_accessor conditions: ::Array[Types::RoutingRuleCondition]
+      attr_accessor domain_name: ::String
+      attr_accessor domain_name_id: ::String
+      attr_accessor priority: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateRoutingRuleResponse
+      attr_accessor actions: ::Array[Types::RoutingRuleAction]
+      attr_accessor conditions: ::Array[Types::RoutingRuleCondition]
+      attr_accessor priority: ::Integer
+      attr_accessor routing_rule_arn: ::String
+      attr_accessor routing_rule_id: ::String
+      SENSITIVE: []
+    end
+
     class CreateStageInput
       attr_accessor access_log_settings: Types::AccessLogSettings
       attr_accessor auto_deploy: bool
@@ -631,6 +653,13 @@ module Aws::ApiGatewayV2
       SENSITIVE: []
     end
 
+    class DeleteRoutingRuleRequest
+      attr_accessor domain_name: ::String
+      attr_accessor domain_name_id: ::String
+      attr_accessor routing_rule_id: ::String
+      SENSITIVE: []
+    end
+
     class DeleteStageRequest
       attr_accessor api_id: ::String
       attr_accessor stage_name: ::String
@@ -664,8 +693,10 @@ module Aws::ApiGatewayV2
     class DomainName
       attr_accessor api_mapping_selection_expression: ::String
       attr_accessor domain_name: ::String
+      attr_accessor domain_name_arn: ::String
       attr_accessor domain_name_configurations: ::Array[Types::DomainNameConfiguration]
       attr_accessor mutual_tls_authentication: Types::MutualTlsAuthentication
+      attr_accessor routing_mode: ("API_MAPPING_ONLY" | "ROUTING_RULE_ONLY" | "ROUTING_RULE_THEN_API_MAPPING")
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -848,8 +879,10 @@ module Aws::ApiGatewayV2
     class GetDomainNameResponse
       attr_accessor api_mapping_selection_expression: ::String
       attr_accessor domain_name: ::String
+      attr_accessor domain_name_arn: ::String
       attr_accessor domain_name_configurations: ::Array[Types::DomainNameConfiguration]
       attr_accessor mutual_tls_authentication: Types::MutualTlsAuthentication
+      attr_accessor routing_mode: ("API_MAPPING_ONLY" | "ROUTING_RULE_ONLY" | "ROUTING_RULE_THEN_API_MAPPING")
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -1048,6 +1081,36 @@ module Aws::ApiGatewayV2
     class GetStageRequest
       attr_accessor api_id: ::String
       attr_accessor stage_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetRoutingRuleRequest
+      attr_accessor domain_name: ::String
+      attr_accessor domain_name_id: ::String
+      attr_accessor routing_rule_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRoutingRuleResponse
+      attr_accessor actions: ::Array[Types::RoutingRuleAction]
+      attr_accessor conditions: ::Array[Types::RoutingRuleCondition]
+      attr_accessor priority: ::Integer
+      attr_accessor routing_rule_arn: ::String
+      attr_accessor routing_rule_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListRoutingRulesRequest
+      attr_accessor domain_name: ::String
+      attr_accessor domain_name_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRoutingRulesResponse
+      attr_accessor next_token: ::String
+      attr_accessor routing_rules: ::Array[Types::RoutingRule]
       SENSITIVE: []
     end
 
@@ -1252,6 +1315,25 @@ module Aws::ApiGatewayV2
       SENSITIVE: []
     end
 
+    class PutRoutingRuleRequest
+      attr_accessor actions: ::Array[Types::RoutingRuleAction]
+      attr_accessor conditions: ::Array[Types::RoutingRuleCondition]
+      attr_accessor domain_name: ::String
+      attr_accessor domain_name_id: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor routing_rule_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutRoutingRuleResponse
+      attr_accessor actions: ::Array[Types::RoutingRuleAction]
+      attr_accessor conditions: ::Array[Types::RoutingRuleCondition]
+      attr_accessor priority: ::Integer
+      attr_accessor routing_rule_arn: ::String
+      attr_accessor routing_rule_id: ::String
+      SENSITIVE: []
+    end
+
     class ReimportApiInput
       attr_accessor body: ::String
       SENSITIVE: []
@@ -1330,6 +1412,62 @@ module Aws::ApiGatewayV2
     class Routes
       attr_accessor items: ::Array[Types::Route]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class RoutingRule
+      attr_accessor actions: ::Array[Types::RoutingRuleAction]
+      attr_accessor conditions: ::Array[Types::RoutingRuleCondition]
+      attr_accessor priority: ::Integer
+      attr_accessor routing_rule_arn: ::String
+      attr_accessor routing_rule_id: ::String
+      SENSITIVE: []
+    end
+
+    class RoutingRuleAction
+      attr_accessor invoke_api: Types::RoutingRuleActionInvokeApi
+      SENSITIVE: []
+    end
+
+    class RoutingRuleActionInvokeApi
+      attr_accessor api_id: ::String
+      attr_accessor stage: ::String
+      attr_accessor strip_base_path: bool
+      SENSITIVE: []
+    end
+
+    class RoutingRuleCondition
+      attr_accessor match_base_paths: Types::RoutingRuleMatchBasePaths
+      attr_accessor match_headers: Types::RoutingRuleMatchHeaders
+      SENSITIVE: []
+    end
+
+    class RoutingRuleInput
+      attr_accessor actions: ::Array[Types::RoutingRuleAction]
+      attr_accessor conditions: ::Array[Types::RoutingRuleCondition]
+      attr_accessor priority: ::Integer
+      SENSITIVE: []
+    end
+
+    class RoutingRuleMatchBasePaths
+      attr_accessor any_of: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RoutingRuleMatchHeaderValue
+      attr_accessor header: ::String
+      attr_accessor value_glob: ::String
+      SENSITIVE: []
+    end
+
+    class RoutingRuleMatchHeaders
+      attr_accessor any_of: ::Array[Types::RoutingRuleMatchHeaderValue]
+      SENSITIVE: []
+    end
+
+    class RoutingRules
+      attr_accessor next_token: ::String
+      attr_accessor routing_rules: ::Array[Types::RoutingRule]
       SENSITIVE: []
     end
 
@@ -1546,6 +1684,7 @@ module Aws::ApiGatewayV2
     class UpdateDomainNameInput
       attr_accessor domain_name_configurations: ::Array[Types::DomainNameConfiguration]
       attr_accessor mutual_tls_authentication: Types::MutualTlsAuthenticationInput
+      attr_accessor routing_mode: ("API_MAPPING_ONLY" | "ROUTING_RULE_ONLY" | "ROUTING_RULE_THEN_API_MAPPING")
       SENSITIVE: []
     end
 
@@ -1553,14 +1692,17 @@ module Aws::ApiGatewayV2
       attr_accessor domain_name: ::String
       attr_accessor domain_name_configurations: ::Array[Types::DomainNameConfiguration]
       attr_accessor mutual_tls_authentication: Types::MutualTlsAuthenticationInput
+      attr_accessor routing_mode: ("API_MAPPING_ONLY" | "ROUTING_RULE_ONLY" | "ROUTING_RULE_THEN_API_MAPPING")
       SENSITIVE: []
     end
 
     class UpdateDomainNameResponse
       attr_accessor api_mapping_selection_expression: ::String
       attr_accessor domain_name: ::String
+      attr_accessor domain_name_arn: ::String
       attr_accessor domain_name_configurations: ::Array[Types::DomainNameConfiguration]
       attr_accessor mutual_tls_authentication: Types::MutualTlsAuthentication
+      attr_accessor routing_mode: ("API_MAPPING_ONLY" | "ROUTING_RULE_ONLY" | "ROUTING_RULE_THEN_API_MAPPING")
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end

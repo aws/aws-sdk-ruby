@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2025-06-06)
+------------------
+
+* Feature - This release introduces the `PromptCreationConfigurations` input parameter, which includes fields to control prompt population for `InvokeAgent` or `InvokeInlineAgent` requests.
+
+1.57.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.56.0 (2025-05-21)
+------------------
+
+* Feature - Amazon Bedrock introduces asynchronous flows (in preview), which let you run flows for longer durations and yield control so that your application can perform other tasks and you don't have to actively monitor the flow's progress.
+
 1.55.0 (2025-05-13)
 ------------------
 

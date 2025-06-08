@@ -217,6 +217,7 @@ module Aws::SageMaker
     CandidateStepType = Shapes::StringShape.new(name: 'CandidateStepType')
     CandidateSteps = Shapes::ListShape.new(name: 'CandidateSteps')
     CanvasAppSettings = Shapes::StructureShape.new(name: 'CanvasAppSettings')
+    CapacityReservationPreference = Shapes::StringShape.new(name: 'CapacityReservationPreference')
     CapacitySize = Shapes::StructureShape.new(name: 'CapacitySize')
     CapacitySizeConfig = Shapes::StructureShape.new(name: 'CapacitySizeConfig')
     CapacitySizeType = Shapes::StringShape.new(name: 'CapacitySizeType')
@@ -845,6 +846,9 @@ module Aws::SageMaker
     EFSFileSystemConfig = Shapes::StructureShape.new(name: 'EFSFileSystemConfig')
     EMRStepMetadata = Shapes::StructureShape.new(name: 'EMRStepMetadata')
     EbsStorageSettings = Shapes::StructureShape.new(name: 'EbsStorageSettings')
+    Ec2CapacityReservation = Shapes::StructureShape.new(name: 'Ec2CapacityReservation')
+    Ec2CapacityReservationId = Shapes::StringShape.new(name: 'Ec2CapacityReservationId')
+    Ec2CapacityReservationsList = Shapes::ListShape.new(name: 'Ec2CapacityReservationsList')
     Edge = Shapes::StructureShape.new(name: 'Edge')
     EdgeDeploymentConfig = Shapes::StructureShape.new(name: 'EdgeDeploymentConfig')
     EdgeDeploymentModelConfig = Shapes::StructureShape.new(name: 'EdgeDeploymentModelConfig')
@@ -1502,6 +1506,7 @@ module Aws::SageMaker
     MetricValue = Shapes::FloatShape.new(name: 'MetricValue')
     MetricsSource = Shapes::StructureShape.new(name: 'MetricsSource')
     MinimumInstanceMetadataServiceVersion = Shapes::StringShape.new(name: 'MinimumInstanceMetadataServiceVersion')
+    MlReservationArn = Shapes::StringShape.new(name: 'MlReservationArn')
     MlTools = Shapes::StringShape.new(name: 'MlTools')
     MlflowVersion = Shapes::StringShape.new(name: 'MlflowVersion')
     Model = Shapes::StructureShape.new(name: 'Model')
@@ -1867,6 +1872,8 @@ module Aws::SageMaker
     ProductListings = Shapes::ListShape.new(name: 'ProductListings')
     ProductionVariant = Shapes::StructureShape.new(name: 'ProductionVariant')
     ProductionVariantAcceleratorType = Shapes::StringShape.new(name: 'ProductionVariantAcceleratorType')
+    ProductionVariantCapacityReservationConfig = Shapes::StructureShape.new(name: 'ProductionVariantCapacityReservationConfig')
+    ProductionVariantCapacityReservationSummary = Shapes::StructureShape.new(name: 'ProductionVariantCapacityReservationSummary')
     ProductionVariantContainerStartupHealthCheckTimeoutInSeconds = Shapes::IntegerShape.new(name: 'ProductionVariantContainerStartupHealthCheckTimeoutInSeconds')
     ProductionVariantCoreDumpConfig = Shapes::StructureShape.new(name: 'ProductionVariantCoreDumpConfig')
     ProductionVariantInferenceAmiVersion = Shapes::StringShape.new(name: 'ProductionVariantInferenceAmiVersion')
@@ -2273,6 +2280,7 @@ module Aws::SageMaker
     TotalHits = Shapes::StructureShape.new(name: 'TotalHits')
     TotalInstanceCount = Shapes::IntegerShape.new(name: 'TotalInstanceCount')
     TrackingServerArn = Shapes::StringShape.new(name: 'TrackingServerArn')
+    TrackingServerMaintenanceStatus = Shapes::StringShape.new(name: 'TrackingServerMaintenanceStatus')
     TrackingServerName = Shapes::StringShape.new(name: 'TrackingServerName')
     TrackingServerSize = Shapes::StringShape.new(name: 'TrackingServerSize')
     TrackingServerStatus = Shapes::StringShape.new(name: 'TrackingServerStatus')
@@ -5346,6 +5354,7 @@ module Aws::SageMaker
     DescribeMlflowTrackingServerResponse.add_member(:mlflow_version, Shapes::ShapeRef.new(shape: MlflowVersion, location_name: "MlflowVersion"))
     DescribeMlflowTrackingServerResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     DescribeMlflowTrackingServerResponse.add_member(:tracking_server_status, Shapes::ShapeRef.new(shape: TrackingServerStatus, location_name: "TrackingServerStatus"))
+    DescribeMlflowTrackingServerResponse.add_member(:tracking_server_maintenance_status, Shapes::ShapeRef.new(shape: TrackingServerMaintenanceStatus, location_name: "TrackingServerMaintenanceStatus"))
     DescribeMlflowTrackingServerResponse.add_member(:is_active, Shapes::ShapeRef.new(shape: IsTrackingServerActive, location_name: "IsActive"))
     DescribeMlflowTrackingServerResponse.add_member(:tracking_server_url, Shapes::ShapeRef.new(shape: TrackingServerUrl, location_name: "TrackingServerUrl"))
     DescribeMlflowTrackingServerResponse.add_member(:weekly_maintenance_window_start, Shapes::ShapeRef.new(shape: WeeklyMaintenanceWindowStart, location_name: "WeeklyMaintenanceWindowStart"))
@@ -6031,6 +6040,14 @@ module Aws::SageMaker
 
     EbsStorageSettings.add_member(:ebs_volume_size_in_gb, Shapes::ShapeRef.new(shape: SpaceEbsVolumeSizeInGb, required: true, location_name: "EbsVolumeSizeInGb"))
     EbsStorageSettings.struct_class = Types::EbsStorageSettings
+
+    Ec2CapacityReservation.add_member(:ec2_capacity_reservation_id, Shapes::ShapeRef.new(shape: Ec2CapacityReservationId, location_name: "Ec2CapacityReservationId"))
+    Ec2CapacityReservation.add_member(:total_instance_count, Shapes::ShapeRef.new(shape: TaskCount, location_name: "TotalInstanceCount"))
+    Ec2CapacityReservation.add_member(:available_instance_count, Shapes::ShapeRef.new(shape: TaskCount, location_name: "AvailableInstanceCount"))
+    Ec2CapacityReservation.add_member(:used_by_current_endpoint, Shapes::ShapeRef.new(shape: TaskCount, location_name: "UsedByCurrentEndpoint"))
+    Ec2CapacityReservation.struct_class = Types::Ec2CapacityReservation
+
+    Ec2CapacityReservationsList.member = Shapes::ShapeRef.new(shape: Ec2CapacityReservation)
 
     Edge.add_member(:source_arn, Shapes::ShapeRef.new(shape: AssociationEntityArn, location_name: "SourceArn"))
     Edge.add_member(:destination_arn, Shapes::ShapeRef.new(shape: AssociationEntityArn, location_name: "DestinationArn"))
@@ -9324,7 +9341,20 @@ module Aws::SageMaker
     ProductionVariant.add_member(:managed_instance_scaling, Shapes::ShapeRef.new(shape: ProductionVariantManagedInstanceScaling, location_name: "ManagedInstanceScaling"))
     ProductionVariant.add_member(:routing_config, Shapes::ShapeRef.new(shape: ProductionVariantRoutingConfig, location_name: "RoutingConfig"))
     ProductionVariant.add_member(:inference_ami_version, Shapes::ShapeRef.new(shape: ProductionVariantInferenceAmiVersion, location_name: "InferenceAmiVersion"))
+    ProductionVariant.add_member(:capacity_reservation_config, Shapes::ShapeRef.new(shape: ProductionVariantCapacityReservationConfig, location_name: "CapacityReservationConfig"))
     ProductionVariant.struct_class = Types::ProductionVariant
+
+    ProductionVariantCapacityReservationConfig.add_member(:capacity_reservation_preference, Shapes::ShapeRef.new(shape: CapacityReservationPreference, location_name: "CapacityReservationPreference"))
+    ProductionVariantCapacityReservationConfig.add_member(:ml_reservation_arn, Shapes::ShapeRef.new(shape: MlReservationArn, location_name: "MlReservationArn"))
+    ProductionVariantCapacityReservationConfig.struct_class = Types::ProductionVariantCapacityReservationConfig
+
+    ProductionVariantCapacityReservationSummary.add_member(:ml_reservation_arn, Shapes::ShapeRef.new(shape: MlReservationArn, location_name: "MlReservationArn"))
+    ProductionVariantCapacityReservationSummary.add_member(:capacity_reservation_preference, Shapes::ShapeRef.new(shape: CapacityReservationPreference, location_name: "CapacityReservationPreference"))
+    ProductionVariantCapacityReservationSummary.add_member(:total_instance_count, Shapes::ShapeRef.new(shape: TaskCount, location_name: "TotalInstanceCount"))
+    ProductionVariantCapacityReservationSummary.add_member(:available_instance_count, Shapes::ShapeRef.new(shape: TaskCount, location_name: "AvailableInstanceCount"))
+    ProductionVariantCapacityReservationSummary.add_member(:used_by_current_endpoint, Shapes::ShapeRef.new(shape: TaskCount, location_name: "UsedByCurrentEndpoint"))
+    ProductionVariantCapacityReservationSummary.add_member(:ec2_capacity_reservations, Shapes::ShapeRef.new(shape: Ec2CapacityReservationsList, location_name: "Ec2CapacityReservations"))
+    ProductionVariantCapacityReservationSummary.struct_class = Types::ProductionVariantCapacityReservationSummary
 
     ProductionVariantCoreDumpConfig.add_member(:destination_s3_uri, Shapes::ShapeRef.new(shape: DestinationS3Uri, required: true, location_name: "DestinationS3Uri"))
     ProductionVariantCoreDumpConfig.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
@@ -9367,6 +9397,7 @@ module Aws::SageMaker
     ProductionVariantSummary.add_member(:desired_serverless_config, Shapes::ShapeRef.new(shape: ProductionVariantServerlessConfig, location_name: "DesiredServerlessConfig"))
     ProductionVariantSummary.add_member(:managed_instance_scaling, Shapes::ShapeRef.new(shape: ProductionVariantManagedInstanceScaling, location_name: "ManagedInstanceScaling"))
     ProductionVariantSummary.add_member(:routing_config, Shapes::ShapeRef.new(shape: ProductionVariantRoutingConfig, location_name: "RoutingConfig"))
+    ProductionVariantSummary.add_member(:capacity_reservation_config, Shapes::ShapeRef.new(shape: ProductionVariantCapacityReservationSummary, location_name: "CapacityReservationConfig"))
     ProductionVariantSummary.struct_class = Types::ProductionVariantSummary
 
     ProductionVariantSummaryList.member = Shapes::ShapeRef.new(shape: ProductionVariantSummary)
@@ -10634,6 +10665,7 @@ module Aws::SageMaker
     UnifiedStudioSettings.add_member(:project_id, Shapes::ShapeRef.new(shape: UnifiedStudioProjectId, location_name: "ProjectId"))
     UnifiedStudioSettings.add_member(:environment_id, Shapes::ShapeRef.new(shape: UnifiedStudioEnvironmentId, location_name: "EnvironmentId"))
     UnifiedStudioSettings.add_member(:project_s3_path, Shapes::ShapeRef.new(shape: S3Uri, location_name: "ProjectS3Path"))
+    UnifiedStudioSettings.add_member(:single_sign_on_application_arn, Shapes::ShapeRef.new(shape: SingleSignOnApplicationArn, location_name: "SingleSignOnApplicationArn"))
     UnifiedStudioSettings.struct_class = Types::UnifiedStudioSettings
 
     UpdateActionRequest.add_member(:action_name, Shapes::ShapeRef.new(shape: ExperimentEntityName, required: true, location_name: "ActionName"))

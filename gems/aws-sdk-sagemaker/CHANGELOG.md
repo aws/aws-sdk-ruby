@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.309.0 (2025-06-04)
+------------------
+
+* Feature - Added support for p6-b200 instance type in SageMaker Training Jobs and Training Plans.
+
+1.308.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.307.0 (2025-05-30)
+------------------
+
+* Feature - Release new parameter CapacityReservationConfig in ProductionVariant
+
+1.306.0 (2025-05-29)
+------------------
+
+* Feature - Add maintenance status field to DescribeMlflowTrackingServer API response
+
 1.305.0 (2025-05-12)
 ------------------
 

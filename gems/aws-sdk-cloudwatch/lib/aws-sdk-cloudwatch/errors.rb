@@ -28,6 +28,7 @@ module Aws::CloudWatch
   #
   # ## Error Classes
   # * {ConcurrentModificationException}
+  # * {ConflictException}
   # * {DashboardInvalidInputError}
   #    * This error class is not used. `InvalidParameterInput` is used during parsing instead.
   # * {DashboardNotFoundError}
@@ -63,6 +64,21 @@ module Aws::CloudWatch
       # @param [Aws::CloudWatch::Types::ConcurrentModificationException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+    end
+
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudWatch::Types::ConflictException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 

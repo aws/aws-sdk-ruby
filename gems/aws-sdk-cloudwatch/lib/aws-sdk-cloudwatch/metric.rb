@@ -244,14 +244,14 @@ module Aws::CloudWatch
     #     1-hour clock interval. For example, 12:32:34 is rounded down to
     #     12:00:00.
     #
-    #   If you set `Period` to 5, 10, or 30, the start time of your request is
-    #   rounded down to the nearest time that corresponds to even 5-, 10-, or
-    #   30-second divisions of a minute. For example, if you make a query at
-    #   (HH:mm:ss) 01:05:23 for the previous 10-second period, the start time
-    #   of your request is rounded down and you receive data from 01:05:10 to
-    #   01:05:20. If you make a query at 15:07:17 for the previous 5 minutes
-    #   of data, using a period of 5 seconds, you receive data timestamped
-    #   between 15:02:15 and 15:07:15.
+    #   If you set `Period` to 5, 10, 20, or 30, the start time of your
+    #   request is rounded down to the nearest time that corresponds to even
+    #   5-, 10-, 20-, or 30-second divisions of a minute. For example, if you
+    #   make a query at (HH:mm:ss) 01:05:23 for the previous 10-second period,
+    #   the start time of your request is rounded down and you receive data
+    #   from 01:05:10 to 01:05:20. If you make a query at 15:07:17 for the
+    #   previous 5 minutes of data, using a period of 5 seconds, you receive
+    #   data timestamped between 15:02:15 and 15:07:15.
     # @option options [required, Time,DateTime,Date,Integer,String] :end_time
     #   The time stamp that determines the last data point to return.
     #
@@ -263,7 +263,7 @@ module Aws::CloudWatch
     #   with regular resolution, a period can be as short as one minute (60
     #   seconds) and must be a multiple of 60. For high-resolution metrics
     #   that are collected at intervals of less than one minute, the period
-    #   can be 1, 5, 10, 30, 60, or any multiple of 60. High-resolution
+    #   can be 1, 5, 10, 20, 30, 60, or any multiple of 60. High-resolution
     #   metrics are those metrics stored by a `PutMetricData` call that
     #   includes a `StorageResolution` of 1 second.
     #
@@ -492,7 +492,7 @@ module Aws::CloudWatch
     #
     #   **Start a Amazon Q Developer operational investigation**
     #
-    #   `arn:aws:aiops:region:account-id:investigation-group:ingestigation-group-id
+    #   `arn:aws:aiops:region:account-id:investigation-group:investigation-group-id
     #   `
     # @option options [Array<String>] :insufficient_data_actions
     #   The actions to execute when this alarm transitions to the
@@ -593,27 +593,29 @@ module Aws::CloudWatch
     #   The dimensions for the metric specified in `MetricName`.
     # @option options [Integer] :period
     #   The length, in seconds, used each time the metric specified in
-    #   `MetricName` is evaluated. Valid values are 10, 30, and any multiple
-    #   of 60.
+    #   `MetricName` is evaluated. Valid values are 10, 20, 30, and any
+    #   multiple of 60.
     #
     #   `Period` is required for alarms based on static thresholds. If you are
     #   creating an alarm based on a metric math expression, you specify the
     #   period for each metric within the objects in the `Metrics` array.
     #
-    #   Be sure to specify 10 or 30 only for metrics that are stored by a
+    #   Be sure to specify 10, 20, or 30 only for metrics that are stored by a
     #   `PutMetricData` call with a `StorageResolution` of 1. If you specify a
-    #   period of 10 or 30 for a metric that does not have sub-minute
+    #   period of 10, 20, or 30 for a metric that does not have sub-minute
     #   resolution, the alarm still attempts to gather data at the period rate
     #   that you specify. In this case, it does not receive data for the
     #   attempts that do not correspond to a one-minute data resolution, and
     #   the alarm might often lapse into INSUFFICENT\_DATA status. Specifying
-    #   10 or 30 also sets this alarm as a high-resolution alarm, which has a
-    #   higher charge than other alarms. For more information about pricing,
-    #   see [Amazon CloudWatch Pricing][1].
+    #   10, 20, or 30 also sets this alarm as a high-resolution alarm, which
+    #   has a higher charge than other alarms. For more information about
+    #   pricing, see [Amazon CloudWatch Pricing][1].
     #
-    #   An alarm's total current evaluation period can be no longer than one
-    #   day, so `Period` multiplied by `EvaluationPeriods` cannot be more than
-    #   86,400 seconds.
+    #   An alarm's total current evaluation period can be no longer than
+    #   seven days, so `Period` multiplied by `EvaluationPeriods` can't be
+    #   more than 604,800 seconds. For alarms with a period of less than one
+    #   hour (3,600 seconds), the total evaluation period can't be longer
+    #   than one day (86,400 seconds).
     #
     #
     #
@@ -647,10 +649,6 @@ module Aws::CloudWatch
     #   consecutive data points be breaching to trigger the alarm, this value
     #   specifies that number. If you are setting an "M out of N" alarm,
     #   this value is the N.
-    #
-    #   An alarm's total current evaluation period can be no longer than one
-    #   day, so this number multiplied by `Period` cannot be more than 86,400
-    #   seconds.
     # @option options [Integer] :datapoints_to_alarm
     #   The number of data points that must be breaching to trigger the alarm.
     #   This is used only if you are setting an "M out of N" alarm. In that
@@ -893,7 +891,7 @@ module Aws::CloudWatch
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/adding-your-own-related-telemetry.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/adding-your-own-related-telemetry.html
     # @return [EmptyStructure]
     def put_data(options = {})
       options = Aws::Util.deep_merge(options,

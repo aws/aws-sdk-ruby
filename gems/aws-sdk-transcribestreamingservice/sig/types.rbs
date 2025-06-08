@@ -77,7 +77,7 @@ module Aws::TranscribeStreamingService
 
     class ClinicalNoteGenerationSettings
       attr_accessor output_bucket_name: ::String
-      attr_accessor note_template: ("HISTORY_AND_PHYSICAL" | "GIRPP")
+      attr_accessor note_template: ("HISTORY_AND_PHYSICAL" | "GIRPP" | "DAP" | "SIRP" | "BIRP" | "BEHAVIORAL_SOAP" | "PHYSICAL_SOAP")
       SENSITIVE: []
     end
 

@@ -103,6 +103,12 @@
         "UpdateApplicationRequest$architecture": "<p>The CPU architecture of an application.</p>"
       }
     },
+    "Arn": {
+      "base": null,
+      "refs": {
+        "PolicyArnList$member": null
+      }
+    },
     "AttemptNumber": {
       "base": null,
       "refs": {
@@ -482,6 +488,12 @@
         "ListJobRunAttemptsResponse$jobRunAttempts": "<p>The array of the listed job run attempt objects.</p>"
       }
     },
+    "JobRunExecutionIamPolicy": {
+      "base": "<p>Optional IAM policy. The resulting job IAM role permissions will be an intersection of the policies passed and the policy associated with your job execution role.</p>",
+      "refs": {
+        "StartJobRunRequest$executionIamPolicy": "<p>You can pass an optional IAM policy. The resulting job IAM role permissions will be an intersection of this policy and the policy associated with your job execution role.</p>"
+      }
+    },
     "JobRunId": {
       "base": null,
       "refs": {
@@ -684,6 +696,18 @@
         "ListJobRunsResponse$nextToken": "<p>The output displays the token for the next set of job run results. This is required for pagination and is available as a response of the previous request.</p>"
       }
     },
+    "PolicyArnList": {
+      "base": null,
+      "refs": {
+        "JobRunExecutionIamPolicy$policyArns": "<p>A list of Amazon Resource Names (ARNs) to use as an execution IAM policy.</p>"
+      }
+    },
+    "PolicyDocument": {
+      "base": null,
+      "refs": {
+        "JobRunExecutionIamPolicy$policy": "<p>An IAM inline policy to use as an execution IAM policy.</p>"
+      }
+    },
     "PrometheusMonitoringConfiguration": {
       "base": "<p>The monitoring configuration object you can configure to send metrics to Amazon Managed Service for Prometheus for a job run.</p>",
       "refs": {
@@ -789,6 +813,12 @@
     "ServiceQuotaExceededException": {
       "base": "<p>The maximum number of resources per account has been reached.</p>",
       "refs": {
+      }
+    },
+    "ShutdownGracePeriodInSeconds": {
+      "base": null,
+      "refs": {
+        "CancelJobRunRequest$shutdownGracePeriodInSeconds": "<p>The duration (in seconds) to wait before forcefully terminating the job after cancellation is requested.</p>"
       }
     },
     "SparkSubmit": {

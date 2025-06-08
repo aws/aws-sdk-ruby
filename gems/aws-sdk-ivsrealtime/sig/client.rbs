@@ -152,7 +152,8 @@ module Aws
                             recording_reconnect_window_seconds: ::Integer?,
                             hls_configuration: {
                               target_segment_duration_seconds: ::Integer?
-                            }?
+                            }?,
+                            record_participant_replicas: bool?
                           }
                         ) -> _CreateStageResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStageResponseSuccess
@@ -378,6 +379,20 @@ module Aws
                                    ) -> _ListParticipantEventsResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListParticipantEventsResponseSuccess
 
+      interface _ListParticipantReplicasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListParticipantReplicasResponse]
+        def replicas: () -> ::Array[Types::ParticipantReplica]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#list_participant_replicas-instance_method
+      def list_participant_replicas: (
+                                       source_stage_arn: ::String,
+                                       participant_id: ::String,
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _ListParticipantReplicasResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListParticipantReplicasResponseSuccess
+
       interface _ListParticipantsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListParticipantsResponse]
         def participants: () -> ::Array[Types::ParticipantSummary]
@@ -513,6 +528,26 @@ module Aws
                              ) -> _StartCompositionResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartCompositionResponseSuccess
 
+      interface _StartParticipantReplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartParticipantReplicationResponse]
+        def access_control_allow_origin: () -> ::String
+        def access_control_expose_headers: () -> ::String
+        def cache_control: () -> ::String
+        def content_security_policy: () -> ::String
+        def strict_transport_security: () -> ::String
+        def x_content_type_options: () -> ::String
+        def x_frame_options: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#start_participant_replication-instance_method
+      def start_participant_replication: (
+                                           source_stage_arn: ::String,
+                                           destination_stage_arn: ::String,
+                                           participant_id: ::String,
+                                           ?reconnect_window_seconds: ::Integer,
+                                           ?attributes: Hash[::String, ::String]
+                                         ) -> _StartParticipantReplicationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartParticipantReplicationResponseSuccess
+
       interface _StopCompositionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StopCompositionResponse]
       end
@@ -521,6 +556,24 @@ module Aws
                               arn: ::String
                             ) -> _StopCompositionResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopCompositionResponseSuccess
+
+      interface _StopParticipantReplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopParticipantReplicationResponse]
+        def access_control_allow_origin: () -> ::String
+        def access_control_expose_headers: () -> ::String
+        def cache_control: () -> ::String
+        def content_security_policy: () -> ::String
+        def strict_transport_security: () -> ::String
+        def x_content_type_options: () -> ::String
+        def x_frame_options: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#stop_participant_replication-instance_method
+      def stop_participant_replication: (
+                                          source_stage_arn: ::String,
+                                          destination_stage_arn: ::String,
+                                          participant_id: ::String
+                                        ) -> _StopParticipantReplicationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopParticipantReplicationResponseSuccess
 
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
@@ -572,7 +625,8 @@ module Aws
                             recording_reconnect_window_seconds: ::Integer?,
                             hls_configuration: {
                               target_segment_duration_seconds: ::Integer?
-                            }?
+                            }?,
+                            record_participant_replicas: bool?
                           }
                         ) -> _UpdateStageResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStageResponseSuccess

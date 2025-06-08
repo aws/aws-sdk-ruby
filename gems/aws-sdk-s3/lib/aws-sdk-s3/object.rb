@@ -397,11 +397,17 @@ module Aws::S3
     end
 
     # If present, indicates that the requester was successfully charged for
-    # the request.
+    # the request. For more information, see [Using Requester Pays buckets
+    # for storage transfers and usage][1] in the *Amazon Simple Storage
+    # Service user guide*.
     #
     # <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html
     # @return [String]
     def request_charged
       data[:request_charged]

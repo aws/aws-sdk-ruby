@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.204.0 (2025-06-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.203.0 (2025-05-29)
+------------------
+
+* Feature - Amazon Connect Service Feature: Email Recipient Limit Increase
+
 1.202.0 (2025-05-12)
 ------------------
 

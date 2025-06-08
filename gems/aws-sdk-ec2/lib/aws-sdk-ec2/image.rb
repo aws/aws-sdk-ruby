@@ -142,8 +142,9 @@ module Aws::EC2
       data[:virtualization_type]
     end
 
-    # The boot mode of the image. For more information, see [Boot modes][1]
-    # in the *Amazon EC2 User Guide*.
+    # The boot mode of the image. For more information, see [Instance launch
+    # behavior with Amazon EC2 boot modes][1] in the *Amazon EC2 User
+    # Guide*.
     #
     #
     #
@@ -245,7 +246,8 @@ module Aws::EC2
     # CopyImage, or CreateRestoreImageTask. The ID does not appear if the
     # AMI was created using any other API. For some older AMIs, the ID might
     # not be available. For more information, see [Identify the source AMI
-    # used to create a new AMI][1] in the *Amazon EC2 User Guide*.
+    # used to create a new Amazon EC2 AMI][1] in the *Amazon EC2 User
+    # Guide*.
     #
     #
     #
@@ -261,8 +263,8 @@ module Aws::EC2
     # CopyImage, or CreateRestoreImageTask. The Region does not appear if
     # the AMI was created using any other API. For some older AMIs, the
     # Region might not be available. For more information, see [Identify the
-    # source AMI used to create a new AMI][1] in the *Amazon EC2 User
-    # Guide*.
+    # source AMI used to create a new Amazon EC2 AMI][1] in the *Amazon EC2
+    # User Guide*.
     #
     #
     #
@@ -605,9 +607,20 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   image.deregister({
+    #     delete_associated_snapshots: false,
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [Boolean] :delete_associated_snapshots
+    #   Specifies whether to delete the snapshots associated with the AMI
+    #   during deregistration.
+    #
+    #   <note markdown="1"> If a snapshot is associated with multiple AMIs, it is not deleted,
+    #   regardless of this setting.
+    #
+    #    </note>
+    #
+    #   Default: The snapshots are not deleted.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

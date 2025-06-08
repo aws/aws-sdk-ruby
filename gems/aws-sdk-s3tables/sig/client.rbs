@@ -213,11 +213,12 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Tables/Client.html#get_table-instance_method
       def get_table: (
-                       table_bucket_arn: ::String,
-                       namespace: ::String,
-                       name: ::String
+                       ?table_bucket_arn: ::String,
+                       ?namespace: ::String,
+                       ?name: ::String,
+                       ?table_arn: ::String
                      ) -> _GetTableResponseSuccess
-                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTableResponseSuccess
+                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTableResponseSuccess
 
       interface _GetTableBucketResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTableBucketResponse]

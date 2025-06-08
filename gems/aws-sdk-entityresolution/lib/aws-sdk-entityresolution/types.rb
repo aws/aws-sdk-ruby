@@ -757,6 +757,87 @@ module Aws::EntityResolution
       include Aws::Structure
     end
 
+    # The record that didn't generate a Match ID.
+    #
+    # @!attribute [rw] input_source_arn
+    #   The input source ARN of the record that didn't generate a Match ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] unique_id
+    #   The unique ID of the record that didn't generate a Match ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message for the record that didn't generate a Match ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/FailedRecord AWS API Documentation
+    #
+    class FailedRecord < Struct.new(
+      :input_source_arn,
+      :unique_id,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workflow_name
+    #   The name of the rule-based matching workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] records
+    #   The records to match.
+    #   @return [Array<Types::Record>]
+    #
+    # @!attribute [rw] processing_type
+    #   The processing mode that determines how Match IDs are generated and
+    #   results are saved. Each mode provides different levels of accuracy,
+    #   response time, and completeness of results.
+    #
+    #   If not specified, defaults to `CONSISTENT`.
+    #
+    #   `CONSISTENT`: Performs immediate lookup and matching against all
+    #   existing records, with results saved synchronously. Provides highest
+    #   accuracy but slower response time.
+    #
+    #   `EVENTUAL` (shown as *Background* in the console): Performs initial
+    #   match ID lookup or generation immediately, with record updates
+    #   processed asynchronously in the background. Offers faster initial
+    #   response time, with complete matching results available later in S3.
+    #
+    #   `EVENTUAL_NO_LOOKUP` (shown as *Quick ID generation* in the
+    #   console): Generates new match IDs without checking existing matches,
+    #   with updates processed asynchronously. Provides fastest response
+    #   time but should only be used for records known to be unique.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/GenerateMatchIdInput AWS API Documentation
+    #
+    class GenerateMatchIdInput < Struct.new(
+      :workflow_name,
+      :records,
+      :processing_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] match_groups
+    #   The match groups from the generated match ID.
+    #   @return [Array<Types::MatchGroup>]
+    #
+    # @!attribute [rw] failed_records
+    #   The records that didn't receive a generated Match ID.
+    #   @return [Array<Types::FailedRecord>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/GenerateMatchIdOutput AWS API Documentation
+    #
+    class GenerateMatchIdOutput < Struct.new(
+      :match_groups,
+      :failed_records)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] workflow_name
     #   The name of the workflow.
     #   @return [String]
@@ -1035,7 +1116,7 @@ module Aws::EntityResolution
     end
 
     # @!attribute [rw] job_id
-    #   The ID of the job.
+    #   The unique identifier of the matching job.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1321,7 +1402,7 @@ module Aws::EntityResolution
     # @!attribute [rw] mapped_input_fields
     #   A list of `MappedInputFields`. Each `MappedInputField` corresponds
     #   to a column the source data table, and contains column name plus
-    #   additional information Venice uses for matching.
+    #   additional information Entity Resolution uses for matching.
     #   @return [Array<Types::SchemaInputAttribute>]
     #
     # @!attribute [rw] created_at
@@ -2154,6 +2235,49 @@ module Aws::EntityResolution
       include Aws::Structure
     end
 
+    # The match group.
+    #
+    # @!attribute [rw] records
+    #   The matched records.
+    #   @return [Array<Types::MatchedRecord>]
+    #
+    # @!attribute [rw] match_id
+    #   The match ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] match_rule
+    #   The match rule of the match group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/MatchGroup AWS API Documentation
+    #
+    class MatchGroup < Struct.new(
+      :records,
+      :match_id,
+      :match_rule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The matched record.
+    #
+    # @!attribute [rw] input_source_arn
+    #   The input source ARN of the matched record.
+    #   @return [String]
+    #
+    # @!attribute [rw] record_id
+    #   The record ID of the matched record.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/MatchedRecord AWS API Documentation
+    #
+    class MatchedRecord < Struct.new(
+      :input_source_arn,
+      :record_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A list of `MatchingWorkflowSummary` objects, each of which contain the
     # fields `WorkflowName`, `WorkflowArn`, `CreatedAt`, `UpdatedAt`.
     #
@@ -2593,6 +2717,30 @@ module Aws::EntityResolution
       :token,
       :policy)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The record.
+    #
+    # @!attribute [rw] input_source_arn
+    #   The input source ARN of the record.
+    #   @return [String]
+    #
+    # @!attribute [rw] unique_id
+    #   The unique ID of the record.
+    #   @return [String]
+    #
+    # @!attribute [rw] record_attribute_map
+    #   The record's attribute map.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/Record AWS API Documentation
+    #
+    class Record < Struct.new(
+      :input_source_arn,
+      :unique_id,
+      :record_attribute_map)
+      SENSITIVE = [:record_attribute_map]
       include Aws::Structure
     end
 
@@ -3204,7 +3352,7 @@ module Aws::EntityResolution
     #
     # @!attribute [rw] resolution_techniques
     #   An object which defines the `resolutionType` and the
-    #   `ruleBasedProperties`
+    #   `ruleBasedProperties`.
     #   @return [Types::ResolutionTechniques]
     #
     # @!attribute [rw] incremental_run_config

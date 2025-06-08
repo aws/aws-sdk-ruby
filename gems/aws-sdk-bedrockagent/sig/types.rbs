@@ -102,6 +102,7 @@ module Aws::BedrockAgent
       attr_accessor agent_alias_name: ::String
       attr_accessor agent_alias_status: ("CREATING" | "PREPARED" | "FAILED" | "UPDATING" | "DELETING" | "DISSOCIATED")
       attr_accessor agent_id: ::String
+      attr_accessor alias_invocation_state: ("ACCEPT_INVOCATIONS" | "REJECT_INVOCATIONS")
       attr_accessor client_token: ::String
       attr_accessor created_at: ::Time
       attr_accessor description: ::String
@@ -128,6 +129,7 @@ module Aws::BedrockAgent
       attr_accessor agent_alias_id: ::String
       attr_accessor agent_alias_name: ::String
       attr_accessor agent_alias_status: ("CREATING" | "PREPARED" | "FAILED" | "UPDATING" | "DELETING" | "DISSOCIATED")
+      attr_accessor alias_invocation_state: ("ACCEPT_INVOCATIONS" | "REJECT_INVOCATIONS")
       attr_accessor created_at: ::Time
       attr_accessor description: ::String
       attr_accessor routing_configuration: ::Array[Types::AgentAliasRoutingConfigurationListItem]
@@ -2738,6 +2740,7 @@ module Aws::BedrockAgent
       attr_accessor agent_alias_id: ::String
       attr_accessor agent_alias_name: ::String
       attr_accessor agent_id: ::String
+      attr_accessor alias_invocation_state: ("ACCEPT_INVOCATIONS" | "REJECT_INVOCATIONS")
       attr_accessor description: ::String
       attr_accessor routing_configuration: ::Array[Types::AgentAliasRoutingConfigurationListItem]
       SENSITIVE: []

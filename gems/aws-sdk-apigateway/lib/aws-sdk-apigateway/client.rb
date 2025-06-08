@@ -990,6 +990,11 @@ module Aws::APIGateway
     #   service for this DomainName regardless of the caller and Method
     #   configuration. Supported only for private custom domain names.
     #
+    # @option params [String] :routing_mode
+    #   The routing mode for this domain name. The routing mode determines how
+    #   API Gateway sends traffic from your custom domain name to your private
+    #   APIs.
+    #
     # @return [Types::DomainName] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DomainName#domain_name #domain_name} => String
@@ -1013,6 +1018,7 @@ module Aws::APIGateway
     #   * {Types::DomainName#ownership_verification_certificate_arn #ownership_verification_certificate_arn} => String
     #   * {Types::DomainName#management_policy #management_policy} => String
     #   * {Types::DomainName#policy #policy} => String
+    #   * {Types::DomainName#routing_mode #routing_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1040,6 +1046,7 @@ module Aws::APIGateway
     #     },
     #     ownership_verification_certificate_arn: "String",
     #     policy: "String",
+    #     routing_mode: "BASE_PATH_MAPPING_ONLY", # accepts BASE_PATH_MAPPING_ONLY, ROUTING_RULE_ONLY, ROUTING_RULE_THEN_BASE_PATH_MAPPING
     #   })
     #
     # @example Response structure
@@ -1073,6 +1080,7 @@ module Aws::APIGateway
     #   resp.ownership_verification_certificate_arn #=> String
     #   resp.management_policy #=> String
     #   resp.policy #=> String
+    #   resp.routing_mode #=> String, one of "BASE_PATH_MAPPING_ONLY", "ROUTING_RULE_ONLY", "ROUTING_RULE_THEN_BASE_PATH_MAPPING"
     #
     # @overload create_domain_name(params = {})
     # @param [Hash] params ({})
@@ -3126,6 +3134,7 @@ module Aws::APIGateway
     #   * {Types::DomainName#ownership_verification_certificate_arn #ownership_verification_certificate_arn} => String
     #   * {Types::DomainName#management_policy #management_policy} => String
     #   * {Types::DomainName#policy #policy} => String
+    #   * {Types::DomainName#routing_mode #routing_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3165,6 +3174,7 @@ module Aws::APIGateway
     #   resp.ownership_verification_certificate_arn #=> String
     #   resp.management_policy #=> String
     #   resp.policy #=> String
+    #   resp.routing_mode #=> String, one of "BASE_PATH_MAPPING_ONLY", "ROUTING_RULE_ONLY", "ROUTING_RULE_THEN_BASE_PATH_MAPPING"
     #
     # @overload get_domain_name(params = {})
     # @param [Hash] params ({})
@@ -3279,6 +3289,7 @@ module Aws::APIGateway
     #   resp.items[0].ownership_verification_certificate_arn #=> String
     #   resp.items[0].management_policy #=> String
     #   resp.items[0].policy #=> String
+    #   resp.items[0].routing_mode #=> String, one of "BASE_PATH_MAPPING_ONLY", "ROUTING_RULE_ONLY", "ROUTING_RULE_THEN_BASE_PATH_MAPPING"
     #
     # @overload get_domain_names(params = {})
     # @param [Hash] params ({})
@@ -6388,6 +6399,7 @@ module Aws::APIGateway
     #   * {Types::DomainName#ownership_verification_certificate_arn #ownership_verification_certificate_arn} => String
     #   * {Types::DomainName#management_policy #management_policy} => String
     #   * {Types::DomainName#policy #policy} => String
+    #   * {Types::DomainName#routing_mode #routing_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -6435,6 +6447,7 @@ module Aws::APIGateway
     #   resp.ownership_verification_certificate_arn #=> String
     #   resp.management_policy #=> String
     #   resp.policy #=> String
+    #   resp.routing_mode #=> String, one of "BASE_PATH_MAPPING_ONLY", "ROUTING_RULE_ONLY", "ROUTING_RULE_THEN_BASE_PATH_MAPPING"
     #
     # @overload update_domain_name(params = {})
     # @param [Hash] params ({})
@@ -7388,7 +7401,7 @@ module Aws::APIGateway
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.116.0'
+      context[:gem_version] = '1.118.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

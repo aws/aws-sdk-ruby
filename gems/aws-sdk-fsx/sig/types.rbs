@@ -303,6 +303,8 @@ module Aws::FSx
       attr_accessor log_configuration: Types::LustreLogCreateConfiguration
       attr_accessor root_squash_configuration: Types::LustreRootSquashConfiguration
       attr_accessor metadata_configuration: Types::CreateFileSystemLustreMetadataConfiguration
+      attr_accessor throughput_capacity: ::Integer
+      attr_accessor data_read_cache_configuration: Types::LustreReadCacheConfiguration
       SENSITIVE: []
     end
 
@@ -1128,6 +1130,8 @@ module Aws::FSx
       attr_accessor root_squash_configuration: Types::LustreRootSquashConfiguration
       attr_accessor metadata_configuration: Types::FileSystemLustreMetadataConfiguration
       attr_accessor efa_enabled: bool
+      attr_accessor throughput_capacity: ::Integer
+      attr_accessor data_read_cache_configuration: Types::LustreReadCacheConfiguration
       SENSITIVE: []
     end
 
@@ -1140,6 +1144,12 @@ module Aws::FSx
     class LustreLogCreateConfiguration
       attr_accessor level: ("DISABLED" | "WARN_ONLY" | "ERROR_ONLY" | "WARN_ERROR")
       attr_accessor destination: ::String
+      SENSITIVE: []
+    end
+
+    class LustreReadCacheConfiguration
+      attr_accessor sizing_mode: ("NO_CACHE" | "USER_PROVISIONED" | "PROPORTIONAL_TO_THROUGHPUT_CAPACITY")
+      attr_accessor size_gi_b: ::Integer
       SENSITIVE: []
     end
 
@@ -1565,6 +1575,8 @@ module Aws::FSx
       attr_accessor root_squash_configuration: Types::LustreRootSquashConfiguration
       attr_accessor per_unit_storage_throughput: ::Integer
       attr_accessor metadata_configuration: Types::UpdateFileSystemLustreMetadataConfiguration
+      attr_accessor throughput_capacity: ::Integer
+      attr_accessor data_read_cache_configuration: Types::LustreReadCacheConfiguration
       SENSITIVE: []
     end
 

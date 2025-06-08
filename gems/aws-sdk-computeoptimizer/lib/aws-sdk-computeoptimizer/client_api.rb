@@ -370,6 +370,7 @@ module Aws::ComputeOptimizer
     RDSDatabaseRecommendedOptionProjectedMetric = Shapes::StructureShape.new(name: 'RDSDatabaseRecommendedOptionProjectedMetric')
     RDSDatabaseRecommendedOptionProjectedMetrics = Shapes::ListShape.new(name: 'RDSDatabaseRecommendedOptionProjectedMetrics')
     RDSEffectiveRecommendationPreferences = Shapes::StructureShape.new(name: 'RDSEffectiveRecommendationPreferences')
+    RDSEstimatedMonthlyVolumeIOPsCostVariation = Shapes::StringShape.new(name: 'RDSEstimatedMonthlyVolumeIOPsCostVariation')
     RDSInstanceEstimatedMonthlySavings = Shapes::StructureShape.new(name: 'RDSInstanceEstimatedMonthlySavings')
     RDSInstanceFinding = Shapes::StringShape.new(name: 'RDSInstanceFinding')
     RDSInstanceFindingReasonCode = Shapes::StringShape.new(name: 'RDSInstanceFindingReasonCode')
@@ -1347,6 +1348,7 @@ module Aws::ComputeOptimizer
     RDSDBRecommendation.add_member(:storage_finding, Shapes::ShapeRef.new(shape: RDSStorageFinding, location_name: "storageFinding"))
     RDSDBRecommendation.add_member(:instance_finding_reason_codes, Shapes::ShapeRef.new(shape: RDSInstanceFindingReasonCodes, location_name: "instanceFindingReasonCodes"))
     RDSDBRecommendation.add_member(:current_instance_performance_risk, Shapes::ShapeRef.new(shape: RDSCurrentInstancePerformanceRisk, location_name: "currentInstancePerformanceRisk"))
+    RDSDBRecommendation.add_member(:current_storage_estimated_monthly_volume_io_ps_cost_variation, Shapes::ShapeRef.new(shape: RDSEstimatedMonthlyVolumeIOPsCostVariation, location_name: "currentStorageEstimatedMonthlyVolumeIOPsCostVariation"))
     RDSDBRecommendation.add_member(:storage_finding_reason_codes, Shapes::ShapeRef.new(shape: RDSStorageFindingReasonCodes, location_name: "storageFindingReasonCodes"))
     RDSDBRecommendation.add_member(:instance_recommendation_options, Shapes::ShapeRef.new(shape: RDSDBInstanceRecommendationOptions, location_name: "instanceRecommendationOptions"))
     RDSDBRecommendation.add_member(:storage_recommendation_options, Shapes::ShapeRef.new(shape: RDSDBStorageRecommendationOptions, location_name: "storageRecommendationOptions"))
@@ -1369,6 +1371,7 @@ module Aws::ComputeOptimizer
     RDSDBStorageRecommendationOption.add_member(:rank, Shapes::ShapeRef.new(shape: Rank, location_name: "rank"))
     RDSDBStorageRecommendationOption.add_member(:savings_opportunity, Shapes::ShapeRef.new(shape: SavingsOpportunity, location_name: "savingsOpportunity"))
     RDSDBStorageRecommendationOption.add_member(:savings_opportunity_after_discounts, Shapes::ShapeRef.new(shape: RDSStorageSavingsOpportunityAfterDiscounts, location_name: "savingsOpportunityAfterDiscounts"))
+    RDSDBStorageRecommendationOption.add_member(:estimated_monthly_volume_io_ps_cost_variation, Shapes::ShapeRef.new(shape: RDSEstimatedMonthlyVolumeIOPsCostVariation, location_name: "estimatedMonthlyVolumeIOPsCostVariation"))
     RDSDBStorageRecommendationOption.struct_class = Types::RDSDBStorageRecommendationOption
 
     RDSDBStorageRecommendationOptions.member = Shapes::ShapeRef.new(shape: RDSDBStorageRecommendationOption)

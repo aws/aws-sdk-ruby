@@ -169,6 +169,7 @@ module Aws::DataExchange
     class CreateEventActionRequest
       attr_accessor action: Types::Action
       attr_accessor event: Types::Event
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -178,6 +179,7 @@ module Aws::DataExchange
       attr_accessor created_at: ::Time
       attr_accessor event: Types::Event
       attr_accessor id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
@@ -466,6 +468,7 @@ module Aws::DataExchange
       attr_accessor created_at: ::Time
       attr_accessor event: Types::Event
       attr_accessor id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end

@@ -1217,7 +1217,7 @@ module Aws::PartnerCentralSelling
     #   be one of the supported resource types i.e. `Opportunity`
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of objects specifying each tag name and value.
+    #   A map of the key-value pairs of the tag or tags to assign.
     #
     # @return [Types::CreateResourceSnapshotJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2394,7 +2394,7 @@ module Aws::PartnerCentralSelling
     #   previous call.
     #
     # @option params [Types::EngagementSort] :sort
-    #   An object that specifies the sort order of the results.
+    #   Specifies the sorting parameters for listing Engagements.
     #
     # @return [Types::ListEngagementsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2964,7 +2964,7 @@ module Aws::PartnerCentralSelling
     #   correct engagement is processed.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of objects specifying each tag name and value.
+    #   A map of the key-value pairs of the tag or tags to assign.
     #
     # @return [Types::StartEngagementByAcceptingInvitationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3043,7 +3043,7 @@ module Aws::PartnerCentralSelling
     #   the correct opportunity.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of objects specifying each tag name and value.
+    #   A map of the key-value pairs of the tag or tags to assign.
     #
     # @return [Types::StartEngagementFromOpportunityTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3224,8 +3224,7 @@ module Aws::PartnerCentralSelling
     #   The Amazon Resource Name (ARN) of the resource that you want to tag.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   A map of the key-value pairs of the tag or tags to assign to the
-    #   resource.
+    #   A map of the key-value pairs of the tag or tags to assign.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3516,7 +3515,7 @@ module Aws::PartnerCentralSelling
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-partnercentralselling'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

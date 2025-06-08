@@ -833,6 +833,8 @@ module Aws::ApiGatewayV2
     #   client and the server. Clients must present a trusted certificate to
     #   access your API.
     #
+    # @option params [String] :routing_mode
+    #
     # @option params [Hash<String,String>] :tags
     #   Represents a collection of tags associated with the resource.
     #
@@ -840,8 +842,10 @@ module Aws::ApiGatewayV2
     #
     #   * {Types::CreateDomainNameResponse#api_mapping_selection_expression #api_mapping_selection_expression} => String
     #   * {Types::CreateDomainNameResponse#domain_name #domain_name} => String
+    #   * {Types::CreateDomainNameResponse#domain_name_arn #domain_name_arn} => String
     #   * {Types::CreateDomainNameResponse#domain_name_configurations #domain_name_configurations} => Array&lt;Types::DomainNameConfiguration&gt;
     #   * {Types::CreateDomainNameResponse#mutual_tls_authentication #mutual_tls_authentication} => Types::MutualTlsAuthentication
+    #   * {Types::CreateDomainNameResponse#routing_mode #routing_mode} => String
     #   * {Types::CreateDomainNameResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -867,6 +871,7 @@ module Aws::ApiGatewayV2
     #       truststore_uri: "UriWithLengthBetween1And2048",
     #       truststore_version: "StringWithLengthBetween1And64",
     #     },
+    #     routing_mode: "API_MAPPING_ONLY", # accepts API_MAPPING_ONLY, ROUTING_RULE_ONLY, ROUTING_RULE_THEN_API_MAPPING
     #     tags: {
     #       "__string" => "StringWithLengthBetween1And1600",
     #     },
@@ -876,6 +881,7 @@ module Aws::ApiGatewayV2
     #
     #   resp.api_mapping_selection_expression #=> String
     #   resp.domain_name #=> String
+    #   resp.domain_name_arn #=> String
     #   resp.domain_name_configurations #=> Array
     #   resp.domain_name_configurations[0].api_gateway_domain_name #=> String
     #   resp.domain_name_configurations[0].certificate_arn #=> String
@@ -892,6 +898,7 @@ module Aws::ApiGatewayV2
     #   resp.mutual_tls_authentication.truststore_version #=> String
     #   resp.mutual_tls_authentication.truststore_warnings #=> Array
     #   resp.mutual_tls_authentication.truststore_warnings[0] #=> String
+    #   resp.routing_mode #=> String, one of "API_MAPPING_ONLY", "ROUTING_RULE_ONLY", "ROUTING_RULE_THEN_API_MAPPING"
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #
@@ -1449,6 +1456,82 @@ module Aws::ApiGatewayV2
       req.send_request(options)
     end
 
+    # Create a routing rule.
+    #
+    # @option params [required, Array<Types::RoutingRuleAction>] :actions
+    #
+    # @option params [required, Array<Types::RoutingRuleCondition>] :conditions
+    #
+    # @option params [required, String] :domain_name
+    #
+    # @option params [String] :domain_name_id
+    #
+    # @option params [required, Integer] :priority
+    #   Represents the priority of the routing rule.
+    #
+    # @return [Types::CreateRoutingRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRoutingRuleResponse#actions #actions} => Array&lt;Types::RoutingRuleAction&gt;
+    #   * {Types::CreateRoutingRuleResponse#conditions #conditions} => Array&lt;Types::RoutingRuleCondition&gt;
+    #   * {Types::CreateRoutingRuleResponse#priority #priority} => Integer
+    #   * {Types::CreateRoutingRuleResponse#routing_rule_arn #routing_rule_arn} => String
+    #   * {Types::CreateRoutingRuleResponse#routing_rule_id #routing_rule_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_routing_rule({
+    #     actions: [ # required
+    #       {
+    #         invoke_api: { # required
+    #           api_id: "Id", # required
+    #           stage: "StringWithLengthBetween1And128", # required
+    #           strip_base_path: false,
+    #         },
+    #       },
+    #     ],
+    #     conditions: [ # required
+    #       {
+    #         match_base_paths: {
+    #           any_of: ["SelectionKey"], # required
+    #         },
+    #         match_headers: {
+    #           any_of: [ # required
+    #             {
+    #               header: "SelectionKey", # required
+    #               value_glob: "SelectionExpression", # required
+    #             },
+    #           ],
+    #         },
+    #       },
+    #     ],
+    #     domain_name: "__string", # required
+    #     domain_name_id: "__string",
+    #     priority: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.actions #=> Array
+    #   resp.actions[0].invoke_api.api_id #=> String
+    #   resp.actions[0].invoke_api.stage #=> String
+    #   resp.actions[0].invoke_api.strip_base_path #=> Boolean
+    #   resp.conditions #=> Array
+    #   resp.conditions[0].match_base_paths.any_of #=> Array
+    #   resp.conditions[0].match_base_paths.any_of[0] #=> String
+    #   resp.conditions[0].match_headers.any_of #=> Array
+    #   resp.conditions[0].match_headers.any_of[0].header #=> String
+    #   resp.conditions[0].match_headers.any_of[0].value_glob #=> String
+    #   resp.priority #=> Integer
+    #   resp.routing_rule_arn #=> String
+    #   resp.routing_rule_id #=> String
+    #
+    # @overload create_routing_rule(params = {})
+    # @param [Hash] params ({})
+    def create_routing_rule(params = {}, options = {})
+      req = build_request(:create_routing_rule, params)
+      req.send_request(options)
+    end
+
     # Creates a Stage for an API.
     #
     # @option params [Types::AccessLogSettings] :access_log_settings
@@ -1943,6 +2026,29 @@ module Aws::ApiGatewayV2
       req.send_request(options)
     end
 
+    # @option params [required, String] :domain_name
+    #
+    # @option params [String] :domain_name_id
+    #
+    # @option params [required, String] :routing_rule_id
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_routing_rule({
+    #     domain_name: "__string", # required
+    #     domain_name_id: "__string",
+    #     routing_rule_id: "__string", # required
+    #   })
+    #
+    # @overload delete_routing_rule(params = {})
+    # @param [Hash] params ({})
+    def delete_routing_rule(params = {}, options = {})
+      req = build_request(:delete_routing_rule, params)
+      req.send_request(options)
+    end
+
     # Deletes a Stage.
     #
     # @option params [required, String] :api_id
@@ -2430,8 +2536,10 @@ module Aws::ApiGatewayV2
     #
     #   * {Types::GetDomainNameResponse#api_mapping_selection_expression #api_mapping_selection_expression} => String
     #   * {Types::GetDomainNameResponse#domain_name #domain_name} => String
+    #   * {Types::GetDomainNameResponse#domain_name_arn #domain_name_arn} => String
     #   * {Types::GetDomainNameResponse#domain_name_configurations #domain_name_configurations} => Array&lt;Types::DomainNameConfiguration&gt;
     #   * {Types::GetDomainNameResponse#mutual_tls_authentication #mutual_tls_authentication} => Types::MutualTlsAuthentication
+    #   * {Types::GetDomainNameResponse#routing_mode #routing_mode} => String
     #   * {Types::GetDomainNameResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -2444,6 +2552,7 @@ module Aws::ApiGatewayV2
     #
     #   resp.api_mapping_selection_expression #=> String
     #   resp.domain_name #=> String
+    #   resp.domain_name_arn #=> String
     #   resp.domain_name_configurations #=> Array
     #   resp.domain_name_configurations[0].api_gateway_domain_name #=> String
     #   resp.domain_name_configurations[0].certificate_arn #=> String
@@ -2460,6 +2569,7 @@ module Aws::ApiGatewayV2
     #   resp.mutual_tls_authentication.truststore_version #=> String
     #   resp.mutual_tls_authentication.truststore_warnings #=> Array
     #   resp.mutual_tls_authentication.truststore_warnings[0] #=> String
+    #   resp.routing_mode #=> String, one of "API_MAPPING_ONLY", "ROUTING_RULE_ONLY", "ROUTING_RULE_THEN_API_MAPPING"
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #
@@ -2493,6 +2603,7 @@ module Aws::ApiGatewayV2
     #   resp.items #=> Array
     #   resp.items[0].api_mapping_selection_expression #=> String
     #   resp.items[0].domain_name #=> String
+    #   resp.items[0].domain_name_arn #=> String
     #   resp.items[0].domain_name_configurations #=> Array
     #   resp.items[0].domain_name_configurations[0].api_gateway_domain_name #=> String
     #   resp.items[0].domain_name_configurations[0].certificate_arn #=> String
@@ -2509,6 +2620,7 @@ module Aws::ApiGatewayV2
     #   resp.items[0].mutual_tls_authentication.truststore_version #=> String
     #   resp.items[0].mutual_tls_authentication.truststore_warnings #=> Array
     #   resp.items[0].mutual_tls_authentication.truststore_warnings[0] #=> String
+    #   resp.items[0].routing_mode #=> String, one of "API_MAPPING_ONLY", "ROUTING_RULE_ONLY", "ROUTING_RULE_THEN_API_MAPPING"
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["__string"] #=> String
     #   resp.next_token #=> String
@@ -3024,6 +3136,104 @@ module Aws::ApiGatewayV2
       req.send_request(options)
     end
 
+    # Gets a routing rule.
+    #
+    # @option params [required, String] :domain_name
+    #
+    # @option params [String] :domain_name_id
+    #
+    # @option params [required, String] :routing_rule_id
+    #
+    # @return [Types::GetRoutingRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRoutingRuleResponse#actions #actions} => Array&lt;Types::RoutingRuleAction&gt;
+    #   * {Types::GetRoutingRuleResponse#conditions #conditions} => Array&lt;Types::RoutingRuleCondition&gt;
+    #   * {Types::GetRoutingRuleResponse#priority #priority} => Integer
+    #   * {Types::GetRoutingRuleResponse#routing_rule_arn #routing_rule_arn} => String
+    #   * {Types::GetRoutingRuleResponse#routing_rule_id #routing_rule_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_routing_rule({
+    #     domain_name: "__string", # required
+    #     domain_name_id: "__string",
+    #     routing_rule_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.actions #=> Array
+    #   resp.actions[0].invoke_api.api_id #=> String
+    #   resp.actions[0].invoke_api.stage #=> String
+    #   resp.actions[0].invoke_api.strip_base_path #=> Boolean
+    #   resp.conditions #=> Array
+    #   resp.conditions[0].match_base_paths.any_of #=> Array
+    #   resp.conditions[0].match_base_paths.any_of[0] #=> String
+    #   resp.conditions[0].match_headers.any_of #=> Array
+    #   resp.conditions[0].match_headers.any_of[0].header #=> String
+    #   resp.conditions[0].match_headers.any_of[0].value_glob #=> String
+    #   resp.priority #=> Integer
+    #   resp.routing_rule_arn #=> String
+    #   resp.routing_rule_id #=> String
+    #
+    # @overload get_routing_rule(params = {})
+    # @param [Hash] params ({})
+    def get_routing_rule(params = {}, options = {})
+      req = build_request(:get_routing_rule, params)
+      req.send_request(options)
+    end
+
+    # Lists routing rules.
+    #
+    # @option params [required, String] :domain_name
+    #
+    # @option params [String] :domain_name_id
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListRoutingRulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRoutingRulesResponse#next_token #next_token} => String
+    #   * {Types::ListRoutingRulesResponse#routing_rules #routing_rules} => Array&lt;Types::RoutingRule&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_routing_rules({
+    #     domain_name: "__string", # required
+    #     domain_name_id: "__string",
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.routing_rules #=> Array
+    #   resp.routing_rules[0].actions #=> Array
+    #   resp.routing_rules[0].actions[0].invoke_api.api_id #=> String
+    #   resp.routing_rules[0].actions[0].invoke_api.stage #=> String
+    #   resp.routing_rules[0].actions[0].invoke_api.strip_base_path #=> Boolean
+    #   resp.routing_rules[0].conditions #=> Array
+    #   resp.routing_rules[0].conditions[0].match_base_paths.any_of #=> Array
+    #   resp.routing_rules[0].conditions[0].match_base_paths.any_of[0] #=> String
+    #   resp.routing_rules[0].conditions[0].match_headers.any_of #=> Array
+    #   resp.routing_rules[0].conditions[0].match_headers.any_of[0].header #=> String
+    #   resp.routing_rules[0].conditions[0].match_headers.any_of[0].value_glob #=> String
+    #   resp.routing_rules[0].priority #=> Integer
+    #   resp.routing_rules[0].routing_rule_arn #=> String
+    #   resp.routing_rules[0].routing_rule_id #=> String
+    #
+    # @overload list_routing_rules(params = {})
+    # @param [Hash] params ({})
+    def list_routing_rules(params = {}, options = {})
+      req = build_request(:list_routing_rules, params)
+      req.send_request(options)
+    end
+
     # Gets a Stage.
     #
     # @option params [required, String] :api_id
@@ -3333,6 +3543,83 @@ module Aws::ApiGatewayV2
     # @param [Hash] params ({})
     def import_api(params = {}, options = {})
       req = build_request(:import_api, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, Array<Types::RoutingRuleAction>] :actions
+    #
+    # @option params [required, Array<Types::RoutingRuleCondition>] :conditions
+    #
+    # @option params [required, String] :domain_name
+    #
+    # @option params [String] :domain_name_id
+    #
+    # @option params [required, Integer] :priority
+    #   Represents the priority of the routing rule.
+    #
+    # @option params [required, String] :routing_rule_id
+    #
+    # @return [Types::PutRoutingRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutRoutingRuleResponse#actions #actions} => Array&lt;Types::RoutingRuleAction&gt;
+    #   * {Types::PutRoutingRuleResponse#conditions #conditions} => Array&lt;Types::RoutingRuleCondition&gt;
+    #   * {Types::PutRoutingRuleResponse#priority #priority} => Integer
+    #   * {Types::PutRoutingRuleResponse#routing_rule_arn #routing_rule_arn} => String
+    #   * {Types::PutRoutingRuleResponse#routing_rule_id #routing_rule_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_routing_rule({
+    #     actions: [ # required
+    #       {
+    #         invoke_api: { # required
+    #           api_id: "Id", # required
+    #           stage: "StringWithLengthBetween1And128", # required
+    #           strip_base_path: false,
+    #         },
+    #       },
+    #     ],
+    #     conditions: [ # required
+    #       {
+    #         match_base_paths: {
+    #           any_of: ["SelectionKey"], # required
+    #         },
+    #         match_headers: {
+    #           any_of: [ # required
+    #             {
+    #               header: "SelectionKey", # required
+    #               value_glob: "SelectionExpression", # required
+    #             },
+    #           ],
+    #         },
+    #       },
+    #     ],
+    #     domain_name: "__string", # required
+    #     domain_name_id: "__string",
+    #     priority: 1, # required
+    #     routing_rule_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.actions #=> Array
+    #   resp.actions[0].invoke_api.api_id #=> String
+    #   resp.actions[0].invoke_api.stage #=> String
+    #   resp.actions[0].invoke_api.strip_base_path #=> Boolean
+    #   resp.conditions #=> Array
+    #   resp.conditions[0].match_base_paths.any_of #=> Array
+    #   resp.conditions[0].match_base_paths.any_of[0] #=> String
+    #   resp.conditions[0].match_headers.any_of #=> Array
+    #   resp.conditions[0].match_headers.any_of[0].header #=> String
+    #   resp.conditions[0].match_headers.any_of[0].value_glob #=> String
+    #   resp.priority #=> Integer
+    #   resp.routing_rule_arn #=> String
+    #   resp.routing_rule_id #=> String
+    #
+    # @overload put_routing_rule(params = {})
+    # @param [Hash] params ({})
+    def put_routing_rule(params = {}, options = {})
+      req = build_request(:put_routing_rule, params)
       req.send_request(options)
     end
 
@@ -3822,12 +4109,16 @@ module Aws::ApiGatewayV2
     #   client and the server. Clients must present a trusted certificate to
     #   access your API.
     #
+    # @option params [String] :routing_mode
+    #
     # @return [Types::UpdateDomainNameResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDomainNameResponse#api_mapping_selection_expression #api_mapping_selection_expression} => String
     #   * {Types::UpdateDomainNameResponse#domain_name #domain_name} => String
+    #   * {Types::UpdateDomainNameResponse#domain_name_arn #domain_name_arn} => String
     #   * {Types::UpdateDomainNameResponse#domain_name_configurations #domain_name_configurations} => Array&lt;Types::DomainNameConfiguration&gt;
     #   * {Types::UpdateDomainNameResponse#mutual_tls_authentication #mutual_tls_authentication} => Types::MutualTlsAuthentication
+    #   * {Types::UpdateDomainNameResponse#routing_mode #routing_mode} => String
     #   * {Types::UpdateDomainNameResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -3853,12 +4144,14 @@ module Aws::ApiGatewayV2
     #       truststore_uri: "UriWithLengthBetween1And2048",
     #       truststore_version: "StringWithLengthBetween1And64",
     #     },
+    #     routing_mode: "API_MAPPING_ONLY", # accepts API_MAPPING_ONLY, ROUTING_RULE_ONLY, ROUTING_RULE_THEN_API_MAPPING
     #   })
     #
     # @example Response structure
     #
     #   resp.api_mapping_selection_expression #=> String
     #   resp.domain_name #=> String
+    #   resp.domain_name_arn #=> String
     #   resp.domain_name_configurations #=> Array
     #   resp.domain_name_configurations[0].api_gateway_domain_name #=> String
     #   resp.domain_name_configurations[0].certificate_arn #=> String
@@ -3875,6 +4168,7 @@ module Aws::ApiGatewayV2
     #   resp.mutual_tls_authentication.truststore_version #=> String
     #   resp.mutual_tls_authentication.truststore_warnings #=> Array
     #   resp.mutual_tls_authentication.truststore_warnings[0] #=> String
+    #   resp.routing_mode #=> String, one of "API_MAPPING_ONLY", "ROUTING_RULE_ONLY", "ROUTING_RULE_THEN_API_MAPPING"
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #
@@ -4629,7 +4923,7 @@ module Aws::ApiGatewayV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-apigatewayv2'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

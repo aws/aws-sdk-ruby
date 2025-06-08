@@ -3262,7 +3262,7 @@ module Aws::EKS
     #
     #   resp.insight.id #=> String
     #   resp.insight.name #=> String
-    #   resp.insight.category #=> String, one of "UPGRADE_READINESS"
+    #   resp.insight.category #=> String, one of "UPGRADE_READINESS", "MISCONFIGURATION"
     #   resp.insight.kubernetes_version #=> String
     #   resp.insight.last_refresh_time #=> Time
     #   resp.insight.last_transition_time #=> Time
@@ -4096,7 +4096,18 @@ module Aws::EKS
 
     # Returns a list of all insights checked for against the specified
     # cluster. You can filter which insights are returned by category,
-    # associated Kubernetes version, and status.
+    # associated Kubernetes version, and status. The default filter lists
+    # all categories and every status.
+    #
+    # The following lists the available categories:
+    #
+    # * `UPGRADE_READINESS`: Amazon EKS identifies issues that could impact
+    #   your ability to upgrade to new versions of Kubernetes. These are
+    #   called upgrade insights.
+    #
+    # * `MISCONFIGURATION`: Amazon EKS identifies misconfiguration in your
+    #   EKS Hybrid Nodes setup that could impair functionality of your
+    #   cluster or workloads. These are called configuration insights.
     #
     # @option params [required, String] :cluster_name
     #   The name of the Amazon EKS cluster associated with the insights.
@@ -4135,7 +4146,7 @@ module Aws::EKS
     #   resp = client.list_insights({
     #     cluster_name: "String", # required
     #     filter: {
-    #       categories: ["UPGRADE_READINESS"], # accepts UPGRADE_READINESS
+    #       categories: ["UPGRADE_READINESS"], # accepts UPGRADE_READINESS, MISCONFIGURATION
     #       kubernetes_versions: ["String"],
     #       statuses: ["PASSING"], # accepts PASSING, WARNING, ERROR, UNKNOWN
     #     },
@@ -4148,7 +4159,7 @@ module Aws::EKS
     #   resp.insights #=> Array
     #   resp.insights[0].id #=> String
     #   resp.insights[0].name #=> String
-    #   resp.insights[0].category #=> String, one of "UPGRADE_READINESS"
+    #   resp.insights[0].category #=> String, one of "UPGRADE_READINESS", "MISCONFIGURATION"
     #   resp.insights[0].kubernetes_version #=> String
     #   resp.insights[0].last_refresh_time #=> Time
     #   resp.insights[0].last_transition_time #=> Time
@@ -5529,7 +5540,7 @@ module Aws::EKS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.137.0'
+      context[:gem_version] = '1.138.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

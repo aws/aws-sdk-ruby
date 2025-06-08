@@ -486,11 +486,14 @@ module Aws::CostOptimizationHub
     #
     #   * {Types::GetPreferencesResponse#savings_estimation_mode #savings_estimation_mode} => String
     #   * {Types::GetPreferencesResponse#member_account_discount_visibility #member_account_discount_visibility} => String
+    #   * {Types::GetPreferencesResponse#preferred_commitment #preferred_commitment} => Types::PreferredCommitment
     #
     # @example Response structure
     #
     #   resp.savings_estimation_mode #=> String, one of "BeforeDiscounts", "AfterDiscounts"
     #   resp.member_account_discount_visibility #=> String, one of "All", "None"
+    #   resp.preferred_commitment.term #=> String, one of "OneYear", "ThreeYears"
+    #   resp.preferred_commitment.payment_option #=> String, one of "AllUpfront", "PartialUpfront", "NoUpfront"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cost-optimization-hub-2022-07-26/GetPreferences AWS API Documentation
     #
@@ -554,8 +557,8 @@ module Aws::CostOptimizationHub
     #   resp.cost_calculation_lookback_period_in_days #=> Integer
     #   resp.estimated_savings_percentage #=> Float
     #   resp.estimated_savings_over_cost_calculation_lookback_period #=> Float
-    #   resp.current_resource_type #=> String, one of "Ec2Instance", "LambdaFunction", "EbsVolume", "EcsService", "Ec2AutoScalingGroup", "Ec2InstanceSavingsPlans", "ComputeSavingsPlans", "SageMakerSavingsPlans", "Ec2ReservedInstances", "RdsReservedInstances", "OpenSearchReservedInstances", "RedshiftReservedInstances", "ElastiCacheReservedInstances", "RdsDbInstanceStorage", "RdsDbInstance", "DynamoDbReservedCapacity", "MemoryDbReservedInstances"
-    #   resp.recommended_resource_type #=> String, one of "Ec2Instance", "LambdaFunction", "EbsVolume", "EcsService", "Ec2AutoScalingGroup", "Ec2InstanceSavingsPlans", "ComputeSavingsPlans", "SageMakerSavingsPlans", "Ec2ReservedInstances", "RdsReservedInstances", "OpenSearchReservedInstances", "RedshiftReservedInstances", "ElastiCacheReservedInstances", "RdsDbInstanceStorage", "RdsDbInstance", "DynamoDbReservedCapacity", "MemoryDbReservedInstances"
+    #   resp.current_resource_type #=> String, one of "Ec2Instance", "LambdaFunction", "EbsVolume", "EcsService", "Ec2AutoScalingGroup", "Ec2InstanceSavingsPlans", "ComputeSavingsPlans", "SageMakerSavingsPlans", "Ec2ReservedInstances", "RdsReservedInstances", "OpenSearchReservedInstances", "RedshiftReservedInstances", "ElastiCacheReservedInstances", "RdsDbInstanceStorage", "RdsDbInstance", "AuroraDbClusterStorage", "DynamoDbReservedCapacity", "MemoryDbReservedInstances"
+    #   resp.recommended_resource_type #=> String, one of "Ec2Instance", "LambdaFunction", "EbsVolume", "EcsService", "Ec2AutoScalingGroup", "Ec2InstanceSavingsPlans", "ComputeSavingsPlans", "SageMakerSavingsPlans", "Ec2ReservedInstances", "RdsReservedInstances", "OpenSearchReservedInstances", "RedshiftReservedInstances", "ElastiCacheReservedInstances", "RdsDbInstanceStorage", "RdsDbInstance", "AuroraDbClusterStorage", "DynamoDbReservedCapacity", "MemoryDbReservedInstances"
     #   resp.region #=> String
     #   resp.source #=> String, one of "ComputeOptimizer", "CostExplorer"
     #   resp.last_refresh_timestamp #=> Time
@@ -790,6 +793,19 @@ module Aws::CostOptimizationHub
     #   resp.current_resource_details.rds_db_instance_storage.cost_calculation.pricing.estimated_discounts.reserved_instances_discount #=> Float
     #   resp.current_resource_details.rds_db_instance_storage.cost_calculation.pricing.estimated_discounts.other_discount #=> Float
     #   resp.current_resource_details.rds_db_instance_storage.cost_calculation.pricing.estimated_cost_after_discounts #=> Float
+    #   resp.current_resource_details.aurora_db_cluster_storage.configuration.storage_type #=> String
+    #   resp.current_resource_details.aurora_db_cluster_storage.cost_calculation.usages #=> Array
+    #   resp.current_resource_details.aurora_db_cluster_storage.cost_calculation.usages[0].usage_type #=> String
+    #   resp.current_resource_details.aurora_db_cluster_storage.cost_calculation.usages[0].usage_amount #=> Float
+    #   resp.current_resource_details.aurora_db_cluster_storage.cost_calculation.usages[0].operation #=> String
+    #   resp.current_resource_details.aurora_db_cluster_storage.cost_calculation.usages[0].product_code #=> String
+    #   resp.current_resource_details.aurora_db_cluster_storage.cost_calculation.usages[0].unit #=> String
+    #   resp.current_resource_details.aurora_db_cluster_storage.cost_calculation.pricing.estimated_cost_before_discounts #=> Float
+    #   resp.current_resource_details.aurora_db_cluster_storage.cost_calculation.pricing.estimated_net_unused_amortized_commitments #=> Float
+    #   resp.current_resource_details.aurora_db_cluster_storage.cost_calculation.pricing.estimated_discounts.savings_plans_discount #=> Float
+    #   resp.current_resource_details.aurora_db_cluster_storage.cost_calculation.pricing.estimated_discounts.reserved_instances_discount #=> Float
+    #   resp.current_resource_details.aurora_db_cluster_storage.cost_calculation.pricing.estimated_discounts.other_discount #=> Float
+    #   resp.current_resource_details.aurora_db_cluster_storage.cost_calculation.pricing.estimated_cost_after_discounts #=> Float
     #   resp.current_resource_details.dynamo_db_reserved_capacity.configuration.account_scope #=> String
     #   resp.current_resource_details.dynamo_db_reserved_capacity.configuration.service #=> String
     #   resp.current_resource_details.dynamo_db_reserved_capacity.configuration.term #=> String
@@ -1045,6 +1061,19 @@ module Aws::CostOptimizationHub
     #   resp.recommended_resource_details.rds_db_instance_storage.cost_calculation.pricing.estimated_discounts.reserved_instances_discount #=> Float
     #   resp.recommended_resource_details.rds_db_instance_storage.cost_calculation.pricing.estimated_discounts.other_discount #=> Float
     #   resp.recommended_resource_details.rds_db_instance_storage.cost_calculation.pricing.estimated_cost_after_discounts #=> Float
+    #   resp.recommended_resource_details.aurora_db_cluster_storage.configuration.storage_type #=> String
+    #   resp.recommended_resource_details.aurora_db_cluster_storage.cost_calculation.usages #=> Array
+    #   resp.recommended_resource_details.aurora_db_cluster_storage.cost_calculation.usages[0].usage_type #=> String
+    #   resp.recommended_resource_details.aurora_db_cluster_storage.cost_calculation.usages[0].usage_amount #=> Float
+    #   resp.recommended_resource_details.aurora_db_cluster_storage.cost_calculation.usages[0].operation #=> String
+    #   resp.recommended_resource_details.aurora_db_cluster_storage.cost_calculation.usages[0].product_code #=> String
+    #   resp.recommended_resource_details.aurora_db_cluster_storage.cost_calculation.usages[0].unit #=> String
+    #   resp.recommended_resource_details.aurora_db_cluster_storage.cost_calculation.pricing.estimated_cost_before_discounts #=> Float
+    #   resp.recommended_resource_details.aurora_db_cluster_storage.cost_calculation.pricing.estimated_net_unused_amortized_commitments #=> Float
+    #   resp.recommended_resource_details.aurora_db_cluster_storage.cost_calculation.pricing.estimated_discounts.savings_plans_discount #=> Float
+    #   resp.recommended_resource_details.aurora_db_cluster_storage.cost_calculation.pricing.estimated_discounts.reserved_instances_discount #=> Float
+    #   resp.recommended_resource_details.aurora_db_cluster_storage.cost_calculation.pricing.estimated_discounts.other_discount #=> Float
+    #   resp.recommended_resource_details.aurora_db_cluster_storage.cost_calculation.pricing.estimated_cost_after_discounts #=> Float
     #   resp.recommended_resource_details.dynamo_db_reserved_capacity.configuration.account_scope #=> String
     #   resp.recommended_resource_details.dynamo_db_reserved_capacity.configuration.service #=> String
     #   resp.recommended_resource_details.dynamo_db_reserved_capacity.configuration.term #=> String
@@ -1186,7 +1215,7 @@ module Aws::CostOptimizationHub
     #       implementation_efforts: ["VeryLow"], # accepts VeryLow, Low, Medium, High, VeryHigh
     #       account_ids: ["AccountId"],
     #       regions: ["String"],
-    #       resource_types: ["Ec2Instance"], # accepts Ec2Instance, LambdaFunction, EbsVolume, EcsService, Ec2AutoScalingGroup, Ec2InstanceSavingsPlans, ComputeSavingsPlans, SageMakerSavingsPlans, Ec2ReservedInstances, RdsReservedInstances, OpenSearchReservedInstances, RedshiftReservedInstances, ElastiCacheReservedInstances, RdsDbInstanceStorage, RdsDbInstance, DynamoDbReservedCapacity, MemoryDbReservedInstances
+    #       resource_types: ["Ec2Instance"], # accepts Ec2Instance, LambdaFunction, EbsVolume, EcsService, Ec2AutoScalingGroup, Ec2InstanceSavingsPlans, ComputeSavingsPlans, SageMakerSavingsPlans, Ec2ReservedInstances, RdsReservedInstances, OpenSearchReservedInstances, RedshiftReservedInstances, ElastiCacheReservedInstances, RdsDbInstanceStorage, RdsDbInstance, AuroraDbClusterStorage, DynamoDbReservedCapacity, MemoryDbReservedInstances
     #       action_types: ["Rightsize"], # accepts Rightsize, Stop, Upgrade, PurchaseSavingsPlans, PurchaseReservedInstances, MigrateToGraviton, Delete, ScaleIn
     #       tags: [
     #         {
@@ -1260,7 +1289,7 @@ module Aws::CostOptimizationHub
     #       implementation_efforts: ["VeryLow"], # accepts VeryLow, Low, Medium, High, VeryHigh
     #       account_ids: ["AccountId"],
     #       regions: ["String"],
-    #       resource_types: ["Ec2Instance"], # accepts Ec2Instance, LambdaFunction, EbsVolume, EcsService, Ec2AutoScalingGroup, Ec2InstanceSavingsPlans, ComputeSavingsPlans, SageMakerSavingsPlans, Ec2ReservedInstances, RdsReservedInstances, OpenSearchReservedInstances, RedshiftReservedInstances, ElastiCacheReservedInstances, RdsDbInstanceStorage, RdsDbInstance, DynamoDbReservedCapacity, MemoryDbReservedInstances
+    #       resource_types: ["Ec2Instance"], # accepts Ec2Instance, LambdaFunction, EbsVolume, EcsService, Ec2AutoScalingGroup, Ec2InstanceSavingsPlans, ComputeSavingsPlans, SageMakerSavingsPlans, Ec2ReservedInstances, RdsReservedInstances, OpenSearchReservedInstances, RedshiftReservedInstances, ElastiCacheReservedInstances, RdsDbInstanceStorage, RdsDbInstance, AuroraDbClusterStorage, DynamoDbReservedCapacity, MemoryDbReservedInstances
     #       action_types: ["Rightsize"], # accepts Rightsize, Stop, Upgrade, PurchaseSavingsPlans, PurchaseReservedInstances, MigrateToGraviton, Delete, ScaleIn
     #       tags: [
     #         {
@@ -1371,22 +1400,34 @@ module Aws::CostOptimizationHub
     # @option params [String] :member_account_discount_visibility
     #   Sets the "member account discount visibility" preference.
     #
+    # @option params [Types::PreferredCommitment] :preferred_commitment
+    #   Sets the preferences for how Reserved Instances and Savings Plans
+    #   cost-saving opportunities are prioritized in terms of payment option
+    #   and term length.
+    #
     # @return [Types::UpdatePreferencesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdatePreferencesResponse#savings_estimation_mode #savings_estimation_mode} => String
     #   * {Types::UpdatePreferencesResponse#member_account_discount_visibility #member_account_discount_visibility} => String
+    #   * {Types::UpdatePreferencesResponse#preferred_commitment #preferred_commitment} => Types::PreferredCommitment
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_preferences({
     #     savings_estimation_mode: "BeforeDiscounts", # accepts BeforeDiscounts, AfterDiscounts
     #     member_account_discount_visibility: "All", # accepts All, None
+    #     preferred_commitment: {
+    #       term: "OneYear", # accepts OneYear, ThreeYears
+    #       payment_option: "AllUpfront", # accepts AllUpfront, PartialUpfront, NoUpfront
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.savings_estimation_mode #=> String, one of "BeforeDiscounts", "AfterDiscounts"
     #   resp.member_account_discount_visibility #=> String, one of "All", "None"
+    #   resp.preferred_commitment.term #=> String, one of "OneYear", "ThreeYears"
+    #   resp.preferred_commitment.payment_option #=> String, one of "AllUpfront", "PartialUpfront", "NoUpfront"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cost-optimization-hub-2022-07-26/UpdatePreferences AWS API Documentation
     #
@@ -1415,7 +1456,7 @@ module Aws::CostOptimizationHub
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-costoptimizationhub'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

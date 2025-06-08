@@ -24,8 +24,8 @@
       "output":{"shape":"CancelJobRunResponse"},
       "errors":[
         {"shape":"ValidationException"},
-        {"shape":"ResourceNotFoundException"},
-        {"shape":"InternalServerException"}
+        {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"}
       ],
       "idempotent":true
     },
@@ -40,8 +40,8 @@
       "output":{"shape":"CreateApplicationResponse"},
       "errors":[
         {"shape":"ValidationException"},
-        {"shape":"ResourceNotFoundException"},
         {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"},
         {"shape":"ConflictException"}
       ],
       "idempotent":true
@@ -57,8 +57,8 @@
       "output":{"shape":"DeleteApplicationResponse"},
       "errors":[
         {"shape":"ValidationException"},
-        {"shape":"ResourceNotFoundException"},
-        {"shape":"InternalServerException"}
+        {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"}
       ],
       "idempotent":true
     },
@@ -73,8 +73,8 @@
       "output":{"shape":"GetApplicationResponse"},
       "errors":[
         {"shape":"ValidationException"},
-        {"shape":"ResourceNotFoundException"},
-        {"shape":"InternalServerException"}
+        {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"}
       ]
     },
     "GetDashboardForJobRun":{
@@ -103,8 +103,8 @@
       "output":{"shape":"GetJobRunResponse"},
       "errors":[
         {"shape":"ValidationException"},
-        {"shape":"ResourceNotFoundException"},
-        {"shape":"InternalServerException"}
+        {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"}
       ]
     },
     "ListApplications":{
@@ -132,8 +132,8 @@
       "output":{"shape":"ListJobRunAttemptsResponse"},
       "errors":[
         {"shape":"ValidationException"},
-        {"shape":"ResourceNotFoundException"},
-        {"shape":"InternalServerException"}
+        {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"}
       ]
     },
     "ListJobRuns":{
@@ -161,8 +161,8 @@
       "output":{"shape":"ListTagsForResourceResponse"},
       "errors":[
         {"shape":"ValidationException"},
-        {"shape":"ResourceNotFoundException"},
-        {"shape":"InternalServerException"}
+        {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"}
       ]
     },
     "StartApplication":{
@@ -176,8 +176,8 @@
       "output":{"shape":"StartApplicationResponse"},
       "errors":[
         {"shape":"ValidationException"},
-        {"shape":"ResourceNotFoundException"},
         {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"},
         {"shape":"ServiceQuotaExceededException"}
       ],
       "idempotent":true
@@ -210,8 +210,8 @@
       "output":{"shape":"StopApplicationResponse"},
       "errors":[
         {"shape":"ValidationException"},
-        {"shape":"ResourceNotFoundException"},
-        {"shape":"InternalServerException"}
+        {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"}
       ],
       "idempotent":true
     },
@@ -226,8 +226,8 @@
       "output":{"shape":"TagResourceResponse"},
       "errors":[
         {"shape":"ValidationException"},
-        {"shape":"ResourceNotFoundException"},
-        {"shape":"InternalServerException"}
+        {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"}
       ]
     },
     "UntagResource":{
@@ -241,8 +241,8 @@
       "output":{"shape":"UntagResourceResponse"},
       "errors":[
         {"shape":"ValidationException"},
-        {"shape":"ResourceNotFoundException"},
-        {"shape":"InternalServerException"}
+        {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"}
       ],
       "idempotent":true
     },
@@ -257,8 +257,8 @@
       "output":{"shape":"UpdateApplicationResponse"},
       "errors":[
         {"shape":"ValidationException"},
-        {"shape":"ResourceNotFoundException"},
-        {"shape":"InternalServerException"}
+        {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"}
       ]
     }
   },
@@ -370,6 +370,12 @@
         "X86_64"
       ]
     },
+    "Arn":{
+      "type":"string",
+      "max":2048,
+      "min":20,
+      "pattern":"([    -~ -퟿-�က0-ჿFF]+)"
+    },
     "AttemptNumber":{
       "type":"integer",
       "box":true,
@@ -414,6 +420,11 @@
           "shape":"JobRunId",
           "location":"uri",
           "locationName":"jobRunId"
+        },
+        "shutdownGracePeriodInSeconds":{
+          "shape":"ShutdownGracePeriodInSeconds",
+          "location":"querystring",
+          "locationName":"shutdownGracePeriodInSeconds"
         }
       }
     },
@@ -588,14 +599,15 @@
     },
     "EntryPointArgument":{
       "type":"string",
-      "max":10280,
       "min":1,
       "pattern":".*\\S.*",
       "sensitive":true
     },
     "EntryPointArguments":{
       "type":"list",
-      "member":{"shape":"EntryPointArgument"}
+      "member":{"shape":"EntryPointArgument"},
+      "max":1024,
+      "min":0
     },
     "EntryPointPath":{
       "type":"string",
@@ -875,6 +887,13 @@
     "JobRunAttempts":{
       "type":"list",
       "member":{"shape":"JobRunAttemptSummary"}
+    },
+    "JobRunExecutionIamPolicy":{
+      "type":"structure",
+      "members":{
+        "policy":{"shape":"PolicyDocument"},
+        "policyArns":{"shape":"PolicyArnList"}
+      }
     },
     "JobRunId":{
       "type":"string",
@@ -1178,6 +1197,18 @@
       "min":1,
       "pattern":"[A-Za-z0-9_=-]+"
     },
+    "PolicyArnList":{
+      "type":"list",
+      "member":{"shape":"Arn"},
+      "max":10,
+      "min":0
+    },
+    "PolicyDocument":{
+      "type":"string",
+      "max":2048,
+      "min":1,
+      "pattern":"([    -ÿ]+)"
+    },
     "PrometheusMonitoringConfiguration":{
       "type":"structure",
       "members":{
@@ -1293,6 +1324,10 @@
       },
       "exception":true
     },
+    "ShutdownGracePeriodInSeconds":{
+      "type":"integer",
+      "box":true
+    },
     "SparkSubmit":{
       "type":"structure",
       "required":["entryPoint"],
@@ -1343,6 +1378,7 @@
           "idempotencyToken":true
         },
         "executionRoleArn":{"shape":"IAMRoleArn"},
+        "executionIamPolicy":{"shape":"JobRunExecutionIamPolicy"},
         "jobDriver":{"shape":"JobDriver"},
         "configurationOverrides":{"shape":"ConfigurationOverrides"},
         "tags":{"shape":"TagMap"},

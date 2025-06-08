@@ -191,7 +191,16 @@ module Aws
                                               s3_bucket: ::String,
                                               s3_key_prefix: ::String?
                                             }?,
-                                            audit_images_limit: ::Integer?
+                                            audit_images_limit: ::Integer?,
+                                            challenge_preferences: Array[
+                                              {
+                                                type: ("FaceMovementAndLightChallenge" | "FaceMovementChallenge"),
+                                                versions: {
+                                                  minimum: ::String?,
+                                                  maximum: ::String?
+                                                }?
+                                              },
+                                            ]?
                                           },
                                           ?client_request_token: ::String
                                         ) -> _CreateFaceLivenessSessionResponseSuccess
@@ -763,6 +772,7 @@ module Aws
         def confidence: () -> ::Float
         def reference_image: () -> Types::AuditImage
         def audit_images: () -> ::Array[Types::AuditImage]
+        def challenge: () -> Types::Challenge
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Rekognition/Client.html#get_face_liveness_session_results-instance_method
       def get_face_liveness_session_results: (

@@ -296,8 +296,8 @@ module Aws::Synthetics
     # Use this structure to input your script code for the canary. This
     # structure contains the Lambda handler with the location where the
     # canary should start running the script. If the script is stored in an
-    # S3 bucket, the bucket name, key, and version are also included. If the
-    # script was passed into the canary directly, the script code is
+    # Amazon S3 bucket, the bucket name, key, and version are also included.
+    # If the script was passed into the canary directly, the script code is
     # contained in the value of `Zipfile`.
     #
     # If you are uploading your canary scripts with an Amazon S3 bucket,
@@ -319,13 +319,13 @@ module Aws::Synthetics
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_WritingCanary_Python.html#CloudWatch_Synthetics_Canaries_WritingCanary_Python_package
     #
     # @!attribute [rw] s3_bucket
-    #   If your canary script is located in S3, specify the bucket name
-    #   here. Do not include `s3://` as the start of the bucket name.
+    #   If your canary script is located in Amazon S3, specify the bucket
+    #   name here. Do not include `s3://` as the start of the bucket name.
     #   @return [String]
     #
     # @!attribute [rw] s3_key
-    #   The S3 key of your script. For more information, see [Working with
-    #   Amazon S3 Objects][1].
+    #   The Amazon S3 key of your script. For more information, see [Working
+    #   with Amazon S3 Objects][1].
     #
     #
     #
@@ -333,17 +333,17 @@ module Aws::Synthetics
     #   @return [String]
     #
     # @!attribute [rw] s3_version
-    #   The S3 version ID of your script.
+    #   The Amazon S3 version ID of your script.
     #   @return [String]
     #
     # @!attribute [rw] zip_file
     #   If you input your canary script directly into the canary instead of
-    #   referring to an S3 location, the value of this parameter is the
-    #   base64-encoded contents of the .zip file that contains the script.
-    #   It must be smaller than 225 Kb.
+    #   referring to an Amazon S3 location, the value of this parameter is
+    #   the base64-encoded contents of the .zip file that contains the
+    #   script. It must be smaller than 225 Kb.
     #
-    #   For large canary scripts, we recommend that you use an S3 location
-    #   instead of inputting it directly with this parameter.
+    #   For large canary scripts, we recommend that you use an Amazon S3
+    #   location instead of inputting it directly with this parameter.
     #   @return [String]
     #
     # @!attribute [rw] handler
@@ -529,13 +529,23 @@ module Aws::Synthetics
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-runtime
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] ephemeral_storage
+    #   Specifies the amount of ephemeral storage (in MB) to allocate for
+    #   the canary run during execution. This temporary storage is used for
+    #   storing canary run artifacts (which are uploaded to an Amazon S3
+    #   bucket at the end of the run), and any canary browser operations.
+    #   This temporary storage is cleared after the run is completed.
+    #   Default storage value is 1024 MB.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/CanaryRunConfigInput AWS API Documentation
     #
     class CanaryRunConfigInput < Struct.new(
       :timeout_in_seconds,
       :memory_in_mb,
       :active_tracing,
-      :environment_variables)
+      :environment_variables,
+      :ephemeral_storage)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -555,12 +565,22 @@ module Aws::Synthetics
     #   Displays whether this canary run used active X-Ray tracing.
     #   @return [Boolean]
     #
+    # @!attribute [rw] ephemeral_storage
+    #   Specifies the amount of ephemeral storage (in MB) to allocate for
+    #   the canary run during execution. This temporary storage is used for
+    #   storing canary run artifacts (which are uploaded to an Amazon S3
+    #   bucket at the end of the run), and any canary browser operations.
+    #   This temporary storage is cleared after the run is completed.
+    #   Default storage value is 1024 MB.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/CanaryRunConfigOutput AWS API Documentation
     #
     class CanaryRunConfigOutput < Struct.new(
       :timeout_in_seconds,
       :memory_in_mb,
-      :active_tracing)
+      :active_tracing,
+      :ephemeral_storage)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -577,9 +597,32 @@ module Aws::Synthetics
     #   @return [String]
     #
     # @!attribute [rw] state_reason_code
-    #   If this value is `CANARY_FAILURE`, an exception occurred in the
-    #   canary code. If this value is `EXECUTION_FAILURE`, an exception
-    #   occurred in CloudWatch Synthetics.
+    #   If this value is `CANARY_FAILURE`, either the canary script failed
+    #   or Synthetics ran into a fatal error when running the canary. For
+    #   example, a canary timeout misconfiguration setting can cause the
+    #   canary to timeout before Synthetics can evaluate its status.
+    #
+    #   If this value is `EXECUTION_FAILURE`, a non-critical failure
+    #   occurred such as failing to save generated debug artifacts (for
+    #   example, screenshots or har files).
+    #
+    #   If both types of failures occurred, the `CANARY_FAILURE` takes
+    #   precedence. To understand the exact error, use the [StateReason][1]
+    #   API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_CanaryRunStatus.html
+    #   @return [String]
+    #
+    # @!attribute [rw] test_result
+    #   Specifies the status of canary script for this run. When Synthetics
+    #   tries to determine the status but fails, the result is marked as
+    #   `UNKNOWN`. For the overall status of canary run, see [State][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_CanaryRunStatus.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/CanaryRunStatus AWS API Documentation
@@ -587,7 +630,8 @@ module Aws::Synthetics
     class CanaryRunStatus < Struct.new(
       :state,
       :state_reason,
-      :state_reason_code)
+      :state_reason_code,
+      :test_result)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -800,15 +844,16 @@ module Aws::Synthetics
     #
     # @!attribute [rw] code
     #   A structure that includes the entry point from which the canary
-    #   should start running your script. If the script is stored in an S3
-    #   bucket, the bucket name, key, and version are also included.
+    #   should start running your script. If the script is stored in an
+    #   Amazon S3 bucket, the bucket name, key, and version are also
+    #   included.
     #   @return [Types::CanaryCodeInput]
     #
     # @!attribute [rw] artifact_s3_location
     #   The location in Amazon S3 where Synthetics stores artifacts from the
     #   test runs of this canary. Artifacts include the log file,
-    #   screenshots, and HAR files. The name of the S3 bucket can't include
-    #   a period (.).
+    #   screenshots, and HAR files. The name of the Amazon S3 bucket can't
+    #   include a period (.).
     #   @return [String]
     #
     # @!attribute [rw] execution_role_arn
@@ -1840,9 +1885,9 @@ module Aws::Synthetics
     #   Use this structure to input your script code for the canary. This
     #   structure contains the Lambda handler with the location where the
     #   canary should start running the script. If the script is stored in
-    #   an S3 bucket, the bucket name, key, and version are also included.
-    #   If the script was passed into the canary directly, the script code
-    #   is contained in the value of `Zipfile`.
+    #   an Amazon S3 bucket, the bucket name, key, and version are also
+    #   included. If the script was passed into the canary directly, the
+    #   script code is contained in the value of `Zipfile`.
     #
     #   If you are uploading your canary scripts with an Amazon S3 bucket,
     #   your zip file should include your script in a certain folder
@@ -1896,8 +1941,9 @@ module Aws::Synthetics
     #   @return [String]
     #
     # @!attribute [rw] success_retention_period_in_days
-    #   The number of days to retain data on the failed runs for this
-    #   canary. The valid range is 1 to 455 days.
+    #   The number of days to retain data about successful runs of this
+    #   canary. If you omit this field, the default of 31 days is used. The
+    #   valid range is 1 to 455 days.
     #
     #   This setting affects the range of information returned by
     #   [GetCanaryRuns][1], as well as the range of information displayed in
@@ -1909,8 +1955,9 @@ module Aws::Synthetics
     #   @return [Integer]
     #
     # @!attribute [rw] failure_retention_period_in_days
-    #   The number of days to retain data on the failed runs for this
-    #   canary. The valid range is 1 to 455 days.
+    #   The number of days to retain data about failed runs of this canary.
+    #   If you omit this field, the default of 31 days is used. The valid
+    #   range is 1 to 455 days.
     #
     #   This setting affects the range of information returned by
     #   [GetCanaryRuns][1], as well as the range of information displayed in
@@ -1952,9 +1999,10 @@ module Aws::Synthetics
     #
     # @!attribute [rw] provisioned_resource_cleanup
     #   Specifies whether to also delete the Lambda functions and layers
-    #   used by this canary when the canary is deleted. If the value of this
-    #   parameter is `AUTOMATIC`, it means that the Lambda functions and
-    #   layers will be deleted when the canary is deleted.
+    #   used by this canary when the canary is deleted. If you omit this
+    #   parameter, the default of `AUTOMATIC` is used, which means that the
+    #   Lambda functions and layers will be deleted when the canary is
+    #   deleted.
     #
     #   If the value of this parameter is `OFF`, then the value of the
     #   `DeleteLambda` parameter of the [DeleteCanary][1] operation
@@ -2119,8 +2167,9 @@ module Aws::Synthetics
     #
     # @!attribute [rw] code
     #   A structure that includes the entry point from which the canary
-    #   should start running your script. If the script is stored in an S3
-    #   bucket, the bucket name, key, and version are also included.
+    #   should start running your script. If the script is stored in an
+    #   Amazon S3 bucket, the bucket name, key, and version are also
+    #   included.
     #   @return [Types::CanaryCodeInput]
     #
     # @!attribute [rw] execution_role_arn
@@ -2223,8 +2272,8 @@ module Aws::Synthetics
     # @!attribute [rw] artifact_s3_location
     #   The location in Amazon S3 where Synthetics stores artifacts from the
     #   test runs of this canary. Artifacts include the log file,
-    #   screenshots, and HAR files. The name of the S3 bucket can't include
-    #   a period (.).
+    #   screenshots, and HAR files. The name of the Amazon S3 bucket can't
+    #   include a period (.).
     #   @return [String]
     #
     # @!attribute [rw] artifact_config

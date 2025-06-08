@@ -432,6 +432,44 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # Describes the type and version of the challenge being used for the
+    # Face Liveness session.
+    #
+    # @!attribute [rw] type
+    #   The type of the challenge being used for the Face Liveness session.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the challenge being used for the Face Liveness
+    #   session.
+    #   @return [String]
+    #
+    class Challenge < Struct.new(
+      :type,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An ordered list of preferred challenge type and versions.
+    #
+    # @!attribute [rw] type
+    #   The types of challenges that have been selected for the Face
+    #   Liveness session.
+    #   @return [String]
+    #
+    # @!attribute [rw] versions
+    #   The version of the challenges that have been selected for the Face
+    #   Liveness session.
+    #   @return [Types::Versions]
+    #
+    class ChallengePreference < Struct.new(
+      :type,
+      :versions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about a face in a target image that matches the
     # source image face analyzed by `CompareFaces`. The `Face` property
     # contains the bounding box of the face in the target image. The
@@ -974,9 +1012,15 @@ module Aws::Rekognition
     #   selfie-video.
     #   @return [Integer]
     #
+    # @!attribute [rw] challenge_preferences
+    #   Indicates preferred challenge types and versions for the Face
+    #   Liveness session to be created.
+    #   @return [Array<Types::ChallengePreference>]
+    #
     class CreateFaceLivenessSessionRequestSettings < Struct.new(
       :output_config,
-      :audit_images_limit)
+      :audit_images_limit,
+      :challenge_preferences)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2717,12 +2761,14 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # The emotions that appear to be expressed on the face, and the
-    # confidence level in the determination. The API is only making a
-    # determination of the physical appearance of a person's face. It is
-    # not a determination of the person’s internal emotional state and
-    # should not be used in such a way. For example, a person pretending to
-    # have a sad face might not be sad emotionally.
+    # The API returns a prediction of an emotion based on a person's facial
+    # expressions, along with the confidence level for the predicted
+    # emotion. It is not a determination of the person’s internal emotional
+    # state and should not be used in such a way. For example, a person
+    # pretending to have a sad face might not be sad emotionally. The API is
+    # not intended to be used, and you may not use it, in a manner that
+    # violates the EU Artificial Intelligence Act or any other applicable
+    # law.
     #
     # @!attribute [rw] type
     #   Type of emotion detected.
@@ -3629,12 +3675,18 @@ module Aws::Rekognition
     #   instead.
     #   @return [Array<Types::AuditImage>]
     #
+    # @!attribute [rw] challenge
+    #   Contains information regarding the challenge type used for the Face
+    #   Liveness check.
+    #   @return [Types::Challenge]
+    #
     class GetFaceLivenessSessionResultsResponse < Struct.new(
       :session_id,
       :status,
       :confidence,
       :reference_image,
-      :audit_images)
+      :audit_images,
+      :challenge)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8262,6 +8314,23 @@ module Aws::Rekognition
     #
     class ValidationData < Struct.new(
       :assets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Object specifying the acceptable range of challenge versions.
+    #
+    # @!attribute [rw] minimum
+    #   The desired minimum version for the challenge.
+    #   @return [String]
+    #
+    # @!attribute [rw] maximum
+    #   The desired maximum version for the challenge.
+    #   @return [String]
+    #
+    class Versions < Struct.new(
+      :minimum,
+      :maximum)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -355,6 +355,25 @@ module Aws
                                  ) -> _DeleteSchemaMappingResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSchemaMappingResponseSuccess
 
+      interface _GenerateMatchIdResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GenerateMatchIdOutput]
+        def match_groups: () -> ::Array[Types::MatchGroup]
+        def failed_records: () -> ::Array[Types::FailedRecord]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EntityResolution/Client.html#generate_match_id-instance_method
+      def generate_match_id: (
+                               workflow_name: ::String,
+                               records: Array[
+                                 {
+                                   input_source_arn: ::String,
+                                   unique_id: ::String,
+                                   record_attribute_map: Hash[::String, ::String]
+                                 },
+                               ],
+                               ?processing_type: ("CONSISTENT" | "EVENTUAL" | "EVENTUAL_NO_LOOKUP")
+                             ) -> _GenerateMatchIdResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GenerateMatchIdResponseSuccess
+
       interface _GetIdMappingJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetIdMappingJobOutput]
         def job_id: () -> ::String
