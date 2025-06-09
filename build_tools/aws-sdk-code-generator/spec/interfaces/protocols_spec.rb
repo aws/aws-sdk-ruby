@@ -12,10 +12,10 @@ describe 'Protocols Resolution:' do
   # Prioritize JSON over CBOR due to better performance.
   context 'with smithy rpc protocol support' do
     it 'selects json with priority' do
-      SpecHelper.generate_service(['ProtocolsRpcJsonQuery'], multiple_files: false)
-      client = ProtocolsRpcJsonQuery::Client.new(stub_responses: true)
+      SpecHelper.generate_service(['ProtocolsJsonRpcQuery'], multiple_files: false)
+      client = ProtocolsJsonRpcQuery::Client.new(stub_responses: true)
       expect(client.handlers).to include(Aws::Json::Handler)
-      Object.send(:remove_const, :ProtocolsRpcJsonQuery)
+      Object.send(:remove_const, :ProtocolsJsonRpcQuery)
     end
 
     it 'selects smithy rpc v2 if it is the only choice' do
@@ -54,10 +54,24 @@ describe 'Protocols Resolution:' do
     end
 
     it 'selects json out of a list with unsupported protocols' do
-      SpecHelper.generate_service(['ProtocolsRpcJsonQuery'], multiple_files: false)
-      client = ProtocolsRpcJsonQuery::Client.new(stub_responses: true)
+      SpecHelper.generate_service(['ProtocolsJsonRpcQuery'], multiple_files: false)
+      client = ProtocolsJsonRpcQuery::Client.new(stub_responses: true)
       expect(client.handlers).to include(Aws::Json::Handler)
-      Object.send(:remove_const, :ProtocolsRpcJsonQuery)
+      Object.send(:remove_const, :ProtocolsJsonRpcQuery)
+    end
+
+    it 'selects json out of a list' do
+      SpecHelper.generate_service(['ProtocolsJsonQuery'], multiple_files: false)
+      client = ProtocolsJsonQuery::Client.new(stub_responses: true)
+      expect(client.handlers).to include(Aws::Json::Handler)
+      Object.send(:remove_const, :ProtocolsJsonQuery)
+    end
+
+    it 'selects query as fallback' do
+      SpecHelper.generate_service(['ProtocolsRpcQuery'], multiple_files: false)
+      client = ProtocolsRpcQuery::Client.new(stub_responses: true)
+      expect(client.handlers).to include(Aws::Query::Handler)
+      Object.send(:remove_const, :ProtocolsRpcQuery)
     end
 
     it 'selects query if it is the only choice' do
