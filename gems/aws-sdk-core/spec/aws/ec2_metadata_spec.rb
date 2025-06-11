@@ -13,7 +13,7 @@ module Aws
       stub_request(:put, "#{endpoint}/latest/api/token")
         .to_return(
           status: 200,
-          body: JSON.dump(token_value),
+          body: Aws::Json.dump(token_value),
           headers: { 'x-aws-ec2-metadata-token-ttl-seconds' => '21600' }
         )
       token_value
