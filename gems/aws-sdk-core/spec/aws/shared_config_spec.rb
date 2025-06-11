@@ -368,14 +368,25 @@ module Aws
       end
     end
 
-    context 'ec2_metadata_v1_disabled selection' do
-      it 'can resolve ec2_metadata_v1_disabled from config file' do
+    context 'disable_ec2_metadata selection' do
+      it 'can resolve disable_ec2_metadata from config file' do
         config = SharedConfig.new(
           config_path: mock_config_file,
           config_enabled: true,
-          profile_name: 'ec2_metadata_v1_disabled'
+          profile_name: 'disable_ec2_metadata'
         )
-        expect(config.ec2_metadata_v1_disabled).to eq('true')
+        expect(config.disable_ec2_metadata).to eq('true')
+      end
+    end
+
+    context 'ec2_instance_profile_name selection' do
+      it 'can resolve ec2_instance_profile_name from config file' do
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 'ec2_instance_profile_name'
+        )
+        expect(config.ec2_instance_profile_name).to eq('foo')
       end
     end
 

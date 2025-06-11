@@ -209,9 +209,10 @@ module Aws
       :endpoint_discovery_enabled,
       :use_dualstack_endpoint,
       :use_fips_endpoint,
+      :disable_ec2_metadata,
       :ec2_metadata_service_endpoint,
       :ec2_metadata_service_endpoint_mode,
-      :ec2_metadata_v1_disabled,
+      :ec2_instance_profile_name,
       :disable_host_prefix_injection,
       :max_attempts,
       :retry_mode,
@@ -233,8 +234,6 @@ module Aws
       :disable_request_compression,
       :request_min_compression_size_bytes,
       :ignore_configured_endpoint_urls,
-      :disable_ec2_metadata,
-      :ec2_instance_profile_name
     )
 
     private
