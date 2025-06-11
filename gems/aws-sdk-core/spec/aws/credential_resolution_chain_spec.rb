@@ -30,7 +30,9 @@ module Aws
     end
 
     before(:each) do
-      allow(InstanceProfileCredentials).to receive(:new).and_return(mock_instance_creds)
+      allow(InstanceProfileCredentials)
+        .to receive(:new)
+        .and_return(mock_instance_creds)
       expect_any_instance_of(ProcessCredentials).not_to receive(:warn)
     end
 
@@ -365,21 +367,15 @@ module Aws
       it 'attempts to fetch metadata credentials last using IMDS' do
         allow(InstanceProfileCredentials).to receive(:new).and_call_original
 
-        stub_request(:put, 'http://169.254.169.254/latest/api/token')
-          .to_return(
-            status: 200,
-            body: "my-token\n",
-            headers: { 'x-aws-ec2-metadata-token-ttl-seconds' => '21600' }
-          )
-        stub_request(
-          :get,
-          'http://169.254.169.254/latest/meta-data/iam/security-credentials/'
-        ).with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-          .to_return(status: 200, body: "profile-name\n")
-        stub_request(
-          :get,
-          'http://169.254.169.254/latest/meta-data/iam/security-credentials/profile-name'
-        ).with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
+        endpoint = 'http://169.254.169.254'
+        extended_path = '/latest/meta-data/iam/security-credentials-extended/'
+        stub_request(:put, URI.join(endpoint, 'latest/api/token'))
+          .to_return(status: 200, body: JSON.dump('my-token'))
+        stub_request(:get, URI.join(endpoint, extended_path))
+          .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
+          .to_return(status: 200, body: JSON.dump('profile-name'))
+        stub_request(:get, URI.join(endpoint, extended_path, 'profile-name'))
+          .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: <<-JSON.strip)
             {
               "Code" : "Success",
@@ -391,13 +387,13 @@ module Aws
               "Expiration" : "#{(Time.now.utc + 3600).strftime('%Y-%m-%dT%H:%M:%SZ')}"
             }
           JSON
-        client = ApiHelper.sample_rest_xml::Client.new(
-          profile: 'nonexistant', region: 'us-east-1'
-        )
-        expect(
-          client.config.credentials.credentials.access_key_id
-        ).to eq('akid-md')
-        expect(metric_values(client.config.credentials.metrics)).to include('0')
+
+        client_creds = ApiHelper.sample_rest_xml::Client.new(
+          profile: 'nonexistant',
+          region: 'us-east-1'
+        ).config.credentials
+        expect(client_creds.credentials.access_key_id).to eq('akid-md')
+        expect(metric_values(client_creds.metrics)).to include('0')
       end
 
       it 'attempts to fetch metadata credentials last using ECS' do
@@ -809,19 +805,9 @@ module Aws
 
       it 'can assume a role with EC2 Instance Metadata as a source' do
         allow(InstanceProfileCredentials).to receive(:new).and_call_original
-
         profile = 'ar_ec2_src'
-        resp = <<-JSON.strip
-          {
-            "Code" : "Success",
-            "LastUpdated" : "2013-11-22T20:03:48Z",
-            "Type" : "AWS-HMAC",
-            "AccessKeyId" : "ACCESS_KEY_EC2",
-            "SecretAccessKey" : "secret",
-            "Token" : "session-token",
-            "Expiration" : "#{(Time.now.utc + 3600).strftime('%Y-%m-%dT%H:%M:%SZ')}"
-          }
-        JSON
+        endpoint = 'http://169.254.169.254'
+        extended_path = '/latest/meta-data/iam/security-credentials-extended/'
         assume_role_stub(
           'arn:aws:iam::123456789012:role/foo',
           'ACCESS_KEY_EC2',
@@ -829,32 +815,38 @@ module Aws
           'AR_SECRET',
           'AR_TOKEN'
         )
-        stub_request(:put, 'http://169.254.169.254/latest/api/token')
-          .to_return(
-            status: 200,
-            body: "my-token\n",
-            headers: { 'x-aws-ec2-metadata-token-ttl-seconds' => '21600' }
-          )
-        stub_request(:get, 'http://169.254.169.254/latest/meta-data/iam/security-credentials/')
+        stub_request(:put, URI.join(endpoint, 'latest/api/token'))
+          .to_return(status: 200, body: JSON.dump('my-token'))
+        stub_request(:get, URI.join(endpoint, extended_path))
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-          .to_return(status: 200, body: "profile-name\n")
-        stub_request(:get, 'http://169.254.169.254/latest/meta-data/iam/security-credentials/profile-name')
+          .to_return(status: 200, body: JSON.dump('profile-name'))
+        stub_request(:get, URI.join(endpoint, extended_path, 'profile-name'))
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-          .to_return(status: 200, body: resp)
-        client = ApiHelper.sample_rest_xml::Client.new(
-          profile: profile,
-          region: 'us-east-1'
-        )
-        expect(
-          client.config.credentials.credentials.access_key_id
-        ).to eq('AR_AKID')
-        expect(metric_values(client.config.credentials.metrics)).to include('p', '0', 'i')
+          .to_return(status: 200, body: <<-JSON.strip)
+            {
+              "Code" : "Success",
+              "LastUpdated" : "2013-11-22T20:03:48Z",
+              "Type" : "AWS-HMAC",
+              "AccessKeyId" : "ACCESS_KEY_EC2",
+              "SecretAccessKey" : "secret",
+              "Token" : "session-token",
+              "Expiration" : "#{(Time.now.utc + 3600).strftime('%Y-%m-%dT%H:%M:%SZ')}"
+            }
+          JSON
+
+        client_creds = ApiHelper.sample_rest_xml::Client.new(
+          profile: profile, region: 'us-east-1'
+        ).config.credentials
+        expect(client_creds.credentials.access_key_id).to eq('AR_AKID')
+        expect(metric_values(client_creds.metrics)).to include('p', '0', 'i')
       end
 
       it 'emits correct UserAgent metrics during STS calls for EC2 Instance Metadata as a source' do
         allow(InstanceProfileCredentials).to receive(:new).and_call_original
 
         profile = 'ar_ec2_src'
+        endpoint = 'http://169.254.169.254'
+        extended_path = '/latest/meta-data/iam/security-credentials-extended/'
         resp = <<-JSON.strip
           {
             "Code" : "Success",
@@ -873,26 +865,25 @@ module Aws
           'AR_SECRET',
           'AR_TOKEN'
         )
-        stub_request(:put, 'http://169.254.169.254/latest/api/token')
-          .to_return(
-            status: 200,
-            body: "my-token\n",
-            headers: { 'x-aws-ec2-metadata-token-ttl-seconds' => '21600' }
-          )
-        stub_request(:get, 'http://169.254.169.254/latest/meta-data/iam/security-credentials/')
+        stub_request(:put, URI.join(endpoint, 'latest/api/token'))
+          .to_return(status: 200, body: JSON.dump('my-token'))
+        stub_request(:get, URI.join(endpoint, extended_path))
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-          .to_return(status: 200, body: "profile-name\n")
-        stub_request(:get, 'http://169.254.169.254/latest/meta-data/iam/security-credentials/profile-name')
+          .to_return(status: 200, body: JSON.dump('profile-name'))
+        stub_request(:get, URI.join(endpoint, extended_path, 'profile-name'))
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: resp)
-        expect_any_instance_of(STS::Client).to receive(:assume_role).and_wrap_original do |m, *args|
-          resp = m.call(*args)
-          expect(metrics_from_user_agent_header(resp)).to include('p', '0')
-          resp
-        end
+
+        expect_any_instance_of(STS::Client)
+          .to receive(:assume_role)
+          .and_wrap_original do |m, *args|
+            resp = m.call(*args)
+            expect(metrics_from_user_agent_header(resp)).to include('p', '0')
+            resp
+          end
+
         ApiHelper.sample_rest_xml::Client.new(
-          profile: profile,
-          region: 'us-east-1'
+          profile: profile, region: 'us-east-1'
         )
       end
 
@@ -1038,21 +1029,15 @@ module Aws
       it 'attempts to fetch metadata credentials last' do
         allow(InstanceProfileCredentials).to receive(:new).and_call_original
 
-        stub_request(:put, 'http://169.254.169.254/latest/api/token')
-          .to_return(
-            status: 200,
-            body: "my-token\n",
-            headers: { 'x-aws-ec2-metadata-token-ttl-seconds' => '21600' }
-          )
-        stub_request(
-          :get,
-          'http://169.254.169.254/latest/meta-data/iam/security-credentials/'
-        ).with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-          .to_return(status: 200, body: "profile-name\n")
-        stub_request(
-          :get,
-          'http://169.254.169.254/latest/meta-data/iam/security-credentials/profile-name'
-        ).with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
+        endpoint = 'http://169.254.169.254'
+        extended_path = '/latest/meta-data/iam/security-credentials-extended/'
+        stub_request(:put, URI.join(endpoint, 'latest/api/token'))
+          .to_return(status: 200, body: JSON.dump('my-token'))
+        stub_request(:get, URI.join(endpoint, extended_path))
+          .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
+          .to_return(status: 200, body: JSON.dump('profile-name'))
+        stub_request(:get, URI.join(endpoint, extended_path, 'profile-name'))
+          .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: <<-JSON.strip)
             {
               "Code" : "Success",
@@ -1064,13 +1049,11 @@ module Aws
               "Expiration" : "#{(Time.now.utc + 3600).strftime('%Y-%m-%dT%H:%M:%SZ')}"
             }
           JSON
-        client = ApiHelper.sample_rest_xml::Client.new(
+        client_creds = ApiHelper.sample_rest_xml::Client.new(
           profile: 'nonexistant', region: 'us-east-1'
-        )
-        expect(
-          client.config.credentials.credentials.access_key_id
-        ).to eq('akid-md')
-        expect(metric_values(client.config.credentials.metrics)).to include('0')
+        ).config.credentials
+        expect(client_creds.credentials.access_key_id).to eq('akid-md')
+        expect(metric_values(client_creds.metrics)).to include('0')
       end
     end
 
