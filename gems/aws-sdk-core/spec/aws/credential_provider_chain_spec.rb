@@ -24,7 +24,7 @@ aws_access_key_id = #{creds[:access_key_id]}
 aws_secret_access_key = #{creds[:secret_access_key]}
 aws_session_token = #{creds[:session_token]}
 aws_account_id = #{creds[:account_id]}
-CREDS
+      CREDS
       allow(Dir).to receive(:home).and_return('HOME')
       allow(File).to receive(:exist?).with(path).and_return(true)
       allow(File).to receive(:readable?).with(path).and_return(true)
@@ -131,6 +131,18 @@ CREDS
       expect(mock_instance_creds).to receive(:set?).and_return(true)
       expect(credentials).to be(mock_instance_creds)
       validate_metrics('CREDENTIALS_IMDS')
+    end
+
+    it 'skips instance profile service when AWS_EC2_METADATA_DISABLED is true' do
+      ENV['AWS_EC2_METADATA_DISABLED'] = 'true'
+      expect(InstanceProfileCredentials).not_to receive(:new)
+      expect(credentials).to be(nil)
+    end
+
+    it 'skips instance profile service when AWS_EC2_METADATA_DISABLED is true' do
+      ENV['AWS_EC2_METADATA_DISABLED'] = 'true'
+      expect(InstanceProfileCredentials).not_to receive(:new)
+      expect(credentials).to be(nil)
     end
 
     it 'hydrates credentials from ECS when AWS_CONTAINER_CREDENTIALS_RELATIVE_URI is set' do

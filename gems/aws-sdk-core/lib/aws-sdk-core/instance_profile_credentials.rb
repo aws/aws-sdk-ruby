@@ -91,10 +91,13 @@ module Aws
 
     private
 
+    attr_accessor :api_version
+    attr_accessor :resolved_profile
+
     def resolve_client_opts(options)
       opts = options.dup
       opts[:backoff] = opts[:delay] if opts[:delay]
-      # delete unnecessary configs
+      # delete unnecessary configs for ec2 metadata client
       %i[client delay ec2_instance_profile_name].each { |k| opts.delete(k) }
       opts.merge(
         endpoint_mode: resolve_endpoint_mode(options),
