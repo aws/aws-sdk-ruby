@@ -77,6 +77,7 @@ module Aws
                 EC2Metadata.new(resolve_client_opts(options))
       @ec2_instance_profile_name = resolve_ec2_instance_profile_name(options)
       @no_refresh_until = nil
+      @async_refresh = false
       @metrics = ['CREDENTIALS_IMDS']
 
       @api_version = :unknown
