@@ -60,8 +60,11 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Subnet.html#block_public_access_states-instance_method
       def block_public_access_states: () -> Types::BlockPublicAccessStates
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Subnet.html#type-instance_method
+      def type: () -> ::String
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Subnet.html#state-instance_method
-      def state: () -> ("pending" | "available" | "unavailable")
+      def state: () -> ("pending" | "available" | "unavailable" | "failed" | "failed-insufficient-capacity")
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Subnet.html#vpc_id-instance_method
       def vpc_id: () -> ::String

@@ -55,6 +55,16 @@ module Aws::WAFV2
     # rule group, `AWSManagedRulesACFPRuleSet`. This configuration is used
     # in `ManagedRuleGroupConfig`.
     #
+    # For additional information about this and the other intelligent threat
+    # mitigation rule groups, see [Intelligent threat mitigation in WAF][1]
+    # and [Amazon Web Services Managed Rules rule groups list][2] in the
+    # *WAF Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-managed-protections
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/aws-managed-rule-groups-list
+    #
     # @!attribute [rw] creation_path
     #   The path of the account creation endpoint for your application. This
     #   is the page on your website that accepts the completed registration
@@ -131,6 +141,16 @@ module Aws::WAFV2
     # group, `AWSManagedRulesATPRuleSet`. This configuration is used in
     # `ManagedRuleGroupConfig`.
     #
+    # For additional information about this and the other intelligent threat
+    # mitigation rule groups, see [Intelligent threat mitigation in WAF][1]
+    # and [Amazon Web Services Managed Rules rule groups list][2] in the
+    # *WAF Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-managed-protections
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/aws-managed-rule-groups-list
+    #
     # @!attribute [rw] login_path
     #   The path of the login endpoint for your application. For example,
     #   for the URL `https://example.com/web/login`, you would provide the
@@ -181,9 +201,74 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # Configures the use of the anti-DDoS managed rule group,
+    # `AWSManagedRulesAntiDDoSRuleSet`. This configuration is used in
+    # `ManagedRuleGroupConfig`.
+    #
+    # The configuration that you provide here determines whether and how the
+    # rules in the rule group are used.
+    #
+    # For additional information about this and the other intelligent threat
+    # mitigation rule groups, see [Intelligent threat mitigation in WAF][1]
+    # and [Amazon Web Services Managed Rules rule groups list][2] in the
+    # *WAF Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-managed-protections
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/aws-managed-rule-groups-list
+    #
+    # @!attribute [rw] client_side_action_config
+    #   Configures the request handling that's applied by the managed rule
+    #   group rules `ChallengeAllDuringEvent` and `ChallengeDDoSRequests`
+    #   during a distributed denial of service (DDoS) attack.
+    #   @return [Types::ClientSideActionConfig]
+    #
+    # @!attribute [rw] sensitivity_to_block
+    #   The sensitivity that the rule group rule `DDoSRequests` uses when
+    #   matching against the DDoS suspicion labeling on a request. The
+    #   managed rule group adds the labeling during DDoS events, before the
+    #   `DDoSRequests` rule runs.
+    #
+    #   The higher the sensitivity, the more levels of labeling that the
+    #   rule matches:
+    #
+    #   * Low sensitivity is less sensitive, causing the rule to match only
+    #     on the most likely participants in an attack, which are the
+    #     requests with the high suspicion label
+    #     `awswaf:managed:aws:anti-ddos:high-suspicion-ddos-request`.
+    #
+    #   * Medium sensitivity causes the rule to match on the medium and high
+    #     suspicion labels.
+    #
+    #   * High sensitivity causes the rule to match on all of the suspicion
+    #     labels: low, medium, and high.
+    #
+    #   Default: `LOW`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/AWSManagedRulesAntiDDoSRuleSet AWS API Documentation
+    #
+    class AWSManagedRulesAntiDDoSRuleSet < Struct.new(
+      :client_side_action_config,
+      :sensitivity_to_block)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details for your use of the Bot Control managed rule group,
     # `AWSManagedRulesBotControlRuleSet`. This configuration is used in
     # `ManagedRuleGroupConfig`.
+    #
+    # For additional information about this and the other intelligent threat
+    # mitigation rule groups, see [Intelligent threat mitigation in WAF][1]
+    # and [Amazon Web Services Managed Rules rule groups list][2] in the
+    # *WAF Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-managed-protections
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/aws-managed-rule-groups-list
     #
     # @!attribute [rw] inspection_level
     #   The inspection level to use for the Bot Control rule group. The
@@ -357,6 +442,41 @@ module Aws::WAFV2
     #
     class AndStatement < Struct.new(
       :statements)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A rule statement that inspects web traffic based on the Autonomous
+    # System Number (ASN) associated with the request's IP address.
+    #
+    # For additional details, see [ASN match rule statement][1] in the [WAF
+    # Developer Guide][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-statement-type-asn-match.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    #
+    # @!attribute [rw] asn_list
+    #   Contains one or more Autonomous System Numbers (ASNs). ASNs are
+    #   unique identifiers assigned to large internet networks managed by
+    #   organizations such as internet service providers, enterprises,
+    #   universities, or government agencies.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] forwarded_ip_config
+    #   The configuration for inspecting IP addresses to match against an
+    #   ASN in an HTTP header that you specify, instead of using the IP
+    #   address that's reported by the web request origin. Commonly, this
+    #   is the X-Forwarded-For (XFF) header, but you can specify any header
+    #   name.
+    #   @return [Types::ForwardedIPConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/AsnMatchStatement AWS API Documentation
+    #
+    class AsnMatchStatement < Struct.new(
+      :asn_list,
+      :forwarded_ip_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -914,6 +1034,135 @@ module Aws::WAFV2
     #
     class CheckCapacityResponse < Struct.new(
       :capacity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This is part of the `AWSManagedRulesAntiDDoSRuleSet`
+    # `ClientSideActionConfig` configuration in `ManagedRuleGroupConfig`.
+    #
+    # @!attribute [rw] usage_of_action
+    #   Determines whether to use the `AWSManagedRulesAntiDDoSRuleSet` rules
+    #   `ChallengeAllDuringEvent` and `ChallengeDDoSRequests` in the rule
+    #   group evaluation and the related label
+    #   `awswaf:managed:aws:anti-ddos:challengeable-request`.
+    #
+    #   * If usage is enabled:
+    #
+    #     * The managed rule group adds the label
+    #       `awswaf:managed:aws:anti-ddos:challengeable-request` to any web
+    #       request whose URL does *NOT* match the regular expressions
+    #       provided in the `ClientSideAction` setting
+    #       `ExemptUriRegularExpressions`.
+    #
+    #     * The two rules are evaluated against web requests for protected
+    #       resources that are experiencing a DDoS attack. The two rules
+    #       only apply their action to matching requests that have the label
+    #       `awswaf:managed:aws:anti-ddos:challengeable-request`.
+    #   * If usage is disabled:
+    #
+    #     * The managed rule group doesn't add the label
+    #       `awswaf:managed:aws:anti-ddos:challengeable-request` to any web
+    #       requests.
+    #
+    #     * The two rules are not evaluated.
+    #
+    #     * None of the other `ClientSideAction` settings have any effect.
+    #
+    #   <note markdown="1"> This setting only enables or disables the use of the two anti-DDOS
+    #   rules `ChallengeAllDuringEvent` and `ChallengeDDoSRequests` in the
+    #   anti-DDoS managed rule group.
+    #
+    #    This setting doesn't alter the action setting in the two rules. To
+    #   override the actions used by the rules `ChallengeAllDuringEvent` and
+    #   `ChallengeDDoSRequests`, enable this setting, and then override the
+    #   rule actions in the usual way, in your managed rule group
+    #   configuration.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] sensitivity
+    #   The sensitivity that the rule group rule `ChallengeDDoSRequests`
+    #   uses when matching against the DDoS suspicion labeling on a request.
+    #   The managed rule group adds the labeling during DDoS events, before
+    #   the `ChallengeDDoSRequests` rule runs.
+    #
+    #   The higher the sensitivity, the more levels of labeling that the
+    #   rule matches:
+    #
+    #   * Low sensitivity is less sensitive, causing the rule to match only
+    #     on the most likely participants in an attack, which are the
+    #     requests with the high suspicion label
+    #     `awswaf:managed:aws:anti-ddos:high-suspicion-ddos-request`.
+    #
+    #   * Medium sensitivity causes the rule to match on the medium and high
+    #     suspicion labels.
+    #
+    #   * High sensitivity causes the rule to match on all of the suspicion
+    #     labels: low, medium, and high.
+    #
+    #   Default: `HIGH`
+    #   @return [String]
+    #
+    # @!attribute [rw] exempt_uri_regular_expressions
+    #   The regular expression to match against the web request URI, used to
+    #   identify requests that can't handle a silent browser challenge.
+    #   When the `ClientSideAction` setting `UsageOfAction` is enabled, the
+    #   managed rule group uses this setting to determine which requests to
+    #   label with `awswaf:managed:aws:anti-ddos:challengeable-request`. If
+    #   `UsageOfAction` is disabled, this setting has no effect and the
+    #   managed rule group doesn't add the label to any requests.
+    #
+    #   The anti-DDoS managed rule group doesn't evaluate the rules
+    #   `ChallengeDDoSRequests` or `ChallengeAllDuringEvent` for web
+    #   requests whose URIs match this regex. This is true regardless of
+    #   whether you override the rule action for either of the rules in your
+    #   web ACL configuration.
+    #
+    #   Amazon Web Services recommends using a regular expression.
+    #
+    #   This setting is required if `UsageOfAction` is set to `ENABLED`. If
+    #   required, you can provide between 1 and 5 regex objects in the array
+    #   of settings.
+    #
+    #   Amazon Web Services recommends starting with the following setting.
+    #   Review and update it for your application's needs:
+    #
+    #   `\/api\/|\.(acc|avi|css|gif|jpe?g|js|mp[34]|ogg|otf|pdf|png|tiff?|ttf|webm|webp|woff2?)$`
+    #   @return [Array<Types::Regex>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ClientSideAction AWS API Documentation
+    #
+    class ClientSideAction < Struct.new(
+      :usage_of_action,
+      :sensitivity,
+      :exempt_uri_regular_expressions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This is part of the configuration for the managed rules
+    # `AWSManagedRulesAntiDDoSRuleSet` in `ManagedRuleGroupConfig`.
+    #
+    # @!attribute [rw] challenge
+    #   Configuration for the use of the `AWSManagedRulesAntiDDoSRuleSet`
+    #   rules `ChallengeAllDuringEvent` and `ChallengeDDoSRequests`.
+    #
+    #   <note markdown="1"> This setting isn't related to the configuration of the `Challenge`
+    #   action itself. It only configures the use of the two anti-DDoS rules
+    #   named here.
+    #
+    #    </note>
+    #
+    #   You can enable or disable the use of these rules, and you can
+    #   configure how to use them when they are enabled.
+    #   @return [Types::ClientSideAction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ClientSideActionConfig AWS API Documentation
+    #
+    class ClientSideActionConfig < Struct.new(
+      :challenge)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1512,6 +1761,15 @@ module Aws::WAFV2
     #   [1]: http://aws.amazon.com/waf/pricing/
     #   @return [Types::AssociationConfig]
     #
+    # @!attribute [rw] on_source_d_do_s_protection_config
+    #   Specifies the type of DDoS protection to apply to web request data
+    #   for a web ACL. For most scenarios, it is recommended to use the
+    #   default protection level, `ACTIVE_UNDER_DDOS`. If a web ACL is
+    #   associated with multiple Application Load Balancers, the changes you
+    #   make to DDoS protection in that web ACL will apply to all associated
+    #   Application Load Balancers.
+    #   @return [Types::OnSourceDDoSProtectionConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/CreateWebACLRequest AWS API Documentation
     #
     class CreateWebACLRequest < Struct.new(
@@ -1527,7 +1785,8 @@ module Aws::WAFV2
       :captcha_config,
       :challenge_config,
       :token_domains,
-      :association_config)
+      :association_config,
+      :on_source_d_do_s_protection_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2849,8 +3108,8 @@ module Aws::WAFV2
     #
     #  </note>
     #
-    # This configuration is used for GeoMatchStatement and
-    # RateBasedStatement. For IPSetReferenceStatement, use
+    # This configuration is used for GeoMatchStatement, AsnMatchStatement,
+    # and RateBasedStatement. For IPSetReferenceStatement, use
     # IPSetForwardedIPConfig instead.
     #
     # WAF only evaluates the first IP address found in the specified HTTP
@@ -3803,11 +4062,12 @@ module Aws::WAFV2
     # `host:user-agent:accept:authorization:referer`.
     #
     # @!attribute [rw] oversize_handling
-    #   What WAF should do if the headers of the request are more numerous
-    #   or larger than WAF can inspect. WAF does not support inspecting the
-    #   entire contents of request headers when they exceed 8 KB (8192
-    #   bytes) or 200 total headers. The underlying host service forwards a
-    #   maximum of 200 headers and at most 8 KB of header contents to WAF.
+    #   What WAF should do if the headers determined by your match scope are
+    #   more numerous or larger than WAF can inspect. WAF does not support
+    #   inspecting the entire contents of request headers when they exceed 8
+    #   KB (8192 bytes) or 200 total headers. The underlying host service
+    #   forwards a maximum of 200 headers and at most 8 KB of header
+    #   contents to WAF.
     #
     #   The options for oversize handling are the following:
     #
@@ -3866,11 +4126,12 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] oversize_handling
-    #   What WAF should do if the headers of the request are more numerous
-    #   or larger than WAF can inspect. WAF does not support inspecting the
-    #   entire contents of request headers when they exceed 8 KB (8192
-    #   bytes) or 200 total headers. The underlying host service forwards a
-    #   maximum of 200 headers and at most 8 KB of header contents to WAF.
+    #   What WAF should do if the headers determined by your match scope are
+    #   more numerous or larger than WAF can inspect. WAF does not support
+    #   inspecting the entire contents of request headers when they exceed 8
+    #   KB (8192 bytes) or 200 total headers. The underlying host service
+    #   forwards a maximum of 200 headers and at most 8 KB of header
+    #   contents to WAF.
     #
     #   The options for oversize handling are the following:
     #
@@ -5515,6 +5776,13 @@ module Aws::WAFV2
     #   your application and the locations in the account creation request
     #   payload of data, such as the user email and phone number fields.
     #
+    # * Use the `AWSManagedRulesAntiDDoSRuleSet` configuration object to
+    #   configure the anti-DDoS managed rule group. The configuration
+    #   includes the sensitivity levels to use in the rules that typically
+    #   block and challenge requests that might be participating in DDoS
+    #   attacks and the specification to use to indicate whether a request
+    #   can handle a silent browser challenge.
+    #
     # * Use the `AWSManagedRulesATPRuleSet` configuration object to
     #   configure the account takeover prevention managed rule group. The
     #   configuration includes the sign-in page of your application and the
@@ -5612,6 +5880,21 @@ module Aws::WAFV2
     #   [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-acfp.html
     #   @return [Types::AWSManagedRulesACFPRuleSet]
     #
+    # @!attribute [rw] aws_managed_rules_anti_d_do_s_rule_set
+    #   Additional configuration for using the anti-DDoS managed rule group,
+    #   `AWSManagedRulesAntiDDoSRuleSet`. Use this to configure anti-DDoS
+    #   behavior for the rule group.
+    #
+    #   For information about using the anti-DDoS managed rule group, see
+    #   [WAF Anti-DDoS rule group][1] and [Distributed Denial of Service
+    #   (DDoS) prevention][2] in the *WAF Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/aws-managed-rule-groups-anti-ddos.html
+    #   [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-anti-ddos.html
+    #   @return [Types::AWSManagedRulesAntiDDoSRuleSet]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ManagedRuleGroupConfig AWS API Documentation
     #
     class ManagedRuleGroupConfig < Struct.new(
@@ -5621,7 +5904,8 @@ module Aws::WAFV2
       :password_field,
       :aws_managed_rules_bot_control_rule_set,
       :aws_managed_rules_atp_rule_set,
-      :aws_managed_rules_acfp_rule_set)
+      :aws_managed_rules_acfp_rule_set,
+      :aws_managed_rules_anti_d_do_s_rule_set)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5701,6 +5985,13 @@ module Aws::WAFV2
     #     creation request payload of data, such as the user email and phone
     #     number fields.
     #
+    #   * Use the `AWSManagedRulesAntiDDoSRuleSet` configuration object to
+    #     configure the anti-DDoS managed rule group. The configuration
+    #     includes the sensitivity levels to use in the rules that typically
+    #     block and challenge requests that might be participating in DDoS
+    #     attacks and the specification to use to indicate whether a request
+    #     can handle a silent browser challenge.
+    #
     #   * Use the `AWSManagedRulesATPRuleSet` configuration object to
     #     configure the account takeover prevention managed rule group. The
     #     configuration includes the sign-in page of your application and
@@ -5717,10 +6008,12 @@ module Aws::WAFV2
     #   configured inside the rule group. You specify one override for each
     #   rule whose action you want to change.
     #
-    #   <note markdown="1"> Take care to verify the rule names in your overrides. If you provide
-    #   a rule name that doesn't match the name of any rule in the rule
-    #   group, WAF doesn't return an error and doesn't apply the override
-    #   setting.
+    #   <note markdown="1"> Verify the rule names in your overrides carefully. With managed rule
+    #   groups, WAF silently ignores any override that uses an invalid rule
+    #   name. With customer-owned rule groups, invalid rule names in your
+    #   overrides will cause web ACL updates to fail. An invalid rule name
+    #   is any name that doesn't exactly match the case-sensitive name of
+    #   an existing rule in the rule group.
     #
     #    </note>
     #
@@ -6122,6 +6415,31 @@ module Aws::WAFV2
     #
     class NotStatement < Struct.new(
       :statement)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configures the level of DDoS protection that applies to web ACLs
+    # associated with Application Load Balancers.
+    #
+    # @!attribute [rw] alb_low_reputation_mode
+    #   The level of DDoS protection that applies to web ACLs associated
+    #   with Application Load Balancers. `ACTIVE_UNDER_DDOS` protection is
+    #   enabled by default whenever a web ACL is associated with an
+    #   Application Load Balancer. In the event that an Application Load
+    #   Balancer experiences high-load conditions or suspected DDoS attacks,
+    #   the `ACTIVE_UNDER_DDOS` protection automatically rate limits traffic
+    #   from known low reputation sources without disrupting Application
+    #   Load Balancer availability. `ALWAYS_ON` protection provides
+    #   constant, always-on monitoring of known low reputation sources for
+    #   suspected DDoS attacks. While this provides a higher level of
+    #   protection, there may be potential impacts on legitimate traffic.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/OnSourceDDoSProtectionConfig AWS API Documentation
+    #
+    class OnSourceDDoSProtectionConfig < Struct.new(
+      :alb_low_reputation_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6747,6 +7065,12 @@ module Aws::WAFV2
     #   defines an aggregation instance.
     #   @return [Types::RateLimitJA4Fingerprint]
     #
+    # @!attribute [rw] asn
+    #   Use an Autonomous System Number (ASN) derived from the request's
+    #   originating or forwarded IP address as an aggregate key. Each
+    #   distinct ASN contributes to the aggregation instance.
+    #   @return [Types::RateLimitAsn]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RateBasedStatementCustomKey AWS API Documentation
     #
     class RateBasedStatementCustomKey < Struct.new(
@@ -6760,7 +7084,8 @@ module Aws::WAFV2
       :label_namespace,
       :uri_path,
       :ja3_fingerprint,
-      :ja4_fingerprint)
+      :ja4_fingerprint,
+      :asn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6799,6 +7124,18 @@ module Aws::WAFV2
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Specifies an Autonomous System Number (ASN) derived from the
+    # request's originating or forwarded IP address as an aggregate key for
+    # a rate-based rule. Each distinct ASN contributes to the aggregation
+    # instance. If you use a single ASN as your custom key, then each ASN
+    # fully defines an aggregation instance.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RateLimitAsn AWS API Documentation
+    #
+    class RateLimitAsn < Aws::EmptyStructure; end
 
     # Specifies a cookie as an aggregate key for a rate-based rule. Each
     # distinct value in the cookie contributes to the aggregation instance.
@@ -7081,7 +7418,9 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # A single regular expression. This is used in a RegexPatternSet.
+    # A single regular expression. This is used in a RegexPatternSet and
+    # also in the configuration for the Amazon Web Services Managed Rules
+    # rule group `AWSManagedRulesAntiDDoSRuleSet`.
     #
     # @!attribute [rw] regex_string
     #   The string representing the regular expression.
@@ -8164,10 +8503,12 @@ module Aws::WAFV2
     #   configured inside the rule group. You specify one override for each
     #   rule whose action you want to change.
     #
-    #   <note markdown="1"> Take care to verify the rule names in your overrides. If you provide
-    #   a rule name that doesn't match the name of any rule in the rule
-    #   group, WAF doesn't return an error and doesn't apply the override
-    #   setting.
+    #   <note markdown="1"> Verify the rule names in your overrides carefully. With managed rule
+    #   groups, WAF silently ignores any override that uses an invalid rule
+    #   name. With customer-owned rule groups, invalid rule names in your
+    #   overrides will cause web ACL updates to fail. An invalid rule name
+    #   is any name that doesn't exactly match the case-sensitive name of
+    #   an existing rule in the rule group.
     #
     #    </note>
     #
@@ -8786,6 +9127,19 @@ module Aws::WAFV2
     #   against a single regular expression.
     #   @return [Types::RegexMatchStatement]
     #
+    # @!attribute [rw] asn_match_statement
+    #   A rule statement that inspects web traffic based on the Autonomous
+    #   System Number (ASN) associated with the request's IP address.
+    #
+    #   For additional details, see [ASN match rule statement][1] in the
+    #   [WAF Developer Guide][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-statement-type-asn-match.html
+    #   [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    #   @return [Types::AsnMatchStatement]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/Statement AWS API Documentation
     #
     class Statement < Struct.new(
@@ -8803,7 +9157,8 @@ module Aws::WAFV2
       :not_statement,
       :managed_rule_group_statement,
       :label_match_statement,
-      :regex_match_statement)
+      :regex_match_statement,
+      :asn_match_statement)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9517,6 +9872,15 @@ module Aws::WAFV2
     #   [1]: http://aws.amazon.com/waf/pricing/
     #   @return [Types::AssociationConfig]
     #
+    # @!attribute [rw] on_source_d_do_s_protection_config
+    #   Specifies the type of DDoS protection to apply to web request data
+    #   for a web ACL. For most scenarios, it is recommended to use the
+    #   default protection level, `ACTIVE_UNDER_DDOS`. If a web ACL is
+    #   associated with multiple Application Load Balancers, the changes you
+    #   make to DDoS protection in that web ACL will apply to all associated
+    #   Application Load Balancers.
+    #   @return [Types::OnSourceDDoSProtectionConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/UpdateWebACLRequest AWS API Documentation
     #
     class UpdateWebACLRequest < Struct.new(
@@ -9533,7 +9897,8 @@ module Aws::WAFV2
       :captcha_config,
       :challenge_config,
       :token_domains,
-      :association_config)
+      :association_config,
+      :on_source_d_do_s_protection_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10311,6 +10676,11 @@ module Aws::WAFV2
     #   `PostProcessFirewallManagerRuleGroups`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] on_source_d_do_s_protection_config
+    #   Configures the level of DDoS protection that applies to web ACLs
+    #   associated with Application Load Balancers.
+    #   @return [Types::OnSourceDDoSProtectionConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/WebACL AWS API Documentation
     #
     class WebACL < Struct.new(
@@ -10332,7 +10702,8 @@ module Aws::WAFV2
       :challenge_config,
       :token_domains,
       :association_config,
-      :retrofitted_by_firewall_manager)
+      :retrofitted_by_firewall_manager,
+      :on_source_d_do_s_protection_config)
       SENSITIVE = []
       include Aws::Structure
     end

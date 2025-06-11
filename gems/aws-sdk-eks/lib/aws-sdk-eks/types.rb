@@ -252,12 +252,12 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] pod_identity_associations
-    #   An array of Pod Identity Assocations owned by the Addon. Each EKS
-    #   Pod Identity association maps a role to a service account in a
-    #   namespace in the cluster.
+    #   An array of EKS Pod Identity associations owned by the add-on. Each
+    #   association maps a role to a service account in a namespace in the
+    #   cluster.
     #
     #   For more information, see [Attach an IAM Role to an Amazon EKS
-    #   add-on using Pod Identity][1] in the *Amazon EKS User Guide*.
+    #   add-on using EKS Pod Identity][1] in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -388,13 +388,13 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # A type of Pod Identity Association owned by an Amazon EKS Add-on.
+    # A type of EKS Pod Identity association owned by an Amazon EKS add-on.
     #
-    # Each EKS Pod Identity Association maps a role to a service account in
-    # a namespace in the cluster.
+    # Each association maps a role to a service account in a namespace in
+    # the cluster.
     #
     # For more information, see [Attach an IAM Role to an Amazon EKS add-on
-    # using Pod Identity][1] in the *Amazon EKS User Guide*.
+    # using EKS Pod Identity][1] in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -417,14 +417,14 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # Information about how to configure IAM for an Addon.
+    # Information about how to configure IAM for an add-on.
     #
     # @!attribute [rw] service_account
-    #   The Kubernetes Service Account name used by the addon.
+    #   The Kubernetes Service Account name used by the add-on.
     #   @return [String]
     #
     # @!attribute [rw] recommended_managed_policies
-    #   A suggested IAM Policy for the addon.
+    #   A suggested IAM Policy for the add-on.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AddonPodIdentityConfiguration AWS API Documentation
@@ -447,7 +447,7 @@ module Aws::EKS
     #   @return [Array<String>]
     #
     # @!attribute [rw] compute_types
-    #   Indicates the compute type of the addon version.
+    #   Indicates the compute type of the add-on version.
     #   @return [Array<String>]
     #
     # @!attribute [rw] compatibilities
@@ -459,7 +459,7 @@ module Aws::EKS
     #   @return [Boolean]
     #
     # @!attribute [rw] requires_iam_permissions
-    #   Indicates if the Addon requires IAM Permissions to operate, such as
+    #   Indicates if the add-on requires IAM Permissions to operate, such as
     #   networking permissions.
     #   @return [Boolean]
     #
@@ -1525,12 +1525,11 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] pod_identity_associations
-    #   An array of Pod Identity Assocations to be created. Each EKS Pod
-    #   Identity association maps a Kubernetes service account to an IAM
-    #   Role.
+    #   An array of EKS Pod Identity associations to be created. Each
+    #   association maps a Kubernetes service account to an IAM role.
     #
     #   For more information, see [Attach an IAM Role to an Amazon EKS
-    #   add-on using Pod Identity][1] in the *Amazon EKS User Guide*.
+    #   add-on using EKS Pod Identity][1] in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -1680,8 +1679,8 @@ module Aws::EKS
     #   If you set this value to `False` when creating a cluster, the
     #   default networking add-ons will not be installed.
     #
-    #   The default networking addons include vpc-cni, coredns, and
-    #   kube-proxy.
+    #   The default networking add-ons include `vpc-cni`, `coredns`, and
+    #   `kube-proxy`.
     #
     #   Use this option when you plan to install third-party alternative
     #   add-ons or self-manage the default networking add-ons.
@@ -2169,13 +2168,14 @@ module Aws::EKS
     end
 
     # @!attribute [rw] cluster_name
-    #   The name of the cluster to create the association in.
+    #   The name of the cluster to create the EKS Pod Identity association
+    #   in.
     #   @return [String]
     #
     # @!attribute [rw] namespace
     #   The name of the Kubernetes namespace inside the cluster to create
-    #   the association in. The service account and the pods that use the
-    #   service account must be in this namespace.
+    #   the EKS Pod Identity association in. The service account and the
+    #   Pods that use the service account must be in this namespace.
     #   @return [String]
     #
     # @!attribute [rw] service_account
@@ -2186,7 +2186,7 @@ module Aws::EKS
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role to associate with the
     #   service account. The EKS Pod Identity agent manages credentials to
-    #   assume this role for applications in the containers in the pods that
+    #   assume this role for applications in the containers in the Pods that
     #   use this service account.
     #   @return [String]
     #
@@ -2230,6 +2230,53 @@ module Aws::EKS
     #     against your tags per resource limit.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] disable_session_tags
+    #   Disable the automatic sessions tags that are appended by EKS Pod
+    #   Identity.
+    #
+    #   EKS Pod Identity adds a pre-defined set of session tags when it
+    #   assumes the role. You can use these tags to author a single role
+    #   that can work across resources by allowing access to Amazon Web
+    #   Services resources based on matching tags. By default, EKS Pod
+    #   Identity attaches six tags, including tags for cluster name,
+    #   namespace, and service account name. For the list of tags added by
+    #   EKS Pod Identity, see [List of session tags added by EKS Pod
+    #   Identity][1] in the *Amazon EKS User Guide*.
+    #
+    #   Amazon Web Services compresses inline session policies, managed
+    #   policy ARNs, and session tags into a packed binary format that has a
+    #   separate limit. If you receive a `PackedPolicyTooLarge` error
+    #   indicating the packed binary format has exceeded the size limit, you
+    #   can attempt to reduce the size by disabling the session tags added
+    #   by EKS Pod Identity.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/pod-id-abac.html#pod-id-abac-tags
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] target_role_arn
+    #   The Amazon Resource Name (ARN) of the target IAM role to associate
+    #   with the service account. This role is assumed by using the EKS Pod
+    #   Identity association role, then the credentials for this role are
+    #   injected into the Pod.
+    #
+    #   When you run applications on Amazon EKS, your application might need
+    #   to access Amazon Web Services resources from a different role that
+    #   exists in the same or different Amazon Web Services account. For
+    #   example, your application running in “Account A” might need to
+    #   access resources, such as Amazon S3 buckets in “Account B” or within
+    #   “Account A” itself. You can create a association to access Amazon
+    #   Web Services resources in “Account B” by creating two IAM roles: a
+    #   role in “Account A” and a role in “Account B” (which can be the same
+    #   or different account), each with the necessary trust and permission
+    #   policies. After you provide these roles in the *IAM role* and
+    #   *Target IAM role* fields, EKS will perform role chaining to ensure
+    #   your application gets the required permissions. This means Role A
+    #   will assume Role B, allowing your Pods to securely access resources
+    #   like S3 buckets in the target account.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreatePodIdentityAssociationRequest AWS API Documentation
     #
     class CreatePodIdentityAssociationRequest < Struct.new(
@@ -2238,7 +2285,9 @@ module Aws::EKS
       :service_account,
       :role_arn,
       :client_request_token,
-      :tags)
+      :tags,
+      :disable_session_tags,
+      :target_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2593,9 +2642,9 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] pod_identity_configuration
-    #   The Kubernetes service account name used by the addon, and any
+    #   The Kubernetes service account name used by the add-on, and any
     #   suggested IAM policies. Use this information to create an IAM Role
-    #   for the Addon.
+    #   for the add-on.
     #   @return [Array<Types::AddonPodIdentityConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeAddonConfigurationResponse AWS API Documentation
@@ -5672,7 +5721,7 @@ module Aws::EKS
     #
     # @!attribute [rw] namespace
     #   The name of the Kubernetes namespace inside the cluster to create
-    #   the association in. The service account and the pods that use the
+    #   the association in. The service account and the Pods that use the
     #   service account must be in this namespace.
     #   @return [String]
     #
@@ -5684,7 +5733,7 @@ module Aws::EKS
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role to associate with the
     #   service account. The EKS Pod Identity agent manages credentials to
-    #   assume this role for applications in the containers in the pods that
+    #   assume this role for applications in the containers in the Pods that
     #   use this service account.
     #   @return [String]
     #
@@ -5733,12 +5782,55 @@ module Aws::EKS
     #   @return [Time]
     #
     # @!attribute [rw] modified_at
-    #   The most recent timestamp that the association was modified at
+    #   The most recent timestamp that the association was modified at.
     #   @return [Time]
     #
     # @!attribute [rw] owner_arn
-    #   If defined, the Pod Identity Association is owned by an Amazon EKS
-    #   Addon.
+    #   If defined, the EKS Pod Identity association is owned by an Amazon
+    #   EKS add-on.
+    #   @return [String]
+    #
+    # @!attribute [rw] disable_session_tags
+    #   The state of the automatic sessions tags. The value of *true*
+    #   disables these tags.
+    #
+    #   EKS Pod Identity adds a pre-defined set of session tags when it
+    #   assumes the role. You can use these tags to author a single role
+    #   that can work across resources by allowing access to Amazon Web
+    #   Services resources based on matching tags. By default, EKS Pod
+    #   Identity attaches six tags, including tags for cluster name,
+    #   namespace, and service account name. For the list of tags added by
+    #   EKS Pod Identity, see [List of session tags added by EKS Pod
+    #   Identity][1] in the *Amazon EKS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/pod-id-abac.html#pod-id-abac-tags
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] target_role_arn
+    #   The Amazon Resource Name (ARN) of the target IAM role to associate
+    #   with the service account. This role is assumed by using the EKS Pod
+    #   Identity association role, then the credentials for this role are
+    #   injected into the Pod.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_id
+    #   The unique identifier for this EKS Pod Identity association for a
+    #   target IAM role. You put this value in the trust policy of the
+    #   target role, in a `Condition` to match the `sts.ExternalId`. This
+    #   ensures that the target role can only be assumed by this
+    #   association. This prevents the *confused deputy problem*. For more
+    #   information about the confused deputy problem, see [The confused
+    #   deputy problem][1] in the *IAM User Guide*.
+    #
+    #   If you want to use the same target role with multiple associations
+    #   or other roles, use independent statements in the trust policy to
+    #   allow `sts:AssumeRole` access from each role.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/PodIdentityAssociation AWS API Documentation
@@ -5753,7 +5845,10 @@ module Aws::EKS
       :tags,
       :created_at,
       :modified_at,
-      :owner_arn)
+      :owner_arn,
+      :disable_session_tags,
+      :target_role_arn,
+      :external_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5782,7 +5877,7 @@ module Aws::EKS
     #
     # @!attribute [rw] namespace
     #   The name of the Kubernetes namespace inside the cluster to create
-    #   the association in. The service account and the pods that use the
+    #   the association in. The service account and the Pods that use the
     #   service account must be in this namespace.
     #   @return [String]
     #
@@ -5800,8 +5895,7 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] owner_arn
-    #   If defined, the Pod Identity Association is owned by an Amazon EKS
-    #   Addon.
+    #   If defined, the association is owned by an Amazon EKS add-on.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/PodIdentityAssociationSummary AWS API Documentation
@@ -5946,7 +6040,7 @@ module Aws::EKS
     #   It must satisfy the following requirements:
     #
     #   * Each block must be within an `IPv4` RFC-1918 network range.
-    #     Minimum allowed size is /24, maximum allowed size is /8.
+    #     Minimum allowed size is /32, maximum allowed size is /8.
     #     Publicly-routable addresses aren't supported.
     #
     #   * Each block cannot overlap with the range of the VPC CIDR blocks
@@ -5984,7 +6078,7 @@ module Aws::EKS
     #   It must satisfy the following requirements:
     #
     #   * Each block must be within an `IPv4` RFC-1918 network range.
-    #     Minimum allowed size is /24, maximum allowed size is /8.
+    #     Minimum allowed size is /32, maximum allowed size is /8.
     #     Publicly-routable addresses aren't supported.
     #
     #   * Each block cannot overlap with the range of the VPC CIDR blocks
@@ -6034,7 +6128,7 @@ module Aws::EKS
     # It must satisfy the following requirements:
     #
     # * Each block must be within an `IPv4` RFC-1918 network range. Minimum
-    #   allowed size is /24, maximum allowed size is /8. Publicly-routable
+    #   allowed size is /32, maximum allowed size is /8. Publicly-routable
     #   addresses aren't supported.
     #
     # * Each block cannot overlap with the range of the VPC CIDR blocks for
@@ -6067,7 +6161,7 @@ module Aws::EKS
     #   It must satisfy the following requirements:
     #
     #   * Each block must be within an `IPv4` RFC-1918 network range.
-    #     Minimum allowed size is /24, maximum allowed size is /8.
+    #     Minimum allowed size is /32, maximum allowed size is /8.
     #     Publicly-routable addresses aren't supported.
     #
     #   * Each block cannot overlap with the range of the VPC CIDR blocks
@@ -6112,7 +6206,7 @@ module Aws::EKS
     # It must satisfy the following requirements:
     #
     # * Each block must be within an `IPv4` RFC-1918 network range. Minimum
-    #   allowed size is /24, maximum allowed size is /8. Publicly-routable
+    #   allowed size is /32, maximum allowed size is /8. Publicly-routable
     #   addresses aren't supported.
     #
     # * Each block cannot overlap with the range of the VPC CIDR blocks for
@@ -6133,7 +6227,7 @@ module Aws::EKS
     #   It must satisfy the following requirements:
     #
     #   * Each block must be within an `IPv4` RFC-1918 network range.
-    #     Minimum allowed size is /24, maximum allowed size is /8.
+    #     Minimum allowed size is /32, maximum allowed size is /8.
     #     Publicly-routable addresses aren't supported.
     #
     #   * Each block cannot overlap with the range of the VPC CIDR blocks
@@ -6686,14 +6780,13 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] pod_identity_associations
-    #   An array of Pod Identity Assocations to be updated. Each EKS Pod
-    #   Identity association maps a Kubernetes service account to an IAM
-    #   Role. If this value is left blank, no change. If an empty array is
-    #   provided, existing Pod Identity Assocations owned by the Addon are
-    #   deleted.
+    #   An array of EKS Pod Identity associations to be updated. Each
+    #   association maps a Kubernetes service account to an IAM role. If
+    #   this value is left blank, no change. If an empty array is provided,
+    #   existing associations owned by the add-on are deleted.
     #
     #   For more information, see [Attach an IAM Role to an Amazon EKS
-    #   add-on using Pod Identity][1] in the *Amazon EKS User Guide*.
+    #   add-on using EKS Pod Identity][1] in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -7149,7 +7242,7 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The new IAM role to change the
+    #   The new IAM role to change in the association.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -7160,20 +7253,68 @@ module Aws::EKS
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] disable_session_tags
+    #   Disable the automatic sessions tags that are appended by EKS Pod
+    #   Identity.
+    #
+    #   EKS Pod Identity adds a pre-defined set of session tags when it
+    #   assumes the role. You can use these tags to author a single role
+    #   that can work across resources by allowing access to Amazon Web
+    #   Services resources based on matching tags. By default, EKS Pod
+    #   Identity attaches six tags, including tags for cluster name,
+    #   namespace, and service account name. For the list of tags added by
+    #   EKS Pod Identity, see [List of session tags added by EKS Pod
+    #   Identity][1] in the *Amazon EKS User Guide*.
+    #
+    #   Amazon Web Services compresses inline session policies, managed
+    #   policy ARNs, and session tags into a packed binary format that has a
+    #   separate limit. If you receive a `PackedPolicyTooLarge` error
+    #   indicating the packed binary format has exceeded the size limit, you
+    #   can attempt to reduce the size by disabling the session tags added
+    #   by EKS Pod Identity.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/pod-id-abac.html#pod-id-abac-tags
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] target_role_arn
+    #   The Amazon Resource Name (ARN) of the target IAM role to associate
+    #   with the service account. This role is assumed by using the EKS Pod
+    #   Identity association role, then the credentials for this role are
+    #   injected into the Pod.
+    #
+    #   When you run applications on Amazon EKS, your application might need
+    #   to access Amazon Web Services resources from a different role that
+    #   exists in the same or different Amazon Web Services account. For
+    #   example, your application running in “Account A” might need to
+    #   access resources, such as buckets in “Account B” or within “Account
+    #   A” itself. You can create a association to access Amazon Web
+    #   Services resources in “Account B” by creating two IAM roles: a role
+    #   in “Account A” and a role in “Account B” (which can be the same or
+    #   different account), each with the necessary trust and permission
+    #   policies. After you provide these roles in the *IAM role* and
+    #   *Target IAM role* fields, EKS will perform role chaining to ensure
+    #   your application gets the required permissions. This means Role A
+    #   will assume Role B, allowing your Pods to securely access resources
+    #   like S3 buckets in the target account.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdatePodIdentityAssociationRequest AWS API Documentation
     #
     class UpdatePodIdentityAssociationRequest < Struct.new(
       :cluster_name,
       :association_id,
       :role_arn,
-      :client_request_token)
+      :client_request_token,
+      :disable_session_tags,
+      :target_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] association
-    #   The full description of the EKS Pod Identity association that was
-    #   updated.
+    #   The full description of the association that was updated.
     #   @return [Types::PodIdentityAssociation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdatePodIdentityAssociationResponse AWS API Documentation
@@ -7303,8 +7444,10 @@ module Aws::EKS
     #   access, your cluster's Kubernetes API server can only receive
     #   requests from within the cluster VPC. The default value for this
     #   parameter is `true`, which enables public access for your Kubernetes
-    #   API server. For more information, see [Amazon EKS cluster endpoint
-    #   access control][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
+    #   API server. The endpoint domain name and IP address family depends
+    #   on the value of the `ipFamily` for the cluster. For more
+    #   information, see [Cluster API server endpoint][1] in the <i>
+    #   <i>Amazon EKS User Guide</i> </i>.
     #
     #
     #
@@ -7320,8 +7463,8 @@ module Aws::EKS
     #   server. If you disable private access and you have nodes or Fargate
     #   pods in the cluster, then ensure that `publicAccessCidrs` includes
     #   the necessary CIDR blocks for communication with the nodes or
-    #   Fargate pods. For more information, see [Amazon EKS cluster endpoint
-    #   access control][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
+    #   Fargate pods. For more information, see [Cluster API server
+    #   endpoint][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
     #
     #
     #
@@ -7332,11 +7475,16 @@ module Aws::EKS
     #   The CIDR blocks that are allowed access to your cluster's public
     #   Kubernetes API server endpoint. Communication to the endpoint from
     #   addresses outside of the CIDR blocks that you specify is denied. The
-    #   default value is `0.0.0.0/0`. If you've disabled private endpoint
-    #   access, make sure that you specify the necessary CIDR blocks for
-    #   every node and Fargate `Pod` in the cluster. For more information,
-    #   see [Amazon EKS cluster endpoint access control][1] in the <i>
-    #   <i>Amazon EKS User Guide</i> </i>.
+    #   default value is `0.0.0.0/0` and additionally `::/0` for dual-stack
+    #   `IPv6` clusters. If you've disabled private endpoint access, make
+    #   sure that you specify the necessary CIDR blocks for every node and
+    #   Fargate `Pod` in the cluster. For more information, see [Cluster API
+    #   server endpoint][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
+    #
+    #   Note that the public endpoints are dual-stack for only `IPv6`
+    #   clusters that are made after October 2024. You can't add `IPv6`
+    #   CIDR blocks to `IPv4` clusters or `IPv6` clusters that were made
+    #   before October 2024.
     #
     #
     #
@@ -7390,9 +7538,8 @@ module Aws::EKS
     #   the internet. If this value is disabled and you have nodes or
     #   Fargate pods in the cluster, then ensure that `publicAccessCidrs`
     #   includes the necessary CIDR blocks for communication with the nodes
-    #   or Fargate pods. For more information, see [Amazon EKS cluster
-    #   endpoint access control][1] in the <i> <i>Amazon EKS User Guide</i>
-    #   </i>.
+    #   or Fargate pods. For more information, see [Cluster API server
+    #   endpoint][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
     #
     #
     #
@@ -7401,7 +7548,22 @@ module Aws::EKS
     #
     # @!attribute [rw] public_access_cidrs
     #   The CIDR blocks that are allowed access to your cluster's public
-    #   Kubernetes API server endpoint.
+    #   Kubernetes API server endpoint. Communication to the endpoint from
+    #   addresses outside of the CIDR blocks that you specify is denied. The
+    #   default value is `0.0.0.0/0` and additionally `::/0` for dual-stack
+    #   `IPv6` clusters. If you've disabled private endpoint access, make
+    #   sure that you specify the necessary CIDR blocks for every node and
+    #   Fargate `Pod` in the cluster. For more information, see [Cluster API
+    #   server endpoint][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
+    #
+    #   Note that the public endpoints are dual-stack for only `IPv6`
+    #   clusters that are made after October 2024. You can't add `IPv6`
+    #   CIDR blocks to `IPv4` clusters or `IPv6` clusters that were made
+    #   before October 2024.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/VpcConfigResponse AWS API Documentation

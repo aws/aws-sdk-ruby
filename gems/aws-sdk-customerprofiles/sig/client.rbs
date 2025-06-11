@@ -135,6 +135,9 @@ module Aws
         def statistic: () -> ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE")
         def created_at: () -> ::Time
         def last_updated_at: () -> ::Time
+        def use_historical_data: () -> bool
+        def status: () -> ("PREPARING" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
+        def readiness: () -> Types::Readiness
         def tags: () -> ::Hash[::String, ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#create_calculated_attribute_definition-instance_method
@@ -153,8 +156,14 @@ module Aws
                                                     },
                                                     ?conditions: {
                                                       range: {
-                                                        value: ::Integer,
-                                                        unit: ("DAYS")
+                                                        value: ::Integer?,
+                                                        unit: ("DAYS")?,
+                                                        value_range: {
+                                                          start: ::Integer,
+                                                          end: ::Integer
+                                                        }?,
+                                                        timestamp_source: ::String?,
+                                                        timestamp_format: ::String?
                                                       }?,
                                                       object_count: ::Integer?,
                                                       threshold: {
@@ -179,6 +188,7 @@ module Aws
                                                       ]
                                                     },
                                                     statistic: ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE"),
+                                                    ?use_historical_data: bool,
                                                     ?tags: Hash[::String, ::String]
                                                   ) -> _CreateCalculatedAttributeDefinitionResponseSuccess
                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCalculatedAttributeDefinitionResponseSuccess
@@ -256,6 +266,32 @@ module Aws
                            ?tags: Hash[::String, ::String]
                          ) -> _CreateDomainResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainResponseSuccess
+
+      interface _CreateDomainLayoutResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDomainLayoutResponse]
+        def layout_definition_name: () -> ::String
+        def description: () -> ::String
+        def display_name: () -> ::String
+        def is_default: () -> bool
+        def layout_type: () -> ("PROFILE_EXPLORER")
+        def layout: () -> ::String
+        def version: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#create_domain_layout-instance_method
+      def create_domain_layout: (
+                                  domain_name: ::String,
+                                  layout_definition_name: ::String,
+                                  description: ::String,
+                                  display_name: ::String,
+                                  ?is_default: bool,
+                                  layout_type: ("PROFILE_EXPLORER"),
+                                  layout: ::String,
+                                  ?tags: Hash[::String, ::String]
+                                ) -> _CreateDomainLayoutResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainLayoutResponseSuccess
 
       interface _CreateEventStreamResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateEventStreamResponse]
@@ -957,6 +993,17 @@ module Aws
                          ) -> _DeleteDomainResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDomainResponseSuccess
 
+      interface _DeleteDomainLayoutResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDomainLayoutResponse]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#delete_domain_layout-instance_method
+      def delete_domain_layout: (
+                                  domain_name: ::String,
+                                  layout_definition_name: ::String
+                                ) -> _DeleteDomainLayoutResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDomainLayoutResponseSuccess
+
       interface _DeleteEventStreamResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEventStreamResponse]
       end
@@ -1103,6 +1150,9 @@ module Aws
         def filter: () -> Types::Filter
         def conditions: () -> Types::Conditions
         def attribute_details: () -> Types::AttributeDetails
+        def use_historical_data: () -> bool
+        def status: () -> ("PREPARING" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
+        def readiness: () -> Types::Readiness
         def tags: () -> ::Hash[::String, ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_calculated_attribute_definition-instance_method
@@ -1118,6 +1168,7 @@ module Aws
         def display_name: () -> ::String
         def is_data_partial: () -> ::String
         def value: () -> ::String
+        def last_object_timestamp: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_calculated_attribute_for_profile-instance_method
       def get_calculated_attribute_for_profile: (
@@ -1145,6 +1196,26 @@ module Aws
                         domain_name: ::String
                       ) -> _GetDomainResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainResponseSuccess
+
+      interface _GetDomainLayoutResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDomainLayoutResponse]
+        def layout_definition_name: () -> ::String
+        def description: () -> ::String
+        def display_name: () -> ::String
+        def is_default: () -> bool
+        def layout_type: () -> ("PROFILE_EXPLORER")
+        def layout: () -> ::String
+        def version: () -> ::String
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_domain_layout-instance_method
+      def get_domain_layout: (
+                               domain_name: ::String,
+                               layout_definition_name: ::String
+                             ) -> _GetDomainLayoutResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainLayoutResponseSuccess
 
       interface _GetEventStreamResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetEventStreamResponse]
@@ -1438,6 +1509,19 @@ module Aws
                                                     profile_id: ::String
                                                   ) -> _ListCalculatedAttributesForProfileResponseSuccess
                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCalculatedAttributesForProfileResponseSuccess
+
+      interface _ListDomainLayoutsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDomainLayoutsResponse]
+        def items: () -> ::Array[Types::LayoutItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#list_domain_layouts-instance_method
+      def list_domain_layouts: (
+                                 domain_name: ::String,
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer
+                               ) -> _ListDomainLayoutsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDomainLayoutsResponseSuccess
 
       interface _ListDomainsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDomainsResponse]
@@ -1798,7 +1882,7 @@ module Aws
                                        }],
                                      ?keys: Hash[::String, Array[
                                          {
-                                           standard_identifiers: Array[("PROFILE" | "ASSET" | "CASE" | "ORDER" | "COMMUNICATION_RECORD" | "UNIQUE" | "SECONDARY" | "LOOKUP_ONLY" | "NEW_ONLY")]?,
+                                           standard_identifiers: Array[("PROFILE" | "ASSET" | "CASE" | "ORDER" | "COMMUNICATION_RECORD" | "AIR_PREFERENCE" | "HOTEL_PREFERENCE" | "AIR_BOOKING" | "AIR_SEGMENT" | "HOTEL_RESERVATION" | "HOTEL_STAY_REVENUE" | "LOYALTY" | "LOYALTY_TRANSACTION" | "LOYALTY_PROMOTION" | "UNIQUE" | "SECONDARY" | "LOOKUP_ONLY" | "NEW_ONLY")]?,
                                            field_names: Array[::String]?
                                          },
                                        ]],
@@ -1858,6 +1942,9 @@ module Aws
         def statistic: () -> ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE")
         def conditions: () -> Types::Conditions
         def attribute_details: () -> Types::AttributeDetails
+        def use_historical_data: () -> bool
+        def status: () -> ("PREPARING" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
+        def readiness: () -> Types::Readiness
         def tags: () -> ::Hash[::String, ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#update_calculated_attribute_definition-instance_method
@@ -1868,8 +1955,14 @@ module Aws
                                                     ?description: ::String,
                                                     ?conditions: {
                                                       range: {
-                                                        value: ::Integer,
-                                                        unit: ("DAYS")
+                                                        value: ::Integer?,
+                                                        unit: ("DAYS")?,
+                                                        value_range: {
+                                                          start: ::Integer,
+                                                          end: ::Integer
+                                                        }?,
+                                                        timestamp_source: ::String?,
+                                                        timestamp_format: ::String?
                                                       }?,
                                                       object_count: ::Integer?,
                                                       threshold: {
@@ -1953,6 +2046,31 @@ module Aws
                            ?tags: Hash[::String, ::String]
                          ) -> _UpdateDomainResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainResponseSuccess
+
+      interface _UpdateDomainLayoutResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDomainLayoutResponse]
+        def layout_definition_name: () -> ::String
+        def description: () -> ::String
+        def display_name: () -> ::String
+        def is_default: () -> bool
+        def layout_type: () -> ("PROFILE_EXPLORER")
+        def layout: () -> ::String
+        def version: () -> ::String
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#update_domain_layout-instance_method
+      def update_domain_layout: (
+                                  domain_name: ::String,
+                                  layout_definition_name: ::String,
+                                  ?description: ::String,
+                                  ?display_name: ::String,
+                                  ?is_default: bool,
+                                  ?layout_type: ("PROFILE_EXPLORER"),
+                                  ?layout: ::String
+                                ) -> _UpdateDomainLayoutResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainLayoutResponseSuccess
 
       interface _UpdateEventTriggerResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEventTriggerResponse]

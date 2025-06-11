@@ -43,6 +43,10 @@ module Aws::Rekognition
     CelebrityRecognition = Shapes::StructureShape.new(name: 'CelebrityRecognition')
     CelebrityRecognitionSortBy = Shapes::StringShape.new(name: 'CelebrityRecognitionSortBy')
     CelebrityRecognitions = Shapes::ListShape.new(name: 'CelebrityRecognitions')
+    Challenge = Shapes::StructureShape.new(name: 'Challenge')
+    ChallengePreference = Shapes::StructureShape.new(name: 'ChallengePreference')
+    ChallengePreferences = Shapes::ListShape.new(name: 'ChallengePreferences')
+    ChallengeType = Shapes::StringShape.new(name: 'ChallengeType')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     CollectionId = Shapes::StringShape.new(name: 'CollectionId')
     CollectionIdList = Shapes::ListShape.new(name: 'CollectionIdList')
@@ -542,9 +546,11 @@ module Aws::Rekognition
     UserMatchList = Shapes::ListShape.new(name: 'UserMatchList')
     UserStatus = Shapes::StringShape.new(name: 'UserStatus')
     ValidationData = Shapes::StructureShape.new(name: 'ValidationData')
+    Version = Shapes::StringShape.new(name: 'Version')
     VersionDescription = Shapes::StringShape.new(name: 'VersionDescription')
     VersionName = Shapes::StringShape.new(name: 'VersionName')
     VersionNames = Shapes::ListShape.new(name: 'VersionNames')
+    Versions = Shapes::StructureShape.new(name: 'Versions')
     Video = Shapes::StructureShape.new(name: 'Video')
     VideoColorRange = Shapes::StringShape.new(name: 'VideoColorRange')
     VideoJobStatus = Shapes::StringShape.new(name: 'VideoJobStatus')
@@ -637,6 +643,16 @@ module Aws::Rekognition
     CelebrityRecognition.struct_class = Types::CelebrityRecognition
 
     CelebrityRecognitions.member = Shapes::ShapeRef.new(shape: CelebrityRecognition)
+
+    Challenge.add_member(:type, Shapes::ShapeRef.new(shape: ChallengeType, required: true, location_name: "Type"))
+    Challenge.add_member(:version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "Version"))
+    Challenge.struct_class = Types::Challenge
+
+    ChallengePreference.add_member(:type, Shapes::ShapeRef.new(shape: ChallengeType, required: true, location_name: "Type"))
+    ChallengePreference.add_member(:versions, Shapes::ShapeRef.new(shape: Versions, location_name: "Versions"))
+    ChallengePreference.struct_class = Types::ChallengePreference
+
+    ChallengePreferences.member = Shapes::ShapeRef.new(shape: ChallengePreference)
 
     CollectionIdList.member = Shapes::ShapeRef.new(shape: CollectionId)
 
@@ -747,6 +763,7 @@ module Aws::Rekognition
 
     CreateFaceLivenessSessionRequestSettings.add_member(:output_config, Shapes::ShapeRef.new(shape: LivenessOutputConfig, location_name: "OutputConfig"))
     CreateFaceLivenessSessionRequestSettings.add_member(:audit_images_limit, Shapes::ShapeRef.new(shape: AuditImagesLimit, location_name: "AuditImagesLimit"))
+    CreateFaceLivenessSessionRequestSettings.add_member(:challenge_preferences, Shapes::ShapeRef.new(shape: ChallengePreferences, location_name: "ChallengePreferences"))
     CreateFaceLivenessSessionRequestSettings.struct_class = Types::CreateFaceLivenessSessionRequestSettings
 
     CreateFaceLivenessSessionResponse.add_member(:session_id, Shapes::ShapeRef.new(shape: LivenessSessionId, required: true, location_name: "SessionId"))
@@ -1275,6 +1292,7 @@ module Aws::Rekognition
     GetFaceLivenessSessionResultsResponse.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
     GetFaceLivenessSessionResultsResponse.add_member(:reference_image, Shapes::ShapeRef.new(shape: AuditImage, location_name: "ReferenceImage"))
     GetFaceLivenessSessionResultsResponse.add_member(:audit_images, Shapes::ShapeRef.new(shape: AuditImages, location_name: "AuditImages"))
+    GetFaceLivenessSessionResultsResponse.add_member(:challenge, Shapes::ShapeRef.new(shape: Challenge, location_name: "Challenge"))
     GetFaceLivenessSessionResultsResponse.struct_class = Types::GetFaceLivenessSessionResultsResponse
 
     GetFaceSearchRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
@@ -2222,6 +2240,10 @@ module Aws::Rekognition
     ValidationData.struct_class = Types::ValidationData
 
     VersionNames.member = Shapes::ShapeRef.new(shape: VersionName)
+
+    Versions.add_member(:minimum, Shapes::ShapeRef.new(shape: Version, location_name: "Minimum"))
+    Versions.add_member(:maximum, Shapes::ShapeRef.new(shape: Version, location_name: "Maximum"))
+    Versions.struct_class = Types::Versions
 
     Video.add_member(:s3_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "S3Object"))
     Video.struct_class = Types::Video

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2025-06-11)
+------------------
+
+* Feature - Introduced ListControlMappings API that retrieves control mappings. Added control aliases and governed resources fields in GetControl and ListControls APIs. New filtering capability in ListControls API, with implementation identifiers and implementation types.
+
 1.25.0 (2025-06-02)
 ------------------
 

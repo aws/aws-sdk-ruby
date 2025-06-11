@@ -1153,6 +1153,7 @@ module Aws::BedrockAgentRuntime
       attr_accessor end_session: bool
       attr_accessor input_text: ::String
       attr_accessor memory_id: ::String
+      attr_accessor prompt_creation_configurations: Types::PromptCreationConfigurations
       attr_accessor session_id: ::String
       attr_accessor session_state: Types::SessionState
       attr_accessor source_arn: ::String
@@ -1203,6 +1204,7 @@ module Aws::BedrockAgentRuntime
       attr_accessor instruction: ::String
       attr_accessor knowledge_bases: ::Array[Types::KnowledgeBase]
       attr_accessor orchestration_type: ("DEFAULT" | "CUSTOM_ORCHESTRATION")
+      attr_accessor prompt_creation_configurations: Types::PromptCreationConfigurations
       attr_accessor prompt_override_configuration: Types::PromptOverrideConfiguration
       attr_accessor session_id: ::String
       attr_accessor streaming_configurations: Types::StreamingConfigurations
@@ -1664,6 +1666,12 @@ module Aws::BedrockAgentRuntime
       attr_accessor prompt_state: ("ENABLED" | "DISABLED")
       attr_accessor prompt_type: ("PRE_PROCESSING" | "ORCHESTRATION" | "KNOWLEDGE_BASE_RESPONSE_GENERATION" | "POST_PROCESSING" | "ROUTING_CLASSIFIER")
       SENSITIVE: [:base_prompt_template]
+    end
+
+    class PromptCreationConfigurations
+      attr_accessor exclude_previous_thinking_steps: bool
+      attr_accessor previous_conversation_turns_to_include: ::Integer
+      SENSITIVE: []
     end
 
     class PromptOverrideConfiguration

@@ -304,6 +304,9 @@ module Aws
                                        trace_status: ("ENABLED" | "DISABLED")?,
                                        custom_prompt: ::String?
                                      }?
+                                   }?,
+                                   nlu_improvement: {
+                                     enabled: bool
                                    }?
                                  }?,
                                  buildtime_settings: {
@@ -7566,6 +7569,9 @@ module Aws
                                        trace_status: ("ENABLED" | "DISABLED")?,
                                        custom_prompt: ::String?
                                      }?
+                                   }?,
+                                   nlu_improvement: {
+                                     enabled: bool
                                    }?
                                  }?,
                                  buildtime_settings: {

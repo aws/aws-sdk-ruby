@@ -11464,6 +11464,7 @@ module Aws
                                                   udp_timeout: ::Integer?
                                                 },
                                                 ?associate_public_ip_address: bool,
+                                                ?associated_subnet_ids: Array[::String],
                                                 ?dry_run: bool,
                                                 network_interface_id: ::String,
                                                 ?description: untyped,

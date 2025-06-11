@@ -129,7 +129,27 @@ module Aws::EC2
       data[:block_public_access_states]
     end
 
+    # Indicates if this is a subnet used with Amazon Elastic VMware Service
+    # (EVS). Possible values are `Elastic VMware Service` or no value. For
+    # more information about Amazon EVS, see [ *Amazon Elastic VMware
+    # Service API Reference* ][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/evs/latest/APIReference/Welcome.html
+    # @return [String]
+    def type
+      data[:type]
+    end
+
     # The current state of the subnet.
+    #
+    # * `failed`: The underlying infrastructure to support the subnet failed
+    #   to provision as expected.
+    #
+    # * `failed-insufficient-capacity`: The underlying infrastructure to
+    #   support the subnet failed to provision due to a shortage of EC2
+    #   instance capacity.
     # @return [String]
     def state
       data[:state]
@@ -1803,7 +1823,7 @@ module Aws::EC2
     #   * `interface-type` - The type of network interface
     #     (`api_gateway_managed` \| `aws_codestar_connections_managed` \|
     #     `branch` \| `ec2_instance_connect_endpoint` \| `efa` \| `efa-only`
-    #     \| `efs` \| `gateway_load_balancer` \|
+    #     \| `efs` \| `evs` \| `gateway_load_balancer` \|
     #     `gateway_load_balancer_endpoint` \| `global_accelerator_managed` \|
     #     `interface` \| `iot_rules_managed` \| `lambda` \| `load_balancer` \|
     #     `nat_gateway` \| `network_load_balancer` \| `quicksight` \|

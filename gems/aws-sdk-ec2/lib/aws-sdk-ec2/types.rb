@@ -828,6 +828,10 @@ module Aws::EC2
     #   (for example an EC2 instance).
     #   @return [String]
     #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet where the IP address is allocated.
+    #   @return [String]
+    #
     # @!attribute [rw] service_managed
     #   The service that manages the elastic IP address.
     #
@@ -859,6 +863,7 @@ module Aws::EC2
       :customer_owned_ip,
       :customer_owned_ipv_4_pool,
       :carrier_ip,
+      :subnet_id,
       :service_managed,
       :instance_id,
       :public_ip)
@@ -26177,7 +26182,7 @@ module Aws::EC2
     #   * `interface-type` - The type of network interface
     #     (`api_gateway_managed` \| `aws_codestar_connections_managed` \|
     #     `branch` \| `ec2_instance_connect_endpoint` \| `efa` \| `efa-only`
-    #     \| `efs` \| `gateway_load_balancer` \|
+    #     \| `efs` \| `evs` \| `gateway_load_balancer` \|
     #     `gateway_load_balancer_endpoint` \| `global_accelerator_managed`
     #     \| `interface` \| `iot_rules_managed` \| `lambda` \|
     #     `load_balancer` \| `nat_gateway` \| `network_load_balancer` \|
@@ -45438,7 +45443,7 @@ module Aws::EC2
     # @!attribute [rw] interface_type
     #   The type of network interface.
     #
-    #   Valid values: `interface` \| `efa` \| `efa-only` \| `trunk`
+    #   Valid values: `interface` \| `efa` \| `efa-only` \| `evs` \| `trunk`
     #   @return [String]
     #
     # @!attribute [rw] ipv_4_prefixes
@@ -55234,6 +55239,10 @@ module Aws::EC2
     #   will only apply to the primary network interface (eth0).
     #   @return [Boolean]
     #
+    # @!attribute [rw] associated_subnet_ids
+    #   A list of subnet IDs to associate with the network interface.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -55279,6 +55288,7 @@ module Aws::EC2
       :enable_primary_ipv_6,
       :connection_tracking_specification,
       :associate_public_ip_address,
+      :associated_subnet_ids,
       :dry_run,
       :network_interface_id,
       :description,
@@ -59320,6 +59330,10 @@ module Aws::EC2
     #   The service provider that manages the network interface.
     #   @return [Types::OperatorResponse]
     #
+    # @!attribute [rw] associated_subnets
+    #   The subnets associated with this network interface.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterface AWS API Documentation
     #
     class NetworkInterface < Struct.new(
@@ -59352,7 +59366,8 @@ module Aws::EC2
       :deny_all_igw_traffic,
       :ipv_6_native,
       :ipv_6_address,
-      :operator)
+      :operator,
+      :associated_subnets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -71684,12 +71699,30 @@ module Aws::EC2
     #   The state of VPC Block Public Access (BPA).
     #   @return [Types::BlockPublicAccessStates]
     #
+    # @!attribute [rw] type
+    #   Indicates if this is a subnet used with Amazon Elastic VMware
+    #   Service (EVS). Possible values are `Elastic VMware Service` or no
+    #   value. For more information about Amazon EVS, see [ *Amazon Elastic
+    #   VMware Service API Reference* ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/evs/latest/APIReference/Welcome.html
+    #   @return [String]
+    #
     # @!attribute [rw] subnet_id
     #   The ID of the subnet.
     #   @return [String]
     #
     # @!attribute [rw] state
     #   The current state of the subnet.
+    #
+    #   * `failed`: The underlying infrastructure to support the subnet
+    #     failed to provision as expected.
+    #
+    #   * `failed-insufficient-capacity`: The underlying infrastructure to
+    #     support the subnet failed to provision due to a shortage of EC2
+    #     instance capacity.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -71745,6 +71778,7 @@ module Aws::EC2
       :ipv_6_native,
       :private_dns_name_options_on_launch,
       :block_public_access_states,
+      :type,
       :subnet_id,
       :state,
       :vpc_id,

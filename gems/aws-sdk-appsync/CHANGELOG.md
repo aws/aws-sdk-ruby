@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.107.0 (2025-06-09)
+------------------
+
+* Feature - Deprecate `atRestEncryptionEnabled` and `transitEncryptionEnabled` attributes in `CreateApiCache` action. Encryption is always enabled for new caches.
+
 1.106.0 (2025-06-02)
 ------------------
 

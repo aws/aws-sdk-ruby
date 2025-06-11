@@ -1005,11 +1005,11 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
-    # Contains information about a condition evaluation result during an
-    # async execution. This event is generated when a condition node in the
-    # flow evaluates its conditions.
+    # Contains information about a condition evaluation result during a flow
+    # execution. This event is generated when a condition node in the flow
+    # evaluates its conditions.
     #
-    # <note markdown="1"> Asynchronous flows is in preview release for Amazon Bedrock and is
+    # <note markdown="1"> Flow executions is in preview release for Amazon Bedrock and is
     # subject to change.
     #
     #  </note>
@@ -1630,9 +1630,9 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
-    # Contains the content of an async execution input or output field.
+    # Contains the content of an flow execution input or output field.
     #
-    # <note markdown="1"> Asynchronous flows is in preview release for Amazon Bedrock and is
+    # <note markdown="1"> Flow executions is in preview release for Amazon Bedrock and is
     # subject to change.
     #
     #  </note>
@@ -1657,10 +1657,10 @@ module Aws::BedrockAgentRuntime
       class Unknown < FlowExecutionContent; end
     end
 
-    # Contains information about an error that occurred during an async
+    # Contains information about an error that occurred during an flow
     # execution.
     #
-    # <note markdown="1"> Asynchronous flows is in preview release for Amazon Bedrock and is
+    # <note markdown="1"> Flow executions is in preview release for Amazon Bedrock and is
     # subject to change.
     #
     #  </note>
@@ -1688,12 +1688,12 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
-    # Represents an event that occurred during an async execution. This is a
+    # Represents an event that occurred during an flow execution. This is a
     # union type that can contain one of several event types, such as node
     # input and output events; flow input and output events; condition node
     # result events, or failure events.
     #
-    # <note markdown="1"> Asynchronous flows is in preview release for Amazon Bedrock and is
+    # <note markdown="1"> Flow executions is in preview release for Amazon Bedrock and is
     # subject to change.
     #
     #  </note>
@@ -1702,8 +1702,8 @@ module Aws::BedrockAgentRuntime
     #
     # @!attribute [rw] condition_result_event
     #   Contains information about a condition evaluation result during the
-    #   async execution. This event is generated when a condition node in
-    #   the flow evaluates its conditions.
+    #   flow execution. This event is generated when a condition node in the
+    #   flow evaluates its conditions.
     #   @return [Types::ConditionResultEvent]
     #
     # @!attribute [rw] flow_failure_event
@@ -1762,9 +1762,9 @@ module Aws::BedrockAgentRuntime
     end
 
     # Contains information about the inputs provided to the flow at the
-    # start of async execution.
+    # start of a flow execution.
     #
-    # <note markdown="1"> Asynchronous flows is in preview release for Amazon Bedrock and is
+    # <note markdown="1"> Flow executions is in preview release for Amazon Bedrock and is
     # subject to change.
     #
     #  </note>
@@ -1791,10 +1791,10 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
-    # Contains information about the outputs produced by the flow during an
-    # async execution.
+    # Contains information about the outputs produced by the flow during a
+    # flow execution.
     #
-    # <note markdown="1"> Asynchronous flows is in preview release for Amazon Bedrock and is
+    # <note markdown="1"> Flow executions is in preview release for Amazon Bedrock and is
     # subject to change.
     #
     #  </note>
@@ -1821,26 +1821,26 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
-    # Contains summary information about a flow's async execution,
-    # including its status, timestamps, and identifiers.
+    # Contains summary information about a flow execution, including its
+    # status, timestamps, and identifiers.
     #
-    # <note markdown="1"> Asynchronous flows is in preview release for Amazon Bedrock and is
+    # <note markdown="1"> Flow executions is in preview release for Amazon Bedrock and is
     # subject to change.
     #
     #  </note>
     #
     # @!attribute [rw] created_at
-    #   The timestamp when the async execution was created.
+    #   The timestamp when the flow execution was created.
     #   @return [Time]
     #
     # @!attribute [rw] ended_at
-    #   The timestamp when the async execution ended. This field is only
+    #   The timestamp when the flow execution ended. This field is only
     #   populated when the execution has completed, failed, timed out, or
     #   been aborted.
     #   @return [Time]
     #
     # @!attribute [rw] execution_arn
-    #   The Amazon Resource Name (ARN) that uniquely identifies the async
+    #   The Amazon Resource Name (ARN) that uniquely identifies the flow
     #   execution.
     #   @return [String]
     #
@@ -1857,9 +1857,9 @@ module Aws::BedrockAgentRuntime
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The current status of the async execution.
+    #   The current status of the flow execution.
     #
-    #   Async executions time out after 24 hours.
+    #   Flow executions time out after 24 hours.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/FlowExecutionSummary AWS API Documentation
@@ -1877,9 +1877,9 @@ module Aws::BedrockAgentRuntime
     end
 
     # Contains information about a failure that occurred at the flow level
-    # during an async execution.
+    # during a flow execution.
     #
-    # <note markdown="1"> Asynchronous flows is in preview release for Amazon Bedrock and is
+    # <note markdown="1"> Flow executions is in preview release for Amazon Bedrock and is
     # subject to change.
     #
     #  </note>
@@ -1958,10 +1958,9 @@ module Aws::BedrockAgentRuntime
       class Unknown < FlowInputContent; end
     end
 
-    # Represents an input field provided to a flow during an async
-    # execution.
+    # Represents an input field provided to a flow during a flow execution.
     #
-    # <note markdown="1"> Asynchronous flows is in preview release for Amazon Bedrock and is
+    # <note markdown="1"> Flow executions is in preview release for Amazon Bedrock and is
     # subject to change.
     #
     #  </note>
@@ -2081,10 +2080,9 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
-    # Represents an output field produced by a flow during an async
-    # execution.
+    # Represents an output field produced by a flow during a flow execution.
     #
-    # <note markdown="1"> Asynchronous flows is in preview release for Amazon Bedrock and is
+    # <note markdown="1"> Flow executions is in preview release for Amazon Bedrock and is
     # subject to change.
     #
     #  </note>
@@ -2839,12 +2837,11 @@ module Aws::BedrockAgentRuntime
     end
 
     # @!attribute [rw] execution_identifier
-    #   The unique identifier of the async execution.
+    #   The unique identifier of the flow execution.
     #   @return [String]
     #
     # @!attribute [rw] flow_alias_identifier
-    #   The unique identifier of the flow alias used for the async
-    #   execution.
+    #   The unique identifier of the flow alias used for the flow execution.
     #   @return [String]
     #
     # @!attribute [rw] flow_identifier
@@ -2867,7 +2864,7 @@ module Aws::BedrockAgentRuntime
     #   @return [String]
     #
     # @!attribute [rw] definition
-    #   The flow definition used for the async execution, including the
+    #   The flow definition used for the flow execution, including the
     #   nodes, connections, and configuration at the time when the execution
     #   started.
     #
@@ -2881,12 +2878,11 @@ module Aws::BedrockAgentRuntime
     #
     # @!attribute [rw] execution_role_arn
     #   The Amazon Resource Name (ARN) of the IAM service role that's used
-    #   by the async execution.
+    #   by the flow execution.
     #   @return [String]
     #
     # @!attribute [rw] flow_alias_identifier
-    #   The unique identifier of the flow alias used for the async
-    #   execution.
+    #   The unique identifier of the flow alias used for the flow execution.
     #   @return [String]
     #
     # @!attribute [rw] flow_identifier
@@ -2894,7 +2890,7 @@ module Aws::BedrockAgentRuntime
     #   @return [String]
     #
     # @!attribute [rw] flow_version
-    #   The version of the flow used for the async execution.
+    #   The version of the flow used for the flow execution.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GetExecutionFlowSnapshotResponse AWS API Documentation
@@ -2911,7 +2907,7 @@ module Aws::BedrockAgentRuntime
     end
 
     # @!attribute [rw] execution_identifier
-    #   The unique identifier of the async execution to retrieve.
+    #   The unique identifier of the flow execution to retrieve.
     #   @return [String]
     #
     # @!attribute [rw] flow_alias_identifier
@@ -2933,19 +2929,19 @@ module Aws::BedrockAgentRuntime
     end
 
     # @!attribute [rw] ended_at
-    #   The timestamp when the async execution ended. This field is only
+    #   The timestamp when the flow execution ended. This field is only
     #   populated when the execution has completed, failed, timed out, or
     #   been aborted.
     #   @return [Time]
     #
     # @!attribute [rw] errors
-    #   A list of errors that occurred during the async execution. Each
-    #   error includes an error code, message, and the node where the error
+    #   A list of errors that occurred during the flow execution. Each error
+    #   includes an error code, message, and the node where the error
     #   occurred, if applicable.
     #   @return [Array<Types::FlowExecutionError>]
     #
     # @!attribute [rw] execution_arn
-    #   The Amazon Resource Name (ARN) that uniquely identifies the async
+    #   The Amazon Resource Name (ARN) that uniquely identifies the flow
     #   execution.
     #   @return [String]
     #
@@ -2962,13 +2958,13 @@ module Aws::BedrockAgentRuntime
     #   @return [String]
     #
     # @!attribute [rw] started_at
-    #   The timestamp when the async execution started.
+    #   The timestamp when the flow execution started.
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   The current status of the async execution.
+    #   The current status of the flow execution.
     #
-    #   Async executions time out after 24 hours.
+    #   Flow executions time out after 24 hours.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GetFlowExecutionResponse AWS API Documentation
@@ -4172,6 +4168,15 @@ module Aws::BedrockAgentRuntime
     #   The unique identifier of the agent memory.
     #   @return [String]
     #
+    # @!attribute [rw] prompt_creation_configurations
+    #   Specifies parameters that control how the service populates the
+    #   agent prompt for an `InvokeAgent` request. You can control which
+    #   aspects of previous invocations in the same agent session the
+    #   service uses to populate the agent prompt. This gives you more
+    #   granular control over the contextual history that is used to process
+    #   the current request.
+    #   @return [Types::PromptCreationConfigurations]
+    #
     # @!attribute [rw] session_id
     #   The unique identifier of the session. Use the same value across
     #   requests to continue the same conversation.
@@ -4214,6 +4219,7 @@ module Aws::BedrockAgentRuntime
       :end_session,
       :input_text,
       :memory_id,
+      :prompt_creation_configurations,
       :session_id,
       :session_state,
       :source_arn,
@@ -4436,6 +4442,15 @@ module Aws::BedrockAgentRuntime
     #   set to DEFAULT orchestration type, by default.
     #   @return [String]
     #
+    # @!attribute [rw] prompt_creation_configurations
+    #   Specifies parameters that control how the service populates the
+    #   agent prompt for an `InvokeInlineAgent` request. You can control
+    #   which aspects of previous invocations in the same agent session the
+    #   service uses to populate the agent prompt. This gives you more
+    #   granular control over the contextual history that is used to process
+    #   the current request.
+    #   @return [Types::PromptCreationConfigurations]
+    #
     # @!attribute [rw] prompt_override_configuration
     #   Configurations for advanced prompts used to override the default
     #   prompts to enhance the accuracy of the inline agent.
@@ -4476,6 +4491,7 @@ module Aws::BedrockAgentRuntime
       :instruction,
       :knowledge_bases,
       :orchestration_type,
+      :prompt_creation_configurations,
       :prompt_override_configuration,
       :session_id,
       :streaming_configurations)
@@ -4839,7 +4855,7 @@ module Aws::BedrockAgentRuntime
     #   @return [String]
     #
     # @!attribute [rw] execution_identifier
-    #   The unique identifier of the async execution.
+    #   The unique identifier of the flow execution.
     #   @return [String]
     #
     # @!attribute [rw] flow_alias_identifier
@@ -4876,9 +4892,9 @@ module Aws::BedrockAgentRuntime
     end
 
     # @!attribute [rw] flow_execution_events
-    #   A list of events that occurred during the async execution. Events
-    #   can include node inputs and outputs, flow inputs and outputs,
-    #   condition results, and failure events.
+    #   A list of events that occurred during the flow execution. Events can
+    #   include node inputs and outputs, flow inputs and outputs, condition
+    #   results, and failure events.
     #   @return [Array<Types::FlowExecutionEvent>]
     #
     # @!attribute [rw] next_token
@@ -4904,8 +4920,8 @@ module Aws::BedrockAgentRuntime
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of async executions to return in a single
-    #   response. If more executions exist than the specified maxResults
+    #   The maximum number of flow executions to return in a single
+    #   response. If more executions exist than the specified `maxResults`
     #   value, a token is included in the response so that the remaining
     #   results can be retrieved.
     #   @return [Integer]
@@ -4927,7 +4943,7 @@ module Aws::BedrockAgentRuntime
     end
 
     # @!attribute [rw] flow_execution_summaries
-    #   A list of async execution summaries. Each summary includes the
+    #   A list of flow execution summaries. Each summary includes the
     #   execution ARN, flow identifier, flow alias identifier, flow version,
     #   status, and timestamps.
     #   @return [Array<Types::FlowExecutionSummary>]
@@ -5408,10 +5424,10 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
-    # Contains the content of a flow node's input or output field for an
-    # async execution.
+    # Contains the content of a flow node's input or output field for a
+    # flow execution.
     #
-    # <note markdown="1"> Asynchronous flows is in preview release for Amazon Bedrock and is
+    # <note markdown="1"> Flow executions is in preview release for Amazon Bedrock and is
     # subject to change.
     #
     #  </note>
@@ -5437,9 +5453,9 @@ module Aws::BedrockAgentRuntime
     end
 
     # Contains information about a failure that occurred at a specific node
-    # during a flow's async execution.
+    # during a flow execution.
     #
-    # <note markdown="1"> Asynchronous flows is in preview release for Amazon Bedrock and is
+    # <note markdown="1"> Flow executions is in preview release for Amazon Bedrock and is
     # subject to change.
     #
     #  </note>
@@ -5473,9 +5489,9 @@ module Aws::BedrockAgentRuntime
     end
 
     # Contains information about the inputs provided to a specific node
-    # during a flow's async execution.
+    # during a flow execution.
     #
-    # <note markdown="1"> Asynchronous flows is in preview release for Amazon Bedrock and is
+    # <note markdown="1"> Flow executions is in preview release for Amazon Bedrock and is
     # subject to change.
     #
     #  </note>
@@ -5502,8 +5518,7 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
-    # Represents an input field provided to a node during a flow's async
-    # execution.
+    # Represents an input field provided to a node during a flow execution.
     #
     # @!attribute [rw] content
     #   The content of the input field, which can contain text or structured
@@ -5524,9 +5539,9 @@ module Aws::BedrockAgentRuntime
     end
 
     # Contains information about the outputs produced by a specific node
-    # during a flow's async execution.
+    # during a flow execution.
     #
-    # <note markdown="1"> Asynchronous flows is in preview release for Amazon Bedrock and is
+    # <note markdown="1"> Flow executions is in preview release for Amazon Bedrock and is
     # subject to change.
     #
     #  </note>
@@ -5553,10 +5568,9 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
-    # Represents an output field produced by a node during a flow's async
-    # execution.
+    # Represents an output field produced by a node during a flow execution.
     #
-    # <note markdown="1"> Asynchronous flows is in preview release for Amazon Bedrock and is
+    # <note markdown="1"> Flow executions is in preview release for Amazon Bedrock and is
     # subject to change.
     #
     #  </note>
@@ -6278,6 +6292,40 @@ module Aws::BedrockAgentRuntime
       :prompt_state,
       :prompt_type)
       SENSITIVE = [:base_prompt_template]
+      include Aws::Structure
+    end
+
+    # Specifies parameters that control how the service populates the agent
+    # prompt for an `InvokeAgent` or `InvokeInlineAgent` request. You can
+    # control which aspects of previous invocations in the same agent
+    # session the service uses to populate the agent prompt. This gives you
+    # more granular control over the contextual history that is used to
+    # process the current request.
+    #
+    # @!attribute [rw] exclude_previous_thinking_steps
+    #   If `true`, the service removes any content between `<thinking>` tags
+    #   from previous conversations in an agent session. The service will
+    #   only remove content from already processed turns. This helps you
+    #   remove content which might not be useful for current and subsequent
+    #   invocations. This can reduce the input token count and potentially
+    #   save costs. The default value is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] previous_conversation_turns_to_include
+    #   The number of previous conversations from the ongoing agent session
+    #   to include in the conversation history of the agent prompt, during
+    #   the current invocation. This gives you more granular control over
+    #   the context that the model is made aware of, and helps the model
+    #   remove older context which is no longer useful during the ongoing
+    #   agent session.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/PromptCreationConfigurations AWS API Documentation
+    #
+    class PromptCreationConfigurations < Struct.new(
+      :exclude_previous_thinking_steps,
+      :previous_conversation_turns_to_include)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7812,9 +7860,9 @@ module Aws::BedrockAgentRuntime
     end
 
     # Represents a condition that was satisfied during a condition node
-    # evaluation in a flow's async execution.
+    # evaluation in a flow execution.
     #
-    # <note markdown="1"> Asynchronous flows is in preview release for Amazon Bedrock and is
+    # <note markdown="1"> Flow executions is in preview release for Amazon Bedrock and is
     # subject to change.
     #
     #  </note>
@@ -8017,13 +8065,13 @@ module Aws::BedrockAgentRuntime
     end
 
     # @!attribute [rw] flow_alias_identifier
-    #   The unique identifier of the flow alias to use for the async
+    #   The unique identifier of the flow alias to use for the flow
     #   execution.
     #   @return [String]
     #
     # @!attribute [rw] flow_execution_name
-    #   The unique name for the async execution. If you don't provide one,
-    #   a system-generated name is used.
+    #   The unique name for the flow execution. If you don't provide one, a
+    #   system-generated name is used.
     #   @return [String]
     #
     # @!attribute [rw] flow_identifier
@@ -8031,12 +8079,12 @@ module Aws::BedrockAgentRuntime
     #   @return [String]
     #
     # @!attribute [rw] inputs
-    #   The input data required for the async execution. This must match the
+    #   The input data required for the flow execution. This must match the
     #   input schema defined in the flow.
     #   @return [Array<Types::FlowInput>]
     #
     # @!attribute [rw] model_performance_configuration
-    #   The performance settings for the foundation model used in the async
+    #   The performance settings for the foundation model used in the flow
     #   execution.
     #   @return [Types::ModelPerformanceConfiguration]
     #
@@ -8053,7 +8101,7 @@ module Aws::BedrockAgentRuntime
     end
 
     # @!attribute [rw] execution_arn
-    #   The Amazon Resource Name (ARN) that uniquely identifies the async
+    #   The Amazon Resource Name (ARN) that uniquely identifies the flow
     #   execution.
     #   @return [String]
     #
@@ -8066,7 +8114,7 @@ module Aws::BedrockAgentRuntime
     end
 
     # @!attribute [rw] execution_identifier
-    #   The unique identifier of the async execution to stop.
+    #   The unique identifier of the flow execution to stop.
     #   @return [String]
     #
     # @!attribute [rw] flow_alias_identifier
@@ -8088,12 +8136,12 @@ module Aws::BedrockAgentRuntime
     end
 
     # @!attribute [rw] execution_arn
-    #   The Amazon Resource Name (ARN) that uniquely identifies the async
+    #   The Amazon Resource Name (ARN) that uniquely identifies the flow
     #   execution that was stopped.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The updated status of the async execution after the stop request.
+    #   The updated status of the flow execution after the stop request.
     #   This will typically be ABORTED if the execution was successfully
     #   stopped.
     #   @return [String]

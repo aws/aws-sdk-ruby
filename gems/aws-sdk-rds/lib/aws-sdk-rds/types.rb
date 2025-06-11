@@ -1070,7 +1070,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be between 0 and 3600.
+    #   * Must be between 0 and 300.
     #
     #   ^
     #   @return [Integer]
@@ -1090,15 +1090,20 @@ module Aws::RDS
     #   specify one or more SQL statements for the proxy to run when opening
     #   each new database connection. The setting is typically used with
     #   `SET` statements to make sure that each connection has identical
-    #   settings. Make sure that the query you add is valid. To include
-    #   multiple variables in a single `SET` statement, use comma
-    #   separators.
+    #   settings. Make sure the query added here is valid. This is an
+    #   optional field, so you can choose to leave it empty. For including
+    #   multiple variables in a single SET statement, use a comma separator.
     #
     #   For example: `SET variable1=value1, variable2=value2`
     #
-    #   For multiple statements, use semicolons as the separator.
-    #
     #   Default: no initialization query
+    #
+    #   Since you can access initialization query as part of target group
+    #   configuration, it is not protected by authentication or
+    #   cryptographic methods. Anyone with access to view or manage your
+    #   proxy target group configuration can view the initialization query.
+    #   You should not add sensitive data, such as passwords or long-lived
+    #   encryption keys, to this option.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ConnectionPoolConfiguration AWS API Documentation
@@ -1152,12 +1157,20 @@ module Aws::RDS
     #
     # @!attribute [rw] init_query
     #   One or more SQL statements for the proxy to run when opening each
-    #   new database connection. Typically used with `SET` statements to
-    #   make sure that each connection has identical settings such as time
-    #   zone and character set. This setting is empty by default. For
-    #   multiple statements, use semicolons as the separator. You can also
-    #   include multiple variables in a single `SET` statement, such as `SET
-    #   x=1, y=2`.
+    #   new database connection. The setting is typically used with `SET`
+    #   statements to make sure that each connection has identical settings.
+    #   The query added here must be valid. For including multiple variables
+    #   in a single SET statement, use a comma separator. This is an
+    #   optional field.
+    #
+    #   For example: `SET variable1=value1, variable2=value2`
+    #
+    #   Since you can access initialization query as part of target group
+    #   configuration, it is not protected by authentication or
+    #   cryptographic methods. Anyone with access to view or manage your
+    #   proxy target group configuration can view the initialization query.
+    #   You should not add sensitive data, such as passwords or long-lived
+    #   encryption keys, to this option.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ConnectionPoolConfigurationInfo AWS API Documentation
@@ -4881,8 +4894,13 @@ module Aws::RDS
     # @!attribute [rw] source_db_instance_identifier
     #   The identifier of the DB instance that will act as the source for
     #   the read replica. Each DB instance can have up to 15 read replicas,
-    #   with the exception of Oracle and SQL Server, which can have up to
-    #   five.
+    #   except for the following engines:
+    #
+    #   * Db2 - Can have up to three replicas.
+    #
+    #   * Oracle - Can have up to five read replicas.
+    #
+    #   * SQL Server - Can have up to five read replicas.
     #
     #   Constraints:
     #
@@ -5000,6 +5018,16 @@ module Aws::RDS
     #   The name of the DB parameter group to associate with this read
     #   replica DB instance.
     #
+    #   For the Db2 DB engine, if your source DB instance uses the Bring
+    #   Your Own License model, then a custom parameter group must be
+    #   associated with the replica. For a same Amazon Web Services Region
+    #   replica, if you don't specify a custom parameter group, Amazon RDS
+    #   associates the custom parameter group associated with the source DB
+    #   instance. For a cross-Region replica, you must specify a custom
+    #   parameter group. This custom parameter group must include your IBM
+    #   Site ID and IBM Customer ID. For more information, see [ IBM IDs for
+    #   Bring Your Own License for Db2][1].
+    #
     #   For Single-AZ or Multi-AZ DB instance read replica instances, if you
     #   don't specify a value for `DBParameterGroupName`, then Amazon RDS
     #   uses the `DBParameterGroup` of the source DB instance for a same
@@ -5012,9 +5040,9 @@ module Aws::RDS
     #
     #   Specifying a parameter group for this operation is only supported
     #   for MySQL DB instances for cross-Region read replicas, for Multi-AZ
-    #   DB cluster read replica instances, and for Oracle DB instances. It
-    #   isn't supported for MySQL DB instances for same Region read
-    #   replicas or for RDS Custom.
+    #   DB cluster read replica instances, for Db2 DB instances, and for
+    #   Oracle DB instances. It isn't supported for MySQL DB instances for
+    #   same Region read replicas or for RDS Custom.
     #
     #   Constraints:
     #
@@ -5023,6 +5051,10 @@ module Aws::RDS
     #   * First character must be a letter.
     #
     #   * Can't end with a hyphen or contain two consecutive hyphens.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html#db2-prereqs-ibm-info
     #   @return [String]
     #
     # @!attribute [rw] publicly_accessible
@@ -5432,31 +5464,50 @@ module Aws::RDS
     #   @return [Array<String>]
     #
     # @!attribute [rw] replica_mode
-    #   The open mode of the replica database: mounted or read-only.
+    #   The open mode of the replica database.
     #
-    #   <note markdown="1"> This parameter is only supported for Oracle DB instances.
+    #   <note markdown="1"> This parameter is only supported for Db2 DB instances and Oracle DB
+    #   instances.
     #
     #    </note>
     #
-    #   Mounted DB replicas are included in Oracle Database Enterprise
-    #   Edition. The main use case for mounted replicas is cross-Region
-    #   disaster recovery. The primary database doesn't use Active Data
-    #   Guard to transmit information to the mounted replica. Because it
-    #   doesn't accept user connections, a mounted replica can't serve a
-    #   read-only workload.
+    #   Db2
     #
-    #   You can create a combination of mounted and read-only DB replicas
-    #   for the same primary DB instance. For more information, see [Working
-    #   with Oracle Read Replicas for Amazon RDS][1] in the *Amazon RDS User
-    #   Guide*.
+    #   : Standby DB replicas are included in Db2 Advanced Edition (AE) and
+    #     Db2 Standard Edition (SE). The main use case for standby replicas
+    #     is cross-Region disaster recovery. Because it doesn't accept user
+    #     connections, a standby replica can't serve a read-only workload.
     #
-    #   For RDS Custom, you must specify this parameter and set it to
-    #   `mounted`. The value won't be set by default. After replica
-    #   creation, you can manage the open mode manually.
+    #     You can create a combination of standby and read-only DB replicas
+    #     for the same primary DB instance. For more information, see
+    #     [Working with read replicas for Amazon RDS for Db2][1] in the
+    #     *Amazon RDS User Guide*.
+    #
+    #     To create standby DB replicas for RDS for Db2, set this parameter
+    #     to `mounted`.
+    #
+    #   Oracle
+    #
+    #   : Mounted DB replicas are included in Oracle Database Enterprise
+    #     Edition. The main use case for mounted replicas is cross-Region
+    #     disaster recovery. The primary database doesn't use Active Data
+    #     Guard to transmit information to the mounted replica. Because it
+    #     doesn't accept user connections, a mounted replica can't serve a
+    #     read-only workload.
+    #
+    #     You can create a combination of mounted and read-only DB replicas
+    #     for the same primary DB instance. For more information, see
+    #     [Working with read replicas for Amazon RDS for Oracle][2] in the
+    #     *Amazon RDS User Guide*.
+    #
+    #     For RDS Custom, you must specify this parameter and set it to
+    #     `mounted`. The value won't be set by default. After replica
+    #     creation, you can manage the open mode manually.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-replication.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
     #   @return [String]
     #
     # @!attribute [rw] max_allocated_storage
@@ -6031,17 +6082,17 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] compute_redundancy
-    #   Specifies whether to create standby DB shard groups for the DB shard
-    #   group. Valid values are the following:
+    #   Specifies whether to create standby standby DB data access shard for
+    #   the DB shard group. Valid values are the following:
     #
-    #   * 0 - Creates a DB shard group without a standby DB shard group.
-    #     This is the default value.
+    #   * 0 - Creates a DB shard group without a standby DB data access
+    #     shard. This is the default value.
     #
-    #   * 1 - Creates a DB shard group with a standby DB shard group in a
-    #     different Availability Zone (AZ).
+    #   * 1 - Creates a DB shard group with a standby DB data access shard
+    #     in a different Availability Zone (AZ).
     #
-    #   * 2 - Creates a DB shard group with two standby DB shard groups in
-    #     two different AZs.
+    #   * 2 - Creates a DB shard group with two standby DB data access shard
+    #     in two different AZs.
     #   @return [Integer]
     #
     # @!attribute [rw] max_acu
@@ -7220,6 +7271,12 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] global_cluster_identifier
+    #   Contains a user-supplied global database cluster identifier. This
+    #   identifier is the unique key that identifies a global database
+    #   cluster.
+    #   @return [String]
+    #
     # @!attribute [rw] global_write_forwarding_status
     #   The status of write forwarding for a secondary cluster in an Aurora
     #   global database.
@@ -7512,6 +7569,7 @@ module Aws::RDS
       :cross_account_clone,
       :domain_memberships,
       :tag_list,
+      :global_cluster_identifier,
       :global_write_forwarding_status,
       :global_write_forwarding_requested,
       :pending_modified_values,
@@ -9005,17 +9063,20 @@ module Aws::RDS
     #   @return [Array<String>]
     #
     # @!attribute [rw] replica_mode
-    #   The open mode of an Oracle read replica. The default is
-    #   `open-read-only`. For more information, see [Working with Oracle
-    #   Read Replicas for Amazon RDS][1] in the *Amazon RDS User Guide*.
+    #   The open mode of a Db2 or an Oracle read replica. The default is
+    #   `open-read-only`. For more information, see [Working with read
+    #   replicas for Amazon RDS for Db2][1] and [Working with read replicas
+    #   for Amazon RDS for Oracle][2] in the *Amazon RDS User Guide*.
     #
-    #   <note markdown="1"> This attribute is only supported in RDS for Oracle.
+    #   <note markdown="1"> This attribute is only supported in RDS for Db2, RDS for Oracle, and
+    #   RDS Custom for Oracle.
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-replication.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
     #   @return [String]
     #
     # @!attribute [rw] license_model
@@ -11432,7 +11493,10 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] subnets
-    #   Contains a list of `Subnet` elements.
+    #   Contains a list of `Subnet` elements. The list of subnets shown here
+    #   might not reflect the current state of your VPC. For the most
+    #   up-to-date information, we recommend checking your VPC configuration
+    #   directly.
     #   @return [Array<Types::Subnet>]
     #
     # @!attribute [rw] db_subnet_group_arn
@@ -19466,26 +19530,50 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] replica_mode
-    #   A value that sets the open mode of a replica database to either
-    #   mounted or read-only.
+    #   The open mode of a replica database.
     #
-    #   <note markdown="1"> Currently, this parameter is only supported for Oracle DB instances.
+    #   <note markdown="1"> This parameter is only supported for Db2 DB instances and Oracle DB
+    #   instances.
     #
     #    </note>
     #
-    #   Mounted DB replicas are included in Oracle Enterprise Edition. The
-    #   main use case for mounted replicas is cross-Region disaster
-    #   recovery. The primary database doesn't use Active Data Guard to
-    #   transmit information to the mounted replica. Because it doesn't
-    #   accept user connections, a mounted replica can't serve a read-only
-    #   workload. For more information, see [Working with Oracle Read
-    #   Replicas for Amazon RDS][1] in the *Amazon RDS User Guide*.
+    #   Db2
     #
-    #   This setting doesn't apply to RDS Custom DB instances.
+    #   : Standby DB replicas are included in Db2 Advanced Edition (AE) and
+    #     Db2 Standard Edition (SE). The main use case for standby replicas
+    #     is cross-Region disaster recovery. Because it doesn't accept user
+    #     connections, a standby replica can't serve a read-only workload.
+    #
+    #     You can create a combination of standby and read-only DB replicas
+    #     for the same primary DB instance. For more information, see
+    #     [Working with read replicas for Amazon RDS for Db2][1] in the
+    #     *Amazon RDS User Guide*.
+    #
+    #     To create standby DB replicas for RDS for Db2, set this parameter
+    #     to `mounted`.
+    #
+    #   Oracle
+    #
+    #   : Mounted DB replicas are included in Oracle Database Enterprise
+    #     Edition. The main use case for mounted replicas is cross-Region
+    #     disaster recovery. The primary database doesn't use Active Data
+    #     Guard to transmit information to the mounted replica. Because it
+    #     doesn't accept user connections, a mounted replica can't serve a
+    #     read-only workload.
+    #
+    #     You can create a combination of mounted and read-only DB replicas
+    #     for the same primary DB instance. For more information, see
+    #     [Working with read replicas for Amazon RDS for Oracle][2] in the
+    #     *Amazon RDS User Guide*.
+    #
+    #     For RDS Custom, you must specify this parameter and set it to
+    #     `mounted`. The value won't be set by default. After replica
+    #     creation, you can manage the open mode manually.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-replication.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
     #   @return [String]
     #
     # @!attribute [rw] enable_customer_owned_ip

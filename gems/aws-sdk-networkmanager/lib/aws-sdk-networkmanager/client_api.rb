@@ -660,6 +660,9 @@ module Aws::NetworkManager
     CoreNetworkChangeValues.add_member(:inside_cidr_blocks, Shapes::ShapeRef.new(shape: ConstrainedStringList, location_name: "InsideCidrBlocks"))
     CoreNetworkChangeValues.add_member(:shared_segments, Shapes::ShapeRef.new(shape: ConstrainedStringList, location_name: "SharedSegments"))
     CoreNetworkChangeValues.add_member(:service_insertion_actions, Shapes::ShapeRef.new(shape: ServiceInsertionActionList, location_name: "ServiceInsertionActions"))
+    CoreNetworkChangeValues.add_member(:vpn_ecmp_support, Shapes::ShapeRef.new(shape: Boolean, location_name: "VpnEcmpSupport"))
+    CoreNetworkChangeValues.add_member(:dns_support, Shapes::ShapeRef.new(shape: Boolean, location_name: "DnsSupport"))
+    CoreNetworkChangeValues.add_member(:security_group_referencing_support, Shapes::ShapeRef.new(shape: Boolean, location_name: "SecurityGroupReferencingSupport"))
     CoreNetworkChangeValues.struct_class = Types::CoreNetworkChangeValues
 
     CoreNetworkEdge.add_member(:edge_location, Shapes::ShapeRef.new(shape: ExternalRegionCode, location_name: "EdgeLocation"))
@@ -1846,6 +1849,8 @@ module Aws::NetworkManager
 
     VpcOptions.add_member(:ipv_6_support, Shapes::ShapeRef.new(shape: Boolean, location_name: "Ipv6Support"))
     VpcOptions.add_member(:appliance_mode_support, Shapes::ShapeRef.new(shape: Boolean, location_name: "ApplianceModeSupport"))
+    VpcOptions.add_member(:dns_support, Shapes::ShapeRef.new(shape: Boolean, location_name: "DnsSupport"))
+    VpcOptions.add_member(:security_group_referencing_support, Shapes::ShapeRef.new(shape: Boolean, location_name: "SecurityGroupReferencingSupport"))
     VpcOptions.struct_class = Types::VpcOptions
 
     WhenSentTo.add_member(:when_sent_to_segments_list, Shapes::ShapeRef.new(shape: WhenSentToSegmentsList, location_name: "WhenSentToSegmentsList"))

@@ -397,6 +397,8 @@ module Aws::BedrockAgentRuntime
     PreProcessingTrace = Shapes::UnionShape.new(name: 'PreProcessingTrace')
     PromptConfiguration = Shapes::StructureShape.new(name: 'PromptConfiguration')
     PromptConfigurations = Shapes::ListShape.new(name: 'PromptConfigurations')
+    PromptCreationConfigurations = Shapes::StructureShape.new(name: 'PromptCreationConfigurations')
+    PromptCreationConfigurationsPreviousConversationTurnsToIncludeInteger = Shapes::IntegerShape.new(name: 'PromptCreationConfigurationsPreviousConversationTurnsToIncludeInteger')
     PromptOverrideConfiguration = Shapes::StructureShape.new(name: 'PromptOverrideConfiguration')
     PromptSessionAttributesMap = Shapes::MapShape.new(name: 'PromptSessionAttributesMap')
     PromptState = Shapes::StringShape.new(name: 'PromptState')
@@ -1445,6 +1447,7 @@ module Aws::BedrockAgentRuntime
     InvokeAgentRequest.add_member(:end_session, Shapes::ShapeRef.new(shape: Boolean, location_name: "endSession"))
     InvokeAgentRequest.add_member(:input_text, Shapes::ShapeRef.new(shape: InputText, location_name: "inputText"))
     InvokeAgentRequest.add_member(:memory_id, Shapes::ShapeRef.new(shape: MemoryId, location_name: "memoryId"))
+    InvokeAgentRequest.add_member(:prompt_creation_configurations, Shapes::ShapeRef.new(shape: PromptCreationConfigurations, location_name: "promptCreationConfigurations"))
     InvokeAgentRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, required: true, location: "uri", location_name: "sessionId"))
     InvokeAgentRequest.add_member(:session_state, Shapes::ShapeRef.new(shape: SessionState, location_name: "sessionState"))
     InvokeAgentRequest.add_member(:source_arn, Shapes::ShapeRef.new(shape: AWSResourceARN, location: "header", location_name: "x-amz-source-arn"))
@@ -1491,6 +1494,7 @@ module Aws::BedrockAgentRuntime
     InvokeInlineAgentRequest.add_member(:instruction, Shapes::ShapeRef.new(shape: Instruction, required: true, location_name: "instruction"))
     InvokeInlineAgentRequest.add_member(:knowledge_bases, Shapes::ShapeRef.new(shape: KnowledgeBases, location_name: "knowledgeBases"))
     InvokeInlineAgentRequest.add_member(:orchestration_type, Shapes::ShapeRef.new(shape: OrchestrationType, location_name: "orchestrationType"))
+    InvokeInlineAgentRequest.add_member(:prompt_creation_configurations, Shapes::ShapeRef.new(shape: PromptCreationConfigurations, location_name: "promptCreationConfigurations"))
     InvokeInlineAgentRequest.add_member(:prompt_override_configuration, Shapes::ShapeRef.new(shape: PromptOverrideConfiguration, location_name: "promptOverrideConfiguration"))
     InvokeInlineAgentRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, required: true, location: "uri", location_name: "sessionId"))
     InvokeInlineAgentRequest.add_member(:streaming_configurations, Shapes::ShapeRef.new(shape: StreamingConfigurations, location_name: "streamingConfigurations"))
@@ -1847,6 +1851,10 @@ module Aws::BedrockAgentRuntime
     PromptConfiguration.struct_class = Types::PromptConfiguration
 
     PromptConfigurations.member = Shapes::ShapeRef.new(shape: PromptConfiguration)
+
+    PromptCreationConfigurations.add_member(:exclude_previous_thinking_steps, Shapes::ShapeRef.new(shape: Boolean, location_name: "excludePreviousThinkingSteps"))
+    PromptCreationConfigurations.add_member(:previous_conversation_turns_to_include, Shapes::ShapeRef.new(shape: PromptCreationConfigurationsPreviousConversationTurnsToIncludeInteger, location_name: "previousConversationTurnsToInclude"))
+    PromptCreationConfigurations.struct_class = Types::PromptCreationConfigurations
 
     PromptOverrideConfiguration.add_member(:override_lambda, Shapes::ShapeRef.new(shape: LambdaResourceArn, location_name: "overrideLambda"))
     PromptOverrideConfiguration.add_member(:prompt_configurations, Shapes::ShapeRef.new(shape: PromptConfigurations, required: true, location_name: "promptConfigurations"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2025-06-09)
+------------------
+
+* Feature - Add ConflictException to UpdateEnvironment API
+
 1.27.0 (2025-06-02)
 ------------------
 

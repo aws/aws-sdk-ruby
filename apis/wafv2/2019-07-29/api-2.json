@@ -930,6 +930,11 @@
       "type":"integer",
       "min":0
     },
+    "ASN":{
+      "type":"long",
+      "max":4294967295,
+      "min":0
+    },
     "AWSManagedRulesACFPRuleSet":{
       "type":"structure",
       "required":[
@@ -953,6 +958,14 @@
         "RequestInspection":{"shape":"RequestInspection"},
         "ResponseInspection":{"shape":"ResponseInspection"},
         "EnableRegexInPath":{"shape":"Boolean"}
+      }
+    },
+    "AWSManagedRulesAntiDDoSRuleSet":{
+      "type":"structure",
+      "required":["ClientSideActionConfig"],
+      "members":{
+        "ClientSideActionConfig":{"shape":"ClientSideActionConfig"},
+        "SensitivityToBlock":{"shape":"SensitivityToAct"}
       }
     },
     "AWSManagedRulesBotControlRuleSet":{
@@ -995,13 +1008,11 @@
     },
     "All":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "AllQueryArguments":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "AllowAction":{
       "type":"structure",
@@ -1014,6 +1025,20 @@
       "required":["Statements"],
       "members":{
         "Statements":{"shape":"Statements"}
+      }
+    },
+    "AsnList":{
+      "type":"list",
+      "member":{"shape":"ASN"},
+      "max":100,
+      "min":1
+    },
+    "AsnMatchStatement":{
+      "type":"structure",
+      "required":["AsnList"],
+      "members":{
+        "AsnList":{"shape":"AsnList"},
+        "ForwardedIPConfig":{"shape":"ForwardedIPConfig"}
       }
     },
     "AssociateWebACLRequest":{
@@ -1029,8 +1054,7 @@
     },
     "AssociateWebACLResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "AssociatedResourceType":{
       "type":"string",
@@ -1143,6 +1167,22 @@
       "type":"structure",
       "members":{
         "Capacity":{"shape":"ConsumedCapacity"}
+      }
+    },
+    "ClientSideAction":{
+      "type":"structure",
+      "required":["UsageOfAction"],
+      "members":{
+        "UsageOfAction":{"shape":"UsageOfAction"},
+        "Sensitivity":{"shape":"SensitivityToAct"},
+        "ExemptUriRegularExpressions":{"shape":"RegularExpressionList"}
+      }
+    },
+    "ClientSideActionConfig":{
+      "type":"structure",
+      "required":["Challenge"],
+      "members":{
+        "Challenge":{"shape":"ClientSideAction"}
       }
     },
     "ComparisonOperator":{
@@ -1573,7 +1613,8 @@
         "CaptchaConfig":{"shape":"CaptchaConfig"},
         "ChallengeConfig":{"shape":"ChallengeConfig"},
         "TokenDomains":{"shape":"TokenDomains"},
-        "AssociationConfig":{"shape":"AssociationConfig"}
+        "AssociationConfig":{"shape":"AssociationConfig"},
+        "OnSourceDDoSProtectionConfig":{"shape":"OnSourceDDoSProtectionConfig"}
       }
     },
     "CreateWebACLResponse":{
@@ -1702,8 +1743,7 @@
     },
     "DeleteAPIKeyResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DeleteFirewallManagerRuleGroupsRequest":{
       "type":"structure",
@@ -1739,8 +1779,7 @@
     },
     "DeleteIPSetResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DeleteLoggingConfigurationRequest":{
       "type":"structure",
@@ -1753,8 +1792,7 @@
     },
     "DeleteLoggingConfigurationResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DeletePermissionPolicyRequest":{
       "type":"structure",
@@ -1765,8 +1803,7 @@
     },
     "DeletePermissionPolicyResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DeleteRegexPatternSetRequest":{
       "type":"structure",
@@ -1785,8 +1822,7 @@
     },
     "DeleteRegexPatternSetResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DeleteRuleGroupRequest":{
       "type":"structure",
@@ -1805,8 +1841,7 @@
     },
     "DeleteRuleGroupResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DeleteWebACLRequest":{
       "type":"structure",
@@ -1825,8 +1860,7 @@
     },
     "DeleteWebACLResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DescribeAllManagedProductsRequest":{
       "type":"structure",
@@ -1893,8 +1927,7 @@
     },
     "DisassociateWebACLResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DownloadUrl":{"type":"string"},
     "EmailField":{
@@ -2877,6 +2910,13 @@
       "min":1,
       "pattern":".*\\S.*"
     },
+    "LowReputationMode":{
+      "type":"string",
+      "enum":[
+        "ACTIVE_UNDER_DDOS",
+        "ALWAYS_ON"
+      ]
+    },
     "ManagedProductDescriptor":{
       "type":"structure",
       "members":{
@@ -2920,7 +2960,8 @@
         },
         "AWSManagedRulesBotControlRuleSet":{"shape":"AWSManagedRulesBotControlRuleSet"},
         "AWSManagedRulesATPRuleSet":{"shape":"AWSManagedRulesATPRuleSet"},
-        "AWSManagedRulesACFPRuleSet":{"shape":"AWSManagedRulesACFPRuleSet"}
+        "AWSManagedRulesACFPRuleSet":{"shape":"AWSManagedRulesACFPRuleSet"},
+        "AWSManagedRulesAntiDDoSRuleSet":{"shape":"AWSManagedRulesAntiDDoSRuleSet"}
       }
     },
     "ManagedRuleGroupConfigs":{
@@ -3020,8 +3061,7 @@
     },
     "Method":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "MetricName":{
       "type":"string",
@@ -3046,14 +3086,20 @@
     },
     "NoneAction":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "NotStatement":{
       "type":"structure",
       "required":["Statement"],
       "members":{
         "Statement":{"shape":"Statement"}
+      }
+    },
+    "OnSourceDDoSProtectionConfig":{
+      "type":"structure",
+      "required":["ALBLowReputationMode"],
+      "members":{
+        "ALBLowReputationMode":{"shape":"LowReputationMode"}
       }
     },
     "OrStatement":{
@@ -3157,7 +3203,8 @@
         "SCOPE_DOWN",
         "CUSTOM_KEYS",
         "ACP_RULE_SET_RESPONSE_INSPECTION",
-        "DATA_PROTECTION_CONFIG"
+        "DATA_PROTECTION_CONFIG",
+        "LOW_REPUTATION_MODE"
       ]
     },
     "ParameterExceptionParameter":{
@@ -3289,13 +3336,11 @@
     },
     "PutPermissionPolicyResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "QueryString":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "RateBasedStatement":{
       "type":"structure",
@@ -3334,7 +3379,8 @@
         "LabelNamespace":{"shape":"RateLimitLabelNamespace"},
         "UriPath":{"shape":"RateLimitUriPath"},
         "JA3Fingerprint":{"shape":"RateLimitJA3Fingerprint"},
-        "JA4Fingerprint":{"shape":"RateLimitJA4Fingerprint"}
+        "JA4Fingerprint":{"shape":"RateLimitJA4Fingerprint"},
+        "ASN":{"shape":"RateLimitAsn"}
       }
     },
     "RateBasedStatementCustomKeys":{
@@ -3354,6 +3400,10 @@
       "max":2000000000,
       "min":10
     },
+    "RateLimitAsn":{
+      "type":"structure",
+      "members":{}
+    },
     "RateLimitCookie":{
       "type":"structure",
       "required":[
@@ -3367,13 +3417,11 @@
     },
     "RateLimitForwardedIP":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "RateLimitHTTPMethod":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "RateLimitHeader":{
       "type":"structure",
@@ -3388,8 +3436,7 @@
     },
     "RateLimitIP":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "RateLimitJA3Fingerprint":{
       "type":"structure",
@@ -3870,6 +3917,14 @@
         "HIGH"
       ]
     },
+    "SensitivityToAct":{
+      "type":"string",
+      "enum":[
+        "LOW",
+        "MEDIUM",
+        "HIGH"
+      ]
+    },
     "SingleCookieName":{
       "type":"string",
       "max":60,
@@ -3950,7 +4005,8 @@
         "NotStatement":{"shape":"NotStatement"},
         "ManagedRuleGroupStatement":{"shape":"ManagedRuleGroupStatement"},
         "LabelMatchStatement":{"shape":"LabelMatchStatement"},
-        "RegexMatchStatement":{"shape":"RegexMatchStatement"}
+        "RegexMatchStatement":{"shape":"RegexMatchStatement"},
+        "AsnMatchStatement":{"shape":"AsnMatchStatement"}
       }
     },
     "Statements":{
@@ -4016,8 +4072,7 @@
     },
     "TagResourceResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "TagValue":{
       "type":"string",
@@ -4116,8 +4171,7 @@
     },
     "UntagResourceResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "UpdateIPSetRequest":{
       "type":"structure",
@@ -4244,7 +4298,8 @@
         "CaptchaConfig":{"shape":"CaptchaConfig"},
         "ChallengeConfig":{"shape":"ChallengeConfig"},
         "TokenDomains":{"shape":"TokenDomains"},
-        "AssociationConfig":{"shape":"AssociationConfig"}
+        "AssociationConfig":{"shape":"AssociationConfig"},
+        "OnSourceDDoSProtectionConfig":{"shape":"OnSourceDDoSProtectionConfig"}
       }
     },
     "UpdateWebACLResponse":{
@@ -4261,8 +4316,14 @@
     },
     "UriPath":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
+    },
+    "UsageOfAction":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED"
+      ]
     },
     "UsernameField":{
       "type":"structure",
@@ -4475,7 +4536,8 @@
         "ChallengeConfig":{"shape":"ChallengeConfig"},
         "TokenDomains":{"shape":"TokenDomains"},
         "AssociationConfig":{"shape":"AssociationConfig"},
-        "RetrofittedByFirewallManager":{"shape":"Boolean"}
+        "RetrofittedByFirewallManager":{"shape":"Boolean"},
+        "OnSourceDDoSProtectionConfig":{"shape":"OnSourceDDoSProtectionConfig"}
       }
     },
     "WebACLSummaries":{

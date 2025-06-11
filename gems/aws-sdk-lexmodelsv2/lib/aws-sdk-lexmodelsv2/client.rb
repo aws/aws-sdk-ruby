@@ -1110,6 +1110,9 @@ module Aws::LexModelsV2
     #             custom_prompt: "BedrockModelCustomPrompt",
     #           },
     #         },
+    #         nlu_improvement: {
+    #           enabled: false, # required
+    #         },
     #       },
     #       buildtime_settings: {
     #         descriptive_bot_builder: {
@@ -1158,6 +1161,7 @@ module Aws::LexModelsV2
     #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.guardrail.version #=> String
     #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.trace_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.custom_prompt #=> String
+    #   resp.generative_ai_settings.runtime_settings.nlu_improvement.enabled #=> Boolean
     #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.enabled #=> Boolean
     #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.bedrock_model_specification.model_arn #=> String
     #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.bedrock_model_specification.guardrail.identifier #=> String
@@ -3609,6 +3613,7 @@ module Aws::LexModelsV2
     #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.guardrail.version #=> String
     #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.trace_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.custom_prompt #=> String
+    #   resp.generative_ai_settings.runtime_settings.nlu_improvement.enabled #=> Boolean
     #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.enabled #=> Boolean
     #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.bedrock_model_specification.model_arn #=> String
     #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.bedrock_model_specification.guardrail.identifier #=> String
@@ -9138,6 +9143,9 @@ module Aws::LexModelsV2
     #             custom_prompt: "BedrockModelCustomPrompt",
     #           },
     #         },
+    #         nlu_improvement: {
+    #           enabled: false, # required
+    #         },
     #       },
     #       buildtime_settings: {
     #         descriptive_bot_builder: {
@@ -9191,6 +9199,7 @@ module Aws::LexModelsV2
     #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.guardrail.version #=> String
     #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.trace_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.custom_prompt #=> String
+    #   resp.generative_ai_settings.runtime_settings.nlu_improvement.enabled #=> Boolean
     #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.enabled #=> Boolean
     #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.bedrock_model_specification.model_arn #=> String
     #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.bedrock_model_specification.guardrail.identifier #=> String
@@ -10554,7 +10563,7 @@ module Aws::LexModelsV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

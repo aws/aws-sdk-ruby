@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2025-06-05)
+------------------
+
+* Feature - Updating the minimum for List APIs to be 1 (instead of 0)
+
 1.11.0 (2025-06-02)
 ------------------
 

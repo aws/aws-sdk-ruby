@@ -1025,6 +1025,24 @@ module Aws::MarketplaceCatalog
     #           },
     #         },
     #       },
+    #       machine_learning_product_filters: {
+    #         entity_id: {
+    #           value_list: ["MachineLearningProductEntityIdString"],
+    #         },
+    #         last_modified_date: {
+    #           date_range: {
+    #             after_value: "DateTimeISO8601",
+    #             before_value: "DateTimeISO8601",
+    #           },
+    #         },
+    #         product_title: {
+    #           value_list: ["MachineLearningProductTitleString"],
+    #           wild_card_value: "MachineLearningProductTitleString",
+    #         },
+    #         visibility: {
+    #           value_list: ["Limited"], # accepts Limited, Public, Restricted, Draft
+    #         },
+    #       },
     #     },
     #     entity_type_sort: {
     #       data_product_sort: {
@@ -1049,6 +1067,10 @@ module Aws::MarketplaceCatalog
     #       },
     #       resale_authorization_sort: {
     #         sort_by: "EntityId", # accepts EntityId, Name, ProductId, ProductName, ManufacturerAccountId, ManufacturerLegalName, ResellerAccountID, ResellerLegalName, Status, OfferExtendedStatus, CreatedDate, AvailabilityEndDate, LastModifiedDate
+    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #       },
+    #       machine_learning_product_sort: {
+    #         sort_by: "EntityId", # accepts EntityId, LastModifiedDate, ProductTitle, Visibility
     #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #       },
     #     },
@@ -1092,6 +1114,8 @@ module Aws::MarketplaceCatalog
     #   resp.entity_summary_list[0].resale_authorization_summary.offer_extended_status #=> String
     #   resp.entity_summary_list[0].resale_authorization_summary.created_date #=> String
     #   resp.entity_summary_list[0].resale_authorization_summary.availability_end_date #=> String
+    #   resp.entity_summary_list[0].machine_learning_product_summary.product_title #=> String
+    #   resp.entity_summary_list[0].machine_learning_product_summary.visibility #=> String, one of "Limited", "Public", "Restricted", "Draft"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ListEntities AWS API Documentation
@@ -1190,12 +1214,17 @@ module Aws::MarketplaceCatalog
     # for more information about change types available for container-based
     # products, see [Working with container products][4].
     #
+    # To download "DetailsDocument" shapes, see [Python][5] and [Java][6]
+    # shapes on GitHub.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples
     # [2]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets
     # [3]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products
     # [4]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products
+    # [5]: https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-python
+    # [6]: https://github.com/awslabs/aws-marketplace-catalog-api-shapes-for-java/tree/main
     #
     # @option params [required, String] :catalog
     #   The catalog related to the request. Fixed value: `AWSMarketplace`
@@ -1370,7 +1399,7 @@ module Aws::MarketplaceCatalog
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplacecatalog'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

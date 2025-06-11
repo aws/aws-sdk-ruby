@@ -2084,7 +2084,7 @@ module Aws::CloudFormation
     end
 
     class WarningDetail
-      attr_accessor type: ("MUTUALLY_EXCLUSIVE_PROPERTIES" | "UNSUPPORTED_PROPERTIES" | "MUTUALLY_EXCLUSIVE_TYPES")
+      attr_accessor type: ("MUTUALLY_EXCLUSIVE_PROPERTIES" | "UNSUPPORTED_PROPERTIES" | "MUTUALLY_EXCLUSIVE_TYPES" | "EXCLUDED_PROPERTIES")
       attr_accessor properties: ::Array[Types::WarningProperty]
       SENSITIVE: []
     end

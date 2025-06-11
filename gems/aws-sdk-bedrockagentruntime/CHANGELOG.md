@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2025-06-06)
+------------------
+
+* Feature - This release introduces the `PromptCreationConfigurations` input parameter, which includes fields to control prompt population for `InvokeAgent` or `InvokeInlineAgent` requests.
+
 1.57.0 (2025-06-02)
 ------------------
 

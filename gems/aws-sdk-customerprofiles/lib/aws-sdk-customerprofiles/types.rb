@@ -748,6 +748,11 @@ module Aws::CustomerProfiles
     #   The value of the calculated attribute.
     #   @return [String]
     #
+    # @!attribute [rw] last_object_timestamp
+    #   The timestamp of the newest object included in the calculated
+    #   attribute calculation.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CalculatedAttributeValue AWS API Documentation
     #
     class CalculatedAttributeValue < Struct.new(
@@ -755,7 +760,8 @@ module Aws::CustomerProfiles
       :display_name,
       :is_data_partial,
       :profile_id,
-      :value)
+      :value,
+      :last_object_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -917,6 +923,11 @@ module Aws::CustomerProfiles
     #   The aggregation operation to perform for the calculated attribute.
     #   @return [String]
     #
+    # @!attribute [rw] use_historical_data
+    #   Whether historical data ingested before the Calculated Attribute was
+    #   created should be included in calculations.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
     #   resource.
@@ -933,6 +944,7 @@ module Aws::CustomerProfiles
       :conditions,
       :filter,
       :statistic,
+      :use_historical_data,
       :tags)
       SENSITIVE = [:description, :attribute_details, :conditions, :statistic]
       include Aws::Structure
@@ -978,6 +990,21 @@ module Aws::CustomerProfiles
     #   recently edited.
     #   @return [Time]
     #
+    # @!attribute [rw] use_historical_data
+    #   Whether historical data ingested before the Calculated Attribute was
+    #   created should be included in calculations.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] status
+    #   Status of the Calculated Attribute creation (whether all historical
+    #   data has been indexed.)
+    #   @return [String]
+    #
+    # @!attribute [rw] readiness
+    #   Information indicating if the Calculated Attribute is ready for use
+    #   by confirming all historical data has been processed and reflected.
+    #   @return [Types::Readiness]
+    #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
     #   resource.
@@ -995,8 +1022,127 @@ module Aws::CustomerProfiles
       :statistic,
       :created_at,
       :last_updated_at,
+      :use_historical_data,
+      :status,
+      :readiness,
       :tags)
       SENSITIVE = [:description, :attribute_details, :conditions, :statistic]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] layout_definition_name
+    #   The unique name of the layout.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the layout
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the layout
+    #   @return [String]
+    #
+    # @!attribute [rw] is_default
+    #   If set to true for a layout, this layout will be used by default to
+    #   view data. If set to false, then the layout will not be used by
+    #   default, but it can be used to view data by explicitly selecting it
+    #   in the console.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] layout_type
+    #   The type of layout that can be used to view data under a Customer
+    #   Profiles domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] layout
+    #   A customizable layout that can be used to view data under a Customer
+    #   Profiles domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateDomainLayoutRequest AWS API Documentation
+    #
+    class CreateDomainLayoutRequest < Struct.new(
+      :domain_name,
+      :layout_definition_name,
+      :description,
+      :display_name,
+      :is_default,
+      :layout_type,
+      :layout,
+      :tags)
+      SENSITIVE = [:description, :layout]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] layout_definition_name
+    #   The unique name of the layout.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the layout
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the layout
+    #   @return [String]
+    #
+    # @!attribute [rw] is_default
+    #   If set to true for a layout, this layout will be used by default to
+    #   view data. If set to false, then the layout will not be used by
+    #   default, but it can be used to view data by explicitly selecting it
+    #   in the console.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] layout_type
+    #   The type of layout that can be used to view data under customer
+    #   profiles domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] layout
+    #   A customizable layout that can be used to view data under Customer
+    #   Profiles domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version used to create layout.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the layout was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp of when the layout was most recently updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateDomainLayoutResponse AWS API Documentation
+    #
+    class CreateDomainLayoutResponse < Struct.new(
+      :layout_definition_name,
+      :description,
+      :display_name,
+      :is_default,
+      :layout_type,
+      :layout,
+      :version,
+      :tags,
+      :created_at,
+      :last_updated_at)
+      SENSITIVE = [:description, :layout]
       include Aws::Structure
     end
 
@@ -1364,7 +1510,7 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] account_number
-    #   An account number that you have given to the customer.
+    #   An account number that you have assigned to the customer.
     #   @return [String]
     #
     # @!attribute [rw] additional_information
@@ -1712,6 +1858,35 @@ module Aws::CustomerProfiles
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteCalculatedAttributeDefinitionResponse AWS API Documentation
     #
     class DeleteCalculatedAttributeDefinitionResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] layout_definition_name
+    #   The unique name of the layout.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteDomainLayoutRequest AWS API Documentation
+    #
+    class DeleteDomainLayoutRequest < Struct.new(
+      :domain_name,
+      :layout_definition_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   A message that indicates the delete request is done.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteDomainLayoutResponse AWS API Documentation
+    #
+    class DeleteDomainLayoutResponse < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] domain_name
     #   The unique name of the domain.
@@ -2755,6 +2930,21 @@ module Aws::CustomerProfiles
     #   that expression.
     #   @return [Types::AttributeDetails]
     #
+    # @!attribute [rw] use_historical_data
+    #   Whether historical data ingested before the Calculated Attribute was
+    #   created should be included in calculations.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] status
+    #   Status of the Calculated Attribute creation (whether all historical
+    #   data has been indexed).
+    #   @return [String]
+    #
+    # @!attribute [rw] readiness
+    #   Information indicating if the Calculated Attribute is ready for use
+    #   by confirming all historical data has been processed and reflected.
+    #   @return [Types::Readiness]
+    #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
     #   resource.
@@ -2772,6 +2962,9 @@ module Aws::CustomerProfiles
       :filter,
       :conditions,
       :attribute_details,
+      :use_historical_data,
+      :status,
+      :readiness,
       :tags)
       SENSITIVE = [:description, :statistic, :conditions, :attribute_details]
       include Aws::Structure
@@ -2816,14 +3009,100 @@ module Aws::CustomerProfiles
     #   The value of the calculated attribute.
     #   @return [String]
     #
+    # @!attribute [rw] last_object_timestamp
+    #   The timestamp of the newest object included in the calculated
+    #   attribute calculation.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetCalculatedAttributeForProfileResponse AWS API Documentation
     #
     class GetCalculatedAttributeForProfileResponse < Struct.new(
       :calculated_attribute_name,
       :display_name,
       :is_data_partial,
-      :value)
+      :value,
+      :last_object_timestamp)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] layout_definition_name
+    #   The unique name of the layout.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetDomainLayoutRequest AWS API Documentation
+    #
+    class GetDomainLayoutRequest < Struct.new(
+      :domain_name,
+      :layout_definition_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] layout_definition_name
+    #   The unique name of the layout.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the layout
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the layout
+    #   @return [String]
+    #
+    # @!attribute [rw] is_default
+    #   If set to true for a layout, this layout will be used by default to
+    #   view data. If set to false, then the layout will not be used by
+    #   default, but it can be used to view data by explicitly selecting it
+    #   in the console.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] layout_type
+    #   The type of layout that can be used to view data under a Customer
+    #   Profiles domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] layout
+    #   A customizable layout that can be used to view data under a Customer
+    #   Profiles domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version used to create layout.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the layout was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp of when the layout was most recently updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetDomainLayoutResponse AWS API Documentation
+    #
+    class GetDomainLayoutResponse < Struct.new(
+      :layout_definition_name,
+      :description,
+      :display_name,
+      :is_default,
+      :layout_type,
+      :layout,
+      :version,
+      :created_at,
+      :last_updated_at,
+      :tags)
+      SENSITIVE = [:description, :layout]
       include Aws::Structure
     end
 
@@ -4095,6 +4374,60 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # The layout object that contains LayoutDefinitionName, Description,
+    # DisplayName, IsDefault, LayoutType, Tags, CreatedAt, LastUpdatedAt
+    #
+    # @!attribute [rw] layout_definition_name
+    #   The unique name of the layout.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the layout
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the layout
+    #   @return [String]
+    #
+    # @!attribute [rw] is_default
+    #   If set to true for a layout, this layout will be used by default to
+    #   view data. If set to false, then layout will not be used by default
+    #   but it can be used to view data by explicit selection on UI.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] layout_type
+    #   The type of layout that can be used to view data under customer
+    #   profiles domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the layout was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp of when the layout was most recently updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/LayoutItem AWS API Documentation
+    #
+    class LayoutItem < Struct.new(
+      :layout_definition_name,
+      :description,
+      :display_name,
+      :is_default,
+      :layout_type,
+      :tags,
+      :created_at,
+      :last_updated_at)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] uri
     #   The URI of the S3 bucket or any other type of data source.
     #   @return [String]
@@ -4165,6 +4498,16 @@ module Aws::CustomerProfiles
     #   recently edited.
     #   @return [Time]
     #
+    # @!attribute [rw] use_historical_data
+    #   Whether historical data ingested before the Calculated Attribute was
+    #   created should be included in calculations.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] status
+    #   Status of the Calculated Attribute creation (whether all historical
+    #   data has been indexed.)
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
     #   resource.
@@ -4178,6 +4521,8 @@ module Aws::CustomerProfiles
       :description,
       :created_at,
       :last_updated_at,
+      :use_historical_data,
+      :status,
       :tags)
       SENSITIVE = [:description]
       include Aws::Structure
@@ -4244,13 +4589,19 @@ module Aws::CustomerProfiles
     #   The value of the calculated attribute.
     #   @return [String]
     #
+    # @!attribute [rw] last_object_timestamp
+    #   The timestamp of the newest object included in the calculated
+    #   attribute calculation.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListCalculatedAttributeForProfileItem AWS API Documentation
     #
     class ListCalculatedAttributeForProfileItem < Struct.new(
       :calculated_attribute_name,
       :display_name,
       :is_data_partial,
-      :value)
+      :value,
+      :last_object_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4327,6 +4678,45 @@ module Aws::CustomerProfiles
       :created_at,
       :last_updated_at,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects returned per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListDomainLayoutsRequest AWS API Documentation
+    #
+    class ListDomainLayoutsRequest < Struct.new(
+      :domain_name,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   Contains summary information about an EventStream.
+    #   @return [Array<Types::LayoutItem>]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListDomainLayoutsResponse AWS API Documentation
+    #
+    class ListDomainLayoutsResponse < Struct.new(
+      :items,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5451,7 +5841,7 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] account_number
-    #   An account number that you have given to the customer.
+    #   An account number that you have assigned to the customer.
     #   @return [String]
     #
     # @!attribute [rw] additional_information
@@ -6184,11 +6574,43 @@ module Aws::CustomerProfiles
     #   The unit of time.
     #   @return [String]
     #
+    # @!attribute [rw] value_range
+    #   A structure letting customers specify a relative time window over
+    #   which over which data is included in the Calculated Attribute. Use
+    #   positive numbers to indicate that the endpoint is in the past, and
+    #   negative numbers to indicate it is in the future. ValueRange
+    #   overrides Value.
+    #   @return [Types::ValueRange]
+    #
+    # @!attribute [rw] timestamp_source
+    #   An expression specifying the field in your JSON object from which
+    #   the date should be parsed. The expression should follow the
+    #   structure of \\"\{ObjectTypeName.&lt;Location of timestamp field in
+    #   JSON pointer format&gt;}\\". E.g. if your object type is MyType and
+    #   source JSON is \{"generatedAt": \{"timestamp":
+    #   "1737587945945"}}, then TimestampSource should be
+    #   "\{MyType.generatedAt.timestamp}".
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp_format
+    #   The format the timestamp field in your JSON object is specified.
+    #   This value should be one of EPOCHMILLI (for Unix epoch timestamps
+    #   with second/millisecond level precision) or ISO\_8601 (following
+    #   ISO\_8601 format with second/millisecond level precision, with an
+    #   optional offset of Z or in the format HH:MM or HHMM.). E.g. if your
+    #   object type is MyType and source JSON is \{"generatedAt":
+    #   \{"timestamp": "2001-07-04T12:08:56.235-0700"}}, then
+    #   TimestampFormat should be "ISO\_8601".
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/Range AWS API Documentation
     #
     class Range < Struct.new(
       :value,
-      :unit)
+      :unit,
+      :value_range,
+      :timestamp_source,
+      :timestamp_format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6213,6 +6635,27 @@ module Aws::CustomerProfiles
       :start,
       :end,
       :unit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information indicating if the Calculated Attribute is ready for use by
+    # confirming all historical data has been processed and reflected.
+    #
+    # @!attribute [rw] progress_percentage
+    #   Approximately how far the Calculated Attribute creation is from
+    #   completion.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] message
+    #   Any customer messaging.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/Readiness AWS API Documentation
+    #
+    class Readiness < Struct.new(
+      :progress_percentage,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7080,6 +7523,21 @@ module Aws::CustomerProfiles
     #   in that expression.
     #   @return [Types::AttributeDetails]
     #
+    # @!attribute [rw] use_historical_data
+    #   Whether historical data ingested before the Calculated Attribute was
+    #   created should be included in calculations.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] status
+    #   Status of the Calculated Attribute creation (whether all historical
+    #   data has been indexed.)
+    #   @return [String]
+    #
+    # @!attribute [rw] readiness
+    #   Information indicating if the Calculated Attribute is ready for use
+    #   by confirming all historical data has been processed and reflected.
+    #   @return [Types::Readiness]
+    #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
     #   resource.
@@ -7096,8 +7554,121 @@ module Aws::CustomerProfiles
       :statistic,
       :conditions,
       :attribute_details,
+      :use_historical_data,
+      :status,
+      :readiness,
       :tags)
       SENSITIVE = [:description, :statistic, :conditions, :attribute_details]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] layout_definition_name
+    #   The unique name of the layout.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the layout
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the layout
+    #   @return [String]
+    #
+    # @!attribute [rw] is_default
+    #   If set to true for a layout, this layout will be used by default to
+    #   view data. If set to false, then the layout will not be used by
+    #   default, but it can be used to view data by explicitly selecting it
+    #   in the console.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] layout_type
+    #   The type of layout that can be used to view data under a Customer
+    #   Profiles domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] layout
+    #   A customizable layout that can be used to view data under a Customer
+    #   Profiles domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/UpdateDomainLayoutRequest AWS API Documentation
+    #
+    class UpdateDomainLayoutRequest < Struct.new(
+      :domain_name,
+      :layout_definition_name,
+      :description,
+      :display_name,
+      :is_default,
+      :layout_type,
+      :layout)
+      SENSITIVE = [:description, :layout]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] layout_definition_name
+    #   The unique name of the layout.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the layout
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the layout
+    #   @return [String]
+    #
+    # @!attribute [rw] is_default
+    #   If set to true for a layout, this layout will be used by default to
+    #   view data. If set to false, then the layout will not be used by
+    #   default, but it can be used to view data by explicitly selecting it
+    #   in the console.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] layout_type
+    #   The type of layout that can be used to view data under a Customer
+    #   Profiles domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] layout
+    #   A customizable layout that can be used to view data under a Customer
+    #   Profiles domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version used to create layout.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the layout was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp of when the layout was most recently updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/UpdateDomainLayoutResponse AWS API Documentation
+    #
+    class UpdateDomainLayoutResponse < Struct.new(
+      :layout_definition_name,
+      :description,
+      :display_name,
+      :is_default,
+      :layout_type,
+      :layout,
+      :version,
+      :created_at,
+      :last_updated_at,
+      :tags)
+      SENSITIVE = [:description, :layout]
       include Aws::Structure
     end
 
@@ -7365,7 +7936,7 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] account_number
-    #   An account number that you have given to the customer.
+    #   An account number that you have assigned to the customer.
     #   @return [String]
     #
     # @!attribute [rw] party_type
@@ -7495,6 +8066,33 @@ module Aws::CustomerProfiles
     #
     class UpdateProfileResponse < Struct.new(
       :profile_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure letting customers specify a relative time window over
+    # which over which data is included in the Calculated Attribute. Use
+    # positive numbers to indicate that the endpoint is in the past, and
+    # negative numbers to indicate it is in the future. ValueRange overrides
+    # Value.
+    #
+    # @!attribute [rw] start
+    #   The start time of when to include objects. Use positive numbers to
+    #   indicate that the starting point is in the past, and negative
+    #   numbers to indicate it is in the future.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end
+    #   The end time of when to include objects. Use positive numbers to
+    #   indicate that the starting point is in the past, and negative
+    #   numbers to indicate it is in the future.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ValueRange AWS API Documentation
+    #
+    class ValueRange < Struct.new(
+      :start,
+      :end)
       SENSITIVE = []
       include Aws::Structure
     end

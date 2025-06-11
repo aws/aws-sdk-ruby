@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2025-06-11)
+------------------
+
+* Feature - Add support for the Assisted NLU feature to improve bot performance
+
 1.73.0 (2025-06-02)
 ------------------
 

@@ -811,6 +811,7 @@ module Aws::RDS
       attr_accessor cross_account_clone: bool
       attr_accessor domain_memberships: ::Array[Types::DomainMembership]
       attr_accessor tag_list: ::Array[Types::Tag]
+      attr_accessor global_cluster_identifier: ::String
       attr_accessor global_write_forwarding_status: ("enabled" | "disabled" | "enabling" | "disabling" | "unknown")
       attr_accessor global_write_forwarding_requested: bool
       attr_accessor pending_modified_values: Types::ClusterPendingModifiedValues

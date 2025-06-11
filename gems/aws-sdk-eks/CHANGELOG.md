@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.139.0 (2025-06-11)
+------------------
+
+* Feature - Release for EKS Pod Identity Cross Account feature and disableSessionTags flag.
+
 1.138.0 (2025-06-02)
 ------------------
 

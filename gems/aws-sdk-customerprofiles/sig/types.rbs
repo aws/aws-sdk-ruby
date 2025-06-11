@@ -192,6 +192,7 @@ module Aws::CustomerProfiles
       attr_accessor is_data_partial: ::String
       attr_accessor profile_id: ::String
       attr_accessor value: ::String
+      attr_accessor last_object_timestamp: ::Time
       SENSITIVE: []
     end
 
@@ -236,6 +237,7 @@ module Aws::CustomerProfiles
       attr_accessor conditions: Types::Conditions
       attr_accessor filter: Types::Filter
       attr_accessor statistic: ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE")
+      attr_accessor use_historical_data: bool
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:description, :attribute_details, :conditions, :statistic]
     end
@@ -250,8 +252,37 @@ module Aws::CustomerProfiles
       attr_accessor statistic: ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE")
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
+      attr_accessor use_historical_data: bool
+      attr_accessor status: ("PREPARING" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
+      attr_accessor readiness: Types::Readiness
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:description, :attribute_details, :conditions, :statistic]
+    end
+
+    class CreateDomainLayoutRequest
+      attr_accessor domain_name: ::String
+      attr_accessor layout_definition_name: ::String
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor is_default: bool
+      attr_accessor layout_type: ("PROFILE_EXPLORER")
+      attr_accessor layout: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:description, :layout]
+    end
+
+    class CreateDomainLayoutResponse
+      attr_accessor layout_definition_name: ::String
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor is_default: bool
+      attr_accessor layout_type: ("PROFILE_EXPLORER")
+      attr_accessor layout: ::String
+      attr_accessor version: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: [:description, :layout]
     end
 
     class CreateDomainRequest
@@ -427,6 +458,17 @@ module Aws::CustomerProfiles
     end
 
     class DeleteCalculatedAttributeDefinitionResponse < Aws::EmptyStructure
+    end
+
+    class DeleteDomainLayoutRequest
+      attr_accessor domain_name: ::String
+      attr_accessor layout_definition_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDomainLayoutResponse
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class DeleteDomainRequest
@@ -743,6 +785,9 @@ module Aws::CustomerProfiles
       attr_accessor filter: Types::Filter
       attr_accessor conditions: Types::Conditions
       attr_accessor attribute_details: Types::AttributeDetails
+      attr_accessor use_historical_data: bool
+      attr_accessor status: ("PREPARING" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
+      attr_accessor readiness: Types::Readiness
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:description, :statistic, :conditions, :attribute_details]
     end
@@ -759,7 +804,28 @@ module Aws::CustomerProfiles
       attr_accessor display_name: ::String
       attr_accessor is_data_partial: ::String
       attr_accessor value: ::String
+      attr_accessor last_object_timestamp: ::Time
       SENSITIVE: []
+    end
+
+    class GetDomainLayoutRequest
+      attr_accessor domain_name: ::String
+      attr_accessor layout_definition_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDomainLayoutResponse
+      attr_accessor layout_definition_name: ::String
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor is_default: bool
+      attr_accessor layout_type: ("PROFILE_EXPLORER")
+      attr_accessor layout: ::String
+      attr_accessor version: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:description, :layout]
     end
 
     class GetDomainRequest
@@ -1081,6 +1147,18 @@ module Aws::CustomerProfiles
       SENSITIVE: []
     end
 
+    class LayoutItem
+      attr_accessor layout_definition_name: ::String
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor is_default: bool
+      attr_accessor layout_type: ("PROFILE_EXPLORER")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: [:description]
+    end
+
     class ListAccountIntegrationsRequest
       attr_accessor uri: ::String
       attr_accessor next_token: ::String
@@ -1101,6 +1179,8 @@ module Aws::CustomerProfiles
       attr_accessor description: ::String
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
+      attr_accessor use_historical_data: bool
+      attr_accessor status: ("PREPARING" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:description]
     end
@@ -1123,6 +1203,7 @@ module Aws::CustomerProfiles
       attr_accessor display_name: ::String
       attr_accessor is_data_partial: ::String
       attr_accessor value: ::String
+      attr_accessor last_object_timestamp: ::Time
       SENSITIVE: []
     end
 
@@ -1145,6 +1226,19 @@ module Aws::CustomerProfiles
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListDomainLayoutsRequest
+      attr_accessor domain_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDomainLayoutsResponse
+      attr_accessor items: ::Array[Types::LayoutItem]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -1445,7 +1539,7 @@ module Aws::CustomerProfiles
     end
 
     class ObjectTypeKey
-      attr_accessor standard_identifiers: ::Array[("PROFILE" | "ASSET" | "CASE" | "ORDER" | "COMMUNICATION_RECORD" | "UNIQUE" | "SECONDARY" | "LOOKUP_ONLY" | "NEW_ONLY")]
+      attr_accessor standard_identifiers: ::Array[("PROFILE" | "ASSET" | "CASE" | "ORDER" | "COMMUNICATION_RECORD" | "AIR_PREFERENCE" | "HOTEL_PREFERENCE" | "AIR_BOOKING" | "AIR_SEGMENT" | "HOTEL_RESERVATION" | "HOTEL_STAY_REVENUE" | "LOYALTY" | "LOYALTY_TRANSACTION" | "LOYALTY_PROMOTION" | "UNIQUE" | "SECONDARY" | "LOOKUP_ONLY" | "NEW_ONLY")]
       attr_accessor field_names: ::Array[::String]
       SENSITIVE: []
     end
@@ -1622,6 +1716,9 @@ module Aws::CustomerProfiles
     class Range
       attr_accessor value: ::Integer
       attr_accessor unit: ("DAYS")
+      attr_accessor value_range: Types::ValueRange
+      attr_accessor timestamp_source: ::String
+      attr_accessor timestamp_format: ::String
       SENSITIVE: []
     end
 
@@ -1629,6 +1726,12 @@ module Aws::CustomerProfiles
       attr_accessor start: ::Integer
       attr_accessor end: ::Integer
       attr_accessor unit: ("DAYS")
+      SENSITIVE: []
+    end
+
+    class Readiness
+      attr_accessor progress_percentage: ::Integer
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -1843,8 +1946,36 @@ module Aws::CustomerProfiles
       attr_accessor statistic: ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE")
       attr_accessor conditions: Types::Conditions
       attr_accessor attribute_details: Types::AttributeDetails
+      attr_accessor use_historical_data: bool
+      attr_accessor status: ("PREPARING" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
+      attr_accessor readiness: Types::Readiness
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:description, :statistic, :conditions, :attribute_details]
+    end
+
+    class UpdateDomainLayoutRequest
+      attr_accessor domain_name: ::String
+      attr_accessor layout_definition_name: ::String
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor is_default: bool
+      attr_accessor layout_type: ("PROFILE_EXPLORER")
+      attr_accessor layout: ::String
+      SENSITIVE: [:description, :layout]
+    end
+
+    class UpdateDomainLayoutResponse
+      attr_accessor layout_definition_name: ::String
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor is_default: bool
+      attr_accessor layout_type: ("PROFILE_EXPLORER")
+      attr_accessor layout: ::String
+      attr_accessor version: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:description, :layout]
     end
 
     class UpdateDomainRequest
@@ -1926,6 +2057,12 @@ module Aws::CustomerProfiles
 
     class UpdateProfileResponse
       attr_accessor profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class ValueRange
+      attr_accessor start: ::Integer
+      attr_accessor end: ::Integer
       SENSITIVE: []
     end
 

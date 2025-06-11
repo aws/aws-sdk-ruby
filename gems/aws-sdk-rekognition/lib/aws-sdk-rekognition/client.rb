@@ -478,8 +478,14 @@ module Aws::Rekognition
 
     # Associates one or more faces with an existing UserID. Takes an array
     # of `FaceIds`. Each `FaceId` that are present in the `FaceIds` list is
-    # associated with the provided UserID. The maximum number of total
-    # `FaceIds` per UserID is 100.
+    # associated with the provided UserID. The number of FaceIds that can be
+    # used as input in a single request is limited to 100.
+    #
+    # Note that the total number of faces that can be associated with a
+    # single `UserID` is also limited to 100. Once a `UserID` has 100 faces
+    # associated with it, no additional faces can be added. If more API
+    # calls are made after the limit is reached, a
+    # `ServiceQuotaExceededException` will result.
     #
     # The `UserMatchThreshold` parameter specifies the minimum user match
     # confidence required for the face to be associated with a UserID that
@@ -1213,6 +1219,15 @@ module Aws::Rekognition
     #         s3_key_prefix: "LivenessS3KeyPrefix",
     #       },
     #       audit_images_limit: 1,
+    #       challenge_preferences: [
+    #         {
+    #           type: "FaceMovementAndLightChallenge", # required, accepts FaceMovementAndLightChallenge, FaceMovementChallenge
+    #           versions: {
+    #             minimum: "Version",
+    #             maximum: "Version",
+    #           },
+    #         },
+    #       ],
     #     },
     #     client_request_token: "ClientRequestToken",
     #   })
@@ -2627,8 +2642,7 @@ module Aws::Rekognition
     # `CustomLabel` object provides the label name (`Name`), the level of
     # confidence that the image contains the object (`Confidence`), and
     # object location information, if it exists, for the label on the image
-    # (`Geometry`). Note that for the `DetectCustomLabelsLabels` operation,
-    # `Polygons` are not returned in the `Geometry` section of the response.
+    # (`Geometry`).
     #
     # To filter labels that are returned, specify a value for
     # `MinConfidence`. `DetectCustomLabelsLabels` only returns labels with a
@@ -4266,6 +4280,7 @@ module Aws::Rekognition
     #   * {Types::GetFaceLivenessSessionResultsResponse#confidence #confidence} => Float
     #   * {Types::GetFaceLivenessSessionResultsResponse#reference_image #reference_image} => Types::AuditImage
     #   * {Types::GetFaceLivenessSessionResultsResponse#audit_images #audit_images} => Array&lt;Types::AuditImage&gt;
+    #   * {Types::GetFaceLivenessSessionResultsResponse#challenge #challenge} => Types::Challenge
     #
     # @example Request syntax with placeholder values
     #
@@ -4295,6 +4310,8 @@ module Aws::Rekognition
     #   resp.audit_images[0].bounding_box.height #=> Float
     #   resp.audit_images[0].bounding_box.left #=> Float
     #   resp.audit_images[0].bounding_box.top #=> Float
+    #   resp.challenge.type #=> String, one of "FaceMovementAndLightChallenge", "FaceMovementChallenge"
+    #   resp.challenge.version #=> String
     #
     # @overload get_face_liveness_session_results(params = {})
     # @param [Hash] params ({})
@@ -4761,6 +4778,13 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # <note markdown="1"> *End of support notice:* On October 31, 2025, AWS will discontinue
+    # support for Amazon Rekognition People Pathing. After October 31, 2025,
+    # you will no longer be able to use the Rekognition People Pathing
+    # capability. For more information, visit this [blog post][1].
+    #
+    #  </note>
+    #
     # Gets the path tracking results of a Amazon Rekognition Video analysis
     # started by StartPersonTracking.
     #
@@ -4799,6 +4823,10 @@ module Aws::Rekognition
     # `GetPersonTracking` and populate the `NextToken` request parameter
     # with the token value returned from the previous call to
     # `GetPersonTracking`.
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/blogs/machine-learning/transitioning-from-amazon-rekognition-people-pathing-exploring-other-alternatives/
     #
     # @option params [required, String] :job_id
     #   The identifier for a job that tracks persons in a video. You get the
@@ -7764,6 +7792,13 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # <note markdown="1"> *End of support notice:* On October 31, 2025, AWS will discontinue
+    # support for Amazon Rekognition People Pathing. After October 31, 2025,
+    # you will no longer be able to use the Rekognition People Pathing
+    # capability. For more information, visit this [blog post][1].
+    #
+    #  </note>
+    #
     # Starts the asynchronous tracking of a person's path in a stored
     # video.
     #
@@ -7779,6 +7814,10 @@ module Aws::Rekognition
     # the status value published to the Amazon SNS topic is `SUCCEEDED`. If
     # so, call GetPersonTracking and pass the job identifier (`JobId`) from
     # the initial call to `StartPersonTracking`.
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/blogs/machine-learning/transitioning-from-amazon-rekognition-people-pathing-exploring-other-alternatives/
     #
     # @option params [required, Types::Video] :video
     #   The video in which you want to detect people. The video must be stored
@@ -8481,7 +8520,7 @@ module Aws::Rekognition
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.116.0'
+      context[:gem_version] = '1.117.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -69,6 +69,8 @@ module Aws::CustomerProfiles
     Consolidation = Shapes::StructureShape.new(name: 'Consolidation')
     CreateCalculatedAttributeDefinitionRequest = Shapes::StructureShape.new(name: 'CreateCalculatedAttributeDefinitionRequest')
     CreateCalculatedAttributeDefinitionResponse = Shapes::StructureShape.new(name: 'CreateCalculatedAttributeDefinitionResponse')
+    CreateDomainLayoutRequest = Shapes::StructureShape.new(name: 'CreateDomainLayoutRequest')
+    CreateDomainLayoutResponse = Shapes::StructureShape.new(name: 'CreateDomainLayoutResponse')
     CreateDomainRequest = Shapes::StructureShape.new(name: 'CreateDomainRequest')
     CreateDomainResponse = Shapes::StructureShape.new(name: 'CreateDomainResponse')
     CreateEventStreamRequest = Shapes::StructureShape.new(name: 'CreateEventStreamRequest')
@@ -95,6 +97,8 @@ module Aws::CustomerProfiles
     DatetimeTypeFieldName = Shapes::StringShape.new(name: 'DatetimeTypeFieldName')
     DeleteCalculatedAttributeDefinitionRequest = Shapes::StructureShape.new(name: 'DeleteCalculatedAttributeDefinitionRequest')
     DeleteCalculatedAttributeDefinitionResponse = Shapes::StructureShape.new(name: 'DeleteCalculatedAttributeDefinitionResponse')
+    DeleteDomainLayoutRequest = Shapes::StructureShape.new(name: 'DeleteDomainLayoutRequest')
+    DeleteDomainLayoutResponse = Shapes::StructureShape.new(name: 'DeleteDomainLayoutResponse')
     DeleteDomainRequest = Shapes::StructureShape.new(name: 'DeleteDomainRequest')
     DeleteDomainResponse = Shapes::StructureShape.new(name: 'DeleteDomainResponse')
     DeleteEventStreamRequest = Shapes::StructureShape.new(name: 'DeleteEventStreamRequest')
@@ -171,6 +175,8 @@ module Aws::CustomerProfiles
     GetCalculatedAttributeDefinitionResponse = Shapes::StructureShape.new(name: 'GetCalculatedAttributeDefinitionResponse')
     GetCalculatedAttributeForProfileRequest = Shapes::StructureShape.new(name: 'GetCalculatedAttributeForProfileRequest')
     GetCalculatedAttributeForProfileResponse = Shapes::StructureShape.new(name: 'GetCalculatedAttributeForProfileResponse')
+    GetDomainLayoutRequest = Shapes::StructureShape.new(name: 'GetDomainLayoutRequest')
+    GetDomainLayoutResponse = Shapes::StructureShape.new(name: 'GetDomainLayoutResponse')
     GetDomainRequest = Shapes::StructureShape.new(name: 'GetDomainRequest')
     GetDomainResponse = Shapes::StructureShape.new(name: 'GetDomainResponse')
     GetEventStreamRequest = Shapes::StructureShape.new(name: 'GetEventStreamRequest')
@@ -220,6 +226,9 @@ module Aws::CustomerProfiles
     JobStats = Shapes::StructureShape.new(name: 'JobStats')
     KeyMap = Shapes::MapShape.new(name: 'KeyMap')
     KmsArn = Shapes::StringShape.new(name: 'KmsArn')
+    LayoutItem = Shapes::StructureShape.new(name: 'LayoutItem')
+    LayoutList = Shapes::ListShape.new(name: 'LayoutList')
+    LayoutType = Shapes::StringShape.new(name: 'LayoutType')
     ListAccountIntegrationsRequest = Shapes::StructureShape.new(name: 'ListAccountIntegrationsRequest')
     ListAccountIntegrationsResponse = Shapes::StructureShape.new(name: 'ListAccountIntegrationsResponse')
     ListCalculatedAttributeDefinitionItem = Shapes::StructureShape.new(name: 'ListCalculatedAttributeDefinitionItem')
@@ -229,6 +238,8 @@ module Aws::CustomerProfiles
     ListCalculatedAttributesForProfileRequest = Shapes::StructureShape.new(name: 'ListCalculatedAttributesForProfileRequest')
     ListCalculatedAttributesForProfileResponse = Shapes::StructureShape.new(name: 'ListCalculatedAttributesForProfileResponse')
     ListDomainItem = Shapes::StructureShape.new(name: 'ListDomainItem')
+    ListDomainLayoutsRequest = Shapes::StructureShape.new(name: 'ListDomainLayoutsRequest')
+    ListDomainLayoutsResponse = Shapes::StructureShape.new(name: 'ListDomainLayoutsResponse')
     ListDomainsRequest = Shapes::StructureShape.new(name: 'ListDomainsRequest')
     ListDomainsResponse = Shapes::StructureShape.new(name: 'ListDomainsResponse')
     ListEventStreamsRequest = Shapes::StructureShape.new(name: 'ListEventStreamsRequest')
@@ -324,6 +335,8 @@ module Aws::CustomerProfiles
     Range = Shapes::StructureShape.new(name: 'Range')
     RangeOverride = Shapes::StructureShape.new(name: 'RangeOverride')
     RangeUnit = Shapes::StringShape.new(name: 'RangeUnit')
+    Readiness = Shapes::StructureShape.new(name: 'Readiness')
+    ReadinessStatus = Shapes::StringShape.new(name: 'ReadinessStatus')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     RuleBasedMatchingRequest = Shapes::StructureShape.new(name: 'RuleBasedMatchingRequest')
@@ -389,6 +402,8 @@ module Aws::CustomerProfiles
     UpdateAttributes = Shapes::MapShape.new(name: 'UpdateAttributes')
     UpdateCalculatedAttributeDefinitionRequest = Shapes::StructureShape.new(name: 'UpdateCalculatedAttributeDefinitionRequest')
     UpdateCalculatedAttributeDefinitionResponse = Shapes::StructureShape.new(name: 'UpdateCalculatedAttributeDefinitionResponse')
+    UpdateDomainLayoutRequest = Shapes::StructureShape.new(name: 'UpdateDomainLayoutRequest')
+    UpdateDomainLayoutResponse = Shapes::StructureShape.new(name: 'UpdateDomainLayoutResponse')
     UpdateDomainRequest = Shapes::StructureShape.new(name: 'UpdateDomainRequest')
     UpdateDomainResponse = Shapes::StructureShape.new(name: 'UpdateDomainResponse')
     UpdateEventTriggerRequest = Shapes::StructureShape.new(name: 'UpdateEventTriggerRequest')
@@ -397,6 +412,9 @@ module Aws::CustomerProfiles
     UpdateProfileResponse = Shapes::StructureShape.new(name: 'UpdateProfileResponse')
     Value = Shapes::IntegerShape.new(name: 'Value')
     ValueList = Shapes::ListShape.new(name: 'ValueList')
+    ValueRange = Shapes::StructureShape.new(name: 'ValueRange')
+    ValueRangeEnd = Shapes::IntegerShape.new(name: 'ValueRangeEnd')
+    ValueRangeStart = Shapes::IntegerShape.new(name: 'ValueRangeStart')
     Values = Shapes::ListShape.new(name: 'Values')
     WorkflowAttributes = Shapes::StructureShape.new(name: 'WorkflowAttributes')
     WorkflowList = Shapes::ListShape.new(name: 'WorkflowList')
@@ -426,6 +444,7 @@ module Aws::CustomerProfiles
     name = Shapes::StringShape.new(name: 'name')
     optionalBoolean = Shapes::BooleanShape.new(name: 'optionalBoolean')
     optionalLong = Shapes::IntegerShape.new(name: 'optionalLong')
+    percentageInteger = Shapes::IntegerShape.new(name: 'percentageInteger')
     requestValueList = Shapes::ListShape.new(name: 'requestValueList')
     s3BucketName = Shapes::StringShape.new(name: 's3BucketName')
     s3KeyName = Shapes::StringShape.new(name: 's3KeyName')
@@ -433,6 +452,7 @@ module Aws::CustomerProfiles
     sensitiveString0To1000 = Shapes::StringShape.new(name: 'sensitiveString0To1000')
     sensitiveString0To255 = Shapes::StringShape.new(name: 'sensitiveString0To255')
     sensitiveString1To1000 = Shapes::StringShape.new(name: 'sensitiveString1To1000')
+    sensitiveString1To2000000 = Shapes::StringShape.new(name: 'sensitiveString1To2000000')
     sensitiveString1To255 = Shapes::StringShape.new(name: 'sensitiveString1To255')
     sensitiveText = Shapes::StringShape.new(name: 'sensitiveText')
     sqsQueueUrl = Shapes::StringShape.new(name: 'sqsQueueUrl')
@@ -607,6 +627,7 @@ module Aws::CustomerProfiles
     CalculatedAttributeValue.add_member(:is_data_partial, Shapes::ShapeRef.new(shape: string1To255, location_name: "IsDataPartial"))
     CalculatedAttributeValue.add_member(:profile_id, Shapes::ShapeRef.new(shape: uuid, location_name: "ProfileId"))
     CalculatedAttributeValue.add_member(:value, Shapes::ShapeRef.new(shape: string1To255, location_name: "Value"))
+    CalculatedAttributeValue.add_member(:last_object_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastObjectTimestamp"))
     CalculatedAttributeValue.struct_class = Types::CalculatedAttributeValue
 
     CalculatedAttributeValueList.member = Shapes::ShapeRef.new(shape: CalculatedAttributeValue)
@@ -646,6 +667,7 @@ module Aws::CustomerProfiles
     CreateCalculatedAttributeDefinitionRequest.add_member(:conditions, Shapes::ShapeRef.new(shape: Conditions, location_name: "Conditions"))
     CreateCalculatedAttributeDefinitionRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Filter, location_name: "Filter"))
     CreateCalculatedAttributeDefinitionRequest.add_member(:statistic, Shapes::ShapeRef.new(shape: Statistic, required: true, location_name: "Statistic"))
+    CreateCalculatedAttributeDefinitionRequest.add_member(:use_historical_data, Shapes::ShapeRef.new(shape: optionalBoolean, location_name: "UseHistoricalData"))
     CreateCalculatedAttributeDefinitionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateCalculatedAttributeDefinitionRequest.struct_class = Types::CreateCalculatedAttributeDefinitionRequest
 
@@ -658,8 +680,33 @@ module Aws::CustomerProfiles
     CreateCalculatedAttributeDefinitionResponse.add_member(:statistic, Shapes::ShapeRef.new(shape: Statistic, location_name: "Statistic"))
     CreateCalculatedAttributeDefinitionResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreatedAt"))
     CreateCalculatedAttributeDefinitionResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastUpdatedAt"))
+    CreateCalculatedAttributeDefinitionResponse.add_member(:use_historical_data, Shapes::ShapeRef.new(shape: optionalBoolean, location_name: "UseHistoricalData"))
+    CreateCalculatedAttributeDefinitionResponse.add_member(:status, Shapes::ShapeRef.new(shape: ReadinessStatus, location_name: "Status"))
+    CreateCalculatedAttributeDefinitionResponse.add_member(:readiness, Shapes::ShapeRef.new(shape: Readiness, location_name: "Readiness"))
     CreateCalculatedAttributeDefinitionResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateCalculatedAttributeDefinitionResponse.struct_class = Types::CreateCalculatedAttributeDefinitionResponse
+
+    CreateDomainLayoutRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    CreateDomainLayoutRequest.add_member(:layout_definition_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "LayoutDefinitionName"))
+    CreateDomainLayoutRequest.add_member(:description, Shapes::ShapeRef.new(shape: sensitiveText, required: true, location_name: "Description"))
+    CreateDomainLayoutRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: displayName, required: true, location_name: "DisplayName"))
+    CreateDomainLayoutRequest.add_member(:is_default, Shapes::ShapeRef.new(shape: boolean, location_name: "IsDefault"))
+    CreateDomainLayoutRequest.add_member(:layout_type, Shapes::ShapeRef.new(shape: LayoutType, required: true, location_name: "LayoutType"))
+    CreateDomainLayoutRequest.add_member(:layout, Shapes::ShapeRef.new(shape: sensitiveString1To2000000, required: true, location_name: "Layout"))
+    CreateDomainLayoutRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateDomainLayoutRequest.struct_class = Types::CreateDomainLayoutRequest
+
+    CreateDomainLayoutResponse.add_member(:layout_definition_name, Shapes::ShapeRef.new(shape: name, required: true, location_name: "LayoutDefinitionName"))
+    CreateDomainLayoutResponse.add_member(:description, Shapes::ShapeRef.new(shape: sensitiveText, required: true, location_name: "Description"))
+    CreateDomainLayoutResponse.add_member(:display_name, Shapes::ShapeRef.new(shape: displayName, required: true, location_name: "DisplayName"))
+    CreateDomainLayoutResponse.add_member(:is_default, Shapes::ShapeRef.new(shape: boolean, location_name: "IsDefault"))
+    CreateDomainLayoutResponse.add_member(:layout_type, Shapes::ShapeRef.new(shape: LayoutType, required: true, location_name: "LayoutType"))
+    CreateDomainLayoutResponse.add_member(:layout, Shapes::ShapeRef.new(shape: sensitiveString1To2000000, required: true, location_name: "Layout"))
+    CreateDomainLayoutResponse.add_member(:version, Shapes::ShapeRef.new(shape: string1To255, required: true, location_name: "Version"))
+    CreateDomainLayoutResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateDomainLayoutResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "CreatedAt"))
+    CreateDomainLayoutResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastUpdatedAt"))
+    CreateDomainLayoutResponse.struct_class = Types::CreateDomainLayoutResponse
 
     CreateDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     CreateDomainRequest.add_member(:default_expiration_days, Shapes::ShapeRef.new(shape: expirationDaysInteger, required: true, location_name: "DefaultExpirationDays"))
@@ -803,6 +850,13 @@ module Aws::CustomerProfiles
     DeleteCalculatedAttributeDefinitionRequest.struct_class = Types::DeleteCalculatedAttributeDefinitionRequest
 
     DeleteCalculatedAttributeDefinitionResponse.struct_class = Types::DeleteCalculatedAttributeDefinitionResponse
+
+    DeleteDomainLayoutRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    DeleteDomainLayoutRequest.add_member(:layout_definition_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "LayoutDefinitionName"))
+    DeleteDomainLayoutRequest.struct_class = Types::DeleteDomainLayoutRequest
+
+    DeleteDomainLayoutResponse.add_member(:message, Shapes::ShapeRef.new(shape: message, required: true, location_name: "Message"))
+    DeleteDomainLayoutResponse.struct_class = Types::DeleteDomainLayoutResponse
 
     DeleteDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     DeleteDomainRequest.struct_class = Types::DeleteDomainRequest
@@ -1056,6 +1110,9 @@ module Aws::CustomerProfiles
     GetCalculatedAttributeDefinitionResponse.add_member(:filter, Shapes::ShapeRef.new(shape: Filter, location_name: "Filter"))
     GetCalculatedAttributeDefinitionResponse.add_member(:conditions, Shapes::ShapeRef.new(shape: Conditions, location_name: "Conditions"))
     GetCalculatedAttributeDefinitionResponse.add_member(:attribute_details, Shapes::ShapeRef.new(shape: AttributeDetails, location_name: "AttributeDetails"))
+    GetCalculatedAttributeDefinitionResponse.add_member(:use_historical_data, Shapes::ShapeRef.new(shape: optionalBoolean, location_name: "UseHistoricalData"))
+    GetCalculatedAttributeDefinitionResponse.add_member(:status, Shapes::ShapeRef.new(shape: ReadinessStatus, location_name: "Status"))
+    GetCalculatedAttributeDefinitionResponse.add_member(:readiness, Shapes::ShapeRef.new(shape: Readiness, location_name: "Readiness"))
     GetCalculatedAttributeDefinitionResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     GetCalculatedAttributeDefinitionResponse.struct_class = Types::GetCalculatedAttributeDefinitionResponse
 
@@ -1068,7 +1125,24 @@ module Aws::CustomerProfiles
     GetCalculatedAttributeForProfileResponse.add_member(:display_name, Shapes::ShapeRef.new(shape: displayName, location_name: "DisplayName"))
     GetCalculatedAttributeForProfileResponse.add_member(:is_data_partial, Shapes::ShapeRef.new(shape: string1To255, location_name: "IsDataPartial"))
     GetCalculatedAttributeForProfileResponse.add_member(:value, Shapes::ShapeRef.new(shape: string1To255, location_name: "Value"))
+    GetCalculatedAttributeForProfileResponse.add_member(:last_object_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastObjectTimestamp"))
     GetCalculatedAttributeForProfileResponse.struct_class = Types::GetCalculatedAttributeForProfileResponse
+
+    GetDomainLayoutRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    GetDomainLayoutRequest.add_member(:layout_definition_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "LayoutDefinitionName"))
+    GetDomainLayoutRequest.struct_class = Types::GetDomainLayoutRequest
+
+    GetDomainLayoutResponse.add_member(:layout_definition_name, Shapes::ShapeRef.new(shape: name, required: true, location_name: "LayoutDefinitionName"))
+    GetDomainLayoutResponse.add_member(:description, Shapes::ShapeRef.new(shape: sensitiveText, required: true, location_name: "Description"))
+    GetDomainLayoutResponse.add_member(:display_name, Shapes::ShapeRef.new(shape: displayName, required: true, location_name: "DisplayName"))
+    GetDomainLayoutResponse.add_member(:is_default, Shapes::ShapeRef.new(shape: boolean, location_name: "IsDefault"))
+    GetDomainLayoutResponse.add_member(:layout_type, Shapes::ShapeRef.new(shape: LayoutType, required: true, location_name: "LayoutType"))
+    GetDomainLayoutResponse.add_member(:layout, Shapes::ShapeRef.new(shape: sensitiveString1To2000000, required: true, location_name: "Layout"))
+    GetDomainLayoutResponse.add_member(:version, Shapes::ShapeRef.new(shape: string1To255, required: true, location_name: "Version"))
+    GetDomainLayoutResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "CreatedAt"))
+    GetDomainLayoutResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "LastUpdatedAt"))
+    GetDomainLayoutResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    GetDomainLayoutResponse.struct_class = Types::GetDomainLayoutResponse
 
     GetDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     GetDomainRequest.struct_class = Types::GetDomainRequest
@@ -1324,6 +1398,18 @@ module Aws::CustomerProfiles
     KeyMap.key = Shapes::ShapeRef.new(shape: name)
     KeyMap.value = Shapes::ShapeRef.new(shape: ObjectTypeKeyList)
 
+    LayoutItem.add_member(:layout_definition_name, Shapes::ShapeRef.new(shape: name, required: true, location_name: "LayoutDefinitionName"))
+    LayoutItem.add_member(:description, Shapes::ShapeRef.new(shape: sensitiveText, required: true, location_name: "Description"))
+    LayoutItem.add_member(:display_name, Shapes::ShapeRef.new(shape: displayName, required: true, location_name: "DisplayName"))
+    LayoutItem.add_member(:is_default, Shapes::ShapeRef.new(shape: boolean, location_name: "IsDefault"))
+    LayoutItem.add_member(:layout_type, Shapes::ShapeRef.new(shape: LayoutType, required: true, location_name: "LayoutType"))
+    LayoutItem.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    LayoutItem.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "CreatedAt"))
+    LayoutItem.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "LastUpdatedAt"))
+    LayoutItem.struct_class = Types::LayoutItem
+
+    LayoutList.member = Shapes::ShapeRef.new(shape: LayoutItem)
+
     ListAccountIntegrationsRequest.add_member(:uri, Shapes::ShapeRef.new(shape: string1To255, required: true, location_name: "Uri"))
     ListAccountIntegrationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location: "querystring", location_name: "next-token"))
     ListAccountIntegrationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxSize100, location: "querystring", location_name: "max-results"))
@@ -1339,6 +1425,8 @@ module Aws::CustomerProfiles
     ListCalculatedAttributeDefinitionItem.add_member(:description, Shapes::ShapeRef.new(shape: sensitiveText, location_name: "Description"))
     ListCalculatedAttributeDefinitionItem.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreatedAt"))
     ListCalculatedAttributeDefinitionItem.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastUpdatedAt"))
+    ListCalculatedAttributeDefinitionItem.add_member(:use_historical_data, Shapes::ShapeRef.new(shape: optionalBoolean, location_name: "UseHistoricalData"))
+    ListCalculatedAttributeDefinitionItem.add_member(:status, Shapes::ShapeRef.new(shape: ReadinessStatus, location_name: "Status"))
     ListCalculatedAttributeDefinitionItem.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     ListCalculatedAttributeDefinitionItem.struct_class = Types::ListCalculatedAttributeDefinitionItem
 
@@ -1355,6 +1443,7 @@ module Aws::CustomerProfiles
     ListCalculatedAttributeForProfileItem.add_member(:display_name, Shapes::ShapeRef.new(shape: displayName, location_name: "DisplayName"))
     ListCalculatedAttributeForProfileItem.add_member(:is_data_partial, Shapes::ShapeRef.new(shape: string1To255, location_name: "IsDataPartial"))
     ListCalculatedAttributeForProfileItem.add_member(:value, Shapes::ShapeRef.new(shape: string1To255, location_name: "Value"))
+    ListCalculatedAttributeForProfileItem.add_member(:last_object_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastObjectTimestamp"))
     ListCalculatedAttributeForProfileItem.struct_class = Types::ListCalculatedAttributeForProfileItem
 
     ListCalculatedAttributesForProfileRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location: "querystring", location_name: "next-token"))
@@ -1372,6 +1461,15 @@ module Aws::CustomerProfiles
     ListDomainItem.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "LastUpdatedAt"))
     ListDomainItem.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     ListDomainItem.struct_class = Types::ListDomainItem
+
+    ListDomainLayoutsRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    ListDomainLayoutsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location: "querystring", location_name: "next-token"))
+    ListDomainLayoutsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxSize100, location: "querystring", location_name: "max-results"))
+    ListDomainLayoutsRequest.struct_class = Types::ListDomainLayoutsRequest
+
+    ListDomainLayoutsResponse.add_member(:items, Shapes::ShapeRef.new(shape: LayoutList, location_name: "Items"))
+    ListDomainLayoutsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location_name: "NextToken"))
+    ListDomainLayoutsResponse.struct_class = Types::ListDomainLayoutsResponse
 
     ListDomainsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location: "querystring", location_name: "next-token"))
     ListDomainsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxSize100, location: "querystring", location_name: "max-results"))
@@ -1773,14 +1871,21 @@ module Aws::CustomerProfiles
     PutProfileObjectTypeResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     PutProfileObjectTypeResponse.struct_class = Types::PutProfileObjectTypeResponse
 
-    Range.add_member(:value, Shapes::ShapeRef.new(shape: Value, required: true, location_name: "Value"))
-    Range.add_member(:unit, Shapes::ShapeRef.new(shape: Unit, required: true, location_name: "Unit"))
+    Range.add_member(:value, Shapes::ShapeRef.new(shape: Value, location_name: "Value"))
+    Range.add_member(:unit, Shapes::ShapeRef.new(shape: Unit, location_name: "Unit"))
+    Range.add_member(:value_range, Shapes::ShapeRef.new(shape: ValueRange, location_name: "ValueRange"))
+    Range.add_member(:timestamp_source, Shapes::ShapeRef.new(shape: string1To255, location_name: "TimestampSource"))
+    Range.add_member(:timestamp_format, Shapes::ShapeRef.new(shape: string1To255, location_name: "TimestampFormat"))
     Range.struct_class = Types::Range
 
     RangeOverride.add_member(:start, Shapes::ShapeRef.new(shape: Start, required: true, location_name: "Start"))
     RangeOverride.add_member(:end, Shapes::ShapeRef.new(shape: End, location_name: "End"))
     RangeOverride.add_member(:unit, Shapes::ShapeRef.new(shape: RangeUnit, required: true, location_name: "Unit"))
     RangeOverride.struct_class = Types::RangeOverride
+
+    Readiness.add_member(:progress_percentage, Shapes::ShapeRef.new(shape: percentageInteger, location_name: "ProgressPercentage"))
+    Readiness.add_member(:message, Shapes::ShapeRef.new(shape: text, location_name: "Message"))
+    Readiness.struct_class = Types::Readiness
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: message, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
@@ -1961,8 +2066,32 @@ module Aws::CustomerProfiles
     UpdateCalculatedAttributeDefinitionResponse.add_member(:statistic, Shapes::ShapeRef.new(shape: Statistic, location_name: "Statistic"))
     UpdateCalculatedAttributeDefinitionResponse.add_member(:conditions, Shapes::ShapeRef.new(shape: Conditions, location_name: "Conditions"))
     UpdateCalculatedAttributeDefinitionResponse.add_member(:attribute_details, Shapes::ShapeRef.new(shape: AttributeDetails, location_name: "AttributeDetails"))
+    UpdateCalculatedAttributeDefinitionResponse.add_member(:use_historical_data, Shapes::ShapeRef.new(shape: optionalBoolean, location_name: "UseHistoricalData"))
+    UpdateCalculatedAttributeDefinitionResponse.add_member(:status, Shapes::ShapeRef.new(shape: ReadinessStatus, location_name: "Status"))
+    UpdateCalculatedAttributeDefinitionResponse.add_member(:readiness, Shapes::ShapeRef.new(shape: Readiness, location_name: "Readiness"))
     UpdateCalculatedAttributeDefinitionResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     UpdateCalculatedAttributeDefinitionResponse.struct_class = Types::UpdateCalculatedAttributeDefinitionResponse
+
+    UpdateDomainLayoutRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    UpdateDomainLayoutRequest.add_member(:layout_definition_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "LayoutDefinitionName"))
+    UpdateDomainLayoutRequest.add_member(:description, Shapes::ShapeRef.new(shape: sensitiveText, location_name: "Description"))
+    UpdateDomainLayoutRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: displayName, location_name: "DisplayName"))
+    UpdateDomainLayoutRequest.add_member(:is_default, Shapes::ShapeRef.new(shape: boolean, location_name: "IsDefault"))
+    UpdateDomainLayoutRequest.add_member(:layout_type, Shapes::ShapeRef.new(shape: LayoutType, location_name: "LayoutType"))
+    UpdateDomainLayoutRequest.add_member(:layout, Shapes::ShapeRef.new(shape: sensitiveString1To2000000, location_name: "Layout"))
+    UpdateDomainLayoutRequest.struct_class = Types::UpdateDomainLayoutRequest
+
+    UpdateDomainLayoutResponse.add_member(:layout_definition_name, Shapes::ShapeRef.new(shape: name, location_name: "LayoutDefinitionName"))
+    UpdateDomainLayoutResponse.add_member(:description, Shapes::ShapeRef.new(shape: sensitiveText, location_name: "Description"))
+    UpdateDomainLayoutResponse.add_member(:display_name, Shapes::ShapeRef.new(shape: displayName, location_name: "DisplayName"))
+    UpdateDomainLayoutResponse.add_member(:is_default, Shapes::ShapeRef.new(shape: boolean, location_name: "IsDefault"))
+    UpdateDomainLayoutResponse.add_member(:layout_type, Shapes::ShapeRef.new(shape: LayoutType, location_name: "LayoutType"))
+    UpdateDomainLayoutResponse.add_member(:layout, Shapes::ShapeRef.new(shape: sensitiveString1To2000000, location_name: "Layout"))
+    UpdateDomainLayoutResponse.add_member(:version, Shapes::ShapeRef.new(shape: string1To255, location_name: "Version"))
+    UpdateDomainLayoutResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreatedAt"))
+    UpdateDomainLayoutResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastUpdatedAt"))
+    UpdateDomainLayoutResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    UpdateDomainLayoutResponse.struct_class = Types::UpdateDomainLayoutResponse
 
     UpdateDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     UpdateDomainRequest.add_member(:default_expiration_days, Shapes::ShapeRef.new(shape: expirationDaysInteger, location_name: "DefaultExpirationDays"))
@@ -2035,6 +2164,10 @@ module Aws::CustomerProfiles
     UpdateProfileResponse.struct_class = Types::UpdateProfileResponse
 
     ValueList.member = Shapes::ShapeRef.new(shape: string1To255)
+
+    ValueRange.add_member(:start, Shapes::ShapeRef.new(shape: ValueRangeStart, required: true, location_name: "Start"))
+    ValueRange.add_member(:end, Shapes::ShapeRef.new(shape: ValueRangeEnd, required: true, location_name: "End"))
+    ValueRange.struct_class = Types::ValueRange
 
     Values.member = Shapes::ShapeRef.new(shape: string1To255)
 
@@ -2139,6 +2272,19 @@ module Aws::CustomerProfiles
         o.http_request_uri = "/domains/{DomainName}"
         o.input = Shapes::ShapeRef.new(shape: CreateDomainRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:create_domain_layout, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDomainLayout"
+        o.http_method = "POST"
+        o.http_request_uri = "/domains/{DomainName}/layouts/{LayoutDefinitionName}"
+        o.input = Shapes::ShapeRef.new(shape: CreateDomainLayoutRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateDomainLayoutResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -2256,6 +2402,19 @@ module Aws::CustomerProfiles
         o.http_request_uri = "/domains/{DomainName}"
         o.input = Shapes::ShapeRef.new(shape: DeleteDomainRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_domain_layout, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDomainLayout"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/domains/{DomainName}/layouts/{LayoutDefinitionName}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDomainLayoutRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDomainLayoutResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -2438,6 +2597,19 @@ module Aws::CustomerProfiles
         o.http_request_uri = "/domains/{DomainName}"
         o.input = Shapes::ShapeRef.new(shape: GetDomainRequest)
         o.output = Shapes::ShapeRef.new(shape: GetDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_domain_layout, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDomainLayout"
+        o.http_method = "GET"
+        o.http_request_uri = "/domains/{DomainName}/layouts/{LayoutDefinitionName}"
+        o.input = Shapes::ShapeRef.new(shape: GetDomainLayoutRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDomainLayoutResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -2670,6 +2842,25 @@ module Aws::CustomerProfiles
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:list_domain_layouts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDomainLayouts"
+        o.http_method = "GET"
+        o.http_request_uri = "/domains/{DomainName}/layouts"
+        o.input = Shapes::ShapeRef.new(shape: ListDomainLayoutsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDomainLayoutsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_domains, Seahorse::Model::Operation.new.tap do |o|
@@ -2987,6 +3178,19 @@ module Aws::CustomerProfiles
         o.http_request_uri = "/domains/{DomainName}"
         o.input = Shapes::ShapeRef.new(shape: UpdateDomainRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_domain_layout, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateDomainLayout"
+        o.http_method = "PUT"
+        o.http_request_uri = "/domains/{DomainName}/layouts/{LayoutDefinitionName}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateDomainLayoutRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateDomainLayoutResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

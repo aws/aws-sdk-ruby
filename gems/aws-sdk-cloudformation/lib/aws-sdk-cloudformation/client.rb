@@ -2870,7 +2870,7 @@ module Aws::CloudFormation
     #   resp.resources[0].resource_status #=> String, one of "PENDING", "IN_PROGRESS", "FAILED", "COMPLETE"
     #   resp.resources[0].resource_status_reason #=> String
     #   resp.resources[0].warnings #=> Array
-    #   resp.resources[0].warnings[0].type #=> String, one of "MUTUALLY_EXCLUSIVE_PROPERTIES", "UNSUPPORTED_PROPERTIES", "MUTUALLY_EXCLUSIVE_TYPES"
+    #   resp.resources[0].warnings[0].type #=> String, one of "MUTUALLY_EXCLUSIVE_PROPERTIES", "UNSUPPORTED_PROPERTIES", "MUTUALLY_EXCLUSIVE_TYPES", "EXCLUDED_PROPERTIES"
     #   resp.resources[0].warnings[0].properties #=> Array
     #   resp.resources[0].warnings[0].properties[0].property_path #=> String
     #   resp.resources[0].warnings[0].properties[0].required #=> Boolean
@@ -8703,7 +8703,7 @@ module Aws::CloudFormation
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.132.0'
+      context[:gem_version] = '1.133.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

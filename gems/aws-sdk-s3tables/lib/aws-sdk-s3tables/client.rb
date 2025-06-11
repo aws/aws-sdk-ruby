@@ -532,13 +532,17 @@ module Aws::S3Tables
     #     `encryptionConfiguration` request parameter you must have the
     #     `s3tables:PutTableEncryption` permission.
     #
-    #   <note markdown="1"> Additionally,
+    #   <note markdown="1"> Additionally, If you choose SSE-KMS encryption you must grant the S3
+    #   Tables maintenance principal access to your KMS key. For more
+    #   information, see [Permissions requirements for S3 Tables SSE-KMS
+    #   encryption][2].
     #
     #    </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-create.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html
     #
     # @option params [required, String] :table_bucket_arn
     #   The Amazon Resource Name (ARN) of the table bucket to create the table
@@ -948,15 +952,18 @@ module Aws::S3Tables
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-tables.html
     #
-    # @option params [required, String] :table_bucket_arn
+    # @option params [String] :table_bucket_arn
     #   The Amazon Resource Name (ARN) of the table bucket associated with the
     #   table.
     #
-    # @option params [required, String] :namespace
+    # @option params [String] :namespace
     #   The name of the namespace the table is associated with.
     #
-    # @option params [required, String] :name
+    # @option params [String] :name
     #   The name of the table.
+    #
+    # @option params [String] :table_arn
+    #   The Amazon Resource Name (ARN) of the table.
     #
     # @return [Types::GetTableResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -980,9 +987,10 @@ module Aws::S3Tables
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_table({
-    #     table_bucket_arn: "TableBucketARN", # required
-    #     namespace: "NamespaceName", # required
-    #     name: "TableName", # required
+    #     table_bucket_arn: "TableBucketARN",
+    #     namespace: "NamespaceName",
+    #     name: "TableName",
+    #     table_arn: "TableARN",
     #   })
     #
     # @example Response structure
@@ -1292,7 +1300,7 @@ module Aws::S3Tables
     #   The Amazon Resource Name (ARN) of the table bucket.
     #
     # @option params [required, String] :namespace
-    #   The name of the namespace the table is associated with.     </p>
+    #   The name of the namespace the table is associated with.
     #
     # @option params [required, String] :name
     #   The name of the maintenance job.
@@ -1621,10 +1629,14 @@ module Aws::S3Tables
     #
     #   <note markdown="1"> If you choose SSE-KMS encryption you must grant the S3 Tables
     #   maintenance principal access to your KMS key. For more information,
-    #   see [Permissions requirements for S3 Tables SSE-KMS
-    #   encryption](AmazonS3/latest/userguide/s3-tables-kms-permissions.html)
+    #   see [Permissions requirements for S3 Tables SSE-KMS encryption][1]
+    #   in the *Amazon Simple Storage Service User Guide*.
     #
     #    </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html
     #
     # @option params [required, String] :table_bucket_arn
     #   The Amazon Resource Name (ARN) of the table bucket.
@@ -1983,7 +1995,7 @@ module Aws::S3Tables
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3tables'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

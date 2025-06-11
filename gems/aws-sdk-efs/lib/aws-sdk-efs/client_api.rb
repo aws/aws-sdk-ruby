@@ -92,6 +92,8 @@ module Aws::EFS
     InvalidPolicyException = Shapes::StructureShape.new(name: 'InvalidPolicyException')
     IpAddress = Shapes::StringShape.new(name: 'IpAddress')
     IpAddressInUse = Shapes::StructureShape.new(name: 'IpAddressInUse')
+    IpAddressType = Shapes::StringShape.new(name: 'IpAddressType')
+    Ipv6Address = Shapes::StringShape.new(name: 'Ipv6Address')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LifeCycleState = Shapes::StringShape.new(name: 'LifeCycleState')
     LifecycleConfigurationDescription = Shapes::StructureShape.new(name: 'LifecycleConfigurationDescription')
@@ -239,6 +241,8 @@ module Aws::EFS
     CreateMountTargetRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
     CreateMountTargetRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, required: true, location_name: "SubnetId"))
     CreateMountTargetRequest.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "IpAddress"))
+    CreateMountTargetRequest.add_member(:ipv_6_address, Shapes::ShapeRef.new(shape: Ipv6Address, location_name: "Ipv6Address"))
+    CreateMountTargetRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
     CreateMountTargetRequest.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroups, location_name: "SecurityGroups"))
     CreateMountTargetRequest.struct_class = Types::CreateMountTargetRequest
 
@@ -484,6 +488,7 @@ module Aws::EFS
     MountTargetDescription.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, required: true, location_name: "SubnetId"))
     MountTargetDescription.add_member(:life_cycle_state, Shapes::ShapeRef.new(shape: LifeCycleState, required: true, location_name: "LifeCycleState"))
     MountTargetDescription.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "IpAddress"))
+    MountTargetDescription.add_member(:ipv_6_address, Shapes::ShapeRef.new(shape: Ipv6Address, location_name: "Ipv6Address"))
     MountTargetDescription.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, location_name: "NetworkInterfaceId"))
     MountTargetDescription.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "AvailabilityZoneId"))
     MountTargetDescription.add_member(:availability_zone_name, Shapes::ShapeRef.new(shape: AvailabilityZoneName, location_name: "AvailabilityZoneName"))

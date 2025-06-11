@@ -476,14 +476,16 @@ module Aws::EFS
     # user and group override any identity information provided by the NFS
     # client. The file system path is exposed as the access point's root
     # directory. Applications using the access point can only access data in
-    # the application's own directory and any subdirectories. To learn
-    # more, see [Mounting a file system using EFS access points][1].
+    # the application's own directory and any subdirectories. A file system
+    # can have a maximum of 10,000 access points unless you request an
+    # increase. To learn more, see [Mounting a file system using EFS access
+    # points][1].
     #
     # <note markdown="1"> If multiple requests to create access points on the same file system
     # are sent in quick succession, and the file system is near the limit of
-    # 1,000 access points, you may experience a throttling response for
-    # these requests. This is to ensure that the file system does not exceed
-    # the stated access point limit.
+    # access points, you may experience a throttling response for these
+    # requests. This is to ensure that the file system does not exceed the
+    # stated access point limit.
     #
     #  </note>
     #
@@ -766,7 +768,7 @@ module Aws::EFS
     #   want to provision for a file system that you're creating. Required if
     #   `ThroughputMode` is set to `provisioned`. Valid values are 1-3414
     #   MiBps, with the upper limit depending on Region. To increase this
-    #   limit, contact Amazon Web Services Support. For more information, see
+    #   limit, contact Amazon Web ServicesSupport. For more information, see
     #   [Amazon EFS quotas that you can increase][1] in the *Amazon EFS User
     #   Guide*.
     #
@@ -1035,11 +1037,12 @@ module Aws::EFS
     # We recommend that you create a mount target in each of the
     # Availability Zones. There are cost considerations for using a file
     # system in an Availability Zone through a mount target created in
-    # another Availability Zone. For more information, see [Amazon EFS][3].
-    # In addition, by always using a mount target local to the instance's
-    # Availability Zone, you eliminate a partial failure scenario. If the
-    # Availability Zone in which your mount target is created goes down,
-    # then you can't access your file system through that mount target.
+    # another Availability Zone. For more information, see [Amazon EFS
+    # pricing][3]. In addition, by always using a mount target local to the
+    # instance's Availability Zone, you eliminate a partial failure
+    # scenario. If the Availability Zone in which your mount target is
+    # created goes down, then you can't access your file system through
+    # that mount target.
     #
     # This operation requires permissions for the following action on the
     # file system:
@@ -1061,7 +1064,7 @@ module Aws::EFS
     #
     # [1]: https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html
     # [2]: https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html#how-it-works-implementation
-    # [3]: http://aws.amazon.com/efs/
+    # [3]: http://aws.amazon.com/efs/pricing/
     #
     # @option params [required, String] :file_system_id
     #   The ID of the file system for which to create the mount target.
@@ -1072,11 +1075,40 @@ module Aws::EFS
     #   Availability Zone.
     #
     # @option params [String] :ip_address
-    #   Valid IPv4 address within the address range of the specified subnet.
+    #   If the IP address type for the mount target is IPv4, then specify the
+    #   IPv4 address within the address range of the specified subnet.
+    #
+    # @option params [String] :ipv_6_address
+    #   If the IP address type for the mount target is IPv6, then specify the
+    #   IPv6 address within the address range of the specified subnet.
+    #
+    # @option params [String] :ip_address_type
+    #   Specify the type of IP address of the mount target you are creating.
+    #   Options are IPv4, dual stack, or IPv6. If you don’t specify an
+    #   IpAddressType, then IPv4 is used.
+    #
+    #   * IPV4\_ONLY – Create mount target with IPv4 only subnet or dual-stack
+    #     subnet.
+    #
+    #   * DUAL\_STACK – Create mount target with dual-stack subnet.
+    #
+    #   * IPV6\_ONLY – Create mount target with IPv6 only subnet.
+    #
+    #   <note markdown="1"> Creating IPv6 mount target only ENI in dual-stack subnet is not
+    #   supported.
+    #
+    #    </note>
     #
     # @option params [Array<String>] :security_groups
-    #   Up to five VPC security group IDs, of the form `sg-xxxxxxxx`. These
-    #   must be for the same VPC as subnet specified.
+    #   VPC security group IDs, of the form `sg-xxxxxxxx`. These must be for
+    #   the same VPC as the subnet specified. The maximum number of security
+    #   groups depends on account quota. For more information, see [Amazon VPC
+    #   Quotas][1] in the *Amazon VPC User Guide* (see the **Security Groups**
+    #   table).
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html
     #
     # @return [Types::MountTargetDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1086,6 +1118,7 @@ module Aws::EFS
     #   * {Types::MountTargetDescription#subnet_id #subnet_id} => String
     #   * {Types::MountTargetDescription#life_cycle_state #life_cycle_state} => String
     #   * {Types::MountTargetDescription#ip_address #ip_address} => String
+    #   * {Types::MountTargetDescription#ipv_6_address #ipv_6_address} => String
     #   * {Types::MountTargetDescription#network_interface_id #network_interface_id} => String
     #   * {Types::MountTargetDescription#availability_zone_id #availability_zone_id} => String
     #   * {Types::MountTargetDescription#availability_zone_name #availability_zone_name} => String
@@ -1118,6 +1151,8 @@ module Aws::EFS
     #     file_system_id: "FileSystemId", # required
     #     subnet_id: "SubnetId", # required
     #     ip_address: "IpAddress",
+    #     ipv_6_address: "Ipv6Address",
+    #     ip_address_type: "IPV4_ONLY", # accepts IPV4_ONLY, IPV6_ONLY, DUAL_STACK
     #     security_groups: ["SecurityGroup"],
     #   })
     #
@@ -1129,6 +1164,7 @@ module Aws::EFS
     #   resp.subnet_id #=> String
     #   resp.life_cycle_state #=> String, one of "creating", "available", "updating", "deleting", "deleted", "error"
     #   resp.ip_address #=> String
+    #   resp.ipv_6_address #=> String
     #   resp.network_interface_id #=> String
     #   resp.availability_zone_id #=> String
     #   resp.availability_zone_name #=> String
@@ -1905,7 +1941,7 @@ module Aws::EFS
     end
 
     # Returns the current `LifecycleConfiguration` object for the specified
-    # Amazon EFS file system. Lifecycle management uses the
+    # EFS file system. Lifecycle management uses the
     # `LifecycleConfiguration` object to identify when to move files between
     # storage classes. For a file system without a `LifecycleConfiguration`
     # object, the call returns an empty array in the response.
@@ -2108,6 +2144,7 @@ module Aws::EFS
     #   resp.mount_targets[0].subnet_id #=> String
     #   resp.mount_targets[0].life_cycle_state #=> String, one of "creating", "available", "updating", "deleting", "deleted", "error"
     #   resp.mount_targets[0].ip_address #=> String
+    #   resp.mount_targets[0].ipv_6_address #=> String
     #   resp.mount_targets[0].network_interface_id #=> String
     #   resp.mount_targets[0].availability_zone_id #=> String
     #   resp.mount_targets[0].availability_zone_name #=> String
@@ -2338,7 +2375,7 @@ module Aws::EFS
     #   The ID of the mount target whose security groups you want to modify.
     #
     # @option params [Array<String>] :security_groups
-    #   An array of up to five VPC security group IDs.
+    #   An array of VPC security group IDs.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2781,7 +2818,7 @@ module Aws::EFS
     #   that you want to provision for a file system that you're creating.
     #   Required if `ThroughputMode` is set to `provisioned`. Valid values are
     #   1-3414 MiBps, with the upper limit depending on Region. To increase
-    #   this limit, contact Amazon Web Services Support. For more information,
+    #   this limit, contact Amazon Web ServicesSupport. For more information,
     #   see [Amazon EFS quotas that you can increase][1] in the *Amazon EFS
     #   User Guide*.
     #
@@ -2923,7 +2960,7 @@ module Aws::EFS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-efs'
-      context[:gem_version] = '1.95.0'
+      context[:gem_version] = '1.96.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

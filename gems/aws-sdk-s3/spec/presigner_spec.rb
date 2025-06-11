@@ -88,7 +88,7 @@ module Aws
             key: 'test.txt',
             expires_in: 86_400
           )
-          expect(CGI.parse(actual_url)).to eq(CGI.parse(expected_url))
+          expect(URI.decode_www_form(actual_url)).to eq(URI.decode_www_form(expected_url))
         end
 
         it 'can sign with a given time' do
@@ -248,7 +248,7 @@ module Aws
             key: 'test.txt',
             expires_in: 86_400
           )
-          expect(CGI.parse(actual_url)).to eq(CGI.parse(expected_url))
+          expect(URI.decode_www_form(actual_url)).to eq(URI.decode_www_form(expected_url))
         end
 
         it 'can sign with a given time' do

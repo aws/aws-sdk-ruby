@@ -30,6 +30,11 @@ module Aws::ControlCatalog
       SENSITIVE: []
     end
 
+    class CommonControlMappingDetails
+      attr_accessor common_control_arn: ::String
+      SENSITIVE: []
+    end
+
     class CommonControlSummary
       attr_accessor arn: ::String
       attr_accessor name: ::String
@@ -41,6 +46,25 @@ module Aws::ControlCatalog
       SENSITIVE: []
     end
 
+    class ControlFilter
+      attr_accessor implementations: Types::ImplementationFilter
+      SENSITIVE: []
+    end
+
+    class ControlMapping
+      attr_accessor control_arn: ::String
+      attr_accessor mapping_type: ("FRAMEWORK" | "COMMON_CONTROL")
+      attr_accessor mapping: Types::Mapping
+      SENSITIVE: []
+    end
+
+    class ControlMappingFilter
+      attr_accessor control_arns: ::Array[::String]
+      attr_accessor common_control_arns: ::Array[::String]
+      attr_accessor mapping_types: ::Array[("FRAMEWORK" | "COMMON_CONTROL")]
+      SENSITIVE: []
+    end
+
     class ControlParameter
       attr_accessor name: ::String
       SENSITIVE: []
@@ -48,12 +72,14 @@ module Aws::ControlCatalog
 
     class ControlSummary
       attr_accessor arn: ::String
+      attr_accessor aliases: ::Array[::String]
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor behavior: ("PREVENTIVE" | "PROACTIVE" | "DETECTIVE")
       attr_accessor severity: ("LOW" | "MEDIUM" | "HIGH" | "CRITICAL")
       attr_accessor implementation: Types::ImplementationSummary
       attr_accessor create_time: ::Time
+      attr_accessor governed_resources: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -71,6 +97,12 @@ module Aws::ControlCatalog
       SENSITIVE: []
     end
 
+    class FrameworkMappingDetails
+      attr_accessor name: ::String
+      attr_accessor item: ::String
+      SENSITIVE: []
+    end
+
     class GetControlRequest
       attr_accessor control_arn: ::String
       SENSITIVE: []
@@ -78,6 +110,7 @@ module Aws::ControlCatalog
 
     class GetControlResponse
       attr_accessor arn: ::String
+      attr_accessor aliases: ::Array[::String]
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor behavior: ("PREVENTIVE" | "PROACTIVE" | "DETECTIVE")
@@ -86,12 +119,19 @@ module Aws::ControlCatalog
       attr_accessor implementation: Types::ImplementationDetails
       attr_accessor parameters: ::Array[Types::ControlParameter]
       attr_accessor create_time: ::Time
+      attr_accessor governed_resources: ::Array[::String]
       SENSITIVE: []
     end
 
     class ImplementationDetails
       attr_accessor type: ::String
       attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ImplementationFilter
+      attr_accessor types: ::Array[::String]
+      attr_accessor identifiers: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -119,9 +159,23 @@ module Aws::ControlCatalog
       SENSITIVE: []
     end
 
+    class ListControlMappingsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filter: Types::ControlMappingFilter
+      SENSITIVE: []
+    end
+
+    class ListControlMappingsResponse
+      attr_accessor control_mappings: ::Array[Types::ControlMapping]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListControlsRequest
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
+      attr_accessor filter: Types::ControlFilter
       SENSITIVE: []
     end
 
@@ -154,6 +208,20 @@ module Aws::ControlCatalog
       attr_accessor objectives: ::Array[Types::ObjectiveSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
+    end
+
+    class Mapping
+      attr_accessor framework: Types::FrameworkMappingDetails
+      attr_accessor common_control: Types::CommonControlMappingDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Framework < Mapping
+      end
+      class CommonControl < Mapping
+      end
+      class Unknown < Mapping
+      end
     end
 
     class ObjectiveFilter

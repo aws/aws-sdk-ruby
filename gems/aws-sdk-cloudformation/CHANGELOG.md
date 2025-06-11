@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.133.0 (2025-06-05)
+------------------
+
+* Feature - Add new warning type 'EXCLUDED_PROPERTIES'
+
 1.132.0 (2025-06-02)
 ------------------
 

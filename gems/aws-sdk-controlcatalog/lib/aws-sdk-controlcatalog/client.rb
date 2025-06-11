@@ -501,6 +501,7 @@ module Aws::ControlCatalog
     # @return [Types::GetControlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetControlResponse#arn #arn} => String
+    #   * {Types::GetControlResponse#aliases #aliases} => Array&lt;String&gt;
     #   * {Types::GetControlResponse#name #name} => String
     #   * {Types::GetControlResponse#description #description} => String
     #   * {Types::GetControlResponse#behavior #behavior} => String
@@ -509,6 +510,7 @@ module Aws::ControlCatalog
     #   * {Types::GetControlResponse#implementation #implementation} => Types::ImplementationDetails
     #   * {Types::GetControlResponse#parameters #parameters} => Array&lt;Types::ControlParameter&gt;
     #   * {Types::GetControlResponse#create_time #create_time} => Time
+    #   * {Types::GetControlResponse#governed_resources #governed_resources} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -519,6 +521,8 @@ module Aws::ControlCatalog
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.aliases #=> Array
+    #   resp.aliases[0] #=> String
     #   resp.name #=> String
     #   resp.description #=> String
     #   resp.behavior #=> String, one of "PREVENTIVE", "PROACTIVE", "DETECTIVE"
@@ -531,6 +535,8 @@ module Aws::ControlCatalog
     #   resp.parameters #=> Array
     #   resp.parameters[0].name #=> String
     #   resp.create_time #=> Time
+    #   resp.governed_resources #=> Array
+    #   resp.governed_resources[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controlcatalog-2018-05-10/GetControl AWS API Documentation
     #
@@ -558,7 +564,7 @@ module Aws::ControlCatalog
     #   An optional filter that narrows the results to a specific objective.
     #
     #   This filter allows you to specify one objective ARN at a time. Passing
-    #   multiple ARNs in the `CommonControlFilter` isn’t currently supported.
+    #   multiple ARNs in the `CommonControlFilter` isn’t supported.
     #
     # @return [Types::ListCommonControlsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -604,17 +610,74 @@ module Aws::ControlCatalog
       req.send_request(options)
     end
 
-    # Returns a paginated list of all available controls in the Amazon Web
-    # Services Control Catalog library. Allows you to discover available
-    # controls. The list of controls is given as structures of type
-    # *controlSummary*. The ARN is returned in the global *controlcatalog*
-    # format, as shown in the examples.
+    # Returns a paginated list of control mappings from the Control Catalog.
+    # Control mappings show relationships between controls and other
+    # entities, such as common controls or compliance frameworks.
     #
     # @option params [String] :next_token
     #   The pagination token that's used to fetch the next set of results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results on a page or for an API request call.
+    #
+    # @option params [Types::ControlMappingFilter] :filter
+    #   An optional filter that narrows the results to specific control
+    #   mappings based on control ARNs, common control ARNs, or mapping types.
+    #
+    # @return [Types::ListControlMappingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListControlMappingsResponse#control_mappings #control_mappings} => Array&lt;Types::ControlMapping&gt;
+    #   * {Types::ListControlMappingsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_control_mappings({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #     filter: {
+    #       control_arns: ["ControlArn"],
+    #       common_control_arns: ["CommonControlArn"],
+    #       mapping_types: ["FRAMEWORK"], # accepts FRAMEWORK, COMMON_CONTROL
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.control_mappings #=> Array
+    #   resp.control_mappings[0].control_arn #=> String
+    #   resp.control_mappings[0].mapping_type #=> String, one of "FRAMEWORK", "COMMON_CONTROL"
+    #   resp.control_mappings[0].mapping.framework.name #=> String
+    #   resp.control_mappings[0].mapping.framework.item #=> String
+    #   resp.control_mappings[0].mapping.common_control.common_control_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controlcatalog-2018-05-10/ListControlMappings AWS API Documentation
+    #
+    # @overload list_control_mappings(params = {})
+    # @param [Hash] params ({})
+    def list_control_mappings(params = {}, options = {})
+      req = build_request(:list_control_mappings, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated list of all available controls in the Control
+    # Catalog library. Allows you to discover available controls. The list
+    # of controls is given as structures of type *controlSummary*. The ARN
+    # is returned in the global *controlcatalog* format, as shown in the
+    # examples.
+    #
+    # @option params [String] :next_token
+    #   The pagination token that's used to fetch the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results on a page or for an API request call.
+    #
+    # @option params [Types::ControlFilter] :filter
+    #   An optional filter that narrows the results to controls with specific
+    #   implementation types or identifiers. If you don't provide a filter,
+    #   the operation returns all available controls.
     #
     # @return [Types::ListControlsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -628,12 +691,20 @@ module Aws::ControlCatalog
     #   resp = client.list_controls({
     #     next_token: "PaginationToken",
     #     max_results: 1,
+    #     filter: {
+    #       implementations: {
+    #         types: ["ImplementationType"],
+    #         identifiers: ["ImplementationIdentifier"],
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.controls #=> Array
     #   resp.controls[0].arn #=> String
+    #   resp.controls[0].aliases #=> Array
+    #   resp.controls[0].aliases[0] #=> String
     #   resp.controls[0].name #=> String
     #   resp.controls[0].description #=> String
     #   resp.controls[0].behavior #=> String, one of "PREVENTIVE", "PROACTIVE", "DETECTIVE"
@@ -641,6 +712,8 @@ module Aws::ControlCatalog
     #   resp.controls[0].implementation.type #=> String
     #   resp.controls[0].implementation.identifier #=> String
     #   resp.controls[0].create_time #=> Time
+    #   resp.controls[0].governed_resources #=> Array
+    #   resp.controls[0].governed_resources[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controlcatalog-2018-05-10/ListControls AWS API Documentation
@@ -652,8 +725,7 @@ module Aws::ControlCatalog
       req.send_request(options)
     end
 
-    # Returns a paginated list of domains from the Amazon Web Services
-    # Control Catalog.
+    # Returns a paginated list of domains from the Control Catalog.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results on a page or for an API request call.
@@ -694,8 +766,7 @@ module Aws::ControlCatalog
       req.send_request(options)
     end
 
-    # Returns a paginated list of objectives from the Amazon Web Services
-    # Control Catalog.
+    # Returns a paginated list of objectives from the Control Catalog.
     #
     # You can apply an optional filter to see the objectives that belong to
     # a specific domain. If you don’t provide a filter, the operation
@@ -711,7 +782,7 @@ module Aws::ControlCatalog
     #   An optional filter that narrows the results to a specific domain.
     #
     #   This filter allows you to specify one domain ARN at a time. Passing
-    #   multiple ARNs in the `ObjectiveFilter` isn’t currently supported.
+    #   multiple ARNs in the `ObjectiveFilter` isn’t supported.
     #
     # @return [Types::ListObjectivesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -773,7 +844,7 @@ module Aws::ControlCatalog
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-controlcatalog'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

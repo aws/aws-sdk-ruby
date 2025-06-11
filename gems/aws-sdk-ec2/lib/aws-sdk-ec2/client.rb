@@ -3305,15 +3305,19 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Attaches an EBS volume to a running or stopped instance and exposes it
-    # to the instance with the specified device name.
+    # Attaches an Amazon EBS volume to a `running` or `stopped` instance,
+    # and exposes it to the instance with the specified device name.
     #
-    # Encrypted EBS volumes must be attached to instances that support
-    # Amazon EBS encryption. For more information, see [Amazon EBS
-    # encryption][1] in the *Amazon EBS User Guide*.
+    # <note markdown="1"> The maximum number of Amazon EBS volumes that you can attach to an
+    # instance depends on the instance type. If you exceed the volume
+    # attachment limit for an instance type, the attachment request fails
+    # with the `AttachmentLimitExceeded` error. For more information, see
+    # [Instance volume limits][1].
     #
-    # After you attach an EBS volume, you must make it available. For more
-    # information, see [Make an EBS volume available for use][2].
+    #  </note>
+    #
+    # After you attach an EBS volume, you must make it available for use.
+    # For more information, see [Make an EBS volume available for use][2].
     #
     # If a volume has an Amazon Web Services Marketplace product code:
     #
@@ -3333,7 +3337,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html
     # [2]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-using-volumes.html
     # [3]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-attaching-volume.html
     #
@@ -6586,8 +6590,9 @@ module Aws::EC2
     #   resp.subnet.private_dns_name_options_on_launch.enable_resource_name_dns_a_record #=> Boolean
     #   resp.subnet.private_dns_name_options_on_launch.enable_resource_name_dns_aaaa_record #=> Boolean
     #   resp.subnet.block_public_access_states.internet_gateway_block_mode #=> String, one of "off", "block-bidirectional", "block-ingress"
+    #   resp.subnet.type #=> String
     #   resp.subnet.subnet_id #=> String
-    #   resp.subnet.state #=> String, one of "pending", "available", "unavailable"
+    #   resp.subnet.state #=> String, one of "pending", "available", "unavailable", "failed", "failed-insufficient-capacity"
     #   resp.subnet.vpc_id #=> String
     #   resp.subnet.cidr_block #=> String
     #   resp.subnet.available_ip_address_count #=> Integer
@@ -11934,6 +11939,8 @@ module Aws::EC2
     #   resp.network_interface.ipv_6_address #=> String
     #   resp.network_interface.operator.managed #=> Boolean
     #   resp.network_interface.operator.principal #=> String
+    #   resp.network_interface.associated_subnets #=> Array
+    #   resp.network_interface.associated_subnets[0] #=> String
     #   resp.client_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkInterface AWS API Documentation
@@ -13855,8 +13862,9 @@ module Aws::EC2
     #   resp.subnet.private_dns_name_options_on_launch.enable_resource_name_dns_a_record #=> Boolean
     #   resp.subnet.private_dns_name_options_on_launch.enable_resource_name_dns_aaaa_record #=> Boolean
     #   resp.subnet.block_public_access_states.internet_gateway_block_mode #=> String, one of "off", "block-bidirectional", "block-ingress"
+    #   resp.subnet.type #=> String
     #   resp.subnet.subnet_id #=> String
-    #   resp.subnet.state #=> String, one of "pending", "available", "unavailable"
+    #   resp.subnet.state #=> String, one of "pending", "available", "unavailable", "failed", "failed-insufficient-capacity"
     #   resp.subnet.vpc_id #=> String
     #   resp.subnet.cidr_block #=> String
     #   resp.subnet.available_ip_address_count #=> Integer
@@ -22275,6 +22283,7 @@ module Aws::EC2
     #   resp.addresses[0].customer_owned_ip #=> String
     #   resp.addresses[0].customer_owned_ipv_4_pool #=> String
     #   resp.addresses[0].carrier_ip #=> String
+    #   resp.addresses[0].subnet_id #=> String
     #   resp.addresses[0].service_managed #=> String, one of "alb", "nlb", "rnat"
     #   resp.addresses[0].instance_id #=> String
     #   resp.addresses[0].public_ip #=> String
@@ -33384,7 +33393,7 @@ module Aws::EC2
     #   * `interface-type` - The type of network interface
     #     (`api_gateway_managed` \| `aws_codestar_connections_managed` \|
     #     `branch` \| `ec2_instance_connect_endpoint` \| `efa` \| `efa-only`
-    #     \| `efs` \| `gateway_load_balancer` \|
+    #     \| `efs` \| `evs` \| `gateway_load_balancer` \|
     #     `gateway_load_balancer_endpoint` \| `global_accelerator_managed` \|
     #     `interface` \| `iot_rules_managed` \| `lambda` \| `load_balancer` \|
     #     `nat_gateway` \| `network_load_balancer` \| `quicksight` \|
@@ -33603,6 +33612,8 @@ module Aws::EC2
     #   resp.network_interfaces[0].ipv_6_address #=> String
     #   resp.network_interfaces[0].operator.managed #=> Boolean
     #   resp.network_interfaces[0].operator.principal #=> String
+    #   resp.network_interfaces[0].associated_subnets #=> Array
+    #   resp.network_interfaces[0].associated_subnets[0] #=> String
     #   resp.next_token #=> String
     #
     #
@@ -38074,8 +38085,9 @@ module Aws::EC2
     #   resp.subnets[0].private_dns_name_options_on_launch.enable_resource_name_dns_a_record #=> Boolean
     #   resp.subnets[0].private_dns_name_options_on_launch.enable_resource_name_dns_aaaa_record #=> Boolean
     #   resp.subnets[0].block_public_access_states.internet_gateway_block_mode #=> String, one of "off", "block-bidirectional", "block-ingress"
+    #   resp.subnets[0].type #=> String
     #   resp.subnets[0].subnet_id #=> String
-    #   resp.subnets[0].state #=> String, one of "pending", "available", "unavailable"
+    #   resp.subnets[0].state #=> String, one of "pending", "available", "unavailable", "failed", "failed-insufficient-capacity"
     #   resp.subnets[0].vpc_id #=> String
     #   resp.subnets[0].cidr_block #=> String
     #   resp.subnets[0].available_ip_address_count #=> Integer
@@ -54385,6 +54397,9 @@ module Aws::EC2
     #   interface. This option can be enabled for any network interface but
     #   will only apply to the primary network interface (eth0).
     #
+    # @option params [Array<String>] :associated_subnet_ids
+    #   A list of subnet IDs to associate with the network interface.
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -54481,6 +54496,7 @@ module Aws::EC2
     #       udp_timeout: 1,
     #     },
     #     associate_public_ip_address: false,
+    #     associated_subnet_ids: ["SubnetId"],
     #     dry_run: false,
     #     network_interface_id: "NetworkInterfaceId", # required
     #     description: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
@@ -66077,7 +66093,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.530.0'
+      context[:gem_version] = '1.531.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

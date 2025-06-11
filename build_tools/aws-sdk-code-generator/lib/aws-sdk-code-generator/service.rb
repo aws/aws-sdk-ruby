@@ -4,11 +4,12 @@ module AwsSdkCodeGenerator
   class Service
     # Ordered priority list of supported protocols
     # api-gateway is a special case and is always first.
+    # Prioritize JSON over CBOR due to better performance.
     SUPPORTED_PROTOCOLS = %w[
       api-gateway
-      smithy-rpc-v2-cbor
       json_1.0
       json_1.1
+      smithy-rpc-v2-cbor
       rest-json
       rest-xml
       query

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2025-06-09)
+------------------
+
+* Feature - The ListEntities API now supports the EntityID, LastModifiedDate, ProductTitle, and Visibility filters for machine learning products. You can also sort using all of those filters.
+
 1.60.0 (2025-06-02)
 ------------------
 

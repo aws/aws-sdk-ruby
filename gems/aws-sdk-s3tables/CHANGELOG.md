@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2025-06-06)
+------------------
+
+* Feature - S3 Tables now supports getting details about a table via its table ARN.
+
 1.8.0 (2025-06-02)
 ------------------
 

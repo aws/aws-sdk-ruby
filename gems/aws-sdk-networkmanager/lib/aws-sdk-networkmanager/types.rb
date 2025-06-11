@@ -1006,6 +1006,21 @@ module Aws::NetworkManager
     #   Describes the service insertion action.
     #   @return [Array<Types::ServiceInsertionAction>]
     #
+    # @!attribute [rw] vpn_ecmp_support
+    #   Indicates whether Equal Cost Multipath (ECMP) is enabled for the
+    #   core network.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] dns_support
+    #   Indicates whether public DNS support is supported. The default is
+    #   `true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] security_group_referencing_support
+    #   Indicates whether security group referencing is enabled for the core
+    #   network.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CoreNetworkChangeValues AWS API Documentation
     #
     class CoreNetworkChangeValues < Struct.new(
@@ -1017,7 +1032,10 @@ module Aws::NetworkManager
       :destination_identifier,
       :inside_cidr_blocks,
       :shared_segments,
-      :service_insertion_actions)
+      :service_insertion_actions,
+      :vpn_ecmp_support,
+      :dns_support,
+      :security_group_referencing_support)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6246,11 +6264,23 @@ module Aws::NetworkManager
     #   value is `false`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] dns_support
+    #   Indicates whether DNS is supported.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] security_group_referencing_support
+    #   Indicates whether security group referencing is enabled for this VPC
+    #   attachment. The default is `true`. However, at the core network
+    #   policy-level the default is set to `false`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/VpcOptions AWS API Documentation
     #
     class VpcOptions < Struct.new(
       :ipv_6_support,
-      :appliance_mode_support)
+      :appliance_mode_support,
+      :dns_support,
+      :security_group_referencing_support)
       SENSITIVE = []
       include Aws::Structure
     end

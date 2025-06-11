@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2025-06-10)
+------------------
+
+* Feature - Documentation updates for Amazon GameLift Streams to address formatting errors, correct resource ID examples, and update links to other guides
+
 1.4.0 (2025-06-02)
 ------------------
 

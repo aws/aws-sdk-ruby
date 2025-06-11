@@ -54,7 +54,7 @@ module Aws::NetworkManager
   autoload :EndpointProvider, 'aws-sdk-networkmanager/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-networkmanager/endpoints'
 
-  GEM_VERSION = '1.64.0'
+  GEM_VERSION = '1.65.0'
 
 end
 

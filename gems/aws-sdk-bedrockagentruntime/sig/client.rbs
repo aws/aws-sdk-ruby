@@ -264,6 +264,10 @@ module Aws
                           ?end_session: bool,
                           ?input_text: ::String,
                           ?memory_id: ::String,
+                          ?prompt_creation_configurations: {
+                            exclude_previous_thinking_steps: bool?,
+                            previous_conversation_turns_to_include: ::Integer?
+                          },
                           session_id: ::String,
                           ?session_state: {
                             conversation_history: {
@@ -935,6 +939,10 @@ module Aws
                                    },
                                  ],
                                  ?orchestration_type: ("DEFAULT" | "CUSTOM_ORCHESTRATION"),
+                                 ?prompt_creation_configurations: {
+                                   exclude_previous_thinking_steps: bool?,
+                                   previous_conversation_turns_to_include: ::Integer?
+                                 },
                                  ?prompt_override_configuration: {
                                    override_lambda: ::String?,
                                    prompt_configurations: Array[

@@ -193,6 +193,27 @@ module Aws
           end.to raise_error(ArgumentError)
         end
 
+        it 'does not recompute checksums on a retry' do
+          original_checksum = nil
+          t = Tempfile.new
+          t.write('original')
+          t.rewind
+          client.stub_responses(
+            :http_checksum_operation,
+            proc do |context|
+              original_checksum = context.http_request.headers['x-amz-checksum-crc32']
+              t.rewind
+              t.write('different')
+              Seahorse::Client::NetworkingError.new(Timeout::Error.new)
+            end,
+            {}
+          )
+          # Retry happens after calculating the checksum, but ensure a new one isn't generated.
+          client.handlers.add(Aws::Plugins::RetryErrors::LegacyHandler, step: :sign, priority: 99)
+          resp = client.http_checksum_operation(body: t)
+          expect(resp.context.http_request.headers['x-amz-checksum-crc32']).to eq(original_checksum)
+        end
+
         file = File.expand_path('checksum_request.json', __dir__)
         test_cases = JSON.load_file(file)
 

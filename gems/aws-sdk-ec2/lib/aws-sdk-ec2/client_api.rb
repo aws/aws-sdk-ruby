@@ -175,6 +175,7 @@ module Aws::EC2
     AssociatedNetworkType = Shapes::StringShape.new(name: 'AssociatedNetworkType')
     AssociatedRole = Shapes::StructureShape.new(name: 'AssociatedRole')
     AssociatedRolesList = Shapes::ListShape.new(name: 'AssociatedRolesList')
+    AssociatedSubnetList = Shapes::ListShape.new(name: 'AssociatedSubnetList')
     AssociatedTargetNetwork = Shapes::StructureShape.new(name: 'AssociatedTargetNetwork')
     AssociatedTargetNetworkSet = Shapes::ListShape.new(name: 'AssociatedTargetNetworkSet')
     AssociationIdList = Shapes::ListShape.new(name: 'AssociationIdList')
@@ -3140,6 +3141,7 @@ module Aws::EC2
     SubnetConfiguration = Shapes::StructureShape.new(name: 'SubnetConfiguration')
     SubnetConfigurationsList = Shapes::ListShape.new(name: 'SubnetConfigurationsList')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
+    SubnetIdList = Shapes::ListShape.new(name: 'SubnetIdList')
     SubnetIdStringList = Shapes::ListShape.new(name: 'SubnetIdStringList')
     SubnetIpPrefixes = Shapes::StructureShape.new(name: 'SubnetIpPrefixes')
     SubnetIpPrefixesList = Shapes::ListShape.new(name: 'SubnetIpPrefixesList')
@@ -3748,6 +3750,7 @@ module Aws::EC2
     Address.add_member(:customer_owned_ip, Shapes::ShapeRef.new(shape: String, location_name: "customerOwnedIp"))
     Address.add_member(:customer_owned_ipv_4_pool, Shapes::ShapeRef.new(shape: String, location_name: "customerOwnedIpv4Pool"))
     Address.add_member(:carrier_ip, Shapes::ShapeRef.new(shape: String, location_name: "carrierIp"))
+    Address.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, location_name: "subnetId"))
     Address.add_member(:service_managed, Shapes::ShapeRef.new(shape: ServiceManaged, location_name: "serviceManaged"))
     Address.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
     Address.add_member(:public_ip, Shapes::ShapeRef.new(shape: String, location_name: "publicIp"))
@@ -4167,6 +4170,8 @@ module Aws::EC2
     AssociatedRole.struct_class = Types::AssociatedRole
 
     AssociatedRolesList.member = Shapes::ShapeRef.new(shape: AssociatedRole, location_name: "item")
+
+    AssociatedSubnetList.member = Shapes::ShapeRef.new(shape: SubnetId, location_name: "item")
 
     AssociatedTargetNetwork.add_member(:network_id, Shapes::ShapeRef.new(shape: String, location_name: "networkId"))
     AssociatedTargetNetwork.add_member(:network_type, Shapes::ShapeRef.new(shape: AssociatedNetworkType, location_name: "networkType"))
@@ -12997,6 +13002,7 @@ module Aws::EC2
     ModifyNetworkInterfaceAttributeRequest.add_member(:enable_primary_ipv_6, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnablePrimaryIpv6"))
     ModifyNetworkInterfaceAttributeRequest.add_member(:connection_tracking_specification, Shapes::ShapeRef.new(shape: ConnectionTrackingSpecificationRequest, location_name: "ConnectionTrackingSpecification"))
     ModifyNetworkInterfaceAttributeRequest.add_member(:associate_public_ip_address, Shapes::ShapeRef.new(shape: Boolean, location_name: "AssociatePublicIpAddress"))
+    ModifyNetworkInterfaceAttributeRequest.add_member(:associated_subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, location_name: "AssociatedSubnetId"))
     ModifyNetworkInterfaceAttributeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     ModifyNetworkInterfaceAttributeRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, required: true, location_name: "networkInterfaceId"))
     ModifyNetworkInterfaceAttributeRequest.add_member(:description, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "description"))
@@ -13751,6 +13757,7 @@ module Aws::EC2
     NetworkInterface.add_member(:ipv_6_native, Shapes::ShapeRef.new(shape: Boolean, location_name: "ipv6Native"))
     NetworkInterface.add_member(:ipv_6_address, Shapes::ShapeRef.new(shape: String, location_name: "ipv6Address"))
     NetworkInterface.add_member(:operator, Shapes::ShapeRef.new(shape: OperatorResponse, location_name: "operator"))
+    NetworkInterface.add_member(:associated_subnets, Shapes::ShapeRef.new(shape: AssociatedSubnetList, location_name: "associatedSubnetSet"))
     NetworkInterface.struct_class = Types::NetworkInterface
 
     NetworkInterfaceAssociation.add_member(:allocation_id, Shapes::ShapeRef.new(shape: String, location_name: "allocationId"))
@@ -16051,6 +16058,7 @@ module Aws::EC2
     Subnet.add_member(:ipv_6_native, Shapes::ShapeRef.new(shape: Boolean, location_name: "ipv6Native"))
     Subnet.add_member(:private_dns_name_options_on_launch, Shapes::ShapeRef.new(shape: PrivateDnsNameOptionsOnLaunch, location_name: "privateDnsNameOptionsOnLaunch"))
     Subnet.add_member(:block_public_access_states, Shapes::ShapeRef.new(shape: BlockPublicAccessStates, location_name: "blockPublicAccessStates"))
+    Subnet.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
     Subnet.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, location_name: "subnetId"))
     Subnet.add_member(:state, Shapes::ShapeRef.new(shape: SubnetState, location_name: "state"))
     Subnet.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
@@ -16088,6 +16096,8 @@ module Aws::EC2
     SubnetConfiguration.struct_class = Types::SubnetConfiguration
 
     SubnetConfigurationsList.member = Shapes::ShapeRef.new(shape: SubnetConfiguration, location_name: "item")
+
+    SubnetIdList.member = Shapes::ShapeRef.new(shape: SubnetId, location_name: "AssociatedSubnetId")
 
     SubnetIdStringList.member = Shapes::ShapeRef.new(shape: SubnetId, location_name: "SubnetId")
 

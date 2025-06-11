@@ -2,7 +2,7 @@
   "metadata": {
     "endpointPrefix": "svc",
     "serviceId": "sample_svc",
-    "protocols": ["smithy-rpc-v2-cbor", "json"],
+    "protocols": ["smithy-rpc-v2-cbor", "query"],
     "jsonVersion": "1.0",
     "protocol": ["fake"]
   },

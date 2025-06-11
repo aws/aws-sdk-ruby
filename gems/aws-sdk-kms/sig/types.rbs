@@ -182,6 +182,7 @@ module Aws::KMS
       attr_accessor plaintext: ::String
       attr_accessor encryption_algorithm: ("SYMMETRIC_DEFAULT" | "RSAES_OAEP_SHA_1" | "RSAES_OAEP_SHA_256" | "SM2PKE")
       attr_accessor ciphertext_for_recipient: ::String
+      attr_accessor key_material_id: ::String
       SENSITIVE: [:plaintext]
     end
 
@@ -200,6 +201,13 @@ module Aws::KMS
 
     class DeleteImportedKeyMaterialRequest
       attr_accessor key_id: ::String
+      attr_accessor key_material_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteImportedKeyMaterialResponse
+      attr_accessor key_id: ::String
+      attr_accessor key_material_id: ::String
       SENSITIVE: []
     end
 
@@ -331,6 +339,7 @@ module Aws::KMS
       attr_accessor key_id: ::String
       attr_accessor key_pair_spec: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SM2")
       attr_accessor ciphertext_for_recipient: ::String
+      attr_accessor key_material_id: ::String
       SENSITIVE: [:private_key_plaintext]
     end
 
@@ -348,6 +357,7 @@ module Aws::KMS
       attr_accessor public_key: ::String
       attr_accessor key_id: ::String
       attr_accessor key_pair_spec: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SM2")
+      attr_accessor key_material_id: ::String
       SENSITIVE: []
     end
 
@@ -367,6 +377,7 @@ module Aws::KMS
       attr_accessor plaintext: ::String
       attr_accessor key_id: ::String
       attr_accessor ciphertext_for_recipient: ::String
+      attr_accessor key_material_id: ::String
       SENSITIVE: [:plaintext]
     end
 
@@ -383,6 +394,7 @@ module Aws::KMS
     class GenerateDataKeyWithoutPlaintextResponse
       attr_accessor ciphertext_blob: ::String
       attr_accessor key_id: ::String
+      attr_accessor key_material_id: ::String
       SENSITIVE: []
     end
 
@@ -499,10 +511,16 @@ module Aws::KMS
       attr_accessor encrypted_key_material: ::String
       attr_accessor valid_to: ::Time
       attr_accessor expiration_model: ("KEY_MATERIAL_EXPIRES" | "KEY_MATERIAL_DOES_NOT_EXPIRE")
+      attr_accessor import_type: ("NEW_KEY_MATERIAL" | "EXISTING_KEY_MATERIAL")
+      attr_accessor key_material_description: ::String
+      attr_accessor key_material_id: ::String
       SENSITIVE: []
     end
 
-    class ImportKeyMaterialResponse < Aws::EmptyStructure
+    class ImportKeyMaterialResponse
+      attr_accessor key_id: ::String
+      attr_accessor key_material_id: ::String
+      SENSITIVE: []
     end
 
     class IncorrectKeyException
@@ -612,6 +630,7 @@ module Aws::KMS
       attr_accessor pending_deletion_window_in_days: ::Integer
       attr_accessor mac_algorithms: ::Array[("HMAC_SHA_224" | "HMAC_SHA_256" | "HMAC_SHA_384" | "HMAC_SHA_512")]
       attr_accessor xks_key_configuration: Types::XksKeyConfigurationType
+      attr_accessor current_key_material_id: ::String
       SENSITIVE: []
     end
 
@@ -671,6 +690,7 @@ module Aws::KMS
 
     class ListKeyRotationsRequest
       attr_accessor key_id: ::String
+      attr_accessor include_key_material: ("ALL_KEY_MATERIAL" | "ROTATIONS_ONLY")
       attr_accessor limit: ::Integer
       attr_accessor marker: ::String
       SENSITIVE: []
@@ -767,6 +787,8 @@ module Aws::KMS
       attr_accessor key_id: ::String
       attr_accessor source_encryption_algorithm: ("SYMMETRIC_DEFAULT" | "RSAES_OAEP_SHA_1" | "RSAES_OAEP_SHA_256" | "SM2PKE")
       attr_accessor destination_encryption_algorithm: ("SYMMETRIC_DEFAULT" | "RSAES_OAEP_SHA_1" | "RSAES_OAEP_SHA_256" | "SM2PKE")
+      attr_accessor source_key_material_id: ::String
+      attr_accessor destination_key_material_id: ::String
       SENSITIVE: []
     end
 
@@ -820,6 +842,12 @@ module Aws::KMS
 
     class RotationsListEntry
       attr_accessor key_id: ::String
+      attr_accessor key_material_id: ::String
+      attr_accessor key_material_description: ::String
+      attr_accessor import_state: ("IMPORTED" | "PENDING_IMPORT")
+      attr_accessor key_material_state: ("NON_CURRENT" | "CURRENT" | "PENDING_ROTATION")
+      attr_accessor expiration_model: ("KEY_MATERIAL_EXPIRES" | "KEY_MATERIAL_DOES_NOT_EXPIRE")
+      attr_accessor valid_to: ::Time
       attr_accessor rotation_date: ::Time
       attr_accessor rotation_type: ("AUTOMATIC" | "ON_DEMAND")
       SENSITIVE: []

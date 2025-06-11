@@ -3906,6 +3906,7 @@ module Aws::RDS
     #   resp.db_cluster.tag_list #=> Array
     #   resp.db_cluster.tag_list[0].key #=> String
     #   resp.db_cluster.tag_list[0].value #=> String
+    #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
@@ -6094,20 +6095,22 @@ module Aws::RDS
 
     # Creates a new DB instance that acts as a read replica for an existing
     # source DB instance or Multi-AZ DB cluster. You can create a read
-    # replica for a DB instance running Db2, MariaDB, MySQL, Oracle,
-    # PostgreSQL, or SQL Server. You can create a read replica for a
-    # Multi-AZ DB cluster running MySQL or PostgreSQL. For more information,
-    # see [Working with read replicas][1] and [Migrating from a Multi-AZ DB
-    # cluster to a DB instance using a read replica][2] in the *Amazon RDS
-    # User Guide*.
+    # replica for a DB instance running MariaDB, MySQL, Oracle, PostgreSQL,
+    # or SQL Server. You can create a read replica for a Multi-AZ DB cluster
+    # running MySQL or PostgreSQL. For more information, see [Working with
+    # read replicas][1] and [Migrating from a Multi-AZ DB cluster to a DB
+    # instance using a read replica][2] in the *Amazon RDS User Guide*.
+    #
+    # Amazon RDS for Db2 supports this operation for standby replicas. To
+    # create a standby replica for a DB instance running Db2, you must set
+    # `ReplicaMode` to `mounted`.
     #
     # Amazon Aurora doesn't support this operation. To create a DB instance
     # for an Aurora DB cluster, use the `CreateDBInstance` operation.
     #
-    # All read replica DB instances are created with backups disabled. All
-    # other attributes (including DB security groups and DB parameter
-    # groups) are inherited from the source DB instance or cluster, except
-    # as specified.
+    # RDS creates read replicas with backups disabled. All other attributes
+    # (including DB security groups and DB parameter groups) are inherited
+    # from the source DB instance or cluster, except as specified.
     #
     # Your source DB instance or cluster must have backup retention enabled.
     #
@@ -6123,8 +6126,14 @@ module Aws::RDS
     #
     # @option params [String] :source_db_instance_identifier
     #   The identifier of the DB instance that will act as the source for the
-    #   read replica. Each DB instance can have up to 15 read replicas, with
-    #   the exception of Oracle and SQL Server, which can have up to five.
+    #   read replica. Each DB instance can have up to 15 read replicas, except
+    #   for the following engines:
+    #
+    #   * Db2 - Can have up to three replicas.
+    #
+    #   * Oracle - Can have up to five read replicas.
+    #
+    #   * SQL Server - Can have up to five read replicas.
     #
     #   Constraints:
     #
@@ -6233,6 +6242,16 @@ module Aws::RDS
     #   The name of the DB parameter group to associate with this read replica
     #   DB instance.
     #
+    #   For the Db2 DB engine, if your source DB instance uses the Bring Your
+    #   Own License model, then a custom parameter group must be associated
+    #   with the replica. For a same Amazon Web Services Region replica, if
+    #   you don't specify a custom parameter group, Amazon RDS associates the
+    #   custom parameter group associated with the source DB instance. For a
+    #   cross-Region replica, you must specify a custom parameter group. This
+    #   custom parameter group must include your IBM Site ID and IBM Customer
+    #   ID. For more information, see [ IBM IDs for Bring Your Own License for
+    #   Db2][1].
+    #
     #   For Single-AZ or Multi-AZ DB instance read replica instances, if you
     #   don't specify a value for `DBParameterGroupName`, then Amazon RDS
     #   uses the `DBParameterGroup` of the source DB instance for a same
@@ -6245,9 +6264,9 @@ module Aws::RDS
     #
     #   Specifying a parameter group for this operation is only supported for
     #   MySQL DB instances for cross-Region read replicas, for Multi-AZ DB
-    #   cluster read replica instances, and for Oracle DB instances. It isn't
-    #   supported for MySQL DB instances for same Region read replicas or for
-    #   RDS Custom.
+    #   cluster read replica instances, for Db2 DB instances, and for Oracle
+    #   DB instances. It isn't supported for MySQL DB instances for same
+    #   Region read replicas or for RDS Custom.
     #
     #   Constraints:
     #
@@ -6256,6 +6275,10 @@ module Aws::RDS
     #   * First character must be a letter.
     #
     #   * Can't end with a hyphen or contain two consecutive hyphens.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html#db2-prereqs-ibm-info
     #
     # @option params [Boolean] :publicly_accessible
     #   Specifies whether the DB instance is publicly accessible.
@@ -6630,31 +6653,50 @@ module Aws::RDS
     #   Example: `123.124.125.126,234.235.236.237`
     #
     # @option params [String] :replica_mode
-    #   The open mode of the replica database: mounted or read-only.
+    #   The open mode of the replica database.
     #
-    #   <note markdown="1"> This parameter is only supported for Oracle DB instances.
+    #   <note markdown="1"> This parameter is only supported for Db2 DB instances and Oracle DB
+    #   instances.
     #
     #    </note>
     #
-    #   Mounted DB replicas are included in Oracle Database Enterprise
-    #   Edition. The main use case for mounted replicas is cross-Region
-    #   disaster recovery. The primary database doesn't use Active Data Guard
-    #   to transmit information to the mounted replica. Because it doesn't
-    #   accept user connections, a mounted replica can't serve a read-only
-    #   workload.
+    #   Db2
     #
-    #   You can create a combination of mounted and read-only DB replicas for
-    #   the same primary DB instance. For more information, see [Working with
-    #   Oracle Read Replicas for Amazon RDS][1] in the *Amazon RDS User
-    #   Guide*.
+    #   : Standby DB replicas are included in Db2 Advanced Edition (AE) and
+    #     Db2 Standard Edition (SE). The main use case for standby replicas is
+    #     cross-Region disaster recovery. Because it doesn't accept user
+    #     connections, a standby replica can't serve a read-only workload.
     #
-    #   For RDS Custom, you must specify this parameter and set it to
-    #   `mounted`. The value won't be set by default. After replica creation,
-    #   you can manage the open mode manually.
+    #     You can create a combination of standby and read-only DB replicas
+    #     for the same primary DB instance. For more information, see [Working
+    #     with read replicas for Amazon RDS for Db2][1] in the *Amazon RDS
+    #     User Guide*.
+    #
+    #     To create standby DB replicas for RDS for Db2, set this parameter to
+    #     `mounted`.
+    #
+    #   Oracle
+    #
+    #   : Mounted DB replicas are included in Oracle Database Enterprise
+    #     Edition. The main use case for mounted replicas is cross-Region
+    #     disaster recovery. The primary database doesn't use Active Data
+    #     Guard to transmit information to the mounted replica. Because it
+    #     doesn't accept user connections, a mounted replica can't serve a
+    #     read-only workload.
+    #
+    #     You can create a combination of mounted and read-only DB replicas
+    #     for the same primary DB instance. For more information, see [Working
+    #     with read replicas for Amazon RDS for Oracle][2] in the *Amazon RDS
+    #     User Guide*.
+    #
+    #     For RDS Custom, you must specify this parameter and set it to
+    #     `mounted`. The value won't be set by default. After replica
+    #     creation, you can manage the open mode manually.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-replication.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
     #
     # @option params [Integer] :max_allocated_storage
     #   The upper limit in gibibytes (GiB) to which Amazon RDS can
@@ -7520,17 +7562,17 @@ module Aws::RDS
     #   The name of the primary DB cluster for the DB shard group.
     #
     # @option params [Integer] :compute_redundancy
-    #   Specifies whether to create standby DB shard groups for the DB shard
-    #   group. Valid values are the following:
+    #   Specifies whether to create standby standby DB data access shard for
+    #   the DB shard group. Valid values are the following:
     #
-    #   * 0 - Creates a DB shard group without a standby DB shard group. This
-    #     is the default value.
+    #   * 0 - Creates a DB shard group without a standby DB data access shard.
+    #     This is the default value.
     #
-    #   * 1 - Creates a DB shard group with a standby DB shard group in a
-    #     different Availability Zone (AZ).
+    #   * 1 - Creates a DB shard group with a standby DB data access shard in
+    #     a different Availability Zone (AZ).
     #
-    #   * 2 - Creates a DB shard group with two standby DB shard groups in two
-    #     different AZs.
+    #   * 2 - Creates a DB shard group with two standby DB data access shard
+    #     in two different AZs.
     #
     # @option params [required, Float] :max_acu
     #   The maximum capacity of the DB shard group in Aurora capacity units
@@ -9350,6 +9392,7 @@ module Aws::RDS
     #   resp.db_cluster.tag_list #=> Array
     #   resp.db_cluster.tag_list[0].key #=> String
     #   resp.db_cluster.tag_list[0].value #=> String
+    #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
@@ -12802,6 +12845,7 @@ module Aws::RDS
     #   resp.db_clusters[0].tag_list #=> Array
     #   resp.db_clusters[0].tag_list[0].key #=> String
     #   resp.db_clusters[0].tag_list[0].value #=> String
+    #   resp.db_clusters[0].global_cluster_identifier #=> String
     #   resp.db_clusters[0].global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_clusters[0].global_write_forwarding_requested #=> Boolean
     #   resp.db_clusters[0].pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
@@ -17912,6 +17956,17 @@ module Aws::RDS
     #
     # This command doesn't apply to RDS Custom.
     #
+    # <note markdown="1"> This operation uses resources on database instances. Because of this,
+    # we recommend publishing database logs to CloudWatch and then using the
+    # GetLogEvents operation. For more information, see [GetLogEvents][1] in
+    # the *Amazon CloudWatch Logs API Reference*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogEvents.html
+    #
     # @option params [required, String] :db_instance_identifier
     #   The customer-assigned name of the DB instance that contains the log
     #   files you want to list.
@@ -18226,6 +18281,7 @@ module Aws::RDS
     #   resp.db_cluster.tag_list #=> Array
     #   resp.db_cluster.tag_list[0].key #=> String
     #   resp.db_cluster.tag_list[0].value #=> String
+    #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
@@ -19952,6 +20008,7 @@ module Aws::RDS
     #   resp.db_cluster.tag_list #=> Array
     #   resp.db_cluster.tag_list[0].key #=> String
     #   resp.db_cluster.tag_list[0].value #=> String
+    #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
@@ -21267,26 +21324,50 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL-certificate-rotation.html
     #
     # @option params [String] :replica_mode
-    #   A value that sets the open mode of a replica database to either
-    #   mounted or read-only.
+    #   The open mode of a replica database.
     #
-    #   <note markdown="1"> Currently, this parameter is only supported for Oracle DB instances.
+    #   <note markdown="1"> This parameter is only supported for Db2 DB instances and Oracle DB
+    #   instances.
     #
     #    </note>
     #
-    #   Mounted DB replicas are included in Oracle Enterprise Edition. The
-    #   main use case for mounted replicas is cross-Region disaster recovery.
-    #   The primary database doesn't use Active Data Guard to transmit
-    #   information to the mounted replica. Because it doesn't accept user
-    #   connections, a mounted replica can't serve a read-only workload. For
-    #   more information, see [Working with Oracle Read Replicas for Amazon
-    #   RDS][1] in the *Amazon RDS User Guide*.
+    #   Db2
     #
-    #   This setting doesn't apply to RDS Custom DB instances.
+    #   : Standby DB replicas are included in Db2 Advanced Edition (AE) and
+    #     Db2 Standard Edition (SE). The main use case for standby replicas is
+    #     cross-Region disaster recovery. Because it doesn't accept user
+    #     connections, a standby replica can't serve a read-only workload.
+    #
+    #     You can create a combination of standby and read-only DB replicas
+    #     for the same primary DB instance. For more information, see [Working
+    #     with read replicas for Amazon RDS for Db2][1] in the *Amazon RDS
+    #     User Guide*.
+    #
+    #     To create standby DB replicas for RDS for Db2, set this parameter to
+    #     `mounted`.
+    #
+    #   Oracle
+    #
+    #   : Mounted DB replicas are included in Oracle Database Enterprise
+    #     Edition. The main use case for mounted replicas is cross-Region
+    #     disaster recovery. The primary database doesn't use Active Data
+    #     Guard to transmit information to the mounted replica. Because it
+    #     doesn't accept user connections, a mounted replica can't serve a
+    #     read-only workload.
+    #
+    #     You can create a combination of mounted and read-only DB replicas
+    #     for the same primary DB instance. For more information, see [Working
+    #     with read replicas for Amazon RDS for Oracle][2] in the *Amazon RDS
+    #     User Guide*.
+    #
+    #     For RDS Custom, you must specify this parameter and set it to
+    #     `mounted`. The value won't be set by default. After replica
+    #     creation, you can manage the open mode manually.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-replication.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
     #
     # @option params [Boolean] :enable_customer_owned_ip
     #   Specifies whether to enable a customer-owned IP address (CoIP) for an
@@ -23832,6 +23913,7 @@ module Aws::RDS
     #   resp.db_cluster.tag_list #=> Array
     #   resp.db_cluster.tag_list[0].key #=> String
     #   resp.db_cluster.tag_list[0].value #=> String
+    #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
@@ -24135,6 +24217,7 @@ module Aws::RDS
     #   resp.db_cluster.tag_list #=> Array
     #   resp.db_cluster.tag_list[0].key #=> String
     #   resp.db_cluster.tag_list[0].value #=> String
+    #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
@@ -25737,6 +25820,7 @@ module Aws::RDS
     #   resp.db_cluster.tag_list #=> Array
     #   resp.db_cluster.tag_list[0].key #=> String
     #   resp.db_cluster.tag_list[0].value #=> String
+    #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
@@ -26561,6 +26645,7 @@ module Aws::RDS
     #   resp.db_cluster.tag_list #=> Array
     #   resp.db_cluster.tag_list[0].key #=> String
     #   resp.db_cluster.tag_list[0].value #=> String
+    #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
@@ -27368,6 +27453,7 @@ module Aws::RDS
     #   resp.db_cluster.tag_list #=> Array
     #   resp.db_cluster.tag_list[0].key #=> String
     #   resp.db_cluster.tag_list[0].value #=> String
+    #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
@@ -30541,6 +30627,7 @@ module Aws::RDS
     #   resp.db_cluster.tag_list #=> Array
     #   resp.db_cluster.tag_list[0].key #=> String
     #   resp.db_cluster.tag_list[0].value #=> String
+    #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
@@ -31375,6 +31462,7 @@ module Aws::RDS
     #   resp.db_cluster.tag_list #=> Array
     #   resp.db_cluster.tag_list[0].key #=> String
     #   resp.db_cluster.tag_list[0].value #=> String
+    #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
     #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
@@ -32285,7 +32373,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.278.0'
+      context[:gem_version] = '1.280.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -123,6 +123,21 @@ module Aws::MarketplaceCatalog
     ListEntitiesResponse = Shapes::StructureShape.new(name: 'ListEntitiesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    MachineLearningProductEntityIdFilter = Shapes::StructureShape.new(name: 'MachineLearningProductEntityIdFilter')
+    MachineLearningProductEntityIdFilterValueList = Shapes::ListShape.new(name: 'MachineLearningProductEntityIdFilterValueList')
+    MachineLearningProductEntityIdString = Shapes::StringShape.new(name: 'MachineLearningProductEntityIdString')
+    MachineLearningProductFilters = Shapes::StructureShape.new(name: 'MachineLearningProductFilters')
+    MachineLearningProductLastModifiedDateFilter = Shapes::StructureShape.new(name: 'MachineLearningProductLastModifiedDateFilter')
+    MachineLearningProductLastModifiedDateFilterDateRange = Shapes::StructureShape.new(name: 'MachineLearningProductLastModifiedDateFilterDateRange')
+    MachineLearningProductSort = Shapes::StructureShape.new(name: 'MachineLearningProductSort')
+    MachineLearningProductSortBy = Shapes::StringShape.new(name: 'MachineLearningProductSortBy')
+    MachineLearningProductSummary = Shapes::StructureShape.new(name: 'MachineLearningProductSummary')
+    MachineLearningProductTitleFilter = Shapes::StructureShape.new(name: 'MachineLearningProductTitleFilter')
+    MachineLearningProductTitleFilterValueList = Shapes::ListShape.new(name: 'MachineLearningProductTitleFilterValueList')
+    MachineLearningProductTitleString = Shapes::StringShape.new(name: 'MachineLearningProductTitleString')
+    MachineLearningProductVisibilityFilter = Shapes::StructureShape.new(name: 'MachineLearningProductVisibilityFilter')
+    MachineLearningProductVisibilityFilterValueList = Shapes::ListShape.new(name: 'MachineLearningProductVisibilityFilterValueList')
+    MachineLearningProductVisibilityString = Shapes::StringShape.new(name: 'MachineLearningProductVisibilityString')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OfferAvailabilityEndDateFilter = Shapes::StructureShape.new(name: 'OfferAvailabilityEndDateFilter')
     OfferAvailabilityEndDateFilterDateRange = Shapes::StructureShape.new(name: 'OfferAvailabilityEndDateFilterDateRange')
@@ -480,6 +495,7 @@ module Aws::MarketplaceCatalog
     EntitySummary.add_member(:saa_s_product_summary, Shapes::ShapeRef.new(shape: SaaSProductSummary, location_name: "SaaSProductSummary"))
     EntitySummary.add_member(:offer_summary, Shapes::ShapeRef.new(shape: OfferSummary, location_name: "OfferSummary"))
     EntitySummary.add_member(:resale_authorization_summary, Shapes::ShapeRef.new(shape: ResaleAuthorizationSummary, location_name: "ResaleAuthorizationSummary"))
+    EntitySummary.add_member(:machine_learning_product_summary, Shapes::ShapeRef.new(shape: MachineLearningProductSummary, location_name: "MachineLearningProductSummary"))
     EntitySummary.struct_class = Types::EntitySummary
 
     EntitySummaryList.member = Shapes::ShapeRef.new(shape: EntitySummary)
@@ -490,6 +506,7 @@ module Aws::MarketplaceCatalog
     EntityTypeFilters.add_member(:offer_filters, Shapes::ShapeRef.new(shape: OfferFilters, location_name: "OfferFilters"))
     EntityTypeFilters.add_member(:container_product_filters, Shapes::ShapeRef.new(shape: ContainerProductFilters, location_name: "ContainerProductFilters"))
     EntityTypeFilters.add_member(:resale_authorization_filters, Shapes::ShapeRef.new(shape: ResaleAuthorizationFilters, location_name: "ResaleAuthorizationFilters"))
+    EntityTypeFilters.add_member(:machine_learning_product_filters, Shapes::ShapeRef.new(shape: MachineLearningProductFilters, location_name: "MachineLearningProductFilters"))
     EntityTypeFilters.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     EntityTypeFilters.add_member_subclass(:data_product_filters, Types::EntityTypeFilters::DataProductFilters)
     EntityTypeFilters.add_member_subclass(:saa_s_product_filters, Types::EntityTypeFilters::SaaSProductFilters)
@@ -497,6 +514,7 @@ module Aws::MarketplaceCatalog
     EntityTypeFilters.add_member_subclass(:offer_filters, Types::EntityTypeFilters::OfferFilters)
     EntityTypeFilters.add_member_subclass(:container_product_filters, Types::EntityTypeFilters::ContainerProductFilters)
     EntityTypeFilters.add_member_subclass(:resale_authorization_filters, Types::EntityTypeFilters::ResaleAuthorizationFilters)
+    EntityTypeFilters.add_member_subclass(:machine_learning_product_filters, Types::EntityTypeFilters::MachineLearningProductFilters)
     EntityTypeFilters.add_member_subclass(:unknown, Types::EntityTypeFilters::Unknown)
     EntityTypeFilters.struct_class = Types::EntityTypeFilters
 
@@ -506,6 +524,7 @@ module Aws::MarketplaceCatalog
     EntityTypeSort.add_member(:offer_sort, Shapes::ShapeRef.new(shape: OfferSort, location_name: "OfferSort"))
     EntityTypeSort.add_member(:container_product_sort, Shapes::ShapeRef.new(shape: ContainerProductSort, location_name: "ContainerProductSort"))
     EntityTypeSort.add_member(:resale_authorization_sort, Shapes::ShapeRef.new(shape: ResaleAuthorizationSort, location_name: "ResaleAuthorizationSort"))
+    EntityTypeSort.add_member(:machine_learning_product_sort, Shapes::ShapeRef.new(shape: MachineLearningProductSort, location_name: "MachineLearningProductSort"))
     EntityTypeSort.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     EntityTypeSort.add_member_subclass(:data_product_sort, Types::EntityTypeSort::DataProductSort)
     EntityTypeSort.add_member_subclass(:saa_s_product_sort, Types::EntityTypeSort::SaaSProductSort)
@@ -513,6 +532,7 @@ module Aws::MarketplaceCatalog
     EntityTypeSort.add_member_subclass(:offer_sort, Types::EntityTypeSort::OfferSort)
     EntityTypeSort.add_member_subclass(:container_product_sort, Types::EntityTypeSort::ContainerProductSort)
     EntityTypeSort.add_member_subclass(:resale_authorization_sort, Types::EntityTypeSort::ResaleAuthorizationSort)
+    EntityTypeSort.add_member_subclass(:machine_learning_product_sort, Types::EntityTypeSort::MachineLearningProductSort)
     EntityTypeSort.add_member_subclass(:unknown, Types::EntityTypeSort::Unknown)
     EntityTypeSort.struct_class = Types::EntityTypeSort
 
@@ -572,6 +592,43 @@ module Aws::MarketplaceCatalog
     ListTagsForResourceResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceArn"))
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    MachineLearningProductEntityIdFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: MachineLearningProductEntityIdFilterValueList, location_name: "ValueList"))
+    MachineLearningProductEntityIdFilter.struct_class = Types::MachineLearningProductEntityIdFilter
+
+    MachineLearningProductEntityIdFilterValueList.member = Shapes::ShapeRef.new(shape: MachineLearningProductEntityIdString)
+
+    MachineLearningProductFilters.add_member(:entity_id, Shapes::ShapeRef.new(shape: MachineLearningProductEntityIdFilter, location_name: "EntityId"))
+    MachineLearningProductFilters.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: MachineLearningProductLastModifiedDateFilter, location_name: "LastModifiedDate"))
+    MachineLearningProductFilters.add_member(:product_title, Shapes::ShapeRef.new(shape: MachineLearningProductTitleFilter, location_name: "ProductTitle"))
+    MachineLearningProductFilters.add_member(:visibility, Shapes::ShapeRef.new(shape: MachineLearningProductVisibilityFilter, location_name: "Visibility"))
+    MachineLearningProductFilters.struct_class = Types::MachineLearningProductFilters
+
+    MachineLearningProductLastModifiedDateFilter.add_member(:date_range, Shapes::ShapeRef.new(shape: MachineLearningProductLastModifiedDateFilterDateRange, location_name: "DateRange"))
+    MachineLearningProductLastModifiedDateFilter.struct_class = Types::MachineLearningProductLastModifiedDateFilter
+
+    MachineLearningProductLastModifiedDateFilterDateRange.add_member(:after_value, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "AfterValue"))
+    MachineLearningProductLastModifiedDateFilterDateRange.add_member(:before_value, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "BeforeValue"))
+    MachineLearningProductLastModifiedDateFilterDateRange.struct_class = Types::MachineLearningProductLastModifiedDateFilterDateRange
+
+    MachineLearningProductSort.add_member(:sort_by, Shapes::ShapeRef.new(shape: MachineLearningProductSortBy, location_name: "SortBy"))
+    MachineLearningProductSort.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
+    MachineLearningProductSort.struct_class = Types::MachineLearningProductSort
+
+    MachineLearningProductSummary.add_member(:product_title, Shapes::ShapeRef.new(shape: MachineLearningProductTitleString, location_name: "ProductTitle"))
+    MachineLearningProductSummary.add_member(:visibility, Shapes::ShapeRef.new(shape: MachineLearningProductVisibilityString, location_name: "Visibility"))
+    MachineLearningProductSummary.struct_class = Types::MachineLearningProductSummary
+
+    MachineLearningProductTitleFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: MachineLearningProductTitleFilterValueList, location_name: "ValueList"))
+    MachineLearningProductTitleFilter.add_member(:wild_card_value, Shapes::ShapeRef.new(shape: MachineLearningProductTitleString, location_name: "WildCardValue"))
+    MachineLearningProductTitleFilter.struct_class = Types::MachineLearningProductTitleFilter
+
+    MachineLearningProductTitleFilterValueList.member = Shapes::ShapeRef.new(shape: MachineLearningProductTitleString)
+
+    MachineLearningProductVisibilityFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: MachineLearningProductVisibilityFilterValueList, location_name: "ValueList"))
+    MachineLearningProductVisibilityFilter.struct_class = Types::MachineLearningProductVisibilityFilter
+
+    MachineLearningProductVisibilityFilterValueList.member = Shapes::ShapeRef.new(shape: MachineLearningProductVisibilityString)
 
     OfferAvailabilityEndDateFilter.add_member(:date_range, Shapes::ShapeRef.new(shape: OfferAvailabilityEndDateFilterDateRange, location_name: "DateRange"))
     OfferAvailabilityEndDateFilter.struct_class = Types::OfferAvailabilityEndDateFilter

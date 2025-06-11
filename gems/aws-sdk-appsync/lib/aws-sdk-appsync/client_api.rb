@@ -497,8 +497,8 @@ module Aws::AppSync
 
     CreateApiCacheRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     CreateApiCacheRequest.add_member(:ttl, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "ttl"))
-    CreateApiCacheRequest.add_member(:transit_encryption_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "transitEncryptionEnabled"))
-    CreateApiCacheRequest.add_member(:at_rest_encryption_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "atRestEncryptionEnabled"))
+    CreateApiCacheRequest.add_member(:transit_encryption_enabled, Shapes::ShapeRef.new(shape: Boolean, deprecated: true, location_name: "transitEncryptionEnabled", metadata: {"deprecatedMessage" => "transitEncryptionEnabled attribute is deprecated. Encryption in transit is always enabled.", "deprecatedSince" => "5/15/2025"}))
+    CreateApiCacheRequest.add_member(:at_rest_encryption_enabled, Shapes::ShapeRef.new(shape: Boolean, deprecated: true, location_name: "atRestEncryptionEnabled", metadata: {"deprecatedMessage" => "atRestEncryptionEnabled attribute is deprecated. Encryption at rest is always enabled.", "deprecatedSince" => "5/15/2025"}))
     CreateApiCacheRequest.add_member(:api_caching_behavior, Shapes::ShapeRef.new(shape: ApiCachingBehavior, required: true, location_name: "apiCachingBehavior"))
     CreateApiCacheRequest.add_member(:type, Shapes::ShapeRef.new(shape: ApiCacheType, required: true, location_name: "type"))
     CreateApiCacheRequest.add_member(:health_metrics_config, Shapes::ShapeRef.new(shape: CacheHealthMetricsConfig, location_name: "healthMetricsConfig"))

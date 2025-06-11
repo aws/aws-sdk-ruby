@@ -228,6 +228,7 @@ module Aws::EC2
       attr_accessor customer_owned_ip: ::String
       attr_accessor customer_owned_ipv_4_pool: ::String
       attr_accessor carrier_ip: ::String
+      attr_accessor subnet_id: ::String
       attr_accessor service_managed: ("alb" | "nlb" | "rnat")
       attr_accessor instance_id: ::String
       attr_accessor public_ip: ::String
@@ -11911,6 +11912,7 @@ module Aws::EC2
       attr_accessor enable_primary_ipv_6: bool
       attr_accessor connection_tracking_specification: Types::ConnectionTrackingSpecificationRequest
       attr_accessor associate_public_ip_address: bool
+      attr_accessor associated_subnet_ids: ::Array[::String]
       attr_accessor dry_run: bool
       attr_accessor network_interface_id: ::String
       attr_accessor description: Types::AttributeValue
@@ -12845,6 +12847,7 @@ module Aws::EC2
       attr_accessor ipv_6_native: bool
       attr_accessor ipv_6_address: ::String
       attr_accessor operator: Types::OperatorResponse
+      attr_accessor associated_subnets: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -15415,8 +15418,9 @@ module Aws::EC2
       attr_accessor ipv_6_native: bool
       attr_accessor private_dns_name_options_on_launch: Types::PrivateDnsNameOptionsOnLaunch
       attr_accessor block_public_access_states: Types::BlockPublicAccessStates
+      attr_accessor type: ::String
       attr_accessor subnet_id: ::String
-      attr_accessor state: ("pending" | "available" | "unavailable")
+      attr_accessor state: ("pending" | "available" | "unavailable" | "failed" | "failed-insufficient-capacity")
       attr_accessor vpc_id: ::String
       attr_accessor cidr_block: ::String
       attr_accessor available_ip_address_count: ::Integer

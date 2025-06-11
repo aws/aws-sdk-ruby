@@ -234,6 +234,12 @@ module Aws::EC2
       data[:operator]
     end
 
+    # The subnets associated with this network interface.
+    # @return [Array<String>]
+    def associated_subnets
+      data[:associated_subnets]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -644,6 +650,7 @@ module Aws::EC2
     #       udp_timeout: 1,
     #     },
     #     associate_public_ip_address: false,
+    #     associated_subnet_ids: ["SubnetId"],
     #     dry_run: false,
     #     description: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #     source_dest_check: {
@@ -683,6 +690,8 @@ module Aws::EC2
     #   Indicates whether to assign a public IPv4 address to a network
     #   interface. This option can be enabled for any network interface but
     #   will only apply to the primary network interface (eth0).
+    # @option options [Array<String>] :associated_subnet_ids
+    #   A list of subnet IDs to associate with the network interface.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

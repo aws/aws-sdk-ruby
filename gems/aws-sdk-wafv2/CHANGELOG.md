@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.111.0 (2025-06-11)
+------------------
+
+* Feature - WAF now provides two DDoS protection options: resource-level monitoring for Application Load Balancers and the AWSManagedRulesAntiDDoSRuleSet managed rule group for CloudFront distributions.
+
+1.110.0 (2025-06-05)
+------------------
+
+* Feature - AWS WAF adds support for ASN-based traffic filtering and support for ASN-based rate limiting.
+
 1.109.0 (2025-06-02)
 ------------------
 

@@ -5,7 +5,8 @@ require 'tempfile'
 require 'time'
 require 'uri'
 require 'set'
-require 'cgi'
+require "cgi/escape"
+require "cgi/util" if RUBY_VERSION < "3.5"
 require 'pathname'
 require 'aws-eventstream'
 

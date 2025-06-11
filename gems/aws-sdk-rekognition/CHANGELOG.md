@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.117.0 (2025-06-06)
+------------------
+
+* Feature - Adds support for defining an ordered preference list of different Rekognition Face Liveness challenge types when calling CreateFaceLivenessSession.
+
 1.116.0 (2025-06-02)
 ------------------
 

@@ -859,22 +859,22 @@ module Aws::BedrockAgentRuntime
       req.send_request(options)
     end
 
-    # Retrieves the flow definition snapshot used for an asynchronous
-    # execution. The snapshot represents the flow metadata and definition as
-    # it existed at the time the asynchronous execution was started. Note
-    # that even if the flow is edited after an execution starts, the
-    # snapshot connected to the execution remains unchanged.
+    # Retrieves the flow definition snapshot used for a flow execution. The
+    # snapshot represents the flow metadata and definition as it existed at
+    # the time the execution was started. Note that even if the flow is
+    # edited after an execution starts, the snapshot connected to the
+    # execution remains unchanged.
     #
-    # <note markdown="1"> Asynchronous flows is in preview release for Amazon Bedrock and is
+    # <note markdown="1"> Flow executions is in preview release for Amazon Bedrock and is
     # subject to change.
     #
     #  </note>
     #
     # @option params [required, String] :execution_identifier
-    #   The unique identifier of the async execution.
+    #   The unique identifier of the flow execution.
     #
     # @option params [required, String] :flow_alias_identifier
-    #   The unique identifier of the flow alias used for the async execution.
+    #   The unique identifier of the flow alias used for the flow execution.
     #
     # @option params [required, String] :flow_identifier
     #   The unique identifier of the flow.
@@ -914,12 +914,12 @@ module Aws::BedrockAgentRuntime
       req.send_request(options)
     end
 
-    # Retrieves details about a specific asynchronous execution of a flow,
-    # including its status, start and end times, and any errors that
-    # occurred during execution.
+    # Retrieves details about a specific flow execution, including its
+    # status, start and end times, and any errors that occurred during
+    # execution.
     #
     # @option params [required, String] :execution_identifier
-    #   The unique identifier of the async execution to retrieve.
+    #   The unique identifier of the flow execution to retrieve.
     #
     # @option params [required, String] :flow_alias_identifier
     #   The unique identifier of the flow alias used for the execution.
@@ -1143,6 +1143,13 @@ module Aws::BedrockAgentRuntime
     #
     # @option params [String] :memory_id
     #   The unique identifier of the agent memory.
+    #
+    # @option params [Types::PromptCreationConfigurations] :prompt_creation_configurations
+    #   Specifies parameters that control how the service populates the agent
+    #   prompt for an `InvokeAgent` request. You can control which aspects of
+    #   previous invocations in the same agent session the service uses to
+    #   populate the agent prompt. This gives you more granular control over
+    #   the contextual history that is used to process the current request.
     #
     # @option params [required, String] :session_id
     #   The unique identifier of the session. Use the same value across
@@ -1399,6 +1406,10 @@ module Aws::BedrockAgentRuntime
     #     end_session: false,
     #     input_text: "InputText",
     #     memory_id: "MemoryId",
+    #     prompt_creation_configurations: {
+    #       exclude_previous_thinking_steps: false,
+    #       previous_conversation_turns_to_include: 1,
+    #     },
     #     session_id: "SessionId", # required
     #     session_state: {
     #       conversation_history: {
@@ -2697,6 +2708,14 @@ module Aws::BedrockAgentRuntime
     #   Specifies the type of orchestration strategy for the agent. This is
     #   set to DEFAULT orchestration type, by default.
     #
+    # @option params [Types::PromptCreationConfigurations] :prompt_creation_configurations
+    #   Specifies parameters that control how the service populates the agent
+    #   prompt for an `InvokeInlineAgent` request. You can control which
+    #   aspects of previous invocations in the same agent session the service
+    #   uses to populate the agent prompt. This gives you more granular
+    #   control over the contextual history that is used to process the
+    #   current request.
+    #
     # @option params [Types::PromptOverrideConfiguration] :prompt_override_configuration
     #   Configurations for advanced prompts used to override the default
     #   prompts to enhance the accuracy of the inline agent.
@@ -3386,6 +3405,10 @@ module Aws::BedrockAgentRuntime
     #       },
     #     ],
     #     orchestration_type: "DEFAULT", # accepts DEFAULT, CUSTOM_ORCHESTRATION
+    #     prompt_creation_configurations: {
+    #       exclude_previous_thinking_steps: false,
+    #       previous_conversation_turns_to_include: 1,
+    #     },
     #     prompt_override_configuration: {
     #       override_lambda: "LambdaResourceArn",
     #       prompt_configurations: [ # required
@@ -4008,12 +4031,12 @@ module Aws::BedrockAgentRuntime
       req.send_request(options, &block)
     end
 
-    # Lists events that occurred during an asynchronous execution of a flow.
-    # Events provide detailed information about the execution progress,
-    # including node inputs and outputs, flow inputs and outputs, condition
-    # results, and failure events.
+    # Lists events that occurred during a flow execution. Events provide
+    # detailed information about the execution progress, including node
+    # inputs and outputs, flow inputs and outputs, condition results, and
+    # failure events.
     #
-    # <note markdown="1"> Asynchronous flows is in preview release for Amazon Bedrock and is
+    # <note markdown="1"> Flow executions is in preview release for Amazon Bedrock and is
     # subject to change.
     #
     #  </note>
@@ -4023,7 +4046,7 @@ module Aws::BedrockAgentRuntime
     #   or `Flow` for flow-level events.
     #
     # @option params [required, String] :execution_identifier
-    #   The unique identifier of the async execution.
+    #   The unique identifier of the flow execution.
     #
     # @option params [required, String] :flow_alias_identifier
     #   The unique identifier of the flow alias used for the execution.
@@ -4099,11 +4122,11 @@ module Aws::BedrockAgentRuntime
       req.send_request(options)
     end
 
-    # Lists all asynchronous executions for a flow. Results can be paginated
-    # and include summary information about each execution, such as status,
-    # start and end times, and the execution's Amazon Resource Name (ARN).
+    # Lists all executions of a flow. Results can be paginated and include
+    # summary information about each execution, such as status, start and
+    # end times, and the execution's Amazon Resource Name (ARN).
     #
-    # <note markdown="1"> Asynchronous flows is in preview release for Amazon Bedrock and is
+    # <note markdown="1"> Flow executions is in preview release for Amazon Bedrock and is
     # subject to change.
     #
     #  </note>
@@ -4115,9 +4138,9 @@ module Aws::BedrockAgentRuntime
     #   The unique identifier of the flow to list executions for.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of async executions to return in a single response.
-    #   If more executions exist than the specified maxResults value, a token
-    #   is included in the response so that the remaining results can be
+    #   The maximum number of flow executions to return in a single response.
+    #   If more executions exist than the specified `maxResults` value, a
+    #   token is included in the response so that the remaining results can be
     #   retrieved.
     #
     # @option params [String] :next_token
@@ -5819,37 +5842,35 @@ module Aws::BedrockAgentRuntime
       req.send_request(options, &block)
     end
 
-    # Starts an asynchronous execution of an Amazon Bedrock flow. Unlike
-    # synchronous flows that run until completion or time out after five
-    # minutes, you can run asynchronous flows for longer durations.
-    # Asynchronous flows also yield control so that your application can
-    # perform other tasks.
+    # Starts an execution of an Amazon Bedrock flow. Unlike flows that run
+    # until completion or time out after five minutes, flow executions let
+    # you run flows asynchronously for longer durations. Flow executions
+    # also yield control so that your application can perform other tasks.
     #
     # This operation returns an Amazon Resource Name (ARN) that you can use
-    # to track and manage your flow's async execution.
+    # to track and manage your flow execution.
     #
-    # <note markdown="1"> Asynchronous flows is in preview release for Amazon Bedrock and is
+    # <note markdown="1"> Flow executions is in preview release for Amazon Bedrock and is
     # subject to change.
     #
     #  </note>
     #
     # @option params [required, String] :flow_alias_identifier
-    #   The unique identifier of the flow alias to use for the async
-    #   execution.
+    #   The unique identifier of the flow alias to use for the flow execution.
     #
     # @option params [String] :flow_execution_name
-    #   The unique name for the async execution. If you don't provide one, a
+    #   The unique name for the flow execution. If you don't provide one, a
     #   system-generated name is used.
     #
     # @option params [required, String] :flow_identifier
     #   The unique identifier of the flow to execute.
     #
     # @option params [required, Array<Types::FlowInput>] :inputs
-    #   The input data required for the async execution. This must match the
+    #   The input data required for the flow execution. This must match the
     #   input schema defined in the flow.
     #
     # @option params [Types::ModelPerformanceConfiguration] :model_performance_configuration
-    #   The performance settings for the foundation model used in the async
+    #   The performance settings for the foundation model used in the flow
     #   execution.
     #
     # @return [Types::StartFlowExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -5893,12 +5914,12 @@ module Aws::BedrockAgentRuntime
       req.send_request(options)
     end
 
-    # Stops an Amazon Bedrock flow's asynchronous execution. This operation
-    # prevents further processing of the flow and changes the execution
-    # status to `Aborted`.
+    # Stops an Amazon Bedrock flow's execution. This operation prevents
+    # further processing of the flow and changes the execution status to
+    # `Aborted`.
     #
     # @option params [required, String] :execution_identifier
-    #   The unique identifier of the async execution to stop.
+    #   The unique identifier of the flow execution to stop.
     #
     # @option params [required, String] :flow_alias_identifier
     #   The unique identifier of the flow alias used for the execution.
@@ -6063,7 +6084,7 @@ module Aws::BedrockAgentRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentruntime'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

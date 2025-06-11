@@ -238,6 +238,7 @@ module Aws::S3Tables
       attr_accessor table_bucket_arn: ::String
       attr_accessor namespace: ::String
       attr_accessor name: ::String
+      attr_accessor table_arn: ::String
       SENSITIVE: []
     end
 

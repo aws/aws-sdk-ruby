@@ -281,6 +281,9 @@ module Aws::NetworkManager
       attr_accessor inside_cidr_blocks: ::Array[::String]
       attr_accessor shared_segments: ::Array[::String]
       attr_accessor service_insertion_actions: ::Array[Types::ServiceInsertionAction]
+      attr_accessor vpn_ecmp_support: bool
+      attr_accessor dns_support: bool
+      attr_accessor security_group_referencing_support: bool
       SENSITIVE: []
     end
 
@@ -1814,6 +1817,8 @@ module Aws::NetworkManager
     class VpcOptions
       attr_accessor ipv_6_support: bool
       attr_accessor appliance_mode_support: bool
+      attr_accessor dns_support: bool
+      attr_accessor security_group_referencing_support: bool
       SENSITIVE: []
     end
 

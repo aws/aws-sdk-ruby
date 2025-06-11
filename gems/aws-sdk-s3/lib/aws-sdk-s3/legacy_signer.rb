@@ -3,7 +3,8 @@
 require 'set'
 require 'time'
 require 'openssl'
-require 'cgi'
+require "cgi/escape"
+require "cgi/util" if RUBY_VERSION < "3.5"
 require 'aws-sdk-core/query'
 
 module Aws

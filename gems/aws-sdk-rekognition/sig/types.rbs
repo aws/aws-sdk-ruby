@@ -105,6 +105,18 @@ module Aws::Rekognition
       SENSITIVE: []
     end
 
+    class Challenge
+      attr_accessor type: ("FaceMovementAndLightChallenge" | "FaceMovementChallenge")
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class ChallengePreference
+      attr_accessor type: ("FaceMovementAndLightChallenge" | "FaceMovementChallenge")
+      attr_accessor versions: Types::Versions
+      SENSITIVE: []
+    end
+
     class CompareFacesMatch
       attr_accessor similarity: ::Float
       attr_accessor face: Types::ComparedFace
@@ -234,6 +246,7 @@ module Aws::Rekognition
     class CreateFaceLivenessSessionRequestSettings
       attr_accessor output_config: Types::LivenessOutputConfig
       attr_accessor audit_images_limit: ::Integer
+      attr_accessor challenge_preferences: ::Array[Types::ChallengePreference]
       SENSITIVE: []
     end
 
@@ -914,6 +927,7 @@ module Aws::Rekognition
       attr_accessor confidence: ::Float
       attr_accessor reference_image: Types::AuditImage
       attr_accessor audit_images: ::Array[Types::AuditImage]
+      attr_accessor challenge: Types::Challenge
       SENSITIVE: []
     end
 
@@ -2113,6 +2127,12 @@ module Aws::Rekognition
 
     class ValidationData
       attr_accessor assets: ::Array[Types::Asset]
+      SENSITIVE: []
+    end
+
+    class Versions
+      attr_accessor minimum: ::String
+      attr_accessor maximum: ::String
       SENSITIVE: []
     end
 

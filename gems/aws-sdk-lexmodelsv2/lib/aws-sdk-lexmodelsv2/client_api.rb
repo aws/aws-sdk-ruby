@@ -564,6 +564,7 @@ module Aws::LexModelsV2
     NewCustomVocabularyItem = Shapes::StructureShape.new(name: 'NewCustomVocabularyItem')
     NextIndex = Shapes::IntegerShape.new(name: 'NextIndex')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NluImprovementSpecification = Shapes::StructureShape.new(name: 'NluImprovementSpecification')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NumericalBotVersion = Shapes::StringShape.new(name: 'NumericalBotVersion')
     OSIncludeFields = Shapes::ListShape.new(name: 'OSIncludeFields')
@@ -2917,6 +2918,9 @@ module Aws::LexModelsV2
     NewCustomVocabularyItem.add_member(:display_as, Shapes::ShapeRef.new(shape: Phrase, location_name: "displayAs"))
     NewCustomVocabularyItem.struct_class = Types::NewCustomVocabularyItem
 
+    NluImprovementSpecification.add_member(:enabled, Shapes::ShapeRef.new(shape: Enabled, required: true, location_name: "enabled"))
+    NluImprovementSpecification.struct_class = Types::NluImprovementSpecification
+
     OSIncludeFields.member = Shapes::ShapeRef.new(shape: IncludeField)
 
     ObfuscationSetting.add_member(:obfuscation_setting_type, Shapes::ShapeRef.new(shape: ObfuscationSettingType, required: true, location_name: "obfuscationSettingType"))
@@ -3059,6 +3063,7 @@ module Aws::LexModelsV2
     RuntimeHints.struct_class = Types::RuntimeHints
 
     RuntimeSettings.add_member(:slot_resolution_improvement, Shapes::ShapeRef.new(shape: SlotResolutionImprovementSpecification, location_name: "slotResolutionImprovement"))
+    RuntimeSettings.add_member(:nlu_improvement, Shapes::ShapeRef.new(shape: NluImprovementSpecification, location_name: "nluImprovement"))
     RuntimeSettings.struct_class = Types::RuntimeSettings
 
     S3BucketLogDestination.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))

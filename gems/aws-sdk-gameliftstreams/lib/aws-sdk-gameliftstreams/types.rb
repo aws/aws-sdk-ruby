@@ -29,8 +29,14 @@ module Aws::GameLiftStreams
     # @!attribute [rw] identifier
     #   A stream group to add the specified locations to.
     #
-    #   This value is a Amazon Resource Name (ARN) that uniquely identifies
-    #   the stream group resource. Format example: `sg-1AB2C3De4`.
+    #   This value is an [Amazon Resource Name (ARN)][1] or ID that uniquely
+    #   identifies the stream group resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4`.
+    #   Example ID: `sg-1AB2C3De4`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
     #   @return [String]
     #
     # @!attribute [rw] location_configurations
@@ -48,9 +54,14 @@ module Aws::GameLiftStreams
     end
 
     # @!attribute [rw] identifier
-    #   This value is the Amazon Resource Name (ARN) that uniquely
-    #   identifies the stream group resource. Format example:
-    #   `sg-1AB2C3De4`.
+    #   This value is an [Amazon Resource Name (ARN)][1] or ID that uniquely
+    #   identifies the stream group resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4`.
+    #   Example ID: `sg-1AB2C3De4`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
     #   @return [String]
     #
     # @!attribute [rw] locations
@@ -111,14 +122,8 @@ module Aws::GameLiftStreams
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
-    #   the application resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`
-    #   or ID-`a-9ZY8X7Wv6`.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   An ID that uniquely identifies the application resource. Example ID:
+    #   `a-9ZY8X7Wv6`.
     #   @return [String]
     #
     # @!attribute [rw] last_updated_at
@@ -187,9 +192,9 @@ module Aws::GameLiftStreams
     #   A set of applications to associate with the stream group.
     #
     #   This value is a set of either [Amazon Resource Names (ARN)][1] or
-    #   IDs that uniquely identify application resources. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`
-    #   or ID-`a-9ZY8X7Wv6`.
+    #   IDs that uniquely identify application resources. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6`.
+    #   Example ID: `a-9ZY8X7Wv6`.
     #
     #
     #
@@ -199,10 +204,10 @@ module Aws::GameLiftStreams
     # @!attribute [rw] identifier
     #   A stream group to associate to the applications.
     #
-    #   This value is a [Amazon Resource Name (ARN)][1] or ID that uniquely
-    #   identifies the stream group resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4`
-    #   or ID-`sg-1AB2C3De4`.
+    #   This value is an [Amazon Resource Name (ARN)][1] or ID that uniquely
+    #   identifies the stream group resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4`.
+    #   Example ID: `sg-1AB2C3De4`.
     #
     #
     #
@@ -221,10 +226,9 @@ module Aws::GameLiftStreams
     # @!attribute [rw] application_arns
     #   A set of applications that are associated to the stream group.
     #
-    #   This value is a set of either [Amazon Resource Names (ARN)][1] or
-    #   IDs that uniquely identify application resources. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`
-    #   or ID-`a-9ZY8X7Wv6`.
+    #   This value is a set of [Amazon Resource Names (ARNs)][1] that
+    #   uniquely identify application resources. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6`.
     #
     #
     #
@@ -234,10 +238,9 @@ module Aws::GameLiftStreams
     # @!attribute [rw] arn
     #   A stream group that is associated to the applications.
     #
-    #   This value is a [Amazon Resource Name (ARN)][1] or ID that uniquely
-    #   identifies the stream group resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4`
-    #   or ID-`sg-1AB2C3De4`.
+    #   This value is an [Amazon Resource Name (ARN)][1] that uniquely
+    #   identifies the stream group resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4`.
     #
     #
     #
@@ -276,9 +279,14 @@ module Aws::GameLiftStreams
     #
     #   <note markdown="1"> The log bucket must have permissions that give Amazon GameLift
     #   Streams access to write the log files. For more information, see
-    #   **Getting Started** in the Amazon GameLift Streams Developer Guide.
+    #   [Application log bucket permission policy][1] in the *Amazon
+    #   GameLift Streams Developer Guide*.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/applications.html#application-bucket-permission-template
     #   @return [String]
     #
     # @!attribute [rw] application_log_paths
@@ -410,10 +418,14 @@ module Aws::GameLiftStreams
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   An Amazon Resource Name (ARN) that's assigned to an application
-    #   resource and uniquely identifies it across all Amazon Web Services
-    #   Regions. Format is `arn:aws:gameliftstreams:[AWS Region]:[AWS
-    #   account]:application/[resource ID]`.
+    #   The [Amazon Resource Name (ARN)][1] that's assigned to an
+    #   application resource and uniquely identifies it across all Amazon
+    #   Web Services Regions. Format is `arn:aws:gameliftstreams:[AWS
+    #   Region]:[AWS account]:application/[resource ID]`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
     #   @return [String]
     #
     # @!attribute [rw] associated_stream_groups
@@ -437,14 +449,8 @@ module Aws::GameLiftStreams
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
-    #   the application resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`
-    #   or ID-`a-9ZY8X7Wv6`.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   A unique ID value that is assigned to the resource when it's
+    #   created. Format example: `a-9ZY8X7Wv6`.
     #   @return [String]
     #
     # @!attribute [rw] last_updated_at
@@ -545,6 +551,15 @@ module Aws::GameLiftStreams
     #   applications that are associated using AssociateApplications. If not
     #   set when creating a stream group, you will need to call
     #   AssociateApplications later, before you can start streaming.
+    #
+    #   This value is an [Amazon Resource Name (ARN)][1] or ID that uniquely
+    #   identifies the application resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6`.
+    #   Example ID: `a-9ZY8X7Wv6`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -670,10 +685,14 @@ module Aws::GameLiftStreams
     end
 
     # @!attribute [rw] arn
-    #   An Amazon Resource Name (ARN) that is assigned to the stream group
-    #   resource and that uniquely identifies the group across all Amazon
-    #   Web Services Regions. Format is `arn:aws:gameliftstreams:[AWS
+    #   The [Amazon Resource Name (ARN)][1] that is assigned to the stream
+    #   group resource and that uniquely identifies the group across all
+    #   Amazon Web Services Regions. Format is `arn:aws:gameliftstreams:[AWS
     #   Region]:[AWS account]:streamgroup/[resource ID]`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
     #   @return [String]
     #
     # @!attribute [rw] associated_applications
@@ -681,8 +700,8 @@ module Aws::GameLiftStreams
     #   can stream any of these applications by using this stream group.
     #
     #   This value is a set of [Amazon Resource Names (ARNs)][1] that
-    #   uniquely identify application resources. Format example:
-    #   `arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`.
+    #   uniquely identify application resources. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6`.
     #
     #
     #
@@ -885,9 +904,9 @@ module Aws::GameLiftStreams
     #
     # @!attribute [rw] identifier
     #   [Amazon Resource Name (ARN)][1] or ID that uniquely identifies the
-    #   stream group resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4`
-    #   or ID-`sg-1AB2C3De4`.
+    #   stream group resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4`.
+    #   Example ID: `sg-1AB2C3De4`.
     #
     #   The stream group that you want to run this stream session with. The
     #   stream group must be in `ACTIVE` status and have idle stream
@@ -906,9 +925,13 @@ module Aws::GameLiftStreams
     #   @return [String]
     #
     # @!attribute [rw] stream_session_identifier
-    #   [Amazon Resource Name (ARN)][1] that uniquely identifies the stream
-    #   session resource. Format example: `1AB2C3De4`. The stream session
-    #   must be in `PENDING_CLIENT_RECONNECTION` or `ACTIVE` status.
+    #   [Amazon Resource Name (ARN)][1] or ID that uniquely identifies the
+    #   stream session resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamsession/sg-1AB2C3De4/ABC123def4567`.
+    #   Example ID: `ABC123def4567`.
+    #
+    #   The stream session must be in `PENDING_CLIENT_RECONNECTION` or
+    #   `ACTIVE` status.
     #
     #
     #
@@ -944,8 +967,8 @@ module Aws::GameLiftStreams
     #
     # @!attribute [rw] arn
     #   An [Amazon Resource Name (ARN)][1] that uniquely identifies the
-    #   application resource. Format example:
-    #   `arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`.
+    #   application resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6`.
     #
     #
     #
@@ -953,8 +976,8 @@ module Aws::GameLiftStreams
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   An ID that uniquely identifies the application resource. For
-    #   example: `a-9ZY8X7Wv6`.
+    #   An ID that uniquely identifies the application resource. Example ID:
+    #   `a-9ZY8X7Wv6`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/DefaultApplication AWS API Documentation
@@ -968,9 +991,9 @@ module Aws::GameLiftStreams
 
     # @!attribute [rw] identifier
     #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
-    #   the application resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`
-    #   or ID-`a-9ZY8X7Wv6`.
+    #   the application resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6`.
+    #   Example ID: `a-9ZY8X7Wv6`.
     #
     #
     #
@@ -986,8 +1009,14 @@ module Aws::GameLiftStreams
     end
 
     # @!attribute [rw] identifier
-    #   The unique ID value of the stream group resource to delete. Format
-    #   example: `sg-1AB2C3De4`.
+    #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
+    #   the stream group resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4`.
+    #   Example ID: `sg-1AB2C3De4`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/DeleteStreamGroupInput AWS API Documentation
@@ -1003,9 +1032,9 @@ module Aws::GameLiftStreams
     #   group.
     #
     #   This value is a set of either [Amazon Resource Names (ARN)][1] or
-    #   IDs that uniquely identify application resources. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`
-    #   or ID-`a-9ZY8X7Wv6`.
+    #   IDs that uniquely identify application resources. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6`.
+    #   Example ID: `a-9ZY8X7Wv6`.
     #
     #
     #
@@ -1016,9 +1045,9 @@ module Aws::GameLiftStreams
     #   A stream group to disassociate these applications from.
     #
     #   This value is an [Amazon Resource Name (ARN)][1] or ID that uniquely
-    #   identifies the stream group resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4`
-    #   or ID-`sg-1AB2C3De4`.
+    #   identifies the stream group resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4`.
+    #   Example ID: `sg-1AB2C3De4`.
     #
     #
     #
@@ -1037,10 +1066,9 @@ module Aws::GameLiftStreams
     # @!attribute [rw] application_arns
     #   A set of applications that are disassociated from this stream group.
     #
-    #   This value is a set of either [Amazon Resource Names (ARN)][1] or
-    #   IDs that uniquely identify application resources. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`
-    #   or ID-`a-9ZY8X7Wv6`.
+    #   This value is a set of [Amazon Resource Names (ARNs)][1] that
+    #   uniquely identify application resources. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6`.
     #
     #
     #
@@ -1048,10 +1076,9 @@ module Aws::GameLiftStreams
     #   @return [Array<String>]
     #
     # @!attribute [rw] arn
-    #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
-    #   the stream group resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4`
-    #   or ID-`sg-1AB2C3De4`.
+    #   An [Amazon Resource Name (ARN)][1] that uniquely identifies the
+    #   stream group resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4`.
     #
     #
     #
@@ -1077,13 +1104,13 @@ module Aws::GameLiftStreams
     #   `.zip` file extension.
     #
     #   Example 1: If you provide an S3 URI called
-    #   `s3://MyBucket/MyGame_Session1.zip`, then Amazon GameLift Streams
-    #   will save the files at that location.
+    #   `s3://amzn-s3-demo-destination-bucket/MyGame_Session1.zip`, then
+    #   Amazon GameLift Streams will save the files at that location.
     #
     #   Example 2: If you provide an S3 URI called
-    #   `s3://MyBucket/MyGameSessions_ExportedFiles/`, then Amazon GameLift
-    #   Streams will save the files at
-    #   `s3://MyBucket/MyGameSessions_ExportedFiles/YYYYMMDD-HHMMSS-appId-sg-Id-sessionId.zip`
+    #   `s3://amzn-s3-demo-destination-bucket/MyGameSessions_ExportedFiles/`,
+    #   then Amazon GameLift Streams will save the files at
+    #   `s3://amzn-s3-demo-destination-bucket/MyGameSessions_ExportedFiles/YYYYMMDD-HHMMSS-appId-sg-Id-sessionId.zip`
     #   or another similar name.
     #   @return [String]
     #
@@ -1111,9 +1138,9 @@ module Aws::GameLiftStreams
 
     # @!attribute [rw] identifier
     #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
-    #   the stream group resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4`
-    #   or ID-`sg-1AB2C3De4`.
+    #   the stream group resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4`.
+    #   Example ID: `sg-1AB2C3De4`.
     #
     #
     #
@@ -1128,19 +1155,21 @@ module Aws::GameLiftStreams
     #   `.zip` file extension.
     #
     #   Example 1: If you provide an S3 URI called
-    #   `s3://MyBucket/MyGame_Session1.zip`, then Amazon GameLift Streams
-    #   will save the files at that location.
+    #   `s3://amzn-s3-demo-destination-bucket/MyGame_Session1.zip`, then
+    #   Amazon GameLift Streams will save the files at that location.
     #
     #   Example 2: If you provide an S3 URI called
-    #   `s3://MyBucket/MyGameSessions_ExportedFiles/`, then Amazon GameLift
-    #   Streams will save the files at
-    #   `s3://MyBucket/MyGameSessions_ExportedFiles/YYYYMMDD-HHMMSS-appId-sg-Id-sessionId.zip`
+    #   `s3://amzn-s3-demo-destination-bucket/MyGameSessions_ExportedFiles/`,
+    #   then Amazon GameLift Streams will save the files at
+    #   `s3://amzn-s3-demo-destination-bucket/MyGameSessions_ExportedFiles/YYYYMMDD-HHMMSS-appId-sg-Id-sessionId.zip`
     #   or another similar name.
     #   @return [String]
     #
     # @!attribute [rw] stream_session_identifier
     #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
-    #   the stream session resource. Format example: `1AB2C3De4`.
+    #   the stream session resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamsession/sg-1AB2C3De4/ABC123def4567`.
+    #   Example ID: `ABC123def4567`.
     #
     #
     #
@@ -1163,9 +1192,9 @@ module Aws::GameLiftStreams
 
     # @!attribute [rw] identifier
     #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
-    #   the application resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`
-    #   or ID-`a-9ZY8X7Wv6`.
+    #   the application resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6`.
+    #   Example ID: `a-9ZY8X7Wv6`.
     #
     #
     #
@@ -1204,10 +1233,14 @@ module Aws::GameLiftStreams
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   An Amazon Resource Name (ARN) that's assigned to an application
-    #   resource and uniquely identifies it across all Amazon Web Services
-    #   Regions. Format is `arn:aws:gameliftstreams:[AWS Region]:[AWS
-    #   account]:application/[resource ID]`.
+    #   The [Amazon Resource Name (ARN)][1] that's assigned to an
+    #   application resource and uniquely identifies it across all Amazon
+    #   Web Services Regions. Format is `arn:aws:gameliftstreams:[AWS
+    #   Region]:[AWS account]:application/[resource ID]`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
     #   @return [String]
     #
     # @!attribute [rw] associated_stream_groups
@@ -1215,8 +1248,8 @@ module Aws::GameLiftStreams
     #   can use any of these stream groups to stream your application.
     #
     #   This value is a set of [Amazon Resource Names (ARNs)][1] that
-    #   uniquely identify stream group resources. Format example:
-    #   `arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4`.
+    #   uniquely identify stream group resources. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4`.
     #
     #
     #
@@ -1239,14 +1272,8 @@ module Aws::GameLiftStreams
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
-    #   the application resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`
-    #   or ID-`a-9ZY8X7Wv6`.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   A unique ID value that is assigned to the resource when it's
+    #   created. Format example: `a-9ZY8X7Wv6`.
     #   @return [String]
     #
     # @!attribute [rw] last_updated_at
@@ -1328,8 +1355,14 @@ module Aws::GameLiftStreams
     end
 
     # @!attribute [rw] identifier
-    #   The unique ID value of the stream group resource to retrieve. Format
-    #   example: `sg-1AB2C3De4`.
+    #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
+    #   the stream group resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4`.
+    #   Example ID: `sg-1AB2C3De4`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/GetStreamGroupInput AWS API Documentation
@@ -1341,10 +1374,14 @@ module Aws::GameLiftStreams
     end
 
     # @!attribute [rw] arn
-    #   An Amazon Resource Name (ARN) that is assigned to the stream group
-    #   resource and that uniquely identifies the group across all Amazon
-    #   Web Services Regions. Format is `arn:aws:gameliftstreams:[AWS
+    #   The [Amazon Resource Name (ARN)][1] that is assigned to the stream
+    #   group resource and that uniquely identifies the group across all
+    #   Amazon Web Services Regions. Format is `arn:aws:gameliftstreams:[AWS
     #   Region]:[AWS account]:streamgroup/[resource ID]`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
     #   @return [String]
     #
     # @!attribute [rw] associated_applications
@@ -1352,8 +1389,8 @@ module Aws::GameLiftStreams
     #   can stream any of these applications by using this stream group.
     #
     #   This value is a set of [Amazon Resource Names (ARNs)][1] that
-    #   uniquely identify application resources. Format example:
-    #   `arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`.
+    #   uniquely identify application resources. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6`.
     #
     #
     #
@@ -1548,9 +1585,9 @@ module Aws::GameLiftStreams
     #   The stream group that runs this stream session.
     #
     #   This value is an [Amazon Resource Name (ARN)][1] or ID that uniquely
-    #   identifies the stream group resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4`
-    #   or ID-`sg-1AB2C3De4`.
+    #   identifies the stream group resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4`.
+    #   Example ID: `sg-1AB2C3De4`.
     #
     #
     #
@@ -1558,8 +1595,10 @@ module Aws::GameLiftStreams
     #   @return [String]
     #
     # @!attribute [rw] stream_session_identifier
-    #   An [Amazon Resource Name (ARN)][1] that uniquely identifies the
-    #   stream session resource. Format example: `1AB2C3De4`.
+    #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
+    #   the stream session resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamsession/sg-1AB2C3De4/ABC123def4567`.
+    #   Example ID: `ABC123def4567`.
     #
     #
     #
@@ -1611,8 +1650,8 @@ module Aws::GameLiftStreams
     #   The application streaming in this session.
     #
     #   This value is an [Amazon Resource Name (ARN)][1] that uniquely
-    #   identifies the application resource. Format example:
-    #   `arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`.
+    #   identifies the application resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6`.
     #
     #
     #
@@ -1620,11 +1659,16 @@ module Aws::GameLiftStreams
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) assigned to the stream session
-    #   resource. When combined with the stream group ARN, this value
-    #   uniquely identifies it across all Amazon Web Services Regions.
-    #   Format is `arn:aws:gameliftstreams:[AWS Region]:[AWS
-    #   account]:streamsession/[resource ID]`.
+    #   The [Amazon Resource Name (ARN)][1] that's assigned to a stream
+    #   session resource. When combined with the stream group resource ID,
+    #   this value uniquely identifies the stream session across all Amazon
+    #   Web Services Regions. Format is `arn:aws:gameliftstreams:[AWS
+    #   Region]:[AWS account]:streamsession/[stream group resource
+    #   ID]/[stream session resource ID]`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
     #   @return [String]
     #
     # @!attribute [rw] connection_timeout_seconds
@@ -1660,8 +1704,9 @@ module Aws::GameLiftStreams
     #   session.
     #
     #   A location's name. For example, `us-east-1`. For a complete list of
-    #   locations that Amazon GameLift Streams supports, refer to [Regions
-    #   and quotas][1] in the *Amazon GameLift Streams Developer Guide*.
+    #   locations that Amazon GameLift Streams supports, refer to [Regions,
+    #   quotas, and limitations][1] in the *Amazon GameLift Streams
+    #   Developer Guide*.
     #
     #
     #
@@ -1706,7 +1751,7 @@ module Aws::GameLiftStreams
     #
     # @!attribute [rw] stream_group_id
     #   The unique identifier for the Amazon GameLift Streams stream group
-    #   that is hosting the stream session.
+    #   that is hosting the stream session. Format example: `sg-1AB2C3De4`.
     #   @return [String]
     #
     # @!attribute [rw] user_id
@@ -1922,7 +1967,11 @@ module Aws::GameLiftStreams
     # @!attribute [rw] identifier
     #   The unique identifier of a Amazon GameLift Streams stream group to
     #   retrieve the stream session for. You can use either the stream group
-    #   ID or the Amazon Resource Name (ARN).
+    #   ID or the [Amazon Resource Name (ARN)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1977,13 +2026,13 @@ module Aws::GameLiftStreams
     end
 
     # @!attribute [rw] resource_arn
-    #   The ([Amazon Resource Name (ARN)][1] that you want to retrieve tags
-    #   for. To get a Amazon GameLift Streams resource ARN, call a List or
+    #   The [Amazon Resource Name (ARN)][1] that you want to retrieve tags
+    #   for. To get an Amazon GameLift Streams resource ARN, call a List or
     #   Get operation for the resource.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/ListTagsForResourceRequest AWS API Documentation
@@ -2028,8 +2077,9 @@ module Aws::GameLiftStreams
     #
     # @!attribute [rw] location_name
     #   A location's name. For example, `us-east-1`. For a complete list of
-    #   locations that Amazon GameLift Streams supports, refer to [Regions
-    #   and quotas][1] in the *Amazon GameLift Streams Developer Guide*.
+    #   locations that Amazon GameLift Streams supports, refer to [Regions,
+    #   quotas, and limitations][1] in the *Amazon GameLift Streams
+    #   Developer Guide*.
     #
     #
     #
@@ -2078,8 +2128,9 @@ module Aws::GameLiftStreams
     #
     # @!attribute [rw] location_name
     #   A location's name. For example, `us-east-1`. For a complete list of
-    #   locations that Amazon GameLift Streams supports, refer to [Regions
-    #   and quotas][1] in the *Amazon GameLift Streams Developer Guide*.
+    #   locations that Amazon GameLift Streams supports, refer to [Regions,
+    #   quotas, and limitations][1] in the *Amazon GameLift Streams
+    #   Developer Guide*.
     #
     #
     #
@@ -2140,8 +2191,14 @@ module Aws::GameLiftStreams
     # @!attribute [rw] identifier
     #   A stream group to remove the specified locations from.
     #
-    #   This value is a Amazon Resource Name (ARN) that uniquely identifies
-    #   the stream group resource. Format example: `sg-1AB2C3De4`.
+    #   This value is an [Amazon Resource Name (ARN)][1] or ID that uniquely
+    #   identifies the stream group resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4`.
+    #   Example ID: `sg-1AB2C3De4`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
     #   @return [String]
     #
     # @!attribute [rw] locations
@@ -2149,8 +2206,8 @@ module Aws::GameLiftStreams
     #
     #   A set of location names. For example, `us-east-1`. For a complete
     #   list of locations that Amazon GameLift Streams supports, refer to
-    #   [Regions and quotas][1] in the *Amazon GameLift Streams Developer
-    #   Guide*.
+    #   [Regions, quotas, and limitations][1] in the *Amazon GameLift
+    #   Streams Developer Guide*.
     #
     #
     #
@@ -2172,8 +2229,9 @@ module Aws::GameLiftStreams
     #
     # @!attribute [rw] location
     #   A location's name. For example, `us-east-1`. For a complete list of
-    #   locations that Amazon GameLift Streams supports, refer to [Regions
-    #   and quotas][1] in the *Amazon GameLift Streams Developer Guide*.
+    #   locations that Amazon GameLift Streams supports, refer to [Regions,
+    #   quotas, and limitations][1] in the *Amazon GameLift Streams
+    #   Developer Guide*.
     #
     #
     #
@@ -2295,9 +2353,9 @@ module Aws::GameLiftStreams
     #
     # @!attribute [rw] application_identifier
     #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
-    #   the application resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`
-    #   or ID-`a-9ZY8X7Wv6`.
+    #   the application resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6`.
+    #   Example ID: `a-9ZY8X7Wv6`.
     #
     #
     #
@@ -2331,9 +2389,9 @@ module Aws::GameLiftStreams
     #   The stream group to run this stream session with.
     #
     #   This value is an [Amazon Resource Name (ARN)][1] or ID that uniquely
-    #   identifies the stream group resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4`
-    #   or ID-`sg-1AB2C3De4`.
+    #   identifies the stream group resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4`.
+    #   Example ID: `sg-1AB2C3De4`.
     #
     #
     #
@@ -2349,8 +2407,8 @@ module Aws::GameLiftStreams
     #
     #   This value is A set of location names. For example, `us-east-1`. For
     #   a complete list of locations that Amazon GameLift Streams supports,
-    #   refer to [Regions and quotas][1] in the *Amazon GameLift Streams
-    #   Developer Guide*.
+    #   refer to [Regions, quotas, and limitations][1] in the *Amazon
+    #   GameLift Streams Developer Guide*.
     #
     #
     #
@@ -2370,8 +2428,18 @@ module Aws::GameLiftStreams
     #
     # @!attribute [rw] signal_request
     #   A WebRTC ICE offer string to use when initializing a WebRTC
-    #   connection. The offer is a very long JSON string. Provide the string
-    #   as a text value in quotes.
+    #   connection. Typically, the offer is a very long JSON string. Provide
+    #   the string as a text value in quotes.
+    #
+    #   Amazon GameLift Streams also supports setting the field to
+    #   "NO\_CLIENT\_CONNECTION". This will create a session without
+    #   needing any browser request or Web SDK integration. The session
+    #   starts up as usual and waits for a reconnection from a browser,
+    #   which is accomplished using [CreateStreamSessionConnection][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_CreateStreamSessionConnection.html
     #   @return [String]
     #
     # @!attribute [rw] user_id
@@ -2432,8 +2500,8 @@ module Aws::GameLiftStreams
     #
     # @!attribute [rw] application_arn
     #   An [Amazon Resource Name (ARN)][1] that uniquely identifies the
-    #   application resource. Format example:
-    #   `arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`.
+    #   application resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6`.
     #
     #
     #
@@ -2441,11 +2509,16 @@ module Aws::GameLiftStreams
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) assigned to the stream session
-    #   resource. When combined with the stream group ARN, this value
-    #   uniquely identifies it across all Amazon Web Services Regions.
-    #   Format is `arn:aws:gameliftstreams:[AWS Region]:[AWS
-    #   account]:streamsession/[resource ID]`.
+    #   The [Amazon Resource Name (ARN)][1] that's assigned to a stream
+    #   session resource. When combined with the stream group resource ID,
+    #   this value uniquely identifies the stream session across all Amazon
+    #   Web Services Regions. Format is `arn:aws:gameliftstreams:[AWS
+    #   Region]:[AWS account]:streamsession/[stream group resource
+    #   ID]/[stream session resource ID]`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
     #   @return [String]
     #
     # @!attribute [rw] connection_timeout_seconds
@@ -2481,8 +2554,9 @@ module Aws::GameLiftStreams
     #   application from.
     #
     #   A location's name. For example, `us-east-1`. For a complete list of
-    #   locations that Amazon GameLift Streams supports, refer to [Regions
-    #   and quotas][1] in the *Amazon GameLift Streams Developer Guide*.
+    #   locations that Amazon GameLift Streams supports, refer to [Regions,
+    #   quotas, and limitations][1] in the *Amazon GameLift Streams
+    #   Developer Guide*.
     #
     #
     #
@@ -2527,7 +2601,7 @@ module Aws::GameLiftStreams
     #
     # @!attribute [rw] stream_group_id
     #   The unique identifier for the Amazon GameLift Streams stream group
-    #   that is hosting the stream session.
+    #   that is hosting the stream session. Format example: `sg-1AB2C3De4`.
     #   @return [String]
     #
     # @!attribute [rw] user_id
@@ -2576,10 +2650,9 @@ module Aws::GameLiftStreams
     # [1]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetStreamGroup.html
     #
     # @!attribute [rw] arn
-    #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
-    #   the stream group resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4`
-    #   or ID-`sg-1AB2C3De4`.
+    #   An [Amazon Resource Name (ARN)][1] that uniquely identifies the
+    #   stream group resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4`.
     #
     #
     #
@@ -2602,14 +2675,8 @@ module Aws::GameLiftStreams
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
-    #   the stream group resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4`
-    #   or ID-`sg-1AB2C3De4`.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   An ID that uniquely identifies the stream group resource. Example
+    #   ID: `sg-1AB2C3De4`.
     #   @return [String]
     #
     # @!attribute [rw] last_updated_at
@@ -2743,10 +2810,9 @@ module Aws::GameLiftStreams
     # [1]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetStreamSession.html
     #
     # @!attribute [rw] application_arn
-    #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
-    #   the application resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`
-    #   or ID-`a-9ZY8X7Wv6`.
+    #   An [Amazon Resource Name (ARN)][1] that uniquely identifies the
+    #   application resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6`.
     #
     #
     #
@@ -2755,7 +2821,8 @@ module Aws::GameLiftStreams
     #
     # @!attribute [rw] arn
     #   An [Amazon Resource Name (ARN)][1] that uniquely identifies the
-    #   stream session resource. Format example: `1AB2C3De4`. .
+    #   stream session resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamsession/sg-1AB2C3De4/ABC123def4567`.
     #
     #
     #
@@ -2783,8 +2850,9 @@ module Aws::GameLiftStreams
     #   session.
     #
     #   A location's name. For example, `us-east-1`. For a complete list of
-    #   locations that Amazon GameLift Streams supports, refer to [Regions
-    #   and quotas][1] in the *Amazon GameLift Streams Developer Guide*.
+    #   locations that Amazon GameLift Streams supports, refer to [Regions,
+    #   quotas, and limitations][1] in the *Amazon GameLift Streams
+    #   Developer Guide*.
     #
     #
     #
@@ -2846,7 +2914,7 @@ module Aws::GameLiftStreams
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2869,9 +2937,9 @@ module Aws::GameLiftStreams
 
     # @!attribute [rw] identifier
     #   [Amazon Resource Name (ARN)][1] or ID that uniquely identifies the
-    #   stream group resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4`
-    #   or ID-`sg-1AB2C3De4`.
+    #   stream group resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4`.
+    #   Example ID: `sg-1AB2C3De4`.
     #
     #   The stream group that runs this stream session.
     #
@@ -2881,8 +2949,10 @@ module Aws::GameLiftStreams
     #   @return [String]
     #
     # @!attribute [rw] stream_session_identifier
-    #   [Amazon Resource Name (ARN)][1] that uniquely identifies the stream
-    #   session resource. Format example: `1AB2C3De4`.
+    #   [Amazon Resource Name (ARN)][1] or ID that uniquely identifies the
+    #   stream session resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamsession/sg-1AB2C3De4/ABC123def4567`.
+    #   Example ID: `ABC123def4567`.
     #
     #
     #
@@ -2919,7 +2989,7 @@ module Aws::GameLiftStreams
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -2947,9 +3017,14 @@ module Aws::GameLiftStreams
     #
     #   <note markdown="1"> The log bucket must have permissions that give Amazon GameLift
     #   Streams access to write the log files. For more information, see
-    #   **Getting Started** in the Amazon GameLift Streams Developer Guide.
+    #   [Application log bucket permission policy][1] in the *Amazon
+    #   GameLift Streams Developer Guide*.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/applications.html#application-bucket-permission-template
     #   @return [String]
     #
     # @!attribute [rw] application_log_paths
@@ -2972,9 +3047,9 @@ module Aws::GameLiftStreams
     #
     # @!attribute [rw] identifier
     #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
-    #   the application resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`
-    #   or ID-`a-9ZY8X7Wv6`.
+    #   the application resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6`.
+    #   Example ID: `a-9ZY8X7Wv6`.
     #
     #
     #
@@ -3016,10 +3091,14 @@ module Aws::GameLiftStreams
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   An Amazon Resource Name (ARN) that's assigned to an application
-    #   resource and uniquely identifies it across all Amazon Web Services
-    #   Regions. Format is `arn:aws:gameliftstreams:[AWS Region]:[AWS
-    #   account]:application/[resource ID]`.
+    #   The [Amazon Resource Name (ARN)][1] that's assigned to an
+    #   application resource and uniquely identifies it across all Amazon
+    #   Web Services Regions. Format is `arn:aws:gameliftstreams:[AWS
+    #   Region]:[AWS account]:application/[resource ID]`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
     #   @return [String]
     #
     # @!attribute [rw] associated_stream_groups
@@ -3027,8 +3106,8 @@ module Aws::GameLiftStreams
     #   can use any of these stream groups to stream your application.
     #
     #   This value is a set of [Amazon Resource Names (ARNs)][1] that
-    #   uniquely identify stream group resources. Format example:
-    #   `arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4`.
+    #   uniquely identify stream group resources. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4`.
     #
     #
     #
@@ -3051,14 +3130,8 @@ module Aws::GameLiftStreams
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
-    #   the application resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`
-    #   or ID-`a-9ZY8X7Wv6`.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   A unique ID value that is assigned to the resource when it's
+    #   created. Format example: `a-9ZY8X7Wv6`.
     #   @return [String]
     #
     # @!attribute [rw] last_updated_at
@@ -3145,9 +3218,9 @@ module Aws::GameLiftStreams
     #
     # @!attribute [rw] identifier
     #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies
-    #   the stream group resource. Format example:
-    #   ARN-`arn:aws:gameliftstreams:us-west-2:123456789012:streamgroup/sg-1AB2C3De4`
-    #   or ID-`sg-1AB2C3De4`.
+    #   the stream group resource. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4`.
+    #   Example ID: `sg-1AB2C3De4`.
     #
     #
     #
@@ -3170,10 +3243,14 @@ module Aws::GameLiftStreams
     end
 
     # @!attribute [rw] arn
-    #   An Amazon Resource Name (ARN) that is assigned to the stream group
-    #   resource and that uniquely identifies the group across all Amazon
-    #   Web Services Regions. Format is `arn:aws:gameliftstreams:[AWS
+    #   The [Amazon Resource Name (ARN)][1] that is assigned to the stream
+    #   group resource and that uniquely identifies the group across all
+    #   Amazon Web Services Regions. Format is `arn:aws:gameliftstreams:[AWS
     #   Region]:[AWS account]:streamgroup/[resource ID]`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
     #   @return [String]
     #
     # @!attribute [rw] associated_applications
@@ -3181,8 +3258,8 @@ module Aws::GameLiftStreams
     #   can stream any of these applications with the stream group.
     #
     #   This value is a set of [Amazon Resource Names (ARNs)][1] that
-    #   uniquely identify application resources. Format example:
-    #   `arn:aws:gameliftstreams:us-west-2:123456789012:application/a-9ZY8X7Wv6`.
+    #   uniquely identify application resources. Example ARN:
+    #   `arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6`.
     #
     #
     #

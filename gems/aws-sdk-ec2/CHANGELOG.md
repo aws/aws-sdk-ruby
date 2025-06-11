@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.531.0 (2025-06-09)
+------------------
+
+* Feature - Release to support Elastic VMware Service (Amazon EVS) Subnet and Amazon EVS Network Interface Types.
+
 1.530.0 (2025-06-02)
 ------------------
 
