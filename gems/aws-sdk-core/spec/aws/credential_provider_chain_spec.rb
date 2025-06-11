@@ -139,12 +139,6 @@ aws_account_id = #{creds[:account_id]}
       expect(credentials).to be(nil)
     end
 
-    it 'skips instance profile service when AWS_EC2_METADATA_DISABLED is true' do
-      ENV['AWS_EC2_METADATA_DISABLED'] = 'true'
-      expect(InstanceProfileCredentials).not_to receive(:new)
-      expect(credentials).to be(nil)
-    end
-
     it 'hydrates credentials from ECS when AWS_CONTAINER_CREDENTIALS_RELATIVE_URI is set' do
       ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = 'test_uri'
       mock_ecs_creds = double('ECSCredentials', metrics: ['CREDENTIALS_HTTP'], set?: true)

@@ -369,12 +369,12 @@ module Aws
 
         endpoint = 'http://169.254.169.254'
         extended_path = '/latest/meta-data/iam/security-credentials-extended/'
-        stub_request(:put, URI.join(endpoint, 'latest/api/token'))
-          .to_return(status: 200, body: JSON.dump('my-token'))
-        stub_request(:get, URI.join(endpoint, extended_path))
+        stub_request(:put, endpoint + '/latest/api/token')
+          .to_return(status: 200, body: Aws::Json.dump('my-token'))
+        stub_request(:get, endpoint + extended_path)
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-          .to_return(status: 200, body: JSON.dump('profile-name'))
-        stub_request(:get, URI.join(endpoint, extended_path, 'profile-name'))
+          .to_return(status: 200, body: Aws::Json.dump('profile-name'))
+        stub_request(:get, endpoint + extended_path + 'profile-name')
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: <<-JSON.strip)
             {
@@ -815,12 +815,12 @@ module Aws
           'AR_SECRET',
           'AR_TOKEN'
         )
-        stub_request(:put, URI.join(endpoint, 'latest/api/token'))
-          .to_return(status: 200, body: JSON.dump('my-token'))
-        stub_request(:get, URI.join(endpoint, extended_path))
+        stub_request(:put, endpoint + '/latest/api/token')
+          .to_return(status: 200, body: Aws::Json.dump('my-token'))
+        stub_request(:get, endpoint + extended_path)
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-          .to_return(status: 200, body: JSON.dump('profile-name'))
-        stub_request(:get, URI.join(endpoint, extended_path, 'profile-name'))
+          .to_return(status: 200, body: Aws::Json.dump('profile-name'))
+        stub_request(:get, endpoint + extended_path + 'profile-name')
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: <<-JSON.strip)
             {
@@ -865,12 +865,12 @@ module Aws
           'AR_SECRET',
           'AR_TOKEN'
         )
-        stub_request(:put, URI.join(endpoint, 'latest/api/token'))
-          .to_return(status: 200, body: JSON.dump('my-token'))
-        stub_request(:get, URI.join(endpoint, extended_path))
+        stub_request(:put, endpoint + '/latest/api/token')
+          .to_return(status: 200, body: Aws::Json.dump('my-token'))
+        stub_request(:get, endpoint + extended_path)
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-          .to_return(status: 200, body: JSON.dump('profile-name'))
-        stub_request(:get, URI.join(endpoint, extended_path, 'profile-name'))
+          .to_return(status: 200, body: Aws::Json.dump('profile-name'))
+        stub_request(:get, endpoint + extended_path +'profile-name')
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: resp)
 
@@ -1031,12 +1031,12 @@ module Aws
 
         endpoint = 'http://169.254.169.254'
         extended_path = '/latest/meta-data/iam/security-credentials-extended/'
-        stub_request(:put, URI.join(endpoint, 'latest/api/token'))
-          .to_return(status: 200, body: JSON.dump('my-token'))
-        stub_request(:get, URI.join(endpoint, extended_path))
+        stub_request(:put, endpoint + '/latest/api/token')
+          .to_return(status: 200, body: Aws::Json.dump('my-token'))
+        stub_request(:get, endpoint + extended_path)
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-          .to_return(status: 200, body: JSON.dump('profile-name'))
-        stub_request(:get, URI.join(endpoint, extended_path, 'profile-name'))
+          .to_return(status: 200, body: Aws::Json.dump('profile-name'))
+        stub_request(:get, endpoint + extended_path + 'profile-name')
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: <<-JSON.strip)
             {
