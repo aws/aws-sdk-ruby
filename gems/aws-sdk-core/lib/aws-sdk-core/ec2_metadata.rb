@@ -168,8 +168,7 @@ module Aws
 
         response.body
       when 401 then raise TokenExpiredError
-      when 404
-        raise MetadataNotFoundError
+      when 404 then raise MetadataNotFoundError
       end
     end
 
@@ -222,10 +221,9 @@ module Aws
         raise
       # StandardError is not ideal but it covers Net::HTTP errors.
       # https://gist.github.com/tenderlove/245188
-      rescue StandardError, TokenExpiredError => e
+      rescue StandardError, TokenExpiredError
         raise unless attempts < @retries
 
-        @token = nil if e.is_a?(TokenExpiredError)
         @backoff.call(attempts)
         attempts += 1
         retry
