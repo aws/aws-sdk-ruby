@@ -144,7 +144,7 @@ module Aws
         created_time = Time.now
         token_value, token_ttl = http_put(conn, @token_ttl)
         @token = Token.new(
-          value: token_value,
+          value: JSON.parse(token_value),
           ttl: token_ttl,
           created_time: created_time
         )
@@ -161,10 +161,22 @@ module Aws
       response = connection.request(request)
 
       case response.code.to_i
-      when 200 then response.body
+      when 200
+        if response.body && !valid_json?(response.body)
+          raise Aws::Errors::MetadataParserError
+        end
+
+        response.body
       when 401 then raise TokenExpiredError
-      when 404 then raise MetadataNotFoundError
+      when 404
+        raise MetadataNotFoundError
       end
+    end
+
+    def valid_json?(value)
+      true if Aws::Json.load(value)
+    rescue Aws::Json::ParseError
+      false
     end
 
     # PUT request fetch token with ttl
@@ -178,6 +190,10 @@ module Aws
 
       case response.code.to_i
       when 200
+        if response.body && !valid_json?(response.body)
+          raise Aws::Errors::MetadataParserError
+        end
+
         [
           response.body,
           response.header['x-aws-ec2-metadata-token-ttl-seconds'].to_i
@@ -198,7 +214,7 @@ module Aws
     end
 
     def retry_errors(&_block)
-      retries = 0
+      attempts = 0
       begin
         yield
       # These errors should not be retried.
@@ -207,11 +223,11 @@ module Aws
       # StandardError is not ideal but it covers Net::HTTP errors.
       # https://gist.github.com/tenderlove/245188
       rescue StandardError, TokenExpiredError => e
-        raise unless retries < @retries
+        raise unless attempts < @retries
 
         @token = nil if e.is_a?(TokenExpiredError)
-        @backoff.call(retries)
-        retries += 1
+        @backoff.call(attempts)
+        attempts += 1
         retry
       end
     end
