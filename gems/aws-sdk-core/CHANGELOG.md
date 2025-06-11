@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support sourcing account ID from IMDS credentials.
+* Feature - TODO
+
 3.225.2 (2025-06-10)
 ------------------
 
