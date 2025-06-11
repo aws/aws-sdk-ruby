@@ -55,8 +55,9 @@ module Aws
     end
 
     describe '#get' do
+      let(:expected_body) { Aws::Json.dump('foo') }
+
       it 'fetches a token before getting metadata' do
-        expected_body = JSON.dump('foo')
         token = stub_get_token
         stub_request(:get, metadata_endpoint)
           .with(headers: { 'x-aws-ec2-metadata-token' => token })
@@ -65,21 +66,20 @@ module Aws
       end
 
       it 'should fetch a new token if the original token is expired' do
-        expected_body = JSON.dump('foo')
         token = stub_get_token
-        # 401 token expired
         stub_request(:get, metadata_endpoint)
           .with(headers: { 'x-aws-ec2-metadata-token' => token })
-          .to_return(status: 401)
+          .to_return(status: 401) # 401 token expired
+
         new_token = stub_get_token('new-token')
         stub_request(:get, metadata_endpoint)
           .with(headers: { 'x-aws-ec2-metadata-token' => new_token })
           .to_return(status: 200, body: expected_body)
+
         expect(client.get(metadata_path)).to eq(expected_body)
       end
 
       it 'retries when given an invalid JSON response' do
-        expected_body = JSON.dump('foo')
         token = stub_get_token
         stub_request(:get, metadata_endpoint)
           .with(headers: { 'x-aws-ec2-metadata-token' => token })
@@ -106,10 +106,7 @@ module Aws
 
       it 'does not retry on errors that should not be retried' do
         stub_request(:put, "#{endpoint}/latest/api/token")
-          .to_return(
-            { status: 400 },
-            { status: 403 }
-          )
+          .to_return({ status: 400 }, { status: 403 })
         expect { client.get(metadata_path) }
           .to raise_error(Aws::EC2Metadata::TokenRetrievalError)
         expect { client.get(metadata_path) }
@@ -134,9 +131,7 @@ module Aws
         end
 
         it 'retries with a proc' do
-          client = EC2Metadata.new(
-            backoff: ->(n) { Kernel.sleep(2**n) }
-          )
+          client = EC2Metadata.new(backoff: ->(n) { Kernel.sleep(2**n) })
           expect(Kernel).to receive(:sleep).with(1)
           expect(Kernel).to receive(:sleep).with(2)
           expect(Kernel).to receive(:sleep).with(4)
@@ -152,7 +147,6 @@ module Aws
         end
 
         it 'defaults to exponential backoff' do
-          client = EC2Metadata.new
           expect(Kernel).to receive(:sleep).with(1.0)
           expect(Kernel).to receive(:sleep).with(1.2)
           expect(Kernel).to receive(:sleep).with(1.44)

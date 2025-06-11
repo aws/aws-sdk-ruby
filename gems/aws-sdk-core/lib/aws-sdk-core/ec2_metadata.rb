@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'time'
 require 'net/http'
+require 'time'
 
 module Aws
-  # A client that can query version 2 of the EC2 Instance Metadata
+  # A client that can query version 2 of the EC2 Instance Metadata.
   class EC2Metadata
     # Path for PUT request for token
     # @api private
@@ -58,9 +58,7 @@ module Aws
       @token_ttl = options[:token_ttl] || 21_600
       @retries = options[:retries] || 3
       @backoff = backoff(options[:backoff])
-
-      endpoint_mode = options[:endpoint_mode] || 'IPv4'
-      @endpoint = resolve_endpoint(options[:endpoint], endpoint_mode)
+      @endpoint = resolve_endpoint(options)
       @port = options[:port] || 80
 
       @http_open_timeout = options[:http_open_timeout] || 1
@@ -71,6 +69,8 @@ module Aws
       @mutex = Mutex.new
     end
 
+    # @return [Integer] Number of times to retry when retrieving credentials
+    #   from the instance metadata service.
     attr_reader :retries
 
     # Fetches a given metadata category using a String path, and returns the
@@ -122,20 +122,11 @@ module Aws
 
     private
 
-    def token_set?
-      @token && !@token.expired?
-    end
-
-    def resolve_endpoint(endpoint, endpoint_mode)
-      return endpoint if endpoint
-
-      case endpoint_mode.downcase
-      when 'ipv4' then 'http://169.254.169.254'
-      when 'ipv6' then 'http://[fd00:ec2::254]'
-      else
-        raise ArgumentError,
-              '`:endpoint_mode` is not valid, expected IPv4 or IPv6, '\
-              "got: #{endpoint_mode}"
+    def backoff(backoff)
+      case backoff
+      when Proc then backoff
+      when Numeric then ->(_) { Kernel.sleep(backoff) }
+      else ->(num_failures) { Kernel.sleep(1.2**num_failures) }
       end
     end
 
@@ -144,7 +135,7 @@ module Aws
         created_time = Time.now
         token_value, token_ttl = http_put(conn, @token_ttl)
         @token = Token.new(
-          value: JSON.parse(token_value),
+          value: Aws::Json.load(token_value),
           ttl: token_ttl,
           created_time: created_time
         )
@@ -170,12 +161,6 @@ module Aws
       when 401 then raise TokenExpiredError
       when 404 then raise MetadataNotFoundError
       end
-    end
-
-    def valid_json?(value)
-      true if Aws::Json.load(value)
-    rescue Aws::Json::ParseError
-      false
     end
 
     # PUT request fetch token with ttl
@@ -212,6 +197,24 @@ module Aws
       yield(http).tap { http.finish }
     end
 
+    def token_set?
+      @token && !@token.expired?
+    end
+
+    def resolve_endpoint(options)
+      return options[:endpoint] if options[:endpoint]
+
+      endpoint_mode = options[:endpoint_mode] || 'IPv4'
+      case endpoint_mode.downcase
+      when 'ipv4' then 'http://169.254.169.254'
+      when 'ipv6' then 'http://[fd00:ec2::254]'
+      else
+        raise ArgumentError,
+              '`:endpoint_mode` is not valid, expected IPv4 or IPv6, '\
+              "got: #{endpoint_mode}"
+      end
+    end
+
     def retry_errors(&_block)
       attempts = 0
       begin
@@ -230,12 +233,10 @@ module Aws
       end
     end
 
-    def backoff(backoff)
-      case backoff
-      when Proc then backoff
-      when Numeric then ->(_) { Kernel.sleep(backoff) }
-      else ->(num_failures) { Kernel.sleep(1.2**num_failures) }
-      end
+    def valid_json?(value)
+      true if Aws::Json.load(value)
+    rescue Aws::Json::ParseError
+      false
     end
 
     # @api private
