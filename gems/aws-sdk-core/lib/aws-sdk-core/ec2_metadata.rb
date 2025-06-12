@@ -32,7 +32,7 @@ module Aws
     #
     # @note Customers using containers may need to increase their hop limit
     #   to access IMDSv2.
-    # @see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html#instance-metadata-transition-to-version-2
+    # @see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html#instance-metadata-transition-to-version-2 Use the Instance Metadata Service to access instance metadata
     #
     # @param [Hash] options
     # @option options [Integer] :token_ttl (21600) The session token's TTL,
@@ -75,30 +75,27 @@ module Aws
 
     # Fetches a given metadata category using a String path, and returns the
     #   result as a String. A path starts with the API version (usually
-    #   "/latest/"). See the instance data categories for possible paths.
+    #   `"/latest/"`). See the instance data categories for possible paths.
     #
     # @example Fetching the instance ID
-    #
     #   ec2_metadata = Aws::EC2Metadata.new
     #   ec2_metadata.get('/latest/meta-data/instance-id')
-    #   => "i-023a25f10a73a0f79"
+    #   # => "i-023a25f10a73a0f79"
     #
     # @note This implementation always returns a String and will not parse any
     #   responses. Parsable responses may include JSON objects or directory
     #   listings, which are strings separated by line feeds (ASCII 10).
     #
     # @example Fetching and parsing JSON meta-data
-    #
     #   require 'json'
     #   data = ec2_metadata.get('/latest/dynamic/instance-identity/document')
     #   JSON.parse(data)
-    #   => {"accountId"=>"012345678912", ... }
+    #   # => {"accountId"=>"012345678912", ... }
     #
     # @example Fetching and parsing directory listings
-    #
     #   listing = ec2_metadata.get('/latest/meta-data')
     #   listing.split(10.chr)
-    #   => ["ami-id", "ami-launch-index", ...]
+    #   # => ["ami-id", "ami-launch-index", ...]
     #
     # @note Unlike other services, IMDS does not have a service API model. This
     #   means that we cannot confidently generate code with methods and
@@ -106,8 +103,8 @@ module Aws
     #   are always supported by being deployed to the instance and does not
     #   require code changes.
     #
-    # @see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-data-categories.html
-    # @see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-identity-documents.html
+    # @see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-data-retrieval.html Access instance metadata for an EC2 instance
+    # @see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-identity-documents.html Instance identity documents for Amazon EC2 instances
     # @param [String] path The full path to the metadata.
     def get(path)
       retry_errors do
