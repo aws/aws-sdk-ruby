@@ -233,7 +233,7 @@ module Aws
       :sdk_ua_app_id,
       :disable_request_compression,
       :request_min_compression_size_bytes,
-      :ignore_configured_endpoint_urls,
+      :ignore_configured_endpoint_urls
     )
 
     private
