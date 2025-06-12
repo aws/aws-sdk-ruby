@@ -210,7 +210,7 @@ module Aws
       else
         begin
           metadata = @client.get(metadata_path)
-          @resolved_profile = Aws::Json.load(metadata.lines.first.strip)
+          @resolved_profile = metadata.lines.first.strip
           @api_version = :extended if @api_version == :unknown
           @resolved_profile
         rescue EC2Metadata::MetadataNotFoundError
