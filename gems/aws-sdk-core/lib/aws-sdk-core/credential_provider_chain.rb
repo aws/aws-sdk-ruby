@@ -199,13 +199,12 @@ module Aws
     end
 
     def ec2_metadata_disabled?(profile_name)
-      if ENV['AWS_EC2_METADATA_DISABLED'] == 'true' ||
-         Aws.shared_config.config_enabled? &&
-         Aws.shared_config.disable_ec2_metadata(profile: profile_name) == 'true'
-        return true
-      end
-
-      false
+      value =
+        ENV['AWS_EC2_METADATA_DISABLED'] ||
+        (Aws.shared_config.config_enabled? &&
+        Aws.shared_config.disable_ec2_metadata(profile: profile_name)) ||
+        'false'
+      Aws::Util.str_2_bool(value)
     end
 
     def assume_role_with_profile(options, profile_name)
