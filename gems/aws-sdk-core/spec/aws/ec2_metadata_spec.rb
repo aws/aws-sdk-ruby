@@ -13,7 +13,7 @@ module Aws
       stub_request(:put, "#{endpoint}/latest/api/token")
         .to_return(
           status: 200,
-          body: Aws::Json.dump(token_value),
+          body: token_value,
           headers: { 'x-aws-ec2-metadata-token-ttl-seconds' => '21600' }
         )
       token_value
@@ -55,7 +55,7 @@ module Aws
     end
 
     describe '#get' do
-      let(:expected_body) { Aws::Json.dump('foo') }
+      let(:expected_body) { "foo\n" }
 
       it 'fetches a token before getting metadata' do
         token = stub_get_token
@@ -77,31 +77,6 @@ module Aws
           .to_return(status: 200, body: expected_body)
 
         expect(client.get(metadata_path)).to eq(expected_body)
-      end
-
-      it 'retries when given an invalid JSON response' do
-        token = stub_get_token
-        stub_request(:get, metadata_endpoint)
-          .with(headers: { 'x-aws-ec2-metadata-token' => token })
-          .to_return(status: 200, body: ' ')
-          .to_return(status: 200, body: '')
-          .to_return(status: 200, body: '{')
-          .to_return(status: 200, body: expected_body)
-        expect(client.get(metadata_path)).to eq(expected_body)
-      end
-
-      it 'raises when all retry attempts has been exhausted' do
-        token = stub_get_token
-        stub_request(:get, metadata_endpoint)
-          .with(headers: { 'x-aws-ec2-metadata-token' => token })
-          .to_return(status: 200, body: ' ')
-          .to_return(status: 200, body: '')
-          .to_return(status: 200, body: '{')
-          .to_return(status: 200, body: ' ')
-        expect { client.get(metadata_path) }.to raise_error(
-          Aws::Errors::MetadataParserError,
-          'Failed to parse metadata service response.'
-        )
       end
 
       it 'does not retry on errors that should not be retried' do
