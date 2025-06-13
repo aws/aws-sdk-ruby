@@ -370,10 +370,10 @@ module Aws
         endpoint = 'http://169.254.169.254'
         extended_path = '/latest/meta-data/iam/security-credentials-extended/'
         stub_request(:put, endpoint + '/latest/api/token')
-          .to_return(status: 200, body: Aws::Json.dump('my-token'))
+          .to_return(status: 200, body: "my-token\n")
         stub_request(:get, endpoint + extended_path)
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-          .to_return(status: 200, body: Aws::Json.dump('profile-name'))
+          .to_return(status: 200, body: "profile-name\n")
         stub_request(:get, endpoint + extended_path + 'profile-name')
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: <<-JSON.strip)
@@ -805,7 +805,6 @@ module Aws
 
       it 'can assume a role with EC2 Instance Metadata as a source' do
         allow(InstanceProfileCredentials).to receive(:new).and_call_original
-        profile = 'ar_ec2_src'
         endpoint = 'http://169.254.169.254'
         extended_path = '/latest/meta-data/iam/security-credentials-extended/'
         assume_role_stub(
@@ -816,10 +815,10 @@ module Aws
           'AR_TOKEN'
         )
         stub_request(:put, endpoint + '/latest/api/token')
-          .to_return(status: 200, body: Aws::Json.dump('my-token'))
+          .to_return(status: 200, body: "my-token\n")
         stub_request(:get, endpoint + extended_path)
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-          .to_return(status: 200, body: Aws::Json.dump('profile-name'))
+          .to_return(status: 200, body: "profile-name\n")
         stub_request(:get, endpoint + extended_path + 'profile-name')
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: <<-JSON.strip)
@@ -835,7 +834,7 @@ module Aws
           JSON
 
         client_creds = ApiHelper.sample_rest_xml::Client.new(
-          profile: profile, region: 'us-east-1'
+          profile: 'ar_ec2_src', region: 'us-east-1'
         ).config.credentials
         expect(client_creds.credentials.access_key_id).to eq('AR_AKID')
         expect(metric_values(client_creds.metrics)).to include('p', '0', 'i')
@@ -844,7 +843,6 @@ module Aws
       it 'emits correct UserAgent metrics during STS calls for EC2 Instance Metadata as a source' do
         allow(InstanceProfileCredentials).to receive(:new).and_call_original
 
-        profile = 'ar_ec2_src'
         endpoint = 'http://169.254.169.254'
         extended_path = '/latest/meta-data/iam/security-credentials-extended/'
         resp = <<-JSON.strip
@@ -866,11 +864,11 @@ module Aws
           'AR_TOKEN'
         )
         stub_request(:put, endpoint + '/latest/api/token')
-          .to_return(status: 200, body: Aws::Json.dump('my-token'))
+          .to_return(status: 200, body: "my-token\n")
         stub_request(:get, endpoint + extended_path)
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-          .to_return(status: 200, body: Aws::Json.dump('profile-name'))
-        stub_request(:get, endpoint + extended_path +'profile-name')
+          .to_return(status: 200, body: "profile-name\n")
+        stub_request(:get, endpoint + extended_path + 'profile-name')
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: resp)
 
@@ -883,7 +881,7 @@ module Aws
           end
 
         ApiHelper.sample_rest_xml::Client.new(
-          profile: profile, region: 'us-east-1'
+          profile: 'ar_ec2_src', region: 'us-east-1'
         )
       end
 
@@ -1032,10 +1030,10 @@ module Aws
         endpoint = 'http://169.254.169.254'
         extended_path = '/latest/meta-data/iam/security-credentials-extended/'
         stub_request(:put, endpoint + '/latest/api/token')
-          .to_return(status: 200, body: Aws::Json.dump('my-token'))
+          .to_return(status: 200, body: "my-token\n")
         stub_request(:get, endpoint + extended_path)
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-          .to_return(status: 200, body: Aws::Json.dump('profile-name'))
+          .to_return(status: 200, body: "profile-name\n")
         stub_request(:get, endpoint + extended_path + 'profile-name')
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: <<-JSON.strip)

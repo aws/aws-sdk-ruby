@@ -18,12 +18,12 @@ module Aws
       path = File.expand_path(
         File.join('HOME', '.aws', 'credentials'))
       creds = random_creds
-      credentials_file ||= <<-CREDS
-[#{profile_name}]
-aws_access_key_id = #{creds[:access_key_id]}
-aws_secret_access_key = #{creds[:secret_access_key]}
-aws_session_token = #{creds[:session_token]}
-aws_account_id = #{creds[:account_id]}
+      credentials_file ||= <<~CREDS
+        [#{profile_name}]
+        aws_access_key_id = #{creds[:access_key_id]}
+        aws_secret_access_key = #{creds[:secret_access_key]}
+        aws_session_token = #{creds[:session_token]}
+        aws_account_id = #{creds[:account_id]}
       CREDS
       allow(Dir).to receive(:home).and_return('HOME')
       allow(File).to receive(:exist?).with(path).and_return(true)
