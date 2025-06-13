@@ -103,7 +103,7 @@ module Aws
     #   are always supported by being deployed to the instance and does not
     #   require code changes.
     #
-    # @see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-data-retrieval.html Access instance metadata for an EC2 instance
+    # @see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html#instancedata-data-categories Instance metadata categories
     # @see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-identity-documents.html Instance identity documents for Amazon EC2 instances
     # @param [String] path The full path to the metadata.
     def get(path)
