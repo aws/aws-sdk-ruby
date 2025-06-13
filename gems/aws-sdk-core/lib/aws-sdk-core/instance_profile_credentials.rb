@@ -24,7 +24,11 @@ module Aws
 
     # Raised when the metadata path with profile name was not found.
     # @api private
-    class InvalidProfile < RuntimeError; end
+    class InvalidProfile < RuntimeError
+      def initialize(*args)
+        super('invalid profile name - unable to find metadata path')
+      end
+    end
 
     # Legacy path base for GET request for profile and credentials
     # @api private
@@ -154,7 +158,7 @@ module Aws
         @profile_name = nil
         fetch_credentials
       else
-        raise InvalidProfile, 'invalid profile name'
+        raise InvalidProfile
       end
     end
 
@@ -164,7 +168,7 @@ module Aws
         return
       end
 
-      # TODO: handle invalid JSON parsing
+      # TODO: May need to handle JSON Parser errors with retries
       new_creds = Aws::Json.load(fetch_credentials)
       if !empty_credentials?(@credentials) && (!new_creds['AccessKeyId'] || new_creds['AccessKeyId'].empty?)
         # credentials are already set, but there was an error getting new credentials
