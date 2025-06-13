@@ -10,8 +10,12 @@ module Aws
 
     let(:token_path) { '/latest/api/token' }
     let(:ipv4_endpoint) { 'http://169.254.169.254' }
-    let(:metadata_uri) { ipv4_endpoint + '/latest/meta-data/iam/security-credentials-extended/' }
-    let(:fallback_uri) { ipv4_endpoint + '/latest/meta-data/iam/security-credentials/' }
+    let(:metadata_uri) do
+      ipv4_endpoint + '/latest/meta-data/iam/security-credentials-extended/'
+    end
+    let(:fallback_uri) do
+      ipv4_endpoint + '/latest/meta-data/iam/security-credentials/'
+    end
 
     describe '#initalize' do
       let(:subject) { InstanceProfileCredentials.new(backoff: 0) }
@@ -37,7 +41,7 @@ module Aws
           .to be(ec2_metadata)
       end
 
-      it 'honors the :delay configuration as :backoff when set' do
+      it 'honors the :delay configuration as :backoff config' do
         dummy_proc = proc { 1 }
         subject = InstanceProfileCredentials.new(delay: dummy_proc)
         ec2_metadata = subject.instance_variable_get(:@ec2_metadata)
@@ -86,9 +90,11 @@ module Aws
 
       context 'endpoint resolution' do
         let(:ec2_metadata) { subject.instance_variable_get(:@ec2_metadata) }
-        let(:ipv6_endpoint) { 'http://[fd00:ec2::254]' }
-        let(:extended_path) { '/latest/meta-data/iam/security-credentials-extended/' }
         let(:endpoint) { 'http://123.123.123.123' }
+        let(:ipv6_endpoint) { 'http://[fd00:ec2::254]' }
+        let(:extended_path) do
+          '/latest/meta-data/iam/security-credentials-extended/'
+        end
 
         before do
           [endpoint, ipv6_endpoint].each do |e|
@@ -109,7 +115,7 @@ module Aws
             .to eq ipv4_endpoint
         end
 
-        it 'honors the :ip_address configuration as :endpoint when set' do
+        it 'honors the :ip_address configuration as :endpoint' do
           subject = InstanceProfileCredentials.new(ip_address: endpoint)
           ec2_metadata = subject.instance_variable_get(:@ec2_metadata)
           expect(ec2_metadata.instance_variable_get(:@endpoint)).to be(endpoint)
@@ -178,7 +184,7 @@ module Aws
     end
 
     describe '#retries' do
-      it 'returns configured retries set on EC2Metadata client' do
+      it 'returns configured retries set on EC2Metadata' do
         ec2_metadata = EC2Metadata.new(retries: 5, backoff: 0)
         subject = InstanceProfileCredentials.new(ec2_metadata: ec2_metadata)
         expect(subject.retries).to eq(ec2_metadata.retries)
@@ -270,10 +276,8 @@ module Aws
       end
 
       it 'throws error when the given profile is invalid' do
-        stub_request(:get, metadata_uri + 'invalid')
-          .to_return(status: 404)
-        stub_request(:get, fallback_uri + 'invalid')
-          .to_return(status: 404)
+        stub_request(:get, metadata_uri + 'invalid').to_return(status: 404)
+        stub_request(:get, fallback_uri + 'invalid').to_return(status: 404)
         expect do
           InstanceProfileCredentials.new(
             backoff: 0,
@@ -328,8 +332,7 @@ module Aws
         end
 
         it 'returns valid credentials when a profile is given' do
-          stub_request(:get, metadata_uri + 'foo')
-            .to_return(status: 404)
+          stub_request(:get, metadata_uri + 'foo').to_return(status: 404)
           stub_request(:get, fallback_uri + 'foo')
             .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
             .to_return(status: 200, body: resp)

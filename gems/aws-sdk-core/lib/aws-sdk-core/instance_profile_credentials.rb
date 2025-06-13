@@ -6,6 +6,15 @@ require 'net/http'
 module Aws
   # An auto-refreshing credential provider that loads credentials from
   # EC2 instances using IMDSv2.
+  # By default, this provider attempts the following steps:
+  #
+  #  * First tries the extended endpoint to retrieve credentials with
+  #  account id.
+  #  * IF a `404` response is received, falls back to legacy endpoint
+  #  to retrieve credentials without account id.
+  #
+  # In addition, this provider will cache the previously successful
+  #  endpoint and profile name for next refresh.
   #
   #     ec2_metadata = Aws::EC2Metadata.new(retries: 4)
   #     instance_creds = Aws::InstanceProfileCredentials.new(
@@ -15,6 +24,7 @@ module Aws
   #
   # If you omit the `:ec2_metadata` option, a new {Aws::EC2Metadata} will
   # be created with options provided.
+  # @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-imds-credentials.html IMDS Credential Provider
   class InstanceProfileCredentials
     include CredentialProvider
     include RefreshingCredentials
@@ -23,7 +33,7 @@ module Aws
     # @api private
     class InvalidProfile < RuntimeError; end
 
-    # Path base for GET request for profile and credentials
+    # Legacy path base for GET request for profile and credentials
     # @api private
     METADATA_LEGACY_PATH = '/latest/meta-data/iam/security-credentials/'
 
@@ -63,9 +73,9 @@ module Aws
     # @option options [IO] :http_debug_output (nil) HTTP wire
     #   traces are sent to this object.  You can specify something
     #   like `$stdout`.
-    # @option options [Integer] :token_ttl Time-to-Live in seconds for EC2
-    #   Metadata Token used for fetching Metadata Profile Credentials, defaults
-    #   to `21600` seconds.
+    # @option options [Integer] :token_ttl (21600) Time-to-Live in seconds for
+    #   EC2 Metadata Token used for fetching Metadata Profile Credentials,
+    #   defaults to `21600` seconds.
     # @option options [Callable] :before_refresh Proc called before
     #   credentials are refreshed. `before_refresh` is called
     #   with an instance of this object when AWS credentials are required
@@ -85,8 +95,8 @@ module Aws
     end
 
     # @return [Integer] Number of times to retry when retrieving credentials
-    #   from the instance metadata service. Defaults to `0` when resolving from
-    #   the default credential chain.
+    #   from the instance metadata service. Defaults to `0` when resolving
+    #   from the default credential chain.
     def retries
       @ec2_metadata.retries
     end
@@ -154,23 +164,6 @@ module Aws
       end
     end
 
-    def resolve_opts(options)
-      excluded_opts =
-        %i[ec2_metadata ec2_instance_profile_name ip_address before_refresh]
-      opts = options.merge(
-        endpoint_mode: resolve_endpoint_mode(options),
-        endpoint: resolve_endpoint(options)
-      )
-
-      if opts[:delay]
-        opts[:backoff] = opts.delete(:delay)
-        warn('The `:delay` option is deprecated. Use `:backoff` instead.')
-      end
-
-      excluded_opts.each { |k| opts.delete(k) }
-      opts
-    end
-
     def resolve_ec2_instance_profile_name(options)
       value =
         options[:ec2_instance_profile_name] ||
@@ -202,6 +195,23 @@ module Aws
         ) || 'IPv4'
     end
 
+    def resolve_opts(options)
+      excluded_opts =
+        %i[ec2_metadata ec2_instance_profile_name ip_address before_refresh]
+      opts = options.merge(
+        endpoint_mode: resolve_endpoint_mode(options),
+        endpoint: resolve_endpoint(options)
+      )
+
+      if opts[:delay]
+        opts[:backoff] = opts.delete(:delay)
+        warn('The `:delay` option is deprecated. Use `:backoff` instead.')
+      end
+
+      excluded_opts.each { |k| opts.delete(k) }
+      opts
+    end
+
     def resolve_profile_name
       return if @profile_name
 
@@ -212,7 +222,6 @@ module Aws
       rescue EC2Metadata::MetadataNotFoundError
         raise unless @api_version == :unknown
 
-        # fall back to legacy api
         @api_version = :legacy
         resolve_profile_name
       end
