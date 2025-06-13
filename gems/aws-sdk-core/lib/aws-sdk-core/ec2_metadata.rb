@@ -32,7 +32,8 @@ module Aws
     #
     # @note Customers using containers may need to increase their hop limit
     #   to access IMDSv2.
-    # @see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html#instance-metadata-transition-to-version-2 Use the Instance Metadata Service to access instance metadata
+    # @see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html#instance-metadata-transition-to-version-2
+    #   Use the Instance Metadata Service to access instance metadata.
     #
     # @param [Hash] options
     # @option options [Integer] :token_ttl (21600) The session token's TTL,
@@ -51,7 +52,7 @@ module Aws
     #   one chunk of data to be read.
     # @option options [IO] :http_debug_output An output stream for debugging. Do
     #   not use this in production.
-    # @option options [Integer,Proc] :backoff A backoff used for retryable
+    # @option options [Integer, Proc] :backoff A backoff used for retryable
     #   requests. When given an Integer, it sleeps that amount. When given a
     #   Proc, it is called with the current number of failed retries.
     def initialize(options = {})

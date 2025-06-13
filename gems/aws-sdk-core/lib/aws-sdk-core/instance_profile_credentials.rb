@@ -4,26 +4,19 @@ require 'time'
 require 'net/http'
 
 module Aws
-  # An auto-refreshing credential provider that loads credentials from
-  # EC2 instances using IMDSv2.
+  # An auto-refreshing credential provider that loads credentials from EC2 instances using IMDSv2.
   # By default, this provider attempts the following steps:
   #
-  #  * First tries the extended endpoint to retrieve credentials with
-  #  account id.
-  #  * IF a `404` response is received, falls back to legacy endpoint
-  #  to retrieve credentials without account id.
+  #  * First tries the extended endpoint to retrieve credentials with account id.
+  #  * IF a `404` response is received, falls back to legacy endpoint to retrieve credentials without account id.
   #
-  # In addition, this provider will cache the previously successful
-  #  endpoint and profile name for next refresh.
+  # In addition, this provider will cache the previously successful endpoint and profile name for next refresh.
   #
   #     ec2_metadata = Aws::EC2Metadata.new(retries: 4)
-  #     instance_creds = Aws::InstanceProfileCredentials.new(
-  #       ec2_metadata: ec2_metadata
-  #     )
-  #     ec2_client = Aws::EC2::Client.new(credentials: instance_creds)
+  #     creds = Aws::InstanceProfileCredentials.new(ec2_metadata: ec2_metadata)
+  #     ec2_client = Aws::EC2::Client.new(credentials: creds)
   #
-  # If you omit the `:ec2_metadata` option, a new {Aws::EC2Metadata} will
-  # be created with options provided.
+  # If you omit the `:ec2_metadata` option, a new {Aws::EC2Metadata} will be created with options provided.
   # @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-imds-credentials.html IMDS Credential Provider
   class InstanceProfileCredentials
     include CredentialProvider
@@ -39,8 +32,7 @@ module Aws
 
     # Extended path base for GET request for profile and credentials
     # @api private
-    METADATA_EXTENDED_PATH =
-      '/latest/meta-data/iam/security-credentials-extended/'
+    METADATA_EXTENDED_PATH = '/latest/meta-data/iam/security-credentials-extended/'
 
     # @param [Hash] options
     # @option options [Aws::EC2Metadata] :ec2_metadata A custom EC2 metadata
@@ -55,35 +47,13 @@ module Aws
     #   * `ENV['AWS_EC2_INSTANCE_PROFILE_NAME']`
     #   * `~/.aws/config`
     #
-    # @option options [Integer] :retries (3) Number of times to retry for the
-    #   {Aws::EC2Metadata} when retrieving credentials. Defaults to `0` when
-    #   resolving from the default credential chain.
-    # @option options [String] :endpoint ('http://169.254.169.254') The IMDS
-    #   endpoint. This option has precedence over the `:endpoint_mode`.
-    # @option options [String] :endpoint_mode ('IPv4') The endpoint mode for the
-    #   instance metadata service. This is either `'IPv4' ('169.254.169.254')`
-    #   or `'IPv6' ('[fd00:ec2::254]')`.
-    # @option options [Integer] :port (80)
-    # @option options [Float] :http_open_timeout (1)
-    # @option options [Float] :http_read_timeout (1)
-    # @option options [Numeric, Proc] :backoff By default, failures are retried
-    #   with exponential back-off, i.e. `sleep(1.2 ** num_failures)`. You can
-    #   pass a number of seconds to sleep between failed attempts, or
-    #   a Proc that accepts the number of failures.
-    # @option options [IO] :http_debug_output (nil) HTTP wire
-    #   traces are sent to this object.  You can specify something
-    #   like `$stdout`.
-    # @option options [Integer] :token_ttl (21600) Time-to-Live in seconds for
-    #   EC2 Metadata Token used for fetching Metadata Profile Credentials,
-    #   defaults to `21600` seconds.
+    # @param (see Aws::EC2Metadata#initialize)
     # @option options [Callable] :before_refresh Proc called before
     #   credentials are refreshed. `before_refresh` is called
     #   with an instance of this object when AWS credentials are required
     #   and need to be refreshed.
     def initialize(options = {})
-      @ec2_metadata =
-        options.delete(:ec2_metadata) ||
-        EC2Metadata.new(resolve_opts(options))
+      @ec2_metadata = options.delete(:ec2_metadata) || build_ec2_metadata_client(options)
       @ec2_instance_profile_name = resolve_ec2_instance_profile_name(options)
       @profile_name = @ec2_instance_profile_name
       @api_version = :unknown
@@ -102,6 +72,50 @@ module Aws
     end
 
     private
+
+    def build_ec2_metadata_client(options)
+      opts = options.merge(
+        endpoint_mode: resolve_endpoint_mode(options),
+        endpoint: resolve_endpoint(options)
+      )
+      opts = opts.except(:ec2_instance_profile_name, :before_refresh)
+
+      if (delay = opts.delete(:delay))
+        warn('The `:delay` option is deprecated. Use `:backoff` instead.')
+        opts[:backoff] = delay
+      end
+      EC2Metadata.new(opts)
+    end
+
+    def resolve_endpoint_mode(options)
+      options[:endpoint_mode] ||
+        ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE'] ||
+        Aws.shared_config.ec2_metadata_service_endpoint_mode(profile: options[:profile]) ||
+        'IPv4'
+    end
+
+    def resolve_endpoint(options)
+      if (value = options.delete(:ip_address))
+        warn('The `:ip_address` option is deprecated. Use `:endpoint` instead.')
+        return value
+      end
+
+      options[:endpoint] ||
+        ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT'] ||
+        Aws.shared_config.ec2_metadata_service_endpoint(profile: options[:profile]) ||
+        nil
+    end
+
+    def resolve_ec2_instance_profile_name(options)
+      value =
+        options[:ec2_instance_profile_name] ||
+        ENV['AWS_EC2_INSTANCE_PROFILE_NAME'] ||
+        Aws.shared_config.ec2_instance_profile_name(profile: options[:profile])
+      return value if value.nil?
+      raise ArgumentError, 'EC2 instance profile name cannot be blank' if value.strip.empty?
+
+      value
+    end
 
     def empty_credentials?(creds)
       creds.nil? || !creds.set?
@@ -152,64 +166,15 @@ module Aws
 
       # TODO: handle invalid JSON parsing
       new_creds = Aws::Json.load(fetch_credentials)
-      if !empty_credentials?(@credentials) &&
-         (!new_creds['AccessKeyId'] || new_creds['AccessKeyId'].empty?)
-        # credentials are already set
-        # error getting new credentials
-        # so don't update the credentials
+      if !empty_credentials?(@credentials) && (!new_creds['AccessKeyId'] || new_creds['AccessKeyId'].empty?)
+        # credentials are already set, but there was an error getting new credentials
+        # so don't update the credentials and use stale ones (static stability)
         @no_refresh_until = Time.now + rand(300..360)
         warn_expired_credentials
       else
+        # credentials are empty or successfully retrieved, update them
         update_credentials(new_creds)
       end
-    end
-
-    def resolve_ec2_instance_profile_name(options)
-      value =
-        options[:ec2_instance_profile_name] ||
-        ENV['AWS_EC2_INSTANCE_PROFILE_NAME'] ||
-        Aws.shared_config.ec2_instance_profile_name(profile: options[:profile])
-      return value if value.nil? || !value.strip.empty?
-
-      raise ArgumentError, 'EC2 instance profile name cannot be a blank value.'
-    end
-
-    def resolve_endpoint(options)
-      if (value = options[:ip_address])
-        warn('The `:ip_address` option is deprecated. Use `:endpoint` instead.')
-        value
-      else
-        options[:endpoint] ||
-          ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT'] ||
-          Aws.shared_config.ec2_metadata_service_endpoint(
-            profile: options[:profile]
-          )
-      end
-    end
-
-    def resolve_endpoint_mode(options)
-      options[:endpoint_mode] ||
-        ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE'] ||
-        Aws.shared_config.ec2_metadata_service_endpoint_mode(
-          profile: options[:profile]
-        ) || 'IPv4'
-    end
-
-    def resolve_opts(options)
-      excluded_opts =
-        %i[ec2_metadata ec2_instance_profile_name ip_address before_refresh]
-      opts = options.merge(
-        endpoint_mode: resolve_endpoint_mode(options),
-        endpoint: resolve_endpoint(options)
-      )
-
-      if opts[:delay]
-        opts[:backoff] = opts.delete(:delay)
-        warn('The `:delay` option is deprecated. Use `:backoff` instead.')
-      end
-
-      excluded_opts.each { |k| opts.delete(k) }
-      opts
     end
 
     def resolve_profile_name
@@ -217,7 +182,7 @@ module Aws
 
       begin
         metadata = @ec2_metadata.get(metadata_path)
-        @profile_name = metadata.lines.first.strip
+        @profile_name = metadata.strip
         @api_version = :extended if @api_version == :unknown
       rescue EC2Metadata::MetadataNotFoundError
         raise unless @api_version == :unknown
@@ -234,8 +199,7 @@ module Aws
         creds['Token'],
         account_id: creds['AccountId']
       )
-      @expiration =
-        creds['Expiration'] ? Time.iso8601(creds['Expiration']) : nil
+      @expiration = creds['Expiration'] ? Time.iso8601(creds['Expiration']) : nil
       return unless @expiration && @expiration < Time.now
 
       @no_refresh_until = Time.now + rand(300..360)
