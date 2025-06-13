@@ -1,8 +1,13 @@
 Unreleased Changes
 ------------------
 
-* Feature - Support sourcing account ID from IMDS credentials.
-* Feature - TODO
+* Feature - Support sourcing account ID when fetching credentials using `Aws::InstanceProfileCredentials`.
+
+* Feature - Remove support for disabling IMDSv1 in `InstanceProfileCredentials` provider. The following configurations has been removed: `ENV['AWS_EC2_METADATA_V1_DISABLED']`, `ec2_metadata_v1_disabled` shared config, or the `disable_imds_v1` credentials option.
+
+* Feature - Support shared config, `disable_ec2_metadata` to disable IMDS credential fetching.
+
+* Feature - Support configuration for IMDS profile name using `ENV['AWS_EC2_INSTANCE_PROFILE_NAME']`, `ec2_instance_profile_name` shared config, or the `ec2_instance_profile_name` Client configuration option.
 
 3.225.2 (2025-06-10)
 ------------------
