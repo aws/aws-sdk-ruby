@@ -76,10 +76,10 @@ module Aws
         EC2Metadata.new(resolve_opts(options))
       @ec2_instance_profile_name = resolve_ec2_instance_profile_name(options)
       @profile_name = @ec2_instance_profile_name
+      @api_version = :unknown
 
       @no_refresh_until = nil
       @async_refresh = false
-      @metadata_path = METADATA_EXTENDED_PATH
       @metrics = ['CREDENTIALS_IMDS']
       super
     end
@@ -97,11 +97,20 @@ module Aws
       creds.nil? || !creds.set?
     end
 
+    def metadata_path
+      case @api_version
+      when :legacy then METADATA_LEGACY_PATH
+      else METADATA_EXTENDED_PATH
+      end
+    end
+
     def fetch_credentials
       resolve_profile_name
 
       begin
-        @ec2_metadata.get(@metadata_path + @profile_name)
+        creds = @ec2_metadata.get(metadata_path + @profile_name)
+        @api_version = :extended if @api_version == :unknown
+        creds
       rescue EC2Metadata::MetadataNotFoundError
         resolve_metadata_path
       end
@@ -113,8 +122,8 @@ module Aws
     end
 
     def resolve_metadata_path
-      if @metadata_path == METADATA_EXTENDED_PATH
-        @metadata_path = METADATA_LEGACY_PATH
+      if @api_version == :unknown
+        @api_version = :legacy
         fetch_credentials
       elsif @ec2_instance_profile_name.nil?
         # cache profile may have been replaced
@@ -197,12 +206,14 @@ module Aws
       return if @profile_name
 
       begin
-        metadata = @ec2_metadata.get(@metadata_path)
+        metadata = @ec2_metadata.get(metadata_path)
         @profile_name = metadata.lines.first.strip
+        @api_version = :extended if @api_version == :unknown
       rescue EC2Metadata::MetadataNotFoundError
-        raise if @metadata_path == METADATA_LEGACY_PATH
+        raise unless @api_version == :unknown
 
-        @metadata_path = METADATA_LEGACY_PATH
+        # fall back to legacy api
+        @api_version = :legacy
         resolve_profile_name
       end
     end
