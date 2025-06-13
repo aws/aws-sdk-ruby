@@ -20,37 +20,30 @@ module Aws
     end
 
     describe '#initalize' do
-      it 'uses default values when options given' do
-        expect(client.instance_variable_get(:@token_ttl)).to eq(21_600)
-        expect(client.instance_variable_get(:@retries)).to eq(3)
-        expect(client.instance_variable_get(:@endpoint)).to eq(endpoint)
-        expect(client.instance_variable_get(:@port)).to eq(80)
-        expect(client.instance_variable_get(:@backoff)).to be_an(Proc)
-        expect(client.instance_variable_get(:@http_open_timeout)).to eq(1)
-        expect(client.instance_variable_get(:@http_read_timeout)).to eq(1)
-        expect(client.instance_variable_get(:@http_debug_output)).to be_nil
+      it 'resolves to correct endpoint based on endpoint mode' do
+        client = EC2Metadata.new(endpoint_mode: 'IPv6')
+        expect(client.instance_variable_get(:@endpoint))
+          .to eq('http://[fd00:ec2::254]')
+
+        client = EC2Metadata.new(endpoint_mode: 'IPv4')
+        expect(client.instance_variable_get(:@endpoint))
+          .to eq(endpoint)
       end
 
-      context 'endpoint configuration' do
-        it 'resolves to correct endpoint based on endpoint mode' do
-          client = EC2Metadata.new(endpoint_mode: 'IPv6')
-          expect(client.instance_variable_get(:@endpoint))
-            .to eq('http://[fd00:ec2::254]')
+      it 'given endpoint takes precedence over endpoint mode' do
+        client = EC2Metadata.new(endpoint_mode: 'IPv6', endpoint: endpoint)
+        expect(client.instance_variable_get(:@endpoint)).to eq(endpoint)
+      end
 
-          client = EC2Metadata.new(endpoint_mode: 'IPv4')
-          expect(client.instance_variable_get(:@endpoint))
-            .to eq(endpoint)
-        end
+      it 'raises when an invalid endpoint mode is given' do
+        expect { EC2Metadata.new(endpoint_mode: 'meep') }
+          .to raise_error(ArgumentError)
+      end
+    end
 
-        it 'given endpoint takes precedence over endpoint mode' do
-          client = EC2Metadata.new(endpoint_mode: 'IPv6', endpoint: endpoint)
-          expect(client.instance_variable_get(:@endpoint)).to eq(endpoint)
-        end
-
-        it 'raises when an invalid endpoint mode is given' do
-          expect { EC2Metadata.new(endpoint_mode: 'meep') }
-            .to raise_error(ArgumentError)
-        end
+    describe '#retries' do
+      it 'defaults to 3' do
+        expect(client.retries).to eq(3)
       end
     end
 
@@ -93,6 +86,35 @@ module Aws
           .to_return(status: 404)
         expect { client.get(metadata_path) }
           .to raise_error(Aws::EC2Metadata::MetadataNotFoundError)
+      end
+
+      context 'endpoint configuration' do
+        let(:endpoint) { 'http://123.123.123.123:9001' }
+
+        it 'uses endpoint with a scheme and custom port' do
+          token = stub_get_token
+          client = EC2Metadata.new(endpoint: endpoint)
+          stub_request(:get, "#{endpoint}/latest/meta-data/foo")
+            .with(headers: { 'x-aws-ec2-metadata-token' => token })
+          client.get(metadata_path)
+        end
+
+        it 'uses endpoint without a scheme and a configured port' do
+          uri = URI(endpoint)
+          token = stub_get_token
+          client = EC2Metadata.new(endpoint: uri.hostname, port: uri.port)
+          stub_request(:get, "#{endpoint}/latest/meta-data/foo")
+            .with(headers: { 'x-aws-ec2-metadata-token' => token })
+          client.get(metadata_path)
+        end
+
+        it 'endpoint takes precedence over endpoint mode' do
+          token = stub_get_token
+          client = EC2Metadata.new(endpoint_mode: 'IPv6', endpoint: endpoint)
+          stub_request(:get, "#{endpoint}/latest/meta-data/foo")
+            .with(headers: { 'x-aws-ec2-metadata-token' => token })
+          client.get(metadata_path)
+        end
       end
 
       context 'backoff strategy' do

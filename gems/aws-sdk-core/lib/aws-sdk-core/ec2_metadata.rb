@@ -8,7 +8,7 @@ module Aws
   class EC2Metadata
     # Path for PUT request for token
     # @api private
-    METADATA_TOKEN_PATH = '/latest/api/token'.freeze
+    METADATA_TOKEN_PATH = '/latest/api/token'
 
     # Raised when the PUT request is not valid. This would be thrown if
     # `token_ttl` is not an Integer.
@@ -109,7 +109,7 @@ module Aws
     def get(path)
       retry_errors do
         @mutex.synchronize do
-          fetch_token unless token_set?
+          fetch_token unless @token && !@token.expired?
         end
         open_connection do |c|
           http_get(c, path, @token.value)
@@ -183,10 +183,6 @@ module Aws
       http.set_debug_output(@http_debug_output) if @http_debug_output
       http.start
       yield(http).tap { http.finish }
-    end
-
-    def token_set?
-      @token && !@token.expired?
     end
 
     def resolve_endpoint(options)
