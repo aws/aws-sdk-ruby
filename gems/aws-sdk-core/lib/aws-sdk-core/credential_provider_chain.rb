@@ -191,8 +191,7 @@ module Aws
       if ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] ||
          ENV['AWS_CONTAINER_CREDENTIALS_FULL_URI']
         ECSCredentials.new(options)
-      elsif ec2_metadata_disabled(profile_name)
-      else
+      elsif !ec2_metadata_disabled(profile_name)
         InstanceProfileCredentials.new(options.merge(profile: profile_name))
       end
     end
@@ -200,8 +199,7 @@ module Aws
     def ec2_metadata_disabled(profile_name)
       value =
         ENV['AWS_EC2_METADATA_DISABLED'] ||
-        (Aws.shared_config.config_enabled? &&
-        Aws.shared_config.disable_ec2_metadata(profile: profile_name)) ||
+        Aws.shared_config.config_enabled? && Aws.shared_config.disable_ec2_metadata(profile: profile_name) ||
         'false'
       Aws::Util.str_2_bool(value)
     end

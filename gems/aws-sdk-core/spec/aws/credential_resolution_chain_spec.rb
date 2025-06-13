@@ -1146,6 +1146,7 @@ module Aws
     end
 
     def stub_token_file(token)
+      allow(File).to receive(:exist?).and_call_original # this file
       allow(File).to receive(:exist?).with('my-token.jwt').and_return(true)
       allow(File).to receive(:read).and_call_original
       allow(File).to receive(:read).with('my-token.jwt').and_return(token)
