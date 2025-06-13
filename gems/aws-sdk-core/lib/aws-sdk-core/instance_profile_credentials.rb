@@ -53,12 +53,9 @@ module Aws
     # @option options [String] :endpoint_mode ('IPv4') The endpoint mode for the
     #   instance metadata service. This is either `'IPv4' ('169.254.169.254')`
     #   or `'IPv6' ('[fd00:ec2::254]')`.
-    # @option options [String] :ip_address ('169.254.169.254') Deprecated. Use
-    #   `:endpoint` instead. The IP address for the endpoint.
     # @option options [Integer] :port (80)
     # @option options [Float] :http_open_timeout (1)
     # @option options [Float] :http_read_timeout (1)
-    # @option options [Numeric, Proc] :delay Deprecated. Use `:backoff` instead.
     # @option options [Numeric, Proc] :backoff By default, failures are retried
     #   with exponential back-off, i.e. `sleep(1.2 ** num_failures)`. You can
     #   pass a number of seconds to sleep between failed attempts, or
@@ -75,17 +72,15 @@ module Aws
     #   and need to be refreshed.
     def initialize(options = {})
       @ec2_metadata =
-        options[:ec2_metadata] ||
+        options.delete(:ec2_metadata) ||
         EC2Metadata.new(resolve_opts(options))
-      options.delete(:ec2_metadata)
-      @profile_name = nil
       @ec2_instance_profile_name = resolve_ec2_instance_profile_name(options)
+      @profile_name = @ec2_instance_profile_name
 
       @no_refresh_until = nil
       @async_refresh = false
-      @metrics = ['CREDENTIALS_IMDS']
-      @api_version = :unknown
       @metadata_path = METADATA_EXTENDED_PATH
+      @metrics = ['CREDENTIALS_IMDS']
       super
     end
 
@@ -98,11 +93,6 @@ module Aws
 
     private
 
-    # tracks which api version is used to call IMDS service
-    # starts as :unknown and updated to either
-    # :extended or :legacy after the first successful call
-    attr_accessor :api_version
-
     def empty_credentials?(creds)
       creds.nil? || !creds.set?
     end
@@ -111,32 +101,27 @@ module Aws
       resolve_profile_name
 
       begin
-        creds = @ec2_metadata.get(metadata_path + @profile_name)
-        @api_version = :extended if @api_version == :unknown
-        creds
+        @ec2_metadata.get(@metadata_path + @profile_name)
       rescue EC2Metadata::MetadataNotFoundError
-        if @api_version == :unknown
-          @api_version = :legacy
-          fetch_credentials
-        elsif @ec2_instance_profile_name.nil?
-          # cache profile may have been replaced
-          @profile_name = nil
-          fetch_credentials
-        else
-          raise InvalidProfile
-        end
+        resolve_metadata_path
       end
-    rescue InvalidProfile
+    rescue InvalidProfile, EC2Metadata::MetadataNotFoundError
       raise
     rescue StandardError => e
       warn("Error retrieving instance profile credentials: #{e}")
       '{}'
     end
 
-    def metadata_path
-      case @api_version
-      when :legacy then METADATA_LEGACY_PATH
-      else METADATA_EXTENDED_PATH
+    def resolve_metadata_path
+      if @metadata_path == METADATA_EXTENDED_PATH
+        @metadata_path = METADATA_LEGACY_PATH
+        fetch_credentials
+      elsif @ec2_instance_profile_name.nil?
+        # cache profile may have been replaced
+        @profile_name = nil
+        fetch_credentials
+      else
+        raise InvalidProfile, 'invalid profile name'
       end
     end
 
@@ -146,39 +131,35 @@ module Aws
         return
       end
 
+      # TODO: handle invalid JSON parsing
       new_creds = Aws::Json.load(fetch_credentials)
       if !empty_credentials?(@credentials) &&
          (!new_creds['AccessKeyId'] || new_creds['AccessKeyId'].empty?)
         # credentials are already set
         # error getting new credentials
         # so don't update the credentials
-        @no_refresh_until = Time.now + refresh_offset
+        @no_refresh_until = Time.now + rand(300..360)
         warn_expired_credentials
       else
         update_credentials(new_creds)
       end
     end
 
-    # Compute an offset for refresh with jitter
-    def refresh_offset
-      rand(300..360)
-    end
-
     def resolve_opts(options)
-      ec2_metadata_opts = options.merge(
+      excluded_opts =
+        %i[ec2_metadata ec2_instance_profile_name ip_address before_refresh]
+      opts = options.merge(
         endpoint_mode: resolve_endpoint_mode(options),
         endpoint: resolve_endpoint(options)
       )
 
-      if ec2_metadata_opts[:delay]
-        ec2_metadata_opts[:backoff] = ec2_metadata_opts[:delay]
-        ec2_metadata_opts.delete(:delay)
+      if opts[:delay]
+        opts[:backoff] = opts.delete(:delay)
         warn('The `:delay` option is deprecated. Use `:backoff` instead.')
       end
 
-      # delete unnecessary configs for ec2 metadata client
-      %i[client ec2_instance_profile_name].each { |k| opts.delete(k) }
-      ec2_metadata_opts
+      excluded_opts.each { |k| opts.delete(k) }
+      opts
     end
 
     def resolve_ec2_instance_profile_name(options)
@@ -194,14 +175,14 @@ module Aws
     def resolve_endpoint(options)
       if (value = options[:ip_address])
         warn('The `:ip_address` option is deprecated. Use `:endpoint` instead.')
-        return value
+        value
+      else
+        options[:endpoint] ||
+          ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT'] ||
+          Aws.shared_config.ec2_metadata_service_endpoint(
+            profile: options[:profile]
+          )
       end
-
-      options[:endpoint] ||
-        ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT'] ||
-        Aws.shared_config.ec2_metadata_service_endpoint(
-          profile: options[:profile]
-        )
     end
 
     def resolve_endpoint_mode(options)
@@ -216,14 +197,12 @@ module Aws
       return if @profile_name
 
       begin
-        metadata = @ec2_metadata.get(metadata_path)
+        metadata = @ec2_metadata.get(@metadata_path)
         @profile_name = metadata.lines.first.strip
-        @api_version = :extended if @api_version == :unknown
       rescue EC2Metadata::MetadataNotFoundError
-        raise unless @api_version == :unknown
+        raise if @metadata_path == METADATA_LEGACY_PATH
 
-        # fall back to legacy api
-        @api_version = :legacy
+        @metadata_path = METADATA_LEGACY_PATH
         resolve_profile_name
       end
     end
@@ -239,7 +218,7 @@ module Aws
         creds['Expiration'] ? Time.iso8601(creds['Expiration']) : nil
       return unless @expiration && @expiration < Time.now
 
-      @no_refresh_until = Time.now + refresh_offset
+      @no_refresh_until = Time.now + rand(300..360)
       warn_expired_credentials
     end
 
