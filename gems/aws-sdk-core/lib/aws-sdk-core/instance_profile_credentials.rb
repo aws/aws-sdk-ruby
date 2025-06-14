@@ -57,8 +57,6 @@ module Aws
 
       @ec2_instance_profile_name = resolve_ec2_instance_profile_name(options)
       @api_version = :unknown
-      @url_base = nil
-      @profile_name = nil
       @resolved_profile = nil
 
       @no_refresh_until = nil
@@ -128,140 +126,86 @@ module Aws
       end
     end
 
-    def fetch_credentials
-      puts "fetching creds"
-      resolve_profile_name
-
-      puts "profile name: #{@profile_name}"
-
-      begin
-        creds = @ec2_metadata.get(metadata_path + @profile_name)
-        puts "creds: #{creds.inspect}"
-        @api_version = :extended if @api_version == :unknown
-        creds
-      rescue EC2Metadata::MetadataNotFoundError
-        resolve_metadata_path
-      end
-    rescue InvalidProfile, EC2Metadata::MetadataNotFoundError
-      raise
-    rescue StandardError => e
-      warn("Error retrieving instance profile credentials: #{e}")
-      '{}'
-    end
-
-    def resolve_metadata_path
-      if @api_version == :unknown
-        @api_version = :legacy
-        fetch_credentials
-      elsif @ec2_instance_profile_name.nil?
-        # cache profile may have been replaced
-        @profile_name = nil
-        fetch_credentials
-      else
-        raise InvalidProfile, 'invalid profile name - unable to find metadata path'
-      end
-    end
-
-    def resolve_profile_name2
-      metadata = @ec2_metadata.get(@url_base)
-      @api_version = :extended if @api_version == :unknown
-      metadata.strip
-    rescue EC2Metadata::MetadataNotFoundError
-      raise InvalidProfile, 'unable to resolve profile name from metadata' unless @api_version == :unknown
-
-      @api_version = :legacy
-      resolve_profile_name2
-    end
-
-    def fetch_credentials2
-      creds = @ec2_metadata.get(@url_base + @profile_name)
-      @api_version = :extended if @api_version == :unknown
-      creds
-    rescue EC2Metadata::MetadataNotFoundError
-      if @api_version == :unknown
-        @api_version = :legacy
-        refresh2
-      elsif @ec2_instance_profile_name.nil?
-        @resolved_profile = nil
-        refresh2
-      else
-        raise 'unable to fetch credentials'
-      end
-    end
-
-    def refresh2
-      @url_base =
-        if @api_version == :legacy
-          METADATA_LEGACY_PATH
-        else
-          METADATA_EXTENDED_PATH
-        end
-
-      @profile_name =
-        if @ec2_instance_profile_name
-          @ec2_instance_profile_name
-        elsif @resolved_profile
-          @resolved_profile
-        else
-          resolve_profile_name2
-        end
-
-      fetch_credentials2
-    end
-
     def refresh
-      puts "refresh is called"
       if @no_refresh_until && @no_refresh_until > Time.now
-        puts "no refresh until #{@no_refresh_until} - warning and returning"
         warn_expired_credentials
         return
       end
 
-      new_creds = Aws::Json.load(refresh2)
+      new_creds =
+        begin
+          retry_errors([Aws::Json::ParseError]) do
+            Aws::Json.load(fetch_credentials)
+          end
+        rescue Aws::Json::ParseError
+          raise Aws::Errors::MetadataParserError
+        rescue InvalidProfile # unable to find profile name with already resolved api-version
+          raise
+        rescue StandardError => e
+          warn("Error retrieving instance profile credentials: #{e}")
+          '{}'
+        end
+
       if !empty_credentials?(@credentials) && (!new_creds['AccessKeyId'] || new_creds['AccessKeyId'].empty?)
         # credentials are already set, but there was an error getting new credentials
         # so don't update the credentials and use stale ones (static stability)
-        puts "no refresh until !"
         @no_refresh_until = Time.now + rand(300..360)
         warn_expired_credentials
       else
-        puts "updating credentials"
-        puts "new creds: #{new_creds.inspect}"
         # credentials are empty or successfully retrieved, update them
         update_credentials(new_creds)
       end
+    end
 
+    def fetch_credentials
+      profile_name = resolve_profile_name
 
+      begin
+        creds = @ec2_metadata.get(metadata_path + profile_name)
+        @api_version = :extended if @api_version == :unknown
+        creds
+      rescue EC2Metadata::MetadataNotFoundError
+        if @api_version == :unknown
+          @api_version = :legacy
+          fetch_credentials
+        elsif @ec2_instance_profile_name.nil?
+          # cache profile may have been replaced
+          @resolved_profile = nil
+          fetch_credentials
+        else
+          raise InvalidProfile, "invalid profile name - unable to find metadata path for #{profile_name}"
+        end
+      end
+    end
 
-
-      # # TODO: May need to handle JSON Parser errors with retries
-      # new_creds = Aws::Json.load(fetch_credentials)
-      # puts "new creds: #{new_creds.inspect}"
-      # if !empty_credentials?(@credentials) && (!new_creds['AccessKeyId'] || new_creds['AccessKeyId'].empty?)
-      #   # credentials are already set, but there was an error getting new credentials
-      #   # so don't update the credentials and use stale ones (static stability)
-      #   puts "no refresh until !"
-      #   @no_refresh_until = Time.now + rand(300..360)
-      #   warn_expired_credentials
-      # else
-      #   # credentials are empty or successfully retrieved, update them
-      #   update_credentials(new_creds)
-      # end
+    def resolve_url_base
+      if @api_version == :legacy
+        METADATA_LEGACY_PATH
+      else
+        METADATA_EXTENDED_PATH
+      end
     end
 
     def resolve_profile_name
-      return if @profile_name
-
-      begin
-        metadata = @ec2_metadata.get(metadata_path)
-        @profile_name = metadata.strip
-        @api_version = :extended if @api_version == :unknown
-      rescue EC2Metadata::MetadataNotFoundError
-        raise unless @api_version == :unknown
-
-        @api_version = :legacy
-        resolve_profile_name
+      if @ec2_instance_profile_name
+        @ec2_instance_profile_name
+      elsif @resolved_profile
+        @resolved_profile
+      else
+        fetch_profile_name
       end
+    end
+
+    def fetch_profile_name
+      metadata = @ec2_metadata.get(metadata_path)
+      @api_version = :extended if @api_version == :unknown
+      @resolved_profile = metadata.strip
+      @resolved_profile
+    rescue EC2Metadata::MetadataNotFoundError
+      raise InvalidProfile, "invalid profile name #{metadata}" unless @api_version == :unknown
+
+      @api_version = :legacy
+      fetch_profile_name
     end
 
     def update_credentials(creds)
@@ -274,7 +218,6 @@ module Aws
       @expiration = creds['Expiration'] ? Time.iso8601(creds['Expiration']) : nil
       return unless @expiration && @expiration < Time.now
 
-      puts "no refresh until"
       @no_refresh_until = Time.now + rand(300..360)
       warn_expired_credentials
     end
@@ -284,6 +227,18 @@ module Aws
         'Attempting credential expiration extension due to a credential service availability issue. '\
         'A refresh of these credentials will be attempted again in 5 minutes.'
       )
+    end
+
+    def retry_errors(error_classes, max_retries: 3, &_block)
+      retries = 0
+      begin
+        yield
+      rescue *error_classes
+        raise unless retries < max_retries
+
+        retries += 1
+        retry
+      end
     end
   end
 end
