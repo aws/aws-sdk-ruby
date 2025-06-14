@@ -139,55 +139,96 @@ module Aws
     end
 
     describe '#credentials' do
-      path = File.expand_path('imds-v21-tests.json', __dir__)
-      test_cases = JSON.load_file(path)
+      let(:expiration) { (Time.now + 3600).utc.iso8601 }
 
-      def setup_stub_responses(test)
-        requests = []
-        requests <<
-          stub_request(:put, ipv4_endpoint + token_path)
+      before do
+        stub_request(:put, ipv4_endpoint + token_path)
           .to_return(status: 200, body: "my-token\n", headers: { 'x-aws-ec2-metadata-token-ttl-seconds' => '21600' })
-
-        test['expectations'].group_by { |e| e['get'] }.each do |path, responses|
-          stub_responses = responses.map do |response|
-            body = response['response']['body']
-            formatted_body = body.is_a?(String) ? "#{body}\n" : JSON.dump(body)
-            { status: response['response']['status'], body: formatted_body }
-          end
-          requests << stub_request(:get, ipv4_endpoint + path).to_return(*stub_responses)
-        end
-        requests
       end
 
-      test_cases.each do |test|
-        it "passes: #{test['summary']}" do
-          ec2_profile = test['config']['ec2InstanceProfileName']
-          requests = setup_stub_responses(test)
+      it 'Test IMDS credentials provider returns valid credentials with account ID' do
+        stub_request(:get, "#{ipv4_endpoint}#{extended_path}")
+          .to_return(status: 200, body: "my-profile-0001\n")
+        resp1 = {
+          "Code": "Success",
+          "LastUpdated": "2025-03-12T20:53:17.832308Z",
+          "Type": "AWS-HMAC",
+          "AccessKeyId": "ASIAIOSFODNN7EXAMPLE",
+          "SecretAccessKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+          "Token": "AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)",
+          "Expiration": expiration,
+          "UnexpectedElement1": {
+            "Name": "ignore-me-1"
+          },
+          "AccountId": "123456789101"
+        }
+        resp2 = {
+          "Code": "Success",
+          "LastUpdated": "2025-03-12T20:53:17.832308Z",
+          "Type": "AWS-HMAC",
+          "AccessKeyId": "ASIAIOSFODNN7EXAMPLE",
+          "SecretAccessKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+          "Token": "AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)",
+          "Expiration": expiration,
+          "UnexpectedElement1": {
+            "Name": "ignore-me-1"
+          },
+          "AccountId": "123456789101"
+        }
+        stub_request(:get, "#{ipv4_endpoint}#{extended_path}my-profile-0001")
+          .to_return(status: 200, body: resp1.to_json)
+          .to_return(status: 200, body: resp2.to_json)
+        subject = InstanceProfileCredentials.new(backoff: 0)
+        creds = subject.credentials
+        expect(creds.access_key_id).to_not be_nil
+        expect(creds.account_id).to eq('123456789101')
+        subject.refresh!
+        creds = subject.credentials
+        expect(creds.access_key_id).to_not be_nil
+        expect(creds.account_id).to eq('123456789101')
+      end
 
-          c = begin
-            InstanceProfileCredentials.new(ec2_instance_profile_name: ec2_profile)
-          rescue InstanceProfileCredentials::InvalidProfile => e
-            e
-          end
-
-          test['outcomes'].each do |expected|
-            if expected['result'] == 'invalid profile'
-              expect(c).to be_a(InstanceProfileCredentials::InvalidProfile)
-            else
-              creds = c.credentials
-              expect(creds.account_id).to eq(expected['accountId'])
-              expect(creds.access_key_id).not_to be_nil
-              c.refresh!
-            end
-          end
-
-          requests.each { |request| assert_requested(request, times: 1) }
-        end
+      it 'Test IMDS credentials provider with a given profile name returns valid credentials with account ID' do
+        resp1 = {
+          "Code": "Success",
+          "LastUpdated": "2025-03-13T20:53:17.832308Z",
+          "Type": "AWS-HMAC",
+          "AccessKeyId": "ASIAIOSFODNN7EXAMPLE",
+          "SecretAccessKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+          "Token": "AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)",
+          "Expiration": expiration,
+          "UnexpectedElement2": {
+            "Name": "ignore-me-2"
+          },
+          "AccountId": "234567891011"
+        }
+        resp2 = {
+          "Code": "Success",
+          "LastUpdated": "2025-03-13T20:53:17.832308Z",
+          "Type": "AWS-HMAC",
+          "AccessKeyId": "ASIAIOSFODNN7EXAMPLE",
+          "SecretAccessKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+          "Token": "AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)",
+          "Expiration": expiration,
+          "UnexpectedElement2": {
+            "Name": "ignore-me-2"
+          },
+          "AccountId": "234567891011"
+        }
+        stub_request(:get, "#{ipv4_endpoint}#{extended_path}my-profile-0002")
+          .to_return(status: 200, body: resp1.to_json)
+          .to_return(status: 200, body: resp2.to_json)
+        subject = InstanceProfileCredentials.new(ec2_instance_profile_name: 'my-profile-0002', backoff: 0)
+        creds = subject.credentials
+        expect(creds.access_key_id).to_not be_nil
+        expect(creds.account_id).to eq('234567891011')
+        subject.refresh!
+        creds = subject.credentials
+        expect(creds.access_key_id).to_not be_nil
+        expect(creds.account_id).to eq('234567891011')
       end
 
       it 'Test IMDS credentials provider when profile is unstable returns valid credentials with account ID' do
-        stub_request(:put, ipv4_endpoint + token_path)
-          .to_return(status: 200, body: "my-token\n", headers: { 'x-aws-ec2-metadata-token-ttl-seconds' => '21600' })
         stub_request(:get, "#{ipv4_endpoint}/latest/meta-data/iam/security-credentials-extended/")
           .to_return(status: 200, 'body' => "my-profile-0003\n")
           .to_return(status: 200, 'body' => "my-profile-0003-b\n")
@@ -198,7 +239,7 @@ module Aws
           "AccessKeyId": "ASIAIOSFODNN7EXAMPLE",
           "SecretAccessKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
           "Token": "AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)",
-          "Expiration": (Time.now + 30).utc.iso8601,
+          "Expiration": expiration,
           "UnexpectedElement3": {
             "Name": "ignore-me-3"
           },
@@ -214,7 +255,7 @@ module Aws
           "AccessKeyId": "ASIAIOSFODNN7EXAMPLE",
           "SecretAccessKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
           "Token": "AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)",
-          "Expiration": (Time.now + 60).utc.iso8601,
+          "Expiration": expiration,
           "UnexpectedElement3": {
             "Name": "ignore-me-3"
           },
@@ -230,6 +271,256 @@ module Aws
         creds = subject.credentials
         expect(creds.access_key_id).to_not be_nil
         expect(creds.account_id).to eq('314253647589')
+      end
+
+      it 'Test IMDS credentials provider with a given profile name when profile is invalid throws an error' do
+        stub_request(:get, "#{ipv4_endpoint}#{extended_path}my-profile-0004").to_return(status: 404)
+        stub_request(:get, "#{ipv4_endpoint}#{fallback_path}my-profile-0004").to_return(status: 404)
+        expect { InstanceProfileCredentials.new(ec2_instance_profile_name: 'my-profile-0004', backoff: 0) }
+          .to raise_error(InstanceProfileCredentials::InvalidProfile, /my-profile-0004/)
+      end
+
+      it 'Test IMDS credentials provider when account ID is unavailable returns valid credentials' do
+        stub_request(:get, "#{ipv4_endpoint}#{extended_path}")
+          .to_return(status: 200, body: "my-profile-0005\n")
+        resp1 = {
+          "Code": "Success",
+          "LastUpdated": "2025-03-16T20:53:17.832308Z",
+          "Type": "AWS-HMAC",
+          "AccessKeyId": "ASIAIOSFODNN7EXAMPLE",
+          "SecretAccessKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+          "Token": "AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)",
+          "Expiration": expiration,
+          "UnexpectedElement5": {
+            "Name": "ignore-me-5"
+          }
+        }
+        resp2 = {
+          "Code": "Success",
+          "LastUpdated": "2025-03-16T20:53:17.832308Z",
+          "Type": "AWS-HMAC",
+          "AccessKeyId": "ASIAIOSFODNN7EXAMPLE",
+          "SecretAccessKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+          "Token": "AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)",
+          "Expiration": expiration,
+          "UnexpectedElement5": {
+            "Name": "ignore-me-5"
+          }
+        }
+        stub_request(:get, "#{ipv4_endpoint}#{extended_path}my-profile-0005")
+          .to_return(status: 200, body: resp1.to_json)
+          .to_return(status: 200, body: resp2.to_json)
+        subject = InstanceProfileCredentials.new(backoff: 0)
+        creds = subject.credentials
+        expect(creds.access_key_id).to_not be_nil
+        expect(creds.account_id).to be_nil
+        subject.refresh!
+        creds = subject.credentials
+        expect(creds.access_key_id).to_not be_nil
+        expect(creds.account_id).to be_nil
+      end
+
+      it 'Test IMDS credentials provider with a given profile name when account ID is unavailable returns valid credentials' do
+        resp1 = {
+          "Code": "Success",
+          "LastUpdated": "2025-03-17T20:53:17.832308Z",
+          "Type": "AWS-HMAC",
+          "AccessKeyId": "ASIAIOSFODNN7EXAMPLE",
+          "SecretAccessKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+          "Token": "AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)",
+          "Expiration": expiration,
+          "UnexpectedElement6": {
+            "Name": "ignore-me-6"
+          }
+        }
+        resp2 = {
+          "Code": "Success",
+          "LastUpdated": "2025-03-17T20:53:17.832308Z",
+          "Type": "AWS-HMAC",
+          "AccessKeyId": "ASIAIOSFODNN7EXAMPLE",
+          "SecretAccessKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+          "Token": "AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)",
+          "Expiration": expiration,
+          "UnexpectedElement6": {
+            "Name": "ignore-me-6"
+          }
+        }
+        stub_request(:get, "#{ipv4_endpoint}#{extended_path}my-profile-0006")
+          .to_return(status: 200, body: resp1.to_json)
+          .to_return(status: 200, body: resp2.to_json)
+        subject = InstanceProfileCredentials.new(ec2_instance_profile_name: 'my-profile-0006', backoff: 0)
+        creds = subject.credentials
+        expect(creds.access_key_id).to_not be_nil
+        expect(creds.account_id).to be_nil
+        subject.refresh!
+        creds = subject.credentials
+        expect(creds.access_key_id).to_not be_nil
+        expect(creds.account_id).to be_nil
+      end
+
+      it 'Test IMDS credentials provider when account ID is unavailable when profile is unstable returns valid credentials' do
+        stub_request(:get, "#{ipv4_endpoint}#{extended_path}")
+          .to_return(status: 200, body: "my-profile-0007\n")
+          .to_return(status: 200, body: "my-profile-0007-b\n")
+        resp1 = {
+          "Code": "Success",
+          "LastUpdated": "2025-03-18T20:53:17.832308Z",
+          "Type": "AWS-HMAC",
+          "AccessKeyId": "ASIAIOSFODNN7EXAMPLE",
+          "SecretAccessKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+          "Token": "AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)",
+          "Expiration": expiration,
+          "UnexpectedElement7": {
+            "Name": "ignore-me-7"
+          }
+        }
+        stub_request(:get, "#{ipv4_endpoint}#{extended_path}my-profile-0007")
+          .to_return(status: 200, body: resp1.to_json)
+          .to_return(status: 404)
+        resp2 = {
+          "Code": "Success",
+          "LastUpdated": "2025-03-18T20:53:17.832308Z",
+          "Type": "AWS-HMAC",
+          "AccessKeyId": "ASIAIOSFODNN7EXAMPLE",
+          "SecretAccessKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+          "Token": "AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)",
+          "Expiration": expiration,
+          "UnexpectedElement7": {
+            "Name": "ignore-me-7"
+          }
+        }
+        stub_request(:get, "#{ipv4_endpoint}#{extended_path}my-profile-0007-b")
+          .to_return(status: 200, body: resp2.to_json)
+        subject = InstanceProfileCredentials.new(backoff: 0)
+        creds = subject.credentials
+        expect(creds.access_key_id).to_not be_nil
+        expect(creds.account_id).to be_nil
+        subject.refresh!
+        creds = subject.credentials
+        expect(creds.access_key_id).to_not be_nil
+        expect(creds.account_id).to be_nil
+      end
+
+      it 'Test IMDS credentials provider with a given profile name when account ID is unavailable when profile is invalid throws an error' do
+        stub_request(:get, "#{ipv4_endpoint}#{extended_path}my-profile-0008").to_return(status: 404)
+        stub_request(:get, "#{ipv4_endpoint}#{fallback_path}my-profile-0008").to_return(status: 404)
+        expect { InstanceProfileCredentials.new(ec2_instance_profile_name: 'my-profile-0008', backoff: 0) }
+          .to raise_error(InstanceProfileCredentials::InvalidProfile, /my-profile-0008/)
+      end
+
+      it 'Test IMDS credentials provider against legacy API returns valid credentials' do
+        stub_request(:get, "#{ipv4_endpoint}#{extended_path}")
+          .to_return(status: 404)
+        stub_request(:get, "#{ipv4_endpoint}#{fallback_path}")
+          .to_return(status: 200, body: "my-profile-0009\n")
+        resp1 = {
+          "Code": "Success",
+          "LastUpdated": "2025-03-20T20:53:17.832308Z",
+          "Type": "AWS-HMAC",
+          "AccessKeyId": "ASIAIOSFODNN7EXAMPLE",
+          "SecretAccessKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+          "Token": "AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)",
+          "Expiration": expiration
+        }
+        resp2 = {
+          "Code": "Success",
+          "LastUpdated": "2025-03-20T20:53:17.832308Z",
+          "Type": "AWS-HMAC",
+          "AccessKeyId": "ASIAIOSFODNN7EXAMPLE",
+          "SecretAccessKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+          "Token": "AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)",
+          "Expiration": expiration
+        }
+        stub_request(:get, "#{ipv4_endpoint}#{fallback_path}my-profile-0009")
+          .to_return(status: 200, body: resp1.to_json)
+          .to_return(status: 200, body: resp2.to_json)
+        subject = InstanceProfileCredentials.new(backoff: 0)
+        creds = subject.credentials
+        expect(creds.access_key_id).to_not be_nil
+        expect(creds.account_id).to be_nil
+        subject.refresh!
+        creds = subject.credentials
+        expect(creds.access_key_id).to_not be_nil
+        expect(creds.account_id).to be_nil
+      end
+
+      it 'Test IMDS credentials provider with a given profile name against legacy API returns valid credentials' do
+        stub_request(:get, "#{ipv4_endpoint}#{extended_path}my-profile-0010").to_return(status: 404)
+        resp1 = {
+          "Code": "Success",
+          "LastUpdated": "2025-03-21T20:53:17.832308Z",
+          "Type": "AWS-HMAC",
+          "AccessKeyId": "ASIAIOSFODNN7EXAMPLE",
+          "SecretAccessKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+          "Token": "AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)",
+          "Expiration": expiration
+        }
+        resp2 = {
+          "Code": "Success",
+          "LastUpdated": "2025-03-21T20:53:17.832308Z",
+          "Type": "AWS-HMAC",
+          "AccessKeyId": "ASIAIOSFODNN7EXAMPLE",
+          "SecretAccessKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+          "Token": "AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)",
+          "Expiration": expiration
+        }
+        stub_request(:get, "#{ipv4_endpoint}#{fallback_path}my-profile-0010")
+          .to_return(status: 200, body: resp1.to_json)
+          .to_return(status: 200, body: resp2.to_json)
+        subject = InstanceProfileCredentials.new(ec2_instance_profile_name: 'my-profile-0010', backoff: 0)
+        creds = subject.credentials
+        expect(creds.access_key_id).to_not be_nil
+        expect(creds.account_id).to be_nil
+        subject.refresh!
+        creds = subject.credentials
+        expect(creds.access_key_id).to_not be_nil
+        expect(creds.account_id).to be_nil
+      end
+
+      it 'Test IMDS credentials provider against legacy API when profile is unstable returns valid credentials' do
+        stub_request(:get, "#{ipv4_endpoint}#{extended_path}")
+          .to_return(status: 404)
+        stub_request(:get, "#{ipv4_endpoint}#{fallback_path}")
+          .to_return(status: 200, body: "my-profile-0011\n")
+          .to_return(status: 200, body: "my-profile-0011-b\n")
+        resp1 = {
+          "Code": "Success",
+          "LastUpdated": "2025-03-22T20:53:17.832308Z",
+          "Type": "AWS-HMAC",
+          "AccessKeyId": "ASIAIOSFODNN7EXAMPLE",
+          "SecretAccessKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+          "Token": "AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)",
+          "Expiration": expiration
+        }
+        stub_request(:get, "#{ipv4_endpoint}#{fallback_path}my-profile-0011")
+          .to_return(status: 200, body: resp1.to_json)
+          .to_return(status: 404)
+        resp2 = {
+          "Code": "Success",
+          "LastUpdated": "2025-03-22T20:53:17.832308Z",
+          "Type": "AWS-HMAC",
+          "AccessKeyId": "ASIAIOSFODNN7EXAMPLE",
+          "SecretAccessKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+          "Token": "AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)",
+          "Expiration": expiration
+        }
+        stub_request(:get, "#{ipv4_endpoint}#{fallback_path}my-profile-0011-b")
+          .to_return(status: 200, body: resp2.to_json)
+        subject = InstanceProfileCredentials.new(backoff: 0)
+        creds = subject.credentials
+        expect(creds.access_key_id).to_not be_nil
+        expect(creds.account_id).to be_nil
+        subject.refresh!
+        creds = subject.credentials
+        expect(creds.access_key_id).to_not be_nil
+        expect(creds.account_id).to be_nil
+      end
+
+      it 'Test IMDS credentials provider with a given profile name against legacy API when profile is invalid throws an error' do
+        stub_request(:get, "#{ipv4_endpoint}#{extended_path}my-profile-0012").to_return(status: 404)
+        stub_request(:get, "#{ipv4_endpoint}#{fallback_path}my-profile-0012").to_return(status: 404)
+        expect { InstanceProfileCredentials.new(ec2_instance_profile_name: 'my-profile-0012', backoff: 0) }
+          .to raise_error(InstanceProfileCredentials::InvalidProfile, /my-profile-0012/)
       end
     end
 

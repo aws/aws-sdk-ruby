@@ -225,6 +225,8 @@ module Aws
         @no_refresh_until = Time.now + rand(300..360)
         warn_expired_credentials
       else
+        puts "updating credentials"
+        puts "new creds: #{new_creds.inspect}"
         # credentials are empty or successfully retrieved, update them
         update_credentials(new_creds)
       end
