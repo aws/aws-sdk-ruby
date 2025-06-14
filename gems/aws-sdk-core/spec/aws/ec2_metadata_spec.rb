@@ -4,7 +4,7 @@ require_relative '../spec_helper'
 
 module Aws
   describe EC2Metadata do
-    let(:client) { EC2Metadata.new }
+    let(:ec2_metadata) { EC2Metadata.new }
     let(:endpoint) { 'http://169.254.169.254' }
     let(:metadata_path) { '/latest/meta-data/foo' }
     let(:metadata_endpoint) { "#{endpoint}/latest/meta-data/foo" }
@@ -21,41 +21,36 @@ module Aws
 
     describe '#initalize' do
       it 'resolves to correct endpoint based on endpoint mode' do
-        client = EC2Metadata.new(endpoint_mode: 'IPv6')
-        expect(client.instance_variable_get(:@endpoint))
-          .to eq('http://[fd00:ec2::254]')
+        ec2_metadata = EC2Metadata.new(endpoint_mode: 'IPv6')
+        expect(ec2_metadata.instance_variable_get(:@endpoint)).to eq('http://[fd00:ec2::254]')
 
-        client = EC2Metadata.new(endpoint_mode: 'IPv4')
-        expect(client.instance_variable_get(:@endpoint))
-          .to eq(endpoint)
+        ec2_metadata = EC2Metadata.new(endpoint_mode: 'IPv4')
+        expect(ec2_metadata.instance_variable_get(:@endpoint)).to eq(endpoint)
       end
 
       it 'given endpoint takes precedence over endpoint mode' do
-        client = EC2Metadata.new(endpoint_mode: 'IPv6', endpoint: endpoint)
-        expect(client.instance_variable_get(:@endpoint)).to eq(endpoint)
+        ec2_metadata = EC2Metadata.new(endpoint_mode: 'IPv6', endpoint: endpoint)
+        expect(ec2_metadata.instance_variable_get(:@endpoint)).to eq(endpoint)
       end
 
       it 'raises when an invalid endpoint mode is given' do
-        expect { EC2Metadata.new(endpoint_mode: 'meep') }
-          .to raise_error(ArgumentError)
+        expect { EC2Metadata.new(endpoint_mode: 'meep') }.to raise_error(ArgumentError)
       end
     end
 
     describe '#retries' do
       it 'defaults to 3' do
-        expect(client.retries).to eq(3)
+        expect(ec2_metadata.retries).to eq(3)
       end
     end
 
     describe '#get' do
-      let(:expected_body) { "foo\n" }
-
       it 'fetches a token before getting metadata' do
         token = stub_get_token
         stub_request(:get, metadata_endpoint)
           .with(headers: { 'x-aws-ec2-metadata-token' => token })
-          .to_return(status: 200, body: expected_body)
-        expect(client.get(metadata_path)).to eq(expected_body)
+          .to_return(status: 200, body: "foo\n")
+        expect(ec2_metadata.get(metadata_path)).to eq("foo\n")
       end
 
       it 'should fetch a new token if the original token is expired' do
@@ -67,25 +62,21 @@ module Aws
         new_token = stub_get_token('new-token')
         stub_request(:get, metadata_endpoint)
           .with(headers: { 'x-aws-ec2-metadata-token' => new_token })
-          .to_return(status: 200, body: expected_body)
+          .to_return(status: 200, body: "foo\n")
 
-        expect(client.get(metadata_path)).to eq(expected_body)
+        expect(ec2_metadata.get(metadata_path)).to eq("foo\n")
       end
 
       it 'does not retry on errors that should not be retried' do
-        stub_request(:put, "#{endpoint}/latest/api/token")
-          .to_return({ status: 400 }, { status: 403 })
-        expect { client.get(metadata_path) }
-          .to raise_error(Aws::EC2Metadata::TokenRetrievalError)
-        expect { client.get(metadata_path) }
-          .to raise_error(Aws::EC2Metadata::RequestForbiddenError)
+        stub_request(:put, "#{endpoint}/latest/api/token").to_return({ status: 400 }, { status: 403 })
+        expect { ec2_metadata.get(metadata_path) }.to raise_error(Aws::EC2Metadata::TokenRetrievalError)
+        expect { ec2_metadata.get(metadata_path) }.to raise_error(Aws::EC2Metadata::RequestForbiddenError)
 
         token = stub_get_token
         stub_request(:get, metadata_endpoint)
           .with(headers: { 'x-aws-ec2-metadata-token' => token })
           .to_return(status: 404)
-        expect { client.get(metadata_path) }
-          .to raise_error(Aws::EC2Metadata::MetadataNotFoundError)
+        expect { ec2_metadata.get(metadata_path) }.to raise_error(Aws::EC2Metadata::MetadataNotFoundError)
       end
 
       context 'endpoint configuration' do
@@ -93,27 +84,27 @@ module Aws
 
         it 'uses endpoint with a scheme and custom port' do
           token = stub_get_token
-          client = EC2Metadata.new(endpoint: endpoint)
+          ec2_metadata = EC2Metadata.new(endpoint: endpoint)
           stub_request(:get, "#{endpoint}/latest/meta-data/foo")
             .with(headers: { 'x-aws-ec2-metadata-token' => token })
-          client.get(metadata_path)
+          ec2_metadata.get(metadata_path)
         end
 
         it 'uses endpoint without a scheme and a configured port' do
           uri = URI(endpoint)
           token = stub_get_token
-          client = EC2Metadata.new(endpoint: uri.hostname, port: uri.port)
+          ec2_metadata = EC2Metadata.new(endpoint: uri.hostname, port: uri.port)
           stub_request(:get, "#{endpoint}/latest/meta-data/foo")
             .with(headers: { 'x-aws-ec2-metadata-token' => token })
-          client.get(metadata_path)
+          ec2_metadata.get(metadata_path)
         end
 
         it 'endpoint takes precedence over endpoint mode' do
           token = stub_get_token
-          client = EC2Metadata.new(endpoint_mode: 'IPv6', endpoint: endpoint)
+          ec2_metadata = EC2Metadata.new(endpoint_mode: 'IPv6', endpoint: endpoint)
           stub_request(:get, "#{endpoint}/latest/meta-data/foo")
             .with(headers: { 'x-aws-ec2-metadata-token' => token })
-          client.get(metadata_path)
+          ec2_metadata.get(metadata_path)
         end
       end
 
@@ -128,27 +119,24 @@ module Aws
         end
 
         it 'retries with a proc' do
-          client = EC2Metadata.new(backoff: ->(n) { Kernel.sleep(2**n) })
+          ec2_metadata = EC2Metadata.new(backoff: ->(n) { Kernel.sleep(2**n) })
           expect(Kernel).to receive(:sleep).with(1)
           expect(Kernel).to receive(:sleep).with(2)
           expect(Kernel).to receive(:sleep).with(4)
-          expect { client.get(metadata_path) }
-            .to raise_error(Errno::ECONNREFUSED)
+          expect { ec2_metadata.get(metadata_path) }.to raise_error(Errno::ECONNREFUSED)
         end
 
         it 'retries with a number of seconds to sleep' do
-          client = EC2Metadata.new(backoff: 3)
+          ec2_metadata = EC2Metadata.new(backoff: 3)
           expect(Kernel).to receive(:sleep).with(3).exactly(3).times
-          expect { client.get(metadata_path) }
-            .to raise_error(Errno::ECONNREFUSED)
+          expect { ec2_metadata.get(metadata_path) }.to raise_error(Errno::ECONNREFUSED)
         end
 
         it 'defaults to exponential backoff' do
           expect(Kernel).to receive(:sleep).with(1.0)
           expect(Kernel).to receive(:sleep).with(1.2)
           expect(Kernel).to receive(:sleep).with(1.44)
-          expect { client.get(metadata_path) }
-            .to raise_error(Errno::ECONNREFUSED)
+          expect { ec2_metadata.get(metadata_path) }.to raise_error(Errno::ECONNREFUSED)
         end
       end
     end

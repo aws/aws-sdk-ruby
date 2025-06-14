@@ -132,11 +132,7 @@ module Aws
       open_connection do |conn|
         created_time = Time.now
         token_value, token_ttl = http_put(conn, @token_ttl)
-        @token = Token.new(
-          value: token_value,
-          ttl: token_ttl,
-          created_time: created_time
-        )
+        @token = Token.new(value: token_value, ttl: token_ttl, created_time: created_time)
       end
     end
 

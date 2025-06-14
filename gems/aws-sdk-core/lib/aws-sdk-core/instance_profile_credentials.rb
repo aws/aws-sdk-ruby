@@ -25,7 +25,7 @@ module Aws
     # Raised when the metadata path with profile name was not found.
     # @api private
     class InvalidProfile < RuntimeError
-      def initialize(*args)
+      def initialize(*_args)
         super('invalid profile name - unable to find metadata path')
       end
     end
@@ -212,9 +212,8 @@ module Aws
 
     def warn_expired_credentials
       warn(
-        'Attempting credential expiration extension due to a credential '\
-        'service availability issue. A refresh of these credentials '\
-        'will be attempted again in 5 minutes.'
+        'Attempting credential expiration extension due to a credential service availability issue. '\
+        'A refresh of these credentials will be attempted again in 5 minutes.'
       )
     end
   end
