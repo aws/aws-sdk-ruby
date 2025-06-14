@@ -11,16 +11,15 @@ module Aws
     let(:extended_path) { '/latest/meta-data/iam/security-credentials-extended/' }
     let(:fallback_path) { '/latest/meta-data/iam/security-credentials/' }
 
-    let(:metadata_uri) { "#{ipv4_endpoint}/#{extended_path}" }
-    let(:fallback_uri) {  "#{ipv4_endpoint}/#{fallback_path}" }
+    let(:metadata_uri) { "#{ipv4_endpoint}#{extended_path}" }
+    let(:fallback_uri) {  "#{ipv4_endpoint}#{fallback_path}" }
 
     describe '#initalize' do
       let(:subject) { InstanceProfileCredentials.new(backoff: 0) }
 
-      before do
-        [endpoint, ipv6_endpoint].each do |e|
-          metadata_uri = e + extended_path
-          stub_request(:put, e + token_path).to_return(status: 200, body: "my-token\n")
+      context 'ec2 metadata client' do
+        before do
+          stub_request(:put, "#{ipv4_endpoint}#{token_path}").to_return(status: 200, body: "my-token\n")
           stub_request(:get, metadata_uri)
             .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
             .to_return(status: 200, body: "my-profile\n")
@@ -28,53 +27,62 @@ module Aws
             .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
             .to_return(status: 200, body: '{}')
         end
-      end
 
-      it 'constructs an EC2Metadata if not provided' do
-        ec2_metadata = double('EC2Metadata', get: nil)
-        expect(EC2Metadata).to receive(:new).and_return(ec2_metadata)
-        expect(subject.ec2_metadata).to be(ec2_metadata)
-      end
+        it 'constructs an EC2Metadata if not provided' do
+          expect(EC2Metadata).to receive(:new).and_call_original
+          subject
+        end
 
-      it 'constructs an EC2Metadata with provided configurations' do
-        subject = InstanceProfileCredentials.new(retries: 2, backoff: 0)
-        expect(subject.ec2_metadata.retries).to be(2)
-      end
+        it 'constructs an EC2Metadata with provided configurations' do
+          subject = InstanceProfileCredentials.new(retries: 2, backoff: 0)
+          expect(subject.ec2_metadata.retries).to be(2)
+        end
 
-      it 'sets EC2Metadata when provided' do
-        ec2_metadata = EC2Metadata.new(backoff: 0)
-        subject = InstanceProfileCredentials.new(ec2_metadata: ec2_metadata)
-        expect(subject.ec2_metadata).to be(ec2_metadata)
-      end
+        it 'sets EC2Metadata when provided' do
+          ec2_metadata = EC2Metadata.new(backoff: 0)
+          subject = InstanceProfileCredentials.new(ec2_metadata: ec2_metadata)
+          expect(subject.ec2_metadata).to be(ec2_metadata)
+        end
 
-      it 'honors the :delay configuration as :backoff config' do
-        dummy_proc = proc { 1 }
-        expect_any_instance_of(InstanceProfileCredentials).to receive(:warn).with(/backoff/)
-        subject = InstanceProfileCredentials.new(delay: dummy_proc)
-        expect(subject.ec2_metadata.backoff).to be(dummy_proc)
+        it 'honors the :delay configuration as :backoff config' do
+          dummy_proc = proc { 1 }
+          expect_any_instance_of(InstanceProfileCredentials).to receive(:warn).with(/backoff/)
+          subject = InstanceProfileCredentials.new(delay: dummy_proc)
+          expect(subject.ec2_metadata.backoff).to be(dummy_proc)
+        end
       end
 
       context 'profile name resolution' do
+        before do
+          stub_request(:put, "#{ipv4_endpoint}#{token_path}").to_return(status: 200, body: "my-token\n")
+          stub_request(:get, metadata_uri)
+            .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
+            .to_return(status: 200, body: "my-profile\n")
+          stub_request(:get, "#{metadata_uri}my-profile")
+            .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
+            .to_return(status: 200, body: '{}')
+        end
+
         it 'defaults to nil' do
           expect(subject.ec2_instance_profile_name).to be_nil
         end
 
         it 'can be configured from shared config' do
-          allow_any_instance_of(Aws::SharedConfig).to receive(:ec2_instance_profile_name).and_return('baz')
-          expect(subject.ec2_instance_profile_name).to eq('baz')
+          allow_any_instance_of(Aws::SharedConfig).to receive(:ec2_instance_profile_name).and_return('my-profile')
+          expect(subject.ec2_instance_profile_name).to eq('my-profile')
         end
 
         it 'can be configured from environment with precedence over shared config' do
-          ENV['AWS_EC2_INSTANCE_PROFILE_NAME'] = 'bar'
-          allow_any_instance_of(Aws::SharedConfig).to receive(:ec2_instance_profile_name).and_return('baz')
-          expect(subject.ec2_instance_profile_name).to eq('bar')
+          ENV['AWS_EC2_INSTANCE_PROFILE_NAME'] = 'my-profile'
+          allow_any_instance_of(Aws::SharedConfig).to receive(:ec2_instance_profile_name).and_return('foo')
+          expect(subject.ec2_instance_profile_name).to eq('my-profile')
         end
 
         it 'can be configured in code with full precedence' do
-          allow_any_instance_of(Aws::SharedConfig).to receive(:ec2_instance_profile_name).and_return('baz')
-          ENV['AWS_EC2_INSTANCE_PROFILE_NAME'] = 'bar'
-          subject = InstanceProfileCredentials.new(ec2_instance_profile_name: 'foo', backoff: 0)
-          expect(subject.ec2_instance_profile_name).to eq('foo')
+          allow_any_instance_of(Aws::SharedConfig).to receive(:ec2_instance_profile_name).and_return('foo')
+          ENV['AWS_EC2_INSTANCE_PROFILE_NAME'] = 'foo'
+          subject = InstanceProfileCredentials.new(ec2_instance_profile_name: 'my-profile', backoff: 0)
+          expect(subject.ec2_instance_profile_name).to eq('my-profile')
         end
 
         it 'raises when the given profile name is empty' do
@@ -85,14 +93,27 @@ module Aws
       end
 
       context 'endpoint resolution' do
+        before do
+          [ipv4_endpoint, ipv6_endpoint].each do |e|
+            metadata_uri = e + extended_path
+            stub_request(:put, e + token_path).to_return(status: 200, body: "my-token\n")
+            stub_request(:get, metadata_uri)
+              .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
+              .to_return(status: 200, body: "my-profile\n")
+            stub_request(:get, "#{metadata_uri}my-profile")
+              .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
+              .to_return(status: 200, body: '{}')
+          end
+        end
+
         it 'defaults to IPv4 endpoint' do
           expect(subject.ec2_metadata.endpoint).to eq ipv4_endpoint
         end
 
         it 'honors the :ip_address configuration as :endpoint' do
           expect_any_instance_of(InstanceProfileCredentials).to receive(:warn).with(/endpoint/)
-          subject = InstanceProfileCredentials.new(ip_address: endpoint)
-          expect(subject.ec2_metadata.endpoint).to eq(endpoint)
+          subject = InstanceProfileCredentials.new(ip_address: ipv6_endpoint)
+          expect(subject.ec2_metadata.endpoint).to eq(ipv6_endpoint)
         end
 
         it 'endpoint can be configured from shared config' do
