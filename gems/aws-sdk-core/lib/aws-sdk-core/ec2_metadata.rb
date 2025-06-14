@@ -58,7 +58,7 @@ module Aws
     def initialize(options = {})
       @token_ttl = options[:token_ttl] || 21_600
       @retries = options[:retries] || 3
-      @backoff = backoff(options[:backoff])
+      @backoff = resolve_backoff(options[:backoff])
       @endpoint = resolve_endpoint(options)
       @port = options[:port] || 80
 
@@ -70,9 +70,29 @@ module Aws
       @mutex = Mutex.new
     end
 
-    # @return [Integer] Number of times to retry when retrieving credentials
-    #   from the instance metadata service.
+    # @return [Integer]
+    attr_reader :token_ttl
+
+    # @return [Integer]
     attr_reader :retries
+
+    # @return [Proc]
+    attr_reader :backoff
+
+    # @return [String]
+    attr_reader :endpoint
+
+    # @return [Integer]
+    attr_reader :port
+
+    # @return [Integer]
+    attr_reader :http_open_timeout
+
+    # @return [Integer]
+    attr_reader :http_read_timeout
+
+    # @return [IO, nil]
+    attr_reader :http_debug_output
 
     # Fetches a given metadata category using a String path, and returns the
     #   result as a String. A path starts with the API version (usually
@@ -120,7 +140,7 @@ module Aws
 
     private
 
-    def backoff(backoff)
+    def resolve_backoff(backoff)
       case backoff
       when Proc then backoff
       when Numeric then ->(_) { Kernel.sleep(backoff) }
