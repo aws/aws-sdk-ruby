@@ -82,8 +82,6 @@ module Aws
         endpoint_mode: resolve_endpoint_mode(options),
         endpoint: resolve_endpoint(options)
       )
-      opts = opts.except(:ec2_instance_profile_name, :before_refresh)
-
       if (delay = opts.delete(:delay))
         warn('The `:delay` option is deprecated. Use `:backoff` instead.')
         opts[:backoff] = delay
