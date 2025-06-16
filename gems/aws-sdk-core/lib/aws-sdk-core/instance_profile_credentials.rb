@@ -17,6 +17,11 @@ module Aws
   #     ec2_client = Aws::EC2::Client.new(credentials: creds)
   #
   # If you omit the `:ec2_metadata` option, a new {Aws::EC2Metadata} will be created with options provided.
+  #
+  # ## Retries
+  # When initialized from the default credential chain, this provider's {Ec2Metadata} client defaults to `0` retries.
+  #   In addition to the {EC2Metadata} client's retry mechanism, this provider will retry failed JSON parsing up to
+  #   `3` times before raising {Aws::Errors::MetadataParserError}.
   # @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-imds-credentials.html IMDS Credential Provider
   class InstanceProfileCredentials
     include CredentialProvider
@@ -35,6 +40,7 @@ module Aws
     METADATA_EXTENDED_PATH = '/latest/meta-data/iam/security-credentials-extended/'
 
     # @param [Hash] options
+    # @option options (see Aws::EC2Metadata#initialize)
     # @option options [Aws::EC2Metadata] :ec2_metadata A custom EC2 metadata
     #   client to use for loading credentials from IMDSv2. If not provided,
     #   a default {Aws::EC2Metadata} client will be constructed with
@@ -47,7 +53,6 @@ module Aws
     #   * `ENV['AWS_EC2_INSTANCE_PROFILE_NAME']`
     #   * `~/.aws/config`
     #
-    # @param (see Aws::EC2Metadata#initialize)
     # @option options [Callable] :before_refresh Proc called before
     #   credentials are refreshed. `before_refresh` is called
     #   with an instance of this object when AWS credentials are required
