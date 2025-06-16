@@ -10,7 +10,6 @@ module Aws
     let(:token_path) { '/latest/api/token' }
     let(:extended_path) { '/latest/meta-data/iam/security-credentials-extended/' }
     let(:fallback_path) { '/latest/meta-data/iam/security-credentials/' }
-
     let(:metadata_uri) { "#{ipv4_endpoint}#{extended_path}" }
     let(:fallback_uri) {  "#{ipv4_endpoint}#{fallback_path}" }
 
@@ -20,12 +19,8 @@ module Aws
       context 'ec2 metadata client' do
         before do
           stub_request(:put, "#{ipv4_endpoint}#{token_path}").to_return(status: 200, body: "my-token\n")
-          stub_request(:get, metadata_uri)
-            .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-            .to_return(status: 200, body: "my-profile\n")
-          stub_request(:get, "#{metadata_uri}my-profile")
-            .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-            .to_return(status: 200, body: '{}')
+          stub_request(:get, metadata_uri).to_return(status: 200, body: "my-profile\n")
+          stub_request(:get, "#{metadata_uri}my-profile").to_return(status: 200, body: '{}')
         end
 
         it 'constructs an EC2Metadata if not provided' do
@@ -44,7 +39,7 @@ module Aws
           expect(subject.ec2_metadata).to be(ec2_metadata)
         end
 
-        it 'honors the :delay configuration as :backoff config' do
+        it 'honors the :delay configuration as :backoff' do
           dummy_proc = proc { 1 }
           expect_any_instance_of(InstanceProfileCredentials).to receive(:warn).with(/backoff/)
           subject = InstanceProfileCredentials.new(delay: dummy_proc)
@@ -55,12 +50,8 @@ module Aws
       context 'profile name resolution' do
         before do
           stub_request(:put, "#{ipv4_endpoint}#{token_path}").to_return(status: 200, body: "my-token\n")
-          stub_request(:get, metadata_uri)
-            .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-            .to_return(status: 200, body: "my-profile\n")
-          stub_request(:get, "#{metadata_uri}my-profile")
-            .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-            .to_return(status: 200, body: '{}')
+          stub_request(:get, metadata_uri).to_return(status: 200, body: "my-profile\n")
+          stub_request(:get, "#{metadata_uri}my-profile").to_return(status: 200, body: '{}')
         end
 
         it 'defaults to nil' do
@@ -97,12 +88,8 @@ module Aws
           [ipv4_endpoint, ipv6_endpoint].each do |e|
             metadata_uri = e + extended_path
             stub_request(:put, e + token_path).to_return(status: 200, body: "my-token\n")
-            stub_request(:get, metadata_uri)
-              .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-              .to_return(status: 200, body: "my-profile\n")
-            stub_request(:get, "#{metadata_uri}my-profile")
-              .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-              .to_return(status: 200, body: '{}')
+            stub_request(:get, metadata_uri).to_return(status: 200, body: "my-profile\n")
+            stub_request(:get, "#{metadata_uri}my-profile").to_return(status: 200, body: '{}')
           end
         end
 
@@ -163,11 +150,7 @@ module Aws
       let(:expiration) { (Time.now + 3600).utc.iso8601 }
 
       before do
-        stub_request(:put, ipv4_endpoint + token_path)
-          .to_return(
-            status: 200, body: "my-token\n",
-            headers: { 'x-aws-ec2-metadata-token-ttl-seconds' => '21600' }
-          )
+        stub_request(:put, ipv4_endpoint + token_path).to_return(status: 200, body: "my-token\n")
       end
 
       it 'Test IMDS credentials provider returns valid credentials with account ID' do
@@ -295,8 +278,8 @@ module Aws
       end
 
       it 'Test IMDS credentials provider with a given profile name when profile is invalid throws an error' do
-        stub_request(:get, "#{ipv4_endpoint}#{extended_path}my-profile-0004").to_return(status: 404)
-        stub_request(:get, "#{ipv4_endpoint}#{fallback_path}my-profile-0004").to_return(status: 404)
+        stub_request(:get, "#{metadata_uri}my-profile-0004").to_return(status: 404)
+        stub_request(:get, "#{fallback_uri}my-profile-0004").to_return(status: 404)
         expect { InstanceProfileCredentials.new(ec2_instance_profile_name: 'my-profile-0004', backoff: 0) }
           .to raise_error(InstanceProfileCredentials::InvalidProfile, /my-profile-0004/)
       end
@@ -542,10 +525,9 @@ module Aws
     end
 
     describe '#refresh!' do
-      let(:expiration) { Time.now.utc + 3600 }
-      let(:expiration2) { expiration + 3600 }
-
       it 're-queries credentials when #refresh! is called' do
+        expiration = Time.now.utc + 3600
+        expiration2 = expiration + 3600
         resp = {
           "Code": 'Success',
           "LastUpdated": '2013-11-22T20:03:48Z',
@@ -564,13 +546,9 @@ module Aws
           "Token": 'session-token-2',
           "Expiration": expiration2.strftime('%Y-%m-%dT%H:%M:%SZ').to_s
         }
-        stub_request(:put, ipv4_endpoint + token_path)
-          .to_return(status: 200, body: "my-token\n", headers: { 'x-aws-ec2-metadata-token-ttl-seconds' => '21600' })
-        stub_request(:get, metadata_uri)
-          .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-          .to_return(status: 200, body: "my-profile\n")
+        stub_request(:put, ipv4_endpoint + token_path).to_return(status: 200, body: "my-token\n")
+        stub_request(:get, metadata_uri).to_return(status: 200, body: "my-profile\n")
         stub_request(:get, "#{metadata_uri}my-profile")
-          .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return({ status: 200, body: resp.to_json }, { status: 200, body: resp2.to_json })
 
         c = InstanceProfileCredentials.new
@@ -587,11 +565,8 @@ module Aws
       let(:near_expiration) { Time.now.utc + 10 }
 
       before(:each) do
-        stub_request(:put, ipv4_endpoint + token_path)
-          .to_return(status: 200, body: "my-token\n", headers: { 'x-aws-ec2-metadata-token-ttl-seconds' => '21600' })
-        stub_request(:get, metadata_uri)
-          .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-          .to_return(status: 200, body: "my-profile\n")
+        stub_request(:put, ipv4_endpoint + token_path).to_return(status: 200, body: "my-token\n")
+        stub_request(:get, metadata_uri).to_return(status: 200, body: "my-profile\n")
       end
 
       it 'provides credentials when the first call returns expired credentials' do
@@ -606,9 +581,7 @@ module Aws
         }
         expect_any_instance_of(InstanceProfileCredentials).to receive(:warn).at_least(:once)
         expected_request =
-          stub_request(:get, "#{metadata_uri}my-profile")
-          .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-          .to_return(status: 200, body: expired_resp.to_json)
+          stub_request(:get, "#{metadata_uri}my-profile").to_return(status: 200, body: expired_resp.to_json)
 
         provider = InstanceProfileCredentials.new(backoff: 0)
         creds = provider.credentials
@@ -636,7 +609,6 @@ module Aws
         expect_any_instance_of(InstanceProfileCredentials).to receive(:warn).at_least(:once)
         expected_request =
           stub_request(:get, "#{metadata_uri}my-profile")
-          .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: near_expiration_resp.to_json)
           .to_raise(Timeout::Error)
 
@@ -644,6 +616,54 @@ module Aws
         expect(provider.credentials.access_key_id).to eq('akid-2')
         assert_requested(expected_request, times: 2)
       end
+    end
+
+    context 'invalid json response' do
+      before(:each) do
+        stub_request(:put, "#{ipv4_endpoint}#{token_path}").to_return(status: 200, body: "my-token\n")
+        stub_request(:get, metadata_uri).to_return(status: 200, body: "profile-name\n")
+      end
+
+      it 'retries if get profile response is invalid JSON' do
+        expiration = Time.now.utc + 3600
+        expiration2 = expiration + 3600
+        resp = {
+          "Code": 'Success',
+          "LastUpdated": '2013-11-22T20:03:48Z',
+          "Type": 'AWS-HMAC',
+          "AccessKeyId": 'akid-2',
+          "SecretAccessKey": 'secret-2',
+          "Token": 'session-token-2',
+          "Expiration": expiration2.strftime('%Y-%m-%dT%H:%M:%SZ').to_s
+        }
+        stub_request(:get, "#{metadata_uri}profile-name")
+          .to_return(
+            { status: 200, body: ' ' },
+            { status: 200, body: '' },
+            { status: 200, body: '{' },
+            { status: 200, body: resp.to_json }
+          )
+
+        c = InstanceProfileCredentials.new(backoff: 0)
+        expect(c.credentials.access_key_id).to eq('akid-2')
+        expect(c.credentials.secret_access_key).to eq('secret-2')
+        expect(c.credentials.session_token).to eq('session-token-2')
+        expect(c.expiration.to_s).to eq(expiration2.to_s)
+      end
+
+      it 'retries invalid JSON exactly 3 times' do
+        stub_request(:get, "#{metadata_uri}profile-name")
+          .to_return(
+            { status: 200, body: '' },
+            { status: 200, body: ' ' },
+            { status: 200, body: '{' },
+            { status: 200, body: ' ' }
+          )
+
+        expect { InstanceProfileCredentials.new(backoff: 0) }
+          .to raise_error(Aws::Errors::MetadataParserError, 'Failed to parse metadata service response.')
+      end
+
     end
   end
 end
