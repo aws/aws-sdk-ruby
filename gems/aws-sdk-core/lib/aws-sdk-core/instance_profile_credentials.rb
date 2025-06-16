@@ -74,10 +74,7 @@ module Aws
     private
 
     def build_ec2_metadata_client(options)
-      opts = options.merge(
-        endpoint_mode: resolve_endpoint_mode(options),
-        endpoint: resolve_endpoint(options)
-      )
+      opts = options.merge(endpoint_mode: resolve_endpoint_mode(options), endpoint: resolve_endpoint(options))
       if (delay = opts.delete(:delay))
         warn('The `:delay` option is deprecated. Use `:backoff` instead.')
         opts[:backoff] = delay

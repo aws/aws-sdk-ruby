@@ -7,7 +7,7 @@ module Aws
     let(:ec2_metadata) { EC2Metadata.new }
     let(:endpoint) { 'http://169.254.169.254' }
     let(:metadata_path) { '/latest/meta-data/foo' }
-    let(:metadata_endpoint) { "#{endpoint}/latest/meta-data/foo" }
+    let(:metadata_endpoint) { "#{endpoint}#{metadata_path}" }
 
     def stub_get_token(token_value = 'my-token')
       stub_request(:put, "#{endpoint}/latest/api/token")
@@ -85,8 +85,7 @@ module Aws
         it 'uses endpoint with a scheme and custom port' do
           token = stub_get_token
           ec2_metadata = EC2Metadata.new(endpoint: endpoint)
-          stub_request(:get, "#{endpoint}/latest/meta-data/foo")
-            .with(headers: { 'x-aws-ec2-metadata-token' => token })
+          stub_request(:get, "#{endpoint}/latest/meta-data/foo").with(headers: { 'x-aws-ec2-metadata-token' => token })
           ec2_metadata.get(metadata_path)
         end
 
@@ -94,16 +93,14 @@ module Aws
           uri = URI(endpoint)
           token = stub_get_token
           ec2_metadata = EC2Metadata.new(endpoint: uri.hostname, port: uri.port)
-          stub_request(:get, "#{endpoint}/latest/meta-data/foo")
-            .with(headers: { 'x-aws-ec2-metadata-token' => token })
+          stub_request(:get, "#{endpoint}/latest/meta-data/foo").with(headers: { 'x-aws-ec2-metadata-token' => token })
           ec2_metadata.get(metadata_path)
         end
 
         it 'endpoint takes precedence over endpoint mode' do
           token = stub_get_token
           ec2_metadata = EC2Metadata.new(endpoint_mode: 'IPv6', endpoint: endpoint)
-          stub_request(:get, "#{endpoint}/latest/meta-data/foo")
-            .with(headers: { 'x-aws-ec2-metadata-token' => token })
+          stub_request(:get, "#{endpoint}/latest/meta-data/foo").with(headers: { 'x-aws-ec2-metadata-token' => token })
           ec2_metadata.get(metadata_path)
         end
       end
@@ -113,8 +110,8 @@ module Aws
           token = stub_get_token
           stub_request(:get, metadata_endpoint)
             .with(headers: { 'x-aws-ec2-metadata-token' => token })
-            .to_raise(Errno::ECONNREFUSED).then
-            .to_raise(Errno::ECONNREFUSED).then
+            .to_raise(Errno::ECONNREFUSED)
+            .to_raise(Errno::ECONNREFUSED)
             .to_raise(Errno::ECONNREFUSED)
         end
 

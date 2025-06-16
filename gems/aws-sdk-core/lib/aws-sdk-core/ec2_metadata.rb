@@ -124,8 +124,10 @@ module Aws
     #   are always supported by being deployed to the instance and does not
     #   require code changes.
     #
-    # @see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html#instancedata-data-categories Instance metadata categories
-    # @see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-identity-documents.html Instance identity documents for Amazon EC2 instances
+    # @see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html#instancedata-data-categories
+    #   Instance metadata categories
+    # @see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-identity-documents.html
+    #    Instance identity documents for Amazon EC2 instances
     # @param [String] path The full path to the metadata.
     def get(path)
       retry_errors do
@@ -158,10 +160,7 @@ module Aws
 
     # GET request fetch profile and credentials
     def http_get(connection, path, token)
-      headers = {
-        'User-Agent' => "aws-sdk-ruby3/#{CORE_GEM_VERSION}",
-        'x-aws-ec2-metadata-token' => token
-      }
+      headers = { 'User-Agent' => "aws-sdk-ruby3/#{CORE_GEM_VERSION}", 'x-aws-ec2-metadata-token' => token }
       request = Net::HTTP::Get.new(path, headers)
       response = connection.request(request)
 
@@ -210,9 +209,7 @@ module Aws
       when 'ipv4' then 'http://169.254.169.254'
       when 'ipv6' then 'http://[fd00:ec2::254]'
       else
-        raise ArgumentError,
-              '`:endpoint_mode` is not valid, expected IPv4 or IPv6, '\
-              "got: #{endpoint_mode}"
+        raise ArgumentError, "`:endpoint_mode` is not valid, expected IPv4 or IPv6, got: #{endpoint_mode}"
       end
     end
 
