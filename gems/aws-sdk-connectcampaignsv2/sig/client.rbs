@@ -218,7 +218,8 @@ module Aws
                                      unit: ("DAY")
                                    },
                                  ]?
-                               }?
+                               }?,
+                               instance_limits_handling: ("OPT_IN" | "OPT_OUT")?
                              },
                              ?tags: Hash[::String, ::String]
                            ) -> _CreateCampaignResponseSuccess
@@ -319,6 +320,16 @@ module Aws
                                        ) -> _GetConnectInstanceConfigResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConnectInstanceConfigResponseSuccess
 
+      interface _GetInstanceCommunicationLimitsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInstanceCommunicationLimitsResponse]
+        def communication_limits_config: () -> Types::InstanceCommunicationLimitsConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCampaignsV2/Client.html#get_instance_communication_limits-instance_method
+      def get_instance_communication_limits: (
+                                               connect_instance_id: ::String
+                                             ) -> _GetInstanceCommunicationLimitsResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInstanceCommunicationLimitsResponseSuccess
+
       interface _GetInstanceOnboardingJobStatusResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetInstanceOnboardingJobStatusResponse]
         def connect_instance_onboarding_job_status: () -> Types::InstanceOnboardingJobStatus
@@ -390,6 +401,23 @@ module Aws
                                               }
                                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCampaignsV2/Client.html#put_instance_communication_limits-instance_method
+      def put_instance_communication_limits: (
+                                               connect_instance_id: ::String,
+                                               communication_limits_config: {
+                                                 all_channel_subtypes: {
+                                                   communication_limits_list: Array[
+                                                     {
+                                                       max_count_per_recipient: ::Integer,
+                                                       frequency: ::Integer,
+                                                       unit: ("DAY")
+                                                     },
+                                                   ]?
+                                                 }?
+                                               }
+                                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       interface _PutOutboundRequestBatchResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutOutboundRequestBatchResponse]
@@ -561,7 +589,8 @@ module Aws
                                                           unit: ("DAY")
                                                         },
                                                       ]?
-                                                    }?
+                                                    }?,
+                                                    instance_limits_handling: ("OPT_IN" | "OPT_OUT")?
                                                   }
                                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]

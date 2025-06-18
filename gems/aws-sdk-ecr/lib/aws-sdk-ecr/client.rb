@@ -846,7 +846,7 @@ module Aws::ECR
     #   for the pull through cache rule. The following is the syntax to use
     #   for each supported upstream registry.
     #
-    #   * Amazon ECR (`ecr`) – `dkr.ecr.<region>.amazonaws.com`
+    #   * Amazon ECR (`ecr`) – `<accountId>.dkr.ecr.<region>.amazonaws.com`
     #
     #   * Amazon ECR Public (`ecr-public`) – `public.ecr.aws`
     #
@@ -1689,6 +1689,8 @@ module Aws::ECR
     #   resp.image_scan_findings.enhanced_findings[0].resources[0].details.aws_ecr_container_image.image_tags[0] #=> String
     #   resp.image_scan_findings.enhanced_findings[0].resources[0].details.aws_ecr_container_image.platform #=> String
     #   resp.image_scan_findings.enhanced_findings[0].resources[0].details.aws_ecr_container_image.pushed_at #=> Time
+    #   resp.image_scan_findings.enhanced_findings[0].resources[0].details.aws_ecr_container_image.last_in_use_at #=> Time
+    #   resp.image_scan_findings.enhanced_findings[0].resources[0].details.aws_ecr_container_image.in_use_count #=> Integer
     #   resp.image_scan_findings.enhanced_findings[0].resources[0].details.aws_ecr_container_image.registry #=> String
     #   resp.image_scan_findings.enhanced_findings[0].resources[0].details.aws_ecr_container_image.repository_name #=> String
     #   resp.image_scan_findings.enhanced_findings[0].resources[0].id #=> String
@@ -1728,13 +1730,24 @@ module Aws::ECR
 
     # Returns metadata about the images in a repository.
     #
-    # <note markdown="1"> Beginning with Docker version 1.9, the Docker client compresses image
+    # <note markdown="1"> Starting with Docker version 1.9, the Docker client compresses image
     # layers before pushing them to a V2 Docker registry. The output of the
-    # `docker images` command shows the uncompressed image size, so it may
-    # return a larger image size than the image sizes returned by
-    # DescribeImages.
+    # `docker images` command shows the uncompressed image size. Therefore,
+    # Docker might return a larger image than the image shown in the Amazon
+    # Web Services Management Console.
     #
     #  </note>
+    #
+    # The new version of Amazon ECR *Basic Scanning* doesn't use the
+    # ImageDetail$imageScanFindingsSummary and ImageDetail$imageScanStatus
+    # attributes from the API response to return scan results. Use the
+    # DescribeImageScanFindings API instead. For more information about
+    # Amazon Web Services native basic scanning, see [ Scan images for
+    # software vulnerabilities in Amazon ECR][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html
     #
     # @option params [String] :registry_id
     #   The Amazon Web Services account ID associated with the registry that
@@ -2375,8 +2388,8 @@ module Aws::ECR
     #   response element. The remaining results of the initial request can be
     #   seen by sending  another `GetLifecyclePolicyPreviewRequest` request
     #   with the returned `nextToken`  value. This value can be between 1 and
-    #   1000. If this  parameter is not used, then
-    #   `GetLifecyclePolicyPreviewRequest` returns up to  100 results and a
+    #   100. If this  parameter is not used, then
+    #   `GetLifecyclePolicyPreviewRequest` returns up to 100 results and a
     #   `nextToken` value, if  applicable. This option cannot be used when you
     #   specify images with `imageIds`.
     #
@@ -3748,7 +3761,7 @@ module Aws::ECR
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.103.0'
+      context[:gem_version] = '1.104.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

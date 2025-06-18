@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2025-06-12)
+------------------
+
+* Feature - Fixed regex patterns for ARN fields.
+
 1.20.0 (2025-06-02)
 ------------------
 

@@ -228,6 +228,7 @@ module Aws::EMRServerless
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor execution_role: ::String
+      attr_accessor execution_iam_policy: Types::JobRunExecutionIamPolicy
       attr_accessor state: ("SUBMITTED" | "PENDING" | "SCHEDULED" | "RUNNING" | "SUCCESS" | "FAILED" | "CANCELLING" | "CANCELLED" | "QUEUED")
       attr_accessor state_details: ::String
       attr_accessor release_label: ::String

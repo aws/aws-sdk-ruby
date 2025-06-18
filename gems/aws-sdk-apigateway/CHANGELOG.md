@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.119.0 (2025-06-12)
+------------------
+
+* Feature - Documentation updates for Amazon API Gateway
+
 1.118.0 (2025-06-03)
 ------------------
 

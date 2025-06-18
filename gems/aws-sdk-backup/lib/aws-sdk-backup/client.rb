@@ -469,6 +469,38 @@ module Aws::Backup
 
     # @!group API Operations
 
+    # Associates an MPA approval team with a backup vault.
+    #
+    # @option params [required, String] :backup_vault_name
+    #   The name of the backup vault to associate with the MPA approval team.
+    #
+    # @option params [required, String] :mpa_approval_team_arn
+    #   The Amazon Resource Name (ARN) of the MPA approval team to associate
+    #   with the backup vault.
+    #
+    # @option params [String] :requester_comment
+    #   A comment provided by the requester explaining the association
+    #   request.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_backup_vault_mpa_approval_team({
+    #     backup_vault_name: "BackupVaultName", # required
+    #     mpa_approval_team_arn: "ARN", # required
+    #     requester_comment: "RequesterComment",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/AssociateBackupVaultMpaApprovalTeam AWS API Documentation
+    #
+    # @overload associate_backup_vault_mpa_approval_team(params = {})
+    # @param [Hash] params ({})
+    def associate_backup_vault_mpa_approval_team(params = {}, options = {})
+      req = build_request(:associate_backup_vault_mpa_approval_team, params)
+      req.send_request(options)
+    end
+
     # Removes the specified legal hold on a recovery point. This action can
     # only be performed by a user with sufficient permissions.
     #
@@ -522,6 +554,9 @@ module Aws::Backup
     #
     #   If used, this parameter must contain 1 to 50 alphanumeric or '-\_.'
     #   characters.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @return [Types::CreateBackupPlanOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -627,6 +662,9 @@ module Aws::Backup
     #   If used, this parameter must contain 1 to 50 alphanumeric or '-\_.'
     #   characters.
     #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Types::CreateBackupSelectionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBackupSelectionOutput#selection_id #selection_id} => String
@@ -724,6 +762,9 @@ module Aws::Backup
     #
     #   If used, this parameter must contain 1 to 50 alphanumeric or '-\_.'
     #   characters.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @return [Types::CreateBackupVaultOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -853,6 +894,9 @@ module Aws::Backup
     #   identical calls. Retrying a successful request with the same
     #   idempotency token results in a success message with no action taken.
     #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @option params [Types::RecoveryPointSelection] :recovery_point_selection
     #   The criteria to assign a set of resources, such as resource types or
     #   backup vaults.
@@ -940,6 +984,9 @@ module Aws::Backup
     #
     #   This parameter is optional. If used, this parameter must contain 1 to
     #   50 alphanumeric or '-\_.' characters.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @option params [required, Integer] :min_retention_days
     #   This setting specifies the minimum retention period that the vault
@@ -1072,6 +1119,66 @@ module Aws::Backup
     # @param [Hash] params ({})
     def create_report_plan(params = {}, options = {})
       req = build_request(:create_report_plan, params)
+      req.send_request(options)
+    end
+
+    # Creates a restore access backup vault that provides temporary access
+    # to recovery points in a logically air-gapped backup vault, subject to
+    # MPA approval.
+    #
+    # @option params [required, String] :source_backup_vault_arn
+    #   The ARN of the source backup vault containing the recovery points to
+    #   which temporary access is requested.
+    #
+    # @option params [String] :backup_vault_name
+    #   The name of the backup vault to associate with an MPA approval team.
+    #
+    # @option params [Hash<String,String>] :backup_vault_tags
+    #   Optional tags to assign to the restore access backup vault.
+    #
+    # @option params [String] :creator_request_id
+    #   A unique string that identifies the request and allows failed requests
+    #   to be retried without the risk of executing the operation twice.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :requester_comment
+    #   A comment explaining the reason for requesting restore access to the
+    #   backup vault.
+    #
+    # @return [Types::CreateRestoreAccessBackupVaultOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRestoreAccessBackupVaultOutput#restore_access_backup_vault_arn #restore_access_backup_vault_arn} => String
+    #   * {Types::CreateRestoreAccessBackupVaultOutput#vault_state #vault_state} => String
+    #   * {Types::CreateRestoreAccessBackupVaultOutput#restore_access_backup_vault_name #restore_access_backup_vault_name} => String
+    #   * {Types::CreateRestoreAccessBackupVaultOutput#creation_date #creation_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_restore_access_backup_vault({
+    #     source_backup_vault_arn: "ARN", # required
+    #     backup_vault_name: "BackupVaultName",
+    #     backup_vault_tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     creator_request_id: "string",
+    #     requester_comment: "RequesterComment",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.restore_access_backup_vault_arn #=> String
+    #   resp.vault_state #=> String, one of "CREATING", "AVAILABLE", "FAILED"
+    #   resp.restore_access_backup_vault_name #=> String
+    #   resp.creation_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateRestoreAccessBackupVault AWS API Documentation
+    #
+    # @overload create_restore_access_backup_vault(params = {})
+    # @param [Hash] params ({})
+    def create_restore_access_backup_vault(params = {}, options = {})
+      req = build_request(:create_restore_access_backup_vault, params)
       req.send_request(options)
     end
 
@@ -1676,6 +1783,10 @@ module Aws::Backup
     #   * {Types::DescribeBackupVaultOutput#min_retention_days #min_retention_days} => Integer
     #   * {Types::DescribeBackupVaultOutput#max_retention_days #max_retention_days} => Integer
     #   * {Types::DescribeBackupVaultOutput#lock_date #lock_date} => Time
+    #   * {Types::DescribeBackupVaultOutput#source_backup_vault_arn #source_backup_vault_arn} => String
+    #   * {Types::DescribeBackupVaultOutput#mpa_approval_team_arn #mpa_approval_team_arn} => String
+    #   * {Types::DescribeBackupVaultOutput#mpa_session_arn #mpa_session_arn} => String
+    #   * {Types::DescribeBackupVaultOutput#latest_mpa_approval_team_update #latest_mpa_approval_team_update} => Types::LatestMpaApprovalTeamUpdate
     #
     # @example Request syntax with placeholder values
     #
@@ -1688,7 +1799,7 @@ module Aws::Backup
     #
     #   resp.backup_vault_name #=> String
     #   resp.backup_vault_arn #=> String
-    #   resp.vault_type #=> String, one of "BACKUP_VAULT", "LOGICALLY_AIR_GAPPED_BACKUP_VAULT"
+    #   resp.vault_type #=> String, one of "BACKUP_VAULT", "LOGICALLY_AIR_GAPPED_BACKUP_VAULT", "RESTORE_ACCESS_BACKUP_VAULT"
     #   resp.vault_state #=> String, one of "CREATING", "AVAILABLE", "FAILED"
     #   resp.encryption_key_arn #=> String
     #   resp.creation_date #=> Time
@@ -1698,6 +1809,14 @@ module Aws::Backup
     #   resp.min_retention_days #=> Integer
     #   resp.max_retention_days #=> Integer
     #   resp.lock_date #=> Time
+    #   resp.source_backup_vault_arn #=> String
+    #   resp.mpa_approval_team_arn #=> String
+    #   resp.mpa_session_arn #=> String
+    #   resp.latest_mpa_approval_team_update.mpa_session_arn #=> String
+    #   resp.latest_mpa_approval_team_update.status #=> String, one of "PENDING", "APPROVED", "FAILED"
+    #   resp.latest_mpa_approval_team_update.status_message #=> String
+    #   resp.latest_mpa_approval_team_update.initiation_date #=> Time
+    #   resp.latest_mpa_approval_team_update.expiry_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeBackupVault AWS API Documentation
     #
@@ -1914,6 +2033,7 @@ module Aws::Backup
     #   * {Types::DescribeRecoveryPointOutput#status #status} => String
     #   * {Types::DescribeRecoveryPointOutput#status_message #status_message} => String
     #   * {Types::DescribeRecoveryPointOutput#creation_date #creation_date} => Time
+    #   * {Types::DescribeRecoveryPointOutput#initiation_date #initiation_date} => Time
     #   * {Types::DescribeRecoveryPointOutput#completion_date #completion_date} => Time
     #   * {Types::DescribeRecoveryPointOutput#backup_size_in_bytes #backup_size_in_bytes} => Integer
     #   * {Types::DescribeRecoveryPointOutput#calculated_lifecycle #calculated_lifecycle} => Types::CalculatedLifecycle
@@ -1954,6 +2074,7 @@ module Aws::Backup
     #   resp.status #=> String, one of "COMPLETED", "PARTIAL", "DELETING", "EXPIRED", "AVAILABLE", "STOPPED", "CREATING"
     #   resp.status_message #=> String
     #   resp.creation_date #=> Time
+    #   resp.initiation_date #=> Time
     #   resp.completion_date #=> Time
     #   resp.backup_size_in_bytes #=> Integer
     #   resp.calculated_lifecycle.move_to_cold_storage_at #=> Time
@@ -1969,7 +2090,7 @@ module Aws::Backup
     #   resp.composite_member_identifier #=> String
     #   resp.is_parent #=> Boolean
     #   resp.resource_name #=> String
-    #   resp.vault_type #=> String, one of "BACKUP_VAULT", "LOGICALLY_AIR_GAPPED_BACKUP_VAULT"
+    #   resp.vault_type #=> String, one of "BACKUP_VAULT", "LOGICALLY_AIR_GAPPED_BACKUP_VAULT", "RESTORE_ACCESS_BACKUP_VAULT"
     #   resp.index_status #=> String, one of "PENDING", "ACTIVE", "FAILED", "DELETING"
     #   resp.index_status_message #=> String
     #
@@ -2160,6 +2281,35 @@ module Aws::Backup
     # @param [Hash] params ({})
     def describe_restore_job(params = {}, options = {})
       req = build_request(:describe_restore_job, params)
+      req.send_request(options)
+    end
+
+    # Removes the association between an MPA approval team and a backup
+    # vault, disabling the MPA approval workflow for restore operations.
+    #
+    # @option params [required, String] :backup_vault_name
+    #   The name of the backup vault from which to disassociate the MPA
+    #   approval team.
+    #
+    # @option params [String] :requester_comment
+    #   An optional comment explaining the reason for disassociating the MPA
+    #   approval team from the backup vault.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_backup_vault_mpa_approval_team({
+    #     backup_vault_name: "BackupVaultName", # required
+    #     requester_comment: "RequesterComment",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DisassociateBackupVaultMpaApprovalTeam AWS API Documentation
+    #
+    # @overload disassociate_backup_vault_mpa_approval_team(params = {})
+    # @param [Hash] params ({})
+    def disassociate_backup_vault_mpa_approval_team(params = {}, options = {})
+      req = build_request(:disassociate_backup_vault_mpa_approval_team, params)
       req.send_request(options)
     end
 
@@ -2570,7 +2720,7 @@ module Aws::Backup
     #   resp.backup_vault_arn #=> String
     #   resp.sns_topic_arn #=> String
     #   resp.backup_vault_events #=> Array
-    #   resp.backup_vault_events[0] #=> String, one of "BACKUP_JOB_STARTED", "BACKUP_JOB_COMPLETED", "BACKUP_JOB_SUCCESSFUL", "BACKUP_JOB_FAILED", "BACKUP_JOB_EXPIRED", "RESTORE_JOB_STARTED", "RESTORE_JOB_COMPLETED", "RESTORE_JOB_SUCCESSFUL", "RESTORE_JOB_FAILED", "COPY_JOB_STARTED", "COPY_JOB_SUCCESSFUL", "COPY_JOB_FAILED", "RECOVERY_POINT_MODIFIED", "BACKUP_PLAN_CREATED", "BACKUP_PLAN_MODIFIED", "S3_BACKUP_OBJECT_FAILED", "S3_RESTORE_OBJECT_FAILED", "RECOVERY_POINT_INDEX_COMPLETED", "RECOVERY_POINT_INDEX_DELETED", "RECOVERY_POINT_INDEXING_FAILED"
+    #   resp.backup_vault_events[0] #=> String, one of "BACKUP_JOB_STARTED", "BACKUP_JOB_COMPLETED", "BACKUP_JOB_SUCCESSFUL", "BACKUP_JOB_FAILED", "BACKUP_JOB_EXPIRED", "RESTORE_JOB_STARTED", "RESTORE_JOB_COMPLETED", "RESTORE_JOB_SUCCESSFUL", "RESTORE_JOB_FAILED", "COPY_JOB_STARTED", "COPY_JOB_SUCCESSFUL", "COPY_JOB_FAILED", "RECOVERY_POINT_MODIFIED", "BACKUP_PLAN_CREATED", "BACKUP_PLAN_MODIFIED", "S3_BACKUP_OBJECT_FAILED", "S3_RESTORE_OBJECT_FAILED", "CONTINUOUS_BACKUP_INTERRUPTED", "RECOVERY_POINT_INDEX_COMPLETED", "RECOVERY_POINT_INDEX_DELETED", "RECOVERY_POINT_INDEXING_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetBackupVaultNotifications AWS API Documentation
     #
@@ -3484,7 +3634,7 @@ module Aws::Backup
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_backup_vaults({
-    #     by_vault_type: "BACKUP_VAULT", # accepts BACKUP_VAULT, LOGICALLY_AIR_GAPPED_BACKUP_VAULT
+    #     by_vault_type: "BACKUP_VAULT", # accepts BACKUP_VAULT, LOGICALLY_AIR_GAPPED_BACKUP_VAULT, RESTORE_ACCESS_BACKUP_VAULT
     #     by_shared: false,
     #     next_token: "string",
     #     max_results: 1,
@@ -3495,7 +3645,7 @@ module Aws::Backup
     #   resp.backup_vault_list #=> Array
     #   resp.backup_vault_list[0].backup_vault_name #=> String
     #   resp.backup_vault_list[0].backup_vault_arn #=> String
-    #   resp.backup_vault_list[0].vault_type #=> String, one of "BACKUP_VAULT", "LOGICALLY_AIR_GAPPED_BACKUP_VAULT"
+    #   resp.backup_vault_list[0].vault_type #=> String, one of "BACKUP_VAULT", "LOGICALLY_AIR_GAPPED_BACKUP_VAULT", "RESTORE_ACCESS_BACKUP_VAULT"
     #   resp.backup_vault_list[0].vault_state #=> String, one of "CREATING", "AVAILABLE", "FAILED"
     #   resp.backup_vault_list[0].creation_date #=> Time
     #   resp.backup_vault_list[0].encryption_key_arn #=> String
@@ -4209,6 +4359,7 @@ module Aws::Backup
     #   resp.recovery_points[0].status #=> String, one of "COMPLETED", "PARTIAL", "DELETING", "EXPIRED", "AVAILABLE", "STOPPED", "CREATING"
     #   resp.recovery_points[0].status_message #=> String
     #   resp.recovery_points[0].creation_date #=> Time
+    #   resp.recovery_points[0].initiation_date #=> Time
     #   resp.recovery_points[0].completion_date #=> Time
     #   resp.recovery_points[0].backup_size_in_bytes #=> Integer
     #   resp.recovery_points[0].calculated_lifecycle.move_to_cold_storage_at #=> Time
@@ -4223,7 +4374,7 @@ module Aws::Backup
     #   resp.recovery_points[0].composite_member_identifier #=> String
     #   resp.recovery_points[0].is_parent #=> Boolean
     #   resp.recovery_points[0].resource_name #=> String
-    #   resp.recovery_points[0].vault_type #=> String, one of "BACKUP_VAULT", "LOGICALLY_AIR_GAPPED_BACKUP_VAULT"
+    #   resp.recovery_points[0].vault_type #=> String, one of "BACKUP_VAULT", "LOGICALLY_AIR_GAPPED_BACKUP_VAULT", "RESTORE_ACCESS_BACKUP_VAULT"
     #   resp.recovery_points[0].index_status #=> String, one of "PENDING", "ACTIVE", "FAILED", "DELETING"
     #   resp.recovery_points[0].index_status_message #=> String
     #
@@ -4350,7 +4501,7 @@ module Aws::Backup
     #   resp.recovery_points[0].is_parent #=> Boolean
     #   resp.recovery_points[0].parent_recovery_point_arn #=> String
     #   resp.recovery_points[0].resource_name #=> String
-    #   resp.recovery_points[0].vault_type #=> String, one of "BACKUP_VAULT", "LOGICALLY_AIR_GAPPED_BACKUP_VAULT"
+    #   resp.recovery_points[0].vault_type #=> String, one of "BACKUP_VAULT", "LOGICALLY_AIR_GAPPED_BACKUP_VAULT", "RESTORE_ACCESS_BACKUP_VAULT"
     #   resp.recovery_points[0].index_status #=> String, one of "PENDING", "ACTIVE", "FAILED", "DELETING"
     #   resp.recovery_points[0].index_status_message #=> String
     #
@@ -4495,6 +4646,58 @@ module Aws::Backup
     # @param [Hash] params ({})
     def list_report_plans(params = {}, options = {})
       req = build_request(:list_report_plans, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of restore access backup vaults associated with a
+    # specified backup vault.
+    #
+    # @option params [required, String] :backup_vault_name
+    #   The name of the backup vault for which to list associated restore
+    #   access backup vaults.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from a previous request to retrieve the next set
+    #   of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return in the response.
+    #
+    # @return [Types::ListRestoreAccessBackupVaultsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRestoreAccessBackupVaultsOutput#next_token #next_token} => String
+    #   * {Types::ListRestoreAccessBackupVaultsOutput#restore_access_backup_vaults #restore_access_backup_vaults} => Array&lt;Types::RestoreAccessBackupVaultListMember&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_restore_access_backup_vaults({
+    #     backup_vault_name: "BackupVaultName", # required
+    #     next_token: "string",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.restore_access_backup_vaults #=> Array
+    #   resp.restore_access_backup_vaults[0].restore_access_backup_vault_arn #=> String
+    #   resp.restore_access_backup_vaults[0].creation_date #=> Time
+    #   resp.restore_access_backup_vaults[0].approval_date #=> Time
+    #   resp.restore_access_backup_vaults[0].vault_state #=> String, one of "CREATING", "AVAILABLE", "FAILED"
+    #   resp.restore_access_backup_vaults[0].latest_revoke_request.mpa_session_arn #=> String
+    #   resp.restore_access_backup_vaults[0].latest_revoke_request.status #=> String, one of "PENDING", "FAILED"
+    #   resp.restore_access_backup_vaults[0].latest_revoke_request.status_message #=> String
+    #   resp.restore_access_backup_vaults[0].latest_revoke_request.initiation_date #=> Time
+    #   resp.restore_access_backup_vaults[0].latest_revoke_request.expiry_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRestoreAccessBackupVaults AWS API Documentation
+    #
+    # @overload list_restore_access_backup_vaults(params = {})
+    # @param [Hash] params ({})
+    def list_restore_access_backup_vaults(params = {}, options = {})
+      req = build_request(:list_restore_access_backup_vaults, params)
       req.send_request(options)
     end
 
@@ -5135,36 +5338,13 @@ module Aws::Backup
     #
     # @option params [required, Array<String>] :backup_vault_events
     #   An array of events that indicate the status of jobs to back up
-    #   resources to the backup vault.
-    #
-    #   For common use cases and code samples, see [Using Amazon SNS to track
-    #   Backup events][1].
-    #
-    #   The following events are supported:
-    #
-    #   * `BACKUP_JOB_STARTED` \| `BACKUP_JOB_COMPLETED` \|
-    #     `BACKUP_JOB_FAILED`
-    #
-    #   * `COPY_JOB_STARTED` \| `COPY_JOB_SUCCESSFUL` \| `COPY_JOB_FAILED`
-    #
-    #   * `RESTORE_JOB_STARTED` \| `RESTORE_JOB_COMPLETED` \|
-    #     `RECOVERY_POINT_MODIFIED`
-    #
-    #   * `S3_BACKUP_OBJECT_FAILED` \| `S3_RESTORE_OBJECT_FAILED`
-    #
-    #   * `RECOVERY_POINT_INDEX_COMPLETED` \| `RECOVERY_POINT_INDEX_DELETED`
-    #     \| `RECOVERY_POINT_INDEXING_FAILED`
-    #
-    #   <note markdown="1"> The list below includes both supported events and deprecated events
-    #   that are no longer in use (for reference). Deprecated events do not
-    #   return statuses or notifications. Refer to the list above for the
-    #   supported events.
-    #
-    #    </note>
+    #   resources to the backup vault. For the list of supported events,
+    #   common use cases, and code samples, see [Notification options with
+    #   Backup][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/sns-notifications.html
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-notifications.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5173,7 +5353,7 @@ module Aws::Backup
     #   resp = client.put_backup_vault_notifications({
     #     backup_vault_name: "BackupVaultName", # required
     #     sns_topic_arn: "ARN", # required
-    #     backup_vault_events: ["BACKUP_JOB_STARTED"], # required, accepts BACKUP_JOB_STARTED, BACKUP_JOB_COMPLETED, BACKUP_JOB_SUCCESSFUL, BACKUP_JOB_FAILED, BACKUP_JOB_EXPIRED, RESTORE_JOB_STARTED, RESTORE_JOB_COMPLETED, RESTORE_JOB_SUCCESSFUL, RESTORE_JOB_FAILED, COPY_JOB_STARTED, COPY_JOB_SUCCESSFUL, COPY_JOB_FAILED, RECOVERY_POINT_MODIFIED, BACKUP_PLAN_CREATED, BACKUP_PLAN_MODIFIED, S3_BACKUP_OBJECT_FAILED, S3_RESTORE_OBJECT_FAILED, RECOVERY_POINT_INDEX_COMPLETED, RECOVERY_POINT_INDEX_DELETED, RECOVERY_POINT_INDEXING_FAILED
+    #     backup_vault_events: ["BACKUP_JOB_STARTED"], # required, accepts BACKUP_JOB_STARTED, BACKUP_JOB_COMPLETED, BACKUP_JOB_SUCCESSFUL, BACKUP_JOB_FAILED, BACKUP_JOB_EXPIRED, RESTORE_JOB_STARTED, RESTORE_JOB_COMPLETED, RESTORE_JOB_SUCCESSFUL, RESTORE_JOB_FAILED, COPY_JOB_STARTED, COPY_JOB_SUCCESSFUL, COPY_JOB_FAILED, RECOVERY_POINT_MODIFIED, BACKUP_PLAN_CREATED, BACKUP_PLAN_MODIFIED, S3_BACKUP_OBJECT_FAILED, S3_RESTORE_OBJECT_FAILED, CONTINUOUS_BACKUP_INTERRUPTED, RECOVERY_POINT_INDEX_COMPLETED, RECOVERY_POINT_INDEX_DELETED, RECOVERY_POINT_INDEXING_FAILED
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/PutBackupVaultNotifications AWS API Documentation
@@ -5218,6 +5398,40 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # Revokes access to a restore access backup vault, removing the ability
+    # to restore from its recovery points and permanently deleting the
+    # vault.
+    #
+    # @option params [required, String] :backup_vault_name
+    #   The name of the source backup vault associated with the restore access
+    #   backup vault to be revoked.
+    #
+    # @option params [required, String] :restore_access_backup_vault_arn
+    #   The ARN of the restore access backup vault to revoke.
+    #
+    # @option params [String] :requester_comment
+    #   A comment explaining the reason for revoking access to the restore
+    #   access backup vault.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.revoke_restore_access_backup_vault({
+    #     backup_vault_name: "BackupVaultName", # required
+    #     restore_access_backup_vault_arn: "ARN", # required
+    #     requester_comment: "RequesterComment",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/RevokeRestoreAccessBackupVault AWS API Documentation
+    #
+    # @overload revoke_restore_access_backup_vault(params = {})
+    # @param [Hash] params ({})
+    def revoke_restore_access_backup_vault(params = {}, options = {})
+      req = build_request(:revoke_restore_access_backup_vault, params)
+      req.send_request(options)
+    end
+
     # Starts an on-demand backup job for the specified resource.
     #
     # @option params [required, String] :backup_vault_name
@@ -5238,6 +5452,9 @@ module Aws::Backup
     #   otherwise identical calls to `StartBackupJob`. Retrying a successful
     #   request with the same idempotency token results in a success message
     #   with no action taken.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @option params [Integer] :start_window_minutes
     #   A value in minutes after a backup is scheduled before a job will be
@@ -5391,6 +5608,9 @@ module Aws::Backup
     #   otherwise identical calls to `StartCopyJob`. Retrying a successful
     #   request with the same idempotency token results in a success message
     #   with no action taken.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @option params [Types::Lifecycle] :lifecycle
     #   Specifies the time period, in days, before a recovery point
@@ -5566,6 +5786,9 @@ module Aws::Backup
     #   otherwise identical calls to `StartRestoreJob`. Retrying a successful
     #   request with the same idempotency token results in a success message
     #   with no action taken.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @option params [String] :resource_type
     #   Starts a job to restore a recovery point for one of the following
@@ -6366,7 +6589,7 @@ module Aws::Backup
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.90.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

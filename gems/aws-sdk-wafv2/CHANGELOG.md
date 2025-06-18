@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.112.0 (2025-06-17)
+------------------
+
+* Feature - AWS WAF can now suggest protection packs for you based on the application information you provide when you create a webACL.
+
 1.111.0 (2025-06-11)
 ------------------
 

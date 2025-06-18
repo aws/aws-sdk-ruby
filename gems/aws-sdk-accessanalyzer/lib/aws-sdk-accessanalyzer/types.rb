@@ -473,16 +473,25 @@ module Aws::AccessAnalyzer
     #   Amazon Web Services organization or account.
     #   @return [Types::UnusedAccessConfiguration]
     #
+    # @!attribute [rw] internal_access
+    #   Specifies the configuration of an internal access analyzer for an
+    #   Amazon Web Services organization or account. This configuration
+    #   determines how the analyzer evaluates access within your Amazon Web
+    #   Services environment.
+    #   @return [Types::InternalAccessConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/AnalyzerConfiguration AWS API Documentation
     #
     class AnalyzerConfiguration < Struct.new(
       :unused_access,
+      :internal_access,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class UnusedAccess < AnalyzerConfiguration; end
+      class InternalAccess < AnalyzerConfiguration; end
       class Unknown < AnalyzerConfiguration; end
     end
 
@@ -537,8 +546,8 @@ module Aws::AccessAnalyzer
     #   @return [Types::StatusReason]
     #
     # @!attribute [rw] configuration
-    #   Specifies whether the analyzer is an external access or unused
-    #   access analyzer.
+    #   Specifies if the analyzer is an external access, unused access, or
+    #   internal access analyzer.
     #   @return [Types::AnalyzerConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/AnalyzerSummary AWS API Documentation
@@ -1050,11 +1059,9 @@ module Aws::AccessAnalyzer
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of analyzer to create. Only `ACCOUNT`, `ORGANIZATION`,
-    #   `ACCOUNT_UNUSED_ACCESS`, and `ORGANIZATION_UNUSED_ACCESS` analyzers
-    #   are supported. You can create only one analyzer per account per
-    #   Region. You can create up to 5 analyzers per organization per
-    #   Region.
+    #   The type of analyzer to create. You can create only one analyzer per
+    #   account per Region. You can create up to 5 analyzers per
+    #   organization per Region.
     #   @return [String]
     #
     # @!attribute [rw] archive_rules
@@ -1085,7 +1092,9 @@ module Aws::AccessAnalyzer
     # @!attribute [rw] configuration
     #   Specifies the configuration of the analyzer. If the analyzer is an
     #   unused access analyzer, the specified scope of unused access is used
-    #   for the configuration.
+    #   for the configuration. If the analyzer is an internal access
+    #   analyzer, the specified internal access analysis rules are used for
+    #   the configuration.
     #   @return [Types::AnalyzerConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/CreateAnalyzerRequest AWS API Documentation
@@ -1479,6 +1488,23 @@ module Aws::AccessAnalyzer
     # @!attribute [rw] resource_control_policy_restriction
     #   The type of restriction applied to the finding by the resource owner
     #   with an Organizations resource control policy (RCP).
+    #
+    #   * `APPLICABLE`: There is an RCP present in the organization but IAM
+    #     Access Analyzer does not include it in the evaluation of effective
+    #     permissions. For example, if `s3:DeleteObject` is blocked by the
+    #     RCP and the restriction is `APPLICABLE`, then `s3:DeleteObject`
+    #     would still be included in the list of actions for the finding.
+    #
+    #   * `FAILED_TO_EVALUATE_RCP`: There was an error evaluating the RCP.
+    #
+    #   * `NOT_APPLICABLE`: There was no RCP present in the organization, or
+    #     there was no RCP applicable to the resource. For example, the
+    #     resource being analyzed is an Amazon RDS snapshot and there is an
+    #     RCP in the organization, but the RCP only impacts Amazon S3
+    #     buckets.
+    #
+    #   * `APPLIED`: This restriction is not currently available for
+    #     external access findings.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/ExternalAccessDetails AWS API Documentation
@@ -1652,6 +1678,12 @@ module Aws::AccessAnalyzer
     #
     # @note FindingDetails is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of FindingDetails corresponding to the set member.
     #
+    # @!attribute [rw] internal_access_details
+    #   The details for an internal access analyzer finding. This contains
+    #   information about access patterns identified within your Amazon Web
+    #   Services organization or account.
+    #   @return [Types::InternalAccessDetails]
+    #
     # @!attribute [rw] external_access_details
     #   The details for an external access analyzer finding.
     #   @return [Types::ExternalAccessDetails]
@@ -1679,6 +1711,7 @@ module Aws::AccessAnalyzer
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/FindingDetails AWS API Documentation
     #
     class FindingDetails < Struct.new(
+      :internal_access_details,
       :external_access_details,
       :unused_permission_details,
       :unused_iam_user_access_key_details,
@@ -1689,6 +1722,7 @@ module Aws::AccessAnalyzer
       include Aws::Structure
       include Aws::Structure::Union
 
+      class InternalAccessDetails < FindingDetails; end
       class ExternalAccessDetails < FindingDetails; end
       class UnusedPermissionDetails < FindingDetails; end
       class UnusedIamUserAccessKeyDetails < FindingDetails; end
@@ -1874,7 +1908,11 @@ module Aws::AccessAnalyzer
     #   @return [Time]
     #
     # @!attribute [rw] finding_type
-    #   The type of the external access or unused access finding.
+    #   The type of the access finding. For external access analyzers, the
+    #   type is `ExternalAccess`. For unused access analyzers, the type can
+    #   be `UnusedIAMRole`, `UnusedIAMUserAccessKey`,
+    #   `UnusedIAMUserPassword`, or `UnusedPermission`. For internal access
+    #   analyzers, the type is `InternalAccess`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/FindingSummaryV2 AWS API Documentation
@@ -1904,6 +1942,13 @@ module Aws::AccessAnalyzer
     #   The aggregate statistics for an external access analyzer.
     #   @return [Types::ExternalAccessFindingsStatistics]
     #
+    # @!attribute [rw] internal_access_findings_statistics
+    #   The aggregate statistics for an internal access analyzer. This
+    #   includes information about active, archived, and resolved findings
+    #   related to internal access within your Amazon Web Services
+    #   organization or account.
+    #   @return [Types::InternalAccessFindingsStatistics]
+    #
     # @!attribute [rw] unused_access_findings_statistics
     #   The aggregate statistics for an unused access analyzer.
     #   @return [Types::UnusedAccessFindingsStatistics]
@@ -1912,6 +1957,7 @@ module Aws::AccessAnalyzer
     #
     class FindingsStatistics < Struct.new(
       :external_access_findings_statistics,
+      :internal_access_findings_statistics,
       :unused_access_findings_statistics,
       :unknown)
       SENSITIVE = []
@@ -1919,6 +1965,7 @@ module Aws::AccessAnalyzer
       include Aws::Structure::Union
 
       class ExternalAccessFindingsStatistics < FindingsStatistics; end
+      class InternalAccessFindingsStatistics < FindingsStatistics; end
       class UnusedAccessFindingsStatistics < FindingsStatistics; end
       class Unknown < FindingsStatistics; end
     end
@@ -2351,7 +2398,8 @@ module Aws::AccessAnalyzer
     #   The type of the finding. For external access analyzers, the type is
     #   `ExternalAccess`. For unused access analyzers, the type can be
     #   `UnusedIAMRole`, `UnusedIAMUserAccessKey`, `UnusedIAMUserPassword`,
-    #   or `UnusedPermission`.
+    #   or `UnusedPermission`. For internal access analyzers, the type is
+    #   `InternalAccess`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/GetFindingV2Response AWS API Documentation
@@ -2506,6 +2554,256 @@ module Aws::AccessAnalyzer
     class InlineArchiveRule < Struct.new(
       :rule_name,
       :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about analysis rules for the internal access
+    # analyzer. Analysis rules determine which entities will generate
+    # findings based on the criteria you define when you create the rule.
+    #
+    # @!attribute [rw] inclusions
+    #   A list of rules for the internal access analyzer containing criteria
+    #   to include in analysis. Only resources that meet the rule criteria
+    #   will generate findings.
+    #   @return [Array<Types::InternalAccessAnalysisRuleCriteria>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/InternalAccessAnalysisRule AWS API Documentation
+    #
+    class InternalAccessAnalysisRule < Struct.new(
+      :inclusions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The criteria for an analysis rule for an internal access analyzer.
+    #
+    # @!attribute [rw] account_ids
+    #   A list of Amazon Web Services account IDs to apply to the internal
+    #   access analysis rule criteria. Account IDs can only be applied to
+    #   the analysis rule criteria for organization-level analyzers.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resource_types
+    #   A list of resource types to apply to the internal access analysis
+    #   rule criteria. The analyzer will only generate findings for
+    #   resources of these types. These resource types are currently
+    #   supported for internal access analyzers:
+    #
+    #   * `AWS::S3::Bucket`
+    #
+    #   * `AWS::RDS::DBSnapshot`
+    #
+    #   * `AWS::RDS::DBClusterSnapshot`
+    #
+    #   * `AWS::S3Express::DirectoryBucket`
+    #
+    #   * `AWS::DynamoDB::Table`
+    #
+    #   * `AWS::DynamoDB::Stream`
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resource_arns
+    #   A list of resource ARNs to apply to the internal access analysis
+    #   rule criteria. The analyzer will only generate findings for
+    #   resources that match these ARNs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/InternalAccessAnalysisRuleCriteria AWS API Documentation
+    #
+    class InternalAccessAnalysisRuleCriteria < Struct.new(
+      :account_ids,
+      :resource_types,
+      :resource_arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the configuration of an internal access analyzer for an
+    # Amazon Web Services organization or account. This configuration
+    # determines how the analyzer evaluates internal access within your
+    # Amazon Web Services environment.
+    #
+    # @!attribute [rw] analysis_rule
+    #   Contains information about analysis rules for the internal access
+    #   analyzer. These rules determine which resources and access patterns
+    #   will be analyzed.
+    #   @return [Types::InternalAccessAnalysisRule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/InternalAccessConfiguration AWS API Documentation
+    #
+    class InternalAccessConfiguration < Struct.new(
+      :analysis_rule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about an internal access finding. This includes
+    # details about the access that was identified within your Amazon Web
+    # Services organization or account.
+    #
+    # @!attribute [rw] action
+    #   The action in the analyzed policy statement that has internal access
+    #   permission to use.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] condition
+    #   The condition in the analyzed policy statement that resulted in an
+    #   internal access finding.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] principal
+    #   The principal that has access to a resource within the internal
+    #   environment.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] principal_owner_account
+    #   The Amazon Web Services account ID that owns the principal
+    #   identified in the internal access finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_type
+    #   The type of internal access identified in the finding. This
+    #   indicates how the access is granted within your Amazon Web Services
+    #   environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_type
+    #   The type of principal identified in the internal access finding,
+    #   such as IAM role or IAM user.
+    #   @return [String]
+    #
+    # @!attribute [rw] sources
+    #   The sources of the internal access finding. This indicates how the
+    #   access that generated the finding is granted within your Amazon Web
+    #   Services environment.
+    #   @return [Array<Types::FindingSource>]
+    #
+    # @!attribute [rw] resource_control_policy_restriction
+    #   The type of restriction applied to the finding by the resource owner
+    #   with an Organizations resource control policy (RCP).
+    #
+    #   * `APPLICABLE`: There is an RCP present in the organization but IAM
+    #     Access Analyzer does not include it in the evaluation of effective
+    #     permissions. For example, if `s3:DeleteObject` is blocked by the
+    #     RCP and the restriction is `APPLICABLE`, then `s3:DeleteObject`
+    #     would still be included in the list of actions for the finding.
+    #     Only applicable to internal access findings with the account as
+    #     the zone of trust.
+    #
+    #   * `FAILED_TO_EVALUATE_RCP`: There was an error evaluating the RCP.
+    #
+    #   * `NOT_APPLICABLE`: There was no RCP present in the organization.
+    #     For internal access findings with the account as the zone of
+    #     trust, `NOT_APPLICABLE` could also indicate that there was no RCP
+    #     applicable to the resource.
+    #
+    #   * `APPLIED`: An RCP is present in the organization and IAM Access
+    #     Analyzer included it in the evaluation of effective permissions.
+    #     For example, if `s3:DeleteObject` is blocked by the RCP and the
+    #     restriction is `APPLIED`, then `s3:DeleteObject` would not be
+    #     included in the list of actions for the finding. Only applicable
+    #     to internal access findings with the organization as the zone of
+    #     trust.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_control_policy_restriction
+    #   The type of restriction applied to the finding by an Organizations
+    #   service control policy (SCP).
+    #
+    #   * `APPLICABLE`: There is an SCP present in the organization but IAM
+    #     Access Analyzer does not include it in the evaluation of effective
+    #     permissions. Only applicable to internal access findings with the
+    #     account as the zone of trust.
+    #
+    #   * `FAILED_TO_EVALUATE_SCP`: There was an error evaluating the SCP.
+    #
+    #   * `NOT_APPLICABLE`: There was no SCP present in the organization.
+    #     For internal access findings with the account as the zone of
+    #     trust, `NOT_APPLICABLE` could also indicate that there was no SCP
+    #     applicable to the principal.
+    #
+    #   * `APPLIED`: An SCP is present in the organization and IAM Access
+    #     Analyzer included it in the evaluation of effective permissions.
+    #     Only applicable to internal access findings with the organization
+    #     as the zone of trust.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/InternalAccessDetails AWS API Documentation
+    #
+    class InternalAccessDetails < Struct.new(
+      :action,
+      :condition,
+      :principal,
+      :principal_owner_account,
+      :access_type,
+      :principal_type,
+      :sources,
+      :resource_control_policy_restriction,
+      :service_control_policy_restriction)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides aggregate statistics about the findings for the specified
+    # internal access analyzer. This includes counts of active, archived,
+    # and resolved findings.
+    #
+    # @!attribute [rw] resource_type_statistics
+    #   The total number of active findings for each resource type of the
+    #   specified internal access analyzer.
+    #   @return [Hash<String,Types::InternalAccessResourceTypeDetails>]
+    #
+    # @!attribute [rw] total_active_findings
+    #   The number of active findings for the specified internal access
+    #   analyzer.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_archived_findings
+    #   The number of archived findings for the specified internal access
+    #   analyzer.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_resolved_findings
+    #   The number of resolved findings for the specified internal access
+    #   analyzer.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/InternalAccessFindingsStatistics AWS API Documentation
+    #
+    class InternalAccessFindingsStatistics < Struct.new(
+      :resource_type_statistics,
+      :total_active_findings,
+      :total_archived_findings,
+      :total_resolved_findings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the total number of active, archived, and
+    # resolved findings for a resource type of an internal access analyzer.
+    #
+    # @!attribute [rw] total_active_findings
+    #   The total number of active findings for the resource type in the
+    #   internal access analyzer.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_resolved_findings
+    #   The total number of resolved findings for the resource type in the
+    #   internal access analyzer.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_archived_findings
+    #   The total number of archived findings for the resource type in the
+    #   internal access analyzer.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/InternalAccessResourceTypeDetails AWS API Documentation
+    #
+    class InternalAccessResourceTypeDetails < Struct.new(
+      :total_active_findings,
+      :total_resolved_findings,
+      :total_archived_findings)
       SENSITIVE = []
       include Aws::Structure
     end

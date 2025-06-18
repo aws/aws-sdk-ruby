@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2025-06-12)
+------------------
+
+* Feature - This release adds support for retrieval of the optional executionIamPolicy field in the GetJobRun API response.
+
 1.47.0 (2025-06-03)
 ------------------
 

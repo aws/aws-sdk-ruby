@@ -245,6 +245,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-lookoutequipment', '~> 1')
   spec.add_dependency('aws-sdk-lookoutmetrics', '~> 1')
   spec.add_dependency('aws-sdk-lookoutforvision', '~> 1')
+  spec.add_dependency('aws-sdk-mpa', '~> 1')
   spec.add_dependency('aws-sdk-mq', '~> 1')
   spec.add_dependency('aws-sdk-mturk', '~> 1')
   spec.add_dependency('aws-sdk-mwaa', '~> 1')

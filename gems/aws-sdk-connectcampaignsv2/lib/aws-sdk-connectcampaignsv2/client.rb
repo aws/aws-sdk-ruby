@@ -648,6 +648,7 @@ module Aws::ConnectCampaignsV2
     #           },
     #         ],
     #       },
+    #       instance_limits_handling: "OPT_IN", # accepts OPT_IN, OPT_OUT
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -929,6 +930,7 @@ module Aws::ConnectCampaignsV2
     #   resp.campaign.communication_limits_override.all_channel_subtypes.communication_limits_list[0].max_count_per_recipient #=> Integer
     #   resp.campaign.communication_limits_override.all_channel_subtypes.communication_limits_list[0].frequency #=> Integer
     #   resp.campaign.communication_limits_override.all_channel_subtypes.communication_limits_list[0].unit #=> String, one of "DAY"
+    #   resp.campaign.communication_limits_override.instance_limits_handling #=> String, one of "OPT_IN", "OPT_OUT"
     #   resp.campaign.tags #=> Hash
     #   resp.campaign.tags["TagKey"] #=> String
     #
@@ -1032,6 +1034,37 @@ module Aws::ConnectCampaignsV2
     # @param [Hash] params ({})
     def get_connect_instance_config(params = {}, options = {})
       req = build_request(:get_connect_instance_config, params)
+      req.send_request(options)
+    end
+
+    # Get the instance communication limits.
+    #
+    # @option params [required, String] :connect_instance_id
+    #   Amazon Connect Instance Id
+    #
+    # @return [Types::GetInstanceCommunicationLimitsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetInstanceCommunicationLimitsResponse#communication_limits_config #communication_limits_config} => Types::InstanceCommunicationLimitsConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_instance_communication_limits({
+    #     connect_instance_id: "InstanceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.communication_limits_config.all_channel_subtypes.communication_limits_list #=> Array
+    #   resp.communication_limits_config.all_channel_subtypes.communication_limits_list[0].max_count_per_recipient #=> Integer
+    #   resp.communication_limits_config.all_channel_subtypes.communication_limits_list[0].frequency #=> Integer
+    #   resp.communication_limits_config.all_channel_subtypes.communication_limits_list[0].unit #=> String, one of "DAY"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/GetInstanceCommunicationLimits AWS API Documentation
+    #
+    # @overload get_instance_communication_limits(params = {})
+    # @param [Hash] params ({})
+    def get_instance_communication_limits(params = {}, options = {})
+      req = build_request(:get_instance_communication_limits, params)
       req.send_request(options)
     end
 
@@ -1251,6 +1284,42 @@ module Aws::ConnectCampaignsV2
     # @param [Hash] params ({})
     def put_connect_instance_integration(params = {}, options = {})
       req = build_request(:put_connect_instance_integration, params)
+      req.send_request(options)
+    end
+
+    # Put the instance communication limits. This API is idempotent.
+    #
+    # @option params [required, String] :connect_instance_id
+    #   Amazon Connect Instance Id
+    #
+    # @option params [required, Types::InstanceCommunicationLimitsConfig] :communication_limits_config
+    #   Instance Communication limits config
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_instance_communication_limits({
+    #     connect_instance_id: "InstanceId", # required
+    #     communication_limits_config: { # required
+    #       all_channel_subtypes: {
+    #         communication_limits_list: [
+    #           {
+    #             max_count_per_recipient: 1, # required
+    #             frequency: 1, # required
+    #             unit: "DAY", # required, accepts DAY
+    #           },
+    #         ],
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/PutInstanceCommunicationLimits AWS API Documentation
+    #
+    # @overload put_instance_communication_limits(params = {})
+    # @param [Hash] params ({})
+    def put_instance_communication_limits(params = {}, options = {})
+      req = build_request(:put_instance_communication_limits, params)
       req.send_request(options)
     end
 
@@ -1633,6 +1702,7 @@ module Aws::ConnectCampaignsV2
     #           },
     #         ],
     #       },
+    #       instance_limits_handling: "OPT_IN", # accepts OPT_IN, OPT_OUT
     #     },
     #   })
     #
@@ -1872,7 +1942,7 @@ module Aws::ConnectCampaignsV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connectcampaignsv2'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.117.0 (2025-06-17)
+------------------
+
+* Feature - Add support for policy operations on the SECURITYHUB_POLICY policy type.
+
 1.116.0 (2025-06-02)
 ------------------
 

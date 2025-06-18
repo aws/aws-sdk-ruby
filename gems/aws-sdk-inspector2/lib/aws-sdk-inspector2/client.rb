@@ -508,6 +508,96 @@ module Aws::Inspector2
       req.send_request(options)
     end
 
+    # Associates multiple code repositories with an Amazon Inspector code
+    # security scan configuration.
+    #
+    # @option params [required, Array<Types::AssociateConfigurationRequest>] :associate_configuration_requests
+    #   A list of code repositories to associate with the specified scan
+    #   configuration.
+    #
+    # @return [Types::BatchAssociateCodeSecurityScanConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchAssociateCodeSecurityScanConfigurationResponse#failed_associations #failed_associations} => Array&lt;Types::FailedAssociationResult&gt;
+    #   * {Types::BatchAssociateCodeSecurityScanConfigurationResponse#successful_associations #successful_associations} => Array&lt;Types::SuccessfulAssociationResult&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_associate_code_security_scan_configuration({
+    #     associate_configuration_requests: [ # required
+    #       {
+    #         resource: { # required
+    #           project_id: "ProjectId",
+    #         },
+    #         scan_configuration_arn: "ScanConfigurationArn", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.failed_associations #=> Array
+    #   resp.failed_associations[0].resource.project_id #=> String
+    #   resp.failed_associations[0].scan_configuration_arn #=> String
+    #   resp.failed_associations[0].status_code #=> String, one of "INTERNAL_ERROR", "ACCESS_DENIED", "SCAN_CONFIGURATION_NOT_FOUND", "INVALID_INPUT", "RESOURCE_NOT_FOUND", "QUOTA_EXCEEDED"
+    #   resp.failed_associations[0].status_message #=> String
+    #   resp.successful_associations #=> Array
+    #   resp.successful_associations[0].resource.project_id #=> String
+    #   resp.successful_associations[0].scan_configuration_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/BatchAssociateCodeSecurityScanConfiguration AWS API Documentation
+    #
+    # @overload batch_associate_code_security_scan_configuration(params = {})
+    # @param [Hash] params ({})
+    def batch_associate_code_security_scan_configuration(params = {}, options = {})
+      req = build_request(:batch_associate_code_security_scan_configuration, params)
+      req.send_request(options)
+    end
+
+    # Disassociates multiple code repositories from an Amazon Inspector code
+    # security scan configuration.
+    #
+    # @option params [required, Array<Types::DisassociateConfigurationRequest>] :disassociate_configuration_requests
+    #   A list of code repositories to disassociate from the specified scan
+    #   configuration.
+    #
+    # @return [Types::BatchDisassociateCodeSecurityScanConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDisassociateCodeSecurityScanConfigurationResponse#failed_associations #failed_associations} => Array&lt;Types::FailedAssociationResult&gt;
+    #   * {Types::BatchDisassociateCodeSecurityScanConfigurationResponse#successful_associations #successful_associations} => Array&lt;Types::SuccessfulAssociationResult&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_disassociate_code_security_scan_configuration({
+    #     disassociate_configuration_requests: [ # required
+    #       {
+    #         resource: { # required
+    #           project_id: "ProjectId",
+    #         },
+    #         scan_configuration_arn: "ScanConfigurationArn", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.failed_associations #=> Array
+    #   resp.failed_associations[0].resource.project_id #=> String
+    #   resp.failed_associations[0].scan_configuration_arn #=> String
+    #   resp.failed_associations[0].status_code #=> String, one of "INTERNAL_ERROR", "ACCESS_DENIED", "SCAN_CONFIGURATION_NOT_FOUND", "INVALID_INPUT", "RESOURCE_NOT_FOUND", "QUOTA_EXCEEDED"
+    #   resp.failed_associations[0].status_message #=> String
+    #   resp.successful_associations #=> Array
+    #   resp.successful_associations[0].resource.project_id #=> String
+    #   resp.successful_associations[0].scan_configuration_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/BatchDisassociateCodeSecurityScanConfiguration AWS API Documentation
+    #
+    # @overload batch_disassociate_code_security_scan_configuration(params = {})
+    # @param [Hash] params ({})
+    def batch_disassociate_code_security_scan_configuration(params = {}, options = {})
+      req = build_request(:batch_disassociate_code_security_scan_configuration, params)
+      req.send_request(options)
+    end
+
     # Retrieves the Amazon Inspector status of multiple Amazon Web Services
     # accounts within your environment.
     #
@@ -530,6 +620,9 @@ module Aws::Inspector2
     #
     #   resp.accounts #=> Array
     #   resp.accounts[0].account_id #=> String
+    #   resp.accounts[0].resource_state.code_repository.error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED", "EC2_SSM_RESOURCE_DATA_SYNC_LIMIT_EXCEEDED", "EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED"
+    #   resp.accounts[0].resource_state.code_repository.error_message #=> String
+    #   resp.accounts[0].resource_state.code_repository.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.accounts[0].resource_state.ec2.error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED", "EC2_SSM_RESOURCE_DATA_SYNC_LIMIT_EXCEEDED", "EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED"
     #   resp.accounts[0].resource_state.ec2.error_message #=> String
     #   resp.accounts[0].resource_state.ec2.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
@@ -549,6 +642,7 @@ module Aws::Inspector2
     #   resp.failed_accounts[0].account_id #=> String
     #   resp.failed_accounts[0].error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED", "EC2_SSM_RESOURCE_DATA_SYNC_LIMIT_EXCEEDED", "EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED"
     #   resp.failed_accounts[0].error_message #=> String
+    #   resp.failed_accounts[0].resource_status.code_repository #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].resource_status.ec2 #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].resource_status.ecr #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].resource_status.lambda #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
@@ -685,7 +779,7 @@ module Aws::Inspector2
     #   resp.accounts[0].free_trial_info[0].end #=> Time
     #   resp.accounts[0].free_trial_info[0].start #=> Time
     #   resp.accounts[0].free_trial_info[0].status #=> String, one of "ACTIVE", "INACTIVE"
-    #   resp.accounts[0].free_trial_info[0].type #=> String, one of "EC2", "ECR", "LAMBDA", "LAMBDA_CODE"
+    #   resp.accounts[0].free_trial_info[0].type #=> String, one of "EC2", "ECR", "LAMBDA", "LAMBDA_CODE", "CODE_REPOSITORY"
     #   resp.failed_accounts #=> Array
     #   resp.failed_accounts[0].account_id #=> String
     #   resp.failed_accounts[0].code #=> String, one of "ACCESS_DENIED", "INTERNAL_ERROR"
@@ -708,7 +802,6 @@ module Aws::Inspector2
     # @option params [Array<String>] :account_ids
     #   The unique identifiers for the Amazon Web Services accounts to
     #   retrieve Amazon Inspector deep inspection activation status for.
-    #   </p>
     #
     # @return [Types::BatchGetMemberEc2DeepInspectionStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -917,6 +1010,127 @@ module Aws::Inspector2
       req.send_request(options)
     end
 
+    # Creates a code security integration with a source code repository
+    # provider.
+    #
+    # After calling the `CreateCodeSecurityIntegration` operation, you
+    # complete authentication and authorization with your provider. Next you
+    # call the `UpdateCodeSecurityIntegration` operation to provide the
+    # `details` to complete the integration setup
+    #
+    # @option params [Types::CreateIntegrationDetail] :details
+    #   The integration details specific to the repository provider type.
+    #
+    # @option params [required, String] :name
+    #   The name of the code security integration.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to apply to the code security integration.
+    #
+    # @option params [required, String] :type
+    #   The type of repository provider for the integration.
+    #
+    # @return [Types::CreateCodeSecurityIntegrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCodeSecurityIntegrationResponse#authorization_url #authorization_url} => String
+    #   * {Types::CreateCodeSecurityIntegrationResponse#integration_arn #integration_arn} => String
+    #   * {Types::CreateCodeSecurityIntegrationResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_code_security_integration({
+    #     details: {
+    #       gitlab_self_managed: {
+    #         access_token: "GitLabAccessToken", # required
+    #         instance_url: "InstanceUrl", # required
+    #       },
+    #     },
+    #     name: "IntegrationName", # required
+    #     tags: {
+    #       "MapKey" => "MapValue",
+    #     },
+    #     type: "GITLAB_SELF_MANAGED", # required, accepts GITLAB_SELF_MANAGED, GITHUB
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.authorization_url #=> String
+    #   resp.integration_arn #=> String
+    #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE", "INACTIVE", "DISABLING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CreateCodeSecurityIntegration AWS API Documentation
+    #
+    # @overload create_code_security_integration(params = {})
+    # @param [Hash] params ({})
+    def create_code_security_integration(params = {}, options = {})
+      req = build_request(:create_code_security_integration, params)
+      req.send_request(options)
+    end
+
+    # Creates a scan configuration for code security scanning.
+    #
+    # @option params [required, Types::CodeSecurityScanConfiguration] :configuration
+    #   The configuration settings for the code security scan.
+    #
+    # @option params [required, String] :level
+    #   The security level for the scan configuration.
+    #
+    # @option params [required, String] :name
+    #   The name of the scan configuration.
+    #
+    # @option params [Types::ScopeSettings] :scope_settings
+    #   The scope settings that define which repositories will be scanned.
+    #   Include this parameter to create a default scan configuration.
+    #   Otherwise Amazon Inspector creates a general scan configuration.
+    #
+    #   A default scan configuration automatically applies to all existing and
+    #   future projects imported into Amazon Inspector. Use the
+    #   `BatchAssociateCodeSecurityScanConfiguration` operation to associate a
+    #   general scan configuration with projects.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to apply to the scan configuration.
+    #
+    # @return [Types::CreateCodeSecurityScanConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCodeSecurityScanConfigurationResponse#scan_configuration_arn #scan_configuration_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_code_security_scan_configuration({
+    #     configuration: { # required
+    #       continuous_integration_scan_configuration: {
+    #         supported_events: ["PULL_REQUEST"], # required, accepts PULL_REQUEST, PUSH
+    #       },
+    #       periodic_scan_configuration: {
+    #         frequency: "WEEKLY", # accepts WEEKLY, MONTHLY, NEVER
+    #         frequency_expression: "FrequencyExpression",
+    #       },
+    #       rule_set_categories: ["SAST"], # required, accepts SAST, IAC, SCA
+    #     },
+    #     level: "ORGANIZATION", # required, accepts ORGANIZATION, ACCOUNT
+    #     name: "ScanConfigurationName", # required
+    #     scope_settings: {
+    #       project_selection_scope: "ALL", # accepts ALL
+    #     },
+    #     tags: {
+    #       "MapKey" => "MapValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scan_configuration_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CreateCodeSecurityScanConfiguration AWS API Documentation
+    #
+    # @overload create_code_security_scan_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_code_security_scan_configuration(params = {}, options = {})
+      req = build_request(:create_code_security_scan_configuration, params)
+      req.send_request(options)
+    end
+
     # Creates a filter resource using specified filter criteria. When the
     # filter action is set to `SUPPRESS` this action creates a suppression
     # rule.
@@ -953,6 +1167,18 @@ module Aws::Inspector2
     #     description: "FilterDescription",
     #     filter_criteria: { # required
     #       aws_account_id: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       code_repository_project_name: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       code_repository_provider_type: [
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #           value: "StringInput", # required
@@ -1290,6 +1516,18 @@ module Aws::Inspector2
     #   resp = client.create_findings_report({
     #     filter_criteria: {
     #       aws_account_id: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       code_repository_project_name: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       code_repository_provider_type: [
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #           value: "StringInput", # required
@@ -1727,6 +1965,63 @@ module Aws::Inspector2
       req.send_request(options)
     end
 
+    # Deletes a code security integration.
+    #
+    # @option params [required, String] :integration_arn
+    #   The Amazon Resource Name (ARN) of the code security integration to
+    #   delete.
+    #
+    # @return [Types::DeleteCodeSecurityIntegrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteCodeSecurityIntegrationResponse#integration_arn #integration_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_code_security_integration({
+    #     integration_arn: "CodeSecurityIntegrationArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.integration_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/DeleteCodeSecurityIntegration AWS API Documentation
+    #
+    # @overload delete_code_security_integration(params = {})
+    # @param [Hash] params ({})
+    def delete_code_security_integration(params = {}, options = {})
+      req = build_request(:delete_code_security_integration, params)
+      req.send_request(options)
+    end
+
+    # Deletes a code security scan configuration.
+    #
+    # @option params [required, String] :scan_configuration_arn
+    #   The Amazon Resource Name (ARN) of the scan configuration to delete.
+    #
+    # @return [Types::DeleteCodeSecurityScanConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteCodeSecurityScanConfigurationResponse#scan_configuration_arn #scan_configuration_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_code_security_scan_configuration({
+    #     scan_configuration_arn: "ScanConfigurationArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scan_configuration_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/DeleteCodeSecurityScanConfiguration AWS API Documentation
+    #
+    # @overload delete_code_security_scan_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_code_security_scan_configuration(params = {}, options = {})
+      req = build_request(:delete_code_security_scan_configuration, params)
+      req.send_request(options)
+    end
+
     # Deletes a filter resource.
     #
     # @option params [required, String] :arn
@@ -1765,6 +2060,7 @@ module Aws::Inspector2
     #
     # @example Response structure
     #
+    #   resp.auto_enable.code_repository #=> Boolean
     #   resp.auto_enable.ec2 #=> Boolean
     #   resp.auto_enable.ecr #=> Boolean
     #   resp.auto_enable.lambda #=> Boolean
@@ -1800,13 +2096,14 @@ module Aws::Inspector2
     #
     #   resp = client.disable({
     #     account_ids: ["AccountId"],
-    #     resource_types: ["EC2"], # accepts EC2, ECR, LAMBDA, LAMBDA_CODE
+    #     resource_types: ["EC2"], # accepts EC2, ECR, LAMBDA, LAMBDA_CODE, CODE_REPOSITORY
     #   })
     #
     # @example Response structure
     #
     #   resp.accounts #=> Array
     #   resp.accounts[0].account_id #=> String
+    #   resp.accounts[0].resource_status.code_repository #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.accounts[0].resource_status.ec2 #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.accounts[0].resource_status.ecr #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.accounts[0].resource_status.lambda #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
@@ -1816,6 +2113,7 @@ module Aws::Inspector2
     #   resp.failed_accounts[0].account_id #=> String
     #   resp.failed_accounts[0].error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED", "EC2_SSM_RESOURCE_DATA_SYNC_LIMIT_EXCEEDED", "EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED"
     #   resp.failed_accounts[0].error_message #=> String
+    #   resp.failed_accounts[0].resource_status.code_repository #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].resource_status.ec2 #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].resource_status.ecr #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].resource_status.lambda #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
@@ -1916,13 +2214,14 @@ module Aws::Inspector2
     #   resp = client.enable({
     #     account_ids: ["AccountId"],
     #     client_token: "ClientToken",
-    #     resource_types: ["EC2"], # required, accepts EC2, ECR, LAMBDA, LAMBDA_CODE
+    #     resource_types: ["EC2"], # required, accepts EC2, ECR, LAMBDA, LAMBDA_CODE, CODE_REPOSITORY
     #   })
     #
     # @example Response structure
     #
     #   resp.accounts #=> Array
     #   resp.accounts[0].account_id #=> String
+    #   resp.accounts[0].resource_status.code_repository #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.accounts[0].resource_status.ec2 #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.accounts[0].resource_status.ecr #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.accounts[0].resource_status.lambda #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
@@ -1932,6 +2231,7 @@ module Aws::Inspector2
     #   resp.failed_accounts[0].account_id #=> String
     #   resp.failed_accounts[0].error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED", "EC2_SSM_RESOURCE_DATA_SYNC_LIMIT_EXCEEDED", "EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED"
     #   resp.failed_accounts[0].error_message #=> String
+    #   resp.failed_accounts[0].resource_status.code_repository #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].resource_status.ec2 #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].resource_status.ecr #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].resource_status.lambda #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
@@ -2183,6 +2483,154 @@ module Aws::Inspector2
       req.send_request(options)
     end
 
+    # Retrieves information about a code security integration.
+    #
+    # @option params [required, String] :integration_arn
+    #   The Amazon Resource Name (ARN) of the code security integration to
+    #   retrieve.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags associated with the code security integration.
+    #
+    # @return [Types::GetCodeSecurityIntegrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCodeSecurityIntegrationResponse#authorization_url #authorization_url} => String
+    #   * {Types::GetCodeSecurityIntegrationResponse#created_on #created_on} => Time
+    #   * {Types::GetCodeSecurityIntegrationResponse#integration_arn #integration_arn} => String
+    #   * {Types::GetCodeSecurityIntegrationResponse#last_update_on #last_update_on} => Time
+    #   * {Types::GetCodeSecurityIntegrationResponse#name #name} => String
+    #   * {Types::GetCodeSecurityIntegrationResponse#status #status} => String
+    #   * {Types::GetCodeSecurityIntegrationResponse#status_reason #status_reason} => String
+    #   * {Types::GetCodeSecurityIntegrationResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetCodeSecurityIntegrationResponse#type #type} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_code_security_integration({
+    #     integration_arn: "CodeSecurityIntegrationArn", # required
+    #     tags: {
+    #       "MapKey" => "MapValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.authorization_url #=> String
+    #   resp.created_on #=> Time
+    #   resp.integration_arn #=> String
+    #   resp.last_update_on #=> Time
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE", "INACTIVE", "DISABLING"
+    #   resp.status_reason #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["MapKey"] #=> String
+    #   resp.type #=> String, one of "GITLAB_SELF_MANAGED", "GITHUB"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetCodeSecurityIntegration AWS API Documentation
+    #
+    # @overload get_code_security_integration(params = {})
+    # @param [Hash] params ({})
+    def get_code_security_integration(params = {}, options = {})
+      req = build_request(:get_code_security_integration, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a specific code security scan.
+    #
+    # @option params [required, Types::CodeSecurityResource] :resource
+    #   The resource identifier for the code repository that was scanned.
+    #
+    # @option params [required, String] :scan_id
+    #   The unique identifier of the scan to retrieve.
+    #
+    # @return [Types::GetCodeSecurityScanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCodeSecurityScanResponse#account_id #account_id} => String
+    #   * {Types::GetCodeSecurityScanResponse#created_at #created_at} => Time
+    #   * {Types::GetCodeSecurityScanResponse#last_commit_id #last_commit_id} => String
+    #   * {Types::GetCodeSecurityScanResponse#resource #resource} => Types::CodeSecurityResource
+    #   * {Types::GetCodeSecurityScanResponse#scan_id #scan_id} => String
+    #   * {Types::GetCodeSecurityScanResponse#status #status} => String
+    #   * {Types::GetCodeSecurityScanResponse#status_reason #status_reason} => String
+    #   * {Types::GetCodeSecurityScanResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_code_security_scan({
+    #     resource: { # required
+    #       project_id: "ProjectId",
+    #     },
+    #     scan_id: "CodeSecurityUuid", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_id #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_commit_id #=> String
+    #   resp.resource.project_id #=> String
+    #   resp.scan_id #=> String
+    #   resp.status #=> String, one of "IN_PROGRESS", "SUCCESSFUL", "FAILED", "SKIPPED"
+    #   resp.status_reason #=> String
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetCodeSecurityScan AWS API Documentation
+    #
+    # @overload get_code_security_scan(params = {})
+    # @param [Hash] params ({})
+    def get_code_security_scan(params = {}, options = {})
+      req = build_request(:get_code_security_scan, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a code security scan configuration.
+    #
+    # @option params [required, String] :scan_configuration_arn
+    #   The Amazon Resource Name (ARN) of the scan configuration to retrieve.
+    #
+    # @return [Types::GetCodeSecurityScanConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCodeSecurityScanConfigurationResponse#configuration #configuration} => Types::CodeSecurityScanConfiguration
+    #   * {Types::GetCodeSecurityScanConfigurationResponse#created_at #created_at} => Time
+    #   * {Types::GetCodeSecurityScanConfigurationResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::GetCodeSecurityScanConfigurationResponse#level #level} => String
+    #   * {Types::GetCodeSecurityScanConfigurationResponse#name #name} => String
+    #   * {Types::GetCodeSecurityScanConfigurationResponse#scan_configuration_arn #scan_configuration_arn} => String
+    #   * {Types::GetCodeSecurityScanConfigurationResponse#scope_settings #scope_settings} => Types::ScopeSettings
+    #   * {Types::GetCodeSecurityScanConfigurationResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_code_security_scan_configuration({
+    #     scan_configuration_arn: "ScanConfigurationArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configuration.continuous_integration_scan_configuration.supported_events #=> Array
+    #   resp.configuration.continuous_integration_scan_configuration.supported_events[0] #=> String, one of "PULL_REQUEST", "PUSH"
+    #   resp.configuration.periodic_scan_configuration.frequency #=> String, one of "WEEKLY", "MONTHLY", "NEVER"
+    #   resp.configuration.periodic_scan_configuration.frequency_expression #=> String
+    #   resp.configuration.rule_set_categories #=> Array
+    #   resp.configuration.rule_set_categories[0] #=> String, one of "SAST", "IAC", "SCA"
+    #   resp.created_at #=> Time
+    #   resp.last_updated_at #=> Time
+    #   resp.level #=> String, one of "ORGANIZATION", "ACCOUNT"
+    #   resp.name #=> String
+    #   resp.scan_configuration_arn #=> String
+    #   resp.scope_settings.project_selection_scope #=> String, one of "ALL"
+    #   resp.tags #=> Hash
+    #   resp.tags["MapKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetCodeSecurityScanConfiguration AWS API Documentation
+    #
+    # @overload get_code_security_scan_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_code_security_scan_configuration(params = {}, options = {})
+      req = build_request(:get_code_security_scan_configuration, params)
+      req.send_request(options)
+    end
+
     # Retrieves setting configurations for Inspector scans.
     #
     # @return [Types::GetConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2273,7 +2721,7 @@ module Aws::Inspector2
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_encryption_key({
-    #     resource_type: "AWS_EC2_INSTANCE", # required, accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_ECR_REPOSITORY, AWS_LAMBDA_FUNCTION
+    #     resource_type: "AWS_EC2_INSTANCE", # required, accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_ECR_REPOSITORY, AWS_LAMBDA_FUNCTION, CODE_REPOSITORY
     #     scan_type: "NETWORK", # required, accepts NETWORK, PACKAGE, CODE
     #   })
     #
@@ -2320,6 +2768,12 @@ module Aws::Inspector2
     #   resp.filter_criteria.aws_account_id #=> Array
     #   resp.filter_criteria.aws_account_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filter_criteria.aws_account_id[0].value #=> String
+    #   resp.filter_criteria.code_repository_project_name #=> Array
+    #   resp.filter_criteria.code_repository_project_name[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filter_criteria.code_repository_project_name[0].value #=> String
+    #   resp.filter_criteria.code_repository_provider_type #=> Array
+    #   resp.filter_criteria.code_repository_provider_type[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filter_criteria.code_repository_provider_type[0].value #=> String
     #   resp.filter_criteria.code_vulnerability_detector_name #=> Array
     #   resp.filter_criteria.code_vulnerability_detector_name[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filter_criteria.code_vulnerability_detector_name[0].value #=> String
@@ -3067,6 +3521,149 @@ module Aws::Inspector2
       req.send_request(options)
     end
 
+    # Lists all code security integrations in your account.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the NextToken value returned from
+    #   the previous request to continue listing results after the first page.
+    #
+    # @return [Types::ListCodeSecurityIntegrationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCodeSecurityIntegrationsResponse#integrations #integrations} => Array&lt;Types::CodeSecurityIntegrationSummary&gt;
+    #   * {Types::ListCodeSecurityIntegrationsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_code_security_integrations({
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.integrations #=> Array
+    #   resp.integrations[0].created_on #=> Time
+    #   resp.integrations[0].integration_arn #=> String
+    #   resp.integrations[0].last_update_on #=> Time
+    #   resp.integrations[0].name #=> String
+    #   resp.integrations[0].status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE", "INACTIVE", "DISABLING"
+    #   resp.integrations[0].status_reason #=> String
+    #   resp.integrations[0].tags #=> Hash
+    #   resp.integrations[0].tags["MapKey"] #=> String
+    #   resp.integrations[0].type #=> String, one of "GITLAB_SELF_MANAGED", "GITHUB"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListCodeSecurityIntegrations AWS API Documentation
+    #
+    # @overload list_code_security_integrations(params = {})
+    # @param [Hash] params ({})
+    def list_code_security_integrations(params = {}, options = {})
+      req = build_request(:list_code_security_integrations, params)
+      req.send_request(options)
+    end
+
+    # Lists the associations between code repositories and Amazon Inspector
+    # code security scan configurations.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response. If your
+    #   request would return more than the maximum the response will return a
+    #   `nextToken` value, use this value when you call the action again to
+    #   get the remaining results.
+    #
+    # @option params [String] :next_token
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request to a list action. For subsequent calls, use the `NextToken`
+    #   value returned from the previous request to continue listing results
+    #   after the first page.
+    #
+    # @option params [required, String] :scan_configuration_arn
+    #   The Amazon Resource Name (ARN) of the scan configuration to list
+    #   associations for.
+    #
+    # @return [Types::ListCodeSecurityScanConfigurationAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCodeSecurityScanConfigurationAssociationsResponse#associations #associations} => Array&lt;Types::CodeSecurityScanConfigurationAssociationSummary&gt;
+    #   * {Types::ListCodeSecurityScanConfigurationAssociationsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_code_security_scan_configuration_associations({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     scan_configuration_arn: "ScanConfigurationArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.associations #=> Array
+    #   resp.associations[0].resource.project_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListCodeSecurityScanConfigurationAssociations AWS API Documentation
+    #
+    # @overload list_code_security_scan_configuration_associations(params = {})
+    # @param [Hash] params ({})
+    def list_code_security_scan_configuration_associations(params = {}, options = {})
+      req = build_request(:list_code_security_scan_configuration_associations, params)
+      req.send_request(options)
+    end
+
+    # Lists all code security scan configurations in your account.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the NextToken value returned from
+    #   the previous request to continue listing results after the first page.
+    #
+    # @return [Types::ListCodeSecurityScanConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCodeSecurityScanConfigurationsResponse#configurations #configurations} => Array&lt;Types::CodeSecurityScanConfigurationSummary&gt;
+    #   * {Types::ListCodeSecurityScanConfigurationsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_code_security_scan_configurations({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configurations #=> Array
+    #   resp.configurations[0].continuous_integration_scan_supported_events #=> Array
+    #   resp.configurations[0].continuous_integration_scan_supported_events[0] #=> String, one of "PULL_REQUEST", "PUSH"
+    #   resp.configurations[0].frequency_expression #=> String
+    #   resp.configurations[0].name #=> String
+    #   resp.configurations[0].owner_account_id #=> String
+    #   resp.configurations[0].periodic_scan_frequency #=> String, one of "WEEKLY", "MONTHLY", "NEVER"
+    #   resp.configurations[0].rule_set_categories #=> Array
+    #   resp.configurations[0].rule_set_categories[0] #=> String, one of "SAST", "IAC", "SCA"
+    #   resp.configurations[0].scan_configuration_arn #=> String
+    #   resp.configurations[0].scope_settings.project_selection_scope #=> String, one of "ALL"
+    #   resp.configurations[0].tags #=> Hash
+    #   resp.configurations[0].tags["MapKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListCodeSecurityScanConfigurations AWS API Documentation
+    #
+    # @overload list_code_security_scan_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_code_security_scan_configurations(params = {}, options = {})
+      req = build_request(:list_code_security_scan_configurations, params)
+      req.send_request(options)
+    end
+
     # Lists coverage details for your environment.
     #
     # @option params [Types::CoverageFilterCriteria] :filter_criteria
@@ -3099,6 +3696,24 @@ module Aws::Inspector2
     #   resp = client.list_coverage({
     #     filter_criteria: {
     #       account_id: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #           value: "CoverageStringInput", # required
+    #         },
+    #       ],
+    #       code_repository_project_name: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #           value: "CoverageStringInput", # required
+    #         },
+    #       ],
+    #       code_repository_provider_type: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #           value: "CoverageStringInput", # required
+    #         },
+    #       ],
+    #       code_repository_provider_type_visibility: [
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
     #           value: "CoverageStringInput", # required
@@ -3164,6 +3779,12 @@ module Aws::Inspector2
     #         {
     #           end_inclusive: Time.now,
     #           start_inclusive: Time.now,
+    #         },
+    #       ],
+    #       last_scanned_commit_id: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #           value: "CoverageStringInput", # required
     #         },
     #       ],
     #       resource_id: [
@@ -3213,6 +3834,23 @@ module Aws::Inspector2
     #   resp.covered_resources[0].account_id #=> String
     #   resp.covered_resources[0].last_scanned_at #=> Time
     #   resp.covered_resources[0].resource_id #=> String
+    #   resp.covered_resources[0].resource_metadata.code_repository.integration_arn #=> String
+    #   resp.covered_resources[0].resource_metadata.code_repository.last_scanned_commit_id #=> String
+    #   resp.covered_resources[0].resource_metadata.code_repository.on_demand_scan.last_scan_at #=> Time
+    #   resp.covered_resources[0].resource_metadata.code_repository.on_demand_scan.last_scanned_commit_id #=> String
+    #   resp.covered_resources[0].resource_metadata.code_repository.on_demand_scan.scan_status.reason #=> String, one of "PENDING_INITIAL_SCAN", "ACCESS_DENIED", "INTERNAL_ERROR", "UNMANAGED_EC2_INSTANCE", "UNSUPPORTED_OS", "SCAN_ELIGIBILITY_EXPIRED", "RESOURCE_TERMINATED", "SUCCESSFUL", "NO_RESOURCES_FOUND", "IMAGE_SIZE_EXCEEDED", "SCAN_FREQUENCY_MANUAL", "SCAN_FREQUENCY_SCAN_ON_PUSH", "EC2_INSTANCE_STOPPED", "PENDING_DISABLE", "NO_INVENTORY", "STALE_INVENTORY", "EXCLUDED_BY_TAG", "UNSUPPORTED_RUNTIME", "UNSUPPORTED_MEDIA_TYPE", "UNSUPPORTED_CONFIG_FILE", "DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED", "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED", "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED", "DEEP_INSPECTION_NO_INVENTORY", "AGENTLESS_INSTANCE_STORAGE_LIMIT_EXCEEDED", "AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED", "PENDING_REVIVAL_SCAN", "INTEGRATION_CONNECTION_LOST", "ACCESS_DENIED_TO_ENCRYPTION_KEY", "UNSUPPORTED_LANGUAGE", "NO_SCAN_CONFIGURATION_ASSOCIATED", "SCAN_IN_PROGRESS"
+    #   resp.covered_resources[0].resource_metadata.code_repository.on_demand_scan.scan_status.status_code #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.covered_resources[0].resource_metadata.code_repository.project_name #=> String
+    #   resp.covered_resources[0].resource_metadata.code_repository.provider_type #=> String
+    #   resp.covered_resources[0].resource_metadata.code_repository.provider_type_visibility #=> String
+    #   resp.covered_resources[0].resource_metadata.code_repository.scan_configuration.continuous_integration_scan_configurations #=> Array
+    #   resp.covered_resources[0].resource_metadata.code_repository.scan_configuration.continuous_integration_scan_configurations[0].rule_set_categories #=> Array
+    #   resp.covered_resources[0].resource_metadata.code_repository.scan_configuration.continuous_integration_scan_configurations[0].rule_set_categories[0] #=> String, one of "SAST", "IAC", "SCA"
+    #   resp.covered_resources[0].resource_metadata.code_repository.scan_configuration.continuous_integration_scan_configurations[0].supported_event #=> String, one of "PULL_REQUEST", "PUSH"
+    #   resp.covered_resources[0].resource_metadata.code_repository.scan_configuration.periodic_scan_configurations #=> Array
+    #   resp.covered_resources[0].resource_metadata.code_repository.scan_configuration.periodic_scan_configurations[0].frequency_expression #=> String
+    #   resp.covered_resources[0].resource_metadata.code_repository.scan_configuration.periodic_scan_configurations[0].rule_set_categories #=> Array
+    #   resp.covered_resources[0].resource_metadata.code_repository.scan_configuration.periodic_scan_configurations[0].rule_set_categories[0] #=> String, one of "SAST", "IAC", "SCA"
     #   resp.covered_resources[0].resource_metadata.ec2.ami_id #=> String
     #   resp.covered_resources[0].resource_metadata.ec2.platform #=> String, one of "WINDOWS", "LINUX", "UNKNOWN", "MACOS"
     #   resp.covered_resources[0].resource_metadata.ec2.tags #=> Hash
@@ -3230,9 +3868,9 @@ module Aws::Inspector2
     #   resp.covered_resources[0].resource_metadata.lambda_function.layers #=> Array
     #   resp.covered_resources[0].resource_metadata.lambda_function.layers[0] #=> String
     #   resp.covered_resources[0].resource_metadata.lambda_function.runtime #=> String, one of "NODEJS", "NODEJS_12_X", "NODEJS_14_X", "NODEJS_16_X", "JAVA_8", "JAVA_8_AL2", "JAVA_11", "PYTHON_3_7", "PYTHON_3_8", "PYTHON_3_9", "UNSUPPORTED", "NODEJS_18_X", "GO_1_X", "JAVA_17", "PYTHON_3_10", "PYTHON_3_11", "DOTNETCORE_3_1", "DOTNET_6", "DOTNET_7", "RUBY_2_7", "RUBY_3_2"
-    #   resp.covered_resources[0].resource_type #=> String, one of "AWS_EC2_INSTANCE", "AWS_ECR_CONTAINER_IMAGE", "AWS_ECR_REPOSITORY", "AWS_LAMBDA_FUNCTION"
+    #   resp.covered_resources[0].resource_type #=> String, one of "AWS_EC2_INSTANCE", "AWS_ECR_CONTAINER_IMAGE", "AWS_ECR_REPOSITORY", "AWS_LAMBDA_FUNCTION", "CODE_REPOSITORY"
     #   resp.covered_resources[0].scan_mode #=> String, one of "EC2_SSM_AGENT_BASED", "EC2_AGENTLESS"
-    #   resp.covered_resources[0].scan_status.reason #=> String, one of "PENDING_INITIAL_SCAN", "ACCESS_DENIED", "INTERNAL_ERROR", "UNMANAGED_EC2_INSTANCE", "UNSUPPORTED_OS", "SCAN_ELIGIBILITY_EXPIRED", "RESOURCE_TERMINATED", "SUCCESSFUL", "NO_RESOURCES_FOUND", "IMAGE_SIZE_EXCEEDED", "SCAN_FREQUENCY_MANUAL", "SCAN_FREQUENCY_SCAN_ON_PUSH", "EC2_INSTANCE_STOPPED", "PENDING_DISABLE", "NO_INVENTORY", "STALE_INVENTORY", "EXCLUDED_BY_TAG", "UNSUPPORTED_RUNTIME", "UNSUPPORTED_MEDIA_TYPE", "UNSUPPORTED_CONFIG_FILE", "DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED", "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED", "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED", "DEEP_INSPECTION_NO_INVENTORY", "AGENTLESS_INSTANCE_STORAGE_LIMIT_EXCEEDED", "AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED", "PENDING_REVIVAL_SCAN"
+    #   resp.covered_resources[0].scan_status.reason #=> String, one of "PENDING_INITIAL_SCAN", "ACCESS_DENIED", "INTERNAL_ERROR", "UNMANAGED_EC2_INSTANCE", "UNSUPPORTED_OS", "SCAN_ELIGIBILITY_EXPIRED", "RESOURCE_TERMINATED", "SUCCESSFUL", "NO_RESOURCES_FOUND", "IMAGE_SIZE_EXCEEDED", "SCAN_FREQUENCY_MANUAL", "SCAN_FREQUENCY_SCAN_ON_PUSH", "EC2_INSTANCE_STOPPED", "PENDING_DISABLE", "NO_INVENTORY", "STALE_INVENTORY", "EXCLUDED_BY_TAG", "UNSUPPORTED_RUNTIME", "UNSUPPORTED_MEDIA_TYPE", "UNSUPPORTED_CONFIG_FILE", "DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED", "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED", "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED", "DEEP_INSPECTION_NO_INVENTORY", "AGENTLESS_INSTANCE_STORAGE_LIMIT_EXCEEDED", "AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED", "PENDING_REVIVAL_SCAN", "INTEGRATION_CONNECTION_LOST", "ACCESS_DENIED_TO_ENCRYPTION_KEY", "UNSUPPORTED_LANGUAGE", "NO_SCAN_CONFIGURATION_ASSOCIATED", "SCAN_IN_PROGRESS"
     #   resp.covered_resources[0].scan_status.status_code #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.covered_resources[0].scan_type #=> String, one of "NETWORK", "PACKAGE", "CODE"
     #   resp.next_token #=> String
@@ -3275,6 +3913,24 @@ module Aws::Inspector2
     #   resp = client.list_coverage_statistics({
     #     filter_criteria: {
     #       account_id: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #           value: "CoverageStringInput", # required
+    #         },
+    #       ],
+    #       code_repository_project_name: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #           value: "CoverageStringInput", # required
+    #         },
+    #       ],
+    #       code_repository_provider_type: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #           value: "CoverageStringInput", # required
+    #         },
+    #       ],
+    #       code_repository_provider_type_visibility: [
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
     #           value: "CoverageStringInput", # required
@@ -3340,6 +3996,12 @@ module Aws::Inspector2
     #         {
     #           end_inclusive: Time.now,
     #           start_inclusive: Time.now,
+    #         },
+    #       ],
+    #       last_scanned_commit_id: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
+    #           value: "CoverageStringInput", # required
     #         },
     #       ],
     #       resource_id: [
@@ -3494,6 +4156,12 @@ module Aws::Inspector2
     #   resp.filters[0].criteria.aws_account_id #=> Array
     #   resp.filters[0].criteria.aws_account_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filters[0].criteria.aws_account_id[0].value #=> String
+    #   resp.filters[0].criteria.code_repository_project_name #=> Array
+    #   resp.filters[0].criteria.code_repository_project_name[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filters[0].criteria.code_repository_project_name[0].value #=> String
+    #   resp.filters[0].criteria.code_repository_provider_type #=> Array
+    #   resp.filters[0].criteria.code_repository_provider_type[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filters[0].criteria.code_repository_provider_type[0].value #=> String
     #   resp.filters[0].criteria.code_vulnerability_detector_name #=> Array
     #   resp.filters[0].criteria.code_vulnerability_detector_name[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filters[0].criteria.code_vulnerability_detector_name[0].value #=> String
@@ -3764,6 +4432,28 @@ module Aws::Inspector2
     #         sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
     #         sort_order: "ASC", # accepts ASC, DESC
     #       },
+    #       code_repository_aggregation: {
+    #         project_names: [
+    #           {
+    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #             value: "StringInput", # required
+    #           },
+    #         ],
+    #         provider_types: [
+    #           {
+    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #             value: "StringInput", # required
+    #           },
+    #         ],
+    #         resource_ids: [
+    #           {
+    #             comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #             value: "StringInput", # required
+    #           },
+    #         ],
+    #         sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL
+    #         sort_order: "ASC", # accepts ASC, DESC
+    #       },
     #       ec2_instance_aggregation: {
     #         amis: [
     #           {
@@ -3911,14 +4601,14 @@ module Aws::Inspector2
     #         ],
     #       },
     #     },
-    #     aggregation_type: "FINDING_TYPE", # required, accepts FINDING_TYPE, PACKAGE, TITLE, REPOSITORY, AMI, AWS_EC2_INSTANCE, AWS_ECR_CONTAINER, IMAGE_LAYER, ACCOUNT, AWS_LAMBDA_FUNCTION, LAMBDA_LAYER
+    #     aggregation_type: "FINDING_TYPE", # required, accepts FINDING_TYPE, PACKAGE, TITLE, REPOSITORY, AMI, AWS_EC2_INSTANCE, AWS_ECR_CONTAINER, IMAGE_LAYER, ACCOUNT, AWS_LAMBDA_FUNCTION, LAMBDA_LAYER, CODE_REPOSITORY
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
     #
-    #   resp.aggregation_type #=> String, one of "FINDING_TYPE", "PACKAGE", "TITLE", "REPOSITORY", "AMI", "AWS_EC2_INSTANCE", "AWS_ECR_CONTAINER", "IMAGE_LAYER", "ACCOUNT", "AWS_LAMBDA_FUNCTION", "LAMBDA_LAYER"
+    #   resp.aggregation_type #=> String, one of "FINDING_TYPE", "PACKAGE", "TITLE", "REPOSITORY", "AMI", "AWS_EC2_INSTANCE", "AWS_ECR_CONTAINER", "IMAGE_LAYER", "ACCOUNT", "AWS_LAMBDA_FUNCTION", "LAMBDA_LAYER", "CODE_REPOSITORY"
     #   resp.next_token #=> String
     #   resp.responses #=> Array
     #   resp.responses[0].account_aggregation.account_id #=> String
@@ -3948,6 +4638,16 @@ module Aws::Inspector2
     #   resp.responses[0].aws_ecr_container_aggregation.severity_counts.critical #=> Integer
     #   resp.responses[0].aws_ecr_container_aggregation.severity_counts.high #=> Integer
     #   resp.responses[0].aws_ecr_container_aggregation.severity_counts.medium #=> Integer
+    #   resp.responses[0].code_repository_aggregation.account_id #=> String
+    #   resp.responses[0].code_repository_aggregation.exploit_available_active_findings_count #=> Integer
+    #   resp.responses[0].code_repository_aggregation.fix_available_active_findings_count #=> Integer
+    #   resp.responses[0].code_repository_aggregation.project_names #=> String
+    #   resp.responses[0].code_repository_aggregation.provider_type #=> String
+    #   resp.responses[0].code_repository_aggregation.resource_id #=> String
+    #   resp.responses[0].code_repository_aggregation.severity_counts.all #=> Integer
+    #   resp.responses[0].code_repository_aggregation.severity_counts.critical #=> Integer
+    #   resp.responses[0].code_repository_aggregation.severity_counts.high #=> Integer
+    #   resp.responses[0].code_repository_aggregation.severity_counts.medium #=> Integer
     #   resp.responses[0].ec2_instance_aggregation.account_id #=> String
     #   resp.responses[0].ec2_instance_aggregation.ami #=> String
     #   resp.responses[0].ec2_instance_aggregation.instance_id #=> String
@@ -4057,6 +4757,18 @@ module Aws::Inspector2
     #   resp = client.list_findings({
     #     filter_criteria: {
     #       aws_account_id: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       code_repository_project_name: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       code_repository_provider_type: [
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #           value: "StringInput", # required
@@ -4471,12 +5183,15 @@ module Aws::Inspector2
     #   resp.findings[0].resources[0].details.aws_lambda_function.vpc_config.subnet_ids #=> Array
     #   resp.findings[0].resources[0].details.aws_lambda_function.vpc_config.subnet_ids[0] #=> String
     #   resp.findings[0].resources[0].details.aws_lambda_function.vpc_config.vpc_id #=> String
+    #   resp.findings[0].resources[0].details.code_repository.integration_arn #=> String
+    #   resp.findings[0].resources[0].details.code_repository.project_name #=> String
+    #   resp.findings[0].resources[0].details.code_repository.provider_type #=> String, one of "GITHUB", "GITLAB_SELF_MANAGED"
     #   resp.findings[0].resources[0].id #=> String
     #   resp.findings[0].resources[0].partition #=> String
     #   resp.findings[0].resources[0].region #=> String
     #   resp.findings[0].resources[0].tags #=> Hash
     #   resp.findings[0].resources[0].tags["MapKey"] #=> String
-    #   resp.findings[0].resources[0].type #=> String, one of "AWS_EC2_INSTANCE", "AWS_ECR_CONTAINER_IMAGE", "AWS_ECR_REPOSITORY", "AWS_LAMBDA_FUNCTION"
+    #   resp.findings[0].resources[0].type #=> String, one of "AWS_EC2_INSTANCE", "AWS_ECR_CONTAINER_IMAGE", "AWS_ECR_REPOSITORY", "AWS_LAMBDA_FUNCTION", "CODE_REPOSITORY"
     #   resp.findings[0].severity #=> String, one of "INFORMATIONAL", "LOW", "MEDIUM", "HIGH", "CRITICAL", "UNTRIAGED"
     #   resp.findings[0].status #=> String, one of "ACTIVE", "SUPPRESSED", "CLOSED"
     #   resp.findings[0].title #=> String
@@ -4619,7 +5334,7 @@ module Aws::Inspector2
     #   resp.totals[0].usage[0].currency #=> String, one of "USD"
     #   resp.totals[0].usage[0].estimated_monthly_cost #=> Float
     #   resp.totals[0].usage[0].total #=> Float
-    #   resp.totals[0].usage[0].type #=> String, one of "EC2_INSTANCE_HOURS", "ECR_INITIAL_SCAN", "ECR_RESCAN", "LAMBDA_FUNCTION_HOURS", "LAMBDA_FUNCTION_CODE_HOURS"
+    #   resp.totals[0].usage[0].type #=> String, one of "EC2_INSTANCE_HOURS", "ECR_INITIAL_SCAN", "ECR_RESCAN", "LAMBDA_FUNCTION_HOURS", "LAMBDA_FUNCTION_CODE_HOURS", "CODE_REPOSITORY_SAST", "CODE_REPOSITORY_IAC", "CODE_REPOSITORY_SCA"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListUsageTotals AWS API Documentation
     #
@@ -4644,7 +5359,7 @@ module Aws::Inspector2
     # @example Request syntax with placeholder values
     #
     #   resp = client.reset_encryption_key({
-    #     resource_type: "AWS_EC2_INSTANCE", # required, accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_ECR_REPOSITORY, AWS_LAMBDA_FUNCTION
+    #     resource_type: "AWS_EC2_INSTANCE", # required, accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_ECR_REPOSITORY, AWS_LAMBDA_FUNCTION, CODE_REPOSITORY
     #     scan_type: "NETWORK", # required, accepts NETWORK, PACKAGE, CODE
     #   })
     #
@@ -4829,6 +5544,46 @@ module Aws::Inspector2
       req.send_request(options)
     end
 
+    # Initiates a code security scan on a specified repository.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Types::CodeSecurityResource] :resource
+    #   The resource identifier for the code repository to scan.
+    #
+    # @return [Types::StartCodeSecurityScanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartCodeSecurityScanResponse#scan_id #scan_id} => String
+    #   * {Types::StartCodeSecurityScanResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_code_security_scan({
+    #     client_token: "CodeSecurityClientToken",
+    #     resource: { # required
+    #       project_id: "ProjectId",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scan_id #=> String
+    #   resp.status #=> String, one of "IN_PROGRESS", "SUCCESSFUL", "FAILED", "SKIPPED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/StartCodeSecurityScan AWS API Documentation
+    #
+    # @overload start_code_security_scan(params = {})
+    # @param [Hash] params ({})
+    def start_code_security_scan(params = {}, options = {})
+      req = build_request(:start_code_security_scan, params)
+      req.send_request(options)
+    end
+
     # Stops a CIS session. This API is used by the Amazon Inspector SSM
     # plugin to communicate with the Amazon Inspector service. The Amazon
     # Inspector SSM plugin calls this API to stop a CIS scan session for the
@@ -5009,6 +5764,96 @@ module Aws::Inspector2
       req.send_request(options)
     end
 
+    # Updates an existing code security integration.
+    #
+    # After calling the `CreateCodeSecurityIntegration` operation, you
+    # complete authentication and authorization with your provider. Next you
+    # call the `UpdateCodeSecurityIntegration` operation to provide the
+    # `details` to complete the integration setup
+    #
+    # @option params [required, Types::UpdateIntegrationDetails] :details
+    #   The updated integration details specific to the repository provider
+    #   type.
+    #
+    # @option params [required, String] :integration_arn
+    #   The Amazon Resource Name (ARN) of the code security integration to
+    #   update.
+    #
+    # @return [Types::UpdateCodeSecurityIntegrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCodeSecurityIntegrationResponse#integration_arn #integration_arn} => String
+    #   * {Types::UpdateCodeSecurityIntegrationResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_code_security_integration({
+    #     details: { # required
+    #       github: {
+    #         code: "GitHubAuthCode", # required
+    #         installation_id: "GitHubInstallationId", # required
+    #       },
+    #       gitlab_self_managed: {
+    #         auth_code: "GitLabAuthCode", # required
+    #       },
+    #     },
+    #     integration_arn: "CodeSecurityIntegrationArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.integration_arn #=> String
+    #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE", "INACTIVE", "DISABLING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateCodeSecurityIntegration AWS API Documentation
+    #
+    # @overload update_code_security_integration(params = {})
+    # @param [Hash] params ({})
+    def update_code_security_integration(params = {}, options = {})
+      req = build_request(:update_code_security_integration, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing code security scan configuration.
+    #
+    # @option params [required, Types::CodeSecurityScanConfiguration] :configuration
+    #   The updated configuration settings for the code security scan.
+    #
+    # @option params [required, String] :scan_configuration_arn
+    #   The Amazon Resource Name (ARN) of the scan configuration to update.
+    #
+    # @return [Types::UpdateCodeSecurityScanConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCodeSecurityScanConfigurationResponse#scan_configuration_arn #scan_configuration_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_code_security_scan_configuration({
+    #     configuration: { # required
+    #       continuous_integration_scan_configuration: {
+    #         supported_events: ["PULL_REQUEST"], # required, accepts PULL_REQUEST, PUSH
+    #       },
+    #       periodic_scan_configuration: {
+    #         frequency: "WEEKLY", # accepts WEEKLY, MONTHLY, NEVER
+    #         frequency_expression: "FrequencyExpression",
+    #       },
+    #       rule_set_categories: ["SAST"], # required, accepts SAST, IAC, SCA
+    #     },
+    #     scan_configuration_arn: "ScanConfigurationArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scan_configuration_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateCodeSecurityScanConfiguration AWS API Documentation
+    #
+    # @overload update_code_security_scan_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_code_security_scan_configuration(params = {}, options = {})
+      req = build_request(:update_code_security_scan_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates setting configurations for your Amazon Inspector account. When
     # you use this API as an Amazon Inspector delegated administrator this
     # updates the setting for all accounts you manage. Member accounts in an
@@ -5114,7 +5959,7 @@ module Aws::Inspector2
     #
     #   resp = client.update_encryption_key({
     #     kms_key_id: "KmsKeyArn", # required
-    #     resource_type: "AWS_EC2_INSTANCE", # required, accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_ECR_REPOSITORY, AWS_LAMBDA_FUNCTION
+    #     resource_type: "AWS_EC2_INSTANCE", # required, accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_ECR_REPOSITORY, AWS_LAMBDA_FUNCTION, CODE_REPOSITORY
     #     scan_type: "NETWORK", # required, accepts NETWORK, PACKAGE, CODE
     #   })
     #
@@ -5161,6 +6006,18 @@ module Aws::Inspector2
     #     filter_arn: "FilterArn", # required
     #     filter_criteria: {
     #       aws_account_id: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       code_repository_project_name: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       code_repository_provider_type: [
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
     #           value: "StringInput", # required
@@ -5512,6 +6369,7 @@ module Aws::Inspector2
     #
     #   resp = client.update_organization_configuration({
     #     auto_enable: { # required
+    #       code_repository: false,
     #       ec2: false, # required
     #       ecr: false, # required
     #       lambda: false,
@@ -5521,6 +6379,7 @@ module Aws::Inspector2
     #
     # @example Response structure
     #
+    #   resp.auto_enable.code_repository #=> Boolean
     #   resp.auto_enable.ec2 #=> Boolean
     #   resp.auto_enable.ecr #=> Boolean
     #   resp.auto_enable.lambda #=> Boolean
@@ -5553,7 +6412,7 @@ module Aws::Inspector2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-inspector2'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

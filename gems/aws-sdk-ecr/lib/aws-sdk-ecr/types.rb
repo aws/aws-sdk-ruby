@@ -86,6 +86,15 @@ module Aws::ECR
     #   The date and time the Amazon ECR container image was pushed.
     #   @return [Time]
     #
+    # @!attribute [rw] last_in_use_at
+    #   The most recent date and time a cluster was running the image.
+    #   @return [Time]
+    #
+    # @!attribute [rw] in_use_count
+    #   The number of Amazon ECS or Amazon EKS clusters currently running
+    #   the image.
+    #   @return [Integer]
+    #
     # @!attribute [rw] registry
     #   The registry the Amazon ECR container image belongs to.
     #   @return [String]
@@ -104,6 +113,8 @@ module Aws::ECR
       :image_tags,
       :platform,
       :pushed_at,
+      :last_in_use_at,
+      :in_use_count,
       :registry,
       :repository_name)
       SENSITIVE = []
@@ -352,7 +363,7 @@ module Aws::ECR
     #   source for the pull through cache rule. The following is the syntax
     #   to use for each supported upstream registry.
     #
-    #   * Amazon ECR (`ecr`) – `dkr.ecr.<region>.amazonaws.com`
+    #   * Amazon ECR (`ecr`) – `<accountId>.dkr.ecr.<region>.amazonaws.com`
     #
     #   * Amazon ECR Public (`ecr-public`) – `public.ecr.aws`
     #
@@ -1707,6 +1718,12 @@ module Aws::ECR
     # @!attribute [rw] authorization_data
     #   A list of authorization token data objects that correspond to the
     #   `registryIds` values in the request.
+    #
+    #   <note markdown="1"> The size of the authorization token returned by Amazon ECR is not
+    #   fixed. We recommend that you don't make assumptions about the
+    #   maximum size.
+    #
+    #    </note>
     #   @return [Array<Types::AuthorizationData>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetAuthorizationTokenResponse AWS API Documentation
@@ -1791,8 +1808,8 @@ module Aws::ECR
     #   response element. The remaining results of the initial request can
     #   be seen by sending  another `GetLifecyclePolicyPreviewRequest`
     #   request with the returned `nextToken`  value. This value can be
-    #   between 1 and 1000. If this  parameter is not used, then
-    #   `GetLifecyclePolicyPreviewRequest` returns up to  100 results and a
+    #   between 1 and 100. If this  parameter is not used, then
+    #   `GetLifecyclePolicyPreviewRequest` returns up to 100 results and a
     #   `nextToken` value, if  applicable. This option cannot be used when
     #   you specify images with `imageIds`.
     #   @return [Integer]
@@ -2074,8 +2091,8 @@ module Aws::ECR
     #   <note markdown="1"> Starting with Docker version 1.9, the Docker client compresses image
     #   layers before pushing them to a V2 Docker registry. The output of
     #   the `docker images` command shows the uncompressed image size.
-    #   Therefore, Docker might return a larger image than the image sizes
-    #   returned by DescribeImages.
+    #   Therefore, Docker might return a larger image than the image shown
+    #   in the Amazon Web Services Management Console.
     #
     #    </note>
     #   @return [Integer]
@@ -3643,8 +3660,8 @@ module Aws::ECR
     #
     # @!attribute [rw] image_tag_mutability
     #   The tag mutability setting for the repository. If this parameter is
-    #   omitted, the default setting of MUTABLE will be used which will
-    #   allow image tags to be overwritten. If IMMUTABLE is specified, all
+    #   omitted, the default setting of `MUTABLE` will be used which will
+    #   allow image tags to be overwritten. If `IMMUTABLE` is specified, all
     #   image tags within the repository will be immutable which will
     #   prevent them from being overwritten.
     #   @return [String]

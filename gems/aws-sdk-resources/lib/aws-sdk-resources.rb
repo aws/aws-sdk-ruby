@@ -235,6 +235,7 @@ module Aws
   autoload :LookoutEquipment, 'aws-sdk-lookoutequipment'
   autoload :LookoutMetrics, 'aws-sdk-lookoutmetrics'
   autoload :LookoutforVision, 'aws-sdk-lookoutforvision'
+  autoload :MPA, 'aws-sdk-mpa'
   autoload :MQ, 'aws-sdk-mq'
   autoload :MTurk, 'aws-sdk-mturk'
   autoload :MWAA, 'aws-sdk-mwaa'

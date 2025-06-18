@@ -2907,6 +2907,12 @@ module Aws::WAFV2
     #   protection in that web ACL will apply to all associated Application
     #   Load Balancers.
     #
+    # @option params [Types::ApplicationConfig] :application_config
+    #   Configures the ability for the WAF console to store and retrieve
+    #   application attributes during the web ACL creation process.
+    #   Application attributes help WAF give recommendations for protection
+    #   packs.
+    #
     # @return [Types::CreateWebACLResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWebACLResponse#summary #summary} => Types::WebACLSummary
@@ -3878,6 +3884,14 @@ module Aws::WAFV2
     #     },
     #     on_source_d_do_s_protection_config: {
     #       alb_low_reputation_mode: "ACTIVE_UNDER_DDOS", # required, accepts ACTIVE_UNDER_DDOS, ALWAYS_ON
+    #     },
+    #     application_config: {
+    #       attributes: [
+    #         {
+    #           name: "AttributeName",
+    #           values: ["AttributeValue"],
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -9578,7 +9592,7 @@ module Aws::WAFV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.111.0'
+      context[:gem_version] = '1.112.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

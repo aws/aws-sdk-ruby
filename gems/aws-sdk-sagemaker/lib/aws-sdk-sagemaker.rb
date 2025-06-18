@@ -55,7 +55,7 @@ module Aws::SageMaker
   autoload :EndpointProvider, 'aws-sdk-sagemaker/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-sagemaker/endpoints'
 
-  GEM_VERSION = '1.309.0'
+  GEM_VERSION = '1.310.0'
 
 end
 

@@ -863,7 +863,10 @@ module Aws::KMS
     #   * For asymmetric KMS keys with NIST-recommended elliptic curve key
     #     pairs, specify `SIGN_VERIFY` or `KEY_AGREEMENT`.
     #
-    #   * For asymmetric KMS keys with `ECC_SECG_P256K1` key pairs specify
+    #   * For asymmetric KMS keys with `ECC_SECG_P256K1` key pairs, specify
+    #     `SIGN_VERIFY`.
+    #
+    #   * For asymmetric KMS keys with ML-DSA key pairs, specify
     #     `SIGN_VERIFY`.
     #
     #   * For asymmetric KMS keys with SM2 key pairs (China Regions only),
@@ -945,6 +948,13 @@ module Aws::KMS
     #       cryptocurrencies.
     #
     #     ^
+    #   * Asymmetric ML-DSA key pairs (signing and verification)
+    #
+    #     * `ML_DSA_44`
+    #
+    #     * `ML_DSA_65`
+    #
+    #     * `ML_DSA_87`
     #   * SM2 key pairs (encryption and decryption -or- signing and
     #     verification -or- deriving shared secrets)
     #
@@ -2540,9 +2550,11 @@ module Aws::KMS
     #
     #   The KMS rule that restricts the use of asymmetric RSA and SM2 KMS
     #   keys to encrypt and decrypt or to sign and verify (but not both),
-    #   and the rule that permits you to use ECC KMS keys only to sign and
-    #   verify, are not effective on data key pairs, which are used outside
-    #   of KMS. The SM2 key spec is only available in China Regions.
+    #   the rule that permits you to use ECC KMS keys only to sign and
+    #   verify, and the rule that permits you to use ML-DSA key pairs to
+    #   sign and verify only are not effective on data key pairs, which are
+    #   used outside of KMS. The SM2 key spec is only available in China
+    #   Regions.
     #   @return [String]
     #
     # @!attribute [rw] grant_tokens
@@ -2671,8 +2683,6 @@ module Aws::KMS
     #
     # @!attribute [rw] key_material_id
     #   The identifier of the key material used to encrypt the private key.
-    #   This field is omitted if the request includes the `Recipient`
-    #   parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKeyPairResponse AWS API Documentation
@@ -2745,9 +2755,11 @@ module Aws::KMS
     #
     #   The KMS rule that restricts the use of asymmetric RSA and SM2 KMS
     #   keys to encrypt and decrypt or to sign and verify (but not both),
-    #   and the rule that permits you to use ECC KMS keys only to sign and
-    #   verify, are not effective on data key pairs, which are used outside
-    #   of KMS. The SM2 key spec is only available in China Regions.
+    #   the rule that permits you to use ECC KMS keys only to sign and
+    #   verify, and the rule that permits you to use ML-DSA key pairs to
+    #   sign and verify only are not effective on data key pairs, which are
+    #   used outside of KMS. The SM2 key spec is only available in China
+    #   Regions.
     #   @return [String]
     #
     # @!attribute [rw] grant_tokens
@@ -6133,27 +6145,34 @@ module Aws::KMS
     #   Tells KMS whether the value of the `Message` parameter should be
     #   hashed as part of the signing algorithm. Use `RAW` for unhashed
     #   messages; use `DIGEST` for message digests, which are already
-    #   hashed.
+    #   hashed; use `EXTERNAL_MU` for 64-byte representative μ used in
+    #   ML-DSA signing as defined in NIST FIPS 204 Section 6.2.
     #
     #   When the value of `MessageType` is `RAW`, KMS uses the standard
     #   signing algorithm, which begins with a hash function. When the value
     #   is `DIGEST`, KMS skips the hashing step in the signing algorithm.
+    #   When the value is `EXTERNAL_MU` KMS skips the concatenated hashing
+    #   of the public key hash and the message done in the ML-DSA signing
+    #   algorithm.
     #
-    #   Use the `DIGEST` value only when the value of the `Message`
-    #   parameter is a message digest. If you use the `DIGEST` value with an
-    #   unhashed message, the security of the signing operation can be
-    #   compromised.
+    #   Use the `DIGEST` or `EXTERNAL_MU` value only when the value of the
+    #   `Message` parameter is a message digest. If you use the `DIGEST`
+    #   value with an unhashed message, the security of the signing
+    #   operation can be compromised.
     #
-    #   When the value of `MessageType`is `DIGEST`, the length of the
+    #   When the value of `MessageType` is `DIGEST`, the length of the
     #   `Message` value must match the length of hashed messages for the
     #   specified signing algorithm.
+    #
+    #   When the value of `MessageType` is `EXTERNAL_MU` the length of the
+    #   `Message` value must be 64 bytes.
     #
     #   You can submit a message digest and omit the `MessageType` or
     #   specify `RAW` so the digest is hashed again while signing. However,
     #   this can cause verification failures when verifying with a system
     #   that assumes a single hash.
     #
-    #   The hashing algorithm in that `Sign` uses is based on the
+    #   The hashing algorithm that `Sign` uses is based on the
     #   `SigningAlgorithm` value.
     #
     #   * Signing algorithms that end in SHA\_256 use the SHA\_256 hashing
@@ -6164,6 +6183,9 @@ module Aws::KMS
     #
     #   * Signing algorithms that end in SHA\_512 use the SHA\_512 hashing
     #     algorithm.
+    #
+    #   * Signing algorithms that end in SHAKE\_256 use the SHAKE\_256
+    #     hashing algorithm.
     #
     #   * SM2DSA uses the SM3 hashing algorithm. For details, see [Offline
     #     verification with SM2 key pairs][1].
@@ -6806,20 +6828,27 @@ module Aws::KMS
     #   Tells KMS whether the value of the `Message` parameter should be
     #   hashed as part of the signing algorithm. Use `RAW` for unhashed
     #   messages; use `DIGEST` for message digests, which are already
-    #   hashed.
+    #   hashed; use `EXTERNAL_MU` for 64-byte representative μ used in
+    #   ML-DSA signing as defined in NIST FIPS 204 Section 6.2.
     #
     #   When the value of `MessageType` is `RAW`, KMS uses the standard
     #   signing algorithm, which begins with a hash function. When the value
     #   is `DIGEST`, KMS skips the hashing step in the signing algorithm.
+    #   When the value is `EXTERNAL_MU` KMS skips the concatenated hashing
+    #   of the public key hash and the message done in the ML-DSA signing
+    #   algorithm.
     #
-    #   Use the `DIGEST` value only when the value of the `Message`
-    #   parameter is a message digest. If you use the `DIGEST` value with an
-    #   unhashed message, the security of the verification operation can be
-    #   compromised.
+    #   Use the `DIGEST` or `EXTERNAL_MU` value only when the value of the
+    #   `Message` parameter is a message digest. If you use the `DIGEST`
+    #   value with an unhashed message, the security of the signing
+    #   operation can be compromised.
     #
-    #   When the value of `MessageType`is `DIGEST`, the length of the
+    #   When the value of `MessageType` is `DIGEST`, the length of the
     #   `Message` value must match the length of hashed messages for the
     #   specified signing algorithm.
+    #
+    #   When the value of `MessageType` is `EXTERNAL_MU` the length of the
+    #   `Message` value must be 64 bytes.
     #
     #   You can submit a message digest and omit the `MessageType` or
     #   specify `RAW` so the digest is hashed again while signing. However,
@@ -6827,7 +6856,7 @@ module Aws::KMS
     #   verifying, verification fails, even when the message hasn't
     #   changed.
     #
-    #   The hashing algorithm in that `Verify` uses is based on the
+    #   The hashing algorithm that `Verify` uses is based on the
     #   `SigningAlgorithm` value.
     #
     #   * Signing algorithms that end in SHA\_256 use the SHA\_256 hashing
@@ -6838,6 +6867,9 @@ module Aws::KMS
     #
     #   * Signing algorithms that end in SHA\_512 use the SHA\_512 hashing
     #     algorithm.
+    #
+    #   * Signing algorithms that end in SHAKE\_256 use the SHAKE\_256
+    #     hashing algorithm.
     #
     #   * SM2DSA uses the SM3 hashing algorithm. For details, see [Offline
     #     verification with SM2 key pairs][1].

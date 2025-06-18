@@ -150,6 +150,7 @@ module Aws::ECR
     ImageTagList = Shapes::ListShape.new(name: 'ImageTagList')
     ImageTagMutability = Shapes::StringShape.new(name: 'ImageTagMutability')
     ImageTagsList = Shapes::ListShape.new(name: 'ImageTagsList')
+    InUseCount = Shapes::IntegerShape.new(name: 'InUseCount')
     InitiateLayerUploadRequest = Shapes::StructureShape.new(name: 'InitiateLayerUploadRequest')
     InitiateLayerUploadResponse = Shapes::StructureShape.new(name: 'InitiateLayerUploadResponse')
     InvalidLayerException = Shapes::StructureShape.new(name: 'InvalidLayerException')
@@ -373,6 +374,8 @@ module Aws::ECR
     AwsEcrContainerImageDetails.add_member(:image_tags, Shapes::ShapeRef.new(shape: ImageTagsList, location_name: "imageTags"))
     AwsEcrContainerImageDetails.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, location_name: "platform"))
     AwsEcrContainerImageDetails.add_member(:pushed_at, Shapes::ShapeRef.new(shape: Date, location_name: "pushedAt"))
+    AwsEcrContainerImageDetails.add_member(:last_in_use_at, Shapes::ShapeRef.new(shape: Date, location_name: "lastInUseAt"))
+    AwsEcrContainerImageDetails.add_member(:in_use_count, Shapes::ShapeRef.new(shape: InUseCount, location_name: "inUseCount"))
     AwsEcrContainerImageDetails.add_member(:registry, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registry"))
     AwsEcrContainerImageDetails.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
     AwsEcrContainerImageDetails.struct_class = Types::AwsEcrContainerImageDetails

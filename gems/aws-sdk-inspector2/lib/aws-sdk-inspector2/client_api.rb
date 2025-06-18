@@ -39,9 +39,14 @@ module Aws::Inspector2
     Architecture = Shapes::StringShape.new(name: 'Architecture')
     ArchitectureList = Shapes::ListShape.new(name: 'ArchitectureList')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    AssociateConfigurationRequest = Shapes::StructureShape.new(name: 'AssociateConfigurationRequest')
+    AssociateConfigurationRequestList = Shapes::ListShape.new(name: 'AssociateConfigurationRequestList')
     AssociateMemberRequest = Shapes::StructureShape.new(name: 'AssociateMemberRequest')
     AssociateMemberResponse = Shapes::StructureShape.new(name: 'AssociateMemberResponse')
+    AssociationResultStatusCode = Shapes::StringShape.new(name: 'AssociationResultStatusCode')
+    AssociationResultStatusMessage = Shapes::StringShape.new(name: 'AssociationResultStatusMessage')
     AtigData = Shapes::StructureShape.new(name: 'AtigData')
+    AuthorizationUrl = Shapes::StringShape.new(name: 'AuthorizationUrl')
     AutoEnable = Shapes::StructureShape.new(name: 'AutoEnable')
     AwsEc2InstanceDetails = Shapes::StructureShape.new(name: 'AwsEc2InstanceDetails')
     AwsEcrContainerAggregation = Shapes::StructureShape.new(name: 'AwsEcrContainerAggregation')
@@ -59,6 +64,10 @@ module Aws::Inspector2
     AwsEksWorkloadInfoTypeString = Shapes::StringShape.new(name: 'AwsEksWorkloadInfoTypeString')
     AwsLambdaFunctionDetails = Shapes::StructureShape.new(name: 'AwsLambdaFunctionDetails')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
+    BatchAssociateCodeSecurityScanConfigurationRequest = Shapes::StructureShape.new(name: 'BatchAssociateCodeSecurityScanConfigurationRequest')
+    BatchAssociateCodeSecurityScanConfigurationResponse = Shapes::StructureShape.new(name: 'BatchAssociateCodeSecurityScanConfigurationResponse')
+    BatchDisassociateCodeSecurityScanConfigurationRequest = Shapes::StructureShape.new(name: 'BatchDisassociateCodeSecurityScanConfigurationRequest')
+    BatchDisassociateCodeSecurityScanConfigurationResponse = Shapes::StructureShape.new(name: 'BatchDisassociateCodeSecurityScanConfigurationResponse')
     BatchGetAccountStatusRequest = Shapes::StructureShape.new(name: 'BatchGetAccountStatusRequest')
     BatchGetAccountStatusResponse = Shapes::StructureShape.new(name: 'BatchGetAccountStatusResponse')
     BatchGetCodeSnippetRequest = Shapes::StructureShape.new(name: 'BatchGetCodeSnippetRequest')
@@ -164,17 +173,45 @@ module Aws::Inspector2
     CodeLine = Shapes::StructureShape.new(name: 'CodeLine')
     CodeLineContentString = Shapes::StringShape.new(name: 'CodeLineContentString')
     CodeLineList = Shapes::ListShape.new(name: 'CodeLineList')
+    CodeRepositoryAggregation = Shapes::StructureShape.new(name: 'CodeRepositoryAggregation')
+    CodeRepositoryAggregationResponse = Shapes::StructureShape.new(name: 'CodeRepositoryAggregationResponse')
+    CodeRepositoryDetails = Shapes::StructureShape.new(name: 'CodeRepositoryDetails')
+    CodeRepositoryIntegrationArn = Shapes::StringShape.new(name: 'CodeRepositoryIntegrationArn')
+    CodeRepositoryMetadata = Shapes::StructureShape.new(name: 'CodeRepositoryMetadata')
+    CodeRepositoryMetadataProjectNameString = Shapes::StringShape.new(name: 'CodeRepositoryMetadataProjectNameString')
+    CodeRepositoryMetadataProviderTypeString = Shapes::StringShape.new(name: 'CodeRepositoryMetadataProviderTypeString')
+    CodeRepositoryMetadataProviderTypeVisibilityString = Shapes::StringShape.new(name: 'CodeRepositoryMetadataProviderTypeVisibilityString')
+    CodeRepositoryOnDemandScan = Shapes::StructureShape.new(name: 'CodeRepositoryOnDemandScan')
+    CodeRepositoryProjectName = Shapes::StringShape.new(name: 'CodeRepositoryProjectName')
+    CodeRepositoryProviderType = Shapes::StringShape.new(name: 'CodeRepositoryProviderType')
+    CodeRepositorySortBy = Shapes::StringShape.new(name: 'CodeRepositorySortBy')
+    CodeScanStatus = Shapes::StringShape.new(name: 'CodeScanStatus')
+    CodeSecurityClientToken = Shapes::StringShape.new(name: 'CodeSecurityClientToken')
+    CodeSecurityIntegrationArn = Shapes::StringShape.new(name: 'CodeSecurityIntegrationArn')
+    CodeSecurityIntegrationSummary = Shapes::StructureShape.new(name: 'CodeSecurityIntegrationSummary')
+    CodeSecurityResource = Shapes::UnionShape.new(name: 'CodeSecurityResource')
+    CodeSecurityScanConfiguration = Shapes::StructureShape.new(name: 'CodeSecurityScanConfiguration')
+    CodeSecurityScanConfigurationAssociationSummaries = Shapes::ListShape.new(name: 'CodeSecurityScanConfigurationAssociationSummaries')
+    CodeSecurityScanConfigurationAssociationSummary = Shapes::StructureShape.new(name: 'CodeSecurityScanConfigurationAssociationSummary')
+    CodeSecurityScanConfigurationSummaries = Shapes::ListShape.new(name: 'CodeSecurityScanConfigurationSummaries')
+    CodeSecurityScanConfigurationSummary = Shapes::StructureShape.new(name: 'CodeSecurityScanConfigurationSummary')
+    CodeSecurityUuid = Shapes::StringShape.new(name: 'CodeSecurityUuid')
     CodeSnippetError = Shapes::StructureShape.new(name: 'CodeSnippetError')
     CodeSnippetErrorCode = Shapes::StringShape.new(name: 'CodeSnippetErrorCode')
     CodeSnippetErrorList = Shapes::ListShape.new(name: 'CodeSnippetErrorList')
     CodeSnippetResult = Shapes::StructureShape.new(name: 'CodeSnippetResult')
     CodeSnippetResultList = Shapes::ListShape.new(name: 'CodeSnippetResultList')
     CodeVulnerabilityDetails = Shapes::StructureShape.new(name: 'CodeVulnerabilityDetails')
+    CommitId = Shapes::StringShape.new(name: 'CommitId')
     Component = Shapes::StringShape.new(name: 'Component')
     ComponentArn = Shapes::StringShape.new(name: 'ComponentArn')
     ComponentType = Shapes::StringShape.new(name: 'ComponentType')
     ComputePlatform = Shapes::StructureShape.new(name: 'ComputePlatform')
+    ConfigurationLevel = Shapes::StringShape.new(name: 'ConfigurationLevel')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ContinuousIntegrationScanConfiguration = Shapes::StructureShape.new(name: 'ContinuousIntegrationScanConfiguration')
+    ContinuousIntegrationScanEvent = Shapes::StringShape.new(name: 'ContinuousIntegrationScanEvent')
+    ContinuousIntegrationScanSupportedEvents = Shapes::ListShape.new(name: 'ContinuousIntegrationScanSupportedEvents')
     Counts = Shapes::StructureShape.new(name: 'Counts')
     CountsList = Shapes::ListShape.new(name: 'CountsList')
     CoverageDateFilter = Shapes::StructureShape.new(name: 'CoverageDateFilter')
@@ -195,10 +232,16 @@ module Aws::Inspector2
     CreateCisScanConfigurationRequest = Shapes::StructureShape.new(name: 'CreateCisScanConfigurationRequest')
     CreateCisScanConfigurationResponse = Shapes::StructureShape.new(name: 'CreateCisScanConfigurationResponse')
     CreateCisTargets = Shapes::StructureShape.new(name: 'CreateCisTargets')
+    CreateCodeSecurityIntegrationRequest = Shapes::StructureShape.new(name: 'CreateCodeSecurityIntegrationRequest')
+    CreateCodeSecurityIntegrationResponse = Shapes::StructureShape.new(name: 'CreateCodeSecurityIntegrationResponse')
+    CreateCodeSecurityScanConfigurationRequest = Shapes::StructureShape.new(name: 'CreateCodeSecurityScanConfigurationRequest')
+    CreateCodeSecurityScanConfigurationResponse = Shapes::StructureShape.new(name: 'CreateCodeSecurityScanConfigurationResponse')
     CreateFilterRequest = Shapes::StructureShape.new(name: 'CreateFilterRequest')
     CreateFilterResponse = Shapes::StructureShape.new(name: 'CreateFilterResponse')
     CreateFindingsReportRequest = Shapes::StructureShape.new(name: 'CreateFindingsReportRequest')
     CreateFindingsReportResponse = Shapes::StructureShape.new(name: 'CreateFindingsReportResponse')
+    CreateGitLabSelfManagedIntegrationDetail = Shapes::StructureShape.new(name: 'CreateGitLabSelfManagedIntegrationDetail')
+    CreateIntegrationDetail = Shapes::UnionShape.new(name: 'CreateIntegrationDetail')
     CreateSbomExportRequest = Shapes::StructureShape.new(name: 'CreateSbomExportRequest')
     CreateSbomExportResponse = Shapes::StructureShape.new(name: 'CreateSbomExportResponse')
     Currency = Shapes::StringShape.new(name: 'Currency')
@@ -228,6 +271,10 @@ module Aws::Inspector2
     DelegatedAdminStatus = Shapes::StringShape.new(name: 'DelegatedAdminStatus')
     DeleteCisScanConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteCisScanConfigurationRequest')
     DeleteCisScanConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteCisScanConfigurationResponse')
+    DeleteCodeSecurityIntegrationRequest = Shapes::StructureShape.new(name: 'DeleteCodeSecurityIntegrationRequest')
+    DeleteCodeSecurityIntegrationResponse = Shapes::StructureShape.new(name: 'DeleteCodeSecurityIntegrationResponse')
+    DeleteCodeSecurityScanConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteCodeSecurityScanConfigurationRequest')
+    DeleteCodeSecurityScanConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteCodeSecurityScanConfigurationResponse')
     DeleteFilterRequest = Shapes::StructureShape.new(name: 'DeleteFilterRequest')
     DeleteFilterResponse = Shapes::StructureShape.new(name: 'DeleteFilterResponse')
     DescribeOrganizationConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeOrganizationConfigurationRequest')
@@ -240,6 +287,8 @@ module Aws::Inspector2
     DisableRequest = Shapes::StructureShape.new(name: 'DisableRequest')
     DisableResourceTypeList = Shapes::ListShape.new(name: 'DisableResourceTypeList')
     DisableResponse = Shapes::StructureShape.new(name: 'DisableResponse')
+    DisassociateConfigurationRequest = Shapes::StructureShape.new(name: 'DisassociateConfigurationRequest')
+    DisassociateConfigurationRequestList = Shapes::ListShape.new(name: 'DisassociateConfigurationRequestList')
     DisassociateMemberRequest = Shapes::StructureShape.new(name: 'DisassociateMemberRequest')
     DisassociateMemberResponse = Shapes::StructureShape.new(name: 'DisassociateMemberResponse')
     Double = Shapes::FloatShape.new(name: 'Double')
@@ -287,6 +336,8 @@ module Aws::Inspector2
     ExternalReportStatus = Shapes::StringShape.new(name: 'ExternalReportStatus')
     FailedAccount = Shapes::StructureShape.new(name: 'FailedAccount')
     FailedAccountList = Shapes::ListShape.new(name: 'FailedAccountList')
+    FailedAssociationResult = Shapes::StructureShape.new(name: 'FailedAssociationResult')
+    FailedAssociationResultList = Shapes::ListShape.new(name: 'FailedAssociationResultList')
     FailedMemberAccountEc2DeepInspectionStatusState = Shapes::StructureShape.new(name: 'FailedMemberAccountEc2DeepInspectionStatusState')
     FailedMemberAccountEc2DeepInspectionStatusStateList = Shapes::ListShape.new(name: 'FailedMemberAccountEc2DeepInspectionStatusStateList')
     FilePath = Shapes::StringShape.new(name: 'FilePath')
@@ -326,6 +377,7 @@ module Aws::Inspector2
     FreeTrialInfoList = Shapes::ListShape.new(name: 'FreeTrialInfoList')
     FreeTrialStatus = Shapes::StringShape.new(name: 'FreeTrialStatus')
     FreeTrialType = Shapes::StringShape.new(name: 'FreeTrialType')
+    FrequencyExpression = Shapes::StringShape.new(name: 'FrequencyExpression')
     FunctionName = Shapes::StringShape.new(name: 'FunctionName')
     GetCisScanReportRequest = Shapes::StructureShape.new(name: 'GetCisScanReportRequest')
     GetCisScanReportResponse = Shapes::StructureShape.new(name: 'GetCisScanReportResponse')
@@ -336,6 +388,12 @@ module Aws::Inspector2
     GetClustersForImageRequest = Shapes::StructureShape.new(name: 'GetClustersForImageRequest')
     GetClustersForImageRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'GetClustersForImageRequestMaxResultsInteger')
     GetClustersForImageResponse = Shapes::StructureShape.new(name: 'GetClustersForImageResponse')
+    GetCodeSecurityIntegrationRequest = Shapes::StructureShape.new(name: 'GetCodeSecurityIntegrationRequest')
+    GetCodeSecurityIntegrationResponse = Shapes::StructureShape.new(name: 'GetCodeSecurityIntegrationResponse')
+    GetCodeSecurityScanConfigurationRequest = Shapes::StructureShape.new(name: 'GetCodeSecurityScanConfigurationRequest')
+    GetCodeSecurityScanConfigurationResponse = Shapes::StructureShape.new(name: 'GetCodeSecurityScanConfigurationResponse')
+    GetCodeSecurityScanRequest = Shapes::StructureShape.new(name: 'GetCodeSecurityScanRequest')
+    GetCodeSecurityScanResponse = Shapes::StructureShape.new(name: 'GetCodeSecurityScanResponse')
     GetConfigurationRequest = Shapes::StructureShape.new(name: 'GetConfigurationRequest')
     GetConfigurationResponse = Shapes::StructureShape.new(name: 'GetConfigurationResponse')
     GetDelegatedAdminAccountRequest = Shapes::StructureShape.new(name: 'GetDelegatedAdminAccountRequest')
@@ -350,6 +408,10 @@ module Aws::Inspector2
     GetMemberResponse = Shapes::StructureShape.new(name: 'GetMemberResponse')
     GetSbomExportRequest = Shapes::StructureShape.new(name: 'GetSbomExportRequest')
     GetSbomExportResponse = Shapes::StructureShape.new(name: 'GetSbomExportResponse')
+    GitHubAuthCode = Shapes::StringShape.new(name: 'GitHubAuthCode')
+    GitHubInstallationId = Shapes::StringShape.new(name: 'GitHubInstallationId')
+    GitLabAccessToken = Shapes::StringShape.new(name: 'GitLabAccessToken')
+    GitLabAuthCode = Shapes::StringShape.new(name: 'GitLabAuthCode')
     GroupKey = Shapes::StringShape.new(name: 'GroupKey')
     ImageHash = Shapes::StringShape.new(name: 'ImageHash')
     ImageLayerAggregation = Shapes::StructureShape.new(name: 'ImageLayerAggregation')
@@ -357,7 +419,12 @@ module Aws::Inspector2
     ImageLayerSortBy = Shapes::StringShape.new(name: 'ImageLayerSortBy')
     ImageTagList = Shapes::ListShape.new(name: 'ImageTagList')
     InspectorScoreDetails = Shapes::StructureShape.new(name: 'InspectorScoreDetails')
+    InstanceUrl = Shapes::StringShape.new(name: 'InstanceUrl')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
+    IntegrationName = Shapes::StringShape.new(name: 'IntegrationName')
+    IntegrationStatus = Shapes::StringShape.new(name: 'IntegrationStatus')
+    IntegrationSummaries = Shapes::ListShape.new(name: 'IntegrationSummaries')
+    IntegrationType = Shapes::StringShape.new(name: 'IntegrationType')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     IpV4Address = Shapes::StringShape.new(name: 'IpV4Address')
     IpV4AddressList = Shapes::ListShape.new(name: 'IpV4AddressList')
@@ -393,6 +460,15 @@ module Aws::Inspector2
     ListCisScansRequest = Shapes::StructureShape.new(name: 'ListCisScansRequest')
     ListCisScansResponse = Shapes::StructureShape.new(name: 'ListCisScansResponse')
     ListCisScansSortBy = Shapes::StringShape.new(name: 'ListCisScansSortBy')
+    ListCodeSecurityIntegrationsRequest = Shapes::StructureShape.new(name: 'ListCodeSecurityIntegrationsRequest')
+    ListCodeSecurityIntegrationsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListCodeSecurityIntegrationsRequestMaxResultsInteger')
+    ListCodeSecurityIntegrationsResponse = Shapes::StructureShape.new(name: 'ListCodeSecurityIntegrationsResponse')
+    ListCodeSecurityScanConfigurationAssociationsRequest = Shapes::StructureShape.new(name: 'ListCodeSecurityScanConfigurationAssociationsRequest')
+    ListCodeSecurityScanConfigurationAssociationsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListCodeSecurityScanConfigurationAssociationsRequestMaxResultsInteger')
+    ListCodeSecurityScanConfigurationAssociationsResponse = Shapes::StructureShape.new(name: 'ListCodeSecurityScanConfigurationAssociationsResponse')
+    ListCodeSecurityScanConfigurationsRequest = Shapes::StructureShape.new(name: 'ListCodeSecurityScanConfigurationsRequest')
+    ListCodeSecurityScanConfigurationsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListCodeSecurityScanConfigurationsRequestMaxResultsInteger')
+    ListCodeSecurityScanConfigurationsResponse = Shapes::StructureShape.new(name: 'ListCodeSecurityScanConfigurationsResponse')
     ListCoverageMaxResults = Shapes::IntegerShape.new(name: 'ListCoverageMaxResults')
     ListCoverageRequest = Shapes::StructureShape.new(name: 'ListCoverageRequest')
     ListCoverageResponse = Shapes::StructureShape.new(name: 'ListCoverageResponse')
@@ -461,6 +537,8 @@ module Aws::Inspector2
     PackageVulnerabilityDetails = Shapes::StructureShape.new(name: 'PackageVulnerabilityDetails')
     Path = Shapes::StringShape.new(name: 'Path')
     PathList = Shapes::ListShape.new(name: 'PathList')
+    PeriodicScanConfiguration = Shapes::StructureShape.new(name: 'PeriodicScanConfiguration')
+    PeriodicScanFrequency = Shapes::StringShape.new(name: 'PeriodicScanFrequency')
     Permission = Shapes::StructureShape.new(name: 'Permission')
     Permissions = Shapes::ListShape.new(name: 'Permissions')
     Platform = Shapes::StringShape.new(name: 'Platform')
@@ -471,6 +549,13 @@ module Aws::Inspector2
     PortRangeFilter = Shapes::StructureShape.new(name: 'PortRangeFilter')
     PortRangeFilterList = Shapes::ListShape.new(name: 'PortRangeFilterList')
     Product = Shapes::StringShape.new(name: 'Product')
+    ProjectCodeSecurityScanConfiguration = Shapes::StructureShape.new(name: 'ProjectCodeSecurityScanConfiguration')
+    ProjectContinuousIntegrationScanConfiguration = Shapes::StructureShape.new(name: 'ProjectContinuousIntegrationScanConfiguration')
+    ProjectContinuousIntegrationScanConfigurationList = Shapes::ListShape.new(name: 'ProjectContinuousIntegrationScanConfigurationList')
+    ProjectId = Shapes::StringShape.new(name: 'ProjectId')
+    ProjectPeriodicScanConfiguration = Shapes::StructureShape.new(name: 'ProjectPeriodicScanConfiguration')
+    ProjectPeriodicScanConfigurationList = Shapes::ListShape.new(name: 'ProjectPeriodicScanConfigurationList')
+    ProjectSelectionScope = Shapes::StringShape.new(name: 'ProjectSelectionScope')
     Reason = Shapes::StringShape.new(name: 'Reason')
     Recommendation = Shapes::StructureShape.new(name: 'Recommendation')
     ReferenceUrls = Shapes::ListShape.new(name: 'ReferenceUrls')
@@ -509,14 +594,19 @@ module Aws::Inspector2
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     RiskScore = Shapes::IntegerShape.new(name: 'RiskScore')
     RuleId = Shapes::StringShape.new(name: 'RuleId')
+    RuleSetCategories = Shapes::ListShape.new(name: 'RuleSetCategories')
+    RuleSetCategory = Shapes::StringShape.new(name: 'RuleSetCategory')
     Runtime = Shapes::StringShape.new(name: 'Runtime')
     SbomReportFormat = Shapes::StringShape.new(name: 'SbomReportFormat')
+    ScanConfigurationArn = Shapes::StringShape.new(name: 'ScanConfigurationArn')
+    ScanConfigurationName = Shapes::StringShape.new(name: 'ScanConfigurationName')
     ScanMode = Shapes::StringShape.new(name: 'ScanMode')
     ScanStatus = Shapes::StructureShape.new(name: 'ScanStatus')
     ScanStatusCode = Shapes::StringShape.new(name: 'ScanStatusCode')
     ScanStatusReason = Shapes::StringShape.new(name: 'ScanStatusReason')
     ScanType = Shapes::StringShape.new(name: 'ScanType')
     Schedule = Shapes::UnionShape.new(name: 'Schedule')
+    ScopeSettings = Shapes::StructureShape.new(name: 'ScopeSettings')
     SearchVulnerabilitiesFilterCriteria = Shapes::StructureShape.new(name: 'SearchVulnerabilitiesFilterCriteria')
     SearchVulnerabilitiesRequest = Shapes::StructureShape.new(name: 'SearchVulnerabilitiesRequest')
     SearchVulnerabilitiesResponse = Shapes::StructureShape.new(name: 'SearchVulnerabilitiesResponse')
@@ -537,6 +627,8 @@ module Aws::Inspector2
     StartCisSessionMessage = Shapes::StructureShape.new(name: 'StartCisSessionMessage')
     StartCisSessionRequest = Shapes::StructureShape.new(name: 'StartCisSessionRequest')
     StartCisSessionResponse = Shapes::StructureShape.new(name: 'StartCisSessionResponse')
+    StartCodeSecurityScanRequest = Shapes::StructureShape.new(name: 'StartCodeSecurityScanRequest')
+    StartCodeSecurityScanResponse = Shapes::StructureShape.new(name: 'StartCodeSecurityScanResponse')
     State = Shapes::StructureShape.new(name: 'State')
     Status = Shapes::StringShape.new(name: 'Status')
     StatusCounts = Shapes::StructureShape.new(name: 'StatusCounts')
@@ -555,6 +647,8 @@ module Aws::Inspector2
     StringList = Shapes::ListShape.new(name: 'StringList')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIdList = Shapes::ListShape.new(name: 'SubnetIdList')
+    SuccessfulAssociationResult = Shapes::StructureShape.new(name: 'SuccessfulAssociationResult')
+    SuccessfulAssociationResultList = Shapes::ListShape.new(name: 'SuccessfulAssociationResultList')
     SuggestedFix = Shapes::StructureShape.new(name: 'SuggestedFix')
     SuggestedFixCodeString = Shapes::StringShape.new(name: 'SuggestedFixCodeString')
     SuggestedFixDescriptionString = Shapes::StringShape.new(name: 'SuggestedFixDescriptionString')
@@ -596,6 +690,10 @@ module Aws::Inspector2
     UpdateCisScanConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateCisScanConfigurationRequest')
     UpdateCisScanConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateCisScanConfigurationResponse')
     UpdateCisTargets = Shapes::StructureShape.new(name: 'UpdateCisTargets')
+    UpdateCodeSecurityIntegrationRequest = Shapes::StructureShape.new(name: 'UpdateCodeSecurityIntegrationRequest')
+    UpdateCodeSecurityIntegrationResponse = Shapes::StructureShape.new(name: 'UpdateCodeSecurityIntegrationResponse')
+    UpdateCodeSecurityScanConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateCodeSecurityScanConfigurationRequest')
+    UpdateCodeSecurityScanConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateCodeSecurityScanConfigurationResponse')
     UpdateConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateConfigurationRequest')
     UpdateConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateConfigurationResponse')
     UpdateEc2DeepInspectionConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateEc2DeepInspectionConfigurationRequest')
@@ -604,6 +702,9 @@ module Aws::Inspector2
     UpdateEncryptionKeyResponse = Shapes::StructureShape.new(name: 'UpdateEncryptionKeyResponse')
     UpdateFilterRequest = Shapes::StructureShape.new(name: 'UpdateFilterRequest')
     UpdateFilterResponse = Shapes::StructureShape.new(name: 'UpdateFilterResponse')
+    UpdateGitHubIntegrationDetail = Shapes::StructureShape.new(name: 'UpdateGitHubIntegrationDetail')
+    UpdateGitLabSelfManagedIntegrationDetail = Shapes::StructureShape.new(name: 'UpdateGitLabSelfManagedIntegrationDetail')
+    UpdateIntegrationDetails = Shapes::UnionShape.new(name: 'UpdateIntegrationDetails')
     UpdateOrgEc2DeepInspectionConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateOrgEc2DeepInspectionConfigurationRequest')
     UpdateOrgEc2DeepInspectionConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateOrgEc2DeepInspectionConfigurationResponse')
     UpdateOrganizationConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateOrganizationConfigurationRequest')
@@ -678,6 +779,7 @@ module Aws::Inspector2
     AggregationRequest.add_member(:account_aggregation, Shapes::ShapeRef.new(shape: AccountAggregation, location_name: "accountAggregation"))
     AggregationRequest.add_member(:ami_aggregation, Shapes::ShapeRef.new(shape: AmiAggregation, location_name: "amiAggregation"))
     AggregationRequest.add_member(:aws_ecr_container_aggregation, Shapes::ShapeRef.new(shape: AwsEcrContainerAggregation, location_name: "awsEcrContainerAggregation"))
+    AggregationRequest.add_member(:code_repository_aggregation, Shapes::ShapeRef.new(shape: CodeRepositoryAggregation, location_name: "codeRepositoryAggregation"))
     AggregationRequest.add_member(:ec2_instance_aggregation, Shapes::ShapeRef.new(shape: Ec2InstanceAggregation, location_name: "ec2InstanceAggregation"))
     AggregationRequest.add_member(:finding_type_aggregation, Shapes::ShapeRef.new(shape: FindingTypeAggregation, location_name: "findingTypeAggregation"))
     AggregationRequest.add_member(:image_layer_aggregation, Shapes::ShapeRef.new(shape: ImageLayerAggregation, location_name: "imageLayerAggregation"))
@@ -690,6 +792,7 @@ module Aws::Inspector2
     AggregationRequest.add_member_subclass(:account_aggregation, Types::AggregationRequest::AccountAggregation)
     AggregationRequest.add_member_subclass(:ami_aggregation, Types::AggregationRequest::AmiAggregation)
     AggregationRequest.add_member_subclass(:aws_ecr_container_aggregation, Types::AggregationRequest::AwsEcrContainerAggregation)
+    AggregationRequest.add_member_subclass(:code_repository_aggregation, Types::AggregationRequest::CodeRepositoryAggregation)
     AggregationRequest.add_member_subclass(:ec2_instance_aggregation, Types::AggregationRequest::Ec2InstanceAggregation)
     AggregationRequest.add_member_subclass(:finding_type_aggregation, Types::AggregationRequest::FindingTypeAggregation)
     AggregationRequest.add_member_subclass(:image_layer_aggregation, Types::AggregationRequest::ImageLayerAggregation)
@@ -704,6 +807,7 @@ module Aws::Inspector2
     AggregationResponse.add_member(:account_aggregation, Shapes::ShapeRef.new(shape: AccountAggregationResponse, location_name: "accountAggregation"))
     AggregationResponse.add_member(:ami_aggregation, Shapes::ShapeRef.new(shape: AmiAggregationResponse, location_name: "amiAggregation"))
     AggregationResponse.add_member(:aws_ecr_container_aggregation, Shapes::ShapeRef.new(shape: AwsEcrContainerAggregationResponse, location_name: "awsEcrContainerAggregation"))
+    AggregationResponse.add_member(:code_repository_aggregation, Shapes::ShapeRef.new(shape: CodeRepositoryAggregationResponse, location_name: "codeRepositoryAggregation"))
     AggregationResponse.add_member(:ec2_instance_aggregation, Shapes::ShapeRef.new(shape: Ec2InstanceAggregationResponse, location_name: "ec2InstanceAggregation"))
     AggregationResponse.add_member(:finding_type_aggregation, Shapes::ShapeRef.new(shape: FindingTypeAggregationResponse, location_name: "findingTypeAggregation"))
     AggregationResponse.add_member(:image_layer_aggregation, Shapes::ShapeRef.new(shape: ImageLayerAggregationResponse, location_name: "imageLayerAggregation"))
@@ -716,6 +820,7 @@ module Aws::Inspector2
     AggregationResponse.add_member_subclass(:account_aggregation, Types::AggregationResponse::AccountAggregation)
     AggregationResponse.add_member_subclass(:ami_aggregation, Types::AggregationResponse::AmiAggregation)
     AggregationResponse.add_member_subclass(:aws_ecr_container_aggregation, Types::AggregationResponse::AwsEcrContainerAggregation)
+    AggregationResponse.add_member_subclass(:code_repository_aggregation, Types::AggregationResponse::CodeRepositoryAggregation)
     AggregationResponse.add_member_subclass(:ec2_instance_aggregation, Types::AggregationResponse::Ec2InstanceAggregation)
     AggregationResponse.add_member_subclass(:finding_type_aggregation, Types::AggregationResponse::FindingTypeAggregation)
     AggregationResponse.add_member_subclass(:image_layer_aggregation, Types::AggregationResponse::ImageLayerAggregation)
@@ -742,6 +847,12 @@ module Aws::Inspector2
 
     ArchitectureList.member = Shapes::ShapeRef.new(shape: Architecture)
 
+    AssociateConfigurationRequest.add_member(:resource, Shapes::ShapeRef.new(shape: CodeSecurityResource, required: true, location_name: "resource"))
+    AssociateConfigurationRequest.add_member(:scan_configuration_arn, Shapes::ShapeRef.new(shape: ScanConfigurationArn, required: true, location_name: "scanConfigurationArn"))
+    AssociateConfigurationRequest.struct_class = Types::AssociateConfigurationRequest
+
+    AssociateConfigurationRequestList.member = Shapes::ShapeRef.new(shape: AssociateConfigurationRequest)
+
     AssociateMemberRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
     AssociateMemberRequest.struct_class = Types::AssociateMemberRequest
 
@@ -754,6 +865,7 @@ module Aws::Inspector2
     AtigData.add_member(:ttps, Shapes::ShapeRef.new(shape: Ttps, location_name: "ttps"))
     AtigData.struct_class = Types::AtigData
 
+    AutoEnable.add_member(:code_repository, Shapes::ShapeRef.new(shape: Boolean, location_name: "codeRepository"))
     AutoEnable.add_member(:ec2, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "ec2"))
     AutoEnable.add_member(:ecr, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "ecr"))
     AutoEnable.add_member(:lambda, Shapes::ShapeRef.new(shape: Boolean, location_name: "lambda"))
@@ -834,6 +946,20 @@ module Aws::Inspector2
 
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     BadRequestException.struct_class = Types::BadRequestException
+
+    BatchAssociateCodeSecurityScanConfigurationRequest.add_member(:associate_configuration_requests, Shapes::ShapeRef.new(shape: AssociateConfigurationRequestList, required: true, location_name: "associateConfigurationRequests"))
+    BatchAssociateCodeSecurityScanConfigurationRequest.struct_class = Types::BatchAssociateCodeSecurityScanConfigurationRequest
+
+    BatchAssociateCodeSecurityScanConfigurationResponse.add_member(:failed_associations, Shapes::ShapeRef.new(shape: FailedAssociationResultList, location_name: "failedAssociations"))
+    BatchAssociateCodeSecurityScanConfigurationResponse.add_member(:successful_associations, Shapes::ShapeRef.new(shape: SuccessfulAssociationResultList, location_name: "successfulAssociations"))
+    BatchAssociateCodeSecurityScanConfigurationResponse.struct_class = Types::BatchAssociateCodeSecurityScanConfigurationResponse
+
+    BatchDisassociateCodeSecurityScanConfigurationRequest.add_member(:disassociate_configuration_requests, Shapes::ShapeRef.new(shape: DisassociateConfigurationRequestList, required: true, location_name: "disassociateConfigurationRequests"))
+    BatchDisassociateCodeSecurityScanConfigurationRequest.struct_class = Types::BatchDisassociateCodeSecurityScanConfigurationRequest
+
+    BatchDisassociateCodeSecurityScanConfigurationResponse.add_member(:failed_associations, Shapes::ShapeRef.new(shape: FailedAssociationResultList, location_name: "failedAssociations"))
+    BatchDisassociateCodeSecurityScanConfigurationResponse.add_member(:successful_associations, Shapes::ShapeRef.new(shape: SuccessfulAssociationResultList, location_name: "successfulAssociations"))
+    BatchDisassociateCodeSecurityScanConfigurationResponse.struct_class = Types::BatchDisassociateCodeSecurityScanConfigurationResponse
 
     BatchGetAccountStatusRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIdSet, location_name: "accountIds"))
     BatchGetAccountStatusRequest.struct_class = Types::BatchGetAccountStatusRequest
@@ -1102,6 +1228,80 @@ module Aws::Inspector2
 
     CodeLineList.member = Shapes::ShapeRef.new(shape: CodeLine)
 
+    CodeRepositoryAggregation.add_member(:project_names, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "projectNames"))
+    CodeRepositoryAggregation.add_member(:provider_types, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "providerTypes"))
+    CodeRepositoryAggregation.add_member(:resource_ids, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "resourceIds"))
+    CodeRepositoryAggregation.add_member(:sort_by, Shapes::ShapeRef.new(shape: CodeRepositorySortBy, location_name: "sortBy"))
+    CodeRepositoryAggregation.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "sortOrder"))
+    CodeRepositoryAggregation.struct_class = Types::CodeRepositoryAggregation
+
+    CodeRepositoryAggregationResponse.add_member(:account_id, Shapes::ShapeRef.new(shape: String, location_name: "accountId"))
+    CodeRepositoryAggregationResponse.add_member(:exploit_available_active_findings_count, Shapes::ShapeRef.new(shape: Long, location_name: "exploitAvailableActiveFindingsCount"))
+    CodeRepositoryAggregationResponse.add_member(:fix_available_active_findings_count, Shapes::ShapeRef.new(shape: Long, location_name: "fixAvailableActiveFindingsCount"))
+    CodeRepositoryAggregationResponse.add_member(:project_names, Shapes::ShapeRef.new(shape: String, required: true, location_name: "projectNames"))
+    CodeRepositoryAggregationResponse.add_member(:provider_type, Shapes::ShapeRef.new(shape: String, location_name: "providerType"))
+    CodeRepositoryAggregationResponse.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
+    CodeRepositoryAggregationResponse.add_member(:severity_counts, Shapes::ShapeRef.new(shape: SeverityCounts, location_name: "severityCounts"))
+    CodeRepositoryAggregationResponse.struct_class = Types::CodeRepositoryAggregationResponse
+
+    CodeRepositoryDetails.add_member(:integration_arn, Shapes::ShapeRef.new(shape: CodeRepositoryIntegrationArn, location_name: "integrationArn"))
+    CodeRepositoryDetails.add_member(:project_name, Shapes::ShapeRef.new(shape: CodeRepositoryProjectName, location_name: "projectName"))
+    CodeRepositoryDetails.add_member(:provider_type, Shapes::ShapeRef.new(shape: CodeRepositoryProviderType, location_name: "providerType"))
+    CodeRepositoryDetails.struct_class = Types::CodeRepositoryDetails
+
+    CodeRepositoryMetadata.add_member(:integration_arn, Shapes::ShapeRef.new(shape: CodeRepositoryIntegrationArn, location_name: "integrationArn"))
+    CodeRepositoryMetadata.add_member(:last_scanned_commit_id, Shapes::ShapeRef.new(shape: CommitId, location_name: "lastScannedCommitId"))
+    CodeRepositoryMetadata.add_member(:on_demand_scan, Shapes::ShapeRef.new(shape: CodeRepositoryOnDemandScan, location_name: "onDemandScan"))
+    CodeRepositoryMetadata.add_member(:project_name, Shapes::ShapeRef.new(shape: CodeRepositoryMetadataProjectNameString, required: true, location_name: "projectName"))
+    CodeRepositoryMetadata.add_member(:provider_type, Shapes::ShapeRef.new(shape: CodeRepositoryMetadataProviderTypeString, required: true, location_name: "providerType"))
+    CodeRepositoryMetadata.add_member(:provider_type_visibility, Shapes::ShapeRef.new(shape: CodeRepositoryMetadataProviderTypeVisibilityString, required: true, location_name: "providerTypeVisibility"))
+    CodeRepositoryMetadata.add_member(:scan_configuration, Shapes::ShapeRef.new(shape: ProjectCodeSecurityScanConfiguration, location_name: "scanConfiguration"))
+    CodeRepositoryMetadata.struct_class = Types::CodeRepositoryMetadata
+
+    CodeRepositoryOnDemandScan.add_member(:last_scan_at, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "lastScanAt"))
+    CodeRepositoryOnDemandScan.add_member(:last_scanned_commit_id, Shapes::ShapeRef.new(shape: CommitId, location_name: "lastScannedCommitId"))
+    CodeRepositoryOnDemandScan.add_member(:scan_status, Shapes::ShapeRef.new(shape: ScanStatus, location_name: "scanStatus"))
+    CodeRepositoryOnDemandScan.struct_class = Types::CodeRepositoryOnDemandScan
+
+    CodeSecurityIntegrationSummary.add_member(:created_on, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdOn"))
+    CodeSecurityIntegrationSummary.add_member(:integration_arn, Shapes::ShapeRef.new(shape: CodeSecurityIntegrationArn, required: true, location_name: "integrationArn"))
+    CodeSecurityIntegrationSummary.add_member(:last_update_on, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdateOn"))
+    CodeSecurityIntegrationSummary.add_member(:name, Shapes::ShapeRef.new(shape: IntegrationName, required: true, location_name: "name"))
+    CodeSecurityIntegrationSummary.add_member(:status, Shapes::ShapeRef.new(shape: IntegrationStatus, required: true, location_name: "status"))
+    CodeSecurityIntegrationSummary.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, required: true, location_name: "statusReason"))
+    CodeSecurityIntegrationSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CodeSecurityIntegrationSummary.add_member(:type, Shapes::ShapeRef.new(shape: IntegrationType, required: true, location_name: "type"))
+    CodeSecurityIntegrationSummary.struct_class = Types::CodeSecurityIntegrationSummary
+
+    CodeSecurityResource.add_member(:project_id, Shapes::ShapeRef.new(shape: ProjectId, location_name: "projectId"))
+    CodeSecurityResource.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    CodeSecurityResource.add_member_subclass(:project_id, Types::CodeSecurityResource::ProjectId)
+    CodeSecurityResource.add_member_subclass(:unknown, Types::CodeSecurityResource::Unknown)
+    CodeSecurityResource.struct_class = Types::CodeSecurityResource
+
+    CodeSecurityScanConfiguration.add_member(:continuous_integration_scan_configuration, Shapes::ShapeRef.new(shape: ContinuousIntegrationScanConfiguration, location_name: "continuousIntegrationScanConfiguration"))
+    CodeSecurityScanConfiguration.add_member(:periodic_scan_configuration, Shapes::ShapeRef.new(shape: PeriodicScanConfiguration, location_name: "periodicScanConfiguration"))
+    CodeSecurityScanConfiguration.add_member(:rule_set_categories, Shapes::ShapeRef.new(shape: RuleSetCategories, required: true, location_name: "ruleSetCategories"))
+    CodeSecurityScanConfiguration.struct_class = Types::CodeSecurityScanConfiguration
+
+    CodeSecurityScanConfigurationAssociationSummaries.member = Shapes::ShapeRef.new(shape: CodeSecurityScanConfigurationAssociationSummary)
+
+    CodeSecurityScanConfigurationAssociationSummary.add_member(:resource, Shapes::ShapeRef.new(shape: CodeSecurityResource, location_name: "resource"))
+    CodeSecurityScanConfigurationAssociationSummary.struct_class = Types::CodeSecurityScanConfigurationAssociationSummary
+
+    CodeSecurityScanConfigurationSummaries.member = Shapes::ShapeRef.new(shape: CodeSecurityScanConfigurationSummary)
+
+    CodeSecurityScanConfigurationSummary.add_member(:continuous_integration_scan_supported_events, Shapes::ShapeRef.new(shape: ContinuousIntegrationScanSupportedEvents, location_name: "continuousIntegrationScanSupportedEvents"))
+    CodeSecurityScanConfigurationSummary.add_member(:frequency_expression, Shapes::ShapeRef.new(shape: FrequencyExpression, location_name: "frequencyExpression"))
+    CodeSecurityScanConfigurationSummary.add_member(:name, Shapes::ShapeRef.new(shape: ScanConfigurationName, required: true, location_name: "name"))
+    CodeSecurityScanConfigurationSummary.add_member(:owner_account_id, Shapes::ShapeRef.new(shape: OwnerId, required: true, location_name: "ownerAccountId"))
+    CodeSecurityScanConfigurationSummary.add_member(:periodic_scan_frequency, Shapes::ShapeRef.new(shape: PeriodicScanFrequency, location_name: "periodicScanFrequency"))
+    CodeSecurityScanConfigurationSummary.add_member(:rule_set_categories, Shapes::ShapeRef.new(shape: RuleSetCategories, required: true, location_name: "ruleSetCategories"))
+    CodeSecurityScanConfigurationSummary.add_member(:scan_configuration_arn, Shapes::ShapeRef.new(shape: ScanConfigurationArn, required: true, location_name: "scanConfigurationArn"))
+    CodeSecurityScanConfigurationSummary.add_member(:scope_settings, Shapes::ShapeRef.new(shape: ScopeSettings, location_name: "scopeSettings"))
+    CodeSecurityScanConfigurationSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CodeSecurityScanConfigurationSummary.struct_class = Types::CodeSecurityScanConfigurationSummary
+
     CodeSnippetError.add_member(:error_code, Shapes::ShapeRef.new(shape: CodeSnippetErrorCode, required: true, location_name: "errorCode"))
     CodeSnippetError.add_member(:error_message, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "errorMessage"))
     CodeSnippetError.add_member(:finding_arn, Shapes::ShapeRef.new(shape: FindingArn, required: true, location_name: "findingArn"))
@@ -1138,6 +1338,11 @@ module Aws::Inspector2
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceType"))
     ConflictException.struct_class = Types::ConflictException
 
+    ContinuousIntegrationScanConfiguration.add_member(:supported_events, Shapes::ShapeRef.new(shape: ContinuousIntegrationScanSupportedEvents, required: true, location_name: "supportedEvents"))
+    ContinuousIntegrationScanConfiguration.struct_class = Types::ContinuousIntegrationScanConfiguration
+
+    ContinuousIntegrationScanSupportedEvents.member = Shapes::ShapeRef.new(shape: ContinuousIntegrationScanEvent)
+
     Counts.add_member(:count, Shapes::ShapeRef.new(shape: AggCounts, location_name: "count"))
     Counts.add_member(:group_key, Shapes::ShapeRef.new(shape: GroupKey, location_name: "groupKey"))
     Counts.struct_class = Types::Counts
@@ -1151,6 +1356,9 @@ module Aws::Inspector2
     CoverageDateFilterList.member = Shapes::ShapeRef.new(shape: CoverageDateFilter)
 
     CoverageFilterCriteria.add_member(:account_id, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "accountId"))
+    CoverageFilterCriteria.add_member(:code_repository_project_name, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "codeRepositoryProjectName"))
+    CoverageFilterCriteria.add_member(:code_repository_provider_type, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "codeRepositoryProviderType"))
+    CoverageFilterCriteria.add_member(:code_repository_provider_type_visibility, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "codeRepositoryProviderTypeVisibility"))
     CoverageFilterCriteria.add_member(:ec2_instance_tags, Shapes::ShapeRef.new(shape: CoverageMapFilterList, location_name: "ec2InstanceTags"))
     CoverageFilterCriteria.add_member(:ecr_image_in_use_count, Shapes::ShapeRef.new(shape: CoverageNumberFilterList, location_name: "ecrImageInUseCount"))
     CoverageFilterCriteria.add_member(:ecr_image_last_in_use_at, Shapes::ShapeRef.new(shape: CoverageDateFilterList, location_name: "ecrImageLastInUseAt"))
@@ -1161,6 +1369,7 @@ module Aws::Inspector2
     CoverageFilterCriteria.add_member(:lambda_function_runtime, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "lambdaFunctionRuntime"))
     CoverageFilterCriteria.add_member(:lambda_function_tags, Shapes::ShapeRef.new(shape: CoverageMapFilterList, location_name: "lambdaFunctionTags"))
     CoverageFilterCriteria.add_member(:last_scanned_at, Shapes::ShapeRef.new(shape: CoverageDateFilterList, location_name: "lastScannedAt"))
+    CoverageFilterCriteria.add_member(:last_scanned_commit_id, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "lastScannedCommitId"))
     CoverageFilterCriteria.add_member(:resource_id, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "resourceId"))
     CoverageFilterCriteria.add_member(:resource_type, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "resourceType"))
     CoverageFilterCriteria.add_member(:scan_mode, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "scanMode"))
@@ -1214,6 +1423,27 @@ module Aws::Inspector2
     CreateCisTargets.add_member(:target_resource_tags, Shapes::ShapeRef.new(shape: TargetResourceTags, required: true, location_name: "targetResourceTags"))
     CreateCisTargets.struct_class = Types::CreateCisTargets
 
+    CreateCodeSecurityIntegrationRequest.add_member(:details, Shapes::ShapeRef.new(shape: CreateIntegrationDetail, location_name: "details"))
+    CreateCodeSecurityIntegrationRequest.add_member(:name, Shapes::ShapeRef.new(shape: IntegrationName, required: true, location_name: "name"))
+    CreateCodeSecurityIntegrationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateCodeSecurityIntegrationRequest.add_member(:type, Shapes::ShapeRef.new(shape: IntegrationType, required: true, location_name: "type"))
+    CreateCodeSecurityIntegrationRequest.struct_class = Types::CreateCodeSecurityIntegrationRequest
+
+    CreateCodeSecurityIntegrationResponse.add_member(:authorization_url, Shapes::ShapeRef.new(shape: AuthorizationUrl, location_name: "authorizationUrl"))
+    CreateCodeSecurityIntegrationResponse.add_member(:integration_arn, Shapes::ShapeRef.new(shape: CodeSecurityIntegrationArn, required: true, location_name: "integrationArn"))
+    CreateCodeSecurityIntegrationResponse.add_member(:status, Shapes::ShapeRef.new(shape: IntegrationStatus, required: true, location_name: "status"))
+    CreateCodeSecurityIntegrationResponse.struct_class = Types::CreateCodeSecurityIntegrationResponse
+
+    CreateCodeSecurityScanConfigurationRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: CodeSecurityScanConfiguration, required: true, location_name: "configuration"))
+    CreateCodeSecurityScanConfigurationRequest.add_member(:level, Shapes::ShapeRef.new(shape: ConfigurationLevel, required: true, location_name: "level"))
+    CreateCodeSecurityScanConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: ScanConfigurationName, required: true, location_name: "name"))
+    CreateCodeSecurityScanConfigurationRequest.add_member(:scope_settings, Shapes::ShapeRef.new(shape: ScopeSettings, location_name: "scopeSettings"))
+    CreateCodeSecurityScanConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateCodeSecurityScanConfigurationRequest.struct_class = Types::CreateCodeSecurityScanConfigurationRequest
+
+    CreateCodeSecurityScanConfigurationResponse.add_member(:scan_configuration_arn, Shapes::ShapeRef.new(shape: ScanConfigurationArn, required: true, location_name: "scanConfigurationArn"))
+    CreateCodeSecurityScanConfigurationResponse.struct_class = Types::CreateCodeSecurityScanConfigurationResponse
+
     CreateFilterRequest.add_member(:action, Shapes::ShapeRef.new(shape: FilterAction, required: true, location_name: "action"))
     CreateFilterRequest.add_member(:description, Shapes::ShapeRef.new(shape: FilterDescription, location_name: "description"))
     CreateFilterRequest.add_member(:filter_criteria, Shapes::ShapeRef.new(shape: FilterCriteria, required: true, location_name: "filterCriteria"))
@@ -1232,6 +1462,16 @@ module Aws::Inspector2
 
     CreateFindingsReportResponse.add_member(:report_id, Shapes::ShapeRef.new(shape: ReportId, location_name: "reportId"))
     CreateFindingsReportResponse.struct_class = Types::CreateFindingsReportResponse
+
+    CreateGitLabSelfManagedIntegrationDetail.add_member(:access_token, Shapes::ShapeRef.new(shape: GitLabAccessToken, required: true, location_name: "accessToken"))
+    CreateGitLabSelfManagedIntegrationDetail.add_member(:instance_url, Shapes::ShapeRef.new(shape: InstanceUrl, required: true, location_name: "instanceUrl"))
+    CreateGitLabSelfManagedIntegrationDetail.struct_class = Types::CreateGitLabSelfManagedIntegrationDetail
+
+    CreateIntegrationDetail.add_member(:gitlab_self_managed, Shapes::ShapeRef.new(shape: CreateGitLabSelfManagedIntegrationDetail, location_name: "gitlabSelfManaged"))
+    CreateIntegrationDetail.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    CreateIntegrationDetail.add_member_subclass(:gitlab_self_managed, Types::CreateIntegrationDetail::GitlabSelfManaged)
+    CreateIntegrationDetail.add_member_subclass(:unknown, Types::CreateIntegrationDetail::Unknown)
+    CreateIntegrationDetail.struct_class = Types::CreateIntegrationDetail
 
     CreateSbomExportRequest.add_member(:report_format, Shapes::ShapeRef.new(shape: SbomReportFormat, required: true, location_name: "reportFormat"))
     CreateSbomExportRequest.add_member(:resource_filter_criteria, Shapes::ShapeRef.new(shape: ResourceFilterCriteria, location_name: "resourceFilterCriteria"))
@@ -1302,6 +1542,18 @@ module Aws::Inspector2
     DeleteCisScanConfigurationResponse.add_member(:scan_configuration_arn, Shapes::ShapeRef.new(shape: CisScanConfigurationArn, required: true, location_name: "scanConfigurationArn"))
     DeleteCisScanConfigurationResponse.struct_class = Types::DeleteCisScanConfigurationResponse
 
+    DeleteCodeSecurityIntegrationRequest.add_member(:integration_arn, Shapes::ShapeRef.new(shape: CodeSecurityIntegrationArn, required: true, location_name: "integrationArn"))
+    DeleteCodeSecurityIntegrationRequest.struct_class = Types::DeleteCodeSecurityIntegrationRequest
+
+    DeleteCodeSecurityIntegrationResponse.add_member(:integration_arn, Shapes::ShapeRef.new(shape: CodeSecurityIntegrationArn, location_name: "integrationArn"))
+    DeleteCodeSecurityIntegrationResponse.struct_class = Types::DeleteCodeSecurityIntegrationResponse
+
+    DeleteCodeSecurityScanConfigurationRequest.add_member(:scan_configuration_arn, Shapes::ShapeRef.new(shape: ScanConfigurationArn, required: true, location_name: "scanConfigurationArn"))
+    DeleteCodeSecurityScanConfigurationRequest.struct_class = Types::DeleteCodeSecurityScanConfigurationRequest
+
+    DeleteCodeSecurityScanConfigurationResponse.add_member(:scan_configuration_arn, Shapes::ShapeRef.new(shape: ScanConfigurationArn, location_name: "scanConfigurationArn"))
+    DeleteCodeSecurityScanConfigurationResponse.struct_class = Types::DeleteCodeSecurityScanConfigurationResponse
+
     DeleteFilterRequest.add_member(:arn, Shapes::ShapeRef.new(shape: FilterArn, required: true, location_name: "arn"))
     DeleteFilterRequest.struct_class = Types::DeleteFilterRequest
 
@@ -1338,6 +1590,12 @@ module Aws::Inspector2
     DisableResponse.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountList, required: true, location_name: "accounts"))
     DisableResponse.add_member(:failed_accounts, Shapes::ShapeRef.new(shape: FailedAccountList, location_name: "failedAccounts"))
     DisableResponse.struct_class = Types::DisableResponse
+
+    DisassociateConfigurationRequest.add_member(:resource, Shapes::ShapeRef.new(shape: CodeSecurityResource, required: true, location_name: "resource"))
+    DisassociateConfigurationRequest.add_member(:scan_configuration_arn, Shapes::ShapeRef.new(shape: ScanConfigurationArn, required: true, location_name: "scanConfigurationArn"))
+    DisassociateConfigurationRequest.struct_class = Types::DisassociateConfigurationRequest
+
+    DisassociateConfigurationRequestList.member = Shapes::ShapeRef.new(shape: DisassociateConfigurationRequest)
 
     DisassociateMemberRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
     DisassociateMemberRequest.struct_class = Types::DisassociateMemberRequest
@@ -1449,6 +1707,14 @@ module Aws::Inspector2
 
     FailedAccountList.member = Shapes::ShapeRef.new(shape: FailedAccount)
 
+    FailedAssociationResult.add_member(:resource, Shapes::ShapeRef.new(shape: CodeSecurityResource, location_name: "resource"))
+    FailedAssociationResult.add_member(:scan_configuration_arn, Shapes::ShapeRef.new(shape: ScanConfigurationArn, location_name: "scanConfigurationArn"))
+    FailedAssociationResult.add_member(:status_code, Shapes::ShapeRef.new(shape: AssociationResultStatusCode, location_name: "statusCode"))
+    FailedAssociationResult.add_member(:status_message, Shapes::ShapeRef.new(shape: AssociationResultStatusMessage, location_name: "statusMessage"))
+    FailedAssociationResult.struct_class = Types::FailedAssociationResult
+
+    FailedAssociationResultList.member = Shapes::ShapeRef.new(shape: FailedAssociationResult)
+
     FailedMemberAccountEc2DeepInspectionStatusState.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
     FailedMemberAccountEc2DeepInspectionStatusState.add_member(:ec2_scan_status, Shapes::ShapeRef.new(shape: Status, location_name: "ec2ScanStatus"))
     FailedMemberAccountEc2DeepInspectionStatusState.add_member(:error_message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "errorMessage"))
@@ -1471,6 +1737,8 @@ module Aws::Inspector2
     FilterArnList.member = Shapes::ShapeRef.new(shape: FilterArn)
 
     FilterCriteria.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "awsAccountId"))
+    FilterCriteria.add_member(:code_repository_project_name, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "codeRepositoryProjectName"))
+    FilterCriteria.add_member(:code_repository_provider_type, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "codeRepositoryProviderType"))
     FilterCriteria.add_member(:code_vulnerability_detector_name, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "codeVulnerabilityDetectorName"))
     FilterCriteria.add_member(:code_vulnerability_detector_tags, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "codeVulnerabilityDetectorTags"))
     FilterCriteria.add_member(:code_vulnerability_file_path, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "codeVulnerabilityFilePath"))
@@ -1631,6 +1899,48 @@ module Aws::Inspector2
     GetClustersForImageResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: GetClustersForImageNextToken, location_name: "nextToken"))
     GetClustersForImageResponse.struct_class = Types::GetClustersForImageResponse
 
+    GetCodeSecurityIntegrationRequest.add_member(:integration_arn, Shapes::ShapeRef.new(shape: CodeSecurityIntegrationArn, required: true, location_name: "integrationArn"))
+    GetCodeSecurityIntegrationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    GetCodeSecurityIntegrationRequest.struct_class = Types::GetCodeSecurityIntegrationRequest
+
+    GetCodeSecurityIntegrationResponse.add_member(:authorization_url, Shapes::ShapeRef.new(shape: AuthorizationUrl, location_name: "authorizationUrl"))
+    GetCodeSecurityIntegrationResponse.add_member(:created_on, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdOn"))
+    GetCodeSecurityIntegrationResponse.add_member(:integration_arn, Shapes::ShapeRef.new(shape: CodeSecurityIntegrationArn, required: true, location_name: "integrationArn"))
+    GetCodeSecurityIntegrationResponse.add_member(:last_update_on, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdateOn"))
+    GetCodeSecurityIntegrationResponse.add_member(:name, Shapes::ShapeRef.new(shape: IntegrationName, required: true, location_name: "name"))
+    GetCodeSecurityIntegrationResponse.add_member(:status, Shapes::ShapeRef.new(shape: IntegrationStatus, required: true, location_name: "status"))
+    GetCodeSecurityIntegrationResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, required: true, location_name: "statusReason"))
+    GetCodeSecurityIntegrationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    GetCodeSecurityIntegrationResponse.add_member(:type, Shapes::ShapeRef.new(shape: IntegrationType, required: true, location_name: "type"))
+    GetCodeSecurityIntegrationResponse.struct_class = Types::GetCodeSecurityIntegrationResponse
+
+    GetCodeSecurityScanConfigurationRequest.add_member(:scan_configuration_arn, Shapes::ShapeRef.new(shape: ScanConfigurationArn, required: true, location_name: "scanConfigurationArn"))
+    GetCodeSecurityScanConfigurationRequest.struct_class = Types::GetCodeSecurityScanConfigurationRequest
+
+    GetCodeSecurityScanConfigurationResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: CodeSecurityScanConfiguration, location_name: "configuration"))
+    GetCodeSecurityScanConfigurationResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    GetCodeSecurityScanConfigurationResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedAt"))
+    GetCodeSecurityScanConfigurationResponse.add_member(:level, Shapes::ShapeRef.new(shape: ConfigurationLevel, location_name: "level"))
+    GetCodeSecurityScanConfigurationResponse.add_member(:name, Shapes::ShapeRef.new(shape: ScanConfigurationName, location_name: "name"))
+    GetCodeSecurityScanConfigurationResponse.add_member(:scan_configuration_arn, Shapes::ShapeRef.new(shape: ScanConfigurationArn, location_name: "scanConfigurationArn"))
+    GetCodeSecurityScanConfigurationResponse.add_member(:scope_settings, Shapes::ShapeRef.new(shape: ScopeSettings, location_name: "scopeSettings"))
+    GetCodeSecurityScanConfigurationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    GetCodeSecurityScanConfigurationResponse.struct_class = Types::GetCodeSecurityScanConfigurationResponse
+
+    GetCodeSecurityScanRequest.add_member(:resource, Shapes::ShapeRef.new(shape: CodeSecurityResource, required: true, location_name: "resource"))
+    GetCodeSecurityScanRequest.add_member(:scan_id, Shapes::ShapeRef.new(shape: CodeSecurityUuid, required: true, location_name: "scanId"))
+    GetCodeSecurityScanRequest.struct_class = Types::GetCodeSecurityScanRequest
+
+    GetCodeSecurityScanResponse.add_member(:account_id, Shapes::ShapeRef.new(shape: String, location_name: "accountId"))
+    GetCodeSecurityScanResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    GetCodeSecurityScanResponse.add_member(:last_commit_id, Shapes::ShapeRef.new(shape: String, location_name: "lastCommitId"))
+    GetCodeSecurityScanResponse.add_member(:resource, Shapes::ShapeRef.new(shape: CodeSecurityResource, location_name: "resource"))
+    GetCodeSecurityScanResponse.add_member(:scan_id, Shapes::ShapeRef.new(shape: CodeSecurityUuid, location_name: "scanId"))
+    GetCodeSecurityScanResponse.add_member(:status, Shapes::ShapeRef.new(shape: CodeScanStatus, location_name: "status"))
+    GetCodeSecurityScanResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    GetCodeSecurityScanResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    GetCodeSecurityScanResponse.struct_class = Types::GetCodeSecurityScanResponse
+
     GetConfigurationRequest.struct_class = Types::GetConfigurationRequest
 
     GetConfigurationResponse.add_member(:ec2_configuration, Shapes::ShapeRef.new(shape: Ec2ConfigurationState, location_name: "ec2Configuration"))
@@ -1704,6 +2014,8 @@ module Aws::Inspector2
 
     InspectorScoreDetails.add_member(:adjusted_cvss, Shapes::ShapeRef.new(shape: CvssScoreDetails, location_name: "adjustedCvss"))
     InspectorScoreDetails.struct_class = Types::InspectorScoreDetails
+
+    IntegrationSummaries.member = Shapes::ShapeRef.new(shape: CodeSecurityIntegrationSummary)
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InternalServerException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Retry-After"))
@@ -1831,6 +2143,31 @@ module Aws::Inspector2
     ListCisScansResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListCisScansResponse.add_member(:scans, Shapes::ShapeRef.new(shape: CisScanList, location_name: "scans"))
     ListCisScansResponse.struct_class = Types::ListCisScansResponse
+
+    ListCodeSecurityIntegrationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListCodeSecurityIntegrationsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListCodeSecurityIntegrationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListCodeSecurityIntegrationsRequest.struct_class = Types::ListCodeSecurityIntegrationsRequest
+
+    ListCodeSecurityIntegrationsResponse.add_member(:integrations, Shapes::ShapeRef.new(shape: IntegrationSummaries, location_name: "integrations"))
+    ListCodeSecurityIntegrationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListCodeSecurityIntegrationsResponse.struct_class = Types::ListCodeSecurityIntegrationsResponse
+
+    ListCodeSecurityScanConfigurationAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListCodeSecurityScanConfigurationAssociationsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListCodeSecurityScanConfigurationAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListCodeSecurityScanConfigurationAssociationsRequest.add_member(:scan_configuration_arn, Shapes::ShapeRef.new(shape: ScanConfigurationArn, required: true, location_name: "scanConfigurationArn"))
+    ListCodeSecurityScanConfigurationAssociationsRequest.struct_class = Types::ListCodeSecurityScanConfigurationAssociationsRequest
+
+    ListCodeSecurityScanConfigurationAssociationsResponse.add_member(:associations, Shapes::ShapeRef.new(shape: CodeSecurityScanConfigurationAssociationSummaries, location_name: "associations"))
+    ListCodeSecurityScanConfigurationAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListCodeSecurityScanConfigurationAssociationsResponse.struct_class = Types::ListCodeSecurityScanConfigurationAssociationsResponse
+
+    ListCodeSecurityScanConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListCodeSecurityScanConfigurationsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListCodeSecurityScanConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListCodeSecurityScanConfigurationsRequest.struct_class = Types::ListCodeSecurityScanConfigurationsRequest
+
+    ListCodeSecurityScanConfigurationsResponse.add_member(:configurations, Shapes::ShapeRef.new(shape: CodeSecurityScanConfigurationSummaries, location_name: "configurations"))
+    ListCodeSecurityScanConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListCodeSecurityScanConfigurationsResponse.struct_class = Types::ListCodeSecurityScanConfigurationsResponse
 
     ListCoverageRequest.add_member(:filter_criteria, Shapes::ShapeRef.new(shape: CoverageFilterCriteria, location_name: "filterCriteria"))
     ListCoverageRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListCoverageMaxResults, location_name: "maxResults"))
@@ -2003,6 +2340,10 @@ module Aws::Inspector2
 
     PathList.member = Shapes::ShapeRef.new(shape: Path)
 
+    PeriodicScanConfiguration.add_member(:frequency, Shapes::ShapeRef.new(shape: PeriodicScanFrequency, location_name: "frequency"))
+    PeriodicScanConfiguration.add_member(:frequency_expression, Shapes::ShapeRef.new(shape: FrequencyExpression, location_name: "frequencyExpression"))
+    PeriodicScanConfiguration.struct_class = Types::PeriodicScanConfiguration
+
     Permission.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, required: true, location_name: "operation"))
     Permission.add_member(:service, Shapes::ShapeRef.new(shape: Service, required: true, location_name: "service"))
     Permission.struct_class = Types::Permission
@@ -2020,6 +2361,22 @@ module Aws::Inspector2
     PortRangeFilter.struct_class = Types::PortRangeFilter
 
     PortRangeFilterList.member = Shapes::ShapeRef.new(shape: PortRangeFilter)
+
+    ProjectCodeSecurityScanConfiguration.add_member(:continuous_integration_scan_configurations, Shapes::ShapeRef.new(shape: ProjectContinuousIntegrationScanConfigurationList, location_name: "continuousIntegrationScanConfigurations"))
+    ProjectCodeSecurityScanConfiguration.add_member(:periodic_scan_configurations, Shapes::ShapeRef.new(shape: ProjectPeriodicScanConfigurationList, location_name: "periodicScanConfigurations"))
+    ProjectCodeSecurityScanConfiguration.struct_class = Types::ProjectCodeSecurityScanConfiguration
+
+    ProjectContinuousIntegrationScanConfiguration.add_member(:rule_set_categories, Shapes::ShapeRef.new(shape: RuleSetCategories, location_name: "ruleSetCategories"))
+    ProjectContinuousIntegrationScanConfiguration.add_member(:supported_event, Shapes::ShapeRef.new(shape: ContinuousIntegrationScanEvent, location_name: "supportedEvent"))
+    ProjectContinuousIntegrationScanConfiguration.struct_class = Types::ProjectContinuousIntegrationScanConfiguration
+
+    ProjectContinuousIntegrationScanConfigurationList.member = Shapes::ShapeRef.new(shape: ProjectContinuousIntegrationScanConfiguration)
+
+    ProjectPeriodicScanConfiguration.add_member(:frequency_expression, Shapes::ShapeRef.new(shape: FrequencyExpression, location_name: "frequencyExpression"))
+    ProjectPeriodicScanConfiguration.add_member(:rule_set_categories, Shapes::ShapeRef.new(shape: RuleSetCategories, location_name: "ruleSetCategories"))
+    ProjectPeriodicScanConfiguration.struct_class = Types::ProjectPeriodicScanConfiguration
+
+    ProjectPeriodicScanConfigurationList.member = Shapes::ShapeRef.new(shape: ProjectPeriodicScanConfiguration)
 
     Recommendation.add_member(:url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Url"))
     Recommendation.add_member(:text, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "text"))
@@ -2062,6 +2419,7 @@ module Aws::Inspector2
     ResourceDetails.add_member(:aws_ec2_instance, Shapes::ShapeRef.new(shape: AwsEc2InstanceDetails, location_name: "awsEc2Instance"))
     ResourceDetails.add_member(:aws_ecr_container_image, Shapes::ShapeRef.new(shape: AwsEcrContainerImageDetails, location_name: "awsEcrContainerImage"))
     ResourceDetails.add_member(:aws_lambda_function, Shapes::ShapeRef.new(shape: AwsLambdaFunctionDetails, location_name: "awsLambdaFunction"))
+    ResourceDetails.add_member(:code_repository, Shapes::ShapeRef.new(shape: CodeRepositoryDetails, location_name: "codeRepository"))
     ResourceDetails.struct_class = Types::ResourceDetails
 
     ResourceFilterCriteria.add_member(:account_id, Shapes::ShapeRef.new(shape: ResourceStringFilterList, location_name: "accountId"))
@@ -2088,18 +2446,21 @@ module Aws::Inspector2
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    ResourceScanMetadata.add_member(:code_repository, Shapes::ShapeRef.new(shape: CodeRepositoryMetadata, location_name: "codeRepository"))
     ResourceScanMetadata.add_member(:ec2, Shapes::ShapeRef.new(shape: Ec2Metadata, location_name: "ec2"))
     ResourceScanMetadata.add_member(:ecr_image, Shapes::ShapeRef.new(shape: EcrContainerImageMetadata, location_name: "ecrImage"))
     ResourceScanMetadata.add_member(:ecr_repository, Shapes::ShapeRef.new(shape: EcrRepositoryMetadata, location_name: "ecrRepository"))
     ResourceScanMetadata.add_member(:lambda_function, Shapes::ShapeRef.new(shape: LambdaFunctionMetadata, location_name: "lambdaFunction"))
     ResourceScanMetadata.struct_class = Types::ResourceScanMetadata
 
+    ResourceState.add_member(:code_repository, Shapes::ShapeRef.new(shape: State, location_name: "codeRepository"))
     ResourceState.add_member(:ec2, Shapes::ShapeRef.new(shape: State, required: true, location_name: "ec2"))
     ResourceState.add_member(:ecr, Shapes::ShapeRef.new(shape: State, required: true, location_name: "ecr"))
     ResourceState.add_member(:lambda, Shapes::ShapeRef.new(shape: State, location_name: "lambda"))
     ResourceState.add_member(:lambda_code, Shapes::ShapeRef.new(shape: State, location_name: "lambdaCode"))
     ResourceState.struct_class = Types::ResourceState
 
+    ResourceStatus.add_member(:code_repository, Shapes::ShapeRef.new(shape: Status, location_name: "codeRepository"))
     ResourceStatus.add_member(:ec2, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "ec2"))
     ResourceStatus.add_member(:ecr, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "ecr"))
     ResourceStatus.add_member(:lambda, Shapes::ShapeRef.new(shape: Status, location_name: "lambda"))
@@ -2113,6 +2474,8 @@ module Aws::Inspector2
     ResourceStringFilterList.member = Shapes::ShapeRef.new(shape: ResourceStringFilter)
 
     ResourceTagFilterList.member = Shapes::ShapeRef.new(shape: TagFilter)
+
+    RuleSetCategories.member = Shapes::ShapeRef.new(shape: RuleSetCategory)
 
     ScanStatus.add_member(:reason, Shapes::ShapeRef.new(shape: ScanStatusReason, required: true, location_name: "reason"))
     ScanStatus.add_member(:status_code, Shapes::ShapeRef.new(shape: ScanStatusCode, required: true, location_name: "statusCode"))
@@ -2129,6 +2492,9 @@ module Aws::Inspector2
     Schedule.add_member_subclass(:weekly, Types::Schedule::Weekly)
     Schedule.add_member_subclass(:unknown, Types::Schedule::Unknown)
     Schedule.struct_class = Types::Schedule
+
+    ScopeSettings.add_member(:project_selection_scope, Shapes::ShapeRef.new(shape: ProjectSelectionScope, location_name: "projectSelectionScope"))
+    ScopeSettings.struct_class = Types::ScopeSettings
 
     SearchVulnerabilitiesFilterCriteria.add_member(:vulnerability_ids, Shapes::ShapeRef.new(shape: VulnIdList, required: true, location_name: "vulnerabilityIds"))
     SearchVulnerabilitiesFilterCriteria.struct_class = Types::SearchVulnerabilitiesFilterCriteria
@@ -2178,6 +2544,14 @@ module Aws::Inspector2
     StartCisSessionRequest.struct_class = Types::StartCisSessionRequest
 
     StartCisSessionResponse.struct_class = Types::StartCisSessionResponse
+
+    StartCodeSecurityScanRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CodeSecurityClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    StartCodeSecurityScanRequest.add_member(:resource, Shapes::ShapeRef.new(shape: CodeSecurityResource, required: true, location_name: "resource"))
+    StartCodeSecurityScanRequest.struct_class = Types::StartCodeSecurityScanRequest
+
+    StartCodeSecurityScanResponse.add_member(:scan_id, Shapes::ShapeRef.new(shape: CodeSecurityUuid, location_name: "scanId"))
+    StartCodeSecurityScanResponse.add_member(:status, Shapes::ShapeRef.new(shape: CodeScanStatus, location_name: "status"))
+    StartCodeSecurityScanResponse.struct_class = Types::StartCodeSecurityScanResponse
 
     State.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "errorCode"))
     State.add_member(:error_message, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "errorMessage"))
@@ -2230,6 +2604,12 @@ module Aws::Inspector2
     StringList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
     SubnetIdList.member = Shapes::ShapeRef.new(shape: SubnetId)
+
+    SuccessfulAssociationResult.add_member(:resource, Shapes::ShapeRef.new(shape: CodeSecurityResource, location_name: "resource"))
+    SuccessfulAssociationResult.add_member(:scan_configuration_arn, Shapes::ShapeRef.new(shape: ScanConfigurationArn, location_name: "scanConfigurationArn"))
+    SuccessfulAssociationResult.struct_class = Types::SuccessfulAssociationResult
+
+    SuccessfulAssociationResultList.member = Shapes::ShapeRef.new(shape: SuccessfulAssociationResult)
 
     SuggestedFix.add_member(:code, Shapes::ShapeRef.new(shape: SuggestedFixCodeString, location_name: "code"))
     SuggestedFix.add_member(:description, Shapes::ShapeRef.new(shape: SuggestedFixDescriptionString, location_name: "description"))
@@ -2316,6 +2696,21 @@ module Aws::Inspector2
     UpdateCisTargets.add_member(:target_resource_tags, Shapes::ShapeRef.new(shape: TargetResourceTags, location_name: "targetResourceTags"))
     UpdateCisTargets.struct_class = Types::UpdateCisTargets
 
+    UpdateCodeSecurityIntegrationRequest.add_member(:details, Shapes::ShapeRef.new(shape: UpdateIntegrationDetails, required: true, location_name: "details"))
+    UpdateCodeSecurityIntegrationRequest.add_member(:integration_arn, Shapes::ShapeRef.new(shape: CodeSecurityIntegrationArn, required: true, location_name: "integrationArn"))
+    UpdateCodeSecurityIntegrationRequest.struct_class = Types::UpdateCodeSecurityIntegrationRequest
+
+    UpdateCodeSecurityIntegrationResponse.add_member(:integration_arn, Shapes::ShapeRef.new(shape: CodeSecurityIntegrationArn, required: true, location_name: "integrationArn"))
+    UpdateCodeSecurityIntegrationResponse.add_member(:status, Shapes::ShapeRef.new(shape: IntegrationStatus, required: true, location_name: "status"))
+    UpdateCodeSecurityIntegrationResponse.struct_class = Types::UpdateCodeSecurityIntegrationResponse
+
+    UpdateCodeSecurityScanConfigurationRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: CodeSecurityScanConfiguration, required: true, location_name: "configuration"))
+    UpdateCodeSecurityScanConfigurationRequest.add_member(:scan_configuration_arn, Shapes::ShapeRef.new(shape: ScanConfigurationArn, required: true, location_name: "scanConfigurationArn"))
+    UpdateCodeSecurityScanConfigurationRequest.struct_class = Types::UpdateCodeSecurityScanConfigurationRequest
+
+    UpdateCodeSecurityScanConfigurationResponse.add_member(:scan_configuration_arn, Shapes::ShapeRef.new(shape: ScanConfigurationArn, location_name: "scanConfigurationArn"))
+    UpdateCodeSecurityScanConfigurationResponse.struct_class = Types::UpdateCodeSecurityScanConfigurationResponse
+
     UpdateConfigurationRequest.add_member(:ec2_configuration, Shapes::ShapeRef.new(shape: Ec2Configuration, location_name: "ec2Configuration"))
     UpdateConfigurationRequest.add_member(:ecr_configuration, Shapes::ShapeRef.new(shape: EcrConfiguration, location_name: "ecrConfiguration"))
     UpdateConfigurationRequest.struct_class = Types::UpdateConfigurationRequest
@@ -2349,6 +2744,21 @@ module Aws::Inspector2
 
     UpdateFilterResponse.add_member(:arn, Shapes::ShapeRef.new(shape: FilterArn, required: true, location_name: "arn"))
     UpdateFilterResponse.struct_class = Types::UpdateFilterResponse
+
+    UpdateGitHubIntegrationDetail.add_member(:code, Shapes::ShapeRef.new(shape: GitHubAuthCode, required: true, location_name: "code"))
+    UpdateGitHubIntegrationDetail.add_member(:installation_id, Shapes::ShapeRef.new(shape: GitHubInstallationId, required: true, location_name: "installationId"))
+    UpdateGitHubIntegrationDetail.struct_class = Types::UpdateGitHubIntegrationDetail
+
+    UpdateGitLabSelfManagedIntegrationDetail.add_member(:auth_code, Shapes::ShapeRef.new(shape: GitLabAuthCode, required: true, location_name: "authCode"))
+    UpdateGitLabSelfManagedIntegrationDetail.struct_class = Types::UpdateGitLabSelfManagedIntegrationDetail
+
+    UpdateIntegrationDetails.add_member(:github, Shapes::ShapeRef.new(shape: UpdateGitHubIntegrationDetail, location_name: "github"))
+    UpdateIntegrationDetails.add_member(:gitlab_self_managed, Shapes::ShapeRef.new(shape: UpdateGitLabSelfManagedIntegrationDetail, location_name: "gitlabSelfManaged"))
+    UpdateIntegrationDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    UpdateIntegrationDetails.add_member_subclass(:github, Types::UpdateIntegrationDetails::Github)
+    UpdateIntegrationDetails.add_member_subclass(:gitlab_self_managed, Types::UpdateIntegrationDetails::GitlabSelfManaged)
+    UpdateIntegrationDetails.add_member_subclass(:unknown, Types::UpdateIntegrationDetails::Unknown)
+    UpdateIntegrationDetails.struct_class = Types::UpdateIntegrationDetails
 
     UpdateOrgEc2DeepInspectionConfigurationRequest.add_member(:org_package_paths, Shapes::ShapeRef.new(shape: PathList, required: true, location_name: "orgPackagePaths"))
     UpdateOrgEc2DeepInspectionConfigurationRequest.struct_class = Types::UpdateOrgEc2DeepInspectionConfigurationRequest
@@ -2468,6 +2878,34 @@ module Aws::Inspector2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:batch_associate_code_security_scan_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchAssociateCodeSecurityScanConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/codesecurity/scan-configuration/batch/associate"
+        o.input = Shapes::ShapeRef.new(shape: BatchAssociateCodeSecurityScanConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchAssociateCodeSecurityScanConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:batch_disassociate_code_security_scan_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchDisassociateCodeSecurityScanConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/codesecurity/scan-configuration/batch/disassociate"
+        o.input = Shapes::ShapeRef.new(shape: BatchDisassociateCodeSecurityScanConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchDisassociateCodeSecurityScanConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:batch_get_account_status, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchGetAccountStatus"
         o.http_method = "POST"
@@ -2579,6 +3017,34 @@ module Aws::Inspector2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:create_code_security_integration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCodeSecurityIntegration"
+        o.http_method = "POST"
+        o.http_request_uri = "/codesecurity/integration/create"
+        o.input = Shapes::ShapeRef.new(shape: CreateCodeSecurityIntegrationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateCodeSecurityIntegrationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:create_code_security_scan_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCodeSecurityScanConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/codesecurity/scan-configuration/create"
+        o.input = Shapes::ShapeRef.new(shape: CreateCodeSecurityScanConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateCodeSecurityScanConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:create_filter, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateFilter"
         o.http_method = "POST"
@@ -2629,6 +3095,32 @@ module Aws::Inspector2
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_code_security_integration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCodeSecurityIntegration"
+        o.http_method = "POST"
+        o.http_request_uri = "/codesecurity/integration/delete"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCodeSecurityIntegrationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteCodeSecurityIntegrationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_code_security_scan_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCodeSecurityScanConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/codesecurity/scan-configuration/delete"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCodeSecurityScanConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteCodeSecurityScanConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -2770,6 +3262,46 @@ module Aws::Inspector2
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:get_code_security_integration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCodeSecurityIntegration"
+        o.http_method = "POST"
+        o.http_request_uri = "/codesecurity/integration/get"
+        o.input = Shapes::ShapeRef.new(shape: GetCodeSecurityIntegrationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCodeSecurityIntegrationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_code_security_scan, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCodeSecurityScan"
+        o.http_method = "POST"
+        o.http_request_uri = "/codesecurity/scan/get"
+        o.input = Shapes::ShapeRef.new(shape: GetCodeSecurityScanRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCodeSecurityScanResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_code_security_scan_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCodeSecurityScanConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/codesecurity/scan-configuration/get"
+        o.input = Shapes::ShapeRef.new(shape: GetCodeSecurityScanConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCodeSecurityScanConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:get_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -2948,6 +3480,44 @@ module Aws::Inspector2
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_code_security_integrations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCodeSecurityIntegrations"
+        o.http_method = "POST"
+        o.http_request_uri = "/codesecurity/integration/list"
+        o.input = Shapes::ShapeRef.new(shape: ListCodeSecurityIntegrationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCodeSecurityIntegrationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:list_code_security_scan_configuration_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCodeSecurityScanConfigurationAssociations"
+        o.http_method = "POST"
+        o.http_request_uri = "/codesecurity/scan-configuration/associations/list"
+        o.input = Shapes::ShapeRef.new(shape: ListCodeSecurityScanConfigurationAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCodeSecurityScanConfigurationAssociationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:list_code_security_scan_configurations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCodeSecurityScanConfigurations"
+        o.http_method = "POST"
+        o.http_request_uri = "/codesecurity/scan-configuration/list"
+        o.input = Shapes::ShapeRef.new(shape: ListCodeSecurityScanConfigurationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCodeSecurityScanConfigurationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:list_coverage, Seahorse::Model::Operation.new.tap do |o|
@@ -3170,6 +3740,20 @@ module Aws::Inspector2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:start_code_security_scan, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartCodeSecurityScan"
+        o.http_method = "POST"
+        o.http_request_uri = "/codesecurity/scan/start"
+        o.input = Shapes::ShapeRef.new(shape: StartCodeSecurityScanRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartCodeSecurityScanResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:stop_cis_session, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StopCisSession"
         o.http_method = "PUT"
@@ -3218,6 +3802,34 @@ module Aws::Inspector2
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_code_security_integration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateCodeSecurityIntegration"
+        o.http_method = "POST"
+        o.http_request_uri = "/codesecurity/integration/update"
+        o.input = Shapes::ShapeRef.new(shape: UpdateCodeSecurityIntegrationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateCodeSecurityIntegrationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_code_security_scan_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateCodeSecurityScanConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/codesecurity/scan-configuration/update"
+        o.input = Shapes::ShapeRef.new(shape: UpdateCodeSecurityScanConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateCodeSecurityScanConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 

@@ -8,18 +8,6 @@
 Feature: Smoke tests for ACM
 
   @acm @smoke
-  Scenario: ListCertificatesSuccess
-    Given I create a 'Aws::ACM' client with config:
-      """
-{"region":"us-west-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'list_certificates' with params:
-      """
-{}
-      """
-    Then I expect an error was not raised
-
-  @acm @smoke
   Scenario: GetCertificateFailure
     Given I create a 'Aws::ACM' client with config:
       """
@@ -30,3 +18,15 @@ Feature: Smoke tests for ACM
 {"certificate_arn":"arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012"}
       """
     Then I expect an error was raised
+
+  @acm @smoke
+  Scenario: ListCertificatesSuccess
+    Given I create a 'Aws::ACM' client with config:
+      """
+{"region":"us-west-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'list_certificates' with params:
+      """
+{}
+      """
+    Then I expect an error was not raised

@@ -638,6 +638,7 @@ module Aws::DatabaseMigrationService
     CreateDataProviderMessage.add_member(:data_provider_name, Shapes::ShapeRef.new(shape: String, location_name: "DataProviderName"))
     CreateDataProviderMessage.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     CreateDataProviderMessage.add_member(:engine, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Engine"))
+    CreateDataProviderMessage.add_member(:virtual, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "Virtual"))
     CreateDataProviderMessage.add_member(:settings, Shapes::ShapeRef.new(shape: DataProviderSettings, required: true, location_name: "Settings"))
     CreateDataProviderMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateDataProviderMessage.struct_class = Types::CreateDataProviderMessage
@@ -845,6 +846,7 @@ module Aws::DatabaseMigrationService
     DataProvider.add_member(:data_provider_creation_time, Shapes::ShapeRef.new(shape: Iso8601DateTime, location_name: "DataProviderCreationTime"))
     DataProvider.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     DataProvider.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
+    DataProvider.add_member(:virtual, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "Virtual"))
     DataProvider.add_member(:settings, Shapes::ShapeRef.new(shape: DataProviderSettings, location_name: "Settings"))
     DataProvider.struct_class = Types::DataProvider
 
@@ -1640,6 +1642,8 @@ module Aws::DatabaseMigrationService
     IbmDb2LuwDataProviderSettings.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
     IbmDb2LuwDataProviderSettings.add_member(:ssl_mode, Shapes::ShapeRef.new(shape: DmsSslModeValue, location_name: "SslMode"))
     IbmDb2LuwDataProviderSettings.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "CertificateArn"))
+    IbmDb2LuwDataProviderSettings.add_member(:s3_path, Shapes::ShapeRef.new(shape: String, location_name: "S3Path"))
+    IbmDb2LuwDataProviderSettings.add_member(:s3_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "S3AccessRoleArn"))
     IbmDb2LuwDataProviderSettings.struct_class = Types::IbmDb2LuwDataProviderSettings
 
     IbmDb2zOsDataProviderSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
@@ -1647,6 +1651,8 @@ module Aws::DatabaseMigrationService
     IbmDb2zOsDataProviderSettings.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
     IbmDb2zOsDataProviderSettings.add_member(:ssl_mode, Shapes::ShapeRef.new(shape: DmsSslModeValue, location_name: "SslMode"))
     IbmDb2zOsDataProviderSettings.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "CertificateArn"))
+    IbmDb2zOsDataProviderSettings.add_member(:s3_path, Shapes::ShapeRef.new(shape: String, location_name: "S3Path"))
+    IbmDb2zOsDataProviderSettings.add_member(:s3_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "S3AccessRoleArn"))
     IbmDb2zOsDataProviderSettings.struct_class = Types::IbmDb2zOsDataProviderSettings
 
     ImportCertificateMessage.add_member(:certificate_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CertificateIdentifier"))
@@ -1782,6 +1788,8 @@ module Aws::DatabaseMigrationService
     MariaDbDataProviderSettings.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
     MariaDbDataProviderSettings.add_member(:ssl_mode, Shapes::ShapeRef.new(shape: DmsSslModeValue, location_name: "SslMode"))
     MariaDbDataProviderSettings.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "CertificateArn"))
+    MariaDbDataProviderSettings.add_member(:s3_path, Shapes::ShapeRef.new(shape: String, location_name: "S3Path"))
+    MariaDbDataProviderSettings.add_member(:s3_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "S3AccessRoleArn"))
     MariaDbDataProviderSettings.struct_class = Types::MariaDbDataProviderSettings
 
     MicrosoftSQLServerSettings.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
@@ -1809,6 +1817,8 @@ module Aws::DatabaseMigrationService
     MicrosoftSqlServerDataProviderSettings.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
     MicrosoftSqlServerDataProviderSettings.add_member(:ssl_mode, Shapes::ShapeRef.new(shape: DmsSslModeValue, location_name: "SslMode"))
     MicrosoftSqlServerDataProviderSettings.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "CertificateArn"))
+    MicrosoftSqlServerDataProviderSettings.add_member(:s3_path, Shapes::ShapeRef.new(shape: String, location_name: "S3Path"))
+    MicrosoftSqlServerDataProviderSettings.add_member(:s3_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "S3AccessRoleArn"))
     MicrosoftSqlServerDataProviderSettings.struct_class = Types::MicrosoftSqlServerDataProviderSettings
 
     MigrationProject.add_member(:migration_project_name, Shapes::ShapeRef.new(shape: String, location_name: "MigrationProjectName"))
@@ -1850,6 +1860,7 @@ module Aws::DatabaseMigrationService
     ModifyDataProviderMessage.add_member(:data_provider_name, Shapes::ShapeRef.new(shape: String, location_name: "DataProviderName"))
     ModifyDataProviderMessage.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     ModifyDataProviderMessage.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
+    ModifyDataProviderMessage.add_member(:virtual, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "Virtual"))
     ModifyDataProviderMessage.add_member(:exact_settings, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ExactSettings"))
     ModifyDataProviderMessage.add_member(:settings, Shapes::ShapeRef.new(shape: DataProviderSettings, location_name: "Settings"))
     ModifyDataProviderMessage.struct_class = Types::ModifyDataProviderMessage
@@ -2045,6 +2056,8 @@ module Aws::DatabaseMigrationService
     MySqlDataProviderSettings.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
     MySqlDataProviderSettings.add_member(:ssl_mode, Shapes::ShapeRef.new(shape: DmsSslModeValue, location_name: "SslMode"))
     MySqlDataProviderSettings.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "CertificateArn"))
+    MySqlDataProviderSettings.add_member(:s3_path, Shapes::ShapeRef.new(shape: String, location_name: "S3Path"))
+    MySqlDataProviderSettings.add_member(:s3_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "S3AccessRoleArn"))
     MySqlDataProviderSettings.struct_class = Types::MySqlDataProviderSettings
 
     NeptuneSettings.add_member(:service_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "ServiceAccessRoleArn"))
@@ -2066,6 +2079,8 @@ module Aws::DatabaseMigrationService
     OracleDataProviderSettings.add_member(:secrets_manager_oracle_asm_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerOracleAsmAccessRoleArn"))
     OracleDataProviderSettings.add_member(:secrets_manager_security_db_encryption_secret_id, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerSecurityDbEncryptionSecretId"))
     OracleDataProviderSettings.add_member(:secrets_manager_security_db_encryption_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerSecurityDbEncryptionAccessRoleArn"))
+    OracleDataProviderSettings.add_member(:s3_path, Shapes::ShapeRef.new(shape: String, location_name: "S3Path"))
+    OracleDataProviderSettings.add_member(:s3_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "S3AccessRoleArn"))
     OracleDataProviderSettings.struct_class = Types::OracleDataProviderSettings
 
     OracleSettings.add_member(:add_supplemental_logging, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AddSupplementalLogging"))
@@ -2173,6 +2188,8 @@ module Aws::DatabaseMigrationService
     PostgreSqlDataProviderSettings.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
     PostgreSqlDataProviderSettings.add_member(:ssl_mode, Shapes::ShapeRef.new(shape: DmsSslModeValue, location_name: "SslMode"))
     PostgreSqlDataProviderSettings.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "CertificateArn"))
+    PostgreSqlDataProviderSettings.add_member(:s3_path, Shapes::ShapeRef.new(shape: String, location_name: "S3Path"))
+    PostgreSqlDataProviderSettings.add_member(:s3_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "S3AccessRoleArn"))
     PostgreSqlDataProviderSettings.struct_class = Types::PostgreSqlDataProviderSettings
 
     PremigrationAssessmentStatus.add_member(:premigration_assessment_run_arn, Shapes::ShapeRef.new(shape: String, location_name: "PremigrationAssessmentRunArn"))
@@ -2262,6 +2279,8 @@ module Aws::DatabaseMigrationService
     RedshiftDataProviderSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
     RedshiftDataProviderSettings.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
     RedshiftDataProviderSettings.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
+    RedshiftDataProviderSettings.add_member(:s3_path, Shapes::ShapeRef.new(shape: String, location_name: "S3Path"))
+    RedshiftDataProviderSettings.add_member(:s3_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "S3AccessRoleArn"))
     RedshiftDataProviderSettings.struct_class = Types::RedshiftDataProviderSettings
 
     RedshiftSettings.add_member(:accept_any_date, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AcceptAnyDate"))

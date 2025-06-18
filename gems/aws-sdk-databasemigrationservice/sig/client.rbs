@@ -179,24 +179,31 @@ module Aws
                                   ?data_provider_name: ::String,
                                   ?description: ::String,
                                   engine: ::String,
+                                  ?virtual: bool,
                                   settings: {
                                     redshift_settings: {
                                       server_name: ::String?,
                                       port: ::Integer?,
-                                      database_name: ::String?
+                                      database_name: ::String?,
+                                      s3_path: ::String?,
+                                      s3_access_role_arn: ::String?
                                     }?,
                                     postgre_sql_settings: {
                                       server_name: ::String?,
                                       port: ::Integer?,
                                       database_name: ::String?,
                                       ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
-                                      certificate_arn: ::String?
+                                      certificate_arn: ::String?,
+                                      s3_path: ::String?,
+                                      s3_access_role_arn: ::String?
                                     }?,
                                     my_sql_settings: {
                                       server_name: ::String?,
                                       port: ::Integer?,
                                       ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
-                                      certificate_arn: ::String?
+                                      certificate_arn: ::String?,
+                                      s3_path: ::String?,
+                                      s3_access_role_arn: ::String?
                                     }?,
                                     oracle_settings: {
                                       server_name: ::String?,
@@ -208,14 +215,18 @@ module Aws
                                       secrets_manager_oracle_asm_secret_id: ::String?,
                                       secrets_manager_oracle_asm_access_role_arn: ::String?,
                                       secrets_manager_security_db_encryption_secret_id: ::String?,
-                                      secrets_manager_security_db_encryption_access_role_arn: ::String?
+                                      secrets_manager_security_db_encryption_access_role_arn: ::String?,
+                                      s3_path: ::String?,
+                                      s3_access_role_arn: ::String?
                                     }?,
                                     microsoft_sql_server_settings: {
                                       server_name: ::String?,
                                       port: ::Integer?,
                                       database_name: ::String?,
                                       ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
-                                      certificate_arn: ::String?
+                                      certificate_arn: ::String?,
+                                      s3_path: ::String?,
+                                      s3_access_role_arn: ::String?
                                     }?,
                                     doc_db_settings: {
                                       server_name: ::String?,
@@ -228,21 +239,27 @@ module Aws
                                       server_name: ::String?,
                                       port: ::Integer?,
                                       ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
-                                      certificate_arn: ::String?
+                                      certificate_arn: ::String?,
+                                      s3_path: ::String?,
+                                      s3_access_role_arn: ::String?
                                     }?,
                                     ibm_db_2_luw_settings: {
                                       server_name: ::String?,
                                       port: ::Integer?,
                                       database_name: ::String?,
                                       ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
-                                      certificate_arn: ::String?
+                                      certificate_arn: ::String?,
+                                      s3_path: ::String?,
+                                      s3_access_role_arn: ::String?
                                     }?,
                                     ibm_db_2z_os_settings: {
                                       server_name: ::String?,
                                       port: ::Integer?,
                                       database_name: ::String?,
                                       ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
-                                      certificate_arn: ::String?
+                                      certificate_arn: ::String?,
+                                      s3_path: ::String?,
+                                      s3_access_role_arn: ::String?
                                     }?,
                                     mongo_db_settings: {
                                       server_name: ::String?,
@@ -1846,25 +1863,32 @@ module Aws
                                   ?data_provider_name: ::String,
                                   ?description: ::String,
                                   ?engine: ::String,
+                                  ?virtual: bool,
                                   ?exact_settings: bool,
                                   ?settings: {
                                     redshift_settings: {
                                       server_name: ::String?,
                                       port: ::Integer?,
-                                      database_name: ::String?
+                                      database_name: ::String?,
+                                      s3_path: ::String?,
+                                      s3_access_role_arn: ::String?
                                     }?,
                                     postgre_sql_settings: {
                                       server_name: ::String?,
                                       port: ::Integer?,
                                       database_name: ::String?,
                                       ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
-                                      certificate_arn: ::String?
+                                      certificate_arn: ::String?,
+                                      s3_path: ::String?,
+                                      s3_access_role_arn: ::String?
                                     }?,
                                     my_sql_settings: {
                                       server_name: ::String?,
                                       port: ::Integer?,
                                       ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
-                                      certificate_arn: ::String?
+                                      certificate_arn: ::String?,
+                                      s3_path: ::String?,
+                                      s3_access_role_arn: ::String?
                                     }?,
                                     oracle_settings: {
                                       server_name: ::String?,
@@ -1876,14 +1900,18 @@ module Aws
                                       secrets_manager_oracle_asm_secret_id: ::String?,
                                       secrets_manager_oracle_asm_access_role_arn: ::String?,
                                       secrets_manager_security_db_encryption_secret_id: ::String?,
-                                      secrets_manager_security_db_encryption_access_role_arn: ::String?
+                                      secrets_manager_security_db_encryption_access_role_arn: ::String?,
+                                      s3_path: ::String?,
+                                      s3_access_role_arn: ::String?
                                     }?,
                                     microsoft_sql_server_settings: {
                                       server_name: ::String?,
                                       port: ::Integer?,
                                       database_name: ::String?,
                                       ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
-                                      certificate_arn: ::String?
+                                      certificate_arn: ::String?,
+                                      s3_path: ::String?,
+                                      s3_access_role_arn: ::String?
                                     }?,
                                     doc_db_settings: {
                                       server_name: ::String?,
@@ -1896,21 +1924,27 @@ module Aws
                                       server_name: ::String?,
                                       port: ::Integer?,
                                       ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
-                                      certificate_arn: ::String?
+                                      certificate_arn: ::String?,
+                                      s3_path: ::String?,
+                                      s3_access_role_arn: ::String?
                                     }?,
                                     ibm_db_2_luw_settings: {
                                       server_name: ::String?,
                                       port: ::Integer?,
                                       database_name: ::String?,
                                       ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
-                                      certificate_arn: ::String?
+                                      certificate_arn: ::String?,
+                                      s3_path: ::String?,
+                                      s3_access_role_arn: ::String?
                                     }?,
                                     ibm_db_2z_os_settings: {
                                       server_name: ::String?,
                                       port: ::Integer?,
                                       database_name: ::String?,
                                       ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
-                                      certificate_arn: ::String?
+                                      certificate_arn: ::String?,
+                                      s3_path: ::String?,
+                                      s3_access_role_arn: ::String?
                                     }?,
                                     mongo_db_settings: {
                                       server_name: ::String?,

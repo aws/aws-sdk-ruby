@@ -95,12 +95,16 @@ module Aws::ConnectCampaignsV2
     GetCampaignStateResponse = Shapes::StructureShape.new(name: 'GetCampaignStateResponse')
     GetConnectInstanceConfigRequest = Shapes::StructureShape.new(name: 'GetConnectInstanceConfigRequest')
     GetConnectInstanceConfigResponse = Shapes::StructureShape.new(name: 'GetConnectInstanceConfigResponse')
+    GetInstanceCommunicationLimitsRequest = Shapes::StructureShape.new(name: 'GetInstanceCommunicationLimitsRequest')
+    GetInstanceCommunicationLimitsResponse = Shapes::StructureShape.new(name: 'GetInstanceCommunicationLimitsResponse')
     GetInstanceOnboardingJobStatusRequest = Shapes::StructureShape.new(name: 'GetInstanceOnboardingJobStatusRequest')
     GetInstanceOnboardingJobStatusResponse = Shapes::StructureShape.new(name: 'GetInstanceOnboardingJobStatusResponse')
+    InstanceCommunicationLimitsConfig = Shapes::StructureShape.new(name: 'InstanceCommunicationLimitsConfig')
     InstanceConfig = Shapes::StructureShape.new(name: 'InstanceConfig')
     InstanceId = Shapes::StringShape.new(name: 'InstanceId')
     InstanceIdFilter = Shapes::StructureShape.new(name: 'InstanceIdFilter')
     InstanceIdFilterOperator = Shapes::StringShape.new(name: 'InstanceIdFilterOperator')
+    InstanceLimitsHandling = Shapes::StringShape.new(name: 'InstanceLimitsHandling')
     InstanceOnboardingJobFailureCode = Shapes::StringShape.new(name: 'InstanceOnboardingJobFailureCode')
     InstanceOnboardingJobStatus = Shapes::StructureShape.new(name: 'InstanceOnboardingJobStatus')
     InstanceOnboardingJobStatusCode = Shapes::StringShape.new(name: 'InstanceOnboardingJobStatusCode')
@@ -139,6 +143,7 @@ module Aws::ConnectCampaignsV2
     ProfileOutboundRequestList = Shapes::ListShape.new(name: 'ProfileOutboundRequestList')
     ProgressiveConfig = Shapes::StructureShape.new(name: 'ProgressiveConfig')
     PutConnectInstanceIntegrationRequest = Shapes::StructureShape.new(name: 'PutConnectInstanceIntegrationRequest')
+    PutInstanceCommunicationLimitsRequest = Shapes::StructureShape.new(name: 'PutInstanceCommunicationLimitsRequest')
     PutOutboundRequestBatchRequest = Shapes::StructureShape.new(name: 'PutOutboundRequestBatchRequest')
     PutOutboundRequestBatchResponse = Shapes::StructureShape.new(name: 'PutOutboundRequestBatchResponse')
     PutProfileOutboundRequestBatchRequest = Shapes::StructureShape.new(name: 'PutProfileOutboundRequestBatchRequest')
@@ -270,6 +275,7 @@ module Aws::ConnectCampaignsV2
     CommunicationLimits.struct_class = Types::CommunicationLimits
 
     CommunicationLimitsConfig.add_member(:all_channel_subtypes, Shapes::ShapeRef.new(shape: CommunicationLimits, location_name: "allChannelSubtypes"))
+    CommunicationLimitsConfig.add_member(:instance_limits_handling, Shapes::ShapeRef.new(shape: InstanceLimitsHandling, location_name: "instanceLimitsHandling"))
     CommunicationLimitsConfig.struct_class = Types::CommunicationLimitsConfig
 
     CommunicationTimeConfig.add_member(:local_time_zone_config, Shapes::ShapeRef.new(shape: LocalTimeZoneConfig, required: true, location_name: "localTimeZoneConfig"))
@@ -415,11 +421,20 @@ module Aws::ConnectCampaignsV2
     GetConnectInstanceConfigResponse.add_member(:connect_instance_config, Shapes::ShapeRef.new(shape: InstanceConfig, location_name: "connectInstanceConfig"))
     GetConnectInstanceConfigResponse.struct_class = Types::GetConnectInstanceConfigResponse
 
+    GetInstanceCommunicationLimitsRequest.add_member(:connect_instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "connectInstanceId"))
+    GetInstanceCommunicationLimitsRequest.struct_class = Types::GetInstanceCommunicationLimitsRequest
+
+    GetInstanceCommunicationLimitsResponse.add_member(:communication_limits_config, Shapes::ShapeRef.new(shape: InstanceCommunicationLimitsConfig, location_name: "communicationLimitsConfig"))
+    GetInstanceCommunicationLimitsResponse.struct_class = Types::GetInstanceCommunicationLimitsResponse
+
     GetInstanceOnboardingJobStatusRequest.add_member(:connect_instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "connectInstanceId"))
     GetInstanceOnboardingJobStatusRequest.struct_class = Types::GetInstanceOnboardingJobStatusRequest
 
     GetInstanceOnboardingJobStatusResponse.add_member(:connect_instance_onboarding_job_status, Shapes::ShapeRef.new(shape: InstanceOnboardingJobStatus, location_name: "connectInstanceOnboardingJobStatus"))
     GetInstanceOnboardingJobStatusResponse.struct_class = Types::GetInstanceOnboardingJobStatusResponse
+
+    InstanceCommunicationLimitsConfig.add_member(:all_channel_subtypes, Shapes::ShapeRef.new(shape: CommunicationLimits, location_name: "allChannelSubtypes"))
+    InstanceCommunicationLimitsConfig.struct_class = Types::InstanceCommunicationLimitsConfig
 
     InstanceConfig.add_member(:connect_instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "connectInstanceId"))
     InstanceConfig.add_member(:service_linked_role_arn, Shapes::ShapeRef.new(shape: ServiceLinkedRoleArn, required: true, location_name: "serviceLinkedRoleArn"))
@@ -539,6 +554,10 @@ module Aws::ConnectCampaignsV2
     PutConnectInstanceIntegrationRequest.add_member(:connect_instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "connectInstanceId"))
     PutConnectInstanceIntegrationRequest.add_member(:integration_config, Shapes::ShapeRef.new(shape: IntegrationConfig, required: true, location_name: "integrationConfig"))
     PutConnectInstanceIntegrationRequest.struct_class = Types::PutConnectInstanceIntegrationRequest
+
+    PutInstanceCommunicationLimitsRequest.add_member(:connect_instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "connectInstanceId"))
+    PutInstanceCommunicationLimitsRequest.add_member(:communication_limits_config, Shapes::ShapeRef.new(shape: InstanceCommunicationLimitsConfig, required: true, location_name: "communicationLimitsConfig"))
+    PutInstanceCommunicationLimitsRequest.struct_class = Types::PutInstanceCommunicationLimitsRequest
 
     PutOutboundRequestBatchRequest.add_member(:id, Shapes::ShapeRef.new(shape: CampaignId, required: true, location: "uri", location_name: "id"))
     PutOutboundRequestBatchRequest.add_member(:outbound_requests, Shapes::ShapeRef.new(shape: OutboundRequestList, required: true, location_name: "outboundRequests"))
@@ -917,6 +936,18 @@ module Aws::ConnectCampaignsV2
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:get_instance_communication_limits, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetInstanceCommunicationLimits"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/connect-instance/{connectInstanceId}/communication-limits"
+        o.input = Shapes::ShapeRef.new(shape: GetInstanceCommunicationLimitsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetInstanceCommunicationLimitsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:get_instance_onboarding_job_status, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetInstanceOnboardingJobStatus"
         o.http_method = "GET"
@@ -1005,6 +1036,19 @@ module Aws::ConnectCampaignsV2
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:put_instance_communication_limits, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutInstanceCommunicationLimits"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v2/connect-instance/{connectInstanceId}/communication-limits"
+        o.input = Shapes::ShapeRef.new(shape: PutInstanceCommunicationLimitsRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:put_outbound_request_batch, Seahorse::Model::Operation.new.tap do |o|

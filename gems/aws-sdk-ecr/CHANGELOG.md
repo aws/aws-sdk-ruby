@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.104.0 (2025-06-16)
+------------------
+
+* Feature - The `DescribeImageScanning` API now includes `lastInUseAt` and `InUseCount` fields that can be used to prioritize vulnerability remediation for images that are actively being used.
+
 1.103.0 (2025-06-02)
 ------------------
 

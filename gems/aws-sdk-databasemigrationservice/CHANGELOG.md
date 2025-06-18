@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.124.0 (2025-06-17)
+------------------
+
+* Feature - Add "Virtual" field to Data Provider as well as "S3Path" and "S3AccessRoleArn" fields to DataProvider settings
+
 1.123.0 (2025-06-02)
 ------------------
 

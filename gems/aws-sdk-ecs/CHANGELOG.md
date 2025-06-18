@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.194.0 (2025-06-12)
+------------------
+
+* Feature - This Amazon ECS  release supports updating the capacityProviderStrategy parameter in update-service.
+
 1.193.0 (2025-06-02)
 ------------------
 

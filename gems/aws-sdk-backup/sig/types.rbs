@@ -24,6 +24,13 @@ module Aws::Backup
       SENSITIVE: []
     end
 
+    class AssociateBackupVaultMpaApprovalTeamInput
+      attr_accessor backup_vault_name: ::String
+      attr_accessor mpa_approval_team_arn: ::String
+      attr_accessor requester_comment: ::String
+      SENSITIVE: [:requester_comment]
+    end
+
     class BackupJob
       attr_accessor account_id: ::String
       attr_accessor backup_job_id: ::String
@@ -152,7 +159,7 @@ module Aws::Backup
     class BackupVaultListMember
       attr_accessor backup_vault_name: ::String
       attr_accessor backup_vault_arn: ::String
-      attr_accessor vault_type: ("BACKUP_VAULT" | "LOGICALLY_AIR_GAPPED_BACKUP_VAULT")
+      attr_accessor vault_type: ("BACKUP_VAULT" | "LOGICALLY_AIR_GAPPED_BACKUP_VAULT" | "RESTORE_ACCESS_BACKUP_VAULT")
       attr_accessor vault_state: ("CREATING" | "AVAILABLE" | "FAILED")
       attr_accessor creation_date: ::Time
       attr_accessor encryption_key_arn: ::String
@@ -381,6 +388,23 @@ module Aws::Backup
       SENSITIVE: []
     end
 
+    class CreateRestoreAccessBackupVaultInput
+      attr_accessor source_backup_vault_arn: ::String
+      attr_accessor backup_vault_name: ::String
+      attr_accessor backup_vault_tags: ::Hash[::String, ::String]
+      attr_accessor creator_request_id: ::String
+      attr_accessor requester_comment: ::String
+      SENSITIVE: [:backup_vault_tags, :requester_comment]
+    end
+
+    class CreateRestoreAccessBackupVaultOutput
+      attr_accessor restore_access_backup_vault_arn: ::String
+      attr_accessor vault_state: ("CREATING" | "AVAILABLE" | "FAILED")
+      attr_accessor restore_access_backup_vault_name: ::String
+      attr_accessor creation_date: ::Time
+      SENSITIVE: []
+    end
+
     class CreateRestoreTestingPlanInput
       attr_accessor creator_request_id: ::String
       attr_accessor restore_testing_plan: Types::RestoreTestingPlanForCreate
@@ -535,7 +559,7 @@ module Aws::Backup
     class DescribeBackupVaultOutput
       attr_accessor backup_vault_name: ::String
       attr_accessor backup_vault_arn: ::String
-      attr_accessor vault_type: ("BACKUP_VAULT" | "LOGICALLY_AIR_GAPPED_BACKUP_VAULT")
+      attr_accessor vault_type: ("BACKUP_VAULT" | "LOGICALLY_AIR_GAPPED_BACKUP_VAULT" | "RESTORE_ACCESS_BACKUP_VAULT")
       attr_accessor vault_state: ("CREATING" | "AVAILABLE" | "FAILED")
       attr_accessor encryption_key_arn: ::String
       attr_accessor creation_date: ::Time
@@ -545,6 +569,10 @@ module Aws::Backup
       attr_accessor min_retention_days: ::Integer
       attr_accessor max_retention_days: ::Integer
       attr_accessor lock_date: ::Time
+      attr_accessor source_backup_vault_arn: ::String
+      attr_accessor mpa_approval_team_arn: ::String
+      attr_accessor mpa_session_arn: ::String
+      attr_accessor latest_mpa_approval_team_update: Types::LatestMpaApprovalTeamUpdate
       SENSITIVE: []
     end
 
@@ -621,6 +649,7 @@ module Aws::Backup
       attr_accessor status: ("COMPLETED" | "PARTIAL" | "DELETING" | "EXPIRED" | "AVAILABLE" | "STOPPED" | "CREATING")
       attr_accessor status_message: ::String
       attr_accessor creation_date: ::Time
+      attr_accessor initiation_date: ::Time
       attr_accessor completion_date: ::Time
       attr_accessor backup_size_in_bytes: ::Integer
       attr_accessor calculated_lifecycle: Types::CalculatedLifecycle
@@ -633,7 +662,7 @@ module Aws::Backup
       attr_accessor composite_member_identifier: ::String
       attr_accessor is_parent: bool
       attr_accessor resource_name: ::String
-      attr_accessor vault_type: ("BACKUP_VAULT" | "LOGICALLY_AIR_GAPPED_BACKUP_VAULT")
+      attr_accessor vault_type: ("BACKUP_VAULT" | "LOGICALLY_AIR_GAPPED_BACKUP_VAULT" | "RESTORE_ACCESS_BACKUP_VAULT")
       attr_accessor index_status: ("PENDING" | "ACTIVE" | "FAILED" | "DELETING")
       attr_accessor index_status_message: ::String
       SENSITIVE: []
@@ -694,6 +723,12 @@ module Aws::Backup
       attr_accessor deletion_status: ("DELETING" | "FAILED" | "SUCCESSFUL")
       attr_accessor deletion_status_message: ::String
       SENSITIVE: []
+    end
+
+    class DisassociateBackupVaultMpaApprovalTeamInput
+      attr_accessor backup_vault_name: ::String
+      attr_accessor requester_comment: ::String
+      SENSITIVE: [:requester_comment]
     end
 
     class DisassociateRecoveryPointFromParentInput
@@ -810,7 +845,7 @@ module Aws::Backup
       attr_accessor backup_vault_name: ::String
       attr_accessor backup_vault_arn: ::String
       attr_accessor sns_topic_arn: ::String
-      attr_accessor backup_vault_events: ::Array[("BACKUP_JOB_STARTED" | "BACKUP_JOB_COMPLETED" | "BACKUP_JOB_SUCCESSFUL" | "BACKUP_JOB_FAILED" | "BACKUP_JOB_EXPIRED" | "RESTORE_JOB_STARTED" | "RESTORE_JOB_COMPLETED" | "RESTORE_JOB_SUCCESSFUL" | "RESTORE_JOB_FAILED" | "COPY_JOB_STARTED" | "COPY_JOB_SUCCESSFUL" | "COPY_JOB_FAILED" | "RECOVERY_POINT_MODIFIED" | "BACKUP_PLAN_CREATED" | "BACKUP_PLAN_MODIFIED" | "S3_BACKUP_OBJECT_FAILED" | "S3_RESTORE_OBJECT_FAILED" | "RECOVERY_POINT_INDEX_COMPLETED" | "RECOVERY_POINT_INDEX_DELETED" | "RECOVERY_POINT_INDEXING_FAILED")]
+      attr_accessor backup_vault_events: ::Array[("BACKUP_JOB_STARTED" | "BACKUP_JOB_COMPLETED" | "BACKUP_JOB_SUCCESSFUL" | "BACKUP_JOB_FAILED" | "BACKUP_JOB_EXPIRED" | "RESTORE_JOB_STARTED" | "RESTORE_JOB_COMPLETED" | "RESTORE_JOB_SUCCESSFUL" | "RESTORE_JOB_FAILED" | "COPY_JOB_STARTED" | "COPY_JOB_SUCCESSFUL" | "COPY_JOB_FAILED" | "RECOVERY_POINT_MODIFIED" | "BACKUP_PLAN_CREATED" | "BACKUP_PLAN_MODIFIED" | "S3_BACKUP_OBJECT_FAILED" | "S3_RESTORE_OBJECT_FAILED" | "CONTINUOUS_BACKUP_INTERRUPTED" | "RECOVERY_POINT_INDEX_COMPLETED" | "RECOVERY_POINT_INDEX_DELETED" | "RECOVERY_POINT_INDEXING_FAILED")]
       SENSITIVE: []
     end
 
@@ -964,6 +999,24 @@ module Aws::Backup
       SENSITIVE: []
     end
 
+    class LatestMpaApprovalTeamUpdate
+      attr_accessor mpa_session_arn: ::String
+      attr_accessor status: ("PENDING" | "APPROVED" | "FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor initiation_date: ::Time
+      attr_accessor expiry_date: ::Time
+      SENSITIVE: []
+    end
+
+    class LatestRevokeRequest
+      attr_accessor mpa_session_arn: ::String
+      attr_accessor status: ("PENDING" | "FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor initiation_date: ::Time
+      attr_accessor expiry_date: ::Time
+      SENSITIVE: []
+    end
+
     class LegalHold
       attr_accessor title: ::String
       attr_accessor status: ("CREATING" | "ACTIVE" | "CANCELING" | "CANCELED")
@@ -1083,7 +1136,7 @@ module Aws::Backup
     end
 
     class ListBackupVaultsInput
-      attr_accessor by_vault_type: ("BACKUP_VAULT" | "LOGICALLY_AIR_GAPPED_BACKUP_VAULT")
+      attr_accessor by_vault_type: ("BACKUP_VAULT" | "LOGICALLY_AIR_GAPPED_BACKUP_VAULT" | "RESTORE_ACCESS_BACKUP_VAULT")
       attr_accessor by_shared: bool
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
@@ -1279,6 +1332,19 @@ module Aws::Backup
       SENSITIVE: []
     end
 
+    class ListRestoreAccessBackupVaultsInput
+      attr_accessor backup_vault_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRestoreAccessBackupVaultsOutput
+      attr_accessor next_token: ::String
+      attr_accessor restore_access_backup_vaults: ::Array[Types::RestoreAccessBackupVaultListMember]
+      SENSITIVE: []
+    end
+
     class ListRestoreJobSummariesInput
       attr_accessor account_id: ::String
       attr_accessor state: ("CREATED" | "PENDING" | "RUNNING" | "ABORTED" | "COMPLETED" | "FAILED" | "AGGREGATE_ALL" | "ANY")
@@ -1411,7 +1477,7 @@ module Aws::Backup
     class PutBackupVaultNotificationsInput
       attr_accessor backup_vault_name: ::String
       attr_accessor sns_topic_arn: ::String
-      attr_accessor backup_vault_events: ::Array[("BACKUP_JOB_STARTED" | "BACKUP_JOB_COMPLETED" | "BACKUP_JOB_SUCCESSFUL" | "BACKUP_JOB_FAILED" | "BACKUP_JOB_EXPIRED" | "RESTORE_JOB_STARTED" | "RESTORE_JOB_COMPLETED" | "RESTORE_JOB_SUCCESSFUL" | "RESTORE_JOB_FAILED" | "COPY_JOB_STARTED" | "COPY_JOB_SUCCESSFUL" | "COPY_JOB_FAILED" | "RECOVERY_POINT_MODIFIED" | "BACKUP_PLAN_CREATED" | "BACKUP_PLAN_MODIFIED" | "S3_BACKUP_OBJECT_FAILED" | "S3_RESTORE_OBJECT_FAILED" | "RECOVERY_POINT_INDEX_COMPLETED" | "RECOVERY_POINT_INDEX_DELETED" | "RECOVERY_POINT_INDEXING_FAILED")]
+      attr_accessor backup_vault_events: ::Array[("BACKUP_JOB_STARTED" | "BACKUP_JOB_COMPLETED" | "BACKUP_JOB_SUCCESSFUL" | "BACKUP_JOB_FAILED" | "BACKUP_JOB_EXPIRED" | "RESTORE_JOB_STARTED" | "RESTORE_JOB_COMPLETED" | "RESTORE_JOB_SUCCESSFUL" | "RESTORE_JOB_FAILED" | "COPY_JOB_STARTED" | "COPY_JOB_SUCCESSFUL" | "COPY_JOB_FAILED" | "RECOVERY_POINT_MODIFIED" | "BACKUP_PLAN_CREATED" | "BACKUP_PLAN_MODIFIED" | "S3_BACKUP_OBJECT_FAILED" | "S3_RESTORE_OBJECT_FAILED" | "CONTINUOUS_BACKUP_INTERRUPTED" | "RECOVERY_POINT_INDEX_COMPLETED" | "RECOVERY_POINT_INDEX_DELETED" | "RECOVERY_POINT_INDEXING_FAILED")]
       SENSITIVE: []
     end
 
@@ -1434,6 +1500,7 @@ module Aws::Backup
       attr_accessor status: ("COMPLETED" | "PARTIAL" | "DELETING" | "EXPIRED" | "AVAILABLE" | "STOPPED" | "CREATING")
       attr_accessor status_message: ::String
       attr_accessor creation_date: ::Time
+      attr_accessor initiation_date: ::Time
       attr_accessor completion_date: ::Time
       attr_accessor backup_size_in_bytes: ::Integer
       attr_accessor calculated_lifecycle: Types::CalculatedLifecycle
@@ -1445,7 +1512,7 @@ module Aws::Backup
       attr_accessor composite_member_identifier: ::String
       attr_accessor is_parent: bool
       attr_accessor resource_name: ::String
-      attr_accessor vault_type: ("BACKUP_VAULT" | "LOGICALLY_AIR_GAPPED_BACKUP_VAULT")
+      attr_accessor vault_type: ("BACKUP_VAULT" | "LOGICALLY_AIR_GAPPED_BACKUP_VAULT" | "RESTORE_ACCESS_BACKUP_VAULT")
       attr_accessor index_status: ("PENDING" | "ACTIVE" | "FAILED" | "DELETING")
       attr_accessor index_status_message: ::String
       SENSITIVE: []
@@ -1462,7 +1529,7 @@ module Aws::Backup
       attr_accessor is_parent: bool
       attr_accessor parent_recovery_point_arn: ::String
       attr_accessor resource_name: ::String
-      attr_accessor vault_type: ("BACKUP_VAULT" | "LOGICALLY_AIR_GAPPED_BACKUP_VAULT")
+      attr_accessor vault_type: ("BACKUP_VAULT" | "LOGICALLY_AIR_GAPPED_BACKUP_VAULT" | "RESTORE_ACCESS_BACKUP_VAULT")
       attr_accessor index_status: ("PENDING" | "ACTIVE" | "FAILED" | "DELETING")
       attr_accessor index_status_message: ::String
       SENSITIVE: []
@@ -1544,6 +1611,15 @@ module Aws::Backup
       attr_accessor message: ::String
       attr_accessor type: ::String
       attr_accessor context: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreAccessBackupVaultListMember
+      attr_accessor restore_access_backup_vault_arn: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor approval_date: ::Time
+      attr_accessor vault_state: ("CREATING" | "AVAILABLE" | "FAILED")
+      attr_accessor latest_revoke_request: Types::LatestRevokeRequest
       SENSITIVE: []
     end
 
@@ -1680,6 +1756,13 @@ module Aws::Backup
       attr_accessor restore_metadata_overrides: ::Hash[::String, ::String]
       attr_accessor validation_window_hours: ::Integer
       SENSITIVE: [:restore_metadata_overrides]
+    end
+
+    class RevokeRestoreAccessBackupVaultInput
+      attr_accessor backup_vault_name: ::String
+      attr_accessor restore_access_backup_vault_arn: ::String
+      attr_accessor requester_comment: ::String
+      SENSITIVE: [:requester_comment]
     end
 
     class ServiceUnavailableException

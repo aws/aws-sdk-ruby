@@ -2224,7 +2224,7 @@ module Aws::IoTFleetWise
     #   resp.campaigns #=> Array
     #   resp.campaigns[0].campaign_name #=> String
     #   resp.campaigns[0].vehicle_name #=> String
-    #   resp.campaigns[0].status #=> String, one of "CREATED", "READY", "HEALTHY", "SUSPENDED", "DELETING"
+    #   resp.campaigns[0].status #=> String, one of "CREATED", "READY", "HEALTHY", "SUSPENDED", "DELETING", "READY_FOR_CHECKIN"
     #   resp.next_token #=> String
     #
     # @overload get_vehicle_status(params = {})
@@ -4247,7 +4247,7 @@ module Aws::IoTFleetWise
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iotfleetwise'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

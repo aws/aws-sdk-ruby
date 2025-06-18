@@ -632,9 +632,10 @@ module Aws::Organizations
     #
     # * [AISERVICES\_OPT\_OUT\_POLICY][7]
     #
+    # * [SECURITYHUB\_POLICY][8]
+    #
     # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator for
-    # an Amazon Web Services service.
+    # account or by a member account that is a delegated administrator.
     #
     #
     #
@@ -645,6 +646,7 @@ module Aws::Organizations
     # [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     # [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
     # [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    # [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
     #
     # @option params [required, String] :policy_id
     #   The unique identifier (ID) of the policy that you want to attach to
@@ -1549,7 +1551,7 @@ module Aws::Organizations
     #   resp.organization.master_account_id #=> String
     #   resp.organization.master_account_email #=> String
     #   resp.organization.available_policy_types #=> Array
-    #   resp.organization.available_policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2"
+    #   resp.organization.available_policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY"
     #   resp.organization.available_policy_types[0].status #=> String, one of "ENABLED", "PENDING_ENABLE", "PENDING_DISABLE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganization AWS API Documentation
@@ -1682,8 +1684,7 @@ module Aws::Organizations
     # `organizations:TagResource` permission.
     #
     # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator for
-    # an Amazon Web Services service.
+    # account or by a member account that is a delegated administrator.
     #
     #
     #
@@ -1733,6 +1734,8 @@ module Aws::Organizations
     #
     #   * [AISERVICES\_OPT\_OUT\_POLICY][7]
     #
+    #   * [SECURITYHUB\_POLICY][8]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
@@ -1742,6 +1745,7 @@ module Aws::Organizations
     #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
     #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags that you want to attach to the newly created policy.
@@ -1798,7 +1802,7 @@ module Aws::Organizations
     #     content: "PolicyContent", # required
     #     description: "PolicyDescription", # required
     #     name: "PolicyName", # required
-    #     type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, RESOURCE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2
+    #     type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, RESOURCE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2, SECURITYHUB_POLICY
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -1813,7 +1817,7 @@ module Aws::Organizations
     #   resp.policy.policy_summary.arn #=> String
     #   resp.policy.policy_summary.name #=> String
     #   resp.policy.policy_summary.description #=> String
-    #   resp.policy.policy_summary.type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2"
+    #   resp.policy.policy_summary.type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY"
     #   resp.policy.policy_summary.aws_managed #=> Boolean
     #   resp.policy.content #=> String
     #
@@ -2007,8 +2011,7 @@ module Aws::Organizations
     # organizational units (OUs), roots, and accounts.
     #
     # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator for
-    # an Amazon Web Services service.
+    # account or by a member account that is a delegated administrator.
     #
     # @option params [required, String] :policy_id
     #   The unique identifier (ID) of the policy that you want to delete. You
@@ -2052,7 +2055,7 @@ module Aws::Organizations
 
     # Deletes the resource policy from your organization.
     #
-    # You can only call this operation from the organization's management
+    # This operation can be called only from the organization's management
     # account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -2123,8 +2126,7 @@ module Aws::Organizations
     # account.
     #
     # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator for
-    # an Amazon Web Services service.
+    # account or by a member account that is a delegated administrator.
     #
     # @option params [required, String] :account_id
     #   The unique identifier (ID) of the Amazon Web Services account that you
@@ -2190,8 +2192,7 @@ module Aws::Organizations
     # account.
     #
     # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator for
-    # an Amazon Web Services service.
+    # account or by a member account that is a delegated administrator.
     #
     # @option params [required, String] :create_account_request_id
     #   Specifies the `Id` value that uniquely identifies the `CreateAccount`
@@ -2288,6 +2289,8 @@ module Aws::Organizations
     #
     #   * [AISERVICES\_OPT\_OUT\_POLICY][5]
     #
+    #   * [SECURITYHUB\_POLICY][6]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html
@@ -2295,6 +2298,7 @@ module Aws::Organizations
     #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
     #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
     #
     # @option params [String] :target_id
     #   When you're signed in as the management account, specify the ID of
@@ -2308,7 +2312,7 @@ module Aws::Organizations
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_effective_policy({
-    #     policy_type: "TAG_POLICY", # required, accepts TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2
+    #     policy_type: "TAG_POLICY", # required, accepts TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2, SECURITYHUB_POLICY
     #     target_id: "PolicyTargetId",
     #   })
     #
@@ -2317,7 +2321,7 @@ module Aws::Organizations
     #   resp.effective_policy.policy_content #=> String
     #   resp.effective_policy.last_updated_timestamp #=> Time
     #   resp.effective_policy.target_id #=> String
-    #   resp.effective_policy.policy_type #=> String, one of "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2"
+    #   resp.effective_policy.policy_type #=> String, one of "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeEffectivePolicy AWS API Documentation
     #
@@ -2488,7 +2492,7 @@ module Aws::Organizations
     #   resp.organization.master_account_id #=> String
     #   resp.organization.master_account_email #=> String
     #   resp.organization.available_policy_types #=> Array
-    #   resp.organization.available_policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2"
+    #   resp.organization.available_policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY"
     #   resp.organization.available_policy_types[0].status #=> String, one of "ENABLED", "PENDING_ENABLE", "PENDING_DISABLE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeOrganization AWS API Documentation
@@ -2503,8 +2507,7 @@ module Aws::Organizations
     # Retrieves information about an organizational unit (OU).
     #
     # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator for
-    # an Amazon Web Services service.
+    # account or by a member account that is a delegated administrator.
     #
     # @option params [required, String] :organizational_unit_id
     #   The unique identifier (ID) of the organizational unit that you want
@@ -2566,8 +2569,7 @@ module Aws::Organizations
     # Retrieves information about a policy.
     #
     # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator for
-    # an Amazon Web Services service.
+    # account or by a member account that is a delegated administrator.
     #
     # @option params [required, String] :policy_id
     #   The unique identifier (ID) of the policy that you want details about.
@@ -2622,7 +2624,7 @@ module Aws::Organizations
     #   resp.policy.policy_summary.arn #=> String
     #   resp.policy.policy_summary.name #=> String
     #   resp.policy.policy_summary.description #=> String
-    #   resp.policy.policy_summary.type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2"
+    #   resp.policy.policy_summary.type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY"
     #   resp.policy.policy_summary.aws_managed #=> Boolean
     #   resp.policy.content #=> String
     #
@@ -2638,8 +2640,7 @@ module Aws::Organizations
     # Retrieves information about a resource policy.
     #
     # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator for
-    # an Amazon Web Services service.
+    # account or by a member account that is a delegated administrator.
     #
     # @return [Types::DescribeResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2679,8 +2680,7 @@ module Aws::Organizations
     # list][2]".
     #
     # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator for
-    # an Amazon Web Services service.
+    # account or by a member account that is a delegated administrator.
     #
     #
     #
@@ -2856,8 +2856,7 @@ module Aws::Organizations
     # and then use this operation.
     #
     # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator for
-    # an Amazon Web Services service.
+    # account or by a member account that is a delegated administrator.
     #
     # To view the status of available policy types in the organization, use
     # DescribeOrganization.
@@ -2895,6 +2894,8 @@ module Aws::Organizations
     #
     #   * [AISERVICES\_OPT\_OUT\_POLICY][7]
     #
+    #   * [SECURITYHUB\_POLICY][8]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
@@ -2904,6 +2905,7 @@ module Aws::Organizations
     #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
     #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
     #
     # @return [Types::DisablePolicyTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2935,7 +2937,7 @@ module Aws::Organizations
     #
     #   resp = client.disable_policy_type({
     #     root_id: "RootId", # required
-    #     policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, RESOURCE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2
+    #     policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, RESOURCE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2, SECURITYHUB_POLICY
     #   })
     #
     # @example Response structure
@@ -2944,7 +2946,7 @@ module Aws::Organizations
     #   resp.root.arn #=> String
     #   resp.root.name #=> String
     #   resp.root.policy_types #=> Array
-    #   resp.root.policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2"
+    #   resp.root.policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY"
     #   resp.root.policy_types[0].status #=> String, one of "ENABLED", "PENDING_ENABLE", "PENDING_DISABLE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisablePolicyType AWS API Documentation
@@ -2977,14 +2979,13 @@ module Aws::Organizations
     # Organizations, see [Using Organizations with other Amazon Web Services
     # services][2] in the *Organizations User Guide*.
     #
-    # You can only call this operation from the organization's management
-    # account and only if the organization has [enabled all features][3].
+    # This operation can be called only from the organization's management
+    # account.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html
     # [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html
-    # [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
     #
     # @option params [required, String] :service_principal
     #   The service principal name of the Amazon Web Services service for
@@ -3123,8 +3124,7 @@ module Aws::Organizations
     # then use this operation.
     #
     # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator for
-    # an Amazon Web Services service.
+    # account or by a member account that is a delegated administrator.
     #
     # You can enable a policy type in a root only if that policy type is
     # available in the organization. To view the status of available policy
@@ -3159,6 +3159,8 @@ module Aws::Organizations
     #
     #   * [AISERVICES\_OPT\_OUT\_POLICY][7]
     #
+    #   * [SECURITYHUB\_POLICY][8]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
@@ -3168,6 +3170,7 @@ module Aws::Organizations
     #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
     #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
     #
     # @return [Types::EnablePolicyTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3203,7 +3206,7 @@ module Aws::Organizations
     #
     #   resp = client.enable_policy_type({
     #     root_id: "RootId", # required
-    #     policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, RESOURCE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2
+    #     policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, RESOURCE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2, SECURITYHUB_POLICY
     #   })
     #
     # @example Response structure
@@ -3212,7 +3215,7 @@ module Aws::Organizations
     #   resp.root.arn #=> String
     #   resp.root.name #=> String
     #   resp.root.policy_types #=> Array
-    #   resp.root.policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2"
+    #   resp.root.policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY"
     #   resp.root.policy_types[0].status #=> String, one of "ENABLED", "PENDING_ENABLE", "PENDING_DISABLE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnablePolicyType AWS API Documentation
@@ -3230,20 +3233,11 @@ module Aws::Organizations
     # invitation is implemented as a Handshake whose details are in the
     # response.
     #
-    # * You can invite Amazon Web Services accounts only from the same
-    #   seller as the management account. For example, if your
-    #   organization's management account was created by Amazon Internet
-    #   Services Pvt. Ltd (AISPL), an Amazon Web Services seller in India,
-    #   you can invite only other AISPL accounts to your organization. You
-    #   can't combine accounts from AISPL and Amazon Web Services or from
-    #   any other Amazon Web Services seller. For more information, see
-    #   [Consolidated billing in India][1].
-    #
-    # * If you receive an exception that indicates that you exceeded your
-    #   account limits for the organization or that the operation failed
-    #   because your organization is still initializing, wait one hour and
-    #   then try again. If the error persists after an hour, contact [Amazon
-    #   Web Services Support][2].
+    # If you receive an exception that indicates that you exceeded your
+    # account limits for the organization or that the operation failed
+    # because your organization is still initializing, wait one hour and
+    # then try again. If the error persists after an hour, contact [Amazon
+    # Web Services Support][1].
     #
     # If the request includes tags, then the requester must have the
     # `organizations:TagResource` permission.
@@ -3253,8 +3247,7 @@ module Aws::Organizations
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/useconsolidatedbilling-India.html
-    # [2]: https://console.aws.amazon.com/support/home#/
+    # [1]: https://console.aws.amazon.com/support/home#/
     #
     # @option params [required, Types::HandshakeParty] :target
     #   The identifier (ID) of the Amazon Web Services account that you want
@@ -3451,11 +3444,6 @@ module Aws::Organizations
     #   you must first change the delegated administrator account to another
     #   account that is remaining in the organization.
     #
-    # * You can leave an organization only after you enable IAM user access
-    #   to billing in your account. For more information, see [About IAM
-    #   access to the Billing and Cost Management console][2] in the *Amazon
-    #   Web Services Billing and Cost Management User Guide*.
-    #
     # * After the account leaves the organization, all tags that were
     #   attached to the account object in the organization are deleted.
     #   Amazon Web Services accounts outside of an organization do not
@@ -3473,7 +3461,6 @@ module Aws::Organizations
     #
     #
     # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_account-before-remove.html
-    # [2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3505,8 +3492,7 @@ module Aws::Organizations
     # services][1] in the *Organizations User Guide*.
     #
     # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator for
-    # an Amazon Web Services service.
+    # account or by a member account that is a delegated administrator.
     #
     #
     #
@@ -3574,8 +3560,7 @@ module Aws::Organizations
     #  </note>
     #
     # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator for
-    # an Amazon Web Services service.
+    # account or by a member account that is a delegated administrator.
     #
     # @option params [String] :next_token
     #   The parameter for receiving additional results if you receive a
@@ -3697,8 +3682,7 @@ module Aws::Organizations
     #  </note>
     #
     # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator for
-    # an Amazon Web Services service.
+    # account or by a member account that is a delegated administrator.
     #
     # @option params [required, String] :parent_id
     #   The unique identifier (ID) for the parent root or organization unit
@@ -3806,8 +3790,7 @@ module Aws::Organizations
     #  </note>
     #
     # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator for
-    # an Amazon Web Services service.
+    # account or by a member account that is a delegated administrator.
     #
     # @option params [required, String] :parent_id
     #   The unique identifier (ID) for the parent root or OU whose children
@@ -3918,8 +3901,7 @@ module Aws::Organizations
     #  </note>
     #
     # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator for
-    # an Amazon Web Services service.
+    # account or by a member account that is a delegated administrator.
     #
     # @option params [Array<String>] :states
     #   A list of one or more states that you want included in the response.
@@ -4035,8 +4017,7 @@ module Aws::Organizations
     # delegated administrators in this organization.
     #
     # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator for
-    # an Amazon Web Services service.
+    # account or by a member account that is a delegated administrator.
     #
     # @option params [String] :service_principal
     #   Specifies a service principal name. If specified, then the operation
@@ -4105,8 +4086,7 @@ module Aws::Organizations
     # is a delegated administrator.
     #
     # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator for
-    # an Amazon Web Services service.
+    # account or by a member account that is a delegated administrator.
     #
     # @option params [required, String] :account_id
     #   The account ID number of a delegated administrator account in the
@@ -4327,8 +4307,7 @@ module Aws::Organizations
     #  </note>
     #
     # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator for
-    # an Amazon Web Services service.
+    # account or by a member account that is a delegated administrator.
     #
     # @option params [Types::HandshakeFilter] :filter
     #   A filter of the handshakes that you want included in the response. The
@@ -4513,8 +4492,7 @@ module Aws::Organizations
     #  </note>
     #
     # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator for
-    # an Amazon Web Services service.
+    # account or by a member account that is a delegated administrator.
     #
     # @option params [required, String] :parent_id
     #   The unique identifier (ID) of the root or OU whose child OUs you want
@@ -4625,8 +4603,7 @@ module Aws::Organizations
     #  </note>
     #
     # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator for
-    # an Amazon Web Services service.
+    # account or by a member account that is a delegated administrator.
     #
     # <note markdown="1"> In the current release, a child can have only a single parent.
     #
@@ -4731,8 +4708,7 @@ module Aws::Organizations
     #  </note>
     #
     # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator for
-    # an Amazon Web Services service.
+    # account or by a member account that is a delegated administrator.
     #
     # @option params [required, String] :filter
     #   Specifies the type of policy that you want to include in the response.
@@ -4752,6 +4728,8 @@ module Aws::Organizations
     #
     #   * [AISERVICES\_OPT\_OUT\_POLICY][7]
     #
+    #   * [SECURITYHUB\_POLICY][8]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
@@ -4761,6 +4739,7 @@ module Aws::Organizations
     #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
     #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
     #
     # @option params [String] :next_token
     #   The parameter for receiving additional results if you receive a
@@ -4830,7 +4809,7 @@ module Aws::Organizations
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_policies({
-    #     filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, RESOURCE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2
+    #     filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, RESOURCE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2, SECURITYHUB_POLICY
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -4842,7 +4821,7 @@ module Aws::Organizations
     #   resp.policies[0].arn #=> String
     #   resp.policies[0].name #=> String
     #   resp.policies[0].description #=> String
-    #   resp.policies[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2"
+    #   resp.policies[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY"
     #   resp.policies[0].aws_managed #=> Boolean
     #   resp.next_token #=> String
     #
@@ -4868,8 +4847,7 @@ module Aws::Organizations
     #  </note>
     #
     # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator for
-    # an Amazon Web Services service.
+    # account or by a member account that is a delegated administrator.
     #
     # @option params [required, String] :target_id
     #   The unique identifier (ID) of the root, organizational unit, or
@@ -4910,6 +4888,8 @@ module Aws::Organizations
     #
     #   * [AISERVICES\_OPT\_OUT\_POLICY][7]
     #
+    #   * [SECURITYHUB\_POLICY][8]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
@@ -4919,6 +4899,7 @@ module Aws::Organizations
     #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
     #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
     #
     # @option params [String] :next_token
     #   The parameter for receiving additional results if you receive a
@@ -4976,7 +4957,7 @@ module Aws::Organizations
     #
     #   resp = client.list_policies_for_target({
     #     target_id: "PolicyTargetId", # required
-    #     filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, RESOURCE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2
+    #     filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, RESOURCE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2, SECURITYHUB_POLICY
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -4988,7 +4969,7 @@ module Aws::Organizations
     #   resp.policies[0].arn #=> String
     #   resp.policies[0].name #=> String
     #   resp.policies[0].description #=> String
-    #   resp.policies[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2"
+    #   resp.policies[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY"
     #   resp.policies[0].aws_managed #=> Boolean
     #   resp.next_token #=> String
     #
@@ -5012,8 +4993,7 @@ module Aws::Organizations
     #  </note>
     #
     # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator for
-    # an Amazon Web Services service.
+    # account or by a member account that is a delegated administrator.
     #
     # <note markdown="1"> Policy types can be enabled and disabled in roots. This is distinct
     # from whether they're available in the organization. When you enable
@@ -5089,7 +5069,7 @@ module Aws::Organizations
     #   resp.roots[0].arn #=> String
     #   resp.roots[0].name #=> String
     #   resp.roots[0].policy_types #=> Array
-    #   resp.roots[0].policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2"
+    #   resp.roots[0].policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY"
     #   resp.roots[0].policy_types[0].status #=> String, one of "ENABLED", "PENDING_ENABLE", "PENDING_DISABLE"
     #   resp.next_token #=> String
     #
@@ -5115,8 +5095,7 @@ module Aws::Organizations
     # * Policy (any type)
     #
     # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator for
-    # an Amazon Web Services service.
+    # account or by a member account that is a delegated administrator.
     #
     # @option params [required, String] :resource_id
     #   The ID of the resource with the tags to list.
@@ -5183,8 +5162,7 @@ module Aws::Organizations
     #  </note>
     #
     # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator for
-    # an Amazon Web Services service.
+    # account or by a member account that is a delegated administrator.
     #
     # @option params [required, String] :policy_id
     #   The unique identifier (ID) of the policy whose attachments you want to
@@ -5370,8 +5348,8 @@ module Aws::Organizations
 
     # Creates or updates a resource policy.
     #
-    # You can only call this operation from the organization's management
-    # account.
+    # This operation can be called only from the organization's management
+    # account..
     #
     # @option params [required, String] :content
     #   If provided, the new content for the resource policy. The text must be
@@ -5564,8 +5542,7 @@ module Aws::Organizations
     # * Policy (any type)
     #
     # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator for
-    # an Amazon Web Services service.
+    # account or by a member account that is a delegated administrator.
     #
     # @option params [required, String] :resource_id
     #   The ID of the resource to add a tag to.
@@ -5630,8 +5607,7 @@ module Aws::Organizations
     # * Policy (any type)
     #
     # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator for
-    # an Amazon Web Services service.
+    # account or by a member account that is a delegated administrator.
     #
     # @option params [required, String] :resource_id
     #   The ID of the resource to remove a tag from.
@@ -5750,8 +5726,7 @@ module Aws::Organizations
     # can't change a policy's type.
     #
     # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator for
-    # an Amazon Web Services service.
+    # account or by a member account that is a delegated administrator.
     #
     # @option params [required, String] :policy_id
     #   The unique identifier (ID) of the policy that you want to update.
@@ -5863,7 +5838,7 @@ module Aws::Organizations
     #   resp.policy.policy_summary.arn #=> String
     #   resp.policy.policy_summary.name #=> String
     #   resp.policy.policy_summary.description #=> String
-    #   resp.policy.policy_summary.type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2"
+    #   resp.policy.policy_summary.type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY"
     #   resp.policy.policy_summary.aws_managed #=> Boolean
     #   resp.policy.content #=> String
     #
@@ -5894,7 +5869,7 @@ module Aws::Organizations
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.116.0'
+      context[:gem_version] = '1.117.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

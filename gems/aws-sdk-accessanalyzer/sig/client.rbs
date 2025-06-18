@@ -260,7 +260,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#create_analyzer-instance_method
       def create_analyzer: (
                              analyzer_name: ::String,
-                             type: ("ACCOUNT" | "ORGANIZATION" | "ACCOUNT_UNUSED_ACCESS" | "ORGANIZATION_UNUSED_ACCESS"),
+                             type: ("ACCOUNT" | "ORGANIZATION" | "ACCOUNT_UNUSED_ACCESS" | "ORGANIZATION_UNUSED_ACCESS" | "ACCOUNT_INTERNAL_ACCESS" | "ORGANIZATION_INTERNAL_ACCESS"),
                              ?archive_rules: Array[
                                {
                                  rule_name: ::String,
@@ -284,6 +284,17 @@ module Aws
                                        resource_tags: Array[
                                          Hash[::String, ::String],
                                        ]?
+                                     },
+                                   ]?
+                                 }?
+                               }?,
+                               internal_access: {
+                                 analysis_rule: {
+                                   inclusions: Array[
+                                     {
+                                       account_ids: Array[::String]?,
+                                       resource_types: Array[("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket" | "AWS::DynamoDB::Table" | "AWS::DynamoDB::Stream" | "AWS::IAM::User")]?,
+                                       resource_arns: Array[::String]?
                                      },
                                    ]?
                                  }?
@@ -413,7 +424,7 @@ module Aws
         def status: () -> ("ACTIVE" | "ARCHIVED" | "RESOLVED")
         def updated_at: () -> ::Time
         def finding_details: () -> ::Array[Types::FindingDetails]
-        def finding_type: () -> ("ExternalAccess" | "UnusedIAMRole" | "UnusedIAMUserAccessKey" | "UnusedIAMUserPassword" | "UnusedPermission")
+        def finding_type: () -> ("ExternalAccess" | "UnusedIAMRole" | "UnusedIAMUserAccessKey" | "UnusedIAMUserPassword" | "UnusedPermission" | "InternalAccess")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#get_finding_v2-instance_method
       def get_finding_v2: (
@@ -504,7 +515,7 @@ module Aws
       def list_analyzers: (
                             ?next_token: ::String,
                             ?max_results: ::Integer,
-                            ?type: ("ACCOUNT" | "ORGANIZATION" | "ACCOUNT_UNUSED_ACCESS" | "ORGANIZATION_UNUSED_ACCESS")
+                            ?type: ("ACCOUNT" | "ORGANIZATION" | "ACCOUNT_UNUSED_ACCESS" | "ORGANIZATION_UNUSED_ACCESS" | "ACCOUNT_INTERNAL_ACCESS" | "ORGANIZATION_INTERNAL_ACCESS")
                           ) -> _ListAnalyzersResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAnalyzersResponseSuccess
 
@@ -660,6 +671,17 @@ module Aws
                                        resource_tags: Array[
                                          Hash[::String, ::String],
                                        ]?
+                                     },
+                                   ]?
+                                 }?
+                               }?,
+                               internal_access: {
+                                 analysis_rule: {
+                                   inclusions: Array[
+                                     {
+                                       account_ids: Array[::String]?,
+                                       resource_types: Array[("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket" | "AWS::DynamoDB::Table" | "AWS::DynamoDB::Stream" | "AWS::IAM::User")]?,
+                                       resource_arns: Array[::String]?
                                      },
                                    ]?
                                  }?

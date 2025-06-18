@@ -1555,20 +1555,21 @@ module Aws::KMS
     #   properties after the KMS key is created.
     #
     #   Asymmetric KMS keys contain an RSA key pair, Elliptic Curve (ECC)
-    #   key pair, or an SM2 key pair (China Regions only). The private key
-    #   in an asymmetric KMS key never leaves KMS unencrypted. However, you
-    #   can use the GetPublicKey operation to download the public key so it
-    #   can be used outside of KMS. Each KMS key can have only one key
-    #   usage. KMS keys with RSA key pairs can be used to encrypt and
-    #   decrypt data or sign and verify messages (but not both). KMS keys
-    #   with NIST-recommended ECC key pairs can be used to sign and verify
-    #   messages or derive shared secrets (but not both). KMS keys with
-    #   `ECC_SECG_P256K1` can be used only to sign and verify messages. KMS
-    #   keys with SM2 key pairs (China Regions only) can be used to either
-    #   encrypt and decrypt data, sign and verify messages, or derive shared
-    #   secrets (you must choose one key usage type). For information about
-    #   asymmetric KMS keys, see [Asymmetric KMS keys][2] in the *Key
-    #   Management Service Developer Guide*.
+    #   key pair, ML-DSA key pair or an SM2 key pair (China Regions only).
+    #   The private key in an asymmetric KMS key never leaves KMS
+    #   unencrypted. However, you can use the GetPublicKey operation to
+    #   download the public key so it can be used outside of KMS. Each KMS
+    #   key can have only one key usage. KMS keys with RSA key pairs can be
+    #   used to encrypt and decrypt data or sign and verify messages (but
+    #   not both). KMS keys with NIST-recommended ECC key pairs can be used
+    #   to sign and verify messages or derive shared secrets (but not both).
+    #   KMS keys with `ECC_SECG_P256K1` can be used only to sign and verify
+    #   messages. KMS keys with ML-DSA key pairs can be used to sign and
+    #   verify messages. KMS keys with SM2 key pairs (China Regions only)
+    #   can be used to either encrypt and decrypt data, sign and verify
+    #   messages, or derive shared secrets (you must choose one key usage
+    #   type). For information about asymmetric KMS keys, see [Asymmetric
+    #   KMS keys][2] in the *Key Management Service Developer Guide*.
     #
     #
     #
@@ -1812,7 +1813,10 @@ module Aws::KMS
     #   * For asymmetric KMS keys with NIST-recommended elliptic curve key
     #     pairs, specify `SIGN_VERIFY` or `KEY_AGREEMENT`.
     #
-    #   * For asymmetric KMS keys with `ECC_SECG_P256K1` key pairs specify
+    #   * For asymmetric KMS keys with `ECC_SECG_P256K1` key pairs, specify
+    #     `SIGN_VERIFY`.
+    #
+    #   * For asymmetric KMS keys with ML-DSA key pairs, specify
     #     `SIGN_VERIFY`.
     #
     #   * For asymmetric KMS keys with SM2 key pairs (China Regions only),
@@ -1889,6 +1893,13 @@ module Aws::KMS
     #     * `ECC_SECG_P256K1` (secp256k1), commonly used for cryptocurrencies.
     #
     #     ^
+    #   * Asymmetric ML-DSA key pairs (signing and verification)
+    #
+    #     * `ML_DSA_44`
+    #
+    #     * `ML_DSA_65`
+    #
+    #     * `ML_DSA_87`
     #   * SM2 key pairs (encryption and decryption -or- signing and
     #     verification -or- deriving shared secrets)
     #
@@ -2094,6 +2105,7 @@ module Aws::KMS
     #       aws_account_id: "111122223333", 
     #       arn: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
     #       creation_date: Time.parse("2017-07-05T14:04:55-07:00"), 
+    #       current_key_material_id: "0b7fd7ddbac6eef27907413567cad8c810e2883dc8a7534067a82ee1142fc1e6", 
     #       customer_master_key_spec: "SYMMETRIC_DEFAULT", 
     #       description: "", 
     #       enabled: true, 
@@ -2146,8 +2158,7 @@ module Aws::KMS
     # @example Example: To create an asymmetric elliptic curve KMS key for signing and verification
     #
     #   # This example creates a KMS key that contains an asymmetric elliptic curve (ECC) key pair for signing and verification.
-    #   # The key usage is required even though "SIGN_VERIFY" is the only valid value for ECC KMS keys. The key spec and key usage
-    #   # can't be changed after the key is created.
+    #   # The key spec and key usage can't be changed after the key is created.
     #
     #   resp = client.create_key({
     #     key_spec: "ECC_NIST_P521", # Describes the type of key material in the KMS key.
@@ -2208,6 +2219,38 @@ module Aws::KMS
     #     }, # Detailed information about the KMS key that this operation creates.
     #   }
     #
+    # @example Example: To create an asymmetric ML-DSA KMS key for signing and verification
+    #
+    #   # This example creates a module-lattice digital signature algorithm (ML-DSA) key for signing and verification. The
+    #   # key-usage parameter is required even though SIGN_VERIFY is the only valid value for ML-DSA keys.
+    #
+    #   resp = client.create_key({
+    #     key_spec: "ML_DSA_65", # Describes the type of key material in the KMS key.
+    #     key_usage: "SIGN_VERIFY", # The cryptographic operations for which you can use the KMS key.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     key_metadata: {
+    #       aws_account_id: "111122223333", 
+    #       arn: "arn:aws:kms:us-east-1:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #       creation_date: Time.parse(1748371316.734), 
+    #       customer_master_key_spec: "ML_DSA_65", 
+    #       description: "", 
+    #       enabled: true, 
+    #       key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #       key_manager: "CUSTOMER", 
+    #       key_spec: "ML_DSA_65", 
+    #       key_state: "Enabled", 
+    #       key_usage: "SIGN_VERIFY", 
+    #       multi_region: false, 
+    #       origin: "AWS_KMS", 
+    #       signing_algorithms: [
+    #         "ML_DSA_SHAKE_256", 
+    #       ], 
+    #     }, # Detailed information about the KMS key that this operation creates.
+    #   }
+    #
     # @example Example: To create a multi-Region primary KMS key
     #
     #   # This example creates a multi-Region primary symmetric encryption key. Because the default values for all parameters
@@ -2223,6 +2266,7 @@ module Aws::KMS
     #       aws_account_id: "111122223333", 
     #       arn: "arn:aws:kms:us-west-2:111122223333:key/mrk-1234abcd12ab34cd56ef12345678990ab", 
     #       creation_date: Time.parse("2021-09-02T016:15:21-09:00"), 
+    #       current_key_material_id: "0b7fd7ddbac6eef27907413567cad8c810e2883dc8a7534067a82ee1142fc1e6", 
     #       customer_master_key_spec: "SYMMETRIC_DEFAULT", 
     #       description: "", 
     #       enabled: true, 
@@ -2359,7 +2403,7 @@ module Aws::KMS
     #     description: "DescriptionType",
     #     key_usage: "SIGN_VERIFY", # accepts SIGN_VERIFY, ENCRYPT_DECRYPT, GENERATE_VERIFY_MAC, KEY_AGREEMENT
     #     customer_master_key_spec: "RSA_2048", # accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SYMMETRIC_DEFAULT, HMAC_224, HMAC_256, HMAC_384, HMAC_512, SM2
-    #     key_spec: "RSA_2048", # accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SYMMETRIC_DEFAULT, HMAC_224, HMAC_256, HMAC_384, HMAC_512, SM2
+    #     key_spec: "RSA_2048", # accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SYMMETRIC_DEFAULT, HMAC_224, HMAC_256, HMAC_384, HMAC_512, SM2, ML_DSA_44, ML_DSA_65, ML_DSA_87
     #     origin: "AWS_KMS", # accepts AWS_KMS, EXTERNAL, AWS_CLOUDHSM, EXTERNAL_KEY_STORE
     #     custom_key_store_id: "CustomKeyStoreIdType",
     #     bypass_policy_lockout_safety_check: false,
@@ -2391,11 +2435,11 @@ module Aws::KMS
     #   resp.key_metadata.expiration_model #=> String, one of "KEY_MATERIAL_EXPIRES", "KEY_MATERIAL_DOES_NOT_EXPIRE"
     #   resp.key_metadata.key_manager #=> String, one of "AWS", "CUSTOMER"
     #   resp.key_metadata.customer_master_key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2"
-    #   resp.key_metadata.key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2"
+    #   resp.key_metadata.key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87"
     #   resp.key_metadata.encryption_algorithms #=> Array
     #   resp.key_metadata.encryption_algorithms[0] #=> String, one of "SYMMETRIC_DEFAULT", "RSAES_OAEP_SHA_1", "RSAES_OAEP_SHA_256", "SM2PKE"
     #   resp.key_metadata.signing_algorithms #=> Array
-    #   resp.key_metadata.signing_algorithms[0] #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA"
+    #   resp.key_metadata.signing_algorithms[0] #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA", "ML_DSA_SHAKE_256"
     #   resp.key_metadata.key_agreement_algorithms #=> Array
     #   resp.key_metadata.key_agreement_algorithms[0] #=> String, one of "ECDH"
     #   resp.key_metadata.multi_region #=> Boolean
@@ -2660,6 +2704,7 @@ module Aws::KMS
     #   {
     #     encryption_algorithm: "SYMMETRIC_DEFAULT", # The encryption algorithm that was used to decrypt the ciphertext. SYMMETRIC_DEFAULT is the only valid value for symmetric encryption in AWS KMS.
     #     key_id: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The Amazon Resource Name (ARN) of the KMS key that was used to decrypt the data.
+    #     key_material_id: "0b7fd7ddbac6eef27907413567cad8c810e2883dc8a7534067a82ee1142fc1e6", # The identifier of the key material used to decrypt the ciphertext.
     #     plaintext: "<binary data>", # The decrypted (plaintext) data.
     #   }
     #
@@ -2993,6 +3038,7 @@ module Aws::KMS
     #
     #   resp = client.delete_imported_key_material({
     #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the KMS key whose imported key material you are deleting. You can use the key ID or the Amazon Resource Name (ARN) of the KMS key.
+    #     key_material_id: "0b7fd7ddbac6eef27907413567cad8c810e2883dc8a7534067a82ee1142fc1e6", # Identifies the deleted key material.
     #   })
     #
     # @example Request syntax with placeholder values
@@ -3652,6 +3698,7 @@ module Aws::KMS
     #       aws_account_id: "111122223333", 
     #       arn: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
     #       creation_date: Time.parse("2017-07-05T14:04:55-07:00"), 
+    #       current_key_material_id: "0b7fd7ddbac6eef27907413567cad8c810e2883dc8a7534067a82ee1142fc1e6", 
     #       customer_master_key_spec: "SYMMETRIC_DEFAULT", 
     #       description: "", 
     #       enabled: true, 
@@ -3718,6 +3765,7 @@ module Aws::KMS
     #       aws_account_id: "111122223333", 
     #       arn: "arn:aws:kms:ap-northeast-1:111122223333:key/mrk-1234abcd12ab34cd56ef1234567890ab", 
     #       creation_date: Time.parse(1586329200.918), 
+    #       current_key_material_id: "0b7fd7ddbac6eef27907413567cad8c810e2883dc8a7534067a82ee1142fc1e6", 
     #       customer_master_key_spec: "SYMMETRIC_DEFAULT", 
     #       description: "", 
     #       enabled: true, 
@@ -3874,11 +3922,11 @@ module Aws::KMS
     #   resp.key_metadata.expiration_model #=> String, one of "KEY_MATERIAL_EXPIRES", "KEY_MATERIAL_DOES_NOT_EXPIRE"
     #   resp.key_metadata.key_manager #=> String, one of "AWS", "CUSTOMER"
     #   resp.key_metadata.customer_master_key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2"
-    #   resp.key_metadata.key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2"
+    #   resp.key_metadata.key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87"
     #   resp.key_metadata.encryption_algorithms #=> Array
     #   resp.key_metadata.encryption_algorithms[0] #=> String, one of "SYMMETRIC_DEFAULT", "RSAES_OAEP_SHA_1", "RSAES_OAEP_SHA_256", "SM2PKE"
     #   resp.key_metadata.signing_algorithms #=> Array
-    #   resp.key_metadata.signing_algorithms[0] #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA"
+    #   resp.key_metadata.signing_algorithms[0] #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA", "ML_DSA_SHAKE_256"
     #   resp.key_metadata.key_agreement_algorithms #=> Array
     #   resp.key_metadata.key_agreement_algorithms[0] #=> String, one of "ECDH"
     #   resp.key_metadata.multi_region #=> Boolean
@@ -4901,6 +4949,7 @@ module Aws::KMS
     #   {
     #     ciphertext_blob: "<binary data>", # The encrypted data key.
     #     key_id: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The ARN of the KMS key that was used to encrypt the data key.
+    #     key_material_id: "0b7fd7ddbac6eef27907413567cad8c810e2883dc8a7534067a82ee1142fc1e6", # The identifier of the key material used to encrypt the data key.
     #     plaintext: "<binary data>", # The unencrypted (plaintext) data key.
     #   }
     #
@@ -5118,10 +5167,11 @@ module Aws::KMS
     #   Determines the type of data key pair that is generated.
     #
     #   The KMS rule that restricts the use of asymmetric RSA and SM2 KMS keys
-    #   to encrypt and decrypt or to sign and verify (but not both), and the
-    #   rule that permits you to use ECC KMS keys only to sign and verify, are
-    #   not effective on data key pairs, which are used outside of KMS. The
-    #   SM2 key spec is only available in China Regions.
+    #   to encrypt and decrypt or to sign and verify (but not both), the rule
+    #   that permits you to use ECC KMS keys only to sign and verify, and the
+    #   rule that permits you to use ML-DSA key pairs to sign and verify only
+    #   are not effective on data key pairs, which are used outside of KMS.
+    #   The SM2 key spec is only available in China Regions.
     #
     # @option params [Array<String>] :grant_tokens
     #   A list of grant tokens.
@@ -5203,6 +5253,7 @@ module Aws::KMS
     #   resp.to_h outputs the following:
     #   {
     #     key_id: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The key ARN of the symmetric encryption KMS key that was used to encrypt the private key.
+    #     key_material_id: "0b7fd7ddbac6eef27907413567cad8c810e2883dc8a7534067a82ee1142fc1e6", # The identifier of the key material used to encrypt the private key.
     #     key_pair_spec: "RSA_3072", # The actual key spec of the RSA data key pair.
     #     private_key_ciphertext_blob: "<binary data>", # The encrypted private key of the RSA data key pair.
     #     private_key_plaintext: "<binary data>", # The plaintext private key of the RSA data key pair.
@@ -5230,6 +5281,7 @@ module Aws::KMS
     #   {
     #     ciphertext_for_recipient: "<binary data>", # The private key of the RSA data key pair encrypted by the public key from the attestation document
     #     key_id: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The key ARN of the symmetric encryption KMS key that was used to encrypt the PrivateKeyCiphertextBlob.
+    #     key_material_id: "0b7fd7ddbac6eef27907413567cad8c810e2883dc8a7534067a82ee1142fc1e6", # The identifier of the key material used to encrypt the private key.
     #     key_pair_spec: "RSA_3072", # The actual key spec of the RSA data key pair.
     #     private_key_ciphertext_blob: "<binary data>", # The private key of the RSA data key pair encrypted by the KMS key.
     #     private_key_plaintext: "", # This field is null or empty
@@ -5396,10 +5448,11 @@ module Aws::KMS
     #   Determines the type of data key pair that is generated.
     #
     #   The KMS rule that restricts the use of asymmetric RSA and SM2 KMS keys
-    #   to encrypt and decrypt or to sign and verify (but not both), and the
-    #   rule that permits you to use ECC KMS keys only to sign and verify, are
-    #   not effective on data key pairs, which are used outside of KMS. The
-    #   SM2 key spec is only available in China Regions.
+    #   to encrypt and decrypt or to sign and verify (but not both), the rule
+    #   that permits you to use ECC KMS keys only to sign and verify, and the
+    #   rule that permits you to use ML-DSA key pairs to sign and verify only
+    #   are not effective on data key pairs, which are used outside of KMS.
+    #   The SM2 key spec is only available in China Regions.
     #
     # @option params [Array<String>] :grant_tokens
     #   A list of grant tokens.
@@ -5447,6 +5500,7 @@ module Aws::KMS
     #   resp.to_h outputs the following:
     #   {
     #     key_id: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The key ARN of the symmetric encryption KMS key that encrypted the private key in the ECC asymmetric data key pair.
+    #     key_material_id: "0b7fd7ddbac6eef27907413567cad8c810e2883dc8a7534067a82ee1142fc1e6", # The identifier of the key material used to encrypt the private key.
     #     key_pair_spec: "ECC_NIST_P521", # The actual key spec of the ECC asymmetric data key pair.
     #     private_key_ciphertext_blob: "<binary data>", # The encrypted private key of the asymmetric ECC data key pair.
     #     public_key: "<binary data>", # The public key (plaintext).
@@ -5668,6 +5722,7 @@ module Aws::KMS
     #   {
     #     ciphertext_blob: "<binary data>", # The encrypted data key.
     #     key_id: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The ARN of the KMS key that was used to encrypt the data key.
+    #     key_material_id: "0b7fd7ddbac6eef27907413567cad8c810e2883dc8a7534067a82ee1142fc1e6", # The identifier of the key material used to encrypt the data key.
     #   }
     #
     # @example Request syntax with placeholder values
@@ -6629,12 +6684,12 @@ module Aws::KMS
     #   resp.key_id #=> String
     #   resp.public_key #=> String
     #   resp.customer_master_key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2"
-    #   resp.key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2"
+    #   resp.key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87"
     #   resp.key_usage #=> String, one of "SIGN_VERIFY", "ENCRYPT_DECRYPT", "GENERATE_VERIFY_MAC", "KEY_AGREEMENT"
     #   resp.encryption_algorithms #=> Array
     #   resp.encryption_algorithms[0] #=> String, one of "SYMMETRIC_DEFAULT", "RSAES_OAEP_SHA_1", "RSAES_OAEP_SHA_256", "SM2PKE"
     #   resp.signing_algorithms #=> Array
-    #   resp.signing_algorithms[0] #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA"
+    #   resp.signing_algorithms[0] #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA", "ML_DSA_SHAKE_256"
     #   resp.key_agreement_algorithms #=> Array
     #   resp.key_agreement_algorithms[0] #=> String, one of "ECDH"
     #
@@ -6902,6 +6957,12 @@ module Aws::KMS
     #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the KMS key to import the key material into. You can use the key ID or the Amazon Resource Name (ARN) of the KMS key.
     #   })
     #
+    #   resp.to_h outputs the following:
+    #   {
+    #     key_id: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The Amazon Resource Name (ARN) of the KMS key into which key material was imported.
+    #     key_material_id: "0b7fd7ddbac6eef27907413567cad8c810e2883dc8a7534067a82ee1142fc1e6", # Identifies the imported key material.
+    #   }
+    #
     # @example Example: To import key material into a KMS key
     #
     #   # The following example imports key material that expires in 3 days. It might be part of an application that frequently
@@ -6914,6 +6975,12 @@ module Aws::KMS
     #     key_id: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the KMS key to import the key material into. You can use the key ID or the Amazon Resource Name (ARN) of the KMS key.
     #     valid_to: Time.parse("2023-09-30T00:00:00-00:00"), # Specifies the date and time when the imported key material expires.
     #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     key_id: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The Amazon Resource Name (ARN) of the KMS key into which key material was imported.
+    #     key_material_id: "0b7fd7ddbac6eef27907413567cad8c810e2883dc8a7534067a82ee1142fc1e6", # Identifies the imported key material.
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -8397,8 +8464,12 @@ module Aws::KMS
     #   resp.to_h outputs the following:
     #   {
     #     ciphertext_blob: "<binary data>", # The reencrypted data.
+    #     destination_encryption_algorithm: "SYMMETRIC_DEFAULT", # The encryption algorithm that was used to reencrypt the data.
+    #     destination_key_material_id: "0b7fd7ddbac6eef27907413567cad8c810e2883dc8a7534067a82ee1142fc1e6", # The identifier of the key material used to reencrypt the data.
     #     key_id: "arn:aws:kms:us-east-2:111122223333:key/0987dcba-09fe-87dc-65ba-ab0987654321", # The ARN of the KMS key that was used to reencrypt the data.
+    #     source_encryption_algorithm: "SYMMETRIC_DEFAULT", # The encryption algorithm that was used to decrypt the ciphertext before it was reencrypted.
     #     source_key_id: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The ARN of the KMS key that was originally used to encrypt the data.
+    #     source_key_material_id: "1c6be7ddbac6eef27907413567cad8c810e2883dc8a7534067a82ee1142fc1e6", # The identifier of the key material used to originally encrypt the data.
     #   }
     #
     # @example Request syntax with placeholder values
@@ -8790,11 +8861,11 @@ module Aws::KMS
     #   resp.replica_key_metadata.expiration_model #=> String, one of "KEY_MATERIAL_EXPIRES", "KEY_MATERIAL_DOES_NOT_EXPIRE"
     #   resp.replica_key_metadata.key_manager #=> String, one of "AWS", "CUSTOMER"
     #   resp.replica_key_metadata.customer_master_key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2"
-    #   resp.replica_key_metadata.key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2"
+    #   resp.replica_key_metadata.key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87"
     #   resp.replica_key_metadata.encryption_algorithms #=> Array
     #   resp.replica_key_metadata.encryption_algorithms[0] #=> String, one of "SYMMETRIC_DEFAULT", "RSAES_OAEP_SHA_1", "RSAES_OAEP_SHA_256", "SM2PKE"
     #   resp.replica_key_metadata.signing_algorithms #=> Array
-    #   resp.replica_key_metadata.signing_algorithms[0] #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA"
+    #   resp.replica_key_metadata.signing_algorithms[0] #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA", "ML_DSA_SHAKE_256"
     #   resp.replica_key_metadata.key_agreement_algorithms #=> Array
     #   resp.replica_key_metadata.key_agreement_algorithms[0] #=> String, one of "ECDH"
     #   resp.replica_key_metadata.multi_region #=> Boolean
@@ -9354,11 +9425,11 @@ module Aws::KMS
     # Developer Guide*.
     #
     # Digital signatures are generated and verified by using asymmetric key
-    # pair, such as an RSA or ECC pair that is represented by an asymmetric
-    # KMS key. The key owner (or an authorized user) uses their private key
-    # to sign a message. Anyone with the public key can verify that the
-    # message was signed with that particular private key and that the
-    # message hasn't changed since it was signed.
+    # pair, such as an RSA, ECC, or ML-DSA pair that is represented by an
+    # asymmetric KMS key. The key owner (or an authorized user) uses their
+    # private key to sign a message. Anyone with the public key can verify
+    # that the message was signed with that particular private key and that
+    # the message hasn't changed since it was signed.
     #
     # To use the `Sign` operation, provide the following information:
     #
@@ -9371,8 +9442,8 @@ module Aws::KMS
     #   to sign. You can submit messages of up to 4096 bytes. To sign a
     #   larger message, generate a hash digest of the message, and then
     #   provide the hash digest in the `Message` parameter. To indicate
-    #   whether the message is a full message or a digest, use the
-    #   `MessageType` parameter.
+    #   whether the message is a full message, a digest, or an ML-DSA
+    #   EXTERNAL\_MU, use the `MessageType` parameter.
     #
     # * Choose a signing algorithm that is compatible with the KMS key.
     #
@@ -9452,26 +9523,34 @@ module Aws::KMS
     # @option params [String] :message_type
     #   Tells KMS whether the value of the `Message` parameter should be
     #   hashed as part of the signing algorithm. Use `RAW` for unhashed
-    #   messages; use `DIGEST` for message digests, which are already hashed.
+    #   messages; use `DIGEST` for message digests, which are already hashed;
+    #   use `EXTERNAL_MU` for 64-byte representative μ used in ML-DSA signing
+    #   as defined in NIST FIPS 204 Section 6.2.
     #
     #   When the value of `MessageType` is `RAW`, KMS uses the standard
     #   signing algorithm, which begins with a hash function. When the value
-    #   is `DIGEST`, KMS skips the hashing step in the signing algorithm.
+    #   is `DIGEST`, KMS skips the hashing step in the signing algorithm. When
+    #   the value is `EXTERNAL_MU` KMS skips the concatenated hashing of the
+    #   public key hash and the message done in the ML-DSA signing algorithm.
     #
-    #   Use the `DIGEST` value only when the value of the `Message` parameter
-    #   is a message digest. If you use the `DIGEST` value with an unhashed
-    #   message, the security of the signing operation can be compromised.
+    #   Use the `DIGEST` or `EXTERNAL_MU` value only when the value of the
+    #   `Message` parameter is a message digest. If you use the `DIGEST` value
+    #   with an unhashed message, the security of the signing operation can be
+    #   compromised.
     #
-    #   When the value of `MessageType`is `DIGEST`, the length of the
+    #   When the value of `MessageType` is `DIGEST`, the length of the
     #   `Message` value must match the length of hashed messages for the
     #   specified signing algorithm.
+    #
+    #   When the value of `MessageType` is `EXTERNAL_MU` the length of the
+    #   `Message` value must be 64 bytes.
     #
     #   You can submit a message digest and omit the `MessageType` or specify
     #   `RAW` so the digest is hashed again while signing. However, this can
     #   cause verification failures when verifying with a system that assumes
     #   a single hash.
     #
-    #   The hashing algorithm in that `Sign` uses is based on the
+    #   The hashing algorithm that `Sign` uses is based on the
     #   `SigningAlgorithm` value.
     #
     #   * Signing algorithms that end in SHA\_256 use the SHA\_256 hashing
@@ -9481,6 +9560,9 @@ module Aws::KMS
     #     algorithm.
     #
     #   * Signing algorithms that end in SHA\_512 use the SHA\_512 hashing
+    #     algorithm.
+    #
+    #   * Signing algorithms that end in SHAKE\_256 use the SHAKE\_256 hashing
     #     algorithm.
     #
     #   * SM2DSA uses the SM3 hashing algorithm. For details, see [Offline
@@ -9573,9 +9655,9 @@ module Aws::KMS
     #   resp = client.sign({
     #     key_id: "KeyIdType", # required
     #     message: "data", # required
-    #     message_type: "RAW", # accepts RAW, DIGEST
+    #     message_type: "RAW", # accepts RAW, DIGEST, EXTERNAL_MU
     #     grant_tokens: ["GrantTokenType"],
-    #     signing_algorithm: "RSASSA_PSS_SHA_256", # required, accepts RSASSA_PSS_SHA_256, RSASSA_PSS_SHA_384, RSASSA_PSS_SHA_512, RSASSA_PKCS1_V1_5_SHA_256, RSASSA_PKCS1_V1_5_SHA_384, RSASSA_PKCS1_V1_5_SHA_512, ECDSA_SHA_256, ECDSA_SHA_384, ECDSA_SHA_512, SM2DSA
+    #     signing_algorithm: "RSASSA_PSS_SHA_256", # required, accepts RSASSA_PSS_SHA_256, RSASSA_PSS_SHA_384, RSASSA_PSS_SHA_512, RSASSA_PKCS1_V1_5_SHA_256, RSASSA_PKCS1_V1_5_SHA_384, RSASSA_PKCS1_V1_5_SHA_512, ECDSA_SHA_256, ECDSA_SHA_384, ECDSA_SHA_512, SM2DSA, ML_DSA_SHAKE_256
     #     dry_run: false,
     #   })
     #
@@ -9583,7 +9665,7 @@ module Aws::KMS
     #
     #   resp.key_id #=> String
     #   resp.signature #=> String
-    #   resp.signing_algorithm #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA"
+    #   resp.signing_algorithm #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA", "ML_DSA_SHAKE_256"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/Sign AWS API Documentation
     #
@@ -10627,27 +10709,34 @@ module Aws::KMS
     # @option params [String] :message_type
     #   Tells KMS whether the value of the `Message` parameter should be
     #   hashed as part of the signing algorithm. Use `RAW` for unhashed
-    #   messages; use `DIGEST` for message digests, which are already hashed.
+    #   messages; use `DIGEST` for message digests, which are already hashed;
+    #   use `EXTERNAL_MU` for 64-byte representative μ used in ML-DSA signing
+    #   as defined in NIST FIPS 204 Section 6.2.
     #
     #   When the value of `MessageType` is `RAW`, KMS uses the standard
     #   signing algorithm, which begins with a hash function. When the value
-    #   is `DIGEST`, KMS skips the hashing step in the signing algorithm.
+    #   is `DIGEST`, KMS skips the hashing step in the signing algorithm. When
+    #   the value is `EXTERNAL_MU` KMS skips the concatenated hashing of the
+    #   public key hash and the message done in the ML-DSA signing algorithm.
     #
-    #   Use the `DIGEST` value only when the value of the `Message` parameter
-    #   is a message digest. If you use the `DIGEST` value with an unhashed
-    #   message, the security of the verification operation can be
+    #   Use the `DIGEST` or `EXTERNAL_MU` value only when the value of the
+    #   `Message` parameter is a message digest. If you use the `DIGEST` value
+    #   with an unhashed message, the security of the signing operation can be
     #   compromised.
     #
-    #   When the value of `MessageType`is `DIGEST`, the length of the
+    #   When the value of `MessageType` is `DIGEST`, the length of the
     #   `Message` value must match the length of hashed messages for the
     #   specified signing algorithm.
+    #
+    #   When the value of `MessageType` is `EXTERNAL_MU` the length of the
+    #   `Message` value must be 64 bytes.
     #
     #   You can submit a message digest and omit the `MessageType` or specify
     #   `RAW` so the digest is hashed again while signing. However, if the
     #   signed message is hashed once while signing, but twice while
     #   verifying, verification fails, even when the message hasn't changed.
     #
-    #   The hashing algorithm in that `Verify` uses is based on the
+    #   The hashing algorithm that `Verify` uses is based on the
     #   `SigningAlgorithm` value.
     #
     #   * Signing algorithms that end in SHA\_256 use the SHA\_256 hashing
@@ -10657,6 +10746,9 @@ module Aws::KMS
     #     algorithm.
     #
     #   * Signing algorithms that end in SHA\_512 use the SHA\_512 hashing
+    #     algorithm.
+    #
+    #   * Signing algorithms that end in SHAKE\_256 use the SHAKE\_256 hashing
     #     algorithm.
     #
     #   * SM2DSA uses the SM3 hashing algorithm. For details, see [Offline
@@ -10750,9 +10842,9 @@ module Aws::KMS
     #   resp = client.verify({
     #     key_id: "KeyIdType", # required
     #     message: "data", # required
-    #     message_type: "RAW", # accepts RAW, DIGEST
+    #     message_type: "RAW", # accepts RAW, DIGEST, EXTERNAL_MU
     #     signature: "data", # required
-    #     signing_algorithm: "RSASSA_PSS_SHA_256", # required, accepts RSASSA_PSS_SHA_256, RSASSA_PSS_SHA_384, RSASSA_PSS_SHA_512, RSASSA_PKCS1_V1_5_SHA_256, RSASSA_PKCS1_V1_5_SHA_384, RSASSA_PKCS1_V1_5_SHA_512, ECDSA_SHA_256, ECDSA_SHA_384, ECDSA_SHA_512, SM2DSA
+    #     signing_algorithm: "RSASSA_PSS_SHA_256", # required, accepts RSASSA_PSS_SHA_256, RSASSA_PSS_SHA_384, RSASSA_PSS_SHA_512, RSASSA_PKCS1_V1_5_SHA_256, RSASSA_PKCS1_V1_5_SHA_384, RSASSA_PKCS1_V1_5_SHA_512, ECDSA_SHA_256, ECDSA_SHA_384, ECDSA_SHA_512, SM2DSA, ML_DSA_SHAKE_256
     #     grant_tokens: ["GrantTokenType"],
     #     dry_run: false,
     #   })
@@ -10761,7 +10853,7 @@ module Aws::KMS
     #
     #   resp.key_id #=> String
     #   resp.signature_valid #=> Boolean
-    #   resp.signing_algorithm #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA"
+    #   resp.signing_algorithm #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA", "ML_DSA_SHAKE_256"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/Verify AWS API Documentation
     #
@@ -10930,7 +11022,7 @@ module Aws::KMS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kms'
-      context[:gem_version] = '1.104.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -537,6 +537,166 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Creates a new custom model in Amazon Bedrock. After the model is
+    # active, you can use it for inference.
+    #
+    # To use the model for inference, you must purchase Provisioned
+    # Throughput for it. You can't use On-demand inference with these
+    # custom models. For more information about Provisioned Throughput, see
+    # [Provisioned Throughput][1].
+    #
+    # The model appears in `ListCustomModels` with a `customizationType` of
+    # `imported`. To track the status of the new model, you use the
+    # `GetCustomModel` API operation. The model can be in the following
+    # states:
+    #
+    # * `Creating` - Initial state during validation and registration
+    #
+    # * `Active` - Model is ready for use in inference
+    #
+    # * `Failed` - Creation process encountered an error
+    #
+    # **Related APIs**
+    #
+    # * [GetCustomModel][2]
+    #
+    # * [ListCustomModels][3]
+    #
+    # * [DeleteCustomModel][4]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetCustomModel.html
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListCustomModels.html
+    # [4]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_DeleteCustomModel.html
+    #
+    # @option params [required, String] :model_name
+    #   A unique name for the custom model.
+    #
+    # @option params [required, Types::ModelDataSource] :model_source_config
+    #   The data source for the model. The Amazon S3 URI in the model source
+    #   must be for the Amazon-managed Amazon S3 bucket containing your model
+    #   artifacts.
+    #
+    # @option params [String] :model_kms_key_arn
+    #   The Amazon Resource Name (ARN) of the customer managed KMS key to
+    #   encrypt the custom model. If you don't provide a KMS key, Amazon
+    #   Bedrock uses an Amazon Web Services-managed KMS key to encrypt the
+    #   model.
+    #
+    #   If you provide a customer managed KMS key, your Amazon Bedrock service
+    #   role must have permissions to use it. For more information see
+    #   [Encryption of imported models][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/encryption-import-model.html
+    #
+    # @option params [String] :role_arn
+    #   The Amazon Resource Name (ARN) of an IAM service role that Amazon
+    #   Bedrock assumes to perform tasks on your behalf. This role must have
+    #   permissions to access the Amazon S3 bucket containing your model
+    #   artifacts and the KMS key (if specified). For more information, see
+    #   [Setting up an IAM service role for importing models][1] in the Amazon
+    #   Bedrock User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-import-iam-role.html
+    #
+    # @option params [Array<Types::Tag>] :model_tags
+    #   A list of key-value pairs to associate with the custom model resource.
+    #   You can use these tags to organize and identify your resources.
+    #
+    #   For more information, see [Tagging resources][1] in the [Amazon
+    #   Bedrock User Guide][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
+    #
+    # @option params [String] :client_request_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @return [Types::CreateCustomModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCustomModelResponse#model_arn #model_arn} => String
+    #
+    #
+    # @example Example: Successful CreateCustomModel API call
+    #
+    #   resp = client.create_custom_model({
+    #     client_request_token: "foo", 
+    #     model_kms_key_arn: "arn:aws:kms:us-east-1:123456789012:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #     model_name: "SampleModel", 
+    #     model_source_config: {
+    #       s3_data_source: {
+    #         s3_uri: "s3://my-bucket/folder", 
+    #       }, 
+    #     }, 
+    #     model_tags: [
+    #       {
+    #         key: "foo", 
+    #         value: "foo", 
+    #       }, 
+    #       {
+    #         key: "foo", 
+    #         value: "foo", 
+    #       }, 
+    #     ], 
+    #     role_arn: "arn:aws:iam::123456789012:role/SampleRole", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     model_arn: "arn:aws:bedrock:us-east-1:123456789012:custom-model/imported/abcdef123456", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_custom_model({
+    #     model_name: "CustomModelName", # required
+    #     model_source_config: { # required
+    #       s3_data_source: {
+    #         s3_uri: "S3Uri", # required
+    #       },
+    #     },
+    #     model_kms_key_arn: "KmsKeyArn",
+    #     role_arn: "RoleArn",
+    #     model_tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     client_request_token: "IdempotencyToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.model_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateCustomModel AWS API Documentation
+    #
+    # @overload create_custom_model(params = {})
+    # @param [Hash] params ({})
+    def create_custom_model(params = {}, options = {})
+      req = build_request(:create_custom_model, params)
+      req.send_request(options)
+    end
+
     # Creates an evaluation job.
     #
     # @option params [required, String] :job_name
@@ -1585,7 +1745,7 @@ module Aws::Bedrock
     #     role_arn: "RoleArn", # required
     #     client_request_token: "IdempotencyToken",
     #     base_model_identifier: "BaseModelIdentifier", # required
-    #     customization_type: "FINE_TUNING", # accepts FINE_TUNING, CONTINUED_PRE_TRAINING, DISTILLATION
+    #     customization_type: "FINE_TUNING", # accepts FINE_TUNING, CONTINUED_PRE_TRAINING, DISTILLATION, IMPORTED
     #     custom_model_kms_key_id: "KmsKeyId",
     #     job_tags: [
     #       {
@@ -2306,7 +2466,7 @@ module Aws::Bedrock
     end
 
     # Get the properties associated with a Amazon Bedrock custom model that
-    # you have created.For more information, see [Custom models][1] in the
+    # you have created. For more information, see [Custom models][1] in the
     # [Amazon Bedrock User Guide][2].
     #
     #
@@ -2334,6 +2494,8 @@ module Aws::Bedrock
     #   * {Types::GetCustomModelResponse#validation_metrics #validation_metrics} => Array&lt;Types::ValidatorMetric&gt;
     #   * {Types::GetCustomModelResponse#creation_time #creation_time} => Time
     #   * {Types::GetCustomModelResponse#customization_config #customization_config} => Types::CustomizationConfig
+    #   * {Types::GetCustomModelResponse#model_status #model_status} => String
+    #   * {Types::GetCustomModelResponse#failure_message #failure_message} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2348,7 +2510,7 @@ module Aws::Bedrock
     #   resp.job_name #=> String
     #   resp.job_arn #=> String
     #   resp.base_model_arn #=> String
-    #   resp.customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION"
+    #   resp.customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "IMPORTED"
     #   resp.model_kms_key_arn #=> String
     #   resp.hyper_parameters #=> Hash
     #   resp.hyper_parameters["String"] #=> String
@@ -2378,6 +2540,8 @@ module Aws::Bedrock
     #   resp.creation_time #=> Time
     #   resp.customization_config.distillation_config.teacher_model_config.teacher_model_identifier #=> String
     #   resp.customization_config.distillation_config.teacher_model_config.max_response_length_for_inference #=> Integer
+    #   resp.model_status #=> String, one of "Active", "Creating", "Failed"
+    #   resp.failure_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetCustomModel AWS API Documentation
     #
@@ -2931,8 +3095,8 @@ module Aws::Bedrock
     #   * {Types::GetModelCustomizationJobResponse#client_request_token #client_request_token} => String
     #   * {Types::GetModelCustomizationJobResponse#role_arn #role_arn} => String
     #   * {Types::GetModelCustomizationJobResponse#status #status} => String
-    #   * {Types::GetModelCustomizationJobResponse#failure_message #failure_message} => String
     #   * {Types::GetModelCustomizationJobResponse#status_details #status_details} => Types::StatusDetails
+    #   * {Types::GetModelCustomizationJobResponse#failure_message #failure_message} => String
     #   * {Types::GetModelCustomizationJobResponse#creation_time #creation_time} => Time
     #   * {Types::GetModelCustomizationJobResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::GetModelCustomizationJobResponse#end_time #end_time} => Time
@@ -2963,7 +3127,6 @@ module Aws::Bedrock
     #   resp.client_request_token #=> String
     #   resp.role_arn #=> String
     #   resp.status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
-    #   resp.failure_message #=> String
     #   resp.status_details.validation_details.status #=> String, one of "InProgress", "Completed", "Stopping", "Stopped", "Failed", "NotStarted"
     #   resp.status_details.validation_details.creation_time #=> Time
     #   resp.status_details.validation_details.last_modified_time #=> Time
@@ -2973,6 +3136,7 @@ module Aws::Bedrock
     #   resp.status_details.training_details.status #=> String, one of "InProgress", "Completed", "Stopping", "Stopped", "Failed", "NotStarted"
     #   resp.status_details.training_details.creation_time #=> Time
     #   resp.status_details.training_details.last_modified_time #=> Time
+    #   resp.failure_message #=> String
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
     #   resp.end_time #=> Time
@@ -2999,7 +3163,7 @@ module Aws::Bedrock
     #   resp.validation_data_config.validators #=> Array
     #   resp.validation_data_config.validators[0].s3_uri #=> String
     #   resp.output_data_config.s3_uri #=> String
-    #   resp.customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION"
+    #   resp.customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "IMPORTED"
     #   resp.output_model_kms_key_arn #=> String
     #   resp.training_metrics.training_loss #=> Float
     #   resp.validation_metrics #=> Array
@@ -3333,6 +3497,20 @@ module Aws::Bedrock
     #   Return custom models depending on if the current account owns them
     #   (`true`) or if they were shared with the current account (`false`).
     #
+    # @option params [String] :model_status
+    #   The status of them model to filter results by. Possible values
+    #   include:
+    #
+    #   * `Creating` - Include only models that are currently being created
+    #     and validated.
+    #
+    #   * `Active` - Include only models that have been successfully created
+    #     and are ready for use.
+    #
+    #   * `Failed` - Include only models where the creation process failed.
+    #
+    #   If you don't specify a status, the API returns models in all states.
+    #
     # @return [Types::ListCustomModelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListCustomModelsResponse#next_token #next_token} => String
@@ -3353,6 +3531,7 @@ module Aws::Bedrock
     #     sort_by: "CreationTime", # accepts CreationTime
     #     sort_order: "Ascending", # accepts Ascending, Descending
     #     is_owned: false,
+    #     model_status: "Active", # accepts Active, Creating, Failed
     #   })
     #
     # @example Response structure
@@ -3364,8 +3543,9 @@ module Aws::Bedrock
     #   resp.model_summaries[0].creation_time #=> Time
     #   resp.model_summaries[0].base_model_arn #=> String
     #   resp.model_summaries[0].base_model_name #=> String
-    #   resp.model_summaries[0].customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION"
+    #   resp.model_summaries[0].customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "IMPORTED"
     #   resp.model_summaries[0].owner_account_id #=> String
+    #   resp.model_summaries[0].model_status #=> String, one of "Active", "Creating", "Failed"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListCustomModels AWS API Documentation
     #
@@ -3971,7 +4151,6 @@ module Aws::Bedrock
     #   resp.model_customization_job_summaries[0].base_model_arn #=> String
     #   resp.model_customization_job_summaries[0].job_name #=> String
     #   resp.model_customization_job_summaries[0].status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
-    #   resp.model_customization_job_summaries[0].last_modified_time #=> Time
     #   resp.model_customization_job_summaries[0].status_details.validation_details.status #=> String, one of "InProgress", "Completed", "Stopping", "Stopped", "Failed", "NotStarted"
     #   resp.model_customization_job_summaries[0].status_details.validation_details.creation_time #=> Time
     #   resp.model_customization_job_summaries[0].status_details.validation_details.last_modified_time #=> Time
@@ -3981,11 +4160,12 @@ module Aws::Bedrock
     #   resp.model_customization_job_summaries[0].status_details.training_details.status #=> String, one of "InProgress", "Completed", "Stopping", "Stopped", "Failed", "NotStarted"
     #   resp.model_customization_job_summaries[0].status_details.training_details.creation_time #=> Time
     #   resp.model_customization_job_summaries[0].status_details.training_details.last_modified_time #=> Time
+    #   resp.model_customization_job_summaries[0].last_modified_time #=> Time
     #   resp.model_customization_job_summaries[0].creation_time #=> Time
     #   resp.model_customization_job_summaries[0].end_time #=> Time
     #   resp.model_customization_job_summaries[0].custom_model_arn #=> String
     #   resp.model_customization_job_summaries[0].custom_model_name #=> String
-    #   resp.model_customization_job_summaries[0].customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION"
+    #   resp.model_customization_job_summaries[0].customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "IMPORTED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListModelCustomizationJobs AWS API Documentation
     #
@@ -4985,7 +5165,7 @@ module Aws::Bedrock
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

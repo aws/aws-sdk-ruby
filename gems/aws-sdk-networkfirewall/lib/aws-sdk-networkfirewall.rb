@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:networkfirewall)
 # structure.
 #
 #     network_firewall = Aws::NetworkFirewall::Client.new
-#     resp = network_firewall.associate_firewall_policy(params)
+#     resp = network_firewall.accept_network_firewall_transit_gateway_attachment(params)
 #
 # See {Client} for more information.
 #
@@ -54,7 +54,7 @@ module Aws::NetworkFirewall
   autoload :EndpointProvider, 'aws-sdk-networkfirewall/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-networkfirewall/endpoints'
 
-  GEM_VERSION = '1.68.0'
+  GEM_VERSION = '1.70.0'
 
 end
 

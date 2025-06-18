@@ -88,6 +88,30 @@ module Aws
                                        ) -> _BatchDeleteEvaluationJobResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteEvaluationJobResponseSuccess
 
+      interface _CreateCustomModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCustomModelResponse]
+        def model_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#create_custom_model-instance_method
+      def create_custom_model: (
+                                 model_name: ::String,
+                                 model_source_config: {
+                                   s3_data_source: {
+                                     s3_uri: ::String
+                                   }?
+                                 },
+                                 ?model_kms_key_arn: ::String,
+                                 ?role_arn: ::String,
+                                 ?model_tags: Array[
+                                   {
+                                     key: ::String,
+                                     value: ::String
+                                   },
+                                 ],
+                                 ?client_request_token: ::String
+                               ) -> _CreateCustomModelResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCustomModelResponseSuccess
+
       interface _CreateEvaluationJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateEvaluationJobResponse]
         def job_arn: () -> ::String
@@ -629,7 +653,7 @@ module Aws
                                             role_arn: ::String,
                                             ?client_request_token: ::String,
                                             base_model_identifier: ::String,
-                                            ?customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION"),
+                                            ?customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "IMPORTED"),
                                             ?custom_model_kms_key_id: ::String,
                                             ?job_tags: Array[
                                               {
@@ -904,7 +928,7 @@ module Aws
         def job_name: () -> ::String
         def job_arn: () -> ::String
         def base_model_arn: () -> ::String
-        def customization_type: () -> ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION")
+        def customization_type: () -> ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "IMPORTED")
         def model_kms_key_arn: () -> ::String
         def hyper_parameters: () -> ::Hash[::String, ::String]
         def training_data_config: () -> Types::TrainingDataConfig
@@ -914,6 +938,8 @@ module Aws
         def validation_metrics: () -> ::Array[Types::ValidatorMetric]
         def creation_time: () -> ::Time
         def customization_config: () -> Types::CustomizationConfig
+        def model_status: () -> ("Active" | "Creating" | "Failed")
+        def failure_message: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_custom_model-instance_method
       def get_custom_model: (
@@ -1059,8 +1085,8 @@ module Aws
         def client_request_token: () -> ::String
         def role_arn: () -> ::String
         def status: () -> ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped")
-        def failure_message: () -> ::String
         def status_details: () -> Types::StatusDetails
+        def failure_message: () -> ::String
         def creation_time: () -> ::Time
         def last_modified_time: () -> ::Time
         def end_time: () -> ::Time
@@ -1069,7 +1095,7 @@ module Aws
         def training_data_config: () -> Types::TrainingDataConfig
         def validation_data_config: () -> Types::ValidationDataConfig
         def output_data_config: () -> Types::OutputDataConfig
-        def customization_type: () -> ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION")
+        def customization_type: () -> ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "IMPORTED")
         def output_model_kms_key_arn: () -> ::String
         def training_metrics: () -> Types::TrainingMetrics
         def validation_metrics: () -> ::Array[Types::ValidatorMetric]
@@ -1194,7 +1220,8 @@ module Aws
                                 ?next_token: ::String,
                                 ?sort_by: ("CreationTime"),
                                 ?sort_order: ("Ascending" | "Descending"),
-                                ?is_owned: bool
+                                ?is_owned: bool,
+                                ?model_status: ("Active" | "Creating" | "Failed")
                               ) -> _ListCustomModelsResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCustomModelsResponseSuccess
 

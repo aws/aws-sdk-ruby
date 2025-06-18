@@ -9,6 +9,13 @@ Unreleased Changes
 
 * Feature - Support configuration for IMDS profile name using `ENV['AWS_EC2_INSTANCE_PROFILE_NAME']`, `ec2_instance_profile_name` shared config, or the `ec2_instance_profile_name` Client configuration option.
 
+3.226.0 (2025-06-17)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - The AWS Security Token Service APIs AssumeRoleWithSAML and AssumeRoleWithWebIdentity can now be invoked without pre-configured AWS credentials in the SDK configuration.
+
 3.225.2 (2025-06-10)
 ------------------
 

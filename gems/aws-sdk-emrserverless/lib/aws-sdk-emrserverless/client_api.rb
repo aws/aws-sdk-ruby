@@ -335,6 +335,7 @@ module Aws::EMRServerless
     JobRun.add_member(:created_at, Shapes::ShapeRef.new(shape: Date, required: true, location_name: "createdAt"))
     JobRun.add_member(:updated_at, Shapes::ShapeRef.new(shape: Date, required: true, location_name: "updatedAt"))
     JobRun.add_member(:execution_role, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "executionRole"))
+    JobRun.add_member(:execution_iam_policy, Shapes::ShapeRef.new(shape: JobRunExecutionIamPolicy, location_name: "executionIamPolicy"))
     JobRun.add_member(:state, Shapes::ShapeRef.new(shape: JobRunState, required: true, location_name: "state"))
     JobRun.add_member(:state_details, Shapes::ShapeRef.new(shape: String256, required: true, location_name: "stateDetails"))
     JobRun.add_member(:release_label, Shapes::ShapeRef.new(shape: ReleaseLabel, required: true, location_name: "releaseLabel"))

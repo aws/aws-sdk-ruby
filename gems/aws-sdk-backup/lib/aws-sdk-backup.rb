@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:backup)
 # structure.
 #
 #     backup = Aws::Backup::Client.new
-#     resp = backup.cancel_legal_hold(params)
+#     resp = backup.associate_backup_vault_mpa_approval_team(params)
 #
 # See {Client} for more information.
 #
@@ -54,7 +54,7 @@ module Aws::Backup
   autoload :EndpointProvider, 'aws-sdk-backup/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-backup/endpoints'
 
-  GEM_VERSION = '1.89.0'
+  GEM_VERSION = '1.90.0'
 
 end
 

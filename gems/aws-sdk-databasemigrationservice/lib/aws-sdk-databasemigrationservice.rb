@@ -55,7 +55,7 @@ module Aws::DatabaseMigrationService
   autoload :EndpointProvider, 'aws-sdk-databasemigrationservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-databasemigrationservice/endpoints'
 
-  GEM_VERSION = '1.123.0'
+  GEM_VERSION = '1.124.0'
 
 end
 

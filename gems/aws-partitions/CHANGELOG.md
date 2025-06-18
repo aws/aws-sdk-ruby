@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.1117.0 (2025-06-17)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::MPA`.
+
 1.1116.0 (2025-06-11)
 ------------------
 

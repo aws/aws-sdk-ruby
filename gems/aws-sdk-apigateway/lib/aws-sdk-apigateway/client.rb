@@ -5185,7 +5185,8 @@ module Aws::APIGateway
     #
     # @option params [Integer] :timeout_in_millis
     #   Custom timeout between 50 and 29,000 milliseconds. The default value
-    #   is 29,000 milliseconds or 29 seconds.
+    #   is 29,000 milliseconds or 29 seconds. You can increase the default
+    #   value to longer than 29 seconds for Regional or private APIs only.
     #
     # @option params [Types::TlsConfig] :tls_config
     #   Specifies the TLS configuration for an integration.
@@ -7401,7 +7402,7 @@ module Aws::APIGateway
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.118.0'
+      context[:gem_version] = '1.119.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

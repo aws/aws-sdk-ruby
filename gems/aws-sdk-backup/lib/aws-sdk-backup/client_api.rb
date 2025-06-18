@@ -20,6 +20,7 @@ module Aws::Backup
     AdvancedBackupSettings = Shapes::ListShape.new(name: 'AdvancedBackupSettings')
     AggregationPeriod = Shapes::StringShape.new(name: 'AggregationPeriod')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
+    AssociateBackupVaultMpaApprovalTeamInput = Shapes::StructureShape.new(name: 'AssociateBackupVaultMpaApprovalTeamInput')
     BackupJob = Shapes::StructureShape.new(name: 'BackupJob')
     BackupJobChildJobsInState = Shapes::MapShape.new(name: 'BackupJobChildJobsInState')
     BackupJobState = Shapes::StringShape.new(name: 'BackupJobState')
@@ -92,6 +93,8 @@ module Aws::Backup
     CreateLogicallyAirGappedBackupVaultOutput = Shapes::StructureShape.new(name: 'CreateLogicallyAirGappedBackupVaultOutput')
     CreateReportPlanInput = Shapes::StructureShape.new(name: 'CreateReportPlanInput')
     CreateReportPlanOutput = Shapes::StructureShape.new(name: 'CreateReportPlanOutput')
+    CreateRestoreAccessBackupVaultInput = Shapes::StructureShape.new(name: 'CreateRestoreAccessBackupVaultInput')
+    CreateRestoreAccessBackupVaultOutput = Shapes::StructureShape.new(name: 'CreateRestoreAccessBackupVaultOutput')
     CreateRestoreTestingPlanInput = Shapes::StructureShape.new(name: 'CreateRestoreTestingPlanInput')
     CreateRestoreTestingPlanOutput = Shapes::StructureShape.new(name: 'CreateRestoreTestingPlanOutput')
     CreateRestoreTestingSelectionInput = Shapes::StructureShape.new(name: 'CreateRestoreTestingSelectionInput')
@@ -133,6 +136,7 @@ module Aws::Backup
     DescribeReportPlanOutput = Shapes::StructureShape.new(name: 'DescribeReportPlanOutput')
     DescribeRestoreJobInput = Shapes::StructureShape.new(name: 'DescribeRestoreJobInput')
     DescribeRestoreJobOutput = Shapes::StructureShape.new(name: 'DescribeRestoreJobOutput')
+    DisassociateBackupVaultMpaApprovalTeamInput = Shapes::StructureShape.new(name: 'DisassociateBackupVaultMpaApprovalTeamInput')
     DisassociateRecoveryPointFromParentInput = Shapes::StructureShape.new(name: 'DisassociateRecoveryPointFromParentInput')
     DisassociateRecoveryPointInput = Shapes::StructureShape.new(name: 'DisassociateRecoveryPointInput')
     ExportBackupPlanTemplateInput = Shapes::StructureShape.new(name: 'ExportBackupPlanTemplateInput')
@@ -188,6 +192,8 @@ module Aws::Backup
     IsEnabled = Shapes::BooleanShape.new(name: 'IsEnabled')
     KeyValue = Shapes::StructureShape.new(name: 'KeyValue')
     KeyValueList = Shapes::ListShape.new(name: 'KeyValueList')
+    LatestMpaApprovalTeamUpdate = Shapes::StructureShape.new(name: 'LatestMpaApprovalTeamUpdate')
+    LatestRevokeRequest = Shapes::StructureShape.new(name: 'LatestRevokeRequest')
     LegalHold = Shapes::StructureShape.new(name: 'LegalHold')
     LegalHoldStatus = Shapes::StringShape.new(name: 'LegalHoldStatus')
     LegalHoldsList = Shapes::ListShape.new(name: 'LegalHoldsList')
@@ -232,6 +238,8 @@ module Aws::Backup
     ListReportJobsOutput = Shapes::StructureShape.new(name: 'ListReportJobsOutput')
     ListReportPlansInput = Shapes::StructureShape.new(name: 'ListReportPlansInput')
     ListReportPlansOutput = Shapes::StructureShape.new(name: 'ListReportPlansOutput')
+    ListRestoreAccessBackupVaultsInput = Shapes::StructureShape.new(name: 'ListRestoreAccessBackupVaultsInput')
+    ListRestoreAccessBackupVaultsOutput = Shapes::StructureShape.new(name: 'ListRestoreAccessBackupVaultsOutput')
     ListRestoreJobSummariesInput = Shapes::StructureShape.new(name: 'ListRestoreJobSummariesInput')
     ListRestoreJobSummariesOutput = Shapes::StructureShape.new(name: 'ListRestoreJobSummariesOutput')
     ListRestoreJobsByProtectedResourceInput = Shapes::StructureShape.new(name: 'ListRestoreJobsByProtectedResourceInput')
@@ -254,6 +262,8 @@ module Aws::Backup
     MetadataKey = Shapes::StringShape.new(name: 'MetadataKey')
     MetadataValue = Shapes::StringShape.new(name: 'MetadataValue')
     MissingParameterValueException = Shapes::StructureShape.new(name: 'MissingParameterValueException')
+    MpaRevokeSessionStatus = Shapes::StringShape.new(name: 'MpaRevokeSessionStatus')
+    MpaSessionStatus = Shapes::StringShape.new(name: 'MpaSessionStatus')
     ParameterName = Shapes::StringShape.new(name: 'ParameterName')
     ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
     ProtectedResource = Shapes::StructureShape.new(name: 'ProtectedResource')
@@ -283,6 +293,7 @@ module Aws::Backup
     ReportPlanList = Shapes::ListShape.new(name: 'ReportPlanList')
     ReportPlanName = Shapes::StringShape.new(name: 'ReportPlanName')
     ReportSetting = Shapes::StructureShape.new(name: 'ReportSetting')
+    RequesterComment = Shapes::StringShape.new(name: 'RequesterComment')
     ResourceArns = Shapes::ListShape.new(name: 'ResourceArns')
     ResourceIdentifiers = Shapes::ListShape.new(name: 'ResourceIdentifiers')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -291,6 +302,8 @@ module Aws::Backup
     ResourceTypeManagementPreference = Shapes::MapShape.new(name: 'ResourceTypeManagementPreference')
     ResourceTypeOptInPreference = Shapes::MapShape.new(name: 'ResourceTypeOptInPreference')
     ResourceTypes = Shapes::ListShape.new(name: 'ResourceTypes')
+    RestoreAccessBackupVaultList = Shapes::ListShape.new(name: 'RestoreAccessBackupVaultList')
+    RestoreAccessBackupVaultListMember = Shapes::StructureShape.new(name: 'RestoreAccessBackupVaultListMember')
     RestoreDeletionStatus = Shapes::StringShape.new(name: 'RestoreDeletionStatus')
     RestoreJobCreator = Shapes::StructureShape.new(name: 'RestoreJobCreator')
     RestoreJobId = Shapes::StringShape.new(name: 'RestoreJobId')
@@ -315,6 +328,7 @@ module Aws::Backup
     RestoreTestingSelectionForUpdate = Shapes::StructureShape.new(name: 'RestoreTestingSelectionForUpdate')
     RestoreTestingSelections = Shapes::ListShape.new(name: 'RestoreTestingSelections')
     RestoreValidationStatus = Shapes::StringShape.new(name: 'RestoreValidationStatus')
+    RevokeRestoreAccessBackupVaultInput = Shapes::StructureShape.new(name: 'RevokeRestoreAccessBackupVaultInput')
     SensitiveStringMap = Shapes::MapShape.new(name: 'SensitiveStringMap')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     StartBackupJobInput = Shapes::StructureShape.new(name: 'StartBackupJobInput')
@@ -377,6 +391,11 @@ module Aws::Backup
     AlreadyExistsException.add_member(:type, Shapes::ShapeRef.new(shape: string, location_name: "Type"))
     AlreadyExistsException.add_member(:context, Shapes::ShapeRef.new(shape: string, location_name: "Context"))
     AlreadyExistsException.struct_class = Types::AlreadyExistsException
+
+    AssociateBackupVaultMpaApprovalTeamInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location: "uri", location_name: "backupVaultName"))
+    AssociateBackupVaultMpaApprovalTeamInput.add_member(:mpa_approval_team_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "MpaApprovalTeamArn"))
+    AssociateBackupVaultMpaApprovalTeamInput.add_member(:requester_comment, Shapes::ShapeRef.new(shape: RequesterComment, location_name: "RequesterComment"))
+    AssociateBackupVaultMpaApprovalTeamInput.struct_class = Types::AssociateBackupVaultMpaApprovalTeamInput
 
     BackupJob.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     BackupJob.add_member(:backup_job_id, Shapes::ShapeRef.new(shape: string, location_name: "BackupJobId"))
@@ -619,7 +638,7 @@ module Aws::Backup
 
     CreateBackupPlanInput.add_member(:backup_plan, Shapes::ShapeRef.new(shape: BackupPlanInput, required: true, location_name: "BackupPlan"))
     CreateBackupPlanInput.add_member(:backup_plan_tags, Shapes::ShapeRef.new(shape: Tags, location_name: "BackupPlanTags"))
-    CreateBackupPlanInput.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: string, location_name: "CreatorRequestId"))
+    CreateBackupPlanInput.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: string, location_name: "CreatorRequestId", metadata: {"idempotencyToken" => true}))
     CreateBackupPlanInput.struct_class = Types::CreateBackupPlanInput
 
     CreateBackupPlanOutput.add_member(:backup_plan_id, Shapes::ShapeRef.new(shape: string, location_name: "BackupPlanId"))
@@ -631,7 +650,7 @@ module Aws::Backup
 
     CreateBackupSelectionInput.add_member(:backup_plan_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "backupPlanId"))
     CreateBackupSelectionInput.add_member(:backup_selection, Shapes::ShapeRef.new(shape: BackupSelection, required: true, location_name: "BackupSelection"))
-    CreateBackupSelectionInput.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: string, location_name: "CreatorRequestId"))
+    CreateBackupSelectionInput.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: string, location_name: "CreatorRequestId", metadata: {"idempotencyToken" => true}))
     CreateBackupSelectionInput.struct_class = Types::CreateBackupSelectionInput
 
     CreateBackupSelectionOutput.add_member(:selection_id, Shapes::ShapeRef.new(shape: string, location_name: "SelectionId"))
@@ -642,7 +661,7 @@ module Aws::Backup
     CreateBackupVaultInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location: "uri", location_name: "backupVaultName"))
     CreateBackupVaultInput.add_member(:backup_vault_tags, Shapes::ShapeRef.new(shape: Tags, location_name: "BackupVaultTags"))
     CreateBackupVaultInput.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "EncryptionKeyArn"))
-    CreateBackupVaultInput.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: string, location_name: "CreatorRequestId"))
+    CreateBackupVaultInput.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: string, location_name: "CreatorRequestId", metadata: {"idempotencyToken" => true}))
     CreateBackupVaultInput.struct_class = Types::CreateBackupVaultInput
 
     CreateBackupVaultOutput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, location_name: "BackupVaultName"))
@@ -663,7 +682,7 @@ module Aws::Backup
 
     CreateLegalHoldInput.add_member(:title, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Title"))
     CreateLegalHoldInput.add_member(:description, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Description"))
-    CreateLegalHoldInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: string, location_name: "IdempotencyToken"))
+    CreateLegalHoldInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: string, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     CreateLegalHoldInput.add_member(:recovery_point_selection, Shapes::ShapeRef.new(shape: RecoveryPointSelection, location_name: "RecoveryPointSelection"))
     CreateLegalHoldInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateLegalHoldInput.struct_class = Types::CreateLegalHoldInput
@@ -679,7 +698,7 @@ module Aws::Backup
 
     CreateLogicallyAirGappedBackupVaultInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location: "uri", location_name: "backupVaultName"))
     CreateLogicallyAirGappedBackupVaultInput.add_member(:backup_vault_tags, Shapes::ShapeRef.new(shape: Tags, location_name: "BackupVaultTags"))
-    CreateLogicallyAirGappedBackupVaultInput.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: string, location_name: "CreatorRequestId"))
+    CreateLogicallyAirGappedBackupVaultInput.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: string, location_name: "CreatorRequestId", metadata: {"idempotencyToken" => true}))
     CreateLogicallyAirGappedBackupVaultInput.add_member(:min_retention_days, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "MinRetentionDays"))
     CreateLogicallyAirGappedBackupVaultInput.add_member(:max_retention_days, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "MaxRetentionDays"))
     CreateLogicallyAirGappedBackupVaultInput.struct_class = Types::CreateLogicallyAirGappedBackupVaultInput
@@ -702,6 +721,19 @@ module Aws::Backup
     CreateReportPlanOutput.add_member(:report_plan_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ReportPlanArn"))
     CreateReportPlanOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationTime"))
     CreateReportPlanOutput.struct_class = Types::CreateReportPlanOutput
+
+    CreateRestoreAccessBackupVaultInput.add_member(:source_backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "SourceBackupVaultArn"))
+    CreateRestoreAccessBackupVaultInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, location_name: "BackupVaultName"))
+    CreateRestoreAccessBackupVaultInput.add_member(:backup_vault_tags, Shapes::ShapeRef.new(shape: Tags, location_name: "BackupVaultTags"))
+    CreateRestoreAccessBackupVaultInput.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: string, location_name: "CreatorRequestId", metadata: {"idempotencyToken" => true}))
+    CreateRestoreAccessBackupVaultInput.add_member(:requester_comment, Shapes::ShapeRef.new(shape: RequesterComment, location_name: "RequesterComment"))
+    CreateRestoreAccessBackupVaultInput.struct_class = Types::CreateRestoreAccessBackupVaultInput
+
+    CreateRestoreAccessBackupVaultOutput.add_member(:restore_access_backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "RestoreAccessBackupVaultArn"))
+    CreateRestoreAccessBackupVaultOutput.add_member(:vault_state, Shapes::ShapeRef.new(shape: VaultState, location_name: "VaultState"))
+    CreateRestoreAccessBackupVaultOutput.add_member(:restore_access_backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, location_name: "RestoreAccessBackupVaultName"))
+    CreateRestoreAccessBackupVaultOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
+    CreateRestoreAccessBackupVaultOutput.struct_class = Types::CreateRestoreAccessBackupVaultOutput
 
     CreateRestoreTestingPlanInput.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: String, location_name: "CreatorRequestId"))
     CreateRestoreTestingPlanInput.add_member(:restore_testing_plan, Shapes::ShapeRef.new(shape: RestoreTestingPlanForCreate, required: true, location_name: "RestoreTestingPlan"))
@@ -824,6 +856,10 @@ module Aws::Backup
     DescribeBackupVaultOutput.add_member(:min_retention_days, Shapes::ShapeRef.new(shape: Long, location_name: "MinRetentionDays"))
     DescribeBackupVaultOutput.add_member(:max_retention_days, Shapes::ShapeRef.new(shape: Long, location_name: "MaxRetentionDays"))
     DescribeBackupVaultOutput.add_member(:lock_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "LockDate"))
+    DescribeBackupVaultOutput.add_member(:source_backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "SourceBackupVaultArn"))
+    DescribeBackupVaultOutput.add_member(:mpa_approval_team_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "MpaApprovalTeamArn"))
+    DescribeBackupVaultOutput.add_member(:mpa_session_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "MpaSessionArn"))
+    DescribeBackupVaultOutput.add_member(:latest_mpa_approval_team_update, Shapes::ShapeRef.new(shape: LatestMpaApprovalTeamUpdate, location_name: "LatestMpaApprovalTeamUpdate"))
     DescribeBackupVaultOutput.struct_class = Types::DescribeBackupVaultOutput
 
     DescribeCopyJobInput.add_member(:copy_job_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "copyJobId"))
@@ -881,6 +917,7 @@ module Aws::Backup
     DescribeRecoveryPointOutput.add_member(:status, Shapes::ShapeRef.new(shape: RecoveryPointStatus, location_name: "Status"))
     DescribeRecoveryPointOutput.add_member(:status_message, Shapes::ShapeRef.new(shape: string, location_name: "StatusMessage"))
     DescribeRecoveryPointOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
+    DescribeRecoveryPointOutput.add_member(:initiation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "InitiationDate"))
     DescribeRecoveryPointOutput.add_member(:completion_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CompletionDate"))
     DescribeRecoveryPointOutput.add_member(:backup_size_in_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "BackupSizeInBytes"))
     DescribeRecoveryPointOutput.add_member(:calculated_lifecycle, Shapes::ShapeRef.new(shape: CalculatedLifecycle, location_name: "CalculatedLifecycle"))
@@ -939,6 +976,10 @@ module Aws::Backup
     DescribeRestoreJobOutput.add_member(:deletion_status, Shapes::ShapeRef.new(shape: RestoreDeletionStatus, location_name: "DeletionStatus"))
     DescribeRestoreJobOutput.add_member(:deletion_status_message, Shapes::ShapeRef.new(shape: string, location_name: "DeletionStatusMessage"))
     DescribeRestoreJobOutput.struct_class = Types::DescribeRestoreJobOutput
+
+    DisassociateBackupVaultMpaApprovalTeamInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location: "uri", location_name: "backupVaultName"))
+    DisassociateBackupVaultMpaApprovalTeamInput.add_member(:requester_comment, Shapes::ShapeRef.new(shape: RequesterComment, location_name: "RequesterComment"))
+    DisassociateBackupVaultMpaApprovalTeamInput.struct_class = Types::DisassociateBackupVaultMpaApprovalTeamInput
 
     DisassociateRecoveryPointFromParentInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location: "uri", location_name: "backupVaultName"))
     DisassociateRecoveryPointFromParentInput.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "recoveryPointArn"))
@@ -1144,6 +1185,20 @@ module Aws::Backup
     KeyValue.struct_class = Types::KeyValue
 
     KeyValueList.member = Shapes::ShapeRef.new(shape: KeyValue)
+
+    LatestMpaApprovalTeamUpdate.add_member(:mpa_session_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "MpaSessionArn"))
+    LatestMpaApprovalTeamUpdate.add_member(:status, Shapes::ShapeRef.new(shape: MpaSessionStatus, location_name: "Status"))
+    LatestMpaApprovalTeamUpdate.add_member(:status_message, Shapes::ShapeRef.new(shape: string, location_name: "StatusMessage"))
+    LatestMpaApprovalTeamUpdate.add_member(:initiation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "InitiationDate"))
+    LatestMpaApprovalTeamUpdate.add_member(:expiry_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "ExpiryDate"))
+    LatestMpaApprovalTeamUpdate.struct_class = Types::LatestMpaApprovalTeamUpdate
+
+    LatestRevokeRequest.add_member(:mpa_session_arn, Shapes::ShapeRef.new(shape: string, location_name: "MpaSessionArn"))
+    LatestRevokeRequest.add_member(:status, Shapes::ShapeRef.new(shape: MpaRevokeSessionStatus, location_name: "Status"))
+    LatestRevokeRequest.add_member(:status_message, Shapes::ShapeRef.new(shape: string, location_name: "StatusMessage"))
+    LatestRevokeRequest.add_member(:initiation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "InitiationDate"))
+    LatestRevokeRequest.add_member(:expiry_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "ExpiryDate"))
+    LatestRevokeRequest.struct_class = Types::LatestRevokeRequest
 
     LegalHold.add_member(:title, Shapes::ShapeRef.new(shape: string, location_name: "Title"))
     LegalHold.add_member(:status, Shapes::ShapeRef.new(shape: LegalHoldStatus, location_name: "Status"))
@@ -1382,6 +1437,15 @@ module Aws::Backup
     ListReportPlansOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "NextToken"))
     ListReportPlansOutput.struct_class = Types::ListReportPlansOutput
 
+    ListRestoreAccessBackupVaultsInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location: "uri", location_name: "backupVaultName"))
+    ListRestoreAccessBackupVaultsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "nextToken"))
+    ListRestoreAccessBackupVaultsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListRestoreAccessBackupVaultsInput.struct_class = Types::ListRestoreAccessBackupVaultsInput
+
+    ListRestoreAccessBackupVaultsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "NextToken"))
+    ListRestoreAccessBackupVaultsOutput.add_member(:restore_access_backup_vaults, Shapes::ShapeRef.new(shape: RestoreAccessBackupVaultList, location_name: "RestoreAccessBackupVaults"))
+    ListRestoreAccessBackupVaultsOutput.struct_class = Types::ListRestoreAccessBackupVaultsOutput
+
     ListRestoreJobSummariesInput.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "AccountId"))
     ListRestoreJobSummariesInput.add_member(:state, Shapes::ShapeRef.new(shape: RestoreJobState, location: "querystring", location_name: "State"))
     ListRestoreJobSummariesInput.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location: "querystring", location_name: "ResourceType"))
@@ -1503,6 +1567,7 @@ module Aws::Backup
     RecoveryPointByBackupVault.add_member(:status, Shapes::ShapeRef.new(shape: RecoveryPointStatus, location_name: "Status"))
     RecoveryPointByBackupVault.add_member(:status_message, Shapes::ShapeRef.new(shape: string, location_name: "StatusMessage"))
     RecoveryPointByBackupVault.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
+    RecoveryPointByBackupVault.add_member(:initiation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "InitiationDate"))
     RecoveryPointByBackupVault.add_member(:completion_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CompletionDate"))
     RecoveryPointByBackupVault.add_member(:backup_size_in_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "BackupSizeInBytes"))
     RecoveryPointByBackupVault.add_member(:calculated_lifecycle, Shapes::ShapeRef.new(shape: CalculatedLifecycle, location_name: "CalculatedLifecycle"))
@@ -1618,6 +1683,15 @@ module Aws::Backup
     ResourceTypeOptInPreference.value = Shapes::ShapeRef.new(shape: IsEnabled)
 
     ResourceTypes.member = Shapes::ShapeRef.new(shape: ResourceType)
+
+    RestoreAccessBackupVaultList.member = Shapes::ShapeRef.new(shape: RestoreAccessBackupVaultListMember)
+
+    RestoreAccessBackupVaultListMember.add_member(:restore_access_backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "RestoreAccessBackupVaultArn"))
+    RestoreAccessBackupVaultListMember.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
+    RestoreAccessBackupVaultListMember.add_member(:approval_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "ApprovalDate"))
+    RestoreAccessBackupVaultListMember.add_member(:vault_state, Shapes::ShapeRef.new(shape: VaultState, location_name: "VaultState"))
+    RestoreAccessBackupVaultListMember.add_member(:latest_revoke_request, Shapes::ShapeRef.new(shape: LatestRevokeRequest, location_name: "LatestRevokeRequest"))
+    RestoreAccessBackupVaultListMember.struct_class = Types::RestoreAccessBackupVaultListMember
 
     RestoreJobCreator.add_member(:restore_testing_plan_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "RestoreTestingPlanArn"))
     RestoreJobCreator.struct_class = Types::RestoreJobCreator
@@ -1740,6 +1814,11 @@ module Aws::Backup
 
     RestoreTestingSelections.member = Shapes::ShapeRef.new(shape: RestoreTestingSelectionForList)
 
+    RevokeRestoreAccessBackupVaultInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location: "uri", location_name: "backupVaultName"))
+    RevokeRestoreAccessBackupVaultInput.add_member(:restore_access_backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "restoreAccessBackupVaultArn"))
+    RevokeRestoreAccessBackupVaultInput.add_member(:requester_comment, Shapes::ShapeRef.new(shape: RequesterComment, location: "querystring", location_name: "requesterComment"))
+    RevokeRestoreAccessBackupVaultInput.struct_class = Types::RevokeRestoreAccessBackupVaultInput
+
     SensitiveStringMap.key = Shapes::ShapeRef.new(shape: String)
     SensitiveStringMap.value = Shapes::ShapeRef.new(shape: String)
 
@@ -1752,7 +1831,7 @@ module Aws::Backup
     StartBackupJobInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location_name: "BackupVaultName"))
     StartBackupJobInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "ResourceArn"))
     StartBackupJobInput.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "IamRoleArn"))
-    StartBackupJobInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: string, location_name: "IdempotencyToken"))
+    StartBackupJobInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: string, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     StartBackupJobInput.add_member(:start_window_minutes, Shapes::ShapeRef.new(shape: WindowMinutes, location_name: "StartWindowMinutes"))
     StartBackupJobInput.add_member(:complete_window_minutes, Shapes::ShapeRef.new(shape: WindowMinutes, location_name: "CompleteWindowMinutes"))
     StartBackupJobInput.add_member(:lifecycle, Shapes::ShapeRef.new(shape: Lifecycle, location_name: "Lifecycle"))
@@ -1771,7 +1850,7 @@ module Aws::Backup
     StartCopyJobInput.add_member(:source_backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location_name: "SourceBackupVaultName"))
     StartCopyJobInput.add_member(:destination_backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "DestinationBackupVaultArn"))
     StartCopyJobInput.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "IamRoleArn"))
-    StartCopyJobInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: string, location_name: "IdempotencyToken"))
+    StartCopyJobInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: string, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     StartCopyJobInput.add_member(:lifecycle, Shapes::ShapeRef.new(shape: Lifecycle, location_name: "Lifecycle"))
     StartCopyJobInput.struct_class = Types::StartCopyJobInput
 
@@ -1790,7 +1869,7 @@ module Aws::Backup
     StartRestoreJobInput.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "RecoveryPointArn"))
     StartRestoreJobInput.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, required: true, location_name: "Metadata"))
     StartRestoreJobInput.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "IamRoleArn"))
-    StartRestoreJobInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: string, location_name: "IdempotencyToken"))
+    StartRestoreJobInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: string, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
     StartRestoreJobInput.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     StartRestoreJobInput.add_member(:copy_source_tags_to_restored_resource, Shapes::ShapeRef.new(shape: boolean, location_name: "CopySourceTagsToRestoredResource"))
     StartRestoreJobInput.struct_class = Types::StartRestoreJobInput
@@ -1926,6 +2005,19 @@ module Aws::Backup
         "uid" => "backup-2018-11-15",
       }
 
+      api.add_operation(:associate_backup_vault_mpa_approval_team, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateBackupVaultMpaApprovalTeam"
+        o.http_method = "PUT"
+        o.http_request_uri = "/backup-vaults/{backupVaultName}/mpaApprovalTeam"
+        o.input = Shapes::ShapeRef.new(shape: AssociateBackupVaultMpaApprovalTeamInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
       api.add_operation(:cancel_legal_hold, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CancelLegalHold"
         o.http_method = "DELETE"
@@ -2028,6 +2120,21 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+      end)
+
+      api.add_operation(:create_restore_access_backup_vault, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRestoreAccessBackupVault"
+        o.http_method = "PUT"
+        o.http_request_uri = "/restore-access-backup-vaults"
+        o.input = Shapes::ShapeRef.new(shape: CreateRestoreAccessBackupVaultInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateRestoreAccessBackupVaultOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:create_restore_testing_plan, Seahorse::Model::Operation.new.tap do |o|
@@ -2319,6 +2426,19 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: DependencyFailureException)
+      end)
+
+      api.add_operation(:disassociate_backup_vault_mpa_approval_team, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateBackupVaultMpaApprovalTeam"
+        o.http_method = "POST"
+        o.http_request_uri = "/backup-vaults/{backupVaultName}/mpaApprovalTeam?delete"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateBackupVaultMpaApprovalTeamInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:disassociate_recovery_point, Seahorse::Model::Operation.new.tap do |o|
@@ -2844,6 +2964,24 @@ module Aws::Backup
         )
       end)
 
+      api.add_operation(:list_restore_access_backup_vaults, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRestoreAccessBackupVaults"
+        o.http_method = "GET"
+        o.http_request_uri = "/logically-air-gapped-backup-vaults/{backupVaultName}/restore-access-backup-vaults/"
+        o.input = Shapes::ShapeRef.new(shape: ListRestoreAccessBackupVaultsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListRestoreAccessBackupVaultsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_restore_job_summaries, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListRestoreJobSummaries"
         o.http_method = "GET"
@@ -2995,6 +3133,19 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:revoke_restore_access_backup_vault, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RevokeRestoreAccessBackupVault"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/logically-air-gapped-backup-vaults/{backupVaultName}/restore-access-backup-vaults/{restoreAccessBackupVaultArn}"
+        o.input = Shapes::ShapeRef.new(shape: RevokeRestoreAccessBackupVaultInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
       api.add_operation(:start_backup_job, Seahorse::Model::Operation.new.tap do |o|

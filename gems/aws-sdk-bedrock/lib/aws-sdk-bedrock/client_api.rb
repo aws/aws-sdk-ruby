@@ -46,6 +46,8 @@ module Aws::Bedrock
     CommitmentDuration = Shapes::StringShape.new(name: 'CommitmentDuration')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
+    CreateCustomModelRequest = Shapes::StructureShape.new(name: 'CreateCustomModelRequest')
+    CreateCustomModelResponse = Shapes::StructureShape.new(name: 'CreateCustomModelResponse')
     CreateEvaluationJobRequest = Shapes::StructureShape.new(name: 'CreateEvaluationJobRequest')
     CreateEvaluationJobResponse = Shapes::StructureShape.new(name: 'CreateEvaluationJobResponse')
     CreateGuardrailRequest = Shapes::StructureShape.new(name: 'CreateGuardrailRequest')
@@ -405,6 +407,7 @@ module Aws::Bedrock
     ModelModalityList = Shapes::ListShape.new(name: 'ModelModalityList')
     ModelName = Shapes::StringShape.new(name: 'ModelName')
     ModelSourceIdentifier = Shapes::StringShape.new(name: 'ModelSourceIdentifier')
+    ModelStatus = Shapes::StringShape.new(name: 'ModelStatus')
     NonBlankString = Shapes::StringShape.new(name: 'NonBlankString')
     OrchestrationConfiguration = Shapes::StructureShape.new(name: 'OrchestrationConfiguration')
     OutputDataConfig = Shapes::StructureShape.new(name: 'OutputDataConfig')
@@ -587,6 +590,17 @@ module Aws::Bedrock
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
 
+    CreateCustomModelRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: CustomModelName, required: true, location_name: "modelName"))
+    CreateCustomModelRequest.add_member(:model_source_config, Shapes::ShapeRef.new(shape: ModelDataSource, required: true, location_name: "modelSourceConfig"))
+    CreateCustomModelRequest.add_member(:model_kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "modelKmsKeyArn"))
+    CreateCustomModelRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
+    CreateCustomModelRequest.add_member(:model_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "modelTags"))
+    CreateCustomModelRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
+    CreateCustomModelRequest.struct_class = Types::CreateCustomModelRequest
+
+    CreateCustomModelResponse.add_member(:model_arn, Shapes::ShapeRef.new(shape: ModelArn, required: true, location_name: "modelArn"))
+    CreateCustomModelResponse.struct_class = Types::CreateCustomModelResponse
+
     CreateEvaluationJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: EvaluationJobName, required: true, location_name: "jobName"))
     CreateEvaluationJobRequest.add_member(:job_description, Shapes::ShapeRef.new(shape: EvaluationJobDescription, location_name: "jobDescription"))
     CreateEvaluationJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
@@ -755,6 +769,7 @@ module Aws::Bedrock
     CustomModelSummary.add_member(:base_model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "baseModelName"))
     CustomModelSummary.add_member(:customization_type, Shapes::ShapeRef.new(shape: CustomizationType, location_name: "customizationType"))
     CustomModelSummary.add_member(:owner_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "ownerAccountId"))
+    CustomModelSummary.add_member(:model_status, Shapes::ShapeRef.new(shape: ModelStatus, location_name: "modelStatus"))
     CustomModelSummary.struct_class = Types::CustomModelSummary
 
     CustomModelSummaryList.member = Shapes::ShapeRef.new(shape: CustomModelSummary)
@@ -1011,18 +1026,20 @@ module Aws::Bedrock
     GetCustomModelResponse.add_member(:model_arn, Shapes::ShapeRef.new(shape: ModelArn, required: true, location_name: "modelArn"))
     GetCustomModelResponse.add_member(:model_name, Shapes::ShapeRef.new(shape: CustomModelName, required: true, location_name: "modelName"))
     GetCustomModelResponse.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "jobName"))
-    GetCustomModelResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: ModelCustomizationJobArn, required: true, location_name: "jobArn"))
-    GetCustomModelResponse.add_member(:base_model_arn, Shapes::ShapeRef.new(shape: ModelArn, required: true, location_name: "baseModelArn"))
+    GetCustomModelResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: ModelCustomizationJobArn, location_name: "jobArn"))
+    GetCustomModelResponse.add_member(:base_model_arn, Shapes::ShapeRef.new(shape: ModelArn, location_name: "baseModelArn"))
     GetCustomModelResponse.add_member(:customization_type, Shapes::ShapeRef.new(shape: CustomizationType, location_name: "customizationType"))
     GetCustomModelResponse.add_member(:model_kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "modelKmsKeyArn"))
     GetCustomModelResponse.add_member(:hyper_parameters, Shapes::ShapeRef.new(shape: ModelCustomizationHyperParameters, location_name: "hyperParameters"))
-    GetCustomModelResponse.add_member(:training_data_config, Shapes::ShapeRef.new(shape: TrainingDataConfig, required: true, location_name: "trainingDataConfig"))
+    GetCustomModelResponse.add_member(:training_data_config, Shapes::ShapeRef.new(shape: TrainingDataConfig, location_name: "trainingDataConfig"))
     GetCustomModelResponse.add_member(:validation_data_config, Shapes::ShapeRef.new(shape: ValidationDataConfig, location_name: "validationDataConfig"))
-    GetCustomModelResponse.add_member(:output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, required: true, location_name: "outputDataConfig"))
+    GetCustomModelResponse.add_member(:output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "outputDataConfig"))
     GetCustomModelResponse.add_member(:training_metrics, Shapes::ShapeRef.new(shape: TrainingMetrics, location_name: "trainingMetrics"))
     GetCustomModelResponse.add_member(:validation_metrics, Shapes::ShapeRef.new(shape: ValidationMetrics, location_name: "validationMetrics"))
     GetCustomModelResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationTime"))
     GetCustomModelResponse.add_member(:customization_config, Shapes::ShapeRef.new(shape: CustomizationConfig, location_name: "customizationConfig"))
+    GetCustomModelResponse.add_member(:model_status, Shapes::ShapeRef.new(shape: ModelStatus, location_name: "modelStatus"))
+    GetCustomModelResponse.add_member(:failure_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "failureMessage"))
     GetCustomModelResponse.struct_class = Types::GetCustomModelResponse
 
     GetEvaluationJobRequest.add_member(:job_identifier, Shapes::ShapeRef.new(shape: EvaluationJobIdentifier, required: true, location: "uri", location_name: "jobIdentifier"))
@@ -1136,8 +1153,8 @@ module Aws::Bedrock
     GetModelCustomizationJobResponse.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientRequestToken"))
     GetModelCustomizationJobResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     GetModelCustomizationJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: ModelCustomizationJobStatus, location_name: "status"))
-    GetModelCustomizationJobResponse.add_member(:failure_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "failureMessage"))
     GetModelCustomizationJobResponse.add_member(:status_details, Shapes::ShapeRef.new(shape: StatusDetails, location_name: "statusDetails"))
+    GetModelCustomizationJobResponse.add_member(:failure_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "failureMessage"))
     GetModelCustomizationJobResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationTime"))
     GetModelCustomizationJobResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
     GetModelCustomizationJobResponse.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
@@ -1543,6 +1560,7 @@ module Aws::Bedrock
     ListCustomModelsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortModelsBy, location: "querystring", location_name: "sortBy"))
     ListCustomModelsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location: "querystring", location_name: "sortOrder"))
     ListCustomModelsRequest.add_member(:is_owned, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "isOwned"))
+    ListCustomModelsRequest.add_member(:model_status, Shapes::ShapeRef.new(shape: ModelStatus, location: "querystring", location_name: "modelStatus"))
     ListCustomModelsRequest.struct_class = Types::ListCustomModelsRequest
 
     ListCustomModelsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
@@ -1754,8 +1772,8 @@ module Aws::Bedrock
     ModelCustomizationJobSummary.add_member(:base_model_arn, Shapes::ShapeRef.new(shape: ModelArn, required: true, location_name: "baseModelArn"))
     ModelCustomizationJobSummary.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, required: true, location_name: "jobName"))
     ModelCustomizationJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: ModelCustomizationJobStatus, required: true, location_name: "status"))
-    ModelCustomizationJobSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
     ModelCustomizationJobSummary.add_member(:status_details, Shapes::ShapeRef.new(shape: StatusDetails, location_name: "statusDetails"))
+    ModelCustomizationJobSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
     ModelCustomizationJobSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationTime"))
     ModelCustomizationJobSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
     ModelCustomizationJobSummary.add_member(:custom_model_arn, Shapes::ShapeRef.new(shape: CustomModelArn, location_name: "customModelArn"))
@@ -2168,6 +2186,22 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_custom_model, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCustomModel"
+        o.http_method = "POST"
+        o.http_request_uri = "/custom-models/create-custom-model"
+        o.input = Shapes::ShapeRef.new(shape: CreateCustomModelRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateCustomModelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 

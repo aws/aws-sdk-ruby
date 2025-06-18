@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.137.0 (2025-06-17)
+------------------
+
+* Feature - Adds operations, structures, and exceptions required for public preview release of Security Hub V2.
+
 1.136.0 (2025-06-02)
 ------------------
 

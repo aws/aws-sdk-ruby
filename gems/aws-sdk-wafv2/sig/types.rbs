@@ -71,6 +71,17 @@ module Aws::WAFV2
       SENSITIVE: []
     end
 
+    class ApplicationAttribute
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ApplicationConfig
+      attr_accessor attributes: ::Array[Types::ApplicationAttribute]
+      SENSITIVE: []
+    end
+
     class AsnMatchStatement
       attr_accessor asn_list: ::Array[::Integer]
       attr_accessor forwarded_ip_config: Types::ForwardedIPConfig
@@ -263,6 +274,7 @@ module Aws::WAFV2
       attr_accessor token_domains: ::Array[::String]
       attr_accessor association_config: Types::AssociationConfig
       attr_accessor on_source_d_do_s_protection_config: Types::OnSourceDDoSProtectionConfig
+      attr_accessor application_config: Types::ApplicationConfig
       SENSITIVE: []
     end
 
@@ -1720,6 +1732,7 @@ module Aws::WAFV2
       attr_accessor association_config: Types::AssociationConfig
       attr_accessor retrofitted_by_firewall_manager: bool
       attr_accessor on_source_d_do_s_protection_config: Types::OnSourceDDoSProtectionConfig
+      attr_accessor application_config: Types::ApplicationConfig
       SENSITIVE: []
     end
 

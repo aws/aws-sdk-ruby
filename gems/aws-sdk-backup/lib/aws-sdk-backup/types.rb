@@ -91,6 +91,31 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # @!attribute [rw] backup_vault_name
+    #   The name of the backup vault to associate with the MPA approval
+    #   team.
+    #   @return [String]
+    #
+    # @!attribute [rw] mpa_approval_team_arn
+    #   The Amazon Resource Name (ARN) of the MPA approval team to associate
+    #   with the backup vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] requester_comment
+    #   A comment provided by the requester explaining the association
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/AssociateBackupVaultMpaApprovalTeamInput AWS API Documentation
+    #
+    class AssociateBackupVaultMpaApprovalTeamInput < Struct.new(
+      :backup_vault_name,
+      :mpa_approval_team_arn,
+      :requester_comment)
+      SENSITIVE = [:requester_comment]
+      include Aws::Structure
+    end
+
     # Contains detailed information about a backup job.
     #
     # @!attribute [rw] account_id
@@ -1622,6 +1647,9 @@ module Aws::Backup
     #
     #   If used, this parameter must contain 1 to 50 alphanumeric or
     #   '-\_.' characters.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateBackupPlanInput AWS API Documentation
@@ -1688,6 +1716,9 @@ module Aws::Backup
     #
     #   If used, this parameter must contain 1 to 50 alphanumeric or
     #   '-\_.' characters.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateBackupSelectionInput AWS API Documentation
@@ -1750,6 +1781,9 @@ module Aws::Backup
     #
     #   If used, this parameter must contain 1 to 50 alphanumeric or
     #   '-\_.' characters.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateBackupVaultInput AWS API Documentation
@@ -1867,6 +1901,9 @@ module Aws::Backup
     #   This is a user-chosen string used to distinguish between otherwise
     #   identical calls. Retrying a successful request with the same
     #   idempotency token results in a success message with no action taken.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] recovery_point_selection
@@ -1952,6 +1989,9 @@ module Aws::Backup
     #
     #   This parameter is optional. If used, this parameter must contain 1
     #   to 50 alphanumeric or '-\_.' characters.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] min_retention_days
@@ -2090,6 +2130,74 @@ module Aws::Backup
       :report_plan_name,
       :report_plan_arn,
       :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] source_backup_vault_arn
+    #   The ARN of the source backup vault containing the recovery points to
+    #   which temporary access is requested.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_vault_name
+    #   The name of the backup vault to associate with an MPA approval team.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_vault_tags
+    #   Optional tags to assign to the restore access backup vault.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] creator_request_id
+    #   A unique string that identifies the request and allows failed
+    #   requests to be retried without the risk of executing the operation
+    #   twice.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] requester_comment
+    #   A comment explaining the reason for requesting restore access to the
+    #   backup vault.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateRestoreAccessBackupVaultInput AWS API Documentation
+    #
+    class CreateRestoreAccessBackupVaultInput < Struct.new(
+      :source_backup_vault_arn,
+      :backup_vault_name,
+      :backup_vault_tags,
+      :creator_request_id,
+      :requester_comment)
+      SENSITIVE = [:backup_vault_tags, :requester_comment]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] restore_access_backup_vault_arn
+    #   The ARN that uniquely identifies the created restore access backup
+    #   vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] vault_state
+    #   The current state of the restore access backup vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_access_backup_vault_name
+    #   The name of the created restore access backup vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   &gt;The date and time when the restore access backup vault was
+    #   created, in Unix format and Coordinated Universal Time
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateRestoreAccessBackupVaultOutput AWS API Documentation
+    #
+    class CreateRestoreAccessBackupVaultOutput < Struct.new(
+      :restore_access_backup_vault_arn,
+      :vault_state,
+      :restore_access_backup_vault_name,
+      :creation_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2836,6 +2944,24 @@ module Aws::Backup
     #   represents Friday, January 26, 2018 12:11:30.087 AM.
     #   @return [Time]
     #
+    # @!attribute [rw] source_backup_vault_arn
+    #   The ARN of the source backup vault from which this restore access
+    #   backup vault was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] mpa_approval_team_arn
+    #   The ARN of the MPA approval team associated with this backup vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] mpa_session_arn
+    #   The ARN of the MPA session associated with this backup vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_mpa_approval_team_update
+    #   Information about the latest update to the MPA approval team
+    #   association for this backup vault.
+    #   @return [Types::LatestMpaApprovalTeamUpdate]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeBackupVaultOutput AWS API Documentation
     #
     class DescribeBackupVaultOutput < Struct.new(
@@ -2850,7 +2976,11 @@ module Aws::Backup
       :locked,
       :min_retention_days,
       :max_retention_days,
-      :lock_date)
+      :lock_date,
+      :source_backup_vault_arn,
+      :mpa_approval_team_arn,
+      :mpa_session_arn,
+      :latest_mpa_approval_team_update)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3198,6 +3328,12 @@ module Aws::Backup
     #   represents Friday, January 26, 2018 12:11:30.087 AM.
     #   @return [Time]
     #
+    # @!attribute [rw] initiation_date
+    #   The date and time when the backup job that created this recovery
+    #   point was initiated, in Unix format and Coordinated Universal Time
+    #   (UTC).
+    #   @return [Time]
+    #
     # @!attribute [rw] completion_date
     #   The date and time that a job to create a recovery point is
     #   completed, in Unix format and Coordinated Universal Time (UTC). The
@@ -3319,6 +3455,7 @@ module Aws::Backup
       :status,
       :status_message,
       :creation_date,
+      :initiation_date,
       :completion_date,
       :backup_size_in_bytes,
       :calculated_lifecycle,
@@ -3563,6 +3700,25 @@ module Aws::Backup
       :deletion_status,
       :deletion_status_message)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] backup_vault_name
+    #   The name of the backup vault from which to disassociate the MPA
+    #   approval team.
+    #   @return [String]
+    #
+    # @!attribute [rw] requester_comment
+    #   An optional comment explaining the reason for disassociating the MPA
+    #   approval team from the backup vault.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DisassociateBackupVaultMpaApprovalTeamInput AWS API Documentation
+    #
+    class DisassociateBackupVaultMpaApprovalTeamInput < Struct.new(
+      :backup_vault_name,
+      :requester_comment)
+      SENSITIVE = [:requester_comment]
       include Aws::Structure
     end
 
@@ -4605,6 +4761,77 @@ module Aws::Backup
     class KeyValue < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the latest update to an MPA approval team
+    # association.
+    #
+    # @!attribute [rw] mpa_session_arn
+    #   The ARN of the MPA session associated with this update.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the MPA approval team update.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   A message describing the current status of the MPA approval team
+    #   update.
+    #   @return [String]
+    #
+    # @!attribute [rw] initiation_date
+    #   The date and time when the MPA approval team update was initiated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expiry_date
+    #   The date and time when the MPA approval team update will expire.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/LatestMpaApprovalTeamUpdate AWS API Documentation
+    #
+    class LatestMpaApprovalTeamUpdate < Struct.new(
+      :mpa_session_arn,
+      :status,
+      :status_message,
+      :initiation_date,
+      :expiry_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the latest request to revoke access to a
+    # backup vault.
+    #
+    # @!attribute [rw] mpa_session_arn
+    #   The ARN of the MPA session associated with this revoke request.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the revoke request.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   A message describing the current status of the revoke request.
+    #   @return [String]
+    #
+    # @!attribute [rw] initiation_date
+    #   The date and time when the revoke request was initiated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expiry_date
+    #   The date and time when the revoke request will expire.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/LatestRevokeRequest AWS API Documentation
+    #
+    class LatestRevokeRequest < Struct.new(
+      :mpa_session_arn,
+      :status,
+      :status_message,
+      :initiation_date,
+      :expiry_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6160,6 +6387,49 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # @!attribute [rw] backup_vault_name
+    #   The name of the backup vault for which to list associated restore
+    #   access backup vaults.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token from a previous request to retrieve the next
+    #   set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return in the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRestoreAccessBackupVaultsInput AWS API Documentation
+    #
+    class ListRestoreAccessBackupVaultsInput < Struct.new(
+      :backup_vault_name,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The pagination token to use in a subsequent request to retrieve the
+    #   next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_access_backup_vaults
+    #   A list of restore access backup vaults associated with the specified
+    #   backup vault.
+    #   @return [Array<Types::RestoreAccessBackupVaultListMember>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRestoreAccessBackupVaultsOutput AWS API Documentation
+    #
+    class ListRestoreAccessBackupVaultsOutput < Struct.new(
+      :next_token,
+      :restore_access_backup_vaults)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] account_id
     #   Returns the job count for the specified account.
     #
@@ -6802,36 +7072,13 @@ module Aws::Backup
     #
     # @!attribute [rw] backup_vault_events
     #   An array of events that indicate the status of jobs to back up
-    #   resources to the backup vault.
-    #
-    #   For common use cases and code samples, see [Using Amazon SNS to
-    #   track Backup events][1].
-    #
-    #   The following events are supported:
-    #
-    #   * `BACKUP_JOB_STARTED` \| `BACKUP_JOB_COMPLETED` \|
-    #     `BACKUP_JOB_FAILED`
-    #
-    #   * `COPY_JOB_STARTED` \| `COPY_JOB_SUCCESSFUL` \| `COPY_JOB_FAILED`
-    #
-    #   * `RESTORE_JOB_STARTED` \| `RESTORE_JOB_COMPLETED` \|
-    #     `RECOVERY_POINT_MODIFIED`
-    #
-    #   * `S3_BACKUP_OBJECT_FAILED` \| `S3_RESTORE_OBJECT_FAILED`
-    #
-    #   * `RECOVERY_POINT_INDEX_COMPLETED` \| `RECOVERY_POINT_INDEX_DELETED`
-    #     \| `RECOVERY_POINT_INDEXING_FAILED`
-    #
-    #   <note markdown="1"> The list below includes both supported events and deprecated events
-    #   that are no longer in use (for reference). Deprecated events do not
-    #   return statuses or notifications. Refer to the list above for the
-    #   supported events.
-    #
-    #    </note>
+    #   resources to the backup vault. For the list of supported events,
+    #   common use cases, and code samples, see [Notification options with
+    #   Backup][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/sns-notifications.html
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-notifications.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/PutBackupVaultNotificationsInput AWS API Documentation
@@ -6932,6 +7179,12 @@ module Aws::Backup
     #   Coordinated Universal Time (UTC). The value of `CreationDate` is
     #   accurate to milliseconds. For example, the value 1516925490.087
     #   represents Friday, January 26, 2018 12:11:30.087 AM.
+    #   @return [Time]
+    #
+    # @!attribute [rw] initiation_date
+    #   The date and time when the backup job that created this recovery
+    #   point was initiated, in Unix format and Coordinated Universal Time
+    #   (UTC).
     #   @return [Time]
     #
     # @!attribute [rw] completion_date
@@ -7048,6 +7301,7 @@ module Aws::Backup
       :status,
       :status_message,
       :creation_date,
+      :initiation_date,
       :completion_date,
       :backup_size_in_bytes,
       :calculated_lifecycle,
@@ -7536,6 +7790,41 @@ module Aws::Backup
       :message,
       :type,
       :context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a restore access backup vault.
+    #
+    # @!attribute [rw] restore_access_backup_vault_arn
+    #   The ARN of the restore access backup vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date and time when the restore access backup vault was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] approval_date
+    #   The date and time when the restore access backup vault was approved.
+    #   @return [Time]
+    #
+    # @!attribute [rw] vault_state
+    #   The current state of the restore access backup vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_revoke_request
+    #   Information about the latest request to revoke access to this backup
+    #   vault.
+    #   @return [Types::LatestRevokeRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/RestoreAccessBackupVaultListMember AWS API Documentation
+    #
+    class RestoreAccessBackupVaultListMember < Struct.new(
+      :restore_access_backup_vault_arn,
+      :creation_date,
+      :approval_date,
+      :vault_state,
+      :latest_revoke_request)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8379,6 +8668,30 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # @!attribute [rw] backup_vault_name
+    #   The name of the source backup vault associated with the restore
+    #   access backup vault to be revoked.
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_access_backup_vault_arn
+    #   The ARN of the restore access backup vault to revoke.
+    #   @return [String]
+    #
+    # @!attribute [rw] requester_comment
+    #   A comment explaining the reason for revoking access to the restore
+    #   access backup vault.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/RevokeRestoreAccessBackupVaultInput AWS API Documentation
+    #
+    class RevokeRestoreAccessBackupVaultInput < Struct.new(
+      :backup_vault_name,
+      :restore_access_backup_vault_arn,
+      :requester_comment)
+      SENSITIVE = [:requester_comment]
+      include Aws::Structure
+    end
+
     # The request failed due to a temporary failure of the server.
     #
     # @!attribute [rw] code
@@ -8426,6 +8739,9 @@ module Aws::Backup
     #   otherwise identical calls to `StartBackupJob`. Retrying a successful
     #   request with the same idempotency token results in a success message
     #   with no action taken.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] start_window_minutes
@@ -8594,6 +8910,9 @@ module Aws::Backup
     #   otherwise identical calls to `StartCopyJob`. Retrying a successful
     #   request with the same idempotency token results in a success message
     #   with no action taken.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] lifecycle
@@ -8773,6 +9092,9 @@ module Aws::Backup
     #   otherwise identical calls to `StartRestoreJob`. Retrying a
     #   successful request with the same idempotency token results in a
     #   success message with no action taken.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] resource_type

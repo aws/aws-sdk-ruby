@@ -289,10 +289,15 @@ module Aws::ConnectCampaignsV2
     #   Communication limits
     #   @return [Types::CommunicationLimits]
     #
+    # @!attribute [rw] instance_limits_handling
+    #   Instance limits handling
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/CommunicationLimitsConfig AWS API Documentation
     #
     class CommunicationLimitsConfig < Struct.new(
-      :all_channel_subtypes)
+      :all_channel_subtypes,
+      :instance_limits_handling)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -931,6 +936,34 @@ module Aws::ConnectCampaignsV2
       include Aws::Structure
     end
 
+    # The request for GetInstanceCommunicationLimits API.
+    #
+    # @!attribute [rw] connect_instance_id
+    #   Amazon Connect Instance Id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/GetInstanceCommunicationLimitsRequest AWS API Documentation
+    #
+    class GetInstanceCommunicationLimitsRequest < Struct.new(
+      :connect_instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response for GetInstanceCommunicationLimits API.
+    #
+    # @!attribute [rw] communication_limits_config
+    #   Instance Communication limits config
+    #   @return [Types::InstanceCommunicationLimitsConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/GetInstanceCommunicationLimitsResponse AWS API Documentation
+    #
+    class GetInstanceCommunicationLimitsResponse < Struct.new(
+      :communication_limits_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request for GetInstanceOnboardingJobStatus API.
     #
     # @!attribute [rw] connect_instance_id
@@ -955,6 +988,20 @@ module Aws::ConnectCampaignsV2
     #
     class GetInstanceOnboardingJobStatusResponse < Struct.new(
       :connect_instance_onboarding_job_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Instance Communication limits config
+    #
+    # @!attribute [rw] all_channel_subtypes
+    #   Communication limits
+    #   @return [Types::CommunicationLimits]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/InstanceCommunicationLimitsConfig AWS API Documentation
+    #
+    class InstanceCommunicationLimitsConfig < Struct.new(
+      :all_channel_subtypes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1439,6 +1486,25 @@ module Aws::ConnectCampaignsV2
     class PutConnectInstanceIntegrationRequest < Struct.new(
       :connect_instance_id,
       :integration_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request for PutInstanceCommunicationLimits API.
+    #
+    # @!attribute [rw] connect_instance_id
+    #   Amazon Connect Instance Id
+    #   @return [String]
+    #
+    # @!attribute [rw] communication_limits_config
+    #   Instance Communication limits config
+    #   @return [Types::InstanceCommunicationLimitsConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/PutInstanceCommunicationLimitsRequest AWS API Documentation
+    #
+    class PutInstanceCommunicationLimitsRequest < Struct.new(
+      :connect_instance_id,
+      :communication_limits_config)
       SENSITIVE = []
       include Aws::Structure
     end

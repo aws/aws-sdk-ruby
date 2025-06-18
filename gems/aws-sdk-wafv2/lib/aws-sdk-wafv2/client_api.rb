@@ -33,12 +33,18 @@ module Aws::WAFV2
     AllQueryArguments = Shapes::StructureShape.new(name: 'AllQueryArguments')
     AllowAction = Shapes::StructureShape.new(name: 'AllowAction')
     AndStatement = Shapes::StructureShape.new(name: 'AndStatement')
+    ApplicationAttribute = Shapes::StructureShape.new(name: 'ApplicationAttribute')
+    ApplicationAttributes = Shapes::ListShape.new(name: 'ApplicationAttributes')
+    ApplicationConfig = Shapes::StructureShape.new(name: 'ApplicationConfig')
     AsnList = Shapes::ListShape.new(name: 'AsnList')
     AsnMatchStatement = Shapes::StructureShape.new(name: 'AsnMatchStatement')
     AssociateWebACLRequest = Shapes::StructureShape.new(name: 'AssociateWebACLRequest')
     AssociateWebACLResponse = Shapes::StructureShape.new(name: 'AssociateWebACLResponse')
     AssociatedResourceType = Shapes::StringShape.new(name: 'AssociatedResourceType')
     AssociationConfig = Shapes::StructureShape.new(name: 'AssociationConfig')
+    AttributeName = Shapes::StringShape.new(name: 'AttributeName')
+    AttributeValue = Shapes::StringShape.new(name: 'AttributeValue')
+    AttributeValues = Shapes::ListShape.new(name: 'AttributeValues')
     BlockAction = Shapes::StructureShape.new(name: 'BlockAction')
     Body = Shapes::StructureShape.new(name: 'Body')
     BodyParsingFallbackBehavior = Shapes::StringShape.new(name: 'BodyParsingFallbackBehavior')
@@ -496,6 +502,15 @@ module Aws::WAFV2
     AndStatement.add_member(:statements, Shapes::ShapeRef.new(shape: Statements, required: true, location_name: "Statements"))
     AndStatement.struct_class = Types::AndStatement
 
+    ApplicationAttribute.add_member(:name, Shapes::ShapeRef.new(shape: AttributeName, location_name: "Name"))
+    ApplicationAttribute.add_member(:values, Shapes::ShapeRef.new(shape: AttributeValues, location_name: "Values"))
+    ApplicationAttribute.struct_class = Types::ApplicationAttribute
+
+    ApplicationAttributes.member = Shapes::ShapeRef.new(shape: ApplicationAttribute)
+
+    ApplicationConfig.add_member(:attributes, Shapes::ShapeRef.new(shape: ApplicationAttributes, location_name: "Attributes"))
+    ApplicationConfig.struct_class = Types::ApplicationConfig
+
     AsnList.member = Shapes::ShapeRef.new(shape: ASN)
 
     AsnMatchStatement.add_member(:asn_list, Shapes::ShapeRef.new(shape: AsnList, required: true, location_name: "AsnList"))
@@ -510,6 +525,8 @@ module Aws::WAFV2
 
     AssociationConfig.add_member(:request_body, Shapes::ShapeRef.new(shape: RequestBody, location_name: "RequestBody"))
     AssociationConfig.struct_class = Types::AssociationConfig
+
+    AttributeValues.member = Shapes::ShapeRef.new(shape: AttributeValue)
 
     BlockAction.add_member(:custom_response, Shapes::ShapeRef.new(shape: CustomResponse, location_name: "CustomResponse"))
     BlockAction.struct_class = Types::BlockAction
@@ -638,6 +655,7 @@ module Aws::WAFV2
     CreateWebACLRequest.add_member(:token_domains, Shapes::ShapeRef.new(shape: TokenDomains, location_name: "TokenDomains"))
     CreateWebACLRequest.add_member(:association_config, Shapes::ShapeRef.new(shape: AssociationConfig, location_name: "AssociationConfig"))
     CreateWebACLRequest.add_member(:on_source_d_do_s_protection_config, Shapes::ShapeRef.new(shape: OnSourceDDoSProtectionConfig, location_name: "OnSourceDDoSProtectionConfig"))
+    CreateWebACLRequest.add_member(:application_config, Shapes::ShapeRef.new(shape: ApplicationConfig, location_name: "ApplicationConfig"))
     CreateWebACLRequest.struct_class = Types::CreateWebACLRequest
 
     CreateWebACLResponse.add_member(:summary, Shapes::ShapeRef.new(shape: WebACLSummary, location_name: "Summary"))
@@ -1776,6 +1794,7 @@ module Aws::WAFV2
     WebACL.add_member(:association_config, Shapes::ShapeRef.new(shape: AssociationConfig, location_name: "AssociationConfig"))
     WebACL.add_member(:retrofitted_by_firewall_manager, Shapes::ShapeRef.new(shape: Boolean, location_name: "RetrofittedByFirewallManager"))
     WebACL.add_member(:on_source_d_do_s_protection_config, Shapes::ShapeRef.new(shape: OnSourceDDoSProtectionConfig, location_name: "OnSourceDDoSProtectionConfig"))
+    WebACL.add_member(:application_config, Shapes::ShapeRef.new(shape: ApplicationConfig, location_name: "ApplicationConfig"))
     WebACL.struct_class = Types::WebACL
 
     WebACLSummaries.member = Shapes::ShapeRef.new(shape: WebACLSummary)

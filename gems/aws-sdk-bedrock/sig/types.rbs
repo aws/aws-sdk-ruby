@@ -85,6 +85,21 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class CreateCustomModelRequest
+      attr_accessor model_name: ::String
+      attr_accessor model_source_config: Types::ModelDataSource
+      attr_accessor model_kms_key_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor model_tags: ::Array[Types::Tag]
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCustomModelResponse
+      attr_accessor model_arn: ::String
+      SENSITIVE: []
+    end
+
     class CreateEvaluationJobRequest
       attr_accessor job_name: ::String
       attr_accessor job_description: ::String
@@ -192,7 +207,7 @@ module Aws::Bedrock
       attr_accessor role_arn: ::String
       attr_accessor client_request_token: ::String
       attr_accessor base_model_identifier: ::String
-      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION")
+      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "IMPORTED")
       attr_accessor custom_model_kms_key_id: ::String
       attr_accessor job_tags: ::Array[Types::Tag]
       attr_accessor custom_model_tags: ::Array[Types::Tag]
@@ -300,8 +315,9 @@ module Aws::Bedrock
       attr_accessor creation_time: ::Time
       attr_accessor base_model_arn: ::String
       attr_accessor base_model_name: ::String
-      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION")
+      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "IMPORTED")
       attr_accessor owner_account_id: ::String
+      attr_accessor model_status: ("Active" | "Creating" | "Failed")
       SENSITIVE: []
     end
 
@@ -648,7 +664,7 @@ module Aws::Bedrock
       attr_accessor job_name: ::String
       attr_accessor job_arn: ::String
       attr_accessor base_model_arn: ::String
-      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION")
+      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "IMPORTED")
       attr_accessor model_kms_key_arn: ::String
       attr_accessor hyper_parameters: ::Hash[::String, ::String]
       attr_accessor training_data_config: Types::TrainingDataConfig
@@ -658,6 +674,8 @@ module Aws::Bedrock
       attr_accessor validation_metrics: ::Array[Types::ValidatorMetric]
       attr_accessor creation_time: ::Time
       attr_accessor customization_config: Types::CustomizationConfig
+      attr_accessor model_status: ("Active" | "Creating" | "Failed")
+      attr_accessor failure_message: ::String
       SENSITIVE: []
     end
 
@@ -803,8 +821,8 @@ module Aws::Bedrock
       attr_accessor client_request_token: ::String
       attr_accessor role_arn: ::String
       attr_accessor status: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped")
-      attr_accessor failure_message: ::String
       attr_accessor status_details: Types::StatusDetails
+      attr_accessor failure_message: ::String
       attr_accessor creation_time: ::Time
       attr_accessor last_modified_time: ::Time
       attr_accessor end_time: ::Time
@@ -813,7 +831,7 @@ module Aws::Bedrock
       attr_accessor training_data_config: Types::TrainingDataConfig
       attr_accessor validation_data_config: Types::ValidationDataConfig
       attr_accessor output_data_config: Types::OutputDataConfig
-      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION")
+      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "IMPORTED")
       attr_accessor output_model_kms_key_arn: ::String
       attr_accessor training_metrics: Types::TrainingMetrics
       attr_accessor validation_metrics: ::Array[Types::ValidatorMetric]
@@ -1279,6 +1297,7 @@ module Aws::Bedrock
       attr_accessor sort_by: ("CreationTime")
       attr_accessor sort_order: ("Ascending" | "Descending")
       attr_accessor is_owned: bool
+      attr_accessor model_status: ("Active" | "Creating" | "Failed")
       SENSITIVE: []
     end
 
@@ -1545,13 +1564,13 @@ module Aws::Bedrock
       attr_accessor base_model_arn: ::String
       attr_accessor job_name: ::String
       attr_accessor status: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped")
-      attr_accessor last_modified_time: ::Time
       attr_accessor status_details: Types::StatusDetails
+      attr_accessor last_modified_time: ::Time
       attr_accessor creation_time: ::Time
       attr_accessor end_time: ::Time
       attr_accessor custom_model_arn: ::String
       attr_accessor custom_model_name: ::String
-      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION")
+      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "IMPORTED")
       SENSITIVE: []
     end
 

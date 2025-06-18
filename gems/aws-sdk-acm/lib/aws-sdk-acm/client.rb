@@ -669,6 +669,7 @@ module Aws::ACM
     #   resp.certificate.certificate_authority_arn #=> String
     #   resp.certificate.renewal_eligibility #=> String, one of "ELIGIBLE", "INELIGIBLE"
     #   resp.certificate.options.certificate_transparency_logging_preference #=> String, one of "ENABLED", "DISABLED"
+    #   resp.certificate.options.export #=> String, one of "ENABLED", "DISABLED"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -685,18 +686,20 @@ module Aws::ACM
     end
 
     # Exports a private certificate issued by a private certificate
-    # authority (CA) for use anywhere. The exported file contains the
-    # certificate, the certificate chain, and the encrypted private 2048-bit
-    # RSA key associated with the public key that is embedded in the
-    # certificate. For security, you must assign a passphrase for the
+    # authority (CA) or public certificate for use anywhere. The exported
+    # file contains the certificate, the certificate chain, and the
+    # encrypted private key associated with the public key that is embedded
+    # in the certificate. For security, you must assign a passphrase for the
     # private key when exporting it.
     #
     # For information about exporting and formatting a certificate using the
-    # ACM console or CLI, see [Export a Private Certificate][1].
+    # ACM console or CLI, see [Export a private certificate][1] and [Export
+    # a public certificate][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-export-private.html
+    # [1]: https://docs.aws.amazon.com/acm/latest/userguide/export-private.html
+    # [2]: https://docs.aws.amazon.com/acm/latest/userguide/export-public-certificate
     #
     # @option params [required, String] :certificate_arn
     #   An Amazon Resource Name (ARN) of the issued certificate. This must be
@@ -983,6 +986,7 @@ module Aws::ACM
     #       extended_key_usage: ["TLS_WEB_SERVER_AUTHENTICATION"], # accepts TLS_WEB_SERVER_AUTHENTICATION, TLS_WEB_CLIENT_AUTHENTICATION, CODE_SIGNING, EMAIL_PROTECTION, TIME_STAMPING, OCSP_SIGNING, IPSEC_END_SYSTEM, IPSEC_TUNNEL, IPSEC_USER, ANY, NONE, CUSTOM
     #       key_usage: ["DIGITAL_SIGNATURE"], # accepts DIGITAL_SIGNATURE, NON_REPUDIATION, KEY_ENCIPHERMENT, DATA_ENCIPHERMENT, KEY_AGREEMENT, CERTIFICATE_SIGNING, CRL_SIGNING, ENCIPHER_ONLY, DECIPHER_ONLY, ANY, CUSTOM
     #       key_types: ["RSA_1024"], # accepts RSA_1024, RSA_2048, RSA_3072, RSA_4096, EC_prime256v1, EC_secp384r1, EC_secp521r1
+    #       export_option: "ENABLED", # accepts ENABLED, DISABLED
     #       managed_by: "CLOUDFRONT", # accepts CLOUDFRONT
     #     },
     #     next_token: "NextToken",
@@ -1007,6 +1011,7 @@ module Aws::ACM
     #   resp.certificate_summary_list[0].key_usages[0] #=> String, one of "DIGITAL_SIGNATURE", "NON_REPUDIATION", "KEY_ENCIPHERMENT", "DATA_ENCIPHERMENT", "KEY_AGREEMENT", "CERTIFICATE_SIGNING", "CRL_SIGNING", "ENCIPHER_ONLY", "DECIPHER_ONLY", "ANY", "CUSTOM"
     #   resp.certificate_summary_list[0].extended_key_usages #=> Array
     #   resp.certificate_summary_list[0].extended_key_usages[0] #=> String, one of "TLS_WEB_SERVER_AUTHENTICATION", "TLS_WEB_CLIENT_AUTHENTICATION", "CODE_SIGNING", "EMAIL_PROTECTION", "TIME_STAMPING", "OCSP_SIGNING", "IPSEC_END_SYSTEM", "IPSEC_TUNNEL", "IPSEC_USER", "ANY", "NONE", "CUSTOM"
+    #   resp.certificate_summary_list[0].export_option #=> String, one of "ENABLED", "DISABLED"
     #   resp.certificate_summary_list[0].in_use #=> Boolean
     #   resp.certificate_summary_list[0].exported #=> Boolean
     #   resp.certificate_summary_list[0].renewal_eligibility #=> String, one of "ELIGIBLE", "INELIGIBLE"
@@ -1158,17 +1163,16 @@ module Aws::ACM
       req.send_request(options)
     end
 
-    # Renews an eligible ACM certificate. At this time, only exported
-    # private certificates can be renewed with this operation. In order to
-    # renew your Amazon Web Services Private CA certificates with ACM, you
-    # must first [grant the ACM service principal permission to do so][1].
-    # For more information, see [Testing Managed Renewal][2] in the ACM User
-    # Guide.
+    # Renews an [eligible ACM certificate][1]. In order to renew your Amazon
+    # Web Services Private CA certificates with ACM, you must first [grant
+    # the ACM service principal permission to do so][2]. For more
+    # information, see [Testing Managed Renewal][3] in the ACM User Guide.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/privateca/latest/userguide/PcaPermissions.html
-    # [2]: https://docs.aws.amazon.com/acm/latest/userguide/manual-renewal.html
+    # [1]: https://docs.aws.amazon.com/acm/latest/userguide/managed-renewal.html
+    # [2]: https://docs.aws.amazon.com/privateca/latest/userguide/PcaPermissions.html
+    # [3]: https://docs.aws.amazon.com/acm/latest/userguide/manual-renewal.html
     #
     # @option params [required, String] :certificate_arn
     #   String that contains the ARN of the ACM certificate to be renewed.
@@ -1210,8 +1214,7 @@ module Aws::ACM
     # required. If you are requesting a public certificate, each domain name
     # that you specify must be validated to verify that you own or control
     # the domain. You can use [DNS validation][1] or [email validation][2].
-    # We recommend that you use DNS validation. ACM issues public
-    # certificates after receiving approval from the domain owner.
+    # We recommend that you use DNS validation.
     #
     # <note markdown="1"> ACM behavior differs from the [RFC 6125][3] specification of the
     # certificate validation process. ACM first checks for a Subject
@@ -1301,16 +1304,24 @@ module Aws::ACM
     #   you can validate domain ownership.
     #
     # @option params [Types::CertificateOptions] :options
-    #   Currently, you can use this parameter to specify whether to add the
-    #   certificate to a certificate transparency log. Certificate
-    #   transparency makes it possible to detect SSL/TLS certificates that
-    #   have been mistakenly or maliciously issued. Certificates that have not
-    #   been logged typically produce an error message in a browser. For more
-    #   information, see [Opting Out of Certificate Transparency Logging][1].
+    #   You can use this parameter to specify whether to add the certificate
+    #   to a certificate transparency log and export your certificate.
+    #
+    #   Certificate transparency makes it possible to detect SSL/TLS
+    #   certificates that have been mistakenly or maliciously issued.
+    #   Certificates that have not been logged typically produce an error
+    #   message in a browser. For more information, see [Opting Out of
+    #   Certificate Transparency Logging][1].
+    #
+    #   You can export public ACM certificates to use with Amazon Web Services
+    #   services as well as outside the Amazon Web Services Cloud. For more
+    #   information, see [Certificate Manager exportable public
+    #   certificate][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency
+    #   [2]: https://docs.aws.amazon.com/acm/latest/userguide/acm-exportable-certificates.html
     #
     # @option params [String] :certificate_authority_arn
     #   The Amazon Resource Name (ARN) of the private certificate authority
@@ -1389,6 +1400,7 @@ module Aws::ACM
     #     ],
     #     options: {
     #       certificate_transparency_logging_preference: "ENABLED", # accepts ENABLED, DISABLED
+    #       export: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #     certificate_authority_arn: "PcaArn",
     #     tags: [
@@ -1483,14 +1495,52 @@ module Aws::ACM
       req.send_request(options)
     end
 
-    # Updates a certificate. Currently, you can use this function to specify
-    # whether to opt in to or out of recording your certificate in a
-    # certificate transparency log. For more information, see [ Opting Out
-    # of Certificate Transparency Logging][1].
+    # Revokes a public ACM certificate. You can only revoke certificates
+    # that have been previously exported.
+    #
+    # @option params [required, String] :certificate_arn
+    #   The Amazon Resource Name (ARN) of the public or private certificate
+    #   that will be revoked. The ARN must have the following form:
+    #
+    #   `arn:aws:acm:region:account:certificate/12345678-1234-1234-1234-123456789012`
+    #
+    # @option params [required, String] :revocation_reason
+    #   Specifies why you revoked the certificate.
+    #
+    # @return [Types::RevokeCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RevokeCertificateResponse#certificate_arn #certificate_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.revoke_certificate({
+    #     certificate_arn: "Arn", # required
+    #     revocation_reason: "UNSPECIFIED", # required, accepts UNSPECIFIED, KEY_COMPROMISE, CA_COMPROMISE, AFFILIATION_CHANGED, SUPERCEDED, SUPERSEDED, CESSATION_OF_OPERATION, CERTIFICATE_HOLD, REMOVE_FROM_CRL, PRIVILEGE_WITHDRAWN, A_A_COMPROMISE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.certificate_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RevokeCertificate AWS API Documentation
+    #
+    # @overload revoke_certificate(params = {})
+    # @param [Hash] params ({})
+    def revoke_certificate(params = {}, options = {})
+      req = build_request(:revoke_certificate, params)
+      req.send_request(options)
+    end
+
+    # Updates a certificate. You can use this function to specify whether to
+    # opt in to or out of recording your certificate in a certificate
+    # transparency log and exporting. For more information, see [ Opting Out
+    # of Certificate Transparency Logging][1] and [Certificate Manager
+    # Exportable Managed Certificates][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency
+    # [2]: https://docs.aws.amazon.com/acm/latest/userguide/acm-exportable-certificates.html
     #
     # @option params [required, String] :certificate_arn
     #   ARN of the requested certificate to update. This must be of the form:
@@ -1500,11 +1550,11 @@ module Aws::ACM
     #
     # @option params [required, Types::CertificateOptions] :options
     #   Use to update the options for your certificate. Currently, you can
-    #   specify whether to add your certificate to a transparency log.
-    #   Certificate transparency makes it possible to detect SSL/TLS
-    #   certificates that have been mistakenly or maliciously issued.
-    #   Certificates that have not been logged typically produce an error
-    #   message in a browser.
+    #   specify whether to add your certificate to a transparency log or
+    #   export your certificate. Certificate transparency makes it possible to
+    #   detect SSL/TLS certificates that have been mistakenly or maliciously
+    #   issued. Certificates that have not been logged typically produce an
+    #   error message in a browser.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1514,6 +1564,7 @@ module Aws::ACM
     #     certificate_arn: "Arn", # required
     #     options: { # required
     #       certificate_transparency_logging_preference: "ENABLED", # accepts ENABLED, DISABLED
+    #       export: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #   })
     #
@@ -1544,7 +1595,7 @@ module Aws::ACM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-acm'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

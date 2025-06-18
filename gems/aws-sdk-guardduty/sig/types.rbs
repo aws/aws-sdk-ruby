@@ -104,6 +104,14 @@ module Aws::GuardDuty
       attr_accessor id: ::String
       attr_accessor user: Types::User
       attr_accessor session: Types::Session
+      attr_accessor process: Types::ActorProcess
+      SENSITIVE: []
+    end
+
+    class ActorProcess
+      attr_accessor name: ::String
+      attr_accessor path: ::String
+      attr_accessor sha_256: ::String
       SENSITIVE: []
     end
 
@@ -245,6 +253,12 @@ module Aws::GuardDuty
       attr_accessor image_prefix: ::String
       attr_accessor volume_mounts: ::Array[Types::VolumeMount]
       attr_accessor security_context: Types::SecurityContext
+      SENSITIVE: []
+    end
+
+    class ContainerFindingResource
+      attr_accessor image: ::String
+      attr_accessor image_uid: ::String
       SENSITIVE: []
     end
 
@@ -802,6 +816,15 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class EksCluster
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED" | "UPDATING" | "PENDING")
+      attr_accessor vpc_id: ::String
+      attr_accessor ec2_instance_uids: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class EksClusterDetails
       attr_accessor name: ::String
       attr_accessor arn: ::String
@@ -1149,7 +1172,7 @@ module Aws::GuardDuty
     end
 
     class Indicator
-      attr_accessor key: ("SUSPICIOUS_USER_AGENT" | "SUSPICIOUS_NETWORK" | "MALICIOUS_IP" | "TOR_IP" | "ATTACK_TACTIC" | "HIGH_RISK_API" | "ATTACK_TECHNIQUE" | "UNUSUAL_API_FOR_ACCOUNT" | "UNUSUAL_ASN_FOR_ACCOUNT" | "UNUSUAL_ASN_FOR_USER")
+      attr_accessor key: ("SUSPICIOUS_USER_AGENT" | "SUSPICIOUS_NETWORK" | "MALICIOUS_IP" | "TOR_IP" | "ATTACK_TACTIC" | "HIGH_RISK_API" | "ATTACK_TECHNIQUE" | "UNUSUAL_API_FOR_ACCOUNT" | "UNUSUAL_ASN_FOR_ACCOUNT" | "UNUSUAL_ASN_FOR_USER" | "SUSPICIOUS_PROCESS" | "MALICIOUS_DOMAIN" | "MALICIOUS_PROCESS" | "CRYPTOMINING_IP" | "CRYPTOMINING_DOMAIN" | "CRYPTOMINING_PROCESS")
       attr_accessor values: ::Array[::String]
       attr_accessor title: ::String
       SENSITIVE: []
@@ -1281,6 +1304,13 @@ module Aws::GuardDuty
       attr_accessor groups: ::Array[::String]
       attr_accessor session_name: ::Array[::String]
       attr_accessor impersonated_user: Types::ImpersonatedUser
+      SENSITIVE: []
+    end
+
+    class KubernetesWorkload
+      attr_accessor container_uids: ::Array[::String]
+      attr_accessor namespace: ::String
+      attr_accessor kubernetes_resources_types: ("PODS" | "JOBS" | "CRONJOBS" | "DEPLOYMENTS" | "DAEMONSETS" | "STATEFULSETS" | "REPLICASETS" | "REPLICATIONCONTROLLERS")
       SENSITIVE: []
     end
 
@@ -1933,6 +1963,9 @@ module Aws::GuardDuty
       attr_accessor access_key: Types::AccessKey
       attr_accessor ec2_network_interface: Types::Ec2NetworkInterface
       attr_accessor s3_object: Types::S3Object
+      attr_accessor eks_cluster: Types::EksCluster
+      attr_accessor kubernetes_workload: Types::KubernetesWorkload
+      attr_accessor container: Types::ContainerFindingResource
       SENSITIVE: []
     end
 
@@ -1960,7 +1993,7 @@ module Aws::GuardDuty
       attr_accessor uid: ::String
       attr_accessor name: ::String
       attr_accessor account_id: ::String
-      attr_accessor resource_type: ("EC2_INSTANCE" | "EC2_NETWORK_INTERFACE" | "S3_BUCKET" | "S3_OBJECT" | "ACCESS_KEY")
+      attr_accessor resource_type: ("EC2_INSTANCE" | "EC2_NETWORK_INTERFACE" | "S3_BUCKET" | "S3_OBJECT" | "ACCESS_KEY" | "EKS_CLUSTER" | "KUBERNETES_WORKLOAD" | "CONTAINER")
       attr_accessor region: ::String
       attr_accessor service: ::String
       attr_accessor cloud_partition: ::String
@@ -2159,6 +2192,7 @@ module Aws::GuardDuty
       attr_accessor endpoints: ::Array[Types::NetworkEndpoint]
       attr_accessor signals: ::Array[Types::Signal]
       attr_accessor sequence_indicators: ::Array[Types::Indicator]
+      attr_accessor additional_sequence_types: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -2205,7 +2239,7 @@ module Aws::GuardDuty
 
     class Signal
       attr_accessor uid: ::String
-      attr_accessor type: ("FINDING" | "CLOUD_TRAIL" | "S3_DATA_EVENTS")
+      attr_accessor type: ("FINDING" | "CLOUD_TRAIL" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "FLOW_LOGS" | "DNS_LOGS" | "RUNTIME_MONITORING")
       attr_accessor description: ::String
       attr_accessor name: ::String
       attr_accessor created_at: ::Time

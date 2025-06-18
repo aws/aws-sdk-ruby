@@ -253,7 +253,7 @@ module Aws::EMRServerless
     #   @return [String]
     #
     # @!attribute [rw] shutdown_grace_period_in_seconds
-    #   The duration (in seconds) to wait before forcefully terminating the
+    #   The duration in seconds to wait before forcefully terminating the
     #   job after cancellation is requested.
     #   @return [Integer]
     #
@@ -838,6 +838,12 @@ module Aws::EMRServerless
     #   The execution role ARN of the job run.
     #   @return [String]
     #
+    # @!attribute [rw] execution_iam_policy
+    #   Optional IAM policy. The resulting job IAM role permissions will be
+    #   an intersection of the policies passed and the policy associated
+    #   with your job execution role.
+    #   @return [Types::JobRunExecutionIamPolicy]
+    #
     # @!attribute [rw] state
     #   The state of the job run.
     #   @return [String]
@@ -937,6 +943,7 @@ module Aws::EMRServerless
       :created_at,
       :updated_at,
       :execution_role,
+      :execution_iam_policy,
       :state,
       :state_details,
       :release_label,

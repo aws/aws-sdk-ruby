@@ -446,6 +446,42 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # Application details defined during the web ACL creation process.
+    # Application attributes help WAF give recommendations for protection
+    # packs.
+    #
+    # @!attribute [rw] name
+    #   Specifies the attribute name.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   Specifies the attribute value.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ApplicationAttribute AWS API Documentation
+    #
+    class ApplicationAttribute < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of `ApplicationAttribute`s that contains information about the
+    # application.
+    #
+    # @!attribute [rw] attributes
+    #   Contains the attribute name and a list of values for that attribute.
+    #   @return [Array<Types::ApplicationAttribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ApplicationConfig AWS API Documentation
+    #
+    class ApplicationConfig < Struct.new(
+      :attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A rule statement that inspects web traffic based on the Autonomous
     # System Number (ASN) associated with the request's IP address.
     #
@@ -1770,6 +1806,13 @@ module Aws::WAFV2
     #   Application Load Balancers.
     #   @return [Types::OnSourceDDoSProtectionConfig]
     #
+    # @!attribute [rw] application_config
+    #   Configures the ability for the WAF console to store and retrieve
+    #   application attributes during the web ACL creation process.
+    #   Application attributes help WAF give recommendations for protection
+    #   packs.
+    #   @return [Types::ApplicationConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/CreateWebACLRequest AWS API Documentation
     #
     class CreateWebACLRequest < Struct.new(
@@ -1786,7 +1829,8 @@ module Aws::WAFV2
       :challenge_config,
       :token_domains,
       :association_config,
-      :on_source_d_do_s_protection_config)
+      :on_source_d_do_s_protection_config,
+      :application_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10681,6 +10725,10 @@ module Aws::WAFV2
     #   associated with Application Load Balancers.
     #   @return [Types::OnSourceDDoSProtectionConfig]
     #
+    # @!attribute [rw] application_config
+    #   Returns a list of `ApplicationAttribute`s.
+    #   @return [Types::ApplicationConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/WebACL AWS API Documentation
     #
     class WebACL < Struct.new(
@@ -10703,7 +10751,8 @@ module Aws::WAFV2
       :token_domains,
       :association_config,
       :retrofitted_by_firewall_manager,
-      :on_source_d_do_s_protection_config)
+      :on_source_d_do_s_protection_config,
+      :application_config)
       SENSITIVE = []
       include Aws::Structure
     end

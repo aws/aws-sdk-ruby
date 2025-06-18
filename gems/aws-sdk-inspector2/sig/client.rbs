@@ -87,6 +87,42 @@ module Aws
                             ) -> _AssociateMemberResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateMemberResponseSuccess
 
+      interface _BatchAssociateCodeSecurityScanConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchAssociateCodeSecurityScanConfigurationResponse]
+        def failed_associations: () -> ::Array[Types::FailedAssociationResult]
+        def successful_associations: () -> ::Array[Types::SuccessfulAssociationResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#batch_associate_code_security_scan_configuration-instance_method
+      def batch_associate_code_security_scan_configuration: (
+                                                              associate_configuration_requests: Array[
+                                                                {
+                                                                  resource: {
+                                                                    project_id: ::String?
+                                                                  },
+                                                                  scan_configuration_arn: ::String
+                                                                },
+                                                              ]
+                                                            ) -> _BatchAssociateCodeSecurityScanConfigurationResponseSuccess
+                                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchAssociateCodeSecurityScanConfigurationResponseSuccess
+
+      interface _BatchDisassociateCodeSecurityScanConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDisassociateCodeSecurityScanConfigurationResponse]
+        def failed_associations: () -> ::Array[Types::FailedAssociationResult]
+        def successful_associations: () -> ::Array[Types::SuccessfulAssociationResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#batch_disassociate_code_security_scan_configuration-instance_method
+      def batch_disassociate_code_security_scan_configuration: (
+                                                                 disassociate_configuration_requests: Array[
+                                                                   {
+                                                                     resource: {
+                                                                       project_id: ::String?
+                                                                     },
+                                                                     scan_configuration_arn: ::String
+                                                                   },
+                                                                 ]
+                                                               ) -> _BatchDisassociateCodeSecurityScanConfigurationResponseSuccess
+                                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDisassociateCodeSecurityScanConfigurationResponseSuccess
+
       interface _BatchGetAccountStatusResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetAccountStatusResponse]
         def accounts: () -> ::Array[Types::AccountState]
@@ -218,6 +254,51 @@ module Aws
                                          ) -> _CreateCisScanConfigurationResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCisScanConfigurationResponseSuccess
 
+      interface _CreateCodeSecurityIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCodeSecurityIntegrationResponse]
+        def authorization_url: () -> ::String
+        def integration_arn: () -> ::String
+        def status: () -> ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#create_code_security_integration-instance_method
+      def create_code_security_integration: (
+                                              ?details: {
+                                                gitlab_self_managed: {
+                                                  access_token: ::String,
+                                                  instance_url: ::String
+                                                }?
+                                              },
+                                              name: ::String,
+                                              ?tags: Hash[::String, ::String],
+                                              type: ("GITLAB_SELF_MANAGED" | "GITHUB")
+                                            ) -> _CreateCodeSecurityIntegrationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCodeSecurityIntegrationResponseSuccess
+
+      interface _CreateCodeSecurityScanConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCodeSecurityScanConfigurationResponse]
+        def scan_configuration_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#create_code_security_scan_configuration-instance_method
+      def create_code_security_scan_configuration: (
+                                                     configuration: {
+                                                       continuous_integration_scan_configuration: {
+                                                         supported_events: Array[("PULL_REQUEST" | "PUSH")]
+                                                       }?,
+                                                       periodic_scan_configuration: {
+                                                         frequency: ("WEEKLY" | "MONTHLY" | "NEVER")?,
+                                                         frequency_expression: ::String?
+                                                       }?,
+                                                       rule_set_categories: Array[("SAST" | "IAC" | "SCA")]
+                                                     },
+                                                     level: ("ORGANIZATION" | "ACCOUNT"),
+                                                     name: ::String,
+                                                     ?scope_settings: {
+                                                       project_selection_scope: ("ALL")?
+                                                     },
+                                                     ?tags: Hash[::String, ::String]
+                                                   ) -> _CreateCodeSecurityScanConfigurationResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCodeSecurityScanConfigurationResponseSuccess
+
       interface _CreateFilterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateFilterResponse]
         def arn: () -> ::String
@@ -228,6 +309,18 @@ module Aws
                            ?description: ::String,
                            filter_criteria: {
                              aws_account_id: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             code_repository_project_name: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             code_repository_provider_type: Array[
                                {
                                  comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
                                  value: ::String
@@ -537,6 +630,18 @@ module Aws
       def create_findings_report: (
                                     ?filter_criteria: {
                                       aws_account_id: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      code_repository_project_name: Array[
+                                        {
+                                          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                          value: ::String
+                                        },
+                                      ]?,
+                                      code_repository_provider_type: Array[
                                         {
                                           comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
                                           value: ::String
@@ -918,6 +1023,26 @@ module Aws
                                          ) -> _DeleteCisScanConfigurationResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCisScanConfigurationResponseSuccess
 
+      interface _DeleteCodeSecurityIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCodeSecurityIntegrationResponse]
+        def integration_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#delete_code_security_integration-instance_method
+      def delete_code_security_integration: (
+                                              integration_arn: ::String
+                                            ) -> _DeleteCodeSecurityIntegrationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCodeSecurityIntegrationResponseSuccess
+
+      interface _DeleteCodeSecurityScanConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCodeSecurityScanConfigurationResponse]
+        def scan_configuration_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#delete_code_security_scan_configuration-instance_method
+      def delete_code_security_scan_configuration: (
+                                                     scan_configuration_arn: ::String
+                                                   ) -> _DeleteCodeSecurityScanConfigurationResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCodeSecurityScanConfigurationResponseSuccess
+
       interface _DeleteFilterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFilterResponse]
         def arn: () -> ::String
@@ -946,7 +1071,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#disable-instance_method
       def disable: (
                      ?account_ids: Array[::String],
-                     ?resource_types: Array[("EC2" | "ECR" | "LAMBDA" | "LAMBDA_CODE")]
+                     ?resource_types: Array[("EC2" | "ECR" | "LAMBDA" | "LAMBDA_CODE" | "CODE_REPOSITORY")]
                    ) -> _DisableResponseSuccess
                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableResponseSuccess
 
@@ -979,7 +1104,7 @@ module Aws
       def enable: (
                     ?account_ids: Array[::String],
                     ?client_token: ::String,
-                    resource_types: Array[("EC2" | "ECR" | "LAMBDA" | "LAMBDA_CODE")]
+                    resource_types: Array[("EC2" | "ECR" | "LAMBDA" | "LAMBDA_CODE" | "CODE_REPOSITORY")]
                   ) -> _EnableResponseSuccess
                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableResponseSuccess
 
@@ -1071,6 +1196,62 @@ module Aws
                                   ) -> _GetClustersForImageResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetClustersForImageResponseSuccess
 
+      interface _GetCodeSecurityIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCodeSecurityIntegrationResponse]
+        def authorization_url: () -> ::String
+        def created_on: () -> ::Time
+        def integration_arn: () -> ::String
+        def last_update_on: () -> ::Time
+        def name: () -> ::String
+        def status: () -> ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING")
+        def status_reason: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def type: () -> ("GITLAB_SELF_MANAGED" | "GITHUB")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#get_code_security_integration-instance_method
+      def get_code_security_integration: (
+                                           integration_arn: ::String,
+                                           ?tags: Hash[::String, ::String]
+                                         ) -> _GetCodeSecurityIntegrationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCodeSecurityIntegrationResponseSuccess
+
+      interface _GetCodeSecurityScanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCodeSecurityScanResponse]
+        def account_id: () -> ::String
+        def created_at: () -> ::Time
+        def last_commit_id: () -> ::String
+        def resource: () -> Types::CodeSecurityResource
+        def scan_id: () -> ::String
+        def status: () -> ("IN_PROGRESS" | "SUCCESSFUL" | "FAILED" | "SKIPPED")
+        def status_reason: () -> ::String
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#get_code_security_scan-instance_method
+      def get_code_security_scan: (
+                                    resource: {
+                                      project_id: ::String?
+                                    },
+                                    scan_id: ::String
+                                  ) -> _GetCodeSecurityScanResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCodeSecurityScanResponseSuccess
+
+      interface _GetCodeSecurityScanConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCodeSecurityScanConfigurationResponse]
+        def configuration: () -> Types::CodeSecurityScanConfiguration
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def level: () -> ("ORGANIZATION" | "ACCOUNT")
+        def name: () -> ::String
+        def scan_configuration_arn: () -> ::String
+        def scope_settings: () -> Types::ScopeSettings
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#get_code_security_scan_configuration-instance_method
+      def get_code_security_scan_configuration: (
+                                                  scan_configuration_arn: ::String
+                                                ) -> _GetCodeSecurityScanConfigurationResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCodeSecurityScanConfigurationResponseSuccess
+
       interface _GetConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetConfigurationResponse]
         def ec2_configuration: () -> Types::Ec2ConfigurationState
@@ -1108,7 +1289,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#get_encryption_key-instance_method
       def get_encryption_key: (
-                                resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION"),
+                                resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY"),
                                 scan_type: ("NETWORK" | "PACKAGE" | "CODE")
                               ) -> _GetEncryptionKeyResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEncryptionKeyResponseSuccess
@@ -1405,6 +1586,43 @@ module Aws
                           ) -> _ListCisScansResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCisScansResponseSuccess
 
+      interface _ListCodeSecurityIntegrationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCodeSecurityIntegrationsResponse]
+        def integrations: () -> ::Array[Types::CodeSecurityIntegrationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#list_code_security_integrations-instance_method
+      def list_code_security_integrations: (
+                                             ?max_results: ::Integer,
+                                             ?next_token: ::String
+                                           ) -> _ListCodeSecurityIntegrationsResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCodeSecurityIntegrationsResponseSuccess
+
+      interface _ListCodeSecurityScanConfigurationAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCodeSecurityScanConfigurationAssociationsResponse]
+        def associations: () -> ::Array[Types::CodeSecurityScanConfigurationAssociationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#list_code_security_scan_configuration_associations-instance_method
+      def list_code_security_scan_configuration_associations: (
+                                                                ?max_results: ::Integer,
+                                                                ?next_token: ::String,
+                                                                scan_configuration_arn: ::String
+                                                              ) -> _ListCodeSecurityScanConfigurationAssociationsResponseSuccess
+                                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCodeSecurityScanConfigurationAssociationsResponseSuccess
+
+      interface _ListCodeSecurityScanConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCodeSecurityScanConfigurationsResponse]
+        def configurations: () -> ::Array[Types::CodeSecurityScanConfigurationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#list_code_security_scan_configurations-instance_method
+      def list_code_security_scan_configurations: (
+                                                    ?max_results: ::Integer,
+                                                    ?next_token: ::String
+                                                  ) -> _ListCodeSecurityScanConfigurationsResponseSuccess
+                                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCodeSecurityScanConfigurationsResponseSuccess
+
       interface _ListCoverageResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListCoverageResponse]
         def covered_resources: () -> ::Array[Types::CoveredResource]
@@ -1414,6 +1632,24 @@ module Aws
       def list_coverage: (
                            ?filter_criteria: {
                              account_id: Array[
+                               {
+                                 comparison: ("EQUALS" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             code_repository_project_name: Array[
+                               {
+                                 comparison: ("EQUALS" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             code_repository_provider_type: Array[
+                               {
+                                 comparison: ("EQUALS" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             code_repository_provider_type_visibility: Array[
                                {
                                  comparison: ("EQUALS" | "NOT_EQUALS"),
                                  value: ::String
@@ -1481,6 +1717,12 @@ module Aws
                                  start_inclusive: ::Time?
                                },
                              ]?,
+                             last_scanned_commit_id: Array[
+                               {
+                                 comparison: ("EQUALS" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
                              resource_id: Array[
                                {
                                  comparison: ("EQUALS" | "NOT_EQUALS"),
@@ -1533,6 +1775,24 @@ module Aws
       def list_coverage_statistics: (
                                       ?filter_criteria: {
                                         account_id: Array[
+                                          {
+                                            comparison: ("EQUALS" | "NOT_EQUALS"),
+                                            value: ::String
+                                          },
+                                        ]?,
+                                        code_repository_project_name: Array[
+                                          {
+                                            comparison: ("EQUALS" | "NOT_EQUALS"),
+                                            value: ::String
+                                          },
+                                        ]?,
+                                        code_repository_provider_type: Array[
+                                          {
+                                            comparison: ("EQUALS" | "NOT_EQUALS"),
+                                            value: ::String
+                                          },
+                                        ]?,
+                                        code_repository_provider_type_visibility: Array[
                                           {
                                             comparison: ("EQUALS" | "NOT_EQUALS"),
                                             value: ::String
@@ -1598,6 +1858,12 @@ module Aws
                                           {
                                             end_inclusive: ::Time?,
                                             start_inclusive: ::Time?
+                                          },
+                                        ]?,
+                                        last_scanned_commit_id: Array[
+                                          {
+                                            comparison: ("EQUALS" | "NOT_EQUALS"),
+                                            value: ::String
                                           },
                                         ]?,
                                         resource_id: Array[
@@ -1670,7 +1936,7 @@ module Aws
 
       interface _ListFindingAggregationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListFindingAggregationsResponse]
-        def aggregation_type: () -> ("FINDING_TYPE" | "PACKAGE" | "TITLE" | "REPOSITORY" | "AMI" | "AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER" | "IMAGE_LAYER" | "ACCOUNT" | "AWS_LAMBDA_FUNCTION" | "LAMBDA_LAYER")
+        def aggregation_type: () -> ("FINDING_TYPE" | "PACKAGE" | "TITLE" | "REPOSITORY" | "AMI" | "AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER" | "IMAGE_LAYER" | "ACCOUNT" | "AWS_LAMBDA_FUNCTION" | "LAMBDA_LAYER" | "CODE_REPOSITORY")
         def next_token: () -> ::String
         def responses: () -> ::Array[Types::AggregationResponse]
       end
@@ -1731,6 +1997,28 @@ module Aws
                                              },
                                            ]?,
                                            repositories: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           resource_ids: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           sort_by: ("CRITICAL" | "HIGH" | "ALL")?,
+                                           sort_order: ("ASC" | "DESC")?
+                                         }?,
+                                         code_repository_aggregation: {
+                                           project_names: Array[
+                                             {
+                                               comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           provider_types: Array[
                                              {
                                                comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
                                                value: ::String
@@ -1892,7 +2180,7 @@ module Aws
                                            ]?
                                          }?
                                        },
-                                       aggregation_type: ("FINDING_TYPE" | "PACKAGE" | "TITLE" | "REPOSITORY" | "AMI" | "AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER" | "IMAGE_LAYER" | "ACCOUNT" | "AWS_LAMBDA_FUNCTION" | "LAMBDA_LAYER"),
+                                       aggregation_type: ("FINDING_TYPE" | "PACKAGE" | "TITLE" | "REPOSITORY" | "AMI" | "AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER" | "IMAGE_LAYER" | "ACCOUNT" | "AWS_LAMBDA_FUNCTION" | "LAMBDA_LAYER" | "CODE_REPOSITORY"),
                                        ?max_results: ::Integer,
                                        ?next_token: ::String
                                      ) -> _ListFindingAggregationsResponseSuccess
@@ -1907,6 +2195,18 @@ module Aws
       def list_findings: (
                            ?filter_criteria: {
                              aws_account_id: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             code_repository_project_name: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             code_repository_provider_type: Array[
                                {
                                  comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
                                  value: ::String
@@ -2252,7 +2552,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#reset_encryption_key-instance_method
       def reset_encryption_key: (
-                                  resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION"),
+                                  resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY"),
                                   scan_type: ("NETWORK" | "PACKAGE" | "CODE")
                                 ) -> _ResetEncryptionKeyResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResetEncryptionKeyResponseSuccess
@@ -2309,6 +2609,20 @@ module Aws
                                scan_job_id: ::String
                              ) -> _StartCisSessionResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartCisSessionResponseSuccess
+
+      interface _StartCodeSecurityScanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartCodeSecurityScanResponse]
+        def scan_id: () -> ::String
+        def status: () -> ("IN_PROGRESS" | "SUCCESSFUL" | "FAILED" | "SKIPPED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#start_code_security_scan-instance_method
+      def start_code_security_scan: (
+                                      ?client_token: ::String,
+                                      resource: {
+                                        project_id: ::String?
+                                      }
+                                    ) -> _StartCodeSecurityScanResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartCodeSecurityScanResponseSuccess
 
       interface _StopCisSessionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StopCisSessionResponse]
@@ -2401,6 +2715,46 @@ module Aws
                                          ) -> _UpdateCisScanConfigurationResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCisScanConfigurationResponseSuccess
 
+      interface _UpdateCodeSecurityIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCodeSecurityIntegrationResponse]
+        def integration_arn: () -> ::String
+        def status: () -> ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#update_code_security_integration-instance_method
+      def update_code_security_integration: (
+                                              details: {
+                                                github: {
+                                                  code: ::String,
+                                                  installation_id: ::String
+                                                }?,
+                                                gitlab_self_managed: {
+                                                  auth_code: ::String
+                                                }?
+                                              },
+                                              integration_arn: ::String
+                                            ) -> _UpdateCodeSecurityIntegrationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCodeSecurityIntegrationResponseSuccess
+
+      interface _UpdateCodeSecurityScanConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCodeSecurityScanConfigurationResponse]
+        def scan_configuration_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#update_code_security_scan_configuration-instance_method
+      def update_code_security_scan_configuration: (
+                                                     configuration: {
+                                                       continuous_integration_scan_configuration: {
+                                                         supported_events: Array[("PULL_REQUEST" | "PUSH")]
+                                                       }?,
+                                                       periodic_scan_configuration: {
+                                                         frequency: ("WEEKLY" | "MONTHLY" | "NEVER")?,
+                                                         frequency_expression: ::String?
+                                                       }?,
+                                                       rule_set_categories: Array[("SAST" | "IAC" | "SCA")]
+                                                     },
+                                                     scan_configuration_arn: ::String
+                                                   ) -> _UpdateCodeSecurityScanConfigurationResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCodeSecurityScanConfigurationResponseSuccess
+
       interface _UpdateConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConfigurationResponse]
       end
@@ -2437,7 +2791,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#update_encryption_key-instance_method
       def update_encryption_key: (
                                    kms_key_id: ::String,
-                                   resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION"),
+                                   resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY"),
                                    scan_type: ("NETWORK" | "PACKAGE" | "CODE")
                                  ) -> _UpdateEncryptionKeyResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEncryptionKeyResponseSuccess
@@ -2453,6 +2807,18 @@ module Aws
                            filter_arn: ::String,
                            ?filter_criteria: {
                              aws_account_id: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             code_repository_project_name: Array[
+                               {
+                                 comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+                                 value: ::String
+                               },
+                             ]?,
+                             code_repository_provider_type: Array[
                                {
                                  comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
                                  value: ::String
@@ -2769,6 +3135,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#update_organization_configuration-instance_method
       def update_organization_configuration: (
                                                auto_enable: {
+                                                 code_repository: bool?,
                                                  ec2: bool,
                                                  ecr: bool,
                                                  lambda: bool?,

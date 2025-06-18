@@ -1907,8 +1907,7 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] domain_name_arn
-    #   The ARN of the domain name. Supported only for private custom domain
-    #   names.
+    #   The ARN of the domain name.
     #   @return [String]
     #
     # @!attribute [rw] certificate_name
@@ -3602,7 +3601,8 @@ module Aws::APIGateway
     #
     # @!attribute [rw] timeout_in_millis
     #   Custom timeout between 50 and 29,000 milliseconds. The default value
-    #   is 29,000 milliseconds or 29 seconds.
+    #   is 29,000 milliseconds or 29 seconds. You can increase the default
+    #   value to longer than 29 seconds for Regional or private APIs only.
     #   @return [Integer]
     #
     # @!attribute [rw] cache_namespace
@@ -4298,7 +4298,8 @@ module Aws::APIGateway
     #
     # @!attribute [rw] timeout_in_millis
     #   Custom timeout between 50 and 29,000 milliseconds. The default value
-    #   is 29,000 milliseconds or 29 seconds.
+    #   is 29,000 milliseconds or 29 seconds. You can increase the default
+    #   value to longer than 29 seconds for Regional or private APIs only.
     #   @return [Integer]
     #
     # @!attribute [rw] tls_config

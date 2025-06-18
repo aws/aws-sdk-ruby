@@ -473,6 +473,7 @@ module Aws
             'LookoutEquipment' => 'lookoutequipment',
             'LookoutMetrics' => 'lookoutmetrics',
             'LookoutforVision' => 'lookoutvision',
+            'MPA' => 'mpa',
             'MQ' => 'mq',
             'MTurk' => 'mturk-requester',
             'MWAA' => 'airflow',

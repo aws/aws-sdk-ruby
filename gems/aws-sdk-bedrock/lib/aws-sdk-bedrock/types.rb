@@ -264,6 +264,97 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # @!attribute [rw] model_name
+    #   A unique name for the custom model.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_source_config
+    #   The data source for the model. The Amazon S3 URI in the model source
+    #   must be for the Amazon-managed Amazon S3 bucket containing your
+    #   model artifacts.
+    #   @return [Types::ModelDataSource]
+    #
+    # @!attribute [rw] model_kms_key_arn
+    #   The Amazon Resource Name (ARN) of the customer managed KMS key to
+    #   encrypt the custom model. If you don't provide a KMS key, Amazon
+    #   Bedrock uses an Amazon Web Services-managed KMS key to encrypt the
+    #   model.
+    #
+    #   If you provide a customer managed KMS key, your Amazon Bedrock
+    #   service role must have permissions to use it. For more information
+    #   see [Encryption of imported models][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/encryption-import-model.html
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of an IAM service role that Amazon
+    #   Bedrock assumes to perform tasks on your behalf. This role must have
+    #   permissions to access the Amazon S3 bucket containing your model
+    #   artifacts and the KMS key (if specified). For more information, see
+    #   [Setting up an IAM service role for importing models][1] in the
+    #   Amazon Bedrock User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-import-iam-role.html
+    #   @return [String]
+    #
+    # @!attribute [rw] model_tags
+    #   A list of key-value pairs to associate with the custom model
+    #   resource. You can use these tags to organize and identify your
+    #   resources.
+    #
+    #   For more information, see [Tagging resources][1] in the [Amazon
+    #   Bedrock User Guide][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateCustomModelRequest AWS API Documentation
+    #
+    class CreateCustomModelRequest < Struct.new(
+      :model_name,
+      :model_source_config,
+      :model_kms_key_arn,
+      :role_arn,
+      :model_tags,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_arn
+    #   The Amazon Resource Name (ARN) of the new custom model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateCustomModelResponse AWS API Documentation
+    #
+    class CreateCustomModelResponse < Struct.new(
+      :model_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] job_name
     #   A name for the evaluation job. Names must unique with your Amazon
     #   Web Services account, and your account's Amazon Web Services
@@ -1301,6 +1392,17 @@ module Aws::Bedrock
     #   The unique identifier of the account that owns the model.
     #   @return [String]
     #
+    # @!attribute [rw] model_status
+    #   The current status of the custom model. Possible values include:
+    #
+    #   * `Creating` - The model is being created and validated.
+    #
+    #   * `Active` - The model has been successfully created and is ready
+    #     for use.
+    #
+    #   * `Failed` - The model creation process failed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CustomModelSummary AWS API Documentation
     #
     class CustomModelSummary < Struct.new(
@@ -1310,7 +1412,8 @@ module Aws::Bedrock
       :base_model_arn,
       :base_model_name,
       :customization_type,
-      :owner_account_id)
+      :owner_account_id,
+      :model_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2408,7 +2511,13 @@ module Aws::Bedrock
     #   @return [String]
     #
     # @!attribute [rw] job_arn
-    #   Job Amazon Resource Name (ARN) associated with this model.
+    #   Job Amazon Resource Name (ARN) associated with this model. For
+    #   models that you create with the [CreateCustomModel][1] API
+    #   operation, this is `NULL`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateCustomModel.html
     #   @return [String]
     #
     # @!attribute [rw] base_model_arn
@@ -2460,6 +2569,24 @@ module Aws::Bedrock
     #   The customization configuration for the custom model.
     #   @return [Types::CustomizationConfig]
     #
+    # @!attribute [rw] model_status
+    #   The current status of the custom model. Possible values include:
+    #
+    #   * `Creating` - The model is being created and validated.
+    #
+    #   * `Active` - The model has been successfully created and is ready
+    #     for use.
+    #
+    #   * `Failed` - The model creation process failed. Check the
+    #     `failureMessage` field for details.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_message
+    #   A failure message for any issues that occurred when creating the
+    #   custom model. This is included for only a failed CreateCustomModel
+    #   operation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetCustomModelResponse AWS API Documentation
     #
     class GetCustomModelResponse < Struct.new(
@@ -2477,7 +2604,9 @@ module Aws::Bedrock
       :training_metrics,
       :validation_metrics,
       :creation_time,
-      :customization_config)
+      :customization_config,
+      :model_status,
+      :failure_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3020,14 +3149,14 @@ module Aws::Bedrock
     #   failed.
     #   @return [String]
     #
-    # @!attribute [rw] failure_message
-    #   Information about why the job failed.
-    #   @return [String]
-    #
     # @!attribute [rw] status_details
     #   For a Distillation job, the details about the statuses of the
     #   sub-tasks of the customization job.
     #   @return [Types::StatusDetails]
+    #
+    # @!attribute [rw] failure_message
+    #   Information about why the job failed.
+    #   @return [String]
     #
     # @!attribute [rw] creation_time
     #   Time that the resource was created.
@@ -3101,8 +3230,8 @@ module Aws::Bedrock
       :client_request_token,
       :role_arn,
       :status,
-      :failure_message,
       :status_details,
+      :failure_message,
       :creation_time,
       :last_modified_time,
       :end_time,
@@ -5507,6 +5636,22 @@ module Aws::Bedrock
     #   (`true`) or if they were shared with the current account (`false`).
     #   @return [Boolean]
     #
+    # @!attribute [rw] model_status
+    #   The status of them model to filter results by. Possible values
+    #   include:
+    #
+    #   * `Creating` - Include only models that are currently being created
+    #     and validated.
+    #
+    #   * `Active` - Include only models that have been successfully created
+    #     and are ready for use.
+    #
+    #   * `Failed` - Include only models where the creation process failed.
+    #
+    #   If you don't specify a status, the API returns models in all
+    #   states.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListCustomModelsRequest AWS API Documentation
     #
     class ListCustomModelsRequest < Struct.new(
@@ -5519,7 +5664,8 @@ module Aws::Bedrock
       :next_token,
       :sort_by,
       :sort_order,
-      :is_owned)
+      :is_owned,
+      :model_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6638,13 +6784,13 @@ module Aws::Bedrock
     #   Status of the customization job.
     #   @return [String]
     #
-    # @!attribute [rw] last_modified_time
-    #   Time that the customization job was last modified.
-    #   @return [Time]
-    #
     # @!attribute [rw] status_details
     #   Details about the status of the data processing sub-task of the job.
     #   @return [Types::StatusDetails]
+    #
+    # @!attribute [rw] last_modified_time
+    #   Time that the customization job was last modified.
+    #   @return [Time]
     #
     # @!attribute [rw] creation_time
     #   Creation time of the custom model.
@@ -6679,8 +6825,8 @@ module Aws::Bedrock
       :base_model_arn,
       :job_name,
       :status,
-      :last_modified_time,
       :status_details,
+      :last_modified_time,
       :creation_time,
       :end_time,
       :custom_model_arn,
@@ -6690,14 +6836,14 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
-    # Data source for the imported model.
+    # The data source of the model to import.
     #
     # @note ModelDataSource is a union - when making an API calls you must set exactly one of the members.
     #
     # @note ModelDataSource is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ModelDataSource corresponding to the set member.
     #
     # @!attribute [rw] s3_data_source
-    #   The Amazon S3 data source of the imported model.
+    #   The Amazon S3 data source of the model to import.
     #   @return [Types::S3DataSource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ModelDataSource AWS API Documentation
@@ -7727,7 +7873,7 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
-    # The Amazon S3 data source of the imported job.
+    # The Amazon S3 data source of the model to import.
     #
     # @!attribute [rw] s3_uri
     #   The URI of the Amazon S3 data source.

@@ -12,6 +12,9 @@ module Aws::Inspector2
 
     # You do not have sufficient access to perform this action.
     #
+    # For `Enable`, you receive this error if you attempt to use a feature
+    # in an unsupported Amazon Web Services Region.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -152,6 +155,11 @@ module Aws::Inspector2
     #   on Amazon ECR container images.
     #   @return [Types::AwsEcrContainerAggregation]
     #
+    # @!attribute [rw] code_repository_aggregation
+    #   An object that contains details about an aggregation request based
+    #   on code repositories.
+    #   @return [Types::CodeRepositoryAggregation]
+    #
     # @!attribute [rw] ec2_instance_aggregation
     #   An object that contains details about an aggregation request based
     #   on Amazon EC2 instances.
@@ -198,6 +206,7 @@ module Aws::Inspector2
       :account_aggregation,
       :ami_aggregation,
       :aws_ecr_container_aggregation,
+      :code_repository_aggregation,
       :ec2_instance_aggregation,
       :finding_type_aggregation,
       :image_layer_aggregation,
@@ -214,6 +223,7 @@ module Aws::Inspector2
       class AccountAggregation < AggregationRequest; end
       class AmiAggregation < AggregationRequest; end
       class AwsEcrContainerAggregation < AggregationRequest; end
+      class CodeRepositoryAggregation < AggregationRequest; end
       class Ec2InstanceAggregation < AggregationRequest; end
       class FindingTypeAggregation < AggregationRequest; end
       class ImageLayerAggregation < AggregationRequest; end
@@ -244,6 +254,11 @@ module Aws::Inspector2
     #   An object that contains details about an aggregation response based
     #   on Amazon ECR container images.
     #   @return [Types::AwsEcrContainerAggregationResponse]
+    #
+    # @!attribute [rw] code_repository_aggregation
+    #   An object that contains details about an aggregation response based
+    #   on code repositories.
+    #   @return [Types::CodeRepositoryAggregationResponse]
     #
     # @!attribute [rw] ec2_instance_aggregation
     #   An object that contains details about an aggregation response based
@@ -289,6 +304,7 @@ module Aws::Inspector2
       :account_aggregation,
       :ami_aggregation,
       :aws_ecr_container_aggregation,
+      :code_repository_aggregation,
       :ec2_instance_aggregation,
       :finding_type_aggregation,
       :image_layer_aggregation,
@@ -305,6 +321,7 @@ module Aws::Inspector2
       class AccountAggregation < AggregationResponse; end
       class AmiAggregation < AggregationResponse; end
       class AwsEcrContainerAggregation < AggregationResponse; end
+      class CodeRepositoryAggregation < AggregationResponse; end
       class Ec2InstanceAggregation < AggregationResponse; end
       class FindingTypeAggregation < AggregationResponse; end
       class ImageLayerAggregation < AggregationResponse; end
@@ -366,6 +383,27 @@ module Aws::Inspector2
       :affected_instances,
       :ami,
       :severity_counts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about a request to associate a code repository with a
+    # scan configuration.
+    #
+    # @!attribute [rw] resource
+    #   Identifies a specific resource in a code repository that will be
+    #   scanned.
+    #   @return [Types::CodeSecurityResource]
+    #
+    # @!attribute [rw] scan_configuration_arn
+    #   The Amazon Resource Name (ARN) of the scan configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/AssociateConfigurationRequest AWS API Documentation
+    #
+    class AssociateConfigurationRequest < Struct.new(
+      :resource,
+      :scan_configuration_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -434,6 +472,11 @@ module Aws::Inspector2
     # Represents which scan types are automatically enabled for new members
     # of your Amazon Inspector organization.
     #
+    # @!attribute [rw] code_repository
+    #   Represents whether code repository scans are automatically enabled
+    #   for new members of your Amazon Inspector organization.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] ec2
     #   Represents whether Amazon EC2 scans are automatically enabled for
     #   new members of your Amazon Inspector organization.
@@ -452,12 +495,13 @@ module Aws::Inspector2
     #
     # @!attribute [rw] lambda_code
     #   Represents whether Lambda code scans are automatically enabled for
-    #   new members of your Amazon Inspector organization.      </p>
+    #   new members of your Amazon Inspector organization.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/AutoEnable AWS API Documentation
     #
     class AutoEnable < Struct.new(
+      :code_repository,
       :ec2,
       :ecr,
       :lambda,
@@ -845,6 +889,70 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # @!attribute [rw] associate_configuration_requests
+    #   A list of code repositories to associate with the specified scan
+    #   configuration.
+    #   @return [Array<Types::AssociateConfigurationRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/BatchAssociateCodeSecurityScanConfigurationRequest AWS API Documentation
+    #
+    class BatchAssociateCodeSecurityScanConfigurationRequest < Struct.new(
+      :associate_configuration_requests)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failed_associations
+    #   Details of any code repositories that failed to be associated with
+    #   the scan configuration.
+    #   @return [Array<Types::FailedAssociationResult>]
+    #
+    # @!attribute [rw] successful_associations
+    #   Details of code repositories that were successfully associated with
+    #   the scan configuration.
+    #   @return [Array<Types::SuccessfulAssociationResult>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/BatchAssociateCodeSecurityScanConfigurationResponse AWS API Documentation
+    #
+    class BatchAssociateCodeSecurityScanConfigurationResponse < Struct.new(
+      :failed_associations,
+      :successful_associations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] disassociate_configuration_requests
+    #   A list of code repositories to disassociate from the specified scan
+    #   configuration.
+    #   @return [Array<Types::DisassociateConfigurationRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/BatchDisassociateCodeSecurityScanConfigurationRequest AWS API Documentation
+    #
+    class BatchDisassociateCodeSecurityScanConfigurationRequest < Struct.new(
+      :disassociate_configuration_requests)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failed_associations
+    #   Details of any code repositories that failed to be disassociated
+    #   from the scan configuration.
+    #   @return [Array<Types::FailedAssociationResult>]
+    #
+    # @!attribute [rw] successful_associations
+    #   Details of code repositories that were successfully disassociated
+    #   from the scan configuration.
+    #   @return [Array<Types::SuccessfulAssociationResult>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/BatchDisassociateCodeSecurityScanConfigurationResponse AWS API Documentation
+    #
+    class BatchDisassociateCodeSecurityScanConfigurationResponse < Struct.new(
+      :failed_associations,
+      :successful_associations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] account_ids
     #   The 12-digit Amazon Web Services account IDs of the accounts to
     #   retrieve Amazon Inspector status for.
@@ -973,7 +1081,6 @@ module Aws::Inspector2
     # @!attribute [rw] account_ids
     #   The unique identifiers for the Amazon Web Services accounts to
     #   retrieve Amazon Inspector deep inspection activation status for.
-    #   </p>
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/BatchGetMemberEc2DeepInspectionStatusRequest AWS API Documentation
@@ -987,12 +1094,11 @@ module Aws::Inspector2
     # @!attribute [rw] account_ids
     #   An array of objects that provide details on the activation status of
     #   Amazon Inspector deep inspection for each of the requested accounts.
-    #   </p>
     #   @return [Array<Types::MemberAccountEc2DeepInspectionStatusState>]
     #
     # @!attribute [rw] failed_account_ids
     #   An array of objects that provide details on any accounts that failed
-    #   to activate Amazon Inspector deep inspection and why.      </p>
+    #   to activate Amazon Inspector deep inspection and why.
     #   @return [Array<Types::FailedMemberAccountEc2DeepInspectionStatusState>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/BatchGetMemberEc2DeepInspectionStatusResponse AWS API Documentation
@@ -1871,6 +1977,358 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # The details that define an aggregation based on code repositories.
+    #
+    # @!attribute [rw] project_names
+    #   The project names to include in the aggregation results.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] provider_types
+    #   The repository provider types to include in the aggregation results.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] resource_ids
+    #   The resource IDs to include in the aggregation results.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] sort_by
+    #   The value to sort results by in the code repository aggregation.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The order to sort results by (ascending or descending) in the code
+    #   repository aggregation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CodeRepositoryAggregation AWS API Documentation
+    #
+    class CodeRepositoryAggregation < Struct.new(
+      :project_names,
+      :provider_types,
+      :resource_ids,
+      :sort_by,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A response that contains the results of a finding aggregation by code
+    # repository.
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID associated with the code
+    #   repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] exploit_available_active_findings_count
+    #   The number of active findings that have an exploit available for the
+    #   code repository.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fix_available_active_findings_count
+    #   The number of active findings that have a fix available for the code
+    #   repository.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] project_names
+    #   The names of the projects associated with the code repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_type
+    #   The type of repository provider for the code repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The resource ID of the code repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity_counts
+    #   An object that contains the counts of aggregated finding per
+    #   severity.
+    #   @return [Types::SeverityCounts]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CodeRepositoryAggregationResponse AWS API Documentation
+    #
+    class CodeRepositoryAggregationResponse < Struct.new(
+      :account_id,
+      :exploit_available_active_findings_count,
+      :fix_available_active_findings_count,
+      :project_names,
+      :provider_type,
+      :resource_id,
+      :severity_counts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about a code repository associated with a finding.
+    #
+    # @!attribute [rw] integration_arn
+    #   The Amazon Resource Name (ARN) of the code security integration
+    #   associated with the repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project in the code repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_type
+    #   The type of repository provider (such as GitHub, GitLab, etc.).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CodeRepositoryDetails AWS API Documentation
+    #
+    class CodeRepositoryDetails < Struct.new(
+      :integration_arn,
+      :project_name,
+      :provider_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains metadata information about a code repository that is being
+    # scanned by Amazon Inspector.
+    #
+    # @!attribute [rw] integration_arn
+    #   The Amazon Resource Name (ARN) of the code security integration
+    #   associated with the repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_scanned_commit_id
+    #   The ID of the last commit that was scanned in the repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] on_demand_scan
+    #   Information about on-demand scans performed on the repository.
+    #   @return [Types::CodeRepositoryOnDemandScan]
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project in the code repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_type
+    #   The type of repository provider (such as GitHub, GitLab, etc.).
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_type_visibility
+    #   The visibility setting of the repository (public or private).
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_configuration
+    #   The scan configuration settings applied to the code repository.
+    #   @return [Types::ProjectCodeSecurityScanConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CodeRepositoryMetadata AWS API Documentation
+    #
+    class CodeRepositoryMetadata < Struct.new(
+      :integration_arn,
+      :last_scanned_commit_id,
+      :on_demand_scan,
+      :project_name,
+      :provider_type,
+      :provider_type_visibility,
+      :scan_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about on-demand scans performed on a code
+    # repository.
+    #
+    # @!attribute [rw] last_scan_at
+    #   The timestamp when the last on-demand scan was performed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_scanned_commit_id
+    #   The ID of the last commit that was scanned during an on-demand scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_status
+    #   The status of the scan.
+    #   @return [Types::ScanStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CodeRepositoryOnDemandScan AWS API Documentation
+    #
+    class CodeRepositoryOnDemandScan < Struct.new(
+      :last_scan_at,
+      :last_scanned_commit_id,
+      :scan_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of information about a code security integration.
+    #
+    # @!attribute [rw] created_on
+    #   The timestamp when the code security integration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] integration_arn
+    #   The Amazon Resource Name (ARN) of the code security integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_update_on
+    #   The timestamp when the code security integration was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   The name of the code security integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the code security integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the current status of the code security integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the code security integration.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] type
+    #   The type of repository provider for the integration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CodeSecurityIntegrationSummary AWS API Documentation
+    #
+    class CodeSecurityIntegrationSummary < Struct.new(
+      :created_on,
+      :integration_arn,
+      :last_update_on,
+      :name,
+      :status,
+      :status_reason,
+      :tags,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies a specific resource in a code repository that will be
+    # scanned.
+    #
+    # @note CodeSecurityResource is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note CodeSecurityResource is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of CodeSecurityResource corresponding to the set member.
+    #
+    # @!attribute [rw] project_id
+    #   The unique identifier of the project in the code repository.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CodeSecurityResource AWS API Documentation
+    #
+    class CodeSecurityResource < Struct.new(
+      :project_id,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ProjectId < CodeSecurityResource; end
+      class Unknown < CodeSecurityResource; end
+    end
+
+    # Contains the configuration settings for code security scans.
+    #
+    # @!attribute [rw] continuous_integration_scan_configuration
+    #   Configuration settings for continuous integration scans that run
+    #   automatically when code changes are made.
+    #   @return [Types::ContinuousIntegrationScanConfiguration]
+    #
+    # @!attribute [rw] periodic_scan_configuration
+    #   Configuration settings for periodic scans that run on a scheduled
+    #   basis.
+    #   @return [Types::PeriodicScanConfiguration]
+    #
+    # @!attribute [rw] rule_set_categories
+    #   The categories of security rules to be applied during the scan.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CodeSecurityScanConfiguration AWS API Documentation
+    #
+    class CodeSecurityScanConfiguration < Struct.new(
+      :continuous_integration_scan_configuration,
+      :periodic_scan_configuration,
+      :rule_set_categories)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of an association between a code repository and a scan
+    # configuration.
+    #
+    # @!attribute [rw] resource
+    #   Identifies a specific resource in a code repository that will be
+    #   scanned.
+    #   @return [Types::CodeSecurityResource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CodeSecurityScanConfigurationAssociationSummary AWS API Documentation
+    #
+    class CodeSecurityScanConfigurationAssociationSummary < Struct.new(
+      :resource)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of information about a code security scan configuration.
+    #
+    # @!attribute [rw] continuous_integration_scan_supported_events
+    #   The repository events that trigger continuous integration scans.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] frequency_expression
+    #   The schedule expression for periodic scans, in cron format.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the scan configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_account_id
+    #   The Amazon Web Services account ID that owns the scan configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] periodic_scan_frequency
+    #   The frequency at which periodic scans are performed.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_set_categories
+    #   The categories of security rules applied during the scan.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] scan_configuration_arn
+    #   The Amazon Resource Name (ARN) of the scan configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope_settings
+    #   The scope settings that define which repositories will be scanned.
+    #   If the `ScopeSetting` parameter is `ALL` the scan configuration
+    #   applies to all existing and future projects imported into Amazon
+    #   Inspector.
+    #   @return [Types::ScopeSettings]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the scan configuration.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CodeSecurityScanConfigurationSummary AWS API Documentation
+    #
+    class CodeSecurityScanConfigurationSummary < Struct.new(
+      :continuous_integration_scan_supported_events,
+      :frequency_expression,
+      :name,
+      :owner_account_id,
+      :periodic_scan_frequency,
+      :rule_set_categories,
+      :scan_configuration_arn,
+      :scope_settings,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about any errors encountered while trying to
     # retrieve a code snippet.
     #
@@ -2033,7 +2491,8 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # A conflict occurred.
+    # A conflict occurred. This exception occurs when the same resource is
+    # being modified by concurrent requests.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2052,6 +2511,22 @@ module Aws::Inspector2
       :message,
       :resource_id,
       :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration settings for continuous integration scans that run
+    # automatically when code changes are made.
+    #
+    # @!attribute [rw] supported_events
+    #   The repository events that trigger continuous integration scans,
+    #   such as pull requests or commits.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ContinuousIntegrationScanConfiguration AWS API Documentation
+    #
+    class ContinuousIntegrationScanConfiguration < Struct.new(
+      :supported_events)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2105,6 +2580,20 @@ module Aws::Inspector2
     #   statistics for.
     #   @return [Array<Types::CoverageStringFilter>]
     #
+    # @!attribute [rw] code_repository_project_name
+    #   Filter criteria for code repositories based on project name.
+    #   @return [Array<Types::CoverageStringFilter>]
+    #
+    # @!attribute [rw] code_repository_provider_type
+    #   Filter criteria for code repositories based on provider type (such
+    #   as GitHub, GitLab, etc.).
+    #   @return [Array<Types::CoverageStringFilter>]
+    #
+    # @!attribute [rw] code_repository_provider_type_visibility
+    #   Filter criteria for code repositories based on visibility setting
+    #   (public or private).
+    #   @return [Array<Types::CoverageStringFilter>]
+    #
     # @!attribute [rw] ec2_instance_tags
     #   The Amazon EC2 instance tags to filter on.
     #   @return [Array<Types::CoverageMapFilter>]
@@ -2150,6 +2639,11 @@ module Aws::Inspector2
     #   time range.
     #   @return [Array<Types::CoverageDateFilter>]
     #
+    # @!attribute [rw] last_scanned_commit_id
+    #   Filter criteria for code repositories based on the ID of the last
+    #   scanned commit.
+    #   @return [Array<Types::CoverageStringFilter>]
+    #
     # @!attribute [rw] resource_id
     #   An array of Amazon Web Services resource IDs to return coverage
     #   statistics for.
@@ -2187,6 +2681,9 @@ module Aws::Inspector2
     #
     class CoverageFilterCriteria < Struct.new(
       :account_id,
+      :code_repository_project_name,
+      :code_repository_provider_type,
+      :code_repository_provider_type_visibility,
       :ec2_instance_tags,
       :ecr_image_in_use_count,
       :ecr_image_last_in_use_at,
@@ -2197,6 +2694,7 @@ module Aws::Inspector2
       :lambda_function_runtime,
       :lambda_function_tags,
       :last_scanned_at,
+      :last_scanned_commit_id,
       :resource_id,
       :resource_type,
       :scan_mode,
@@ -2383,6 +2881,108 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # @!attribute [rw] details
+    #   The integration details specific to the repository provider type.
+    #   @return [Types::CreateIntegrationDetail]
+    #
+    # @!attribute [rw] name
+    #   The name of the code security integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to apply to the code security integration.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] type
+    #   The type of repository provider for the integration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CreateCodeSecurityIntegrationRequest AWS API Documentation
+    #
+    class CreateCodeSecurityIntegrationRequest < Struct.new(
+      :details,
+      :name,
+      :tags,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] authorization_url
+    #   The URL used to authorize the integration with the repository
+    #   provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_arn
+    #   The Amazon Resource Name (ARN) of the created code security
+    #   integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the code security integration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CreateCodeSecurityIntegrationResponse AWS API Documentation
+    #
+    class CreateCodeSecurityIntegrationResponse < Struct.new(
+      :authorization_url,
+      :integration_arn,
+      :status)
+      SENSITIVE = [:authorization_url]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration
+    #   The configuration settings for the code security scan.
+    #   @return [Types::CodeSecurityScanConfiguration]
+    #
+    # @!attribute [rw] level
+    #   The security level for the scan configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the scan configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope_settings
+    #   The scope settings that define which repositories will be scanned.
+    #   Include this parameter to create a default scan configuration.
+    #   Otherwise Amazon Inspector creates a general scan configuration.
+    #
+    #   A default scan configuration automatically applies to all existing
+    #   and future projects imported into Amazon Inspector. Use the
+    #   `BatchAssociateCodeSecurityScanConfiguration` operation to associate
+    #   a general scan configuration with projects.
+    #   @return [Types::ScopeSettings]
+    #
+    # @!attribute [rw] tags
+    #   The tags to apply to the scan configuration.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CreateCodeSecurityScanConfigurationRequest AWS API Documentation
+    #
+    class CreateCodeSecurityScanConfigurationRequest < Struct.new(
+      :configuration,
+      :level,
+      :name,
+      :scope_settings,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scan_configuration_arn
+    #   The Amazon Resource Name (ARN) of the created scan configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CreateCodeSecurityScanConfigurationResponse AWS API Documentation
+    #
+    class CreateCodeSecurityScanConfigurationResponse < Struct.new(
+      :scan_configuration_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] action
     #   Defines the action that is to be applied to the findings that match
     #   the filter.
@@ -2467,6 +3067,50 @@ module Aws::Inspector2
       :report_id)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Contains details required to create an integration with a self-managed
+    # GitLab instance.
+    #
+    # @!attribute [rw] access_token
+    #   The personal access token used to authenticate with the self-managed
+    #   GitLab instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_url
+    #   The URL of the self-managed GitLab instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CreateGitLabSelfManagedIntegrationDetail AWS API Documentation
+    #
+    class CreateGitLabSelfManagedIntegrationDetail < Struct.new(
+      :access_token,
+      :instance_url)
+      SENSITIVE = [:access_token, :instance_url]
+      include Aws::Structure
+    end
+
+    # Contains details required to create a code security integration with a
+    # specific repository provider.
+    #
+    # @note CreateIntegrationDetail is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] gitlab_self_managed
+    #   Details specific to creating an integration with a self-managed
+    #   GitLab instance.
+    #   @return [Types::CreateGitLabSelfManagedIntegrationDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CreateIntegrationDetail AWS API Documentation
+    #
+    class CreateIntegrationDetail < Struct.new(
+      :gitlab_self_managed,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class GitlabSelfManaged < CreateIntegrationDetail; end
+      class Unknown < CreateIntegrationDetail; end
     end
 
     # @!attribute [rw] report_format
@@ -2733,6 +3377,56 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # @!attribute [rw] integration_arn
+    #   The Amazon Resource Name (ARN) of the code security integration to
+    #   delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/DeleteCodeSecurityIntegrationRequest AWS API Documentation
+    #
+    class DeleteCodeSecurityIntegrationRequest < Struct.new(
+      :integration_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] integration_arn
+    #   The Amazon Resource Name (ARN) of the deleted code security
+    #   integration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/DeleteCodeSecurityIntegrationResponse AWS API Documentation
+    #
+    class DeleteCodeSecurityIntegrationResponse < Struct.new(
+      :integration_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scan_configuration_arn
+    #   The Amazon Resource Name (ARN) of the scan configuration to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/DeleteCodeSecurityScanConfigurationRequest AWS API Documentation
+    #
+    class DeleteCodeSecurityScanConfigurationRequest < Struct.new(
+      :scan_configuration_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scan_configuration_arn
+    #   The Amazon Resource Name (ARN) of the deleted scan configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/DeleteCodeSecurityScanConfigurationResponse AWS API Documentation
+    #
+    class DeleteCodeSecurityScanConfigurationResponse < Struct.new(
+      :scan_configuration_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] arn
     #   The Amazon Resource Number (ARN) of the filter to be deleted.
     #   @return [String]
@@ -2867,6 +3561,28 @@ module Aws::Inspector2
     class DisableResponse < Struct.new(
       :accounts,
       :failed_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about a request to disassociate a code repository
+    # from a scan configuration.
+    #
+    # @!attribute [rw] resource
+    #   Identifies a specific resource in a code repository that will be
+    #   scanned.
+    #   @return [Types::CodeSecurityResource]
+    #
+    # @!attribute [rw] scan_configuration_arn
+    #   The Amazon Resource Name (ARN) of the scan configuration to
+    #   disassociate from a code repository.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/DisassociateConfigurationRequest AWS API Documentation
+    #
+    class DisassociateConfigurationRequest < Struct.new(
+      :resource,
+      :scan_configuration_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3168,7 +3884,7 @@ module Aws::Inspector2
     #   @return [String]
     #
     # @!attribute [rw] rescan_duration
-    #   The rescan duration configured for image push date.      </p>
+    #   The rescan duration configured for image push date.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -3396,6 +4112,39 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # Details about a failed attempt to associate or disassociate a code
+    # repository with a scan configuration.
+    #
+    # @!attribute [rw] resource
+    #   Identifies a specific resource in a code repository that will be
+    #   scanned.
+    #   @return [Types::CodeSecurityResource]
+    #
+    # @!attribute [rw] scan_configuration_arn
+    #   The Amazon Resource Name (ARN) of the scan configuration that failed
+    #   to be associated or disassociated.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_code
+    #   The status code indicating why the association or disassociation
+    #   failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   A message explaining why the association or disassociation failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/FailedAssociationResult AWS API Documentation
+    #
+    class FailedAssociationResult < Struct.new(
+      :resource,
+      :scan_configuration_arn,
+      :status_code,
+      :status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that contains details about a member account in your
     # organization that failed to activate Amazon Inspector deep inspection.
     #
@@ -3491,6 +4240,16 @@ module Aws::Inspector2
     # @!attribute [rw] aws_account_id
     #   Details of the Amazon Web Services account IDs used to filter
     #   findings.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] code_repository_project_name
+    #   Filter criteria for findings based on the project name in a code
+    #   repository.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] code_repository_provider_type
+    #   Filter criteria for findings based on the repository provider type
+    #   (such as GitHub, GitLab, etc.).
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] code_vulnerability_detector_name
@@ -3708,6 +4467,8 @@ module Aws::Inspector2
     #
     class FilterCriteria < Struct.new(
       :aws_account_id,
+      :code_repository_project_name,
+      :code_repository_provider_type,
       :code_vulnerability_detector_name,
       :code_vulnerability_detector_tags,
       :code_vulnerability_file_path,
@@ -4271,6 +5032,206 @@ module Aws::Inspector2
     class GetClustersForImageResponse < Struct.new(
       :cluster,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] integration_arn
+    #   The Amazon Resource Name (ARN) of the code security integration to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the code security integration.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetCodeSecurityIntegrationRequest AWS API Documentation
+    #
+    class GetCodeSecurityIntegrationRequest < Struct.new(
+      :integration_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] authorization_url
+    #   The URL used to authorize the integration with the repository
+    #   provider. This is only returned if reauthorization is required to
+    #   fix a connection issue. Otherwise, it is null.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_on
+    #   The timestamp when the code security integration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] integration_arn
+    #   The Amazon Resource Name (ARN) of the code security integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_update_on
+    #   The timestamp when the code security integration was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   The name of the code security integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the code security integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the current status of the code security integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the code security integration.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] type
+    #   The type of repository provider for the integration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetCodeSecurityIntegrationResponse AWS API Documentation
+    #
+    class GetCodeSecurityIntegrationResponse < Struct.new(
+      :authorization_url,
+      :created_on,
+      :integration_arn,
+      :last_update_on,
+      :name,
+      :status,
+      :status_reason,
+      :tags,
+      :type)
+      SENSITIVE = [:authorization_url]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scan_configuration_arn
+    #   The Amazon Resource Name (ARN) of the scan configuration to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetCodeSecurityScanConfigurationRequest AWS API Documentation
+    #
+    class GetCodeSecurityScanConfigurationRequest < Struct.new(
+      :scan_configuration_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration
+    #   The configuration settings for the code security scan.
+    #   @return [Types::CodeSecurityScanConfiguration]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the scan configuration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp when the scan configuration was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] level
+    #   The security level for the scan configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the scan configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_configuration_arn
+    #   The Amazon Resource Name (ARN) of the scan configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope_settings
+    #   The scope settings that define which repositories will be scanned.
+    #   If the `ScopeSetting` parameter is `ALL` the scan configuration
+    #   applies to all existing and future projects imported into Amazon
+    #   Inspector.
+    #   @return [Types::ScopeSettings]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the scan configuration.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetCodeSecurityScanConfigurationResponse AWS API Documentation
+    #
+    class GetCodeSecurityScanConfigurationResponse < Struct.new(
+      :configuration,
+      :created_at,
+      :last_updated_at,
+      :level,
+      :name,
+      :scan_configuration_arn,
+      :scope_settings,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource
+    #   The resource identifier for the code repository that was scanned.
+    #   @return [Types::CodeSecurityResource]
+    #
+    # @!attribute [rw] scan_id
+    #   The unique identifier of the scan to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetCodeSecurityScanRequest AWS API Documentation
+    #
+    class GetCodeSecurityScanRequest < Struct.new(
+      :resource,
+      :scan_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID associated with the scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the scan was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_commit_id
+    #   The identifier of the last commit that was scanned. This is only
+    #   returned if the scan was successful or skipped.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The resource identifier for the code repository that was scanned.
+    #   @return [Types::CodeSecurityResource]
+    #
+    # @!attribute [rw] scan_id
+    #   The unique identifier of the scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the current status of the scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the scan was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetCodeSecurityScanResponse AWS API Documentation
+    #
+    class GetCodeSecurityScanResponse < Struct.new(
+      :account_id,
+      :created_at,
+      :last_commit_id,
+      :resource,
+      :scan_id,
+      :status,
+      :status_reason,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5209,6 +6170,142 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the NextToken value returned from
+    #   the previous request to continue listing results after the first
+    #   page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListCodeSecurityIntegrationsRequest AWS API Documentation
+    #
+    class ListCodeSecurityIntegrationsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] integrations
+    #   A list of code security integration summaries.
+    #   @return [Array<Types::CodeSecurityIntegrationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the NextToken value returned from
+    #   the previous request to continue listing results after the first
+    #   page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListCodeSecurityIntegrationsResponse AWS API Documentation
+    #
+    class ListCodeSecurityIntegrationsResponse < Struct.new(
+      :integrations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response. If your
+    #   request would return more than the maximum the response will return
+    #   a `nextToken` value, use this value when you call the action again
+    #   to get the remaining results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request to a list action. For subsequent calls, use the `NextToken`
+    #   value returned from the previous request to continue listing results
+    #   after the first page.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_configuration_arn
+    #   The Amazon Resource Name (ARN) of the scan configuration to list
+    #   associations for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListCodeSecurityScanConfigurationAssociationsRequest AWS API Documentation
+    #
+    class ListCodeSecurityScanConfigurationAssociationsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :scan_configuration_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] associations
+    #   A list of associations between code repositories and scan
+    #   configurations.
+    #   @return [Array<Types::CodeSecurityScanConfigurationAssociationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request to a list action. For subsequent calls, use the `NextToken`
+    #   value returned from the previous request to continue listing results
+    #   after the first page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListCodeSecurityScanConfigurationAssociationsResponse AWS API Documentation
+    #
+    class ListCodeSecurityScanConfigurationAssociationsResponse < Struct.new(
+      :associations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the NextToken value returned from
+    #   the previous request to continue listing results after the first
+    #   page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListCodeSecurityScanConfigurationsRequest AWS API Documentation
+    #
+    class ListCodeSecurityScanConfigurationsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configurations
+    #   A list of code security scan configuration summaries.
+    #   @return [Array<Types::CodeSecurityScanConfigurationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the NextToken value returned from
+    #   the previous request to continue listing results after the first
+    #   page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListCodeSecurityScanConfigurationsResponse AWS API Documentation
+    #
+    class ListCodeSecurityScanConfigurationsResponse < Struct.new(
+      :configurations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] filter_criteria
     #   An object that contains details on the filters to apply to the
     #   coverage data for your environment.
@@ -6019,6 +7116,32 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # Configuration settings for periodic scans that run on a scheduled
+    # basis.
+    #
+    # @!attribute [rw] frequency
+    #   The frequency at which periodic scans are performed (such as weekly
+    #   or monthly).
+    #
+    #   If you don't provide the `frequencyExpression` Amazon Inspector
+    #   chooses day for the scan to run. If you provide the
+    #   `frequencyExpression`, the schedule must match the specified
+    #   `frequency`.
+    #   @return [String]
+    #
+    # @!attribute [rw] frequency_expression
+    #   The schedule expression for periodic scans, in cron format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/PeriodicScanConfiguration AWS API Documentation
+    #
+    class PeriodicScanConfiguration < Struct.new(
+      :frequency,
+      :frequency_expression)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information on the permissions an account has within Amazon
     # Inspector.
     #
@@ -6074,6 +7197,71 @@ module Aws::Inspector2
     class PortRangeFilter < Struct.new(
       :begin_inclusive,
       :end_inclusive)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the scan configuration settings applied to a specific project
+    # in a code repository.
+    #
+    # @!attribute [rw] continuous_integration_scan_configurations
+    #   The continuous integration scan configurations applied to the
+    #   project.
+    #   @return [Array<Types::ProjectContinuousIntegrationScanConfiguration>]
+    #
+    # @!attribute [rw] periodic_scan_configurations
+    #   The periodic scan configurations applied to the project.
+    #   @return [Array<Types::ProjectPeriodicScanConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ProjectCodeSecurityScanConfiguration AWS API Documentation
+    #
+    class ProjectCodeSecurityScanConfiguration < Struct.new(
+      :continuous_integration_scan_configurations,
+      :periodic_scan_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the continuous integration scan configuration settings
+    # applied to a specific project.
+    #
+    # @!attribute [rw] rule_set_categories
+    #   The categories of security rules applied during continuous
+    #   integration scans for the project.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] supported_event
+    #   The repository event that triggers continuous integration scans for
+    #   the project.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ProjectContinuousIntegrationScanConfiguration AWS API Documentation
+    #
+    class ProjectContinuousIntegrationScanConfiguration < Struct.new(
+      :rule_set_categories,
+      :supported_event)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the periodic scan configuration settings applied to a
+    # specific project.
+    #
+    # @!attribute [rw] frequency_expression
+    #   The schedule expression for periodic scans, in cron format, applied
+    #   to the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_set_categories
+    #   The categories of security rules applied during periodic scans for
+    #   the project.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ProjectPeriodicScanConfiguration AWS API Documentation
+    #
+    class ProjectPeriodicScanConfiguration < Struct.new(
+      :frequency_expression,
+      :rule_set_categories)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6246,12 +7434,18 @@ module Aws::Inspector2
     #   function affected by a finding.
     #   @return [Types::AwsLambdaFunctionDetails]
     #
+    # @!attribute [rw] code_repository
+    #   Contains details about a code repository resource associated with a
+    #   finding.
+    #   @return [Types::CodeRepositoryDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ResourceDetails AWS API Documentation
     #
     class ResourceDetails < Struct.new(
       :aws_ec2_instance,
       :aws_ecr_container_image,
-      :aws_lambda_function)
+      :aws_lambda_function,
+      :code_repository)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6349,6 +7543,11 @@ module Aws::Inspector2
     # An object that contains details about the metadata for an Amazon ECR
     # resource.
     #
+    # @!attribute [rw] code_repository
+    #   Contains metadata about scan coverage for a code repository
+    #   resource.
+    #   @return [Types::CodeRepositoryMetadata]
+    #
     # @!attribute [rw] ec2
     #   An object that contains metadata details for an Amazon EC2 instance.
     #   @return [Types::Ec2Metadata]
@@ -6371,6 +7570,7 @@ module Aws::Inspector2
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ResourceScanMetadata AWS API Documentation
     #
     class ResourceScanMetadata < Struct.new(
+      :code_repository,
       :ec2,
       :ecr_image,
       :ecr_repository,
@@ -6381,6 +7581,11 @@ module Aws::Inspector2
 
     # Details the state of Amazon Inspector for each resource type Amazon
     # Inspector scans.
+    #
+    # @!attribute [rw] code_repository
+    #   An object that described the state of Amazon Inspector scans for an
+    #   account.
+    #   @return [Types::State]
     #
     # @!attribute [rw] ec2
     #   An object detailing the state of Amazon Inspector scanning for
@@ -6405,6 +7610,7 @@ module Aws::Inspector2
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ResourceState AWS API Documentation
     #
     class ResourceState < Struct.new(
+      :code_repository,
       :ec2,
       :ecr,
       :lambda,
@@ -6415,6 +7621,10 @@ module Aws::Inspector2
 
     # Details the status of Amazon Inspector for each resource type Amazon
     # Inspector scans.
+    #
+    # @!attribute [rw] code_repository
+    #   The status of Amazon Inspector scanning for code repositories.
+    #   @return [String]
     #
     # @!attribute [rw] ec2
     #   The status of Amazon Inspector scanning for Amazon EC2 resources.
@@ -6437,6 +7647,7 @@ module Aws::Inspector2
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ResourceStatus AWS API Documentation
     #
     class ResourceStatus < Struct.new(
+      :code_repository,
       :ec2,
       :ecr,
       :lambda,
@@ -6469,16 +7680,95 @@ module Aws::Inspector2
     # @!attribute [rw] reason
     #   The scan status. Possible return values and descriptions are:
     #
-    #   `PENDING_INITIAL_SCAN` - This resource has been identified for
-    #   scanning, results will be available soon.
-    #
     #   `ACCESS_DENIED` - Resource access policy restricting Amazon
     #   Inspector access. Please update the IAM policy.
+    #
+    #   `ACCESS_DENIED_TO_ENCRYPTION_KEY` - The KMS key policy doesn't
+    #   allow Amazon Inspector access. Update the key policy.
+    #
+    #   `DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED` - Amazon Inspector
+    #   failed to extract the package inventory because the package
+    #   collection time exceeding the maximum threshold of 15 minutes.
+    #
+    #   `DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED` - The SSM agent
+    #   couldn't send inventory to Amazon Inspector because the SSM quota
+    #   for Inventory data collected per instance per day has already been
+    #   reached for this instance.
+    #
+    #   `DEEP_INSPECTION_NO_INVENTORY` - The Amazon Inspector plugin hasn't
+    #   yet been able to collect an inventory of packages for this instance.
+    #   This is usually the result of a pending scan, however, if this
+    #   status persists after 6 hours, use SSM to ensure that the required
+    #   Amazon Inspector associations exist and are running for the
+    #   instance.
+    #
+    #   `DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED` - The instance
+    #   has exceeded the 5000 package limit for Amazon Inspector Deep
+    #   inspection. To resume Deep inspection for this instance you can try
+    #   to adjust the custom paths associated with the account.
+    #
+    #   `EC2_INSTANCE_STOPPED` - This EC2 instance is in a stopped state,
+    #   therefore, Amazon Inspector will pause scanning. The existing
+    #   findings will continue to exist until the instance is terminated.
+    #   Once the instance is re-started, Inspector will automatically start
+    #   scanning the instance again. Please note that you will not be
+    #   charged for this instance while it's in a stopped state.
+    #
+    #   `EXCLUDED_BY_TAG` - This resource was not scanned because it has
+    #   been excluded by a tag.
+    #
+    #   `IMAGE_SIZE_EXCEEDED` - Reserved for future use.
+    #
+    #   `INTEGRATION_CONNNECTION_LOST` - Amazon Inspector couldn't
+    #   communicate with the source code management platform.
     #
     #   `INTERNAL_ERROR` - Amazon Inspector has encountered an internal
     #   error for this resource. Amazon Inspector service will automatically
     #   resolve the issue and resume the scanning. No action required from
     #   the user.
+    #
+    #   `NO INVENTORY` - Amazon Inspector couldn't find software
+    #   application inventory to scan for vulnerabilities. This might be
+    #   caused due to required Amazon Inspector associations being deleted
+    #   or failing to run on your resource. Please verify the status of
+    #   `InspectorInventoryCollection-do-not-delete` association in the SSM
+    #   console for the resource. Additionally, you can verify the
+    #   instance's inventory in the SSM Fleet Manager console.
+    #
+    #   `NO_RESOURCES_FOUND` - Reserved for future use.
+    #
+    #   `NO_SCAN_CONFIGURATION_ASSOCIATED` - The code repository resource
+    #   doesn't have an associated scan configuration.
+    #
+    #   `PENDING_DISABLE` - This resource is pending cleanup during
+    #   disablement. The customer will not be billed while a resource is in
+    #   the pending disable status.
+    #
+    #   `PENDING_INITIAL_SCAN` - This resource has been identified for
+    #   scanning, results will be available soon.
+    #
+    #   `RESOURCE_TERMINATED` - This resource has been terminated. The
+    #   findings and coverage associated with this resource are in the
+    #   process of being cleaned up.
+    #
+    #   `SCAN_ELIGIBILITY_EXPIRED` - The configured scan duration has lapsed
+    #   for this image.
+    #
+    #   `SCAN_FREQUENCY_MANUAL` - This image will not be covered by Amazon
+    #   Inspector due to the repository scan frequency configuration.
+    #
+    #   `SCAN_FREQUENCY_SCAN_ON_PUSH` - This image will be scanned one time
+    #   and will not new findings because of the scan frequency
+    #   configuration.
+    #
+    #   `SCAN_IN_PROGRESS` - The resource is currently being scanned.
+    #
+    #   `STALE_INVENTORY` - Amazon Inspector wasn't able to collect an
+    #   updated software application inventory in the last 7 days. Please
+    #   confirm the required Amazon Inspector associations still exist and
+    #   you can still see an updated inventory in the SSM console.
+    #
+    #   `SUCCESSFUL` - The scan was successful.
     #
     #   `UNMANAGED_EC2_INSTANCE` - The EC2 instance is not managed by SSM,
     #   please use the following SSM automation to remediate the issue:
@@ -6486,92 +7776,25 @@ module Aws::Inspector2
     #   Once the instance becomes managed by SSM, Inspector will
     #   automatically begin scanning this instance.
     #
+    #   `UNSUPPORTED_CONFIG_FILE` - Reserved for future use.
+    #
+    #   `UNSUPPORTED_LANGUAGE` - The scan was unsuccessful because the
+    #   repository contains files in an unsupported programming language.
+    #
+    #   `UNSUPPORTED_MEDIA_TYPE `- The ECR image has an unsupported media
+    #   type.
+    #
     #   `UNSUPPORTED_OS` - Amazon Inspector does not support this OS,
     #   architecture, or image manifest type at this time. To see a complete
     #   list of supported operating systems see:
     #   [https://docs.aws.amazon.com/inspector/latest/user/supported.html](
     #   https://docs.aws.amazon.com/inspector/latest/user/supported.html).
     #
-    #   `SCAN_ELIGIBILITY_EXPIRED` - The configured scan duration has lapsed
-    #   for this image.
-    #
-    #   `RESOURCE_TERMINATED` - This resource has been terminated. The
-    #   findings and coverage associated with this resource are in the
-    #   process of being cleaned up.
-    #
-    #   `SUCCESSFUL` - The scan was successful.
-    #
-    #   `NO_RESOURCES_FOUND` - Reserved for future use.
-    #
-    #   `IMAGE_SIZE_EXCEEDED` - Reserved for future use.
-    #
-    #   `SCAN_FREQUENCY_MANUAL` - This image will not be covered by Amazon
-    #   Inspector due to the repository scan frequency configuration.
-    #
-    #   `SCAN_FREQUENCY_SCAN_ON_PUSH `- This image will be scanned one time
-    #   and will not new findings because of the scan frequency
-    #   configuration.
-    #
-    #   `EC2_INSTANCE_STOPPED` - This EC2 instance is in a stopped state,
-    #   therefore, Amazon Inspector will pause scanning. The existing
-    #   findings will continue to exist until the instance is terminated.
-    #   Once the instance is re-started, Inspector will automatically start
-    #   scanning the instance again. Please note that you will not be
-    #   charged for this instance while it’s in a stopped state.
-    #
-    #   `PENDING_DISABLE` - This resource is pending cleanup during
-    #   disablement. The customer will not be billed while a resource is in
-    #   the pending disable status.
-    #
-    #   `NO INVENTORY` - Amazon Inspector couldn’t find software application
-    #   inventory to scan for vulnerabilities. This might be caused due to
-    #   required Amazon Inspector associations being deleted or failing to
-    #   run on your resource. Please verify the status of
-    #   `InspectorInventoryCollection-do-not-delete` association in the SSM
-    #   console for the resource. Additionally, you can verify the
-    #   instance’s inventory in the SSM Fleet Manager console.
-    #
-    #   `STALE_INVENTORY` - Amazon Inspector wasn’t able to collect an
-    #   updated software application inventory in the last 7 days. Please
-    #   confirm the required Amazon Inspector associations still exist and
-    #   you can still see an updated inventory in the SSM console.
-    #
-    #   `EXCLUDED_BY_TAG` - This resource was not scanned because it has
-    #   been excluded by a tag.
-    #
     #   `UNSUPPORTED_RUNTIME` - The function was not scanned because it has
     #   an unsupported runtime. To see a complete list of supported runtimes
     #   see:
     #   [https://docs.aws.amazon.com/inspector/latest/user/supported.html](
     #   https://docs.aws.amazon.com/inspector/latest/user/supported.html).
-    #
-    #   `UNSUPPORTED_MEDIA_TYPE `- The ECR image has an unsupported media
-    #   type.
-    #
-    #   `UNSUPPORTED_CONFIG_FILE` - Reserved for future use.
-    #
-    #   `DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED` - The instance
-    #   has exceeded the 5000 package limit for Amazon Inspector Deep
-    #   inspection. To resume Deep inspection for this instance you can try
-    #   to adjust the custom paths associated with the account.
-    #
-    #   `DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED` - The SSM agent
-    #   couldn't send inventory to Amazon Inspector because the SSM quota
-    #   for Inventory data collected per instance per day has already been
-    #   reached for this instance.
-    #
-    #   `DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED` - Amazon Inspector
-    #   failed to extract the package inventory because the package
-    #   collection time exceeding the maximum threshold of 15 minutes.
-    #
-    #   `DEEP_INSPECTION_NO_INVENTORY` The Amazon Inspector plugin hasn't
-    #   yet been able to collect an inventory of packages for this instance.
-    #   This is usually the result of a pending scan, however, if this
-    #   status persists after 6 hours, use SSM to ensure that the required
-    #   Amazon Inspector associations exist and are running for the
-    #   instance.
-    #
-    #
     #
     #
     #
@@ -6630,6 +7853,24 @@ module Aws::Inspector2
       class OneTime < Schedule; end
       class Weekly < Schedule; end
       class Unknown < Schedule; end
+    end
+
+    # Defines the scope of repositories to be included in code security
+    # scans.
+    #
+    # @!attribute [rw] project_selection_scope
+    #   The scope of projects to be selected for scanning within the
+    #   integrated repositories. Setting the value to `ALL` applies the
+    #   scope settings to all existing and future projects imported into
+    #   Amazon Inspector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ScopeSettings AWS API Documentation
+    #
+    class ScopeSettings < Struct.new(
+      :project_selection_scope)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # Details on the criteria used to define the filter for a vulnerability
@@ -6836,6 +8077,44 @@ module Aws::Inspector2
     #
     class StartCisSessionResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The resource identifier for the code repository to scan.
+    #   @return [Types::CodeSecurityResource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/StartCodeSecurityScanRequest AWS API Documentation
+    #
+    class StartCodeSecurityScanRequest < Struct.new(
+      :client_token,
+      :resource)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scan_id
+    #   The unique identifier of the initiated scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the initiated scan.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/StartCodeSecurityScanResponse AWS API Documentation
+    #
+    class StartCodeSecurityScanResponse < Struct.new(
+      :scan_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that described the state of Amazon Inspector scans for an
     # account.
     #
@@ -7041,6 +8320,28 @@ module Aws::Inspector2
     class StringFilter < Struct.new(
       :comparison,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about a successful association or disassociation between a
+    # code repository and a scan configuration.
+    #
+    # @!attribute [rw] resource
+    #   Identifies a specific resource in a code repository that will be
+    #   scanned.
+    #   @return [Types::CodeSecurityResource]
+    #
+    # @!attribute [rw] scan_configuration_arn
+    #   The Amazon Resource Name (ARN) of the scan configuration that was
+    #   successfully associated or disassociated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/SuccessfulAssociationResult AWS API Documentation
+    #
+    class SuccessfulAssociationResult < Struct.new(
+      :resource,
+      :scan_configuration_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7301,6 +8602,72 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # @!attribute [rw] details
+    #   The updated integration details specific to the repository provider
+    #   type.
+    #   @return [Types::UpdateIntegrationDetails]
+    #
+    # @!attribute [rw] integration_arn
+    #   The Amazon Resource Name (ARN) of the code security integration to
+    #   update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateCodeSecurityIntegrationRequest AWS API Documentation
+    #
+    class UpdateCodeSecurityIntegrationRequest < Struct.new(
+      :details,
+      :integration_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] integration_arn
+    #   The Amazon Resource Name (ARN) of the updated code security
+    #   integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the updated code security integration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateCodeSecurityIntegrationResponse AWS API Documentation
+    #
+    class UpdateCodeSecurityIntegrationResponse < Struct.new(
+      :integration_arn,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration
+    #   The updated configuration settings for the code security scan.
+    #   @return [Types::CodeSecurityScanConfiguration]
+    #
+    # @!attribute [rw] scan_configuration_arn
+    #   The Amazon Resource Name (ARN) of the scan configuration to update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateCodeSecurityScanConfigurationRequest AWS API Documentation
+    #
+    class UpdateCodeSecurityScanConfigurationRequest < Struct.new(
+      :configuration,
+      :scan_configuration_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scan_configuration_arn
+    #   The Amazon Resource Name (ARN) of the updated scan configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateCodeSecurityScanConfigurationResponse AWS API Documentation
+    #
+    class UpdateCodeSecurityScanConfigurationResponse < Struct.new(
+      :scan_configuration_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] ec2_configuration
     #   Specifies how the Amazon EC2 automated scan will be updated for your
     #   environment.
@@ -7454,6 +8821,72 @@ module Aws::Inspector2
       :arn)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Contains details required to update an integration with GitHub.
+    #
+    # @!attribute [rw] code
+    #   The authorization code received from GitHub to update the
+    #   integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] installation_id
+    #   The installation ID of the GitHub App associated with the
+    #   integration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateGitHubIntegrationDetail AWS API Documentation
+    #
+    class UpdateGitHubIntegrationDetail < Struct.new(
+      :code,
+      :installation_id)
+      SENSITIVE = [:code]
+      include Aws::Structure
+    end
+
+    # Contains details required to update an integration with a self-managed
+    # GitLab instance.
+    #
+    # @!attribute [rw] auth_code
+    #   The authorization code received from the self-managed GitLab
+    #   instance to update the integration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateGitLabSelfManagedIntegrationDetail AWS API Documentation
+    #
+    class UpdateGitLabSelfManagedIntegrationDetail < Struct.new(
+      :auth_code)
+      SENSITIVE = [:auth_code]
+      include Aws::Structure
+    end
+
+    # Contains details required to update a code security integration with a
+    # specific repository provider.
+    #
+    # @note UpdateIntegrationDetails is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] github
+    #   Details specific to updating an integration with GitHub.
+    #   @return [Types::UpdateGitHubIntegrationDetail]
+    #
+    # @!attribute [rw] gitlab_self_managed
+    #   Details specific to updating an integration with a self-managed
+    #   GitLab instance.
+    #   @return [Types::UpdateGitLabSelfManagedIntegrationDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateIntegrationDetails AWS API Documentation
+    #
+    class UpdateIntegrationDetails < Struct.new(
+      :github,
+      :gitlab_self_managed,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Github < UpdateIntegrationDetails; end
+      class GitlabSelfManaged < UpdateIntegrationDetails; end
+      class Unknown < UpdateIntegrationDetails; end
     end
 
     # @!attribute [rw] org_package_paths

@@ -5382,6 +5382,45 @@ module Aws::ECS
     # are part of a service, if the task reports as unhealthy then the task
     # will be stopped and the service scheduler will replace it.
     #
+    # When a container health check fails for a task that is part of a
+    # service, the following process occurs:
+    #
+    # 1.  The task is marked as `UNHEALTHY`.
+    #
+    # 2.  The unhealthy task will be stopped, and during the stopping
+    #     process, it will go through the following states:
+    #
+    #     * `DEACTIVATING` - In this state, Amazon ECS performs additional
+    #       steps before stopping the task. For example, for tasks that are
+    #       part of services configured to use Elastic Load Balancing target
+    #       groups, target groups will be deregistered in this state.
+    #
+    #     * `STOPPING` - The task is in the process of being stopped.
+    #
+    #     * `DEPROVISIONING` - Resources associated with the task are being
+    #       cleaned up.
+    #
+    #     * `STOPPED` - The task has been completely stopped.
+    # 3.  After the old task stops, a new task will be launched to ensure
+    #     service operation, and the new task will go through the following
+    #     lifecycle:
+    #
+    #     * `PROVISIONING` - Resources required for the task are being
+    #       provisioned.
+    #
+    #     * `PENDING` - The task is waiting to be placed on a container
+    #       instance.
+    #
+    #     * `ACTIVATING` - In this state, Amazon ECS pulls container images,
+    #       creates containers, configures task networking, registers load
+    #       balancer target groups, and configures service discovery status.
+    #
+    #     * `RUNNING` - The task is running and performing its work.
+    #
+    # For more detailed information about task lifecycle states, see [Task
+    # lifecycle][1] in the *Amazon Elastic Container Service Developer
+    # Guide*.
+    #
     # The following are notes about container health check support:
     #
     # * If the Amazon ECS container agent becomes disconnected from the
@@ -5396,25 +5435,26 @@ module Aws::ECS
     #
     # * Container health checks require version `1.17.0` or greater of the
     #   Amazon ECS container agent. For more information, see [Updating the
-    #   Amazon ECS container agent][1].
+    #   Amazon ECS container agent][2].
     #
     # * Container health checks are supported for Fargate tasks if you're
     #   using platform version `1.1.0` or greater. For more information, see
-    #   [Fargate platform versions][2].
+    #   [Fargate platform versions][3].
     #
     # * Container health checks aren't supported for tasks that are part of
     #   a service that's configured to use a Classic Load Balancer.
     #
     # For an example of how to specify a task definition with multiple
     # containers where container dependency is specified, see [Container
-    # dependency][3] in the *Amazon Elastic Container Service Developer
+    # dependency][4] in the *Amazon Elastic Container Service Developer
     # Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html
-    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
-    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/example_task_definitions.html#example_task_definition-containerdependency
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-lifecycle-explanation.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html
+    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
+    # [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/example_task_definitions.html#example_task_definition-containerdependency
     #
     # @!attribute [rw] command
     #   A string array representing the command that the container runs to
@@ -13352,6 +13392,8 @@ module Aws::ECS
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that your service runs on. If you do not specify a cluster, the
     #   default cluster is assumed.
+    #
+    #   You can't change the cluster name.
     #   @return [String]
     #
     # @!attribute [rw] service
@@ -13373,44 +13415,40 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] capacity_provider_strategy
-    #   The capacity provider strategy to update the service to use.
+    #   The details of a capacity provider strategy. You can set a capacity
+    #   provider when you create a cluster, run a task, or update a service.
     #
-    #   if the service uses the default capacity provider strategy for the
-    #   cluster, the service can be updated to use one or more capacity
-    #   providers as opposed to the default capacity provider strategy.
-    #   However, when a service is using a capacity provider strategy
-    #   that's not the default capacity provider strategy, the service
-    #   can't be updated to use the cluster's default capacity provider
-    #   strategy.
+    #   When you use Fargate, the capacity providers are `FARGATE` or
+    #   `FARGATE_SPOT`.
     #
-    #   A capacity provider strategy consists of one or more capacity
-    #   providers along with the `base` and `weight` to assign to them. A
-    #   capacity provider must be associated with the cluster to be used in
-    #   a capacity provider strategy. The [PutClusterCapacityProviders][1]
-    #   API is used to associate a capacity provider with a cluster. Only
-    #   capacity providers with an `ACTIVE` or `UPDATING` status can be
-    #   used.
+    #   When you use Amazon EC2, the capacity providers are Auto Scaling
+    #   groups.
     #
-    #   If specifying a capacity provider that uses an Auto Scaling group,
-    #   the capacity provider must already be created. New capacity
-    #   providers can be created with the [CreateClusterCapacityProvider][2]
-    #   API operation.
+    #   You can change capacity providers for rolling deployments and
+    #   blue/green deployments.
     #
-    #   To use a Fargate capacity provider, specify either the `FARGATE` or
-    #   `FARGATE_SPOT` capacity providers. The Fargate capacity providers
-    #   are available to all accounts and only need to be associated with a
-    #   cluster to be used.
+    #   The following list provides the valid transitions:
     #
-    #   The [PutClusterCapacityProviders][1]API operation is used to update
-    #   the list of available capacity providers for a cluster after the
-    #   cluster is created.
+    #   * Update the Fargate launch type to an EC2 capacity provider.
     #
+    #   * Update the Amazon EC2 launch type to a Fargate capacity provider.
+    #
+    #   * Update the Fargate capacity provider to an EC2 capacity provider.
+    #
+    #   * Update the Amazon EC2 capacity provider to a Fargate capacity
+    #     provider.
+    #
+    #   * Update the EC2 or Fargate capacity provider back to the launch
+    #     type.
+    #
+    #     Pass an empty list in the `capacityProvider` parameter.
+    #
+    #   For information about Amazon Web Services CDK considerations, see
+    #   [Amazon Web Services CDK considerations][1].
     #
     #
     #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html
-    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateClusterCapacityProvider.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service-parameters.html
     #   @return [Array<Types::CapacityProviderStrategyItem>]
     #
     # @!attribute [rw] deployment_configuration
@@ -13522,6 +13560,10 @@ module Aws::ECS
     #   @return [Boolean]
     #
     # @!attribute [rw] load_balancers
+    #   <note markdown="1"> You must have a service-linked role when you update this property
+    #
+    #    </note>
+    #
     #   A list of Elastic Load Balancing load balancer objects. It contains
     #   the load balancer name, the container name, and the container port
     #   to access from the load balancer. The container name is as it
@@ -13570,8 +13612,15 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] service_registries
+    #   <note markdown="1"> You must have a service-linked role when you update this property.
+    #
+    #    For more information about the role see the `CreateService` request
+    #   parameter [ `role` ][1].
+    #
+    #    </note>
+    #
     #   The details for the service discovery registries to assign to this
-    #   service. For more information, see [Service Discovery][1].
+    #   service. For more information, see [Service Discovery][2].
     #
     #   When you add, update, or remove the service registries
     #   configuration, Amazon ECS starts new tasks with the updated service
@@ -13583,7 +13632,8 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html#ECS-CreateService-request-role
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
     #   @return [Array<Types::ServiceRegistry>]
     #
     # @!attribute [rw] service_connect_configuration

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2025-06-12)
+------------------
+
+* Feature - Add new status READY_FOR_CHECKIN used for vehicle synchronisation
+
 1.48.0 (2025-06-02)
 ------------------
 

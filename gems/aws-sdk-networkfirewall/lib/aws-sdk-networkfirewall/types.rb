@@ -37,6 +37,59 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   Required. The unique identifier of the transit gateway attachment to
+    #   accept. This ID is returned in the response when creating a transit
+    #   gateway-attached firewall.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/AcceptNetworkFirewallTransitGatewayAttachmentRequest AWS API Documentation
+    #
+    class AcceptNetworkFirewallTransitGatewayAttachmentRequest < Struct.new(
+      :transit_gateway_attachment_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The unique identifier of the transit gateway attachment that was
+    #   accepted.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_attachment_status
+    #   The current status of the transit gateway attachment. Valid values
+    #   are:
+    #
+    #   * `CREATING` - The attachment is being created
+    #
+    #   * `DELETING` - The attachment is being deleted
+    #
+    #   * `DELETED` - The attachment has been deleted
+    #
+    #   * `FAILED` - The attachment creation has failed and cannot be
+    #     recovered
+    #
+    #   * `ERROR` - The attachment is in an error state that might be
+    #     recoverable
+    #
+    #   * `READY` - The attachment is active and processing traffic
+    #
+    #   * `PENDING_ACCEPTANCE` - The attachment is waiting to be accepted
+    #
+    #   * `REJECTING` - The attachment is in the process of being rejected
+    #
+    #   * `REJECTED` - The attachment has been rejected
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/AcceptNetworkFirewallTransitGatewayAttachmentResponse AWS API Documentation
+    #
+    class AcceptNetworkFirewallTransitGatewayAttachmentResponse < Struct.new(
+      :transit_gateway_attachment_id,
+      :transit_gateway_attachment_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A custom action to use in stateless rule actions settings. This is
     # used in CustomAction.
     #
@@ -286,6 +339,101 @@ module Aws::NetworkFirewall
     #   You must specify the ARN or the name, and you can specify both.
     #   @return [String]
     #
+    # @!attribute [rw] availability_zone_mappings
+    #   Required. The Availability Zones where you want to create firewall
+    #   endpoints. You must specify at least one Availability Zone.
+    #   @return [Array<Types::AvailabilityZoneMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/AssociateAvailabilityZonesRequest AWS API Documentation
+    #
+    class AssociateAvailabilityZonesRequest < Struct.new(
+      :update_token,
+      :firewall_arn,
+      :firewall_name,
+      :availability_zone_mappings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_name
+    #   The descriptive name of the firewall. You can't change the name of
+    #   a firewall after you create it.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_mappings
+    #   The Availability Zones where Network Firewall created firewall
+    #   endpoints. Each mapping specifies an Availability Zone where the
+    #   firewall processes traffic.
+    #   @return [Array<Types::AvailabilityZoneMapping>]
+    #
+    # @!attribute [rw] update_token
+    #   An optional token that you can use for optimistic locking. Network
+    #   Firewall returns a token to your requests that access the firewall.
+    #   The token marks the state of the firewall resource at the time of
+    #   the request.
+    #
+    #   To make an unconditional change to the firewall, omit the token in
+    #   your update request. Without the token, Network Firewall performs
+    #   your updates regardless of whether the firewall has changed since
+    #   you last retrieved it.
+    #
+    #   To make a conditional change to the firewall, provide the token in
+    #   your update request. Network Firewall uses the token to ensure that
+    #   the firewall hasn't changed since you last retrieved it. If it has
+    #   changed, the operation fails with an `InvalidTokenException`. If
+    #   this happens, retrieve the firewall again to get a current copy of
+    #   it with a new token. Reapply your changes as needed, then try the
+    #   operation again using the new token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/AssociateAvailabilityZonesResponse AWS API Documentation
+    #
+    class AssociateAvailabilityZonesResponse < Struct.new(
+      :firewall_arn,
+      :firewall_name,
+      :availability_zone_mappings,
+      :update_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update_token
+    #   An optional token that you can use for optimistic locking. Network
+    #   Firewall returns a token to your requests that access the firewall.
+    #   The token marks the state of the firewall resource at the time of
+    #   the request.
+    #
+    #   To make an unconditional change to the firewall, omit the token in
+    #   your update request. Without the token, Network Firewall performs
+    #   your updates regardless of whether the firewall has changed since
+    #   you last retrieved it.
+    #
+    #   To make a conditional change to the firewall, provide the token in
+    #   your update request. Network Firewall uses the token to ensure that
+    #   the firewall hasn't changed since you last retrieved it. If it has
+    #   changed, the operation fails with an `InvalidTokenException`. If
+    #   this happens, retrieve the firewall again to get a current copy of
+    #   it with a new token. Reapply your changes as needed, then try the
+    #   operation again using the new token.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_name
+    #   The descriptive name of the firewall. You can't change the name of
+    #   a firewall after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #   @return [String]
+    #
     # @!attribute [rw] firewall_policy_arn
     #   The Amazon Resource Name (ARN) of the firewall policy.
     #   @return [String]
@@ -495,6 +643,29 @@ module Aws::NetworkFirewall
       :endpoint_id,
       :status,
       :status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the mapping between an Availability Zone and a firewall
+    # endpoint for a transit gateway-attached firewall. Each mapping
+    # represents where the firewall can process traffic. You use these
+    # mappings when calling CreateFirewall, AssociateAvailabilityZones, and
+    # DisassociateAvailabilityZones.
+    #
+    # To retrieve the current Availability Zone mappings for a firewall, use
+    # DescribeFirewall.
+    #
+    # @!attribute [rw] availability_zone
+    #   The ID of the Availability Zone where the firewall endpoint is
+    #   located. For example, `us-east-2a`. The Availability Zone must be in
+    #   the same Region as the transit gateway.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/AvailabilityZoneMapping AWS API Documentation
+    #
+    class AvailabilityZoneMapping < Struct.new(
+      :availability_zone)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -753,6 +924,50 @@ module Aws::NetworkFirewall
     #   to enable on the firewall.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] transit_gateway_id
+    #   Required when creating a transit gateway-attached firewall. The
+    #   unique identifier of the transit gateway to attach to this firewall.
+    #   You can provide either a transit gateway from your account or one
+    #   that has been shared with you through Resource Access Manager.
+    #
+    #   After creating the firewall, you cannot change the transit gateway
+    #   association. To use a different transit gateway, you must create a
+    #   new firewall.
+    #
+    #   For information about creating firewalls, see CreateFirewall. For
+    #   specific guidance about transit gateway-attached firewalls, see
+    #   [Considerations for transit gateway-attached firewalls][1] in the
+    #   *Network Firewall Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/tgw-firewall-considerations.html
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_mappings
+    #   Required. The Availability Zones where you want to create firewall
+    #   endpoints for a transit gateway-attached firewall. You must specify
+    #   at least one Availability Zone. Consider enabling the firewall in
+    #   every Availability Zone where you have workloads to maintain
+    #   Availability Zone independence.
+    #
+    #   You can modify Availability Zones later using
+    #   AssociateAvailabilityZones or DisassociateAvailabilityZones, but
+    #   this may briefly disrupt traffic. The
+    #   `AvailabilityZoneChangeProtection` setting controls whether you can
+    #   make these modifications.
+    #   @return [Array<Types::AvailabilityZoneMapping>]
+    #
+    # @!attribute [rw] availability_zone_change_protection
+    #   Optional. A setting indicating whether the firewall is protected
+    #   against changes to its Availability Zone configuration. When set to
+    #   `TRUE`, you cannot add or remove Availability Zones without first
+    #   disabling this protection using
+    #   UpdateAvailabilityZoneChangeProtection.
+    #
+    #   Default value: `FALSE`
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateFirewallRequest AWS API Documentation
     #
     class CreateFirewallRequest < Struct.new(
@@ -766,7 +981,10 @@ module Aws::NetworkFirewall
       :description,
       :tags,
       :encryption_configuration,
-      :enabled_analysis_types)
+      :enabled_analysis_types,
+      :transit_gateway_id,
+      :availability_zone_mappings,
+      :availability_zone_change_protection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -928,6 +1146,18 @@ module Aws::NetworkFirewall
     #   analyzer without creating the rule group, set `DryRun` to `TRUE`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] summary_configuration
+    #   An object that contains a `RuleOptions` array of strings. You use
+    #   `RuleOptions` to determine which of the following RuleSummary values
+    #   are returned in response to `DescribeRuleGroupSummary`.
+    #
+    #   * `Metadata` - returns
+    #
+    #   * `Msg`
+    #
+    #   * `SID`
+    #   @return [Types::SummaryConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateRuleGroupRequest AWS API Documentation
     #
     class CreateRuleGroupRequest < Struct.new(
@@ -941,7 +1171,8 @@ module Aws::NetworkFirewall
       :dry_run,
       :encryption_configuration,
       :source_metadata,
-      :analyze_rule_group)
+      :analyze_rule_group,
+      :summary_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1268,6 +1499,59 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   Required. The unique identifier of the transit gateway attachment to
+    #   delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteNetworkFirewallTransitGatewayAttachmentRequest AWS API Documentation
+    #
+    class DeleteNetworkFirewallTransitGatewayAttachmentRequest < Struct.new(
+      :transit_gateway_attachment_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the transit gateway attachment that was deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_attachment_status
+    #   The current status of the transit gateway attachment deletion
+    #   process.
+    #
+    #   Valid values are:
+    #
+    #   * `CREATING` - The attachment is being created
+    #
+    #   * `DELETING` - The attachment is being deleted
+    #
+    #   * `DELETED` - The attachment has been deleted
+    #
+    #   * `FAILED` - The attachment creation has failed and cannot be
+    #     recovered
+    #
+    #   * `ERROR` - The attachment is in an error state that might be
+    #     recoverable
+    #
+    #   * `READY` - The attachment is active and processing traffic
+    #
+    #   * `PENDING_ACCEPTANCE` - The attachment is waiting to be accepted
+    #
+    #   * `REJECTING` - The attachment is in the process of being rejected
+    #
+    #   * `REJECTED` - The attachment has been rejected
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteNetworkFirewallTransitGatewayAttachmentResponse AWS API Documentation
+    #
+    class DeleteNetworkFirewallTransitGatewayAttachmentResponse < Struct.new(
+      :transit_gateway_attachment_id,
+      :transit_gateway_attachment_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the rule group or firewall policy
     #   whose resource policy you want to delete.
@@ -1444,6 +1728,12 @@ module Aws::NetworkFirewall
     #   defined.
     #   @return [Hash<String,Types::AvailabilityZoneMetadata>]
     #
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The unique identifier of the transit gateway attachment associated
+    #   with this firewall. This field is only present for transit
+    #   gateway-attached firewalls.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeFirewallMetadataResponse AWS API Documentation
     #
     class DescribeFirewallMetadataResponse < Struct.new(
@@ -1451,7 +1741,8 @@ module Aws::NetworkFirewall
       :firewall_policy_arn,
       :description,
       :status,
-      :supported_availability_zones)
+      :supported_availability_zones,
+      :transit_gateway_attachment_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1851,7 +2142,7 @@ module Aws::NetworkFirewall
     #   @return [Types::StatefulRuleOptions]
     #
     # @!attribute [rw] last_modified_time
-    #   The last time that the rule group was changed.
+    #   A timestamp indicating when the rule group was last modified.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeRuleGroupMetadataResponse AWS API Documentation
@@ -1951,6 +2242,73 @@ module Aws::NetworkFirewall
       :update_token,
       :rule_group,
       :rule_group_response)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rule_group_name
+    #   The descriptive name of the rule group. You can't change the name
+    #   of a rule group after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_group_arn
+    #   Required. The Amazon Resource Name (ARN) of the rule group.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of rule group you want a summary for. This is a required
+    #   field.
+    #
+    #   Valid value: `STATEFUL`
+    #
+    #   Note that `STATELESS` exists but is not currently supported. If you
+    #   provide `STATELESS`, an exception is returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeRuleGroupSummaryRequest AWS API Documentation
+    #
+    class DescribeRuleGroupSummaryRequest < Struct.new(
+      :rule_group_name,
+      :rule_group_arn,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rule_group_name
+    #   The descriptive name of the rule group. You can't change the name
+    #   of a rule group after you create it.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] summary
+    #   A complex type that contains rule information based on the rule
+    #   group's configured summary settings. The content varies depending
+    #   on the fields that you specified to extract in your
+    #   SummaryConfiguration. When you haven't configured any summary
+    #   settings, this returns an empty array. The response might include:
+    #
+    #   * Rule identifiers
+    #
+    #   * Rule descriptions
+    #
+    #   * Any metadata fields that you specified in your
+    #     SummaryConfiguration
+    #   @return [Types::Summary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeRuleGroupSummaryResponse AWS API Documentation
+    #
+    class DescribeRuleGroupSummaryResponse < Struct.new(
+      :rule_group_name,
+      :description,
+      :summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2095,6 +2453,100 @@ module Aws::NetworkFirewall
     #
     class Dimension < Struct.new(
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update_token
+    #   An optional token that you can use for optimistic locking. Network
+    #   Firewall returns a token to your requests that access the firewall.
+    #   The token marks the state of the firewall resource at the time of
+    #   the request.
+    #
+    #   To make an unconditional change to the firewall, omit the token in
+    #   your update request. Without the token, Network Firewall performs
+    #   your updates regardless of whether the firewall has changed since
+    #   you last retrieved it.
+    #
+    #   To make a conditional change to the firewall, provide the token in
+    #   your update request. Network Firewall uses the token to ensure that
+    #   the firewall hasn't changed since you last retrieved it. If it has
+    #   changed, the operation fails with an `InvalidTokenException`. If
+    #   this happens, retrieve the firewall again to get a current copy of
+    #   it with a new token. Reapply your changes as needed, then try the
+    #   operation again using the new token.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_name
+    #   The descriptive name of the firewall. You can't change the name of
+    #   a firewall after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_mappings
+    #   Required. The Availability Zones to remove from the firewall's
+    #   configuration.
+    #   @return [Array<Types::AvailabilityZoneMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DisassociateAvailabilityZonesRequest AWS API Documentation
+    #
+    class DisassociateAvailabilityZonesRequest < Struct.new(
+      :update_token,
+      :firewall_arn,
+      :firewall_name,
+      :availability_zone_mappings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_name
+    #   The descriptive name of the firewall. You can't change the name of
+    #   a firewall after you create it.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_mappings
+    #   The remaining Availability Zones where the firewall has endpoints
+    #   after the disassociation.
+    #   @return [Array<Types::AvailabilityZoneMapping>]
+    #
+    # @!attribute [rw] update_token
+    #   An optional token that you can use for optimistic locking. Network
+    #   Firewall returns a token to your requests that access the firewall.
+    #   The token marks the state of the firewall resource at the time of
+    #   the request.
+    #
+    #   To make an unconditional change to the firewall, omit the token in
+    #   your update request. Without the token, Network Firewall performs
+    #   your updates regardless of whether the firewall has changed since
+    #   you last retrieved it.
+    #
+    #   To make a conditional change to the firewall, provide the token in
+    #   your update request. Network Firewall uses the token to ensure that
+    #   the firewall hasn't changed since you last retrieved it. If it has
+    #   changed, the operation fails with an `InvalidTokenException`. If
+    #   this happens, retrieve the firewall again to get a current copy of
+    #   it with a new token. Reapply your changes as needed, then try the
+    #   operation again using the new token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DisassociateAvailabilityZonesResponse AWS API Documentation
+    #
+    class DisassociateAvailabilityZonesResponse < Struct.new(
+      :firewall_arn,
+      :firewall_name,
+      :availability_zone_mappings,
+      :update_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2340,6 +2792,31 @@ module Aws::NetworkFirewall
     #   to enable on the firewall.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] transit_gateway_id
+    #   The unique identifier of the transit gateway associated with this
+    #   firewall. This field is only present for transit gateway-attached
+    #   firewalls.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_owner_account_id
+    #   The Amazon Web Services account ID that owns the transit gateway.
+    #   This may be different from the firewall owner's account ID when
+    #   using a shared transit gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_mappings
+    #   The Availability Zones where the firewall endpoints are created for
+    #   a transit gateway-attached firewall. Each mapping specifies an
+    #   Availability Zone where the firewall processes traffic.
+    #   @return [Array<Types::AvailabilityZoneMapping>]
+    #
+    # @!attribute [rw] availability_zone_change_protection
+    #   A setting indicating whether the firewall is protected against
+    #   changes to its Availability Zone configuration. When set to `TRUE`,
+    #   you must first disable this protection before adding or removing
+    #   Availability Zones.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/Firewall AWS API Documentation
     #
     class Firewall < Struct.new(
@@ -2356,7 +2833,11 @@ module Aws::NetworkFirewall
       :tags,
       :encryption_configuration,
       :number_of_associations,
-      :enabled_analysis_types)
+      :enabled_analysis_types,
+      :transit_gateway_id,
+      :transit_gateway_owner_account_id,
+      :availability_zone_mappings,
+      :availability_zone_change_protection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2374,11 +2855,18 @@ module Aws::NetworkFirewall
     #   The Amazon Resource Name (ARN) of the firewall.
     #   @return [String]
     #
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The unique identifier of the transit gateway attachment associated
+    #   with this firewall. This field is only present for transit
+    #   gateway-attached firewalls.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/FirewallMetadata AWS API Documentation
     #
     class FirewallMetadata < Struct.new(
       :firewall_name,
-      :firewall_arn)
+      :firewall_arn,
+      :transit_gateway_attachment_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2651,13 +3139,21 @@ module Aws::NetworkFirewall
     #   all of the reference sets in a firewall.
     #   @return [Types::CapacityUsageSummary]
     #
+    # @!attribute [rw] transit_gateway_attachment_sync_state
+    #   The synchronization state of the transit gateway attachment. This
+    #   indicates whether the firewall's transit gateway configuration is
+    #   properly synchronized and operational. Use this to verify that your
+    #   transit gateway configuration changes have been applied.
+    #   @return [Types::TransitGatewayAttachmentSyncState]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/FirewallStatus AWS API Documentation
     #
     class FirewallStatus < Struct.new(
       :status,
       :configuration_sync_state_summary,
       :sync_states,
-      :capacity_usage_summary)
+      :capacity_usage_summary,
+      :transit_gateway_attachment_sync_state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4176,6 +4672,67 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   Required. The unique identifier of the transit gateway attachment to
+    #   reject. This ID is returned in the response when creating a transit
+    #   gateway-attached firewall.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/RejectNetworkFirewallTransitGatewayAttachmentRequest AWS API Documentation
+    #
+    class RejectNetworkFirewallTransitGatewayAttachmentRequest < Struct.new(
+      :transit_gateway_attachment_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The unique identifier of the transit gateway attachment that was
+    #   rejected.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_attachment_status
+    #   The current status of the transit gateway attachment. Valid values
+    #   are:
+    #
+    #   * `CREATING` - The attachment is being created
+    #
+    #   * `DELETING` - The attachment is being deleted
+    #
+    #   * `DELETED` - The attachment has been deleted
+    #
+    #   * `FAILED` - The attachment creation has failed and cannot be
+    #     recovered
+    #
+    #   * `ERROR` - The attachment is in an error state that might be
+    #     recoverable
+    #
+    #   * `READY` - The attachment is active and processing traffic
+    #
+    #   * `PENDING_ACCEPTANCE` - The attachment is waiting to be accepted
+    #
+    #   * `REJECTING` - The attachment is in the process of being rejected
+    #
+    #   * `REJECTED` - The attachment has been rejected
+    #
+    #   For information about troubleshooting endpoint failures, see
+    #   [Troubleshooting firewall endpoint failures][1] in the *Network
+    #   Firewall Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-troubleshooting-endpoint-failures.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/RejectNetworkFirewallTransitGatewayAttachmentResponse AWS API Documentation
+    #
+    class RejectNetworkFirewallTransitGatewayAttachmentResponse < Struct.new(
+      :transit_gateway_attachment_id,
+      :transit_gateway_attachment_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Unable to locate a resource using the parameters that you provided.
     #
     # @!attribute [rw] message
@@ -4407,7 +4964,7 @@ module Aws::NetworkFirewall
     #   @return [Types::SourceMetadata]
     #
     # @!attribute [rw] sns_topic
-    #   The Amazon resource name (ARN) of the Amazon Simple Notification
+    #   The Amazon Resource Name (ARN) of the Amazon Simple Notification
     #   Service SNS topic that's used to record changes to the managed rule
     #   group. You can subscribe to the SNS topic to receive notifications
     #   when the managed rule group is modified, such as for new versions
@@ -4434,6 +4991,16 @@ module Aws::NetworkFirewall
     #   in the list of analysis results.
     #   @return [Array<Types::AnalysisResult>]
     #
+    # @!attribute [rw] summary_configuration
+    #   A complex type containing the currently selected rule option fields
+    #   that will be displayed for rule summarization returned by
+    #   DescribeRuleGroupSummary.
+    #
+    #   * The `RuleOptions` specified in SummaryConfiguration
+    #
+    #   * Rule metadata organization preferences
+    #   @return [Types::SummaryConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/RuleGroupResponse AWS API Documentation
     #
     class RuleGroupResponse < Struct.new(
@@ -4451,7 +5018,8 @@ module Aws::NetworkFirewall
       :source_metadata,
       :sns_topic,
       :last_modified_time,
-      :analysis_results)
+      :analysis_results,
+      :summary_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4490,8 +5058,42 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # A complex type containing details about a Suricata rule. Contains:
+    #
+    # * `SID`
+    #
+    # * `Msg`
+    #
+    # * `Metadata`
+    #
+    # Summaries are available for rule groups you manage and for active
+    # threat defense Amazon Web Services managed rule groups.
+    #
+    # @!attribute [rw] sid
+    #   The unique identifier (Signature ID) of the Suricata rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] msg
+    #   The contents taken from the rule's msg field.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   The contents of the rule's metadata.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/RuleSummary AWS API Documentation
+    #
+    class RuleSummary < Struct.new(
+      :sid,
+      :msg,
+      :metadata)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Settings that are available for use in the rules in the RuleGroup
-    # where this is defined.
+    # where this is defined. See CreateRuleGroup or UpdateRuleGroup for
+    # usage.
     #
     # @!attribute [rw] ip_sets
     #   A list of IP addresses and address ranges, in CIDR notation.
@@ -4682,9 +5284,8 @@ module Aws::NetworkFirewall
     #     Authority.
     #
     #   For more information about configuring certificates for outbound
-    #   inspection, see [Using SSL/TLS certificates with certificates with
-    #   TLS inspection configurations][1] in the *Network Firewall Developer
-    #   Guide*.
+    #   inspection, see [Using SSL/TLS certificates with TLS inspection
+    #   configurations][1] in the *Network Firewall Developer Guide*.
     #
     #   For information about working with certificates in ACM, see
     #   [Importing certificates][2] in the *Certificate Manager User Guide*.
@@ -5001,17 +5602,18 @@ module Aws::NetworkFirewall
     #
     # @!attribute [rw] rule_order
     #   Indicates how to manage the order of stateful rule evaluation for
-    #   the policy. `STRICT_ORDER` is the default and recommended option.
-    #   With `STRICT_ORDER`, provide your rules in the order that you want
-    #   them to be evaluated. You can then choose one or more default
-    #   actions for packets that don't match any rules. Choose
-    #   `STRICT_ORDER` to have the stateful rules engine determine the
-    #   evaluation order of your rules. The default action for this rule
-    #   order is `PASS`, followed by `DROP`, `REJECT`, and `ALERT` actions.
-    #   Stateful rules are provided to the rule engine as Suricata
-    #   compatible strings, and Suricata evaluates them based on your
-    #   settings. For more information, see [Evaluation order for stateful
-    #   rules][1] in the *Network Firewall Developer Guide*.
+    #   the policy. `STRICT_ORDER` is the recommended option, but
+    #   `DEFAULT_ACTION_ORDER` is the default option. With `STRICT_ORDER`,
+    #   provide your rules in the order that you want them to be evaluated.
+    #   You can then choose one or more default actions for packets that
+    #   don't match any rules. Choose `STRICT_ORDER` to have the stateful
+    #   rules engine determine the evaluation order of your rules. The
+    #   default action for this rule order is `PASS`, followed by `DROP`,
+    #   `REJECT`, and `ALERT` actions. Stateful rules are provided to the
+    #   rule engine as Suricata compatible strings, and Suricata evaluates
+    #   them based on your settings. For more information, see [Evaluation
+    #   order for stateful rules][1] in the *Network Firewall Developer
+    #   Guide*.
     #
     #
     #
@@ -5166,12 +5768,32 @@ module Aws::NetworkFirewall
     #   the rule group within a policy.
     #   @return [Types::StatefulRuleGroupOverride]
     #
+    # @!attribute [rw] deep_threat_inspection
+    #   Network Firewall plans to augment the active threat defense managed
+    #   rule group with an additional deep threat inspection capability.
+    #   When this capability is released, Amazon Web Services will analyze
+    #   service logs of network traffic processed by these rule groups to
+    #   identify threat indicators across customers. Amazon Web Services
+    #   will use these threat indicators to improve the active threat
+    #   defense managed rule groups and protect the security of Amazon Web
+    #   Services customers and services.
+    #
+    #   <note markdown="1"> Customers can opt-out of deep threat inspection at any time through
+    #   the Network Firewall console or API. When customers opt out, Network
+    #   Firewall will not use the network traffic processed by those
+    #   customers' active threat defense rule groups for rule group
+    #   improvement.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/StatefulRuleGroupReference AWS API Documentation
     #
     class StatefulRuleGroupReference < Struct.new(
       :resource_arn,
       :priority,
-      :override)
+      :override,
+      :deep_threat_inspection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5305,6 +5927,52 @@ module Aws::NetworkFirewall
     class SubnetMapping < Struct.new(
       :subnet_id,
       :ip_address_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A complex type containing summaries of security protections provided
+    # by a rule group.
+    #
+    # Network Firewall extracts this information from selected fields in the
+    # rule group's Suricata rules, based on your SummaryConfiguration
+    # settings.
+    #
+    # @!attribute [rw] rule_summaries
+    #   An array of RuleSummary objects containing individual rule details
+    #   that had been configured by the rulegroup's SummaryConfiguration.
+    #   @return [Array<Types::RuleSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/Summary AWS API Documentation
+    #
+    class Summary < Struct.new(
+      :rule_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A complex type that specifies which Suricata rule metadata fields to
+    # use when displaying threat information. Contains:
+    #
+    # * `RuleOptions` - The Suricata rule options fields to extract and
+    #   display
+    #
+    # ^
+    #
+    # These settings affect how threat information appears in both the
+    # console and API responses. Summaries are available for rule groups you
+    # manage and for active threat defense Amazon Web Services managed rule
+    # groups.
+    #
+    # @!attribute [rw] rule_options
+    #   Specifies the selected rule options returned by
+    #   DescribeRuleGroupSummary.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/SummaryConfiguration AWS API Documentation
+    #
+    class SummaryConfiguration < Struct.new(
+      :rule_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5612,6 +6280,87 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # Contains information about the synchronization state of a transit
+    # gateway attachment, including its current status and any error
+    # messages. Network Firewall uses this to track the state of your
+    # transit gateway configuration changes.
+    #
+    # @!attribute [rw] attachment_id
+    #   The unique identifier of the transit gateway attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_attachment_status
+    #   The current status of the transit gateway attachment.
+    #
+    #   Valid values are:
+    #
+    #   * `CREATING` - The attachment is being created
+    #
+    #   * `DELETING` - The attachment is being deleted
+    #
+    #   * `DELETED` - The attachment has been deleted
+    #
+    #   * `FAILED` - The attachment creation has failed and cannot be
+    #     recovered
+    #
+    #   * `ERROR` - The attachment is in an error state that might be
+    #     recoverable
+    #
+    #   * `READY` - The attachment is active and processing traffic
+    #
+    #   * `PENDING_ACCEPTANCE` - The attachment is waiting to be accepted
+    #
+    #   * `REJECTING` - The attachment is in the process of being rejected
+    #
+    #   * `REJECTED` - The attachment has been rejected
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   A message providing additional information about the current status,
+    #   particularly useful when the transit gateway attachment is in a
+    #   non-`READY` state.
+    #
+    #   Valid values are:
+    #
+    #   * `CREATING` - The attachment is being created
+    #
+    #   * `DELETING` - The attachment is being deleted
+    #
+    #   * `DELETED` - The attachment has been deleted
+    #
+    #   * `FAILED` - The attachment creation has failed and cannot be
+    #     recovered
+    #
+    #   * `ERROR` - The attachment is in an error state that might be
+    #     recoverable
+    #
+    #   * `READY` - The attachment is active and processing traffic
+    #
+    #   * `PENDING_ACCEPTANCE` - The attachment is waiting to be accepted
+    #
+    #   * `REJECTING` - The attachment is in the process of being rejected
+    #
+    #   * `REJECTED` - The attachment has been rejected
+    #
+    #   For information about troubleshooting endpoint failures, see
+    #   [Troubleshooting firewall endpoint failures][1] in the *Network
+    #   Firewall Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-troubleshooting-endpoint-failures.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/TransitGatewayAttachmentSyncState AWS API Documentation
+    #
+    class TransitGatewayAttachmentSyncState < Struct.new(
+      :attachment_id,
+      :transit_gateway_attachment_status,
+      :status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A unique source IP address that connected to a domain.
     #
     # @!attribute [rw] count
@@ -5658,6 +6407,106 @@ module Aws::NetworkFirewall
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] update_token
+    #   An optional token that you can use for optimistic locking. Network
+    #   Firewall returns a token to your requests that access the firewall.
+    #   The token marks the state of the firewall resource at the time of
+    #   the request.
+    #
+    #   To make an unconditional change to the firewall, omit the token in
+    #   your update request. Without the token, Network Firewall performs
+    #   your updates regardless of whether the firewall has changed since
+    #   you last retrieved it.
+    #
+    #   To make a conditional change to the firewall, provide the token in
+    #   your update request. Network Firewall uses the token to ensure that
+    #   the firewall hasn't changed since you last retrieved it. If it has
+    #   changed, the operation fails with an `InvalidTokenException`. If
+    #   this happens, retrieve the firewall again to get a current copy of
+    #   it with a new token. Reapply your changes as needed, then try the
+    #   operation again using the new token.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_name
+    #   The descriptive name of the firewall. You can't change the name of
+    #   a firewall after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_change_protection
+    #   A setting indicating whether the firewall is protected against
+    #   changes to the subnet associations. Use this setting to protect
+    #   against accidentally modifying the subnet associations for a
+    #   firewall that is in use. When you create a firewall, the operation
+    #   initializes this setting to `TRUE`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateAvailabilityZoneChangeProtectionRequest AWS API Documentation
+    #
+    class UpdateAvailabilityZoneChangeProtectionRequest < Struct.new(
+      :update_token,
+      :firewall_arn,
+      :firewall_name,
+      :availability_zone_change_protection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update_token
+    #   An optional token that you can use for optimistic locking. Network
+    #   Firewall returns a token to your requests that access the firewall.
+    #   The token marks the state of the firewall resource at the time of
+    #   the request.
+    #
+    #   To make an unconditional change to the firewall, omit the token in
+    #   your update request. Without the token, Network Firewall performs
+    #   your updates regardless of whether the firewall has changed since
+    #   you last retrieved it.
+    #
+    #   To make a conditional change to the firewall, provide the token in
+    #   your update request. Network Firewall uses the token to ensure that
+    #   the firewall hasn't changed since you last retrieved it. If it has
+    #   changed, the operation fails with an `InvalidTokenException`. If
+    #   this happens, retrieve the firewall again to get a current copy of
+    #   it with a new token. Reapply your changes as needed, then try the
+    #   operation again using the new token.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_name
+    #   The descriptive name of the firewall. You can't change the name of
+    #   a firewall after you create it.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_change_protection
+    #   A setting indicating whether the firewall is protected against
+    #   changes to the subnet associations. Use this setting to protect
+    #   against accidentally modifying the subnet associations for a
+    #   firewall that is in use. When you create a firewall, the operation
+    #   initializes this setting to `TRUE`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateAvailabilityZoneChangeProtectionResponse AWS API Documentation
+    #
+    class UpdateAvailabilityZoneChangeProtectionResponse < Struct.new(
+      :update_token,
+      :firewall_arn,
+      :firewall_name,
+      :availability_zone_change_protection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] enabled_analysis_types
     #   An optional setting indicating the specific traffic analysis types
@@ -6443,6 +7292,12 @@ module Aws::NetworkFirewall
     #   analyzer without updating the rule group, set `DryRun` to `TRUE`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] summary_configuration
+    #   Updates the selected summary configuration for a rule group.
+    #
+    #   Changes affect subsequent responses from DescribeRuleGroupSummary.
+    #   @return [Types::SummaryConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateRuleGroupRequest AWS API Documentation
     #
     class UpdateRuleGroupRequest < Struct.new(
@@ -6456,7 +7311,8 @@ module Aws::NetworkFirewall
       :dry_run,
       :encryption_configuration,
       :source_metadata,
-      :analyze_rule_group)
+      :analyze_rule_group,
+      :summary_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

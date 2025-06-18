@@ -169,6 +169,7 @@ module Aws::DatabaseMigrationService
       attr_accessor data_provider_name: ::String
       attr_accessor description: ::String
       attr_accessor engine: ::String
+      attr_accessor virtual: bool
       attr_accessor settings: Types::DataProviderSettings
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
@@ -418,6 +419,7 @@ module Aws::DatabaseMigrationService
       attr_accessor data_provider_creation_time: ::Time
       attr_accessor description: ::String
       attr_accessor engine: ::String
+      attr_accessor virtual: bool
       attr_accessor settings: Types::DataProviderSettings
       SENSITIVE: []
     end
@@ -1484,6 +1486,8 @@ module Aws::DatabaseMigrationService
       attr_accessor database_name: ::String
       attr_accessor ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")
       attr_accessor certificate_arn: ::String
+      attr_accessor s3_path: ::String
+      attr_accessor s3_access_role_arn: ::String
       SENSITIVE: []
     end
 
@@ -1493,6 +1497,8 @@ module Aws::DatabaseMigrationService
       attr_accessor database_name: ::String
       attr_accessor ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")
       attr_accessor certificate_arn: ::String
+      attr_accessor s3_path: ::String
+      attr_accessor s3_access_role_arn: ::String
       SENSITIVE: []
     end
 
@@ -1662,6 +1668,8 @@ module Aws::DatabaseMigrationService
       attr_accessor port: ::Integer
       attr_accessor ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")
       attr_accessor certificate_arn: ::String
+      attr_accessor s3_path: ::String
+      attr_accessor s3_access_role_arn: ::String
       SENSITIVE: []
     end
 
@@ -1693,6 +1701,8 @@ module Aws::DatabaseMigrationService
       attr_accessor database_name: ::String
       attr_accessor ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")
       attr_accessor certificate_arn: ::String
+      attr_accessor s3_path: ::String
+      attr_accessor s3_access_role_arn: ::String
       SENSITIVE: []
     end
 
@@ -1744,6 +1754,7 @@ module Aws::DatabaseMigrationService
       attr_accessor data_provider_name: ::String
       attr_accessor description: ::String
       attr_accessor engine: ::String
+      attr_accessor virtual: bool
       attr_accessor exact_settings: bool
       attr_accessor settings: Types::DataProviderSettings
       SENSITIVE: []
@@ -1985,6 +1996,8 @@ module Aws::DatabaseMigrationService
       attr_accessor port: ::Integer
       attr_accessor ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")
       attr_accessor certificate_arn: ::String
+      attr_accessor s3_path: ::String
+      attr_accessor s3_access_role_arn: ::String
       SENSITIVE: []
     end
 
@@ -2010,6 +2023,8 @@ module Aws::DatabaseMigrationService
       attr_accessor secrets_manager_oracle_asm_access_role_arn: ::String
       attr_accessor secrets_manager_security_db_encryption_secret_id: ::String
       attr_accessor secrets_manager_security_db_encryption_access_role_arn: ::String
+      attr_accessor s3_path: ::String
+      attr_accessor s3_access_role_arn: ::String
       SENSITIVE: []
     end
 
@@ -2121,6 +2136,8 @@ module Aws::DatabaseMigrationService
       attr_accessor database_name: ::String
       attr_accessor ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")
       attr_accessor certificate_arn: ::String
+      attr_accessor s3_path: ::String
+      attr_accessor s3_access_role_arn: ::String
       SENSITIVE: []
     end
 
@@ -2228,6 +2245,8 @@ module Aws::DatabaseMigrationService
       attr_accessor server_name: ::String
       attr_accessor port: ::Integer
       attr_accessor database_name: ::String
+      attr_accessor s3_path: ::String
+      attr_accessor s3_access_role_arn: ::String
       SENSITIVE: []
     end
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2025-06-17)
+------------------
+
+* Feature - Release of Active Threat Defense in Network Firewall
+
+1.69.0 (2025-06-16)
+------------------
+
+* Feature - You can now create firewalls using a Transit Gateway instead of a VPC, resulting in a TGW attachment.
+
 1.68.0 (2025-06-04)
 ------------------
 

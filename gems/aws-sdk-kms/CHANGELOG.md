@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.105.0 (2025-06-12)
+------------------
+
+* Feature - AWS KMS announces the support of ML-DSA key pairs that creates post-quantum safe digital signatures.
+
 1.104.0 (2025-06-06)
 ------------------
 

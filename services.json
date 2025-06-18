@@ -731,6 +731,9 @@
   "LookoutforVision": {
     "models": "lookoutvision/2020-11-20"
   },
+  "MPA": {
+    "models": "mpa/2022-07-26"
+  },
   "MQ": {
     "models": "mq/2017-11-27"
   },

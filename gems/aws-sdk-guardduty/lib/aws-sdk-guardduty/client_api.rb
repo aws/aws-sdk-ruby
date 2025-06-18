@@ -34,7 +34,9 @@ module Aws::GuardDuty
     Action = Shapes::StructureShape.new(name: 'Action')
     Actor = Shapes::StructureShape.new(name: 'Actor')
     ActorIds = Shapes::ListShape.new(name: 'ActorIds')
+    ActorProcess = Shapes::StructureShape.new(name: 'ActorProcess')
     Actors = Shapes::ListShape.new(name: 'Actors')
+    AdditionalSequenceTypes = Shapes::ListShape.new(name: 'AdditionalSequenceTypes')
     AddonDetails = Shapes::StructureShape.new(name: 'AddonDetails')
     AdminAccount = Shapes::StructureShape.new(name: 'AdminAccount')
     AdminAccounts = Shapes::ListShape.new(name: 'AdminAccounts')
@@ -63,10 +65,15 @@ module Aws::GuardDuty
     City = Shapes::StructureShape.new(name: 'City')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     CloudTrailConfigurationResult = Shapes::StructureShape.new(name: 'CloudTrailConfigurationResult')
+    ClusterStatus = Shapes::StringShape.new(name: 'ClusterStatus')
     Condition = Shapes::StructureShape.new(name: 'Condition')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     Container = Shapes::StructureShape.new(name: 'Container')
+    ContainerFindingResource = Shapes::StructureShape.new(name: 'ContainerFindingResource')
+    ContainerImageUid = Shapes::StringShape.new(name: 'ContainerImageUid')
     ContainerInstanceDetails = Shapes::StructureShape.new(name: 'ContainerInstanceDetails')
+    ContainerUid = Shapes::StringShape.new(name: 'ContainerUid')
+    ContainerUids = Shapes::ListShape.new(name: 'ContainerUids')
     Containers = Shapes::ListShape.new(name: 'Containers')
     CountByCoverageStatus = Shapes::MapShape.new(name: 'CountByCoverageStatus')
     CountByResourceType = Shapes::MapShape.new(name: 'CountByResourceType')
@@ -176,10 +183,13 @@ module Aws::GuardDuty
     EbsVolumeScanDetails = Shapes::StructureShape.new(name: 'EbsVolumeScanDetails')
     EbsVolumesResult = Shapes::StructureShape.new(name: 'EbsVolumesResult')
     Ec2Instance = Shapes::StructureShape.new(name: 'Ec2Instance')
+    Ec2InstanceUid = Shapes::StringShape.new(name: 'Ec2InstanceUid')
+    Ec2InstanceUids = Shapes::ListShape.new(name: 'Ec2InstanceUids')
     Ec2NetworkInterface = Shapes::StructureShape.new(name: 'Ec2NetworkInterface')
     Ec2NetworkInterfaceUids = Shapes::ListShape.new(name: 'Ec2NetworkInterfaceUids')
     EcsClusterDetails = Shapes::StructureShape.new(name: 'EcsClusterDetails')
     EcsTaskDetails = Shapes::StructureShape.new(name: 'EcsTaskDetails')
+    EksCluster = Shapes::StructureShape.new(name: 'EksCluster')
     EksClusterDetails = Shapes::StructureShape.new(name: 'EksClusterDetails')
     Email = Shapes::StringShape.new(name: 'Email')
     EnableOrganizationAdminAccountRequest = Shapes::StructureShape.new(name: 'EnableOrganizationAdminAccountRequest')
@@ -296,9 +306,11 @@ module Aws::GuardDuty
     KubernetesDataSourceFreeTrial = Shapes::StructureShape.new(name: 'KubernetesDataSourceFreeTrial')
     KubernetesDetails = Shapes::StructureShape.new(name: 'KubernetesDetails')
     KubernetesPermissionCheckedDetails = Shapes::StructureShape.new(name: 'KubernetesPermissionCheckedDetails')
+    KubernetesResourcesTypes = Shapes::StringShape.new(name: 'KubernetesResourcesTypes')
     KubernetesRoleBindingDetails = Shapes::StructureShape.new(name: 'KubernetesRoleBindingDetails')
     KubernetesRoleDetails = Shapes::StructureShape.new(name: 'KubernetesRoleDetails')
     KubernetesUserDetails = Shapes::StructureShape.new(name: 'KubernetesUserDetails')
+    KubernetesWorkload = Shapes::StructureShape.new(name: 'KubernetesWorkload')
     KubernetesWorkloadDetails = Shapes::StructureShape.new(name: 'KubernetesWorkloadDetails')
     LambdaDetails = Shapes::StructureShape.new(name: 'LambdaDetails')
     Lineage = Shapes::ListShape.new(name: 'Lineage')
@@ -422,6 +434,9 @@ module Aws::GuardDuty
     PrivateIpAddressDetails = Shapes::StructureShape.new(name: 'PrivateIpAddressDetails')
     PrivateIpAddresses = Shapes::ListShape.new(name: 'PrivateIpAddresses')
     ProcessDetails = Shapes::StructureShape.new(name: 'ProcessDetails')
+    ProcessName = Shapes::StringShape.new(name: 'ProcessName')
+    ProcessPath = Shapes::StringShape.new(name: 'ProcessPath')
+    ProcessSha256 = Shapes::StringShape.new(name: 'ProcessSha256')
     ProductCode = Shapes::StructureShape.new(name: 'ProductCode')
     ProductCodes = Shapes::ListShape.new(name: 'ProductCodes')
     ProfileSubtype = Shapes::StringShape.new(name: 'ProfileSubtype')
@@ -655,11 +670,19 @@ module Aws::GuardDuty
     Actor.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
     Actor.add_member(:user, Shapes::ShapeRef.new(shape: User, location_name: "user"))
     Actor.add_member(:session, Shapes::ShapeRef.new(shape: Session, location_name: "session"))
+    Actor.add_member(:process, Shapes::ShapeRef.new(shape: ActorProcess, location_name: "process"))
     Actor.struct_class = Types::Actor
 
     ActorIds.member = Shapes::ShapeRef.new(shape: String)
 
+    ActorProcess.add_member(:name, Shapes::ShapeRef.new(shape: ProcessName, required: true, location_name: "name"))
+    ActorProcess.add_member(:path, Shapes::ShapeRef.new(shape: ProcessPath, required: true, location_name: "path"))
+    ActorProcess.add_member(:sha_256, Shapes::ShapeRef.new(shape: ProcessSha256, location_name: "sha256"))
+    ActorProcess.struct_class = Types::ActorProcess
+
     Actors.member = Shapes::ShapeRef.new(shape: Actor)
+
+    AdditionalSequenceTypes.member = Shapes::ShapeRef.new(shape: FindingType)
 
     AddonDetails.add_member(:addon_version, Shapes::ShapeRef.new(shape: String, location_name: "addonVersion"))
     AddonDetails.add_member(:addon_status, Shapes::ShapeRef.new(shape: String, location_name: "addonStatus"))
@@ -782,9 +805,15 @@ module Aws::GuardDuty
     Container.add_member(:security_context, Shapes::ShapeRef.new(shape: SecurityContext, location_name: "securityContext"))
     Container.struct_class = Types::Container
 
+    ContainerFindingResource.add_member(:image, Shapes::ShapeRef.new(shape: String, required: true, location_name: "image"))
+    ContainerFindingResource.add_member(:image_uid, Shapes::ShapeRef.new(shape: ContainerImageUid, location_name: "imageUid"))
+    ContainerFindingResource.struct_class = Types::ContainerFindingResource
+
     ContainerInstanceDetails.add_member(:covered_container_instances, Shapes::ShapeRef.new(shape: Long, location_name: "coveredContainerInstances"))
     ContainerInstanceDetails.add_member(:compatible_container_instances, Shapes::ShapeRef.new(shape: Long, location_name: "compatibleContainerInstances"))
     ContainerInstanceDetails.struct_class = Types::ContainerInstanceDetails
+
+    ContainerUids.member = Shapes::ShapeRef.new(shape: ContainerUid)
 
     Containers.member = Shapes::ShapeRef.new(shape: Container)
 
@@ -1180,6 +1209,8 @@ module Aws::GuardDuty
     Ec2Instance.add_member(:ec2_network_interface_uids, Shapes::ShapeRef.new(shape: Ec2NetworkInterfaceUids, location_name: "ec2NetworkInterfaceUids"))
     Ec2Instance.struct_class = Types::Ec2Instance
 
+    Ec2InstanceUids.member = Shapes::ShapeRef.new(shape: Ec2InstanceUid)
+
     Ec2NetworkInterface.add_member(:ipv_6_addresses, Shapes::ShapeRef.new(shape: Ipv6Addresses, location_name: "ipv6Addresses"))
     Ec2NetworkInterface.add_member(:private_ip_addresses, Shapes::ShapeRef.new(shape: PrivateIpAddresses, location_name: "privateIpAddresses"))
     Ec2NetworkInterface.add_member(:public_ip, Shapes::ShapeRef.new(shape: String, location_name: "publicIp"))
@@ -1212,6 +1243,13 @@ module Aws::GuardDuty
     EcsTaskDetails.add_member(:group, Shapes::ShapeRef.new(shape: String, location_name: "group"))
     EcsTaskDetails.add_member(:launch_type, Shapes::ShapeRef.new(shape: String, location_name: "launchType"))
     EcsTaskDetails.struct_class = Types::EcsTaskDetails
+
+    EksCluster.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
+    EksCluster.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    EksCluster.add_member(:status, Shapes::ShapeRef.new(shape: ClusterStatus, location_name: "status"))
+    EksCluster.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
+    EksCluster.add_member(:ec2_instance_uids, Shapes::ShapeRef.new(shape: Ec2InstanceUids, location_name: "ec2InstanceUids"))
+    EksCluster.struct_class = Types::EksCluster
 
     EksClusterDetails.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     EksClusterDetails.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
@@ -1606,6 +1644,11 @@ module Aws::GuardDuty
     KubernetesUserDetails.add_member(:session_name, Shapes::ShapeRef.new(shape: SessionNameList, location_name: "sessionName"))
     KubernetesUserDetails.add_member(:impersonated_user, Shapes::ShapeRef.new(shape: ImpersonatedUser, location_name: "impersonatedUser"))
     KubernetesUserDetails.struct_class = Types::KubernetesUserDetails
+
+    KubernetesWorkload.add_member(:container_uids, Shapes::ShapeRef.new(shape: ContainerUids, location_name: "containerUids"))
+    KubernetesWorkload.add_member(:namespace, Shapes::ShapeRef.new(shape: String, location_name: "namespace"))
+    KubernetesWorkload.add_member(:kubernetes_resources_types, Shapes::ShapeRef.new(shape: KubernetesResourcesTypes, location_name: "kubernetesResourcesTypes"))
+    KubernetesWorkload.struct_class = Types::KubernetesWorkload
 
     KubernetesWorkloadDetails.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     KubernetesWorkloadDetails.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
@@ -2127,6 +2170,9 @@ module Aws::GuardDuty
     ResourceData.add_member(:access_key, Shapes::ShapeRef.new(shape: AccessKey, location_name: "accessKey"))
     ResourceData.add_member(:ec2_network_interface, Shapes::ShapeRef.new(shape: Ec2NetworkInterface, location_name: "ec2NetworkInterface"))
     ResourceData.add_member(:s3_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "s3Object"))
+    ResourceData.add_member(:eks_cluster, Shapes::ShapeRef.new(shape: EksCluster, location_name: "eksCluster"))
+    ResourceData.add_member(:kubernetes_workload, Shapes::ShapeRef.new(shape: KubernetesWorkload, location_name: "kubernetesWorkload"))
+    ResourceData.add_member(:container, Shapes::ShapeRef.new(shape: ContainerFindingResource, location_name: "container"))
     ResourceData.struct_class = Types::ResourceData
 
     ResourceDetails.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, location_name: "instanceArn"))
@@ -2322,6 +2368,7 @@ module Aws::GuardDuty
     Sequence.add_member(:endpoints, Shapes::ShapeRef.new(shape: NetworkEndpoints, location_name: "endpoints"))
     Sequence.add_member(:signals, Shapes::ShapeRef.new(shape: Signals, required: true, location_name: "signals"))
     Sequence.add_member(:sequence_indicators, Shapes::ShapeRef.new(shape: Indicators, location_name: "sequenceIndicators"))
+    Sequence.add_member(:additional_sequence_types, Shapes::ShapeRef.new(shape: AdditionalSequenceTypes, location_name: "additionalSequenceTypes"))
     Sequence.struct_class = Types::Sequence
 
     Service.add_member(:action, Shapes::ShapeRef.new(shape: Action, location_name: "action"))

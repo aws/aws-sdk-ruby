@@ -194,6 +194,29 @@ module Aws::GuardDuty
     #
     # @!attribute [rw] email
     #   The email address of the member account.
+    #
+    #   The rules for a valid email address:
+    #
+    #   * The email address must be a minimum of 6 and a maximum of 64
+    #     characters long.
+    #
+    #   * All characters must be 7-bit ASCII characters.
+    #
+    #   * There must be one and only one @ symbol, which separates the local
+    #     name from the domain name.
+    #
+    #   * The local name can't contain any of the following characters:
+    #
+    #     whitespace, " ' ( ) &lt; &gt; \[ \] : ' , \\ \| % &amp;
+    #
+    #   * The local name can't begin with a dot (.).
+    #
+    #   * The domain name can consist of only the characters \[a-z\],
+    #     \[A-Z\], \[0-9\], hyphen (-), or dot (.).
+    #
+    #   * The domain name can't begin or end with a dot (.) or hyphen (-).
+    #
+    #   * The domain name must contain at least one dot.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AccountDetail AWS API Documentation
@@ -353,12 +376,47 @@ module Aws::GuardDuty
     #   initiated.
     #   @return [Types::Session]
     #
+    # @!attribute [rw] process
+    #   Contains information about the process associated with the threat
+    #   actor. This includes details such as process name, path, execution
+    #   time, and unique identifiers that help track the actor's activities
+    #   within the system.
+    #   @return [Types::ActorProcess]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Actor AWS API Documentation
     #
     class Actor < Struct.new(
       :id,
       :user,
-      :session)
+      :session,
+      :process)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a process involved in a GuardDuty finding,
+    # including process identification, execution details, and file
+    # information.
+    #
+    # @!attribute [rw] name
+    #   The name of the process as it appears in the system.
+    #   @return [String]
+    #
+    # @!attribute [rw] path
+    #   The full file path to the process executable on the system.
+    #   @return [String]
+    #
+    # @!attribute [rw] sha_256
+    #   The SHA256 hash of the process executable file, which can be used
+    #   for identification and verification purposes.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ActorProcess AWS API Documentation
+    #
+    class ActorProcess < Struct.new(
+      :name,
+      :path,
+      :sha_256)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -892,6 +950,28 @@ module Aws::GuardDuty
       :image_prefix,
       :volume_mounts,
       :security_context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about container resources involved in a GuardDuty
+    # finding. This structure provides details about containers that were
+    # identified as part of suspicious or malicious activity.
+    #
+    # @!attribute [rw] image
+    #   The container image information, including the image name and tag
+    #   used to run the container that was involved in the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_uid
+    #   The unique ID associated with the container image.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ContainerFindingResource AWS API Documentation
+    #
+    class ContainerFindingResource < Struct.new(
+      :image,
+      :image_uid)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3252,6 +3332,46 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the Amazon EKS cluster involved in a
+    # GuardDuty finding, including cluster identification, status, and
+    # network configuration.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) that uniquely identifies the Amazon
+    #   EKS cluster involved in the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp indicating when the Amazon EKS cluster was created, in
+    #   UTC format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the Amazon EKS cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the Amazon Virtual Private Cloud (Amazon VPC) associated
+    #   with the Amazon EKS cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] ec2_instance_uids
+    #   A list of unique identifiers for the Amazon EC2 instances that serve
+    #   as worker nodes in the Amazon EKS cluster.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/EksCluster AWS API Documentation
+    #
+    class EksCluster < Struct.new(
+      :arn,
+      :created_at,
+      :status,
+      :vpc_id,
+      :ec2_instance_uids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about the EKS cluster involved in a Kubernetes finding.
     #
     # @!attribute [rw] name
@@ -3407,11 +3527,6 @@ module Aws::GuardDuty
     # @!attribute [rw] criterion_key
     #   An enum value representing possible scan properties to match with
     #   given scan entries.
-    #
-    #   <note markdown="1"> Replace the enum value `CLUSTER_NAME` with `EKS_CLUSTER_NAME`.
-    #   `CLUSTER_NAME` has been deprecated.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] filter_condition
@@ -3459,7 +3574,17 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The Region where the finding was generated.
+    #   The Region where the finding was generated. For findings generated
+    #   from [Global Service Events][1], the Region value in the finding
+    #   might differ from the Region where GuardDuty identifies the
+    #   potential threat. For more information, see [How GuardDuty handles
+    #   Amazon Web Services CloudTrail global events][2] in the *Amazon
+    #   GuardDuty User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-global-service-events
+    #   [2]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_data-sources.html#cloudtrail_global
     #   @return [String]
     #
     # @!attribute [rw] resource
@@ -5058,6 +5183,34 @@ module Aws::GuardDuty
       :groups,
       :session_name,
       :impersonated_user)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about Kubernetes workloads involved in a
+    # GuardDuty finding, including pods, deployments, and other Kubernetes
+    # resources.
+    #
+    # @!attribute [rw] container_uids
+    #   A list of unique identifiers for the containers that are part of the
+    #   Kubernetes workload.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] namespace
+    #   The Kubernetes namespace in which the workload is running, providing
+    #   logical isolation within the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] kubernetes_resources_types
+    #   The types of Kubernetes resources involved in the workload.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KubernetesWorkload AWS API Documentation
+    #
+    class KubernetesWorkload < Struct.new(
+      :container_uids,
+      :namespace,
+      :kubernetes_resources_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7718,6 +7871,23 @@ module Aws::GuardDuty
     #   Contains information about the Amazon S3 object.
     #   @return [Types::S3Object]
     #
+    # @!attribute [rw] eks_cluster
+    #   Contains detailed information about the Amazon EKS cluster
+    #   associated with the activity that prompted GuardDuty to generate a
+    #   finding.
+    #   @return [Types::EksCluster]
+    #
+    # @!attribute [rw] kubernetes_workload
+    #   Contains detailed information about the Kubernetes workload
+    #   associated with the activity that prompted GuardDuty to generate a
+    #   finding.
+    #   @return [Types::KubernetesWorkload]
+    #
+    # @!attribute [rw] container
+    #   Contains detailed information about the container associated with
+    #   the activity that prompted GuardDuty to generate a finding.
+    #   @return [Types::ContainerFindingResource]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ResourceData AWS API Documentation
     #
     class ResourceData < Struct.new(
@@ -7725,7 +7895,10 @@ module Aws::GuardDuty
       :ec2_instance,
       :access_key,
       :ec2_network_interface,
-      :s3_object)
+      :s3_object,
+      :eks_cluster,
+      :kubernetes_workload,
+      :container)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8657,6 +8830,12 @@ module Aws::GuardDuty
     #   sequence.
     #   @return [Array<Types::Indicator>]
     #
+    # @!attribute [rw] additional_sequence_types
+    #   Additional types of sequences that may be associated with the attack
+    #   sequence finding, providing further context about the nature of the
+    #   detected threat.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Sequence AWS API Documentation
     #
     class Sequence < Struct.new(
@@ -8666,7 +8845,8 @@ module Aws::GuardDuty
       :resources,
       :endpoints,
       :signals,
-      :sequence_indicators)
+      :sequence_indicators,
+      :additional_sequence_types)
       SENSITIVE = []
       include Aws::Structure
     end

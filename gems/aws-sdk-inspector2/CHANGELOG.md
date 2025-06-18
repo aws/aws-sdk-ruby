@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2025-06-17)
+------------------
+
+* Feature - Add Code Repository Scanning as part of AWS InspectorV2
+
 1.53.0 (2025-06-02)
 ------------------
 

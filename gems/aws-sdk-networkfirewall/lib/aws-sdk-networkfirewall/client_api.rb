@@ -14,7 +14,10 @@ module Aws::NetworkFirewall
 
     include Seahorse::Model
 
+    AWSAccountId = Shapes::StringShape.new(name: 'AWSAccountId')
     AZSyncState = Shapes::StructureShape.new(name: 'AZSyncState')
+    AcceptNetworkFirewallTransitGatewayAttachmentRequest = Shapes::StructureShape.new(name: 'AcceptNetworkFirewallTransitGatewayAttachmentRequest')
+    AcceptNetworkFirewallTransitGatewayAttachmentResponse = Shapes::StructureShape.new(name: 'AcceptNetworkFirewallTransitGatewayAttachmentResponse')
     ActionDefinition = Shapes::StructureShape.new(name: 'ActionDefinition')
     ActionName = Shapes::StringShape.new(name: 'ActionName')
     Address = Shapes::StructureShape.new(name: 'Address')
@@ -29,14 +32,20 @@ module Aws::NetworkFirewall
     AnalysisResult = Shapes::StructureShape.new(name: 'AnalysisResult')
     AnalysisResultList = Shapes::ListShape.new(name: 'AnalysisResultList')
     AnalysisTypeReportResult = Shapes::StructureShape.new(name: 'AnalysisTypeReportResult')
+    AssociateAvailabilityZonesRequest = Shapes::StructureShape.new(name: 'AssociateAvailabilityZonesRequest')
+    AssociateAvailabilityZonesResponse = Shapes::StructureShape.new(name: 'AssociateAvailabilityZonesResponse')
     AssociateFirewallPolicyRequest = Shapes::StructureShape.new(name: 'AssociateFirewallPolicyRequest')
     AssociateFirewallPolicyResponse = Shapes::StructureShape.new(name: 'AssociateFirewallPolicyResponse')
     AssociateSubnetsRequest = Shapes::StructureShape.new(name: 'AssociateSubnetsRequest')
     AssociateSubnetsResponse = Shapes::StructureShape.new(name: 'AssociateSubnetsResponse')
     AssociationSyncState = Shapes::MapShape.new(name: 'AssociationSyncState')
     Attachment = Shapes::StructureShape.new(name: 'Attachment')
+    AttachmentId = Shapes::StringShape.new(name: 'AttachmentId')
     AttachmentStatus = Shapes::StringShape.new(name: 'AttachmentStatus')
     AvailabilityZone = Shapes::StringShape.new(name: 'AvailabilityZone')
+    AvailabilityZoneMapping = Shapes::StructureShape.new(name: 'AvailabilityZoneMapping')
+    AvailabilityZoneMappingString = Shapes::StringShape.new(name: 'AvailabilityZoneMappingString')
+    AvailabilityZoneMappings = Shapes::ListShape.new(name: 'AvailabilityZoneMappings')
     AvailabilityZoneMetadata = Shapes::StructureShape.new(name: 'AvailabilityZoneMetadata')
     AzSubnet = Shapes::StringShape.new(name: 'AzSubnet')
     AzSubnets = Shapes::ListShape.new(name: 'AzSubnets')
@@ -62,10 +71,13 @@ module Aws::NetworkFirewall
     CreateVpcEndpointAssociationResponse = Shapes::StructureShape.new(name: 'CreateVpcEndpointAssociationResponse')
     CustomAction = Shapes::StructureShape.new(name: 'CustomAction')
     CustomActions = Shapes::ListShape.new(name: 'CustomActions')
+    DeepThreatInspection = Shapes::BooleanShape.new(name: 'DeepThreatInspection')
     DeleteFirewallPolicyRequest = Shapes::StructureShape.new(name: 'DeleteFirewallPolicyRequest')
     DeleteFirewallPolicyResponse = Shapes::StructureShape.new(name: 'DeleteFirewallPolicyResponse')
     DeleteFirewallRequest = Shapes::StructureShape.new(name: 'DeleteFirewallRequest')
     DeleteFirewallResponse = Shapes::StructureShape.new(name: 'DeleteFirewallResponse')
+    DeleteNetworkFirewallTransitGatewayAttachmentRequest = Shapes::StructureShape.new(name: 'DeleteNetworkFirewallTransitGatewayAttachmentRequest')
+    DeleteNetworkFirewallTransitGatewayAttachmentResponse = Shapes::StructureShape.new(name: 'DeleteNetworkFirewallTransitGatewayAttachmentResponse')
     DeleteResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyRequest')
     DeleteResourcePolicyResponse = Shapes::StructureShape.new(name: 'DeleteResourcePolicyResponse')
     DeleteRuleGroupRequest = Shapes::StructureShape.new(name: 'DeleteRuleGroupRequest')
@@ -90,6 +102,8 @@ module Aws::NetworkFirewall
     DescribeRuleGroupMetadataResponse = Shapes::StructureShape.new(name: 'DescribeRuleGroupMetadataResponse')
     DescribeRuleGroupRequest = Shapes::StructureShape.new(name: 'DescribeRuleGroupRequest')
     DescribeRuleGroupResponse = Shapes::StructureShape.new(name: 'DescribeRuleGroupResponse')
+    DescribeRuleGroupSummaryRequest = Shapes::StructureShape.new(name: 'DescribeRuleGroupSummaryRequest')
+    DescribeRuleGroupSummaryResponse = Shapes::StructureShape.new(name: 'DescribeRuleGroupSummaryResponse')
     DescribeTLSInspectionConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeTLSInspectionConfigurationRequest')
     DescribeTLSInspectionConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeTLSInspectionConfigurationResponse')
     DescribeVpcEndpointAssociationRequest = Shapes::StructureShape.new(name: 'DescribeVpcEndpointAssociationRequest')
@@ -99,6 +113,8 @@ module Aws::NetworkFirewall
     Dimension = Shapes::StructureShape.new(name: 'Dimension')
     DimensionValue = Shapes::StringShape.new(name: 'DimensionValue')
     Dimensions = Shapes::ListShape.new(name: 'Dimensions')
+    DisassociateAvailabilityZonesRequest = Shapes::StructureShape.new(name: 'DisassociateAvailabilityZonesRequest')
+    DisassociateAvailabilityZonesResponse = Shapes::StructureShape.new(name: 'DisassociateAvailabilityZonesResponse')
     DisassociateSubnetsRequest = Shapes::StructureShape.new(name: 'DisassociateSubnetsRequest')
     DisassociateSubnetsResponse = Shapes::StructureShape.new(name: 'DisassociateSubnetsResponse')
     Domain = Shapes::StringShape.new(name: 'Domain')
@@ -211,6 +227,8 @@ module Aws::NetworkFirewall
     PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
     PutResourcePolicyResponse = Shapes::StructureShape.new(name: 'PutResourcePolicyResponse')
     ReferenceSets = Shapes::StructureShape.new(name: 'ReferenceSets')
+    RejectNetworkFirewallTransitGatewayAttachmentRequest = Shapes::StructureShape.new(name: 'RejectNetworkFirewallTransitGatewayAttachmentRequest')
+    RejectNetworkFirewallTransitGatewayAttachmentResponse = Shapes::StructureShape.new(name: 'RejectNetworkFirewallTransitGatewayAttachmentResponse')
     ReportTime = Shapes::TimestampShape.new(name: 'ReportTime')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
@@ -232,6 +250,8 @@ module Aws::NetworkFirewall
     RuleOption = Shapes::StructureShape.new(name: 'RuleOption')
     RuleOptions = Shapes::ListShape.new(name: 'RuleOptions')
     RuleOrder = Shapes::StringShape.new(name: 'RuleOrder')
+    RuleSummaries = Shapes::ListShape.new(name: 'RuleSummaries')
+    RuleSummary = Shapes::StructureShape.new(name: 'RuleSummary')
     RuleTargets = Shapes::ListShape.new(name: 'RuleTargets')
     RuleVariableName = Shapes::StringShape.new(name: 'RuleVariableName')
     RuleVariables = Shapes::StructureShape.new(name: 'RuleVariables')
@@ -278,6 +298,10 @@ module Aws::NetworkFirewall
     StreamExceptionPolicy = Shapes::StringShape.new(name: 'StreamExceptionPolicy')
     SubnetMapping = Shapes::StructureShape.new(name: 'SubnetMapping')
     SubnetMappings = Shapes::ListShape.new(name: 'SubnetMappings')
+    Summary = Shapes::StructureShape.new(name: 'Summary')
+    SummaryConfiguration = Shapes::StructureShape.new(name: 'SummaryConfiguration')
+    SummaryRuleOption = Shapes::StringShape.new(name: 'SummaryRuleOption')
+    SummaryRuleOptions = Shapes::ListShape.new(name: 'SummaryRuleOptions')
     SupportedAvailabilityZones = Shapes::MapShape.new(name: 'SupportedAvailabilityZones')
     SyncState = Shapes::StructureShape.new(name: 'SyncState')
     SyncStateConfig = Shapes::MapShape.new(name: 'SyncStateConfig')
@@ -302,10 +326,17 @@ module Aws::NetworkFirewall
     TcpIdleTimeoutRangeBound = Shapes::IntegerShape.new(name: 'TcpIdleTimeoutRangeBound')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TlsCertificateData = Shapes::StructureShape.new(name: 'TlsCertificateData')
+    TransitGatewayAttachmentId = Shapes::StringShape.new(name: 'TransitGatewayAttachmentId')
+    TransitGatewayAttachmentStatus = Shapes::StringShape.new(name: 'TransitGatewayAttachmentStatus')
+    TransitGatewayAttachmentSyncState = Shapes::StructureShape.new(name: 'TransitGatewayAttachmentSyncState')
+    TransitGatewayAttachmentSyncStateMessage = Shapes::StringShape.new(name: 'TransitGatewayAttachmentSyncStateMessage')
+    TransitGatewayId = Shapes::StringShape.new(name: 'TransitGatewayId')
     UniqueSources = Shapes::StructureShape.new(name: 'UniqueSources')
     UnsupportedOperationException = Shapes::StructureShape.new(name: 'UnsupportedOperationException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateAvailabilityZoneChangeProtectionRequest = Shapes::StructureShape.new(name: 'UpdateAvailabilityZoneChangeProtectionRequest')
+    UpdateAvailabilityZoneChangeProtectionResponse = Shapes::StructureShape.new(name: 'UpdateAvailabilityZoneChangeProtectionResponse')
     UpdateFirewallAnalysisSettingsRequest = Shapes::StructureShape.new(name: 'UpdateFirewallAnalysisSettingsRequest')
     UpdateFirewallAnalysisSettingsResponse = Shapes::StructureShape.new(name: 'UpdateFirewallAnalysisSettingsResponse')
     UpdateFirewallDeleteProtectionRequest = Shapes::StructureShape.new(name: 'UpdateFirewallDeleteProtectionRequest')
@@ -340,6 +371,13 @@ module Aws::NetworkFirewall
     AZSyncState.add_member(:attachment, Shapes::ShapeRef.new(shape: Attachment, location_name: "Attachment"))
     AZSyncState.struct_class = Types::AZSyncState
 
+    AcceptNetworkFirewallTransitGatewayAttachmentRequest.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, required: true, location_name: "TransitGatewayAttachmentId"))
+    AcceptNetworkFirewallTransitGatewayAttachmentRequest.struct_class = Types::AcceptNetworkFirewallTransitGatewayAttachmentRequest
+
+    AcceptNetworkFirewallTransitGatewayAttachmentResponse.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, required: true, location_name: "TransitGatewayAttachmentId"))
+    AcceptNetworkFirewallTransitGatewayAttachmentResponse.add_member(:transit_gateway_attachment_status, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentStatus, required: true, location_name: "TransitGatewayAttachmentStatus"))
+    AcceptNetworkFirewallTransitGatewayAttachmentResponse.struct_class = Types::AcceptNetworkFirewallTransitGatewayAttachmentResponse
+
     ActionDefinition.add_member(:publish_metric_action, Shapes::ShapeRef.new(shape: PublishMetricAction, location_name: "PublishMetricAction"))
     ActionDefinition.struct_class = Types::ActionDefinition
 
@@ -373,6 +411,18 @@ module Aws::NetworkFirewall
     AnalysisTypeReportResult.add_member(:unique_sources, Shapes::ShapeRef.new(shape: UniqueSources, location_name: "UniqueSources"))
     AnalysisTypeReportResult.struct_class = Types::AnalysisTypeReportResult
 
+    AssociateAvailabilityZonesRequest.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
+    AssociateAvailabilityZonesRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
+    AssociateAvailabilityZonesRequest.add_member(:firewall_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "FirewallName"))
+    AssociateAvailabilityZonesRequest.add_member(:availability_zone_mappings, Shapes::ShapeRef.new(shape: AvailabilityZoneMappings, required: true, location_name: "AvailabilityZoneMappings"))
+    AssociateAvailabilityZonesRequest.struct_class = Types::AssociateAvailabilityZonesRequest
+
+    AssociateAvailabilityZonesResponse.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
+    AssociateAvailabilityZonesResponse.add_member(:firewall_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "FirewallName"))
+    AssociateAvailabilityZonesResponse.add_member(:availability_zone_mappings, Shapes::ShapeRef.new(shape: AvailabilityZoneMappings, location_name: "AvailabilityZoneMappings"))
+    AssociateAvailabilityZonesResponse.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
+    AssociateAvailabilityZonesResponse.struct_class = Types::AssociateAvailabilityZonesResponse
+
     AssociateFirewallPolicyRequest.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
     AssociateFirewallPolicyRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
     AssociateFirewallPolicyRequest.add_member(:firewall_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "FirewallName"))
@@ -405,6 +455,11 @@ module Aws::NetworkFirewall
     Attachment.add_member(:status, Shapes::ShapeRef.new(shape: AttachmentStatus, location_name: "Status"))
     Attachment.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "StatusMessage"))
     Attachment.struct_class = Types::Attachment
+
+    AvailabilityZoneMapping.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZoneMappingString, required: true, location_name: "AvailabilityZone"))
+    AvailabilityZoneMapping.struct_class = Types::AvailabilityZoneMapping
+
+    AvailabilityZoneMappings.member = Shapes::ShapeRef.new(shape: AvailabilityZoneMapping)
 
     AvailabilityZoneMetadata.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IPAddressType, location_name: "IPAddressType"))
     AvailabilityZoneMetadata.struct_class = Types::AvailabilityZoneMetadata
@@ -448,6 +503,9 @@ module Aws::NetworkFirewall
     CreateFirewallRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateFirewallRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
     CreateFirewallRequest.add_member(:enabled_analysis_types, Shapes::ShapeRef.new(shape: EnabledAnalysisTypes, location_name: "EnabledAnalysisTypes"))
+    CreateFirewallRequest.add_member(:transit_gateway_id, Shapes::ShapeRef.new(shape: TransitGatewayId, location_name: "TransitGatewayId"))
+    CreateFirewallRequest.add_member(:availability_zone_mappings, Shapes::ShapeRef.new(shape: AvailabilityZoneMappings, location_name: "AvailabilityZoneMappings"))
+    CreateFirewallRequest.add_member(:availability_zone_change_protection, Shapes::ShapeRef.new(shape: Boolean, location_name: "AvailabilityZoneChangeProtection"))
     CreateFirewallRequest.struct_class = Types::CreateFirewallRequest
 
     CreateFirewallResponse.add_member(:firewall, Shapes::ShapeRef.new(shape: Firewall, location_name: "Firewall"))
@@ -465,6 +523,7 @@ module Aws::NetworkFirewall
     CreateRuleGroupRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
     CreateRuleGroupRequest.add_member(:source_metadata, Shapes::ShapeRef.new(shape: SourceMetadata, location_name: "SourceMetadata"))
     CreateRuleGroupRequest.add_member(:analyze_rule_group, Shapes::ShapeRef.new(shape: Boolean, location_name: "AnalyzeRuleGroup"))
+    CreateRuleGroupRequest.add_member(:summary_configuration, Shapes::ShapeRef.new(shape: SummaryConfiguration, location_name: "SummaryConfiguration"))
     CreateRuleGroupRequest.struct_class = Types::CreateRuleGroupRequest
 
     CreateRuleGroupResponse.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, required: true, location_name: "UpdateToken"))
@@ -514,6 +573,13 @@ module Aws::NetworkFirewall
     DeleteFirewallResponse.add_member(:firewall_status, Shapes::ShapeRef.new(shape: FirewallStatus, location_name: "FirewallStatus"))
     DeleteFirewallResponse.struct_class = Types::DeleteFirewallResponse
 
+    DeleteNetworkFirewallTransitGatewayAttachmentRequest.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, required: true, location_name: "TransitGatewayAttachmentId"))
+    DeleteNetworkFirewallTransitGatewayAttachmentRequest.struct_class = Types::DeleteNetworkFirewallTransitGatewayAttachmentRequest
+
+    DeleteNetworkFirewallTransitGatewayAttachmentResponse.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, required: true, location_name: "TransitGatewayAttachmentId"))
+    DeleteNetworkFirewallTransitGatewayAttachmentResponse.add_member(:transit_gateway_attachment_status, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentStatus, required: true, location_name: "TransitGatewayAttachmentStatus"))
+    DeleteNetworkFirewallTransitGatewayAttachmentResponse.struct_class = Types::DeleteNetworkFirewallTransitGatewayAttachmentResponse
+
     DeleteResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
     DeleteResourcePolicyRequest.struct_class = Types::DeleteResourcePolicyRequest
 
@@ -549,6 +615,7 @@ module Aws::NetworkFirewall
     DescribeFirewallMetadataResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     DescribeFirewallMetadataResponse.add_member(:status, Shapes::ShapeRef.new(shape: FirewallStatusValue, location_name: "Status"))
     DescribeFirewallMetadataResponse.add_member(:supported_availability_zones, Shapes::ShapeRef.new(shape: SupportedAvailabilityZones, location_name: "SupportedAvailabilityZones"))
+    DescribeFirewallMetadataResponse.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, location_name: "TransitGatewayAttachmentId"))
     DescribeFirewallMetadataResponse.struct_class = Types::DescribeFirewallMetadataResponse
 
     DescribeFirewallPolicyRequest.add_member(:firewall_policy_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "FirewallPolicyName"))
@@ -628,6 +695,16 @@ module Aws::NetworkFirewall
     DescribeRuleGroupResponse.add_member(:rule_group_response, Shapes::ShapeRef.new(shape: RuleGroupResponse, required: true, location_name: "RuleGroupResponse"))
     DescribeRuleGroupResponse.struct_class = Types::DescribeRuleGroupResponse
 
+    DescribeRuleGroupSummaryRequest.add_member(:rule_group_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "RuleGroupName"))
+    DescribeRuleGroupSummaryRequest.add_member(:rule_group_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "RuleGroupArn"))
+    DescribeRuleGroupSummaryRequest.add_member(:type, Shapes::ShapeRef.new(shape: RuleGroupType, location_name: "Type"))
+    DescribeRuleGroupSummaryRequest.struct_class = Types::DescribeRuleGroupSummaryRequest
+
+    DescribeRuleGroupSummaryResponse.add_member(:rule_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "RuleGroupName"))
+    DescribeRuleGroupSummaryResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    DescribeRuleGroupSummaryResponse.add_member(:summary, Shapes::ShapeRef.new(shape: Summary, location_name: "Summary"))
+    DescribeRuleGroupSummaryResponse.struct_class = Types::DescribeRuleGroupSummaryResponse
+
     DescribeTLSInspectionConfigurationRequest.add_member(:tls_inspection_configuration_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "TLSInspectionConfigurationArn"))
     DescribeTLSInspectionConfigurationRequest.add_member(:tls_inspection_configuration_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "TLSInspectionConfigurationName"))
     DescribeTLSInspectionConfigurationRequest.struct_class = Types::DescribeTLSInspectionConfigurationRequest
@@ -648,6 +725,18 @@ module Aws::NetworkFirewall
     Dimension.struct_class = Types::Dimension
 
     Dimensions.member = Shapes::ShapeRef.new(shape: Dimension)
+
+    DisassociateAvailabilityZonesRequest.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
+    DisassociateAvailabilityZonesRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
+    DisassociateAvailabilityZonesRequest.add_member(:firewall_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "FirewallName"))
+    DisassociateAvailabilityZonesRequest.add_member(:availability_zone_mappings, Shapes::ShapeRef.new(shape: AvailabilityZoneMappings, required: true, location_name: "AvailabilityZoneMappings"))
+    DisassociateAvailabilityZonesRequest.struct_class = Types::DisassociateAvailabilityZonesRequest
+
+    DisassociateAvailabilityZonesResponse.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
+    DisassociateAvailabilityZonesResponse.add_member(:firewall_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "FirewallName"))
+    DisassociateAvailabilityZonesResponse.add_member(:availability_zone_mappings, Shapes::ShapeRef.new(shape: AvailabilityZoneMappings, location_name: "AvailabilityZoneMappings"))
+    DisassociateAvailabilityZonesResponse.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
+    DisassociateAvailabilityZonesResponse.struct_class = Types::DisassociateAvailabilityZonesResponse
 
     DisassociateSubnetsRequest.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
     DisassociateSubnetsRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
@@ -681,10 +770,15 @@ module Aws::NetworkFirewall
     Firewall.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
     Firewall.add_member(:number_of_associations, Shapes::ShapeRef.new(shape: NumberOfAssociations, location_name: "NumberOfAssociations"))
     Firewall.add_member(:enabled_analysis_types, Shapes::ShapeRef.new(shape: EnabledAnalysisTypes, location_name: "EnabledAnalysisTypes"))
+    Firewall.add_member(:transit_gateway_id, Shapes::ShapeRef.new(shape: TransitGatewayId, location_name: "TransitGatewayId"))
+    Firewall.add_member(:transit_gateway_owner_account_id, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "TransitGatewayOwnerAccountId"))
+    Firewall.add_member(:availability_zone_mappings, Shapes::ShapeRef.new(shape: AvailabilityZoneMappings, location_name: "AvailabilityZoneMappings"))
+    Firewall.add_member(:availability_zone_change_protection, Shapes::ShapeRef.new(shape: Boolean, location_name: "AvailabilityZoneChangeProtection"))
     Firewall.struct_class = Types::Firewall
 
     FirewallMetadata.add_member(:firewall_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "FirewallName"))
     FirewallMetadata.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
+    FirewallMetadata.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, location_name: "TransitGatewayAttachmentId"))
     FirewallMetadata.struct_class = Types::FirewallMetadata
 
     FirewallPolicies.member = Shapes::ShapeRef.new(shape: FirewallPolicyMetadata)
@@ -721,6 +815,7 @@ module Aws::NetworkFirewall
     FirewallStatus.add_member(:configuration_sync_state_summary, Shapes::ShapeRef.new(shape: ConfigurationSyncState, required: true, location_name: "ConfigurationSyncStateSummary"))
     FirewallStatus.add_member(:sync_states, Shapes::ShapeRef.new(shape: SyncStates, location_name: "SyncStates"))
     FirewallStatus.add_member(:capacity_usage_summary, Shapes::ShapeRef.new(shape: CapacityUsageSummary, location_name: "CapacityUsageSummary"))
+    FirewallStatus.add_member(:transit_gateway_attachment_sync_state, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentSyncState, location_name: "TransitGatewayAttachmentSyncState"))
     FirewallStatus.struct_class = Types::FirewallStatus
 
     Firewalls.member = Shapes::ShapeRef.new(shape: FirewallMetadata)
@@ -986,6 +1081,13 @@ module Aws::NetworkFirewall
     ReferenceSets.add_member(:ip_set_references, Shapes::ShapeRef.new(shape: IPSetReferenceMap, location_name: "IPSetReferences"))
     ReferenceSets.struct_class = Types::ReferenceSets
 
+    RejectNetworkFirewallTransitGatewayAttachmentRequest.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, required: true, location_name: "TransitGatewayAttachmentId"))
+    RejectNetworkFirewallTransitGatewayAttachmentRequest.struct_class = Types::RejectNetworkFirewallTransitGatewayAttachmentRequest
+
+    RejectNetworkFirewallTransitGatewayAttachmentResponse.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, required: true, location_name: "TransitGatewayAttachmentId"))
+    RejectNetworkFirewallTransitGatewayAttachmentResponse.add_member(:transit_gateway_attachment_status, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentStatus, required: true, location_name: "TransitGatewayAttachmentStatus"))
+    RejectNetworkFirewallTransitGatewayAttachmentResponse.struct_class = Types::RejectNetworkFirewallTransitGatewayAttachmentResponse
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
@@ -1021,6 +1123,7 @@ module Aws::NetworkFirewall
     RuleGroupResponse.add_member(:sns_topic, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "SnsTopic"))
     RuleGroupResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: LastUpdateTime, location_name: "LastModifiedTime"))
     RuleGroupResponse.add_member(:analysis_results, Shapes::ShapeRef.new(shape: AnalysisResultList, location_name: "AnalysisResults"))
+    RuleGroupResponse.add_member(:summary_configuration, Shapes::ShapeRef.new(shape: SummaryConfiguration, location_name: "SummaryConfiguration"))
     RuleGroupResponse.struct_class = Types::RuleGroupResponse
 
     RuleGroups.member = Shapes::ShapeRef.new(shape: RuleGroupMetadata)
@@ -1032,6 +1135,13 @@ module Aws::NetworkFirewall
     RuleOption.struct_class = Types::RuleOption
 
     RuleOptions.member = Shapes::ShapeRef.new(shape: RuleOption)
+
+    RuleSummaries.member = Shapes::ShapeRef.new(shape: RuleSummary)
+
+    RuleSummary.add_member(:sid, Shapes::ShapeRef.new(shape: CollectionMember_String, location_name: "SID"))
+    RuleSummary.add_member(:msg, Shapes::ShapeRef.new(shape: CollectionMember_String, location_name: "Msg"))
+    RuleSummary.add_member(:metadata, Shapes::ShapeRef.new(shape: CollectionMember_String, location_name: "Metadata"))
+    RuleSummary.struct_class = Types::RuleSummary
 
     RuleTargets.member = Shapes::ShapeRef.new(shape: CollectionMember_String)
 
@@ -1130,6 +1240,7 @@ module Aws::NetworkFirewall
     StatefulRuleGroupReference.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
     StatefulRuleGroupReference.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, location_name: "Priority", metadata: {"box" => true}))
     StatefulRuleGroupReference.add_member(:override, Shapes::ShapeRef.new(shape: StatefulRuleGroupOverride, location_name: "Override"))
+    StatefulRuleGroupReference.add_member(:deep_threat_inspection, Shapes::ShapeRef.new(shape: DeepThreatInspection, location_name: "DeepThreatInspection"))
     StatefulRuleGroupReference.struct_class = Types::StatefulRuleGroupReference
 
     StatefulRuleGroupReferences.member = Shapes::ShapeRef.new(shape: StatefulRuleGroupReference)
@@ -1162,6 +1273,14 @@ module Aws::NetworkFirewall
     SubnetMapping.struct_class = Types::SubnetMapping
 
     SubnetMappings.member = Shapes::ShapeRef.new(shape: SubnetMapping)
+
+    Summary.add_member(:rule_summaries, Shapes::ShapeRef.new(shape: RuleSummaries, location_name: "RuleSummaries"))
+    Summary.struct_class = Types::Summary
+
+    SummaryConfiguration.add_member(:rule_options, Shapes::ShapeRef.new(shape: SummaryRuleOptions, location_name: "RuleOptions"))
+    SummaryConfiguration.struct_class = Types::SummaryConfiguration
+
+    SummaryRuleOptions.member = Shapes::ShapeRef.new(shape: SummaryRuleOption)
 
     SupportedAvailabilityZones.key = Shapes::ShapeRef.new(shape: AvailabilityZone)
     SupportedAvailabilityZones.value = Shapes::ShapeRef.new(shape: AvailabilityZoneMetadata)
@@ -1229,6 +1348,11 @@ module Aws::NetworkFirewall
     TlsCertificateData.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusReason, location_name: "StatusMessage"))
     TlsCertificateData.struct_class = Types::TlsCertificateData
 
+    TransitGatewayAttachmentSyncState.add_member(:attachment_id, Shapes::ShapeRef.new(shape: AttachmentId, location_name: "AttachmentId"))
+    TransitGatewayAttachmentSyncState.add_member(:transit_gateway_attachment_status, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentStatus, location_name: "TransitGatewayAttachmentStatus"))
+    TransitGatewayAttachmentSyncState.add_member(:status_message, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentSyncStateMessage, location_name: "StatusMessage"))
+    TransitGatewayAttachmentSyncState.struct_class = Types::TransitGatewayAttachmentSyncState
+
     UniqueSources.add_member(:count, Shapes::ShapeRef.new(shape: Count, location_name: "Count"))
     UniqueSources.struct_class = Types::UniqueSources
 
@@ -1240,6 +1364,18 @@ module Aws::NetworkFirewall
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateAvailabilityZoneChangeProtectionRequest.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
+    UpdateAvailabilityZoneChangeProtectionRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
+    UpdateAvailabilityZoneChangeProtectionRequest.add_member(:firewall_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "FirewallName"))
+    UpdateAvailabilityZoneChangeProtectionRequest.add_member(:availability_zone_change_protection, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "AvailabilityZoneChangeProtection"))
+    UpdateAvailabilityZoneChangeProtectionRequest.struct_class = Types::UpdateAvailabilityZoneChangeProtectionRequest
+
+    UpdateAvailabilityZoneChangeProtectionResponse.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
+    UpdateAvailabilityZoneChangeProtectionResponse.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
+    UpdateAvailabilityZoneChangeProtectionResponse.add_member(:firewall_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "FirewallName"))
+    UpdateAvailabilityZoneChangeProtectionResponse.add_member(:availability_zone_change_protection, Shapes::ShapeRef.new(shape: Boolean, location_name: "AvailabilityZoneChangeProtection"))
+    UpdateAvailabilityZoneChangeProtectionResponse.struct_class = Types::UpdateAvailabilityZoneChangeProtectionResponse
 
     UpdateFirewallAnalysisSettingsRequest.add_member(:enabled_analysis_types, Shapes::ShapeRef.new(shape: EnabledAnalysisTypes, location_name: "EnabledAnalysisTypes"))
     UpdateFirewallAnalysisSettingsRequest.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "FirewallArn"))
@@ -1337,6 +1473,7 @@ module Aws::NetworkFirewall
     UpdateRuleGroupRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
     UpdateRuleGroupRequest.add_member(:source_metadata, Shapes::ShapeRef.new(shape: SourceMetadata, location_name: "SourceMetadata"))
     UpdateRuleGroupRequest.add_member(:analyze_rule_group, Shapes::ShapeRef.new(shape: Boolean, location_name: "AnalyzeRuleGroup"))
+    UpdateRuleGroupRequest.add_member(:summary_configuration, Shapes::ShapeRef.new(shape: SummaryConfiguration, location_name: "SummaryConfiguration"))
     UpdateRuleGroupRequest.struct_class = Types::UpdateRuleGroupRequest
 
     UpdateRuleGroupResponse.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, required: true, location_name: "UpdateToken"))
@@ -1410,6 +1547,33 @@ module Aws::NetworkFirewall
         "targetPrefix" => "NetworkFirewall_20201112",
         "uid" => "network-firewall-2020-11-12",
       }
+
+      api.add_operation(:accept_network_firewall_transit_gateway_attachment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AcceptNetworkFirewallTransitGatewayAttachment"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AcceptNetworkFirewallTransitGatewayAttachmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: AcceptNetworkFirewallTransitGatewayAttachmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:associate_availability_zones, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateAvailabilityZones"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateAvailabilityZonesRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateAvailabilityZonesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientCapacityException)
+      end)
 
       api.add_operation(:associate_firewall_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AssociateFirewallPolicy"
@@ -1534,6 +1698,18 @@ module Aws::NetworkFirewall
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+      end)
+
+      api.add_operation(:delete_network_firewall_transit_gateway_attachment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteNetworkFirewallTransitGatewayAttachment"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteNetworkFirewallTransitGatewayAttachmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteNetworkFirewallTransitGatewayAttachmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:delete_resource_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -1685,6 +1861,18 @@ module Aws::NetworkFirewall
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:describe_rule_group_summary, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeRuleGroupSummary"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeRuleGroupSummaryRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeRuleGroupSummaryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:describe_tls_inspection_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeTLSInspectionConfiguration"
         o.http_method = "POST"
@@ -1707,6 +1895,20 @@ module Aws::NetworkFirewall
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:disassociate_availability_zones, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateAvailabilityZones"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateAvailabilityZonesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateAvailabilityZonesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
       end)
 
       api.add_operation(:disassociate_subnets, Seahorse::Model::Operation.new.tap do |o|
@@ -1911,6 +2113,18 @@ module Aws::NetworkFirewall
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourcePolicyException)
       end)
 
+      api.add_operation(:reject_network_firewall_transit_gateway_attachment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RejectNetworkFirewallTransitGatewayAttachment"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RejectNetworkFirewallTransitGatewayAttachmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: RejectNetworkFirewallTransitGatewayAttachmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:start_analysis_report, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartAnalysisReport"
         o.http_method = "POST"
@@ -1969,6 +2183,20 @@ module Aws::NetworkFirewall
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:update_availability_zone_change_protection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAvailabilityZoneChangeProtection"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAvailabilityZoneChangeProtectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAvailabilityZoneChangeProtectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceOwnerCheckException)
       end)
 
       api.add_operation(:update_firewall_analysis_settings, Seahorse::Model::Operation.new.tap do |o|

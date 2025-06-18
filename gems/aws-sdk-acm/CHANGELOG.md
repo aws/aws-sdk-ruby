@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2025-06-17)
+------------------
+
+* Feature - Adds support for Exportable Public Certificates
+
 1.88.0 (2025-06-02)
 ------------------
 

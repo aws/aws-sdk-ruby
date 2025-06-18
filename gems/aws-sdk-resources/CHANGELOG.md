@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.230.0 (2025-06-17)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-mpa` gem.
+
 3.229.0 (2025-06-04)
 ------------------
 

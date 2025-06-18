@@ -169,6 +169,7 @@ module Aws
                                  extended_key_usage: Array[("TLS_WEB_SERVER_AUTHENTICATION" | "TLS_WEB_CLIENT_AUTHENTICATION" | "CODE_SIGNING" | "EMAIL_PROTECTION" | "TIME_STAMPING" | "OCSP_SIGNING" | "IPSEC_END_SYSTEM" | "IPSEC_TUNNEL" | "IPSEC_USER" | "ANY" | "NONE" | "CUSTOM")]?,
                                  key_usage: Array[("DIGITAL_SIGNATURE" | "NON_REPUDIATION" | "KEY_ENCIPHERMENT" | "DATA_ENCIPHERMENT" | "KEY_AGREEMENT" | "CERTIFICATE_SIGNING" | "CRL_SIGNING" | "ENCIPHER_ONLY" | "DECIPHER_ONLY" | "ANY" | "CUSTOM")]?,
                                  key_types: Array[("RSA_1024" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "EC_prime256v1" | "EC_secp384r1" | "EC_secp521r1")]?,
+                                 export_option: ("ENABLED" | "DISABLED")?,
                                  managed_by: ("CLOUDFRONT")?
                                },
                                ?next_token: ::String,
@@ -232,7 +233,8 @@ module Aws
                                    },
                                  ],
                                  ?options: {
-                                   certificate_transparency_logging_preference: ("ENABLED" | "DISABLED")?
+                                   certificate_transparency_logging_preference: ("ENABLED" | "DISABLED")?,
+                                   export: ("ENABLED" | "DISABLED")?
                                  },
                                  ?certificate_authority_arn: ::String,
                                  ?tags: Array[
@@ -254,11 +256,23 @@ module Aws
                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _RevokeCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RevokeCertificateResponse]
+        def certificate_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACM/Client.html#revoke_certificate-instance_method
+      def revoke_certificate: (
+                                certificate_arn: ::String,
+                                revocation_reason: ("UNSPECIFIED" | "KEY_COMPROMISE" | "CA_COMPROMISE" | "AFFILIATION_CHANGED" | "SUPERCEDED" | "SUPERSEDED" | "CESSATION_OF_OPERATION" | "CERTIFICATE_HOLD" | "REMOVE_FROM_CRL" | "PRIVILEGE_WITHDRAWN" | "A_A_COMPROMISE")
+                              ) -> _RevokeCertificateResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RevokeCertificateResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACM/Client.html#update_certificate_options-instance_method
       def update_certificate_options: (
                                         certificate_arn: ::String,
                                         options: {
-                                          certificate_transparency_logging_preference: ("ENABLED" | "DISABLED")?
+                                          certificate_transparency_logging_preference: ("ENABLED" | "DISABLED")?,
+                                          export: ("ENABLED" | "DISABLED")?
                                         }
                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]

@@ -478,8 +478,8 @@ module Aws::EMRServerless
     #   The ID of the job run to cancel.
     #
     # @option params [Integer] :shutdown_grace_period_in_seconds
-    #   The duration (in seconds) to wait before forcefully terminating the
-    #   job after cancellation is requested.
+    #   The duration in seconds to wait before forcefully terminating the job
+    #   after cancellation is requested.
     #
     # @return [Types::CancelJobRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -893,6 +893,9 @@ module Aws::EMRServerless
     #   resp.job_run.created_at #=> Time
     #   resp.job_run.updated_at #=> Time
     #   resp.job_run.execution_role #=> String
+    #   resp.job_run.execution_iam_policy.policy #=> String
+    #   resp.job_run.execution_iam_policy.policy_arns #=> Array
+    #   resp.job_run.execution_iam_policy.policy_arns[0] #=> String
     #   resp.job_run.state #=> String, one of "SUBMITTED", "PENDING", "SCHEDULED", "RUNNING", "SUCCESS", "FAILED", "CANCELLING", "CANCELLED", "QUEUED"
     #   resp.job_run.state_details #=> String
     #   resp.job_run.release_label #=> String
@@ -1662,7 +1665,7 @@ module Aws::EMRServerless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-emrserverless'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

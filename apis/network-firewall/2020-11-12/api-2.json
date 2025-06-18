@@ -16,6 +16,39 @@
     "auth":["aws.auth#sigv4"]
   },
   "operations":{
+    "AcceptNetworkFirewallTransitGatewayAttachment":{
+      "name":"AcceptNetworkFirewallTransitGatewayAttachment",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AcceptNetworkFirewallTransitGatewayAttachmentRequest"},
+      "output":{"shape":"AcceptNetworkFirewallTransitGatewayAttachmentResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalServerError"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
+    "AssociateAvailabilityZones":{
+      "name":"AssociateAvailabilityZones",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AssociateAvailabilityZonesRequest"},
+      "output":{"shape":"AssociateAvailabilityZonesResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalServerError"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InvalidTokenException"},
+        {"shape":"InvalidOperationException"},
+        {"shape":"InsufficientCapacityException"}
+      ]
+    },
     "AssociateFirewallPolicy":{
       "name":"AssociateFirewallPolicy",
       "http":{
@@ -166,6 +199,21 @@
         {"shape":"InternalServerError"},
         {"shape":"UnsupportedOperationException"},
         {"shape":"InvalidOperationException"}
+      ]
+    },
+    "DeleteNetworkFirewallTransitGatewayAttachment":{
+      "name":"DeleteNetworkFirewallTransitGatewayAttachment",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteNetworkFirewallTransitGatewayAttachmentRequest"},
+      "output":{"shape":"DeleteNetworkFirewallTransitGatewayAttachmentResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalServerError"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"}
       ]
     },
     "DeleteResourcePolicy":{
@@ -353,6 +401,21 @@
         {"shape":"InternalServerError"}
       ]
     },
+    "DescribeRuleGroupSummary":{
+      "name":"DescribeRuleGroupSummary",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeRuleGroupSummaryRequest"},
+      "output":{"shape":"DescribeRuleGroupSummaryResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServerError"}
+      ]
+    },
     "DescribeTLSInspectionConfiguration":{
       "name":"DescribeTLSInspectionConfiguration",
       "http":{
@@ -381,6 +444,23 @@
         {"shape":"InternalServerError"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"ThrottlingException"}
+      ]
+    },
+    "DisassociateAvailabilityZones":{
+      "name":"DisassociateAvailabilityZones",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DisassociateAvailabilityZonesRequest"},
+      "output":{"shape":"DisassociateAvailabilityZonesResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalServerError"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InvalidTokenException"},
+        {"shape":"InvalidOperationException"}
       ]
     },
     "DisassociateSubnets":{
@@ -561,6 +641,21 @@
         {"shape":"InvalidResourcePolicyException"}
       ]
     },
+    "RejectNetworkFirewallTransitGatewayAttachment":{
+      "name":"RejectNetworkFirewallTransitGatewayAttachment",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RejectNetworkFirewallTransitGatewayAttachmentRequest"},
+      "output":{"shape":"RejectNetworkFirewallTransitGatewayAttachmentResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalServerError"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
     "StartAnalysisReport":{
       "name":"StartAnalysisReport",
       "http":{
@@ -634,6 +729,23 @@
         {"shape":"InternalServerError"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidRequestException"}
+      ]
+    },
+    "UpdateAvailabilityZoneChangeProtection":{
+      "name":"UpdateAvailabilityZoneChangeProtection",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateAvailabilityZoneChangeProtectionRequest"},
+      "output":{"shape":"UpdateAvailabilityZoneChangeProtectionResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalServerError"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InvalidTokenException"},
+        {"shape":"ResourceOwnerCheckException"}
       ]
     },
     "UpdateFirewallAnalysisSettings":{
@@ -802,10 +914,34 @@
     }
   },
   "shapes":{
+    "AWSAccountId":{
+      "type":"string",
+      "max":12,
+      "min":12,
+      "pattern":"^\\d{12}$"
+    },
     "AZSyncState":{
       "type":"structure",
       "members":{
         "Attachment":{"shape":"Attachment"}
+      }
+    },
+    "AcceptNetworkFirewallTransitGatewayAttachmentRequest":{
+      "type":"structure",
+      "required":["TransitGatewayAttachmentId"],
+      "members":{
+        "TransitGatewayAttachmentId":{"shape":"TransitGatewayAttachmentId"}
+      }
+    },
+    "AcceptNetworkFirewallTransitGatewayAttachmentResponse":{
+      "type":"structure",
+      "required":[
+        "TransitGatewayAttachmentId",
+        "TransitGatewayAttachmentStatus"
+      ],
+      "members":{
+        "TransitGatewayAttachmentId":{"shape":"TransitGatewayAttachmentId"},
+        "TransitGatewayAttachmentStatus":{"shape":"TransitGatewayAttachmentStatus"}
       }
     },
     "ActionDefinition":{
@@ -889,6 +1025,25 @@
         "UniqueSources":{"shape":"UniqueSources"}
       }
     },
+    "AssociateAvailabilityZonesRequest":{
+      "type":"structure",
+      "required":["AvailabilityZoneMappings"],
+      "members":{
+        "UpdateToken":{"shape":"UpdateToken"},
+        "FirewallArn":{"shape":"ResourceArn"},
+        "FirewallName":{"shape":"ResourceName"},
+        "AvailabilityZoneMappings":{"shape":"AvailabilityZoneMappings"}
+      }
+    },
+    "AssociateAvailabilityZonesResponse":{
+      "type":"structure",
+      "members":{
+        "FirewallArn":{"shape":"ResourceArn"},
+        "FirewallName":{"shape":"ResourceName"},
+        "AvailabilityZoneMappings":{"shape":"AvailabilityZoneMappings"},
+        "UpdateToken":{"shape":"UpdateToken"}
+      }
+    },
     "AssociateFirewallPolicyRequest":{
       "type":"structure",
       "required":["FirewallPolicyArn"],
@@ -941,6 +1096,7 @@
         "StatusMessage":{"shape":"StatusMessage"}
       }
     },
+    "AttachmentId":{"type":"string"},
     "AttachmentStatus":{
       "type":"string",
       "enum":[
@@ -953,6 +1109,23 @@
       ]
     },
     "AvailabilityZone":{"type":"string"},
+    "AvailabilityZoneMapping":{
+      "type":"structure",
+      "required":["AvailabilityZone"],
+      "members":{
+        "AvailabilityZone":{"shape":"AvailabilityZoneMappingString"}
+      }
+    },
+    "AvailabilityZoneMappingString":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"\\S+"
+    },
+    "AvailabilityZoneMappings":{
+      "type":"list",
+      "member":{"shape":"AvailabilityZoneMapping"}
+    },
     "AvailabilityZoneMetadata":{
       "type":"structure",
       "members":{
@@ -1054,7 +1227,10 @@
         "Description":{"shape":"Description"},
         "Tags":{"shape":"TagList"},
         "EncryptionConfiguration":{"shape":"EncryptionConfiguration"},
-        "EnabledAnalysisTypes":{"shape":"EnabledAnalysisTypes"}
+        "EnabledAnalysisTypes":{"shape":"EnabledAnalysisTypes"},
+        "TransitGatewayId":{"shape":"TransitGatewayId"},
+        "AvailabilityZoneMappings":{"shape":"AvailabilityZoneMappings"},
+        "AvailabilityZoneChangeProtection":{"shape":"Boolean"}
       }
     },
     "CreateFirewallResponse":{
@@ -1082,7 +1258,8 @@
         "DryRun":{"shape":"Boolean"},
         "EncryptionConfiguration":{"shape":"EncryptionConfiguration"},
         "SourceMetadata":{"shape":"SourceMetadata"},
-        "AnalyzeRuleGroup":{"shape":"Boolean"}
+        "AnalyzeRuleGroup":{"shape":"Boolean"},
+        "SummaryConfiguration":{"shape":"SummaryConfiguration"}
       }
     },
     "CreateRuleGroupResponse":{
@@ -1158,6 +1335,7 @@
       "type":"list",
       "member":{"shape":"CustomAction"}
     },
+    "DeepThreatInspection":{"type":"boolean"},
     "DeleteFirewallPolicyRequest":{
       "type":"structure",
       "members":{
@@ -1184,6 +1362,24 @@
       "members":{
         "Firewall":{"shape":"Firewall"},
         "FirewallStatus":{"shape":"FirewallStatus"}
+      }
+    },
+    "DeleteNetworkFirewallTransitGatewayAttachmentRequest":{
+      "type":"structure",
+      "required":["TransitGatewayAttachmentId"],
+      "members":{
+        "TransitGatewayAttachmentId":{"shape":"TransitGatewayAttachmentId"}
+      }
+    },
+    "DeleteNetworkFirewallTransitGatewayAttachmentResponse":{
+      "type":"structure",
+      "required":[
+        "TransitGatewayAttachmentId",
+        "TransitGatewayAttachmentStatus"
+      ],
+      "members":{
+        "TransitGatewayAttachmentId":{"shape":"TransitGatewayAttachmentId"},
+        "TransitGatewayAttachmentStatus":{"shape":"TransitGatewayAttachmentStatus"}
       }
     },
     "DeleteResourcePolicyRequest":{
@@ -1253,7 +1449,8 @@
         "FirewallPolicyArn":{"shape":"ResourceArn"},
         "Description":{"shape":"Description"},
         "Status":{"shape":"FirewallStatusValue"},
-        "SupportedAvailabilityZones":{"shape":"SupportedAvailabilityZones"}
+        "SupportedAvailabilityZones":{"shape":"SupportedAvailabilityZones"},
+        "TransitGatewayAttachmentId":{"shape":"TransitGatewayAttachmentId"}
       }
     },
     "DescribeFirewallPolicyRequest":{
@@ -1392,6 +1589,23 @@
         "RuleGroupResponse":{"shape":"RuleGroupResponse"}
       }
     },
+    "DescribeRuleGroupSummaryRequest":{
+      "type":"structure",
+      "members":{
+        "RuleGroupName":{"shape":"ResourceName"},
+        "RuleGroupArn":{"shape":"ResourceArn"},
+        "Type":{"shape":"RuleGroupType"}
+      }
+    },
+    "DescribeRuleGroupSummaryResponse":{
+      "type":"structure",
+      "required":["RuleGroupName"],
+      "members":{
+        "RuleGroupName":{"shape":"ResourceName"},
+        "Description":{"shape":"Description"},
+        "Summary":{"shape":"Summary"}
+      }
+    },
     "DescribeTLSInspectionConfigurationRequest":{
       "type":"structure",
       "members":{
@@ -1454,6 +1668,25 @@
       "member":{"shape":"Dimension"},
       "max":1,
       "min":1
+    },
+    "DisassociateAvailabilityZonesRequest":{
+      "type":"structure",
+      "required":["AvailabilityZoneMappings"],
+      "members":{
+        "UpdateToken":{"shape":"UpdateToken"},
+        "FirewallArn":{"shape":"ResourceArn"},
+        "FirewallName":{"shape":"ResourceName"},
+        "AvailabilityZoneMappings":{"shape":"AvailabilityZoneMappings"}
+      }
+    },
+    "DisassociateAvailabilityZonesResponse":{
+      "type":"structure",
+      "members":{
+        "FirewallArn":{"shape":"ResourceArn"},
+        "FirewallName":{"shape":"ResourceName"},
+        "AvailabilityZoneMappings":{"shape":"AvailabilityZoneMappings"},
+        "UpdateToken":{"shape":"UpdateToken"}
+      }
     },
     "DisassociateSubnetsRequest":{
       "type":"structure",
@@ -1527,14 +1760,19 @@
         "Tags":{"shape":"TagList"},
         "EncryptionConfiguration":{"shape":"EncryptionConfiguration"},
         "NumberOfAssociations":{"shape":"NumberOfAssociations"},
-        "EnabledAnalysisTypes":{"shape":"EnabledAnalysisTypes"}
+        "EnabledAnalysisTypes":{"shape":"EnabledAnalysisTypes"},
+        "TransitGatewayId":{"shape":"TransitGatewayId"},
+        "TransitGatewayOwnerAccountId":{"shape":"AWSAccountId"},
+        "AvailabilityZoneMappings":{"shape":"AvailabilityZoneMappings"},
+        "AvailabilityZoneChangeProtection":{"shape":"Boolean"}
       }
     },
     "FirewallMetadata":{
       "type":"structure",
       "members":{
         "FirewallName":{"shape":"ResourceName"},
-        "FirewallArn":{"shape":"ResourceArn"}
+        "FirewallArn":{"shape":"ResourceArn"},
+        "TransitGatewayAttachmentId":{"shape":"TransitGatewayAttachmentId"}
       }
     },
     "FirewallPolicies":{
@@ -1597,7 +1835,8 @@
         "Status":{"shape":"FirewallStatusValue"},
         "ConfigurationSyncStateSummary":{"shape":"ConfigurationSyncState"},
         "SyncStates":{"shape":"SyncStates"},
-        "CapacityUsageSummary":{"shape":"CapacityUsageSummary"}
+        "CapacityUsageSummary":{"shape":"CapacityUsageSummary"},
+        "TransitGatewayAttachmentSyncState":{"shape":"TransitGatewayAttachmentSyncState"}
       }
     },
     "FirewallStatusValue":{
@@ -2242,6 +2481,24 @@
         "IPSetReferences":{"shape":"IPSetReferenceMap"}
       }
     },
+    "RejectNetworkFirewallTransitGatewayAttachmentRequest":{
+      "type":"structure",
+      "required":["TransitGatewayAttachmentId"],
+      "members":{
+        "TransitGatewayAttachmentId":{"shape":"TransitGatewayAttachmentId"}
+      }
+    },
+    "RejectNetworkFirewallTransitGatewayAttachmentResponse":{
+      "type":"structure",
+      "required":[
+        "TransitGatewayAttachmentId",
+        "TransitGatewayAttachmentStatus"
+      ],
+      "members":{
+        "TransitGatewayAttachmentId":{"shape":"TransitGatewayAttachmentId"},
+        "TransitGatewayAttachmentStatus":{"shape":"TransitGatewayAttachmentStatus"}
+      }
+    },
     "ReportTime":{"type":"timestamp"},
     "ResourceArn":{
       "type":"string",
@@ -2266,7 +2523,8 @@
       "type":"string",
       "enum":[
         "AWS_MANAGED_THREAT_SIGNATURES",
-        "AWS_MANAGED_DOMAIN_LISTS"
+        "AWS_MANAGED_DOMAIN_LISTS",
+        "ACTIVE_THREAT_DEFENSE"
       ]
     },
     "ResourceName":{
@@ -2356,7 +2614,8 @@
         "SourceMetadata":{"shape":"SourceMetadata"},
         "SnsTopic":{"shape":"ResourceArn"},
         "LastModifiedTime":{"shape":"LastUpdateTime"},
-        "AnalysisResults":{"shape":"AnalysisResultList"}
+        "AnalysisResults":{"shape":"AnalysisResultList"},
+        "SummaryConfiguration":{"shape":"SummaryConfiguration"}
       }
     },
     "RuleGroupType":{
@@ -2392,6 +2651,18 @@
         "DEFAULT_ACTION_ORDER",
         "STRICT_ORDER"
       ]
+    },
+    "RuleSummaries":{
+      "type":"list",
+      "member":{"shape":"RuleSummary"}
+    },
+    "RuleSummary":{
+      "type":"structure",
+      "members":{
+        "SID":{"shape":"CollectionMember_String"},
+        "Msg":{"shape":"CollectionMember_String"},
+        "Metadata":{"shape":"CollectionMember_String"}
+      }
     },
     "RuleTargets":{
       "type":"list",
@@ -2616,7 +2887,8 @@
           "shape":"Priority",
           "box":true
         },
-        "Override":{"shape":"StatefulRuleGroupOverride"}
+        "Override":{"shape":"StatefulRuleGroupOverride"},
+        "DeepThreatInspection":{"shape":"DeepThreatInspection"}
       }
     },
     "StatefulRuleGroupReferences":{
@@ -2650,7 +2922,9 @@
         "IKEV2",
         "TFTP",
         "NTP",
-        "DHCP"
+        "DHCP",
+        "HTTP2",
+        "QUIC"
       ]
     },
     "StatefulRules":{
@@ -2726,6 +3000,30 @@
     "SubnetMappings":{
       "type":"list",
       "member":{"shape":"SubnetMapping"}
+    },
+    "Summary":{
+      "type":"structure",
+      "members":{
+        "RuleSummaries":{"shape":"RuleSummaries"}
+      }
+    },
+    "SummaryConfiguration":{
+      "type":"structure",
+      "members":{
+        "RuleOptions":{"shape":"SummaryRuleOptions"}
+      }
+    },
+    "SummaryRuleOption":{
+      "type":"string",
+      "enum":[
+        "SID",
+        "MSG",
+        "METADATA"
+      ]
+    },
+    "SummaryRuleOptions":{
+      "type":"list",
+      "member":{"shape":"SummaryRuleOption"}
     },
     "SupportedAvailabilityZones":{
       "type":"map",
@@ -2895,6 +3193,41 @@
         "StatusMessage":{"shape":"StatusReason"}
       }
     },
+    "TransitGatewayAttachmentId":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"^tgw-attach-[0-9a-z]+$"
+    },
+    "TransitGatewayAttachmentStatus":{
+      "type":"string",
+      "enum":[
+        "CREATING",
+        "DELETING",
+        "DELETED",
+        "FAILED",
+        "ERROR",
+        "READY",
+        "PENDING_ACCEPTANCE",
+        "REJECTING",
+        "REJECTED"
+      ]
+    },
+    "TransitGatewayAttachmentSyncState":{
+      "type":"structure",
+      "members":{
+        "AttachmentId":{"shape":"AttachmentId"},
+        "TransitGatewayAttachmentStatus":{"shape":"TransitGatewayAttachmentStatus"},
+        "StatusMessage":{"shape":"TransitGatewayAttachmentSyncStateMessage"}
+      }
+    },
+    "TransitGatewayAttachmentSyncStateMessage":{"type":"string"},
+    "TransitGatewayId":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"^tgw-[0-9a-z]+$"
+    },
     "UniqueSources":{
       "type":"structure",
       "members":{
@@ -2922,6 +3255,25 @@
     "UntagResourceResponse":{
       "type":"structure",
       "members":{}
+    },
+    "UpdateAvailabilityZoneChangeProtectionRequest":{
+      "type":"structure",
+      "required":["AvailabilityZoneChangeProtection"],
+      "members":{
+        "UpdateToken":{"shape":"UpdateToken"},
+        "FirewallArn":{"shape":"ResourceArn"},
+        "FirewallName":{"shape":"ResourceName"},
+        "AvailabilityZoneChangeProtection":{"shape":"Boolean"}
+      }
+    },
+    "UpdateAvailabilityZoneChangeProtectionResponse":{
+      "type":"structure",
+      "members":{
+        "UpdateToken":{"shape":"UpdateToken"},
+        "FirewallArn":{"shape":"ResourceArn"},
+        "FirewallName":{"shape":"ResourceName"},
+        "AvailabilityZoneChangeProtection":{"shape":"Boolean"}
+      }
     },
     "UpdateFirewallAnalysisSettingsRequest":{
       "type":"structure",
@@ -3074,7 +3426,8 @@
         "DryRun":{"shape":"Boolean"},
         "EncryptionConfiguration":{"shape":"EncryptionConfiguration"},
         "SourceMetadata":{"shape":"SourceMetadata"},
-        "AnalyzeRuleGroup":{"shape":"Boolean"}
+        "AnalyzeRuleGroup":{"shape":"Boolean"},
+        "SummaryConfiguration":{"shape":"SummaryConfiguration"}
       }
     },
     "UpdateRuleGroupResponse":{

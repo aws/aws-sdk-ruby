@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.118.0 (2025-06-17)
+------------------
+
+* Feature - Adding support for extended threat detection for EKS Audit Logs and EKS Runtime Monitoring.
+
 1.117.0 (2025-06-02)
 ------------------
 

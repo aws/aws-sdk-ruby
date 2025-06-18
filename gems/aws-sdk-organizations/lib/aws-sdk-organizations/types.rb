@@ -603,10 +603,19 @@ module Aws::Organizations
     # * POLICY\_NUMBER\_LIMIT\_EXCEEDED: You attempted to exceed the number
     #   of policies that you can have in an organization.
     #
-    # * SERVICE\_ACCESS\_NOT\_ENABLED: You attempted to register a delegated
-    #   administrator before you enabled service access. Call the
-    #   `EnableAWSServiceAccess` API first.
+    # * POLICY\_TYPE\_ENABLED\_FOR\_THIS\_SERVICE: You attempted to disable
+    #   service access before you disabled the policy type (for example,
+    #   SECURITYHUB\_POLICY). To complete this operation, you must first
+    #   disable the policy type.
     #
+    # * SERVICE\_ACCESS\_NOT\_ENABLED:
+    #
+    #   * You attempted to register a delegated administrator before you
+    #     enabled service access. Call the `EnableAWSServiceAccess` API
+    #     first.
+    #
+    #   * You attempted to enable a policy type before you enabled service
+    #     access. Call the `EnableAWSServiceAccess` API first.
     # * TAG\_POLICY\_VIOLATION: You attempted to create or update a resource
     #   with tags that are not compliant with the tag policy requirements
     #   for this account.
@@ -1226,6 +1235,8 @@ module Aws::Organizations
     #
     #   * [AISERVICES\_OPT\_OUT\_POLICY][7]
     #
+    #   * [SECURITYHUB\_POLICY][8]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
@@ -1235,6 +1246,7 @@ module Aws::Organizations
     #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
     #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1545,6 +1557,8 @@ module Aws::Organizations
     #
     #   * [AISERVICES\_OPT\_OUT\_POLICY][5]
     #
+    #   * [SECURITYHUB\_POLICY][6]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html
@@ -1552,6 +1566,7 @@ module Aws::Organizations
     #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
     #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
     #   @return [String]
     #
     # @!attribute [rw] target_id
@@ -1822,6 +1837,8 @@ module Aws::Organizations
     #
     #   * [AISERVICES\_OPT\_OUT\_POLICY][7]
     #
+    #   * [SECURITYHUB\_POLICY][8]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
@@ -1831,6 +1848,7 @@ module Aws::Organizations
     #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
     #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisablePolicyTypeRequest AWS API Documentation
@@ -2037,6 +2055,8 @@ module Aws::Organizations
     #
     #   * [AISERVICES\_OPT\_OUT\_POLICY][7]
     #
+    #   * [SECURITYHUB\_POLICY][8]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
@@ -2046,6 +2066,7 @@ module Aws::Organizations
     #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
     #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnablePolicyTypeRequest AWS API Documentation
@@ -2285,9 +2306,7 @@ module Aws::Organizations
     #
     # * ORGANIZATION\_FROM\_DIFFERENT\_SELLER\_OF\_RECORD: The request
     #   failed because the account is from a different marketplace than the
-    #   accounts in the organization. For example, accounts with India
-    #   addresses must be associated with the AISPL marketplace. All
-    #   accounts in an organization must be from the same marketplace.
+    #   accounts in the organization.
     #
     # * ORGANIZATION\_MEMBERSHIP\_CHANGE\_RATE\_LIMIT\_EXCEEDED: You
     #   attempted to change the membership of an account too quickly after
@@ -3357,6 +3376,8 @@ module Aws::Organizations
     #
     #   * [AISERVICES\_OPT\_OUT\_POLICY][7]
     #
+    #   * [SECURITYHUB\_POLICY][8]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
@@ -3366,6 +3387,7 @@ module Aws::Organizations
     #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
     #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3439,6 +3461,8 @@ module Aws::Organizations
     #
     #   * [AISERVICES\_OPT\_OUT\_POLICY][7]
     #
+    #   * [SECURITYHUB\_POLICY][8]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
@@ -3448,6 +3472,7 @@ module Aws::Organizations
     #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
     #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+    #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
     #   @return [String]
     #
     # @!attribute [rw] next_token

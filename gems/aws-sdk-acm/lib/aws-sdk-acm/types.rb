@@ -272,28 +272,42 @@ module Aws::ACM
       include Aws::Structure
     end
 
-    # Structure that contains options for your certificate. Currently, you
-    # can use this only to specify whether to opt in to or out of
-    # certificate transparency logging. Some browsers require that public
-    # certificates issued for your domain be recorded in a log. Certificates
-    # that are not logged typically generate a browser error. Transparency
-    # makes it possible for you to detect SSL/TLS certificates that have
-    # been mistakenly or maliciously issued for your domain. For general
-    # information, see [Certificate Transparency Logging][1].
+    # Structure that contains options for your certificate. You can use this
+    # structure to specify whether to opt in to or out of certificate
+    # transparency logging and export your certificate.
+    #
+    # Some browsers require that public certificates issued for your domain
+    # be recorded in a log. Certificates that are not logged typically
+    # generate a browser error. Transparency makes it possible for you to
+    # detect SSL/TLS certificates that have been mistakenly or maliciously
+    # issued for your domain. For general information, see [Certificate
+    # Transparency Logging][1].
+    #
+    # You can export public ACM certificates to use with Amazon Web Services
+    # services as well as outside Amazon Web Services Cloud. For more
+    # information, see [Certificate Manager exportable public
+    # certificate][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency
+    # [2]: https://docs.aws.amazon.com/acm/latest/userguide/acm-exportable-certificates.html
     #
     # @!attribute [rw] certificate_transparency_logging_preference
     #   You can opt out of certificate transparency logging by specifying
     #   the `DISABLED` option. Opt in by specifying `ENABLED`.
     #   @return [String]
     #
+    # @!attribute [rw] export
+    #   You can opt in to allow the export of your certificates by
+    #   specifying `ENABLED`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CertificateOptions AWS API Documentation
     #
     class CertificateOptions < Struct.new(
-      :certificate_transparency_logging_preference)
+      :certificate_transparency_logging_preference,
+      :export)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -404,6 +418,10 @@ module Aws::ACM
     #   can be used and consists of a name and an object identifier (OID).
     #   @return [Array<String>]
     #
+    # @!attribute [rw] export_option
+    #   Indicates if export is enabled for the certificate.
+    #   @return [String]
+    #
     # @!attribute [rw] in_use
     #   Indicates whether the certificate is currently in use by any Amazon
     #   Web Services resources.
@@ -464,6 +482,7 @@ module Aws::ACM
       :key_algorithm,
       :key_usages,
       :extended_key_usages,
+      :export_option,
       :in_use,
       :exported,
       :renewal_eligibility,
@@ -582,11 +601,13 @@ module Aws::ACM
     #   domain validation. For more information, see [Use DNS to Validate
     #   Domain Ownership][1].
     #
-    #   Note: The CNAME information that you need does not include the name
-    #   of your domain. If you include your domain name in the DNS database
+    #   <note markdown="1"> The CNAME information that you need does not include the name of
+    #   your domain. If you include your domain name in the DNS database
     #   CNAME record, validation fails. For example, if the name is
-    #   "\_a79865eb4cd1a6ab990a45779b4e0b96.yourdomain.com", only
-    #   "\_a79865eb4cd1a6ab990a45779b4e0b96" must be used.
+    #   `_a79865eb4cd1a6ab990a45779b4e0b96.yourdomain.com`, only
+    #   `_a79865eb4cd1a6ab990a45779b4e0b96` must be used.
+    #
+    #    </note>
     #
     #
     #
@@ -595,9 +616,9 @@ module Aws::ACM
     #
     # @!attribute [rw] http_redirect
     #   Contains information for HTTP-based domain validation of
-    #   certificates requested through CloudFront and issued by ACM. This
-    #   field exists only when the certificate type is `AMAZON_ISSUED` and
-    #   the validation method is `HTTP`.
+    #   certificates requested through Amazon CloudFront and issued by ACM.
+    #   This field exists only when the certificate type is `AMAZON_ISSUED`
+    #   and the validation method is `HTTP`.
     #   @return [Types::HttpRedirect]
     #
     # @!attribute [rw] validation_method
@@ -794,6 +815,11 @@ module Aws::ACM
     #   certificates.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] export_option
+    #   Specify `ENABLED` or `DISABLED` to identify certificates that can be
+    #   exported.
+    #   @return [String]
+    #
     # @!attribute [rw] managed_by
     #   Identifies the Amazon Web Services service that manages the
     #   certificate issued by ACM.
@@ -805,6 +831,7 @@ module Aws::ACM
       :extended_key_usage,
       :key_usage,
       :key_types,
+      :export_option,
       :managed_by)
       SENSITIVE = []
       include Aws::Structure
@@ -865,9 +892,9 @@ module Aws::ACM
     end
 
     # Contains information for HTTP-based domain validation of certificates
-    # requested through CloudFront and issued by ACM. This field exists only
-    # when the certificate type is `AMAZON_ISSUED` and the validation method
-    # is `HTTP`.
+    # requested through Amazon CloudFront and issued by ACM. This field
+    # exists only when the certificate type is `AMAZON_ISSUED` and the
+    # validation method is `HTTP`.
     #
     # @!attribute [rw] redirect_from
     #   The URL including the domain to be validated. The certificate
@@ -944,7 +971,7 @@ module Aws::ACM
       include Aws::Structure
     end
 
-    # One or more of of request parameters specified is not valid.
+    # One or more of request parameters specified is not valid.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1349,17 +1376,24 @@ module Aws::ACM
     #   @return [Array<Types::DomainValidationOption>]
     #
     # @!attribute [rw] options
-    #   Currently, you can use this parameter to specify whether to add the
-    #   certificate to a certificate transparency log. Certificate
-    #   transparency makes it possible to detect SSL/TLS certificates that
-    #   have been mistakenly or maliciously issued. Certificates that have
-    #   not been logged typically produce an error message in a browser. For
-    #   more information, see [Opting Out of Certificate Transparency
-    #   Logging][1].
+    #   You can use this parameter to specify whether to add the certificate
+    #   to a certificate transparency log and export your certificate.
+    #
+    #   Certificate transparency makes it possible to detect SSL/TLS
+    #   certificates that have been mistakenly or maliciously issued.
+    #   Certificates that have not been logged typically produce an error
+    #   message in a browser. For more information, see [Opting Out of
+    #   Certificate Transparency Logging][1].
+    #
+    #   You can export public ACM certificates to use with Amazon Web
+    #   Services services as well as outside the Amazon Web Services Cloud.
+    #   For more information, see [Certificate Manager exportable public
+    #   certificate][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency
+    #   [2]: https://docs.aws.amazon.com/acm/latest/userguide/acm-exportable-certificates.html
     #   @return [Types::CertificateOptions]
     #
     # @!attribute [rw] certificate_authority_arn
@@ -1573,6 +1607,39 @@ module Aws::ACM
       include Aws::Structure
     end
 
+    # @!attribute [rw] certificate_arn
+    #   The Amazon Resource Name (ARN) of the public or private certificate
+    #   that will be revoked. The ARN must have the following form:
+    #
+    #   `arn:aws:acm:region:account:certificate/12345678-1234-1234-1234-123456789012`
+    #   @return [String]
+    #
+    # @!attribute [rw] revocation_reason
+    #   Specifies why you revoked the certificate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RevokeCertificateRequest AWS API Documentation
+    #
+    class RevokeCertificateRequest < Struct.new(
+      :certificate_arn,
+      :revocation_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificate_arn
+    #   The Amazon Resource Name (ARN) of the public or private certificate
+    #   that was revoked.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RevokeCertificateResponse AWS API Documentation
+    #
+    class RevokeCertificateResponse < Struct.new(
+      :certificate_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A key-value pair that identifies or specifies metadata about an ACM
     # resource.
     #
@@ -1644,11 +1711,11 @@ module Aws::ACM
     #
     # @!attribute [rw] options
     #   Use to update the options for your certificate. Currently, you can
-    #   specify whether to add your certificate to a transparency log.
-    #   Certificate transparency makes it possible to detect SSL/TLS
-    #   certificates that have been mistakenly or maliciously issued.
-    #   Certificates that have not been logged typically produce an error
-    #   message in a browser.
+    #   specify whether to add your certificate to a transparency log or
+    #   export your certificate. Certificate transparency makes it possible
+    #   to detect SSL/TLS certificates that have been mistakenly or
+    #   maliciously issued. Certificates that have not been logged typically
+    #   produce an error message in a browser.
     #   @return [Types::CertificateOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/UpdateCertificateOptionsRequest AWS API Documentation

@@ -2890,6 +2890,14 @@ module Aws
                             },
                             ?on_source_d_do_s_protection_config: {
                               alb_low_reputation_mode: ("ACTIVE_UNDER_DDOS" | "ALWAYS_ON")
+                            },
+                            ?application_config: {
+                              attributes: Array[
+                                {
+                                  name: ::String?,
+                                  values: Array[::String]?
+                                },
+                              ]?
                             }
                           ) -> _CreateWebACLResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWebACLResponseSuccess
