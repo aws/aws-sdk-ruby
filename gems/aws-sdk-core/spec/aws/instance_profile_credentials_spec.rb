@@ -11,7 +11,23 @@ module Aws
     let(:extended_path) { '/latest/meta-data/iam/security-credentials-extended/' }
     let(:fallback_path) { '/latest/meta-data/iam/security-credentials/' }
     let(:metadata_uri) { "#{ipv4_endpoint}#{extended_path}" }
-    let(:fallback_uri) {  "#{ipv4_endpoint}#{fallback_path}" }
+    let(:fallback_uri) { "#{ipv4_endpoint}#{fallback_path}" }
+
+    def json_response(expiration: nil, account_id: nil)
+      resp = {
+        "Code": 'Success',
+        "LastUpdated": '2025-03-12T20:53:17.832308Z',
+        "Type": 'AWS-HMAC',
+        "AccessKeyId": 'ASIAIOSFODNN7EXAMPLE',
+        "SecretAccessKey": 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
+        "Token": 'AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)',
+        "Expiration": expiration || (Time.now + 3600).utc.iso8601,
+        "UnexpectedElement1": { "Name": 'ignore-me-1' }
+      }
+      resp['AccountId'] = account_id if account_id
+      resp.to_json
+    end
+
 
     describe '#initalize' do
       let(:subject) { InstanceProfileCredentials.new(backoff: 0) }
@@ -150,40 +166,17 @@ module Aws
       let(:expiration) { (Time.now + 3600).utc.iso8601 }
 
       before do
-        stub_request(:put, ipv4_endpoint + token_path).to_return(status: 200, body: "my-token\n")
+        stub_request(:put, ipv4_endpoint + token_path)
+          .to_return(status: 200, body: "my-token\n", headers: { 'x-aws-ec2-metadata-token-ttl-seconds' => '21600' })
       end
 
       it 'Test IMDS credentials provider returns valid credentials with account ID' do
-        resp1 = {
-          "Code": 'Success',
-          "LastUpdated": '2025-03-12T20:53:17.832308Z',
-          "Type": 'AWS-HMAC',
-          "AccessKeyId": 'ASIAIOSFODNN7EXAMPLE',
-          "SecretAccessKey": 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
-          "Token": 'AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)',
-          "Expiration": expiration,
-          "UnexpectedElement1": {
-            "Name": 'ignore-me-1'
-          },
-          "AccountId": '123456789101'
-        }
-        resp2 = {
-          "Code": 'Success',
-          "LastUpdated": '2025-03-12T20:53:17.832308Z',
-          "Type": 'AWS-HMAC',
-          "AccessKeyId": 'ASIAIOSFODNN7EXAMPLE',
-          "SecretAccessKey": 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
-          "Token": 'AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)',
-          "Expiration": expiration,
-          "UnexpectedElement1": {
-            "Name": 'ignore-me-1'
-          },
-          "AccountId": '123456789101'
-        }
         stub_request(:get, metadata_uri).to_return(status: 200, body: "my-profile-0001\n")
         stub_request(:get, "#{metadata_uri}my-profile-0001")
-          .to_return({ status: 200, body: resp1.to_json }, { status: 200, body: resp2.to_json })
-
+          .to_return(
+            { status: 200, body: json_response(account_id: '123456789101') },
+            { status: 200, body: json_response(account_id: '123456789101') }
+          )
         subject = InstanceProfileCredentials.new(backoff: 0)
         creds = subject.credentials
         expect(creds.access_key_id).to_not be_nil
@@ -195,35 +188,11 @@ module Aws
       end
 
       it 'Test IMDS credentials provider with a given profile name returns valid credentials with account ID' do
-        resp1 = {
-          "Code": 'Success',
-          "LastUpdated": '2025-03-13T20:53:17.832308Z',
-          "Type": 'AWS-HMAC',
-          "AccessKeyId": 'ASIAIOSFODNN7EXAMPLE',
-          "SecretAccessKey": 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
-          "Token": 'AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)',
-          "Expiration": expiration,
-          "UnexpectedElement2": {
-            "Name": 'ignore-me-2'
-          },
-          "AccountId": '234567891011'
-        }
-        resp2 = {
-          "Code": 'Success',
-          "LastUpdated": '2025-03-13T20:53:17.832308Z',
-          "Type": 'AWS-HMAC',
-          "AccessKeyId": 'ASIAIOSFODNN7EXAMPLE',
-          "SecretAccessKey": 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
-          "Token": 'AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)',
-          "Expiration": expiration,
-          "UnexpectedElement2": {
-            "Name": 'ignore-me-2'
-          },
-          "AccountId": '234567891011'
-        }
         stub_request(:get, "#{metadata_uri}my-profile-0002")
-          .to_return({ status: 200, body: resp1.to_json }, { status: 200, body: resp2.to_json })
-
+          .to_return(
+            { status: 200, body: json_response(account_id: '234567891011') },
+            { status: 200, body: json_response(account_id: '234567891011') }
+          )
         subject = InstanceProfileCredentials.new(ec2_instance_profile_name: 'my-profile-0002', backoff: 0)
         creds = subject.credentials
         expect(creds.access_key_id).to_not be_nil
@@ -235,37 +204,12 @@ module Aws
       end
 
       it 'Test IMDS credentials provider when profile is unstable returns valid credentials with account ID' do
-        resp1 = {
-          "Code": 'Success',
-          "LastUpdated": '2025-03-14T20:53:17.832308Z',
-          "Type": 'AWS-HMAC',
-          "AccessKeyId": 'ASIAIOSFODNN7EXAMPLE',
-          "SecretAccessKey": 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
-          "Token": 'AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)',
-          "Expiration": expiration,
-          "UnexpectedElement3": {
-            "Name": 'ignore-me-3'
-          },
-          "AccountId": '345678910112'
-        }
-        resp2 = {
-          "Code": 'Success',
-          "LastUpdated": '2025-03-15T20:53:17.832308Z',
-          "Type": 'AWS-HMAC',
-          "AccessKeyId": 'ASIAIOSFODNN7EXAMPLE',
-          "SecretAccessKey": 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
-          "Token": 'AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)',
-          "Expiration": expiration,
-          "UnexpectedElement3": {
-            "Name": 'ignore-me-3'
-          },
-          "AccountId": '314253647589'
-        }
         stub_request(:get, metadata_uri)
           .to_return({ status: 200, 'body' => "my-profile-0003\n" }, { status: 200, 'body' => "my-profile-0003-b\n" })
         stub_request(:get, "#{metadata_uri}my-profile-0003")
-          .to_return({ status: 200, body: resp1.to_json }, { status: 404 })
-        stub_request(:get, "#{metadata_uri}my-profile-0003-b").to_return(status: 200, body: resp2.to_json)
+          .to_return({ status: 200, body: json_response(account_id: '345678910112') }, { status: 404 })
+        stub_request(:get, "#{metadata_uri}my-profile-0003-b")
+          .to_return(status: 200, body: json_response(account_id: '314253647589'))
 
         subject = InstanceProfileCredentials.new(backoff: 0)
         creds = subject.credentials
@@ -285,33 +229,9 @@ module Aws
       end
 
       it 'Test IMDS credentials provider when account ID is unavailable returns valid credentials' do
-        resp1 = {
-          "Code": 'Success',
-          "LastUpdated": '2025-03-16T20:53:17.832308Z',
-          "Type": 'AWS-HMAC',
-          "AccessKeyId": 'ASIAIOSFODNN7EXAMPLE',
-          "SecretAccessKey": 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
-          "Token": 'AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)',
-          "Expiration": expiration,
-          "UnexpectedElement5": {
-            "Name": 'ignore-me-5'
-          }
-        }
-        resp2 = {
-          "Code": 'Success',
-          "LastUpdated": '2025-03-16T20:53:17.832308Z',
-          "Type": 'AWS-HMAC',
-          "AccessKeyId": 'ASIAIOSFODNN7EXAMPLE',
-          "SecretAccessKey": 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
-          "Token": 'AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)',
-          "Expiration": expiration,
-          "UnexpectedElement5": {
-            "Name": 'ignore-me-5'
-          }
-        }
         stub_request(:get, metadata_uri).to_return(status: 200, body: "my-profile-0005\n")
         stub_request(:get, "#{metadata_uri}my-profile-0005")
-          .to_return({ status: 200, body: resp1.to_json }, { status: 200, body: resp2.to_json })
+          .to_return({ status: 200, body: json_response }, { status: 200, body: json_response })
 
         subject = InstanceProfileCredentials.new(backoff: 0)
         creds = subject.credentials
@@ -323,34 +243,9 @@ module Aws
         expect(creds.account_id).to be_nil
       end
 
-      it 'Test IMDS credentials provider with a given profile name '\
-          'when account ID is unavailable returns valid credentials' do
-        resp1 = {
-          "Code": 'Success',
-          "LastUpdated": '2025-03-17T20:53:17.832308Z',
-          "Type": 'AWS-HMAC',
-          "AccessKeyId": 'ASIAIOSFODNN7EXAMPLE',
-          "SecretAccessKey": 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
-          "Token": 'AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)',
-          "Expiration": expiration,
-          "UnexpectedElement6": {
-            "Name": 'ignore-me-6'
-          }
-        }
-        resp2 = {
-          "Code": 'Success',
-          "LastUpdated": '2025-03-17T20:53:17.832308Z',
-          "Type": 'AWS-HMAC',
-          "AccessKeyId": 'ASIAIOSFODNN7EXAMPLE',
-          "SecretAccessKey": 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
-          "Token": 'AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)',
-          "Expiration": expiration,
-          "UnexpectedElement6": {
-            "Name": 'ignore-me-6'
-          }
-        }
+      it 'Test IMDS credentials provider with a given profile name when account ID is unavailable returns valid credentials' do
         stub_request(:get, "#{metadata_uri}my-profile-0006")
-          .to_return({ status: 200, body: resp1.to_json }, { status: 200, body: resp2.to_json })
+          .to_return({ status: 200, body: json_response }, { status: 200, body: json_response })
 
         subject = InstanceProfileCredentials.new(ec2_instance_profile_name: 'my-profile-0006', backoff: 0)
         creds = subject.credentials
@@ -362,37 +257,12 @@ module Aws
         expect(creds.account_id).to be_nil
       end
 
-      it 'Test IMDS credentials provider when account ID is unavailable'\
-         'when profile is unstable returns valid credentials' do
-        resp1 = {
-          "Code": 'Success',
-          "LastUpdated": '2025-03-18T20:53:17.832308Z',
-          "Type": 'AWS-HMAC',
-          "AccessKeyId": 'ASIAIOSFODNN7EXAMPLE',
-          "SecretAccessKey": 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
-          "Token": 'AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)',
-          "Expiration": expiration,
-          "UnexpectedElement7": {
-            "Name": 'ignore-me-7'
-          }
-        }
-        resp2 = {
-          "Code": 'Success',
-          "LastUpdated": '2025-03-18T20:53:17.832308Z',
-          "Type": 'AWS-HMAC',
-          "AccessKeyId": 'ASIAIOSFODNN7EXAMPLE',
-          "SecretAccessKey": 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
-          "Token": 'AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)',
-          "Expiration": expiration,
-          "UnexpectedElement7": {
-            "Name": 'ignore-me-7'
-          }
-        }
+      it 'Test IMDS credentials provider when account ID is unavailable when profile is unstable returns valid credentials' do
         stub_request(:get, metadata_uri)
           .to_return({ status: 200, body: "my-profile-0007\n" }, { status: 200, body: "my-profile-0007-b\n" })
         stub_request(:get, "#{metadata_uri}my-profile-0007")
-          .to_return({ status: 200, body: resp1.to_json }, { status: 404 })
-        stub_request(:get, "#{metadata_uri}my-profile-0007-b").to_return(status: 200, body: resp2.to_json)
+          .to_return({ status: 200, body: json_response }, { status: 404 })
+        stub_request(:get, "#{metadata_uri}my-profile-0007-b").to_return(status: 200, body: json_response)
 
         subject = InstanceProfileCredentials.new(backoff: 0)
         creds = subject.credentials
@@ -413,28 +283,10 @@ module Aws
       end
 
       it 'Test IMDS credentials provider against legacy API returns valid credentials' do
-        resp1 = {
-          "Code": 'Success',
-          "LastUpdated": '2025-03-20T20:53:17.832308Z',
-          "Type": 'AWS-HMAC',
-          "AccessKeyId": 'ASIAIOSFODNN7EXAMPLE',
-          "SecretAccessKey": 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
-          "Token": 'AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)',
-          "Expiration": expiration
-        }
-        resp2 = {
-          "Code": 'Success',
-          "LastUpdated": '2025-03-20T20:53:17.832308Z',
-          "Type": 'AWS-HMAC',
-          "AccessKeyId": 'ASIAIOSFODNN7EXAMPLE',
-          "SecretAccessKey": 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
-          "Token": 'AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)',
-          "Expiration": expiration
-        }
         stub_request(:get, metadata_uri).to_return(status: 404)
         stub_request(:get, fallback_uri).to_return(status: 200, body: "my-profile-0009\n")
         stub_request(:get, "#{fallback_uri}my-profile-0009")
-          .to_return({ status: 200, body: resp1.to_json }, { status: 200, body: resp2.to_json })
+          .to_return({ status: 200, body: json_response }, { status: 200, body: json_response })
 
         subject = InstanceProfileCredentials.new(backoff: 0)
         creds = subject.credentials
@@ -447,27 +299,9 @@ module Aws
       end
 
       it 'Test IMDS credentials provider with a given profile name against legacy API returns valid credentials' do
-        resp1 = {
-          "Code": 'Success',
-          "LastUpdated": '2025-03-21T20:53:17.832308Z',
-          "Type": 'AWS-HMAC',
-          "AccessKeyId": 'ASIAIOSFODNN7EXAMPLE',
-          "SecretAccessKey": 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
-          "Token": 'AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)',
-          "Expiration": expiration
-        }
-        resp2 = {
-          "Code": 'Success',
-          "LastUpdated": '2025-03-21T20:53:17.832308Z',
-          "Type": 'AWS-HMAC',
-          "AccessKeyId": 'ASIAIOSFODNN7EXAMPLE',
-          "SecretAccessKey": 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
-          "Token": 'AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)',
-          "Expiration": expiration
-        }
         stub_request(:get, "#{metadata_uri}my-profile-0010").to_return(status: 404)
         stub_request(:get, "#{fallback_uri}my-profile-0010")
-          .to_return({ status: 200, body: resp1.to_json }, { status: 200, body: resp2.to_json })
+          .to_return({ status: 200, body: json_response }, { status: 200, body: json_response })
 
         subject = InstanceProfileCredentials.new(ec2_instance_profile_name: 'my-profile-0010', backoff: 0)
         creds = subject.credentials
@@ -480,30 +314,12 @@ module Aws
       end
 
       it 'Test IMDS credentials provider against legacy API when profile is unstable returns valid credentials' do
-        resp1 = {
-          "Code": 'Success',
-          "LastUpdated": '2025-03-22T20:53:17.832308Z',
-          "Type": 'AWS-HMAC',
-          "AccessKeyId": 'ASIAIOSFODNN7EXAMPLE',
-          "SecretAccessKey": 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
-          "Token": 'AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)',
-          "Expiration": expiration
-        }
-        resp2 = {
-          "Code": 'Success',
-          "LastUpdated": '2025-03-22T20:53:17.832308Z',
-          "Type": 'AWS-HMAC',
-          "AccessKeyId": 'ASIAIOSFODNN7EXAMPLE',
-          "SecretAccessKey": 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
-          "Token": 'AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKw...(truncated)',
-          "Expiration": expiration
-        }
         stub_request(:get, metadata_uri).to_return(status: 404)
         stub_request(:get, fallback_uri)
           .to_return({ status: 200, body: "my-profile-0011\n" }, { status: 200, body: "my-profile-0011-b\n" })
         stub_request(:get, "#{fallback_uri}my-profile-0011")
-          .to_return({ status: 200, body: resp1.to_json }, { status: 404 })
-        stub_request(:get, "#{fallback_uri}my-profile-0011-b").to_return(status: 200, body: resp2.to_json)
+          .to_return({ status: 200, body: json_response }, { status: 404 })
+        stub_request(:get, "#{fallback_uri}my-profile-0011-b").to_return(status: 200, body: json_response)
 
         subject = InstanceProfileCredentials.new(backoff: 0)
         creds = subject.credentials
@@ -515,8 +331,7 @@ module Aws
         expect(creds.account_id).to be_nil
       end
 
-      it 'Test IMDS credentials provider with a given profile name against legacy API'\
-         'when profile is invalid throws an error' do
+      it 'Test IMDS credentials provider with a given profile name against legacy API when profile is invalid throws an error' do
         stub_request(:get, "#{metadata_uri}my-profile-0012").to_return(status: 404)
         stub_request(:get, "#{fallback_uri}my-profile-0012").to_return(status: 404)
         expect { InstanceProfileCredentials.new(ec2_instance_profile_name: 'my-profile-0012', backoff: 0) }
@@ -528,7 +343,7 @@ module Aws
       it 're-queries credentials when #refresh! is called' do
         expiration = Time.now.utc + 3600
         expiration2 = expiration + 3600
-        resp = {
+        credentials_resp = {
           "Code": 'Success',
           "LastUpdated": '2013-11-22T20:03:48Z',
           "Type": 'AWS-HMAC',
@@ -536,8 +351,8 @@ module Aws
           "SecretAccessKey": 'secret',
           "Token": 'session-token',
           "Expiration": expiration.strftime('%Y-%m-%dT%H:%M:%SZ').to_s
-        }
-        resp2 = {
+        }.to_json
+        credentials_resp2 = {
           "Code": 'Success',
           "LastUpdated": '2013-11-22T20:03:48Z',
           "Type": 'AWS-HMAC',
@@ -545,12 +360,14 @@ module Aws
           "SecretAccessKey": 'secret-2',
           "Token": 'session-token-2',
           "Expiration": expiration2.strftime('%Y-%m-%dT%H:%M:%SZ').to_s
-        }
+        }.to_json
         stub_request(:put, ipv4_endpoint + token_path).to_return(status: 200, body: "my-token\n")
         stub_request(:get, metadata_uri).to_return(status: 200, body: "my-profile\n")
         stub_request(:get, "#{metadata_uri}my-profile")
-          .to_return({ status: 200, body: resp.to_json }, { status: 200, body: resp2.to_json })
-
+          .to_return(
+            { status: 200, body: credentials_resp },
+            { status: 200, body: credentials_resp2 }
+          )
         c = InstanceProfileCredentials.new
         c.refresh!
         expect(c.credentials.access_key_id).to eq('akid-2')
@@ -578,10 +395,9 @@ module Aws
           "SecretAccessKey": 'secret',
           "Token": 'session-token',
           "Expiration": expired.strftime('%Y-%m-%dT%H:%M:%SZ').to_s
-        }
+        }.to_json
         expect_any_instance_of(InstanceProfileCredentials).to receive(:warn).at_least(:once)
-        expected_request =
-          stub_request(:get, "#{metadata_uri}my-profile").to_return(status: 200, body: expired_resp.to_json)
+        expected_request = stub_request(:get, "#{metadata_uri}my-profile").to_return(status: 200, body: expired_resp)
 
         provider = InstanceProfileCredentials.new(backoff: 0)
         creds = provider.credentials
@@ -635,13 +451,13 @@ module Aws
           "SecretAccessKey": 'secret-2',
           "Token": 'session-token-2',
           "Expiration": expiration2.strftime('%Y-%m-%dT%H:%M:%SZ').to_s
-        }
+        }.to_json
         stub_request(:get, "#{metadata_uri}profile-name")
           .to_return(
             { status: 200, body: ' ' },
             { status: 200, body: '' },
             { status: 200, body: '{' },
-            { status: 200, body: resp.to_json }
+            { status: 200, body: resp }
           )
 
         c = InstanceProfileCredentials.new(backoff: 0)
@@ -659,11 +475,9 @@ module Aws
             { status: 200, body: '{' },
             { status: 200, body: ' ' }
           )
-
         expect { InstanceProfileCredentials.new(backoff: 0) }
           .to raise_error(Aws::Errors::MetadataParserError, 'Failed to parse metadata service response.')
       end
-
     end
   end
 end

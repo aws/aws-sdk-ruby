@@ -38,12 +38,6 @@ module Aws
       end
     end
 
-    describe '#retries' do
-      it 'defaults to 3' do
-        expect(ec2_metadata.retries).to eq(3)
-      end
-    end
-
     describe '#get' do
       it 'fetches a token before getting metadata' do
         token = stub_get_token

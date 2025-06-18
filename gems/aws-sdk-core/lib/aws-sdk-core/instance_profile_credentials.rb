@@ -19,7 +19,7 @@ module Aws
   # If you omit the `:ec2_metadata` option, a new {Aws::EC2Metadata} will be created with options provided.
   #
   # ## Retries
-  # When initialized from the default credential chain, this provider's {Ec2Metadata} client defaults to `0` retries.
+  # When initialized from the default credential chain, this provider's {EC2Metadata} client defaults to `0` retries.
   #   In addition to the {EC2Metadata} client's retry mechanism, this provider will retry failed JSON parsing up to
   #   `3` times before raising {Aws::Errors::MetadataParserError}.
   # @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-imds-credentials.html IMDS Credential Provider
@@ -59,7 +59,6 @@ module Aws
     #   and need to be refreshed.
     def initialize(options = {})
       @ec2_metadata = options.delete(:ec2_metadata) || build_ec2_metadata_client(options)
-
       @ec2_instance_profile_name = resolve_ec2_instance_profile_name(options)
       @api_version = :unknown
       @resolved_profile = nil
@@ -136,9 +135,7 @@ module Aws
 
       new_creds =
         begin
-          retry_errors([Aws::Json::ParseError]) do
-            Aws::Json.load(fetch_credentials)
-          end
+          retry_json_errors { Aws::Json.load(fetch_credentials) }
         rescue Aws::Json::ParseError
           raise Aws::Errors::MetadataParserError
         rescue InvalidProfile # unable to find profile name with already resolved api-version
@@ -231,14 +228,14 @@ module Aws
       )
     end
 
-    def retry_errors(error_classes, max_retries: 3, &_block)
-      retries = 0
+    def retry_json_errors(&_block)
+      attempts = 0
       begin
         yield
-      rescue *error_classes
-        raise unless retries < max_retries
+      rescue Aws::Json::ParseError
+        raise unless attempts < 3
 
-        retries += 1
+        attempts += 1
         retry
       end
     end

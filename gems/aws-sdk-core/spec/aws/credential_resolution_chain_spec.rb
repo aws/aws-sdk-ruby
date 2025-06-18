@@ -30,9 +30,7 @@ module Aws
     end
 
     before(:each) do
-      allow(InstanceProfileCredentials)
-        .to receive(:new)
-        .and_return(mock_instance_creds)
+      allow(InstanceProfileCredentials).to receive(:new).and_return(mock_instance_creds)
       expect_any_instance_of(ProcessCredentials).not_to receive(:warn)
     end
 
@@ -76,9 +74,7 @@ module Aws
           'AR_SECRET',
           'AR_TOKEN'
         )
-        client = ApiHelper.sample_rest_xml::Client.new(
-          profile: 'assumerole_sc', region: 'us-east-1'
-        )
+        client = ApiHelper.sample_rest_xml::Client.new(profile: 'assumerole_sc', region: 'us-east-1')
         expect(client.config.credentials.credentials.access_key_id).to eq('AR_AKID')
         expect(metric_values(client.config.credentials.metrics)).to include('o', 'n', 'i')
       end
@@ -101,9 +97,7 @@ module Aws
           expect(metrics_from_user_agent_header(resp)).to include('o', 'n')
           resp
         end
-        ApiHelper.sample_rest_xml::Client.new(
-          profile: 'assumerole_sc', region: 'us-east-1'
-        )
+        ApiHelper.sample_rest_xml::Client.new(profile: 'assumerole_sc', region: 'us-east-1')
       end
 
       it 'prefers assume role web identity from profile over sso' do
@@ -113,12 +107,8 @@ module Aws
           'AR_SECRET',
           'AR_TOKEN'
         )
-        client = ApiHelper.sample_rest_xml::Client.new(
-          profile: 'ar_web_identity', region: 'us-east-1'
-        )
-        expect(
-          client.config.credentials.credentials.access_key_id
-        ).to eq('AR_AKID')
+        client = ApiHelper.sample_rest_xml::Client.new(profile: 'ar_web_identity', region: 'us-east-1')
+        expect(client.config.credentials.credentials.access_key_id).to eq('AR_AKID')
         expect(metric_values(client.config.credentials.metrics)).to include('q', 'k')
       end
 
@@ -134,9 +124,7 @@ module Aws
           expect(metrics_from_user_agent_header(resp)).to include('q')
           resp
         end
-        ApiHelper.sample_rest_xml::Client.new(
-          profile: 'ar_web_identity', region: 'us-east-1'
-        )
+        ApiHelper.sample_rest_xml::Client.new(profile: 'ar_web_identity', region: 'us-east-1')
       end
 
       it 'prefers assume role web identity from ENV over sso' do
@@ -176,20 +164,13 @@ module Aws
           expect(metrics_from_user_agent_header(resp)).to include('h')
           resp
         end
-        ApiHelper.sample_rest_xml::Client.new(
-          region: 'us-east-1'
-        )
+        ApiHelper.sample_rest_xml::Client.new(region: 'us-east-1')
       end
 
       it 'prefers sso credentials over assume role' do
         sso_stub
-        client = ApiHelper.sample_rest_xml::Client.new(
-          profile: 'sso_creds',
-          token_provider: nil
-        )
-        expect(
-          client.config.credentials.credentials.access_key_id
-        ).to eq('SSO_AKID')
+        client = ApiHelper.sample_rest_xml::Client.new(profile: 'sso_creds', token_provider: nil)
+        expect(client.config.credentials.credentials.access_key_id).to eq('SSO_AKID')
         expect(metric_values(client.config.credentials.metrics)).to include('r', 's')
       end
 
@@ -200,20 +181,13 @@ module Aws
           expect(metrics_from_user_agent_header(resp)).to include('r')
           resp
         end
-        ApiHelper.sample_rest_xml::Client.new(
-          profile: 'sso_creds',
-          token_provider: nil
-        )
+        ApiHelper.sample_rest_xml::Client.new(profile: 'sso_creds', token_provider: nil)
       end
 
       it 'loads SSO credentials from a legacy profile' do
         legacy_sso_stub
-        client = ApiHelper.sample_rest_xml::Client.new(
-          profile: 'sso_creds_legacy'
-        )
-        expect(
-          client.config.credentials.credentials.access_key_id
-        ).to eq('SSO_AKID')
+        client = ApiHelper.sample_rest_xml::Client.new(profile: 'sso_creds_legacy')
+        expect(client.config.credentials.credentials.access_key_id).to eq('SSO_AKID')
         expect(metric_values(client.config.credentials.metrics)).to include('t', 'u')
       end
 
@@ -224,61 +198,39 @@ module Aws
           expect(metrics_from_user_agent_header(resp)).to include('t')
           resp
         end
-        ApiHelper.sample_rest_xml::Client.new(
-          profile: 'sso_creds_legacy'
-        )
+        ApiHelper.sample_rest_xml::Client.new(profile: 'sso_creds_legacy')
       end
 
       it 'loads SSO credentials from a mixed legacy profile when values match' do
         sso_stub
-        client = ApiHelper.sample_rest_xml::Client.new(
-          profile: 'sso_creds_mixed_legacy',
-          token_provider: nil
-        )
-        expect(
-          client.config.credentials.credentials.access_key_id
-        ).to eq('SSO_AKID')
+        client = ApiHelper.sample_rest_xml::Client.new(profile: 'sso_creds_mixed_legacy', token_provider: nil)
+        expect(client.config.credentials.credentials.access_key_id).to eq('SSO_AKID')
         expect(metric_values(client.config.credentials.metrics)).to include('r', 's')
       end
 
       it 'loads SSO credentials from when the session name has quotes' do
         sso_stub
-        client = ApiHelper.sample_rest_xml::Client.new(
-          profile: 'sso_creds_session_with_quotes',
-          token_provider: nil
-        )
-        expect(
-          client.config.credentials.credentials.access_key_id
-        ).to eq('SSO_AKID')
+        client = ApiHelper.sample_rest_xml::Client.new(profile: 'sso_creds_session_with_quotes', token_provider: nil)
+        expect(client.config.credentials.credentials.access_key_id).to eq('SSO_AKID')
         expect(metric_values(client.config.credentials.metrics)).to include('r', 's')
       end
 
       it 'raises when attempting to load an incomplete SSO Profile' do
         expect do
-          ApiHelper.sample_rest_xml::Client.new(
-            profile: 'sso_creds_bad',
-            region: 'us-east-1'
-          )
+          ApiHelper.sample_rest_xml::Client.new(profile: 'sso_creds_bad', region: 'us-east-1')
         end.to raise_error(ArgumentError, /Missing required keys/)
       end
 
       it 'raises when attempting to load a mixed legacy SSO Profile with mismatched values' do
         expect do
-          ApiHelper.sample_rest_xml::Client.new(
-            profile: 'sso_creds_mixed_legacy_mismatch',
-            region: 'us-east-1'
-          )
+          ApiHelper.sample_rest_xml::Client.new(profile: 'sso_creds_mixed_legacy_mismatch', region: 'us-east-1')
         end.to raise_error(ArgumentError, /does not match the profile/)
       end
 
       it 'raises when attempting to load an SSO profile with a missing sso-session' do
         expect do
-          ApiHelper.sample_rest_xml::Client.new(
-            profile: 'sso_creds_bad_session',
-            region: 'us-east-1'
-          )
-        end.to raise_error(ArgumentError,
-          /sso-session session-does-not-exist must be defined in the config file/)
+          ApiHelper.sample_rest_xml::Client.new(profile: 'sso_creds_bad_session', region: 'us-east-1')
+        end.to raise_error(ArgumentError, /sso-session session-does-not-exist must be defined in the config file/)
       end
 
       it 'prefers assume role over shared config' do
@@ -289,48 +241,29 @@ module Aws
           'AR_SECRET',
           'AR_TOKEN'
         )
-        client = ApiHelper.sample_rest_xml::Client.new(
-          profile: 'ar_plus_creds', region: 'us-east-1'
-        )
-
-        expect(
-          client.config.credentials.credentials.access_key_id
-        ).to eq('AR_AKID')
+        client = ApiHelper.sample_rest_xml::Client.new(profile: 'ar_plus_creds', region: 'us-east-1')
+        expect(client.config.credentials.credentials.access_key_id).to eq('AR_AKID')
         expect(metric_values(client.config.credentials.metrics)).to include('o', 'n', 'i')
 
         sts_client = client.config.credentials.client
-        expect(
-          sts_client.config.region
-        ).to eq('us-east-1')
+        expect(sts_client.config.region).to eq('us-east-1')
       end
 
       it 'prefers shared credential file static credentials over shared config' do
-        client = ApiHelper.sample_rest_xml::Client.new(
-          profile: 'credentials_first', region: 'us-east-1'
-        )
-        expect(
-          client.config.credentials.credentials.access_key_id
-        ).to eq('ACCESS_KEY_CRD')
+        client = ApiHelper.sample_rest_xml::Client.new(profile: 'credentials_first', region: 'us-east-1')
+        expect(client.config.credentials.credentials.access_key_id).to eq('ACCESS_KEY_CRD')
         expect(metric_values(client.config.credentials.metrics)).to include('n')
       end
 
       it 'will source static credentials from shared config after shared credentials' do
-        client = ApiHelper.sample_rest_xml::Client.new(
-          profile: 'incomplete_cred', region: 'us-east-1'
-        )
-        expect(
-          client.config.credentials.credentials.access_key_id
-        ).to eq('ACCESS_KEY_SC1')
+        client = ApiHelper.sample_rest_xml::Client.new(profile: 'incomplete_cred', region: 'us-east-1')
+        expect(client.config.credentials.credentials.access_key_id).to eq('ACCESS_KEY_SC1')
         expect(metric_values(client.config.credentials.metrics)).to include('n')
       end
 
       it 'prefers process credentials over metadata credentials' do
-        client = ApiHelper.sample_rest_xml::Client.new(
-          profile: 'creds_from_process', region: 'us-east-1'
-        )
-        expect(
-          client.config.credentials.credentials.access_key_id
-        ).to eq('AK_PROC1')
+        client = ApiHelper.sample_rest_xml::Client.new(profile: 'creds_from_process', region: 'us-east-1')
+        expect(client.config.credentials.credentials.access_key_id).to eq('AK_PROC1')
         expect(metric_values(client.config.credentials.metrics)).to include('v', 'w')
       end
 
@@ -340,12 +273,8 @@ module Aws
           'AWS_ACCESS_KEY_ID' => 'AKID_ENV_STUB',
           'AWS_SECRET_ACCESS_KEY' => 'SECRET_ENV_STUB'
         )
-        client = ApiHelper.sample_rest_xml::Client.new(
-          region: 'us-east-1'
-        )
-        expect(
-          client.config.credentials.credentials.access_key_id
-        ).to eq('AKID_ENV_STUB')
+        client = ApiHelper.sample_rest_xml::Client.new(region: 'us-east-1')
+        expect(client.config.credentials.credentials.access_key_id).to eq('AKID_ENV_STUB')
         expect(metric_values(client.config.credentials.metrics)).to include('g')
       end
 
@@ -355,12 +284,8 @@ module Aws
           'AWS_ACCESS_KEY_ID' => 'AKID_ENV_STUB',
           'AWS_SECRET_ACCESS_KEY' => 'SECRET_ENV_STUB'
         )
-        client = ApiHelper.sample_rest_xml::Client.new(
-          profile: 'creds_from_process', region: 'us-east-1'
-        )
-        expect(
-          client.config.credentials.credentials.access_key_id
-        ).to eq('AK_PROC1')
+        client = ApiHelper.sample_rest_xml::Client.new(profile: 'creds_from_process', region: 'us-east-1')
+        expect(client.config.credentials.credentials.access_key_id).to eq('AK_PROC1')
         expect(metric_values(client.config.credentials.metrics)).to include('v', 'w')
       end
 
@@ -369,12 +294,11 @@ module Aws
 
         endpoint = 'http://169.254.169.254'
         extended_path = '/latest/meta-data/iam/security-credentials-extended/'
-        stub_request(:put, endpoint + '/latest/api/token')
-          .to_return(status: 200, body: "my-token\n")
+        stub_request(:put, "#{endpoint}/latest/api/token").to_return(status: 200, body: "my-token\n")
         stub_request(:get, endpoint + extended_path)
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: "profile-name\n")
-        stub_request(:get, endpoint + extended_path + 'profile-name')
+        stub_request(:get, "#{endpoint}#{extended_path}profile-name")
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: <<-JSON.strip)
             {
@@ -389,8 +313,7 @@ module Aws
           JSON
 
         client_creds = ApiHelper.sample_rest_xml::Client.new(
-          profile: 'nonexistant',
-          region: 'us-east-1'
+          profile: 'nonexistant', region: 'us-east-1'
         ).config.credentials
         expect(client_creds.credentials.access_key_id).to eq('akid-md')
         expect(metric_values(client_creds.metrics)).to include('0')
@@ -408,12 +331,9 @@ module Aws
           }
         JSON
         stub_const('ENV', 'AWS_CONTAINER_CREDENTIALS_RELATIVE_URI' => path)
-        stub_request(:get, "http://169.254.170.2#{path}")
-          .to_return(status: 200, body: resp)
-        client = ApiHelper.sample_rest_xml::Client.new(
-          profile: 'nonexistent',
-          region: 'us-east-1'
-        )
+        stub_request(:get, "http://169.254.170.2#{path}").to_return(status: 200, body: resp)
+
+        client = ApiHelper.sample_rest_xml::Client.new(profile: 'nonexistent', region: 'us-east-1')
         expect(client.config.credentials.credentials.access_key_id).to eq('ACCESS_KEY_ECS')
         expect(metric_values(client.config.credentials.metrics)).to include('z')
       end
@@ -487,9 +407,7 @@ module Aws
             expect(metrics_from_user_agent_header(resp)).to include('o', 'q', 'k')
             resp
           end
-          ApiHelper.sample_rest_xml::Client.new(
-            profile: 'ar_web_src', region: 'us-east-1'
-          )
+          ApiHelper.sample_rest_xml::Client.new(profile: 'ar_web_src', region: 'us-east-1')
         end
 
         it 'supports :source_profile from process credentials' do
@@ -500,13 +418,8 @@ module Aws
             'SECRET_AK_PROC1',
             'TOKEN_PROC1'
           )
-
-          client = ApiHelper.sample_rest_xml::Client.new(
-            profile: 'creds_from_sc_process', region: 'us-east-1'
-          )
-          expect(
-            client.config.credentials.credentials.access_key_id
-          ).to eq('AK_PROC1')
+          client = ApiHelper.sample_rest_xml::Client.new(profile: 'creds_from_sc_process', region: 'us-east-1')
+          expect(client.config.credentials.credentials.access_key_id).to eq('AK_PROC1')
           expect(metric_values(client.config.credentials.metrics)).to include('o', 'v', 'w', 'i')
         end
 
@@ -523,14 +436,11 @@ module Aws
             expect(metrics_from_user_agent_header(resp)).to include('o', 'v', 'w')
             resp
           end
-          ApiHelper.sample_rest_xml::Client.new(
-            profile: 'creds_from_sc_process', region: 'us-east-1'
-          )
+          ApiHelper.sample_rest_xml::Client.new(profile: 'creds_from_sc_process', region: 'us-east-1')
         end
 
         it 'supports :source_profile from sso credentials' do
           sso_stub
-
           assume_role_stub(
             'arn:aws:iam::123456789012:role/foo',
             'SSO_AKID',
@@ -538,19 +448,13 @@ module Aws
             'SECRET_AK',
             'TOKEN'
           )
-
-          client = ApiHelper.sample_rest_xml::Client.new(
-            profile: 'ar_sso_src', region: 'us-east-1'
-          )
-          expect(
-            client.config.credentials.credentials.access_key_id
-          ).to eq('AR_AKID')
+          client = ApiHelper.sample_rest_xml::Client.new(profile: 'ar_sso_src', region: 'us-east-1')
+          expect(client.config.credentials.credentials.access_key_id).to eq('AR_AKID')
           expect(metric_values(client.config.credentials.metrics)).to include('o', 'r', 's', 'i')
         end
 
         it 'emits correct UserAgent metrics during service calls for :source_profile from sso credentials' do
           sso_stub
-
           assume_role_stub(
             'arn:aws:iam::123456789012:role/foo',
             'SSO_AKID',
@@ -568,14 +472,11 @@ module Aws
             expect(metrics_from_user_agent_header(resp)).to include('o', 'r', 's')
             resp
           end
-          ApiHelper.sample_rest_xml::Client.new(
-            profile: 'ar_sso_src', region: 'us-east-1'
-          )
+          ApiHelper.sample_rest_xml::Client.new(profile: 'ar_sso_src', region: 'us-east-1')
         end
 
         it 'supports :source_profile from legacy sso credentials' do
           legacy_sso_stub
-
           assume_role_stub(
             'arn:aws:iam::123456789012:role/foo',
             'SSO_AKID',
@@ -583,19 +484,13 @@ module Aws
             'SECRET_AK',
             'TOKEN'
           )
-
-          client = ApiHelper.sample_rest_xml::Client.new(
-            profile: 'ar_sso_legacy_src', region: 'us-east-1'
-          )
-          expect(
-            client.config.credentials.credentials.access_key_id
-          ).to eq('AR_AKID')
+          client = ApiHelper.sample_rest_xml::Client.new(profile: 'ar_sso_legacy_src', region: 'us-east-1')
+          expect(client.config.credentials.credentials.access_key_id).to eq('AR_AKID')
           expect(metric_values(client.config.credentials.metrics)).to include('o', 't', 'u', 'i')
         end
 
         it 'emits correct UserAgent metrics during STS calls for :source_profile from legacy sso credentials' do
           legacy_sso_stub
-
           assume_role_stub(
             'arn:aws:iam::123456789012:role/foo',
             'SSO_AKID',
@@ -613,9 +508,7 @@ module Aws
             expect(metrics_from_user_agent_header(resp)).to include('o', 't', 'u')
             resp
           end
-          ApiHelper.sample_rest_xml::Client.new(
-            profile: 'ar_sso_legacy_src', region: 'us-east-1'
-          )
+          ApiHelper.sample_rest_xml::Client.new(profile: 'ar_sso_legacy_src', region: 'us-east-1')
         end
 
         it 'supports assume role chaining' do
@@ -626,7 +519,6 @@ module Aws
             'SECRET_AK_1',
             'TOKEN_1'
           )
-
           assume_role_stub(
             'arn:aws:iam::123456789012:role/role_a',
             'AK_1',
@@ -634,13 +526,8 @@ module Aws
             'SECRET_AK_2',
             'TOKEN_2'
           )
-
-          client = ApiHelper.sample_rest_xml::Client.new(
-            profile: 'assume_role_chain_b', region: 'us-east-1'
-          )
-          expect(
-            client.config.credentials.credentials.access_key_id
-          ).to eq('AK_2')
+          client = ApiHelper.sample_rest_xml::Client.new(profile: 'assume_role_chain_b', region: 'us-east-1')
+          expect(client.config.credentials.credentials.access_key_id).to eq('AK_2')
           expect(metric_values(client.config.credentials.metrics)).to include('o', 'n', 'i')
         end
 
@@ -652,7 +539,6 @@ module Aws
             'SECRET_AK_1',
             'TOKEN_1'
           )
-
           assume_role_stub(
             'arn:aws:iam::123456789012:role/role_a',
             'AK_1',
@@ -665,9 +551,7 @@ module Aws
             expect(metrics_from_user_agent_header(resp)).to include('o', 'n')
             resp
           end
-          ApiHelper.sample_rest_xml::Client.new(
-            profile: 'assume_role_chain_b', region: 'us-east-1'
-          )
+          ApiHelper.sample_rest_xml::Client.new(profile: 'assume_role_chain_b', region: 'us-east-1')
         end
 
         it 'uses source credentials when source and static are both set' do
@@ -678,13 +562,10 @@ module Aws
             'SECRET_AK_2',
             'TOKEN_2'
           )
-
           client = ApiHelper.sample_rest_xml::Client.new(
             profile: 'assume_role_source_and_credentials', region: 'us-east-1'
           )
-          expect(
-            client.config.credentials.credentials.access_key_id
-          ).to eq('AK_2')
+          expect(client.config.credentials.credentials.access_key_id).to eq('AK_2')
           expect(metric_values(client.config.credentials.metrics)).to include('o', 'n', 'i')
         end
 
@@ -696,37 +577,26 @@ module Aws
             'SECRET_AK_2',
             'TOKEN_2'
           )
-
-          client = ApiHelper.sample_rest_xml::Client.new(
-            profile: 'assume_role_self_reference', region: 'us-east-1'
-          )
-          expect(
-            client.config.credentials.credentials.access_key_id
-          ).to eq('AK_2')
+          client = ApiHelper.sample_rest_xml::Client.new(profile: 'assume_role_self_reference', region: 'us-east-1')
+          expect(client.config.credentials.credentials.access_key_id).to eq('AK_2')
           expect(metric_values(client.config.credentials.metrics)).to include('o', 'n', 'i')
         end
 
         it 'raises if there is a loop in chained profiles' do
           expect do
-            ApiHelper.sample_rest_xml::Client.new(
-              profile: 'assume_role_chain_loop_a', region: 'us-east-1'
-            )
+            ApiHelper.sample_rest_xml::Client.new(profile: 'assume_role_chain_loop_a', region: 'us-east-1')
           end.to raise_error(Errors::SourceProfileCircularReferenceError)
         end
 
         it 'raises if credential_source is present but invalid' do
           expect do
-            ApiHelper.sample_rest_xml::Client.new(
-              profile: 'ar_bad_csrc', region: 'us-east-1'
-            )
+            ApiHelper.sample_rest_xml::Client.new(profile: 'ar_bad_csrc', region: 'us-east-1')
           end.to raise_error(Errors::InvalidCredentialSourceError)
         end
 
         it 'raises if source_profile and credential_source both present' do
           expect do
-            ApiHelper.sample_rest_xml::Client.new(
-              profile: 'ar_src_conflict', region: 'us-east-1'
-            )
+            ApiHelper.sample_rest_xml::Client.new(profile: 'ar_src_conflict', region: 'us-east-1')
           end.to raise_error(Errors::CredentialSourceConflictError)
         end
 
@@ -738,12 +608,8 @@ module Aws
             'AR_SECRET',
             'AR_TOKEN'
           )
-          client = ApiHelper.sample_rest_xml::Client.new(
-            profile: 'assumerole_sc', region: 'us-east-1'
-          )
-          expect(
-            client.config.credentials.credentials.access_key_id
-          ).to eq('AR_AKID')
+          client = ApiHelper.sample_rest_xml::Client.new(profile: 'assumerole_sc', region: 'us-east-1')
+          expect(client.config.credentials.credentials.access_key_id).to eq('AR_AKID')
           expect(metric_values(client.config.credentials.metrics)).to include('o', 'n', 'i')
         end
 
@@ -758,9 +624,7 @@ module Aws
           client = ApiHelper.sample_rest_xml::Client.new(
             profile: 'ar_from_self', region: 'us-east-1'
           )
-          expect(
-            client.config.credentials.credentials.access_key_id
-          ).to eq('AR_AKID')
+          expect(client.config.credentials.credentials.access_key_id).to eq('AR_AKID')
           expect(metric_values(client.config.credentials.metrics)).to include('o', 'n', 'i')
         end
 
@@ -772,12 +636,8 @@ module Aws
             'AR_SECRET',
             'AR_TOKEN'
           )
-          client = ApiHelper.sample_rest_xml::Client.new(
-            profile: 'creds_from_sc', region: 'us-east-1'
-          )
-          expect(
-            client.config.credentials.credentials.access_key_id
-          ).to eq('AR_AKID')
+          client = ApiHelper.sample_rest_xml::Client.new(profile: 'creds_from_sc', region: 'us-east-1')
+          expect(client.config.credentials.credentials.access_key_id).to eq('AR_AKID')
           expect(metric_values(client.config.credentials.metrics)).to include('o', 'n', 'i')
         end
 
@@ -789,16 +649,13 @@ module Aws
             'AR_SECRET',
             'AR_TOKEN'
           )
-
           allow(ENV).to receive(:[])
           allow(ENV).to receive(:[]).with('AWS_PROFILE').and_return('ar_from_self')
           allow(ENV).to receive(:values_at).and_return(['us-east-1'])
 
           credentials = CredentialProviderChain.new.resolve
 
-          expect(
-            credentials.credentials.access_key_id
-          ).to eq('AR_AKID')
+          expect(credentials.credentials.access_key_id).to eq('AR_AKID')
           expect(metric_values(credentials.metrics)).to include('o', 'n', 'i')
         end
       end
@@ -814,12 +671,11 @@ module Aws
           'AR_SECRET',
           'AR_TOKEN'
         )
-        stub_request(:put, endpoint + '/latest/api/token')
-          .to_return(status: 200, body: "my-token\n")
+        stub_request(:put, "#{endpoint}/latest/api/token").to_return(status: 200, body: "my-token\n")
         stub_request(:get, endpoint + extended_path)
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: "profile-name\n")
-        stub_request(:get, endpoint + extended_path + 'profile-name')
+        stub_request(:get, "#{endpoint}#{extended_path}profile-name")
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: <<-JSON.strip)
             {
@@ -863,30 +719,23 @@ module Aws
           'AR_SECRET',
           'AR_TOKEN'
         )
-        stub_request(:put, endpoint + '/latest/api/token')
-          .to_return(status: 200, body: "my-token\n")
+        stub_request(:put, "#{endpoint}/latest/api/token").to_return(status: 200, body: "my-token\n")
         stub_request(:get, endpoint + extended_path)
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: "profile-name\n")
-        stub_request(:get, endpoint + extended_path + 'profile-name')
+        stub_request(:get, "#{endpoint}#{extended_path}profile-name")
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: resp)
 
-        expect_any_instance_of(STS::Client)
-          .to receive(:assume_role)
-          .and_wrap_original do |m, *args|
-            resp = m.call(*args)
-            expect(metrics_from_user_agent_header(resp)).to include('p', '0')
-            resp
-          end
-
-        ApiHelper.sample_rest_xml::Client.new(
-          profile: 'ar_ec2_src', region: 'us-east-1'
-        )
+        expect_any_instance_of(STS::Client).to receive(:assume_role).and_wrap_original do |m, *args|
+          resp = m.call(*args)
+          expect(metrics_from_user_agent_header(resp)).to include('p', '0')
+          resp
+        end
+        ApiHelper.sample_rest_xml::Client.new(profile: 'ar_ec2_src', region: 'us-east-1')
       end
 
       it 'can assume a role with ECS Credentials as a source' do
-        profile = 'ar_ecs_src'
         path = '/latest/credentials?id=foobarbaz'
         resp = <<-JSON.strip
           {
@@ -898,8 +747,7 @@ module Aws
           }
         JSON
         stub_const('ENV', 'AWS_CONTAINER_CREDENTIALS_RELATIVE_URI' => path)
-        stub_request(:get, "http://169.254.170.2#{path}")
-          .to_return(status: 200, body: resp)
+        stub_request(:get, "http://169.254.170.2#{path}").to_return(status: 200, body: resp)
         assume_role_stub(
           'arn:aws:iam::123456789012:role/foo',
           'ACCESS_KEY_ECS',
@@ -907,13 +755,8 @@ module Aws
           'AR_SECRET',
           'AR_TOKEN'
         )
-        client = ApiHelper.sample_rest_xml::Client.new(
-          profile: profile,
-          region: 'us-east-1'
-        )
-        expect(
-          client.config.credentials.credentials.access_key_id
-        ).to eq('AR_AKID')
+        client = ApiHelper.sample_rest_xml::Client.new(profile: 'ar_ecs_src', region: 'us-east-1')
+        expect(client.config.credentials.credentials.access_key_id).to eq('AR_AKID')
         expect(metric_values(client.config.credentials.metrics)).to include('p', 'z', 'i')
       end
 
@@ -930,8 +773,7 @@ module Aws
           }
         JSON
         stub_const('ENV', 'AWS_CONTAINER_CREDENTIALS_RELATIVE_URI' => path)
-        stub_request(:get, "http://169.254.170.2#{path}")
-          .to_return(status: 200, body: resp)
+        stub_request(:get, "http://169.254.170.2#{path}").to_return(status: 200, body: resp)
         assume_role_stub(
           'arn:aws:iam::123456789012:role/foo',
           'ACCESS_KEY_ECS',
@@ -974,9 +816,7 @@ module Aws
           profile: 'fooprofile',
           region: 'us-east-1'
         )
-        expect(
-          client.config.credentials.credentials.access_key_id
-        ).to eq('ACCESS_DIRECT')
+        expect(client.config.credentials.credentials.access_key_id).to eq('ACCESS_DIRECT')
         expect(metric_values(client.config.credentials.metrics)).to include('n')
       end
 
@@ -986,12 +826,8 @@ module Aws
           'AWS_ACCESS_KEY_ID' => 'AKID_ENV_STUB',
           'AWS_SECRET_ACCESS_KEY' => 'SECRET_ENV_STUB'
         )
-        client = ApiHelper.sample_rest_xml::Client.new(
-          region: 'us-east-1'
-        )
-        expect(
-          client.config.credentials.credentials.access_key_id
-        ).to eq('AKID_ENV_STUB')
+        client = ApiHelper.sample_rest_xml::Client.new(region: 'us-east-1')
+        expect(client.config.credentials.credentials.access_key_id).to eq('AKID_ENV_STUB')
         expect(metric_values(client.config.credentials.metrics)).to include('g')
       end
 
@@ -1001,26 +837,18 @@ module Aws
           'AWS_ACCESS_KEY_ID' => 'AKID_ENV_STUB',
           'AWS_SECRET_ACCESS_KEY' => 'SECRET_ENV_STUB'
         )
-        client = ApiHelper.sample_rest_xml::Client.new(
-          profile: 'fooprofile', region: 'us-east-1'
-        )
-        expect(
-          client.config.credentials.credentials.access_key_id
-        ).to eq('ACCESS_KEY_1')
+        client = ApiHelper.sample_rest_xml::Client.new(profile: 'fooprofile', region: 'us-east-1')
+        expect(client.config.credentials.credentials.access_key_id).to eq('ACCESS_KEY_1')
         expect(metric_values(client.config.credentials.metrics)).to include('n')
       end
 
       it 'will not load credentials from shared config' do
-        client = ApiHelper.sample_rest_xml::Client.new(
-          profile: 'creds_from_cfg', region: 'us-east-1'
-        )
+        client = ApiHelper.sample_rest_xml::Client.new(profile: 'creds_from_cfg', region: 'us-east-1')
         expect(client.config.credentials).to eq(nil)
       end
 
       it 'will not attempt to assume a role' do
-        client = ApiHelper.sample_rest_xml::Client.new(
-          profile: 'assumerole_sc', region: 'us-east-1'
-        )
+        client = ApiHelper.sample_rest_xml::Client.new(profile: 'assumerole_sc', region: 'us-east-1')
         expect(client.config.credentials).to eq(nil)
       end
 
@@ -1029,12 +857,11 @@ module Aws
 
         endpoint = 'http://169.254.169.254'
         extended_path = '/latest/meta-data/iam/security-credentials-extended/'
-        stub_request(:put, endpoint + '/latest/api/token')
-          .to_return(status: 200, body: "my-token\n")
+        stub_request(:put, "#{endpoint}/latest/api/token").to_return(status: 200, body: "my-token\n")
         stub_request(:get, endpoint + extended_path)
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: "profile-name\n")
-        stub_request(:get, endpoint + extended_path + 'profile-name')
+        stub_request(:get, "#{endpoint}#{extended_path}profile-name")
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: <<-JSON.strip)
             {
