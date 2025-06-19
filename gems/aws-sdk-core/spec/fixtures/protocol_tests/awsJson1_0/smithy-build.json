@@ -1,0 +1,21 @@
+{
+  "version": "1.0",
+  "projections": {
+    "json10": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["aws.protocoltests.json10#JsonRpc10"]
+          }
+        },
+        {
+          "name": "removeUnusedShapes"
+        },
+        {
+          "name": "removeTraitDefinitions"
+        }
+      ]
+    }
+  }
+}

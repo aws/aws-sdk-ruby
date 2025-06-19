@@ -10,7 +10,7 @@ module Aws
         def sign(request:, identity:, properties:)
           signer = Aws::Sigv4::Signer.new(
             service: properties['name'],
-            region: properties['region'],
+            region: 'us-west-2', # TODO: make region configurable
             credentials: identity
           )
           signature = signer.sign_request(

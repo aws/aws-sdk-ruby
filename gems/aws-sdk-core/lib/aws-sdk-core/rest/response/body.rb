@@ -45,7 +45,7 @@ module Aws
             return false unless @ref.shape[:http_payload_member]
 
             payload = @ref.shape[:http_payload_member].shape
-            payload.is_a?(BlobShape) && !payload.traits.include?('smithy.api#streaming')
+            payload.is_a?(BlobShape) && !payload.traits.key?('smithy.api#streaming')
           end
 
           def empty_body?(body)

@@ -8,12 +8,54 @@ task 'build:aws-sdk-lambda' do
   AwsSdkCodeGenerator.generate_aws_sdk_lambda
 end
 
-desc 'run protocol tests'
-task 'spec:protocol_tests' do
+# TODO: generalize all of this
+task 'spec:protocol_tests' => %w[
+  spec:protocol_tests:restJson1
+  spec:protocol_tests:awsJson1_0
+  spec:protocol_tests:awsJson1_1
+]
+
+task 'spec:protocol_tests:restJson1' do
   model = JSON.load_file('gems/aws-sdk-core/spec/fixtures/protocol_tests/restJson1/model.json')
   plan_options = {
     module_name: 'RestJson',
     gem_name: 'restJson1',
+    gem_version: '0.1.0',
+    destination_root: Dir.mktmpdir
+  }
+  plan = Smithy::Plan.new(model, :client, plan_options)
+  Smithy.generate(plan)
+  $LOAD_PATH.unshift("#{plan.destination_root}/lib")
+  $LOAD_PATH.unshift('gems/aws-sdk-core/lib')
+  require plan.gem_name
+  sh("bundle exec rspec -I gems/aws-sdk-core/lib -I #{plan.destination_root}/lib spec #{plan.destination_root}/spec --format documentation")
+ensure
+  cleanup_gem(plan.module_name, plan.destination_root)
+end
+
+task 'spec:protocol_tests:awsJson1_0' do
+  model = JSON.load_file('gems/aws-sdk-core/spec/fixtures/protocol_tests/awsJson1_0/model.json')
+  plan_options = {
+    module_name: 'AwsJson1_0',
+    gem_name: 'awsJson1_0',
+    gem_version: '0.1.0',
+    destination_root: Dir.mktmpdir
+  }
+  plan = Smithy::Plan.new(model, :client, plan_options)
+  Smithy.generate(plan)
+  $LOAD_PATH.unshift("#{plan.destination_root}/lib")
+  $LOAD_PATH.unshift('gems/aws-sdk-core/lib')
+  require plan.gem_name
+  sh("bundle exec rspec -I gems/aws-sdk-core/lib -I #{plan.destination_root}/lib spec #{plan.destination_root}/spec --format documentation")
+ensure
+  cleanup_gem(plan.module_name, plan.destination_root)
+end
+
+task 'spec:protocol_tests:awsJson1_1' do
+  model = JSON.load_file('gems/aws-sdk-core/spec/fixtures/protocol_tests/awsJson1_1/model.json')
+  plan_options = {
+    module_name: 'AwsJson1_1',
+    gem_name: 'awsJson1_1',
     gem_version: '0.1.0',
     destination_root: Dir.mktmpdir
   }

@@ -77,7 +77,7 @@ module Aws
           end
 
           def string(shape, value)
-            if shape.traits.include?('smithy.api#mediaType')
+            if shape.traits.key?('smithy.api#mediaType')
               Base64.strict_decode64(value)
             else
               value.to_s

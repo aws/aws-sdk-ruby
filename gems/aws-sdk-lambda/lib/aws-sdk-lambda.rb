@@ -5,6 +5,7 @@
 require 'aws-sdk-core'
 require 'smithy-client'
 
+
 Object.const_set('Aws', Module.new) unless Object.const_defined?('Aws')
 Aws.const_set('Lambda', Module.new) unless Aws.const_defined?('Lambda')
 

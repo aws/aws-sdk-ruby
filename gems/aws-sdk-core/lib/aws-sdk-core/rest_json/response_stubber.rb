@@ -23,7 +23,7 @@ module Aws
           resp
         end
 
-        def stub_error(error_code)
+        def stub_error(_service, error_code)
           resp = Smithy::Client::HTTP::Response.new
           resp.status_code = 400
           resp.headers['Content-Type'] = 'application/json'

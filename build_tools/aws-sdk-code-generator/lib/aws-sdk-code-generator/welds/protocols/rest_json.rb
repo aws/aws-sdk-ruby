@@ -10,9 +10,9 @@ module AwsSdkCodeGenerator
       class RestJson < Smithy::Weld
         def for?(service)
           _, service = service.first
-          return false unless service.fetch('traits', {}).include?('aws.protocols#restJson1')
+          return false unless service.fetch('traits', {}).key?('aws.protocols#restJson1')
 
-          say_status :insert, 'Adding the Rest JSON protocol', @plan.quiet
+          say_status :insert, 'Adding the restJson1 protocol', @plan.quiet
           true
         end
 

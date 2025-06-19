@@ -7,6 +7,7 @@ require_relative 'plugins/endpoint'
 require 'aws-sdk-core/plugins/sigv4'
 require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
+require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
 require 'smithy-client/plugins/idempotency_token'
 require 'smithy-client/plugins/logging'
@@ -36,6 +37,7 @@ module Aws::Lambda
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
+    add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
     add_plugin(Smithy::Client::Plugins::IdempotencyToken)
     add_plugin(Smithy::Client::Plugins::Logging)
@@ -245,7 +247,7 @@ module Aws::Lambda
     # @return [Types::AddLayerVersionPermissionResponse]
     def add_layer_version_permission(params = {}, options = {})
       input = build_input(:add_layer_version_permission, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Grants a <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying">principal</a> 
@@ -368,7 +370,7 @@ module Aws::Lambda
     # @return [Types::AddPermissionResponse]
     def add_permission(params = {}, options = {})
       input = build_input(:add_permission, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Creates an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html">alias</a> for a
@@ -457,7 +459,7 @@ module Aws::Lambda
     # @return [Types::CreateAliasOutput]
     def create_alias(params = {}, options = {})
       input = build_input(:create_alias, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Creates a code signing configuration. A <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html">code signing configuration</a> defines a list of
@@ -506,7 +508,7 @@ module Aws::Lambda
     # @return [Types::CreateCodeSigningConfigResponse]
     def create_code_signing_config(params = {}, options = {})
       input = build_input(:create_code_signing_config, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Creates a mapping between an event source and an Lambda function. Lambda reads items from the event source and invokes the function.</p>
@@ -947,7 +949,7 @@ module Aws::Lambda
     # @return [Types::CreateEventSourceMappingOutput]
     def create_event_source_mapping(params = {}, options = {})
       input = build_input(:create_event_source_mapping, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Creates a Lambda function. To create a function, you need a <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html">deployment package</a> and an <a href="https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role">execution role</a>. The
@@ -1319,7 +1321,7 @@ module Aws::Lambda
     # @return [Types::CreateFunctionOutput]
     def create_function(params = {}, options = {})
       input = build_input(:create_function, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Creates a Lambda function URL with the specified configuration parameters. A function URL is
@@ -1406,7 +1408,7 @@ module Aws::Lambda
     # @return [Types::CreateFunctionUrlConfigResponse]
     def create_function_url_config(params = {}, options = {})
       input = build_input(:create_function_url_config, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Deletes a Lambda function <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html">alias</a>.</p>
@@ -1457,7 +1459,7 @@ module Aws::Lambda
     # @return [Smithy::Schema::EmptyStructure]
     def delete_alias(params = {}, options = {})
       input = build_input(:delete_alias, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Deletes the code signing configuration. You can delete the code signing configuration only if no function is
@@ -1477,7 +1479,7 @@ module Aws::Lambda
     # @return [Types::DeleteCodeSigningConfigResponse]
     def delete_code_signing_config(params = {}, options = {})
       input = build_input(:delete_code_signing_config, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Deletes an <a href="https://docs.aws.amazon.com/lambda/latest/dg/intro-invocation-modes.html">event source
@@ -1572,7 +1574,7 @@ module Aws::Lambda
     # @return [Types::DeleteEventSourceMappingOutput]
     def delete_event_source_mapping(params = {}, options = {})
       input = build_input(:delete_event_source_mapping, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Deletes a Lambda function. To delete a specific function version, use the <code>Qualifier</code> parameter.
@@ -1627,7 +1629,7 @@ module Aws::Lambda
     # @return [Smithy::Schema::EmptyStructure]
     def delete_function(params = {}, options = {})
       input = build_input(:delete_function, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Removes the code signing configuration from the function.</p>
@@ -1665,7 +1667,7 @@ module Aws::Lambda
     # @return [Smithy::Schema::EmptyStructure]
     def delete_function_code_signing_config(params = {}, options = {})
       input = build_input(:delete_function_code_signing_config, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Removes a concurrent execution limit from a function.</p>
@@ -1712,7 +1714,7 @@ module Aws::Lambda
     # @return [Smithy::Schema::EmptyStructure]
     def delete_function_concurrency(params = {}, options = {})
       input = build_input(:delete_function_concurrency, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Deletes the configuration for asynchronous invocation for a function, version, or alias.</p>
@@ -1764,7 +1766,7 @@ module Aws::Lambda
     # @return [Smithy::Schema::EmptyStructure]
     def delete_function_event_invoke_config(params = {}, options = {})
       input = build_input(:delete_function_event_invoke_config, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Deletes a Lambda function URL. When you delete a function URL, you
@@ -1806,7 +1808,7 @@ module Aws::Lambda
     # @return [Smithy::Schema::EmptyStructure]
     def delete_function_url_config(params = {}, options = {})
       input = build_input(:delete_function_url_config, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Deletes a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda
@@ -1840,7 +1842,7 @@ module Aws::Lambda
     # @return [Smithy::Schema::EmptyStructure]
     def delete_layer_version(params = {}, options = {})
       input = build_input(:delete_layer_version, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Deletes the provisioned concurrency configuration for a function.</p>
@@ -1891,7 +1893,7 @@ module Aws::Lambda
     # @return [Smithy::Schema::EmptyStructure]
     def delete_provisioned_concurrency_config(params = {}, options = {})
       input = build_input(:delete_provisioned_concurrency_config, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Retrieves details about your account's <a href="https://docs.aws.amazon.com/lambda/latest/dg/limits.html">limits</a> and usage in an Amazon Web Services Region.</p>
@@ -1937,7 +1939,7 @@ module Aws::Lambda
     # @return [Types::GetAccountSettingsResponse]
     def get_account_settings(params = {}, options = {})
       input = build_input(:get_account_settings, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Returns details about a Lambda function <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html">alias</a>.</p>
@@ -2005,7 +2007,7 @@ module Aws::Lambda
     # @return [Types::GetAliasOutput]
     def get_alias(params = {}, options = {})
       input = build_input(:get_alias, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Returns information about the specified code signing configuration.</p>
@@ -2037,7 +2039,7 @@ module Aws::Lambda
     # @return [Types::GetCodeSigningConfigResponse]
     def get_code_signing_config(params = {}, options = {})
       input = build_input(:get_code_signing_config, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Returns details about an event source mapping. You can get the identifier of a mapping from the output of
@@ -2130,7 +2132,7 @@ module Aws::Lambda
     # @return [Types::GetEventSourceMappingOutput]
     def get_event_source_mapping(params = {}, options = {})
       input = build_input(:get_event_source_mapping, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Returns information about the function or function version, with a link to download the deployment package
@@ -2329,7 +2331,7 @@ module Aws::Lambda
     # @return [Types::GetFunctionResponse]
     def get_function(params = {}, options = {})
       input = build_input(:get_function, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Returns the code signing configuration for the specified function.</p>
@@ -2370,7 +2372,7 @@ module Aws::Lambda
     # @return [Types::GetFunctionCodeSigningConfigResponse]
     def get_function_code_signing_config(params = {}, options = {})
       input = build_input(:get_function_code_signing_config, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Returns details about the reserved concurrency configuration for a function. To set a concurrency limit for a
@@ -2422,7 +2424,7 @@ module Aws::Lambda
     # @return [Types::GetFunctionConcurrencyResponse]
     def get_function_concurrency(params = {}, options = {})
       input = build_input(:get_function_concurrency, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Returns the version-specific settings of a Lambda function or version. The output includes only options that
@@ -2593,7 +2595,7 @@ module Aws::Lambda
     # @return [Types::GetFunctionConfigurationOutput]
     def get_function_configuration(params = {}, options = {})
       input = build_input(:get_function_configuration, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Retrieves the configuration for asynchronous invocation for a function, version, or alias.</p>
@@ -2648,7 +2650,7 @@ module Aws::Lambda
     # @return [Types::GetFunctionEventInvokeConfigOutput]
     def get_function_event_invoke_config(params = {}, options = {})
       input = build_input(:get_function_event_invoke_config, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Returns your function's <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-recursion.html">recursive loop detection</a> configuration. 
@@ -2670,7 +2672,7 @@ module Aws::Lambda
     # @return [Types::GetFunctionRecursionConfigResponse]
     def get_function_recursion_config(params = {}, options = {})
       input = build_input(:get_function_recursion_config, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Returns details about a Lambda function URL.</p>
@@ -2726,7 +2728,7 @@ module Aws::Lambda
     # @return [Types::GetFunctionUrlConfigResponse]
     def get_function_url_config(params = {}, options = {})
       input = build_input(:get_function_url_config, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Returns information about a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda
@@ -2792,7 +2794,7 @@ module Aws::Lambda
     # @return [Types::GetLayerVersionOutput]
     def get_layer_version(params = {}, options = {})
       input = build_input(:get_layer_version, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Returns information about a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda
@@ -2852,7 +2854,7 @@ module Aws::Lambda
     # @return [Types::GetLayerVersionByArnOutput]
     def get_layer_version_by_arn(params = {}, options = {})
       input = build_input(:get_layer_version_by_arn, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Returns the permission policy for a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda
@@ -2878,7 +2880,7 @@ module Aws::Lambda
     # @return [Types::GetLayerVersionPolicyResponse]
     def get_layer_version_policy(params = {}, options = {})
       input = build_input(:get_layer_version_policy, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Returns the <a href="https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html">resource-based IAM policy</a> for a function, version, or alias.</p>
@@ -2935,7 +2937,7 @@ module Aws::Lambda
     # @return [Types::GetPolicyResponse]
     def get_policy(params = {}, options = {})
       input = build_input(:get_policy, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Retrieves the provisioned concurrency configuration for a function's alias or version.</p>
@@ -3015,7 +3017,7 @@ module Aws::Lambda
     # @return [Types::GetProvisionedConcurrencyConfigResponse]
     def get_provisioned_concurrency_config(params = {}, options = {})
       input = build_input(:get_provisioned_concurrency_config, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Retrieves the runtime management configuration for a function's version. If the runtime update mode is <b>Manual</b>, this includes the ARN of the 
@@ -3063,7 +3065,7 @@ module Aws::Lambda
     # @return [Types::GetRuntimeManagementConfigResponse]
     def get_runtime_management_config(params = {}, options = {})
       input = build_input(:get_runtime_management_config, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Invokes a Lambda function. You can invoke a function synchronously (and wait for the response), or
@@ -3200,7 +3202,7 @@ module Aws::Lambda
     # @return [Types::InvocationResponse]
     def invoke(params = {}, options = {})
       input = build_input(:invoke, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <important>
@@ -3263,7 +3265,7 @@ module Aws::Lambda
     # @return [Types::InvokeAsyncResponse]
     def invoke_async(params = {}, options = {})
       input = build_input(:invoke_async, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Configure your Lambda functions to stream response payloads back to clients. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-response-streaming.html">Configuring a Lambda function to stream responses</a>.</p>
@@ -3350,7 +3352,7 @@ module Aws::Lambda
     # @return [Types::InvokeWithResponseStreamResponse]
     def invoke_with_response_stream(params = {}, options = {})
       input = build_input(:invoke_with_response_stream, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Returns a list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html">aliases</a>
@@ -3445,7 +3447,7 @@ module Aws::Lambda
     # @return [Types::ListAliasesResponse]
     def list_aliases(params = {}, options = {})
       input = build_input(:list_aliases, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Returns a list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuring-codesigning.html">code
@@ -3485,7 +3487,7 @@ module Aws::Lambda
     # @return [Types::ListCodeSigningConfigsResponse]
     def list_code_signing_configs(params = {}, options = {})
       input = build_input(:list_code_signing_configs, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Lists event source mappings. Specify an <code>EventSourceArn</code> to show only event source mappings for a
@@ -3663,7 +3665,7 @@ module Aws::Lambda
     # @return [Types::ListEventSourceMappingsResponse]
     def list_event_source_mappings(params = {}, options = {})
       input = build_input(:list_event_source_mappings, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Retrieves a list of configurations for asynchronous invocation for a function.</p>
@@ -3750,7 +3752,7 @@ module Aws::Lambda
     # @return [Types::ListFunctionEventInvokeConfigsResponse]
     def list_function_event_invoke_configs(params = {}, options = {})
       input = build_input(:list_function_event_invoke_configs, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Returns a list of Lambda function URLs for the specified function.</p>
@@ -3815,7 +3817,7 @@ module Aws::Lambda
     # @return [Types::ListFunctionUrlConfigsResponse]
     def list_function_url_configs(params = {}, options = {})
       input = build_input(:list_function_url_configs, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Returns a list of Lambda functions, with the version-specific configuration of each. Lambda returns up to 50
@@ -4006,7 +4008,7 @@ module Aws::Lambda
     # @return [Types::ListFunctionsResponse]
     def list_functions(params = {}, options = {})
       input = build_input(:list_functions, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>List the functions that use the specified code signing configuration. You can use this method prior to deleting a
@@ -4035,7 +4037,7 @@ module Aws::Lambda
     # @return [Types::ListFunctionsByCodeSigningConfigResponse]
     def list_functions_by_code_signing_config(params = {}, options = {})
       input = build_input(:list_functions_by_code_signing_config, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Lists the versions of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda
@@ -4117,7 +4119,7 @@ module Aws::Lambda
     # @return [Types::ListLayerVersionsResponse]
     def list_layer_versions(params = {}, options = {})
       input = build_input(:list_layer_versions, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Lists <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-layers.html">Lambda
@@ -4198,7 +4200,7 @@ module Aws::Lambda
     # @return [Types::ListLayersResponse]
     def list_layers(params = {}, options = {})
       input = build_input(:list_layers, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Retrieves a list of provisioned concurrency configurations for a function.</p>
@@ -4283,7 +4285,7 @@ module Aws::Lambda
     # @return [Types::ListProvisionedConcurrencyConfigsResponse]
     def list_provisioned_concurrency_configs(params = {}, options = {})
       input = build_input(:list_provisioned_concurrency_configs, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Returns a function, event source mapping, or code signing configuration's <a href="https://docs.aws.amazon.com/lambda/latest/dg/tagging.html">tags</a>. You can
@@ -4322,7 +4324,7 @@ module Aws::Lambda
     # @return [Types::ListTagsResponse]
     def list_tags(params = {}, options = {})
       input = build_input(:list_tags, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Returns a list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">versions</a>,
@@ -4527,7 +4529,7 @@ module Aws::Lambda
     # @return [Types::ListVersionsByFunctionResponse]
     def list_versions_by_function(params = {}, options = {})
       input = build_input(:list_versions_by_function, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Creates an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda
@@ -4636,7 +4638,7 @@ module Aws::Lambda
     # @return [Types::PublishLayerVersionResponse]
     def publish_layer_version(params = {}, options = {})
       input = build_input(:publish_layer_version, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Creates a <a href="https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">version</a> from the
@@ -4821,7 +4823,7 @@ module Aws::Lambda
     # @return [Types::PublishVersionOutput]
     def publish_version(params = {}, options = {})
       input = build_input(:publish_version, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Update the code signing configuration for the function. Changes to the code signing configuration take effect the
@@ -4866,7 +4868,7 @@ module Aws::Lambda
     # @return [Types::PutFunctionCodeSigningConfigResponse]
     def put_function_code_signing_config(params = {}, options = {})
       input = build_input(:put_function_code_signing_config, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Sets the maximum number of simultaneous executions for a function, and reserves capacity for that concurrency
@@ -4929,7 +4931,7 @@ module Aws::Lambda
     # @return [Types::PutFunctionConcurrencyOutput]
     def put_function_concurrency(params = {}, options = {})
       input = build_input(:put_function_concurrency, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Configures options for <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html">asynchronous
@@ -5040,7 +5042,7 @@ module Aws::Lambda
     # @return [Types::PutFunctionEventInvokeConfigOutput]
     def put_function_event_invoke_config(params = {}, options = {})
       input = build_input(:put_function_event_invoke_config, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Sets your function's <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-recursion.html">recursive loop detection</a> configuration.</p>
@@ -5100,7 +5102,7 @@ module Aws::Lambda
     # @return [Types::PutFunctionRecursionConfigResponse]
     def put_function_recursion_config(params = {}, options = {})
       input = build_input(:put_function_recursion_config, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Adds a provisioned concurrency configuration to a function's alias or version.</p>
@@ -5167,7 +5169,7 @@ module Aws::Lambda
     # @return [Types::PutProvisionedConcurrencyConfigResponse]
     def put_provisioned_concurrency_config(params = {}, options = {})
       input = build_input(:put_provisioned_concurrency_config, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Sets the runtime management configuration for a function's version. For more information, 
@@ -5242,7 +5244,7 @@ module Aws::Lambda
     # @return [Types::PutRuntimeManagementConfigResponse]
     def put_runtime_management_config(params = {}, options = {})
       input = build_input(:put_runtime_management_config, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Removes a statement from the permissions policy for a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda
@@ -5284,7 +5286,7 @@ module Aws::Lambda
     # @return [Smithy::Schema::EmptyStructure]
     def remove_layer_version_permission(params = {}, options = {})
       input = build_input(:remove_layer_version_permission, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Revokes function-use permission from an Amazon Web Services service or another Amazon Web Services account. You
@@ -5344,7 +5346,7 @@ module Aws::Lambda
     # @return [Smithy::Schema::EmptyStructure]
     def remove_permission(params = {}, options = {})
       input = build_input(:remove_permission, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Adds <a href="https://docs.aws.amazon.com/lambda/latest/dg/tagging.html">tags</a> to a function, event source mapping, or code signing configuration.</p>
@@ -5380,7 +5382,7 @@ module Aws::Lambda
     # @return [Smithy::Schema::EmptyStructure]
     def tag_resource(params = {}, options = {})
       input = build_input(:tag_resource, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Removes <a href="https://docs.aws.amazon.com/lambda/latest/dg/tagging.html">tags</a> from a function, event source mapping, or code signing configuration.</p>
@@ -5414,7 +5416,7 @@ module Aws::Lambda
     # @return [Smithy::Schema::EmptyStructure]
     def untag_resource(params = {}, options = {})
       input = build_input(:untag_resource, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Updates the configuration of a Lambda function <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html">alias</a>.</p>
@@ -5511,7 +5513,7 @@ module Aws::Lambda
     # @return [Types::UpdateAliasOutput]
     def update_alias(params = {}, options = {})
       input = build_input(:update_alias, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Update the code signing configuration. Changes to the code signing configuration take effect the next time a
@@ -5557,7 +5559,7 @@ module Aws::Lambda
     # @return [Types::UpdateCodeSigningConfigResponse]
     def update_code_signing_config(params = {}, options = {})
       input = build_input(:update_code_signing_config, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Updates an event source mapping. You can change the function that Lambda invokes, or pause
@@ -5917,7 +5919,7 @@ module Aws::Lambda
     # @return [Types::UpdateEventSourceMappingOutput]
     def update_event_source_mapping(params = {}, options = {})
       input = build_input(:update_event_source_mapping, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Updates a Lambda function's code. If code signing is enabled for the function, the code package
@@ -6128,7 +6130,7 @@ module Aws::Lambda
     # @return [Types::UpdateFunctionCodeOutput]
     def update_function_code(params = {}, options = {})
       input = build_input(:update_function_code, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Modify the version-specific settings of a Lambda function.</p>
@@ -6417,7 +6419,7 @@ module Aws::Lambda
     # @return [Types::UpdateFunctionConfigurationOutput]
     def update_function_configuration(params = {}, options = {})
       input = build_input(:update_function_configuration, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Updates the configuration for asynchronous invocation for a function, version, or alias.</p>
@@ -6542,7 +6544,7 @@ module Aws::Lambda
     # @return [Types::UpdateFunctionEventInvokeConfigOutput]
     def update_function_event_invoke_config(params = {}, options = {})
       input = build_input(:update_function_event_invoke_config, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # <p>Updates the configuration for a Lambda function URL.</p>
@@ -6629,7 +6631,7 @@ module Aws::Lambda
     # @return [Types::UpdateFunctionUrlConfigResponse]
     def update_function_url_config(params = {}, options = {})
       input = build_input(:update_function_url_config, params)
-      input.send_request(options)
+      input.send_input(options)
     end
 
     # Polls an API operation until a resource enters a desired state.
@@ -6676,7 +6678,6 @@ module Aws::Lambda
     #     rescue Smithy::Client::Waiters::WaiterFailed
     #       # resource did not enter the desired state in time
     #     end
-    #
     #
     # @param [Symbol] waiter_name
     # @param [Hash] params ({})

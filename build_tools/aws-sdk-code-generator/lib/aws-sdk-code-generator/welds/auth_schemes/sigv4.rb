@@ -9,7 +9,7 @@ module AwsSdkCodeGenerator
     class SigV4 < Smithy::Weld
       def for?(service)
         _id, service = service.first
-        return false unless service.fetch('traits', {}).include?('aws.auth#sigv4')
+        return false unless service.fetch('traits', {}).key?('aws.auth#sigv4')
 
         say_status :insert, 'Adding the SigV4 plugin', @plan.quiet
         true

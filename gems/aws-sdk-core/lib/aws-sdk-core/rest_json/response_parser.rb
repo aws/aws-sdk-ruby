@@ -89,7 +89,7 @@ module Aws
         end
 
         def aws_query_error?(context)
-          context.config.service.traits.include?('aws.protocols#awsQueryCompatible') &&
+          context.config.service.traits.key?('aws.protocols#awsQueryCompatible') &&
             context.response.headers['x-amzn-query-error']
         end
 

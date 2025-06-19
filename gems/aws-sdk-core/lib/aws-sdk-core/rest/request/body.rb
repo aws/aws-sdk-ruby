@@ -21,8 +21,8 @@ module Aws
             @ref = ref
           end
 
-          def apply(request_or_response, params)
-            body = build_body(params)
+          def apply(request_or_response, input)
+            body = build_body(input)
             # TODO: this is terrible
             if body.nil? && modeled_body_member? && !string_or_blob_payload? && !union_payload?
               body = '{}'
@@ -32,17 +32,17 @@ module Aws
 
           private
 
-          def build_body(params)
+          def build_body(input)
             # When string, blob, or enum as a payload, use value directly
             if string_or_blob_payload?
-              params[@ref.shape[:http_payload]]
+              input[@ref.shape[:http_payload]]
             # Otherwise, serialize the payload member
             elsif @ref.shape[:http_payload_member]
-              params = params[@ref.shape[:http_payload]]
-              @codec.serialize(@ref.shape[:http_payload_member].shape, params) if params
+              input = input[@ref.shape[:http_payload]]
+              @codec.serialize(@ref.shape[:http_payload_member].shape, input) if input
             else
-              params = body_params(params)
-              @codec.serialize(@ref, params) unless params.empty?
+              input = body_members(input)
+              @codec.serialize(@ref, input) unless input.empty?
             end
           end
 
@@ -53,12 +53,11 @@ module Aws
             payload.is_a?(StringShape) || payload.is_a?(BlobShape) || payload.is_a?(EnumShape)
           end
 
-          def body_params(params)
+          def body_members(input)
             @ref.shape.members.each_with_object({}) do |(member_name, member_ref), hash|
-              next if NON_BODY_TRAITS.any? { |trait| member_ref.traits.include?(trait) }
-              next unless params.key?(member_name)
+              next if NON_BODY_TRAITS.any? { |trait| member_ref.traits.key?(trait) }
 
-              hash[member_name] = params[member_name]
+              hash[member_name] = input[member_name]
             end
           end
 
@@ -66,7 +65,7 @@ module Aws
             return true if @ref.shape[:http_payload_member]
 
             @ref.shape.members.each_value do |member_ref|
-              return true unless NON_BODY_TRAITS.any? { |trait| member_ref.traits.include?(trait) }
+              return true unless NON_BODY_TRAITS.any? { |trait| member_ref.traits.key?(trait) }
             end
             false
           end

@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "projections": {
-    "restJson": {
+    "restJson1": {
       "transforms": [
         {
           "name": "includeServices",

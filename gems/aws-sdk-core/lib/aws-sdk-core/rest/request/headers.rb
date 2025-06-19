@@ -63,7 +63,7 @@ module Aws
           end
 
           def string(headers, header_name, shape, value)
-            if shape.traits.include?('smithy.api#mediaType')
+            if shape.traits.key?('smithy.api#mediaType')
               headers[header_name] = Base64.strict_encode64(value)
             else
               default(headers, header_name, value)
