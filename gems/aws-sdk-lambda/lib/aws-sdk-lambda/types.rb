@@ -265,6 +265,20 @@ module Aws::Lambda
       include Smithy::Schema::Structure
     end
 
+    module ApplicationLogLevel
+      Trace = 'TRACE'
+      Debug = 'DEBUG'
+      Info = 'INFO'
+      Warn = 'WARN'
+      Error = 'ERROR'
+      Fatal = 'FATAL'
+    end
+
+    module Architecture
+      x86_64 = 'x86_64'
+      arm64 = 'arm64'
+    end
+
     # <p>Details about a <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html">Code signing configuration</a>. </p>
     # @!attribute code_signing_config_id
     #   <p>Unique identifer for the Code signing configuration.</p>
@@ -320,6 +334,11 @@ module Aws::Lambda
       :untrusted_artifact_on_deployment,
       keyword_init: true)
       include Smithy::Schema::Structure
+    end
+
+    module CodeSigningPolicy
+      Warn = 'Warn'
+      Enforce = 'Enforce'
     end
 
     # <p>Your Amazon Web Services account has exceeded its maximum total code size. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html">Lambda quotas</a>.</p>
@@ -1884,6 +1903,10 @@ module Aws::Lambda
       include Smithy::Schema::Structure
     end
 
+    module EndPointType
+      KAFKA_BOOTSTRAP_SERVERS = 'KAFKA_BOOTSTRAP_SERVERS'
+    end
+
     # <p>A function's environment variable settings. You can use environment variables to adjust your function's
     #       behavior without updating code. An environment variable is a pair of strings that are stored in a function's
     #       version-specific configuration.</p>
@@ -2095,6 +2118,10 @@ module Aws::Lambda
       include Smithy::Schema::Structure
     end
 
+    module EventSourceMappingMetric
+      EventCount = 'EventCount'
+    end
+
     # <p>The metrics configuration for your event source. Use this configuration object to define which metrics you want your
     #       event source mapping to produce.</p>
     # @!attribute metrics
@@ -2109,6 +2136,12 @@ module Aws::Lambda
       :metrics,
       keyword_init: true)
       include Smithy::Schema::Structure
+    end
+
+    module EventSourcePosition
+      TRIM_HORIZON = 'TRIM_HORIZON'
+      LATEST = 'LATEST'
+      AT_TIMESTAMP = 'AT_TIMESTAMP'
     end
 
     # <p>Details about the connection between a Lambda function and an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html">Amazon EFS file system</a>.</p>
@@ -2168,6 +2201,11 @@ module Aws::Lambda
       :message,
       keyword_init: true)
       include Smithy::Schema::Structure
+    end
+
+    module FullDocument
+      UpdateLookup = 'UpdateLookup'
+      Default = 'Default'
     end
 
     # <p>The code for the Lambda function. You can either specify an object in Amazon S3, upload a
@@ -2468,6 +2506,15 @@ module Aws::Lambda
       include Smithy::Schema::Structure
     end
 
+    module FunctionResponseType
+      ReportBatchItemFailures = 'ReportBatchItemFailures'
+    end
+
+    module FunctionUrlAuthType
+      NONE = 'NONE'
+      AWS_IAM = 'AWS_IAM'
+    end
+
     # <p>Details about a Lambda function URL.</p>
     # @!attribute function_url
     #   <p>The HTTP URL endpoint for your function.</p>
@@ -2517,6 +2564,10 @@ module Aws::Lambda
       :invoke_mode,
       keyword_init: true)
       include Smithy::Schema::Structure
+    end
+
+    module FunctionVersion
+      ALL = 'ALL'
     end
 
     class GetAccountSettingsRequest < Struct.new(
@@ -3895,6 +3946,12 @@ module Aws::Lambda
       end
     end
 
+    module InvocationType
+      Event = 'Event'
+      RequestResponse = 'RequestResponse'
+      DryRun = 'DryRun'
+    end
+
     # @deprecated
     # @!attribute function_name
     #   <p>The name or ARN of the Lambda function.</p>
@@ -3942,6 +3999,11 @@ module Aws::Lambda
         options[:status] = 0 unless options.key?(:status)
         super
       end
+    end
+
+    module InvokeMode
+      BUFFERED = 'BUFFERED'
+      RESPONSE_STREAM = 'RESPONSE_STREAM'
     end
 
     # <p>A chunk of the streamed response payload.</p>
@@ -4067,19 +4129,15 @@ module Aws::Lambda
 
     # <p>An object that includes a chunk of the response payload. When the stream has ended, Lambda includes a <code>InvokeComplete</code> object.</p>
     class InvokeWithResponseStreamResponseEvent < Smithy::Schema::Union
-      # @!attribute payload_chunk
-      #   <p>A chunk of the streamed response payload.</p>
-      #   @return [Types::InvokeResponseStreamUpdate]
+      # <p>A chunk of the streamed response payload.</p>
       class PayloadChunk < InvokeWithResponseStreamResponseEvent
         def to_h
           { payload_chunk: super(__getobj__) }
         end
       end
 
-      # @!attribute invoke_complete
-      #   <p>An object that's returned when the stream has ended and all the payload chunks have been
-      #         returned.</p>
-      #   @return [Types::InvokeWithResponseStreamCompleteEvent]
+      # <p>An object that's returned when the stream has ended and all the payload chunks have been
+      #       returned.</p>
       class InvokeComplete < InvokeWithResponseStreamResponseEvent
         def to_h
           { invoke_complete: super(__getobj__) }
@@ -4146,6 +4204,36 @@ module Aws::Lambda
       :message,
       keyword_init: true)
       include Smithy::Schema::Structure
+    end
+
+    module LastUpdateStatus
+      Successful = 'Successful'
+      Failed = 'Failed'
+      InProgress = 'InProgress'
+    end
+
+    module LastUpdateStatusReasonCode
+      EniLimitExceeded = 'EniLimitExceeded'
+      InsufficientRolePermissions = 'InsufficientRolePermissions'
+      InvalidConfiguration = 'InvalidConfiguration'
+      InternalError = 'InternalError'
+      SubnetOutOfIPAddresses = 'SubnetOutOfIPAddresses'
+      InvalidSubnet = 'InvalidSubnet'
+      InvalidSecurityGroup = 'InvalidSecurityGroup'
+      ImageDeleted = 'ImageDeleted'
+      ImageAccessDenied = 'ImageAccessDenied'
+      InvalidImage = 'InvalidImage'
+      KMSKeyAccessDenied = 'KMSKeyAccessDenied'
+      KMSKeyNotFound = 'KMSKeyNotFound'
+      InvalidStateKMSKey = 'InvalidStateKMSKey'
+      DisabledKMSKey = 'DisabledKMSKey'
+      EFSIOError = 'EFSIOError'
+      EFSMountConnectivityError = 'EFSMountConnectivityError'
+      EFSMountFailure = 'EFSMountFailure'
+      EFSMountTimeout = 'EFSMountTimeout'
+      InvalidRuntime = 'InvalidRuntime'
+      InvalidZipFileException = 'InvalidZipFileException'
+      FunctionError = 'FunctionError'
     end
 
     # <p>An <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda
@@ -4828,6 +4916,16 @@ module Aws::Lambda
       include Smithy::Schema::Structure
     end
 
+    module LogFormat
+      Json = 'JSON'
+      Text = 'Text'
+    end
+
+    module LogType
+      None = 'None'
+      Tail = 'Tail'
+    end
+
     # <p>The function's Amazon CloudWatch Logs configuration settings.</p>
     # @!attribute log_format
     #   <p>The format in which Lambda sends your function's application and system logs to CloudWatch. Select between 
@@ -4882,6 +4980,11 @@ module Aws::Lambda
       :destination,
       keyword_init: true)
       include Smithy::Schema::Structure
+    end
+
+    module PackageType
+      Zip = 'Zip'
+      Image = 'Image'
     end
 
     # <p>The permissions policy for the resource is too large. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html">Lambda quotas</a>.</p>
@@ -4964,6 +5067,12 @@ module Aws::Lambda
       :message,
       keyword_init: true)
       include Smithy::Schema::Structure
+    end
+
+    module ProvisionedConcurrencyStatusEnum
+      IN_PROGRESS = 'IN_PROGRESS'
+      READY = 'READY'
+      FAILED = 'FAILED'
     end
 
     # <p>The <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode">
@@ -5753,6 +5862,11 @@ module Aws::Lambda
       include Smithy::Schema::Structure
     end
 
+    module RecursiveLoop
+      Allow = 'Allow'
+      Terminate = 'Terminate'
+    end
+
     # @!attribute layer_name
     #   <p>The name or Amazon Resource Name (ARN) of the layer.</p>
     #   @return [String]
@@ -5883,6 +5997,55 @@ module Aws::Lambda
       include Smithy::Schema::Structure
     end
 
+    module ResponseStreamingInvocationType
+      RequestResponse = 'RequestResponse'
+      DryRun = 'DryRun'
+    end
+
+    module Runtime
+      nodejs = 'nodejs'
+      nodejs43 = 'nodejs4.3'
+      nodejs610 = 'nodejs6.10'
+      nodejs810 = 'nodejs8.10'
+      nodejs10x = 'nodejs10.x'
+      nodejs12x = 'nodejs12.x'
+      nodejs14x = 'nodejs14.x'
+      nodejs16x = 'nodejs16.x'
+      java8 = 'java8'
+      java8al2 = 'java8.al2'
+      java11 = 'java11'
+      python27 = 'python2.7'
+      python36 = 'python3.6'
+      python37 = 'python3.7'
+      python38 = 'python3.8'
+      python39 = 'python3.9'
+      dotnetcore10 = 'dotnetcore1.0'
+      dotnetcore20 = 'dotnetcore2.0'
+      dotnetcore21 = 'dotnetcore2.1'
+      dotnetcore31 = 'dotnetcore3.1'
+      dotnet6 = 'dotnet6'
+      dotnet8 = 'dotnet8'
+      nodejs43edge = 'nodejs4.3-edge'
+      go1x = 'go1.x'
+      ruby25 = 'ruby2.5'
+      ruby27 = 'ruby2.7'
+      provided = 'provided'
+      providedal2 = 'provided.al2'
+      nodejs18x = 'nodejs18.x'
+      python310 = 'python3.10'
+      java17 = 'java17'
+      ruby32 = 'ruby3.2'
+      ruby33 = 'ruby3.3'
+      ruby34 = 'ruby3.4'
+      python311 = 'python3.11'
+      nodejs20x = 'nodejs20.x'
+      providedal2023 = 'provided.al2023'
+      python312 = 'python3.12'
+      java21 = 'java21'
+      python313 = 'python3.13'
+      nodejs22x = 'nodejs22.x'
+    end
+
     # <p>The ARN of the runtime and any errors that occured.</p>
     # @!attribute runtime_version_arn
     #   <p>The ARN of the runtime version you want the function to use.</p>
@@ -5967,6 +6130,11 @@ module Aws::Lambda
       include Smithy::Schema::Structure
     end
 
+    module SnapStartApplyOn
+      PublishedVersions = 'PublishedVersions'
+      None = 'None'
+    end
+
     # <p>The <code>afterRestore()</code>
     #             <a href="https://docs.aws.amazon.com/lambda/latest/dg/snapstart-runtime-hooks.html">runtime hook</a> encountered an error. For more information, check the Amazon CloudWatch logs.</p>
     # @!attribute type
@@ -5990,6 +6158,11 @@ module Aws::Lambda
       :message,
       keyword_init: true)
       include Smithy::Schema::Structure
+    end
+
+    module SnapStartOptimizationStatus
+      On = 'On'
+      Off = 'Off'
     end
 
     # <p>The function's <a href="https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html">SnapStart</a> setting.</p>
@@ -6073,6 +6246,51 @@ module Aws::Lambda
       include Smithy::Schema::Structure
     end
 
+    module SourceAccessType
+      BASIC_AUTH = 'BASIC_AUTH'
+      VPC_SUBNET = 'VPC_SUBNET'
+      VPC_SECURITY_GROUP = 'VPC_SECURITY_GROUP'
+      SASL_SCRAM_512_AUTH = 'SASL_SCRAM_512_AUTH'
+      SASL_SCRAM_256_AUTH = 'SASL_SCRAM_256_AUTH'
+      VIRTUAL_HOST = 'VIRTUAL_HOST'
+      CLIENT_CERTIFICATE_TLS_AUTH = 'CLIENT_CERTIFICATE_TLS_AUTH'
+      SERVER_ROOT_CA_CERTIFICATE = 'SERVER_ROOT_CA_CERTIFICATE'
+    end
+
+    module State
+      Pending = 'Pending'
+      Active = 'Active'
+      Inactive = 'Inactive'
+      Failed = 'Failed'
+    end
+
+    module StateReasonCode
+      Idle = 'Idle'
+      Creating = 'Creating'
+      Restoring = 'Restoring'
+      EniLimitExceeded = 'EniLimitExceeded'
+      InsufficientRolePermissions = 'InsufficientRolePermissions'
+      InvalidConfiguration = 'InvalidConfiguration'
+      InternalError = 'InternalError'
+      SubnetOutOfIPAddresses = 'SubnetOutOfIPAddresses'
+      InvalidSubnet = 'InvalidSubnet'
+      InvalidSecurityGroup = 'InvalidSecurityGroup'
+      ImageDeleted = 'ImageDeleted'
+      ImageAccessDenied = 'ImageAccessDenied'
+      InvalidImage = 'InvalidImage'
+      KMSKeyAccessDenied = 'KMSKeyAccessDenied'
+      KMSKeyNotFound = 'KMSKeyNotFound'
+      InvalidStateKMSKey = 'InvalidStateKMSKey'
+      DisabledKMSKey = 'DisabledKMSKey'
+      EFSIOError = 'EFSIOError'
+      EFSMountConnectivityError = 'EFSMountConnectivityError'
+      EFSMountFailure = 'EFSMountFailure'
+      EFSMountTimeout = 'EFSMountTimeout'
+      InvalidRuntime = 'InvalidRuntime'
+      InvalidZipFileException = 'InvalidZipFileException'
+      FunctionError = 'FunctionError'
+    end
+
     # <p>Lambda couldn't set up VPC access for the Lambda function because one or more
     #       configured subnets has no available IP addresses.</p>
     # @!attribute type
@@ -6084,6 +6302,12 @@ module Aws::Lambda
       :message,
       keyword_init: true)
       include Smithy::Schema::Structure
+    end
+
+    module SystemLogLevel
+      Debug = 'DEBUG'
+      Info = 'INFO'
+      Warn = 'WARN'
     end
 
     # @!attribute resource
@@ -6111,6 +6335,15 @@ module Aws::Lambda
       :message,
       keyword_init: true)
       include Smithy::Schema::Structure
+    end
+
+    module ThrottleReason
+      ConcurrentInvocationLimitExceeded = 'ConcurrentInvocationLimitExceeded'
+      FunctionInvocationRateLimitExceeded = 'FunctionInvocationRateLimitExceeded'
+      ReservedFunctionConcurrentInvocationLimitExceeded = 'ReservedFunctionConcurrentInvocationLimitExceeded'
+      ReservedFunctionInvocationRateLimitExceeded = 'ReservedFunctionInvocationRateLimitExceeded'
+      CallerRateLimitExceeded = 'CallerRateLimitExceeded'
+      ConcurrentSnapshotCreateLimitExceeded = 'ConcurrentSnapshotCreateLimitExceeded'
     end
 
     # <p>The request throughput limit was exceeded. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html#api-requests">Lambda quotas</a>.</p>
@@ -6151,6 +6384,11 @@ module Aws::Lambda
       :mode,
       keyword_init: true)
       include Smithy::Schema::Structure
+    end
+
+    module TracingMode
+      Active = 'Active'
+      PassThrough = 'PassThrough'
     end
 
     # <p>The content type of the <code>Invoke</code> request body is not JSON.</p>
@@ -7407,6 +7645,12 @@ module Aws::Lambda
       :invoke_mode,
       keyword_init: true)
       include Smithy::Schema::Structure
+    end
+
+    module UpdateRuntimeOn
+      Auto = 'Auto'
+      Manual = 'Manual'
+      FunctionUpdate = 'FunctionUpdate'
     end
 
     # <p>The VPC security groups and subnets that are attached to a Lambda function. For more information,

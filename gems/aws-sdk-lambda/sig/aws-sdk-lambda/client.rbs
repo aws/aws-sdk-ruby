@@ -46,7 +46,7 @@ module Aws::Lambda
     ) -> void | (?Hash[Symbol, untyped]) -> void
 
     interface _AddLayerVersionPermissionResponse
-      include Smithy::Client::_Output[Types::AddLayerVersionPermissionResponse]
+      include Smithy::Client::_Response[Types::AddLayerVersionPermissionResponse]
       def statement: () -> String?
       def revision_id: () -> String?
     end
@@ -61,7 +61,7 @@ module Aws::Lambda
     ) -> _AddLayerVersionPermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddLayerVersionPermissionResponse
 
     interface _AddPermissionResponse
-      include Smithy::Client::_Output[Types::AddPermissionResponse]
+      include Smithy::Client::_Response[Types::AddPermissionResponse]
       def statement: () -> String?
     end
     def add_permission: (
@@ -79,7 +79,7 @@ module Aws::Lambda
     ) -> _AddPermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddPermissionResponse
 
     interface _CreateAliasResponse
-      include Smithy::Client::_Output[Types::CreateAliasOutput]
+      include Smithy::Client::_Response[Types::CreateAliasOutput]
       def alias_arn: () -> String?
       def name: () -> String?
       def function_version: () -> String?
@@ -98,7 +98,7 @@ module Aws::Lambda
     ) -> _CreateAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAliasResponse
 
     interface _CreateCodeSigningConfigResponse
-      include Smithy::Client::_Output[Types::CreateCodeSigningConfigResponse]
+      include Smithy::Client::_Response[Types::CreateCodeSigningConfigResponse]
       def code_signing_config: () -> Types::CodeSigningConfig?
     end
     def create_code_signing_config: (
@@ -113,7 +113,7 @@ module Aws::Lambda
     ) -> _CreateCodeSigningConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCodeSigningConfigResponse
 
     interface _CreateEventSourceMappingResponse
-      include Smithy::Client::_Output[Types::CreateEventSourceMappingOutput]
+      include Smithy::Client::_Response[Types::CreateEventSourceMappingOutput]
       def uuid: () -> String?
       def starting_position: () -> String?
       def starting_position_timestamp: () -> Time?
@@ -215,7 +215,7 @@ module Aws::Lambda
     ) -> _CreateEventSourceMappingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEventSourceMappingResponse
 
     interface _CreateFunctionResponse
-      include Smithy::Client::_Output[Types::CreateFunctionOutput]
+      include Smithy::Client::_Response[Types::CreateFunctionOutput]
       def function_name: () -> String?
       def function_arn: () -> String?
       def runtime: () -> String?
@@ -316,7 +316,7 @@ module Aws::Lambda
     ) -> _CreateFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFunctionResponse
 
     interface _CreateFunctionUrlConfigResponse
-      include Smithy::Client::_Output[Types::CreateFunctionUrlConfigResponse]
+      include Smithy::Client::_Response[Types::CreateFunctionUrlConfigResponse]
       def function_url: () -> String?
       def function_arn: () -> String?
       def auth_type: () -> String?
@@ -340,7 +340,7 @@ module Aws::Lambda
     ) -> _CreateFunctionUrlConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFunctionUrlConfigResponse
 
     interface _DeleteAliasResponse
-      include Smithy::Client::_Output[Smithy::Schema::EmptyStructure]
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
     def delete_alias: (
       ?function_name: String,
@@ -348,14 +348,14 @@ module Aws::Lambda
     ) -> _DeleteAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAliasResponse
 
     interface _DeleteCodeSigningConfigResponse
-      include Smithy::Client::_Output[Types::DeleteCodeSigningConfigResponse]
+      include Smithy::Client::_Response[Types::DeleteCodeSigningConfigResponse]
     end
     def delete_code_signing_config: (
       ?code_signing_config_arn: String
     ) -> _DeleteCodeSigningConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCodeSigningConfigResponse
 
     interface _DeleteEventSourceMappingResponse
-      include Smithy::Client::_Output[Types::DeleteEventSourceMappingOutput]
+      include Smithy::Client::_Response[Types::DeleteEventSourceMappingOutput]
       def uuid: () -> String?
       def starting_position: () -> String?
       def starting_position_timestamp: () -> Time?
@@ -394,7 +394,7 @@ module Aws::Lambda
     ) -> _DeleteEventSourceMappingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEventSourceMappingResponse
 
     interface _DeleteFunctionResponse
-      include Smithy::Client::_Output[Smithy::Schema::EmptyStructure]
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
     def delete_function: (
       ?function_name: String,
@@ -402,21 +402,21 @@ module Aws::Lambda
     ) -> _DeleteFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFunctionResponse
 
     interface _DeleteFunctionCodeSigningConfigResponse
-      include Smithy::Client::_Output[Smithy::Schema::EmptyStructure]
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
     def delete_function_code_signing_config: (
       ?function_name: String
     ) -> _DeleteFunctionCodeSigningConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFunctionCodeSigningConfigResponse
 
     interface _DeleteFunctionConcurrencyResponse
-      include Smithy::Client::_Output[Smithy::Schema::EmptyStructure]
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
     def delete_function_concurrency: (
       ?function_name: String
     ) -> _DeleteFunctionConcurrencyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFunctionConcurrencyResponse
 
     interface _DeleteFunctionEventInvokeConfigResponse
-      include Smithy::Client::_Output[Smithy::Schema::EmptyStructure]
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
     def delete_function_event_invoke_config: (
       ?function_name: String,
@@ -424,7 +424,7 @@ module Aws::Lambda
     ) -> _DeleteFunctionEventInvokeConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFunctionEventInvokeConfigResponse
 
     interface _DeleteFunctionUrlConfigResponse
-      include Smithy::Client::_Output[Smithy::Schema::EmptyStructure]
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
     def delete_function_url_config: (
       ?function_name: String,
@@ -432,7 +432,7 @@ module Aws::Lambda
     ) -> _DeleteFunctionUrlConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFunctionUrlConfigResponse
 
     interface _DeleteLayerVersionResponse
-      include Smithy::Client::_Output[Smithy::Schema::EmptyStructure]
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
     def delete_layer_version: (
       ?layer_name: String,
@@ -440,7 +440,7 @@ module Aws::Lambda
     ) -> _DeleteLayerVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLayerVersionResponse
 
     interface _DeleteProvisionedConcurrencyConfigResponse
-      include Smithy::Client::_Output[Smithy::Schema::EmptyStructure]
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
     def delete_provisioned_concurrency_config: (
       ?function_name: String,
@@ -448,14 +448,14 @@ module Aws::Lambda
     ) -> _DeleteProvisionedConcurrencyConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProvisionedConcurrencyConfigResponse
 
     interface _GetAccountSettingsResponse
-      include Smithy::Client::_Output[Types::GetAccountSettingsResponse]
+      include Smithy::Client::_Response[Types::GetAccountSettingsResponse]
       def account_limit: () -> Types::AccountLimit?
       def account_usage: () -> Types::AccountUsage?
     end
     def get_account_settings: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountSettingsResponse
 
     interface _GetAliasResponse
-      include Smithy::Client::_Output[Types::GetAliasOutput]
+      include Smithy::Client::_Response[Types::GetAliasOutput]
       def alias_arn: () -> String?
       def name: () -> String?
       def function_version: () -> String?
@@ -469,7 +469,7 @@ module Aws::Lambda
     ) -> _GetAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAliasResponse
 
     interface _GetCodeSigningConfigResponse
-      include Smithy::Client::_Output[Types::GetCodeSigningConfigResponse]
+      include Smithy::Client::_Response[Types::GetCodeSigningConfigResponse]
       def code_signing_config: () -> Types::CodeSigningConfig?
     end
     def get_code_signing_config: (
@@ -477,7 +477,7 @@ module Aws::Lambda
     ) -> _GetCodeSigningConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCodeSigningConfigResponse
 
     interface _GetEventSourceMappingResponse
-      include Smithy::Client::_Output[Types::GetEventSourceMappingOutput]
+      include Smithy::Client::_Response[Types::GetEventSourceMappingOutput]
       def uuid: () -> String?
       def starting_position: () -> String?
       def starting_position_timestamp: () -> Time?
@@ -516,7 +516,7 @@ module Aws::Lambda
     ) -> _GetEventSourceMappingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEventSourceMappingResponse
 
     interface _GetFunctionResponse
-      include Smithy::Client::_Output[Types::GetFunctionResponse]
+      include Smithy::Client::_Response[Types::GetFunctionResponse]
       def configuration: () -> Types::FunctionConfiguration?
       def code: () -> Types::FunctionCodeLocation?
       def tags: () -> Hash[String, String]?
@@ -529,7 +529,7 @@ module Aws::Lambda
     ) -> _GetFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFunctionResponse
 
     interface _GetFunctionCodeSigningConfigResponse
-      include Smithy::Client::_Output[Types::GetFunctionCodeSigningConfigResponse]
+      include Smithy::Client::_Response[Types::GetFunctionCodeSigningConfigResponse]
       def code_signing_config_arn: () -> String?
       def function_name: () -> String?
     end
@@ -538,7 +538,7 @@ module Aws::Lambda
     ) -> _GetFunctionCodeSigningConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFunctionCodeSigningConfigResponse
 
     interface _GetFunctionConcurrencyResponse
-      include Smithy::Client::_Output[Types::GetFunctionConcurrencyResponse]
+      include Smithy::Client::_Response[Types::GetFunctionConcurrencyResponse]
       def reserved_concurrent_executions: () -> Integer?
     end
     def get_function_concurrency: (
@@ -546,7 +546,7 @@ module Aws::Lambda
     ) -> _GetFunctionConcurrencyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFunctionConcurrencyResponse
 
     interface _GetFunctionConfigurationResponse
-      include Smithy::Client::_Output[Types::GetFunctionConfigurationOutput]
+      include Smithy::Client::_Response[Types::GetFunctionConfigurationOutput]
       def function_name: () -> String?
       def function_arn: () -> String?
       def runtime: () -> String?
@@ -590,7 +590,7 @@ module Aws::Lambda
     ) -> _GetFunctionConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFunctionConfigurationResponse
 
     interface _GetFunctionEventInvokeConfigResponse
-      include Smithy::Client::_Output[Types::GetFunctionEventInvokeConfigOutput]
+      include Smithy::Client::_Response[Types::GetFunctionEventInvokeConfigOutput]
       def last_modified: () -> Time?
       def function_arn: () -> String?
       def maximum_retry_attempts: () -> Integer?
@@ -603,7 +603,7 @@ module Aws::Lambda
     ) -> _GetFunctionEventInvokeConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFunctionEventInvokeConfigResponse
 
     interface _GetFunctionRecursionConfigResponse
-      include Smithy::Client::_Output[Types::GetFunctionRecursionConfigResponse]
+      include Smithy::Client::_Response[Types::GetFunctionRecursionConfigResponse]
       def recursive_loop: () -> String?
     end
     def get_function_recursion_config: (
@@ -611,7 +611,7 @@ module Aws::Lambda
     ) -> _GetFunctionRecursionConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFunctionRecursionConfigResponse
 
     interface _GetFunctionUrlConfigResponse
-      include Smithy::Client::_Output[Types::GetFunctionUrlConfigResponse]
+      include Smithy::Client::_Response[Types::GetFunctionUrlConfigResponse]
       def function_url: () -> String?
       def function_arn: () -> String?
       def auth_type: () -> String?
@@ -626,7 +626,7 @@ module Aws::Lambda
     ) -> _GetFunctionUrlConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFunctionUrlConfigResponse
 
     interface _GetLayerVersionResponse
-      include Smithy::Client::_Output[Types::GetLayerVersionOutput]
+      include Smithy::Client::_Response[Types::GetLayerVersionOutput]
       def content: () -> Types::LayerVersionContentOutput?
       def layer_arn: () -> String?
       def layer_version_arn: () -> String?
@@ -643,7 +643,7 @@ module Aws::Lambda
     ) -> _GetLayerVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLayerVersionResponse
 
     interface _GetLayerVersionByArnResponse
-      include Smithy::Client::_Output[Types::GetLayerVersionByArnOutput]
+      include Smithy::Client::_Response[Types::GetLayerVersionByArnOutput]
       def content: () -> Types::LayerVersionContentOutput?
       def layer_arn: () -> String?
       def layer_version_arn: () -> String?
@@ -659,7 +659,7 @@ module Aws::Lambda
     ) -> _GetLayerVersionByArnResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLayerVersionByArnResponse
 
     interface _GetLayerVersionPolicyResponse
-      include Smithy::Client::_Output[Types::GetLayerVersionPolicyResponse]
+      include Smithy::Client::_Response[Types::GetLayerVersionPolicyResponse]
       def policy: () -> String?
       def revision_id: () -> String?
     end
@@ -669,7 +669,7 @@ module Aws::Lambda
     ) -> _GetLayerVersionPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLayerVersionPolicyResponse
 
     interface _GetPolicyResponse
-      include Smithy::Client::_Output[Types::GetPolicyResponse]
+      include Smithy::Client::_Response[Types::GetPolicyResponse]
       def policy: () -> String?
       def revision_id: () -> String?
     end
@@ -679,7 +679,7 @@ module Aws::Lambda
     ) -> _GetPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPolicyResponse
 
     interface _GetProvisionedConcurrencyConfigResponse
-      include Smithy::Client::_Output[Types::GetProvisionedConcurrencyConfigResponse]
+      include Smithy::Client::_Response[Types::GetProvisionedConcurrencyConfigResponse]
       def requested_provisioned_concurrent_executions: () -> Integer?
       def available_provisioned_concurrent_executions: () -> Integer?
       def allocated_provisioned_concurrent_executions: () -> Integer?
@@ -693,7 +693,7 @@ module Aws::Lambda
     ) -> _GetProvisionedConcurrencyConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProvisionedConcurrencyConfigResponse
 
     interface _GetRuntimeManagementConfigResponse
-      include Smithy::Client::_Output[Types::GetRuntimeManagementConfigResponse]
+      include Smithy::Client::_Response[Types::GetRuntimeManagementConfigResponse]
       def update_runtime_on: () -> String?
       def runtime_version_arn: () -> String?
       def function_arn: () -> String?
@@ -704,7 +704,7 @@ module Aws::Lambda
     ) -> _GetRuntimeManagementConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRuntimeManagementConfigResponse
 
     interface _InvokeResponse
-      include Smithy::Client::_Output[Types::InvocationResponse]
+      include Smithy::Client::_Response[Types::InvocationResponse]
       def status_code: () -> Integer?
       def function_error: () -> String?
       def log_result: () -> String?
@@ -721,7 +721,7 @@ module Aws::Lambda
     ) -> _InvokeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InvokeResponse
 
     interface _InvokeAsyncResponse
-      include Smithy::Client::_Output[Types::InvokeAsyncResponse]
+      include Smithy::Client::_Response[Types::InvokeAsyncResponse]
       def status: () -> Integer?
     end
     def invoke_async: (
@@ -730,7 +730,7 @@ module Aws::Lambda
     ) -> _InvokeAsyncResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InvokeAsyncResponse
 
     interface _InvokeWithResponseStreamResponse
-      include Smithy::Client::_Output[Types::InvokeWithResponseStreamResponse]
+      include Smithy::Client::_Response[Types::InvokeWithResponseStreamResponse]
       def status_code: () -> Integer?
       def executed_version: () -> String?
       def event_stream: () -> Types::InvokeWithResponseStreamResponseEvent?
@@ -746,7 +746,7 @@ module Aws::Lambda
     ) -> _InvokeWithResponseStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InvokeWithResponseStreamResponse
 
     interface _ListAliasesResponse
-      include Smithy::Client::_Output[Types::ListAliasesResponse]
+      include Smithy::Client::_Response[Types::ListAliasesResponse]
       def next_marker: () -> String?
       def aliases: () -> Array[Types::AliasConfiguration]?
     end
@@ -758,7 +758,7 @@ module Aws::Lambda
     ) -> _ListAliasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAliasesResponse
 
     interface _ListCodeSigningConfigsResponse
-      include Smithy::Client::_Output[Types::ListCodeSigningConfigsResponse]
+      include Smithy::Client::_Response[Types::ListCodeSigningConfigsResponse]
       def next_marker: () -> String?
       def code_signing_configs: () -> Array[Types::CodeSigningConfig]?
     end
@@ -768,7 +768,7 @@ module Aws::Lambda
     ) -> _ListCodeSigningConfigsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCodeSigningConfigsResponse
 
     interface _ListEventSourceMappingsResponse
-      include Smithy::Client::_Output[Types::ListEventSourceMappingsResponse]
+      include Smithy::Client::_Response[Types::ListEventSourceMappingsResponse]
       def next_marker: () -> String?
       def event_source_mappings: () -> Array[Types::EventSourceMappingConfiguration]?
     end
@@ -780,7 +780,7 @@ module Aws::Lambda
     ) -> _ListEventSourceMappingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEventSourceMappingsResponse
 
     interface _ListFunctionEventInvokeConfigsResponse
-      include Smithy::Client::_Output[Types::ListFunctionEventInvokeConfigsResponse]
+      include Smithy::Client::_Response[Types::ListFunctionEventInvokeConfigsResponse]
       def function_event_invoke_configs: () -> Array[Types::FunctionEventInvokeConfig]?
       def next_marker: () -> String?
     end
@@ -791,7 +791,7 @@ module Aws::Lambda
     ) -> _ListFunctionEventInvokeConfigsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFunctionEventInvokeConfigsResponse
 
     interface _ListFunctionUrlConfigsResponse
-      include Smithy::Client::_Output[Types::ListFunctionUrlConfigsResponse]
+      include Smithy::Client::_Response[Types::ListFunctionUrlConfigsResponse]
       def function_url_configs: () -> Array[Types::FunctionUrlConfig]?
       def next_marker: () -> String?
     end
@@ -802,7 +802,7 @@ module Aws::Lambda
     ) -> _ListFunctionUrlConfigsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFunctionUrlConfigsResponse
 
     interface _ListFunctionsResponse
-      include Smithy::Client::_Output[Types::ListFunctionsResponse]
+      include Smithy::Client::_Response[Types::ListFunctionsResponse]
       def next_marker: () -> String?
       def functions: () -> Array[Types::FunctionConfiguration]?
     end
@@ -814,7 +814,7 @@ module Aws::Lambda
     ) -> _ListFunctionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFunctionsResponse
 
     interface _ListFunctionsByCodeSigningConfigResponse
-      include Smithy::Client::_Output[Types::ListFunctionsByCodeSigningConfigResponse]
+      include Smithy::Client::_Response[Types::ListFunctionsByCodeSigningConfigResponse]
       def next_marker: () -> String?
       def function_arns: () -> Array[String]?
     end
@@ -825,7 +825,7 @@ module Aws::Lambda
     ) -> _ListFunctionsByCodeSigningConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFunctionsByCodeSigningConfigResponse
 
     interface _ListLayerVersionsResponse
-      include Smithy::Client::_Output[Types::ListLayerVersionsResponse]
+      include Smithy::Client::_Response[Types::ListLayerVersionsResponse]
       def next_marker: () -> String?
       def layer_versions: () -> Array[Types::LayerVersionsListItem]?
     end
@@ -838,7 +838,7 @@ module Aws::Lambda
     ) -> _ListLayerVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLayerVersionsResponse
 
     interface _ListLayersResponse
-      include Smithy::Client::_Output[Types::ListLayersResponse]
+      include Smithy::Client::_Response[Types::ListLayersResponse]
       def next_marker: () -> String?
       def layers: () -> Array[Types::LayersListItem]?
     end
@@ -850,7 +850,7 @@ module Aws::Lambda
     ) -> _ListLayersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLayersResponse
 
     interface _ListProvisionedConcurrencyConfigsResponse
-      include Smithy::Client::_Output[Types::ListProvisionedConcurrencyConfigsResponse]
+      include Smithy::Client::_Response[Types::ListProvisionedConcurrencyConfigsResponse]
       def provisioned_concurrency_configs: () -> Array[Types::ProvisionedConcurrencyConfigListItem]?
       def next_marker: () -> String?
     end
@@ -861,7 +861,7 @@ module Aws::Lambda
     ) -> _ListProvisionedConcurrencyConfigsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProvisionedConcurrencyConfigsResponse
 
     interface _ListTagsResponse
-      include Smithy::Client::_Output[Types::ListTagsResponse]
+      include Smithy::Client::_Response[Types::ListTagsResponse]
       def tags: () -> Hash[String, String]?
     end
     def list_tags: (
@@ -869,7 +869,7 @@ module Aws::Lambda
     ) -> _ListTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsResponse
 
     interface _ListVersionsByFunctionResponse
-      include Smithy::Client::_Output[Types::ListVersionsByFunctionResponse]
+      include Smithy::Client::_Response[Types::ListVersionsByFunctionResponse]
       def next_marker: () -> String?
       def versions: () -> Array[Types::FunctionConfiguration]?
     end
@@ -880,7 +880,7 @@ module Aws::Lambda
     ) -> _ListVersionsByFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVersionsByFunctionResponse
 
     interface _PublishLayerVersionResponse
-      include Smithy::Client::_Output[Types::PublishLayerVersionResponse]
+      include Smithy::Client::_Response[Types::PublishLayerVersionResponse]
       def content: () -> Types::LayerVersionContentOutput?
       def layer_arn: () -> String?
       def layer_version_arn: () -> String?
@@ -906,7 +906,7 @@ module Aws::Lambda
     ) -> _PublishLayerVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PublishLayerVersionResponse
 
     interface _PublishVersionResponse
-      include Smithy::Client::_Output[Types::PublishVersionOutput]
+      include Smithy::Client::_Response[Types::PublishVersionOutput]
       def function_name: () -> String?
       def function_arn: () -> String?
       def runtime: () -> String?
@@ -952,7 +952,7 @@ module Aws::Lambda
     ) -> _PublishVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PublishVersionResponse
 
     interface _PutFunctionCodeSigningConfigResponse
-      include Smithy::Client::_Output[Types::PutFunctionCodeSigningConfigResponse]
+      include Smithy::Client::_Response[Types::PutFunctionCodeSigningConfigResponse]
       def code_signing_config_arn: () -> String?
       def function_name: () -> String?
     end
@@ -962,7 +962,7 @@ module Aws::Lambda
     ) -> _PutFunctionCodeSigningConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutFunctionCodeSigningConfigResponse
 
     interface _PutFunctionConcurrencyResponse
-      include Smithy::Client::_Output[Types::PutFunctionConcurrencyOutput]
+      include Smithy::Client::_Response[Types::PutFunctionConcurrencyOutput]
       def reserved_concurrent_executions: () -> Integer?
     end
     def put_function_concurrency: (
@@ -971,7 +971,7 @@ module Aws::Lambda
     ) -> _PutFunctionConcurrencyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutFunctionConcurrencyResponse
 
     interface _PutFunctionEventInvokeConfigResponse
-      include Smithy::Client::_Output[Types::PutFunctionEventInvokeConfigOutput]
+      include Smithy::Client::_Response[Types::PutFunctionEventInvokeConfigOutput]
       def last_modified: () -> Time?
       def function_arn: () -> String?
       def maximum_retry_attempts: () -> Integer?
@@ -994,7 +994,7 @@ module Aws::Lambda
     ) -> _PutFunctionEventInvokeConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutFunctionEventInvokeConfigResponse
 
     interface _PutFunctionRecursionConfigResponse
-      include Smithy::Client::_Output[Types::PutFunctionRecursionConfigResponse]
+      include Smithy::Client::_Response[Types::PutFunctionRecursionConfigResponse]
       def recursive_loop: () -> String?
     end
     def put_function_recursion_config: (
@@ -1003,7 +1003,7 @@ module Aws::Lambda
     ) -> _PutFunctionRecursionConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutFunctionRecursionConfigResponse
 
     interface _PutProvisionedConcurrencyConfigResponse
-      include Smithy::Client::_Output[Types::PutProvisionedConcurrencyConfigResponse]
+      include Smithy::Client::_Response[Types::PutProvisionedConcurrencyConfigResponse]
       def requested_provisioned_concurrent_executions: () -> Integer?
       def available_provisioned_concurrent_executions: () -> Integer?
       def allocated_provisioned_concurrent_executions: () -> Integer?
@@ -1018,7 +1018,7 @@ module Aws::Lambda
     ) -> _PutProvisionedConcurrencyConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutProvisionedConcurrencyConfigResponse
 
     interface _PutRuntimeManagementConfigResponse
-      include Smithy::Client::_Output[Types::PutRuntimeManagementConfigResponse]
+      include Smithy::Client::_Response[Types::PutRuntimeManagementConfigResponse]
       def update_runtime_on: () -> String?
       def function_arn: () -> String?
       def runtime_version_arn: () -> String?
@@ -1031,7 +1031,7 @@ module Aws::Lambda
     ) -> _PutRuntimeManagementConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutRuntimeManagementConfigResponse
 
     interface _RemoveLayerVersionPermissionResponse
-      include Smithy::Client::_Output[Smithy::Schema::EmptyStructure]
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
     def remove_layer_version_permission: (
       ?layer_name: String,
@@ -1041,7 +1041,7 @@ module Aws::Lambda
     ) -> _RemoveLayerVersionPermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveLayerVersionPermissionResponse
 
     interface _RemovePermissionResponse
-      include Smithy::Client::_Output[Smithy::Schema::EmptyStructure]
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
     def remove_permission: (
       ?function_name: String,
@@ -1051,7 +1051,7 @@ module Aws::Lambda
     ) -> _RemovePermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemovePermissionResponse
 
     interface _TagResourceResponse
-      include Smithy::Client::_Output[Smithy::Schema::EmptyStructure]
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
     def tag_resource: (
       ?resource: String,
@@ -1059,7 +1059,7 @@ module Aws::Lambda
     ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
 
     interface _UntagResourceResponse
-      include Smithy::Client::_Output[Smithy::Schema::EmptyStructure]
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
     def untag_resource: (
       ?resource: String,
@@ -1067,7 +1067,7 @@ module Aws::Lambda
     ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
 
     interface _UpdateAliasResponse
-      include Smithy::Client::_Output[Types::UpdateAliasOutput]
+      include Smithy::Client::_Response[Types::UpdateAliasOutput]
       def alias_arn: () -> String?
       def name: () -> String?
       def function_version: () -> String?
@@ -1087,7 +1087,7 @@ module Aws::Lambda
     ) -> _UpdateAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAliasResponse
 
     interface _UpdateCodeSigningConfigResponse
-      include Smithy::Client::_Output[Types::UpdateCodeSigningConfigResponse]
+      include Smithy::Client::_Response[Types::UpdateCodeSigningConfigResponse]
       def code_signing_config: () -> Types::CodeSigningConfig?
     end
     def update_code_signing_config: (
@@ -1102,7 +1102,7 @@ module Aws::Lambda
     ) -> _UpdateCodeSigningConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCodeSigningConfigResponse
 
     interface _UpdateEventSourceMappingResponse
-      include Smithy::Client::_Output[Types::UpdateEventSourceMappingOutput]
+      include Smithy::Client::_Response[Types::UpdateEventSourceMappingOutput]
       def uuid: () -> String?
       def starting_position: () -> String?
       def starting_position_timestamp: () -> Time?
@@ -1188,7 +1188,7 @@ module Aws::Lambda
     ) -> _UpdateEventSourceMappingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEventSourceMappingResponse
 
     interface _UpdateFunctionCodeResponse
-      include Smithy::Client::_Output[Types::UpdateFunctionCodeOutput]
+      include Smithy::Client::_Response[Types::UpdateFunctionCodeOutput]
       def function_name: () -> String?
       def function_arn: () -> String?
       def runtime: () -> String?
@@ -1241,7 +1241,7 @@ module Aws::Lambda
     ) -> _UpdateFunctionCodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFunctionCodeResponse
 
     interface _UpdateFunctionConfigurationResponse
-      include Smithy::Client::_Output[Types::UpdateFunctionConfigurationOutput]
+      include Smithy::Client::_Response[Types::UpdateFunctionConfigurationOutput]
       def function_name: () -> String?
       def function_arn: () -> String?
       def runtime: () -> String?
@@ -1330,7 +1330,7 @@ module Aws::Lambda
     ) -> _UpdateFunctionConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFunctionConfigurationResponse
 
     interface _UpdateFunctionEventInvokeConfigResponse
-      include Smithy::Client::_Output[Types::UpdateFunctionEventInvokeConfigOutput]
+      include Smithy::Client::_Response[Types::UpdateFunctionEventInvokeConfigOutput]
       def last_modified: () -> Time?
       def function_arn: () -> String?
       def maximum_retry_attempts: () -> Integer?
@@ -1353,7 +1353,7 @@ module Aws::Lambda
     ) -> _UpdateFunctionEventInvokeConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFunctionEventInvokeConfigResponse
 
     interface _UpdateFunctionUrlConfigResponse
-      include Smithy::Client::_Output[Types::UpdateFunctionUrlConfigResponse]
+      include Smithy::Client::_Response[Types::UpdateFunctionUrlConfigResponse]
       def function_url: () -> String?
       def function_arn: () -> String?
       def auth_type: () -> String?

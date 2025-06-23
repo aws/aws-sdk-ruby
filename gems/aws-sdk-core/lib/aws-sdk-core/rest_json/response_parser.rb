@@ -15,9 +15,9 @@ module Aws
 
         def parse_error(output)
           context = output.context
-          return unless (300..599).cover?(context.response.status_code)
+          return unless (300..599).cover?(context.http_response.status_code)
 
-          body = context.response.body.read
+          body = context.http_response.body.read
           code, message, data = extract_error(body, context)
           build_error(context, code, message, data)
         end
@@ -30,9 +30,9 @@ module Aws
             else
               output_shape.shape.type.new
             end
-          Rest::Response::StatusCode.new(output_shape).apply(output.context.response, output.data)
-          Rest::Response::Headers.new(output_shape).apply(output.context.response, output.data)
-          Rest::Response::Body.new(@codec, output_shape).apply(output.context.response.body, output.data)
+          Rest::Response::StatusCode.new(output_shape).apply(output.context.http_response, output.data)
+          Rest::Response::Headers.new(output_shape).apply(output.context.http_response, output.data)
+          Rest::Response::Body.new(@codec, output_shape).apply(output.context.http_response.body, output.data)
           output.data # TODO: don't rely on a return value?
         end
 
@@ -48,7 +48,7 @@ module Aws
         end
 
         def http_status_error_code(context)
-          status_code = context.response.status_code
+          status_code = context.http_response.status_code
           {
             302 => 'MovedTemporarily',
             304 => 'NotModified',
@@ -73,14 +73,14 @@ module Aws
         def error_code(json, context)
           code =
             if aws_query_error?(context)
-              query_header = context.response.headers['x-amzn-query-error']
+              query_header = context.http_response.headers['x-amzn-query-error']
               error, _type = query_header.split(';') # type not supported
               remove_prefix(error, context)
             else
               json['__type']
             end
           code ||= json['code']
-          code ||= context.response.headers['x-amzn-errortype']
+          code ||= context.http_response.headers['x-amzn-errortype']
           if code
             code.split('#').last.split(':').first
           else
@@ -90,7 +90,7 @@ module Aws
 
         def aws_query_error?(context)
           context.config.service.traits.key?('aws.protocols#awsQueryCompatible') &&
-            context.response.headers['x-amzn-query-error']
+            context.http_response.headers['x-amzn-query-error']
         end
 
         def remove_prefix(error_code, context)
@@ -122,7 +122,7 @@ module Aws
 
         def apply_error_headers(ref, context, data)
           headers = Rest::Response::Headers.new(ref)
-          headers.apply(context.response, data)
+          headers.apply(context.http_response, data)
         end
       end
     end

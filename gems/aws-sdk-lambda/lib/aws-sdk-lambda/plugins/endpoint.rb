@@ -45,7 +45,7 @@ module Aws::Lambda
           params = EndpointParameters.create(context)
           endpoint = context.config.endpoint_provider.resolve(params)\
 
-          context.request.endpoint = endpoint.uri
+          context.http_request.endpoint = endpoint.uri
           apply_endpoint_headers(context, endpoint.headers)
 
           context[:endpoint_params] = params
@@ -57,7 +57,7 @@ module Aws::Lambda
 
         def apply_endpoint_headers(context, headers)
           headers.each do |key, value|
-            context.request.headers[key] = value
+            context.http_request.headers[key] = value
           end
         end
       end
