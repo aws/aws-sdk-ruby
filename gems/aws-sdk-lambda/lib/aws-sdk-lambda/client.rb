@@ -12,7 +12,7 @@ require 'smithy-client/plugins/host_prefix'
 require 'smithy-client/plugins/idempotency_token'
 require 'smithy-client/plugins/logging'
 require 'smithy-client/plugins/net_http'
-require 'smithy-client/plugins/pageable_output'
+require 'smithy-client/plugins/pageable_response'
 require 'smithy-client/plugins/param_converter'
 require 'smithy-client/plugins/param_validator'
 require 'smithy-client/plugins/protocol'
@@ -42,7 +42,7 @@ module Aws::Lambda
     add_plugin(Smithy::Client::Plugins::IdempotencyToken)
     add_plugin(Smithy::Client::Plugins::Logging)
     add_plugin(Smithy::Client::Plugins::NetHTTP)
-    add_plugin(Smithy::Client::Plugins::PageableOutput)
+    add_plugin(Smithy::Client::Plugins::PageableResponse)
     add_plugin(Smithy::Client::Plugins::ParamConverter)
     add_plugin(Smithy::Client::Plugins::ParamValidator)
     add_plugin(Smithy::Client::Plugins::Protocol)
@@ -143,7 +143,7 @@ module Aws::Lambda
     #  The protocol to use for request serialization and response deserialization.
     # @option options [Boolean] :raise_response_errors (true)
     #  When `true`, response errors are raised. When `false`, the error is placed on the
-    #  output in the {Smithy::Client::Output#error error accessor}.
+    #  output in the {Smithy::Client::Response#error error accessor}.
     # @option options [String] :region
     #  TODO
     # @option options [Integer] :request_min_compression_size_bytes (10240)
@@ -220,8 +220,8 @@ module Aws::Lambda
     #     principal: "223456789012"
     #   }
     #   options = {}
-    #   output = client.add_layer_version_permission(params, options)
-    #   output.to_h #=>
+    #   response = client.add_layer_version_permission(params, options)
+    #   response.to_h #=>
     #   {
     #     statement: "{\"Sid\":\"xaccount\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::223456789012:root\"},\"Action\":\"lambda:GetLayerVersion\",\"Resource\":\"arn:aws:lambda:us-east-2:123456789012:layer:my-layer:1\"}",
     #     revision_id: "35d87451-f796-4a3f-a618-95a3671b0a0c"
@@ -237,17 +237,17 @@ module Aws::Lambda
     #     revision_id: "String"
     #   }
     #   options = {}
-    #   output = client.add_layer_version_permission(params, options)
+    #   response = client.add_layer_version_permission(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     statement: "String",
     #     revision_id: "String"
     #   }
     # @return [Types::AddLayerVersionPermissionResponse]
     def add_layer_version_permission(params = {}, options = {})
-      input = build_input(:add_layer_version_permission, params)
-      input.send_input(options)
+      request = build_request(:add_layer_version_permission, params)
+      request.send_request(options)
     end
 
     # <p>Grants a <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying">principal</a> 
@@ -327,8 +327,8 @@ module Aws::Lambda
     #     source_account: "123456789012"
     #   }
     #   options = {}
-    #   output = client.add_permission(params, options)
-    #   output.to_h #=>
+    #   response = client.add_permission(params, options)
+    #   response.to_h #=>
     #   {
     #     statement: "{\"Sid\":\"s3\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"s3.amazonaws.com\"},\"Action\":\"lambda:InvokeFunction\",\"Resource\":\"arn:aws:lambda:us-east-2:123456789012:function:my-function\",\"Condition\":{\"StringEquals\":{\"AWS:SourceAccount\":\"123456789012\"},\"ArnLike\":{\"AWS:SourceArn\":\"arn:aws:s3:::my-bucket-1xpuxmplzrlbh\"}}}"
     #   }
@@ -341,8 +341,8 @@ module Aws::Lambda
     #     principal: "223456789012"
     #   }
     #   options = {}
-    #   output = client.add_permission(params, options)
-    #   output.to_h #=>
+    #   response = client.add_permission(params, options)
+    #   response.to_h #=>
     #   {
     #     statement: "{\"Sid\":\"xaccount\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::223456789012:root\"},\"Action\":\"lambda:InvokeFunction\",\"Resource\":\"arn:aws:lambda:us-east-2:123456789012:function:my-function\"}"
     #   }
@@ -361,16 +361,16 @@ module Aws::Lambda
     #     function_url_auth_type: "NONE" # One of: ["NONE", "AWS_IAM"]
     #   }
     #   options = {}
-    #   output = client.add_permission(params, options)
+    #   response = client.add_permission(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     statement: "String"
     #   }
     # @return [Types::AddPermissionResponse]
     def add_permission(params = {}, options = {})
-      input = build_input(:add_permission, params)
-      input.send_input(options)
+      request = build_request(:add_permission, params)
+      request.send_request(options)
     end
 
     # <p>Creates an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html">alias</a> for a
@@ -419,8 +419,8 @@ module Aws::Lambda
     #     description: "alias for live version of function"
     #   }
     #   options = {}
-    #   output = client.create_alias(params, options)
-    #   output.to_h #=>
+    #   response = client.create_alias(params, options)
+    #   response.to_h #=>
     #   {
     #     function_version: "1",
     #     name: "LIVE",
@@ -441,9 +441,9 @@ module Aws::Lambda
     #     }
     #   }
     #   options = {}
-    #   output = client.create_alias(params, options)
+    #   response = client.create_alias(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     alias_arn: "FunctionArn",
     #     name: "Alias",
@@ -458,8 +458,8 @@ module Aws::Lambda
     #   }
     # @return [Types::CreateAliasOutput]
     def create_alias(params = {}, options = {})
-      input = build_input(:create_alias, params)
-      input.send_input(options)
+      request = build_request(:create_alias, params)
+      request.send_request(options)
     end
 
     # <p>Creates a code signing configuration. A <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html">code signing configuration</a> defines a list of
@@ -488,9 +488,9 @@ module Aws::Lambda
     #     }
     #   }
     #   options = {}
-    #   output = client.create_code_signing_config(params, options)
+    #   response = client.create_code_signing_config(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     code_signing_config: { # required
     #       code_signing_config_id: "CodeSigningConfigId", # required
@@ -507,8 +507,8 @@ module Aws::Lambda
     #   }
     # @return [Types::CreateCodeSigningConfigResponse]
     def create_code_signing_config(params = {}, options = {})
-      input = build_input(:create_code_signing_config, params)
-      input.send_input(options)
+      request = build_request(:create_code_signing_config, params)
+      request.send_request(options)
     end
 
     # <p>Creates a mapping between an event source and an Lambda function. Lambda reads items from the event source and invokes the function.</p>
@@ -788,8 +788,8 @@ module Aws::Lambda
     #     batch_size: 5
     #   }
     #   options = {}
-    #   output = client.create_event_source_mapping(params, options)
-    #   output.to_h #=>
+    #   response = client.create_event_source_mapping(params, options)
+    #   response.to_h #=>
     #   {
     #     uuid: "a1b2c3d4-5678-90ab-cdef-11111EXAMPLE",
     #     state_transition_reason: "USER_INITIATED",
@@ -869,9 +869,9 @@ module Aws::Lambda
     #     }
     #   }
     #   options = {}
-    #   output = client.create_event_source_mapping(params, options)
+    #   response = client.create_event_source_mapping(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     uuid: "String",
     #     starting_position: "TRIM_HORIZON" # One of: ["TRIM_HORIZON", "LATEST", "AT_TIMESTAMP"],
@@ -948,8 +948,8 @@ module Aws::Lambda
     #   }
     # @return [Types::CreateEventSourceMappingOutput]
     def create_event_source_mapping(params = {}, options = {})
-      input = build_input(:create_event_source_mapping, params)
-      input.send_input(options)
+      request = build_request(:create_event_source_mapping, params)
+      request.send_request(options)
     end
 
     # <p>Creates a Lambda function. To create a function, you need a <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html">deployment package</a> and an <a href="https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role">execution role</a>. The
@@ -1126,8 +1126,8 @@ module Aws::Lambda
     #     }
     #   }
     #   options = {}
-    #   output = client.create_function(params, options)
-    #   output.to_h #=>
+    #   response = client.create_function(params, options)
+    #   response.to_h #=>
     #   {
     #     function_name: "my-function",
     #     function_arn: "arn:aws:lambda:us-west-2:123456789012:function:my-function",
@@ -1222,9 +1222,9 @@ module Aws::Lambda
     #     }
     #   }
     #   options = {}
-    #   output = client.create_function(params, options)
+    #   response = client.create_function(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     function_name: "NamespacedFunctionName",
     #     function_arn: "NameSpacedFunctionArn",
@@ -1320,8 +1320,8 @@ module Aws::Lambda
     #   }
     # @return [Types::CreateFunctionOutput]
     def create_function(params = {}, options = {})
-      input = build_input(:create_function, params)
-      input.send_input(options)
+      request = build_request(:create_function, params)
+      request.send_request(options)
     end
 
     # <p>Creates a Lambda function URL with the specified configuration parameters. A function URL is
@@ -1387,9 +1387,9 @@ module Aws::Lambda
     #     invoke_mode: "BUFFERED" # One of: ["BUFFERED", "RESPONSE_STREAM"]
     #   }
     #   options = {}
-    #   output = client.create_function_url_config(params, options)
+    #   response = client.create_function_url_config(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     function_url: "FunctionUrl", # required
     #     function_arn: "FunctionArn", # required
@@ -1407,8 +1407,8 @@ module Aws::Lambda
     #   }
     # @return [Types::CreateFunctionUrlConfigResponse]
     def create_function_url_config(params = {}, options = {})
-      input = build_input(:create_function_url_config, params)
-      input.send_input(options)
+      request = build_request(:create_function_url_config, params)
+      request.send_request(options)
     end
 
     # <p>Deletes a Lambda function <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html">alias</a>.</p>
@@ -1443,8 +1443,8 @@ module Aws::Lambda
     #     name: "BLUE"
     #   }
     #   options = {}
-    #   output = client.delete_alias(params, options)
-    #   output.to_h #=>
+    #   response = client.delete_alias(params, options)
+    #   response.to_h #=>
     #   {}
     # @example Request syntax with placeholder values
     #   params = {
@@ -1452,14 +1452,14 @@ module Aws::Lambda
     #     name: "Alias", # required
     #   }
     #   options = {}
-    #   output = client.delete_alias(params, options)
+    #   response = client.delete_alias(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {}
     # @return [Smithy::Schema::EmptyStructure]
     def delete_alias(params = {}, options = {})
-      input = build_input(:delete_alias, params)
-      input.send_input(options)
+      request = build_request(:delete_alias, params)
+      request.send_request(options)
     end
 
     # <p>Deletes the code signing configuration. You can delete the code signing configuration only if no function is
@@ -1472,14 +1472,14 @@ module Aws::Lambda
     #     code_signing_config_arn: "CodeSigningConfigArn", # required
     #   }
     #   options = {}
-    #   output = client.delete_code_signing_config(params, options)
+    #   response = client.delete_code_signing_config(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {}
     # @return [Types::DeleteCodeSigningConfigResponse]
     def delete_code_signing_config(params = {}, options = {})
-      input = build_input(:delete_code_signing_config, params)
-      input.send_input(options)
+      request = build_request(:delete_code_signing_config, params)
+      request.send_request(options)
     end
 
     # <p>Deletes an <a href="https://docs.aws.amazon.com/lambda/latest/dg/intro-invocation-modes.html">event source
@@ -1494,9 +1494,9 @@ module Aws::Lambda
     #     uuid: "String", # required
     #   }
     #   options = {}
-    #   output = client.delete_event_source_mapping(params, options)
+    #   response = client.delete_event_source_mapping(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     uuid: "String",
     #     starting_position: "TRIM_HORIZON" # One of: ["TRIM_HORIZON", "LATEST", "AT_TIMESTAMP"],
@@ -1573,8 +1573,8 @@ module Aws::Lambda
     #   }
     # @return [Types::DeleteEventSourceMappingOutput]
     def delete_event_source_mapping(params = {}, options = {})
-      input = build_input(:delete_event_source_mapping, params)
-      input.send_input(options)
+      request = build_request(:delete_event_source_mapping, params)
+      request.send_request(options)
     end
 
     # <p>Deletes a Lambda function. To delete a specific function version, use the <code>Qualifier</code> parameter.
@@ -1613,8 +1613,8 @@ module Aws::Lambda
     #     qualifier: "1"
     #   }
     #   options = {}
-    #   output = client.delete_function(params, options)
-    #   output.to_h #=>
+    #   response = client.delete_function(params, options)
+    #   response.to_h #=>
     #   {}
     # @example Request syntax with placeholder values
     #   params = {
@@ -1622,14 +1622,14 @@ module Aws::Lambda
     #     qualifier: "Qualifier"
     #   }
     #   options = {}
-    #   output = client.delete_function(params, options)
+    #   response = client.delete_function(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {}
     # @return [Smithy::Schema::EmptyStructure]
     def delete_function(params = {}, options = {})
-      input = build_input(:delete_function, params)
-      input.send_input(options)
+      request = build_request(:delete_function, params)
+      request.send_request(options)
     end
 
     # <p>Removes the code signing configuration from the function.</p>
@@ -1660,14 +1660,14 @@ module Aws::Lambda
     #     function_name: "FunctionName", # required
     #   }
     #   options = {}
-    #   output = client.delete_function_code_signing_config(params, options)
+    #   response = client.delete_function_code_signing_config(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {}
     # @return [Smithy::Schema::EmptyStructure]
     def delete_function_code_signing_config(params = {}, options = {})
-      input = build_input(:delete_function_code_signing_config, params)
-      input.send_input(options)
+      request = build_request(:delete_function_code_signing_config, params)
+      request.send_request(options)
     end
 
     # <p>Removes a concurrent execution limit from a function.</p>
@@ -1699,22 +1699,22 @@ module Aws::Lambda
     #     function_name: "my-function"
     #   }
     #   options = {}
-    #   output = client.delete_function_concurrency(params, options)
-    #   output.to_h #=>
+    #   response = client.delete_function_concurrency(params, options)
+    #   response.to_h #=>
     #   {}
     # @example Request syntax with placeholder values
     #   params = {
     #     function_name: "FunctionName", # required
     #   }
     #   options = {}
-    #   output = client.delete_function_concurrency(params, options)
+    #   response = client.delete_function_concurrency(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {}
     # @return [Smithy::Schema::EmptyStructure]
     def delete_function_concurrency(params = {}, options = {})
-      input = build_input(:delete_function_concurrency, params)
-      input.send_input(options)
+      request = build_request(:delete_function_concurrency, params)
+      request.send_request(options)
     end
 
     # <p>Deletes the configuration for asynchronous invocation for a function, version, or alias.</p>
@@ -1750,8 +1750,8 @@ module Aws::Lambda
     #     qualifier: "GREEN"
     #   }
     #   options = {}
-    #   output = client.delete_function_event_invoke_config(params, options)
-    #   output.to_h #=>
+    #   response = client.delete_function_event_invoke_config(params, options)
+    #   response.to_h #=>
     #   {}
     # @example Request syntax with placeholder values
     #   params = {
@@ -1759,14 +1759,14 @@ module Aws::Lambda
     #     qualifier: "Qualifier"
     #   }
     #   options = {}
-    #   output = client.delete_function_event_invoke_config(params, options)
+    #   response = client.delete_function_event_invoke_config(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {}
     # @return [Smithy::Schema::EmptyStructure]
     def delete_function_event_invoke_config(params = {}, options = {})
-      input = build_input(:delete_function_event_invoke_config, params)
-      input.send_input(options)
+      request = build_request(:delete_function_event_invoke_config, params)
+      request.send_request(options)
     end
 
     # <p>Deletes a Lambda function URL. When you delete a function URL, you
@@ -1801,14 +1801,14 @@ module Aws::Lambda
     #     qualifier: "FunctionUrlQualifier"
     #   }
     #   options = {}
-    #   output = client.delete_function_url_config(params, options)
+    #   response = client.delete_function_url_config(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {}
     # @return [Smithy::Schema::EmptyStructure]
     def delete_function_url_config(params = {}, options = {})
-      input = build_input(:delete_function_url_config, params)
-      input.send_input(options)
+      request = build_request(:delete_function_url_config, params)
+      request.send_request(options)
     end
 
     # <p>Deletes a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda
@@ -1826,8 +1826,8 @@ module Aws::Lambda
     #     version_number: 2
     #   }
     #   options = {}
-    #   output = client.delete_layer_version(params, options)
-    #   output.to_h #=>
+    #   response = client.delete_layer_version(params, options)
+    #   response.to_h #=>
     #   {}
     # @example Request syntax with placeholder values
     #   params = {
@@ -1835,14 +1835,14 @@ module Aws::Lambda
     #     version_number: 1, # required
     #   }
     #   options = {}
-    #   output = client.delete_layer_version(params, options)
+    #   response = client.delete_layer_version(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {}
     # @return [Smithy::Schema::EmptyStructure]
     def delete_layer_version(params = {}, options = {})
-      input = build_input(:delete_layer_version, params)
-      input.send_input(options)
+      request = build_request(:delete_layer_version, params)
+      request.send_request(options)
     end
 
     # <p>Deletes the provisioned concurrency configuration for a function.</p>
@@ -1877,8 +1877,8 @@ module Aws::Lambda
     #     qualifier: "GREEN"
     #   }
     #   options = {}
-    #   output = client.delete_provisioned_concurrency_config(params, options)
-    #   output.to_h #=>
+    #   response = client.delete_provisioned_concurrency_config(params, options)
+    #   response.to_h #=>
     #   {}
     # @example Request syntax with placeholder values
     #   params = {
@@ -1886,14 +1886,14 @@ module Aws::Lambda
     #     qualifier: "Qualifier", # required
     #   }
     #   options = {}
-    #   output = client.delete_provisioned_concurrency_config(params, options)
+    #   response = client.delete_provisioned_concurrency_config(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {}
     # @return [Smithy::Schema::EmptyStructure]
     def delete_provisioned_concurrency_config(params = {}, options = {})
-      input = build_input(:delete_provisioned_concurrency_config, params)
-      input.send_input(options)
+      request = build_request(:delete_provisioned_concurrency_config, params)
+      request.send_request(options)
     end
 
     # <p>Retrieves details about your account's <a href="https://docs.aws.amazon.com/lambda/latest/dg/limits.html">limits</a> and usage in an Amazon Web Services Region.</p>
@@ -1902,8 +1902,8 @@ module Aws::Lambda
     #   # This operation takes no parameters and returns details about storage and concurrency quotas in the current Region.
     #   params = {}
     #   options = {}
-    #   output = client.get_account_settings(params, options)
-    #   output.to_h #=>
+    #   response = client.get_account_settings(params, options)
+    #   response.to_h #=>
     #   {
     #     account_limit: {
     #       code_size_unzipped: 262144000,
@@ -1920,9 +1920,9 @@ module Aws::Lambda
     # @example Request syntax with placeholder values
     #   params = {}
     #   options = {}
-    #   output = client.get_account_settings(params, options)
+    #   response = client.get_account_settings(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     account_limit: {
     #       total_code_size: 1,
@@ -1938,8 +1938,8 @@ module Aws::Lambda
     #   }
     # @return [Types::GetAccountSettingsResponse]
     def get_account_settings(params = {}, options = {})
-      input = build_input(:get_account_settings, params)
-      input.send_input(options)
+      request = build_request(:get_account_settings, params)
+      request.send_request(options)
     end
 
     # <p>Returns details about a Lambda function <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html">alias</a>.</p>
@@ -1974,8 +1974,8 @@ module Aws::Lambda
     #     name: "BLUE"
     #   }
     #   options = {}
-    #   output = client.get_alias(params, options)
-    #   output.to_h #=>
+    #   response = client.get_alias(params, options)
+    #   response.to_h #=>
     #   {
     #     alias_arn: "arn:aws:lambda:us-west-2:123456789012:function:my-function:BLUE",
     #     name: "BLUE",
@@ -1989,9 +1989,9 @@ module Aws::Lambda
     #     name: "Alias", # required
     #   }
     #   options = {}
-    #   output = client.get_alias(params, options)
+    #   response = client.get_alias(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     alias_arn: "FunctionArn",
     #     name: "Alias",
@@ -2006,8 +2006,8 @@ module Aws::Lambda
     #   }
     # @return [Types::GetAliasOutput]
     def get_alias(params = {}, options = {})
-      input = build_input(:get_alias, params)
-      input.send_input(options)
+      request = build_request(:get_alias, params)
+      request.send_request(options)
     end
 
     # <p>Returns information about the specified code signing configuration.</p>
@@ -2019,9 +2019,9 @@ module Aws::Lambda
     #     code_signing_config_arn: "CodeSigningConfigArn", # required
     #   }
     #   options = {}
-    #   output = client.get_code_signing_config(params, options)
+    #   response = client.get_code_signing_config(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     code_signing_config: { # required
     #       code_signing_config_id: "CodeSigningConfigId", # required
@@ -2038,8 +2038,8 @@ module Aws::Lambda
     #   }
     # @return [Types::GetCodeSigningConfigResponse]
     def get_code_signing_config(params = {}, options = {})
-      input = build_input(:get_code_signing_config, params)
-      input.send_input(options)
+      request = build_request(:get_code_signing_config, params)
+      request.send_request(options)
     end
 
     # <p>Returns details about an event source mapping. You can get the identifier of a mapping from the output of
@@ -2052,9 +2052,9 @@ module Aws::Lambda
     #     uuid: "String", # required
     #   }
     #   options = {}
-    #   output = client.get_event_source_mapping(params, options)
+    #   response = client.get_event_source_mapping(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     uuid: "String",
     #     starting_position: "TRIM_HORIZON" # One of: ["TRIM_HORIZON", "LATEST", "AT_TIMESTAMP"],
@@ -2131,8 +2131,8 @@ module Aws::Lambda
     #   }
     # @return [Types::GetEventSourceMappingOutput]
     def get_event_source_mapping(params = {}, options = {})
-      input = build_input(:get_event_source_mapping, params)
-      input.send_input(options)
+      request = build_request(:get_event_source_mapping, params)
+      request.send_request(options)
     end
 
     # <p>Returns information about the function or function version, with a link to download the deployment package
@@ -2169,8 +2169,8 @@ module Aws::Lambda
     #     qualifier: "1"
     #   }
     #   options = {}
-    #   output = client.get_function(params, options)
-    #   output.to_h #=>
+    #   response = client.get_function(params, options)
+    #   response.to_h #=>
     #   {
     #     configuration: {
     #       function_name: "my-function",
@@ -2213,9 +2213,9 @@ module Aws::Lambda
     #     qualifier: "Qualifier"
     #   }
     #   options = {}
-    #   output = client.get_function(params, options)
+    #   response = client.get_function(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     configuration: {
     #       function_name: "NamespacedFunctionName",
@@ -2330,8 +2330,8 @@ module Aws::Lambda
     #   }
     # @return [Types::GetFunctionResponse]
     def get_function(params = {}, options = {})
-      input = build_input(:get_function, params)
-      input.send_input(options)
+      request = build_request(:get_function, params)
+      request.send_request(options)
     end
 
     # <p>Returns the code signing configuration for the specified function.</p>
@@ -2362,17 +2362,17 @@ module Aws::Lambda
     #     function_name: "FunctionName", # required
     #   }
     #   options = {}
-    #   output = client.get_function_code_signing_config(params, options)
+    #   response = client.get_function_code_signing_config(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     code_signing_config_arn: "CodeSigningConfigArn", # required
     #     function_name: "FunctionName", # required
     #   }
     # @return [Types::GetFunctionCodeSigningConfigResponse]
     def get_function_code_signing_config(params = {}, options = {})
-      input = build_input(:get_function_code_signing_config, params)
-      input.send_input(options)
+      request = build_request(:get_function_code_signing_config, params)
+      request.send_request(options)
     end
 
     # <p>Returns details about the reserved concurrency configuration for a function. To set a concurrency limit for a
@@ -2405,8 +2405,8 @@ module Aws::Lambda
     #     function_name: "my-function"
     #   }
     #   options = {}
-    #   output = client.get_function_concurrency(params, options)
-    #   output.to_h #=>
+    #   response = client.get_function_concurrency(params, options)
+    #   response.to_h #=>
     #   {
     #     reserved_concurrent_executions: 250
     #   }
@@ -2415,16 +2415,16 @@ module Aws::Lambda
     #     function_name: "FunctionName", # required
     #   }
     #   options = {}
-    #   output = client.get_function_concurrency(params, options)
+    #   response = client.get_function_concurrency(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     reserved_concurrent_executions: 1
     #   }
     # @return [Types::GetFunctionConcurrencyResponse]
     def get_function_concurrency(params = {}, options = {})
-      input = build_input(:get_function_concurrency, params)
-      input.send_input(options)
+      request = build_request(:get_function_concurrency, params)
+      request.send_request(options)
     end
 
     # <p>Returns the version-specific settings of a Lambda function or version. The output includes only options that
@@ -2461,8 +2461,8 @@ module Aws::Lambda
     #     qualifier: "1"
     #   }
     #   options = {}
-    #   output = client.get_function_configuration(params, options)
-    #   output.to_h #=>
+    #   response = client.get_function_configuration(params, options)
+    #   response.to_h #=>
     #   {
     #     function_name: "my-function",
     #     function_arn: "arn:aws:lambda:us-west-2:123456789012:function:my-function",
@@ -2496,9 +2496,9 @@ module Aws::Lambda
     #     qualifier: "Qualifier"
     #   }
     #   options = {}
-    #   output = client.get_function_configuration(params, options)
+    #   response = client.get_function_configuration(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     function_name: "NamespacedFunctionName",
     #     function_arn: "NameSpacedFunctionArn",
@@ -2594,8 +2594,8 @@ module Aws::Lambda
     #   }
     # @return [Types::GetFunctionConfigurationOutput]
     def get_function_configuration(params = {}, options = {})
-      input = build_input(:get_function_configuration, params)
-      input.send_input(options)
+      request = build_request(:get_function_configuration, params)
+      request.send_request(options)
     end
 
     # <p>Retrieves the configuration for asynchronous invocation for a function, version, or alias.</p>
@@ -2630,9 +2630,9 @@ module Aws::Lambda
     #     qualifier: "Qualifier"
     #   }
     #   options = {}
-    #   output = client.get_function_event_invoke_config(params, options)
+    #   response = client.get_function_event_invoke_config(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     last_modified: Time.now,
     #     function_arn: "FunctionArn",
@@ -2649,8 +2649,8 @@ module Aws::Lambda
     #   }
     # @return [Types::GetFunctionEventInvokeConfigOutput]
     def get_function_event_invoke_config(params = {}, options = {})
-      input = build_input(:get_function_event_invoke_config, params)
-      input.send_input(options)
+      request = build_request(:get_function_event_invoke_config, params)
+      request.send_request(options)
     end
 
     # <p>Returns your function's <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-recursion.html">recursive loop detection</a> configuration. 
@@ -2663,16 +2663,16 @@ module Aws::Lambda
     #     function_name: "UnqualifiedFunctionName", # required
     #   }
     #   options = {}
-    #   output = client.get_function_recursion_config(params, options)
+    #   response = client.get_function_recursion_config(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     recursive_loop: "Allow" # One of: ["Allow", "Terminate"]
     #   }
     # @return [Types::GetFunctionRecursionConfigResponse]
     def get_function_recursion_config(params = {}, options = {})
-      input = build_input(:get_function_recursion_config, params)
-      input.send_input(options)
+      request = build_request(:get_function_recursion_config, params)
+      request.send_request(options)
     end
 
     # <p>Returns details about a Lambda function URL.</p>
@@ -2706,9 +2706,9 @@ module Aws::Lambda
     #     qualifier: "FunctionUrlQualifier"
     #   }
     #   options = {}
-    #   output = client.get_function_url_config(params, options)
+    #   response = client.get_function_url_config(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     function_url: "FunctionUrl", # required
     #     function_arn: "FunctionArn", # required
@@ -2727,8 +2727,8 @@ module Aws::Lambda
     #   }
     # @return [Types::GetFunctionUrlConfigResponse]
     def get_function_url_config(params = {}, options = {})
-      input = build_input(:get_function_url_config, params)
-      input.send_input(options)
+      request = build_request(:get_function_url_config, params)
+      request.send_request(options)
     end
 
     # <p>Returns information about a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda
@@ -2746,8 +2746,8 @@ module Aws::Lambda
     #     version_number: 1
     #   }
     #   options = {}
-    #   output = client.get_layer_version(params, options)
-    #   output.to_h #=>
+    #   response = client.get_layer_version(params, options)
+    #   response.to_h #=>
     #   {
     #     content: {
     #       location: "https://awslambda-us-east-2-layers.s3.us-east-2.amazonaws.com/snapshots/123456789012/my-layer-4aaa2fbb-ff77-4b0a-ad92-5b78a716a96a?versionId=27iWyA73cCAYqyH...",
@@ -2771,9 +2771,9 @@ module Aws::Lambda
     #     version_number: 1, # required
     #   }
     #   options = {}
-    #   output = client.get_layer_version(params, options)
+    #   response = client.get_layer_version(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     content: {
     #       location: "String",
@@ -2793,8 +2793,8 @@ module Aws::Lambda
     #   }
     # @return [Types::GetLayerVersionOutput]
     def get_layer_version(params = {}, options = {})
-      input = build_input(:get_layer_version, params)
-      input.send_input(options)
+      request = build_request(:get_layer_version, params)
+      request.send_request(options)
     end
 
     # <p>Returns information about a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda
@@ -2809,8 +2809,8 @@ module Aws::Lambda
     #     arn: "arn:aws:lambda:ca-central-1:123456789012:layer:blank-python-lib:3"
     #   }
     #   options = {}
-    #   output = client.get_layer_version_by_arn(params, options)
-    #   output.to_h #=>
+    #   response = client.get_layer_version_by_arn(params, options)
+    #   response.to_h #=>
     #   {
     #     content: {
     #       location: "https://awslambda-us-east-2-layers.s3.us-east-2.amazonaws.com/snapshots/123456789012/blank-python-lib-e5212378-xmpl-44ee-8398-9d8ec5113949?versionId=WbZnvf...",
@@ -2831,9 +2831,9 @@ module Aws::Lambda
     #     arn: "LayerVersionArn", # required
     #   }
     #   options = {}
-    #   output = client.get_layer_version_by_arn(params, options)
+    #   response = client.get_layer_version_by_arn(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     content: {
     #       location: "String",
@@ -2853,8 +2853,8 @@ module Aws::Lambda
     #   }
     # @return [Types::GetLayerVersionByArnOutput]
     def get_layer_version_by_arn(params = {}, options = {})
-      input = build_input(:get_layer_version_by_arn, params)
-      input.send_input(options)
+      request = build_request(:get_layer_version_by_arn, params)
+      request.send_request(options)
     end
 
     # <p>Returns the permission policy for a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda
@@ -2870,17 +2870,17 @@ module Aws::Lambda
     #     version_number: 1, # required
     #   }
     #   options = {}
-    #   output = client.get_layer_version_policy(params, options)
+    #   response = client.get_layer_version_policy(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     policy: "String",
     #     revision_id: "String"
     #   }
     # @return [Types::GetLayerVersionPolicyResponse]
     def get_layer_version_policy(params = {}, options = {})
-      input = build_input(:get_layer_version_policy, params)
-      input.send_input(options)
+      request = build_request(:get_layer_version_policy, params)
+      request.send_request(options)
     end
 
     # <p>Returns the <a href="https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html">resource-based IAM policy</a> for a function, version, or alias.</p>
@@ -2915,8 +2915,8 @@ module Aws::Lambda
     #     qualifier: "1"
     #   }
     #   options = {}
-    #   output = client.get_policy(params, options)
-    #   output.to_h #=>
+    #   response = client.get_policy(params, options)
+    #   response.to_h #=>
     #   {
     #     policy: "{\"Version\":\"2012-10-17\",\"Id\":\"default\",\"Statement\":[{\"Sid\":\"xaccount\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::123456789012:root\"},\"Action\":\"lambda:InvokeFunction\",\"Resource\":\"arn:aws:lambda:us-east-2:123456789012:function:my-function:1\"}]}",
     #     revision_id: "4843f2f6-7c59-4fda-b484-afd0bc0e22b8"
@@ -2927,17 +2927,17 @@ module Aws::Lambda
     #     qualifier: "Qualifier"
     #   }
     #   options = {}
-    #   output = client.get_policy(params, options)
+    #   response = client.get_policy(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     policy: "String",
     #     revision_id: "String"
     #   }
     # @return [Types::GetPolicyResponse]
     def get_policy(params = {}, options = {})
-      input = build_input(:get_policy, params)
-      input.send_input(options)
+      request = build_request(:get_policy, params)
+      request.send_request(options)
     end
 
     # <p>Retrieves the provisioned concurrency configuration for a function's alias or version.</p>
@@ -2972,8 +2972,8 @@ module Aws::Lambda
     #     qualifier: "BLUE"
     #   }
     #   options = {}
-    #   output = client.get_provisioned_concurrency_config(params, options)
-    #   output.to_h #=>
+    #   response = client.get_provisioned_concurrency_config(params, options)
+    #   response.to_h #=>
     #   {
     #     requested_provisioned_concurrent_executions: 100,
     #     available_provisioned_concurrent_executions: 100,
@@ -2988,8 +2988,8 @@ module Aws::Lambda
     #     qualifier: "BLUE"
     #   }
     #   options = {}
-    #   output = client.get_provisioned_concurrency_config(params, options)
-    #   output.to_h #=>
+    #   response = client.get_provisioned_concurrency_config(params, options)
+    #   response.to_h #=>
     #   {
     #     requested_provisioned_concurrent_executions: 100,
     #     available_provisioned_concurrent_executions: 100,
@@ -3003,9 +3003,9 @@ module Aws::Lambda
     #     qualifier: "Qualifier", # required
     #   }
     #   options = {}
-    #   output = client.get_provisioned_concurrency_config(params, options)
+    #   response = client.get_provisioned_concurrency_config(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     requested_provisioned_concurrent_executions: 1,
     #     available_provisioned_concurrent_executions: 1,
@@ -3016,8 +3016,8 @@ module Aws::Lambda
     #   }
     # @return [Types::GetProvisionedConcurrencyConfigResponse]
     def get_provisioned_concurrency_config(params = {}, options = {})
-      input = build_input(:get_provisioned_concurrency_config, params)
-      input.send_input(options)
+      request = build_request(:get_provisioned_concurrency_config, params)
+      request.send_request(options)
     end
 
     # <p>Retrieves the runtime management configuration for a function's version. If the runtime update mode is <b>Manual</b>, this includes the ARN of the 
@@ -3054,9 +3054,9 @@ module Aws::Lambda
     #     qualifier: "Qualifier"
     #   }
     #   options = {}
-    #   output = client.get_runtime_management_config(params, options)
+    #   response = client.get_runtime_management_config(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     update_runtime_on: "Auto" # One of: ["Auto", "Manual", "FunctionUpdate"],
     #     runtime_version_arn: "RuntimeVersionArn",
@@ -3064,8 +3064,8 @@ module Aws::Lambda
     #   }
     # @return [Types::GetRuntimeManagementConfigResponse]
     def get_runtime_management_config(params = {}, options = {})
-      input = build_input(:get_runtime_management_config, params)
-      input.send_input(options)
+      request = build_request(:get_runtime_management_config, params)
+      request.send_request(options)
     end
 
     # <p>Invokes a Lambda function. You can invoke a function synchronously (and wait for the response), or
@@ -3158,8 +3158,8 @@ module Aws::Lambda
     #     qualifier: "1"
     #   }
     #   options = {}
-    #   output = client.invoke(params, options)
-    #   output.to_h #=>
+    #   response = client.invoke(params, options)
+    #   response.to_h #=>
     #   {
     #     status_code: 200,
     #     payload: "200 SUCCESS"
@@ -3173,8 +3173,8 @@ module Aws::Lambda
     #     qualifier: "1"
     #   }
     #   options = {}
-    #   output = client.invoke(params, options)
-    #   output.to_h #=>
+    #   response = client.invoke(params, options)
+    #   response.to_h #=>
     #   {
     #     status_code: 202,
     #     payload: ""
@@ -3189,9 +3189,9 @@ module Aws::Lambda
     #     qualifier: "Qualifier"
     #   }
     #   options = {}
-    #   output = client.invoke(params, options)
+    #   response = client.invoke(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     status_code: 1,
     #     function_error: "String",
@@ -3201,8 +3201,8 @@ module Aws::Lambda
     #   }
     # @return [Types::InvocationResponse]
     def invoke(params = {}, options = {})
-      input = build_input(:invoke, params)
-      input.send_input(options)
+      request = build_request(:invoke, params)
+      request.send_request(options)
     end
 
     # <important>
@@ -3244,8 +3244,8 @@ module Aws::Lambda
     #     invoke_args: "{}"
     #   }
     #   options = {}
-    #   output = client.invoke_async(params, options)
-    #   output.to_h #=>
+    #   response = client.invoke_async(params, options)
+    #   response.to_h #=>
     #   {
     #     status: 202
     #   }
@@ -3255,17 +3255,17 @@ module Aws::Lambda
     #     invoke_args: File.read("source_file"), # required
     #   }
     #   options = {}
-    #   output = client.invoke_async(params, options)
+    #   response = client.invoke_async(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     status: 1
     #   }
     # @deprecated
     # @return [Types::InvokeAsyncResponse]
     def invoke_async(params = {}, options = {})
-      input = build_input(:invoke_async, params)
-      input.send_input(options)
+      request = build_request(:invoke_async, params)
+      request.send_request(options)
     end
 
     # <p>Configure your Lambda functions to stream response payloads back to clients. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-response-streaming.html">Configuring a Lambda function to stream responses</a>.</p>
@@ -3330,9 +3330,9 @@ module Aws::Lambda
     #     payload: "data"
     #   }
     #   options = {}
-    #   output = client.invoke_with_response_stream(params, options)
+    #   response = client.invoke_with_response_stream(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     status_code: 1,
     #     executed_version: "Version",
@@ -3351,8 +3351,8 @@ module Aws::Lambda
     #   }
     # @return [Types::InvokeWithResponseStreamResponse]
     def invoke_with_response_stream(params = {}, options = {})
-      input = build_input(:invoke_with_response_stream, params)
-      input.send_input(options)
+      request = build_request(:invoke_with_response_stream, params)
+      request.send_request(options)
     end
 
     # <p>Returns a list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html">aliases</a>
@@ -3391,8 +3391,8 @@ module Aws::Lambda
     #     function_name: "my-function"
     #   }
     #   options = {}
-    #   output = client.list_aliases(params, options)
-    #   output.to_h #=>
+    #   response = client.list_aliases(params, options)
+    #   response.to_h #=>
     #   {
     #     aliases: [
     #       {
@@ -3424,9 +3424,9 @@ module Aws::Lambda
     #     max_items: 1
     #   }
     #   options = {}
-    #   output = client.list_aliases(params, options)
+    #   response = client.list_aliases(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     next_marker: "String",
     #     aliases: [
@@ -3446,8 +3446,8 @@ module Aws::Lambda
     #   }
     # @return [Types::ListAliasesResponse]
     def list_aliases(params = {}, options = {})
-      input = build_input(:list_aliases, params)
-      input.send_input(options)
+      request = build_request(:list_aliases, params)
+      request.send_request(options)
     end
 
     # <p>Returns a list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuring-codesigning.html">code
@@ -3464,9 +3464,9 @@ module Aws::Lambda
     #     max_items: 1
     #   }
     #   options = {}
-    #   output = client.list_code_signing_configs(params, options)
+    #   response = client.list_code_signing_configs(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     next_marker: "String",
     #     code_signing_configs: [
@@ -3486,8 +3486,8 @@ module Aws::Lambda
     #   }
     # @return [Types::ListCodeSigningConfigsResponse]
     def list_code_signing_configs(params = {}, options = {})
-      input = build_input(:list_code_signing_configs, params)
-      input.send_input(options)
+      request = build_request(:list_code_signing_configs, params)
+      request.send_request(options)
     end
 
     # <p>Lists event source mappings. Specify an <code>EventSourceArn</code> to show only event source mappings for a
@@ -3557,8 +3557,8 @@ module Aws::Lambda
     #     function_name: "my-function"
     #   }
     #   options = {}
-    #   output = client.list_event_source_mappings(params, options)
-    #   output.to_h #=>
+    #   response = client.list_event_source_mappings(params, options)
+    #   response.to_h #=>
     #   {
     #     event_source_mappings: [
     #       {
@@ -3580,9 +3580,9 @@ module Aws::Lambda
     #     max_items: 1
     #   }
     #   options = {}
-    #   output = client.list_event_source_mappings(params, options)
+    #   response = client.list_event_source_mappings(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     next_marker: "String",
     #     event_source_mappings: [
@@ -3664,8 +3664,8 @@ module Aws::Lambda
     #   }
     # @return [Types::ListEventSourceMappingsResponse]
     def list_event_source_mappings(params = {}, options = {})
-      input = build_input(:list_event_source_mappings, params)
-      input.send_input(options)
+      request = build_request(:list_event_source_mappings, params)
+      request.send_request(options)
     end
 
     # <p>Retrieves a list of configurations for asynchronous invocation for a function.</p>
@@ -3702,8 +3702,8 @@ module Aws::Lambda
     #     function_name: "my-function"
     #   }
     #   options = {}
-    #   output = client.list_function_event_invoke_configs(params, options)
-    #   output.to_h #=>
+    #   response = client.list_function_event_invoke_configs(params, options)
+    #   response.to_h #=>
     #   {
     #     function_event_invoke_configs: [
     #       {
@@ -3727,9 +3727,9 @@ module Aws::Lambda
     #     max_items: 1
     #   }
     #   options = {}
-    #   output = client.list_function_event_invoke_configs(params, options)
+    #   response = client.list_function_event_invoke_configs(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     function_event_invoke_configs: [
     #       {
@@ -3751,8 +3751,8 @@ module Aws::Lambda
     #   }
     # @return [Types::ListFunctionEventInvokeConfigsResponse]
     def list_function_event_invoke_configs(params = {}, options = {})
-      input = build_input(:list_function_event_invoke_configs, params)
-      input.send_input(options)
+      request = build_request(:list_function_event_invoke_configs, params)
+      request.send_request(options)
     end
 
     # <p>Returns a list of Lambda function URLs for the specified function.</p>
@@ -3790,9 +3790,9 @@ module Aws::Lambda
     #     max_items: 1
     #   }
     #   options = {}
-    #   output = client.list_function_url_configs(params, options)
+    #   response = client.list_function_url_configs(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     function_url_configs: [ # required
     #       {
@@ -3816,8 +3816,8 @@ module Aws::Lambda
     #   }
     # @return [Types::ListFunctionUrlConfigsResponse]
     def list_function_url_configs(params = {}, options = {})
-      input = build_input(:list_function_url_configs, params)
-      input.send_input(options)
+      request = build_request(:list_function_url_configs, params)
+      request.send_request(options)
     end
 
     # <p>Returns a list of Lambda functions, with the version-specific configuration of each. Lambda returns up to 50
@@ -3846,8 +3846,8 @@ module Aws::Lambda
     #   # This operation returns a list of Lambda functions.
     #   params = {}
     #   options = {}
-    #   output = client.list_functions(params, options)
-    #   output.to_h #=>
+    #   response = client.list_functions(params, options)
+    #   response.to_h #=>
     #   {
     #     next_marker: "",
     #     functions: [
@@ -3904,9 +3904,9 @@ module Aws::Lambda
     #     max_items: 1
     #   }
     #   options = {}
-    #   output = client.list_functions(params, options)
+    #   response = client.list_functions(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     next_marker: "String",
     #     functions: [
@@ -4007,8 +4007,8 @@ module Aws::Lambda
     #   }
     # @return [Types::ListFunctionsResponse]
     def list_functions(params = {}, options = {})
-      input = build_input(:list_functions, params)
-      input.send_input(options)
+      request = build_request(:list_functions, params)
+      request.send_request(options)
     end
 
     # <p>List the functions that use the specified code signing configuration. You can use this method prior to deleting a
@@ -4027,17 +4027,17 @@ module Aws::Lambda
     #     max_items: 1
     #   }
     #   options = {}
-    #   output = client.list_functions_by_code_signing_config(params, options)
+    #   response = client.list_functions_by_code_signing_config(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     next_marker: "String",
     #     function_arns: ["FunctionArn"]
     #   }
     # @return [Types::ListFunctionsByCodeSigningConfigResponse]
     def list_functions_by_code_signing_config(params = {}, options = {})
-      input = build_input(:list_functions_by_code_signing_config, params)
-      input.send_input(options)
+      request = build_request(:list_functions_by_code_signing_config, params)
+      request.send_request(options)
     end
 
     # <p>Lists the versions of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda
@@ -4066,8 +4066,8 @@ module Aws::Lambda
     #     layer_name: "blank-java-lib"
     #   }
     #   options = {}
-    #   output = client.list_layer_versions(params, options)
-    #   output.to_h #=>
+    #   response = client.list_layer_versions(params, options)
+    #   response.to_h #=>
     #   {
     #     layer_versions: [
     #       {
@@ -4099,9 +4099,9 @@ module Aws::Lambda
     #     compatible_architecture: "x86_64" # One of: ["x86_64", "arm64"]
     #   }
     #   options = {}
-    #   output = client.list_layer_versions(params, options)
+    #   response = client.list_layer_versions(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     next_marker: "String",
     #     layer_versions: [
@@ -4118,8 +4118,8 @@ module Aws::Lambda
     #   }
     # @return [Types::ListLayerVersionsResponse]
     def list_layer_versions(params = {}, options = {})
-      input = build_input(:list_layer_versions, params)
-      input.send_input(options)
+      request = build_request(:list_layer_versions, params)
+      request.send_request(options)
     end
 
     # <p>Lists <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-layers.html">Lambda
@@ -4148,8 +4148,8 @@ module Aws::Lambda
     #     compatible_runtime: python3.7
     #   }
     #   options = {}
-    #   output = client.list_layers(params, options)
-    #   output.to_h #=>
+    #   response = client.list_layers(params, options)
+    #   response.to_h #=>
     #   {
     #     layers: [
     #       {
@@ -4176,9 +4176,9 @@ module Aws::Lambda
     #     compatible_architecture: "x86_64" # One of: ["x86_64", "arm64"]
     #   }
     #   options = {}
-    #   output = client.list_layers(params, options)
+    #   response = client.list_layers(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     next_marker: "String",
     #     layers: [
@@ -4199,8 +4199,8 @@ module Aws::Lambda
     #   }
     # @return [Types::ListLayersResponse]
     def list_layers(params = {}, options = {})
-      input = build_input(:list_layers, params)
-      input.send_input(options)
+      request = build_request(:list_layers, params)
+      request.send_request(options)
     end
 
     # <p>Retrieves a list of provisioned concurrency configurations for a function.</p>
@@ -4236,8 +4236,8 @@ module Aws::Lambda
     #     function_name: "my-function"
     #   }
     #   options = {}
-    #   output = client.list_provisioned_concurrency_configs(params, options)
-    #   output.to_h #=>
+    #   response = client.list_provisioned_concurrency_configs(params, options)
+    #   response.to_h #=>
     #   {
     #     provisioned_concurrency_configs: [
     #       {
@@ -4265,9 +4265,9 @@ module Aws::Lambda
     #     max_items: 1
     #   }
     #   options = {}
-    #   output = client.list_provisioned_concurrency_configs(params, options)
+    #   response = client.list_provisioned_concurrency_configs(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     provisioned_concurrency_configs: [
     #       {
@@ -4284,8 +4284,8 @@ module Aws::Lambda
     #   }
     # @return [Types::ListProvisionedConcurrencyConfigsResponse]
     def list_provisioned_concurrency_configs(params = {}, options = {})
-      input = build_input(:list_provisioned_concurrency_configs, params)
-      input.send_input(options)
+      request = build_request(:list_provisioned_concurrency_configs, params)
+      request.send_request(options)
     end
 
     # <p>Returns a function, event source mapping, or code signing configuration's <a href="https://docs.aws.amazon.com/lambda/latest/dg/tagging.html">tags</a>. You can
@@ -4300,8 +4300,8 @@ module Aws::Lambda
     #     resource: "arn:aws:lambda:us-west-2:123456789012:function:my-function"
     #   }
     #   options = {}
-    #   output = client.list_tags(params, options)
-    #   output.to_h #=>
+    #   response = client.list_tags(params, options)
+    #   response.to_h #=>
     #   {
     #     tags: {
     #       "Category" => "Web Tools",
@@ -4313,9 +4313,9 @@ module Aws::Lambda
     #     resource: "TaggableResource", # required
     #   }
     #   options = {}
-    #   output = client.list_tags(params, options)
+    #   response = client.list_tags(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     tags: {
     #       "TagKey" => "TagValue"
@@ -4323,8 +4323,8 @@ module Aws::Lambda
     #   }
     # @return [Types::ListTagsResponse]
     def list_tags(params = {}, options = {})
-      input = build_input(:list_tags, params)
-      input.send_input(options)
+      request = build_request(:list_tags, params)
+      request.send_request(options)
     end
 
     # <p>Returns a list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">versions</a>,
@@ -4362,8 +4362,8 @@ module Aws::Lambda
     #     function_name: "my-function"
     #   }
     #   options = {}
-    #   output = client.list_versions_by_function(params, options)
-    #   output.to_h #=>
+    #   response = client.list_versions_by_function(params, options)
+    #   response.to_h #=>
     #   {
     #     versions: [
     #       {
@@ -4425,9 +4425,9 @@ module Aws::Lambda
     #     max_items: 1
     #   }
     #   options = {}
-    #   output = client.list_versions_by_function(params, options)
+    #   response = client.list_versions_by_function(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     next_marker: "String",
     #     versions: [
@@ -4528,8 +4528,8 @@ module Aws::Lambda
     #   }
     # @return [Types::ListVersionsByFunctionResponse]
     def list_versions_by_function(params = {}, options = {})
-      input = build_input(:list_versions_by_function, params)
-      input.send_input(options)
+      request = build_request(:list_versions_by_function, params)
+      request.send_request(options)
     end
 
     # <p>Creates an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda
@@ -4581,8 +4581,8 @@ module Aws::Lambda
     #     license_info: "MIT"
     #   }
     #   options = {}
-    #   output = client.publish_layer_version(params, options)
-    #   output.to_h #=>
+    #   response = client.publish_layer_version(params, options)
+    #   response.to_h #=>
     #   {
     #     content: {
     #       location: "https://awslambda-us-west-2-layers.s3.us-west-2.amazonaws.com/snapshots/123456789012/my-layer-4aaa2fbb-ff77-4b0a-ad92-5b78a716a96a?versionId=27iWyA73cCAYqyH...",
@@ -4615,9 +4615,9 @@ module Aws::Lambda
     #     compatible_architectures: ["x86_64" # One of: ["x86_64", "arm64"]]
     #   }
     #   options = {}
-    #   output = client.publish_layer_version(params, options)
+    #   response = client.publish_layer_version(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     content: {
     #       location: "String",
@@ -4637,8 +4637,8 @@ module Aws::Lambda
     #   }
     # @return [Types::PublishLayerVersionResponse]
     def publish_layer_version(params = {}, options = {})
-      input = build_input(:publish_layer_version, params)
-      input.send_input(options)
+      request = build_request(:publish_layer_version, params)
+      request.send_request(options)
     end
 
     # <p>Creates a <a href="https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">version</a> from the
@@ -4687,8 +4687,8 @@ module Aws::Lambda
     #     description: ""
     #   }
     #   options = {}
-    #   output = client.publish_version(params, options)
-    #   output.to_h #=>
+    #   response = client.publish_version(params, options)
+    #   response.to_h #=>
     #   {
     #     function_name: "my-function",
     #     function_arn: "arn:aws:lambda:us-west-2:123456789012:function:my-function",
@@ -4724,9 +4724,9 @@ module Aws::Lambda
     #     revision_id: "String"
     #   }
     #   options = {}
-    #   output = client.publish_version(params, options)
+    #   response = client.publish_version(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     function_name: "NamespacedFunctionName",
     #     function_arn: "NameSpacedFunctionArn",
@@ -4822,8 +4822,8 @@ module Aws::Lambda
     #   }
     # @return [Types::PublishVersionOutput]
     def publish_version(params = {}, options = {})
-      input = build_input(:publish_version, params)
-      input.send_input(options)
+      request = build_request(:publish_version, params)
+      request.send_request(options)
     end
 
     # <p>Update the code signing configuration for the function. Changes to the code signing configuration take effect the
@@ -4858,17 +4858,17 @@ module Aws::Lambda
     #     function_name: "FunctionName", # required
     #   }
     #   options = {}
-    #   output = client.put_function_code_signing_config(params, options)
+    #   response = client.put_function_code_signing_config(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     code_signing_config_arn: "CodeSigningConfigArn", # required
     #     function_name: "FunctionName", # required
     #   }
     # @return [Types::PutFunctionCodeSigningConfigResponse]
     def put_function_code_signing_config(params = {}, options = {})
-      input = build_input(:put_function_code_signing_config, params)
-      input.send_input(options)
+      request = build_request(:put_function_code_signing_config, params)
+      request.send_request(options)
     end
 
     # <p>Sets the maximum number of simultaneous executions for a function, and reserves capacity for that concurrency
@@ -4911,8 +4911,8 @@ module Aws::Lambda
     #     reserved_concurrent_executions: 100
     #   }
     #   options = {}
-    #   output = client.put_function_concurrency(params, options)
-    #   output.to_h #=>
+    #   response = client.put_function_concurrency(params, options)
+    #   response.to_h #=>
     #   {
     #     reserved_concurrent_executions: 100
     #   }
@@ -4922,16 +4922,16 @@ module Aws::Lambda
     #     reserved_concurrent_executions: 1, # required
     #   }
     #   options = {}
-    #   output = client.put_function_concurrency(params, options)
+    #   response = client.put_function_concurrency(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     reserved_concurrent_executions: 1
     #   }
     # @return [Types::PutFunctionConcurrencyOutput]
     def put_function_concurrency(params = {}, options = {})
-      input = build_input(:put_function_concurrency, params)
-      input.send_input(options)
+      request = build_request(:put_function_concurrency, params)
+      request.send_request(options)
     end
 
     # <p>Configures options for <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html">asynchronous
@@ -5022,9 +5022,9 @@ module Aws::Lambda
     #     }
     #   }
     #   options = {}
-    #   output = client.put_function_event_invoke_config(params, options)
+    #   response = client.put_function_event_invoke_config(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     last_modified: Time.now,
     #     function_arn: "FunctionArn",
@@ -5041,8 +5041,8 @@ module Aws::Lambda
     #   }
     # @return [Types::PutFunctionEventInvokeConfigOutput]
     def put_function_event_invoke_config(params = {}, options = {})
-      input = build_input(:put_function_event_invoke_config, params)
-      input.send_input(options)
+      request = build_request(:put_function_event_invoke_config, params)
+      request.send_request(options)
     end
 
     # <p>Sets your function's <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-recursion.html">recursive loop detection</a> configuration.</p>
@@ -5093,16 +5093,16 @@ module Aws::Lambda
     #     recursive_loop: "Allow" # One of: ["Allow", "Terminate"], # required
     #   }
     #   options = {}
-    #   output = client.put_function_recursion_config(params, options)
+    #   response = client.put_function_recursion_config(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     recursive_loop: "Allow" # One of: ["Allow", "Terminate"]
     #   }
     # @return [Types::PutFunctionRecursionConfigResponse]
     def put_function_recursion_config(params = {}, options = {})
-      input = build_input(:put_function_recursion_config, params)
-      input.send_input(options)
+      request = build_request(:put_function_recursion_config, params)
+      request.send_request(options)
     end
 
     # <p>Adds a provisioned concurrency configuration to a function's alias or version.</p>
@@ -5140,8 +5140,8 @@ module Aws::Lambda
     #     provisioned_concurrent_executions: 100
     #   }
     #   options = {}
-    #   output = client.put_provisioned_concurrency_config(params, options)
-    #   output.to_h #=>
+    #   response = client.put_provisioned_concurrency_config(params, options)
+    #   response.to_h #=>
     #   {
     #     requested_provisioned_concurrent_executions: 100,
     #     allocated_provisioned_concurrent_executions: 0,
@@ -5155,9 +5155,9 @@ module Aws::Lambda
     #     provisioned_concurrent_executions: 1, # required
     #   }
     #   options = {}
-    #   output = client.put_provisioned_concurrency_config(params, options)
+    #   response = client.put_provisioned_concurrency_config(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     requested_provisioned_concurrent_executions: 1,
     #     available_provisioned_concurrent_executions: 1,
@@ -5168,8 +5168,8 @@ module Aws::Lambda
     #   }
     # @return [Types::PutProvisionedConcurrencyConfigResponse]
     def put_provisioned_concurrency_config(params = {}, options = {})
-      input = build_input(:put_provisioned_concurrency_config, params)
-      input.send_input(options)
+      request = build_request(:put_provisioned_concurrency_config, params)
+      request.send_request(options)
     end
 
     # <p>Sets the runtime management configuration for a function's version. For more information, 
@@ -5233,9 +5233,9 @@ module Aws::Lambda
     #     runtime_version_arn: "RuntimeVersionArn"
     #   }
     #   options = {}
-    #   output = client.put_runtime_management_config(params, options)
+    #   response = client.put_runtime_management_config(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     update_runtime_on: "Auto" # One of: ["Auto", "Manual", "FunctionUpdate"], # required
     #     function_arn: "FunctionArn", # required
@@ -5243,8 +5243,8 @@ module Aws::Lambda
     #   }
     # @return [Types::PutRuntimeManagementConfigResponse]
     def put_runtime_management_config(params = {}, options = {})
-      input = build_input(:put_runtime_management_config, params)
-      input.send_input(options)
+      request = build_request(:put_runtime_management_config, params)
+      request.send_request(options)
     end
 
     # <p>Removes a statement from the permissions policy for a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda
@@ -5268,8 +5268,8 @@ module Aws::Lambda
     #     statement_id: "xaccount"
     #   }
     #   options = {}
-    #   output = client.remove_layer_version_permission(params, options)
-    #   output.to_h #=>
+    #   response = client.remove_layer_version_permission(params, options)
+    #   response.to_h #=>
     #   {}
     # @example Request syntax with placeholder values
     #   params = {
@@ -5279,14 +5279,14 @@ module Aws::Lambda
     #     revision_id: "String"
     #   }
     #   options = {}
-    #   output = client.remove_layer_version_permission(params, options)
+    #   response = client.remove_layer_version_permission(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {}
     # @return [Smithy::Schema::EmptyStructure]
     def remove_layer_version_permission(params = {}, options = {})
-      input = build_input(:remove_layer_version_permission, params)
-      input.send_input(options)
+      request = build_request(:remove_layer_version_permission, params)
+      request.send_request(options)
     end
 
     # <p>Revokes function-use permission from an Amazon Web Services service or another Amazon Web Services account. You
@@ -5328,8 +5328,8 @@ module Aws::Lambda
     #     qualifier: "PROD"
     #   }
     #   options = {}
-    #   output = client.remove_permission(params, options)
-    #   output.to_h #=>
+    #   response = client.remove_permission(params, options)
+    #   response.to_h #=>
     #   {}
     # @example Request syntax with placeholder values
     #   params = {
@@ -5339,14 +5339,14 @@ module Aws::Lambda
     #     revision_id: "String"
     #   }
     #   options = {}
-    #   output = client.remove_permission(params, options)
+    #   response = client.remove_permission(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {}
     # @return [Smithy::Schema::EmptyStructure]
     def remove_permission(params = {}, options = {})
-      input = build_input(:remove_permission, params)
-      input.send_input(options)
+      request = build_request(:remove_permission, params)
+      request.send_request(options)
     end
 
     # <p>Adds <a href="https://docs.aws.amazon.com/lambda/latest/dg/tagging.html">tags</a> to a function, event source mapping, or code signing configuration.</p>
@@ -5364,8 +5364,8 @@ module Aws::Lambda
     #     }
     #   }
     #   options = {}
-    #   output = client.tag_resource(params, options)
-    #   output.to_h #=>
+    #   response = client.tag_resource(params, options)
+    #   response.to_h #=>
     #   {}
     # @example Request syntax with placeholder values
     #   params = {
@@ -5375,14 +5375,14 @@ module Aws::Lambda
     #     }
     #   }
     #   options = {}
-    #   output = client.tag_resource(params, options)
+    #   response = client.tag_resource(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {}
     # @return [Smithy::Schema::EmptyStructure]
     def tag_resource(params = {}, options = {})
-      input = build_input(:tag_resource, params)
-      input.send_input(options)
+      request = build_request(:tag_resource, params)
+      request.send_request(options)
     end
 
     # <p>Removes <a href="https://docs.aws.amazon.com/lambda/latest/dg/tagging.html">tags</a> from a function, event source mapping, or code signing configuration.</p>
@@ -5400,8 +5400,8 @@ module Aws::Lambda
     #     ]
     #   }
     #   options = {}
-    #   output = client.untag_resource(params, options)
-    #   output.to_h #=>
+    #   response = client.untag_resource(params, options)
+    #   response.to_h #=>
     #   {}
     # @example Request syntax with placeholder values
     #   params = {
@@ -5409,14 +5409,14 @@ module Aws::Lambda
     #     tag_keys: ["TagKey"], # required
     #   }
     #   options = {}
-    #   output = client.untag_resource(params, options)
+    #   response = client.untag_resource(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {}
     # @return [Smithy::Schema::EmptyStructure]
     def untag_resource(params = {}, options = {})
-      input = build_input(:untag_resource, params)
-      input.send_input(options)
+      request = build_request(:untag_resource, params)
+      request.send_request(options)
     end
 
     # <p>Updates the configuration of a Lambda function <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html">alias</a>.</p>
@@ -5467,8 +5467,8 @@ module Aws::Lambda
     #     }
     #   }
     #   options = {}
-    #   output = client.update_alias(params, options)
-    #   output.to_h #=>
+    #   response = client.update_alias(params, options)
+    #   response.to_h #=>
     #   {
     #     function_version: "2",
     #     name: "BLUE",
@@ -5495,9 +5495,9 @@ module Aws::Lambda
     #     revision_id: "String"
     #   }
     #   options = {}
-    #   output = client.update_alias(params, options)
+    #   response = client.update_alias(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     alias_arn: "FunctionArn",
     #     name: "Alias",
@@ -5512,8 +5512,8 @@ module Aws::Lambda
     #   }
     # @return [Types::UpdateAliasOutput]
     def update_alias(params = {}, options = {})
-      input = build_input(:update_alias, params)
-      input.send_input(options)
+      request = build_request(:update_alias, params)
+      request.send_request(options)
     end
 
     # <p>Update the code signing configuration. Changes to the code signing configuration take effect the next time a
@@ -5539,9 +5539,9 @@ module Aws::Lambda
     #     }
     #   }
     #   options = {}
-    #   output = client.update_code_signing_config(params, options)
+    #   response = client.update_code_signing_config(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     code_signing_config: { # required
     #       code_signing_config_id: "CodeSigningConfigId", # required
@@ -5558,8 +5558,8 @@ module Aws::Lambda
     #   }
     # @return [Types::UpdateCodeSigningConfigResponse]
     def update_code_signing_config(params = {}, options = {})
-      input = build_input(:update_code_signing_config, params)
-      input.send_input(options)
+      request = build_request(:update_code_signing_config, params)
+      request.send_request(options)
     end
 
     # <p>Updates an event source mapping. You can change the function that Lambda invokes, or pause
@@ -5839,9 +5839,9 @@ module Aws::Lambda
     #     }
     #   }
     #   options = {}
-    #   output = client.update_event_source_mapping(params, options)
+    #   response = client.update_event_source_mapping(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     uuid: "String",
     #     starting_position: "TRIM_HORIZON" # One of: ["TRIM_HORIZON", "LATEST", "AT_TIMESTAMP"],
@@ -5918,8 +5918,8 @@ module Aws::Lambda
     #   }
     # @return [Types::UpdateEventSourceMappingOutput]
     def update_event_source_mapping(params = {}, options = {})
-      input = build_input(:update_event_source_mapping, params)
-      input.send_input(options)
+      request = build_request(:update_event_source_mapping, params)
+      request.send_request(options)
     end
 
     # <p>Updates a Lambda function's code. If code signing is enabled for the function, the code package
@@ -5996,8 +5996,8 @@ module Aws::Lambda
     #     s3_key: "function.zip"
     #   }
     #   options = {}
-    #   output = client.update_function_code(params, options)
-    #   output.to_h #=>
+    #   response = client.update_function_code(params, options)
+    #   response.to_h #=>
     #   {
     #     tracing_config: {
     #       mode: PassThrough
@@ -6031,9 +6031,9 @@ module Aws::Lambda
     #     source_kms_key_arn: "KMSKeyArn"
     #   }
     #   options = {}
-    #   output = client.update_function_code(params, options)
+    #   response = client.update_function_code(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     function_name: "NamespacedFunctionName",
     #     function_arn: "NameSpacedFunctionArn",
@@ -6129,8 +6129,8 @@ module Aws::Lambda
     #   }
     # @return [Types::UpdateFunctionCodeOutput]
     def update_function_code(params = {}, options = {})
-      input = build_input(:update_function_code, params)
-      input.send_input(options)
+      request = build_request(:update_function_code, params)
+      request.send_request(options)
     end
 
     # <p>Modify the version-specific settings of a Lambda function.</p>
@@ -6247,8 +6247,8 @@ module Aws::Lambda
     #     memory_size: 256
     #   }
     #   options = {}
-    #   output = client.update_function_configuration(params, options)
-    #   output.to_h #=>
+    #   response = client.update_function_configuration(params, options)
+    #   response.to_h #=>
     #   {
     #     tracing_config: {
     #       mode: PassThrough
@@ -6320,9 +6320,9 @@ module Aws::Lambda
     #     }
     #   }
     #   options = {}
-    #   output = client.update_function_configuration(params, options)
+    #   response = client.update_function_configuration(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     function_name: "NamespacedFunctionName",
     #     function_arn: "NameSpacedFunctionArn",
@@ -6418,8 +6418,8 @@ module Aws::Lambda
     #   }
     # @return [Types::UpdateFunctionConfigurationOutput]
     def update_function_configuration(params = {}, options = {})
-      input = build_input(:update_function_configuration, params)
-      input.send_input(options)
+      request = build_request(:update_function_configuration, params)
+      request.send_request(options)
     end
 
     # <p>Updates the configuration for asynchronous invocation for a function, version, or alias.</p>
@@ -6493,8 +6493,8 @@ module Aws::Lambda
     #     }
     #   }
     #   options = {}
-    #   output = client.update_function_event_invoke_config(params, options)
-    #   output.to_h #=>
+    #   response = client.update_function_event_invoke_config(params, options)
+    #   response.to_h #=>
     #   {
     #     last_modified: Time.parse(1573687896.493),
     #     function_arn: "arn:aws:lambda:us-east-2:123456789012:function:my-function:$LATEST",
@@ -6524,9 +6524,9 @@ module Aws::Lambda
     #     }
     #   }
     #   options = {}
-    #   output = client.update_function_event_invoke_config(params, options)
+    #   response = client.update_function_event_invoke_config(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     last_modified: Time.now,
     #     function_arn: "FunctionArn",
@@ -6543,8 +6543,8 @@ module Aws::Lambda
     #   }
     # @return [Types::UpdateFunctionEventInvokeConfigOutput]
     def update_function_event_invoke_config(params = {}, options = {})
-      input = build_input(:update_function_event_invoke_config, params)
-      input.send_input(options)
+      request = build_request(:update_function_event_invoke_config, params)
+      request.send_request(options)
     end
 
     # <p>Updates the configuration for a Lambda function URL.</p>
@@ -6609,9 +6609,9 @@ module Aws::Lambda
     #     invoke_mode: "BUFFERED" # One of: ["BUFFERED", "RESPONSE_STREAM"]
     #   }
     #   options = {}
-    #   output = client.update_function_url_config(params, options)
+    #   response = client.update_function_url_config(params, options)
     # @example Response structure with placeholder values
-    #   output.to_h #=>
+    #   response.to_h #=>
     #   {
     #     function_url: "FunctionUrl", # required
     #     function_arn: "FunctionArn", # required
@@ -6630,8 +6630,8 @@ module Aws::Lambda
     #   }
     # @return [Types::UpdateFunctionUrlConfigResponse]
     def update_function_url_config(params = {}, options = {})
-      input = build_input(:update_function_url_config, params)
-      input.send_input(options)
+      request = build_request(:update_function_url_config, params)
+      request.send_request(options)
     end
 
     # Polls an API operation until a resource enters a desired state.
@@ -6699,21 +6699,22 @@ module Aws::Lambda
       waiter(waiter_name, options).wait(params)
     end
 
-    private
-
-    def build_input(operation_name, params)
+    # @api private
+    def build_request(operation_name, params)
       handlers = @handlers.for(operation_name)
       context = Smithy::Client::HandlerContext.new(
         operation_name: operation_name,
         operation: config.service.operation(operation_name),
         client: self,
-        params: params,
         config: config,
+        params: params
       )
       context[:gem_name] = 'aws-sdk-lambda'
       context[:gem_version] = '2.0.0.pre0'
-      Smithy::Client::Input.new(handlers: handlers, context: context)
+      Smithy::Client::Request.new(handlers: handlers, context: context)
     end
+
+    private
 
     def waiters
       {
