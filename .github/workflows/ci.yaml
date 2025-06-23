@@ -40,7 +40,7 @@ jobs:
           bundle install
 
       - name: Build SDK
-        run: build aws-sdk-lambda
+        run: bundle exec rake build:aws-sdk-lambda
 
       - name: Test
         env:
