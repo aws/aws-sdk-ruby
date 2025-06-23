@@ -8,6 +8,21 @@ task 'build:aws-sdk-lambda' do
   AwsSdkCodeGenerator.generate_aws_sdk_lambda
 end
 
+desc 'execute every spec file'
+task 'test:spec' do
+  failures = []
+  Dir.glob('**/spec/**/*_spec.rb').each do |spec_file|
+    sh("bundle exec rspec #{spec_file}") do |ok, _|
+      failures << spec_file unless ok
+    end
+  end
+  msg = "One or more spec files had failures:\n\n"
+  failures.each do |path|
+    msg += "bundle exec rspec #{path}\n"
+  end
+  abort(msg) unless failures.empty?
+end
+
 # TODO: generalize all of this
 task 'spec:protocol_tests' => %w[
   spec:protocol_tests:restJson1

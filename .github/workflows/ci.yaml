@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - version-4
+
+  pull_request:
+    branches:
+      - version-4
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Only one version for now
+        ruby: [3.4]
+        env: [KITCHEN_SINK, CRT]
+
+    steps:
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+
+      - uses: actions/checkout@v4
+
+      - name: Setup ENV
+        run: |
+          echo "${{ matrix.env }}=1" >> $GITHUB_ENV
+
+      - name: Install gems
+        run: |
+          bundle config set --local with 'build test'
+          bundle install
+
+      - name: Build SDK
+        run: build aws-sdk-lambda
+
+      - name: Test
+        env:
+          JRUBY_OPTS: -J-Xmx4g
+        run: bundle exec rake test:spec
