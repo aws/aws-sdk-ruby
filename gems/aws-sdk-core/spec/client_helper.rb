@@ -2,7 +2,7 @@
 
 require 'smithy'
 
-module ApiHelper
+module ClientHelper
   class << self
     def sample_shapes
       {

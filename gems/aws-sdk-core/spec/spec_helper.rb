@@ -29,11 +29,9 @@ def mock_env(mock_env = {})
 end
 
 def mock_shared_config(config_contents = '', credentials_contents = '')
-  puts 'Parsing mock config'
   parsed_config = Aws::Core::ConfigFileParser.new(
     config_contents
   ).parse
-  puts 'Parsing mock credentials'
   parsed_credentials = Aws::Core::ConfigFileParser.new(
     credentials_contents
   ).parse
