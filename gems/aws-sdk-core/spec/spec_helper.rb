@@ -8,26 +8,6 @@ require 'rspec'
 require 'smithy-client'
 require 'webmock/rspec'
 
-# Use in a context block to set the ENV for the duration of a test.
-def let_env(mock_env = {})
-  before do
-    mock_env(mock_env)
-  end
-end
-
-# Use in an example block to set the ENV for the duration of a test.
-def mock_env(mock_env = {})
-  allow(ENV).to receive(:[]).and_call_original
-  allow(ENV).to receive(:fetch).and_call_original
-  mock_env.each_pair do |k, v|
-    allow(ENV).to receive(:[]).with(k).and_return(v)
-    allow(ENV).to receive(:fetch).with(k).and_return(v)
-    allow(ENV).to receive(:fetch).with(k, anything) do |_, default|
-      v || default
-    end
-  end
-end
-
 def mock_shared_config(config_contents = '', credentials_contents = '')
   parsed_config = Aws::Core::ConfigFileParser.new(
     config_contents
@@ -56,9 +36,6 @@ end
 
 RSpec.configure do |config|
   config.before(:each) do
-    # Clear current ENV to avoid loading credentials
-    ENV.keep_if { |k, _| k == 'PATH' }
-
     # Default all shared config to be empty
     mock_shared_config
   end
