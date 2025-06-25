@@ -28,6 +28,7 @@ module Aws::Lambda
       ?http_ssl_timeout: Numeric,
       ?http_verify_mode: Integer,
       ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
       ?log_level: Symbol,
       ?logger: Logger,
       ?protocol: String | Class,

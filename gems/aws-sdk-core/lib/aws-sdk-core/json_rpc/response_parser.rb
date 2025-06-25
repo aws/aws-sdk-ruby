@@ -9,8 +9,8 @@ module Aws
           @codec = Smithy::JSON::Codec.new(options)
         end
 
-        def parse_error(output)
-          context = output.context
+        def parse_error(response)
+          context = response.context
           return unless (300..599).cover?(context.http_response.status_code)
 
           body = context.http_response.body.read
@@ -18,9 +18,9 @@ module Aws
           build_error(context, code, message, data)
         end
 
-        def parse_data(output)
-          output_shape = output.context.operation.output
-          @codec.deserialize(output_shape, output.context.http_response.body.read)
+        def parse_data(response)
+          output_shape = response.context.operation.output
+          @codec.deserialize(output_shape, response.context.http_response.body.read)
         end
 
         private
