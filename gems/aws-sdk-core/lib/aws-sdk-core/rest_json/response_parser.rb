@@ -13,8 +13,8 @@ module Aws
           @codec = Smithy::JSON::Codec.new(options)
         end
 
-        def parse_error(output)
-          context = output.context
+        def parse_error(response)
+          context = response.context
           return unless (300..599).cover?(context.http_response.status_code)
 
           body = context.http_response.body.read
@@ -22,18 +22,18 @@ module Aws
           build_error(context, code, message, data)
         end
 
-        def parse_data(output)
-          output_shape = output.context.operation.output
-          output.data =
-            if output_shape.shape == Smithy::Schema::Shapes::Prelude::Unit
+        def parse_data(response)
+          output = response.context.operation.output
+          response.data =
+            if output.shape == Smithy::Schema::Shapes::Prelude::Unit
               Smithy::Schema::EmptyStructure.new
             else
-              output_shape.shape.type.new
+              output.shape.type.new
             end
-          Rest::Response::StatusCode.new(output_shape).apply(output.context.http_response, output.data)
-          Rest::Response::Headers.new(output_shape).apply(output.context.http_response, output.data)
-          Rest::Response::Body.new(@codec, output_shape).apply(output.context.http_response.body, output.data)
-          output.data # TODO: don't rely on a return value?
+          Rest::Response::StatusCode.new(output).apply(response.context.http_response, response)
+          Rest::Response::Headers.new(output).apply(response.context.http_response, response)
+          Rest::Response::Body.new(@codec, output).apply(response.context.http_response.body, response)
+          response.data # TODO: don't rely on a return value?
         end
 
         private

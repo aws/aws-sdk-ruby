@@ -10,30 +10,30 @@ module Aws
         end
 
         def stub_data(_service, operation, data)
-          resp = Smithy::Client::HTTP::Response.new
-          resp.status_code = 200
-          resp.headers['X-Amzn-RequestId'] = 'stubbed-request-id'
-          apply_status_code(resp, operation, data)
-          apply_headers(resp, operation, data)
-          apply_body(resp, operation, data)
+          http_resp = Smithy::Client::HTTP::Response.new
+          http_resp.status_code = 200
+          http_resp.headers['X-Amzn-RequestId'] = 'stubbed-request-id'
+          apply_status_code(http_resp, operation, data)
+          apply_headers(http_resp, operation, data)
+          apply_body(http_resp, operation, data)
 
-          resp.headers['Smithy-Protocol'] = 'rpc-v2-cbor'
-          resp.headers['Content-Type'] = 'application/cbor'
-          resp.body = @codec.serialize(operation.output, data)
-          resp
+          http_resp.headers['Smithy-Protocol'] = 'rpc-v2-cbor'
+          http_resp.headers['Content-Type'] = 'application/cbor'
+          http_resp.body = @codec.serialize(operation.output, data)
+          http_resp
         end
 
         def stub_error(_service, error_code)
-          resp = Smithy::Client::HTTP::Response.new
-          resp.status_code = 400
-          resp.headers['Content-Type'] = 'application/json'
-          resp.body = <<~JSON.strip
+          http_resp = Smithy::Client::HTTP::Response.new
+          http_resp.status_code = 400
+          http_resp.headers['Content-Type'] = 'application/json'
+          http_resp.body = <<~JSON.strip
             {
               "code": #{error_code.inspect},
               "message": "stubbed-error-message"
             }
           JSON
-          resp
+          http_resp
         end
 
         private

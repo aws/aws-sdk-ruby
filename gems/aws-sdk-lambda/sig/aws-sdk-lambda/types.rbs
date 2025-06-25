@@ -165,6 +165,20 @@ module Aws::Lambda
       attr_accessor consumer_group_id: String?
     end
 
+    module ApplicationLogLevel
+      Trace: String
+      Debug: String
+      Info: String
+      Warn: String
+      Error: String
+      Fatal: String
+    end
+
+    module Architecture
+      x86_64: String
+      arm64: String
+    end
+
     class CodeSigningConfig
       include Smithy::Schema::Structure
 
@@ -208,6 +222,11 @@ module Aws::Lambda
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor untrusted_artifact_on_deployment: String?
+    end
+
+    module CodeSigningPolicy
+      Warn: String
+      Enforce: String
     end
 
     class CodeStorageExceededException
@@ -999,6 +1018,10 @@ module Aws::Lambda
       attr_accessor message: String?
     end
 
+    module EndPointType
+      KAFKA_BOOTSTRAP_SERVERS: String
+    end
+
     class Environment
       include Smithy::Schema::Structure
 
@@ -1120,6 +1143,10 @@ module Aws::Lambda
       attr_accessor provisioned_poller_config: Types::ProvisionedPollerConfig?
     end
 
+    module EventSourceMappingMetric
+      EventCount: String
+    end
+
     class EventSourceMappingMetricsConfig
       include Smithy::Schema::Structure
 
@@ -1129,6 +1156,12 @@ module Aws::Lambda
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor metrics: Array[String]?
+    end
+
+    module EventSourcePosition
+      TRIM_HORIZON: String
+      LATEST: String
+      AT_TIMESTAMP: String
     end
 
     class FileSystemConfig
@@ -1177,6 +1210,11 @@ module Aws::Lambda
 
       attr_accessor error_code: String?
       attr_accessor message: String?
+    end
+
+    module FullDocument
+      UpdateLookup: String
+      Default: String
     end
 
     class FunctionCode
@@ -1319,6 +1357,15 @@ module Aws::Lambda
       attr_accessor destination_config: Types::DestinationConfig?
     end
 
+    module FunctionResponseType
+      ReportBatchItemFailures: String
+    end
+
+    module FunctionUrlAuthType
+      NONE: String
+      AWS_IAM: String
+    end
+
     class FunctionUrlConfig
       include Smithy::Schema::Structure
 
@@ -1340,6 +1387,10 @@ module Aws::Lambda
       attr_accessor cors: Types::Cors?
       attr_accessor auth_type: String?
       attr_accessor invoke_mode: String?
+    end
+
+    module FunctionVersion
+      ALL: String
     end
 
     class GetAccountSettingsRequest
@@ -2130,6 +2181,12 @@ module Aws::Lambda
       attr_accessor executed_version: String?
     end
 
+    module InvocationType
+      Event: String
+      RequestResponse: String
+      DryRun: String
+    end
+
     class InvokeAsyncRequest
       include Smithy::Schema::Structure
 
@@ -2152,6 +2209,11 @@ module Aws::Lambda
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor status: Integer?
+    end
+
+    module InvokeMode
+      BUFFERED: String
+      RESPONSE_STREAM: String
     end
 
     class InvokeResponseStreamUpdate
@@ -2218,16 +2280,23 @@ module Aws::Lambda
       attr_accessor response_stream_content_type: String?
     end
 
-    class InvokeWithResponseStreamResponseEvent < Smithy::Schema::Union
+    class InvokeWithResponseStreamResponseEvent
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?payload_chunk: Types::InvokeResponseStreamUpdate,
+        ?invoke_complete: Types::InvokeWithResponseStreamCompleteEvent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payload_chunk: Types::InvokeResponseStreamUpdate?
+      attr_accessor invoke_complete: Types::InvokeWithResponseStreamCompleteEvent?
 
       class PayloadChunk < InvokeWithResponseStreamResponseEvent
       end
-
       class InvokeComplete < InvokeWithResponseStreamResponseEvent
       end
-
       class Unknown < InvokeWithResponseStreamResponseEvent
-        def initialize: (name: String?, value: untyped?) -> void
       end
     end
 
@@ -2281,6 +2350,36 @@ module Aws::Lambda
 
       attr_accessor type: String?
       attr_accessor message: String?
+    end
+
+    module LastUpdateStatus
+      Successful: String
+      Failed: String
+      InProgress: String
+    end
+
+    module LastUpdateStatusReasonCode
+      EniLimitExceeded: String
+      InsufficientRolePermissions: String
+      InvalidConfiguration: String
+      InternalError: String
+      SubnetOutOfIPAddresses: String
+      InvalidSubnet: String
+      InvalidSecurityGroup: String
+      ImageDeleted: String
+      ImageAccessDenied: String
+      InvalidImage: String
+      KMSKeyAccessDenied: String
+      KMSKeyNotFound: String
+      InvalidStateKMSKey: String
+      DisabledKMSKey: String
+      EFSIOError: String
+      EFSMountConnectivityError: String
+      EFSMountFailure: String
+      EFSMountTimeout: String
+      InvalidRuntime: String
+      InvalidZipFileException: String
+      FunctionError: String
     end
 
     class Layer
@@ -2714,6 +2813,16 @@ module Aws::Lambda
       attr_accessor versions: Array[Types::FunctionConfiguration]?
     end
 
+    module LogFormat
+      Json: String
+      Text: String
+    end
+
+    module LogType
+      None: String
+      Tail: String
+    end
+
     class LoggingConfig
       include Smithy::Schema::Structure
 
@@ -2751,6 +2860,11 @@ module Aws::Lambda
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor destination: String?
+    end
+
+    module PackageType
+      Zip: String
+      Image: String
     end
 
     class PolicyLengthExceededException
@@ -2813,6 +2927,12 @@ module Aws::Lambda
 
       attr_accessor type: String?
       attr_accessor message: String?
+    end
+
+    module ProvisionedConcurrencyStatusEnum
+      IN_PROGRESS: String
+      READY: String
+      FAILED: String
     end
 
     class ProvisionedPollerConfig
@@ -3167,6 +3287,11 @@ module Aws::Lambda
       attr_accessor message: String?
     end
 
+    module RecursiveLoop
+      Allow: String
+      Terminate: String
+    end
+
     class RemoveLayerVersionPermissionRequest
       include Smithy::Schema::Structure
 
@@ -3266,6 +3391,55 @@ module Aws::Lambda
       attr_accessor message: String?
     end
 
+    module ResponseStreamingInvocationType
+      RequestResponse: String
+      DryRun: String
+    end
+
+    module Runtime
+      nodejs: String
+      nodejs43: String
+      nodejs610: String
+      nodejs810: String
+      nodejs10x: String
+      nodejs12x: String
+      nodejs14x: String
+      nodejs16x: String
+      java8: String
+      java8al2: String
+      java11: String
+      python27: String
+      python36: String
+      python37: String
+      python38: String
+      python39: String
+      dotnetcore10: String
+      dotnetcore20: String
+      dotnetcore21: String
+      dotnetcore31: String
+      dotnet6: String
+      dotnet8: String
+      nodejs43edge: String
+      go1x: String
+      ruby25: String
+      ruby27: String
+      provided: String
+      providedal2: String
+      nodejs18x: String
+      python310: String
+      java17: String
+      ruby32: String
+      ruby33: String
+      ruby34: String
+      python311: String
+      nodejs20x: String
+      providedal2023: String
+      python312: String
+      java21: String
+      python313: String
+      nodejs22x: String
+    end
+
     class RuntimeVersionConfig
       include Smithy::Schema::Structure
 
@@ -3349,6 +3523,11 @@ module Aws::Lambda
       attr_accessor apply_on: String?
     end
 
+    module SnapStartApplyOn
+      PublishedVersions: String
+      None: String
+    end
+
     class SnapStartException
       include Smithy::Schema::Structure
 
@@ -3373,6 +3552,11 @@ module Aws::Lambda
 
       attr_accessor type: String?
       attr_accessor message: String?
+    end
+
+    module SnapStartOptimizationStatus
+      On: String
+      Off: String
     end
 
     class SnapStartResponse
@@ -3414,6 +3598,51 @@ module Aws::Lambda
       attr_accessor uri: String?
     end
 
+    module SourceAccessType
+      BASIC_AUTH: String
+      VPC_SUBNET: String
+      VPC_SECURITY_GROUP: String
+      SASL_SCRAM_512_AUTH: String
+      SASL_SCRAM_256_AUTH: String
+      VIRTUAL_HOST: String
+      CLIENT_CERTIFICATE_TLS_AUTH: String
+      SERVER_ROOT_CA_CERTIFICATE: String
+    end
+
+    module State
+      Pending: String
+      Active: String
+      Inactive: String
+      Failed: String
+    end
+
+    module StateReasonCode
+      Idle: String
+      Creating: String
+      Restoring: String
+      EniLimitExceeded: String
+      InsufficientRolePermissions: String
+      InvalidConfiguration: String
+      InternalError: String
+      SubnetOutOfIPAddresses: String
+      InvalidSubnet: String
+      InvalidSecurityGroup: String
+      ImageDeleted: String
+      ImageAccessDenied: String
+      InvalidImage: String
+      KMSKeyAccessDenied: String
+      KMSKeyNotFound: String
+      InvalidStateKMSKey: String
+      DisabledKMSKey: String
+      EFSIOError: String
+      EFSMountConnectivityError: String
+      EFSMountFailure: String
+      EFSMountTimeout: String
+      InvalidRuntime: String
+      InvalidZipFileException: String
+      FunctionError: String
+    end
+
     class SubnetIPAddressLimitReachedException
       include Smithy::Schema::Structure
 
@@ -3425,6 +3654,12 @@ module Aws::Lambda
 
       attr_accessor type: String?
       attr_accessor message: String?
+    end
+
+    module SystemLogLevel
+      Debug: String
+      Info: String
+      Warn: String
     end
 
     class TagResourceRequest
@@ -3451,6 +3686,15 @@ module Aws::Lambda
 
       attr_accessor error_code: String?
       attr_accessor message: String?
+    end
+
+    module ThrottleReason
+      ConcurrentInvocationLimitExceeded: String
+      FunctionInvocationRateLimitExceeded: String
+      ReservedFunctionConcurrentInvocationLimitExceeded: String
+      ReservedFunctionInvocationRateLimitExceeded: String
+      CallerRateLimitExceeded: String
+      ConcurrentSnapshotCreateLimitExceeded: String
     end
 
     class TooManyRequestsException
@@ -3490,6 +3734,11 @@ module Aws::Lambda
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor mode: String?
+    end
+
+    module TracingMode
+      Active: String
+      PassThrough: String
     end
 
     class UnsupportedMediaTypeException
@@ -4026,6 +4275,12 @@ module Aws::Lambda
       attr_accessor creation_time: String?
       attr_accessor last_modified_time: String?
       attr_accessor invoke_mode: String?
+    end
+
+    module UpdateRuntimeOn
+      Auto: String
+      Manual: String
+      FunctionUpdate: String
     end
 
     class VpcConfig

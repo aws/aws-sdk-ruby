@@ -4128,31 +4128,23 @@ module Aws::Lambda
     end
 
     # <p>An object that includes a chunk of the response payload. When the stream has ended, Lambda includes a <code>InvokeComplete</code> object.</p>
-    class InvokeWithResponseStreamResponseEvent < Smithy::Schema::Union
-      # <p>A chunk of the streamed response payload.</p>
-      class PayloadChunk < InvokeWithResponseStreamResponseEvent
-        def to_h
-          { payload_chunk: super(__getobj__) }
-        end
-      end
+    # @!attribute payload_chunk
+    #   <p>A chunk of the streamed response payload.</p>
+    #   @return [Types::InvokeResponseStreamUpdate]
+    # @!attribute invoke_complete
+    #   <p>An object that's returned when the stream has ended and all the payload chunks have been
+    #         returned.</p>
+    #   @return [Types::InvokeWithResponseStreamCompleteEvent]
+    class InvokeWithResponseStreamResponseEvent < Struct.new(
+      :payload_chunk,
+      :invoke_complete,
+      :unknown,
+      keyword_init: true)
+      include Smithy::Schema::Union
 
-      # <p>An object that's returned when the stream has ended and all the payload chunks have been
-      #       returned.</p>
-      class InvokeComplete < InvokeWithResponseStreamResponseEvent
-        def to_h
-          { invoke_complete: super(__getobj__) }
-        end
-      end
-
-      class Unknown < InvokeWithResponseStreamResponseEvent
-        def initialize(name, value)
-          super({ name: name, value: value })
-        end
-
-        def to_h
-          { unknown: super(__getobj__) }
-        end
-      end
+      class PayloadChunk < InvokeWithResponseStreamResponseEvent; end
+      class InvokeComplete < InvokeWithResponseStreamResponseEvent; end
+      class Unknown < InvokeWithResponseStreamResponseEvent; end
     end
 
     # <p>Lambda couldn't decrypt the environment variables because KMS access was denied.

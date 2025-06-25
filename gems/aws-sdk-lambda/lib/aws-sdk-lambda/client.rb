@@ -135,6 +135,8 @@ module Aws::Lambda
     #  The number of seconds to wait for one block to be written (via one write(2) call).
     #  Defaults to `nil` which uses the Net::HTTP default value.
     #  See {https://docs.ruby-lang.org/en/master/Net/HTTP.html#attribute-i-write_timeout Net::HTTP#write_timeout}.
+    # @option options [Smithy::Client::LogFormatter] :log_formatter (Aws::Log::Formatter.default)
+    #  The log formatter used by the logger.
     # @option options [Symbol] :log_level (info)
     #  The log level to send messages to the logger at.
     # @option options [Logger] :logger
