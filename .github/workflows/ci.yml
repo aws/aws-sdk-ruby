@@ -1,0 +1,90 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - version-4
+
+  pull_request:
+    branches:
+      - version-4
+
+permissions:
+  contents: read
+
+jobs:
+  core-test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # TODO: Only one version for now, add more later
+        ruby: [3.4]
+
+    steps:
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+
+      - uses: actions/checkout@v4
+
+      - name: Install gems
+        run: |
+          bundle config set --local with 'build test'
+          bundle install
+
+      - name: Test
+        run: bundle exec rake test:spec:aws-sdk-core
+
+  protocol-test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Only one version for now
+        ruby: [3.4]
+
+    steps:
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+
+      - uses: actions/checkout@v4
+
+      - name: Install gems
+        run: |
+          bundle config set --local with 'build test'
+          bundle install
+
+      - name: Test
+        run: bundle exec rake spec:protocol_tests
+
+  gem-test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Only one version for now
+        ruby: [3.4]
+
+    steps:
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+
+      - uses: actions/checkout@v4
+
+      - name: Install gems
+        run: |
+          bundle config set --local with 'build test'
+          bundle install
+
+      # TODO: update this
+      - name: Build SDK
+        run: bundle exec rake build:aws-sdk-lambda
+
+      - name: Test
+        run: bundle exec rake test:spec:aws-sdk-lambda

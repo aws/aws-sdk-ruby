@@ -8,6 +8,36 @@ task 'build:aws-sdk-lambda' do
   AwsSdkCodeGenerator.generate_aws_sdk_lambda
 end
 
+desc 'Executes every spec file, one at a time.'
+task 'test:spec:each' do
+  failures = []
+  Dir.glob('**/spec/**/*_spec.rb').each do |spec_file|
+    sh("bundle exec rspec #{spec_file}") do |ok, _|
+      failures << spec_file unless ok
+    end
+  end
+  msg = "One or more spec files had failures:\n\n"
+  failures.each do |path|
+    msg += "bundle exec rspec #{path}\n"
+  end
+  abort(msg) unless failures.empty?
+end
+
+desc 'Executes specs for a single gem, e.g. test:spec:aws-sdk-s3'
+task 'test:spec:*'
+
+rule /test:spec:.+$/ do |task|
+  spec_dir = "gems/#{task.name.split(':').last}/spec"
+  sh("bundle exec rspec #{spec_dir}")
+end
+
+desc 'Execute spec tests.'
+task 'test:spec' do
+  Dir.glob('**/spec').tap do |spec_file_list|
+    sh("bundle exec rspec #{spec_file_list.join(' ')}")
+  end
+end
+
 # TODO: generalize all of this
 task 'spec:protocol_tests' => %w[
   spec:protocol_tests:restJson1
