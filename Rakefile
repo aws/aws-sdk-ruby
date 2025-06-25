@@ -38,14 +38,6 @@ task 'test:spec' do
   end
 end
 
-desc 'Execute spec tests for all gems except core'
-task 'test:spec:gems' do
-  Dir.glob('**/spec').tap do |spec_file_list|
-    spec_file_list.delete('gems/aws-sdk-core/spec')
-    sh("bundle exec rspec #{spec_file_list.join(' ')}")
-  end
-end
-
 # TODO: generalize all of this
 task 'spec:protocol_tests' => %w[
   spec:protocol_tests:restJson1

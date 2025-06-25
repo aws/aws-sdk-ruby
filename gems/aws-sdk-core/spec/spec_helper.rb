@@ -36,6 +36,8 @@ end
 
 RSpec.configure do |config|
   config.before(:each) do
+    stub_const(ENV, {})
+
     # Default all shared config to be empty
     mock_shared_config
   end
