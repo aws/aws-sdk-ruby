@@ -104,12 +104,7 @@ module Aws
       secret = %w[AWS_SECRET_ACCESS_KEY AMAZON_SECRET_ACCESS_KEY AWS_SECRET_KEY]
       token =  %w[AWS_SESSION_TOKEN AMAZON_SESSION_TOKEN]
       account_id = %w[AWS_ACCOUNT_ID]
-      creds = Credentials.new(
-        envar(key),
-        envar(secret),
-        envar(token),
-        account_id: envar(account_id)
-      )
+      creds = Credentials.new(envar(key), envar(secret), envar(token), account_id: envar(account_id))
       creds.metrics = ['CREDENTIALS_ENV_VARS']
       creds
     end
@@ -188,19 +183,20 @@ module Aws
 
     def instance_profile_credentials(options)
       profile_name = determine_profile_name(options)
-      if ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] ||
-         ENV['AWS_CONTAINER_CREDENTIALS_FULL_URI']
+      if ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] || ENV['AWS_CONTAINER_CREDENTIALS_FULL_URI']
         ECSCredentials.new(options)
-      else
+      elsif !ec2_metadata_disabled
         InstanceProfileCredentials.new(options.merge(profile: profile_name))
       end
     end
 
+    def ec2_metadata_disabled
+      value = ENV['AWS_EC2_METADATA_DISABLED'] || 'false'
+      Aws::Util.str_2_bool(value)
+    end
+
     def assume_role_with_profile(options, profile_name)
-      assume_opts = {
-        profile: profile_name,
-        chain_config: @config
-      }
+      assume_opts = { profile: profile_name, chain_config: @config }
       if options[:config] && options[:config].region
         assume_opts[:region] = options[:config].region
       end
