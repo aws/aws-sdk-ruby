@@ -83,6 +83,7 @@ module Aws
         nil
     end
 
+    # TODO: team discussion on possible removal
     def resolve_disable_v1(options)
       value = options[:disable_imds_v1] ||
               ENV['AWS_EC2_METADATA_V1_DISABLED'] ||
@@ -122,13 +123,7 @@ module Aws
       creds.nil? || !creds.set?
     end
 
-    def metadata_disabled?
-      ENV.fetch('AWS_EC2_METADATA_DISABLED', 'false').downcase == 'true'
-    end
-
     def fetch_credentials
-      return '{}' if metadata_disabled?
-
       metadata = @ec2_metadata.get(METADATA_PATH_BASE)
       profile_name = metadata.lines.first.strip
       @ec2_metadata.get(METADATA_PATH_BASE + profile_name)
@@ -142,7 +137,7 @@ module Aws
       @expiration = creds['Expiration'] ? Time.iso8601(creds['Expiration']) : nil
       return unless @expiration && @expiration < Time.now
 
-      @no_refresh_until = Time.now + refresh_offset
+      @no_refresh_until = Time.now + rand(300..360)
       warn_expired_credentials
     end
 
