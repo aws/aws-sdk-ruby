@@ -143,6 +143,12 @@ module Aws::EC2
       data[:core_network_arn]
     end
 
+    # The Amazon Resource Name (ARN) of the ODB network.
+    # @return [String]
+    def odb_network_arn
+      data[:odb_network_arn]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -314,6 +320,7 @@ module Aws::EC2
     #     local_gateway_id: "LocalGatewayId",
     #     carrier_gateway_id: "CarrierGatewayId",
     #     core_network_arn: "CoreNetworkArn",
+    #     odb_network_arn: "OdbNetworkArn",
     #     dry_run: false,
     #     gateway_id: "RouteGatewayId",
     #     destination_ipv_6_cidr_block: "String",
@@ -340,6 +347,8 @@ module Aws::EC2
     #   \[IPv4 traffic only\] The ID of a carrier gateway.
     # @option options [String] :core_network_arn
     #   The Amazon Resource Name (ARN) of the core network.
+    # @option options [String] :odb_network_arn
+    #   The Amazon Resource Name (ARN) of the ODB network.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

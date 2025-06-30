@@ -1,0 +1,426 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module WorkspacesInstances
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkspacesInstances/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateVolumeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateVolumeResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkspacesInstances/Client.html#associate_volume-instance_method
+      def associate_volume: (
+                              workspace_instance_id: ::String,
+                              volume_id: ::String,
+                              device: ::String
+                            ) -> _AssociateVolumeResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateVolumeResponseSuccess
+
+      interface _CreateVolumeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVolumeResponse]
+        def volume_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkspacesInstances/Client.html#create_volume-instance_method
+      def create_volume: (
+                           availability_zone: ::String,
+                           ?client_token: ::String,
+                           ?encrypted: bool,
+                           ?iops: ::Integer,
+                           ?kms_key_id: ::String,
+                           ?size_in_gb: ::Integer,
+                           ?snapshot_id: ::String,
+                           ?tag_specifications: Array[
+                             {
+                               resource_type: ("instance" | "volume" | "spot-instances-request" | "network-interface")?,
+                               tags: Array[
+                                 {
+                                   key: ::String?,
+                                   value: ::String?
+                                 },
+                               ]?
+                             },
+                           ],
+                           ?throughput: ::Integer,
+                           ?volume_type: ("standard" | "io1" | "io2" | "gp2" | "sc1" | "st1" | "gp3")
+                         ) -> _CreateVolumeResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVolumeResponseSuccess
+
+      interface _CreateWorkspaceInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkspaceInstanceResponse]
+        def workspace_instance_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkspacesInstances/Client.html#create_workspace_instance-instance_method
+      def create_workspace_instance: (
+                                       ?client_token: ::String,
+                                       ?tags: Array[
+                                         {
+                                           key: ::String?,
+                                           value: ::String?
+                                         },
+                                       ],
+                                       managed_instance: {
+                                         block_device_mappings: Array[
+                                           {
+                                             device_name: ::String?,
+                                             ebs: {
+                                               volume_type: ("standard" | "io1" | "io2" | "gp2" | "sc1" | "st1" | "gp3")?,
+                                               encrypted: bool?,
+                                               kms_key_id: ::String?,
+                                               iops: ::Integer?,
+                                               throughput: ::Integer?,
+                                               volume_size: ::Integer?
+                                             }?,
+                                             no_device: ::String?,
+                                             virtual_name: ::String?
+                                           },
+                                         ]?,
+                                         capacity_reservation_specification: {
+                                           capacity_reservation_preference: ("capacity-reservations-only" | "open" | "none")?,
+                                           capacity_reservation_target: {
+                                             capacity_reservation_id: ::String?,
+                                             capacity_reservation_resource_group_arn: ::String?
+                                           }?
+                                         }?,
+                                         cpu_options: {
+                                           amd_sev_snp: ("enabled" | "disabled")?,
+                                           core_count: ::Integer?,
+                                           threads_per_core: ::Integer?
+                                         }?,
+                                         credit_specification: {
+                                           cpu_credits: ("standard" | "unlimited")?
+                                         }?,
+                                         disable_api_stop: bool?,
+                                         ebs_optimized: bool?,
+                                         enable_primary_ipv_6: bool?,
+                                         enclave_options: {
+                                           enabled: bool?
+                                         }?,
+                                         hibernation_options: {
+                                           configured: bool?
+                                         }?,
+                                         iam_instance_profile: {
+                                           arn: ::String?,
+                                           name: ::String?
+                                         }?,
+                                         image_id: ::String?,
+                                         instance_market_options: {
+                                           market_type: ("spot" | "capacity-block")?,
+                                           spot_options: {
+                                             block_duration_minutes: ::Integer?,
+                                             instance_interruption_behavior: ("hibernate" | "stop")?,
+                                             max_price: ::String?,
+                                             spot_instance_type: ("one-time" | "persistent")?,
+                                             valid_until_utc: ::Time?
+                                           }?
+                                         }?,
+                                         instance_type: ::String?,
+                                         ipv_6_addresses: Array[
+                                           {
+                                             ipv_6_address: ::String?,
+                                             is_primary_ipv_6: bool?
+                                           },
+                                         ]?,
+                                         ipv_6_address_count: ::Integer?,
+                                         kernel_id: ::String?,
+                                         key_name: ::String?,
+                                         license_specifications: Array[
+                                           {
+                                             license_configuration_arn: ::String?
+                                           },
+                                         ]?,
+                                         maintenance_options: {
+                                           auto_recovery: ("disabled" | "default")?
+                                         }?,
+                                         metadata_options: {
+                                           http_endpoint: ("enabled" | "disabled")?,
+                                           http_protocol_ipv_6: ("enabled" | "disabled")?,
+                                           http_put_response_hop_limit: ::Integer?,
+                                           http_tokens: ("optional" | "required")?,
+                                           instance_metadata_tags: ("enabled" | "disabled")?
+                                         }?,
+                                         monitoring: {
+                                           enabled: bool?
+                                         }?,
+                                         network_interfaces: Array[
+                                           {
+                                             associate_carrier_ip_address: bool?,
+                                             associate_public_ip_address: bool?,
+                                             connection_tracking_specification: {
+                                               tcp_established_timeout: ::Integer?,
+                                               udp_stream_timeout: ::Integer?,
+                                               udp_timeout: ::Integer?
+                                             }?,
+                                             description: ::String?,
+                                             device_index: ::Integer?,
+                                             ena_srd_specification: {
+                                               ena_srd_enabled: bool?,
+                                               ena_srd_udp_specification: {
+                                                 ena_srd_udp_enabled: bool?
+                                               }?
+                                             }?,
+                                             interface_type: ("interface" | "efa" | "efa-only")?,
+                                             ipv_4_prefixes: Array[
+                                               {
+                                                 ipv_4_prefix: ::String?
+                                               },
+                                             ]?,
+                                             ipv_4_prefix_count: ::Integer?,
+                                             ipv_6_address_count: ::Integer?,
+                                             ipv_6_addresses: Array[
+                                               {
+                                                 ipv_6_address: ::String?,
+                                                 is_primary_ipv_6: bool?
+                                               },
+                                             ]?,
+                                             ipv_6_prefixes: Array[
+                                               {
+                                                 ipv_6_prefix: ::String?
+                                               },
+                                             ]?,
+                                             ipv_6_prefix_count: ::Integer?,
+                                             network_card_index: ::Integer?,
+                                             network_interface_id: ::String?,
+                                             primary_ipv_6: bool?,
+                                             private_ip_address: ::String?,
+                                             private_ip_addresses: Array[
+                                               {
+                                                 primary: bool?,
+                                                 private_ip_address: ::String?
+                                               },
+                                             ]?,
+                                             secondary_private_ip_address_count: ::Integer?,
+                                             groups: Array[::String]?,
+                                             subnet_id: ::String?
+                                           },
+                                         ]?,
+                                         network_performance_options: {
+                                           bandwidth_weighting: ("default" | "vpc-1" | "ebs-1")?
+                                         }?,
+                                         placement: {
+                                           affinity: ::String?,
+                                           availability_zone: ::String?,
+                                           group_id: ::String?,
+                                           group_name: ::String?,
+                                           host_id: ::String?,
+                                           host_resource_group_arn: ::String?,
+                                           partition_number: ::Integer?,
+                                           tenancy: ("default" | "dedicated" | "host")?
+                                         }?,
+                                         private_dns_name_options: {
+                                           hostname_type: ("ip-name" | "resource-name")?,
+                                           enable_resource_name_dns_a_record: bool?,
+                                           enable_resource_name_dns_aaaa_record: bool?
+                                         }?,
+                                         private_ip_address: ::String?,
+                                         ramdisk_id: ::String?,
+                                         security_group_ids: Array[::String]?,
+                                         security_groups: Array[::String]?,
+                                         subnet_id: ::String?,
+                                         tag_specifications: Array[
+                                           {
+                                             resource_type: ("instance" | "volume" | "spot-instances-request" | "network-interface")?,
+                                             tags: Array[
+                                               {
+                                                 key: ::String?,
+                                                 value: ::String?
+                                               },
+                                             ]?
+                                           },
+                                         ]?,
+                                         user_data: ::String?
+                                       }
+                                     ) -> _CreateWorkspaceInstanceResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkspaceInstanceResponseSuccess
+
+      interface _DeleteVolumeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVolumeResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkspacesInstances/Client.html#delete_volume-instance_method
+      def delete_volume: (
+                           volume_id: ::String
+                         ) -> _DeleteVolumeResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVolumeResponseSuccess
+
+      interface _DeleteWorkspaceInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWorkspaceInstanceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkspacesInstances/Client.html#delete_workspace_instance-instance_method
+      def delete_workspace_instance: (
+                                       workspace_instance_id: ::String
+                                     ) -> _DeleteWorkspaceInstanceResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWorkspaceInstanceResponseSuccess
+
+      interface _DisassociateVolumeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateVolumeResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkspacesInstances/Client.html#disassociate_volume-instance_method
+      def disassociate_volume: (
+                                 workspace_instance_id: ::String,
+                                 volume_id: ::String,
+                                 ?device: ::String,
+                                 ?disassociate_mode: ("FORCE" | "NO_FORCE")
+                               ) -> _DisassociateVolumeResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateVolumeResponseSuccess
+
+      interface _GetWorkspaceInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkspaceInstanceResponse]
+        def workspace_instance_errors: () -> ::Array[Types::WorkspaceInstanceError]
+        def ec2_instance_errors: () -> ::Array[Types::EC2InstanceError]
+        def provision_state: () -> ("ALLOCATING" | "ALLOCATED" | "DEALLOCATING" | "DEALLOCATED" | "ERROR_ALLOCATING" | "ERROR_DEALLOCATING")
+        def workspace_instance_id: () -> ::String
+        def ec2_managed_instance: () -> Types::EC2ManagedInstance
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkspacesInstances/Client.html#get_workspace_instance-instance_method
+      def get_workspace_instance: (
+                                    workspace_instance_id: ::String
+                                  ) -> _GetWorkspaceInstanceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkspaceInstanceResponseSuccess
+
+      interface _ListInstanceTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInstanceTypesResponse]
+        def instance_types: () -> ::Array[Types::InstanceTypeInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkspacesInstances/Client.html#list_instance_types-instance_method
+      def list_instance_types: (
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _ListInstanceTypesResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInstanceTypesResponseSuccess
+
+      interface _ListRegionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRegionsResponse]
+        def regions: () -> ::Array[Types::Region]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkspacesInstances/Client.html#list_regions-instance_method
+      def list_regions: (
+                          ?max_results: ::Integer,
+                          ?next_token: ::String
+                        ) -> _ListRegionsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRegionsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkspacesInstances/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    workspace_instance_id: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListWorkspaceInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkspaceInstancesResponse]
+        def workspace_instances: () -> ::Array[Types::WorkspaceInstance]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkspacesInstances/Client.html#list_workspace_instances-instance_method
+      def list_workspace_instances: (
+                                      ?provision_states: Array[("ALLOCATING" | "ALLOCATED" | "DEALLOCATING" | "DEALLOCATED" | "ERROR_ALLOCATING" | "ERROR_DEALLOCATING")],
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListWorkspaceInstancesResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkspaceInstancesResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkspacesInstances/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          workspace_instance_id: ::String,
+                          tags: Array[
+                            {
+                              key: ::String?,
+                              value: ::String?
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkspacesInstances/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            workspace_instance_id: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+    end
+  end
+end
+

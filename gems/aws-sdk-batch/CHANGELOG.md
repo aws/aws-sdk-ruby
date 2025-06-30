@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.116.0 (2025-06-24)
+------------------
+
+* Feature - Add userdataType to LaunchTemplateSpecification and LaunchTemplateSpecificationOverride.
+
 1.115.0 (2025-06-02)
 ------------------
 

@@ -1,0 +1,230 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AIOps
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AIOps/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateInvestigationGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateInvestigationGroupOutput]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AIOps/Client.html#create_investigation_group-instance_method
+      def create_investigation_group: (
+                                        name: ::String,
+                                        role_arn: ::String,
+                                        ?encryption_configuration: {
+                                          type: ("AWS_OWNED_KEY" | "CUSTOMER_MANAGED_KMS_KEY")?,
+                                          kms_key_id: ::String?
+                                        },
+                                        ?retention_in_days: ::Integer,
+                                        ?tags: Hash[::String, ::String],
+                                        ?tag_key_boundaries: Array[::String],
+                                        ?chatbot_notification_channel: Hash[::String, Array[::String]],
+                                        ?is_cloud_trail_event_history_enabled: bool,
+                                        ?cross_account_configurations: Array[
+                                          {
+                                            source_role_arn: ::String?
+                                          },
+                                        ]
+                                      ) -> _CreateInvestigationGroupResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInvestigationGroupResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AIOps/Client.html#delete_investigation_group-instance_method
+      def delete_investigation_group: (
+                                        identifier: ::String
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteInvestigationGroupPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteInvestigationGroupPolicyOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AIOps/Client.html#delete_investigation_group_policy-instance_method
+      def delete_investigation_group_policy: (
+                                               identifier: ::String
+                                             ) -> _DeleteInvestigationGroupPolicyResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteInvestigationGroupPolicyResponseSuccess
+
+      interface _GetInvestigationGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInvestigationGroupResponse]
+        def created_by: () -> ::String
+        def created_at: () -> ::Time
+        def last_modified_by: () -> ::String
+        def last_modified_at: () -> ::Time
+        def name: () -> ::String
+        def arn: () -> ::String
+        def role_arn: () -> ::String
+        def encryption_configuration: () -> Types::EncryptionConfiguration
+        def retention_in_days: () -> ::Integer
+        def chatbot_notification_channel: () -> ::Hash[::String, ::Array[::String]]
+        def tag_key_boundaries: () -> ::Array[::String]
+        def is_cloud_trail_event_history_enabled: () -> bool
+        def cross_account_configurations: () -> ::Array[Types::CrossAccountConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AIOps/Client.html#get_investigation_group-instance_method
+      def get_investigation_group: (
+                                     identifier: ::String
+                                   ) -> _GetInvestigationGroupResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInvestigationGroupResponseSuccess
+
+      interface _GetInvestigationGroupPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInvestigationGroupPolicyResponse]
+        def investigation_group_arn: () -> ::String
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AIOps/Client.html#get_investigation_group_policy-instance_method
+      def get_investigation_group_policy: (
+                                            identifier: ::String
+                                          ) -> _GetInvestigationGroupPolicyResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInvestigationGroupPolicyResponseSuccess
+
+      interface _ListInvestigationGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInvestigationGroupsOutput]
+        def next_token: () -> ::String
+        def investigation_groups: () -> ::Array[Types::ListInvestigationGroupsModel]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AIOps/Client.html#list_investigation_groups-instance_method
+      def list_investigation_groups: (
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _ListInvestigationGroupsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInvestigationGroupsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AIOps/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutInvestigationGroupPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutInvestigationGroupPolicyResponse]
+        def investigation_group_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AIOps/Client.html#put_investigation_group_policy-instance_method
+      def put_investigation_group_policy: (
+                                            identifier: ::String,
+                                            policy: ::String
+                                          ) -> _PutInvestigationGroupPolicyResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutInvestigationGroupPolicyResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AIOps/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AIOps/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateInvestigationGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateInvestigationGroupOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AIOps/Client.html#update_investigation_group-instance_method
+      def update_investigation_group: (
+                                        identifier: ::String,
+                                        ?role_arn: ::String,
+                                        ?encryption_configuration: {
+                                          type: ("AWS_OWNED_KEY" | "CUSTOMER_MANAGED_KMS_KEY")?,
+                                          kms_key_id: ::String?
+                                        },
+                                        ?tag_key_boundaries: Array[::String],
+                                        ?chatbot_notification_channel: Hash[::String, Array[::String]],
+                                        ?is_cloud_trail_event_history_enabled: bool,
+                                        ?cross_account_configurations: Array[
+                                          {
+                                            source_role_arn: ::String?
+                                          },
+                                        ]
+                                      ) -> _UpdateInvestigationGroupResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateInvestigationGroupResponseSuccess
+    end
+  end
+end
+

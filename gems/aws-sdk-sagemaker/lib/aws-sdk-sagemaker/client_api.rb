@@ -237,6 +237,23 @@ module Aws::SageMaker
     CategoricalParameters = Shapes::ListShape.new(name: 'CategoricalParameters')
     Cents = Shapes::IntegerShape.new(name: 'Cents')
     CertifyForMarketplace = Shapes::BooleanShape.new(name: 'CertifyForMarketplace')
+    CfnCreateTemplateProvider = Shapes::StructureShape.new(name: 'CfnCreateTemplateProvider')
+    CfnStackCreateParameter = Shapes::StructureShape.new(name: 'CfnStackCreateParameter')
+    CfnStackCreateParameters = Shapes::ListShape.new(name: 'CfnStackCreateParameters')
+    CfnStackDetail = Shapes::StructureShape.new(name: 'CfnStackDetail')
+    CfnStackId = Shapes::StringShape.new(name: 'CfnStackId')
+    CfnStackName = Shapes::StringShape.new(name: 'CfnStackName')
+    CfnStackParameter = Shapes::StructureShape.new(name: 'CfnStackParameter')
+    CfnStackParameterKey = Shapes::StringShape.new(name: 'CfnStackParameterKey')
+    CfnStackParameterValue = Shapes::StringShape.new(name: 'CfnStackParameterValue')
+    CfnStackParameters = Shapes::ListShape.new(name: 'CfnStackParameters')
+    CfnStackStatusMessage = Shapes::StringShape.new(name: 'CfnStackStatusMessage')
+    CfnStackUpdateParameter = Shapes::StructureShape.new(name: 'CfnStackUpdateParameter')
+    CfnStackUpdateParameters = Shapes::ListShape.new(name: 'CfnStackUpdateParameters')
+    CfnTemplateName = Shapes::StringShape.new(name: 'CfnTemplateName')
+    CfnTemplateProviderDetail = Shapes::StructureShape.new(name: 'CfnTemplateProviderDetail')
+    CfnTemplateURL = Shapes::StringShape.new(name: 'CfnTemplateURL')
+    CfnUpdateTemplateProvider = Shapes::StructureShape.new(name: 'CfnUpdateTemplateProvider')
     Channel = Shapes::StructureShape.new(name: 'Channel')
     ChannelName = Shapes::StringShape.new(name: 'ChannelName')
     ChannelSpecification = Shapes::StructureShape.new(name: 'ChannelSpecification')
@@ -500,6 +517,8 @@ module Aws::SageMaker
     CreateSpaceResponse = Shapes::StructureShape.new(name: 'CreateSpaceResponse')
     CreateStudioLifecycleConfigRequest = Shapes::StructureShape.new(name: 'CreateStudioLifecycleConfigRequest')
     CreateStudioLifecycleConfigResponse = Shapes::StructureShape.new(name: 'CreateStudioLifecycleConfigResponse')
+    CreateTemplateProvider = Shapes::StructureShape.new(name: 'CreateTemplateProvider')
+    CreateTemplateProviderList = Shapes::ListShape.new(name: 'CreateTemplateProviderList')
     CreateTrainingJobRequest = Shapes::StructureShape.new(name: 'CreateTrainingJobRequest')
     CreateTrainingJobResponse = Shapes::StructureShape.new(name: 'CreateTrainingJobResponse')
     CreateTrainingPlanRequest = Shapes::StructureShape.new(name: 'CreateTrainingPlanRequest')
@@ -2255,6 +2274,8 @@ module Aws::SageMaker
     TaskTitle = Shapes::StringShape.new(name: 'TaskTitle')
     TemplateContent = Shapes::StringShape.new(name: 'TemplateContent')
     TemplateContentSha256 = Shapes::StringShape.new(name: 'TemplateContentSha256')
+    TemplateProviderDetail = Shapes::StructureShape.new(name: 'TemplateProviderDetail')
+    TemplateProviderDetailList = Shapes::ListShape.new(name: 'TemplateProviderDetailList')
     TemplateUrl = Shapes::StringShape.new(name: 'TemplateUrl')
     TensorBoardAppSettings = Shapes::StructureShape.new(name: 'TensorBoardAppSettings')
     TensorBoardOutputConfig = Shapes::StructureShape.new(name: 'TensorBoardOutputConfig')
@@ -2476,6 +2497,8 @@ module Aws::SageMaker
     UpdateProjectOutput = Shapes::StructureShape.new(name: 'UpdateProjectOutput')
     UpdateSpaceRequest = Shapes::StructureShape.new(name: 'UpdateSpaceRequest')
     UpdateSpaceResponse = Shapes::StructureShape.new(name: 'UpdateSpaceResponse')
+    UpdateTemplateProvider = Shapes::StructureShape.new(name: 'UpdateTemplateProvider')
+    UpdateTemplateProviderList = Shapes::ListShape.new(name: 'UpdateTemplateProviderList')
     UpdateTrainingJobRequest = Shapes::StructureShape.new(name: 'UpdateTrainingJobRequest')
     UpdateTrainingJobResponse = Shapes::StructureShape.new(name: 'UpdateTrainingJobResponse')
     UpdateTrialComponentRequest = Shapes::StructureShape.new(name: 'UpdateTrialComponentRequest')
@@ -3084,6 +3107,47 @@ module Aws::SageMaker
     CategoricalParameterRanges.member = Shapes::ShapeRef.new(shape: CategoricalParameterRange)
 
     CategoricalParameters.member = Shapes::ShapeRef.new(shape: CategoricalParameter)
+
+    CfnCreateTemplateProvider.add_member(:template_name, Shapes::ShapeRef.new(shape: CfnTemplateName, required: true, location_name: "TemplateName"))
+    CfnCreateTemplateProvider.add_member(:template_url, Shapes::ShapeRef.new(shape: CfnTemplateURL, required: true, location_name: "TemplateURL"))
+    CfnCreateTemplateProvider.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleARN"))
+    CfnCreateTemplateProvider.add_member(:parameters, Shapes::ShapeRef.new(shape: CfnStackCreateParameters, location_name: "Parameters"))
+    CfnCreateTemplateProvider.struct_class = Types::CfnCreateTemplateProvider
+
+    CfnStackCreateParameter.add_member(:key, Shapes::ShapeRef.new(shape: CfnStackParameterKey, required: true, location_name: "Key"))
+    CfnStackCreateParameter.add_member(:value, Shapes::ShapeRef.new(shape: CfnStackParameterValue, location_name: "Value"))
+    CfnStackCreateParameter.struct_class = Types::CfnStackCreateParameter
+
+    CfnStackCreateParameters.member = Shapes::ShapeRef.new(shape: CfnStackCreateParameter)
+
+    CfnStackDetail.add_member(:name, Shapes::ShapeRef.new(shape: CfnStackName, location_name: "Name"))
+    CfnStackDetail.add_member(:id, Shapes::ShapeRef.new(shape: CfnStackId, location_name: "Id"))
+    CfnStackDetail.add_member(:status_message, Shapes::ShapeRef.new(shape: CfnStackStatusMessage, required: true, location_name: "StatusMessage"))
+    CfnStackDetail.struct_class = Types::CfnStackDetail
+
+    CfnStackParameter.add_member(:key, Shapes::ShapeRef.new(shape: CfnStackParameterKey, required: true, location_name: "Key"))
+    CfnStackParameter.add_member(:value, Shapes::ShapeRef.new(shape: CfnStackParameterValue, location_name: "Value"))
+    CfnStackParameter.struct_class = Types::CfnStackParameter
+
+    CfnStackParameters.member = Shapes::ShapeRef.new(shape: CfnStackParameter)
+
+    CfnStackUpdateParameter.add_member(:key, Shapes::ShapeRef.new(shape: CfnStackParameterKey, required: true, location_name: "Key"))
+    CfnStackUpdateParameter.add_member(:value, Shapes::ShapeRef.new(shape: CfnStackParameterValue, location_name: "Value"))
+    CfnStackUpdateParameter.struct_class = Types::CfnStackUpdateParameter
+
+    CfnStackUpdateParameters.member = Shapes::ShapeRef.new(shape: CfnStackUpdateParameter)
+
+    CfnTemplateProviderDetail.add_member(:template_name, Shapes::ShapeRef.new(shape: CfnTemplateName, required: true, location_name: "TemplateName"))
+    CfnTemplateProviderDetail.add_member(:template_url, Shapes::ShapeRef.new(shape: CfnTemplateURL, required: true, location_name: "TemplateURL"))
+    CfnTemplateProviderDetail.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleARN"))
+    CfnTemplateProviderDetail.add_member(:parameters, Shapes::ShapeRef.new(shape: CfnStackParameters, location_name: "Parameters"))
+    CfnTemplateProviderDetail.add_member(:stack_detail, Shapes::ShapeRef.new(shape: CfnStackDetail, location_name: "StackDetail"))
+    CfnTemplateProviderDetail.struct_class = Types::CfnTemplateProviderDetail
+
+    CfnUpdateTemplateProvider.add_member(:template_name, Shapes::ShapeRef.new(shape: CfnTemplateName, required: true, location_name: "TemplateName"))
+    CfnUpdateTemplateProvider.add_member(:template_url, Shapes::ShapeRef.new(shape: CfnTemplateURL, required: true, location_name: "TemplateURL"))
+    CfnUpdateTemplateProvider.add_member(:parameters, Shapes::ShapeRef.new(shape: CfnStackUpdateParameters, location_name: "Parameters"))
+    CfnUpdateTemplateProvider.struct_class = Types::CfnUpdateTemplateProvider
 
     Channel.add_member(:channel_name, Shapes::ShapeRef.new(shape: ChannelName, required: true, location_name: "ChannelName"))
     Channel.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, required: true, location_name: "DataSource"))
@@ -4104,6 +4168,7 @@ module Aws::SageMaker
     CreateProjectInput.add_member(:project_description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "ProjectDescription"))
     CreateProjectInput.add_member(:service_catalog_provisioning_details, Shapes::ShapeRef.new(shape: ServiceCatalogProvisioningDetails, location_name: "ServiceCatalogProvisioningDetails"))
     CreateProjectInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateProjectInput.add_member(:template_providers, Shapes::ShapeRef.new(shape: CreateTemplateProviderList, location_name: "TemplateProviders"))
     CreateProjectInput.struct_class = Types::CreateProjectInput
 
     CreateProjectOutput.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "ProjectArn"))
@@ -4130,6 +4195,11 @@ module Aws::SageMaker
 
     CreateStudioLifecycleConfigResponse.add_member(:studio_lifecycle_config_arn, Shapes::ShapeRef.new(shape: StudioLifecycleConfigArn, location_name: "StudioLifecycleConfigArn"))
     CreateStudioLifecycleConfigResponse.struct_class = Types::CreateStudioLifecycleConfigResponse
+
+    CreateTemplateProvider.add_member(:cfn_template_provider, Shapes::ShapeRef.new(shape: CfnCreateTemplateProvider, location_name: "CfnTemplateProvider"))
+    CreateTemplateProvider.struct_class = Types::CreateTemplateProvider
+
+    CreateTemplateProviderList.member = Shapes::ShapeRef.new(shape: CreateTemplateProvider)
 
     CreateTrainingJobRequest.add_member(:training_job_name, Shapes::ShapeRef.new(shape: TrainingJobName, required: true, location_name: "TrainingJobName"))
     CreateTrainingJobRequest.add_member(:hyper_parameters, Shapes::ShapeRef.new(shape: HyperParameters, location_name: "HyperParameters"))
@@ -5681,6 +5751,7 @@ module Aws::SageMaker
     DescribeProjectOutput.add_member(:service_catalog_provisioning_details, Shapes::ShapeRef.new(shape: ServiceCatalogProvisioningDetails, location_name: "ServiceCatalogProvisioningDetails"))
     DescribeProjectOutput.add_member(:service_catalog_provisioned_product_details, Shapes::ShapeRef.new(shape: ServiceCatalogProvisionedProductDetails, location_name: "ServiceCatalogProvisionedProductDetails"))
     DescribeProjectOutput.add_member(:project_status, Shapes::ShapeRef.new(shape: ProjectStatus, required: true, location_name: "ProjectStatus"))
+    DescribeProjectOutput.add_member(:template_provider_details, Shapes::ShapeRef.new(shape: TemplateProviderDetailList, location_name: "TemplateProviderDetails"))
     DescribeProjectOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: UserContext, location_name: "CreatedBy"))
     DescribeProjectOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
     DescribeProjectOutput.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
@@ -9446,6 +9517,7 @@ module Aws::SageMaker
     Project.add_member(:project_status, Shapes::ShapeRef.new(shape: ProjectStatus, location_name: "ProjectStatus"))
     Project.add_member(:created_by, Shapes::ShapeRef.new(shape: UserContext, location_name: "CreatedBy"))
     Project.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    Project.add_member(:template_provider_details, Shapes::ShapeRef.new(shape: TemplateProviderDetailList, location_name: "TemplateProviderDetails"))
     Project.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     Project.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     Project.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: UserContext, location_name: "LastModifiedBy"))
@@ -10206,6 +10278,11 @@ module Aws::SageMaker
     TargetTrackingScalingPolicyConfiguration.struct_class = Types::TargetTrackingScalingPolicyConfiguration
 
     TaskKeywords.member = Shapes::ShapeRef.new(shape: TaskKeyword)
+
+    TemplateProviderDetail.add_member(:cfn_template_provider_detail, Shapes::ShapeRef.new(shape: CfnTemplateProviderDetail, location_name: "CfnTemplateProviderDetail"))
+    TemplateProviderDetail.struct_class = Types::TemplateProviderDetail
+
+    TemplateProviderDetailList.member = Shapes::ShapeRef.new(shape: TemplateProviderDetail)
 
     TensorBoardAppSettings.add_member(:default_resource_spec, Shapes::ShapeRef.new(shape: ResourceSpec, location_name: "DefaultResourceSpec"))
     TensorBoardAppSettings.struct_class = Types::TensorBoardAppSettings
@@ -11023,6 +11100,7 @@ module Aws::SageMaker
     UpdateProjectInput.add_member(:project_description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "ProjectDescription"))
     UpdateProjectInput.add_member(:service_catalog_provisioning_update_details, Shapes::ShapeRef.new(shape: ServiceCatalogProvisioningUpdateDetails, location_name: "ServiceCatalogProvisioningUpdateDetails"))
     UpdateProjectInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    UpdateProjectInput.add_member(:template_providers_to_update, Shapes::ShapeRef.new(shape: UpdateTemplateProviderList, location_name: "TemplateProvidersToUpdate"))
     UpdateProjectInput.struct_class = Types::UpdateProjectInput
 
     UpdateProjectOutput.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "ProjectArn"))
@@ -11036,6 +11114,11 @@ module Aws::SageMaker
 
     UpdateSpaceResponse.add_member(:space_arn, Shapes::ShapeRef.new(shape: SpaceArn, location_name: "SpaceArn"))
     UpdateSpaceResponse.struct_class = Types::UpdateSpaceResponse
+
+    UpdateTemplateProvider.add_member(:cfn_template_provider, Shapes::ShapeRef.new(shape: CfnUpdateTemplateProvider, location_name: "CfnTemplateProvider"))
+    UpdateTemplateProvider.struct_class = Types::UpdateTemplateProvider
+
+    UpdateTemplateProviderList.member = Shapes::ShapeRef.new(shape: UpdateTemplateProvider)
 
     UpdateTrainingJobRequest.add_member(:training_job_name, Shapes::ShapeRef.new(shape: TrainingJobName, required: true, location_name: "TrainingJobName"))
     UpdateTrainingJobRequest.add_member(:profiler_config, Shapes::ShapeRef.new(shape: ProfilerConfigForUpdate, location_name: "ProfilerConfig"))

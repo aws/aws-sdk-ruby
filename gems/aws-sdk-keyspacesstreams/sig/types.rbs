@@ -1,0 +1,245 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::KeyspacesStreams
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetRecordsInput
+      attr_accessor shard_iterator: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetRecordsOutput
+      attr_accessor change_records: ::Array[Types::Record]
+      attr_accessor next_shard_iterator: ::String
+      SENSITIVE: []
+    end
+
+    class GetShardIteratorInput
+      attr_accessor stream_arn: ::String
+      attr_accessor shard_id: ::String
+      attr_accessor shard_iterator_type: ("TRIM_HORIZON" | "LATEST" | "AT_SEQUENCE_NUMBER" | "AFTER_SEQUENCE_NUMBER")
+      attr_accessor sequence_number: ::String
+      SENSITIVE: []
+    end
+
+    class GetShardIteratorOutput
+      attr_accessor shard_iterator: ::String
+      SENSITIVE: []
+    end
+
+    class GetStreamInput
+      attr_accessor stream_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor shard_filter: Types::ShardFilter
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetStreamOutput
+      attr_accessor stream_arn: ::String
+      attr_accessor stream_label: ::String
+      attr_accessor stream_status: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED")
+      attr_accessor stream_view_type: ("NEW_IMAGE" | "OLD_IMAGE" | "NEW_AND_OLD_IMAGES" | "KEYS_ONLY")
+      attr_accessor creation_request_date_time: ::Time
+      attr_accessor keyspace_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor shards: ::Array[Types::Shard]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KeyspacesCell
+      attr_accessor value: Types::KeyspacesCellValue
+      attr_accessor metadata: Types::KeyspacesMetadata
+      SENSITIVE: []
+    end
+
+    class KeyspacesCellMapDefinition
+      attr_accessor key: Types::KeyspacesCellValue
+      attr_accessor value: Types::KeyspacesCellValue
+      attr_accessor metadata: Types::KeyspacesMetadata
+      SENSITIVE: []
+    end
+
+    class KeyspacesCellValue
+      attr_accessor ascii_t: ::String
+      attr_accessor bigint_t: ::String
+      attr_accessor blob_t: ::String
+      attr_accessor bool_t: bool
+      attr_accessor counter_t: ::String
+      attr_accessor date_t: ::String
+      attr_accessor decimal_t: ::String
+      attr_accessor double_t: ::String
+      attr_accessor float_t: ::String
+      attr_accessor inet_t: ::String
+      attr_accessor int_t: ::String
+      attr_accessor list_t: ::Array[Types::KeyspacesCell]
+      attr_accessor map_t: ::Array[Types::KeyspacesCellMapDefinition]
+      attr_accessor set_t: ::Array[Types::KeyspacesCell]
+      attr_accessor smallint_t: ::String
+      attr_accessor text_t: ::String
+      attr_accessor time_t: ::String
+      attr_accessor timestamp_t: ::String
+      attr_accessor timeuuid_t: ::String
+      attr_accessor tinyint_t: ::String
+      attr_accessor tuple_t: ::Array[Types::KeyspacesCell]
+      attr_accessor uuid_t: ::String
+      attr_accessor varchar_t: ::String
+      attr_accessor varint_t: ::String
+      attr_accessor udt_t: ::Hash[::String, Types::KeyspacesCell]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AsciiT < KeyspacesCellValue
+      end
+      class BigintT < KeyspacesCellValue
+      end
+      class BlobT < KeyspacesCellValue
+      end
+      class BoolT < KeyspacesCellValue
+      end
+      class CounterT < KeyspacesCellValue
+      end
+      class DateT < KeyspacesCellValue
+      end
+      class DecimalT < KeyspacesCellValue
+      end
+      class DoubleT < KeyspacesCellValue
+      end
+      class FloatT < KeyspacesCellValue
+      end
+      class InetT < KeyspacesCellValue
+      end
+      class IntT < KeyspacesCellValue
+      end
+      class ListT < KeyspacesCellValue
+      end
+      class MapT < KeyspacesCellValue
+      end
+      class SetT < KeyspacesCellValue
+      end
+      class SmallintT < KeyspacesCellValue
+      end
+      class TextT < KeyspacesCellValue
+      end
+      class TimeT < KeyspacesCellValue
+      end
+      class TimestampT < KeyspacesCellValue
+      end
+      class TimeuuidT < KeyspacesCellValue
+      end
+      class TinyintT < KeyspacesCellValue
+      end
+      class TupleT < KeyspacesCellValue
+      end
+      class UuidT < KeyspacesCellValue
+      end
+      class VarcharT < KeyspacesCellValue
+      end
+      class VarintT < KeyspacesCellValue
+      end
+      class UdtT < KeyspacesCellValue
+      end
+      class Unknown < KeyspacesCellValue
+      end
+    end
+
+    class KeyspacesMetadata
+      attr_accessor expiration_time: ::String
+      attr_accessor write_time: ::String
+      SENSITIVE: []
+    end
+
+    class KeyspacesRow
+      attr_accessor value_cells: ::Hash[::String, Types::KeyspacesCell]
+      attr_accessor static_cells: ::Hash[::String, Types::KeyspacesCell]
+      attr_accessor row_metadata: Types::KeyspacesMetadata
+      SENSITIVE: []
+    end
+
+    class ListStreamsInput
+      attr_accessor keyspace_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStreamsOutput
+      attr_accessor streams: ::Array[Types::Stream]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class Record
+      attr_accessor event_version: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor origin: ("USER" | "REPLICATION" | "TTL")
+      attr_accessor partition_keys: ::Hash[::String, Types::KeyspacesCellValue]
+      attr_accessor clustering_keys: ::Hash[::String, Types::KeyspacesCellValue]
+      attr_accessor new_image: Types::KeyspacesRow
+      attr_accessor old_image: Types::KeyspacesRow
+      attr_accessor sequence_number: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SequenceNumberRange
+      attr_accessor starting_sequence_number: ::String
+      attr_accessor ending_sequence_number: ::String
+      SENSITIVE: []
+    end
+
+    class Shard
+      attr_accessor shard_id: ::String
+      attr_accessor sequence_number_range: Types::SequenceNumberRange
+      attr_accessor parent_shard_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ShardFilter
+      attr_accessor type: ("CHILD_SHARDS")
+      attr_accessor shard_id: ::String
+      SENSITIVE: []
+    end
+
+    class Stream
+      attr_accessor stream_arn: ::String
+      attr_accessor keyspace_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor stream_label: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor error_code: ("InvalidFormat" | "TrimmedDataAccess" | "ExpiredIterator" | "ExpiredNextToken")
+      SENSITIVE: []
+    end
+  end
+end

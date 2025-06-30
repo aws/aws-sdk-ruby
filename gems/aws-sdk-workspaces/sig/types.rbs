@@ -24,6 +24,18 @@ module Aws::WorkSpaces
       SENSITIVE: []
     end
 
+    class AccessEndpoint
+      attr_accessor access_endpoint_type: ("STREAMING_WSP")
+      attr_accessor vpc_endpoint_id: ::String
+      SENSITIVE: []
+    end
+
+    class AccessEndpointConfig
+      attr_accessor access_endpoints: ::Array[Types::AccessEndpoint]
+      attr_accessor internet_fallback_protocols: ::Array[("PCOIP")]
+      SENSITIVE: []
+    end
+
     class AccountLink
       attr_accessor account_link_id: ::String
       attr_accessor account_link_status: ("LINKED" | "LINKING_FAILED" | "LINK_NOT_FOUND" | "PENDING_ACCEPTANCE_BY_TARGET_ACCOUNT" | "REJECTED")
@@ -945,6 +957,11 @@ module Aws::WorkSpaces
       SENSITIVE: []
     end
 
+    class InvalidParameterCombinationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class InvalidParameterValuesException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1589,6 +1606,7 @@ module Aws::WorkSpaces
       attr_accessor device_type_zero_client: ("ALLOW" | "DENY")
       attr_accessor device_type_linux: ("ALLOW" | "DENY")
       attr_accessor device_type_work_spaces_thin_client: ("ALLOW" | "DENY")
+      attr_accessor access_endpoint_config: Types::AccessEndpointConfig
       SENSITIVE: []
     end
 

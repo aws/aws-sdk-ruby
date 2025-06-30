@@ -4247,7 +4247,14 @@ module Aws::MediaConvert
     #   (PCS) with DDS x-coordinate and DDS y-coordinate. For video
     #   resolutions with a height of 576 pixels or less, MediaConvert
     #   doesn't include the DDS, regardless of the value you choose for DDS
-    #   handling. All burn-in and DVB-Sub font settings must match.
+    #   handling. All burn-in and DVB-Sub font settings must match. To
+    #   include the DDS, with optimized subtitle placement and reduced data
+    #   overhead: We recommend that you choose Specified (optimal). This
+    #   option provides the same visual positioning as Specified while using
+    #   less bandwidth. This also supports resolutions higher than 1080p
+    #   while maintaining full DVB-Sub compatibility. When you do, also
+    #   specify the offset coordinates of the display window with DDS
+    #   x-coordinate and DDS y-coordinate.
     #   @return [String]
     #
     # @!attribute [rw] dds_x_coordinate

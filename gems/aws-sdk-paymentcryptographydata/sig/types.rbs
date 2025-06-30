@@ -235,7 +235,7 @@ module Aws::PaymentCryptographyData
     class EcdhDerivationAttributes
       attr_accessor certificate_authority_public_key_identifier: ::String
       attr_accessor public_key_certificate: ::String
-      attr_accessor key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")
+      attr_accessor key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512" | "HMAC_SHA224")
       attr_accessor key_derivation_function: ("NIST_SP800" | "ANSI_X963")
       attr_accessor key_derivation_hash_algorithm: ("SHA_256" | "SHA_384" | "SHA_512")
       attr_accessor shared_information: ::String
@@ -815,7 +815,7 @@ module Aws::PaymentCryptographyData
 
     class WrappedKey
       attr_accessor wrapped_key_material: Types::WrappedKeyMaterial
-      attr_accessor key_check_value_algorithm: ("CMAC" | "ANSI_X9_24")
+      attr_accessor key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC")
       SENSITIVE: []
     end
 

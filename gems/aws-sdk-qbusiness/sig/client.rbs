@@ -89,6 +89,13 @@ module Aws
                                   application_id: ::String,
                                   statement_id: ::String,
                                   actions: Array[::String],
+                                  ?conditions: Array[
+                                    {
+                                      condition_operator: ("StringEquals"),
+                                      condition_key: ::String,
+                                      condition_values: Array[::String]
+                                    },
+                                  ],
                                   principal: ::String
                                 ) -> _AssociatePermissionResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociatePermissionResponseSuccess
@@ -534,6 +541,15 @@ module Aws
                                   ],
                                   ?client_token: ::String,
                                   display_name: ::String,
+                                  ?authentication_detail: {
+                                    authentication_type: ("AWS_IAM_IDC_TTI" | "AWS_IAM_IDC_AUTH_CODE"),
+                                    authentication_configuration: {
+                                      idc_trusted_token_issuer_configuration: {
+                                        idc_trusted_token_issuer_arn: ::String
+                                      }?
+                                    }?,
+                                    external_ids: Array[::String]?
+                                  },
                                   ?tags: Array[
                                     {
                                       key: ::String,
@@ -1028,6 +1044,7 @@ module Aws
         def idc_application_arn: () -> ::String
         def principal: () -> ::String
         def action_configurations: () -> ::Array[Types::ActionConfiguration]
+        def authentication_detail: () -> Types::DataAccessorAuthenticationDetail
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
       end
@@ -1841,6 +1858,15 @@ module Aws
                                       }?
                                     },
                                   ],
+                                  ?authentication_detail: {
+                                    authentication_type: ("AWS_IAM_IDC_TTI" | "AWS_IAM_IDC_AUTH_CODE"),
+                                    authentication_configuration: {
+                                      idc_trusted_token_issuer_configuration: {
+                                        idc_trusted_token_issuer_arn: ::String
+                                      }?
+                                    }?,
+                                    external_ids: Array[::String]?
+                                  },
                                   ?display_name: ::String
                                 ) -> _UpdateDataAccessorResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataAccessorResponseSuccess

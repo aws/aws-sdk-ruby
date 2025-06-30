@@ -35,6 +35,7 @@ module Aws::QConnect
   # * {ServiceQuotaExceededException}
   # * {ThrottlingException}
   # * {TooManyTagsException}
+  # * {UnauthorizedException}
   # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -178,6 +179,21 @@ module Aws::QConnect
       # @return [String]
       def resource_name
         @data[:resource_name]
+      end
+    end
+
+    class UnauthorizedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::QConnect::Types::UnauthorizedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 

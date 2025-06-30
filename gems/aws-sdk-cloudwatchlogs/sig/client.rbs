@@ -1068,6 +1068,11 @@ module Aws
                                  parse_route_53: {
                                    source: ::String?
                                  }?,
+                                 parse_to_ocsf: {
+                                   source: ::String?,
+                                   event_source: ("CloudTrail" | "Route53Resolver" | "VPCFlow" | "EKSAudit" | "AWSWAF"),
+                                   ocsf_version: ("V1.1")
+                                 }?,
                                  parse_postgres: {
                                    source: ::String?
                                  }?,
@@ -1273,6 +1278,11 @@ module Aws
                                   }?,
                                   parse_route_53: {
                                     source: ::String?
+                                  }?,
+                                  parse_to_ocsf: {
+                                    source: ::String?,
+                                    event_source: ("CloudTrail" | "Route53Resolver" | "VPCFlow" | "EKSAudit" | "AWSWAF"),
+                                    ocsf_version: ("V1.1")
                                   }?,
                                   parse_postgres: {
                                     source: ::String?

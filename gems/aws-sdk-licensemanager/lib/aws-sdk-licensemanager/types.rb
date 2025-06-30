@@ -2165,10 +2165,15 @@ module Aws::LicenseManager
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html#billing-info
     #   @return [String]
     #
+    # @!attribute [rw] product_codes
+    #   Product codes referred to in the license conversion process.
+    #   @return [Array<Types::ProductCodeListItem>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/LicenseConversionContext AWS API Documentation
     #
     class LicenseConversionContext < Struct.new(
-      :usage_operation)
+      :usage_operation,
+      :product_codes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3222,6 +3227,25 @@ module Aws::LicenseManager
     #
     class OrganizationConfiguration < Struct.new(
       :enable_integration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list item that contains a product code.
+    #
+    # @!attribute [rw] product_code_id
+    #   The product code ID
+    #   @return [String]
+    #
+    # @!attribute [rw] product_code_type
+    #   The product code type
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ProductCodeListItem AWS API Documentation
+    #
+    class ProductCodeListItem < Struct.new(
+      :product_code_id,
+      :product_code_type)
       SENSITIVE = []
       include Aws::Structure
     end

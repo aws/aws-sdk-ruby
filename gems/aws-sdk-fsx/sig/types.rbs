@@ -8,6 +8,12 @@
 module Aws::FSx
   module Types
 
+    class AccessPointAlreadyOwnedByYou
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class ActiveDirectoryBackupAttributes
       attr_accessor domain_name: ::String
       attr_accessor active_directory_id: ::String
@@ -187,6 +193,32 @@ module Aws::FSx
     class CreateAggregateConfiguration
       attr_accessor aggregates: ::Array[::String]
       attr_accessor constituents_per_aggregate: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateAndAttachS3AccessPointOpenZFSConfiguration
+      attr_accessor volume_id: ::String
+      attr_accessor file_system_identity: Types::OpenZFSFileSystemIdentity
+      SENSITIVE: []
+    end
+
+    class CreateAndAttachS3AccessPointRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("OPENZFS")
+      attr_accessor open_zfs_configuration: Types::CreateAndAttachS3AccessPointOpenZFSConfiguration
+      attr_accessor s3_access_point: Types::CreateAndAttachS3AccessPointS3Configuration
+      SENSITIVE: []
+    end
+
+    class CreateAndAttachS3AccessPointResponse
+      attr_accessor s3_access_point_attachment: Types::S3AccessPointAttachment
+      SENSITIVE: []
+    end
+
+    class CreateAndAttachS3AccessPointS3Configuration
+      attr_accessor vpc_configuration: Types::S3AccessPointVpcConfiguration
+      attr_accessor policy: ::String
       SENSITIVE: []
     end
 
@@ -823,6 +855,20 @@ module Aws::FSx
       SENSITIVE: []
     end
 
+    class DescribeS3AccessPointAttachmentsRequest
+      attr_accessor names: ::Array[::String]
+      attr_accessor filters: ::Array[Types::S3AccessPointAttachmentsFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeS3AccessPointAttachmentsResponse
+      attr_accessor s3_access_point_attachments: ::Array[Types::S3AccessPointAttachment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class DescribeSharedVpcConfigurationRequest < Aws::EmptyStructure
     end
 
@@ -871,6 +917,18 @@ module Aws::FSx
     class DescribeVolumesResponse
       attr_accessor volumes: ::Array[Types::Volume]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DetachAndDeleteS3AccessPointRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DetachAndDeleteS3AccessPointResponse
+      attr_accessor lifecycle: ("AVAILABLE" | "CREATING" | "DELETING" | "UPDATING" | "FAILED")
+      attr_accessor name: ::String
       SENSITIVE: []
     end
 
@@ -1054,6 +1112,12 @@ module Aws::FSx
       SENSITIVE: []
     end
 
+    class InvalidAccessPoint
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class InvalidDataRepositoryType
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1088,6 +1152,12 @@ module Aws::FSx
     end
 
     class InvalidRegion
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequest
+      attr_accessor error_code: ::String
       attr_accessor message: ::String
       SENSITIVE: []
     end
@@ -1258,6 +1328,12 @@ module Aws::FSx
       SENSITIVE: []
     end
 
+    class OpenZFSFileSystemIdentity
+      attr_accessor type: ("POSIX")
+      attr_accessor posix_user: Types::OpenZFSPosixFileSystemUser
+      SENSITIVE: []
+    end
+
     class OpenZFSNfsExport
       attr_accessor client_configurations: ::Array[Types::OpenZFSClientConfiguration]
       SENSITIVE: []
@@ -1266,6 +1342,13 @@ module Aws::FSx
     class OpenZFSOriginSnapshotConfiguration
       attr_accessor snapshot_arn: ::String
       attr_accessor copy_strategy: ("CLONE" | "FULL_COPY" | "INCREMENTAL_COPY")
+      SENSITIVE: []
+    end
+
+    class OpenZFSPosixFileSystemUser
+      attr_accessor uid: ::Integer
+      attr_accessor gid: ::Integer
+      attr_accessor secondary_gids: ::Array[::Integer]
       SENSITIVE: []
     end
 
@@ -1350,6 +1433,46 @@ module Aws::FSx
     class RetentionPeriod
       attr_accessor type: ("SECONDS" | "MINUTES" | "HOURS" | "DAYS" | "MONTHS" | "YEARS" | "INFINITE" | "UNSPECIFIED")
       attr_accessor value: ::Integer
+      SENSITIVE: []
+    end
+
+    class S3AccessPoint
+      attr_accessor resource_arn: ::String
+      attr_accessor alias: ::String
+      attr_accessor vpc_configuration: Types::S3AccessPointVpcConfiguration
+      SENSITIVE: []
+    end
+
+    class S3AccessPointAttachment
+      attr_accessor lifecycle: ("AVAILABLE" | "CREATING" | "DELETING" | "UPDATING" | "FAILED")
+      attr_accessor lifecycle_transition_reason: Types::LifecycleTransitionReason
+      attr_accessor creation_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor type: ("OPENZFS")
+      attr_accessor open_zfs_configuration: Types::S3AccessPointOpenZFSConfiguration
+      attr_accessor s3_access_point: Types::S3AccessPoint
+      SENSITIVE: []
+    end
+
+    class S3AccessPointAttachmentNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class S3AccessPointAttachmentsFilter
+      attr_accessor name: ("file-system-id" | "volume-id" | "type")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class S3AccessPointOpenZFSConfiguration
+      attr_accessor volume_id: ::String
+      attr_accessor file_system_identity: Types::OpenZFSFileSystemIdentity
+      SENSITIVE: []
+    end
+
+    class S3AccessPointVpcConfiguration
+      attr_accessor vpc_id: ::String
       SENSITIVE: []
     end
 
@@ -1518,6 +1641,12 @@ module Aws::FSx
     class TieringPolicy
       attr_accessor cooling_period: ::Integer
       attr_accessor name: ("SNAPSHOT_ONLY" | "AUTO" | "ALL" | "NONE")
+      SENSITIVE: []
+    end
+
+    class TooManyAccessPoints
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 

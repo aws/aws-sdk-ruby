@@ -17,6 +17,8 @@ module Aws
       end
       class EncryptionTypeMismatch < ::Aws::Errors::ServiceError
       end
+      class IdempotencyParameterMismatch < ::Aws::Errors::ServiceError
+      end
       class InvalidObjectState < ::Aws::Errors::ServiceError
         def storage_class: () -> ::String
         def access_tier: () -> ::String

@@ -576,6 +576,12 @@ module Aws::AutoScaling
     #   If you omit this property, all Auto Scaling groups are described.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] include_instances
+    #   Specifies whether to include information about Amazon EC2 instances
+    #   in the response. When set to `true` (default), the response includes
+    #   instance details.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] next_token
     #   The token for the next set of items to return. (You received this
     #   token from a previous call.)
@@ -594,6 +600,7 @@ module Aws::AutoScaling
     #
     class AutoScalingGroupNamesType < Struct.new(
       :auto_scaling_group_names,
+      :include_instances,
       :next_token,
       :max_records,
       :filters)

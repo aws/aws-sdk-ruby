@@ -156,7 +156,13 @@ module Aws::QBusiness
     CustomizationConfiguration = Shapes::StructureShape.new(name: 'CustomizationConfiguration')
     DataAccessor = Shapes::StructureShape.new(name: 'DataAccessor')
     DataAccessorArn = Shapes::StringShape.new(name: 'DataAccessorArn')
+    DataAccessorAuthenticationConfiguration = Shapes::UnionShape.new(name: 'DataAccessorAuthenticationConfiguration')
+    DataAccessorAuthenticationDetail = Shapes::StructureShape.new(name: 'DataAccessorAuthenticationDetail')
+    DataAccessorAuthenticationType = Shapes::StringShape.new(name: 'DataAccessorAuthenticationType')
+    DataAccessorExternalId = Shapes::StringShape.new(name: 'DataAccessorExternalId')
+    DataAccessorExternalIds = Shapes::ListShape.new(name: 'DataAccessorExternalIds')
     DataAccessorId = Shapes::StringShape.new(name: 'DataAccessorId')
+    DataAccessorIdcTrustedTokenIssuerConfiguration = Shapes::StructureShape.new(name: 'DataAccessorIdcTrustedTokenIssuerConfiguration')
     DataAccessorName = Shapes::StringShape.new(name: 'DataAccessorName')
     DataAccessors = Shapes::ListShape.new(name: 'DataAccessors')
     DataSource = Shapes::StructureShape.new(name: 'DataSource')
@@ -289,6 +295,7 @@ module Aws::QBusiness
     IAMIdentityProviderArn = Shapes::StringShape.new(name: 'IAMIdentityProviderArn')
     IdcApplicationArn = Shapes::StringShape.new(name: 'IdcApplicationArn')
     IdcAuthConfiguration = Shapes::StructureShape.new(name: 'IdcAuthConfiguration')
+    IdcTrustedTokenIssuerArn = Shapes::StringShape.new(name: 'IdcTrustedTokenIssuerArn')
     IdentityProviderConfiguration = Shapes::UnionShape.new(name: 'IdentityProviderConfiguration')
     IdentityType = Shapes::StringShape.new(name: 'IdentityType')
     ImageExtractionConfiguration = Shapes::StructureShape.new(name: 'ImageExtractionConfiguration')
@@ -406,6 +413,12 @@ module Aws::QBusiness
     OrchestrationControl = Shapes::StringShape.new(name: 'OrchestrationControl')
     Origin = Shapes::StringShape.new(name: 'Origin')
     Payload = Shapes::StringShape.new(name: 'Payload')
+    PermissionCondition = Shapes::StructureShape.new(name: 'PermissionCondition')
+    PermissionConditionKey = Shapes::StringShape.new(name: 'PermissionConditionKey')
+    PermissionConditionOperator = Shapes::StringShape.new(name: 'PermissionConditionOperator')
+    PermissionConditionValue = Shapes::StringShape.new(name: 'PermissionConditionValue')
+    PermissionConditionValues = Shapes::ListShape.new(name: 'PermissionConditionValues')
+    PermissionConditions = Shapes::ListShape.new(name: 'PermissionConditions')
     PersonalizationConfiguration = Shapes::StructureShape.new(name: 'PersonalizationConfiguration')
     PersonalizationControlMode = Shapes::StringShape.new(name: 'PersonalizationControlMode')
     Plugin = Shapes::StructureShape.new(name: 'Plugin')
@@ -683,6 +696,7 @@ module Aws::QBusiness
     AssociatePermissionRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
     AssociatePermissionRequest.add_member(:statement_id, Shapes::ShapeRef.new(shape: StatementId, required: true, location_name: "statementId"))
     AssociatePermissionRequest.add_member(:actions, Shapes::ShapeRef.new(shape: QIamActions, required: true, location_name: "actions"))
+    AssociatePermissionRequest.add_member(:conditions, Shapes::ShapeRef.new(shape: PermissionConditions, location_name: "conditions"))
     AssociatePermissionRequest.add_member(:principal, Shapes::ShapeRef.new(shape: PrincipalRoleArn, required: true, location_name: "principal"))
     AssociatePermissionRequest.struct_class = Types::AssociatePermissionRequest
 
@@ -977,6 +991,7 @@ module Aws::QBusiness
     CreateDataAccessorRequest.add_member(:action_configurations, Shapes::ShapeRef.new(shape: ActionConfigurationList, required: true, location_name: "actionConfigurations"))
     CreateDataAccessorRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateDataAccessorRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DataAccessorName, required: true, location_name: "displayName"))
+    CreateDataAccessorRequest.add_member(:authentication_detail, Shapes::ShapeRef.new(shape: DataAccessorAuthenticationDetail, location_name: "authenticationDetail"))
     CreateDataAccessorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateDataAccessorRequest.struct_class = Types::CreateDataAccessorRequest
 
@@ -1103,9 +1118,26 @@ module Aws::QBusiness
     DataAccessor.add_member(:data_accessor_arn, Shapes::ShapeRef.new(shape: DataAccessorArn, location_name: "dataAccessorArn"))
     DataAccessor.add_member(:idc_application_arn, Shapes::ShapeRef.new(shape: IdcApplicationArn, location_name: "idcApplicationArn"))
     DataAccessor.add_member(:principal, Shapes::ShapeRef.new(shape: PrincipalRoleArn, location_name: "principal"))
+    DataAccessor.add_member(:authentication_detail, Shapes::ShapeRef.new(shape: DataAccessorAuthenticationDetail, location_name: "authenticationDetail"))
     DataAccessor.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     DataAccessor.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     DataAccessor.struct_class = Types::DataAccessor
+
+    DataAccessorAuthenticationConfiguration.add_member(:idc_trusted_token_issuer_configuration, Shapes::ShapeRef.new(shape: DataAccessorIdcTrustedTokenIssuerConfiguration, location_name: "idcTrustedTokenIssuerConfiguration"))
+    DataAccessorAuthenticationConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    DataAccessorAuthenticationConfiguration.add_member_subclass(:idc_trusted_token_issuer_configuration, Types::DataAccessorAuthenticationConfiguration::IdcTrustedTokenIssuerConfiguration)
+    DataAccessorAuthenticationConfiguration.add_member_subclass(:unknown, Types::DataAccessorAuthenticationConfiguration::Unknown)
+    DataAccessorAuthenticationConfiguration.struct_class = Types::DataAccessorAuthenticationConfiguration
+
+    DataAccessorAuthenticationDetail.add_member(:authentication_type, Shapes::ShapeRef.new(shape: DataAccessorAuthenticationType, required: true, location_name: "authenticationType"))
+    DataAccessorAuthenticationDetail.add_member(:authentication_configuration, Shapes::ShapeRef.new(shape: DataAccessorAuthenticationConfiguration, location_name: "authenticationConfiguration"))
+    DataAccessorAuthenticationDetail.add_member(:external_ids, Shapes::ShapeRef.new(shape: DataAccessorExternalIds, location_name: "externalIds"))
+    DataAccessorAuthenticationDetail.struct_class = Types::DataAccessorAuthenticationDetail
+
+    DataAccessorExternalIds.member = Shapes::ShapeRef.new(shape: DataAccessorExternalId)
+
+    DataAccessorIdcTrustedTokenIssuerConfiguration.add_member(:idc_trusted_token_issuer_arn, Shapes::ShapeRef.new(shape: IdcTrustedTokenIssuerArn, required: true, location_name: "idcTrustedTokenIssuerArn"))
+    DataAccessorIdcTrustedTokenIssuerConfiguration.struct_class = Types::DataAccessorIdcTrustedTokenIssuerConfiguration
 
     DataAccessors.member = Shapes::ShapeRef.new(shape: DataAccessor)
 
@@ -1429,6 +1461,7 @@ module Aws::QBusiness
     GetDataAccessorResponse.add_member(:idc_application_arn, Shapes::ShapeRef.new(shape: IdcApplicationArn, location_name: "idcApplicationArn"))
     GetDataAccessorResponse.add_member(:principal, Shapes::ShapeRef.new(shape: PrincipalRoleArn, location_name: "principal"))
     GetDataAccessorResponse.add_member(:action_configurations, Shapes::ShapeRef.new(shape: ActionConfigurationList, location_name: "actionConfigurations"))
+    GetDataAccessorResponse.add_member(:authentication_detail, Shapes::ShapeRef.new(shape: DataAccessorAuthenticationDetail, location_name: "authenticationDetail"))
     GetDataAccessorResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     GetDataAccessorResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     GetDataAccessorResponse.struct_class = Types::GetDataAccessorResponse
@@ -1887,6 +1920,15 @@ module Aws::QBusiness
     OrchestrationConfiguration.add_member(:control, Shapes::ShapeRef.new(shape: OrchestrationControl, required: true, location_name: "control"))
     OrchestrationConfiguration.struct_class = Types::OrchestrationConfiguration
 
+    PermissionCondition.add_member(:condition_operator, Shapes::ShapeRef.new(shape: PermissionConditionOperator, required: true, location_name: "conditionOperator"))
+    PermissionCondition.add_member(:condition_key, Shapes::ShapeRef.new(shape: PermissionConditionKey, required: true, location_name: "conditionKey"))
+    PermissionCondition.add_member(:condition_values, Shapes::ShapeRef.new(shape: PermissionConditionValues, required: true, location_name: "conditionValues"))
+    PermissionCondition.struct_class = Types::PermissionCondition
+
+    PermissionConditionValues.member = Shapes::ShapeRef.new(shape: PermissionConditionValue)
+
+    PermissionConditions.member = Shapes::ShapeRef.new(shape: PermissionCondition)
+
     PersonalizationConfiguration.add_member(:personalization_control_mode, Shapes::ShapeRef.new(shape: PersonalizationControlMode, required: true, location_name: "personalizationControlMode"))
     PersonalizationConfiguration.struct_class = Types::PersonalizationConfiguration
 
@@ -2209,6 +2251,7 @@ module Aws::QBusiness
     UpdateDataAccessorRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
     UpdateDataAccessorRequest.add_member(:data_accessor_id, Shapes::ShapeRef.new(shape: DataAccessorId, required: true, location: "uri", location_name: "dataAccessorId"))
     UpdateDataAccessorRequest.add_member(:action_configurations, Shapes::ShapeRef.new(shape: ActionConfigurationList, required: true, location_name: "actionConfigurations"))
+    UpdateDataAccessorRequest.add_member(:authentication_detail, Shapes::ShapeRef.new(shape: DataAccessorAuthenticationDetail, location_name: "authenticationDetail"))
     UpdateDataAccessorRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DataAccessorName, location_name: "displayName"))
     UpdateDataAccessorRequest.struct_class = Types::UpdateDataAccessorRequest
 

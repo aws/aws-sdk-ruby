@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2025-06-27)
+------------------
+
+* Feature - Adding UnauthorizedException to public SDK
+
 1.34.0 (2025-06-02)
 ------------------
 

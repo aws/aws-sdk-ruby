@@ -31,7 +31,7 @@ module Aws
     def emit(type, params)
       unless @stream
         raise Aws::Errors::SignalEventError.new(
-          "Singaling events before making async request"\
+          "Signaling events before making async request"\
           " is not allowed."
         )
       end

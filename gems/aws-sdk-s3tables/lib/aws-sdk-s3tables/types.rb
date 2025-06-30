@@ -826,10 +826,16 @@ module Aws::S3Tables
     #   The target file size for the table in MB.
     #   @return [Integer]
     #
+    # @!attribute [rw] strategy
+    #   The compaction strategy to use for the table. This determines how
+    #   files are selected and combined during compaction operations.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/IcebergCompactionSettings AWS API Documentation
     #
     class IcebergCompactionSettings < Struct.new(
-      :target_file_size_mb)
+      :target_file_size_mb,
+      :strategy)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -89,8 +89,7 @@ module Aws::WorkSpacesThinClient
       attr_accessor updated_at: ::Time
       attr_accessor arn: ::String
       attr_accessor kms_key_arn: ::String
-      attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: [:name, :tags]
+      SENSITIVE: [:name]
     end
 
     class DeviceSummary
@@ -131,9 +130,8 @@ module Aws::WorkSpacesThinClient
       attr_accessor updated_at: ::Time
       attr_accessor arn: ::String
       attr_accessor kms_key_arn: ::String
-      attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor device_creation_tags: ::Hash[::String, ::String]
-      SENSITIVE: [:name, :desktop_endpoint, :activation_code, :tags, :device_creation_tags]
+      SENSITIVE: [:name, :desktop_endpoint, :activation_code, :device_creation_tags]
     end
 
     class EnvironmentSummary
@@ -277,8 +275,7 @@ module Aws::WorkSpacesThinClient
       attr_accessor validation_status: ("VALIDATED" | "NOT_VALIDATED")
       attr_accessor software: ::Array[Types::Software]
       attr_accessor arn: ::String
-      attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: [:tags]
+      SENSITIVE: []
     end
 
     class SoftwareSetSummary

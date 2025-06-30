@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2025-06-26)
+------------------
+
+* Feature - This release provides change data capture (CDC) streams support through updates to the Amazon Keyspaces API.
+
 1.41.0 (2025-06-02)
 ------------------
 

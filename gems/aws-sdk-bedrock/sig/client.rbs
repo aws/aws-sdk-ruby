@@ -447,6 +447,17 @@ module Aws
                                  ) -> _CreateEvaluationJobResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEvaluationJobResponseSuccess
 
+      interface _CreateFoundationModelAgreementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFoundationModelAgreementResponse]
+        def model_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#create_foundation_model_agreement-instance_method
+      def create_foundation_model_agreement: (
+                                               offer_token: ::String,
+                                               model_id: ::String
+                                             ) -> _CreateFoundationModelAgreementResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFoundationModelAgreementResponseSuccess
+
       interface _CreateGuardrailResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateGuardrailResponse]
         def guardrail_id: () -> ::String
@@ -470,7 +481,10 @@ module Aws
                                     input_enabled: bool?,
                                     output_enabled: bool?
                                   },
-                                ]
+                                ],
+                                tier_config: {
+                                  tier_name: ("CLASSIC" | "STANDARD")
+                                }?
                               },
                               ?content_policy_config: {
                                 filters_config: Array[
@@ -485,7 +499,10 @@ module Aws
                                     input_enabled: bool?,
                                     output_enabled: bool?
                                   },
-                                ]
+                                ],
+                                tier_config: {
+                                  tier_name: ("CLASSIC" | "STANDARD")
+                                }?
                               },
                               ?word_policy_config: {
                                 words_config: Array[
@@ -849,6 +866,15 @@ module Aws
                                ) -> _DeleteCustomModelResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCustomModelResponseSuccess
 
+      interface _DeleteFoundationModelAgreementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFoundationModelAgreementResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#delete_foundation_model_agreement-instance_method
+      def delete_foundation_model_agreement: (
+                                               model_id: ::String
+                                             ) -> _DeleteFoundationModelAgreementResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFoundationModelAgreementResponseSuccess
+
       interface _DeleteGuardrailResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGuardrailResponse]
       end
@@ -979,6 +1005,20 @@ module Aws
                                   model_identifier: ::String
                                 ) -> _GetFoundationModelResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFoundationModelResponseSuccess
+
+      interface _GetFoundationModelAvailabilityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFoundationModelAvailabilityResponse]
+        def model_id: () -> ::String
+        def agreement_availability: () -> Types::AgreementAvailability
+        def authorization_status: () -> ("AUTHORIZED" | "NOT_AUTHORIZED")
+        def entitlement_availability: () -> ("AVAILABLE" | "NOT_AVAILABLE")
+        def region_availability: () -> ("AVAILABLE" | "NOT_AVAILABLE")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_foundation_model_availability-instance_method
+      def get_foundation_model_availability: (
+                                               model_id: ::String
+                                             ) -> _GetFoundationModelAvailabilityResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFoundationModelAvailabilityResponseSuccess
 
       interface _GetGuardrailResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetGuardrailResponse]
@@ -1204,6 +1244,15 @@ module Aws
                                             ) -> _GetProvisionedModelThroughputResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProvisionedModelThroughputResponseSuccess
 
+      interface _GetUseCaseForModelAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetUseCaseForModelAccessResponse]
+        def form_data: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_use_case_for_model_access-instance_method
+      def get_use_case_for_model_access: (
+                                         ) -> _GetUseCaseForModelAccessResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUseCaseForModelAccessResponseSuccess
+
       interface _ListCustomModelsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListCustomModelsResponse]
         def next_token: () -> ::String
@@ -1243,6 +1292,18 @@ module Aws
                                   ?sort_order: ("Ascending" | "Descending")
                                 ) -> _ListEvaluationJobsResponseSuccess
                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEvaluationJobsResponseSuccess
+
+      interface _ListFoundationModelAgreementOffersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFoundationModelAgreementOffersResponse]
+        def model_id: () -> ::String
+        def offers: () -> ::Array[Types::Offer]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#list_foundation_model_agreement_offers-instance_method
+      def list_foundation_model_agreement_offers: (
+                                                    model_id: ::String,
+                                                    ?offer_type: ("ALL" | "PUBLIC")
+                                                  ) -> _ListFoundationModelAgreementOffersResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFoundationModelAgreementOffersResponseSuccess
 
       interface _ListFoundationModelsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListFoundationModelsResponse]
@@ -1455,6 +1516,15 @@ module Aws
                                                       ) -> _PutModelInvocationLoggingConfigurationResponseSuccess
                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutModelInvocationLoggingConfigurationResponseSuccess
 
+      interface _PutUseCaseForModelAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutUseCaseForModelAccessResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#put_use_case_for_model_access-instance_method
+      def put_use_case_for_model_access: (
+                                           form_data: ::String
+                                         ) -> _PutUseCaseForModelAccessResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutUseCaseForModelAccessResponseSuccess
+
       interface _RegisterMarketplaceModelEndpointResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RegisterMarketplaceModelEndpointResponse]
         def marketplace_model_endpoint: () -> Types::MarketplaceModelEndpoint
@@ -1542,7 +1612,10 @@ module Aws
                                     input_enabled: bool?,
                                     output_enabled: bool?
                                   },
-                                ]
+                                ],
+                                tier_config: {
+                                  tier_name: ("CLASSIC" | "STANDARD")
+                                }?
                               },
                               ?content_policy_config: {
                                 filters_config: Array[
@@ -1557,7 +1630,10 @@ module Aws
                                     input_enabled: bool?,
                                     output_enabled: bool?
                                   },
-                                ]
+                                ],
+                                tier_config: {
+                                  tier_name: ("CLASSIC" | "STANDARD")
+                                }?
                               },
                               ?word_policy_config: {
                                 words_config: Array[

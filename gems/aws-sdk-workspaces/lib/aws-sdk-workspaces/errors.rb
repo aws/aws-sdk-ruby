@@ -33,6 +33,7 @@ module Aws::WorkSpaces
   # * {ConflictException}
   # * {IncompatibleApplicationsException}
   # * {InternalServerException}
+  # * {InvalidParameterCombinationException}
   # * {InvalidParameterValuesException}
   # * {InvalidResourceStateException}
   # * {OperatingSystemNotCompatibleException}
@@ -121,6 +122,21 @@ module Aws::WorkSpaces
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::WorkSpaces::Types::InternalServerException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class InvalidParameterCombinationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WorkSpaces::Types::InvalidParameterCombinationException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

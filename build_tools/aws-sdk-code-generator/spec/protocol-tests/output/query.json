@@ -2,11 +2,20 @@
     {
         "description": "Test cases for DatetimeOffsets operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsquery",
             "protocol": "query",
             "protocols": [
                 "query"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsQuery",
+            "serviceId": "Query Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsQuery",
+            "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
             "DatetimeOffsetsOutput": {
@@ -76,11 +85,20 @@
     {
         "description": "Test cases for EmptyInputAndEmptyOutput operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsquery",
             "protocol": "query",
             "protocols": [
                 "query"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsQuery",
+            "serviceId": "Query Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsQuery",
+            "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
             "EmptyInputAndEmptyOutputOutput": {
@@ -113,11 +131,20 @@
     {
         "description": "Test cases for FlattenedXmlMap operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsquery",
             "protocol": "query",
             "protocols": [
                 "query"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsQuery",
+            "serviceId": "Query Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsQuery",
+            "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
             "FlattenedXmlMapOutput": {
@@ -186,11 +213,20 @@
     {
         "description": "Test cases for FlattenedXmlMapWithXmlName operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsquery",
             "protocol": "query",
             "protocols": [
                 "query"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsQuery",
+            "serviceId": "Query Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsQuery",
+            "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
             "FlattenedXmlMapWithXmlNameOutput": {
@@ -252,11 +288,20 @@
     {
         "description": "Test cases for FlattenedXmlMapWithXmlNamespace operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsquery",
             "protocol": "query",
             "protocols": [
                 "query"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsQuery",
+            "serviceId": "Query Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsQuery",
+            "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
             "FlattenedXmlMapWithXmlNamespaceOutput": {
@@ -321,11 +366,20 @@
     {
         "description": "Test cases for FractionalSeconds operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsquery",
             "protocol": "query",
             "protocols": [
                 "query"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsQuery",
+            "serviceId": "Query Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsQuery",
+            "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
             "FractionalSecondsOutput": {
@@ -371,11 +425,20 @@
     {
         "description": "Test cases for GreetingWithErrors operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsquery",
             "protocol": "query",
             "protocols": [
                 "query"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsQuery",
+            "serviceId": "Query Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsQuery",
+            "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
             "GreetingWithErrorsOutput": {
@@ -421,11 +484,20 @@
     {
         "description": "Test cases for GreetingWithErrors operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsquery",
             "protocol": "query",
             "protocols": [
                 "query"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsQuery",
+            "serviceId": "Query Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsQuery",
+            "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
             "InvalidGreeting": {
@@ -477,11 +549,20 @@
     {
         "description": "Test cases for GreetingWithErrors operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsquery",
             "protocol": "query",
             "protocols": [
                 "query"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsQuery",
+            "serviceId": "Query Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsQuery",
+            "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
             "ComplexError": {
@@ -545,11 +626,20 @@
     {
         "description": "Test cases for GreetingWithErrors operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsquery",
             "protocol": "query",
             "protocols": [
                 "query"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsQuery",
+            "serviceId": "Query Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsQuery",
+            "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
             "CustomCodeError": {
@@ -605,11 +695,20 @@
     {
         "description": "Test cases for IgnoresWrappingXmlName operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsquery",
             "protocol": "query",
             "protocols": [
                 "query"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsQuery",
+            "serviceId": "Query Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsQuery",
+            "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
             "IgnoresWrappingXmlNameOutput": {
@@ -656,11 +755,20 @@
     {
         "description": "Test cases for NoInputAndNoOutput operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsquery",
             "protocol": "query",
             "protocols": [
                 "query"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsQuery",
+            "serviceId": "Query Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsQuery",
+            "uid": "query-protocol-2020-01-08"
         },
         "shapes": {},
         "cases": [
@@ -685,11 +793,20 @@
     {
         "description": "Test cases for NoInputAndOutput operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsquery",
             "protocol": "query",
             "protocols": [
                 "query"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsQuery",
+            "serviceId": "Query Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsQuery",
+            "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
             "NoInputAndOutputOutput": {
@@ -722,11 +839,20 @@
     {
         "description": "Test cases for RecursiveXmlShapes operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsquery",
             "protocol": "query",
             "protocols": [
                 "query"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsQuery",
+            "serviceId": "Query Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsQuery",
+            "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
             "RecursiveXmlShapesOutput": {
@@ -805,11 +931,20 @@
     {
         "description": "Test cases for SimpleScalarXmlProperties operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsquery",
             "protocol": "query",
             "protocols": [
                 "query"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsQuery",
+            "serviceId": "Query Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsQuery",
+            "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
             "SimpleScalarXmlPropertiesOutput": {
@@ -986,11 +1121,20 @@
     {
         "description": "Test cases for XmlBlobs operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsquery",
             "protocol": "query",
             "protocols": [
                 "query"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsQuery",
+            "serviceId": "Query Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsQuery",
+            "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
             "XmlBlobsOutput": {
@@ -1036,11 +1180,20 @@
     {
         "description": "Test cases for XmlEmptyBlobs operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsquery",
             "protocol": "query",
             "protocols": [
                 "query"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsQuery",
+            "serviceId": "Query Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsQuery",
+            "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
             "XmlBlobsOutput": {
@@ -1109,11 +1262,20 @@
     {
         "description": "Test cases for XmlEmptyLists operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsquery",
             "protocol": "query",
             "protocols": [
                 "query"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsQuery",
+            "serviceId": "Query Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsQuery",
+            "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
             "XmlListsOutput": {
@@ -1321,11 +1483,20 @@
     {
         "description": "Test cases for XmlEmptyMaps operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsquery",
             "protocol": "query",
             "protocols": [
                 "query"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsQuery",
+            "serviceId": "Query Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsQuery",
+            "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
             "XmlMapsOutput": {
@@ -1411,11 +1582,20 @@
     {
         "description": "Test cases for XmlEnums operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsquery",
             "protocol": "query",
             "protocols": [
                 "query"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsQuery",
+            "serviceId": "Query Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsQuery",
+            "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
             "XmlEnumsOutput": {
@@ -1521,11 +1701,20 @@
     {
         "description": "Test cases for XmlIntEnums operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsquery",
             "protocol": "query",
             "protocols": [
                 "query"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsQuery",
+            "serviceId": "Query Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsQuery",
+            "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
             "XmlIntEnumsOutput": {
@@ -1625,11 +1814,20 @@
     {
         "description": "Test cases for XmlLists operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsquery",
             "protocol": "query",
             "protocols": [
                 "query"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsQuery",
+            "serviceId": "Query Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsQuery",
+            "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
             "XmlListsOutput": {
@@ -1904,11 +2102,20 @@
     {
         "description": "Test cases for XmlMaps operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsquery",
             "protocol": "query",
             "protocols": [
                 "query"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsQuery",
+            "serviceId": "Query Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsQuery",
+            "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
             "XmlMapsOutput": {
@@ -1978,11 +2185,20 @@
     {
         "description": "Test cases for XmlMapsXmlName operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsquery",
             "protocol": "query",
             "protocols": [
                 "query"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsQuery",
+            "serviceId": "Query Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsQuery",
+            "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
             "XmlMapsXmlNameOutput": {
@@ -2053,11 +2269,20 @@
     {
         "description": "Test cases for XmlNamespaces operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsquery",
             "protocol": "query",
             "protocols": [
                 "query"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsQuery",
+            "serviceId": "Query Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsQuery",
+            "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
             "XmlNamespacesOutput": {
@@ -2133,11 +2358,20 @@
     {
         "description": "Test cases for XmlTimestamps operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsquery",
             "protocol": "query",
             "protocols": [
                 "query"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsQuery",
+            "serviceId": "Query Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsQuery",
+            "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
             "XmlTimestampsOutput": {

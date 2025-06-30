@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2025-06-26)
+------------------
+
+* Feature - Adding managed integrations APIs for IoT Device Management to onboard and control devices across different manufacturers, connectivity protocols and third party vendor clouds. APIs include managed thing operations, provisioning profile management, and cloud connector operations.
+
 1.3.0 (2025-06-02)
 ------------------
 

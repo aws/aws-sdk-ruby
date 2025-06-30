@@ -53,6 +53,45 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # Describes the access type and endpoint for a WorkSpace.
+    #
+    # @!attribute [rw] access_endpoint_type
+    #   Indicates the type of access endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   Indicates the VPC endpoint to use for access.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AccessEndpoint AWS API Documentation
+    #
+    class AccessEndpoint < Struct.new(
+      :access_endpoint_type,
+      :vpc_endpoint_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the access endpoint configuration for a WorkSpace.
+    #
+    # @!attribute [rw] access_endpoints
+    #   Indicates a list of access endpoints associated with this directory.
+    #   @return [Array<Types::AccessEndpoint>]
+    #
+    # @!attribute [rw] internet_fallback_protocols
+    #   Indicates a list of protocols that fallback to using the public
+    #   Internet when streaming over a VPC endpoint is not available.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AccessEndpointConfig AWS API Documentation
+    #
+    class AccessEndpointConfig < Struct.new(
+      :access_endpoints,
+      :internet_fallback_protocols)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about about the account link.
     #
     # @!attribute [rw] account_link_id
@@ -3172,6 +3211,20 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # Two or more of the selected parameter values cannot be used together.
+    #
+    # @!attribute [rw] message
+    #   The exception error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/InvalidParameterCombinationException AWS API Documentation
+    #
+    class InvalidParameterCombinationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # One or more parameter values are not valid.
     #
     # @!attribute [rw] message
@@ -5399,6 +5452,10 @@ module Aws::WorkSpaces
     #   WorkSpaces Thin Client.
     #   @return [String]
     #
+    # @!attribute [rw] access_endpoint_config
+    #   Specifies the configuration for accessing the WorkSpace.
+    #   @return [Types::AccessEndpointConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceAccessProperties AWS API Documentation
     #
     class WorkspaceAccessProperties < Struct.new(
@@ -5410,7 +5467,8 @@ module Aws::WorkSpaces
       :device_type_chrome_os,
       :device_type_zero_client,
       :device_type_linux,
-      :device_type_work_spaces_thin_client)
+      :device_type_work_spaces_thin_client,
+      :access_endpoint_config)
       SENSITIVE = []
       include Aws::Structure
     end

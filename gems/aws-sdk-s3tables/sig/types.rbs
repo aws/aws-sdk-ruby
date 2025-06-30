@@ -264,6 +264,7 @@ module Aws::S3Tables
 
     class IcebergCompactionSettings
       attr_accessor target_file_size_mb: ::Integer
+      attr_accessor strategy: ("auto" | "binpack" | "sort" | "z-order")
       SENSITIVE: []
     end
 

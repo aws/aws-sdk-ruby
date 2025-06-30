@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.223.0 (2025-06-27)
+------------------
+
+* Feature - AWS Glue now supports schema, partition and sort management of Apache Iceberg tables using Glue SDK
+
+1.222.0 (2025-06-23)
+------------------
+
+* Feature - AWS Glue now supports sort and z-order strategy for managed automated compaction for Iceberg tables in addition to binpack.
+
+1.221.0 (2025-06-20)
+------------------
+
+* Feature - AWS Glue Data Quality now provides aggregated metrics in evaluation results when publishAggregatedMetrics with row-level results are enabled. These metrics include summary statistics showing total counts of processed, passed, and failed rows and rules in a single view.
+
 1.220.0 (2025-06-02)
 ------------------
 

@@ -151,8 +151,11 @@ module Aws::PaymentCryptography
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] derive_key_usage
-    #   The cryptographic usage of an ECDH derived key as deﬁned in section
-    #   A.5.2 of the TR-31 spec.
+    #   The intended cryptographic usage of keys derived from the ECC key
+    #   pair to be created.
+    #
+    #   After creating an ECC key pair, you cannot change the intended
+    #   cryptographic usage of keys derived from it using ECDH.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/CreateKeyInput AWS API Documentation
@@ -228,18 +231,20 @@ module Aws::PaymentCryptography
       include Aws::Structure
     end
 
-    # Derivation data used to derive an ECDH key.
+    # The shared information used when deriving a key using ECDH.
     #
     # @note DiffieHellmanDerivationData is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] shared_information
-    #   A byte string containing information that binds the ECDH derived key
-    #   to the two parties involved or to the context of the key.
+    #   A string containing information that binds the ECDH derived key to
+    #   the two parties involved or to the context of the key.
     #
     #   It may include details like identities of the two parties deriving
     #   the key, context of the operation, session IDs, and optionally a
-    #   nonce. It must not contain zero bytes, and re-using shared
-    #   information for multiple ECDH key derivations is not recommended.
+    #   nonce. It must not contain zero bytes. It is not recommended to
+    #   reuse shared information for multiple ECDH key derivations, as it
+    #   could result in derived key material being the same across different
+    #   derivations.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/DiffieHellmanDerivationData AWS API Documentation
@@ -283,37 +288,38 @@ module Aws::PaymentCryptography
       include Aws::Structure
     end
 
-    # Parameter information for key material export using the asymmetric
-    # ECDH key exchange method.
+    # Key derivation parameter information for key material export using
+    # asymmetric ECDH key exchange method.
     #
     # @!attribute [rw] private_key_identifier
-    #   The `keyARN` of the asymmetric ECC key.
+    #   The `keyARN` of the asymmetric ECC key created within Amazon Web
+    #   Services Payment Cryptography.
     #   @return [String]
     #
     # @!attribute [rw] certificate_authority_public_key_identifier
-    #   The `keyARN` of the certificate that signed the client's
-    #   `PublicKeyCertificate`.
+    #   The `keyARN` of the CA that signed the `PublicKeyCertificate` for
+    #   the client's receiving ECC key pair.
     #   @return [String]
     #
     # @!attribute [rw] public_key_certificate
-    #   The client's public key certificate in PEM format (base64 encoded)
-    #   to use for ECDH key derivation.
+    #   The public key certificate of the client's receiving ECC key pair,
+    #   in PEM format (base64 encoded), to use for ECDH key derivation.
     #   @return [String]
     #
     # @!attribute [rw] derive_key_algorithm
-    #   The key algorithm of the derived ECDH key.
+    #   The key algorithm of the shared derived ECDH key.
     #   @return [String]
     #
     # @!attribute [rw] key_derivation_function
-    #   The key derivation function to use for deriving a key using ECDH.
+    #   The key derivation function to use when deriving a key using ECDH.
     #   @return [String]
     #
     # @!attribute [rw] key_derivation_hash_algorithm
-    #   The hash type to use for deriving a key using ECDH.
+    #   The hash type to use when deriving a key using ECDH.
     #   @return [String]
     #
     # @!attribute [rw] derivation_data
-    #   Derivation data used to derive an ECDH key.
+    #   The shared information used when deriving a key using ECDH.
     #   @return [Types::DiffieHellmanDerivationData]
     #
     # @!attribute [rw] key_block_headers
@@ -428,8 +434,8 @@ module Aws::PaymentCryptography
     #   @return [Types::ExportKeyCryptogram]
     #
     # @!attribute [rw] diffie_hellman_tr_31_key_block
-    #   Parameter information for key material export using the asymmetric
-    #   ECDH key exchange method.
+    #   Key derivation parameter information for key material export using
+    #   asymmetric ECDH key exchange method.
     #   @return [Types::ExportDiffieHellmanTr31KeyBlock]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ExportKeyMaterial AWS API Documentation
@@ -505,7 +511,7 @@ module Aws::PaymentCryptography
     #   Payment Cryptography. It also contains the signing key certificate
     #   that will sign the wrapped key during TR-34 key block generation.
     #   Call [GetParametersForExport][1] to receive an export token. It
-    #   expires after 7 days. You can use the same export token to export
+    #   expires after 30 days. You can use the same export token to export
     #   multiple keys from the same service account.
     #
     #
@@ -616,7 +622,7 @@ module Aws::PaymentCryptography
     # @!attribute [rw] signing_key_certificate
     #   The signing key certificate in PEM format (base64 encoded) of the
     #   public key for signature within the TR-34 key block. The certificate
-    #   expires after 7 days.
+    #   expires after 30 days.
     #   @return [String]
     #
     # @!attribute [rw] signing_key_certificate_chain
@@ -632,8 +638,8 @@ module Aws::PaymentCryptography
     #
     # @!attribute [rw] export_token
     #   The export token to initiate key export from Amazon Web Services
-    #   Payment Cryptography. The export token expires after 7 days. You can
-    #   use the same export token to export multiple keys from the same
+    #   Payment Cryptography. The export token expires after 30 days. You
+    #   can use the same export token to export multiple keys from the same
     #   service account.
     #   @return [String]
     #
@@ -684,7 +690,7 @@ module Aws::PaymentCryptography
     # @!attribute [rw] wrapping_key_certificate
     #   The wrapping key certificate in PEM format (base64 encoded) of the
     #   wrapping key for use within the TR-34 key block. The certificate
-    #   expires in 7 days.
+    #   expires in 30 days.
     #   @return [String]
     #
     # @!attribute [rw] wrapping_key_certificate_chain
@@ -700,8 +706,8 @@ module Aws::PaymentCryptography
     #
     # @!attribute [rw] import_token
     #   The import token to initiate key import into Amazon Web Services
-    #   Payment Cryptography. The import token expires after 7 days. You can
-    #   use the same import token to import multiple keys to the same
+    #   Payment Cryptography. The import token expires after 30 days. You
+    #   can use the same import token to import multiple keys to the same
     #   service account.
     #   @return [String]
     #
@@ -754,37 +760,38 @@ module Aws::PaymentCryptography
       include Aws::Structure
     end
 
-    # Parameter information for key material import using the asymmetric
-    # ECDH key exchange method.
+    # Key derivation parameter information for key material import using
+    # asymmetric ECDH key exchange method.
     #
     # @!attribute [rw] private_key_identifier
-    #   The `keyARN` of the asymmetric ECC key.
+    #   The `keyARN` of the asymmetric ECC key created within Amazon Web
+    #   Services Payment Cryptography.
     #   @return [String]
     #
     # @!attribute [rw] certificate_authority_public_key_identifier
-    #   The `keyARN` of the certificate that signed the client's
-    #   `PublicKeyCertificate`.
+    #   The `keyARN` of the CA that signed the `PublicKeyCertificate` for
+    #   the client's receiving ECC key pair.
     #   @return [String]
     #
     # @!attribute [rw] public_key_certificate
-    #   The client's public key certificate in PEM format (base64 encoded)
-    #   to use for ECDH key derivation.
+    #   The public key certificate of the client's receiving ECC key pair,
+    #   in PEM format (base64 encoded), to use for ECDH key derivation.
     #   @return [String]
     #
     # @!attribute [rw] derive_key_algorithm
-    #   The key algorithm of the derived ECDH key.
+    #   The key algorithm of the shared derived ECDH key.
     #   @return [String]
     #
     # @!attribute [rw] key_derivation_function
-    #   The key derivation function to use for deriving a key using ECDH.
+    #   The key derivation function to use when deriving a key using ECDH.
     #   @return [String]
     #
     # @!attribute [rw] key_derivation_hash_algorithm
-    #   The hash type to use for deriving a key using ECDH.
+    #   The hash type to use when deriving a key using ECDH.
     #   @return [String]
     #
     # @!attribute [rw] derivation_data
-    #   Derivation data used to derive an ECDH key.
+    #   The shared information used when deriving a key using ECDH.
     #   @return [Types::DiffieHellmanDerivationData]
     #
     # @!attribute [rw] wrapped_key_block
@@ -826,8 +833,8 @@ module Aws::PaymentCryptography
     # @!attribute [rw] import_token
     #   The import token that initiates key import using the asymmetric RSA
     #   wrap and unwrap key exchange method into AWS Payment Cryptography.
-    #   It expires after 7 days. You can use the same import token to import
-    #   multiple keys to the same service account.
+    #   It expires after 30 days. You can use the same import token to
+    #   import multiple keys to the same service account.
     #   @return [String]
     #
     # @!attribute [rw] wrapping_spec
@@ -937,8 +944,8 @@ module Aws::PaymentCryptography
     #   @return [Types::ImportKeyCryptogram]
     #
     # @!attribute [rw] diffie_hellman_tr_31_key_block
-    #   Parameter information for key material import using the asymmetric
-    #   ECDH key exchange method.
+    #   Key derivation parameter information for key material import using
+    #   asymmetric ECDH key exchange method.
     #   @return [Types::ImportDiffieHellmanTr31KeyBlock]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ImportKeyMaterial AWS API Documentation
@@ -1014,7 +1021,7 @@ module Aws::PaymentCryptography
     # @!attribute [rw] import_token
     #   The import token that initiates key import using the asymmetric
     #   TR-34 key exchange method into Amazon Web Services Payment
-    #   Cryptography. It expires after 7 days. You can use the same import
+    #   Cryptography. It expires after 30 days. You can use the same import
     #   token to import multiple keys to the same service account.
     #   @return [String]
     #

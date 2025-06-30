@@ -1069,7 +1069,7 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :network_interface_id
     #   The network interface of the gateway on which to expose the iSCSI
-    #   target. Only IPv4 addresses are accepted. Use
+    #   target. Accepts IPv4 and IPv6 addresses. Use
     #   DescribeGatewayInformation to get a list of the network interfaces
     #   available on a gateway.
     #
@@ -1307,7 +1307,7 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :network_interface_id
     #   The network interface of the gateway on which to expose the iSCSI
-    #   target. Only IPv4 addresses are accepted. Use
+    #   target. Accepts IPv4 and IPv6 addresses. Use
     #   DescribeGatewayInformation to get a list of the network interfaces
     #   available on a gateway.
     #
@@ -1527,7 +1527,8 @@ module Aws::StorageGateway
     #
     # @option params [Array<String>] :client_list
     #   The list of clients that are allowed to access the S3 File Gateway.
-    #   The list must contain either valid IP addresses or valid CIDR blocks.
+    #   The list must contain either valid IPv4/IPv6 addresses or valid CIDR
+    #   blocks.
     #
     # @option params [String] :squash
     #   A value that maps a user to anonymous user.
@@ -1665,7 +1666,7 @@ module Aws::StorageGateway
     #     location_arn: "LocationARN", # required
     #     default_storage_class: "StorageClass",
     #     object_acl: "private", # accepts private, public-read, public-read-write, authenticated-read, bucket-owner-read, bucket-owner-full-control, aws-exec-read
-    #     client_list: ["IPV4AddressCIDR"],
+    #     client_list: ["Ipv4OrIpv6AddressCIDR"],
     #     squash: "Squash",
     #     read_only: false,
     #     guess_mime_type_enabled: false,
@@ -2309,7 +2310,7 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :network_interface_id
     #   The network interface of the gateway on which to expose the iSCSI
-    #   target. Only IPv4 addresses are accepted. Use
+    #   target. Accepts IPv4 and IPv6 addresses. Use
     #   DescribeGatewayInformation to get a list of the network interfaces
     #   available on a gateway.
     #
@@ -5032,9 +5033,16 @@ module Aws::StorageGateway
     #   domain.
     #
     # @option params [Array<String>] :domain_controllers
-    #   List of IPv4 addresses, NetBIOS names, or host names of your domain
+    #   List of IP addresses, NetBIOS names, or host names of your domain
     #   server. If you need to specify the port number include it after the
     #   colon (“:”). For example, `mydc.mydomain.com:389`.
+    #
+    #   <note markdown="1"> S3 File Gateway supports IPv6 addresses in addition to IPv4 and other
+    #   existing formats.
+    #
+    #    FSx File Gateway does not support IPv6.
+    #
+    #    </note>
     #
     # @option params [Integer] :timeout_in_seconds
     #   Specifies the time in seconds, in which the `JoinDomain` operation
@@ -6458,8 +6466,9 @@ module Aws::StorageGateway
     # The following requirements must be met to successfully generate a
     # cache report:
     #
-    # * You must have permissions to list the entire Amazon S3 bucket
-    #   associated with the specified file share.
+    # * You must have `s3:PutObject` and `s3:AbortMultipartUpload`
+    #   permissions for the Amazon S3 bucket where you want to store the
+    #   cache report.
     #
     # * No other cache reports can currently be in-progress for the
     #   specified file share.
@@ -7274,7 +7283,8 @@ module Aws::StorageGateway
     #
     # @option params [Array<String>] :client_list
     #   The list of clients that are allowed to access the S3 File Gateway.
-    #   The list must contain either valid IP addresses or valid CIDR blocks.
+    #   The list must contain either valid IPv4/IPv6 addresses or valid CIDR
+    #   blocks.
     #
     # @option params [String] :squash
     #   The user mapped to anonymous user.
@@ -7378,7 +7388,7 @@ module Aws::StorageGateway
     #     },
     #     default_storage_class: "StorageClass",
     #     object_acl: "private", # accepts private, public-read, public-read-write, authenticated-read, bucket-owner-read, bucket-owner-full-control, aws-exec-read
-    #     client_list: ["IPV4AddressCIDR"],
+    #     client_list: ["Ipv4OrIpv6AddressCIDR"],
     #     squash: "Squash",
     #     read_only: false,
     #     guess_mime_type_enabled: false,
@@ -7969,7 +7979,7 @@ module Aws::StorageGateway
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.110.0'
+      context[:gem_version] = '1.111.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

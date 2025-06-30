@@ -15,6 +15,7 @@ module Aws
 
         def wait: (
                     ?auto_scaling_group_names: Array[::String],
+                    ?include_instances: bool,
                     ?next_token: ::String,
                     ?max_records: ::Integer,
                     ?filters: Array[
@@ -33,6 +34,7 @@ module Aws
 
         def wait: (
                     ?auto_scaling_group_names: Array[::String],
+                    ?include_instances: bool,
                     ?next_token: ::String,
                     ?max_records: ::Integer,
                     ?filters: Array[
@@ -51,6 +53,7 @@ module Aws
 
         def wait: (
                     ?auto_scaling_group_names: Array[::String],
+                    ?include_instances: bool,
                     ?next_token: ::String,
                     ?max_records: ::Integer,
                     ?filters: Array[

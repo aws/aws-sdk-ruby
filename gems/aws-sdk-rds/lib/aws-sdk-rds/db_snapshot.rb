@@ -256,8 +256,8 @@ module Aws::RDS
       data[:snapshot_database_time]
     end
 
-    # Specifies where manual snapshots are stored: Amazon Web Services
-    # Outposts or the Amazon Web Services Region.
+    # Specifies where manual snapshots are stored: Dedicated Local Zones,
+    # Amazon Web Services Outposts or the Amazon Web Services Region.
     # @return [String]
     def snapshot_target
       data[:snapshot_target]
@@ -290,6 +290,14 @@ module Aws::RDS
     # @return [Boolean]
     def multi_tenant
       data[:multi_tenant]
+    end
+
+    # Specifies the name of the Availability Zone where RDS stores the DB
+    # snapshot. This value is valid only for snapshots that RDS stores on a
+    # Dedicated Local Zone.
+    # @return [String]
+    def snapshot_availability_zone
+      data[:snapshot_availability_zone]
     end
 
     # @!endgroup
@@ -485,6 +493,8 @@ module Aws::RDS
     #     option_group_name: "String",
     #     target_custom_availability_zone: "String",
     #     copy_option_group: false,
+    #     snapshot_availability_zone: "String",
+    #     snapshot_target: "String",
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -631,6 +641,20 @@ module Aws::RDS
     #   source DB snapshot to the target Amazon Web Services account and
     #   associate with the target DB snapshot. The associated option group can
     #   be copied only with cross-account snapshot copy calls.
+    # @option options [String] :snapshot_availability_zone
+    #   Specifies the name of the Availability Zone where RDS stores the DB
+    #   snapshot. This value is valid only for snapshots that RDS stores on a
+    #   Dedicated Local Zone.
+    # @option options [String] :snapshot_target
+    #   Configures the location where RDS will store copied snapshots.
+    #
+    #   Valid Values:
+    #
+    #   * `local` (Dedicated Local Zone)
+    #
+    #   * `outposts` (Amazon Web Services Outposts)
+    #
+    #   * `region` (Amazon Web Services Region)
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -1139,8 +1163,9 @@ module Aws::RDS
     #   Specifies where automated backups and manual snapshots are stored for
     #   the restored DB instance.
     #
-    #   Possible values are `outposts` (Amazon Web Services Outposts) and
-    #   `region` (Amazon Web Services Region). The default is `region`.
+    #   Possible values are `local` (Dedicated Local Zone), `outposts` (Amazon
+    #   Web Services Outposts), and `region` (Amazon Web Services Region). The
+    #   default is `region`.
     #
     #   For more information, see [Working with Amazon RDS on Amazon Web
     #   Services Outposts][1] in the *Amazon RDS User Guide*.

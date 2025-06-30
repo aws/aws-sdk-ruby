@@ -257,6 +257,7 @@ module Aws
                               ]?
                             },
                           ],
+                          ?snapshot_location: ("regional" | "local"),
                           ?dry_run: bool,
                           name: ::String,
                           ?description: ::String,
@@ -272,8 +273,10 @@ module Aws
                                 kms_key_id: ::String?,
                                 throughput: ::Integer?,
                                 outpost_arn: ::String?,
+                                availability_zone: ::String?,
                                 encrypted: bool?,
-                                volume_initialization_rate: ::Integer?
+                                volume_initialization_rate: ::Integer?,
+                                availability_zone_id: ::String?
                               }?,
                               no_device: ::String?,
                               device_name: ::String?,

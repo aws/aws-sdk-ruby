@@ -28,6 +28,7 @@ module Aws::S3Control
     AccessGrantsLocationsList = Shapes::ListShape.new(name: 'AccessGrantsLocationsList')
     AccessKeyId = Shapes::StringShape.new(name: 'AccessKeyId')
     AccessPoint = Shapes::StructureShape.new(name: 'AccessPoint')
+    AccessPointBucketName = Shapes::StringShape.new(name: 'AccessPointBucketName')
     AccessPointList = Shapes::ListShape.new(name: 'AccessPointList')
     AccessPointName = Shapes::StringShape.new(name: 'AccessPointName')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
@@ -87,6 +88,8 @@ module Aws::S3Control
     CreationDate = Shapes::TimestampShape.new(name: 'CreationDate')
     CreationTimestamp = Shapes::TimestampShape.new(name: 'CreationTimestamp')
     Credentials = Shapes::StructureShape.new(name: 'Credentials')
+    DataSourceId = Shapes::StringShape.new(name: 'DataSourceId')
+    DataSourceType = Shapes::StringShape.new(name: 'DataSourceType')
     Date = Shapes::TimestampShape.new(name: 'Date')
     Days = Shapes::IntegerShape.new(name: 'Days')
     DaysAfterInitiation = Shapes::IntegerShape.new(name: 'DaysAfterInitiation')
@@ -555,10 +558,12 @@ module Aws::S3Control
     AccessPoint.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location_name: "Name"))
     AccessPoint.add_member(:network_origin, Shapes::ShapeRef.new(shape: NetworkOrigin, required: true, location_name: "NetworkOrigin"))
     AccessPoint.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, location_name: "VpcConfiguration"))
-    AccessPoint.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "Bucket"))
+    AccessPoint.add_member(:bucket, Shapes::ShapeRef.new(shape: AccessPointBucketName, required: true, location_name: "Bucket"))
     AccessPoint.add_member(:access_point_arn, Shapes::ShapeRef.new(shape: S3AccessPointArn, location_name: "AccessPointArn"))
     AccessPoint.add_member(:alias, Shapes::ShapeRef.new(shape: Alias, location_name: "Alias"))
     AccessPoint.add_member(:bucket_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "BucketAccountId"))
+    AccessPoint.add_member(:data_source_id, Shapes::ShapeRef.new(shape: DataSourceId, location_name: "DataSourceId"))
+    AccessPoint.add_member(:data_source_type, Shapes::ShapeRef.new(shape: DataSourceType, location_name: "DataSourceType"))
     AccessPoint.struct_class = Types::AccessPoint
 
     AccessPointList.member = Shapes::ShapeRef.new(shape: AccessPoint, location_name: "AccessPoint")
@@ -1005,7 +1010,7 @@ module Aws::S3Control
     GetAccessPointRequest.struct_class = Types::GetAccessPointRequest
 
     GetAccessPointResult.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, location_name: "Name"))
-    GetAccessPointResult.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket"))
+    GetAccessPointResult.add_member(:bucket, Shapes::ShapeRef.new(shape: AccessPointBucketName, location_name: "Bucket"))
     GetAccessPointResult.add_member(:network_origin, Shapes::ShapeRef.new(shape: NetworkOrigin, location_name: "NetworkOrigin"))
     GetAccessPointResult.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, location_name: "VpcConfiguration"))
     GetAccessPointResult.add_member(:public_access_block_configuration, Shapes::ShapeRef.new(shape: PublicAccessBlockConfiguration, location_name: "PublicAccessBlockConfiguration"))
@@ -1014,6 +1019,8 @@ module Aws::S3Control
     GetAccessPointResult.add_member(:access_point_arn, Shapes::ShapeRef.new(shape: S3AccessPointArn, location_name: "AccessPointArn"))
     GetAccessPointResult.add_member(:endpoints, Shapes::ShapeRef.new(shape: Endpoints, location_name: "Endpoints"))
     GetAccessPointResult.add_member(:bucket_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "BucketAccountId"))
+    GetAccessPointResult.add_member(:data_source_id, Shapes::ShapeRef.new(shape: DataSourceId, location_name: "DataSourceId"))
+    GetAccessPointResult.add_member(:data_source_type, Shapes::ShapeRef.new(shape: DataSourceType, location_name: "DataSourceType"))
     GetAccessPointResult.struct_class = Types::GetAccessPointResult
 
     GetAccessPointScopeRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam" => {"name" => "AccountId"}, "hostLabel" => true, "hostLabelName" => "AccountId"}))
@@ -1397,6 +1404,8 @@ module Aws::S3Control
     ListAccessPointsRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, location: "querystring", location_name: "bucket", metadata: {"contextParam" => {"name" => "Bucket"}}))
     ListAccessPointsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location: "querystring", location_name: "nextToken"))
     ListAccessPointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListAccessPointsRequest.add_member(:data_source_id, Shapes::ShapeRef.new(shape: DataSourceId, location: "querystring", location_name: "dataSourceId"))
+    ListAccessPointsRequest.add_member(:data_source_type, Shapes::ShapeRef.new(shape: DataSourceType, location: "querystring", location_name: "dataSourceType"))
     ListAccessPointsRequest.struct_class = Types::ListAccessPointsRequest
 
     ListAccessPointsResult.add_member(:access_point_list, Shapes::ShapeRef.new(shape: AccessPointList, location_name: "AccessPointList"))

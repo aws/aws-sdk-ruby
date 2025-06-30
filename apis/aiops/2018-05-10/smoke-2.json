@@ -1,0 +1,20 @@
+{
+  "version" : 2,
+  "testCases" : [ {
+    "id" : "CreateInvestigationGroupUnauthorized",
+    "operationName" : "CreateInvestigationGroup",
+    "input" : {
+      "name" : "test-smoke",
+      "roleArn" : "arn:aws:iam::123456789012:role/assistant-role"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  } ]
+}

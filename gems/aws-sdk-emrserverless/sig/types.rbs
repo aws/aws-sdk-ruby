@@ -31,6 +31,7 @@ module Aws::EMRServerless
       attr_accessor monitoring_configuration: Types::MonitoringConfiguration
       attr_accessor interactive_configuration: Types::InteractiveConfiguration
       attr_accessor scheduler_configuration: Types::SchedulerConfiguration
+      attr_accessor identity_center_configuration: Types::IdentityCenterConfiguration
       SENSITIVE: []
     end
 
@@ -117,6 +118,7 @@ module Aws::EMRServerless
       attr_accessor monitoring_configuration: Types::MonitoringConfiguration
       attr_accessor interactive_configuration: Types::InteractiveConfiguration
       attr_accessor scheduler_configuration: Types::SchedulerConfiguration
+      attr_accessor identity_center_configuration: Types::IdentityCenterConfigurationInput
       SENSITIVE: []
     end
 
@@ -175,6 +177,17 @@ module Aws::EMRServerless
       attr_accessor init_query_file: ::String
       attr_accessor parameters: ::String
       SENSITIVE: [:query, :init_query_file, :parameters]
+    end
+
+    class IdentityCenterConfiguration
+      attr_accessor identity_center_instance_arn: ::String
+      attr_accessor identity_center_application_arn: ::String
+      SENSITIVE: []
+    end
+
+    class IdentityCenterConfigurationInput
+      attr_accessor identity_center_instance_arn: ::String
+      SENSITIVE: []
     end
 
     class ImageConfiguration
@@ -503,6 +516,7 @@ module Aws::EMRServerless
       attr_accessor runtime_configuration: ::Array[Types::Configuration]
       attr_accessor monitoring_configuration: Types::MonitoringConfiguration
       attr_accessor scheduler_configuration: Types::SchedulerConfiguration
+      attr_accessor identity_center_configuration: Types::IdentityCenterConfigurationInput
       SENSITIVE: []
     end
 

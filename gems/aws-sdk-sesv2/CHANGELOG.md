@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2025-06-27)
+------------------
+
+* Feature - Added support for new SES regions
+
 1.77.0 (2025-06-02)
 ------------------
 

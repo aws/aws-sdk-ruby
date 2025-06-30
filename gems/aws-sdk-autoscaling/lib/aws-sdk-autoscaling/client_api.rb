@@ -178,6 +178,7 @@ module Aws::AutoScaling
     HonorCooldown = Shapes::BooleanShape.new(name: 'HonorCooldown')
     ImpairedZoneHealthCheckBehavior = Shapes::StringShape.new(name: 'ImpairedZoneHealthCheckBehavior')
     IncludeDeletedGroups = Shapes::BooleanShape.new(name: 'IncludeDeletedGroups')
+    IncludeInstances = Shapes::BooleanShape.new(name: 'IncludeInstances')
     Instance = Shapes::StructureShape.new(name: 'Instance')
     InstanceGeneration = Shapes::StringShape.new(name: 'InstanceGeneration')
     InstanceGenerations = Shapes::ListShape.new(name: 'InstanceGenerations')
@@ -544,6 +545,7 @@ module Aws::AutoScaling
     AutoScalingGroupNames.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen255)
 
     AutoScalingGroupNamesType.add_member(:auto_scaling_group_names, Shapes::ShapeRef.new(shape: AutoScalingGroupNames, location_name: "AutoScalingGroupNames"))
+    AutoScalingGroupNamesType.add_member(:include_instances, Shapes::ShapeRef.new(shape: IncludeInstances, location_name: "IncludeInstances"))
     AutoScalingGroupNamesType.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
     AutoScalingGroupNamesType.add_member(:max_records, Shapes::ShapeRef.new(shape: MaxRecords, location_name: "MaxRecords"))
     AutoScalingGroupNamesType.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.106.0 (2025-06-26)
+------------------
+
+* Feature - This release updates AWS CLI examples for KMS APIs.
+
 1.105.0 (2025-06-12)
 ------------------
 

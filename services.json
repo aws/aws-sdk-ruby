@@ -5,6 +5,9 @@
   "ACMPCA": {
     "models": "acm-pca/2017-08-22"
   },
+  "AIOps": {
+    "models": "aiops/2018-05-10"
+  },
   "APIGateway": {
     "models": "apigateway/2015-07-09",
     "addPlugins": [
@@ -662,6 +665,9 @@
   "Keyspaces": {
     "models": "keyspaces/2022-02-10"
   },
+  "KeyspacesStreams": {
+    "models": "keyspacesstreams/2024-09-09"
+  },
   "Kinesis": {
     "models": "kinesis/2013-12-02"
   },
@@ -1318,6 +1324,9 @@
   },
   "WorkSpacesWeb": {
     "models": "workspaces-web/2020-07-08"
+  },
+  "WorkspacesInstances": {
+    "models": "workspaces-instances/2022-07-26"
   },
   "XRay": {
     "models": "xray/2016-04-12"

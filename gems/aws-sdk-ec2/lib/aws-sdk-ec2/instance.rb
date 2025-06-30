@@ -345,9 +345,14 @@ module Aws::EC2
       data[:private_dns_name]
     end
 
-    # \[IPv4 only\] The public DNS name assigned to the instance. This name
-    # is not available until the instance enters the `running` state. This
-    # name is only available if you've enabled DNS hostnames for your VPC.
+    # The public DNS name assigned to the instance. This name is not
+    # available until the instance enters the `running` state. This name is
+    # only available if you've enabled DNS hostnames for your VPC. The
+    # format of this name depends on the [public hostname type][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/hostname-types.html#public-hostnames
     # @return [String]
     def public_dns_name
       data[:public_dns_name]
@@ -778,6 +783,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     snapshot_location: "regional", # accepts regional, local
     #     dry_run: false,
     #     name: "String", # required
     #     description: "String",
@@ -793,8 +799,10 @@ module Aws::EC2
     #           kms_key_id: "String",
     #           throughput: 1,
     #           outpost_arn: "String",
+    #           availability_zone: "String",
     #           encrypted: false,
     #           volume_initialization_rate: 1,
+    #           availability_zone_id: "String",
     #         },
     #         no_device: "String",
     #         device_name: "String",
@@ -822,6 +830,21 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
+    # @option options [String] :snapshot_location
+    #   <note markdown="1"> Only supported for instances in Local Zones. If the source instance is
+    #   not in a Local Zone, omit this parameter.
+    #
+    #    </note>
+    #
+    #   The Amazon S3 location where the snapshots will be stored.
+    #
+    #   * To create local snapshots in the same Local Zone as the source
+    #     instance, specify `local`.
+    #
+    #   * To create regional snapshots in the parent Region of the Local Zone,
+    #     specify `regional` or omit this parameter.
+    #
+    #   Default: `regional`
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

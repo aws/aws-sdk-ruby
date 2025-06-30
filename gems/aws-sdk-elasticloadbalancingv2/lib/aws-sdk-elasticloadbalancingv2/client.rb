@@ -475,14 +475,14 @@ module Aws::ElasticLoadBalancingV2
     # If the certificate in already in the certificate list, the call is
     # successful but the certificate is not added again.
     #
-    # For more information, see [HTTPS listeners][1] in the *Application
-    # Load Balancers Guide* or [TLS listeners][2] in the *Network Load
+    # For more information, see [SSL certificates][1] in the *Application
+    # Load Balancers Guide* or [Server certificates][2] in the *Network Load
     # Balancers Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html
-    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/https-listener-certificates.html
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/tls-listener-certificates.html
     #
     # @option params [required, String] :listener_arn
     #   The Amazon Resource Name (ARN) of the listener.
@@ -669,8 +669,8 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
-    #   [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/describe-ssl-policies.html
+    #   [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/describe-ssl-policies.html
     #
     # @option params [Array<Types::Certificate>] :certificates
     #   \[HTTPS and TLS listeners\] The default certificate for the listener.
@@ -700,7 +700,7 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-listeners.html#alpn-policies
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags to assign to the listener.
@@ -1758,6 +1758,13 @@ module Aws::ElasticLoadBalancingV2
 
     # Creates a trust store.
     #
+    # For more information, see [Mutual TLS for Application Load
+    # Balancers][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/mutual-authentication.html
+    #
     # @option params [required, String] :name
     #   The name of the trust store.
     #
@@ -2044,9 +2051,9 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html#deregistration-delay
-    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html#deregistration-delay
-    # [3]: https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/target-groups.html#deregistration-delay
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/edit-target-group-attributes.html#deregistration-delay
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/edit-target-group-attributes.html#deregistration-delay
+    # [3]: https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/edit-target-group-attributes.html#deregistration-delay
     #
     # @option params [required, String] :target_group_arn
     #   The Amazon Resource Name (ARN) of the target group.
@@ -2122,6 +2129,8 @@ module Aws::ElasticLoadBalancingV2
     #
     #   * {Types::DescribeAccountLimitsOutput#limits #limits} => Array&lt;Types::Limit&gt;
     #   * {Types::DescribeAccountLimitsOutput#next_marker #next_marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2241,8 +2250,8 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#https-listener-certificates
-    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#tls-listener-certificate
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/https-listener-certificates.html
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/tls-listener-certificates.html
     #
     # @option params [required, String] :listener_arn
     #   The Amazon Resource Names (ARN) of the listener.
@@ -2769,13 +2778,13 @@ module Aws::ElasticLoadBalancingV2
     # negotiation.
     #
     # For more information, see [Security policies][1] in the *Application
-    # Load Balancers Guide* or [Security policies][2] in the *Network Load
+    # Load Balancers Guide* and [Security policies][2] in the *Network Load
     # Balancers Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
-    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/describe-ssl-policies.html
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/describe-ssl-policies.html
     #
     # @option params [Array<String>] :names
     #   The names of the policies.
@@ -3682,8 +3691,8 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
-    #   [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/describe-ssl-policies.html
+    #   [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/describe-ssl-policies.html
     #
     # @option params [Array<Types::Certificate>] :certificates
     #   \[HTTPS and TLS listeners\] The default certificate for the listener.
@@ -3713,7 +3722,7 @@ module Aws::ElasticLoadBalancingV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-listeners.html#alpn-policies
     #
     # @option params [Types::MutualAuthenticationAttributes] :mutual_authentication
     #   The mutual authentication configuration information.
@@ -4670,10 +4679,19 @@ module Aws::ElasticLoadBalancingV2
     # register each EC2 instance or IP address with the same target group
     # multiple times using different ports.
     #
-    # With a Network Load Balancer, you can't register instances by
-    # instance ID if they have the following instance types: C1, CC1, CC2,
-    # CG1, CG2, CR1, CS1, G1, G2, HI1, HS1, M1, M2, M3, and T1. You can
-    # register instances of these types by IP address.
+    # For more information, see the following:
+    #
+    # * [Register targets for your Application Load Balancer][1]
+    #
+    # * [Register targets for your Network Load Balancer][2]
+    #
+    # * [Register targets for your Gateway Load Balancer][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-register-targets.html
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/target-group-register-targets.html
+    # [3]: https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/target-group-register-targets.html
     #
     # @option params [required, String] :target_group_arn
     #   The Amazon Resource Name (ARN) of the target group.
@@ -5261,7 +5279,7 @@ module Aws::ElasticLoadBalancingV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.133.0'
+      context[:gem_version] = '1.134.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

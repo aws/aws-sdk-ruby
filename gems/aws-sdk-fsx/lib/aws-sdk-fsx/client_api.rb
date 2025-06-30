@@ -15,6 +15,8 @@ module Aws::FSx
     include Seahorse::Model
 
     AWSAccountId = Shapes::StringShape.new(name: 'AWSAccountId')
+    AccessPointAlreadyOwnedByYou = Shapes::StructureShape.new(name: 'AccessPointAlreadyOwnedByYou')
+    AccessPointPolicy = Shapes::StringShape.new(name: 'AccessPointPolicy')
     ActiveDirectoryBackupAttributes = Shapes::StructureShape.new(name: 'ActiveDirectoryBackupAttributes')
     ActiveDirectoryError = Shapes::StructureShape.new(name: 'ActiveDirectoryError')
     ActiveDirectoryErrorType = Shapes::StringShape.new(name: 'ActiveDirectoryErrorType')
@@ -68,6 +70,10 @@ module Aws::FSx
     CopySnapshotAndUpdateVolumeResponse = Shapes::StructureShape.new(name: 'CopySnapshotAndUpdateVolumeResponse')
     CopyTagsToDataRepositoryAssociations = Shapes::BooleanShape.new(name: 'CopyTagsToDataRepositoryAssociations')
     CreateAggregateConfiguration = Shapes::StructureShape.new(name: 'CreateAggregateConfiguration')
+    CreateAndAttachS3AccessPointOpenZFSConfiguration = Shapes::StructureShape.new(name: 'CreateAndAttachS3AccessPointOpenZFSConfiguration')
+    CreateAndAttachS3AccessPointRequest = Shapes::StructureShape.new(name: 'CreateAndAttachS3AccessPointRequest')
+    CreateAndAttachS3AccessPointResponse = Shapes::StructureShape.new(name: 'CreateAndAttachS3AccessPointResponse')
+    CreateAndAttachS3AccessPointS3Configuration = Shapes::StructureShape.new(name: 'CreateAndAttachS3AccessPointS3Configuration')
     CreateBackupRequest = Shapes::StructureShape.new(name: 'CreateBackupRequest')
     CreateBackupResponse = Shapes::StructureShape.new(name: 'CreateBackupResponse')
     CreateDataRepositoryAssociationRequest = Shapes::StructureShape.new(name: 'CreateDataRepositoryAssociationRequest')
@@ -168,6 +174,8 @@ module Aws::FSx
     DescribeFileSystemAliasesResponse = Shapes::StructureShape.new(name: 'DescribeFileSystemAliasesResponse')
     DescribeFileSystemsRequest = Shapes::StructureShape.new(name: 'DescribeFileSystemsRequest')
     DescribeFileSystemsResponse = Shapes::StructureShape.new(name: 'DescribeFileSystemsResponse')
+    DescribeS3AccessPointAttachmentsRequest = Shapes::StructureShape.new(name: 'DescribeS3AccessPointAttachmentsRequest')
+    DescribeS3AccessPointAttachmentsResponse = Shapes::StructureShape.new(name: 'DescribeS3AccessPointAttachmentsResponse')
     DescribeSharedVpcConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeSharedVpcConfigurationRequest')
     DescribeSharedVpcConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeSharedVpcConfigurationResponse')
     DescribeSnapshotsRequest = Shapes::StructureShape.new(name: 'DescribeSnapshotsRequest')
@@ -176,6 +184,8 @@ module Aws::FSx
     DescribeStorageVirtualMachinesResponse = Shapes::StructureShape.new(name: 'DescribeStorageVirtualMachinesResponse')
     DescribeVolumesRequest = Shapes::StructureShape.new(name: 'DescribeVolumesRequest')
     DescribeVolumesResponse = Shapes::StructureShape.new(name: 'DescribeVolumesResponse')
+    DetachAndDeleteS3AccessPointRequest = Shapes::StructureShape.new(name: 'DetachAndDeleteS3AccessPointRequest')
+    DetachAndDeleteS3AccessPointResponse = Shapes::StructureShape.new(name: 'DetachAndDeleteS3AccessPointResponse')
     DirectoryId = Shapes::StringShape.new(name: 'DirectoryId')
     DirectoryPassword = Shapes::StringShape.new(name: 'DirectoryPassword')
     DirectoryUserName = Shapes::StringShape.new(name: 'DirectoryUserName')
@@ -187,6 +197,7 @@ module Aws::FSx
     DriveCacheType = Shapes::StringShape.new(name: 'DriveCacheType')
     DurationSinceLastAccess = Shapes::StructureShape.new(name: 'DurationSinceLastAccess')
     EndTime = Shapes::TimestampShape.new(name: 'EndTime')
+    ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     EventType = Shapes::StringShape.new(name: 'EventType')
     EventTypes = Shapes::ListShape.new(name: 'EventTypes')
@@ -210,6 +221,7 @@ module Aws::FSx
     FileSystemEndpoint = Shapes::StructureShape.new(name: 'FileSystemEndpoint')
     FileSystemEndpoints = Shapes::StructureShape.new(name: 'FileSystemEndpoints')
     FileSystemFailureDetails = Shapes::StructureShape.new(name: 'FileSystemFailureDetails')
+    FileSystemGID = Shapes::IntegerShape.new(name: 'FileSystemGID')
     FileSystemId = Shapes::StringShape.new(name: 'FileSystemId')
     FileSystemIds = Shapes::ListShape.new(name: 'FileSystemIds')
     FileSystemLifecycle = Shapes::StringShape.new(name: 'FileSystemLifecycle')
@@ -217,8 +229,10 @@ module Aws::FSx
     FileSystemMaintenanceOperation = Shapes::StringShape.new(name: 'FileSystemMaintenanceOperation')
     FileSystemMaintenanceOperations = Shapes::ListShape.new(name: 'FileSystemMaintenanceOperations')
     FileSystemNotFound = Shapes::StructureShape.new(name: 'FileSystemNotFound')
+    FileSystemSecondaryGIDs = Shapes::ListShape.new(name: 'FileSystemSecondaryGIDs')
     FileSystemType = Shapes::StringShape.new(name: 'FileSystemType')
     FileSystemTypeVersion = Shapes::StringShape.new(name: 'FileSystemTypeVersion')
+    FileSystemUID = Shapes::IntegerShape.new(name: 'FileSystemUID')
     FileSystems = Shapes::ListShape.new(name: 'FileSystems')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterName = Shapes::StringShape.new(name: 'FilterName')
@@ -237,6 +251,7 @@ module Aws::FSx
     IntegerNoMaxFromNegativeOne = Shapes::IntegerShape.new(name: 'IntegerNoMaxFromNegativeOne')
     IntegerRecordSizeKiB = Shapes::IntegerShape.new(name: 'IntegerRecordSizeKiB')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
+    InvalidAccessPoint = Shapes::StructureShape.new(name: 'InvalidAccessPoint')
     InvalidDataRepositoryType = Shapes::StructureShape.new(name: 'InvalidDataRepositoryType')
     InvalidDestinationKmsKey = Shapes::StructureShape.new(name: 'InvalidDestinationKmsKey')
     InvalidExportPath = Shapes::StructureShape.new(name: 'InvalidExportPath')
@@ -244,6 +259,7 @@ module Aws::FSx
     InvalidNetworkSettings = Shapes::StructureShape.new(name: 'InvalidNetworkSettings')
     InvalidPerUnitStorageThroughput = Shapes::StructureShape.new(name: 'InvalidPerUnitStorageThroughput')
     InvalidRegion = Shapes::StructureShape.new(name: 'InvalidRegion')
+    InvalidRequest = Shapes::StructureShape.new(name: 'InvalidRequest')
     InvalidSourceKmsKey = Shapes::StructureShape.new(name: 'InvalidSourceKmsKey')
     Iops = Shapes::IntegerShape.new(name: 'Iops')
     IpAddress = Shapes::StringShape.new(name: 'IpAddress')
@@ -297,11 +313,14 @@ module Aws::FSx
     OpenZFSDataCompressionType = Shapes::StringShape.new(name: 'OpenZFSDataCompressionType')
     OpenZFSDeploymentType = Shapes::StringShape.new(name: 'OpenZFSDeploymentType')
     OpenZFSFileSystemConfiguration = Shapes::StructureShape.new(name: 'OpenZFSFileSystemConfiguration')
+    OpenZFSFileSystemIdentity = Shapes::StructureShape.new(name: 'OpenZFSFileSystemIdentity')
+    OpenZFSFileSystemUserType = Shapes::StringShape.new(name: 'OpenZFSFileSystemUserType')
     OpenZFSNfsExport = Shapes::StructureShape.new(name: 'OpenZFSNfsExport')
     OpenZFSNfsExportOption = Shapes::StringShape.new(name: 'OpenZFSNfsExportOption')
     OpenZFSNfsExportOptions = Shapes::ListShape.new(name: 'OpenZFSNfsExportOptions')
     OpenZFSNfsExports = Shapes::ListShape.new(name: 'OpenZFSNfsExports')
     OpenZFSOriginSnapshotConfiguration = Shapes::StructureShape.new(name: 'OpenZFSOriginSnapshotConfiguration')
+    OpenZFSPosixFileSystemUser = Shapes::StructureShape.new(name: 'OpenZFSPosixFileSystemUser')
     OpenZFSQuotaType = Shapes::StringShape.new(name: 'OpenZFSQuotaType')
     OpenZFSReadCacheConfiguration = Shapes::StructureShape.new(name: 'OpenZFSReadCacheConfiguration')
     OpenZFSReadCacheSizingMode = Shapes::StringShape.new(name: 'OpenZFSReadCacheSizingMode')
@@ -337,6 +356,22 @@ module Aws::FSx
     RetentionPeriodValue = Shapes::IntegerShape.new(name: 'RetentionPeriodValue')
     RouteTableId = Shapes::StringShape.new(name: 'RouteTableId')
     RouteTableIds = Shapes::ListShape.new(name: 'RouteTableIds')
+    S3AccessPoint = Shapes::StructureShape.new(name: 'S3AccessPoint')
+    S3AccessPointAlias = Shapes::StringShape.new(name: 'S3AccessPointAlias')
+    S3AccessPointAttachment = Shapes::StructureShape.new(name: 'S3AccessPointAttachment')
+    S3AccessPointAttachmentLifecycle = Shapes::StringShape.new(name: 'S3AccessPointAttachmentLifecycle')
+    S3AccessPointAttachmentName = Shapes::StringShape.new(name: 'S3AccessPointAttachmentName')
+    S3AccessPointAttachmentNames = Shapes::ListShape.new(name: 'S3AccessPointAttachmentNames')
+    S3AccessPointAttachmentNotFound = Shapes::StructureShape.new(name: 'S3AccessPointAttachmentNotFound')
+    S3AccessPointAttachmentType = Shapes::StringShape.new(name: 'S3AccessPointAttachmentType')
+    S3AccessPointAttachments = Shapes::ListShape.new(name: 'S3AccessPointAttachments')
+    S3AccessPointAttachmentsFilter = Shapes::StructureShape.new(name: 'S3AccessPointAttachmentsFilter')
+    S3AccessPointAttachmentsFilterName = Shapes::StringShape.new(name: 'S3AccessPointAttachmentsFilterName')
+    S3AccessPointAttachmentsFilterValue = Shapes::StringShape.new(name: 'S3AccessPointAttachmentsFilterValue')
+    S3AccessPointAttachmentsFilterValues = Shapes::ListShape.new(name: 'S3AccessPointAttachmentsFilterValues')
+    S3AccessPointAttachmentsFilters = Shapes::ListShape.new(name: 'S3AccessPointAttachmentsFilters')
+    S3AccessPointOpenZFSConfiguration = Shapes::StructureShape.new(name: 'S3AccessPointOpenZFSConfiguration')
+    S3AccessPointVpcConfiguration = Shapes::StructureShape.new(name: 'S3AccessPointVpcConfiguration')
     S3DataRepositoryConfiguration = Shapes::StructureShape.new(name: 'S3DataRepositoryConfiguration')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
@@ -405,6 +440,7 @@ module Aws::FSx
     ThroughputCapacityPerHAPair = Shapes::IntegerShape.new(name: 'ThroughputCapacityPerHAPair')
     TieringPolicy = Shapes::StructureShape.new(name: 'TieringPolicy')
     TieringPolicyName = Shapes::StringShape.new(name: 'TieringPolicyName')
+    TooManyAccessPoints = Shapes::StructureShape.new(name: 'TooManyAccessPoints')
     TotalConstituents = Shapes::IntegerShape.new(name: 'TotalConstituents')
     TotalCount = Shapes::IntegerShape.new(name: 'TotalCount')
     TotalTransferBytes = Shapes::IntegerShape.new(name: 'TotalTransferBytes')
@@ -465,6 +501,10 @@ module Aws::FSx
     WindowsAuditLogCreateConfiguration = Shapes::StructureShape.new(name: 'WindowsAuditLogCreateConfiguration')
     WindowsDeploymentType = Shapes::StringShape.new(name: 'WindowsDeploymentType')
     WindowsFileSystemConfiguration = Shapes::StructureShape.new(name: 'WindowsFileSystemConfiguration')
+
+    AccessPointAlreadyOwnedByYou.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
+    AccessPointAlreadyOwnedByYou.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    AccessPointAlreadyOwnedByYou.struct_class = Types::AccessPointAlreadyOwnedByYou
 
     ActiveDirectoryBackupAttributes.add_member(:domain_name, Shapes::ShapeRef.new(shape: ActiveDirectoryFullyQualifiedName, location_name: "DomainName"))
     ActiveDirectoryBackupAttributes.add_member(:active_directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "ActiveDirectoryId"))
@@ -607,6 +647,24 @@ module Aws::FSx
     CreateAggregateConfiguration.add_member(:aggregates, Shapes::ShapeRef.new(shape: Aggregates, location_name: "Aggregates"))
     CreateAggregateConfiguration.add_member(:constituents_per_aggregate, Shapes::ShapeRef.new(shape: AggregateListMultiplier, location_name: "ConstituentsPerAggregate"))
     CreateAggregateConfiguration.struct_class = Types::CreateAggregateConfiguration
+
+    CreateAndAttachS3AccessPointOpenZFSConfiguration.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, required: true, location_name: "VolumeId"))
+    CreateAndAttachS3AccessPointOpenZFSConfiguration.add_member(:file_system_identity, Shapes::ShapeRef.new(shape: OpenZFSFileSystemIdentity, required: true, location_name: "FileSystemIdentity"))
+    CreateAndAttachS3AccessPointOpenZFSConfiguration.struct_class = Types::CreateAndAttachS3AccessPointOpenZFSConfiguration
+
+    CreateAndAttachS3AccessPointRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
+    CreateAndAttachS3AccessPointRequest.add_member(:name, Shapes::ShapeRef.new(shape: S3AccessPointAttachmentName, required: true, location_name: "Name"))
+    CreateAndAttachS3AccessPointRequest.add_member(:type, Shapes::ShapeRef.new(shape: S3AccessPointAttachmentType, required: true, location_name: "Type"))
+    CreateAndAttachS3AccessPointRequest.add_member(:open_zfs_configuration, Shapes::ShapeRef.new(shape: CreateAndAttachS3AccessPointOpenZFSConfiguration, location_name: "OpenZFSConfiguration"))
+    CreateAndAttachS3AccessPointRequest.add_member(:s3_access_point, Shapes::ShapeRef.new(shape: CreateAndAttachS3AccessPointS3Configuration, location_name: "S3AccessPoint"))
+    CreateAndAttachS3AccessPointRequest.struct_class = Types::CreateAndAttachS3AccessPointRequest
+
+    CreateAndAttachS3AccessPointResponse.add_member(:s3_access_point_attachment, Shapes::ShapeRef.new(shape: S3AccessPointAttachment, location_name: "S3AccessPointAttachment"))
+    CreateAndAttachS3AccessPointResponse.struct_class = Types::CreateAndAttachS3AccessPointResponse
+
+    CreateAndAttachS3AccessPointS3Configuration.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: S3AccessPointVpcConfiguration, location_name: "VpcConfiguration"))
+    CreateAndAttachS3AccessPointS3Configuration.add_member(:policy, Shapes::ShapeRef.new(shape: AccessPointPolicy, location_name: "Policy"))
+    CreateAndAttachS3AccessPointS3Configuration.struct_class = Types::CreateAndAttachS3AccessPointS3Configuration
 
     CreateBackupRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId"))
     CreateBackupRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
@@ -1105,6 +1163,16 @@ module Aws::FSx
     DescribeFileSystemsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeFileSystemsResponse.struct_class = Types::DescribeFileSystemsResponse
 
+    DescribeS3AccessPointAttachmentsRequest.add_member(:names, Shapes::ShapeRef.new(shape: S3AccessPointAttachmentNames, location_name: "Names"))
+    DescribeS3AccessPointAttachmentsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: S3AccessPointAttachmentsFilters, location_name: "Filters"))
+    DescribeS3AccessPointAttachmentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeS3AccessPointAttachmentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeS3AccessPointAttachmentsRequest.struct_class = Types::DescribeS3AccessPointAttachmentsRequest
+
+    DescribeS3AccessPointAttachmentsResponse.add_member(:s3_access_point_attachments, Shapes::ShapeRef.new(shape: S3AccessPointAttachments, location_name: "S3AccessPointAttachments"))
+    DescribeS3AccessPointAttachmentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeS3AccessPointAttachmentsResponse.struct_class = Types::DescribeS3AccessPointAttachmentsResponse
+
     DescribeSharedVpcConfigurationRequest.struct_class = Types::DescribeSharedVpcConfigurationRequest
 
     DescribeSharedVpcConfigurationResponse.add_member(:enable_fsx_route_table_updates_from_participant_accounts, Shapes::ShapeRef.new(shape: VerboseFlag, location_name: "EnableFsxRouteTableUpdatesFromParticipantAccounts"))
@@ -1140,6 +1208,14 @@ module Aws::FSx
     DescribeVolumesResponse.add_member(:volumes, Shapes::ShapeRef.new(shape: Volumes, location_name: "Volumes"))
     DescribeVolumesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeVolumesResponse.struct_class = Types::DescribeVolumesResponse
+
+    DetachAndDeleteS3AccessPointRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
+    DetachAndDeleteS3AccessPointRequest.add_member(:name, Shapes::ShapeRef.new(shape: S3AccessPointAttachmentName, required: true, location_name: "Name"))
+    DetachAndDeleteS3AccessPointRequest.struct_class = Types::DetachAndDeleteS3AccessPointRequest
+
+    DetachAndDeleteS3AccessPointResponse.add_member(:lifecycle, Shapes::ShapeRef.new(shape: S3AccessPointAttachmentLifecycle, location_name: "Lifecycle"))
+    DetachAndDeleteS3AccessPointResponse.add_member(:name, Shapes::ShapeRef.new(shape: S3AccessPointAttachmentName, location_name: "Name"))
+    DetachAndDeleteS3AccessPointResponse.struct_class = Types::DetachAndDeleteS3AccessPointResponse
 
     DisassociateFileSystemAliasesRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     DisassociateFileSystemAliasesRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
@@ -1275,6 +1351,8 @@ module Aws::FSx
     FileSystemNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     FileSystemNotFound.struct_class = Types::FileSystemNotFound
 
+    FileSystemSecondaryGIDs.member = Shapes::ShapeRef.new(shape: FileSystemGID)
+
     FileSystems.member = Shapes::ShapeRef.new(shape: FileSystem)
 
     Filter.add_member(:name, Shapes::ShapeRef.new(shape: FilterName, location_name: "Name"))
@@ -1294,6 +1372,10 @@ module Aws::FSx
 
     InternalServerError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InternalServerError.struct_class = Types::InternalServerError
+
+    InvalidAccessPoint.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
+    InvalidAccessPoint.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidAccessPoint.struct_class = Types::InvalidAccessPoint
 
     InvalidDataRepositoryType.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InvalidDataRepositoryType.struct_class = Types::InvalidDataRepositoryType
@@ -1318,6 +1400,10 @@ module Aws::FSx
 
     InvalidRegion.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InvalidRegion.struct_class = Types::InvalidRegion
+
+    InvalidRequest.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
+    InvalidRequest.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidRequest.struct_class = Types::InvalidRequest
 
     InvalidSourceKmsKey.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InvalidSourceKmsKey.struct_class = Types::InvalidSourceKmsKey
@@ -1455,6 +1541,10 @@ module Aws::FSx
     OpenZFSFileSystemConfiguration.add_member(:read_cache_configuration, Shapes::ShapeRef.new(shape: OpenZFSReadCacheConfiguration, location_name: "ReadCacheConfiguration"))
     OpenZFSFileSystemConfiguration.struct_class = Types::OpenZFSFileSystemConfiguration
 
+    OpenZFSFileSystemIdentity.add_member(:type, Shapes::ShapeRef.new(shape: OpenZFSFileSystemUserType, required: true, location_name: "Type"))
+    OpenZFSFileSystemIdentity.add_member(:posix_user, Shapes::ShapeRef.new(shape: OpenZFSPosixFileSystemUser, location_name: "PosixUser"))
+    OpenZFSFileSystemIdentity.struct_class = Types::OpenZFSFileSystemIdentity
+
     OpenZFSNfsExport.add_member(:client_configurations, Shapes::ShapeRef.new(shape: OpenZFSClientConfigurations, required: true, location_name: "ClientConfigurations"))
     OpenZFSNfsExport.struct_class = Types::OpenZFSNfsExport
 
@@ -1465,6 +1555,11 @@ module Aws::FSx
     OpenZFSOriginSnapshotConfiguration.add_member(:snapshot_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "SnapshotARN"))
     OpenZFSOriginSnapshotConfiguration.add_member(:copy_strategy, Shapes::ShapeRef.new(shape: OpenZFSCopyStrategy, location_name: "CopyStrategy"))
     OpenZFSOriginSnapshotConfiguration.struct_class = Types::OpenZFSOriginSnapshotConfiguration
+
+    OpenZFSPosixFileSystemUser.add_member(:uid, Shapes::ShapeRef.new(shape: FileSystemUID, required: true, location_name: "Uid"))
+    OpenZFSPosixFileSystemUser.add_member(:gid, Shapes::ShapeRef.new(shape: FileSystemGID, required: true, location_name: "Gid"))
+    OpenZFSPosixFileSystemUser.add_member(:secondary_gids, Shapes::ShapeRef.new(shape: FileSystemSecondaryGIDs, location_name: "SecondaryGids"))
+    OpenZFSPosixFileSystemUser.struct_class = Types::OpenZFSPosixFileSystemUser
 
     OpenZFSReadCacheConfiguration.add_member(:sizing_mode, Shapes::ShapeRef.new(shape: OpenZFSReadCacheSizingMode, location_name: "SizingMode"))
     OpenZFSReadCacheConfiguration.add_member(:size_gi_b, Shapes::ShapeRef.new(shape: StorageCapacity, location_name: "SizeGiB"))
@@ -1535,6 +1630,42 @@ module Aws::FSx
     RetentionPeriod.struct_class = Types::RetentionPeriod
 
     RouteTableIds.member = Shapes::ShapeRef.new(shape: RouteTableId)
+
+    S3AccessPoint.add_member(:resource_arn, Shapes::ShapeRef.new(shape: GeneralARN, location_name: "ResourceARN"))
+    S3AccessPoint.add_member(:alias, Shapes::ShapeRef.new(shape: S3AccessPointAlias, location_name: "Alias"))
+    S3AccessPoint.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: S3AccessPointVpcConfiguration, location_name: "VpcConfiguration"))
+    S3AccessPoint.struct_class = Types::S3AccessPoint
+
+    S3AccessPointAttachment.add_member(:lifecycle, Shapes::ShapeRef.new(shape: S3AccessPointAttachmentLifecycle, location_name: "Lifecycle"))
+    S3AccessPointAttachment.add_member(:lifecycle_transition_reason, Shapes::ShapeRef.new(shape: LifecycleTransitionReason, location_name: "LifecycleTransitionReason"))
+    S3AccessPointAttachment.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime"))
+    S3AccessPointAttachment.add_member(:name, Shapes::ShapeRef.new(shape: S3AccessPointAttachmentName, location_name: "Name"))
+    S3AccessPointAttachment.add_member(:type, Shapes::ShapeRef.new(shape: S3AccessPointAttachmentType, location_name: "Type"))
+    S3AccessPointAttachment.add_member(:open_zfs_configuration, Shapes::ShapeRef.new(shape: S3AccessPointOpenZFSConfiguration, location_name: "OpenZFSConfiguration"))
+    S3AccessPointAttachment.add_member(:s3_access_point, Shapes::ShapeRef.new(shape: S3AccessPoint, location_name: "S3AccessPoint"))
+    S3AccessPointAttachment.struct_class = Types::S3AccessPointAttachment
+
+    S3AccessPointAttachmentNames.member = Shapes::ShapeRef.new(shape: S3AccessPointAttachmentName)
+
+    S3AccessPointAttachmentNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    S3AccessPointAttachmentNotFound.struct_class = Types::S3AccessPointAttachmentNotFound
+
+    S3AccessPointAttachments.member = Shapes::ShapeRef.new(shape: S3AccessPointAttachment)
+
+    S3AccessPointAttachmentsFilter.add_member(:name, Shapes::ShapeRef.new(shape: S3AccessPointAttachmentsFilterName, location_name: "Name"))
+    S3AccessPointAttachmentsFilter.add_member(:values, Shapes::ShapeRef.new(shape: S3AccessPointAttachmentsFilterValues, location_name: "Values"))
+    S3AccessPointAttachmentsFilter.struct_class = Types::S3AccessPointAttachmentsFilter
+
+    S3AccessPointAttachmentsFilterValues.member = Shapes::ShapeRef.new(shape: S3AccessPointAttachmentsFilterValue)
+
+    S3AccessPointAttachmentsFilters.member = Shapes::ShapeRef.new(shape: S3AccessPointAttachmentsFilter)
+
+    S3AccessPointOpenZFSConfiguration.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId"))
+    S3AccessPointOpenZFSConfiguration.add_member(:file_system_identity, Shapes::ShapeRef.new(shape: OpenZFSFileSystemIdentity, location_name: "FileSystemIdentity"))
+    S3AccessPointOpenZFSConfiguration.struct_class = Types::S3AccessPointOpenZFSConfiguration
+
+    S3AccessPointVpcConfiguration.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
+    S3AccessPointVpcConfiguration.struct_class = Types::S3AccessPointVpcConfiguration
 
     S3DataRepositoryConfiguration.add_member(:auto_import_policy, Shapes::ShapeRef.new(shape: AutoImportPolicy, location_name: "AutoImportPolicy"))
     S3DataRepositoryConfiguration.add_member(:auto_export_policy, Shapes::ShapeRef.new(shape: AutoExportPolicy, location_name: "AutoExportPolicy"))
@@ -1686,6 +1817,10 @@ module Aws::FSx
     TieringPolicy.add_member(:cooling_period, Shapes::ShapeRef.new(shape: CoolingPeriod, location_name: "CoolingPeriod"))
     TieringPolicy.add_member(:name, Shapes::ShapeRef.new(shape: TieringPolicyName, location_name: "Name"))
     TieringPolicy.struct_class = Types::TieringPolicy
+
+    TooManyAccessPoints.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
+    TooManyAccessPoints.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    TooManyAccessPoints.struct_class = Types::TooManyAccessPoints
 
     UnsupportedOperation.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     UnsupportedOperation.struct_class = Types::UnsupportedOperation
@@ -1977,6 +2112,23 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
+      end)
+
+      api.add_operation(:create_and_attach_s3_access_point, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAndAttachS3AccessPoint"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateAndAttachS3AccessPointRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAndAttachS3AccessPointResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: VolumeNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessPoint)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequest)
+        o.errors << Shapes::ShapeRef.new(shape: AccessPointAlreadyOwnedByYou)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyAccessPoints)
       end)
 
       api.add_operation(:create_backup, Seahorse::Model::Operation.new.tap do |o|
@@ -2330,6 +2482,24 @@ module Aws::FSx
         )
       end)
 
+      api.add_operation(:describe_s3_access_point_attachments, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeS3AccessPointAttachments"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeS3AccessPointAttachmentsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeS3AccessPointAttachmentsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: S3AccessPointAttachmentNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:describe_shared_vpc_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeSharedVpcConfiguration"
         o.http_method = "POST"
@@ -2389,6 +2559,19 @@ module Aws::FSx
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:detach_and_delete_s3_access_point, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DetachAndDeleteS3AccessPoint"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DetachAndDeleteS3AccessPointRequest)
+        o.output = Shapes::ShapeRef.new(shape: DetachAndDeleteS3AccessPointResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: S3AccessPointAttachmentNotFound)
       end)
 
       api.add_operation(:disassociate_file_system_aliases, Seahorse::Model::Operation.new.tap do |o|

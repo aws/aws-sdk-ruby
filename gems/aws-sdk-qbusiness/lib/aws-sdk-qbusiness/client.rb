@@ -497,6 +497,11 @@ module Aws::QBusiness
     #   The list of Amazon Q Business actions that the ISV is allowed to
     #   perform.
     #
+    # @option params [Array<Types::PermissionCondition>] :conditions
+    #   The conditions that restrict when the permission is effective. These
+    #   conditions can be used to limit the permission based on specific
+    #   attributes of the request.
+    #
     # @option params [required, String] :principal
     #   The Amazon Resource Name of the IAM role for the ISV that is being
     #   granted permission.
@@ -511,6 +516,13 @@ module Aws::QBusiness
     #     application_id: "ApplicationId", # required
     #     statement_id: "StatementId", # required
     #     actions: ["QIamAction"], # required
+    #     conditions: [
+    #       {
+    #         condition_operator: "StringEquals", # required, accepts StringEquals
+    #         condition_key: "PermissionConditionKey", # required
+    #         condition_values: ["PermissionConditionValue"], # required
+    #       },
+    #     ],
     #     principal: "PrincipalRoleArn", # required
     #   })
     #
@@ -1379,6 +1391,11 @@ module Aws::QBusiness
     # @option params [required, String] :display_name
     #   A friendly name for the data accessor.
     #
+    # @option params [Types::DataAccessorAuthenticationDetail] :authentication_detail
+    #   The authentication configuration details for the data accessor. This
+    #   specifies how the ISV will authenticate when accessing data through
+    #   this data accessor.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   The tags to associate with the data accessor.
     #
@@ -1480,6 +1497,15 @@ module Aws::QBusiness
     #     ],
     #     client_token: "ClientToken",
     #     display_name: "DataAccessorName", # required
+    #     authentication_detail: {
+    #       authentication_type: "AWS_IAM_IDC_TTI", # required, accepts AWS_IAM_IDC_TTI, AWS_IAM_IDC_AUTH_CODE
+    #       authentication_configuration: {
+    #         idc_trusted_token_issuer_configuration: {
+    #           idc_trusted_token_issuer_arn: "IdcTrustedTokenIssuerArn", # required
+    #         },
+    #       },
+    #       external_ids: ["DataAccessorExternalId"],
+    #     },
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -2810,6 +2836,7 @@ module Aws::QBusiness
     #   * {Types::GetDataAccessorResponse#idc_application_arn #idc_application_arn} => String
     #   * {Types::GetDataAccessorResponse#principal #principal} => String
     #   * {Types::GetDataAccessorResponse#action_configurations #action_configurations} => Array&lt;Types::ActionConfiguration&gt;
+    #   * {Types::GetDataAccessorResponse#authentication_detail #authentication_detail} => Types::DataAccessorAuthenticationDetail
     #   * {Types::GetDataAccessorResponse#created_at #created_at} => Time
     #   * {Types::GetDataAccessorResponse#updated_at #updated_at} => Time
     #
@@ -2877,6 +2904,10 @@ module Aws::QBusiness
     #   resp.action_configurations[0].filter_configuration.document_attribute_filter.less_than_or_equals.value.string_list_value[0] #=> String
     #   resp.action_configurations[0].filter_configuration.document_attribute_filter.less_than_or_equals.value.long_value #=> Integer
     #   resp.action_configurations[0].filter_configuration.document_attribute_filter.less_than_or_equals.value.date_value #=> Time
+    #   resp.authentication_detail.authentication_type #=> String, one of "AWS_IAM_IDC_TTI", "AWS_IAM_IDC_AUTH_CODE"
+    #   resp.authentication_detail.authentication_configuration.idc_trusted_token_issuer_configuration.idc_trusted_token_issuer_arn #=> String
+    #   resp.authentication_detail.external_ids #=> Array
+    #   resp.authentication_detail.external_ids[0] #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #
@@ -3649,6 +3680,10 @@ module Aws::QBusiness
     #   resp.data_accessors[0].data_accessor_arn #=> String
     #   resp.data_accessors[0].idc_application_arn #=> String
     #   resp.data_accessors[0].principal #=> String
+    #   resp.data_accessors[0].authentication_detail.authentication_type #=> String, one of "AWS_IAM_IDC_TTI", "AWS_IAM_IDC_AUTH_CODE"
+    #   resp.data_accessors[0].authentication_detail.authentication_configuration.idc_trusted_token_issuer_configuration.idc_trusted_token_issuer_arn #=> String
+    #   resp.data_accessors[0].authentication_detail.external_ids #=> Array
+    #   resp.data_accessors[0].authentication_detail.external_ids[0] #=> String
     #   resp.data_accessors[0].created_at #=> Time
     #   resp.data_accessors[0].updated_at #=> Time
     #   resp.next_token #=> String
@@ -5116,6 +5151,11 @@ module Aws::QBusiness
     #   The updated list of action configurations specifying the allowed
     #   actions and any associated filters.
     #
+    # @option params [Types::DataAccessorAuthenticationDetail] :authentication_detail
+    #   The updated authentication configuration details for the data
+    #   accessor. This specifies how the ISV will authenticate when accessing
+    #   data through this data accessor.
+    #
     # @option params [String] :display_name
     #   The updated friendly name for the data accessor.
     #
@@ -5211,6 +5251,15 @@ module Aws::QBusiness
     #         },
     #       },
     #     ],
+    #     authentication_detail: {
+    #       authentication_type: "AWS_IAM_IDC_TTI", # required, accepts AWS_IAM_IDC_TTI, AWS_IAM_IDC_AUTH_CODE
+    #       authentication_configuration: {
+    #         idc_trusted_token_issuer_configuration: {
+    #           idc_trusted_token_issuer_arn: "IdcTrustedTokenIssuerArn", # required
+    #         },
+    #       },
+    #       external_ids: ["DataAccessorExternalId"],
+    #     },
     #     display_name: "DataAccessorName",
     #   })
     #
@@ -5824,7 +5873,7 @@ module Aws::QBusiness
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-qbusiness'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -177,7 +177,6 @@ module Aws::WorkSpacesThinClient
     Device.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     Device.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
     Device.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
-    Device.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, deprecated: true, location_name: "tags", metadata: {"deprecatedMessage" => "This field will be removed in future releases. Use ListTagsForResource API instead.", "deprecatedSince" => "2025-03-25"}))
     Device.struct_class = Types::Device
 
     DeviceCreationTagsMap.key = Shapes::ShapeRef.new(shape: DeviceCreationTagKey)
@@ -220,7 +219,6 @@ module Aws::WorkSpacesThinClient
     Environment.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     Environment.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
     Environment.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
-    Environment.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, deprecated: true, location_name: "tags", metadata: {"deprecatedMessage" => "This field will be removed in future releases. Use ListTagsForResource API instead.", "deprecatedSince" => "2025-03-25"}))
     Environment.add_member(:device_creation_tags, Shapes::ShapeRef.new(shape: DeviceCreationTagsMap, location_name: "deviceCreationTags"))
     Environment.struct_class = Types::Environment
 
@@ -328,7 +326,6 @@ module Aws::WorkSpacesThinClient
     SoftwareSet.add_member(:validation_status, Shapes::ShapeRef.new(shape: SoftwareSetValidationStatus, location_name: "validationStatus"))
     SoftwareSet.add_member(:software, Shapes::ShapeRef.new(shape: SoftwareList, location_name: "software"))
     SoftwareSet.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
-    SoftwareSet.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, deprecated: true, location_name: "tags", metadata: {"deprecatedMessage" => "This field will be removed in future releases. Use ListTagsForResource API instead.", "deprecatedSince" => "2025-03-25"}))
     SoftwareSet.struct_class = Types::SoftwareSet
 
     SoftwareSetList.member = Shapes::ShapeRef.new(shape: SoftwareSetSummary)

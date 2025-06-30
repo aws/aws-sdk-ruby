@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.205.0 (2025-06-27)
+------------------
+
+* Feature - This release adds the following value to an InitiateAs enum: COMPLETED
+
 1.204.0 (2025-06-02)
 ------------------
 

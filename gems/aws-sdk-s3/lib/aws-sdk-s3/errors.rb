@@ -30,6 +30,7 @@ module Aws::S3
   # * {BucketAlreadyExists}
   # * {BucketAlreadyOwnedByYou}
   # * {EncryptionTypeMismatch}
+  # * {IdempotencyParameterMismatch}
   # * {InvalidObjectState}
   # * {InvalidRequest}
   # * {InvalidWriteOffset}
@@ -71,6 +72,16 @@ module Aws::S3
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::S3::Types::EncryptionTypeMismatch] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class IdempotencyParameterMismatch < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::S3::Types::IdempotencyParameterMismatch] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

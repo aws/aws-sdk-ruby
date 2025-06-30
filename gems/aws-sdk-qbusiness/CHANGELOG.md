@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2025-06-26)
+------------------
+
+* Feature - Added support for App level authentication for QBusiness DataAccessor using AWS IAM Identity center Trusted Token issuer
+
 1.40.0 (2025-06-02)
 ------------------
 

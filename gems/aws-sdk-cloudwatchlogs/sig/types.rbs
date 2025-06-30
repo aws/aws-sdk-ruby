@@ -1214,6 +1214,13 @@ module Aws::CloudWatchLogs
       SENSITIVE: []
     end
 
+    class ParseToOCSF
+      attr_accessor source: ::String
+      attr_accessor event_source: ("CloudTrail" | "Route53Resolver" | "VPCFlow" | "EKSAudit" | "AWSWAF")
+      attr_accessor ocsf_version: ("V1.1")
+      SENSITIVE: []
+    end
+
     class ParseVPC
       attr_accessor source: ::String
       SENSITIVE: []
@@ -1252,6 +1259,7 @@ module Aws::CloudWatchLogs
       attr_accessor parse_json: Types::ParseJSON
       attr_accessor parse_key_value: Types::ParseKeyValue
       attr_accessor parse_route_53: Types::ParseRoute53
+      attr_accessor parse_to_ocsf: Types::ParseToOCSF
       attr_accessor parse_postgres: Types::ParsePostgres
       attr_accessor parse_vpc: Types::ParseVPC
       attr_accessor parse_waf: Types::ParseWAF

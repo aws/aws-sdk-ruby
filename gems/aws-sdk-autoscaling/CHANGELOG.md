@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.138.0 (2025-06-18)
+------------------
+
+* Feature - Add IncludeInstances parameter to DescribeAutoScalingGroups API
+
 1.137.0 (2025-06-02)
 ------------------
 

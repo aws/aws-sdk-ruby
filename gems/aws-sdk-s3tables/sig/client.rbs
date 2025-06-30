@@ -414,7 +414,8 @@ module Aws
                                                    status: ("enabled" | "disabled")?,
                                                    settings: {
                                                      iceberg_compaction: {
-                                                       target_file_size_mb: ::Integer?
+                                                       target_file_size_mb: ::Integer?,
+                                                       strategy: ("auto" | "binpack" | "sort" | "z-order")?
                                                      }?,
                                                      iceberg_snapshot_management: {
                                                        min_snapshots_to_keep: ::Integer?,

@@ -129,7 +129,7 @@ module Aws
                        include_countries: Array[::String]?,
                        include_place_types: Array[("Locality" | "PostalCode" | "Intersection" | "Street" | "PointAddress" | "InterpolatedAddress")]?
                      },
-                     ?additional_features: Array[("TimeZone" | "Access")],
+                     ?additional_features: Array[("TimeZone" | "Access" | "SecondaryAddresses" | "Intersections")],
                      ?language: ::String,
                      ?political_view: ::String,
                      ?intended_use: ("SingleUse" | "Storage"),
@@ -140,7 +140,7 @@ module Aws
       interface _GetPlaceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetPlaceResponse]
         def place_id: () -> ::String
-        def place_type: () -> ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress")
+        def place_type: () -> ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress" | "SecondaryAddress")
         def title: () -> ::String
         def pricing_bucket: () -> ::String
         def address: () -> Types::Address
@@ -158,11 +158,13 @@ module Aws
         def time_zone: () -> Types::TimeZone
         def political_view: () -> ::String
         def phonemes: () -> Types::PhonemeDetails
+        def main_address: () -> Types::RelatedPlace
+        def secondary_addresses: () -> ::Array[Types::RelatedPlace]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GeoPlaces/Client.html#get_place-instance_method
       def get_place: (
                        place_id: ::String,
-                       ?additional_features: Array[("TimeZone" | "Phonemes" | "Access" | "Contact")],
+                       ?additional_features: Array[("TimeZone" | "Phonemes" | "Access" | "Contact" | "SecondaryAddresses")],
                        ?language: ::String,
                        ?political_view: ::String,
                        ?intended_use: ("SingleUse" | "Storage"),
@@ -183,7 +185,7 @@ module Aws
                              ?filter: {
                                include_place_types: Array[("Locality" | "Intersection" | "Street" | "PointAddress" | "InterpolatedAddress")]?
                              },
-                             ?additional_features: Array[("TimeZone" | "Access")],
+                             ?additional_features: Array[("TimeZone" | "Access" | "Intersections")],
                              ?language: ::String,
                              ?political_view: ::String,
                              ?intended_use: ("SingleUse" | "Storage"),

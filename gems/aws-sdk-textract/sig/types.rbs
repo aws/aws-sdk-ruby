@@ -285,6 +285,7 @@ module Aws::Textract
     class Geometry
       attr_accessor bounding_box: Types::BoundingBox
       attr_accessor polygon: ::Array[Types::Point]
+      attr_accessor rotation_angle: ::Float
       SENSITIVE: []
     end
 

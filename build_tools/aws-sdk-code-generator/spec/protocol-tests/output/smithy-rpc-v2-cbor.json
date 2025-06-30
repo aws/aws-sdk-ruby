@@ -2,12 +2,21 @@
     {
         "description": "Test cases for EmptyInputOutput operation",
         "metadata": {
+            "apiVersion": "2020-07-14",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "rpcv2protocol",
             "protocol": "smithy-rpc-v2-cbor",
             "protocols": [
                 "smithy-rpc-v2-cbor"
             ],
-            "apiVersion": "2020-07-14",
-            "targetPrefix": "RpcV2Protocol"
+            "serviceFullName": "RpcV2Protocol",
+            "serviceId": "RpcV2Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RpcV2Protocol",
+            "targetPrefix": "RpcV2Protocol",
+            "uid": "rpcv2protocol-2020-07-14"
         },
         "shapes": {
             "EmptyStructure": {
@@ -67,12 +76,21 @@
     {
         "description": "Test cases for Float16 operation",
         "metadata": {
+            "apiVersion": "2020-07-14",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "rpcv2protocol",
             "protocol": "smithy-rpc-v2-cbor",
             "protocols": [
                 "smithy-rpc-v2-cbor"
             ],
-            "apiVersion": "2020-07-14",
-            "targetPrefix": "RpcV2Protocol"
+            "serviceFullName": "RpcV2Protocol",
+            "serviceId": "RpcV2Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RpcV2Protocol",
+            "targetPrefix": "RpcV2Protocol",
+            "uid": "rpcv2protocol-2020-07-14"
         },
         "shapes": {
             "Float16Output": {
@@ -219,12 +237,21 @@
     {
         "description": "Test cases for FractionalSeconds operation",
         "metadata": {
+            "apiVersion": "2020-07-14",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "rpcv2protocol",
             "protocol": "smithy-rpc-v2-cbor",
             "protocols": [
                 "smithy-rpc-v2-cbor"
             ],
-            "apiVersion": "2020-07-14",
-            "targetPrefix": "RpcV2Protocol"
+            "serviceFullName": "RpcV2Protocol",
+            "serviceId": "RpcV2Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RpcV2Protocol",
+            "targetPrefix": "RpcV2Protocol",
+            "uid": "rpcv2protocol-2020-07-14"
         },
         "shapes": {
             "FractionalSecondsOutput": {
@@ -271,12 +298,21 @@
     {
         "description": "Test cases for GreetingWithErrors operation",
         "metadata": {
+            "apiVersion": "2020-07-14",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "rpcv2protocol",
             "protocol": "smithy-rpc-v2-cbor",
             "protocols": [
                 "smithy-rpc-v2-cbor"
             ],
-            "apiVersion": "2020-07-14",
-            "targetPrefix": "RpcV2Protocol"
+            "serviceFullName": "RpcV2Protocol",
+            "serviceId": "RpcV2Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RpcV2Protocol",
+            "targetPrefix": "RpcV2Protocol",
+            "uid": "rpcv2protocol-2020-07-14"
         },
         "shapes": {
             "InvalidGreeting": {
@@ -330,12 +366,21 @@
     {
         "description": "Test cases for GreetingWithErrors operation",
         "metadata": {
+            "apiVersion": "2020-07-14",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "rpcv2protocol",
             "protocol": "smithy-rpc-v2-cbor",
             "protocols": [
                 "smithy-rpc-v2-cbor"
             ],
-            "apiVersion": "2020-07-14",
-            "targetPrefix": "RpcV2Protocol"
+            "serviceFullName": "RpcV2Protocol",
+            "serviceId": "RpcV2Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RpcV2Protocol",
+            "targetPrefix": "RpcV2Protocol",
+            "uid": "rpcv2protocol-2020-07-14"
         },
         "shapes": {
             "ComplexError": {
@@ -429,12 +474,21 @@
     {
         "description": "Test cases for NoInputOutput operation",
         "metadata": {
+            "apiVersion": "2020-07-14",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "rpcv2protocol",
             "protocol": "smithy-rpc-v2-cbor",
             "protocols": [
                 "smithy-rpc-v2-cbor"
             ],
-            "apiVersion": "2020-07-14",
-            "targetPrefix": "RpcV2Protocol"
+            "serviceFullName": "RpcV2Protocol",
+            "serviceId": "RpcV2Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RpcV2Protocol",
+            "targetPrefix": "RpcV2Protocol",
+            "uid": "rpcv2protocol-2020-07-14"
         },
         "shapes": {},
         "cases": [
@@ -502,12 +556,21 @@
     {
         "description": "Test cases for OptionalInputOutput operation",
         "metadata": {
+            "apiVersion": "2020-07-14",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "rpcv2protocol",
             "protocol": "smithy-rpc-v2-cbor",
             "protocols": [
                 "smithy-rpc-v2-cbor"
             ],
-            "apiVersion": "2020-07-14",
-            "targetPrefix": "RpcV2Protocol"
+            "serviceFullName": "RpcV2Protocol",
+            "serviceId": "RpcV2Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RpcV2Protocol",
+            "targetPrefix": "RpcV2Protocol",
+            "uid": "rpcv2protocol-2020-07-14"
         },
         "shapes": {
             "SimpleStructure": {
@@ -551,12 +614,21 @@
     {
         "description": "Test cases for RecursiveShapes operation",
         "metadata": {
+            "apiVersion": "2020-07-14",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "rpcv2protocol",
             "protocol": "smithy-rpc-v2-cbor",
             "protocols": [
                 "smithy-rpc-v2-cbor"
             ],
-            "apiVersion": "2020-07-14",
-            "targetPrefix": "RpcV2Protocol"
+            "serviceFullName": "RpcV2Protocol",
+            "serviceId": "RpcV2Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RpcV2Protocol",
+            "targetPrefix": "RpcV2Protocol",
+            "uid": "rpcv2protocol-2020-07-14"
         },
         "shapes": {
             "RecursiveShapesInputOutput": {
@@ -671,12 +743,21 @@
     {
         "description": "Test cases for RpcV2CborDenseMaps operation",
         "metadata": {
+            "apiVersion": "2020-07-14",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "rpcv2protocol",
             "protocol": "smithy-rpc-v2-cbor",
             "protocols": [
                 "smithy-rpc-v2-cbor"
             ],
-            "apiVersion": "2020-07-14",
-            "targetPrefix": "RpcV2Protocol"
+            "serviceFullName": "RpcV2Protocol",
+            "serviceId": "RpcV2Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RpcV2Protocol",
+            "targetPrefix": "RpcV2Protocol",
+            "uid": "rpcv2protocol-2020-07-14"
         },
         "shapes": {
             "RpcV2CborDenseMapsInputOutput": {
@@ -904,12 +985,21 @@
     {
         "description": "Test cases for RpcV2CborLists operation",
         "metadata": {
+            "apiVersion": "2020-07-14",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "rpcv2protocol",
             "protocol": "smithy-rpc-v2-cbor",
             "protocols": [
                 "smithy-rpc-v2-cbor"
             ],
-            "apiVersion": "2020-07-14",
-            "targetPrefix": "RpcV2Protocol"
+            "serviceFullName": "RpcV2Protocol",
+            "serviceId": "RpcV2Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RpcV2Protocol",
+            "targetPrefix": "RpcV2Protocol",
+            "uid": "rpcv2protocol-2020-07-14"
         },
         "shapes": {
             "RpcV2CborListInputOutput": {
@@ -1224,12 +1314,21 @@
     {
         "description": "Test cases for SimpleScalarProperties operation",
         "metadata": {
+            "apiVersion": "2020-07-14",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "rpcv2protocol",
             "protocol": "smithy-rpc-v2-cbor",
             "protocols": [
                 "smithy-rpc-v2-cbor"
             ],
-            "apiVersion": "2020-07-14",
-            "targetPrefix": "RpcV2Protocol"
+            "serviceFullName": "RpcV2Protocol",
+            "serviceId": "RpcV2Protocol",
+            "signatureVersion": "v4",
+            "signingName": "RpcV2Protocol",
+            "targetPrefix": "RpcV2Protocol",
+            "uid": "rpcv2protocol-2020-07-14"
         },
         "shapes": {
             "SimpleScalarStructure": {

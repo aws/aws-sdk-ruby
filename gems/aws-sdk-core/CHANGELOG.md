@@ -9,6 +9,11 @@ Unreleased Changes
 
 * Feature - Support configuration for IMDS profile name using `ENV['AWS_EC2_INSTANCE_PROFILE_NAME']`, `ec2_instance_profile_name` shared config, or the `ec2_instance_profile_name` Client configuration option.
 
+3.226.1 (2025-06-24)
+------------------
+
+* Issue - Fixed spelling in the `Aws::Errors::SignalEventError` error message.
+
 3.226.0 (2025-06-17)
 ------------------
 

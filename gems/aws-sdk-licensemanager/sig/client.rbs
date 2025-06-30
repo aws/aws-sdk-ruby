@@ -305,10 +305,22 @@ module Aws
       def create_license_conversion_task_for_resource: (
                                                          resource_arn: ::String,
                                                          source_license_context: {
-                                                           usage_operation: ::String?
+                                                           usage_operation: ::String?,
+                                                           product_codes: Array[
+                                                             {
+                                                               product_code_id: ::String,
+                                                               product_code_type: ("marketplace")
+                                                             },
+                                                           ]?
                                                          },
                                                          destination_license_context: {
-                                                           usage_operation: ::String?
+                                                           usage_operation: ::String?,
+                                                           product_codes: Array[
+                                                             {
+                                                               product_code_id: ::String,
+                                                               product_code_type: ("marketplace")
+                                                             },
+                                                           ]?
                                                          }
                                                        ) -> _CreateLicenseConversionTaskForResourceResponseSuccess
                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLicenseConversionTaskForResourceResponseSuccess

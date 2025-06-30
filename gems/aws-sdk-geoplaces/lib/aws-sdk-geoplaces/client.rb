@@ -469,15 +469,22 @@ module Aws::GeoPlaces
 
     # @!group API Operations
 
-    # The autocomplete operation speeds up and increases the accuracy of
-    # entering addresses by providing a list of address candidates matching
-    # a partially entered address. Results are sorted from most to least
-    # matching. Filtering and biasing can be used to increase the relevance
-    # of the results if additional search context is known
+    # `Autocomplete` completes potential places and addresses as the user
+    # types, based on the partial input. The API enhances the efficiency and
+    # accuracy of address by completing query based on a few entered
+    # keystrokes. It helps you by completing partial queries with valid
+    # address completion. Also, the API supports the filtering of results
+    # based on geographic location, country, or specific place types, and
+    # can be tailored using optional parameters like language and political
+    # views.
     #
     # @option params [required, String] :query_text
     #   The free-form text query to match addresses against. This is usually a
     #   partially typed address from an end user in an address box or form.
+    #
+    #   <note markdown="1"> The fields `QueryText`, and `QueryID` are mutually exclusive.
+    #
+    #    </note>
     #
     # @option params [Integer] :max_results
     #   An optional limit for the number of results returned in a single call.
@@ -495,14 +502,15 @@ module Aws::GeoPlaces
     #
     # @option params [Types::AutocompleteFilter] :filter
     #   A structure which contains a set of inclusion/exclusion properties
-    #   that results must posses in order to be returned as a result.
+    #   that results must possess in order to be returned as a result.
     #
     # @option params [String] :postal_code_mode
     #   The `PostalCodeMode` affects how postal code results are returned. If
     #   a postal code spans multiple localities and this value is empty,
     #   partial district or locality information may be returned under a
     #   single postal code result entry. If it's populated with the value
-    #   `cityLookup`, all cities in that postal code are returned.
+    #   `EnumerateSpannedLocalities`, all cities in that postal code are
+    #   returned.
     #
     # @option params [Array<String>] :additional_features
     #   A list of optional additional parameters that can be requested for
@@ -522,6 +530,39 @@ module Aws::GeoPlaces
     #   country. The political view applies to the results of the request to
     #   represent unresolved territorial claims through the point of view of
     #   the specified country.
+    #
+    #   The following political views are currently supported:
+    #
+    #   * `ARG`: Argentina's view on the Southern Patagonian Ice Field and
+    #     Tierra Del Fuego, including the Falkland Islands, South Georgia, and
+    #     South Sandwich Islands
+    #
+    #   * `EGY`: Egypt's view on Bir Tawil
+    #
+    #   * `IND`: India's view on Gilgit-Baltistan
+    #
+    #   * `KEN`: Kenya's view on the Ilemi Triangle
+    #
+    #   * `MAR`: Morocco's view on Western Sahara
+    #
+    #   * `RUS`: Russia's view on Crimea
+    #
+    #   * `SDN`: Sudan's view on the Halaib Triangle
+    #
+    #   * `SRB`: Serbia's view on Kosovo, Vukovar, and Sarengrad Islands
+    #
+    #   * `SUR`: Suriname's view on the Courantyne Headwaters and Lawa
+    #     Headwaters
+    #
+    #   * `SYR`: Syria's view on the Golan Heights
+    #
+    #   * `TUR`: Turkey's view on Cyprus and Northern Cyprus
+    #
+    #   * `TZA`: Tanzania's view on Lake Malawi
+    #
+    #   * `URY`: Uruguay's view on Rincon de Artigas
+    #
+    #   * `VNM`: Vietnam's view on the Paracel Islands and Spratly Islands
     #
     # @option params [String] :intended_use
     #   Indicates if the results will be stored. Defaults to `SingleUse`, if
@@ -564,7 +605,7 @@ module Aws::GeoPlaces
     #   resp.pricing_bucket #=> String
     #   resp.result_items #=> Array
     #   resp.result_items[0].place_id #=> String
-    #   resp.result_items[0].place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress"
+    #   resp.result_items[0].place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress"
     #   resp.result_items[0].title #=> String
     #   resp.result_items[0].address.label #=> String
     #   resp.result_items[0].address.country.code_2 #=> String
@@ -594,6 +635,8 @@ module Aws::GeoPlaces
     #   resp.result_items[0].address.street_components[0].language #=> String
     #   resp.result_items[0].address.address_number #=> String
     #   resp.result_items[0].address.building #=> String
+    #   resp.result_items[0].address.secondary_address_components #=> Array
+    #   resp.result_items[0].address.secondary_address_components[0].number #=> String
     #   resp.result_items[0].distance #=> Integer
     #   resp.result_items[0].language #=> String
     #   resp.result_items[0].political_view #=> String
@@ -680,12 +723,21 @@ module Aws::GeoPlaces
       req.send_request(options)
     end
 
-    # The `Geocode` action allows you to obtain coordinates, addresses, and
-    # other information about places.
+    # `Geocode` converts a textual address or place into geographic
+    # coordinates. You can obtain geographic coordinates, address component,
+    # and other related information. It supports flexible queries, including
+    # free-form text or structured queries with components like street
+    # names, postal codes, and regions. The Geocode API can also provide
+    # additional features such as time zone information and the inclusion of
+    # political views.
     #
     # @option params [String] :query_text
     #   The free-form text query to match addresses against. This is usually a
     #   partially typed address from an end user in an address box or form.
+    #
+    #   <note markdown="1"> The fields `QueryText`, and `QueryID` are mutually exclusive.
+    #
+    #    </note>
     #
     # @option params [Types::GeocodeQueryComponents] :query_components
     #   A structured free text query allows you to search for places by the
@@ -707,7 +759,7 @@ module Aws::GeoPlaces
     #
     # @option params [Types::GeocodeFilter] :filter
     #   A structure which contains a set of inclusion/exclusion properties
-    #   that results must posses in order to be returned as a result.
+    #   that results must possess in order to be returned as a result.
     #
     # @option params [Array<String>] :additional_features
     #   A list of optional additional parameters, such as time zone, that can
@@ -731,6 +783,18 @@ module Aws::GeoPlaces
     # @option params [String] :intended_use
     #   Indicates if the results will be stored. Defaults to `SingleUse`, if
     #   left empty.
+    #
+    #   <note markdown="1"> Storing the response of an Geocode query is required to comply with
+    #   service terms, but charged at a higher cost per request. Please review
+    #   the [user agreement][1] and [service pricing structure][2] to
+    #   determine the correct setting for your use case.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/location/sla/
+    #   [2]: https://aws.amazon.com/location/pricing/
     #
     # @option params [String] :key
     #   Optional: The API key to be used for authorization. Either an API key
@@ -761,7 +825,7 @@ module Aws::GeoPlaces
     #       include_countries: ["CountryCode"],
     #       include_place_types: ["Locality"], # accepts Locality, PostalCode, Intersection, Street, PointAddress, InterpolatedAddress
     #     },
-    #     additional_features: ["TimeZone"], # accepts TimeZone, Access
+    #     additional_features: ["TimeZone"], # accepts TimeZone, Access, SecondaryAddresses, Intersections
     #     language: "LanguageTag",
     #     political_view: "CountryCode",
     #     intended_use: "SingleUse", # accepts SingleUse, Storage
@@ -773,7 +837,7 @@ module Aws::GeoPlaces
     #   resp.pricing_bucket #=> String
     #   resp.result_items #=> Array
     #   resp.result_items[0].place_id #=> String
-    #   resp.result_items[0].place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress"
+    #   resp.result_items[0].place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress"
     #   resp.result_items[0].title #=> String
     #   resp.result_items[0].address.label #=> String
     #   resp.result_items[0].address.country.code_2 #=> String
@@ -803,6 +867,8 @@ module Aws::GeoPlaces
     #   resp.result_items[0].address.street_components[0].language #=> String
     #   resp.result_items[0].address.address_number #=> String
     #   resp.result_items[0].address.building #=> String
+    #   resp.result_items[0].address.secondary_address_components #=> Array
+    #   resp.result_items[0].address.secondary_address_components[0].number #=> String
     #   resp.result_items[0].address_number_corrected #=> Boolean
     #   resp.result_items[0].postal_code_details #=> Array
     #   resp.result_items[0].postal_code_details[0].postal_code #=> String
@@ -846,6 +912,198 @@ module Aws::GeoPlaces
     #   resp.result_items[0].match_scores.components.address.intersection[0] #=> Float
     #   resp.result_items[0].match_scores.components.address.address_number #=> Float
     #   resp.result_items[0].match_scores.components.address.building #=> Float
+    #   resp.result_items[0].match_scores.components.address.secondary_address_components #=> Array
+    #   resp.result_items[0].match_scores.components.address.secondary_address_components[0].number #=> Float
+    #   resp.result_items[0].parsed_query.title #=> Array
+    #   resp.result_items[0].parsed_query.title[0].start_index #=> Integer
+    #   resp.result_items[0].parsed_query.title[0].end_index #=> Integer
+    #   resp.result_items[0].parsed_query.title[0].value #=> String
+    #   resp.result_items[0].parsed_query.title[0].query_component #=> String
+    #   resp.result_items[0].parsed_query.address.country #=> Array
+    #   resp.result_items[0].parsed_query.address.country[0].start_index #=> Integer
+    #   resp.result_items[0].parsed_query.address.country[0].end_index #=> Integer
+    #   resp.result_items[0].parsed_query.address.country[0].value #=> String
+    #   resp.result_items[0].parsed_query.address.country[0].query_component #=> String
+    #   resp.result_items[0].parsed_query.address.region #=> Array
+    #   resp.result_items[0].parsed_query.address.region[0].start_index #=> Integer
+    #   resp.result_items[0].parsed_query.address.region[0].end_index #=> Integer
+    #   resp.result_items[0].parsed_query.address.region[0].value #=> String
+    #   resp.result_items[0].parsed_query.address.region[0].query_component #=> String
+    #   resp.result_items[0].parsed_query.address.sub_region #=> Array
+    #   resp.result_items[0].parsed_query.address.sub_region[0].start_index #=> Integer
+    #   resp.result_items[0].parsed_query.address.sub_region[0].end_index #=> Integer
+    #   resp.result_items[0].parsed_query.address.sub_region[0].value #=> String
+    #   resp.result_items[0].parsed_query.address.sub_region[0].query_component #=> String
+    #   resp.result_items[0].parsed_query.address.locality #=> Array
+    #   resp.result_items[0].parsed_query.address.locality[0].start_index #=> Integer
+    #   resp.result_items[0].parsed_query.address.locality[0].end_index #=> Integer
+    #   resp.result_items[0].parsed_query.address.locality[0].value #=> String
+    #   resp.result_items[0].parsed_query.address.locality[0].query_component #=> String
+    #   resp.result_items[0].parsed_query.address.district #=> Array
+    #   resp.result_items[0].parsed_query.address.district[0].start_index #=> Integer
+    #   resp.result_items[0].parsed_query.address.district[0].end_index #=> Integer
+    #   resp.result_items[0].parsed_query.address.district[0].value #=> String
+    #   resp.result_items[0].parsed_query.address.district[0].query_component #=> String
+    #   resp.result_items[0].parsed_query.address.sub_district #=> Array
+    #   resp.result_items[0].parsed_query.address.sub_district[0].start_index #=> Integer
+    #   resp.result_items[0].parsed_query.address.sub_district[0].end_index #=> Integer
+    #   resp.result_items[0].parsed_query.address.sub_district[0].value #=> String
+    #   resp.result_items[0].parsed_query.address.sub_district[0].query_component #=> String
+    #   resp.result_items[0].parsed_query.address.postal_code #=> Array
+    #   resp.result_items[0].parsed_query.address.postal_code[0].start_index #=> Integer
+    #   resp.result_items[0].parsed_query.address.postal_code[0].end_index #=> Integer
+    #   resp.result_items[0].parsed_query.address.postal_code[0].value #=> String
+    #   resp.result_items[0].parsed_query.address.postal_code[0].query_component #=> String
+    #   resp.result_items[0].parsed_query.address.block #=> Array
+    #   resp.result_items[0].parsed_query.address.block[0].start_index #=> Integer
+    #   resp.result_items[0].parsed_query.address.block[0].end_index #=> Integer
+    #   resp.result_items[0].parsed_query.address.block[0].value #=> String
+    #   resp.result_items[0].parsed_query.address.block[0].query_component #=> String
+    #   resp.result_items[0].parsed_query.address.sub_block #=> Array
+    #   resp.result_items[0].parsed_query.address.sub_block[0].start_index #=> Integer
+    #   resp.result_items[0].parsed_query.address.sub_block[0].end_index #=> Integer
+    #   resp.result_items[0].parsed_query.address.sub_block[0].value #=> String
+    #   resp.result_items[0].parsed_query.address.sub_block[0].query_component #=> String
+    #   resp.result_items[0].parsed_query.address.street #=> Array
+    #   resp.result_items[0].parsed_query.address.street[0].start_index #=> Integer
+    #   resp.result_items[0].parsed_query.address.street[0].end_index #=> Integer
+    #   resp.result_items[0].parsed_query.address.street[0].value #=> String
+    #   resp.result_items[0].parsed_query.address.street[0].query_component #=> String
+    #   resp.result_items[0].parsed_query.address.address_number #=> Array
+    #   resp.result_items[0].parsed_query.address.address_number[0].start_index #=> Integer
+    #   resp.result_items[0].parsed_query.address.address_number[0].end_index #=> Integer
+    #   resp.result_items[0].parsed_query.address.address_number[0].value #=> String
+    #   resp.result_items[0].parsed_query.address.address_number[0].query_component #=> String
+    #   resp.result_items[0].parsed_query.address.building #=> Array
+    #   resp.result_items[0].parsed_query.address.building[0].start_index #=> Integer
+    #   resp.result_items[0].parsed_query.address.building[0].end_index #=> Integer
+    #   resp.result_items[0].parsed_query.address.building[0].value #=> String
+    #   resp.result_items[0].parsed_query.address.building[0].query_component #=> String
+    #   resp.result_items[0].parsed_query.address.secondary_address_components #=> Array
+    #   resp.result_items[0].parsed_query.address.secondary_address_components[0].start_index #=> Integer
+    #   resp.result_items[0].parsed_query.address.secondary_address_components[0].end_index #=> Integer
+    #   resp.result_items[0].parsed_query.address.secondary_address_components[0].value #=> String
+    #   resp.result_items[0].parsed_query.address.secondary_address_components[0].number #=> String
+    #   resp.result_items[0].parsed_query.address.secondary_address_components[0].designator #=> String
+    #   resp.result_items[0].intersections #=> Array
+    #   resp.result_items[0].intersections[0].place_id #=> String
+    #   resp.result_items[0].intersections[0].title #=> String
+    #   resp.result_items[0].intersections[0].address.label #=> String
+    #   resp.result_items[0].intersections[0].address.country.code_2 #=> String
+    #   resp.result_items[0].intersections[0].address.country.code_3 #=> String
+    #   resp.result_items[0].intersections[0].address.country.name #=> String
+    #   resp.result_items[0].intersections[0].address.region.code #=> String
+    #   resp.result_items[0].intersections[0].address.region.name #=> String
+    #   resp.result_items[0].intersections[0].address.sub_region.code #=> String
+    #   resp.result_items[0].intersections[0].address.sub_region.name #=> String
+    #   resp.result_items[0].intersections[0].address.locality #=> String
+    #   resp.result_items[0].intersections[0].address.district #=> String
+    #   resp.result_items[0].intersections[0].address.sub_district #=> String
+    #   resp.result_items[0].intersections[0].address.postal_code #=> String
+    #   resp.result_items[0].intersections[0].address.block #=> String
+    #   resp.result_items[0].intersections[0].address.sub_block #=> String
+    #   resp.result_items[0].intersections[0].address.intersection #=> Array
+    #   resp.result_items[0].intersections[0].address.intersection[0] #=> String
+    #   resp.result_items[0].intersections[0].address.street #=> String
+    #   resp.result_items[0].intersections[0].address.street_components #=> Array
+    #   resp.result_items[0].intersections[0].address.street_components[0].base_name #=> String
+    #   resp.result_items[0].intersections[0].address.street_components[0].type #=> String
+    #   resp.result_items[0].intersections[0].address.street_components[0].type_placement #=> String, one of "BeforeBaseName", "AfterBaseName"
+    #   resp.result_items[0].intersections[0].address.street_components[0].type_separator #=> String
+    #   resp.result_items[0].intersections[0].address.street_components[0].prefix #=> String
+    #   resp.result_items[0].intersections[0].address.street_components[0].suffix #=> String
+    #   resp.result_items[0].intersections[0].address.street_components[0].direction #=> String
+    #   resp.result_items[0].intersections[0].address.street_components[0].language #=> String
+    #   resp.result_items[0].intersections[0].address.address_number #=> String
+    #   resp.result_items[0].intersections[0].address.building #=> String
+    #   resp.result_items[0].intersections[0].address.secondary_address_components #=> Array
+    #   resp.result_items[0].intersections[0].address.secondary_address_components[0].number #=> String
+    #   resp.result_items[0].intersections[0].position #=> Array
+    #   resp.result_items[0].intersections[0].position[0] #=> Float
+    #   resp.result_items[0].intersections[0].distance #=> Integer
+    #   resp.result_items[0].intersections[0].route_distance #=> Integer
+    #   resp.result_items[0].intersections[0].map_view #=> Array
+    #   resp.result_items[0].intersections[0].map_view[0] #=> Float
+    #   resp.result_items[0].intersections[0].access_points #=> Array
+    #   resp.result_items[0].intersections[0].access_points[0].position #=> Array
+    #   resp.result_items[0].intersections[0].access_points[0].position[0] #=> Float
+    #   resp.result_items[0].main_address.place_id #=> String
+    #   resp.result_items[0].main_address.place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress"
+    #   resp.result_items[0].main_address.title #=> String
+    #   resp.result_items[0].main_address.address.label #=> String
+    #   resp.result_items[0].main_address.address.country.code_2 #=> String
+    #   resp.result_items[0].main_address.address.country.code_3 #=> String
+    #   resp.result_items[0].main_address.address.country.name #=> String
+    #   resp.result_items[0].main_address.address.region.code #=> String
+    #   resp.result_items[0].main_address.address.region.name #=> String
+    #   resp.result_items[0].main_address.address.sub_region.code #=> String
+    #   resp.result_items[0].main_address.address.sub_region.name #=> String
+    #   resp.result_items[0].main_address.address.locality #=> String
+    #   resp.result_items[0].main_address.address.district #=> String
+    #   resp.result_items[0].main_address.address.sub_district #=> String
+    #   resp.result_items[0].main_address.address.postal_code #=> String
+    #   resp.result_items[0].main_address.address.block #=> String
+    #   resp.result_items[0].main_address.address.sub_block #=> String
+    #   resp.result_items[0].main_address.address.intersection #=> Array
+    #   resp.result_items[0].main_address.address.intersection[0] #=> String
+    #   resp.result_items[0].main_address.address.street #=> String
+    #   resp.result_items[0].main_address.address.street_components #=> Array
+    #   resp.result_items[0].main_address.address.street_components[0].base_name #=> String
+    #   resp.result_items[0].main_address.address.street_components[0].type #=> String
+    #   resp.result_items[0].main_address.address.street_components[0].type_placement #=> String, one of "BeforeBaseName", "AfterBaseName"
+    #   resp.result_items[0].main_address.address.street_components[0].type_separator #=> String
+    #   resp.result_items[0].main_address.address.street_components[0].prefix #=> String
+    #   resp.result_items[0].main_address.address.street_components[0].suffix #=> String
+    #   resp.result_items[0].main_address.address.street_components[0].direction #=> String
+    #   resp.result_items[0].main_address.address.street_components[0].language #=> String
+    #   resp.result_items[0].main_address.address.address_number #=> String
+    #   resp.result_items[0].main_address.address.building #=> String
+    #   resp.result_items[0].main_address.address.secondary_address_components #=> Array
+    #   resp.result_items[0].main_address.address.secondary_address_components[0].number #=> String
+    #   resp.result_items[0].main_address.position #=> Array
+    #   resp.result_items[0].main_address.position[0] #=> Float
+    #   resp.result_items[0].main_address.access_points #=> Array
+    #   resp.result_items[0].main_address.access_points[0].position #=> Array
+    #   resp.result_items[0].main_address.access_points[0].position[0] #=> Float
+    #   resp.result_items[0].secondary_addresses #=> Array
+    #   resp.result_items[0].secondary_addresses[0].place_id #=> String
+    #   resp.result_items[0].secondary_addresses[0].place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress"
+    #   resp.result_items[0].secondary_addresses[0].title #=> String
+    #   resp.result_items[0].secondary_addresses[0].address.label #=> String
+    #   resp.result_items[0].secondary_addresses[0].address.country.code_2 #=> String
+    #   resp.result_items[0].secondary_addresses[0].address.country.code_3 #=> String
+    #   resp.result_items[0].secondary_addresses[0].address.country.name #=> String
+    #   resp.result_items[0].secondary_addresses[0].address.region.code #=> String
+    #   resp.result_items[0].secondary_addresses[0].address.region.name #=> String
+    #   resp.result_items[0].secondary_addresses[0].address.sub_region.code #=> String
+    #   resp.result_items[0].secondary_addresses[0].address.sub_region.name #=> String
+    #   resp.result_items[0].secondary_addresses[0].address.locality #=> String
+    #   resp.result_items[0].secondary_addresses[0].address.district #=> String
+    #   resp.result_items[0].secondary_addresses[0].address.sub_district #=> String
+    #   resp.result_items[0].secondary_addresses[0].address.postal_code #=> String
+    #   resp.result_items[0].secondary_addresses[0].address.block #=> String
+    #   resp.result_items[0].secondary_addresses[0].address.sub_block #=> String
+    #   resp.result_items[0].secondary_addresses[0].address.intersection #=> Array
+    #   resp.result_items[0].secondary_addresses[0].address.intersection[0] #=> String
+    #   resp.result_items[0].secondary_addresses[0].address.street #=> String
+    #   resp.result_items[0].secondary_addresses[0].address.street_components #=> Array
+    #   resp.result_items[0].secondary_addresses[0].address.street_components[0].base_name #=> String
+    #   resp.result_items[0].secondary_addresses[0].address.street_components[0].type #=> String
+    #   resp.result_items[0].secondary_addresses[0].address.street_components[0].type_placement #=> String, one of "BeforeBaseName", "AfterBaseName"
+    #   resp.result_items[0].secondary_addresses[0].address.street_components[0].type_separator #=> String
+    #   resp.result_items[0].secondary_addresses[0].address.street_components[0].prefix #=> String
+    #   resp.result_items[0].secondary_addresses[0].address.street_components[0].suffix #=> String
+    #   resp.result_items[0].secondary_addresses[0].address.street_components[0].direction #=> String
+    #   resp.result_items[0].secondary_addresses[0].address.street_components[0].language #=> String
+    #   resp.result_items[0].secondary_addresses[0].address.address_number #=> String
+    #   resp.result_items[0].secondary_addresses[0].address.building #=> String
+    #   resp.result_items[0].secondary_addresses[0].address.secondary_address_components #=> Array
+    #   resp.result_items[0].secondary_addresses[0].address.secondary_address_components[0].number #=> String
+    #   resp.result_items[0].secondary_addresses[0].position #=> Array
+    #   resp.result_items[0].secondary_addresses[0].position[0] #=> Float
+    #   resp.result_items[0].secondary_addresses[0].access_points #=> Array
+    #   resp.result_items[0].secondary_addresses[0].access_points[0].position #=> Array
+    #   resp.result_items[0].secondary_addresses[0].access_points[0].position[0] #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/Geocode AWS API Documentation
     #
@@ -856,8 +1114,8 @@ module Aws::GeoPlaces
       req.send_request(options)
     end
 
-    # Finds a place by its unique ID. A `PlaceId` is returned by other place
-    # operations.
+    # `GetPlace` finds a place by its unique ID. A `PlaceId` is returned by
+    # other place operations.
     #
     # @option params [required, String] :place_id
     #   The `PlaceId` of the place you wish to receive the information for.
@@ -885,6 +1143,18 @@ module Aws::GeoPlaces
     #   Indicates if the results will be stored. Defaults to `SingleUse`, if
     #   left empty.
     #
+    #   <note markdown="1"> Storing the response of an GetPlace query is required to comply with
+    #   service terms, but charged at a higher cost per request. Please review
+    #   the [user agreement][1] and [service pricing structure][2] to
+    #   determine the correct setting for your use case.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/location/sla/
+    #   [2]: https://aws.amazon.com/location/pricing/
+    #
     # @option params [String] :key
     #   Optional: The API key to be used for authorization. Either an API key
     #   or valid SigV4 signature must be provided when making a request.
@@ -910,12 +1180,14 @@ module Aws::GeoPlaces
     #   * {Types::GetPlaceResponse#time_zone #time_zone} => Types::TimeZone
     #   * {Types::GetPlaceResponse#political_view #political_view} => String
     #   * {Types::GetPlaceResponse#phonemes #phonemes} => Types::PhonemeDetails
+    #   * {Types::GetPlaceResponse#main_address #main_address} => Types::RelatedPlace
+    #   * {Types::GetPlaceResponse#secondary_addresses #secondary_addresses} => Array&lt;Types::RelatedPlace&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_place({
     #     place_id: "GetPlaceRequestPlaceIdString", # required
-    #     additional_features: ["TimeZone"], # accepts TimeZone, Phonemes, Access, Contact
+    #     additional_features: ["TimeZone"], # accepts TimeZone, Phonemes, Access, Contact, SecondaryAddresses
     #     language: "LanguageTag",
     #     political_view: "CountryCode",
     #     intended_use: "SingleUse", # accepts SingleUse, Storage
@@ -925,7 +1197,7 @@ module Aws::GeoPlaces
     # @example Response structure
     #
     #   resp.place_id #=> String
-    #   resp.place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress"
+    #   resp.place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress"
     #   resp.title #=> String
     #   resp.pricing_bucket #=> String
     #   resp.address.label #=> String
@@ -956,6 +1228,8 @@ module Aws::GeoPlaces
     #   resp.address.street_components[0].language #=> String
     #   resp.address.address_number #=> String
     #   resp.address.building #=> String
+    #   resp.address.secondary_address_components #=> Array
+    #   resp.address.secondary_address_components[0].number #=> String
     #   resp.address_number_corrected #=> Boolean
     #   resp.postal_code_details #=> Array
     #   resp.postal_code_details[0].postal_code #=> String
@@ -1078,6 +1352,83 @@ module Aws::GeoPlaces
     #   resp.phonemes.address.street[0].value #=> String
     #   resp.phonemes.address.street[0].language #=> String
     #   resp.phonemes.address.street[0].preferred #=> Boolean
+    #   resp.main_address.place_id #=> String
+    #   resp.main_address.place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress"
+    #   resp.main_address.title #=> String
+    #   resp.main_address.address.label #=> String
+    #   resp.main_address.address.country.code_2 #=> String
+    #   resp.main_address.address.country.code_3 #=> String
+    #   resp.main_address.address.country.name #=> String
+    #   resp.main_address.address.region.code #=> String
+    #   resp.main_address.address.region.name #=> String
+    #   resp.main_address.address.sub_region.code #=> String
+    #   resp.main_address.address.sub_region.name #=> String
+    #   resp.main_address.address.locality #=> String
+    #   resp.main_address.address.district #=> String
+    #   resp.main_address.address.sub_district #=> String
+    #   resp.main_address.address.postal_code #=> String
+    #   resp.main_address.address.block #=> String
+    #   resp.main_address.address.sub_block #=> String
+    #   resp.main_address.address.intersection #=> Array
+    #   resp.main_address.address.intersection[0] #=> String
+    #   resp.main_address.address.street #=> String
+    #   resp.main_address.address.street_components #=> Array
+    #   resp.main_address.address.street_components[0].base_name #=> String
+    #   resp.main_address.address.street_components[0].type #=> String
+    #   resp.main_address.address.street_components[0].type_placement #=> String, one of "BeforeBaseName", "AfterBaseName"
+    #   resp.main_address.address.street_components[0].type_separator #=> String
+    #   resp.main_address.address.street_components[0].prefix #=> String
+    #   resp.main_address.address.street_components[0].suffix #=> String
+    #   resp.main_address.address.street_components[0].direction #=> String
+    #   resp.main_address.address.street_components[0].language #=> String
+    #   resp.main_address.address.address_number #=> String
+    #   resp.main_address.address.building #=> String
+    #   resp.main_address.address.secondary_address_components #=> Array
+    #   resp.main_address.address.secondary_address_components[0].number #=> String
+    #   resp.main_address.position #=> Array
+    #   resp.main_address.position[0] #=> Float
+    #   resp.main_address.access_points #=> Array
+    #   resp.main_address.access_points[0].position #=> Array
+    #   resp.main_address.access_points[0].position[0] #=> Float
+    #   resp.secondary_addresses #=> Array
+    #   resp.secondary_addresses[0].place_id #=> String
+    #   resp.secondary_addresses[0].place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress"
+    #   resp.secondary_addresses[0].title #=> String
+    #   resp.secondary_addresses[0].address.label #=> String
+    #   resp.secondary_addresses[0].address.country.code_2 #=> String
+    #   resp.secondary_addresses[0].address.country.code_3 #=> String
+    #   resp.secondary_addresses[0].address.country.name #=> String
+    #   resp.secondary_addresses[0].address.region.code #=> String
+    #   resp.secondary_addresses[0].address.region.name #=> String
+    #   resp.secondary_addresses[0].address.sub_region.code #=> String
+    #   resp.secondary_addresses[0].address.sub_region.name #=> String
+    #   resp.secondary_addresses[0].address.locality #=> String
+    #   resp.secondary_addresses[0].address.district #=> String
+    #   resp.secondary_addresses[0].address.sub_district #=> String
+    #   resp.secondary_addresses[0].address.postal_code #=> String
+    #   resp.secondary_addresses[0].address.block #=> String
+    #   resp.secondary_addresses[0].address.sub_block #=> String
+    #   resp.secondary_addresses[0].address.intersection #=> Array
+    #   resp.secondary_addresses[0].address.intersection[0] #=> String
+    #   resp.secondary_addresses[0].address.street #=> String
+    #   resp.secondary_addresses[0].address.street_components #=> Array
+    #   resp.secondary_addresses[0].address.street_components[0].base_name #=> String
+    #   resp.secondary_addresses[0].address.street_components[0].type #=> String
+    #   resp.secondary_addresses[0].address.street_components[0].type_placement #=> String, one of "BeforeBaseName", "AfterBaseName"
+    #   resp.secondary_addresses[0].address.street_components[0].type_separator #=> String
+    #   resp.secondary_addresses[0].address.street_components[0].prefix #=> String
+    #   resp.secondary_addresses[0].address.street_components[0].suffix #=> String
+    #   resp.secondary_addresses[0].address.street_components[0].direction #=> String
+    #   resp.secondary_addresses[0].address.street_components[0].language #=> String
+    #   resp.secondary_addresses[0].address.address_number #=> String
+    #   resp.secondary_addresses[0].address.building #=> String
+    #   resp.secondary_addresses[0].address.secondary_address_components #=> Array
+    #   resp.secondary_addresses[0].address.secondary_address_components[0].number #=> String
+    #   resp.secondary_addresses[0].position #=> Array
+    #   resp.secondary_addresses[0].position[0] #=> Float
+    #   resp.secondary_addresses[0].access_points #=> Array
+    #   resp.secondary_addresses[0].access_points[0].position #=> Array
+    #   resp.secondary_addresses[0].access_points[0].position[0] #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/GetPlace AWS API Documentation
     #
@@ -1088,12 +1439,17 @@ module Aws::GeoPlaces
       req.send_request(options)
     end
 
-    # The `ReverseGeocode` operation allows you to retrieve addresses and
-    # place information from coordinates.
+    # `ReverseGeocode` converts geographic coordinates into a human-readable
+    # address or place. You can obtain address component, and other related
+    # information such as place type, category, street information. The
+    # Reverse Geocode API supports filtering to on place type so that you
+    # can refine result based on your need. Also, The Reverse Geocode API
+    # can also provide additional features such as time zone information and
+    # the inclusion of political views.
     #
     # @option params [required, Array<Float>] :query_position
     #   The position, in `[lng, lat]` for which you are querying nearby
-    #   resultsfor. Results closer to the position will be ranked higher then
+    #   results for. Results closer to the position will be ranked higher then
     #   results further away from the position
     #
     # @option params [Integer] :query_radius
@@ -1105,7 +1461,7 @@ module Aws::GeoPlaces
     #
     # @option params [Types::ReverseGeocodeFilter] :filter
     #   A structure which contains a set of inclusion/exclusion properties
-    #   that results must posses in order to be returned as a result.
+    #   that results must possess in order to be returned as a result.
     #
     # @option params [Array<String>] :additional_features
     #   A list of optional additional parameters, such as time zone that can
@@ -1130,6 +1486,18 @@ module Aws::GeoPlaces
     #   Indicates if the results will be stored. Defaults to `SingleUse`, if
     #   left empty.
     #
+    #   <note markdown="1"> Storing the response of an ReverseGeocode query is required to comply
+    #   with service terms, but charged at a higher cost per request. Please
+    #   review the [user agreement][1] and [service pricing structure][2] to
+    #   determine the correct setting for your use case.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/location/sla/
+    #   [2]: https://aws.amazon.com/location/pricing/
+    #
     # @option params [String] :key
     #   Optional: The API key to be used for authorization. Either an API key
     #   or valid SigV4 signature must be provided when making a request.
@@ -1148,7 +1516,7 @@ module Aws::GeoPlaces
     #     filter: {
     #       include_place_types: ["Locality"], # accepts Locality, Intersection, Street, PointAddress, InterpolatedAddress
     #     },
-    #     additional_features: ["TimeZone"], # accepts TimeZone, Access
+    #     additional_features: ["TimeZone"], # accepts TimeZone, Access, Intersections
     #     language: "LanguageTag",
     #     political_view: "CountryCode",
     #     intended_use: "SingleUse", # accepts SingleUse, Storage
@@ -1160,7 +1528,7 @@ module Aws::GeoPlaces
     #   resp.pricing_bucket #=> String
     #   resp.result_items #=> Array
     #   resp.result_items[0].place_id #=> String
-    #   resp.result_items[0].place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress"
+    #   resp.result_items[0].place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress"
     #   resp.result_items[0].title #=> String
     #   resp.result_items[0].address.label #=> String
     #   resp.result_items[0].address.country.code_2 #=> String
@@ -1190,6 +1558,8 @@ module Aws::GeoPlaces
     #   resp.result_items[0].address.street_components[0].language #=> String
     #   resp.result_items[0].address.address_number #=> String
     #   resp.result_items[0].address.building #=> String
+    #   resp.result_items[0].address.secondary_address_components #=> Array
+    #   resp.result_items[0].address.secondary_address_components[0].number #=> String
     #   resp.result_items[0].address_number_corrected #=> Boolean
     #   resp.result_items[0].postal_code_details #=> Array
     #   resp.result_items[0].postal_code_details[0].postal_code #=> String
@@ -1218,6 +1588,48 @@ module Aws::GeoPlaces
     #   resp.result_items[0].time_zone.offset #=> String
     #   resp.result_items[0].time_zone.offset_seconds #=> Integer
     #   resp.result_items[0].political_view #=> String
+    #   resp.result_items[0].intersections #=> Array
+    #   resp.result_items[0].intersections[0].place_id #=> String
+    #   resp.result_items[0].intersections[0].title #=> String
+    #   resp.result_items[0].intersections[0].address.label #=> String
+    #   resp.result_items[0].intersections[0].address.country.code_2 #=> String
+    #   resp.result_items[0].intersections[0].address.country.code_3 #=> String
+    #   resp.result_items[0].intersections[0].address.country.name #=> String
+    #   resp.result_items[0].intersections[0].address.region.code #=> String
+    #   resp.result_items[0].intersections[0].address.region.name #=> String
+    #   resp.result_items[0].intersections[0].address.sub_region.code #=> String
+    #   resp.result_items[0].intersections[0].address.sub_region.name #=> String
+    #   resp.result_items[0].intersections[0].address.locality #=> String
+    #   resp.result_items[0].intersections[0].address.district #=> String
+    #   resp.result_items[0].intersections[0].address.sub_district #=> String
+    #   resp.result_items[0].intersections[0].address.postal_code #=> String
+    #   resp.result_items[0].intersections[0].address.block #=> String
+    #   resp.result_items[0].intersections[0].address.sub_block #=> String
+    #   resp.result_items[0].intersections[0].address.intersection #=> Array
+    #   resp.result_items[0].intersections[0].address.intersection[0] #=> String
+    #   resp.result_items[0].intersections[0].address.street #=> String
+    #   resp.result_items[0].intersections[0].address.street_components #=> Array
+    #   resp.result_items[0].intersections[0].address.street_components[0].base_name #=> String
+    #   resp.result_items[0].intersections[0].address.street_components[0].type #=> String
+    #   resp.result_items[0].intersections[0].address.street_components[0].type_placement #=> String, one of "BeforeBaseName", "AfterBaseName"
+    #   resp.result_items[0].intersections[0].address.street_components[0].type_separator #=> String
+    #   resp.result_items[0].intersections[0].address.street_components[0].prefix #=> String
+    #   resp.result_items[0].intersections[0].address.street_components[0].suffix #=> String
+    #   resp.result_items[0].intersections[0].address.street_components[0].direction #=> String
+    #   resp.result_items[0].intersections[0].address.street_components[0].language #=> String
+    #   resp.result_items[0].intersections[0].address.address_number #=> String
+    #   resp.result_items[0].intersections[0].address.building #=> String
+    #   resp.result_items[0].intersections[0].address.secondary_address_components #=> Array
+    #   resp.result_items[0].intersections[0].address.secondary_address_components[0].number #=> String
+    #   resp.result_items[0].intersections[0].position #=> Array
+    #   resp.result_items[0].intersections[0].position[0] #=> Float
+    #   resp.result_items[0].intersections[0].distance #=> Integer
+    #   resp.result_items[0].intersections[0].route_distance #=> Integer
+    #   resp.result_items[0].intersections[0].map_view #=> Array
+    #   resp.result_items[0].intersections[0].map_view[0] #=> Float
+    #   resp.result_items[0].intersections[0].access_points #=> Array
+    #   resp.result_items[0].intersections[0].access_points[0].position #=> Array
+    #   resp.result_items[0].intersections[0].access_points[0].position[0] #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/ReverseGeocode AWS API Documentation
     #
@@ -1228,23 +1640,32 @@ module Aws::GeoPlaces
       req.send_request(options)
     end
 
-    # Search nearby a specified location.
+    # `SearchNearby` queries for points of interest within a radius from a
+    # central coordinates, returning place results with optional filters
+    # such as categories, business chains, food types and more. The API
+    # returns details such as a place name, address, phone, category, food
+    # type, contact, opening hours. Also, the API can return phonemes, time
+    # zones and more based on requested parameters.
     #
     # @option params [required, Array<Float>] :query_position
     #   The position, in `[lng, lat]` for which you are querying nearby
-    #   resultsfor. Results closer to the position will be ranked higher then
+    #   results for. Results closer to the position will be ranked higher then
     #   results further away from the position
     #
     # @option params [Integer] :query_radius
     #   The maximum distance in meters from the QueryPosition from which a
     #   result will be returned.
     #
+    #   <note markdown="1"> The fields `QueryText`, and `QueryID` are mutually exclusive.
+    #
+    #    </note>
+    #
     # @option params [Integer] :max_results
     #   An optional limit for the number of results returned in a single call.
     #
     # @option params [Types::SearchNearbyFilter] :filter
     #   A structure which contains a set of inclusion/exclusion properties
-    #   that results must posses in order to be returned as a result.
+    #   that results must possess in order to be returned as a result.
     #
     # @option params [Array<String>] :additional_features
     #   A list of optional additional parameters, such as time zone, that can
@@ -1268,6 +1689,18 @@ module Aws::GeoPlaces
     # @option params [String] :intended_use
     #   Indicates if the results will be stored. Defaults to `SingleUse`, if
     #   left empty.
+    #
+    #   <note markdown="1"> Storing the response of an SearchNearby query is required to comply
+    #   with service terms, but charged at a higher cost per request. Please
+    #   review the [user agreement][1] and [service pricing structure][2] to
+    #   determine the correct setting for your use case.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/location/sla/
+    #   [2]: https://aws.amazon.com/location/pricing/
     #
     # @option params [String] :next_token
     #   If `nextToken` is returned, there are more results available. The
@@ -1312,7 +1745,7 @@ module Aws::GeoPlaces
     #   resp.pricing_bucket #=> String
     #   resp.result_items #=> Array
     #   resp.result_items[0].place_id #=> String
-    #   resp.result_items[0].place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress"
+    #   resp.result_items[0].place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress"
     #   resp.result_items[0].title #=> String
     #   resp.result_items[0].address.label #=> String
     #   resp.result_items[0].address.country.code_2 #=> String
@@ -1342,6 +1775,8 @@ module Aws::GeoPlaces
     #   resp.result_items[0].address.street_components[0].language #=> String
     #   resp.result_items[0].address.address_number #=> String
     #   resp.result_items[0].address.building #=> String
+    #   resp.result_items[0].address.secondary_address_components #=> Array
+    #   resp.result_items[0].address.secondary_address_components[0].number #=> String
     #   resp.result_items[0].address_number_corrected #=> Boolean
     #   resp.result_items[0].position #=> Array
     #   resp.result_items[0].position[0] #=> Float
@@ -1470,16 +1905,26 @@ module Aws::GeoPlaces
       req.send_request(options)
     end
 
-    # Use the `SearchText` operation to search for geocode and place
-    # information. You can then complete a follow-up query suggested from
-    # the `Suggest` API via a query id.
+    # `SearchText` searches for geocode and place information. You can then
+    # complete a follow-up query suggested from the `Suggest` API via a
+    # query id.
     #
     # @option params [String] :query_text
     #   The free-form text query to match addresses against. This is usually a
     #   partially typed address from an end user in an address box or form.
     #
+    #   <note markdown="1"> The fields `QueryText`, and `QueryID` are mutually exclusive.
+    #
+    #    </note>
+    #
     # @option params [String] :query_id
-    #   The query Id.
+    #   The query Id returned by the suggest API. If passed in the request,
+    #   the SearchText API will preform a SearchText query with the improved
+    #   query terms for the original query made to the suggest API.
+    #
+    #   <note markdown="1"> The fields `QueryText`, and `QueryID` are mutually exclusive.
+    #
+    #    </note>
     #
     # @option params [Integer] :max_results
     #   An optional limit for the number of results returned in a single call.
@@ -1497,7 +1942,7 @@ module Aws::GeoPlaces
     #
     # @option params [Types::SearchTextFilter] :filter
     #   A structure which contains a set of inclusion/exclusion properties
-    #   that results must posses in order to be returned as a result.
+    #   that results must possess in order to be returned as a result.
     #
     # @option params [Array<String>] :additional_features
     #   A list of optional additional parameters, such as time zone, that can
@@ -1521,6 +1966,18 @@ module Aws::GeoPlaces
     # @option params [String] :intended_use
     #   Indicates if the results will be stored. Defaults to `SingleUse`, if
     #   left empty.
+    #
+    #   <note markdown="1"> Storing the response of an SearchText query is required to comply with
+    #   service terms, but charged at a higher cost per request. Please review
+    #   the [user agreement][1] and [service pricing structure][2] to
+    #   determine the correct setting for your use case.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/location/sla/
+    #   [2]: https://aws.amazon.com/location/pricing/
     #
     # @option params [String] :next_token
     #   If `nextToken` is returned, there are more results available. The
@@ -1564,7 +2021,7 @@ module Aws::GeoPlaces
     #   resp.pricing_bucket #=> String
     #   resp.result_items #=> Array
     #   resp.result_items[0].place_id #=> String
-    #   resp.result_items[0].place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress"
+    #   resp.result_items[0].place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress"
     #   resp.result_items[0].title #=> String
     #   resp.result_items[0].address.label #=> String
     #   resp.result_items[0].address.country.code_2 #=> String
@@ -1594,6 +2051,8 @@ module Aws::GeoPlaces
     #   resp.result_items[0].address.street_components[0].language #=> String
     #   resp.result_items[0].address.address_number #=> String
     #   resp.result_items[0].address.building #=> String
+    #   resp.result_items[0].address.secondary_address_components #=> Array
+    #   resp.result_items[0].address.secondary_address_components[0].number #=> String
     #   resp.result_items[0].address_number_corrected #=> Boolean
     #   resp.result_items[0].position #=> Array
     #   resp.result_items[0].position[0] #=> Float
@@ -1722,13 +2181,25 @@ module Aws::GeoPlaces
       req.send_request(options)
     end
 
-    # The `Suggest` operation finds addresses or place candidates based on
-    # incomplete or misspelled queries. You then select the best query to
-    # submit based on the returned results.
+    # `Suggest` provides intelligent predictions or recommendations based on
+    # the user's input or context, such as relevant places, points of
+    # interest, query terms or search category. It is designed to help users
+    # find places or point of interests candidates or identify a follow on
+    # query based on incomplete or misspelled queries. It returns a list of
+    # possible matches or refinements that can be used to formulate a more
+    # accurate query. Users can select the most appropriate suggestion and
+    # use it for further searching. The API provides options for filtering
+    # results by location and other attributes, and allows for additional
+    # features like phonemes and timezones. The response includes refined
+    # query terms and detailed place information.
     #
     # @option params [required, String] :query_text
     #   The free-form text query to match addresses against. This is usually a
     #   partially typed address from an end user in an address box or form.
+    #
+    #   <note markdown="1"> The fields `QueryText`, and `QueryID` are mutually exclusive.
+    #
+    #    </note>
     #
     # @option params [Integer] :max_results
     #   An optional limit for the number of results returned in a single call.
@@ -1750,7 +2221,7 @@ module Aws::GeoPlaces
     #
     # @option params [Types::SuggestFilter] :filter
     #   A structure which contains a set of inclusion/exclusion properties
-    #   that results must posses in order to be returned as a result.
+    #   that results must possess in order to be returned as a result.
     #
     # @option params [Array<String>] :additional_features
     #   A list of optional additional parameters, such as time zone, that can
@@ -1814,7 +2285,7 @@ module Aws::GeoPlaces
     #   resp.result_items[0].title #=> String
     #   resp.result_items[0].suggest_result_item_type #=> String, one of "Place", "Query"
     #   resp.result_items[0].place.place_id #=> String
-    #   resp.result_items[0].place.place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress"
+    #   resp.result_items[0].place.place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress"
     #   resp.result_items[0].place.address.label #=> String
     #   resp.result_items[0].place.address.country.code_2 #=> String
     #   resp.result_items[0].place.address.country.code_3 #=> String
@@ -1843,6 +2314,8 @@ module Aws::GeoPlaces
     #   resp.result_items[0].place.address.street_components[0].language #=> String
     #   resp.result_items[0].place.address.address_number #=> String
     #   resp.result_items[0].place.address.building #=> String
+    #   resp.result_items[0].place.address.secondary_address_components #=> Array
+    #   resp.result_items[0].place.address.secondary_address_components[0].number #=> String
     #   resp.result_items[0].place.position #=> Array
     #   resp.result_items[0].place.position[0] #=> Float
     #   resp.result_items[0].place.distance #=> Integer
@@ -1957,7 +2430,7 @@ module Aws::GeoPlaces
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-geoplaces'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

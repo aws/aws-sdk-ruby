@@ -225,7 +225,9 @@ module Aws::Glue
     ColumnValuesString = Shapes::StringShape.new(name: 'ColumnValuesString')
     CommentString = Shapes::StringShape.new(name: 'CommentString')
     CommitIdString = Shapes::StringShape.new(name: 'CommitIdString')
+    CompactionConfiguration = Shapes::StructureShape.new(name: 'CompactionConfiguration')
     CompactionMetrics = Shapes::StructureShape.new(name: 'CompactionMetrics')
+    CompactionStrategy = Shapes::StringShape.new(name: 'CompactionStrategy')
     Comparator = Shapes::StringShape.new(name: 'Comparator')
     Compatibility = Shapes::StringShape.new(name: 'Compatibility')
     CompressionType = Shapes::StringShape.new(name: 'CompressionType')
@@ -318,6 +320,7 @@ module Aws::Glue
     CreateDevEndpointRequest = Shapes::StructureShape.new(name: 'CreateDevEndpointRequest')
     CreateDevEndpointResponse = Shapes::StructureShape.new(name: 'CreateDevEndpointResponse')
     CreateGrokClassifierRequest = Shapes::StructureShape.new(name: 'CreateGrokClassifierRequest')
+    CreateIcebergTableInput = Shapes::StructureShape.new(name: 'CreateIcebergTableInput')
     CreateIntegrationRequest = Shapes::StructureShape.new(name: 'CreateIntegrationRequest')
     CreateIntegrationResourcePropertyRequest = Shapes::StructureShape.new(name: 'CreateIntegrationResourcePropertyRequest')
     CreateIntegrationResourcePropertyResponse = Shapes::StructureShape.new(name: 'CreateIntegrationResourcePropertyResponse')
@@ -392,6 +395,7 @@ module Aws::Glue
     DataLakePrincipalString = Shapes::StringShape.new(name: 'DataLakePrincipalString')
     DataOperation = Shapes::StringShape.new(name: 'DataOperation')
     DataOperations = Shapes::ListShape.new(name: 'DataOperations')
+    DataQualityAggregatedMetrics = Shapes::StructureShape.new(name: 'DataQualityAggregatedMetrics')
     DataQualityAnalyzerResult = Shapes::StructureShape.new(name: 'DataQualityAnalyzerResult')
     DataQualityAnalyzerResults = Shapes::ListShape.new(name: 'DataQualityAnalyzerResults')
     DataQualityEncryption = Shapes::StructureShape.new(name: 'DataQualityEncryption')
@@ -795,15 +799,32 @@ module Aws::Glue
     HudiTargetList = Shapes::ListShape.new(name: 'HudiTargetList')
     HyperTargetCompressionType = Shapes::StringShape.new(name: 'HyperTargetCompressionType')
     IAMRoleArn = Shapes::StringShape.new(name: 'IAMRoleArn')
+    IcebergCompactionConfiguration = Shapes::StructureShape.new(name: 'IcebergCompactionConfiguration')
     IcebergCompactionMetrics = Shapes::StructureShape.new(name: 'IcebergCompactionMetrics')
+    IcebergDocument = Shapes::DocumentShape.new(name: 'IcebergDocument', document: true)
     IcebergInput = Shapes::StructureShape.new(name: 'IcebergInput')
+    IcebergNullOrder = Shapes::StringShape.new(name: 'IcebergNullOrder')
     IcebergOrphanFileDeletionConfiguration = Shapes::StructureShape.new(name: 'IcebergOrphanFileDeletionConfiguration')
     IcebergOrphanFileDeletionMetrics = Shapes::StructureShape.new(name: 'IcebergOrphanFileDeletionMetrics')
+    IcebergPartitionField = Shapes::StructureShape.new(name: 'IcebergPartitionField')
+    IcebergPartitionSpec = Shapes::StructureShape.new(name: 'IcebergPartitionSpec')
+    IcebergPartitionSpecFieldList = Shapes::ListShape.new(name: 'IcebergPartitionSpecFieldList')
     IcebergRetentionConfiguration = Shapes::StructureShape.new(name: 'IcebergRetentionConfiguration')
     IcebergRetentionMetrics = Shapes::StructureShape.new(name: 'IcebergRetentionMetrics')
+    IcebergSchema = Shapes::StructureShape.new(name: 'IcebergSchema')
+    IcebergSortDirection = Shapes::StringShape.new(name: 'IcebergSortDirection')
+    IcebergSortField = Shapes::StructureShape.new(name: 'IcebergSortField')
+    IcebergSortOrder = Shapes::StructureShape.new(name: 'IcebergSortOrder')
+    IcebergSortOrderFieldList = Shapes::ListShape.new(name: 'IcebergSortOrderFieldList')
+    IcebergStructField = Shapes::StructureShape.new(name: 'IcebergStructField')
+    IcebergStructFieldList = Shapes::ListShape.new(name: 'IcebergStructFieldList')
+    IcebergStructTypeEnum = Shapes::StringShape.new(name: 'IcebergStructTypeEnum')
+    IcebergTableUpdate = Shapes::StructureShape.new(name: 'IcebergTableUpdate')
+    IcebergTableUpdateList = Shapes::ListShape.new(name: 'IcebergTableUpdateList')
     IcebergTarget = Shapes::StructureShape.new(name: 'IcebergTarget')
     IcebergTargetCompressionType = Shapes::StringShape.new(name: 'IcebergTargetCompressionType')
     IcebergTargetList = Shapes::ListShape.new(name: 'IcebergTargetList')
+    IcebergTransformString = Shapes::StringShape.new(name: 'IcebergTransformString')
     IdString = Shapes::StringShape.new(name: 'IdString')
     IdempotentParameterMismatchException = Shapes::StructureShape.new(name: 'IdempotentParameterMismatchException')
     IdleTimeout = Shapes::IntegerShape.new(name: 'IdleTimeout')
@@ -819,6 +840,7 @@ module Aws::Glue
     InclusionAnnotationValue = Shapes::StringShape.new(name: 'InclusionAnnotationValue')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     IntegerFlag = Shapes::IntegerShape.new(name: 'IntegerFlag')
+    IntegerList = Shapes::ListShape.new(name: 'IntegerList')
     IntegerValue = Shapes::IntegerShape.new(name: 'IntegerValue')
     Integration = Shapes::StructureShape.new(name: 'Integration')
     IntegrationAdditionalEncryptionContextMap = Shapes::MapShape.new(name: 'IntegrationAdditionalEncryptionContextMap')
@@ -1185,6 +1207,7 @@ module Aws::Glue
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     RoleString = Shapes::StringShape.new(name: 'RoleString')
     RowTag = Shapes::StringShape.new(name: 'RowTag')
+    RuleMetricsMap = Shapes::MapShape.new(name: 'RuleMetricsMap')
     RulesetNames = Shapes::ListShape.new(name: 'RulesetNames')
     RunId = Shapes::StringShape.new(name: 'RunId')
     RunIdentifier = Shapes::StructureShape.new(name: 'RunIdentifier')
@@ -1354,6 +1377,7 @@ module Aws::Glue
     String2048 = Shapes::StringShape.new(name: 'String2048')
     StringColumnStatisticsData = Shapes::StructureShape.new(name: 'StringColumnStatisticsData')
     StringList = Shapes::ListShape.new(name: 'StringList')
+    StringToStringMap = Shapes::MapShape.new(name: 'StringToStringMap')
     SupportedDialect = Shapes::StructureShape.new(name: 'SupportedDialect')
     Table = Shapes::StructureShape.new(name: 'Table')
     TableAttributes = Shapes::StringShape.new(name: 'TableAttributes')
@@ -1474,6 +1498,8 @@ module Aws::Glue
     UpdateDevEndpointRequest = Shapes::StructureShape.new(name: 'UpdateDevEndpointRequest')
     UpdateDevEndpointResponse = Shapes::StructureShape.new(name: 'UpdateDevEndpointResponse')
     UpdateGrokClassifierRequest = Shapes::StructureShape.new(name: 'UpdateGrokClassifierRequest')
+    UpdateIcebergInput = Shapes::StructureShape.new(name: 'UpdateIcebergInput')
+    UpdateIcebergTableInput = Shapes::StructureShape.new(name: 'UpdateIcebergTableInput')
     UpdateIntegrationResourcePropertyRequest = Shapes::StructureShape.new(name: 'UpdateIntegrationResourcePropertyRequest')
     UpdateIntegrationResourcePropertyResponse = Shapes::StructureShape.new(name: 'UpdateIntegrationResourcePropertyResponse')
     UpdateIntegrationTablePropertiesRequest = Shapes::StructureShape.new(name: 'UpdateIntegrationTablePropertiesRequest')
@@ -1485,6 +1511,7 @@ module Aws::Glue
     UpdateJsonClassifierRequest = Shapes::StructureShape.new(name: 'UpdateJsonClassifierRequest')
     UpdateMLTransformRequest = Shapes::StructureShape.new(name: 'UpdateMLTransformRequest')
     UpdateMLTransformResponse = Shapes::StructureShape.new(name: 'UpdateMLTransformResponse')
+    UpdateOpenTableFormatInput = Shapes::StructureShape.new(name: 'UpdateOpenTableFormatInput')
     UpdatePartitionRequest = Shapes::StructureShape.new(name: 'UpdatePartitionRequest')
     UpdatePartitionResponse = Shapes::StructureShape.new(name: 'UpdatePartitionResponse')
     UpdateRegistryInput = Shapes::StructureShape.new(name: 'UpdateRegistryInput')
@@ -2325,6 +2352,9 @@ module Aws::Glue
 
     ColumnValueStringList.member = Shapes::ShapeRef.new(shape: ColumnValuesString)
 
+    CompactionConfiguration.add_member(:iceberg_configuration, Shapes::ShapeRef.new(shape: IcebergCompactionConfiguration, location_name: "icebergConfiguration"))
+    CompactionConfiguration.struct_class = Types::CompactionConfiguration
+
     CompactionMetrics.add_member(:iceberg_metrics, Shapes::ShapeRef.new(shape: IcebergCompactionMetrics, location_name: "IcebergMetrics"))
     CompactionMetrics.struct_class = Types::CompactionMetrics
 
@@ -2716,6 +2746,13 @@ module Aws::Glue
     CreateGrokClassifierRequest.add_member(:custom_patterns, Shapes::ShapeRef.new(shape: CustomPatterns, location_name: "CustomPatterns"))
     CreateGrokClassifierRequest.struct_class = Types::CreateGrokClassifierRequest
 
+    CreateIcebergTableInput.add_member(:location, Shapes::ShapeRef.new(shape: LocationString, required: true, location_name: "Location"))
+    CreateIcebergTableInput.add_member(:schema, Shapes::ShapeRef.new(shape: IcebergSchema, required: true, location_name: "Schema"))
+    CreateIcebergTableInput.add_member(:partition_spec, Shapes::ShapeRef.new(shape: IcebergPartitionSpec, location_name: "PartitionSpec"))
+    CreateIcebergTableInput.add_member(:write_order, Shapes::ShapeRef.new(shape: IcebergSortOrder, location_name: "WriteOrder"))
+    CreateIcebergTableInput.add_member(:properties, Shapes::ShapeRef.new(shape: StringToStringMap, location_name: "Properties"))
+    CreateIcebergTableInput.struct_class = Types::CreateIcebergTableInput
+
     CreateIntegrationRequest.add_member(:integration_name, Shapes::ShapeRef.new(shape: String128, required: true, location_name: "IntegrationName"))
     CreateIntegrationRequest.add_member(:source_arn, Shapes::ShapeRef.new(shape: String128, required: true, location_name: "SourceArn"))
     CreateIntegrationRequest.add_member(:target_arn, Shapes::ShapeRef.new(shape: String128, required: true, location_name: "TargetArn"))
@@ -2912,6 +2949,7 @@ module Aws::Glue
 
     CreateTableRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     CreateTableRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
+    CreateTableRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
     CreateTableRequest.add_member(:table_input, Shapes::ShapeRef.new(shape: TableInput, required: true, location_name: "TableInput"))
     CreateTableRequest.add_member(:partition_indexes, Shapes::ShapeRef.new(shape: PartitionIndexList, location_name: "PartitionIndexes"))
     CreateTableRequest.add_member(:transaction_id, Shapes::ShapeRef.new(shape: TransactionIdString, location_name: "TransactionId"))
@@ -3051,6 +3089,14 @@ module Aws::Glue
 
     DataOperations.member = Shapes::ShapeRef.new(shape: DataOperation)
 
+    DataQualityAggregatedMetrics.add_member(:total_rows_processed, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "TotalRowsProcessed"))
+    DataQualityAggregatedMetrics.add_member(:total_rows_passed, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "TotalRowsPassed"))
+    DataQualityAggregatedMetrics.add_member(:total_rows_failed, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "TotalRowsFailed"))
+    DataQualityAggregatedMetrics.add_member(:total_rules_processed, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "TotalRulesProcessed"))
+    DataQualityAggregatedMetrics.add_member(:total_rules_passed, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "TotalRulesPassed"))
+    DataQualityAggregatedMetrics.add_member(:total_rules_failed, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "TotalRulesFailed"))
+    DataQualityAggregatedMetrics.struct_class = Types::DataQualityAggregatedMetrics
+
     DataQualityAnalyzerResult.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
     DataQualityAnalyzerResult.add_member(:description, Shapes::ShapeRef.new(shape: DataQualityRuleResultDescription, location_name: "Description"))
     DataQualityAnalyzerResult.add_member(:evaluation_message, Shapes::ShapeRef.new(shape: DataQualityRuleResultDescription, location_name: "EvaluationMessage"))
@@ -3094,6 +3140,7 @@ module Aws::Glue
     DataQualityResult.add_member(:rule_results, Shapes::ShapeRef.new(shape: DataQualityRuleResults, location_name: "RuleResults"))
     DataQualityResult.add_member(:analyzer_results, Shapes::ShapeRef.new(shape: DataQualityAnalyzerResults, location_name: "AnalyzerResults"))
     DataQualityResult.add_member(:observations, Shapes::ShapeRef.new(shape: DataQualityObservations, location_name: "Observations"))
+    DataQualityResult.add_member(:aggregated_metrics, Shapes::ShapeRef.new(shape: DataQualityAggregatedMetrics, location_name: "AggregatedMetrics"))
     DataQualityResult.struct_class = Types::DataQualityResult
 
     DataQualityResultDescription.add_member(:result_id, Shapes::ShapeRef.new(shape: HashString, location_name: "ResultId"))
@@ -3137,6 +3184,7 @@ module Aws::Glue
     DataQualityRuleResult.add_member(:result, Shapes::ShapeRef.new(shape: DataQualityRuleResultStatus, location_name: "Result"))
     DataQualityRuleResult.add_member(:evaluated_metrics, Shapes::ShapeRef.new(shape: EvaluatedMetricsMap, location_name: "EvaluatedMetrics"))
     DataQualityRuleResult.add_member(:evaluated_rule, Shapes::ShapeRef.new(shape: DataQualityRuleResultDescription, location_name: "EvaluatedRule"))
+    DataQualityRuleResult.add_member(:rule_metrics, Shapes::ShapeRef.new(shape: RuleMetricsMap, location_name: "RuleMetrics"))
     DataQualityRuleResult.struct_class = Types::DataQualityRuleResult
 
     DataQualityRuleResults.member = Shapes::ShapeRef.new(shape: DataQualityRuleResult)
@@ -3707,10 +3755,12 @@ module Aws::Glue
 
     FederatedCatalog.add_member(:identifier, Shapes::ShapeRef.new(shape: FederationIdentifier, location_name: "Identifier"))
     FederatedCatalog.add_member(:connection_name, Shapes::ShapeRef.new(shape: NameString, location_name: "ConnectionName"))
+    FederatedCatalog.add_member(:connection_type, Shapes::ShapeRef.new(shape: NameString, location_name: "ConnectionType"))
     FederatedCatalog.struct_class = Types::FederatedCatalog
 
     FederatedDatabase.add_member(:identifier, Shapes::ShapeRef.new(shape: FederationIdentifier, location_name: "Identifier"))
     FederatedDatabase.add_member(:connection_name, Shapes::ShapeRef.new(shape: NameString, location_name: "ConnectionName"))
+    FederatedDatabase.add_member(:connection_type, Shapes::ShapeRef.new(shape: NameString, location_name: "ConnectionType"))
     FederatedDatabase.struct_class = Types::FederatedDatabase
 
     FederatedResourceAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
@@ -3720,6 +3770,7 @@ module Aws::Glue
     FederatedTable.add_member(:identifier, Shapes::ShapeRef.new(shape: FederationIdentifier, location_name: "Identifier"))
     FederatedTable.add_member(:database_identifier, Shapes::ShapeRef.new(shape: FederationIdentifier, location_name: "DatabaseIdentifier"))
     FederatedTable.add_member(:connection_name, Shapes::ShapeRef.new(shape: NameString, location_name: "ConnectionName"))
+    FederatedTable.add_member(:connection_type, Shapes::ShapeRef.new(shape: NameString, location_name: "ConnectionType"))
     FederatedTable.struct_class = Types::FederatedTable
 
     FederationSourceException.add_member(:federation_source_error_code, Shapes::ShapeRef.new(shape: FederationSourceErrorCode, location_name: "FederationSourceErrorCode"))
@@ -4004,6 +4055,7 @@ module Aws::Glue
     GetDataQualityResultResponse.add_member(:rule_results, Shapes::ShapeRef.new(shape: DataQualityRuleResults, location_name: "RuleResults"))
     GetDataQualityResultResponse.add_member(:analyzer_results, Shapes::ShapeRef.new(shape: DataQualityAnalyzerResults, location_name: "AnalyzerResults"))
     GetDataQualityResultResponse.add_member(:observations, Shapes::ShapeRef.new(shape: DataQualityObservations, location_name: "Observations"))
+    GetDataQualityResultResponse.add_member(:aggregated_metrics, Shapes::ShapeRef.new(shape: DataQualityAggregatedMetrics, location_name: "AggregatedMetrics"))
     GetDataQualityResultResponse.struct_class = Types::GetDataQualityResultResponse
 
     GetDataQualityRuleRecommendationRunRequest.add_member(:run_id, Shapes::ShapeRef.new(shape: HashString, required: true, location_name: "RunId"))
@@ -4661,6 +4713,9 @@ module Aws::Glue
 
     HudiTargetList.member = Shapes::ShapeRef.new(shape: HudiTarget)
 
+    IcebergCompactionConfiguration.add_member(:strategy, Shapes::ShapeRef.new(shape: CompactionStrategy, location_name: "strategy"))
+    IcebergCompactionConfiguration.struct_class = Types::IcebergCompactionConfiguration
+
     IcebergCompactionMetrics.add_member(:number_of_bytes_compacted, Shapes::ShapeRef.new(shape: metricCounts, location_name: "NumberOfBytesCompacted"))
     IcebergCompactionMetrics.add_member(:number_of_files_compacted, Shapes::ShapeRef.new(shape: metricCounts, location_name: "NumberOfFilesCompacted"))
     IcebergCompactionMetrics.add_member(:dpu_hours, Shapes::ShapeRef.new(shape: dpuHours, location_name: "DpuHours"))
@@ -4670,6 +4725,7 @@ module Aws::Glue
 
     IcebergInput.add_member(:metadata_operation, Shapes::ShapeRef.new(shape: MetadataOperation, required: true, location_name: "MetadataOperation"))
     IcebergInput.add_member(:version, Shapes::ShapeRef.new(shape: VersionString, location_name: "Version"))
+    IcebergInput.add_member(:create_iceberg_table_input, Shapes::ShapeRef.new(shape: CreateIcebergTableInput, location_name: "CreateIcebergTableInput"))
     IcebergInput.struct_class = Types::IcebergInput
 
     IcebergOrphanFileDeletionConfiguration.add_member(:orphan_file_retention_period_in_days, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "orphanFileRetentionPeriodInDays"))
@@ -4681,6 +4737,18 @@ module Aws::Glue
     IcebergOrphanFileDeletionMetrics.add_member(:number_of_dpus, Shapes::ShapeRef.new(shape: dpuCounts, location_name: "NumberOfDpus"))
     IcebergOrphanFileDeletionMetrics.add_member(:job_duration_in_hour, Shapes::ShapeRef.new(shape: dpuDurationInHour, location_name: "JobDurationInHour"))
     IcebergOrphanFileDeletionMetrics.struct_class = Types::IcebergOrphanFileDeletionMetrics
+
+    IcebergPartitionField.add_member(:source_id, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "SourceId"))
+    IcebergPartitionField.add_member(:transform, Shapes::ShapeRef.new(shape: IcebergTransformString, required: true, location_name: "Transform"))
+    IcebergPartitionField.add_member(:name, Shapes::ShapeRef.new(shape: ColumnNameString, required: true, location_name: "Name"))
+    IcebergPartitionField.add_member(:field_id, Shapes::ShapeRef.new(shape: Integer, location_name: "FieldId"))
+    IcebergPartitionField.struct_class = Types::IcebergPartitionField
+
+    IcebergPartitionSpec.add_member(:fields, Shapes::ShapeRef.new(shape: IcebergPartitionSpecFieldList, required: true, location_name: "Fields"))
+    IcebergPartitionSpec.add_member(:spec_id, Shapes::ShapeRef.new(shape: Integer, location_name: "SpecId"))
+    IcebergPartitionSpec.struct_class = Types::IcebergPartitionSpec
+
+    IcebergPartitionSpecFieldList.member = Shapes::ShapeRef.new(shape: IcebergPartitionField)
 
     IcebergRetentionConfiguration.add_member(:snapshot_retention_period_in_days, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "snapshotRetentionPeriodInDays"))
     IcebergRetentionConfiguration.add_member(:number_of_snapshots_to_retain, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "numberOfSnapshotsToRetain"))
@@ -4694,6 +4762,42 @@ module Aws::Glue
     IcebergRetentionMetrics.add_member(:number_of_dpus, Shapes::ShapeRef.new(shape: dpuCounts, location_name: "NumberOfDpus"))
     IcebergRetentionMetrics.add_member(:job_duration_in_hour, Shapes::ShapeRef.new(shape: dpuDurationInHour, location_name: "JobDurationInHour"))
     IcebergRetentionMetrics.struct_class = Types::IcebergRetentionMetrics
+
+    IcebergSchema.add_member(:schema_id, Shapes::ShapeRef.new(shape: Integer, location_name: "SchemaId"))
+    IcebergSchema.add_member(:identifier_field_ids, Shapes::ShapeRef.new(shape: IntegerList, location_name: "IdentifierFieldIds"))
+    IcebergSchema.add_member(:type, Shapes::ShapeRef.new(shape: IcebergStructTypeEnum, location_name: "Type"))
+    IcebergSchema.add_member(:fields, Shapes::ShapeRef.new(shape: IcebergStructFieldList, required: true, location_name: "Fields"))
+    IcebergSchema.struct_class = Types::IcebergSchema
+
+    IcebergSortField.add_member(:source_id, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "SourceId"))
+    IcebergSortField.add_member(:transform, Shapes::ShapeRef.new(shape: IcebergTransformString, required: true, location_name: "Transform"))
+    IcebergSortField.add_member(:direction, Shapes::ShapeRef.new(shape: IcebergSortDirection, required: true, location_name: "Direction"))
+    IcebergSortField.add_member(:null_order, Shapes::ShapeRef.new(shape: IcebergNullOrder, required: true, location_name: "NullOrder"))
+    IcebergSortField.struct_class = Types::IcebergSortField
+
+    IcebergSortOrder.add_member(:order_id, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "OrderId"))
+    IcebergSortOrder.add_member(:fields, Shapes::ShapeRef.new(shape: IcebergSortOrderFieldList, required: true, location_name: "Fields"))
+    IcebergSortOrder.struct_class = Types::IcebergSortOrder
+
+    IcebergSortOrderFieldList.member = Shapes::ShapeRef.new(shape: IcebergSortField)
+
+    IcebergStructField.add_member(:id, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "Id"))
+    IcebergStructField.add_member(:name, Shapes::ShapeRef.new(shape: ColumnNameString, required: true, location_name: "Name"))
+    IcebergStructField.add_member(:type, Shapes::ShapeRef.new(shape: IcebergDocument, required: true, location_name: "Type"))
+    IcebergStructField.add_member(:required, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Required"))
+    IcebergStructField.add_member(:doc, Shapes::ShapeRef.new(shape: CommentString, location_name: "Doc"))
+    IcebergStructField.struct_class = Types::IcebergStructField
+
+    IcebergStructFieldList.member = Shapes::ShapeRef.new(shape: IcebergStructField)
+
+    IcebergTableUpdate.add_member(:schema, Shapes::ShapeRef.new(shape: IcebergSchema, required: true, location_name: "Schema"))
+    IcebergTableUpdate.add_member(:partition_spec, Shapes::ShapeRef.new(shape: IcebergPartitionSpec, location_name: "PartitionSpec"))
+    IcebergTableUpdate.add_member(:sort_order, Shapes::ShapeRef.new(shape: IcebergSortOrder, location_name: "SortOrder"))
+    IcebergTableUpdate.add_member(:location, Shapes::ShapeRef.new(shape: LocationString, required: true, location_name: "Location"))
+    IcebergTableUpdate.add_member(:properties, Shapes::ShapeRef.new(shape: StringToStringMap, location_name: "Properties"))
+    IcebergTableUpdate.struct_class = Types::IcebergTableUpdate
+
+    IcebergTableUpdateList.member = Shapes::ShapeRef.new(shape: IcebergTableUpdate)
 
     IcebergTarget.add_member(:paths, Shapes::ShapeRef.new(shape: PathList, location_name: "Paths"))
     IcebergTarget.add_member(:connection_name, Shapes::ShapeRef.new(shape: ConnectionName, location_name: "ConnectionName"))
@@ -4736,6 +4840,8 @@ module Aws::Glue
     InboundIntegrationsList.member = Shapes::ShapeRef.new(shape: InboundIntegration)
 
     InclusionAnnotationList.member = Shapes::ShapeRef.new(shape: DatapointInclusionAnnotation)
+
+    IntegerList.member = Shapes::ShapeRef.new(shape: Integer)
 
     Integration.add_member(:source_arn, Shapes::ShapeRef.new(shape: String128, required: true, location_name: "SourceArn"))
     Integration.add_member(:target_arn, Shapes::ShapeRef.new(shape: String128, required: true, location_name: "TargetArn"))
@@ -5891,6 +5997,9 @@ module Aws::Glue
     RetentionMetrics.add_member(:iceberg_metrics, Shapes::ShapeRef.new(shape: IcebergRetentionMetrics, location_name: "IcebergMetrics"))
     RetentionMetrics.struct_class = Types::RetentionMetrics
 
+    RuleMetricsMap.key = Shapes::ShapeRef.new(shape: NameString)
+    RuleMetricsMap.value = Shapes::ShapeRef.new(shape: NullableDouble)
+
     RulesetNames.member = Shapes::ShapeRef.new(shape: NameString)
 
     RunIdentifier.add_member(:run_id, Shapes::ShapeRef.new(shape: HashString, location_name: "RunId"))
@@ -6618,6 +6727,9 @@ module Aws::Glue
 
     StringList.member = Shapes::ShapeRef.new(shape: GenericString)
 
+    StringToStringMap.key = Shapes::ShapeRef.new(shape: NullableString)
+    StringToStringMap.value = Shapes::ShapeRef.new(shape: NullableString)
+
     SupportedDialect.add_member(:dialect, Shapes::ShapeRef.new(shape: ViewDialect, location_name: "Dialect"))
     SupportedDialect.add_member(:dialect_version, Shapes::ShapeRef.new(shape: ViewDialectVersionString, location_name: "DialectVersion"))
     SupportedDialect.struct_class = Types::SupportedDialect
@@ -6688,6 +6800,7 @@ module Aws::Glue
     TableOptimizerConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: ArnString, location_name: "roleArn"))
     TableOptimizerConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "enabled"))
     TableOptimizerConfiguration.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: TableOptimizerVpcConfiguration, location_name: "vpcConfiguration"))
+    TableOptimizerConfiguration.add_member(:compaction_configuration, Shapes::ShapeRef.new(shape: CompactionConfiguration, location_name: "compactionConfiguration"))
     TableOptimizerConfiguration.add_member(:retention_configuration, Shapes::ShapeRef.new(shape: RetentionConfiguration, location_name: "retentionConfiguration"))
     TableOptimizerConfiguration.add_member(:orphan_file_deletion_configuration, Shapes::ShapeRef.new(shape: OrphanFileDeletionConfiguration, location_name: "orphanFileDeletionConfiguration"))
     TableOptimizerConfiguration.struct_class = Types::TableOptimizerConfiguration
@@ -6698,6 +6811,7 @@ module Aws::Glue
     TableOptimizerRun.add_member(:metrics, Shapes::ShapeRef.new(shape: RunMetrics, deprecated: true, location_name: "metrics", metadata: {"deprecatedMessage" => "Metrics has been replaced by optimizer type specific metrics such as IcebergCompactionMetrics"}))
     TableOptimizerRun.add_member(:error, Shapes::ShapeRef.new(shape: MessageString, location_name: "error"))
     TableOptimizerRun.add_member(:compaction_metrics, Shapes::ShapeRef.new(shape: CompactionMetrics, location_name: "compactionMetrics"))
+    TableOptimizerRun.add_member(:compaction_strategy, Shapes::ShapeRef.new(shape: CompactionStrategy, location_name: "compactionStrategy"))
     TableOptimizerRun.add_member(:retention_metrics, Shapes::ShapeRef.new(shape: RetentionMetrics, location_name: "retentionMetrics"))
     TableOptimizerRun.add_member(:orphan_file_deletion_metrics, Shapes::ShapeRef.new(shape: OrphanFileDeletionMetrics, location_name: "orphanFileDeletionMetrics"))
     TableOptimizerRun.struct_class = Types::TableOptimizerRun
@@ -7040,6 +7154,12 @@ module Aws::Glue
     UpdateGrokClassifierRequest.add_member(:custom_patterns, Shapes::ShapeRef.new(shape: CustomPatterns, location_name: "CustomPatterns"))
     UpdateGrokClassifierRequest.struct_class = Types::UpdateGrokClassifierRequest
 
+    UpdateIcebergInput.add_member(:update_iceberg_table_input, Shapes::ShapeRef.new(shape: UpdateIcebergTableInput, required: true, location_name: "UpdateIcebergTableInput"))
+    UpdateIcebergInput.struct_class = Types::UpdateIcebergInput
+
+    UpdateIcebergTableInput.add_member(:updates, Shapes::ShapeRef.new(shape: IcebergTableUpdateList, required: true, location_name: "Updates"))
+    UpdateIcebergTableInput.struct_class = Types::UpdateIcebergTableInput
+
     UpdateIntegrationResourcePropertyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String128, required: true, location_name: "ResourceArn"))
     UpdateIntegrationResourcePropertyRequest.add_member(:source_processing_properties, Shapes::ShapeRef.new(shape: SourceProcessingProperties, location_name: "SourceProcessingProperties"))
     UpdateIntegrationResourcePropertyRequest.add_member(:target_processing_properties, Shapes::ShapeRef.new(shape: TargetProcessingProperties, location_name: "TargetProcessingProperties"))
@@ -7099,6 +7219,9 @@ module Aws::Glue
     UpdateMLTransformResponse.add_member(:transform_id, Shapes::ShapeRef.new(shape: HashString, location_name: "TransformId"))
     UpdateMLTransformResponse.struct_class = Types::UpdateMLTransformResponse
 
+    UpdateOpenTableFormatInput.add_member(:update_iceberg_input, Shapes::ShapeRef.new(shape: UpdateIcebergInput, location_name: "UpdateIcebergInput"))
+    UpdateOpenTableFormatInput.struct_class = Types::UpdateOpenTableFormatInput
+
     UpdatePartitionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     UpdatePartitionRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     UpdatePartitionRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
@@ -7152,12 +7275,14 @@ module Aws::Glue
 
     UpdateTableRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     UpdateTableRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
-    UpdateTableRequest.add_member(:table_input, Shapes::ShapeRef.new(shape: TableInput, required: true, location_name: "TableInput"))
+    UpdateTableRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    UpdateTableRequest.add_member(:table_input, Shapes::ShapeRef.new(shape: TableInput, location_name: "TableInput"))
     UpdateTableRequest.add_member(:skip_archive, Shapes::ShapeRef.new(shape: BooleanNullable, location_name: "SkipArchive"))
     UpdateTableRequest.add_member(:transaction_id, Shapes::ShapeRef.new(shape: TransactionIdString, location_name: "TransactionId"))
     UpdateTableRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: VersionString, location_name: "VersionId"))
     UpdateTableRequest.add_member(:view_update_action, Shapes::ShapeRef.new(shape: ViewUpdateAction, location_name: "ViewUpdateAction"))
     UpdateTableRequest.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location_name: "Force"))
+    UpdateTableRequest.add_member(:update_open_table_format_input, Shapes::ShapeRef.new(shape: UpdateOpenTableFormatInput, location_name: "UpdateOpenTableFormatInput"))
     UpdateTableRequest.struct_class = Types::UpdateTableRequest
 
     UpdateTableResponse.struct_class = Types::UpdateTableResponse

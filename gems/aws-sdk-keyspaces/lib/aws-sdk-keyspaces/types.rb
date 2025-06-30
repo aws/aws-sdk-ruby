@@ -270,6 +270,96 @@ module Aws::Keyspaces
       include Aws::Structure
     end
 
+    # The settings for the CDC stream of a table. For more information about
+    # CDC streams, see [Working with change data capture (CDC) streams in
+    # Amazon Keyspaces][1] in the *Amazon Keyspaces Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/cdc.html
+    #
+    # @!attribute [rw] status
+    #   The status of the CDC stream. You can enable or disable a stream for
+    #   a table.
+    #   @return [String]
+    #
+    # @!attribute [rw] view_type
+    #   The view type specifies the changes Amazon Keyspaces records for
+    #   each changed row in the stream. After you create the stream, you
+    #   can't make changes to this selection.
+    #
+    #   The options are:
+    #
+    #   * `NEW_AND_OLD_IMAGES` - both versions of the row, before and after
+    #     the change. This is the default.
+    #
+    #   * `NEW_IMAGE` - the version of the row after the change.
+    #
+    #   * `OLD_IMAGE` - the version of the row before the change.
+    #
+    #   * `KEYS_ONLY` - the partition and clustering keys of the row that
+    #     was changed.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags (key-value pairs) that you want to apply to the stream.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] propagate_tags
+    #   Specifies that the stream inherits the tags from the table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/CdcSpecification AWS API Documentation
+    #
+    class CdcSpecification < Struct.new(
+      :status,
+      :view_type,
+      :tags,
+      :propagate_tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The settings of the CDC stream of the table. For more information
+    # about CDC streams, see [Working with change data capture (CDC) streams
+    # in Amazon Keyspaces][1] in the *Amazon Keyspaces Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/cdc.html
+    #
+    # @!attribute [rw] status
+    #   The status of the CDC stream. Specifies if the table has a CDC
+    #   stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] view_type
+    #   The view type specifies the changes Amazon Keyspaces records for
+    #   each changed row in the stream. This setting can't be changed,
+    #   after the stream has been created.
+    #
+    #   The options are:
+    #
+    #   * `NEW_AND_OLD_IMAGES` - both versions of the row, before and after
+    #     the change. This is the default.
+    #
+    #   * `NEW_IMAGE` - the version of the row after the change.
+    #
+    #   * `OLD_IMAGE` - the version of the row before the change.
+    #
+    #   * `KEYS_ONLY` - the partition and clustering keys of the row that
+    #     was changed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/CdcSpecificationSummary AWS API Documentation
+    #
+    class CdcSpecificationSummary < Struct.new(
+      :status,
+      :view_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The client-side timestamp setting of the table.
     #
     # For more information, see [How it works: Amazon Keyspaces client-side
@@ -622,6 +712,10 @@ module Aws::Keyspaces
     #     for the table. (Optional)
     #   @return [Array<Types::ReplicaSpecification>]
     #
+    # @!attribute [rw] cdc_specification
+    #   The CDC stream settings of the table.
+    #   @return [Types::CdcSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/CreateTableRequest AWS API Documentation
     #
     class CreateTableRequest < Struct.new(
@@ -637,7 +731,8 @@ module Aws::Keyspaces
       :tags,
       :client_side_timestamps,
       :auto_scaling_specification,
-      :replica_specifications)
+      :replica_specifications,
+      :cdc_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1044,6 +1139,14 @@ module Aws::Keyspaces
     #   Regions a multi-Region table is replicated in.
     #   @return [Array<Types::ReplicaSpecificationSummary>]
     #
+    # @!attribute [rw] latest_stream_arn
+    #   The Amazon Resource Name (ARN) of the stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] cdc_specification
+    #   The CDC stream settings of the table.
+    #   @return [Types::CdcSpecificationSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/GetTableResponse AWS API Documentation
     #
     class GetTableResponse < Struct.new(
@@ -1060,7 +1163,9 @@ module Aws::Keyspaces
       :default_time_to_live,
       :comment,
       :client_side_timestamps,
-      :replica_specifications)
+      :replica_specifications,
+      :latest_stream_arn,
+      :cdc_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2186,6 +2291,10 @@ module Aws::Keyspaces
     #   The Region specific settings of a multi-Regional table.
     #   @return [Array<Types::ReplicaSpecification>]
     #
+    # @!attribute [rw] cdc_specification
+    #   The CDC stream settings of the table.
+    #   @return [Types::CdcSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/UpdateTableRequest AWS API Documentation
     #
     class UpdateTableRequest < Struct.new(
@@ -2199,7 +2308,8 @@ module Aws::Keyspaces
       :default_time_to_live,
       :client_side_timestamps,
       :auto_scaling_specification,
-      :replica_specifications)
+      :replica_specifications,
+      :cdc_specification)
       SENSITIVE = []
       include Aws::Structure
     end

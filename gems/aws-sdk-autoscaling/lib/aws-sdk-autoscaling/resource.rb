@@ -844,6 +844,7 @@ module Aws::AutoScaling
     #
     #   groups = auto_scaling.groups({
     #     auto_scaling_group_names: ["XmlStringMaxLen255"],
+    #     include_instances: false,
     #     filters: [
     #       {
     #         name: "XmlString",
@@ -858,6 +859,10 @@ module Aws::AutoScaling
     #   `MaxRecords` property.
     #
     #   If you omit this property, all Auto Scaling groups are described.
+    # @option options [Boolean] :include_instances
+    #   Specifies whether to include information about Amazon EC2 instances in
+    #   the response. When set to `true` (default), the response includes
+    #   instance details.
     # @option options [Array<Types::Filter>] :filters
     #   One or more filters to limit the results based on specific tags.
     # @return [AutoScalingGroup::Collection]

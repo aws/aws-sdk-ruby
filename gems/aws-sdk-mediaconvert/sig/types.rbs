@@ -692,7 +692,7 @@ module Aws::MediaConvert
       attr_accessor apply_font_color: ("WHITE_TEXT_ONLY" | "ALL_TEXT")
       attr_accessor background_color: ("NONE" | "BLACK" | "WHITE" | "AUTO")
       attr_accessor background_opacity: ::Integer
-      attr_accessor dds_handling: ("NONE" | "SPECIFIED" | "NO_DISPLAY_WINDOW")
+      attr_accessor dds_handling: ("NONE" | "SPECIFIED" | "NO_DISPLAY_WINDOW" | "SPECIFIED_OPTIMAL")
       attr_accessor dds_x_coordinate: ::Integer
       attr_accessor dds_y_coordinate: ::Integer
       attr_accessor fallback_font: ("BEST_MATCH" | "MONOSPACED_SANSSERIF" | "MONOSPACED_SERIF" | "PROPORTIONAL_SANSSERIF" | "PROPORTIONAL_SERIF")

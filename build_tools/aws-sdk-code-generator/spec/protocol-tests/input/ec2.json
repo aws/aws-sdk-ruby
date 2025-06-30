@@ -2,11 +2,20 @@
     {
         "description": "Test cases for EmptyInputAndEmptyOutput operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsec2",
             "protocol": "ec2",
             "protocols": [
                 "ec2"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsEc2",
+            "serviceId": "EC2 Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsEc2",
+            "uid": "ec2-protocol-2020-01-08"
         },
         "shapes": {
             "EmptyInputAndEmptyOutputInput": {
@@ -44,11 +53,20 @@
     {
         "description": "Test cases for EndpointOperation operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsec2",
             "protocol": "ec2",
             "protocols": [
                 "ec2"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsEc2",
+            "serviceId": "EC2 Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsEc2",
+            "uid": "ec2-protocol-2020-01-08"
         },
         "shapes": {},
         "cases": [
@@ -82,11 +100,20 @@
     {
         "description": "Test cases for EndpointWithHostLabelOperation operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsec2",
             "protocol": "ec2",
             "protocols": [
                 "ec2"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsEc2",
+            "serviceId": "EC2 Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsEc2",
+            "uid": "ec2-protocol-2020-01-08"
         },
         "shapes": {
             "HostLabelInput": {
@@ -141,11 +168,20 @@
     {
         "description": "Test cases for HostWithPathOperation operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsec2",
             "protocol": "ec2",
             "protocols": [
                 "ec2"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsEc2",
+            "serviceId": "EC2 Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsEc2",
+            "uid": "ec2-protocol-2020-01-08"
         },
         "shapes": {},
         "cases": [
@@ -173,11 +209,20 @@
     {
         "description": "Test cases for NestedStructures operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsec2",
             "protocol": "ec2",
             "protocols": [
                 "ec2"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsEc2",
+            "serviceId": "EC2 Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsEc2",
+            "uid": "ec2-protocol-2020-01-08"
         },
         "shapes": {
             "NestedStructuresInput": {
@@ -251,11 +296,20 @@
     {
         "description": "Test cases for NoInputAndOutput operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsec2",
             "protocol": "ec2",
             "protocols": [
                 "ec2"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsEc2",
+            "serviceId": "EC2 Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsEc2",
+            "uid": "ec2-protocol-2020-01-08"
         },
         "shapes": {},
         "cases": [
@@ -285,11 +339,20 @@
     {
         "description": "Test cases for PutWithContentEncoding operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsec2",
             "protocol": "ec2",
             "protocols": [
                 "ec2"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsEc2",
+            "serviceId": "EC2 Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsEc2",
+            "uid": "ec2-protocol-2020-01-08"
         },
         "shapes": {
             "PutWithContentEncodingInput": {
@@ -372,11 +435,20 @@
     {
         "description": "Test cases for QueryIdempotencyTokenAutoFill operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsec2",
             "protocol": "ec2",
             "protocols": [
                 "ec2"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsEc2",
+            "serviceId": "EC2 Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsEc2",
+            "uid": "ec2-protocol-2020-01-08"
         },
         "shapes": {
             "QueryIdempotencyTokenAutoFillInput": {
@@ -454,11 +526,20 @@
     {
         "description": "Test cases for QueryLists operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsec2",
             "protocol": "ec2",
             "protocols": [
                 "ec2"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsEc2",
+            "serviceId": "EC2 Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsEc2",
+            "uid": "ec2-protocol-2020-01-08"
         },
         "shapes": {
             "QueryListsInput": {
@@ -680,11 +761,20 @@
     {
         "description": "Test cases for QueryTimestamps operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsec2",
             "protocol": "ec2",
             "protocols": [
                 "ec2"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsEc2",
+            "serviceId": "EC2 Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsEc2",
+            "uid": "ec2-protocol-2020-01-08"
         },
         "shapes": {
             "QueryTimestampsInput": {
@@ -750,11 +840,20 @@
     {
         "description": "Test cases for SimpleInputParams operation",
         "metadata": {
+            "apiVersion": "2020-01-08",
+            "auth": [
+                "aws.auth#sigv4"
+            ],
+            "endpointPrefix": "awsec2",
             "protocol": "ec2",
             "protocols": [
                 "ec2"
             ],
-            "apiVersion": "2020-01-08"
+            "serviceFullName": "AwsEc2",
+            "serviceId": "EC2 Protocol",
+            "signatureVersion": "v4",
+            "signingName": "AwsEc2",
+            "uid": "ec2-protocol-2020-01-08"
         },
         "shapes": {
             "SimpleInputParamsInput": {

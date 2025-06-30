@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2025-06-24)
+------------------
+
+* Feature - We are making ListFoundationModelAgreementOffers, DeleteFoundationModelAgreement, CreateFoundationModelAgreement, GetFoundationModelAvailability, PutUseCaseForModelAccess and GetUseCaseForModelAccess APIs public, previously they were console.
+
+1.51.0 (2025-06-20)
+------------------
+
+* Feature - Add support for tiers in Content Filters and Denied Topics for Amazon Bedrock Guardrails.
+
+1.50.0 (2025-06-19)
+------------------
+
+* Feature - This release of the SDK has the API and documentation for the createcustommodel API. This feature lets you copy a trained model into Amazon Bedrock for inference.
+
 1.49.0 (2025-06-17)
 ------------------
 

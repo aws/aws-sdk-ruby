@@ -887,8 +887,10 @@ module Aws::Batch
     #             launch_template_name: "String",
     #             version: "String",
     #             target_instance_types: ["String"],
+    #             userdata_type: "EKS_BOOTSTRAP_SH", # accepts EKS_BOOTSTRAP_SH, EKS_NODEADM
     #           },
     #         ],
+    #         userdata_type: "EKS_BOOTSTRAP_SH", # accepts EKS_BOOTSTRAP_SH, EKS_NODEADM
     #       },
     #       ec2_configuration: [
     #         {
@@ -1563,6 +1565,8 @@ module Aws::Batch
     #   resp.compute_environments[0].compute_resources.launch_template.overrides[0].version #=> String
     #   resp.compute_environments[0].compute_resources.launch_template.overrides[0].target_instance_types #=> Array
     #   resp.compute_environments[0].compute_resources.launch_template.overrides[0].target_instance_types[0] #=> String
+    #   resp.compute_environments[0].compute_resources.launch_template.overrides[0].userdata_type #=> String, one of "EKS_BOOTSTRAP_SH", "EKS_NODEADM"
+    #   resp.compute_environments[0].compute_resources.launch_template.userdata_type #=> String, one of "EKS_BOOTSTRAP_SH", "EKS_NODEADM"
     #   resp.compute_environments[0].compute_resources.ec2_configuration #=> Array
     #   resp.compute_environments[0].compute_resources.ec2_configuration[0].image_type #=> String
     #   resp.compute_environments[0].compute_resources.ec2_configuration[0].image_id_override #=> String
@@ -5331,8 +5335,10 @@ module Aws::Batch
     #             launch_template_name: "String",
     #             version: "String",
     #             target_instance_types: ["String"],
+    #             userdata_type: "EKS_BOOTSTRAP_SH", # accepts EKS_BOOTSTRAP_SH, EKS_NODEADM
     #           },
     #         ],
+    #         userdata_type: "EKS_BOOTSTRAP_SH", # accepts EKS_BOOTSTRAP_SH, EKS_NODEADM
     #       },
     #       ec2_configuration: [
     #         {
@@ -5618,7 +5624,7 @@ module Aws::Batch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.115.0'
+      context[:gem_version] = '1.116.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

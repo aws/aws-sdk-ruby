@@ -21,7 +21,7 @@ module Aws::GeoPlaces
     class AccessRestriction
       attr_accessor restricted: bool
       attr_accessor categories: ::Array[Types::Category]
-      SENSITIVE: []
+      SENSITIVE: [:restricted]
     end
 
     class Address
@@ -40,7 +40,8 @@ module Aws::GeoPlaces
       attr_accessor street_components: ::Array[Types::StreetComponents]
       attr_accessor address_number: ::String
       attr_accessor building: ::String
-      SENSITIVE: []
+      attr_accessor secondary_address_components: ::Array[Types::SecondaryAddressComponent]
+      SENSITIVE: [:label, :locality, :district, :sub_district, :postal_code, :block, :sub_block, :street, :address_number, :building]
     end
 
     class AddressComponentMatchScores
@@ -56,6 +57,7 @@ module Aws::GeoPlaces
       attr_accessor intersection: ::Array[::Float]
       attr_accessor address_number: ::Float
       attr_accessor building: ::Float
+      attr_accessor secondary_address_components: ::Array[Types::SecondaryAddressComponentMatchScore]
       SENSITIVE: []
     end
 
@@ -115,7 +117,7 @@ module Aws::GeoPlaces
       attr_accessor political_view: ::String
       attr_accessor intended_use: ("SingleUse")
       attr_accessor key: ::String
-      SENSITIVE: [:query_text, :bias_position, :key]
+      SENSITIVE: [:query_text, :bias_position, :political_view, :key]
     end
 
     class AutocompleteResponse
@@ -126,20 +128,20 @@ module Aws::GeoPlaces
 
     class AutocompleteResultItem
       attr_accessor place_id: ::String
-      attr_accessor place_type: ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress")
+      attr_accessor place_type: ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress" | "SecondaryAddress")
       attr_accessor title: ::String
       attr_accessor address: Types::Address
       attr_accessor distance: ::Integer
       attr_accessor language: ::String
       attr_accessor political_view: ::String
       attr_accessor highlights: Types::AutocompleteHighlights
-      SENSITIVE: []
+      SENSITIVE: [:place_id, :place_type, :title, :distance, :political_view]
     end
 
     class BusinessChain
       attr_accessor name: ::String
       attr_accessor id: ::String
-      SENSITIVE: []
+      SENSITIVE: [:name, :id]
     end
 
     class Category
@@ -147,7 +149,7 @@ module Aws::GeoPlaces
       attr_accessor name: ::String
       attr_accessor localized_name: ::String
       attr_accessor primary: bool
-      SENSITIVE: []
+      SENSITIVE: [:id, :name, :localized_name, :primary]
     end
 
     class ComponentMatchScores
@@ -160,7 +162,7 @@ module Aws::GeoPlaces
       attr_accessor label: ::String
       attr_accessor value: ::String
       attr_accessor categories: ::Array[Types::Category]
-      SENSITIVE: []
+      SENSITIVE: [:label, :value]
     end
 
     class Contacts
@@ -175,7 +177,7 @@ module Aws::GeoPlaces
       attr_accessor code_2: ::String
       attr_accessor code_3: ::String
       attr_accessor name: ::String
-      SENSITIVE: []
+      SENSITIVE: [:code_2, :code_3, :name]
     end
 
     class CountryHighlights
@@ -187,19 +189,42 @@ module Aws::GeoPlaces
     class FilterCircle
       attr_accessor center: ::Array[::Float]
       attr_accessor radius: ::Integer
-      SENSITIVE: [:center]
+      SENSITIVE: [:center, :radius]
     end
 
     class FoodType
       attr_accessor localized_name: ::String
       attr_accessor id: ::String
       attr_accessor primary: bool
-      SENSITIVE: []
+      SENSITIVE: [:localized_name, :id, :primary]
     end
 
     class GeocodeFilter
       attr_accessor include_countries: ::Array[::String]
       attr_accessor include_place_types: ::Array[("Locality" | "PostalCode" | "Intersection" | "Street" | "PointAddress" | "InterpolatedAddress")]
+      SENSITIVE: []
+    end
+
+    class GeocodeParsedQuery
+      attr_accessor title: ::Array[Types::ParsedQueryComponent]
+      attr_accessor address: Types::GeocodeParsedQueryAddressComponents
+      SENSITIVE: []
+    end
+
+    class GeocodeParsedQueryAddressComponents
+      attr_accessor country: ::Array[Types::ParsedQueryComponent]
+      attr_accessor region: ::Array[Types::ParsedQueryComponent]
+      attr_accessor sub_region: ::Array[Types::ParsedQueryComponent]
+      attr_accessor locality: ::Array[Types::ParsedQueryComponent]
+      attr_accessor district: ::Array[Types::ParsedQueryComponent]
+      attr_accessor sub_district: ::Array[Types::ParsedQueryComponent]
+      attr_accessor postal_code: ::Array[Types::ParsedQueryComponent]
+      attr_accessor block: ::Array[Types::ParsedQueryComponent]
+      attr_accessor sub_block: ::Array[Types::ParsedQueryComponent]
+      attr_accessor street: ::Array[Types::ParsedQueryComponent]
+      attr_accessor address_number: ::Array[Types::ParsedQueryComponent]
+      attr_accessor building: ::Array[Types::ParsedQueryComponent]
+      attr_accessor secondary_address_components: ::Array[Types::ParsedQuerySecondaryAddressComponent]
       SENSITIVE: []
     end
 
@@ -221,12 +246,12 @@ module Aws::GeoPlaces
       attr_accessor max_results: ::Integer
       attr_accessor bias_position: ::Array[::Float]
       attr_accessor filter: Types::GeocodeFilter
-      attr_accessor additional_features: ::Array[("TimeZone" | "Access")]
+      attr_accessor additional_features: ::Array[("TimeZone" | "Access" | "SecondaryAddresses" | "Intersections")]
       attr_accessor language: ::String
       attr_accessor political_view: ::String
       attr_accessor intended_use: ("SingleUse" | "Storage")
       attr_accessor key: ::String
-      SENSITIVE: [:query_text, :bias_position, :key]
+      SENSITIVE: [:query_text, :bias_position, :political_view, :key]
     end
 
     class GeocodeResponse
@@ -237,7 +262,7 @@ module Aws::GeoPlaces
 
     class GeocodeResultItem
       attr_accessor place_id: ::String
-      attr_accessor place_type: ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress")
+      attr_accessor place_type: ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress" | "SecondaryAddress")
       attr_accessor title: ::String
       attr_accessor address: Types::Address
       attr_accessor address_number_corrected: bool
@@ -251,22 +276,26 @@ module Aws::GeoPlaces
       attr_accessor time_zone: Types::TimeZone
       attr_accessor political_view: ::String
       attr_accessor match_scores: Types::MatchScoreDetails
-      SENSITIVE: [:position, :map_view]
+      attr_accessor parsed_query: Types::GeocodeParsedQuery
+      attr_accessor intersections: ::Array[Types::Intersection]
+      attr_accessor main_address: Types::RelatedPlace
+      attr_accessor secondary_addresses: ::Array[Types::RelatedPlace]
+      SENSITIVE: [:place_id, :place_type, :title, :address_number_corrected, :position, :distance, :map_view, :political_view]
     end
 
     class GetPlaceRequest
       attr_accessor place_id: ::String
-      attr_accessor additional_features: ::Array[("TimeZone" | "Phonemes" | "Access" | "Contact")]
+      attr_accessor additional_features: ::Array[("TimeZone" | "Phonemes" | "Access" | "Contact" | "SecondaryAddresses")]
       attr_accessor language: ::String
       attr_accessor political_view: ::String
       attr_accessor intended_use: ("SingleUse" | "Storage")
       attr_accessor key: ::String
-      SENSITIVE: [:place_id, :key]
+      SENSITIVE: [:place_id, :political_view, :key]
     end
 
     class GetPlaceResponse
       attr_accessor place_id: ::String
-      attr_accessor place_type: ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress")
+      attr_accessor place_type: ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress" | "SecondaryAddress")
       attr_accessor title: ::String
       attr_accessor pricing_bucket: ::String
       attr_accessor address: Types::Address
@@ -284,19 +313,33 @@ module Aws::GeoPlaces
       attr_accessor time_zone: Types::TimeZone
       attr_accessor political_view: ::String
       attr_accessor phonemes: Types::PhonemeDetails
-      SENSITIVE: [:position, :map_view]
+      attr_accessor main_address: Types::RelatedPlace
+      attr_accessor secondary_addresses: ::Array[Types::RelatedPlace]
+      SENSITIVE: [:place_id, :place_type, :title, :address_number_corrected, :position, :map_view, :political_view]
     end
 
     class Highlight
       attr_accessor start_index: ::Integer
       attr_accessor end_index: ::Integer
       attr_accessor value: ::String
-      SENSITIVE: []
+      SENSITIVE: [:value]
     end
 
     class InternalServerException
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class Intersection
+      attr_accessor place_id: ::String
+      attr_accessor title: ::String
+      attr_accessor address: Types::Address
+      attr_accessor position: ::Array[::Float]
+      attr_accessor distance: ::Integer
+      attr_accessor route_distance: ::Integer
+      attr_accessor map_view: ::Array[::Float]
+      attr_accessor access_points: ::Array[Types::AccessPoint]
+      SENSITIVE: [:place_id, :title, :position, :distance, :route_distance, :map_view]
     end
 
     class MatchScoreDetails
@@ -310,14 +353,31 @@ module Aws::GeoPlaces
       attr_accessor open_now: bool
       attr_accessor components: ::Array[Types::OpeningHoursComponents]
       attr_accessor categories: ::Array[Types::Category]
-      SENSITIVE: []
+      SENSITIVE: [:open_now]
     end
 
     class OpeningHoursComponents
       attr_accessor open_time: ::String
       attr_accessor open_duration: ::String
       attr_accessor recurrence: ::String
-      SENSITIVE: []
+      SENSITIVE: [:open_time, :open_duration, :recurrence]
+    end
+
+    class ParsedQueryComponent
+      attr_accessor start_index: ::Integer
+      attr_accessor end_index: ::Integer
+      attr_accessor value: ::String
+      attr_accessor query_component: ::String
+      SENSITIVE: [:value, :query_component]
+    end
+
+    class ParsedQuerySecondaryAddressComponent
+      attr_accessor start_index: ::Integer
+      attr_accessor end_index: ::Integer
+      attr_accessor value: ::String
+      attr_accessor number: ::String
+      attr_accessor designator: ::String
+      SENSITIVE: [:value, :number, :designator]
     end
 
     class PhonemeDetails
@@ -330,7 +390,7 @@ module Aws::GeoPlaces
       attr_accessor value: ::String
       attr_accessor language: ::String
       attr_accessor preferred: bool
-      SENSITIVE: []
+      SENSITIVE: [:value, :preferred]
     end
 
     class PostalCodeDetails
@@ -339,7 +399,7 @@ module Aws::GeoPlaces
       attr_accessor postal_code_type: ("UspsZip" | "UspsZipPlus4")
       attr_accessor usps_zip: Types::UspsZip
       attr_accessor usps_zip_plus_4: Types::UspsZipPlus4
-      SENSITIVE: []
+      SENSITIVE: [:postal_code, :postal_authority, :postal_code_type]
     end
 
     class QueryRefinement
@@ -347,19 +407,29 @@ module Aws::GeoPlaces
       attr_accessor original_term: ::String
       attr_accessor start_index: ::Integer
       attr_accessor end_index: ::Integer
-      SENSITIVE: []
+      SENSITIVE: [:refined_term, :original_term]
     end
 
     class Region
       attr_accessor code: ::String
       attr_accessor name: ::String
-      SENSITIVE: []
+      SENSITIVE: [:code, :name]
     end
 
     class RegionHighlights
       attr_accessor code: ::Array[Types::Highlight]
       attr_accessor name: ::Array[Types::Highlight]
       SENSITIVE: []
+    end
+
+    class RelatedPlace
+      attr_accessor place_id: ::String
+      attr_accessor place_type: ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress" | "SecondaryAddress")
+      attr_accessor title: ::String
+      attr_accessor address: Types::Address
+      attr_accessor position: ::Array[::Float]
+      attr_accessor access_points: ::Array[Types::AccessPoint]
+      SENSITIVE: [:place_id, :place_type, :title, :position]
     end
 
     class ReverseGeocodeFilter
@@ -372,12 +442,12 @@ module Aws::GeoPlaces
       attr_accessor query_radius: ::Integer
       attr_accessor max_results: ::Integer
       attr_accessor filter: Types::ReverseGeocodeFilter
-      attr_accessor additional_features: ::Array[("TimeZone" | "Access")]
+      attr_accessor additional_features: ::Array[("TimeZone" | "Access" | "Intersections")]
       attr_accessor language: ::String
       attr_accessor political_view: ::String
       attr_accessor intended_use: ("SingleUse" | "Storage")
       attr_accessor key: ::String
-      SENSITIVE: [:query_position, :key]
+      SENSITIVE: [:query_position, :query_radius, :political_view, :key]
     end
 
     class ReverseGeocodeResponse
@@ -388,7 +458,7 @@ module Aws::GeoPlaces
 
     class ReverseGeocodeResultItem
       attr_accessor place_id: ::String
-      attr_accessor place_type: ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress")
+      attr_accessor place_type: ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress" | "SecondaryAddress")
       attr_accessor title: ::String
       attr_accessor address: Types::Address
       attr_accessor address_number_corrected: bool
@@ -401,7 +471,8 @@ module Aws::GeoPlaces
       attr_accessor access_points: ::Array[Types::AccessPoint]
       attr_accessor time_zone: Types::TimeZone
       attr_accessor political_view: ::String
-      SENSITIVE: [:position, :map_view]
+      attr_accessor intersections: ::Array[Types::Intersection]
+      SENSITIVE: [:place_id, :place_type, :title, :address_number_corrected, :position, :distance, :map_view, :political_view]
     end
 
     class SearchNearbyFilter
@@ -427,7 +498,7 @@ module Aws::GeoPlaces
       attr_accessor intended_use: ("SingleUse" | "Storage")
       attr_accessor next_token: ::String
       attr_accessor key: ::String
-      SENSITIVE: [:query_position, :key]
+      SENSITIVE: [:query_position, :query_radius, :political_view, :key]
     end
 
     class SearchNearbyResponse
@@ -439,7 +510,7 @@ module Aws::GeoPlaces
 
     class SearchNearbyResultItem
       attr_accessor place_id: ::String
-      attr_accessor place_type: ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress")
+      attr_accessor place_type: ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress" | "SecondaryAddress")
       attr_accessor title: ::String
       attr_accessor address: Types::Address
       attr_accessor address_number_corrected: bool
@@ -456,7 +527,7 @@ module Aws::GeoPlaces
       attr_accessor time_zone: Types::TimeZone
       attr_accessor political_view: ::String
       attr_accessor phonemes: Types::PhonemeDetails
-      SENSITIVE: [:position, :map_view]
+      SENSITIVE: [:place_id, :place_type, :title, :address_number_corrected, :position, :distance, :map_view, :political_view]
     end
 
     class SearchTextFilter
@@ -478,7 +549,7 @@ module Aws::GeoPlaces
       attr_accessor intended_use: ("SingleUse" | "Storage")
       attr_accessor next_token: ::String
       attr_accessor key: ::String
-      SENSITIVE: [:query_text, :query_id, :bias_position, :key]
+      SENSITIVE: [:query_text, :query_id, :bias_position, :political_view, :key]
     end
 
     class SearchTextResponse
@@ -490,7 +561,7 @@ module Aws::GeoPlaces
 
     class SearchTextResultItem
       attr_accessor place_id: ::String
-      attr_accessor place_type: ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress")
+      attr_accessor place_type: ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress" | "SecondaryAddress")
       attr_accessor title: ::String
       attr_accessor address: Types::Address
       attr_accessor address_number_corrected: bool
@@ -507,7 +578,17 @@ module Aws::GeoPlaces
       attr_accessor time_zone: Types::TimeZone
       attr_accessor political_view: ::String
       attr_accessor phonemes: Types::PhonemeDetails
-      SENSITIVE: [:position, :map_view]
+      SENSITIVE: [:place_id, :place_type, :title, :address_number_corrected, :position, :distance, :map_view, :political_view]
+    end
+
+    class SecondaryAddressComponent
+      attr_accessor number: ::String
+      SENSITIVE: [:number]
+    end
+
+    class SecondaryAddressComponentMatchScore
+      attr_accessor number: ::Float
+      SENSITIVE: []
     end
 
     class StreetComponents
@@ -519,13 +600,13 @@ module Aws::GeoPlaces
       attr_accessor suffix: ::String
       attr_accessor direction: ::String
       attr_accessor language: ::String
-      SENSITIVE: []
+      SENSITIVE: [:base_name, :type, :prefix, :suffix, :direction]
     end
 
     class SubRegion
       attr_accessor code: ::String
       attr_accessor name: ::String
-      SENSITIVE: []
+      SENSITIVE: [:code, :name]
     end
 
     class SubRegionHighlights
@@ -554,7 +635,7 @@ module Aws::GeoPlaces
 
     class SuggestPlaceResult
       attr_accessor place_id: ::String
-      attr_accessor place_type: ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress")
+      attr_accessor place_type: ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress" | "SecondaryAddress")
       attr_accessor address: Types::Address
       attr_accessor position: ::Array[::Float]
       attr_accessor distance: ::Integer
@@ -567,13 +648,13 @@ module Aws::GeoPlaces
       attr_accessor time_zone: Types::TimeZone
       attr_accessor political_view: ::String
       attr_accessor phonemes: Types::PhonemeDetails
-      SENSITIVE: [:position, :map_view]
+      SENSITIVE: [:place_id, :place_type, :position, :distance, :map_view, :political_view]
     end
 
     class SuggestQueryResult
       attr_accessor query_id: ::String
       attr_accessor query_type: ("Category" | "BusinessChain")
-      SENSITIVE: []
+      SENSITIVE: [:query_id]
     end
 
     class SuggestRequest
@@ -587,7 +668,7 @@ module Aws::GeoPlaces
       attr_accessor political_view: ::String
       attr_accessor intended_use: ("SingleUse")
       attr_accessor key: ::String
-      SENSITIVE: [:query_text, :bias_position, :key]
+      SENSITIVE: [:query_text, :bias_position, :political_view, :key]
     end
 
     class SuggestResponse
@@ -603,7 +684,7 @@ module Aws::GeoPlaces
       attr_accessor place: Types::SuggestPlaceResult
       attr_accessor query: Types::SuggestQueryResult
       attr_accessor highlights: Types::SuggestHighlights
-      SENSITIVE: []
+      SENSITIVE: [:title]
     end
 
     class ThrottlingException
@@ -615,17 +696,17 @@ module Aws::GeoPlaces
       attr_accessor name: ::String
       attr_accessor offset: ::String
       attr_accessor offset_seconds: ::Integer
-      SENSITIVE: []
+      SENSITIVE: [:name, :offset, :offset_seconds]
     end
 
     class UspsZip
       attr_accessor zip_classification_code: ("Military" | "PostOfficeBoxes" | "Unique")
-      SENSITIVE: []
+      SENSITIVE: [:zip_classification_code]
     end
 
     class UspsZipPlus4
       attr_accessor record_type_code: ("Firm" | "General" | "HighRise" | "PostOfficeBox" | "Rural" | "Street")
-      SENSITIVE: []
+      SENSITIVE: [:record_type_code]
     end
 
     class ValidationException

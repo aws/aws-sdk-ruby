@@ -41,6 +41,7 @@ module Aws::Textract
     AnalyzeIDDetections = Shapes::StructureShape.new(name: 'AnalyzeIDDetections')
     AnalyzeIDRequest = Shapes::StructureShape.new(name: 'AnalyzeIDRequest')
     AnalyzeIDResponse = Shapes::StructureShape.new(name: 'AnalyzeIDResponse')
+    Angle = Shapes::FloatShape.new(name: 'Angle')
     AutoUpdate = Shapes::StringShape.new(name: 'AutoUpdate')
     BadDocumentException = Shapes::StructureShape.new(name: 'BadDocumentException')
     Block = Shapes::StructureShape.new(name: 'Block')
@@ -449,6 +450,7 @@ module Aws::Textract
 
     Geometry.add_member(:bounding_box, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "BoundingBox"))
     Geometry.add_member(:polygon, Shapes::ShapeRef.new(shape: Polygon, location_name: "Polygon"))
+    Geometry.add_member(:rotation_angle, Shapes::ShapeRef.new(shape: Angle, location_name: "RotationAngle"))
     Geometry.struct_class = Types::Geometry
 
     GetAdapterRequest.add_member(:adapter_id, Shapes::ShapeRef.new(shape: AdapterId, required: true, location_name: "AdapterId"))

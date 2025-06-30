@@ -2726,6 +2726,7 @@ module Aws::Deadline
     #   * {Types::GetJobResponse#task_run_status #task_run_status} => String
     #   * {Types::GetJobResponse#target_task_run_status #target_task_run_status} => String
     #   * {Types::GetJobResponse#task_run_status_counts #task_run_status_counts} => Hash&lt;String,Integer&gt;
+    #   * {Types::GetJobResponse#task_failure_retry_count #task_failure_retry_count} => Integer
     #   * {Types::GetJobResponse#storage_profile_id #storage_profile_id} => String
     #   * {Types::GetJobResponse#max_failed_tasks_count #max_failed_tasks_count} => Integer
     #   * {Types::GetJobResponse#max_retries_per_task #max_retries_per_task} => Integer
@@ -2760,6 +2761,7 @@ module Aws::Deadline
     #   resp.target_task_run_status #=> String, one of "READY", "FAILED", "SUCCEEDED", "CANCELED", "SUSPENDED", "PENDING"
     #   resp.task_run_status_counts #=> Hash
     #   resp.task_run_status_counts["TaskRunStatus"] #=> Integer
+    #   resp.task_failure_retry_count #=> Integer
     #   resp.storage_profile_id #=> String
     #   resp.max_failed_tasks_count #=> Integer
     #   resp.max_retries_per_task #=> Integer
@@ -3426,6 +3428,7 @@ module Aws::Deadline
     #   * {Types::GetStepResponse#lifecycle_status_message #lifecycle_status_message} => String
     #   * {Types::GetStepResponse#task_run_status #task_run_status} => String
     #   * {Types::GetStepResponse#task_run_status_counts #task_run_status_counts} => Hash&lt;String,Integer&gt;
+    #   * {Types::GetStepResponse#task_failure_retry_count #task_failure_retry_count} => Integer
     #   * {Types::GetStepResponse#target_task_run_status #target_task_run_status} => String
     #   * {Types::GetStepResponse#created_at #created_at} => Time
     #   * {Types::GetStepResponse#created_by #created_by} => String
@@ -3456,6 +3459,7 @@ module Aws::Deadline
     #   resp.task_run_status #=> String, one of "PENDING", "READY", "ASSIGNED", "STARTING", "SCHEDULED", "INTERRUPTING", "RUNNING", "SUSPENDED", "CANCELED", "FAILED", "SUCCEEDED", "NOT_COMPATIBLE"
     #   resp.task_run_status_counts #=> Hash
     #   resp.task_run_status_counts["TaskRunStatus"] #=> Integer
+    #   resp.task_failure_retry_count #=> Integer
     #   resp.target_task_run_status #=> String, one of "READY", "FAILED", "SUCCEEDED", "CANCELED", "SUSPENDED", "PENDING"
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
@@ -4252,6 +4256,7 @@ module Aws::Deadline
     #   resp.jobs[0].target_task_run_status #=> String, one of "READY", "FAILED", "SUCCEEDED", "CANCELED", "SUSPENDED", "PENDING"
     #   resp.jobs[0].task_run_status_counts #=> Hash
     #   resp.jobs[0].task_run_status_counts["TaskRunStatus"] #=> Integer
+    #   resp.jobs[0].task_failure_retry_count #=> Integer
     #   resp.jobs[0].max_failed_tasks_count #=> Integer
     #   resp.jobs[0].max_retries_per_task #=> Integer
     #   resp.jobs[0].max_worker_count #=> Integer
@@ -5087,6 +5092,7 @@ module Aws::Deadline
     #   resp.steps[0].task_run_status #=> String, one of "PENDING", "READY", "ASSIGNED", "STARTING", "SCHEDULED", "INTERRUPTING", "RUNNING", "SUSPENDED", "CANCELED", "FAILED", "SUCCEEDED", "NOT_COMPATIBLE"
     #   resp.steps[0].task_run_status_counts #=> Hash
     #   resp.steps[0].task_run_status_counts["TaskRunStatus"] #=> Integer
+    #   resp.steps[0].task_failure_retry_count #=> Integer
     #   resp.steps[0].target_task_run_status #=> String, one of "READY", "FAILED", "SUCCEEDED", "CANCELED", "SUSPENDED", "PENDING"
     #   resp.steps[0].created_at #=> Time
     #   resp.steps[0].created_by #=> String
@@ -5489,6 +5495,7 @@ module Aws::Deadline
     #   resp.jobs[0].target_task_run_status #=> String, one of "READY", "FAILED", "SUCCEEDED", "CANCELED", "SUSPENDED", "PENDING"
     #   resp.jobs[0].task_run_status_counts #=> Hash
     #   resp.jobs[0].task_run_status_counts["TaskRunStatus"] #=> Integer
+    #   resp.jobs[0].task_failure_retry_count #=> Integer
     #   resp.jobs[0].priority #=> Integer
     #   resp.jobs[0].max_failed_tasks_count #=> Integer
     #   resp.jobs[0].max_retries_per_task #=> Integer
@@ -5614,6 +5621,7 @@ module Aws::Deadline
     #   resp.steps[0].target_task_run_status #=> String, one of "READY", "FAILED", "SUCCEEDED", "CANCELED", "SUSPENDED", "PENDING"
     #   resp.steps[0].task_run_status_counts #=> Hash
     #   resp.steps[0].task_run_status_counts["TaskRunStatus"] #=> Integer
+    #   resp.steps[0].task_failure_retry_count #=> Integer
     #   resp.steps[0].created_at #=> Time
     #   resp.steps[0].started_at #=> Time
     #   resp.steps[0].ended_at #=> Time
@@ -7062,7 +7070,7 @@ module Aws::Deadline
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-deadline'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

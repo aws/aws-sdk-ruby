@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2025-06-25)
+------------------
+
+* Feature - Add RotationAngle field to Geometry of WORD blocks for Textract AnalyzeDocument API
+
 1.77.0 (2025-06-02)
 ------------------
 

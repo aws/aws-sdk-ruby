@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.153.0 (2025-06-19)
+------------------
+
+* Feature - Support Schema Registry feature for Kafka Event Source Mapping. Customers can now configure a Schema Registry to enable schema validation and filtering for Avro, Protobuf, and JSON-formatted events in Lambda for Kafka Event Source.
+
 1.152.0 (2025-06-02)
 ------------------
 

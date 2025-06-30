@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2025-06-25)
+------------------
+
+* Feature - Remove Tags field from Get API responses
+
 1.28.0 (2025-06-09)
 ------------------
 

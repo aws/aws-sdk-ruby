@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2025-06-24)
+------------------
+
+* Feature - AWS License Manager now supports license type conversions for AWS Marketplace products. Customers can provide Marketplace codes in the source license context or destination license context in the CreateLicenseConversionTaskForResource requests.
+
 1.74.0 (2025-06-02)
 ------------------
 

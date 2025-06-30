@@ -1725,6 +1725,24 @@ module Aws::RDS
     #   can be copied only with cross-account snapshot copy calls.
     #   @return [Boolean]
     #
+    # @!attribute [rw] snapshot_availability_zone
+    #   Specifies the name of the Availability Zone where RDS stores the DB
+    #   snapshot. This value is valid only for snapshots that RDS stores on
+    #   a Dedicated Local Zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_target
+    #   Configures the location where RDS will store copied snapshots.
+    #
+    #   Valid Values:
+    #
+    #   * `local` (Dedicated Local Zone)
+    #
+    #   * `outposts` (Amazon Web Services Outposts)
+    #
+    #   * `region` (Amazon Web Services Region)
+    #   @return [String]
+    #
     # @!attribute [rw] source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -1742,6 +1760,8 @@ module Aws::RDS
       :option_group_name,
       :target_custom_availability_zone,
       :copy_option_group,
+      :snapshot_availability_zone,
+      :snapshot_target,
       :source_region)
       SENSITIVE = []
       include Aws::Structure
@@ -4648,6 +4668,8 @@ module Aws::RDS
     #
     #   Valid Values:
     #
+    #   * `local` (Dedicated Local Zone)
+    #
     #   * `outposts` (Amazon Web Services Outposts)
     #
     #   * `region` (Amazon Web Services Region)
@@ -5597,6 +5619,17 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing
     #   @return [Boolean]
     #
+    # @!attribute [rw] backup_target
+    #   The location where RDS stores automated backups and manual
+    #   snapshots.
+    #
+    #   Valid Values:
+    #
+    #   * `local` for Dedicated Local Zones
+    #
+    #   * `region` for Amazon Web Services Region
+    #   @return [String]
+    #
     # @!attribute [rw] allocated_storage
     #   The amount of storage (in gibibytes) to allocate initially for the
     #   read replica. Follow the allocation rules specified in
@@ -5708,6 +5741,7 @@ module Aws::RDS
       :network_type,
       :storage_throughput,
       :enable_customer_owned_ip,
+      :backup_target,
       :allocated_storage,
       :source_db_cluster_identifier,
       :dedicated_log_volume,
@@ -9438,8 +9472,8 @@ module Aws::RDS
     #
     # @!attribute [rw] backup_target
     #   The location where automated backups and manual snapshots are
-    #   stored: Amazon Web Services Outposts or the Amazon Web Services
-    #   Region.
+    #   stored: Dedicated Local Zones, Amazon Web Services Outposts or the
+    #   Amazon Web Services Region.
     #   @return [String]
     #
     # @!attribute [rw] network_type
@@ -9769,8 +9803,9 @@ module Aws::RDS
     #   @return [Array<Types::DBInstanceAutomatedBackupsReplication>]
     #
     # @!attribute [rw] backup_target
-    #   The location where automated backups are stored: Amazon Web Services
-    #   Outposts or the Amazon Web Services Region.
+    #   The location where automated backups are stored: Dedicated Local
+    #   Zones, Amazon Web Services Outposts or the Amazon Web Services
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] storage_throughput
@@ -11198,8 +11233,8 @@ module Aws::RDS
     #   @return [Time]
     #
     # @!attribute [rw] snapshot_target
-    #   Specifies where manual snapshots are stored: Amazon Web Services
-    #   Outposts or the Amazon Web Services Region.
+    #   Specifies where manual snapshots are stored: Dedicated Local Zones,
+    #   Amazon Web Services Outposts or the Amazon Web Services Region.
     #   @return [String]
     #
     # @!attribute [rw] storage_throughput
@@ -11222,6 +11257,12 @@ module Aws::RDS
     #   multi-tenant configuration (TRUE) or the single-tenant configuration
     #   (FALSE).
     #   @return [Boolean]
+    #
+    # @!attribute [rw] snapshot_availability_zone
+    #   Specifies the name of the Availability Zone where RDS stores the DB
+    #   snapshot. This value is valid only for snapshots that RDS stores on
+    #   a Dedicated Local Zone.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshot AWS API Documentation
     #
@@ -11261,7 +11302,8 @@ module Aws::RDS
       :storage_throughput,
       :db_system_id,
       :dedicated_log_volume,
-      :multi_tenant)
+      :multi_tenant,
+      :snapshot_availability_zone)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25451,8 +25493,9 @@ module Aws::RDS
     #   Specifies where automated backups and manual snapshots are stored
     #   for the restored DB instance.
     #
-    #   Possible values are `outposts` (Amazon Web Services Outposts) and
-    #   `region` (Amazon Web Services Region). The default is `region`.
+    #   Possible values are `local` (Dedicated Local Zone), `outposts`
+    #   (Amazon Web Services Outposts), and `region` (Amazon Web Services
+    #   Region). The default is `region`.
     #
     #   For more information, see [Working with Amazon RDS on Amazon Web
     #   Services Outposts][1] in the *Amazon RDS User Guide*.
@@ -26951,6 +26994,8 @@ module Aws::RDS
     #   the restored DB instance.
     #
     #   Valid Values:
+    #
+    #   * `local` (Dedicated Local Zone)
     #
     #   * `outposts` (Amazon Web Services Outposts)
     #

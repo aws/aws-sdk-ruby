@@ -611,10 +611,13 @@ module Aws::Route53Resolver
     #   Specify the applicable value:
     #
     #   * `INBOUND`: Resolver forwards DNS queries to the DNS service for a
-    #     VPC from your network
+    #     VPC from your network.
     #
     #   * `OUTBOUND`: Resolver forwards DNS queries from the DNS service for
-    #     a VPC to your network
+    #     a VPC to your network.
+    #
+    #   * `INBOUND_DELEGATION`: Resolver delegates queries to Route 53
+    #     private hosted zones from your network.
     #   @return [String]
     #
     # @!attribute [rw] ip_addresses
@@ -652,9 +655,10 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] protocols
     #   The protocols you want to use for the endpoint. DoH-FIPS is
-    #   applicable for inbound endpoints only.
+    #   applicable for default inbound endpoints only.
     #
-    #   For an inbound endpoint you can apply the protocols as follows:
+    #   For a default inbound endpoint you can apply the protocols as
+    #   follows:
     #
     #   * Do53 and DoH in combination.
     #
@@ -667,6 +671,8 @@ module Aws::Route53Resolver
     #   * DoH-FIPS alone.
     #
     #   * None, which is treated as Do53.
+    #
+    #   For a delegation inbound endpoint you can use Do53 only.
     #
     #   For an outbound endpoint you can apply the protocols as follows:
     #
@@ -789,7 +795,7 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] rule_type
     #   When you want to forward DNS queries for specified domain name to
-    #   resolvers on your network, specify `FORWARD`.
+    #   resolvers on your network, specify `FORWARD` or `DELEGATE`.
     #
     #   When you have a forwarding rule to forward DNS queries for a domain
     #   to your network and you want Resolver to process queries for a
@@ -833,6 +839,11 @@ module Aws::Route53Resolver
     #   the endpoint.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] delegation_record
+    #   DNS queries with the delegation records that match this domain name
+    #   are forwarded to the resolvers on your network.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateResolverRuleRequest AWS API Documentation
     #
     class CreateResolverRuleRequest < Struct.new(
@@ -842,7 +853,8 @@ module Aws::Route53Resolver
       :domain_name,
       :target_ips,
       :resolver_endpoint_id,
-      :tags)
+      :tags,
+      :delegation_record)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4029,8 +4041,8 @@ module Aws::Route53Resolver
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The ID of the Amazon Virtual Private Cloud VPC that you're
-    #   configuring Resolver for.
+    #   The ID of the Amazon Virtual Private Cloud VPC or a Route 53 Profile
+    #   that you're configuring Resolver for.
     #   @return [String]
     #
     # @!attribute [rw] owner_id
@@ -4161,6 +4173,9 @@ module Aws::Route53Resolver
     #   * `INBOUND`: allows DNS queries to your VPC from your network
     #
     #   * `OUTBOUND`: allows DNS queries from your VPC to your network
+    #
+    #   * `INBOUND_DELEGATION`: Resolver delegates queries to Route 53
+    #     private hosted zones from your network.
     #   @return [String]
     #
     # @!attribute [rw] ip_address_count
@@ -4242,8 +4257,8 @@ module Aws::Route53Resolver
     #   @return [String]
     #
     # @!attribute [rw] protocols
-    #   Protocols used for the endpoint. DoH-FIPS is applicable for inbound
-    #   endpoints only.
+    #   Protocols used for the endpoint. DoH-FIPS is applicable for a
+    #   default inbound endpoints only.
     #
     #   For an inbound endpoint you can apply the protocols as follows:
     #
@@ -4258,6 +4273,8 @@ module Aws::Route53Resolver
     #   * DoH-FIPS alone.
     #
     #   * None, which is treated as Do53.
+    #
+    #   For a delegation inbound endpoint you can use Do53 only.
     #
     #   For an outbound endpoint you can apply the protocols as follows:
     #
@@ -4524,7 +4541,10 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] rule_type
     #   When you want to forward DNS queries for specified domain name to
-    #   resolvers on your network, specify `FORWARD`.
+    #   resolvers on your network, specify `FORWARD` or `DELEGATE`. If a
+    #   query matches multiple Resolver rules (example.com and
+    #   www.example.com), outbound DNS queries are routed using the Resolver
+    #   rule that contains the most specific domain name (www.example.com).
     #
     #   When you have a forwarding rule to forward DNS queries for a domain
     #   to your network and you want Resolver to process queries for a
@@ -4576,6 +4596,11 @@ module Aws::Route53Resolver
     #   time format and Coordinated Universal Time (UTC).
     #   @return [String]
     #
+    # @!attribute [rw] delegation_record
+    #   DNS queries with delegation records that point to this domain name
+    #   are forwarded to resolvers on your network.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ResolverRule AWS API Documentation
     #
     class ResolverRule < Struct.new(
@@ -4592,7 +4617,8 @@ module Aws::Route53Resolver
       :owner_id,
       :share_status,
       :creation_time,
-      :modification_time)
+      :modification_time,
+      :delegation_record)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5382,8 +5408,8 @@ module Aws::Route53Resolver
     end
 
     # @!attribute [rw] resource_id
-    #   Resource ID of the Amazon VPC that you want to update the Resolver
-    #   configuration for.
+    #   The ID of the Amazon Virtual Private Cloud VPC or a Route 53 Profile
+    #   that you're configuring Resolver for.
     #   @return [String]
     #
     # @!attribute [rw] autodefined_reverse_flag
@@ -5489,9 +5515,10 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] protocols
     #   The protocols you want to use for the endpoint. DoH-FIPS is
-    #   applicable for inbound endpoints only.
+    #   applicable for default inbound endpoints only.
     #
-    #   For an inbound endpoint you can apply the protocols as follows:
+    #   For a default inbound endpoint you can apply the protocols as
+    #   follows:
     #
     #   * Do53 and DoH in combination.
     #
@@ -5504,6 +5531,8 @@ module Aws::Route53Resolver
     #   * DoH-FIPS alone.
     #
     #   * None, which is treated as Do53.
+    #
+    #   For a delegation inbound endpoint you can use Do53 only.
     #
     #   For an outbound endpoint you can apply the protocols as follows:
     #

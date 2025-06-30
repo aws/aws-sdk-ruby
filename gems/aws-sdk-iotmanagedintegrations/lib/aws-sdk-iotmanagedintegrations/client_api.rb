@@ -19,14 +19,26 @@ module Aws::IoTManagedIntegrations
     AbortCriteriaAction = Shapes::StringShape.new(name: 'AbortCriteriaAction')
     AbortCriteriaFailureType = Shapes::StringShape.new(name: 'AbortCriteriaFailureType')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AccountAssociationArn = Shapes::StringShape.new(name: 'AccountAssociationArn')
+    AccountAssociationDescription = Shapes::StringShape.new(name: 'AccountAssociationDescription')
+    AccountAssociationErrorMessage = Shapes::StringShape.new(name: 'AccountAssociationErrorMessage')
+    AccountAssociationId = Shapes::StringShape.new(name: 'AccountAssociationId')
+    AccountAssociationItem = Shapes::StructureShape.new(name: 'AccountAssociationItem')
+    AccountAssociationListDefinition = Shapes::ListShape.new(name: 'AccountAssociationListDefinition')
+    AccountAssociationName = Shapes::StringShape.new(name: 'AccountAssociationName')
     ActionName = Shapes::StringShape.new(name: 'ActionName')
     ActionReference = Shapes::StringShape.new(name: 'ActionReference')
     ActionTraceId = Shapes::StringShape.new(name: 'ActionTraceId')
     AdvertisedProductId = Shapes::StringShape.new(name: 'AdvertisedProductId')
+    AssociationState = Shapes::StringShape.new(name: 'AssociationState')
     AttributeName = Shapes::StringShape.new(name: 'AttributeName')
     AttributeValue = Shapes::StringShape.new(name: 'AttributeValue')
+    AuthConfig = Shapes::StructureShape.new(name: 'AuthConfig')
+    AuthConfigUpdate = Shapes::StructureShape.new(name: 'AuthConfigUpdate')
     AuthMaterialString = Shapes::StringShape.new(name: 'AuthMaterialString')
     AuthMaterialType = Shapes::StringShape.new(name: 'AuthMaterialType')
+    AuthType = Shapes::StringShape.new(name: 'AuthType')
+    AuthUrl = Shapes::StringShape.new(name: 'AuthUrl')
     BaseRatePerMinute = Shapes::IntegerShape.new(name: 'BaseRatePerMinute')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     Brand = Shapes::StringShape.new(name: 'Brand')
@@ -47,11 +59,17 @@ module Aws::IoTManagedIntegrations
     CapabilityReportEvents = Shapes::ListShape.new(name: 'CapabilityReportEvents')
     CapabilityReportProperties = Shapes::ListShape.new(name: 'CapabilityReportProperties')
     CapabilityReportVersion = Shapes::StringShape.new(name: 'CapabilityReportVersion')
+    CapabilitySchemaItem = Shapes::StructureShape.new(name: 'CapabilitySchemaItem')
+    CapabilitySchemas = Shapes::ListShape.new(name: 'CapabilitySchemas')
     CapabilityVersion = Shapes::StringShape.new(name: 'CapabilityVersion')
     ClaimCertificate = Shapes::StringShape.new(name: 'ClaimCertificate')
     ClaimCertificatePrivateKey = Shapes::StringShape.new(name: 'ClaimCertificatePrivateKey')
     Classification = Shapes::StringShape.new(name: 'Classification')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    CloudConnectorDescription = Shapes::StringShape.new(name: 'CloudConnectorDescription')
+    CloudConnectorId = Shapes::StringShape.new(name: 'CloudConnectorId')
+    CloudConnectorType = Shapes::StringShape.new(name: 'CloudConnectorType')
+    ClusterId = Shapes::StringShape.new(name: 'ClusterId')
     CommandCapabilities = Shapes::ListShape.new(name: 'CommandCapabilities')
     CommandCapability = Shapes::StructureShape.new(name: 'CommandCapability')
     CommandEndpoint = Shapes::StructureShape.new(name: 'CommandEndpoint')
@@ -65,8 +83,27 @@ module Aws::IoTManagedIntegrations
     ConnectivityStatus = Shapes::BooleanShape.new(name: 'ConnectivityStatus')
     ConnectivityTimestamp = Shapes::TimestampShape.new(name: 'ConnectivityTimestamp')
     ConnectorAssociationId = Shapes::StringShape.new(name: 'ConnectorAssociationId')
+    ConnectorDestinationDescription = Shapes::StringShape.new(name: 'ConnectorDestinationDescription')
+    ConnectorDestinationId = Shapes::StringShape.new(name: 'ConnectorDestinationId')
+    ConnectorDestinationListDefinition = Shapes::ListShape.new(name: 'ConnectorDestinationListDefinition')
+    ConnectorDestinationName = Shapes::StringShape.new(name: 'ConnectorDestinationName')
+    ConnectorDestinationSummary = Shapes::StructureShape.new(name: 'ConnectorDestinationSummary')
     ConnectorDeviceId = Shapes::StringShape.new(name: 'ConnectorDeviceId')
+    ConnectorDeviceName = Shapes::StringShape.new(name: 'ConnectorDeviceName')
+    ConnectorEventMessage = Shapes::StringShape.new(name: 'ConnectorEventMessage')
+    ConnectorEventOperation = Shapes::StringShape.new(name: 'ConnectorEventOperation')
+    ConnectorEventOperationVersion = Shapes::StringShape.new(name: 'ConnectorEventOperationVersion')
+    ConnectorEventStatusCode = Shapes::IntegerShape.new(name: 'ConnectorEventStatusCode')
+    ConnectorId = Shapes::StringShape.new(name: 'ConnectorId')
+    ConnectorItem = Shapes::StructureShape.new(name: 'ConnectorItem')
+    ConnectorList = Shapes::ListShape.new(name: 'ConnectorList')
     ConnectorPolicyId = Shapes::StringShape.new(name: 'ConnectorPolicyId')
+    CreateAccountAssociationRequest = Shapes::StructureShape.new(name: 'CreateAccountAssociationRequest')
+    CreateAccountAssociationResponse = Shapes::StructureShape.new(name: 'CreateAccountAssociationResponse')
+    CreateCloudConnectorRequest = Shapes::StructureShape.new(name: 'CreateCloudConnectorRequest')
+    CreateCloudConnectorResponse = Shapes::StructureShape.new(name: 'CreateCloudConnectorResponse')
+    CreateConnectorDestinationRequest = Shapes::StructureShape.new(name: 'CreateConnectorDestinationRequest')
+    CreateConnectorDestinationResponse = Shapes::StructureShape.new(name: 'CreateConnectorDestinationResponse')
     CreateCredentialLockerRequest = Shapes::StructureShape.new(name: 'CreateCredentialLockerRequest')
     CreateCredentialLockerResponse = Shapes::StructureShape.new(name: 'CreateCredentialLockerResponse')
     CreateDestinationRequest = Shapes::StructureShape.new(name: 'CreateDestinationRequest')
@@ -90,6 +127,12 @@ module Aws::IoTManagedIntegrations
     CredentialLockerListDefinition = Shapes::ListShape.new(name: 'CredentialLockerListDefinition')
     CredentialLockerName = Shapes::StringShape.new(name: 'CredentialLockerName')
     CredentialLockerSummary = Shapes::StructureShape.new(name: 'CredentialLockerSummary')
+    CustomProtocolDetail = Shapes::MapShape.new(name: 'CustomProtocolDetail')
+    CustomProtocolDetailKey = Shapes::StringShape.new(name: 'CustomProtocolDetailKey')
+    CustomProtocolDetailValue = Shapes::StringShape.new(name: 'CustomProtocolDetailValue')
+    DeleteAccountAssociationRequest = Shapes::StructureShape.new(name: 'DeleteAccountAssociationRequest')
+    DeleteCloudConnectorRequest = Shapes::StructureShape.new(name: 'DeleteCloudConnectorRequest')
+    DeleteConnectorDestinationRequest = Shapes::StructureShape.new(name: 'DeleteConnectorDestinationRequest')
     DeleteCredentialLockerRequest = Shapes::StructureShape.new(name: 'DeleteCredentialLockerRequest')
     DeleteDestinationRequest = Shapes::StructureShape.new(name: 'DeleteDestinationRequest')
     DeleteEventLogConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteEventLogConfigurationRequest')
@@ -102,36 +145,60 @@ module Aws::IoTManagedIntegrations
     DeliveryDestinationArn = Shapes::StringShape.new(name: 'DeliveryDestinationArn')
     DeliveryDestinationRoleArn = Shapes::StringShape.new(name: 'DeliveryDestinationRoleArn')
     DeliveryDestinationType = Shapes::StringShape.new(name: 'DeliveryDestinationType')
+    DeregisterAccountAssociationRequest = Shapes::StructureShape.new(name: 'DeregisterAccountAssociationRequest')
     DestinationCreatedAt = Shapes::TimestampShape.new(name: 'DestinationCreatedAt')
     DestinationDescription = Shapes::StringShape.new(name: 'DestinationDescription')
     DestinationListDefinition = Shapes::ListShape.new(name: 'DestinationListDefinition')
     DestinationName = Shapes::StringShape.new(name: 'DestinationName')
     DestinationSummary = Shapes::StructureShape.new(name: 'DestinationSummary')
     DestinationUpdatedAt = Shapes::TimestampShape.new(name: 'DestinationUpdatedAt')
+    Device = Shapes::StructureShape.new(name: 'Device')
     DeviceDiscoveryArn = Shapes::StringShape.new(name: 'DeviceDiscoveryArn')
     DeviceDiscoveryId = Shapes::StringShape.new(name: 'DeviceDiscoveryId')
+    DeviceDiscoveryListDefinition = Shapes::ListShape.new(name: 'DeviceDiscoveryListDefinition')
     DeviceDiscoveryStatus = Shapes::StringShape.new(name: 'DeviceDiscoveryStatus')
+    DeviceDiscoverySummary = Shapes::StructureShape.new(name: 'DeviceDiscoverySummary')
+    DeviceMetadata = Shapes::DocumentShape.new(name: 'DeviceMetadata', document: true)
     DeviceSpecificKey = Shapes::StringShape.new(name: 'DeviceSpecificKey')
     DeviceType = Shapes::StringShape.new(name: 'DeviceType')
+    DeviceTypeList = Shapes::ListShape.new(name: 'DeviceTypeList')
     DeviceTypes = Shapes::ListShape.new(name: 'DeviceTypes')
+    Devices = Shapes::ListShape.new(name: 'Devices')
     DisconnectReasonValue = Shapes::StringShape.new(name: 'DisconnectReasonValue')
+    DiscoveredAt = Shapes::TimestampShape.new(name: 'DiscoveredAt')
+    DiscoveredDeviceListDefinition = Shapes::ListShape.new(name: 'DiscoveredDeviceListDefinition')
+    DiscoveredDeviceSummary = Shapes::StructureShape.new(name: 'DiscoveredDeviceSummary')
     DiscoveryAuthMaterialString = Shapes::StringShape.new(name: 'DiscoveryAuthMaterialString')
     DiscoveryAuthMaterialType = Shapes::StringShape.new(name: 'DiscoveryAuthMaterialType')
     DiscoveryFinishedAt = Shapes::TimestampShape.new(name: 'DiscoveryFinishedAt')
+    DiscoveryModification = Shapes::StringShape.new(name: 'DiscoveryModification')
     DiscoveryStartedAt = Shapes::TimestampShape.new(name: 'DiscoveryStartedAt')
     DiscoveryType = Shapes::StringShape.new(name: 'DiscoveryType')
+    DisplayName = Shapes::StringShape.new(name: 'DisplayName')
     DurationInMinutes = Shapes::IntegerShape.new(name: 'DurationInMinutes')
     EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
     EndTime = Shapes::StringShape.new(name: 'EndTime')
     EndpointAddress = Shapes::StringShape.new(name: 'EndpointAddress')
+    EndpointConfig = Shapes::StructureShape.new(name: 'EndpointConfig')
     EndpointId = Shapes::StringShape.new(name: 'EndpointId')
+    EndpointSemanticTag = Shapes::StringShape.new(name: 'EndpointSemanticTag')
+    EndpointType = Shapes::StringShape.new(name: 'EndpointType')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    ErrorResourceId = Shapes::StringShape.new(name: 'ErrorResourceId')
+    ErrorResourceType = Shapes::StringShape.new(name: 'ErrorResourceType')
     EventLogConfigurationListDefinition = Shapes::ListShape.new(name: 'EventLogConfigurationListDefinition')
     EventLogConfigurationSummary = Shapes::StructureShape.new(name: 'EventLogConfigurationSummary')
     EventName = Shapes::StringShape.new(name: 'EventName')
     EventType = Shapes::StringShape.new(name: 'EventType')
     ExecutionNumber = Shapes::IntegerShape.new(name: 'ExecutionNumber')
     ExponentialRolloutRate = Shapes::StructureShape.new(name: 'ExponentialRolloutRate')
+    ExtrinsicSchemaId = Shapes::StringShape.new(name: 'ExtrinsicSchemaId')
+    GetAccountAssociationRequest = Shapes::StructureShape.new(name: 'GetAccountAssociationRequest')
+    GetAccountAssociationResponse = Shapes::StructureShape.new(name: 'GetAccountAssociationResponse')
+    GetCloudConnectorRequest = Shapes::StructureShape.new(name: 'GetCloudConnectorRequest')
+    GetCloudConnectorResponse = Shapes::StructureShape.new(name: 'GetCloudConnectorResponse')
+    GetConnectorDestinationRequest = Shapes::StructureShape.new(name: 'GetConnectorDestinationRequest')
+    GetConnectorDestinationResponse = Shapes::StructureShape.new(name: 'GetConnectorDestinationResponse')
     GetCredentialLockerRequest = Shapes::StructureShape.new(name: 'GetCredentialLockerRequest')
     GetCredentialLockerResponse = Shapes::StructureShape.new(name: 'GetCredentialLockerResponse')
     GetCustomEndpointRequest = Shapes::StructureShape.new(name: 'GetCustomEndpointRequest')
@@ -177,14 +244,31 @@ module Aws::IoTManagedIntegrations
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InternationalArticleNumber = Shapes::StringShape.new(name: 'InternationalArticleNumber')
+    InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
+    IoTManagedIntegrationsResourceARN = Shapes::StringShape.new(name: 'IoTManagedIntegrationsResourceARN')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
+    LambdaArn = Shapes::StringShape.new(name: 'LambdaArn')
+    LambdaConfig = Shapes::StructureShape.new(name: 'LambdaConfig')
     LastUpdatedAt = Shapes::TimestampShape.new(name: 'LastUpdatedAt')
+    LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListAccountAssociationsRequest = Shapes::StructureShape.new(name: 'ListAccountAssociationsRequest')
+    ListAccountAssociationsResponse = Shapes::StructureShape.new(name: 'ListAccountAssociationsResponse')
+    ListCloudConnectorsRequest = Shapes::StructureShape.new(name: 'ListCloudConnectorsRequest')
+    ListCloudConnectorsResponse = Shapes::StructureShape.new(name: 'ListCloudConnectorsResponse')
+    ListConnectorDestinationsRequest = Shapes::StructureShape.new(name: 'ListConnectorDestinationsRequest')
+    ListConnectorDestinationsResponse = Shapes::StructureShape.new(name: 'ListConnectorDestinationsResponse')
     ListCredentialLockersRequest = Shapes::StructureShape.new(name: 'ListCredentialLockersRequest')
     ListCredentialLockersResponse = Shapes::StructureShape.new(name: 'ListCredentialLockersResponse')
     ListDestinationsRequest = Shapes::StructureShape.new(name: 'ListDestinationsRequest')
     ListDestinationsResponse = Shapes::StructureShape.new(name: 'ListDestinationsResponse')
+    ListDeviceDiscoveriesRequest = Shapes::StructureShape.new(name: 'ListDeviceDiscoveriesRequest')
+    ListDeviceDiscoveriesResponse = Shapes::StructureShape.new(name: 'ListDeviceDiscoveriesResponse')
+    ListDiscoveredDevicesRequest = Shapes::StructureShape.new(name: 'ListDiscoveredDevicesRequest')
+    ListDiscoveredDevicesResponse = Shapes::StructureShape.new(name: 'ListDiscoveredDevicesResponse')
     ListEventLogConfigurationsRequest = Shapes::StructureShape.new(name: 'ListEventLogConfigurationsRequest')
     ListEventLogConfigurationsResponse = Shapes::StructureShape.new(name: 'ListEventLogConfigurationsResponse')
+    ListManagedThingAccountAssociationsRequest = Shapes::StructureShape.new(name: 'ListManagedThingAccountAssociationsRequest')
+    ListManagedThingAccountAssociationsResponse = Shapes::StructureShape.new(name: 'ListManagedThingAccountAssociationsResponse')
     ListManagedThingSchemasRequest = Shapes::StructureShape.new(name: 'ListManagedThingSchemasRequest')
     ListManagedThingSchemasResponse = Shapes::StructureShape.new(name: 'ListManagedThingSchemasResponse')
     ListManagedThingsRequest = Shapes::StructureShape.new(name: 'ListManagedThingsRequest')
@@ -201,6 +285,8 @@ module Aws::IoTManagedIntegrations
     ListProvisioningProfilesResponse = Shapes::StructureShape.new(name: 'ListProvisioningProfilesResponse')
     ListSchemaVersionsRequest = Shapes::StructureShape.new(name: 'ListSchemaVersionsRequest')
     ListSchemaVersionsResponse = Shapes::StructureShape.new(name: 'ListSchemaVersionsResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     LocalStoreFileRotationMaxBytes = Shapes::IntegerShape.new(name: 'LocalStoreFileRotationMaxBytes')
     LocalStoreFileRotationMaxFiles = Shapes::IntegerShape.new(name: 'LocalStoreFileRotationMaxFiles')
     LocalStoreLocation = Shapes::StringShape.new(name: 'LocalStoreLocation')
@@ -208,11 +294,40 @@ module Aws::IoTManagedIntegrations
     LogLevel = Shapes::StringShape.new(name: 'LogLevel')
     MacAddress = Shapes::StringShape.new(name: 'MacAddress')
     ManagedThingArn = Shapes::StringShape.new(name: 'ManagedThingArn')
+    ManagedThingAssociation = Shapes::StructureShape.new(name: 'ManagedThingAssociation')
+    ManagedThingAssociationList = Shapes::ListShape.new(name: 'ManagedThingAssociationList')
     ManagedThingId = Shapes::StringShape.new(name: 'ManagedThingId')
     ManagedThingListDefinition = Shapes::ListShape.new(name: 'ManagedThingListDefinition')
     ManagedThingSchemaListDefinition = Shapes::ListShape.new(name: 'ManagedThingSchemaListDefinition')
     ManagedThingSchemaListItem = Shapes::StructureShape.new(name: 'ManagedThingSchemaListItem')
     ManagedThingSummary = Shapes::StructureShape.new(name: 'ManagedThingSummary')
+    MatterAttributeId = Shapes::StringShape.new(name: 'MatterAttributeId')
+    MatterAttributes = Shapes::DocumentShape.new(name: 'MatterAttributes', document: true)
+    MatterCapabilityReport = Shapes::StructureShape.new(name: 'MatterCapabilityReport')
+    MatterCapabilityReportAttribute = Shapes::StructureShape.new(name: 'MatterCapabilityReportAttribute')
+    MatterCapabilityReportAttributeValue = Shapes::DocumentShape.new(name: 'MatterCapabilityReportAttributeValue', document: true)
+    MatterCapabilityReportAttributes = Shapes::ListShape.new(name: 'MatterCapabilityReportAttributes')
+    MatterCapabilityReportCluster = Shapes::StructureShape.new(name: 'MatterCapabilityReportCluster')
+    MatterCapabilityReportClusterRevisionId = Shapes::IntegerShape.new(name: 'MatterCapabilityReportClusterRevisionId')
+    MatterCapabilityReportClusters = Shapes::ListShape.new(name: 'MatterCapabilityReportClusters')
+    MatterCapabilityReportCommands = Shapes::ListShape.new(name: 'MatterCapabilityReportCommands')
+    MatterCapabilityReportEndpoint = Shapes::StructureShape.new(name: 'MatterCapabilityReportEndpoint')
+    MatterCapabilityReportEndpointClientClusters = Shapes::ListShape.new(name: 'MatterCapabilityReportEndpointClientClusters')
+    MatterCapabilityReportEndpointParts = Shapes::ListShape.new(name: 'MatterCapabilityReportEndpointParts')
+    MatterCapabilityReportEndpointSemanticTags = Shapes::ListShape.new(name: 'MatterCapabilityReportEndpointSemanticTags')
+    MatterCapabilityReportEndpoints = Shapes::ListShape.new(name: 'MatterCapabilityReportEndpoints')
+    MatterCapabilityReportEvents = Shapes::ListShape.new(name: 'MatterCapabilityReportEvents')
+    MatterCapabilityReportFabricIndex = Shapes::IntegerShape.new(name: 'MatterCapabilityReportFabricIndex')
+    MatterCapabilityReportFeatureMap = Shapes::IntegerShape.new(name: 'MatterCapabilityReportFeatureMap')
+    MatterCapabilityReportGeneratedCommands = Shapes::ListShape.new(name: 'MatterCapabilityReportGeneratedCommands')
+    MatterCluster = Shapes::StructureShape.new(name: 'MatterCluster')
+    MatterClusters = Shapes::ListShape.new(name: 'MatterClusters')
+    MatterCommandId = Shapes::StringShape.new(name: 'MatterCommandId')
+    MatterCommands = Shapes::MapShape.new(name: 'MatterCommands')
+    MatterEndpoint = Shapes::StructureShape.new(name: 'MatterEndpoint')
+    MatterEventId = Shapes::StringShape.new(name: 'MatterEventId')
+    MatterEvents = Shapes::MapShape.new(name: 'MatterEvents')
+    MatterFields = Shapes::DocumentShape.new(name: 'MatterFields', document: true)
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaximumPerMinute = Shapes::IntegerShape.new(name: 'MaximumPerMinute')
     MetaData = Shapes::MapShape.new(name: 'MetaData')
@@ -228,6 +343,10 @@ module Aws::IoTManagedIntegrations
     NotificationConfigurationUpdatedAt = Shapes::TimestampShape.new(name: 'NotificationConfigurationUpdatedAt')
     NumberOfNotifiedThings = Shapes::IntegerShape.new(name: 'NumberOfNotifiedThings')
     NumberOfSucceededThings = Shapes::IntegerShape.new(name: 'NumberOfSucceededThings')
+    OAuthAuthorizationUrl = Shapes::StringShape.new(name: 'OAuthAuthorizationUrl')
+    OAuthCompleteRedirectUrl = Shapes::StringShape.new(name: 'OAuthCompleteRedirectUrl')
+    OAuthConfig = Shapes::StructureShape.new(name: 'OAuthConfig')
+    OAuthUpdate = Shapes::StructureShape.new(name: 'OAuthUpdate')
     OtaDescription = Shapes::StringShape.new(name: 'OtaDescription')
     OtaMechanism = Shapes::StringShape.new(name: 'OtaMechanism')
     OtaNextToken = Shapes::StringShape.new(name: 'OtaNextToken')
@@ -254,6 +373,8 @@ module Aws::IoTManagedIntegrations
     OtaType = Shapes::StringShape.new(name: 'OtaType')
     Owner = Shapes::StringShape.new(name: 'Owner')
     ParentControllerId = Shapes::StringShape.new(name: 'ParentControllerId')
+    ProactiveRefreshTokenRenewal = Shapes::StructureShape.new(name: 'ProactiveRefreshTokenRenewal')
+    ProactiveRefreshTokenRenewalDaysBeforeRenewalInteger = Shapes::IntegerShape.new(name: 'ProactiveRefreshTokenRenewalDaysBeforeRenewalInteger')
     PropertyName = Shapes::StringShape.new(name: 'PropertyName')
     ProvisioningProfileArn = Shapes::StringShape.new(name: 'ProvisioningProfileArn')
     ProvisioningProfileId = Shapes::StringShape.new(name: 'ProvisioningProfileId')
@@ -269,6 +390,8 @@ module Aws::IoTManagedIntegrations
     PutHubConfigurationResponse = Shapes::StructureShape.new(name: 'PutHubConfigurationResponse')
     PutRuntimeLogConfigurationRequest = Shapes::StructureShape.new(name: 'PutRuntimeLogConfigurationRequest')
     QueuedAt = Shapes::TimestampShape.new(name: 'QueuedAt')
+    RegisterAccountAssociationRequest = Shapes::StructureShape.new(name: 'RegisterAccountAssociationRequest')
+    RegisterAccountAssociationResponse = Shapes::StructureShape.new(name: 'RegisterAccountAssociationResponse')
     RegisterCustomEndpointRequest = Shapes::StructureShape.new(name: 'RegisterCustomEndpointRequest')
     RegisterCustomEndpointResponse = Shapes::StructureShape.new(name: 'RegisterCustomEndpointResponse')
     ResetRuntimeLogConfigurationRequest = Shapes::StructureShape.new(name: 'ResetRuntimeLogConfigurationRequest')
@@ -296,6 +419,11 @@ module Aws::IoTManagedIntegrations
     SchemaVersionVersion = Shapes::StringShape.new(name: 'SchemaVersionVersion')
     SchemaVersionVisibility = Shapes::StringShape.new(name: 'SchemaVersionVisibility')
     SchemaVersionedId = Shapes::StringShape.new(name: 'SchemaVersionedId')
+    SecretsManager = Shapes::StructureShape.new(name: 'SecretsManager')
+    SecretsManagerArn = Shapes::StringShape.new(name: 'SecretsManagerArn')
+    SecretsManagerVersionId = Shapes::StringShape.new(name: 'SecretsManagerVersionId')
+    SendConnectorEventRequest = Shapes::StructureShape.new(name: 'SendConnectorEventRequest')
+    SendConnectorEventResponse = Shapes::StructureShape.new(name: 'SendConnectorEventResponse')
     SendManagedThingCommandRequest = Shapes::StructureShape.new(name: 'SendManagedThingCommandRequest')
     SendManagedThingCommandResponse = Shapes::StructureShape.new(name: 'SendManagedThingCommandResponse')
     SerialNumber = Shapes::StringShape.new(name: 'SerialNumber')
@@ -304,6 +432,9 @@ module Aws::IoTManagedIntegrations
     SetupAt = Shapes::TimestampShape.new(name: 'SetupAt')
     SmartHomeResourceId = Shapes::StringShape.new(name: 'SmartHomeResourceId')
     SmartHomeResourceType = Shapes::StringShape.new(name: 'SmartHomeResourceType')
+    SpecVersion = Shapes::StringShape.new(name: 'SpecVersion')
+    StartAccountAssociationRefreshRequest = Shapes::StructureShape.new(name: 'StartAccountAssociationRefreshRequest')
+    StartAccountAssociationRefreshResponse = Shapes::StructureShape.new(name: 'StartAccountAssociationRefreshResponse')
     StartDeviceDiscoveryRequest = Shapes::StructureShape.new(name: 'StartDeviceDiscoveryRequest')
     StartDeviceDiscoveryResponse = Shapes::StructureShape.new(name: 'StartDeviceDiscoveryResponse')
     StartTime = Shapes::StringShape.new(name: 'StartTime')
@@ -314,15 +445,26 @@ module Aws::IoTManagedIntegrations
     StateEndpoints = Shapes::ListShape.new(name: 'StateEndpoints')
     String = Shapes::StringShape.new(name: 'String')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TagsMap = Shapes::MapShape.new(name: 'TagsMap')
     Target = Shapes::ListShape.new(name: 'Target')
     TaskProcessingDetails = Shapes::StructureShape.new(name: 'TaskProcessingDetails')
+    ThirdPartyUserId = Shapes::StringShape.new(name: 'ThirdPartyUserId')
     ThresholdPercentage = Shapes::FloatShape.new(name: 'ThresholdPercentage')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    TokenEndpointAuthenticationScheme = Shapes::StringShape.new(name: 'TokenEndpointAuthenticationScheme')
+    TokenUrl = Shapes::StringShape.new(name: 'TokenUrl')
     TraceId = Shapes::StringShape.new(name: 'TraceId')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
     UniversalProductCode = Shapes::StringShape.new(name: 'UniversalProductCode')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateAccountAssociationRequest = Shapes::StructureShape.new(name: 'UpdateAccountAssociationRequest')
+    UpdateCloudConnectorRequest = Shapes::StructureShape.new(name: 'UpdateCloudConnectorRequest')
+    UpdateConnectorDestinationRequest = Shapes::StructureShape.new(name: 'UpdateConnectorDestinationRequest')
     UpdateDestinationRequest = Shapes::StructureShape.new(name: 'UpdateDestinationRequest')
     UpdateEventLogConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateEventLogConfigurationRequest')
     UpdateManagedThingRequest = Shapes::StructureShape.new(name: 'UpdateManagedThingRequest')
@@ -344,6 +486,23 @@ module Aws::IoTManagedIntegrations
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AccountAssociationItem.add_member(:account_association_id, Shapes::ShapeRef.new(shape: AccountAssociationId, required: true, location_name: "AccountAssociationId"))
+    AccountAssociationItem.add_member(:association_state, Shapes::ShapeRef.new(shape: AssociationState, required: true, location_name: "AssociationState"))
+    AccountAssociationItem.add_member(:error_message, Shapes::ShapeRef.new(shape: AccountAssociationErrorMessage, location_name: "ErrorMessage"))
+    AccountAssociationItem.add_member(:connector_destination_id, Shapes::ShapeRef.new(shape: ConnectorDestinationId, location_name: "ConnectorDestinationId"))
+    AccountAssociationItem.add_member(:name, Shapes::ShapeRef.new(shape: AccountAssociationName, location_name: "Name"))
+    AccountAssociationItem.add_member(:description, Shapes::ShapeRef.new(shape: AccountAssociationDescription, location_name: "Description"))
+    AccountAssociationItem.add_member(:arn, Shapes::ShapeRef.new(shape: AccountAssociationArn, location_name: "Arn"))
+    AccountAssociationItem.struct_class = Types::AccountAssociationItem
+
+    AccountAssociationListDefinition.member = Shapes::ShapeRef.new(shape: AccountAssociationItem)
+
+    AuthConfig.add_member(:o_auth, Shapes::ShapeRef.new(shape: OAuthConfig, location_name: "oAuth"))
+    AuthConfig.struct_class = Types::AuthConfig
+
+    AuthConfigUpdate.add_member(:o_auth_update, Shapes::ShapeRef.new(shape: OAuthUpdate, location_name: "oAuthUpdate"))
+    AuthConfigUpdate.struct_class = Types::AuthConfigUpdate
 
     CapabilityAction.add_member(:name, Shapes::ShapeRef.new(shape: CapabilityActionName, required: true, location_name: "name"))
     CapabilityAction.add_member(:ref, Shapes::ShapeRef.new(shape: ActionReference, location_name: "ref"))
@@ -381,6 +540,15 @@ module Aws::IoTManagedIntegrations
 
     CapabilityReportProperties.member = Shapes::ShapeRef.new(shape: PropertyName)
 
+    CapabilitySchemaItem.add_member(:format, Shapes::ShapeRef.new(shape: SchemaVersionFormat, required: true, location_name: "Format"))
+    CapabilitySchemaItem.add_member(:capability_id, Shapes::ShapeRef.new(shape: SchemaVersionedId, required: true, location_name: "CapabilityId"))
+    CapabilitySchemaItem.add_member(:extrinsic_id, Shapes::ShapeRef.new(shape: ExtrinsicSchemaId, required: true, location_name: "ExtrinsicId"))
+    CapabilitySchemaItem.add_member(:extrinsic_version, Shapes::ShapeRef.new(shape: MatterCapabilityReportClusterRevisionId, required: true, location_name: "ExtrinsicVersion"))
+    CapabilitySchemaItem.add_member(:schema, Shapes::ShapeRef.new(shape: ValidationSchema, required: true, location_name: "Schema"))
+    CapabilitySchemaItem.struct_class = Types::CapabilitySchemaItem
+
+    CapabilitySchemas.member = Shapes::ShapeRef.new(shape: CapabilitySchemaItem)
+
     CommandCapabilities.member = Shapes::ShapeRef.new(shape: CommandCapability)
 
     CommandCapability.add_member(:id, Shapes::ShapeRef.new(shape: SchemaVersionedId, required: true, location_name: "id"))
@@ -406,6 +574,59 @@ module Aws::IoTManagedIntegrations
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
 
+    ConnectorDestinationListDefinition.member = Shapes::ShapeRef.new(shape: ConnectorDestinationSummary)
+
+    ConnectorDestinationSummary.add_member(:name, Shapes::ShapeRef.new(shape: ConnectorDestinationName, location_name: "Name"))
+    ConnectorDestinationSummary.add_member(:description, Shapes::ShapeRef.new(shape: ConnectorDestinationDescription, location_name: "Description"))
+    ConnectorDestinationSummary.add_member(:cloud_connector_id, Shapes::ShapeRef.new(shape: CloudConnectorId, location_name: "CloudConnectorId"))
+    ConnectorDestinationSummary.add_member(:id, Shapes::ShapeRef.new(shape: ConnectorDestinationId, location_name: "Id"))
+    ConnectorDestinationSummary.struct_class = Types::ConnectorDestinationSummary
+
+    ConnectorItem.add_member(:name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "Name"))
+    ConnectorItem.add_member(:endpoint_config, Shapes::ShapeRef.new(shape: EndpointConfig, required: true, location_name: "EndpointConfig"))
+    ConnectorItem.add_member(:description, Shapes::ShapeRef.new(shape: CloudConnectorDescription, location_name: "Description"))
+    ConnectorItem.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location_name: "EndpointType"))
+    ConnectorItem.add_member(:id, Shapes::ShapeRef.new(shape: CloudConnectorId, location_name: "Id"))
+    ConnectorItem.add_member(:type, Shapes::ShapeRef.new(shape: CloudConnectorType, location_name: "Type"))
+    ConnectorItem.struct_class = Types::ConnectorItem
+
+    ConnectorList.member = Shapes::ShapeRef.new(shape: ConnectorItem)
+
+    CreateAccountAssociationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateAccountAssociationRequest.add_member(:connector_destination_id, Shapes::ShapeRef.new(shape: ConnectorDestinationId, required: true, location_name: "ConnectorDestinationId"))
+    CreateAccountAssociationRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccountAssociationName, location_name: "Name"))
+    CreateAccountAssociationRequest.add_member(:description, Shapes::ShapeRef.new(shape: AccountAssociationDescription, location_name: "Description"))
+    CreateAccountAssociationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
+    CreateAccountAssociationRequest.struct_class = Types::CreateAccountAssociationRequest
+
+    CreateAccountAssociationResponse.add_member(:o_auth_authorization_url, Shapes::ShapeRef.new(shape: OAuthAuthorizationUrl, required: true, location_name: "OAuthAuthorizationUrl"))
+    CreateAccountAssociationResponse.add_member(:account_association_id, Shapes::ShapeRef.new(shape: AccountAssociationId, required: true, location_name: "AccountAssociationId"))
+    CreateAccountAssociationResponse.add_member(:association_state, Shapes::ShapeRef.new(shape: AssociationState, required: true, location_name: "AssociationState"))
+    CreateAccountAssociationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: AccountAssociationArn, location_name: "Arn"))
+    CreateAccountAssociationResponse.struct_class = Types::CreateAccountAssociationResponse
+
+    CreateCloudConnectorRequest.add_member(:name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "Name"))
+    CreateCloudConnectorRequest.add_member(:endpoint_config, Shapes::ShapeRef.new(shape: EndpointConfig, required: true, location_name: "EndpointConfig"))
+    CreateCloudConnectorRequest.add_member(:description, Shapes::ShapeRef.new(shape: CloudConnectorDescription, location_name: "Description"))
+    CreateCloudConnectorRequest.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location_name: "EndpointType"))
+    CreateCloudConnectorRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateCloudConnectorRequest.struct_class = Types::CreateCloudConnectorRequest
+
+    CreateCloudConnectorResponse.add_member(:id, Shapes::ShapeRef.new(shape: CloudConnectorId, location_name: "Id"))
+    CreateCloudConnectorResponse.struct_class = Types::CreateCloudConnectorResponse
+
+    CreateConnectorDestinationRequest.add_member(:name, Shapes::ShapeRef.new(shape: ConnectorDestinationName, location_name: "Name"))
+    CreateConnectorDestinationRequest.add_member(:description, Shapes::ShapeRef.new(shape: ConnectorDestinationDescription, location_name: "Description"))
+    CreateConnectorDestinationRequest.add_member(:cloud_connector_id, Shapes::ShapeRef.new(shape: CloudConnectorId, required: true, location_name: "CloudConnectorId"))
+    CreateConnectorDestinationRequest.add_member(:auth_type, Shapes::ShapeRef.new(shape: AuthType, required: true, location_name: "AuthType"))
+    CreateConnectorDestinationRequest.add_member(:auth_config, Shapes::ShapeRef.new(shape: AuthConfig, required: true, location_name: "AuthConfig"))
+    CreateConnectorDestinationRequest.add_member(:secrets_manager, Shapes::ShapeRef.new(shape: SecretsManager, required: true, location_name: "SecretsManager"))
+    CreateConnectorDestinationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateConnectorDestinationRequest.struct_class = Types::CreateConnectorDestinationRequest
+
+    CreateConnectorDestinationResponse.add_member(:id, Shapes::ShapeRef.new(shape: ConnectorDestinationId, location_name: "Id"))
+    CreateConnectorDestinationResponse.struct_class = Types::CreateConnectorDestinationResponse
+
     CreateCredentialLockerRequest.add_member(:name, Shapes::ShapeRef.new(shape: CredentialLockerName, location_name: "Name"))
     CreateCredentialLockerRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateCredentialLockerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
@@ -422,7 +643,7 @@ module Aws::IoTManagedIntegrations
     CreateDestinationRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: DeliveryDestinationRoleArn, required: true, location_name: "RoleArn"))
     CreateDestinationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateDestinationRequest.add_member(:description, Shapes::ShapeRef.new(shape: DestinationDescription, location_name: "Description"))
-    CreateDestinationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
+    CreateDestinationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, deprecated: true, location_name: "Tags", metadata: {"deprecatedMessage" => "Tags have been deprecated from this api", "deprecatedSince" => "06-25-2025"}))
     CreateDestinationRequest.struct_class = Types::CreateDestinationRequest
 
     CreateDestinationResponse.add_member(:name, Shapes::ShapeRef.new(shape: DestinationName, location_name: "Name"))
@@ -447,6 +668,7 @@ module Aws::IoTManagedIntegrations
     CreateManagedThingRequest.add_member(:model, Shapes::ShapeRef.new(shape: Model, location_name: "Model"))
     CreateManagedThingRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     CreateManagedThingRequest.add_member(:capability_report, Shapes::ShapeRef.new(shape: CapabilityReport, location_name: "CapabilityReport"))
+    CreateManagedThingRequest.add_member(:capability_schemas, Shapes::ShapeRef.new(shape: CapabilitySchemas, location_name: "CapabilitySchemas"))
     CreateManagedThingRequest.add_member(:capabilities, Shapes::ShapeRef.new(shape: Capabilities, location_name: "Capabilities"))
     CreateManagedThingRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateManagedThingRequest.add_member(:classification, Shapes::ShapeRef.new(shape: Classification, location_name: "Classification"))
@@ -462,7 +684,7 @@ module Aws::IoTManagedIntegrations
     CreateNotificationConfigurationRequest.add_member(:event_type, Shapes::ShapeRef.new(shape: EventType, required: true, location_name: "EventType"))
     CreateNotificationConfigurationRequest.add_member(:destination_name, Shapes::ShapeRef.new(shape: DestinationName, required: true, location_name: "DestinationName"))
     CreateNotificationConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
-    CreateNotificationConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
+    CreateNotificationConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, deprecated: true, location_name: "Tags", metadata: {"deprecatedMessage" => "Tags has been deprecated from this api", "deprecatedSince" => "06-25-2025"}))
     CreateNotificationConfigurationRequest.struct_class = Types::CreateNotificationConfigurationRequest
 
     CreateNotificationConfigurationResponse.add_member(:event_type, Shapes::ShapeRef.new(shape: EventType, location_name: "EventType"))
@@ -519,6 +741,18 @@ module Aws::IoTManagedIntegrations
     CredentialLockerSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: CredentialLockerCreatedAt, location_name: "CreatedAt"))
     CredentialLockerSummary.struct_class = Types::CredentialLockerSummary
 
+    CustomProtocolDetail.key = Shapes::ShapeRef.new(shape: CustomProtocolDetailKey)
+    CustomProtocolDetail.value = Shapes::ShapeRef.new(shape: CustomProtocolDetailValue)
+
+    DeleteAccountAssociationRequest.add_member(:account_association_id, Shapes::ShapeRef.new(shape: AccountAssociationId, required: true, location: "uri", location_name: "AccountAssociationId"))
+    DeleteAccountAssociationRequest.struct_class = Types::DeleteAccountAssociationRequest
+
+    DeleteCloudConnectorRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: CloudConnectorId, required: true, location: "uri", location_name: "Identifier"))
+    DeleteCloudConnectorRequest.struct_class = Types::DeleteCloudConnectorRequest
+
+    DeleteConnectorDestinationRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: ConnectorDestinationId, required: true, location: "uri", location_name: "Identifier"))
+    DeleteConnectorDestinationRequest.struct_class = Types::DeleteConnectorDestinationRequest
+
     DeleteCredentialLockerRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: CredentialLockerId, required: true, location: "uri", location_name: "Identifier"))
     DeleteCredentialLockerRequest.struct_class = Types::DeleteCredentialLockerRequest
 
@@ -544,6 +778,10 @@ module Aws::IoTManagedIntegrations
     DeleteProvisioningProfileRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: ProvisioningProfileId, required: true, location: "uri", location_name: "Identifier"))
     DeleteProvisioningProfileRequest.struct_class = Types::DeleteProvisioningProfileRequest
 
+    DeregisterAccountAssociationRequest.add_member(:managed_thing_id, Shapes::ShapeRef.new(shape: ManagedThingId, required: true, location_name: "ManagedThingId"))
+    DeregisterAccountAssociationRequest.add_member(:account_association_id, Shapes::ShapeRef.new(shape: AccountAssociationId, required: true, location_name: "AccountAssociationId"))
+    DeregisterAccountAssociationRequest.struct_class = Types::DeregisterAccountAssociationRequest
+
     DestinationListDefinition.member = Shapes::ShapeRef.new(shape: DestinationSummary)
 
     DestinationSummary.add_member(:description, Shapes::ShapeRef.new(shape: DestinationDescription, location_name: "Description"))
@@ -553,7 +791,41 @@ module Aws::IoTManagedIntegrations
     DestinationSummary.add_member(:role_arn, Shapes::ShapeRef.new(shape: DeliveryDestinationRoleArn, location_name: "RoleArn"))
     DestinationSummary.struct_class = Types::DestinationSummary
 
+    Device.add_member(:connector_device_id, Shapes::ShapeRef.new(shape: ConnectorDeviceId, required: true, location_name: "ConnectorDeviceId"))
+    Device.add_member(:connector_device_name, Shapes::ShapeRef.new(shape: ConnectorDeviceName, location_name: "ConnectorDeviceName"))
+    Device.add_member(:capability_report, Shapes::ShapeRef.new(shape: MatterCapabilityReport, required: true, location_name: "CapabilityReport"))
+    Device.add_member(:capability_schemas, Shapes::ShapeRef.new(shape: CapabilitySchemas, location_name: "CapabilitySchemas"))
+    Device.add_member(:device_metadata, Shapes::ShapeRef.new(shape: DeviceMetadata, location_name: "DeviceMetadata"))
+    Device.struct_class = Types::Device
+
+    DeviceDiscoveryListDefinition.member = Shapes::ShapeRef.new(shape: DeviceDiscoverySummary)
+
+    DeviceDiscoverySummary.add_member(:id, Shapes::ShapeRef.new(shape: DeviceDiscoveryId, location_name: "Id"))
+    DeviceDiscoverySummary.add_member(:discovery_type, Shapes::ShapeRef.new(shape: DiscoveryType, location_name: "DiscoveryType"))
+    DeviceDiscoverySummary.add_member(:status, Shapes::ShapeRef.new(shape: DeviceDiscoveryStatus, location_name: "Status"))
+    DeviceDiscoverySummary.struct_class = Types::DeviceDiscoverySummary
+
+    DeviceTypeList.member = Shapes::ShapeRef.new(shape: DeviceType)
+
     DeviceTypes.member = Shapes::ShapeRef.new(shape: DeviceType)
+
+    Devices.member = Shapes::ShapeRef.new(shape: Device)
+
+    DiscoveredDeviceListDefinition.member = Shapes::ShapeRef.new(shape: DiscoveredDeviceSummary)
+
+    DiscoveredDeviceSummary.add_member(:connector_device_id, Shapes::ShapeRef.new(shape: ConnectorDeviceId, location_name: "ConnectorDeviceId"))
+    DiscoveredDeviceSummary.add_member(:connector_device_name, Shapes::ShapeRef.new(shape: ConnectorDeviceName, location_name: "ConnectorDeviceName"))
+    DiscoveredDeviceSummary.add_member(:device_types, Shapes::ShapeRef.new(shape: DeviceTypeList, location_name: "DeviceTypes"))
+    DiscoveredDeviceSummary.add_member(:managed_thing_id, Shapes::ShapeRef.new(shape: ManagedThingId, location_name: "ManagedThingId"))
+    DiscoveredDeviceSummary.add_member(:modification, Shapes::ShapeRef.new(shape: DiscoveryModification, location_name: "Modification"))
+    DiscoveredDeviceSummary.add_member(:discovered_at, Shapes::ShapeRef.new(shape: DiscoveredAt, location_name: "DiscoveredAt"))
+    DiscoveredDeviceSummary.add_member(:brand, Shapes::ShapeRef.new(shape: Brand, location_name: "Brand"))
+    DiscoveredDeviceSummary.add_member(:model, Shapes::ShapeRef.new(shape: Model, location_name: "Model"))
+    DiscoveredDeviceSummary.add_member(:authentication_material, Shapes::ShapeRef.new(shape: AuthMaterialString, location_name: "AuthenticationMaterial"))
+    DiscoveredDeviceSummary.struct_class = Types::DiscoveredDeviceSummary
+
+    EndpointConfig.add_member(:lambda, Shapes::ShapeRef.new(shape: LambdaConfig, location_name: "lambda"))
+    EndpointConfig.struct_class = Types::EndpointConfig
 
     EventLogConfigurationListDefinition.member = Shapes::ShapeRef.new(shape: EventLogConfigurationSummary)
 
@@ -567,6 +839,44 @@ module Aws::IoTManagedIntegrations
     ExponentialRolloutRate.add_member(:increment_factor, Shapes::ShapeRef.new(shape: IncrementFactor, location_name: "IncrementFactor"))
     ExponentialRolloutRate.add_member(:rate_increase_criteria, Shapes::ShapeRef.new(shape: RolloutRateIncreaseCriteria, location_name: "RateIncreaseCriteria"))
     ExponentialRolloutRate.struct_class = Types::ExponentialRolloutRate
+
+    GetAccountAssociationRequest.add_member(:account_association_id, Shapes::ShapeRef.new(shape: AccountAssociationId, required: true, location: "uri", location_name: "AccountAssociationId"))
+    GetAccountAssociationRequest.struct_class = Types::GetAccountAssociationRequest
+
+    GetAccountAssociationResponse.add_member(:account_association_id, Shapes::ShapeRef.new(shape: AccountAssociationId, required: true, location_name: "AccountAssociationId"))
+    GetAccountAssociationResponse.add_member(:association_state, Shapes::ShapeRef.new(shape: AssociationState, required: true, location_name: "AssociationState"))
+    GetAccountAssociationResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: AccountAssociationErrorMessage, location_name: "ErrorMessage"))
+    GetAccountAssociationResponse.add_member(:connector_destination_id, Shapes::ShapeRef.new(shape: ConnectorDestinationId, location_name: "ConnectorDestinationId"))
+    GetAccountAssociationResponse.add_member(:name, Shapes::ShapeRef.new(shape: AccountAssociationName, location_name: "Name"))
+    GetAccountAssociationResponse.add_member(:description, Shapes::ShapeRef.new(shape: AccountAssociationDescription, location_name: "Description"))
+    GetAccountAssociationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: AccountAssociationArn, location_name: "Arn"))
+    GetAccountAssociationResponse.add_member(:o_auth_authorization_url, Shapes::ShapeRef.new(shape: OAuthAuthorizationUrl, required: true, location_name: "OAuthAuthorizationUrl"))
+    GetAccountAssociationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
+    GetAccountAssociationResponse.struct_class = Types::GetAccountAssociationResponse
+
+    GetCloudConnectorRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: CloudConnectorId, required: true, location: "uri", location_name: "Identifier"))
+    GetCloudConnectorRequest.struct_class = Types::GetCloudConnectorRequest
+
+    GetCloudConnectorResponse.add_member(:name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "Name"))
+    GetCloudConnectorResponse.add_member(:endpoint_config, Shapes::ShapeRef.new(shape: EndpointConfig, required: true, location_name: "EndpointConfig"))
+    GetCloudConnectorResponse.add_member(:description, Shapes::ShapeRef.new(shape: CloudConnectorDescription, location_name: "Description"))
+    GetCloudConnectorResponse.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location_name: "EndpointType"))
+    GetCloudConnectorResponse.add_member(:id, Shapes::ShapeRef.new(shape: CloudConnectorId, location_name: "Id"))
+    GetCloudConnectorResponse.add_member(:type, Shapes::ShapeRef.new(shape: CloudConnectorType, location_name: "Type"))
+    GetCloudConnectorResponse.struct_class = Types::GetCloudConnectorResponse
+
+    GetConnectorDestinationRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: ConnectorDestinationId, required: true, location: "uri", location_name: "Identifier"))
+    GetConnectorDestinationRequest.struct_class = Types::GetConnectorDestinationRequest
+
+    GetConnectorDestinationResponse.add_member(:name, Shapes::ShapeRef.new(shape: ConnectorDestinationName, location_name: "Name"))
+    GetConnectorDestinationResponse.add_member(:description, Shapes::ShapeRef.new(shape: ConnectorDestinationDescription, location_name: "Description"))
+    GetConnectorDestinationResponse.add_member(:cloud_connector_id, Shapes::ShapeRef.new(shape: CloudConnectorId, location_name: "CloudConnectorId"))
+    GetConnectorDestinationResponse.add_member(:id, Shapes::ShapeRef.new(shape: ConnectorDestinationId, location_name: "Id"))
+    GetConnectorDestinationResponse.add_member(:auth_type, Shapes::ShapeRef.new(shape: AuthType, location_name: "AuthType"))
+    GetConnectorDestinationResponse.add_member(:auth_config, Shapes::ShapeRef.new(shape: AuthConfig, location_name: "AuthConfig"))
+    GetConnectorDestinationResponse.add_member(:secrets_manager, Shapes::ShapeRef.new(shape: SecretsManager, location_name: "SecretsManager"))
+    GetConnectorDestinationResponse.add_member(:o_auth_complete_redirect_url, Shapes::ShapeRef.new(shape: OAuthCompleteRedirectUrl, location_name: "OAuthCompleteRedirectUrl"))
+    GetConnectorDestinationResponse.struct_class = Types::GetConnectorDestinationResponse
 
     GetCredentialLockerRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: CredentialLockerId, required: true, location: "uri", location_name: "Identifier"))
     GetCredentialLockerRequest.struct_class = Types::GetCredentialLockerRequest
@@ -600,7 +910,7 @@ module Aws::IoTManagedIntegrations
     GetDestinationResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: DeliveryDestinationRoleArn, location_name: "RoleArn"))
     GetDestinationResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DestinationCreatedAt, location_name: "CreatedAt"))
     GetDestinationResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: DestinationUpdatedAt, location_name: "UpdatedAt"))
-    GetDestinationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
+    GetDestinationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, deprecated: true, location_name: "Tags", metadata: {"deprecatedMessage" => "Tags has been deprecated from this api", "deprecatedSince" => "06-25-2025"}))
     GetDestinationResponse.struct_class = Types::GetDestinationResponse
 
     GetDeviceDiscoveryRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: DeviceDiscoveryId, required: true, location: "uri", location_name: "Identifier"))
@@ -612,9 +922,10 @@ module Aws::IoTManagedIntegrations
     GetDeviceDiscoveryResponse.add_member(:status, Shapes::ShapeRef.new(shape: DeviceDiscoveryStatus, required: true, location_name: "Status"))
     GetDeviceDiscoveryResponse.add_member(:started_at, Shapes::ShapeRef.new(shape: DiscoveryStartedAt, required: true, location_name: "StartedAt"))
     GetDeviceDiscoveryResponse.add_member(:controller_id, Shapes::ShapeRef.new(shape: ManagedThingId, location_name: "ControllerId"))
-    GetDeviceDiscoveryResponse.add_member(:connector_association_id, Shapes::ShapeRef.new(shape: ConnectorAssociationId, location_name: "ConnectorAssociationId"))
+    GetDeviceDiscoveryResponse.add_member(:connector_association_id, Shapes::ShapeRef.new(shape: ConnectorAssociationId, deprecated: true, location_name: "ConnectorAssociationId", metadata: {"deprecatedMessage" => "ConnectorAssociationId has been deprecated", "deprecatedSince" => "2025-06-25"}))
+    GetDeviceDiscoveryResponse.add_member(:account_association_id, Shapes::ShapeRef.new(shape: AccountAssociationId, location_name: "AccountAssociationId"))
     GetDeviceDiscoveryResponse.add_member(:finished_at, Shapes::ShapeRef.new(shape: DiscoveryFinishedAt, location_name: "FinishedAt"))
-    GetDeviceDiscoveryResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
+    GetDeviceDiscoveryResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, deprecated: true, location_name: "Tags", metadata: {"deprecatedMessage" => "Tags have been deprecated from this api", "deprecatedSince" => "06-25-2025"}))
     GetDeviceDiscoveryResponse.struct_class = Types::GetDeviceDiscoveryResponse
 
     GetEventLogConfigurationRequest.add_member(:id, Shapes::ShapeRef.new(shape: LogConfigurationId, required: true, location: "uri", location_name: "Id"))
@@ -672,7 +983,8 @@ module Aws::IoTManagedIntegrations
     GetManagedThingResponse.add_member(:serial_number, Shapes::ShapeRef.new(shape: SerialNumber, location_name: "SerialNumber"))
     GetManagedThingResponse.add_member(:universal_product_code, Shapes::ShapeRef.new(shape: UniversalProductCode, location_name: "UniversalProductCode"))
     GetManagedThingResponse.add_member(:international_article_number, Shapes::ShapeRef.new(shape: InternationalArticleNumber, location_name: "InternationalArticleNumber"))
-    GetManagedThingResponse.add_member(:connector_policy_id, Shapes::ShapeRef.new(shape: ConnectorPolicyId, location_name: "ConnectorPolicyId"))
+    GetManagedThingResponse.add_member(:connector_policy_id, Shapes::ShapeRef.new(shape: ConnectorPolicyId, deprecated: true, location_name: "ConnectorPolicyId", metadata: {"deprecatedMessage" => "ConnectorPolicyId is deprecated", "deprecatedSince" => "2025-06-25"}))
+    GetManagedThingResponse.add_member(:connector_destination_id, Shapes::ShapeRef.new(shape: ConnectorDestinationId, location_name: "ConnectorDestinationId"))
     GetManagedThingResponse.add_member(:connector_device_id, Shapes::ShapeRef.new(shape: ConnectorDeviceId, location_name: "ConnectorDeviceId"))
     GetManagedThingResponse.add_member(:device_specific_key, Shapes::ShapeRef.new(shape: DeviceSpecificKey, location_name: "DeviceSpecificKey"))
     GetManagedThingResponse.add_member(:mac_address, Shapes::ShapeRef.new(shape: MacAddress, location_name: "MacAddress"))
@@ -699,7 +1011,7 @@ module Aws::IoTManagedIntegrations
     GetNotificationConfigurationResponse.add_member(:destination_name, Shapes::ShapeRef.new(shape: DestinationName, location_name: "DestinationName"))
     GetNotificationConfigurationResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: NotificationConfigurationCreatedAt, location_name: "CreatedAt"))
     GetNotificationConfigurationResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: NotificationConfigurationUpdatedAt, location_name: "UpdatedAt"))
-    GetNotificationConfigurationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
+    GetNotificationConfigurationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, deprecated: true, location_name: "Tags", metadata: {"deprecatedMessage" => "Tags has been deprecated for this api", "deprecatedSince" => "06-25-2025"}))
     GetNotificationConfigurationResponse.struct_class = Types::GetNotificationConfigurationResponse
 
     GetOtaTaskConfigurationRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: OtaTaskConfigurationId, required: true, location: "uri", location_name: "Identifier"))
@@ -731,6 +1043,7 @@ module Aws::IoTManagedIntegrations
     GetOtaTaskResponse.add_member(:ota_scheduling_config, Shapes::ShapeRef.new(shape: OtaTaskSchedulingConfig, location_name: "OtaSchedulingConfig"))
     GetOtaTaskResponse.add_member(:ota_task_execution_retry_config, Shapes::ShapeRef.new(shape: OtaTaskExecutionRetryConfig, location_name: "OtaTaskExecutionRetryConfig"))
     GetOtaTaskResponse.add_member(:status, Shapes::ShapeRef.new(shape: OtaStatus, location_name: "Status"))
+    GetOtaTaskResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
     GetOtaTaskResponse.struct_class = Types::GetOtaTaskResponse
 
     GetProvisioningProfileRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: ProvisioningProfileId, required: true, location: "uri", location_name: "Identifier"))
@@ -771,6 +1084,43 @@ module Aws::IoTManagedIntegrations
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
 
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
+
+    LambdaConfig.add_member(:arn, Shapes::ShapeRef.new(shape: LambdaArn, required: true, location_name: "arn"))
+    LambdaConfig.struct_class = Types::LambdaConfig
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
+
+    ListAccountAssociationsRequest.add_member(:connector_destination_id, Shapes::ShapeRef.new(shape: ConnectorDestinationId, location: "querystring", location_name: "ConnectorDestinationId"))
+    ListAccountAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
+    ListAccountAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    ListAccountAssociationsRequest.struct_class = Types::ListAccountAssociationsRequest
+
+    ListAccountAssociationsResponse.add_member(:items, Shapes::ShapeRef.new(shape: AccountAssociationListDefinition, location_name: "Items"))
+    ListAccountAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAccountAssociationsResponse.struct_class = Types::ListAccountAssociationsResponse
+
+    ListCloudConnectorsRequest.add_member(:type, Shapes::ShapeRef.new(shape: CloudConnectorType, location: "querystring", location_name: "Type"))
+    ListCloudConnectorsRequest.add_member(:lambda_arn, Shapes::ShapeRef.new(shape: LambdaArn, location: "querystring", location_name: "LambdaArn"))
+    ListCloudConnectorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
+    ListCloudConnectorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    ListCloudConnectorsRequest.struct_class = Types::ListCloudConnectorsRequest
+
+    ListCloudConnectorsResponse.add_member(:items, Shapes::ShapeRef.new(shape: ConnectorList, location_name: "Items"))
+    ListCloudConnectorsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListCloudConnectorsResponse.struct_class = Types::ListCloudConnectorsResponse
+
+    ListConnectorDestinationsRequest.add_member(:cloud_connector_id, Shapes::ShapeRef.new(shape: CloudConnectorId, location: "querystring", location_name: "CloudConnectorId"))
+    ListConnectorDestinationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    ListConnectorDestinationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
+    ListConnectorDestinationsRequest.struct_class = Types::ListConnectorDestinationsRequest
+
+    ListConnectorDestinationsResponse.add_member(:connector_destination_list, Shapes::ShapeRef.new(shape: ConnectorDestinationListDefinition, location_name: "ConnectorDestinationList"))
+    ListConnectorDestinationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListConnectorDestinationsResponse.struct_class = Types::ListConnectorDestinationsResponse
+
     ListCredentialLockersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
     ListCredentialLockersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
     ListCredentialLockersRequest.struct_class = Types::ListCredentialLockersRequest
@@ -787,6 +1137,25 @@ module Aws::IoTManagedIntegrations
     ListDestinationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListDestinationsResponse.struct_class = Types::ListDestinationsResponse
 
+    ListDeviceDiscoveriesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    ListDeviceDiscoveriesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
+    ListDeviceDiscoveriesRequest.add_member(:type_filter, Shapes::ShapeRef.new(shape: DiscoveryType, location: "querystring", location_name: "TypeFilter"))
+    ListDeviceDiscoveriesRequest.add_member(:status_filter, Shapes::ShapeRef.new(shape: DeviceDiscoveryStatus, location: "querystring", location_name: "StatusFilter"))
+    ListDeviceDiscoveriesRequest.struct_class = Types::ListDeviceDiscoveriesRequest
+
+    ListDeviceDiscoveriesResponse.add_member(:items, Shapes::ShapeRef.new(shape: DeviceDiscoveryListDefinition, location_name: "Items"))
+    ListDeviceDiscoveriesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListDeviceDiscoveriesResponse.struct_class = Types::ListDeviceDiscoveriesResponse
+
+    ListDiscoveredDevicesRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: DeviceDiscoveryId, required: true, location: "uri", location_name: "Identifier"))
+    ListDiscoveredDevicesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    ListDiscoveredDevicesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
+    ListDiscoveredDevicesRequest.struct_class = Types::ListDiscoveredDevicesRequest
+
+    ListDiscoveredDevicesResponse.add_member(:items, Shapes::ShapeRef.new(shape: DiscoveredDeviceListDefinition, location_name: "Items"))
+    ListDiscoveredDevicesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListDiscoveredDevicesResponse.struct_class = Types::ListDiscoveredDevicesResponse
+
     ListEventLogConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
     ListEventLogConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
     ListEventLogConfigurationsRequest.struct_class = Types::ListEventLogConfigurationsRequest
@@ -794,6 +1163,16 @@ module Aws::IoTManagedIntegrations
     ListEventLogConfigurationsResponse.add_member(:event_log_configuration_list, Shapes::ShapeRef.new(shape: EventLogConfigurationListDefinition, location_name: "EventLogConfigurationList"))
     ListEventLogConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListEventLogConfigurationsResponse.struct_class = Types::ListEventLogConfigurationsResponse
+
+    ListManagedThingAccountAssociationsRequest.add_member(:managed_thing_id, Shapes::ShapeRef.new(shape: ManagedThingId, location: "querystring", location_name: "ManagedThingId"))
+    ListManagedThingAccountAssociationsRequest.add_member(:account_association_id, Shapes::ShapeRef.new(shape: AccountAssociationId, location: "querystring", location_name: "AccountAssociationId"))
+    ListManagedThingAccountAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
+    ListManagedThingAccountAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    ListManagedThingAccountAssociationsRequest.struct_class = Types::ListManagedThingAccountAssociationsRequest
+
+    ListManagedThingAccountAssociationsResponse.add_member(:items, Shapes::ShapeRef.new(shape: ManagedThingAssociationList, location_name: "Items"))
+    ListManagedThingAccountAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListManagedThingAccountAssociationsResponse.struct_class = Types::ListManagedThingAccountAssociationsResponse
 
     ListManagedThingSchemasRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: ManagedThingId, required: true, location: "uri", location_name: "Identifier"))
     ListManagedThingSchemasRequest.add_member(:endpoint_id_filter, Shapes::ShapeRef.new(shape: EndpointId, location: "querystring", location_name: "EndpointIdFilter"))
@@ -810,7 +1189,9 @@ module Aws::IoTManagedIntegrations
     ListManagedThingsRequest.add_member(:credential_locker_filter, Shapes::ShapeRef.new(shape: CredentialLockerId, location: "querystring", location_name: "CredentialLockerFilter"))
     ListManagedThingsRequest.add_member(:role_filter, Shapes::ShapeRef.new(shape: Role, location: "querystring", location_name: "RoleFilter"))
     ListManagedThingsRequest.add_member(:parent_controller_identifier_filter, Shapes::ShapeRef.new(shape: ParentControllerId, location: "querystring", location_name: "ParentControllerIdentifierFilter"))
-    ListManagedThingsRequest.add_member(:connector_policy_id_filter, Shapes::ShapeRef.new(shape: ConnectorPolicyId, location: "querystring", location_name: "ConnectorPolicyIdFilter"))
+    ListManagedThingsRequest.add_member(:connector_policy_id_filter, Shapes::ShapeRef.new(shape: ConnectorPolicyId, deprecated: true, location: "querystring", location_name: "ConnectorPolicyIdFilter", metadata: {"deprecatedMessage" => "ConnectorPolicyIdFilter is deprecated", "deprecatedSince" => "06-25-2025"}))
+    ListManagedThingsRequest.add_member(:connector_destination_id_filter, Shapes::ShapeRef.new(shape: ConnectorDestinationId, location: "querystring", location_name: "ConnectorDestinationIdFilter"))
+    ListManagedThingsRequest.add_member(:connector_device_id_filter, Shapes::ShapeRef.new(shape: ConnectorDeviceId, location: "querystring", location_name: "ConnectorDeviceIdFilter"))
     ListManagedThingsRequest.add_member(:serial_number_filter, Shapes::ShapeRef.new(shape: SerialNumber, location: "querystring", location_name: "SerialNumberFilter"))
     ListManagedThingsRequest.add_member(:provisioning_status_filter, Shapes::ShapeRef.new(shape: ProvisioningStatus, location: "querystring", location_name: "ProvisioningStatusFilter"))
     ListManagedThingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
@@ -875,6 +1256,18 @@ module Aws::IoTManagedIntegrations
     ListSchemaVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListSchemaVersionsResponse.struct_class = Types::ListSchemaVersionsResponse
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: IoTManagedIntegrationsResourceARN, required: true, location: "uri", location_name: "ResourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    ManagedThingAssociation.add_member(:managed_thing_id, Shapes::ShapeRef.new(shape: ManagedThingId, location_name: "ManagedThingId"))
+    ManagedThingAssociation.add_member(:account_association_id, Shapes::ShapeRef.new(shape: AccountAssociationId, location_name: "AccountAssociationId"))
+    ManagedThingAssociation.struct_class = Types::ManagedThingAssociation
+
+    ManagedThingAssociationList.member = Shapes::ShapeRef.new(shape: ManagedThingAssociation)
+
     ManagedThingListDefinition.member = Shapes::ShapeRef.new(shape: ManagedThingSummary)
 
     ManagedThingSchemaListDefinition.member = Shapes::ShapeRef.new(shape: ManagedThingSchemaListItem)
@@ -890,7 +1283,8 @@ module Aws::IoTManagedIntegrations
     ManagedThingSummary.add_member(:brand, Shapes::ShapeRef.new(shape: Brand, location_name: "Brand"))
     ManagedThingSummary.add_member(:classification, Shapes::ShapeRef.new(shape: Classification, location_name: "Classification"))
     ManagedThingSummary.add_member(:connector_device_id, Shapes::ShapeRef.new(shape: ConnectorDeviceId, location_name: "ConnectorDeviceId"))
-    ManagedThingSummary.add_member(:connector_policy_id, Shapes::ShapeRef.new(shape: ConnectorPolicyId, location_name: "ConnectorPolicyId"))
+    ManagedThingSummary.add_member(:connector_policy_id, Shapes::ShapeRef.new(shape: ConnectorPolicyId, deprecated: true, location_name: "ConnectorPolicyId", metadata: {"deprecatedMessage" => "ConnectorPolicyId has been deprecated", "deprecatedSince" => "06-25-2025"}))
+    ManagedThingSummary.add_member(:connector_destination_id, Shapes::ShapeRef.new(shape: ConnectorDestinationId, location_name: "ConnectorDestinationId"))
     ManagedThingSummary.add_member(:model, Shapes::ShapeRef.new(shape: Model, location_name: "Model"))
     ManagedThingSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     ManagedThingSummary.add_member(:owner, Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
@@ -904,6 +1298,73 @@ module Aws::IoTManagedIntegrations
     ManagedThingSummary.add_member(:activated_at, Shapes::ShapeRef.new(shape: SetupAt, location_name: "ActivatedAt"))
     ManagedThingSummary.struct_class = Types::ManagedThingSummary
 
+    MatterCapabilityReport.add_member(:version, Shapes::ShapeRef.new(shape: CapabilityReportVersion, required: true, location_name: "version"))
+    MatterCapabilityReport.add_member(:node_id, Shapes::ShapeRef.new(shape: NodeId, location_name: "nodeId"))
+    MatterCapabilityReport.add_member(:endpoints, Shapes::ShapeRef.new(shape: MatterCapabilityReportEndpoints, required: true, location_name: "endpoints"))
+    MatterCapabilityReport.struct_class = Types::MatterCapabilityReport
+
+    MatterCapabilityReportAttribute.add_member(:id, Shapes::ShapeRef.new(shape: MatterAttributeId, location_name: "id"))
+    MatterCapabilityReportAttribute.add_member(:name, Shapes::ShapeRef.new(shape: ActionName, location_name: "name"))
+    MatterCapabilityReportAttribute.add_member(:value, Shapes::ShapeRef.new(shape: MatterCapabilityReportAttributeValue, location_name: "value"))
+    MatterCapabilityReportAttribute.struct_class = Types::MatterCapabilityReportAttribute
+
+    MatterCapabilityReportAttributes.member = Shapes::ShapeRef.new(shape: MatterCapabilityReportAttribute)
+
+    MatterCapabilityReportCluster.add_member(:id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "id"))
+    MatterCapabilityReportCluster.add_member(:revision, Shapes::ShapeRef.new(shape: MatterCapabilityReportClusterRevisionId, required: true, location_name: "revision"))
+    MatterCapabilityReportCluster.add_member(:public_id, Shapes::ShapeRef.new(shape: SchemaVersionedId, location_name: "publicId"))
+    MatterCapabilityReportCluster.add_member(:name, Shapes::ShapeRef.new(shape: CapabilityName, location_name: "name"))
+    MatterCapabilityReportCluster.add_member(:spec_version, Shapes::ShapeRef.new(shape: SpecVersion, location_name: "specVersion"))
+    MatterCapabilityReportCluster.add_member(:attributes, Shapes::ShapeRef.new(shape: MatterCapabilityReportAttributes, location_name: "attributes"))
+    MatterCapabilityReportCluster.add_member(:commands, Shapes::ShapeRef.new(shape: MatterCapabilityReportCommands, location_name: "commands"))
+    MatterCapabilityReportCluster.add_member(:events, Shapes::ShapeRef.new(shape: MatterCapabilityReportEvents, location_name: "events"))
+    MatterCapabilityReportCluster.add_member(:feature_map, Shapes::ShapeRef.new(shape: MatterCapabilityReportFeatureMap, location_name: "featureMap"))
+    MatterCapabilityReportCluster.add_member(:generated_commands, Shapes::ShapeRef.new(shape: MatterCapabilityReportGeneratedCommands, location_name: "generatedCommands"))
+    MatterCapabilityReportCluster.add_member(:fabric_index, Shapes::ShapeRef.new(shape: MatterCapabilityReportFabricIndex, location_name: "fabricIndex"))
+    MatterCapabilityReportCluster.struct_class = Types::MatterCapabilityReportCluster
+
+    MatterCapabilityReportClusters.member = Shapes::ShapeRef.new(shape: MatterCapabilityReportCluster)
+
+    MatterCapabilityReportCommands.member = Shapes::ShapeRef.new(shape: MatterCommandId)
+
+    MatterCapabilityReportEndpoint.add_member(:id, Shapes::ShapeRef.new(shape: EndpointId, required: true, location_name: "id"))
+    MatterCapabilityReportEndpoint.add_member(:device_types, Shapes::ShapeRef.new(shape: DeviceTypes, required: true, location_name: "deviceTypes"))
+    MatterCapabilityReportEndpoint.add_member(:clusters, Shapes::ShapeRef.new(shape: MatterCapabilityReportClusters, required: true, location_name: "clusters"))
+    MatterCapabilityReportEndpoint.add_member(:parts, Shapes::ShapeRef.new(shape: MatterCapabilityReportEndpointParts, location_name: "parts"))
+    MatterCapabilityReportEndpoint.add_member(:semantic_tags, Shapes::ShapeRef.new(shape: MatterCapabilityReportEndpointSemanticTags, location_name: "semanticTags"))
+    MatterCapabilityReportEndpoint.add_member(:client_clusters, Shapes::ShapeRef.new(shape: MatterCapabilityReportEndpointClientClusters, location_name: "clientClusters"))
+    MatterCapabilityReportEndpoint.struct_class = Types::MatterCapabilityReportEndpoint
+
+    MatterCapabilityReportEndpointClientClusters.member = Shapes::ShapeRef.new(shape: ClusterId)
+
+    MatterCapabilityReportEndpointParts.member = Shapes::ShapeRef.new(shape: EndpointId)
+
+    MatterCapabilityReportEndpointSemanticTags.member = Shapes::ShapeRef.new(shape: EndpointSemanticTag)
+
+    MatterCapabilityReportEndpoints.member = Shapes::ShapeRef.new(shape: MatterCapabilityReportEndpoint)
+
+    MatterCapabilityReportEvents.member = Shapes::ShapeRef.new(shape: MatterEventId)
+
+    MatterCapabilityReportGeneratedCommands.member = Shapes::ShapeRef.new(shape: MatterCommandId)
+
+    MatterCluster.add_member(:id, Shapes::ShapeRef.new(shape: ClusterId, location_name: "id"))
+    MatterCluster.add_member(:attributes, Shapes::ShapeRef.new(shape: MatterAttributes, location_name: "attributes"))
+    MatterCluster.add_member(:commands, Shapes::ShapeRef.new(shape: MatterCommands, location_name: "commands"))
+    MatterCluster.add_member(:events, Shapes::ShapeRef.new(shape: MatterEvents, location_name: "events"))
+    MatterCluster.struct_class = Types::MatterCluster
+
+    MatterClusters.member = Shapes::ShapeRef.new(shape: MatterCluster)
+
+    MatterCommands.key = Shapes::ShapeRef.new(shape: MatterCommandId)
+    MatterCommands.value = Shapes::ShapeRef.new(shape: MatterFields)
+
+    MatterEndpoint.add_member(:id, Shapes::ShapeRef.new(shape: EndpointId, location_name: "id"))
+    MatterEndpoint.add_member(:clusters, Shapes::ShapeRef.new(shape: MatterClusters, location_name: "clusters"))
+    MatterEndpoint.struct_class = Types::MatterEndpoint
+
+    MatterEvents.key = Shapes::ShapeRef.new(shape: MatterEventId)
+    MatterEvents.value = Shapes::ShapeRef.new(shape: MatterFields)
+
     MetaData.key = Shapes::ShapeRef.new(shape: AttributeName)
     MetaData.value = Shapes::ShapeRef.new(shape: AttributeValue)
 
@@ -912,6 +1373,18 @@ module Aws::IoTManagedIntegrations
     NotificationConfigurationSummary.add_member(:event_type, Shapes::ShapeRef.new(shape: EventType, location_name: "EventType"))
     NotificationConfigurationSummary.add_member(:destination_name, Shapes::ShapeRef.new(shape: DestinationName, location_name: "DestinationName"))
     NotificationConfigurationSummary.struct_class = Types::NotificationConfigurationSummary
+
+    OAuthConfig.add_member(:auth_url, Shapes::ShapeRef.new(shape: AuthUrl, required: true, location_name: "authUrl"))
+    OAuthConfig.add_member(:token_url, Shapes::ShapeRef.new(shape: TokenUrl, required: true, location_name: "tokenUrl"))
+    OAuthConfig.add_member(:scope, Shapes::ShapeRef.new(shape: String, location_name: "scope"))
+    OAuthConfig.add_member(:token_endpoint_authentication_scheme, Shapes::ShapeRef.new(shape: TokenEndpointAuthenticationScheme, required: true, location_name: "tokenEndpointAuthenticationScheme"))
+    OAuthConfig.add_member(:o_auth_complete_redirect_url, Shapes::ShapeRef.new(shape: String, location_name: "oAuthCompleteRedirectUrl"))
+    OAuthConfig.add_member(:proactive_refresh_token_renewal, Shapes::ShapeRef.new(shape: ProactiveRefreshTokenRenewal, location_name: "proactiveRefreshTokenRenewal"))
+    OAuthConfig.struct_class = Types::OAuthConfig
+
+    OAuthUpdate.add_member(:o_auth_complete_redirect_url, Shapes::ShapeRef.new(shape: String, location_name: "oAuthCompleteRedirectUrl"))
+    OAuthUpdate.add_member(:proactive_refresh_token_renewal, Shapes::ShapeRef.new(shape: ProactiveRefreshTokenRenewal, location_name: "proactiveRefreshTokenRenewal"))
+    OAuthUpdate.struct_class = Types::OAuthUpdate
 
     OtaTaskAbortConfig.add_member(:abort_config_criteria_list, Shapes::ShapeRef.new(shape: AbortConfigCriteriaList, location_name: "AbortConfigCriteriaList"))
     OtaTaskAbortConfig.struct_class = Types::OtaTaskAbortConfig
@@ -963,6 +1436,10 @@ module Aws::IoTManagedIntegrations
     OtaTaskTimeoutConfig.add_member(:in_progress_timeout_in_minutes, Shapes::ShapeRef.new(shape: InProgressTimeoutInMinutes, location_name: "InProgressTimeoutInMinutes"))
     OtaTaskTimeoutConfig.struct_class = Types::OtaTaskTimeoutConfig
 
+    ProactiveRefreshTokenRenewal.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
+    ProactiveRefreshTokenRenewal.add_member(:days_before_renewal, Shapes::ShapeRef.new(shape: ProactiveRefreshTokenRenewalDaysBeforeRenewalInteger, location_name: "DaysBeforeRenewal"))
+    ProactiveRefreshTokenRenewal.struct_class = Types::ProactiveRefreshTokenRenewal
+
     ProvisioningProfileListDefinition.member = Shapes::ShapeRef.new(shape: ProvisioningProfileSummary)
 
     ProvisioningProfileSummary.add_member(:name, Shapes::ShapeRef.new(shape: ProvisioningProfileName, location_name: "Name"))
@@ -995,6 +1472,16 @@ module Aws::IoTManagedIntegrations
     PutRuntimeLogConfigurationRequest.add_member(:runtime_log_configurations, Shapes::ShapeRef.new(shape: RuntimeLogConfigurations, required: true, location_name: "RuntimeLogConfigurations"))
     PutRuntimeLogConfigurationRequest.struct_class = Types::PutRuntimeLogConfigurationRequest
 
+    RegisterAccountAssociationRequest.add_member(:managed_thing_id, Shapes::ShapeRef.new(shape: ManagedThingId, required: true, location_name: "ManagedThingId"))
+    RegisterAccountAssociationRequest.add_member(:account_association_id, Shapes::ShapeRef.new(shape: AccountAssociationId, required: true, location_name: "AccountAssociationId"))
+    RegisterAccountAssociationRequest.add_member(:device_discovery_id, Shapes::ShapeRef.new(shape: DeviceDiscoveryId, required: true, location_name: "DeviceDiscoveryId"))
+    RegisterAccountAssociationRequest.struct_class = Types::RegisterAccountAssociationRequest
+
+    RegisterAccountAssociationResponse.add_member(:account_association_id, Shapes::ShapeRef.new(shape: AccountAssociationId, location_name: "AccountAssociationId"))
+    RegisterAccountAssociationResponse.add_member(:device_discovery_id, Shapes::ShapeRef.new(shape: DeviceDiscoveryId, location_name: "DeviceDiscoveryId"))
+    RegisterAccountAssociationResponse.add_member(:managed_thing_id, Shapes::ShapeRef.new(shape: ManagedThingId, location_name: "ManagedThingId"))
+    RegisterAccountAssociationResponse.struct_class = Types::RegisterAccountAssociationResponse
+
     RegisterCustomEndpointRequest.struct_class = Types::RegisterCustomEndpointRequest
 
     RegisterCustomEndpointResponse.add_member(:endpoint_address, Shapes::ShapeRef.new(shape: EndpointAddress, required: true, location_name: "EndpointAddress"))
@@ -1004,6 +1491,8 @@ module Aws::IoTManagedIntegrations
     ResetRuntimeLogConfigurationRequest.struct_class = Types::ResetRuntimeLogConfigurationRequest
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: ErrorResourceId, location_name: "ResourceId"))
+    ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ErrorResourceType, location_name: "ResourceType"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     RetryConfigCriteria.add_member(:failure_type, Shapes::ShapeRef.new(shape: RetryCriteriaFailureType, location_name: "FailureType"))
@@ -1042,9 +1531,30 @@ module Aws::IoTManagedIntegrations
     SchemaVersionListItem.add_member(:visibility, Shapes::ShapeRef.new(shape: SchemaVersionVisibility, location_name: "Visibility"))
     SchemaVersionListItem.struct_class = Types::SchemaVersionListItem
 
+    SecretsManager.add_member(:arn, Shapes::ShapeRef.new(shape: SecretsManagerArn, required: true, location_name: "arn"))
+    SecretsManager.add_member(:version_id, Shapes::ShapeRef.new(shape: SecretsManagerVersionId, required: true, location_name: "versionId"))
+    SecretsManager.struct_class = Types::SecretsManager
+
+    SendConnectorEventRequest.add_member(:connector_id, Shapes::ShapeRef.new(shape: ConnectorId, required: true, location: "uri", location_name: "ConnectorId"))
+    SendConnectorEventRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: ThirdPartyUserId, location_name: "UserId"))
+    SendConnectorEventRequest.add_member(:operation, Shapes::ShapeRef.new(shape: ConnectorEventOperation, required: true, location_name: "Operation"))
+    SendConnectorEventRequest.add_member(:operation_version, Shapes::ShapeRef.new(shape: ConnectorEventOperationVersion, location_name: "OperationVersion"))
+    SendConnectorEventRequest.add_member(:status_code, Shapes::ShapeRef.new(shape: ConnectorEventStatusCode, location_name: "StatusCode"))
+    SendConnectorEventRequest.add_member(:message, Shapes::ShapeRef.new(shape: ConnectorEventMessage, location_name: "Message"))
+    SendConnectorEventRequest.add_member(:device_discovery_id, Shapes::ShapeRef.new(shape: DeviceDiscoveryId, location_name: "DeviceDiscoveryId"))
+    SendConnectorEventRequest.add_member(:connector_device_id, Shapes::ShapeRef.new(shape: ConnectorDeviceId, location_name: "ConnectorDeviceId"))
+    SendConnectorEventRequest.add_member(:trace_id, Shapes::ShapeRef.new(shape: TraceId, location_name: "TraceId"))
+    SendConnectorEventRequest.add_member(:devices, Shapes::ShapeRef.new(shape: Devices, location_name: "Devices"))
+    SendConnectorEventRequest.add_member(:matter_endpoint, Shapes::ShapeRef.new(shape: MatterEndpoint, location_name: "MatterEndpoint"))
+    SendConnectorEventRequest.struct_class = Types::SendConnectorEventRequest
+
+    SendConnectorEventResponse.add_member(:connector_id, Shapes::ShapeRef.new(shape: ConnectorId, required: true, location_name: "ConnectorId"))
+    SendConnectorEventResponse.struct_class = Types::SendConnectorEventResponse
+
     SendManagedThingCommandRequest.add_member(:managed_thing_id, Shapes::ShapeRef.new(shape: ManagedThingId, required: true, location: "uri", location_name: "ManagedThingId"))
     SendManagedThingCommandRequest.add_member(:endpoints, Shapes::ShapeRef.new(shape: CommandEndpoints, required: true, location_name: "Endpoints"))
-    SendManagedThingCommandRequest.add_member(:connector_association_id, Shapes::ShapeRef.new(shape: ConnectorAssociationId, location_name: "ConnectorAssociationId"))
+    SendManagedThingCommandRequest.add_member(:connector_association_id, Shapes::ShapeRef.new(shape: ConnectorAssociationId, deprecated: true, location_name: "ConnectorAssociationId", metadata: {"deprecatedMessage" => "ConnectorAssociationId has been deprecated", "deprecatedSince" => "06-25-2025"}))
+    SendManagedThingCommandRequest.add_member(:account_association_id, Shapes::ShapeRef.new(shape: AccountAssociationId, location_name: "AccountAssociationId"))
     SendManagedThingCommandRequest.struct_class = Types::SendManagedThingCommandRequest
 
     SendManagedThingCommandResponse.add_member(:trace_id, Shapes::ShapeRef.new(shape: TraceId, location_name: "TraceId"))
@@ -1056,13 +1566,21 @@ module Aws::IoTManagedIntegrations
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
 
+    StartAccountAssociationRefreshRequest.add_member(:account_association_id, Shapes::ShapeRef.new(shape: AccountAssociationId, required: true, location: "uri", location_name: "AccountAssociationId"))
+    StartAccountAssociationRefreshRequest.struct_class = Types::StartAccountAssociationRefreshRequest
+
+    StartAccountAssociationRefreshResponse.add_member(:o_auth_authorization_url, Shapes::ShapeRef.new(shape: OAuthAuthorizationUrl, required: true, location_name: "OAuthAuthorizationUrl"))
+    StartAccountAssociationRefreshResponse.struct_class = Types::StartAccountAssociationRefreshResponse
+
     StartDeviceDiscoveryRequest.add_member(:discovery_type, Shapes::ShapeRef.new(shape: DiscoveryType, required: true, location_name: "DiscoveryType"))
+    StartDeviceDiscoveryRequest.add_member(:custom_protocol_detail, Shapes::ShapeRef.new(shape: CustomProtocolDetail, location_name: "CustomProtocolDetail"))
     StartDeviceDiscoveryRequest.add_member(:controller_identifier, Shapes::ShapeRef.new(shape: ManagedThingId, location_name: "ControllerIdentifier"))
-    StartDeviceDiscoveryRequest.add_member(:connector_association_identifier, Shapes::ShapeRef.new(shape: ConnectorAssociationId, location_name: "ConnectorAssociationIdentifier"))
+    StartDeviceDiscoveryRequest.add_member(:connector_association_identifier, Shapes::ShapeRef.new(shape: ConnectorAssociationId, deprecated: true, location_name: "ConnectorAssociationIdentifier", metadata: {"deprecatedMessage" => "ConnectorAssociationIdentifier is deprecated", "deprecatedSince" => "06-25-2025"}))
+    StartDeviceDiscoveryRequest.add_member(:account_association_id, Shapes::ShapeRef.new(shape: AccountAssociationId, location_name: "AccountAssociationId"))
     StartDeviceDiscoveryRequest.add_member(:authentication_material, Shapes::ShapeRef.new(shape: DiscoveryAuthMaterialString, location_name: "AuthenticationMaterial"))
     StartDeviceDiscoveryRequest.add_member(:authentication_material_type, Shapes::ShapeRef.new(shape: DiscoveryAuthMaterialType, location_name: "AuthenticationMaterialType"))
     StartDeviceDiscoveryRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken"))
-    StartDeviceDiscoveryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
+    StartDeviceDiscoveryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, deprecated: true, location_name: "Tags", metadata: {"deprecatedMessage" => "Tags have been deprecated from this api", "deprecatedSince" => "06-25-2025"}))
     StartDeviceDiscoveryRequest.struct_class = Types::StartDeviceDiscoveryRequest
 
     StartDeviceDiscoveryResponse.add_member(:id, Shapes::ShapeRef.new(shape: DeviceDiscoveryId, location_name: "Id"))
@@ -1082,6 +1600,14 @@ module Aws::IoTManagedIntegrations
     StateEndpoint.struct_class = Types::StateEndpoint
 
     StateEndpoints.member = Shapes::ShapeRef.new(shape: StateEndpoint)
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: IoTManagedIntegrationsResourceARN, required: true, location: "uri", location_name: "ResourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
 
     TagsMap.key = Shapes::ShapeRef.new(shape: TagKey)
     TagsMap.value = Shapes::ShapeRef.new(shape: TagValue)
@@ -1105,6 +1631,30 @@ module Aws::IoTManagedIntegrations
     UnauthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     UnauthorizedException.struct_class = Types::UnauthorizedException
 
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: IoTManagedIntegrationsResourceARN, required: true, location: "uri", location_name: "ResourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateAccountAssociationRequest.add_member(:account_association_id, Shapes::ShapeRef.new(shape: AccountAssociationId, required: true, location: "uri", location_name: "AccountAssociationId"))
+    UpdateAccountAssociationRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccountAssociationName, location_name: "Name"))
+    UpdateAccountAssociationRequest.add_member(:description, Shapes::ShapeRef.new(shape: AccountAssociationDescription, location_name: "Description"))
+    UpdateAccountAssociationRequest.struct_class = Types::UpdateAccountAssociationRequest
+
+    UpdateCloudConnectorRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: CloudConnectorId, required: true, location: "uri", location_name: "Identifier"))
+    UpdateCloudConnectorRequest.add_member(:name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "Name"))
+    UpdateCloudConnectorRequest.add_member(:description, Shapes::ShapeRef.new(shape: CloudConnectorDescription, location_name: "Description"))
+    UpdateCloudConnectorRequest.struct_class = Types::UpdateCloudConnectorRequest
+
+    UpdateConnectorDestinationRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: ConnectorDestinationId, required: true, location: "uri", location_name: "Identifier"))
+    UpdateConnectorDestinationRequest.add_member(:description, Shapes::ShapeRef.new(shape: ConnectorDestinationDescription, location_name: "Description"))
+    UpdateConnectorDestinationRequest.add_member(:name, Shapes::ShapeRef.new(shape: ConnectorDestinationName, location_name: "Name"))
+    UpdateConnectorDestinationRequest.add_member(:auth_type, Shapes::ShapeRef.new(shape: AuthType, location_name: "AuthType"))
+    UpdateConnectorDestinationRequest.add_member(:auth_config, Shapes::ShapeRef.new(shape: AuthConfigUpdate, location_name: "AuthConfig"))
+    UpdateConnectorDestinationRequest.add_member(:secrets_manager, Shapes::ShapeRef.new(shape: SecretsManager, location_name: "SecretsManager"))
+    UpdateConnectorDestinationRequest.struct_class = Types::UpdateConnectorDestinationRequest
+
     UpdateDestinationRequest.add_member(:name, Shapes::ShapeRef.new(shape: DestinationName, required: true, location: "uri", location_name: "Name"))
     UpdateDestinationRequest.add_member(:delivery_destination_arn, Shapes::ShapeRef.new(shape: DeliveryDestinationArn, location_name: "DeliveryDestinationArn"))
     UpdateDestinationRequest.add_member(:delivery_destination_type, Shapes::ShapeRef.new(shape: DeliveryDestinationType, location_name: "DeliveryDestinationType"))
@@ -1124,6 +1674,7 @@ module Aws::IoTManagedIntegrations
     UpdateManagedThingRequest.add_member(:model, Shapes::ShapeRef.new(shape: Model, location_name: "Model"))
     UpdateManagedThingRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     UpdateManagedThingRequest.add_member(:capability_report, Shapes::ShapeRef.new(shape: CapabilityReport, location_name: "CapabilityReport"))
+    UpdateManagedThingRequest.add_member(:capability_schemas, Shapes::ShapeRef.new(shape: CapabilitySchemas, location_name: "CapabilitySchemas"))
     UpdateManagedThingRequest.add_member(:capabilities, Shapes::ShapeRef.new(shape: Capabilities, location_name: "Capabilities"))
     UpdateManagedThingRequest.add_member(:classification, Shapes::ShapeRef.new(shape: Classification, location_name: "Classification"))
     UpdateManagedThingRequest.add_member(:hub_network_mode, Shapes::ShapeRef.new(shape: HubNetworkMode, location_name: "HubNetworkMode"))
@@ -1160,6 +1711,47 @@ module Aws::IoTManagedIntegrations
         "signingName" => "iotmanagedintegrations",
         "uid" => "iot-managed-integrations-2025-03-03",
       }
+
+      api.add_operation(:create_account_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAccountAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/account-associations"
+        o.input = Shapes::ShapeRef.new(shape: CreateAccountAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAccountAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:create_cloud_connector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCloudConnector"
+        o.http_method = "POST"
+        o.http_request_uri = "/cloud-connectors"
+        o.input = Shapes::ShapeRef.new(shape: CreateCloudConnectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateCloudConnectorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_connector_destination, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateConnectorDestination"
+        o.http_method = "POST"
+        o.http_request_uri = "/connector-destinations"
+        o.input = Shapes::ShapeRef.new(shape: CreateConnectorDestinationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateConnectorDestinationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
 
       api.add_operation(:create_credential_locker, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateCredentialLocker"
@@ -1241,8 +1833,10 @@ module Aws::IoTManagedIntegrations
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:create_ota_task_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -1270,6 +1864,47 @@ module Aws::IoTManagedIntegrations
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:delete_account_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAccountAssociation"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/account-associations/{AccountAssociationId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAccountAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:delete_cloud_connector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCloudConnector"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/cloud-connectors/{Identifier}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCloudConnectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:delete_connector_destination, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteConnectorDestination"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/connector-destinations/{Identifier}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteConnectorDestinationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
@@ -1353,6 +1988,7 @@ module Aws::IoTManagedIntegrations
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:delete_ota_task_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -1379,6 +2015,59 @@ module Aws::IoTManagedIntegrations
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:deregister_account_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeregisterAccountAssociation"
+        o.http_method = "PUT"
+        o.http_request_uri = "/managed-thing-associations/deregister"
+        o.input = Shapes::ShapeRef.new(shape: DeregisterAccountAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_account_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAccountAssociation"
+        o.http_method = "GET"
+        o.http_request_uri = "/account-associations/{AccountAssociationId}"
+        o.input = Shapes::ShapeRef.new(shape: GetAccountAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAccountAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_cloud_connector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCloudConnector"
+        o.http_method = "GET"
+        o.http_request_uri = "/cloud-connectors/{Identifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetCloudConnectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCloudConnectorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_connector_destination, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetConnectorDestination"
+        o.http_method = "GET"
+        o.http_request_uri = "/connector-destinations/{Identifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetConnectorDestinationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetConnectorDestinationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
@@ -1639,6 +2328,61 @@ module Aws::IoTManagedIntegrations
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:list_account_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAccountAssociations"
+        o.http_method = "GET"
+        o.http_request_uri = "/account-associations"
+        o.input = Shapes::ShapeRef.new(shape: ListAccountAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAccountAssociationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_cloud_connectors, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCloudConnectors"
+        o.http_method = "GET"
+        o.http_request_uri = "/cloud-connectors"
+        o.input = Shapes::ShapeRef.new(shape: ListCloudConnectorsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCloudConnectorsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_connector_destinations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListConnectorDestinations"
+        o.http_method = "GET"
+        o.http_request_uri = "/connector-destinations"
+        o.input = Shapes::ShapeRef.new(shape: ListConnectorDestinationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListConnectorDestinationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_credential_lockers, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListCredentialLockers"
         o.http_method = "GET"
@@ -1676,12 +2420,71 @@ module Aws::IoTManagedIntegrations
         )
       end)
 
+      api.add_operation(:list_device_discoveries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDeviceDiscoveries"
+        o.http_method = "GET"
+        o.http_request_uri = "/device-discoveries"
+        o.input = Shapes::ShapeRef.new(shape: ListDeviceDiscoveriesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDeviceDiscoveriesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_discovered_devices, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDiscoveredDevices"
+        o.http_method = "GET"
+        o.http_request_uri = "/device-discoveries/{Identifier}/devices"
+        o.input = Shapes::ShapeRef.new(shape: ListDiscoveredDevicesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDiscoveredDevicesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_event_log_configurations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListEventLogConfigurations"
         o.http_method = "GET"
         o.http_request_uri = "/event-log-configurations"
         o.input = Shapes::ShapeRef.new(shape: ListEventLogConfigurationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListEventLogConfigurationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_managed_thing_account_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListManagedThingAccountAssociations"
+        o.http_method = "GET"
+        o.http_request_uri = "/managed-thing-associations"
+        o.input = Shapes::ShapeRef.new(shape: ListManagedThingAccountAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListManagedThingAccountAssociationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1781,6 +2584,7 @@ module Aws::IoTManagedIntegrations
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1799,6 +2603,7 @@ module Aws::IoTManagedIntegrations
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1847,6 +2652,18 @@ module Aws::IoTManagedIntegrations
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/tags/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:put_default_encryption_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutDefaultEncryptionConfiguration"
         o.http_method = "POST"
@@ -1889,6 +2706,20 @@ module Aws::IoTManagedIntegrations
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:register_account_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RegisterAccountAssociation"
+        o.http_method = "PUT"
+        o.http_request_uri = "/managed-thing-associations/register"
+        o.input = Shapes::ShapeRef.new(shape: RegisterAccountAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: RegisterAccountAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:register_custom_endpoint, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RegisterCustomEndpoint"
         o.http_method = "POST"
@@ -1917,12 +2748,41 @@ module Aws::IoTManagedIntegrations
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:send_connector_event, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SendConnectorEvent"
+        o.http_method = "POST"
+        o.http_request_uri = "/connector-event/{ConnectorId}"
+        o.input = Shapes::ShapeRef.new(shape: SendConnectorEventRequest)
+        o.output = Shapes::ShapeRef.new(shape: SendConnectorEventResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:send_managed_thing_command, Seahorse::Model::Operation.new.tap do |o|
         o.name = "SendManagedThingCommand"
         o.http_method = "POST"
         o.http_request_uri = "/managed-things-command/{ManagedThingId}"
         o.input = Shapes::ShapeRef.new(shape: SendManagedThingCommandRequest)
         o.output = Shapes::ShapeRef.new(shape: SendManagedThingCommandResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:start_account_association_refresh, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartAccountAssociationRefresh"
+        o.http_method = "POST"
+        o.http_request_uri = "/account-associations/{AccountAssociationId}/refresh"
+        o.input = Shapes::ShapeRef.new(shape: StartAccountAssociationRefreshRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartAccountAssociationRefreshResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1943,6 +2803,73 @@ module Aws::IoTManagedIntegrations
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tags/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/tags/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:update_account_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAccountAssociation"
+        o.http_method = "PUT"
+        o.http_request_uri = "/account-associations/{AccountAssociationId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAccountAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:update_cloud_connector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateCloudConnector"
+        o.http_method = "PUT"
+        o.http_request_uri = "/cloud-connectors/{Identifier}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateCloudConnectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:update_connector_destination, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateConnectorDestination"
+        o.http_method = "PUT"
+        o.http_request_uri = "/connector-destinations/{Identifier}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateConnectorDestinationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)

@@ -2036,6 +2036,11 @@ module Aws::SESV2
     #     in Asia Pacific (Mumbai) region using Deterministic Easy-DKIM
     #     (DEED).
     #
+    #   * `AWS_SES_AP_SOUTH_2` – Indicates that DKIM was configured for the
+    #     identity by replicating signing attributes from a parent identity
+    #     in Asia Pacific (Hyderabad) region using Deterministic Easy-DKIM
+    #     (DEED).
+    #
     #   * `AWS_SES_EU_WEST_3` – Indicates that DKIM was configured for the
     #     identity by replicating signing attributes from a parent identity
     #     in Europe (Paris) region using Deterministic Easy-DKIM (DEED).
@@ -2061,6 +2066,11 @@ module Aws::SESV2
     #     the identity by replicating signing attributes from a parent
     #     identity in Asia Pacific (Seoul) region using Deterministic
     #     Easy-DKIM (DEED).
+    #
+    #   * `AWS_SES_ME_CENTRAL_1` – Indicates that DKIM was configured for
+    #     the identity by replicating signing attributes from a parent
+    #     identity in Middle East (UAE) region using Deterministic Easy-DKIM
+    #     (DEED).
     #
     #   * `AWS_SES_ME_SOUTH_1` – Indicates that DKIM was configured for the
     #     identity by replicating signing attributes from a parent identity
@@ -2106,6 +2116,11 @@ module Aws::SESV2
     #     the identity by replicating signing attributes from a parent
     #     identity in Europe (Frankfurt) region using Deterministic
     #     Easy-DKIM (DEED).
+    #
+    #   * `AWS_SES_EU_CENTRAL_2` – Indicates that DKIM was configured for
+    #     the identity by replicating signing attributes from a parent
+    #     identity in Europe (Zurich) region using Deterministic Easy-DKIM
+    #     (DEED).
     #
     #   * `AWS_SES_US_EAST_1` – Indicates that DKIM was configured for the
     #     identity by replicating signing attributes from a parent identity
@@ -2213,6 +2228,10 @@ module Aws::SESV2
     #     replicating from a parent identity in Asia Pacific (Mumbai) region
     #     using Deterministic Easy-DKIM (DEED).
     #
+    #   * `AWS_SES_AP_SOUTH_2` – Configure DKIM for the identity by
+    #     replicating from a parent identity in Asia Pacific (Hyderabad)
+    #     region using Deterministic Easy-DKIM (DEED).
+    #
     #   * `AWS_SES_EU_WEST_3` – Configure DKIM for the identity by
     #     replicating from a parent identity in Europe (Paris) region using
     #     Deterministic Easy-DKIM (DEED).
@@ -2235,6 +2254,10 @@ module Aws::SESV2
     #
     #   * `AWS_SES_AP_NORTHEAST_2` – Configure DKIM for the identity by
     #     replicating from a parent identity in Asia Pacific (Seoul) region
+    #     using Deterministic Easy-DKIM (DEED).
+    #
+    #   * `AWS_SES_ME_CENTRAL_1` – Configure DKIM for the identity by
+    #     replicating from a parent identity in Middle East (UAE) region
     #     using Deterministic Easy-DKIM (DEED).
     #
     #   * `AWS_SES_ME_SOUTH_1` – Configure DKIM for the identity by
@@ -2272,6 +2295,10 @@ module Aws::SESV2
     #   * `AWS_SES_EU_CENTRAL_1` – Configure DKIM for the identity by
     #     replicating from a parent identity in Europe (Frankfurt) region
     #     using Deterministic Easy-DKIM (DEED).
+    #
+    #   * `AWS_SES_EU_CENTRAL_2` – Configure DKIM for the identity by
+    #     replicating from a parent identity in Europe (Zurich) region using
+    #     Deterministic Easy-DKIM (DEED).
     #
     #   * `AWS_SES_US_EAST_1` – Configure DKIM for the identity by
     #     replicating from a parent identity in US East (N. Virginia) region
@@ -2682,8 +2709,7 @@ module Aws::SESV2
     #     rendering issue. This event type can occur when template data is
     #     missing, or when there is a mismatch between template parameters
     #     and data. (This event type only occurs when you send email using
-    #     the [ `SendTemplatedEmail` ][1] or [ `SendBulkTemplatedEmail` ][2]
-    #     API operations.)
+    #     the [ `SendEmail` ][1] or [ `SendBulkEmail` ][2] API operations.)
     #
     #   * `DELIVERY_DELAY` - The email couldn't be delivered to the
     #     recipient’s mail server because a temporary issue occurred.
@@ -2697,8 +2723,8 @@ module Aws::SESV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/APIReference/API_SendTemplatedEmail.html
-    #   [2]: https://docs.aws.amazon.com/ses/latest/APIReference/API_SendBulkTemplatedEmail.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/APIReference-V2/API_SendEmail.html
+    #   [2]: https://docs.aws.amazon.com/ses/latest/APIReference-V2/API_SendBulkEmail.html
     #   [3]: https://docs.aws.amazon.com/ses/latest/dg/sending-email-subscription-management.html
     #   @return [Array<String>]
     #
@@ -7559,8 +7585,7 @@ module Aws::SESV2
     #
     # @!attribute [rw] template_name
     #   The name of the template. You will refer to this name when you send
-    #   email using the `SendTemplatedEmail` or `SendBulkTemplatedEmail`
-    #   operations.
+    #   email using the `SendEmail` or `SendBulkEmail` operations.
     #   @return [String]
     #
     # @!attribute [rw] template_arn

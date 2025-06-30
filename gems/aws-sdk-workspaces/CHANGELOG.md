@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.139.0 (2025-06-26)
+------------------
+
+* Feature - Updated modifyStreamingProperties to support PrivateLink VPC endpoints for directories
+
 1.138.0 (2025-06-02)
 ------------------
 

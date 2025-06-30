@@ -1120,6 +1120,38 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Request a model access agreement for the specified model.
+    #
+    # @option params [required, String] :offer_token
+    #   An offer token encapsulates the information for an offer.
+    #
+    # @option params [required, String] :model_id
+    #   Model Id of the model for the access request.
+    #
+    # @return [Types::CreateFoundationModelAgreementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFoundationModelAgreementResponse#model_id #model_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_foundation_model_agreement({
+    #     offer_token: "OfferToken", # required
+    #     model_id: "BedrockModelId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.model_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateFoundationModelAgreement AWS API Documentation
+    #
+    # @overload create_foundation_model_agreement(params = {})
+    # @param [Hash] params ({})
+    def create_foundation_model_agreement(params = {}, options = {})
+      req = build_request(:create_foundation_model_agreement, params)
+      req.send_request(options)
+    end
+
     # Creates a guardrail to block topics and to implement safeguards for
     # your generative AI applications.
     #
@@ -1238,6 +1270,9 @@ module Aws::Bedrock
     #           output_enabled: false,
     #         },
     #       ],
+    #       tier_config: {
+    #         tier_name: "CLASSIC", # required, accepts CLASSIC, STANDARD
+    #       },
     #     },
     #     content_policy_config: {
     #       filters_config: [ # required
@@ -1253,6 +1288,9 @@ module Aws::Bedrock
     #           output_enabled: false,
     #         },
     #       ],
+    #       tier_config: {
+    #         tier_name: "CLASSIC", # required, accepts CLASSIC, STANDARD
+    #       },
     #     },
     #     word_policy_config: {
     #       words_config: [
@@ -2263,6 +2301,28 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Delete the model access agreement for the specified model.
+    #
+    # @option params [required, String] :model_id
+    #   Model Id of the model access to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_foundation_model_agreement({
+    #     model_id: "BedrockModelId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteFoundationModelAgreement AWS API Documentation
+    #
+    # @overload delete_foundation_model_agreement(params = {})
+    # @param [Hash] params ({})
+    def delete_foundation_model_agreement(params = {}, options = {})
+      req = build_request(:delete_foundation_model_agreement, params)
+      req.send_request(options)
+    end
+
     # Deletes a guardrail.
     #
     # * To delete a guardrail, only specify the ARN of the guardrail in the
@@ -2749,6 +2809,43 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Get information about the Foundation model availability.
+    #
+    # @option params [required, String] :model_id
+    #   The model Id of the foundation model.
+    #
+    # @return [Types::GetFoundationModelAvailabilityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFoundationModelAvailabilityResponse#model_id #model_id} => String
+    #   * {Types::GetFoundationModelAvailabilityResponse#agreement_availability #agreement_availability} => Types::AgreementAvailability
+    #   * {Types::GetFoundationModelAvailabilityResponse#authorization_status #authorization_status} => String
+    #   * {Types::GetFoundationModelAvailabilityResponse#entitlement_availability #entitlement_availability} => String
+    #   * {Types::GetFoundationModelAvailabilityResponse#region_availability #region_availability} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_foundation_model_availability({
+    #     model_id: "BedrockModelId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.model_id #=> String
+    #   resp.agreement_availability.status #=> String, one of "AVAILABLE", "PENDING", "NOT_AVAILABLE", "ERROR"
+    #   resp.agreement_availability.error_message #=> String
+    #   resp.authorization_status #=> String, one of "AUTHORIZED", "NOT_AUTHORIZED"
+    #   resp.entitlement_availability #=> String, one of "AVAILABLE", "NOT_AVAILABLE"
+    #   resp.region_availability #=> String, one of "AVAILABLE", "NOT_AVAILABLE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetFoundationModelAvailability AWS API Documentation
+    #
+    # @overload get_foundation_model_availability(params = {})
+    # @param [Hash] params ({})
+    def get_foundation_model_availability(params = {}, options = {})
+      req = build_request(:get_foundation_model_availability, params)
+      req.send_request(options)
+    end
+
     # Gets details about a guardrail. If you don't specify a version, the
     # response returns details for the `DRAFT` version.
     #
@@ -2808,6 +2905,7 @@ module Aws::Bedrock
     #   resp.topic_policy.topics[0].output_action #=> String, one of "BLOCK", "NONE"
     #   resp.topic_policy.topics[0].input_enabled #=> Boolean
     #   resp.topic_policy.topics[0].output_enabled #=> Boolean
+    #   resp.topic_policy.tier.tier_name #=> String, one of "CLASSIC", "STANDARD"
     #   resp.content_policy.filters #=> Array
     #   resp.content_policy.filters[0].type #=> String, one of "SEXUAL", "VIOLENCE", "HATE", "INSULTS", "MISCONDUCT", "PROMPT_ATTACK"
     #   resp.content_policy.filters[0].input_strength #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
@@ -2820,6 +2918,7 @@ module Aws::Bedrock
     #   resp.content_policy.filters[0].output_action #=> String, one of "BLOCK", "NONE"
     #   resp.content_policy.filters[0].input_enabled #=> Boolean
     #   resp.content_policy.filters[0].output_enabled #=> Boolean
+    #   resp.content_policy.tier.tier_name #=> String, one of "CLASSIC", "STANDARD"
     #   resp.word_policy.words #=> Array
     #   resp.word_policy.words[0].text #=> String
     #   resp.word_policy.words[0].input_action #=> String, one of "BLOCK", "NONE"
@@ -3447,6 +3546,25 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Get usecase for model access.
+    #
+    # @return [Types::GetUseCaseForModelAccessResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetUseCaseForModelAccessResponse#form_data #form_data} => String
+    #
+    # @example Response structure
+    #
+    #   resp.form_data #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetUseCaseForModelAccess AWS API Documentation
+    #
+    # @overload get_use_case_for_model_access(params = {})
+    # @param [Hash] params ({})
+    def get_use_case_for_model_access(params = {}, options = {})
+      req = build_request(:get_use_case_for_model_access, params)
+      req.send_request(options)
+    end
+
     # Returns a list of the custom models that you have created with the
     # `CreateModelCustomizationJob` operation.
     #
@@ -3646,6 +3764,50 @@ module Aws::Bedrock
     # @param [Hash] params ({})
     def list_evaluation_jobs(params = {}, options = {})
       req = build_request(:list_evaluation_jobs, params)
+      req.send_request(options)
+    end
+
+    # Get the offers associated with the specified model.
+    #
+    # @option params [required, String] :model_id
+    #   Model Id of the foundation model.
+    #
+    # @option params [String] :offer_type
+    #   Type of offer associated with the model.
+    #
+    # @return [Types::ListFoundationModelAgreementOffersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFoundationModelAgreementOffersResponse#model_id #model_id} => String
+    #   * {Types::ListFoundationModelAgreementOffersResponse#offers #offers} => Array&lt;Types::Offer&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_foundation_model_agreement_offers({
+    #     model_id: "BedrockModelId", # required
+    #     offer_type: "ALL", # accepts ALL, PUBLIC
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.model_id #=> String
+    #   resp.offers #=> Array
+    #   resp.offers[0].offer_id #=> String
+    #   resp.offers[0].offer_token #=> String
+    #   resp.offers[0].term_details.usage_based_pricing_term.rate_card #=> Array
+    #   resp.offers[0].term_details.usage_based_pricing_term.rate_card[0].dimension #=> String
+    #   resp.offers[0].term_details.usage_based_pricing_term.rate_card[0].price #=> String
+    #   resp.offers[0].term_details.usage_based_pricing_term.rate_card[0].description #=> String
+    #   resp.offers[0].term_details.usage_based_pricing_term.rate_card[0].unit #=> String
+    #   resp.offers[0].term_details.legal_term.url #=> String
+    #   resp.offers[0].term_details.support_term.refund_policy_description #=> String
+    #   resp.offers[0].term_details.validity_term.agreement_duration #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListFoundationModelAgreementOffers AWS API Documentation
+    #
+    # @overload list_foundation_model_agreement_offers(params = {})
+    # @param [Hash] params ({})
+    def list_foundation_model_agreement_offers(params = {}, options = {})
+      req = build_request(:list_foundation_model_agreement_offers, params)
       req.send_request(options)
     end
 
@@ -4627,6 +4789,28 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Put usecase for model access.
+    #
+    # @option params [required, String, StringIO, File] :form_data
+    #   Put customer profile Request.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_use_case_for_model_access({
+    #     form_data: "data", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PutUseCaseForModelAccess AWS API Documentation
+    #
+    # @overload put_use_case_for_model_access(params = {})
+    # @param [Hash] params ({})
+    def put_use_case_for_model_access(params = {}, options = {})
+      req = build_request(:put_use_case_for_model_access, params)
+      req.send_request(options)
+    end
+
     # Registers an existing Amazon SageMaker endpoint with Amazon Bedrock
     # Marketplace, allowing it to be used with Amazon Bedrock APIs.
     #
@@ -4934,6 +5118,9 @@ module Aws::Bedrock
     #           output_enabled: false,
     #         },
     #       ],
+    #       tier_config: {
+    #         tier_name: "CLASSIC", # required, accepts CLASSIC, STANDARD
+    #       },
     #     },
     #     content_policy_config: {
     #       filters_config: [ # required
@@ -4949,6 +5136,9 @@ module Aws::Bedrock
     #           output_enabled: false,
     #         },
     #       ],
+    #       tier_config: {
+    #         tier_name: "CLASSIC", # required, accepts CLASSIC, STANDARD
+    #       },
     #     },
     #     word_policy_config: {
     #       words_config: [
@@ -5165,7 +5355,7 @@ module Aws::Bedrock
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

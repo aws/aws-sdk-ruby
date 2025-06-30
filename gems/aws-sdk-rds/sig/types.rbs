@@ -272,6 +272,8 @@ module Aws::RDS
       attr_accessor option_group_name: ::String
       attr_accessor target_custom_availability_zone: ::String
       attr_accessor copy_option_group: bool
+      attr_accessor snapshot_availability_zone: ::String
+      attr_accessor snapshot_target: ::String
       attr_accessor source_region: ::String
       SENSITIVE: []
     end
@@ -544,6 +546,7 @@ module Aws::RDS
       attr_accessor network_type: ::String
       attr_accessor storage_throughput: ::Integer
       attr_accessor enable_customer_owned_ip: bool
+      attr_accessor backup_target: ::String
       attr_accessor allocated_storage: ::Integer
       attr_accessor source_db_cluster_identifier: ::String
       attr_accessor dedicated_log_volume: bool
@@ -1564,6 +1567,7 @@ module Aws::RDS
       attr_accessor db_system_id: ::String
       attr_accessor dedicated_log_volume: bool
       attr_accessor multi_tenant: bool
+      attr_accessor snapshot_availability_zone: ::String
       SENSITIVE: []
     end
 

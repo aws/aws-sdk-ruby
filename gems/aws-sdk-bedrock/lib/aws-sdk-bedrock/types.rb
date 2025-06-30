@@ -23,6 +23,25 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # Information about the agreement availability
+    #
+    # @!attribute [rw] status
+    #   Status of the agreement.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   Error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/AgreementAvailability AWS API Documentation
+    #
+    class AgreementAvailability < Struct.new(
+      :status,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration details of an automated evaluation job. The
     # `EvaluationDatasetMetricConfig` object is used to specify the prompt
     # datasets, task type, and metric names.
@@ -452,6 +471,35 @@ module Aws::Bedrock
     #
     class CreateEvaluationJobResponse < Struct.new(
       :job_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] offer_token
+    #   An offer token encapsulates the information for an offer.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_id
+    #   Model Id of the model for the access request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateFoundationModelAgreementRequest AWS API Documentation
+    #
+    class CreateFoundationModelAgreementRequest < Struct.new(
+      :offer_token,
+      :model_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_id
+    #   Model Id of the model for the access request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateFoundationModelAgreementResponse AWS API Documentation
+    #
+    class CreateFoundationModelAgreementResponse < Struct.new(
+      :model_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1511,6 +1559,22 @@ module Aws::Bedrock
     #
     class DeleteCustomModelResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] model_id
+    #   Model Id of the model access to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteFoundationModelAgreementRequest AWS API Documentation
+    #
+    class DeleteFoundationModelAgreementRequest < Struct.new(
+      :model_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteFoundationModelAgreementResponse AWS API Documentation
+    #
+    class DeleteFoundationModelAgreementResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] guardrail_identifier
     #   The unique identifier of the guardrail. This can be an ID or the
     #   ARN.
@@ -1641,6 +1705,35 @@ module Aws::Bedrock
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeregisterMarketplaceModelEndpointResponse AWS API Documentation
     #
     class DeregisterMarketplaceModelEndpointResponse < Aws::EmptyStructure; end
+
+    # Dimensional price rate.
+    #
+    # @!attribute [rw] dimension
+    #   Dimension for the price rate.
+    #   @return [String]
+    #
+    # @!attribute [rw] price
+    #   Single-dimensional rate information.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Description of the price rate.
+    #   @return [String]
+    #
+    # @!attribute [rw] unit
+    #   Unit associated with the price.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DimensionalPriceRate AWS API Documentation
+    #
+    class DimensionalPriceRate < Struct.new(
+      :dimension,
+      :price,
+      :description,
+      :unit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Settings for distilling a foundation model into a smaller and more
     # efficient model.
@@ -2708,6 +2801,50 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # @!attribute [rw] model_id
+    #   The model Id of the foundation model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetFoundationModelAvailabilityRequest AWS API Documentation
+    #
+    class GetFoundationModelAvailabilityRequest < Struct.new(
+      :model_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_id
+    #   The model Id of the foundation model.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_availability
+    #   Agreement availability.
+    #   @return [Types::AgreementAvailability]
+    #
+    # @!attribute [rw] authorization_status
+    #   Authorization status.
+    #   @return [String]
+    #
+    # @!attribute [rw] entitlement_availability
+    #   Entitlement availability.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_availability
+    #   Region availability.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetFoundationModelAvailabilityResponse AWS API Documentation
+    #
+    class GetFoundationModelAvailabilityResponse < Struct.new(
+      :model_id,
+      :agreement_availability,
+      :authorization_status,
+      :entitlement_availability,
+      :region_availability)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] model_identifier
     #   The model identifier.
     #   @return [String]
@@ -3687,6 +3824,24 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetUseCaseForModelAccessRequest AWS API Documentation
+    #
+    class GetUseCaseForModelAccessRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] form_data
+    #   Get customer profile Response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetUseCaseForModelAccessResponse AWS API Documentation
+    #
+    class GetUseCaseForModelAccessResponse < Struct.new(
+      :form_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration details for the guardrail.
     #
     # @!attribute [rw] guardrail_id
@@ -3941,6 +4096,60 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # The tier that your guardrail uses for content filters.
+    #
+    # @!attribute [rw] tier_name
+    #   The tier that your guardrail uses for content filters. Valid values
+    #   include:
+    #
+    #   * `CLASSIC` tier – Provides established guardrails functionality
+    #     supporting English, French, and Spanish languages.
+    #
+    #   * `STANDARD` tier – Provides a more robust solution than the
+    #     `CLASSIC` tier and has more comprehensive language support. This
+    #     tier requires that your guardrail use [cross-Region inference][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GuardrailContentFiltersTier AWS API Documentation
+    #
+    class GuardrailContentFiltersTier < Struct.new(
+      :tier_name)
+      SENSITIVE = [:tier_name]
+      include Aws::Structure
+    end
+
+    # The tier that your guardrail uses for content filters. Consider using
+    # a tier that balances performance, accuracy, and compatibility with
+    # your existing generative AI workflows.
+    #
+    # @!attribute [rw] tier_name
+    #   The tier that your guardrail uses for content filters. Valid values
+    #   include:
+    #
+    #   * `CLASSIC` tier – Provides established guardrails functionality
+    #     supporting English, French, and Spanish languages.
+    #
+    #   * `STANDARD` tier – Provides a more robust solution than the
+    #     `CLASSIC` tier and has more comprehensive language support. This
+    #     tier requires that your guardrail use [cross-Region inference][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GuardrailContentFiltersTierConfig AWS API Documentation
+    #
+    class GuardrailContentFiltersTierConfig < Struct.new(
+      :tier_name)
+      SENSITIVE = [:tier_name]
+      include Aws::Structure
+    end
+
     # Contains details about how to handle harmful content.
     #
     # This data type is used in the following API operations:
@@ -3958,10 +4167,15 @@ module Aws::Bedrock
     #   apply to prompts and model responses.
     #   @return [Array<Types::GuardrailContentFilter>]
     #
+    # @!attribute [rw] tier
+    #   The tier that your guardrail uses for content filters.
+    #   @return [Types::GuardrailContentFiltersTier]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GuardrailContentPolicy AWS API Documentation
     #
     class GuardrailContentPolicy < Struct.new(
-      :filters)
+      :filters,
+      :tier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3973,10 +4187,15 @@ module Aws::Bedrock
     #   apply to prompts and model responses.
     #   @return [Array<Types::GuardrailContentFilterConfig>]
     #
+    # @!attribute [rw] tier_config
+    #   The tier that your guardrail uses for content filters.
+    #   @return [Types::GuardrailContentFiltersTierConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GuardrailContentPolicyConfig AWS API Documentation
     #
     class GuardrailContentPolicyConfig < Struct.new(
-      :filters_config)
+      :filters_config,
+      :tier_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4994,10 +5213,15 @@ module Aws::Bedrock
     #   A list of policies related to topics that the guardrail should deny.
     #   @return [Array<Types::GuardrailTopic>]
     #
+    # @!attribute [rw] tier
+    #   The tier that your guardrail uses for denied topic filters.
+    #   @return [Types::GuardrailTopicsTier]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GuardrailTopicPolicy AWS API Documentation
     #
     class GuardrailTopicPolicy < Struct.new(
-      :topics)
+      :topics,
+      :tier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5009,11 +5233,70 @@ module Aws::Bedrock
     #   A list of policies related to topics that the guardrail should deny.
     #   @return [Array<Types::GuardrailTopicConfig>]
     #
+    # @!attribute [rw] tier_config
+    #   The tier that your guardrail uses for denied topic filters.
+    #   @return [Types::GuardrailTopicsTierConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GuardrailTopicPolicyConfig AWS API Documentation
     #
     class GuardrailTopicPolicyConfig < Struct.new(
-      :topics_config)
+      :topics_config,
+      :tier_config)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The tier that your guardrail uses for denied topic filters.
+    #
+    # @!attribute [rw] tier_name
+    #   The tier that your guardrail uses for denied topic filters. Valid
+    #   values include:
+    #
+    #   * `CLASSIC` tier – Provides established guardrails functionality
+    #     supporting English, French, and Spanish languages.
+    #
+    #   * `STANDARD` tier – Provides a more robust solution than the
+    #     `CLASSIC` tier and has more comprehensive language support. This
+    #     tier requires that your guardrail use [cross-Region inference][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GuardrailTopicsTier AWS API Documentation
+    #
+    class GuardrailTopicsTier < Struct.new(
+      :tier_name)
+      SENSITIVE = [:tier_name]
+      include Aws::Structure
+    end
+
+    # The tier that your guardrail uses for denied topic filters. Consider
+    # using a tier that balances performance, accuracy, and compatibility
+    # with your existing generative AI workflows.
+    #
+    # @!attribute [rw] tier_name
+    #   The tier that your guardrail uses for denied topic filters. Valid
+    #   values include:
+    #
+    #   * `CLASSIC` tier – Provides established guardrails functionality
+    #     supporting English, French, and Spanish languages.
+    #
+    #   * `STANDARD` tier – Provides a more robust solution than the
+    #     `CLASSIC` tier and has more comprehensive language support. This
+    #     tier requires that your guardrail use [cross-Region inference][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GuardrailTopicsTierConfig AWS API Documentation
+    #
+    class GuardrailTopicsTierConfig < Struct.new(
+      :tier_name)
+      SENSITIVE = [:tier_name]
       include Aws::Structure
     end
 
@@ -5587,6 +5870,20 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # The legal term of the agreement.
+    #
+    # @!attribute [rw] url
+    #   URL to the legal term document.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/LegalTerm AWS API Documentation
+    #
+    class LegalTerm < Struct.new(
+      :url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] creation_time_before
     #   Return custom models created before the specified time.
     #   @return [Time]
@@ -5763,6 +6060,40 @@ module Aws::Bedrock
     class ListEvaluationJobsResponse < Struct.new(
       :next_token,
       :job_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_id
+    #   Model Id of the foundation model.
+    #   @return [String]
+    #
+    # @!attribute [rw] offer_type
+    #   Type of offer associated with the model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListFoundationModelAgreementOffersRequest AWS API Documentation
+    #
+    class ListFoundationModelAgreementOffersRequest < Struct.new(
+      :model_id,
+      :offer_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_id
+    #   Model Id of the foundation model.
+    #   @return [String]
+    #
+    # @!attribute [rw] offers
+    #   List of the offers associated with the specified model.
+    #   @return [Array<Types::Offer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListFoundationModelAgreementOffersResponse AWS API Documentation
+    #
+    class ListFoundationModelAgreementOffersResponse < Struct.new(
+      :model_id,
+      :offers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7161,6 +7492,30 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # An offer dictates usage terms for the model.
+    #
+    # @!attribute [rw] offer_id
+    #   Offer Id for a model offer.
+    #   @return [String]
+    #
+    # @!attribute [rw] offer_token
+    #   Offer token.
+    #   @return [String]
+    #
+    # @!attribute [rw] term_details
+    #   Details about the terms of the offer.
+    #   @return [Types::TermDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/Offer AWS API Documentation
+    #
+    class Offer < Struct.new(
+      :offer_id,
+      :offer_token,
+      :term_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration details for the model to process the prompt prior to
     # retrieval and response generation.
     #
@@ -7201,6 +7556,20 @@ module Aws::Bedrock
     #
     class PerformanceConfiguration < Struct.new(
       :latency)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the usage-based pricing term.
+    #
+    # @!attribute [rw] rate_card
+    #   Describes a usage price for each dimension.
+    #   @return [Array<Types::DimensionalPriceRate>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PricingTerm AWS API Documentation
+    #
+    class PricingTerm < Struct.new(
+      :rate_card)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7407,6 +7776,22 @@ module Aws::Bedrock
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PutModelInvocationLoggingConfigurationResponse AWS API Documentation
     #
     class PutModelInvocationLoggingConfigurationResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] form_data
+    #   Put customer profile Request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PutUseCaseForModelAccessRequest AWS API Documentation
+    #
+    class PutUseCaseForModelAccessRequest < Struct.new(
+      :form_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PutUseCaseForModelAccessResponse AWS API Documentation
+    #
+    class PutUseCaseForModelAccessResponse < Aws::EmptyStructure; end
 
     # The configuration details for transforming the prompt.
     #
@@ -8054,6 +8439,20 @@ module Aws::Bedrock
     #
     class StopModelInvocationJobResponse < Aws::EmptyStructure; end
 
+    # Describes a support term.
+    #
+    # @!attribute [rw] refund_policy_description
+    #   Describes the refund policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/SupportTerm AWS API Documentation
+    #
+    class SupportTerm < Struct.new(
+      :refund_policy_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Definition of the key/value pair for a tag.
     #
     # @!attribute [rw] key
@@ -8110,6 +8509,35 @@ module Aws::Bedrock
     class TeacherModelConfig < Struct.new(
       :teacher_model_identifier,
       :max_response_length_for_inference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the usage terms of an offer.
+    #
+    # @!attribute [rw] usage_based_pricing_term
+    #   Describes the usage-based pricing term.
+    #   @return [Types::PricingTerm]
+    #
+    # @!attribute [rw] legal_term
+    #   Describes the legal terms.
+    #   @return [Types::LegalTerm]
+    #
+    # @!attribute [rw] support_term
+    #   Describes the support terms.
+    #   @return [Types::SupportTerm]
+    #
+    # @!attribute [rw] validity_term
+    #   Describes the validity terms.
+    #   @return [Types::ValidityTerm]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/TermDetails AWS API Documentation
+    #
+    class TermDetails < Struct.new(
+      :usage_based_pricing_term,
+      :legal_term,
+      :support_term,
+      :validity_term)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8532,6 +8960,20 @@ module Aws::Bedrock
     #
     class ValidatorMetric < Struct.new(
       :validation_loss)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the validity terms.
+    #
+    # @!attribute [rw] agreement_duration
+    #   Describes the agreement duration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ValidityTerm AWS API Documentation
+    #
+    class ValidityTerm < Struct.new(
+      :agreement_duration)
       SENSITIVE = []
       include Aws::Structure
     end

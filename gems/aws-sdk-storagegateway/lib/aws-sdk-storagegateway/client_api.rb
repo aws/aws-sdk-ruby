@@ -228,12 +228,12 @@ module Aws::StorageGateway
     Hosts = Shapes::ListShape.new(name: 'Hosts')
     HourOfDay = Shapes::IntegerShape.new(name: 'HourOfDay')
     IPV4Address = Shapes::StringShape.new(name: 'IPV4Address')
-    IPV4AddressCIDR = Shapes::StringShape.new(name: 'IPV4AddressCIDR')
     Initiator = Shapes::StringShape.new(name: 'Initiator')
     Initiators = Shapes::ListShape.new(name: 'Initiators')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
     InvalidGatewayRequestException = Shapes::StructureShape.new(name: 'InvalidGatewayRequestException')
     IpAddressList = Shapes::ListShape.new(name: 'IpAddressList')
+    Ipv4OrIpv6AddressCIDR = Shapes::StringShape.new(name: 'Ipv4OrIpv6AddressCIDR')
     IqnName = Shapes::StringShape.new(name: 'IqnName')
     JoinDomainInput = Shapes::StructureShape.new(name: 'JoinDomainInput')
     JoinDomainOutput = Shapes::StructureShape.new(name: 'JoinDomainOutput')
@@ -1071,7 +1071,7 @@ module Aws::StorageGateway
 
     FileShareARNList.member = Shapes::ShapeRef.new(shape: FileShareARN)
 
-    FileShareClientList.member = Shapes::ShapeRef.new(shape: IPV4AddressCIDR)
+    FileShareClientList.member = Shapes::ShapeRef.new(shape: Ipv4OrIpv6AddressCIDR)
 
     FileShareInfo.add_member(:file_share_type, Shapes::ShapeRef.new(shape: FileShareType, location_name: "FileShareType"))
     FileShareInfo.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))

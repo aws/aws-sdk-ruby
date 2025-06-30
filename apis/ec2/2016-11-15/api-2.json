@@ -12065,6 +12065,7 @@
           "shape":"TagSpecificationList",
           "locationName":"TagSpecification"
         },
+        "SnapshotLocation":{"shape":"SnapshotLocationEnum"},
         "DryRun":{
           "shape":"Boolean",
           "locationName":"dryRun"
@@ -13124,6 +13125,7 @@
         "LocalGatewayId":{"shape":"LocalGatewayId"},
         "CarrierGatewayId":{"shape":"CarrierGatewayId"},
         "CoreNetworkArn":{"shape":"CoreNetworkArn"},
+        "OdbNetworkArn":{"shape":"OdbNetworkArn"},
         "DryRun":{
           "shape":"Boolean",
           "locationName":"dryRun"
@@ -23249,11 +23251,16 @@
           "shape":"String",
           "locationName":"outpostArn"
         },
+        "AvailabilityZone":{
+          "shape":"String",
+          "locationName":"availabilityZone"
+        },
         "Encrypted":{
           "shape":"Boolean",
           "locationName":"encrypted"
         },
-        "VolumeInitializationRate":{"shape":"Integer"}
+        "VolumeInitializationRate":{"shape":"Integer"},
+        "AvailabilityZoneId":{"shape":"String"}
       }
     },
     "EbsBlockDeviceResponse":{
@@ -39565,6 +39572,7 @@
         "locationName":"item"
       }
     },
+    "OdbNetworkArn":{"type":"string"},
     "OfferingClassType":{
       "type":"string",
       "enum":[
@@ -42123,6 +42131,7 @@
         "LocalGatewayId":{"shape":"LocalGatewayId"},
         "CarrierGatewayId":{"shape":"CarrierGatewayId"},
         "CoreNetworkArn":{"shape":"CoreNetworkArn"},
+        "OdbNetworkArn":{"shape":"OdbNetworkArn"},
         "DryRun":{
           "shape":"Boolean",
           "locationName":"dryRun"
@@ -43949,6 +43958,10 @@
         "CoreNetworkArn":{
           "shape":"CoreNetworkArn",
           "locationName":"coreNetworkArn"
+        },
+        "OdbNetworkArn":{
+          "shape":"OdbNetworkArn",
+          "locationName":"odbNetworkArn"
         }
       }
     },

@@ -31,6 +31,8 @@ module Aws::S3Control
       attr_accessor access_point_arn: ::String
       attr_accessor alias: ::String
       attr_accessor bucket_account_id: ::String
+      attr_accessor data_source_id: ::String
+      attr_accessor data_source_type: ::String
       SENSITIVE: []
     end
 
@@ -663,6 +665,8 @@ module Aws::S3Control
       attr_accessor access_point_arn: ::String
       attr_accessor endpoints: ::Hash[::String, ::String]
       attr_accessor bucket_account_id: ::String
+      attr_accessor data_source_id: ::String
+      attr_accessor data_source_type: ::String
       SENSITIVE: []
     end
 
@@ -1181,6 +1185,8 @@ module Aws::S3Control
       attr_accessor bucket: ::String
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
+      attr_accessor data_source_id: ::String
+      attr_accessor data_source_type: ::String
       SENSITIVE: []
     end
 

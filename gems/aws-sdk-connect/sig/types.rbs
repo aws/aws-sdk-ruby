@@ -911,7 +911,7 @@ module Aws::Connect
       attr_accessor initiation_method: ("INBOUND" | "OUTBOUND" | "TRANSFER" | "QUEUE_TRANSFER" | "CALLBACK" | "API" | "DISCONNECT" | "MONITOR" | "EXTERNAL_OUTBOUND" | "WEBRTC_API" | "AGENT_REPLY" | "FLOW")
       attr_accessor expiry_duration_in_minutes: ::Integer
       attr_accessor user_info: Types::UserInfo
-      attr_accessor initiate_as: ("CONNECTED_TO_USER")
+      attr_accessor initiate_as: ("CONNECTED_TO_USER" | "COMPLETED")
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor segment_attributes: ::Hash[::String, Types::SegmentAttributeValue]

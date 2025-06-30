@@ -497,6 +497,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#describe_auto_scaling_groups-instance_method
       def describe_auto_scaling_groups: (
                                           ?auto_scaling_group_names: Array[::String],
+                                          ?include_instances: bool,
                                           ?next_token: ::String,
                                           ?max_records: ::Integer,
                                           ?filters: Array[
@@ -1401,6 +1402,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#wait_until-instance_method
       def wait_until: (:group_exists waiter_name, 
                     ?auto_scaling_group_names: Array[::String],
+                    ?include_instances: bool,
                     ?next_token: ::String,
                     ?max_records: ::Integer,
                     ?filters: Array[
@@ -1413,6 +1415,7 @@ module Aws
                     | (:group_exists waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeAutoScalingGroupsResponseSuccess
                     | (:group_in_service waiter_name, 
                     ?auto_scaling_group_names: Array[::String],
+                    ?include_instances: bool,
                     ?next_token: ::String,
                     ?max_records: ::Integer,
                     ?filters: Array[
@@ -1425,6 +1428,7 @@ module Aws
                     | (:group_in_service waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeAutoScalingGroupsResponseSuccess
                     | (:group_not_exists waiter_name, 
                     ?auto_scaling_group_names: Array[::String],
+                    ?include_instances: bool,
                     ?next_token: ::String,
                     ?max_records: ::Integer,
                     ?filters: Array[

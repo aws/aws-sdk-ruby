@@ -889,6 +889,11 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class CompactionConfiguration
+      attr_accessor iceberg_configuration: Types::IcebergCompactionConfiguration
+      SENSITIVE: []
+    end
+
     class CompactionMetrics
       attr_accessor iceberg_metrics: Types::IcebergCompactionMetrics
       SENSITIVE: []
@@ -1330,6 +1335,15 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class CreateIcebergTableInput
+      attr_accessor location: ::String
+      attr_accessor schema: Types::IcebergSchema
+      attr_accessor partition_spec: Types::IcebergPartitionSpec
+      attr_accessor write_order: Types::IcebergSortOrder
+      attr_accessor properties: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class CreateIntegrationRequest
       attr_accessor integration_name: ::String
       attr_accessor source_arn: ::String
@@ -1577,6 +1591,7 @@ module Aws::Glue
     class CreateTableRequest
       attr_accessor catalog_id: ::String
       attr_accessor database_name: ::String
+      attr_accessor name: ::String
       attr_accessor table_input: Types::TableInput
       attr_accessor partition_indexes: ::Array[Types::PartitionIndex]
       attr_accessor transaction_id: ::String
@@ -1727,6 +1742,16 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class DataQualityAggregatedMetrics
+      attr_accessor total_rows_processed: ::Float
+      attr_accessor total_rows_passed: ::Float
+      attr_accessor total_rows_failed: ::Float
+      attr_accessor total_rules_processed: ::Float
+      attr_accessor total_rules_passed: ::Float
+      attr_accessor total_rules_failed: ::Float
+      SENSITIVE: []
+    end
+
     class DataQualityAnalyzerResult
       attr_accessor name: ::String
       attr_accessor description: ::String
@@ -1777,6 +1802,7 @@ module Aws::Glue
       attr_accessor rule_results: ::Array[Types::DataQualityRuleResult]
       attr_accessor analyzer_results: ::Array[Types::DataQualityAnalyzerResult]
       attr_accessor observations: ::Array[Types::DataQualityObservation]
+      attr_accessor aggregated_metrics: Types::DataQualityAggregatedMetrics
       SENSITIVE: []
     end
 
@@ -1820,7 +1846,8 @@ module Aws::Glue
       attr_accessor result: ("PASS" | "FAIL" | "ERROR")
       attr_accessor evaluated_metrics: ::Hash[::String, ::Float]
       attr_accessor evaluated_rule: ::String
-      SENSITIVE: [:description, :evaluation_message, :evaluated_metrics, :evaluated_rule]
+      attr_accessor rule_metrics: ::Hash[::String, ::Float]
+      SENSITIVE: [:description, :evaluation_message, :evaluated_metrics, :evaluated_rule, :rule_metrics]
     end
 
     class DataQualityRulesetEvaluationRunDescription
@@ -2555,12 +2582,14 @@ module Aws::Glue
     class FederatedCatalog
       attr_accessor identifier: ::String
       attr_accessor connection_name: ::String
+      attr_accessor connection_type: ::String
       SENSITIVE: []
     end
 
     class FederatedDatabase
       attr_accessor identifier: ::String
       attr_accessor connection_name: ::String
+      attr_accessor connection_type: ::String
       SENSITIVE: []
     end
 
@@ -2574,6 +2603,7 @@ module Aws::Glue
       attr_accessor identifier: ::String
       attr_accessor database_identifier: ::String
       attr_accessor connection_name: ::String
+      attr_accessor connection_type: ::String
       SENSITIVE: []
     end
 
@@ -2959,6 +2989,7 @@ module Aws::Glue
       attr_accessor rule_results: ::Array[Types::DataQualityRuleResult]
       attr_accessor analyzer_results: ::Array[Types::DataQualityAnalyzerResult]
       attr_accessor observations: ::Array[Types::DataQualityObservation]
+      attr_accessor aggregated_metrics: Types::DataQualityAggregatedMetrics
       SENSITIVE: []
     end
 
@@ -3834,6 +3865,11 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class IcebergCompactionConfiguration
+      attr_accessor strategy: ("binpack" | "sort" | "z-order")
+      SENSITIVE: []
+    end
+
     class IcebergCompactionMetrics
       attr_accessor number_of_bytes_compacted: ::Integer
       attr_accessor number_of_files_compacted: ::Integer
@@ -3846,6 +3882,7 @@ module Aws::Glue
     class IcebergInput
       attr_accessor metadata_operation: ("CREATE")
       attr_accessor version: ::String
+      attr_accessor create_iceberg_table_input: Types::CreateIcebergTableInput
       SENSITIVE: []
     end
 
@@ -3863,6 +3900,20 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class IcebergPartitionField
+      attr_accessor source_id: ::Integer
+      attr_accessor transform: ::String
+      attr_accessor name: ::String
+      attr_accessor field_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class IcebergPartitionSpec
+      attr_accessor fields: ::Array[Types::IcebergPartitionField]
+      attr_accessor spec_id: ::Integer
+      SENSITIVE: []
+    end
+
     class IcebergRetentionConfiguration
       attr_accessor snapshot_retention_period_in_days: ::Integer
       attr_accessor number_of_snapshots_to_retain: ::Integer
@@ -3877,6 +3928,46 @@ module Aws::Glue
       attr_accessor dpu_hours: ::Float
       attr_accessor number_of_dpus: ::Integer
       attr_accessor job_duration_in_hour: ::Float
+      SENSITIVE: []
+    end
+
+    class IcebergSchema
+      attr_accessor schema_id: ::Integer
+      attr_accessor identifier_field_ids: ::Array[::Integer]
+      attr_accessor type: ("struct")
+      attr_accessor fields: ::Array[Types::IcebergStructField]
+      SENSITIVE: []
+    end
+
+    class IcebergSortField
+      attr_accessor source_id: ::Integer
+      attr_accessor transform: ::String
+      attr_accessor direction: ("asc" | "desc")
+      attr_accessor null_order: ("nulls-first" | "nulls-last")
+      SENSITIVE: []
+    end
+
+    class IcebergSortOrder
+      attr_accessor order_id: ::Integer
+      attr_accessor fields: ::Array[Types::IcebergSortField]
+      SENSITIVE: []
+    end
+
+    class IcebergStructField
+      attr_accessor id: ::Integer
+      attr_accessor name: ::String
+      attr_accessor type: untyped
+      attr_accessor required: bool
+      attr_accessor doc: ::String
+      SENSITIVE: []
+    end
+
+    class IcebergTableUpdate
+      attr_accessor schema: Types::IcebergSchema
+      attr_accessor partition_spec: Types::IcebergPartitionSpec
+      attr_accessor sort_order: Types::IcebergSortOrder
+      attr_accessor location: ::String
+      attr_accessor properties: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -6288,6 +6379,7 @@ module Aws::Glue
       attr_accessor role_arn: ::String
       attr_accessor enabled: bool
       attr_accessor vpc_configuration: Types::TableOptimizerVpcConfiguration
+      attr_accessor compaction_configuration: Types::CompactionConfiguration
       attr_accessor retention_configuration: Types::RetentionConfiguration
       attr_accessor orphan_file_deletion_configuration: Types::OrphanFileDeletionConfiguration
       SENSITIVE: []
@@ -6300,6 +6392,7 @@ module Aws::Glue
       attr_accessor metrics: Types::RunMetrics
       attr_accessor error: ::String
       attr_accessor compaction_metrics: Types::CompactionMetrics
+      attr_accessor compaction_strategy: ("binpack" | "sort" | "z-order")
       attr_accessor retention_metrics: Types::RetentionMetrics
       attr_accessor orphan_file_deletion_metrics: Types::OrphanFileDeletionMetrics
       SENSITIVE: []
@@ -6721,6 +6814,16 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class UpdateIcebergInput
+      attr_accessor update_iceberg_table_input: Types::UpdateIcebergTableInput
+      SENSITIVE: []
+    end
+
+    class UpdateIcebergTableInput
+      attr_accessor updates: ::Array[Types::IcebergTableUpdate]
+      SENSITIVE: []
+    end
+
     class UpdateIntegrationResourcePropertyRequest
       attr_accessor resource_arn: ::String
       attr_accessor source_processing_properties: Types::SourceProcessingProperties
@@ -6801,6 +6904,11 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class UpdateOpenTableFormatInput
+      attr_accessor update_iceberg_input: Types::UpdateIcebergInput
+      SENSITIVE: []
+    end
+
     class UpdatePartitionRequest
       attr_accessor catalog_id: ::String
       attr_accessor database_name: ::String
@@ -6873,12 +6981,14 @@ module Aws::Glue
     class UpdateTableRequest
       attr_accessor catalog_id: ::String
       attr_accessor database_name: ::String
+      attr_accessor name: ::String
       attr_accessor table_input: Types::TableInput
       attr_accessor skip_archive: bool
       attr_accessor transaction_id: ::String
       attr_accessor version_id: ::String
       attr_accessor view_update_action: ("ADD" | "REPLACE" | "ADD_OR_REPLACE" | "DROP")
       attr_accessor force: bool
+      attr_accessor update_open_table_format_input: Types::UpdateOpenTableFormatInput
       SENSITIVE: []
     end
 

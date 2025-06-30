@@ -17,6 +17,7 @@ Gem::Specification.new do |spec|
   # service gems
   spec.add_dependency('aws-sdk-acm', '~> 1')
   spec.add_dependency('aws-sdk-acmpca', '~> 1')
+  spec.add_dependency('aws-sdk-aiops', '~> 1')
   spec.add_dependency('aws-sdk-apigateway', '~> 1')
   spec.add_dependency('aws-sdk-arczonalshift', '~> 1')
   spec.add_dependency('aws-sdk-accessanalyzer', '~> 1')
@@ -222,6 +223,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-kendra', '~> 1')
   spec.add_dependency('aws-sdk-kendraranking', '~> 1')
   spec.add_dependency('aws-sdk-keyspaces', '~> 1')
+  spec.add_dependency('aws-sdk-keyspacesstreams', '~> 1')
   spec.add_dependency('aws-sdk-kinesis', '~> 1')
   spec.add_dependency('aws-sdk-kinesisanalytics', '~> 1')
   spec.add_dependency('aws-sdk-kinesisanalyticsv2', '~> 1')
@@ -418,6 +420,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-workspaces', '~> 1')
   spec.add_dependency('aws-sdk-workspacesthinclient', '~> 1')
   spec.add_dependency('aws-sdk-workspacesweb', '~> 1')
+  spec.add_dependency('aws-sdk-workspacesinstances', '~> 1')
   spec.add_dependency('aws-sdk-xray', '~> 1')
   # end service gems
 

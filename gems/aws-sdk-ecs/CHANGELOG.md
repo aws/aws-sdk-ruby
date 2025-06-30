@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.196.0 (2025-06-25)
+------------------
+
+* Feature - Updates for change to Amazon ECS default log driver mode from blocking to non-blocking
+
+1.195.0 (2025-06-20)
+------------------
+
+* Feature - Add ECS support for Windows Server 2025
+
 1.194.0 (2025-06-12)
 ------------------
 

@@ -17,11 +17,15 @@ module Aws::Bedrock
     AcceptEula = Shapes::BooleanShape.new(name: 'AcceptEula')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
+    AcknowledgementFormDataBody = Shapes::BlobShape.new(name: 'AcknowledgementFormDataBody')
     AdditionalModelRequestFields = Shapes::MapShape.new(name: 'AdditionalModelRequestFields')
     AdditionalModelRequestFieldsKey = Shapes::StringShape.new(name: 'AdditionalModelRequestFieldsKey')
     AdditionalModelRequestFieldsValue = Shapes::DocumentShape.new(name: 'AdditionalModelRequestFieldsValue', document: true)
+    AgreementAvailability = Shapes::StructureShape.new(name: 'AgreementAvailability')
+    AgreementStatus = Shapes::StringShape.new(name: 'AgreementStatus')
     ApplicationType = Shapes::StringShape.new(name: 'ApplicationType')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    AuthorizationStatus = Shapes::StringShape.new(name: 'AuthorizationStatus')
     AutomatedEvaluationConfig = Shapes::StructureShape.new(name: 'AutomatedEvaluationConfig')
     AutomatedEvaluationCustomMetricConfig = Shapes::StructureShape.new(name: 'AutomatedEvaluationCustomMetricConfig')
     AutomatedEvaluationCustomMetricSource = Shapes::UnionShape.new(name: 'AutomatedEvaluationCustomMetricSource')
@@ -50,6 +54,8 @@ module Aws::Bedrock
     CreateCustomModelResponse = Shapes::StructureShape.new(name: 'CreateCustomModelResponse')
     CreateEvaluationJobRequest = Shapes::StructureShape.new(name: 'CreateEvaluationJobRequest')
     CreateEvaluationJobResponse = Shapes::StructureShape.new(name: 'CreateEvaluationJobResponse')
+    CreateFoundationModelAgreementRequest = Shapes::StructureShape.new(name: 'CreateFoundationModelAgreementRequest')
+    CreateFoundationModelAgreementResponse = Shapes::StructureShape.new(name: 'CreateFoundationModelAgreementResponse')
     CreateGuardrailRequest = Shapes::StructureShape.new(name: 'CreateGuardrailRequest')
     CreateGuardrailResponse = Shapes::StructureShape.new(name: 'CreateGuardrailResponse')
     CreateGuardrailVersionRequest = Shapes::StructureShape.new(name: 'CreateGuardrailVersionRequest')
@@ -86,6 +92,8 @@ module Aws::Bedrock
     DataProcessingDetails = Shapes::StructureShape.new(name: 'DataProcessingDetails')
     DeleteCustomModelRequest = Shapes::StructureShape.new(name: 'DeleteCustomModelRequest')
     DeleteCustomModelResponse = Shapes::StructureShape.new(name: 'DeleteCustomModelResponse')
+    DeleteFoundationModelAgreementRequest = Shapes::StructureShape.new(name: 'DeleteFoundationModelAgreementRequest')
+    DeleteFoundationModelAgreementResponse = Shapes::StructureShape.new(name: 'DeleteFoundationModelAgreementResponse')
     DeleteGuardrailRequest = Shapes::StructureShape.new(name: 'DeleteGuardrailRequest')
     DeleteGuardrailResponse = Shapes::StructureShape.new(name: 'DeleteGuardrailResponse')
     DeleteImportedModelRequest = Shapes::StructureShape.new(name: 'DeleteImportedModelRequest')
@@ -102,9 +110,11 @@ module Aws::Bedrock
     DeleteProvisionedModelThroughputResponse = Shapes::StructureShape.new(name: 'DeleteProvisionedModelThroughputResponse')
     DeregisterMarketplaceModelEndpointRequest = Shapes::StructureShape.new(name: 'DeregisterMarketplaceModelEndpointRequest')
     DeregisterMarketplaceModelEndpointResponse = Shapes::StructureShape.new(name: 'DeregisterMarketplaceModelEndpointResponse')
+    DimensionalPriceRate = Shapes::StructureShape.new(name: 'DimensionalPriceRate')
     DistillationConfig = Shapes::StructureShape.new(name: 'DistillationConfig')
     EndpointConfig = Shapes::UnionShape.new(name: 'EndpointConfig')
     EndpointName = Shapes::StringShape.new(name: 'EndpointName')
+    EntitlementAvailability = Shapes::StringShape.new(name: 'EntitlementAvailability')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ErrorMessages = Shapes::ListShape.new(name: 'ErrorMessages')
     EvaluationBedrockKnowledgeBaseIdentifiers = Shapes::ListShape.new(name: 'EvaluationBedrockKnowledgeBaseIdentifiers')
@@ -172,6 +182,8 @@ module Aws::Bedrock
     GetCustomModelResponse = Shapes::StructureShape.new(name: 'GetCustomModelResponse')
     GetEvaluationJobRequest = Shapes::StructureShape.new(name: 'GetEvaluationJobRequest')
     GetEvaluationJobResponse = Shapes::StructureShape.new(name: 'GetEvaluationJobResponse')
+    GetFoundationModelAvailabilityRequest = Shapes::StructureShape.new(name: 'GetFoundationModelAvailabilityRequest')
+    GetFoundationModelAvailabilityResponse = Shapes::StructureShape.new(name: 'GetFoundationModelAvailabilityResponse')
     GetFoundationModelRequest = Shapes::StructureShape.new(name: 'GetFoundationModelRequest')
     GetFoundationModelResponse = Shapes::StructureShape.new(name: 'GetFoundationModelResponse')
     GetGuardrailRequest = Shapes::StructureShape.new(name: 'GetGuardrailRequest')
@@ -196,6 +208,8 @@ module Aws::Bedrock
     GetPromptRouterResponse = Shapes::StructureShape.new(name: 'GetPromptRouterResponse')
     GetProvisionedModelThroughputRequest = Shapes::StructureShape.new(name: 'GetProvisionedModelThroughputRequest')
     GetProvisionedModelThroughputResponse = Shapes::StructureShape.new(name: 'GetProvisionedModelThroughputResponse')
+    GetUseCaseForModelAccessRequest = Shapes::StructureShape.new(name: 'GetUseCaseForModelAccessRequest')
+    GetUseCaseForModelAccessResponse = Shapes::StructureShape.new(name: 'GetUseCaseForModelAccessResponse')
     GuardrailArn = Shapes::StringShape.new(name: 'GuardrailArn')
     GuardrailBlockedMessaging = Shapes::StringShape.new(name: 'GuardrailBlockedMessaging')
     GuardrailConfiguration = Shapes::StructureShape.new(name: 'GuardrailConfiguration')
@@ -207,6 +221,9 @@ module Aws::Bedrock
     GuardrailContentFilterType = Shapes::StringShape.new(name: 'GuardrailContentFilterType')
     GuardrailContentFilters = Shapes::ListShape.new(name: 'GuardrailContentFilters')
     GuardrailContentFiltersConfig = Shapes::ListShape.new(name: 'GuardrailContentFiltersConfig')
+    GuardrailContentFiltersTier = Shapes::StructureShape.new(name: 'GuardrailContentFiltersTier')
+    GuardrailContentFiltersTierConfig = Shapes::StructureShape.new(name: 'GuardrailContentFiltersTierConfig')
+    GuardrailContentFiltersTierName = Shapes::StringShape.new(name: 'GuardrailContentFiltersTierName')
     GuardrailContentPolicy = Shapes::StructureShape.new(name: 'GuardrailContentPolicy')
     GuardrailContentPolicyConfig = Shapes::StructureShape.new(name: 'GuardrailContentPolicyConfig')
     GuardrailContextualGroundingAction = Shapes::StringShape.new(name: 'GuardrailContextualGroundingAction')
@@ -275,6 +292,9 @@ module Aws::Bedrock
     GuardrailTopicType = Shapes::StringShape.new(name: 'GuardrailTopicType')
     GuardrailTopics = Shapes::ListShape.new(name: 'GuardrailTopics')
     GuardrailTopicsConfig = Shapes::ListShape.new(name: 'GuardrailTopicsConfig')
+    GuardrailTopicsTier = Shapes::StructureShape.new(name: 'GuardrailTopicsTier')
+    GuardrailTopicsTierConfig = Shapes::StructureShape.new(name: 'GuardrailTopicsTierConfig')
+    GuardrailTopicsTierName = Shapes::StringShape.new(name: 'GuardrailTopicsTierName')
     GuardrailVersion = Shapes::StringShape.new(name: 'GuardrailVersion')
     GuardrailWord = Shapes::StructureShape.new(name: 'GuardrailWord')
     GuardrailWordAction = Shapes::StringShape.new(name: 'GuardrailWordAction')
@@ -331,10 +351,13 @@ module Aws::Bedrock
     KnowledgeBaseRetrieveAndGenerateConfiguration = Shapes::StructureShape.new(name: 'KnowledgeBaseRetrieveAndGenerateConfiguration')
     KnowledgeBaseVectorSearchConfiguration = Shapes::StructureShape.new(name: 'KnowledgeBaseVectorSearchConfiguration')
     KnowledgeBaseVectorSearchConfigurationNumberOfResultsInteger = Shapes::IntegerShape.new(name: 'KnowledgeBaseVectorSearchConfigurationNumberOfResultsInteger')
+    LegalTerm = Shapes::StructureShape.new(name: 'LegalTerm')
     ListCustomModelsRequest = Shapes::StructureShape.new(name: 'ListCustomModelsRequest')
     ListCustomModelsResponse = Shapes::StructureShape.new(name: 'ListCustomModelsResponse')
     ListEvaluationJobsRequest = Shapes::StructureShape.new(name: 'ListEvaluationJobsRequest')
     ListEvaluationJobsResponse = Shapes::StructureShape.new(name: 'ListEvaluationJobsResponse')
+    ListFoundationModelAgreementOffersRequest = Shapes::StructureShape.new(name: 'ListFoundationModelAgreementOffersRequest')
+    ListFoundationModelAgreementOffersResponse = Shapes::StructureShape.new(name: 'ListFoundationModelAgreementOffersResponse')
     ListFoundationModelsRequest = Shapes::StructureShape.new(name: 'ListFoundationModelsRequest')
     ListFoundationModelsResponse = Shapes::StructureShape.new(name: 'ListFoundationModelsResponse')
     ListGuardrailsRequest = Shapes::StructureShape.new(name: 'ListGuardrailsRequest')
@@ -409,12 +432,18 @@ module Aws::Bedrock
     ModelSourceIdentifier = Shapes::StringShape.new(name: 'ModelSourceIdentifier')
     ModelStatus = Shapes::StringShape.new(name: 'ModelStatus')
     NonBlankString = Shapes::StringShape.new(name: 'NonBlankString')
+    Offer = Shapes::StructureShape.new(name: 'Offer')
+    OfferId = Shapes::StringShape.new(name: 'OfferId')
+    OfferToken = Shapes::StringShape.new(name: 'OfferToken')
+    OfferType = Shapes::StringShape.new(name: 'OfferType')
+    Offers = Shapes::ListShape.new(name: 'Offers')
     OrchestrationConfiguration = Shapes::StructureShape.new(name: 'OrchestrationConfiguration')
     OutputDataConfig = Shapes::StructureShape.new(name: 'OutputDataConfig')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PerformanceConfigLatency = Shapes::StringShape.new(name: 'PerformanceConfigLatency')
     PerformanceConfiguration = Shapes::StructureShape.new(name: 'PerformanceConfiguration')
     PositiveInteger = Shapes::IntegerShape.new(name: 'PositiveInteger')
+    PricingTerm = Shapes::StructureShape.new(name: 'PricingTerm')
     PromptRouterArn = Shapes::StringShape.new(name: 'PromptRouterArn')
     PromptRouterDescription = Shapes::StringShape.new(name: 'PromptRouterDescription')
     PromptRouterName = Shapes::StringShape.new(name: 'PromptRouterName')
@@ -435,17 +464,21 @@ module Aws::Bedrock
     ProvisionedModelSummary = Shapes::StructureShape.new(name: 'ProvisionedModelSummary')
     PutModelInvocationLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'PutModelInvocationLoggingConfigurationRequest')
     PutModelInvocationLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'PutModelInvocationLoggingConfigurationResponse')
+    PutUseCaseForModelAccessRequest = Shapes::StructureShape.new(name: 'PutUseCaseForModelAccessRequest')
+    PutUseCaseForModelAccessResponse = Shapes::StructureShape.new(name: 'PutUseCaseForModelAccessResponse')
     QueryTransformationConfiguration = Shapes::StructureShape.new(name: 'QueryTransformationConfiguration')
     QueryTransformationType = Shapes::StringShape.new(name: 'QueryTransformationType')
     RAGConfig = Shapes::UnionShape.new(name: 'RAGConfig')
     RAGStopSequences = Shapes::ListShape.new(name: 'RAGStopSequences')
     RAGStopSequencesMemberString = Shapes::StringShape.new(name: 'RAGStopSequencesMemberString')
     RagConfigs = Shapes::ListShape.new(name: 'RagConfigs')
+    RateCard = Shapes::ListShape.new(name: 'RateCard')
     RatingScale = Shapes::ListShape.new(name: 'RatingScale')
     RatingScaleItem = Shapes::StructureShape.new(name: 'RatingScaleItem')
     RatingScaleItemDefinition = Shapes::StringShape.new(name: 'RatingScaleItemDefinition')
     RatingScaleItemValue = Shapes::UnionShape.new(name: 'RatingScaleItemValue')
     RatingScaleItemValueStringValueString = Shapes::StringShape.new(name: 'RatingScaleItemValueStringValueString')
+    RegionAvailability = Shapes::StringShape.new(name: 'RegionAvailability')
     RegisterMarketplaceModelEndpointRequest = Shapes::StructureShape.new(name: 'RegisterMarketplaceModelEndpointRequest')
     RegisterMarketplaceModelEndpointResponse = Shapes::StructureShape.new(name: 'RegisterMarketplaceModelEndpointResponse')
     RequestMetadataBaseFilters = Shapes::StructureShape.new(name: 'RequestMetadataBaseFilters')
@@ -490,6 +523,7 @@ module Aws::Bedrock
     String = Shapes::StringShape.new(name: 'String')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
+    SupportTerm = Shapes::StructureShape.new(name: 'SupportTerm')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -501,6 +535,7 @@ module Aws::Bedrock
     TeacherModelConfig = Shapes::StructureShape.new(name: 'TeacherModelConfig')
     TeacherModelIdentifier = Shapes::StringShape.new(name: 'TeacherModelIdentifier')
     Temperature = Shapes::FloatShape.new(name: 'Temperature')
+    TermDetails = Shapes::StructureShape.new(name: 'TermDetails')
     TextInferenceConfig = Shapes::StructureShape.new(name: 'TextInferenceConfig')
     TextPromptTemplate = Shapes::StringShape.new(name: 'TextPromptTemplate')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
@@ -526,6 +561,7 @@ module Aws::Bedrock
     Validator = Shapes::StructureShape.new(name: 'Validator')
     ValidatorMetric = Shapes::StructureShape.new(name: 'ValidatorMetric')
     Validators = Shapes::ListShape.new(name: 'Validators')
+    ValidityTerm = Shapes::StructureShape.new(name: 'ValidityTerm')
     VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
     kBS3Uri = Shapes::StringShape.new(name: 'kBS3Uri')
 
@@ -534,6 +570,10 @@ module Aws::Bedrock
 
     AdditionalModelRequestFields.key = Shapes::ShapeRef.new(shape: AdditionalModelRequestFieldsKey)
     AdditionalModelRequestFields.value = Shapes::ShapeRef.new(shape: AdditionalModelRequestFieldsValue)
+
+    AgreementAvailability.add_member(:status, Shapes::ShapeRef.new(shape: AgreementStatus, required: true, location_name: "status"))
+    AgreementAvailability.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
+    AgreementAvailability.struct_class = Types::AgreementAvailability
 
     AutomatedEvaluationConfig.add_member(:dataset_metric_configs, Shapes::ShapeRef.new(shape: EvaluationDatasetMetricConfigs, required: true, location_name: "datasetMetricConfigs"))
     AutomatedEvaluationConfig.add_member(:evaluator_model_config, Shapes::ShapeRef.new(shape: EvaluatorModelConfig, location_name: "evaluatorModelConfig"))
@@ -615,6 +655,13 @@ module Aws::Bedrock
 
     CreateEvaluationJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: EvaluationJobArn, required: true, location_name: "jobArn"))
     CreateEvaluationJobResponse.struct_class = Types::CreateEvaluationJobResponse
+
+    CreateFoundationModelAgreementRequest.add_member(:offer_token, Shapes::ShapeRef.new(shape: OfferToken, required: true, location_name: "offerToken"))
+    CreateFoundationModelAgreementRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: BedrockModelId, required: true, location_name: "modelId"))
+    CreateFoundationModelAgreementRequest.struct_class = Types::CreateFoundationModelAgreementRequest
+
+    CreateFoundationModelAgreementResponse.add_member(:model_id, Shapes::ShapeRef.new(shape: BedrockModelId, required: true, location_name: "modelId"))
+    CreateFoundationModelAgreementResponse.struct_class = Types::CreateFoundationModelAgreementResponse
 
     CreateGuardrailRequest.add_member(:name, Shapes::ShapeRef.new(shape: GuardrailName, required: true, location_name: "name"))
     CreateGuardrailRequest.add_member(:description, Shapes::ShapeRef.new(shape: GuardrailDescription, location_name: "description"))
@@ -794,6 +841,11 @@ module Aws::Bedrock
 
     DeleteCustomModelResponse.struct_class = Types::DeleteCustomModelResponse
 
+    DeleteFoundationModelAgreementRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: BedrockModelId, required: true, location_name: "modelId"))
+    DeleteFoundationModelAgreementRequest.struct_class = Types::DeleteFoundationModelAgreementRequest
+
+    DeleteFoundationModelAgreementResponse.struct_class = Types::DeleteFoundationModelAgreementResponse
+
     DeleteGuardrailRequest.add_member(:guardrail_identifier, Shapes::ShapeRef.new(shape: GuardrailIdentifier, required: true, location: "uri", location_name: "guardrailIdentifier"))
     DeleteGuardrailRequest.add_member(:guardrail_version, Shapes::ShapeRef.new(shape: GuardrailNumericalVersion, location: "querystring", location_name: "guardrailVersion"))
     DeleteGuardrailRequest.struct_class = Types::DeleteGuardrailRequest
@@ -833,6 +885,12 @@ module Aws::Bedrock
     DeregisterMarketplaceModelEndpointRequest.struct_class = Types::DeregisterMarketplaceModelEndpointRequest
 
     DeregisterMarketplaceModelEndpointResponse.struct_class = Types::DeregisterMarketplaceModelEndpointResponse
+
+    DimensionalPriceRate.add_member(:dimension, Shapes::ShapeRef.new(shape: String, location_name: "dimension"))
+    DimensionalPriceRate.add_member(:price, Shapes::ShapeRef.new(shape: String, location_name: "price"))
+    DimensionalPriceRate.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    DimensionalPriceRate.add_member(:unit, Shapes::ShapeRef.new(shape: String, location_name: "unit"))
+    DimensionalPriceRate.struct_class = Types::DimensionalPriceRate
 
     DistillationConfig.add_member(:teacher_model_config, Shapes::ShapeRef.new(shape: TeacherModelConfig, required: true, location_name: "teacherModelConfig"))
     DistillationConfig.struct_class = Types::DistillationConfig
@@ -1061,6 +1119,16 @@ module Aws::Bedrock
     GetEvaluationJobResponse.add_member(:failure_messages, Shapes::ShapeRef.new(shape: ErrorMessages, location_name: "failureMessages"))
     GetEvaluationJobResponse.struct_class = Types::GetEvaluationJobResponse
 
+    GetFoundationModelAvailabilityRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: BedrockModelId, required: true, location: "uri", location_name: "modelId"))
+    GetFoundationModelAvailabilityRequest.struct_class = Types::GetFoundationModelAvailabilityRequest
+
+    GetFoundationModelAvailabilityResponse.add_member(:model_id, Shapes::ShapeRef.new(shape: BedrockModelId, required: true, location_name: "modelId"))
+    GetFoundationModelAvailabilityResponse.add_member(:agreement_availability, Shapes::ShapeRef.new(shape: AgreementAvailability, required: true, location_name: "agreementAvailability"))
+    GetFoundationModelAvailabilityResponse.add_member(:authorization_status, Shapes::ShapeRef.new(shape: AuthorizationStatus, required: true, location_name: "authorizationStatus"))
+    GetFoundationModelAvailabilityResponse.add_member(:entitlement_availability, Shapes::ShapeRef.new(shape: EntitlementAvailability, required: true, location_name: "entitlementAvailability"))
+    GetFoundationModelAvailabilityResponse.add_member(:region_availability, Shapes::ShapeRef.new(shape: RegionAvailability, required: true, location_name: "regionAvailability"))
+    GetFoundationModelAvailabilityResponse.struct_class = Types::GetFoundationModelAvailabilityResponse
+
     GetFoundationModelRequest.add_member(:model_identifier, Shapes::ShapeRef.new(shape: ModelIdentifier, required: true, location: "uri", location_name: "modelIdentifier"))
     GetFoundationModelRequest.struct_class = Types::GetFoundationModelRequest
 
@@ -1247,6 +1315,11 @@ module Aws::Bedrock
     GetProvisionedModelThroughputResponse.add_member(:commitment_expiration_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "commitmentExpirationTime"))
     GetProvisionedModelThroughputResponse.struct_class = Types::GetProvisionedModelThroughputResponse
 
+    GetUseCaseForModelAccessRequest.struct_class = Types::GetUseCaseForModelAccessRequest
+
+    GetUseCaseForModelAccessResponse.add_member(:form_data, Shapes::ShapeRef.new(shape: AcknowledgementFormDataBody, required: true, location_name: "formData"))
+    GetUseCaseForModelAccessResponse.struct_class = Types::GetUseCaseForModelAccessResponse
+
     GuardrailConfiguration.add_member(:guardrail_id, Shapes::ShapeRef.new(shape: GuardrailConfigurationGuardrailIdString, required: true, location_name: "guardrailId"))
     GuardrailConfiguration.add_member(:guardrail_version, Shapes::ShapeRef.new(shape: GuardrailConfigurationGuardrailVersionString, required: true, location_name: "guardrailVersion"))
     GuardrailConfiguration.struct_class = Types::GuardrailConfiguration
@@ -1277,10 +1350,18 @@ module Aws::Bedrock
 
     GuardrailContentFiltersConfig.member = Shapes::ShapeRef.new(shape: GuardrailContentFilterConfig)
 
+    GuardrailContentFiltersTier.add_member(:tier_name, Shapes::ShapeRef.new(shape: GuardrailContentFiltersTierName, required: true, location_name: "tierName"))
+    GuardrailContentFiltersTier.struct_class = Types::GuardrailContentFiltersTier
+
+    GuardrailContentFiltersTierConfig.add_member(:tier_name, Shapes::ShapeRef.new(shape: GuardrailContentFiltersTierName, required: true, location_name: "tierName"))
+    GuardrailContentFiltersTierConfig.struct_class = Types::GuardrailContentFiltersTierConfig
+
     GuardrailContentPolicy.add_member(:filters, Shapes::ShapeRef.new(shape: GuardrailContentFilters, location_name: "filters"))
+    GuardrailContentPolicy.add_member(:tier, Shapes::ShapeRef.new(shape: GuardrailContentFiltersTier, location_name: "tier"))
     GuardrailContentPolicy.struct_class = Types::GuardrailContentPolicy
 
     GuardrailContentPolicyConfig.add_member(:filters_config, Shapes::ShapeRef.new(shape: GuardrailContentFiltersConfig, required: true, location_name: "filtersConfig"))
+    GuardrailContentPolicyConfig.add_member(:tier_config, Shapes::ShapeRef.new(shape: GuardrailContentFiltersTierConfig, location_name: "tierConfig"))
     GuardrailContentPolicyConfig.struct_class = Types::GuardrailContentPolicyConfig
 
     GuardrailContextualGroundingFilter.add_member(:type, Shapes::ShapeRef.new(shape: GuardrailContextualGroundingFilterType, required: true, location_name: "type"))
@@ -1424,14 +1505,22 @@ module Aws::Bedrock
     GuardrailTopicExamples.member = Shapes::ShapeRef.new(shape: GuardrailTopicExample)
 
     GuardrailTopicPolicy.add_member(:topics, Shapes::ShapeRef.new(shape: GuardrailTopics, required: true, location_name: "topics"))
+    GuardrailTopicPolicy.add_member(:tier, Shapes::ShapeRef.new(shape: GuardrailTopicsTier, location_name: "tier"))
     GuardrailTopicPolicy.struct_class = Types::GuardrailTopicPolicy
 
     GuardrailTopicPolicyConfig.add_member(:topics_config, Shapes::ShapeRef.new(shape: GuardrailTopicsConfig, required: true, location_name: "topicsConfig"))
+    GuardrailTopicPolicyConfig.add_member(:tier_config, Shapes::ShapeRef.new(shape: GuardrailTopicsTierConfig, location_name: "tierConfig"))
     GuardrailTopicPolicyConfig.struct_class = Types::GuardrailTopicPolicyConfig
 
     GuardrailTopics.member = Shapes::ShapeRef.new(shape: GuardrailTopic)
 
     GuardrailTopicsConfig.member = Shapes::ShapeRef.new(shape: GuardrailTopicConfig)
+
+    GuardrailTopicsTier.add_member(:tier_name, Shapes::ShapeRef.new(shape: GuardrailTopicsTierName, required: true, location_name: "tierName"))
+    GuardrailTopicsTier.struct_class = Types::GuardrailTopicsTier
+
+    GuardrailTopicsTierConfig.add_member(:tier_name, Shapes::ShapeRef.new(shape: GuardrailTopicsTierName, required: true, location_name: "tierName"))
+    GuardrailTopicsTierConfig.struct_class = Types::GuardrailTopicsTierConfig
 
     GuardrailWord.add_member(:text, Shapes::ShapeRef.new(shape: GuardrailWordTextString, required: true, location_name: "text"))
     GuardrailWord.add_member(:input_action, Shapes::ShapeRef.new(shape: GuardrailWordAction, location_name: "inputAction"))
@@ -1550,6 +1639,9 @@ module Aws::Bedrock
     KnowledgeBaseVectorSearchConfiguration.add_member(:filter, Shapes::ShapeRef.new(shape: RetrievalFilter, location_name: "filter"))
     KnowledgeBaseVectorSearchConfiguration.struct_class = Types::KnowledgeBaseVectorSearchConfiguration
 
+    LegalTerm.add_member(:url, Shapes::ShapeRef.new(shape: String, location_name: "url"))
+    LegalTerm.struct_class = Types::LegalTerm
+
     ListCustomModelsRequest.add_member(:creation_time_before, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "creationTimeBefore"))
     ListCustomModelsRequest.add_member(:creation_time_after, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "creationTimeAfter"))
     ListCustomModelsRequest.add_member(:name_contains, Shapes::ShapeRef.new(shape: CustomModelName, location: "querystring", location_name: "nameContains"))
@@ -1581,6 +1673,14 @@ module Aws::Bedrock
     ListEvaluationJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListEvaluationJobsResponse.add_member(:job_summaries, Shapes::ShapeRef.new(shape: EvaluationSummaries, location_name: "jobSummaries"))
     ListEvaluationJobsResponse.struct_class = Types::ListEvaluationJobsResponse
+
+    ListFoundationModelAgreementOffersRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: BedrockModelId, required: true, location: "uri", location_name: "modelId"))
+    ListFoundationModelAgreementOffersRequest.add_member(:offer_type, Shapes::ShapeRef.new(shape: OfferType, location: "querystring", location_name: "offerType"))
+    ListFoundationModelAgreementOffersRequest.struct_class = Types::ListFoundationModelAgreementOffersRequest
+
+    ListFoundationModelAgreementOffersResponse.add_member(:model_id, Shapes::ShapeRef.new(shape: BedrockModelId, required: true, location_name: "modelId"))
+    ListFoundationModelAgreementOffersResponse.add_member(:offers, Shapes::ShapeRef.new(shape: Offers, required: true, location_name: "offers"))
+    ListFoundationModelAgreementOffersResponse.struct_class = Types::ListFoundationModelAgreementOffersResponse
 
     ListFoundationModelsRequest.add_member(:by_provider, Shapes::ShapeRef.new(shape: Provider, location: "querystring", location_name: "byProvider"))
     ListFoundationModelsRequest.add_member(:by_customization_type, Shapes::ShapeRef.new(shape: ModelCustomization, location: "querystring", location_name: "byCustomizationType"))
@@ -1844,6 +1944,13 @@ module Aws::Bedrock
 
     ModelModalityList.member = Shapes::ShapeRef.new(shape: ModelModality)
 
+    Offer.add_member(:offer_id, Shapes::ShapeRef.new(shape: OfferId, location_name: "offerId"))
+    Offer.add_member(:offer_token, Shapes::ShapeRef.new(shape: OfferToken, required: true, location_name: "offerToken"))
+    Offer.add_member(:term_details, Shapes::ShapeRef.new(shape: TermDetails, required: true, location_name: "termDetails"))
+    Offer.struct_class = Types::Offer
+
+    Offers.member = Shapes::ShapeRef.new(shape: Offer)
+
     OrchestrationConfiguration.add_member(:query_transformation_configuration, Shapes::ShapeRef.new(shape: QueryTransformationConfiguration, required: true, location_name: "queryTransformationConfiguration"))
     OrchestrationConfiguration.struct_class = Types::OrchestrationConfiguration
 
@@ -1852,6 +1959,9 @@ module Aws::Bedrock
 
     PerformanceConfiguration.add_member(:latency, Shapes::ShapeRef.new(shape: PerformanceConfigLatency, location_name: "latency"))
     PerformanceConfiguration.struct_class = Types::PerformanceConfiguration
+
+    PricingTerm.add_member(:rate_card, Shapes::ShapeRef.new(shape: RateCard, required: true, location_name: "rateCard"))
+    PricingTerm.struct_class = Types::PricingTerm
 
     PromptRouterSummaries.member = Shapes::ShapeRef.new(shape: PromptRouterSummary)
 
@@ -1896,6 +2006,11 @@ module Aws::Bedrock
 
     PutModelInvocationLoggingConfigurationResponse.struct_class = Types::PutModelInvocationLoggingConfigurationResponse
 
+    PutUseCaseForModelAccessRequest.add_member(:form_data, Shapes::ShapeRef.new(shape: AcknowledgementFormDataBody, required: true, location_name: "formData"))
+    PutUseCaseForModelAccessRequest.struct_class = Types::PutUseCaseForModelAccessRequest
+
+    PutUseCaseForModelAccessResponse.struct_class = Types::PutUseCaseForModelAccessResponse
+
     QueryTransformationConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: QueryTransformationType, required: true, location_name: "type"))
     QueryTransformationConfiguration.struct_class = Types::QueryTransformationConfiguration
 
@@ -1910,6 +2025,8 @@ module Aws::Bedrock
     RAGStopSequences.member = Shapes::ShapeRef.new(shape: RAGStopSequencesMemberString)
 
     RagConfigs.member = Shapes::ShapeRef.new(shape: RAGConfig)
+
+    RateCard.member = Shapes::ShapeRef.new(shape: DimensionalPriceRate)
 
     RatingScale.member = Shapes::ShapeRef.new(shape: RatingScaleItem)
 
@@ -2047,6 +2164,9 @@ module Aws::Bedrock
 
     SubnetIds.member = Shapes::ShapeRef.new(shape: SubnetId)
 
+    SupportTerm.add_member(:refund_policy_description, Shapes::ShapeRef.new(shape: String, location_name: "refundPolicyDescription"))
+    SupportTerm.struct_class = Types::SupportTerm
+
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "value"))
     Tag.struct_class = Types::Tag
@@ -2064,6 +2184,12 @@ module Aws::Bedrock
     TeacherModelConfig.add_member(:teacher_model_identifier, Shapes::ShapeRef.new(shape: TeacherModelIdentifier, required: true, location_name: "teacherModelIdentifier"))
     TeacherModelConfig.add_member(:max_response_length_for_inference, Shapes::ShapeRef.new(shape: Integer, location_name: "maxResponseLengthForInference"))
     TeacherModelConfig.struct_class = Types::TeacherModelConfig
+
+    TermDetails.add_member(:usage_based_pricing_term, Shapes::ShapeRef.new(shape: PricingTerm, required: true, location_name: "usageBasedPricingTerm"))
+    TermDetails.add_member(:legal_term, Shapes::ShapeRef.new(shape: LegalTerm, required: true, location_name: "legalTerm"))
+    TermDetails.add_member(:support_term, Shapes::ShapeRef.new(shape: SupportTerm, required: true, location_name: "supportTerm"))
+    TermDetails.add_member(:validity_term, Shapes::ShapeRef.new(shape: ValidityTerm, location_name: "validityTerm"))
+    TermDetails.struct_class = Types::TermDetails
 
     TextInferenceConfig.add_member(:temperature, Shapes::ShapeRef.new(shape: Temperature, location_name: "temperature"))
     TextInferenceConfig.add_member(:top_p, Shapes::ShapeRef.new(shape: TopP, location_name: "topP"))
@@ -2152,6 +2278,9 @@ module Aws::Bedrock
 
     Validators.member = Shapes::ShapeRef.new(shape: Validator)
 
+    ValidityTerm.add_member(:agreement_duration, Shapes::ShapeRef.new(shape: String, location_name: "agreementDuration"))
+    ValidityTerm.struct_class = Types::ValidityTerm
+
     VpcConfig.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, required: true, location_name: "subnetIds"))
     VpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, required: true, location_name: "securityGroupIds"))
     VpcConfig.struct_class = Types::VpcConfig
@@ -2217,6 +2346,20 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_foundation_model_agreement, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateFoundationModelAgreement"
+        o.http_method = "POST"
+        o.http_request_uri = "/create-foundation-model-agreement"
+        o.input = Shapes::ShapeRef.new(shape: CreateFoundationModelAgreementRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateFoundationModelAgreementResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
@@ -2386,6 +2529,20 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:delete_foundation_model_agreement, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteFoundationModelAgreement"
+        o.http_method = "POST"
+        o.http_request_uri = "/delete-foundation-model-agreement"
+        o.input = Shapes::ShapeRef.new(shape: DeleteFoundationModelAgreementRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteFoundationModelAgreementResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:delete_guardrail, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteGuardrail"
         o.http_method = "DELETE"
@@ -2525,6 +2682,19 @@ module Aws::Bedrock
         o.http_request_uri = "/foundation-models/{modelIdentifier}"
         o.input = Shapes::ShapeRef.new(shape: GetFoundationModelRequest)
         o.output = Shapes::ShapeRef.new(shape: GetFoundationModelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_foundation_model_availability, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetFoundationModelAvailability"
+        o.http_method = "GET"
+        o.http_request_uri = "/foundation-model-availability/{modelId}"
+        o.input = Shapes::ShapeRef.new(shape: GetFoundationModelAvailabilityRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetFoundationModelAvailabilityResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2673,6 +2843,18 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:get_use_case_for_model_access, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetUseCaseForModelAccess"
+        o.http_method = "GET"
+        o.http_request_uri = "/use-case-for-model-access"
+        o.input = Shapes::ShapeRef.new(shape: GetUseCaseForModelAccessRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetUseCaseForModelAccessResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:list_custom_models, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListCustomModels"
         o.http_method = "GET"
@@ -2707,6 +2889,19 @@ module Aws::Bedrock
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_foundation_model_agreement_offers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFoundationModelAgreementOffers"
+        o.http_method = "GET"
+        o.http_request_uri = "/list-foundation-model-agreement-offers/{modelId}"
+        o.input = Shapes::ShapeRef.new(shape: ListFoundationModelAgreementOffersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListFoundationModelAgreementOffersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:list_foundation_models, Seahorse::Model::Operation.new.tap do |o|
@@ -2923,6 +3118,18 @@ module Aws::Bedrock
         o.http_request_uri = "/logging/modelinvocations"
         o.input = Shapes::ShapeRef.new(shape: PutModelInvocationLoggingConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: PutModelInvocationLoggingConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:put_use_case_for_model_access, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutUseCaseForModelAccess"
+        o.http_method = "POST"
+        o.http_request_uri = "/use-case-for-model-access"
+        o.input = Shapes::ShapeRef.new(shape: PutUseCaseForModelAccessRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutUseCaseForModelAccessResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

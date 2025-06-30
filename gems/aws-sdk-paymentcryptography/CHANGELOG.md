@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2025-06-19)
+------------------
+
+* Feature - Additional support for managing HMAC keys that adheres to changes documented in X9.143-2021 and provides better interoperability for key import/export
+
 1.35.0 (2025-06-02)
 ------------------
 

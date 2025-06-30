@@ -247,6 +247,7 @@ module Aws
           {
             'ACM' => 'acm',
             'ACMPCA' => 'acm-pca',
+            'AIOps' => 'aiops',
             'APIGateway' => 'apigateway',
             'ARCZonalShift' => 'arc-zonal-shift',
             'AccessAnalyzer' => 'access-analyzer',
@@ -450,6 +451,7 @@ module Aws
             'Kendra' => 'kendra',
             'KendraRanking' => 'kendra-ranking',
             'Keyspaces' => 'cassandra',
+            'KeyspacesStreams' => 'cassandra-streams',
             'Kinesis' => 'kinesis',
             'KinesisAnalytics' => 'kinesisanalytics',
             'KinesisAnalyticsV2' => 'kinesisanalytics',
@@ -649,6 +651,7 @@ module Aws
             'WorkSpaces' => 'workspaces',
             'WorkSpacesThinClient' => 'thinclient',
             'WorkSpacesWeb' => 'workspaces-web',
+            'WorkspacesInstances' => 'workspaces-instances',
             'XRay' => 'xray',
           }
           # end service ids

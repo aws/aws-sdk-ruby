@@ -1639,6 +1639,7 @@ module Aws::GameLift
     class LocationModel
       attr_accessor location_name: ::String
       attr_accessor location_arn: ::String
+      attr_accessor ping_beacon: Types::PingBeacon
       SENSITIVE: []
     end
 
@@ -1722,6 +1723,11 @@ module Aws::GameLift
 
     class OutOfCapacityException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PingBeacon
+      attr_accessor udp_endpoint: Types::UDPEndpoint
       SENSITIVE: []
     end
 
@@ -2112,6 +2118,12 @@ module Aws::GameLift
 
     class TerminateGameSessionOutput
       attr_accessor game_session: Types::GameSession
+      SENSITIVE: []
+    end
+
+    class UDPEndpoint
+      attr_accessor domain: ::String
+      attr_accessor port: ::Integer
       SENSITIVE: []
     end
 

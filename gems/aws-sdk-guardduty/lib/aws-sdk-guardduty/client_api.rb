@@ -1647,7 +1647,7 @@ module Aws::GuardDuty
 
     KubernetesWorkload.add_member(:container_uids, Shapes::ShapeRef.new(shape: ContainerUids, location_name: "containerUids"))
     KubernetesWorkload.add_member(:namespace, Shapes::ShapeRef.new(shape: String, location_name: "namespace"))
-    KubernetesWorkload.add_member(:kubernetes_resources_types, Shapes::ShapeRef.new(shape: KubernetesResourcesTypes, location_name: "kubernetesResourcesTypes"))
+    KubernetesWorkload.add_member(:kubernetes_resources_types, Shapes::ShapeRef.new(shape: KubernetesResourcesTypes, location_name: "type"))
     KubernetesWorkload.struct_class = Types::KubernetesWorkload
 
     KubernetesWorkloadDetails.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))

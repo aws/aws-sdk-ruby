@@ -31,6 +31,8 @@ module Aws::IoTManagedIntegrations
   # * {ConflictException}
   # * {InternalFailureException}
   # * {InternalServerException}
+  # * {InvalidRequestException}
+  # * {LimitExceededException}
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
   # * {ServiceUnavailableException}
@@ -104,6 +106,36 @@ module Aws::IoTManagedIntegrations
       end
     end
 
+    class InvalidRequestException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::IoTManagedIntegrations::Types::InvalidRequestException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class LimitExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::IoTManagedIntegrations::Types::LimitExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class ResourceNotFoundException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -116,6 +148,16 @@ module Aws::IoTManagedIntegrations
       # @return [String]
       def message
         @message || @data[:message]
+      end
+
+      # @return [String]
+      def resource_id
+        @data[:resource_id]
+      end
+
+      # @return [String]
+      def resource_type
+        @data[:resource_type]
       end
     end
 

@@ -945,7 +945,13 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing this object
-    #   in Amazon S3 (for example, `AES256`, `aws:kms`).
+    #   in Amazon S3.
+    #
+    #   <note markdown="1"> When accessing data stored in Amazon FSx file systems using S3
+    #   access points, the only valid server side encryption option is
+    #   `aws:fsx`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -1481,7 +1487,13 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when you store this object
-    #   in Amazon S3 (for example, `AES256`, `aws:kms`, `aws:kms:dsse`).
+    #   in Amazon S3 or Amazon FSx.
+    #
+    #   <note markdown="1"> When accessing data stored in Amazon FSx file systems using S3
+    #   access points, the only valid server side encryption option is
+    #   `aws:fsx`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_algorithm
@@ -2037,6 +2049,14 @@ module Aws::S3
     #     encryption-related request headers, you must ensure the encryption
     #     key is the same customer managed key that you specified for the
     #     directory bucket's default encryption configuration.
+    #
+    #   * <b>S3 access points for Amazon FSx </b> - When accessing data
+    #     stored in Amazon FSx file systems using S3 access points, the only
+    #     valid server side encryption option is `aws:fsx`. All Amazon FSx
+    #     file systems have encryption configured by default and are
+    #     encrypted at rest. Data is automatically encrypted before being
+    #     written to the file system, and automatically decrypted as it is
+    #     read. These processes are handled transparently by Amazon FSx.
     #
     #
     #
@@ -2912,7 +2932,13 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when you store this object
-    #   in Amazon S3 (for example, `AES256`, `aws:kms`).
+    #   in Amazon S3 or Amazon FSx.
+    #
+    #   <note markdown="1"> When accessing data stored in Amazon FSx file systems using S3
+    #   access points, the only valid server side encryption option is
+    #   `aws:fsx`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_algorithm
@@ -3380,7 +3406,7 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when you store this object
-    #   in Amazon S3 (for example, `AES256`, `aws:kms`).
+    #   in Amazon S3 or Amazon FSx.
     #
     #   * <b>Directory buckets </b> - For directory buckets, there are only
     #     two supported options for server-side encryption: server-side
@@ -3422,6 +3448,14 @@ module Aws::S3
     #     directory bucket.
     #
     #      </note>
+    #
+    #   * <b>S3 access points for Amazon FSx </b> - When accessing data
+    #     stored in Amazon FSx file systems using S3 access points, the only
+    #     valid server side encryption option is `aws:fsx`. All Amazon FSx
+    #     file systems have encryption configured by default and are
+    #     encrypted at rest. Data is automatically encrypted before being
+    #     written to the file system, and automatically decrypted as it is
+    #     read. These processes are handled transparently by Amazon FSx.
     #
     #
     #
@@ -3689,6 +3723,12 @@ module Aws::S3
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when you store objects in
     #   the directory bucket.
+    #
+    #   <note markdown="1"> When accessing data stored in Amazon FSx file systems using S3
+    #   access points, the only valid server side encryption option is
+    #   `aws:fsx`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
@@ -3752,6 +3792,14 @@ module Aws::S3
     #   keys (SSE-KMS) (`aws:kms`). By default, Amazon S3 encrypts data with
     #   SSE-S3. For more information, see [Protecting data with server-side
     #   encryption][1] in the *Amazon S3 User Guide*.
+    #
+    #   <b>S3 access points for Amazon FSx </b> - When accessing data stored
+    #   in Amazon FSx file systems using S3 access points, the only valid
+    #   server side encryption option is `aws:fsx`. All Amazon FSx file
+    #   systems have encryption configured by default and are encrypted at
+    #   rest. Data is automatically encrypted before being written to the
+    #   file system, and automatically decrypted as it is read. These
+    #   processes are handled transparently by Amazon FSx.
     #
     #
     #
@@ -4000,11 +4048,19 @@ module Aws::S3
     #   The ID used to identify the S3 Intelligent-Tiering configuration.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account ID of the expected bucket owner. If the account ID that
+    #   you provide does not match the actual owner of the bucket, the
+    #   request fails with the HTTP status code `403 Forbidden` (access
+    #   denied).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketIntelligentTieringConfigurationRequest AWS API Documentation
     #
     class DeleteBucketIntelligentTieringConfigurationRequest < Struct.new(
       :bucket,
-      :id)
+      :id,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6292,11 +6348,19 @@ module Aws::S3
     #   The ID used to identify the S3 Intelligent-Tiering configuration.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account ID of the expected bucket owner. If the account ID that
+    #   you provide does not match the actual owner of the bucket, the
+    #   request fails with the HTTP status code `403 Forbidden` (access
+    #   denied).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketIntelligentTieringConfigurationRequest AWS API Documentation
     #
     class GetBucketIntelligentTieringConfigurationRequest < Struct.new(
       :bucket,
-      :id)
+      :id,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7222,15 +7286,15 @@ module Aws::S3
     #   A container for elements related to a particular part. A response
     #   can contain zero or more `Parts` elements.
     #
-    #   <note markdown="1"> * **General purpose buckets** - For `GetObjectAttributes`, if a
+    #   <note markdown="1"> * **General purpose buckets** - For `GetObjectAttributes`, if an
     #     additional checksum (including `x-amz-checksum-crc32`,
     #     `x-amz-checksum-crc32c`, `x-amz-checksum-sha1`, or
     #     `x-amz-checksum-sha256`) isn't applied to the object specified in
-    #     the request, the response doesn't return `Part`.
+    #     the request, the response doesn't return the `Part` element.
     #
-    #   * **Directory buckets** - For `GetObjectAttributes`, no matter
-    #     whether a additional checksum is applied to the object specified
-    #     in the request, the response returns `Part`.
+    #   * **Directory buckets** - For `GetObjectAttributes`, regardless of
+    #     whether an additional checksum is applied to the object specified
+    #     in the request, the response returns the `Part` element.
     #
     #    </note>
     #   @return [Array<Types::ObjectPart>]
@@ -7747,7 +7811,13 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when you store this object
-    #   in Amazon S3.
+    #   in Amazon S3 or Amazon FSx.
+    #
+    #   <note markdown="1"> When accessing data stored in Amazon FSx file systems using S3
+    #   access points, the only valid server side encryption option is
+    #   `aws:fsx`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] metadata
@@ -8995,7 +9065,13 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when you store this object
-    #   in Amazon S3 (for example, `AES256`, `aws:kms`, `aws:kms:dsse`).
+    #   in Amazon S3 or Amazon FSx.
+    #
+    #   <note markdown="1"> When accessing data stored in Amazon FSx file systems using S3
+    #   access points, the only valid server side encryption option is
+    #   `aws:fsx`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] metadata
@@ -9121,6 +9197,22 @@ module Aws::S3
     #   as a multipart upload.
     #   @return [Integer]
     #
+    # @!attribute [rw] tag_count
+    #   The number of tags, if any, on the object, when you have the
+    #   relevant permission to read object tags.
+    #
+    #   You can use [GetObjectTagging][1] to retrieve the tag set associated
+    #   with an object.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectTagging.html
+    #   @return [Integer]
+    #
     # @!attribute [rw] object_lock_mode
     #   The Object Lock mode, if any, that's in effect for this object.
     #   This header is only returned if the requester has the
@@ -9201,6 +9293,7 @@ module Aws::S3
       :request_charged,
       :replication_status,
       :parts_count,
+      :tag_count,
       :object_lock_mode,
       :object_lock_retain_until_date,
       :object_lock_legal_hold_status)
@@ -9488,6 +9581,27 @@ module Aws::S3
       SENSITIVE = [:sse_customer_key]
       include Aws::Structure
     end
+
+    # Parameters on this idempotent request are inconsistent with parameters
+    # used in previous request(s).
+    #
+    # For a list of error codes and more information on Amazon S3 errors,
+    # see [Error codes][1].
+    #
+    # <note markdown="1"> Idempotency ensures that an API request completes no more than one
+    # time. With an idempotent request, if the original request completes
+    # successfully, any subsequent retries complete successfully without
+    # performing any further actions.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ErrorCodeList
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/IdempotencyParameterMismatch AWS API Documentation
+    #
+    class IdempotencyParameterMismatch < Aws::EmptyStructure; end
 
     # Container for the `Suffix` element.
     #
@@ -10076,9 +10190,16 @@ module Aws::S3
     #   `Filter` is required if the `LifecycleRule` does not contain a
     #   `Prefix` element.
     #
+    #   For more information about `Tag` filters, see [Adding filters to
+    #   Lifecycle rules][1] in the *Amazon S3 User Guide*.
+    #
     #   <note markdown="1"> `Tag` filters are not supported for directory buckets.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/intro-lifecycle-filters.html
     #   @return [Types::LifecycleRuleFilter]
     #
     # @!attribute [rw] status
@@ -10344,11 +10465,19 @@ module Aws::S3
     #   this request should begin.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account ID of the expected bucket owner. If the account ID that
+    #   you provide does not match the actual owner of the bucket, the
+    #   request fails with the HTTP status code `403 Forbidden` (access
+    #   denied).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketIntelligentTieringConfigurationsRequest AWS API Documentation
     #
     class ListBucketIntelligentTieringConfigurationsRequest < Struct.new(
       :bucket,
-      :continuation_token)
+      :continuation_token,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11517,8 +11646,7 @@ module Aws::S3
     # @!attribute [rw] continuation_token
     #   If `ContinuationToken` was sent with the request, it is included in
     #   the response. You can use the returned `ContinuationToken` for
-    #   pagination of the list response. You can use this
-    #   `ContinuationToken` for pagination of the list results.
+    #   pagination of the list response.
     #   @return [String]
     #
     # @!attribute [rw] next_continuation_token
@@ -13055,6 +13183,19 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # End of support notice: Beginning October 1, 2025, Amazon S3 will stop
+    # returning `DisplayName`. Update your applications to use canonical IDs
+    # (unique identifier for Amazon Web Services accounts), Amazon Web
+    # Services account ID (12 digit identifier) or IAM ARNs (full resource
+    # naming) as a direct replacement of `DisplayName`.
+    #
+    #  This change affects the following Amazon Web Services Regions: US
+    # East
+    # (N. Virginia) Region, US West (N. California) Region, US West (Oregon)
+    # Region, Asia Pacific (Singapore) Region, Asia Pacific (Sydney) Region,
+    # Asia Pacific (Tokyo) Region, Europe (Ireland) Region, and South
+    # America (São Paulo) Region.
+    #
     # Container for the owner's display name and ID.
     #
     # @!attribute [rw] display_name
@@ -13736,6 +13877,13 @@ module Aws::S3
     #   The ID used to identify the S3 Intelligent-Tiering configuration.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The account ID of the expected bucket owner. If the account ID that
+    #   you provide does not match the actual owner of the bucket, the
+    #   request fails with the HTTP status code `403 Forbidden` (access
+    #   denied).
+    #   @return [String]
+    #
     # @!attribute [rw] intelligent_tiering_configuration
     #   Container for S3 Intelligent-Tiering configuration.
     #   @return [Types::IntelligentTieringConfiguration]
@@ -13745,6 +13893,7 @@ module Aws::S3
     class PutBucketIntelligentTieringConfigurationRequest < Struct.new(
       :bucket,
       :id,
+      :expected_bucket_owner,
       :intelligent_tiering_configuration)
       SENSITIVE = []
       include Aws::Structure
@@ -15115,7 +15264,13 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when you store this object
-    #   in Amazon S3.
+    #   in Amazon S3 or Amazon FSx.
+    #
+    #   <note markdown="1"> When accessing data stored in Amazon FSx file systems using S3
+    #   access points, the only valid server side encryption option is
+    #   `aws:fsx`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -15627,8 +15782,7 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm that was used when you store
-    #   this object in Amazon S3 (for example, `AES256`, `aws:kms`,
-    #   `aws:kms:dsse`).
+    #   this object in Amazon S3 or Amazon FSx.
     #
     #   * <b>General purpose buckets </b> - You have four mutually exclusive
     #     options to protect data using server-side encryption in Amazon S3,
@@ -15682,6 +15836,14 @@ module Aws::S3
     #     directory bucket.
     #
     #      </note>
+    #
+    #   * <b>S3 access points for Amazon FSx </b> - When accessing data
+    #     stored in Amazon FSx file systems using S3 access points, the only
+    #     valid server side encryption option is `aws:fsx`. All Amazon FSx
+    #     file systems have encryption configured by default and are
+    #     encrypted at rest. Data is automatically encrypted before being
+    #     written to the file system, and automatically decrypted as it is
+    #     read. These processes are handled transparently by Amazon FSx.
     #
     #
     #
@@ -16470,6 +16632,129 @@ module Aws::S3
     class RedirectAllRequestsTo < Struct.new(
       :host_name,
       :protocol)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RenameObjectOutput AWS API Documentation
+    #
+    class RenameObjectOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] bucket
+    #   The bucket name of the directory bucket containing the object.
+    #
+    #   You must use virtual-hosted-style requests in the format
+    #   `Bucket-name.s3express-zone-id.region-code.amazonaws.com`.
+    #   Path-style requests are not supported. Directory bucket names must
+    #   be unique in the chosen Availability Zone. Bucket names must follow
+    #   the format `bucket-base-name--zone-id--x-s3 ` (for example,
+    #   `amzn-s3-demo-bucket--usw2-az1--x-s3`). For information about bucket
+    #   naming restrictions, see [Directory bucket naming rules][1] in the
+    #   *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-bucket-naming-rules.html
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   Key name of the object to rename.
+    #   @return [String]
+    #
+    # @!attribute [rw] rename_source
+    #   Specifies the source for the rename operation. The value must be URL
+    #   encoded.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_if_match
+    #   Renames the object only if the ETag (entity tag) value provided
+    #   during the operation matches the ETag of the object in S3. The
+    #   `If-Match` header field makes the request method conditional on
+    #   ETags. If the ETag values do not match, the operation returns a `412
+    #   Precondition Failed` error.
+    #
+    #   Expects the ETag value as a string.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_if_none_match
+    #   Renames the object only if the destination does not already exist in
+    #   the specified directory bucket. If the object does exist when you
+    #   send a request with `If-None-Match:*`, the S3 API will return a `412
+    #   Precondition Failed` error, preventing an overwrite. The
+    #   `If-None-Match` header prevents overwrites of existing data by
+    #   validating that there's not an object with the same key name
+    #   already in your directory bucket.
+    #
+    #   Expects the `*` character (asterisk).
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_if_modified_since
+    #   Renames the object if the destination exists and if it has been
+    #   modified since the specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] destination_if_unmodified_since
+    #   Renames the object if it hasn't been modified since the specified
+    #   time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] source_if_match
+    #   Renames the object if the source exists and if its entity tag (ETag)
+    #   matches the specified ETag.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_if_none_match
+    #   Renames the object if the source exists and if its entity tag (ETag)
+    #   is different than the specified ETag. If an asterisk (`*`) character
+    #   is provided, the operation will fail and return a `412 Precondition
+    #   Failed` error.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_if_modified_since
+    #   Renames the object if the source exists and if it has been modified
+    #   since the specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] source_if_unmodified_since
+    #   Renames the object if the source exists and hasn't been modified
+    #   since the specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] client_token
+    #   A unique string with a max of 64 ASCII characters in the ASCII range
+    #   of 33 - 126.
+    #
+    #   <note markdown="1"> `RenameObject` supports idempotency using a client token. To make an
+    #   idempotent API request using `RenameObject`, specify a client token
+    #   in the request. You should not reuse the same client token for other
+    #   API requests. If you retry a request that completed successfully
+    #   using the same client token and the same parameters, the retry
+    #   succeeds without performing any further actions. If you retry a
+    #   successful request using the same client token, but one or more of
+    #   the parameters are different, the retry fails and an
+    #   `IdempotentParameterMismatch` error is returned.
+    #
+    #    </note>
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RenameObjectRequest AWS API Documentation
+    #
+    class RenameObjectRequest < Struct.new(
+      :bucket,
+      :key,
+      :rename_source,
+      :destination_if_match,
+      :destination_if_none_match,
+      :destination_if_modified_since,
+      :destination_if_unmodified_since,
+      :source_if_match,
+      :source_if_none_match,
+      :source_if_modified_since,
+      :source_if_unmodified_since,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18189,7 +18474,13 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when you store this object
-    #   in Amazon S3 (for example, `AES256`, `aws:kms`).
+    #   in Amazon S3 or Amazon FSx.
+    #
+    #   <note markdown="1"> When accessing data stored in Amazon FSx file systems using S3
+    #   access points, the only valid server side encryption option is
+    #   `aws:fsx`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_algorithm
@@ -18587,7 +18878,13 @@ module Aws::S3
 
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when you store this object
-    #   in Amazon S3 (for example, `AES256`, `aws:kms`).
+    #   in Amazon S3 or Amazon FSx.
+    #
+    #   <note markdown="1"> When accessing data stored in Amazon FSx file systems using S3
+    #   access points, the only valid server side encryption option is
+    #   `aws:fsx`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] etag
@@ -19320,7 +19617,13 @@ module Aws::S3
     #
     # @!attribute [rw] server_side_encryption
     #   The server-side encryption algorithm used when storing requested
-    #   object in Amazon S3 (for example, AES256, `aws:kms`).
+    #   object in Amazon S3 or Amazon FSx.
+    #
+    #   <note markdown="1"> When accessing data stored in Amazon FSx file systems using S3
+    #   access points, the only valid server side encryption option is
+    #   `aws:fsx`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_algorithm

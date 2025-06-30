@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:iotmanagedintegrations)
 # structure.
 #
 #     io_t_managed_integrations = Aws::IoTManagedIntegrations::Client.new
-#     resp = io_t_managed_integrations.create_credential_locker(params)
+#     resp = io_t_managed_integrations.create_account_association(params)
 #
 # See {Client} for more information.
 #
@@ -54,7 +54,7 @@ module Aws::IoTManagedIntegrations
   autoload :EndpointProvider, 'aws-sdk-iotmanagedintegrations/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-iotmanagedintegrations/endpoints'
 
-  GEM_VERSION = '1.3.0'
+  GEM_VERSION = '1.4.0'
 
 end
 

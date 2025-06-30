@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.111.0 (2025-06-25)
+------------------
+
+* Feature - Add support for the ability to use Amazon S3 Access Points with Amazon FSx for OpenZFS file systems.
+
 1.110.0 (2025-06-02)
 ------------------
 

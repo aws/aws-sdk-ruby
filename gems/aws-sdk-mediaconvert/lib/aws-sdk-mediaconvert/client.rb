@@ -892,7 +892,7 @@ module Aws::MediaConvert
     #               apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
     #               background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #               background_opacity: 1,
-    #               dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #               dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW, SPECIFIED_OPTIMAL
     #               dds_x_coordinate: 1,
     #               dds_y_coordinate: 1,
     #               fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
@@ -1683,7 +1683,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.apply_font_color #=> String, one of "WHITE_TEXT_ONLY", "ALL_TEXT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_handling #=> String, one of "NONE", "SPECIFIED", "NO_DISPLAY_WINDOW"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_handling #=> String, one of "NONE", "SPECIFIED", "NO_DISPLAY_WINDOW", "SPECIFIED_OPTIMAL"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_x_coordinate #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_y_coordinate #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
@@ -2685,7 +2685,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.apply_font_color #=> String, one of "WHITE_TEXT_ONLY", "ALL_TEXT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_handling #=> String, one of "NONE", "SPECIFIED", "NO_DISPLAY_WINDOW"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_handling #=> String, one of "NONE", "SPECIFIED", "NO_DISPLAY_WINDOW", "SPECIFIED_OPTIMAL"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_x_coordinate #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_y_coordinate #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
@@ -3555,7 +3555,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.apply_font_color #=> String, one of "WHITE_TEXT_ONLY", "ALL_TEXT"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
-    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_handling #=> String, one of "NONE", "SPECIFIED", "NO_DISPLAY_WINDOW"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_handling #=> String, one of "NONE", "SPECIFIED", "NO_DISPLAY_WINDOW", "SPECIFIED_OPTIMAL"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_x_coordinate #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_y_coordinate #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
@@ -4714,7 +4714,7 @@ module Aws::MediaConvert
     #               apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
     #               background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #               background_opacity: 1,
-    #               dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
+    #               dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW, SPECIFIED_OPTIMAL
     #               dds_x_coordinate: 1,
     #               dds_y_coordinate: 1,
     #               fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
@@ -5502,7 +5502,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.apply_font_color #=> String, one of "WHITE_TEXT_ONLY", "ALL_TEXT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_handling #=> String, one of "NONE", "SPECIFIED", "NO_DISPLAY_WINDOW"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_handling #=> String, one of "NONE", "SPECIFIED", "NO_DISPLAY_WINDOW", "SPECIFIED_OPTIMAL"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_x_coordinate #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_y_coordinate #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
@@ -6122,7 +6122,7 @@ module Aws::MediaConvert
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.161.0'
+      context[:gem_version] = '1.162.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

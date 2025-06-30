@@ -137,6 +137,35 @@ module Aws
                                            ) -> _CopySnapshotAndUpdateVolumeResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopySnapshotAndUpdateVolumeResponseSuccess
 
+      interface _CreateAndAttachS3AccessPointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAndAttachS3AccessPointResponse]
+        def s3_access_point_attachment: () -> Types::S3AccessPointAttachment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#create_and_attach_s3_access_point-instance_method
+      def create_and_attach_s3_access_point: (
+                                               ?client_request_token: ::String,
+                                               name: ::String,
+                                               type: ("OPENZFS"),
+                                               ?open_zfs_configuration: {
+                                                 volume_id: ::String,
+                                                 file_system_identity: {
+                                                   type: ("POSIX"),
+                                                   posix_user: {
+                                                     uid: ::Integer,
+                                                     gid: ::Integer,
+                                                     secondary_gids: Array[::Integer]?
+                                                   }?
+                                                 }
+                                               },
+                                               ?s3_access_point: {
+                                                 vpc_configuration: {
+                                                   vpc_id: ::String?
+                                                 }?,
+                                                 policy: ::String?
+                                               }
+                                             ) -> _CreateAndAttachS3AccessPointResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAndAttachS3AccessPointResponseSuccess
+
       interface _CreateBackupResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateBackupResponse]
         def backup: () -> Types::Backup
@@ -958,6 +987,25 @@ module Aws
                                  ) -> _DescribeFileSystemsResponseSuccess
                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFileSystemsResponseSuccess
 
+      interface _DescribeS3AccessPointAttachmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeS3AccessPointAttachmentsResponse]
+        def s3_access_point_attachments: () -> ::Array[Types::S3AccessPointAttachment]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#describe_s3_access_point_attachments-instance_method
+      def describe_s3_access_point_attachments: (
+                                                  ?names: Array[::String],
+                                                  ?filters: Array[
+                                                    {
+                                                      name: ("file-system-id" | "volume-id" | "type")?,
+                                                      values: Array[::String]?
+                                                    },
+                                                  ],
+                                                  ?max_results: ::Integer,
+                                                  ?next_token: ::String
+                                                ) -> _DescribeS3AccessPointAttachmentsResponseSuccess
+                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeS3AccessPointAttachmentsResponseSuccess
+
       interface _DescribeSharedVpcConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSharedVpcConfigurationResponse]
         def enable_fsx_route_table_updates_from_participant_accounts: () -> ::String
@@ -1024,6 +1072,18 @@ module Aws
                               ?next_token: ::String
                             ) -> _DescribeVolumesResponseSuccess
                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeVolumesResponseSuccess
+
+      interface _DetachAndDeleteS3AccessPointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetachAndDeleteS3AccessPointResponse]
+        def lifecycle: () -> ("AVAILABLE" | "CREATING" | "DELETING" | "UPDATING" | "FAILED")
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#detach_and_delete_s3_access_point-instance_method
+      def detach_and_delete_s3_access_point: (
+                                               ?client_request_token: ::String,
+                                               name: ::String
+                                             ) -> _DetachAndDeleteS3AccessPointResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetachAndDeleteS3AccessPointResponseSuccess
 
       interface _DisassociateFileSystemAliasesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateFileSystemAliasesResponse]

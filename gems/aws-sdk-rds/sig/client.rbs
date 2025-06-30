@@ -262,6 +262,8 @@ module Aws
                               ?option_group_name: ::String,
                               ?target_custom_availability_zone: ::String,
                               ?copy_option_group: bool,
+                              ?snapshot_availability_zone: ::String,
+                              ?snapshot_target: ::String,
                               ?source_region: ::String
                             ) -> _CopyDBSnapshotResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopyDBSnapshotResponseSuccess
@@ -659,6 +661,7 @@ module Aws
                                              ?network_type: ::String,
                                              ?storage_throughput: ::Integer,
                                              ?enable_customer_owned_ip: bool,
+                                             ?backup_target: ::String,
                                              ?allocated_storage: ::Integer,
                                              ?source_db_cluster_identifier: ::String,
                                              ?dedicated_log_volume: bool,

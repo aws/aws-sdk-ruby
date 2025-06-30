@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.130.0 (2025-06-27)
+------------------
+
+* Feature - Added important considerations to the PutConformancePack and PutOrganizationConformancPack APIs.
+
 1.129.0 (2025-06-02)
 ------------------
 

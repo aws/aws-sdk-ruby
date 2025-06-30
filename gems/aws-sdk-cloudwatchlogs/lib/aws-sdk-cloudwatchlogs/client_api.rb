@@ -176,6 +176,7 @@ module Aws::CloudWatchLogs
     EventId = Shapes::StringShape.new(name: 'EventId')
     EventMessage = Shapes::StringShape.new(name: 'EventMessage')
     EventNumber = Shapes::IntegerShape.new(name: 'EventNumber')
+    EventSource = Shapes::StringShape.new(name: 'EventSource')
     EventsLimit = Shapes::IntegerShape.new(name: 'EventsLimit')
     ExportDestinationBucket = Shapes::StringShape.new(name: 'ExportDestinationBucket')
     ExportDestinationPrefix = Shapes::StringShape.new(name: 'ExportDestinationPrefix')
@@ -333,6 +334,7 @@ module Aws::CloudWatchLogs
     MoveKeys = Shapes::StructureShape.new(name: 'MoveKeys')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NonMatchValue = Shapes::StringShape.new(name: 'NonMatchValue')
+    OCSFVersion = Shapes::StringShape.new(name: 'OCSFVersion')
     OpenSearchApplication = Shapes::StructureShape.new(name: 'OpenSearchApplication')
     OpenSearchApplicationEndpoint = Shapes::StringShape.new(name: 'OpenSearchApplicationEndpoint')
     OpenSearchApplicationId = Shapes::StringShape.new(name: 'OpenSearchApplicationId')
@@ -363,6 +365,7 @@ module Aws::CloudWatchLogs
     ParseKeyValue = Shapes::StructureShape.new(name: 'ParseKeyValue')
     ParsePostgres = Shapes::StructureShape.new(name: 'ParsePostgres')
     ParseRoute53 = Shapes::StructureShape.new(name: 'ParseRoute53')
+    ParseToOCSF = Shapes::StructureShape.new(name: 'ParseToOCSF')
     ParseVPC = Shapes::StructureShape.new(name: 'ParseVPC')
     ParseWAF = Shapes::StructureShape.new(name: 'ParseWAF')
     ParserFieldDelimiter = Shapes::StringShape.new(name: 'ParserFieldDelimiter')
@@ -1507,6 +1510,11 @@ module Aws::CloudWatchLogs
     ParseRoute53.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "source"))
     ParseRoute53.struct_class = Types::ParseRoute53
 
+    ParseToOCSF.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "source"))
+    ParseToOCSF.add_member(:event_source, Shapes::ShapeRef.new(shape: EventSource, required: true, location_name: "eventSource"))
+    ParseToOCSF.add_member(:ocsf_version, Shapes::ShapeRef.new(shape: OCSFVersion, required: true, location_name: "ocsfVersion"))
+    ParseToOCSF.struct_class = Types::ParseToOCSF
+
     ParseVPC.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "source"))
     ParseVPC.struct_class = Types::ParseVPC
 
@@ -1538,6 +1546,7 @@ module Aws::CloudWatchLogs
     Processor.add_member(:parse_json, Shapes::ShapeRef.new(shape: ParseJSON, location_name: "parseJSON"))
     Processor.add_member(:parse_key_value, Shapes::ShapeRef.new(shape: ParseKeyValue, location_name: "parseKeyValue"))
     Processor.add_member(:parse_route_53, Shapes::ShapeRef.new(shape: ParseRoute53, location_name: "parseRoute53"))
+    Processor.add_member(:parse_to_ocsf, Shapes::ShapeRef.new(shape: ParseToOCSF, location_name: "parseToOCSF"))
     Processor.add_member(:parse_postgres, Shapes::ShapeRef.new(shape: ParsePostgres, location_name: "parsePostgres"))
     Processor.add_member(:parse_vpc, Shapes::ShapeRef.new(shape: ParseVPC, location_name: "parseVPC"))
     Processor.add_member(:parse_waf, Shapes::ShapeRef.new(shape: ParseWAF, location_name: "parseWAF"))

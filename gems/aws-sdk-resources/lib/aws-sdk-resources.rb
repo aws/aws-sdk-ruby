@@ -7,6 +7,7 @@ module Aws
   # service gems
   autoload :ACM, 'aws-sdk-acm'
   autoload :ACMPCA, 'aws-sdk-acmpca'
+  autoload :AIOps, 'aws-sdk-aiops'
   autoload :APIGateway, 'aws-sdk-apigateway'
   autoload :ARCZonalShift, 'aws-sdk-arczonalshift'
   autoload :AccessAnalyzer, 'aws-sdk-accessanalyzer'
@@ -212,6 +213,7 @@ module Aws
   autoload :Kendra, 'aws-sdk-kendra'
   autoload :KendraRanking, 'aws-sdk-kendraranking'
   autoload :Keyspaces, 'aws-sdk-keyspaces'
+  autoload :KeyspacesStreams, 'aws-sdk-keyspacesstreams'
   autoload :Kinesis, 'aws-sdk-kinesis'
   autoload :KinesisAnalytics, 'aws-sdk-kinesisanalytics'
   autoload :KinesisAnalyticsV2, 'aws-sdk-kinesisanalyticsv2'
@@ -411,6 +413,7 @@ module Aws
   autoload :WorkSpaces, 'aws-sdk-workspaces'
   autoload :WorkSpacesThinClient, 'aws-sdk-workspacesthinclient'
   autoload :WorkSpacesWeb, 'aws-sdk-workspacesweb'
+  autoload :WorkspacesInstances, 'aws-sdk-workspacesinstances'
   autoload :XRay, 'aws-sdk-xray'
   # end service gems
 end

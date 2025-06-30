@@ -360,10 +360,6 @@ module Aws::WorkSpacesThinClient
     #   used to encrypt the device.
     #   @return [String]
     #
-    # @!attribute [rw] tags
-    #   The tag keys and optional values for the resource.
-    #   @return [Hash<String,String>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/Device AWS API Documentation
     #
     class Device < Struct.new(
@@ -386,9 +382,8 @@ module Aws::WorkSpacesThinClient
       :created_at,
       :updated_at,
       :arn,
-      :kms_key_arn,
-      :tags)
-      SENSITIVE = [:name, :tags]
+      :kms_key_arn)
+      SENSITIVE = [:name]
       include Aws::Structure
     end
 
@@ -557,10 +552,6 @@ module Aws::WorkSpacesThinClient
     #   used to encrypt the environment.
     #   @return [String]
     #
-    # @!attribute [rw] tags
-    #   The tag keys and optional values for the resource.
-    #   @return [Hash<String,String>]
-    #
     # @!attribute [rw] device_creation_tags
     #   The tag keys and optional values for the newly created devices for
     #   this environment.
@@ -587,9 +578,8 @@ module Aws::WorkSpacesThinClient
       :updated_at,
       :arn,
       :kms_key_arn,
-      :tags,
       :device_creation_tags)
-      SENSITIVE = [:name, :desktop_endpoint, :activation_code, :tags, :device_creation_tags]
+      SENSITIVE = [:name, :desktop_endpoint, :activation_code, :device_creation_tags]
       include Aws::Structure
     end
 
@@ -1095,10 +1085,6 @@ module Aws::WorkSpacesThinClient
     #   The Amazon Resource Name (ARN) of the software set.
     #   @return [String]
     #
-    # @!attribute [rw] tags
-    #   The tag keys and optional values for the resource.
-    #   @return [Hash<String,String>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-thin-client-2023-08-22/SoftwareSet AWS API Documentation
     #
     class SoftwareSet < Struct.new(
@@ -1108,9 +1094,8 @@ module Aws::WorkSpacesThinClient
       :supported_until,
       :validation_status,
       :software,
-      :arn,
-      :tags)
-      SENSITIVE = [:tags]
+      :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 

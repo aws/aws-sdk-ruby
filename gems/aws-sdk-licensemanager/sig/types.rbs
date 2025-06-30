@@ -605,6 +605,7 @@ module Aws::LicenseManager
 
     class LicenseConversionContext
       attr_accessor usage_operation: ::String
+      attr_accessor product_codes: ::Array[Types::ProductCodeListItem]
       SENSITIVE: []
     end
 
@@ -899,6 +900,12 @@ module Aws::LicenseManager
 
     class OrganizationConfiguration
       attr_accessor enable_integration: bool
+      SENSITIVE: []
+    end
+
+    class ProductCodeListItem
+      attr_accessor product_code_id: ::String
+      attr_accessor product_code_type: ("marketplace")
       SENSITIVE: []
     end
 

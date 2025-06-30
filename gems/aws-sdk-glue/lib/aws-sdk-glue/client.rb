@@ -1028,6 +1028,8 @@ module Aws::Glue
     #   resp.results[0].rule_results[0].evaluated_metrics #=> Hash
     #   resp.results[0].rule_results[0].evaluated_metrics["NameString"] #=> Float
     #   resp.results[0].rule_results[0].evaluated_rule #=> String
+    #   resp.results[0].rule_results[0].rule_metrics #=> Hash
+    #   resp.results[0].rule_results[0].rule_metrics["NameString"] #=> Float
     #   resp.results[0].analyzer_results #=> Array
     #   resp.results[0].analyzer_results[0].name #=> String
     #   resp.results[0].analyzer_results[0].description #=> String
@@ -1044,6 +1046,12 @@ module Aws::Glue
     #   resp.results[0].observations[0].metric_based_observation.metric_values.upper_limit #=> Float
     #   resp.results[0].observations[0].metric_based_observation.new_rules #=> Array
     #   resp.results[0].observations[0].metric_based_observation.new_rules[0] #=> String
+    #   resp.results[0].aggregated_metrics.total_rows_processed #=> Float
+    #   resp.results[0].aggregated_metrics.total_rows_passed #=> Float
+    #   resp.results[0].aggregated_metrics.total_rows_failed #=> Float
+    #   resp.results[0].aggregated_metrics.total_rules_processed #=> Float
+    #   resp.results[0].aggregated_metrics.total_rules_passed #=> Float
+    #   resp.results[0].aggregated_metrics.total_rules_failed #=> Float
     #   resp.results_not_found #=> Array
     #   resp.results_not_found[0] #=> String
     #
@@ -2235,6 +2243,7 @@ module Aws::Glue
     #   resp.table_optimizers[0].table_optimizer.configuration.role_arn #=> String
     #   resp.table_optimizers[0].table_optimizer.configuration.enabled #=> Boolean
     #   resp.table_optimizers[0].table_optimizer.configuration.vpc_configuration.glue_connection_name #=> String
+    #   resp.table_optimizers[0].table_optimizer.configuration.compaction_configuration.iceberg_configuration.strategy #=> String, one of "binpack", "sort", "z-order"
     #   resp.table_optimizers[0].table_optimizer.configuration.retention_configuration.iceberg_configuration.snapshot_retention_period_in_days #=> Integer
     #   resp.table_optimizers[0].table_optimizer.configuration.retention_configuration.iceberg_configuration.number_of_snapshots_to_retain #=> Integer
     #   resp.table_optimizers[0].table_optimizer.configuration.retention_configuration.iceberg_configuration.clean_expired_files #=> Boolean
@@ -2253,6 +2262,7 @@ module Aws::Glue
     #   resp.table_optimizers[0].table_optimizer.last_run.compaction_metrics.iceberg_metrics.dpu_hours #=> Float
     #   resp.table_optimizers[0].table_optimizer.last_run.compaction_metrics.iceberg_metrics.number_of_dpus #=> Integer
     #   resp.table_optimizers[0].table_optimizer.last_run.compaction_metrics.iceberg_metrics.job_duration_in_hour #=> Float
+    #   resp.table_optimizers[0].table_optimizer.last_run.compaction_strategy #=> String, one of "binpack", "sort", "z-order"
     #   resp.table_optimizers[0].table_optimizer.last_run.retention_metrics.iceberg_metrics.number_of_data_files_deleted #=> Integer
     #   resp.table_optimizers[0].table_optimizer.last_run.retention_metrics.iceberg_metrics.number_of_manifest_files_deleted #=> Integer
     #   resp.table_optimizers[0].table_optimizer.last_run.retention_metrics.iceberg_metrics.number_of_manifest_lists_deleted #=> Integer
@@ -2966,6 +2976,7 @@ module Aws::Glue
     #       federated_catalog: {
     #         identifier: "FederationIdentifier",
     #         connection_name: "NameString",
+    #         connection_type: "NameString",
     #       },
     #       parameters: {
     #         "KeyString" => "ParametersMapValue",
@@ -3577,6 +3588,7 @@ module Aws::Glue
     #       federated_database: {
     #         identifier: "FederationIdentifier",
     #         connection_name: "NameString",
+    #         connection_type: "NameString",
     #       },
     #     },
     #     tags: {
@@ -5132,6 +5144,10 @@ module Aws::Glue
     #   The catalog database in which to create the new table. For Hive
     #   compatibility, this name is entirely lowercase.
     #
+    # @option params [String] :name
+    #   The unique identifier for the table within the specified database that
+    #   will be created in the Glue Data Catalog.
+    #
     # @option params [required, Types::TableInput] :table_input
     #   The `TableInput` object that defines the metadata table to create in
     #   the catalog.
@@ -5154,6 +5170,7 @@ module Aws::Glue
     #   resp = client.create_table({
     #     catalog_id: "CatalogIdString",
     #     database_name: "NameString", # required
+    #     name: "NameString",
     #     table_input: { # required
     #       name: "NameString", # required
     #       description: "DescriptionString",
@@ -5261,6 +5278,49 @@ module Aws::Glue
     #       iceberg_input: {
     #         metadata_operation: "CREATE", # required, accepts CREATE
     #         version: "VersionString",
+    #         create_iceberg_table_input: {
+    #           location: "LocationString", # required
+    #           schema: { # required
+    #             schema_id: 1,
+    #             identifier_field_ids: [1],
+    #             type: "struct", # accepts struct
+    #             fields: [ # required
+    #               {
+    #                 id: 1, # required
+    #                 name: "ColumnNameString", # required
+    #                 type: { # required
+    #                 },
+    #                 required: false, # required
+    #                 doc: "CommentString",
+    #               },
+    #             ],
+    #           },
+    #           partition_spec: {
+    #             fields: [ # required
+    #               {
+    #                 source_id: 1, # required
+    #                 transform: "IcebergTransformString", # required
+    #                 name: "ColumnNameString", # required
+    #                 field_id: 1,
+    #               },
+    #             ],
+    #             spec_id: 1,
+    #           },
+    #           write_order: {
+    #             order_id: 1, # required
+    #             fields: [ # required
+    #               {
+    #                 source_id: 1, # required
+    #                 transform: "IcebergTransformString", # required
+    #                 direction: "asc", # required, accepts asc, desc
+    #                 null_order: "nulls-first", # required, accepts nulls-first, nulls-last
+    #               },
+    #             ],
+    #           },
+    #           properties: {
+    #             "NullableString" => "NullableString",
+    #           },
+    #         },
     #       },
     #     },
     #   })
@@ -5306,6 +5366,11 @@ module Aws::Glue
     #       enabled: false,
     #       vpc_configuration: {
     #         glue_connection_name: "glueConnectionNameString",
+    #       },
+    #       compaction_configuration: {
+    #         iceberg_configuration: {
+    #           strategy: "binpack", # accepts binpack, sort, z-order
+    #         },
     #       },
     #       retention_configuration: {
     #         iceberg_configuration: {
@@ -7212,6 +7277,7 @@ module Aws::Glue
     #   resp.catalog.target_redshift_catalog.catalog_arn #=> String
     #   resp.catalog.federated_catalog.identifier #=> String
     #   resp.catalog.federated_catalog.connection_name #=> String
+    #   resp.catalog.federated_catalog.connection_type #=> String
     #   resp.catalog.catalog_properties.data_lake_access_properties.data_lake_access #=> Boolean
     #   resp.catalog.catalog_properties.data_lake_access_properties.data_transfer_role #=> String
     #   resp.catalog.catalog_properties.data_lake_access_properties.kms_key #=> String
@@ -7331,6 +7397,7 @@ module Aws::Glue
     #   resp.catalog_list[0].target_redshift_catalog.catalog_arn #=> String
     #   resp.catalog_list[0].federated_catalog.identifier #=> String
     #   resp.catalog_list[0].federated_catalog.connection_name #=> String
+    #   resp.catalog_list[0].federated_catalog.connection_type #=> String
     #   resp.catalog_list[0].catalog_properties.data_lake_access_properties.data_lake_access #=> Boolean
     #   resp.catalog_list[0].catalog_properties.data_lake_access_properties.data_transfer_role #=> String
     #   resp.catalog_list[0].catalog_properties.data_lake_access_properties.kms_key #=> String
@@ -8424,6 +8491,7 @@ module Aws::Glue
     #   * {Types::GetDataQualityResultResponse#rule_results #rule_results} => Array&lt;Types::DataQualityRuleResult&gt;
     #   * {Types::GetDataQualityResultResponse#analyzer_results #analyzer_results} => Array&lt;Types::DataQualityAnalyzerResult&gt;
     #   * {Types::GetDataQualityResultResponse#observations #observations} => Array&lt;Types::DataQualityObservation&gt;
+    #   * {Types::GetDataQualityResultResponse#aggregated_metrics #aggregated_metrics} => Types::DataQualityAggregatedMetrics
     #
     # @example Request syntax with placeholder values
     #
@@ -8457,6 +8525,8 @@ module Aws::Glue
     #   resp.rule_results[0].evaluated_metrics #=> Hash
     #   resp.rule_results[0].evaluated_metrics["NameString"] #=> Float
     #   resp.rule_results[0].evaluated_rule #=> String
+    #   resp.rule_results[0].rule_metrics #=> Hash
+    #   resp.rule_results[0].rule_metrics["NameString"] #=> Float
     #   resp.analyzer_results #=> Array
     #   resp.analyzer_results[0].name #=> String
     #   resp.analyzer_results[0].description #=> String
@@ -8473,6 +8543,12 @@ module Aws::Glue
     #   resp.observations[0].metric_based_observation.metric_values.upper_limit #=> Float
     #   resp.observations[0].metric_based_observation.new_rules #=> Array
     #   resp.observations[0].metric_based_observation.new_rules[0] #=> String
+    #   resp.aggregated_metrics.total_rows_processed #=> Float
+    #   resp.aggregated_metrics.total_rows_passed #=> Float
+    #   resp.aggregated_metrics.total_rows_failed #=> Float
+    #   resp.aggregated_metrics.total_rules_processed #=> Float
+    #   resp.aggregated_metrics.total_rules_passed #=> Float
+    #   resp.aggregated_metrics.total_rules_failed #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityResult AWS API Documentation
     #
@@ -8697,6 +8773,7 @@ module Aws::Glue
     #   resp.database.catalog_id #=> String
     #   resp.database.federated_database.identifier #=> String
     #   resp.database.federated_database.connection_name #=> String
+    #   resp.database.federated_database.connection_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDatabase AWS API Documentation
     #
@@ -8774,6 +8851,7 @@ module Aws::Glue
     #   resp.database_list[0].catalog_id #=> String
     #   resp.database_list[0].federated_database.identifier #=> String
     #   resp.database_list[0].federated_database.connection_name #=> String
+    #   resp.database_list[0].federated_database.connection_type #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDatabases AWS API Documentation
@@ -12841,6 +12919,7 @@ module Aws::Glue
     #   resp.table.federated_table.identifier #=> String
     #   resp.table.federated_table.database_identifier #=> String
     #   resp.table.federated_table.connection_name #=> String
+    #   resp.table.federated_table.connection_type #=> String
     #   resp.table.view_definition.is_protected #=> Boolean
     #   resp.table.view_definition.definer #=> String
     #   resp.table.view_definition.sub_objects #=> Array
@@ -12920,6 +12999,7 @@ module Aws::Glue
     #   resp.table_optimizer.configuration.role_arn #=> String
     #   resp.table_optimizer.configuration.enabled #=> Boolean
     #   resp.table_optimizer.configuration.vpc_configuration.glue_connection_name #=> String
+    #   resp.table_optimizer.configuration.compaction_configuration.iceberg_configuration.strategy #=> String, one of "binpack", "sort", "z-order"
     #   resp.table_optimizer.configuration.retention_configuration.iceberg_configuration.snapshot_retention_period_in_days #=> Integer
     #   resp.table_optimizer.configuration.retention_configuration.iceberg_configuration.number_of_snapshots_to_retain #=> Integer
     #   resp.table_optimizer.configuration.retention_configuration.iceberg_configuration.clean_expired_files #=> Boolean
@@ -12938,6 +13018,7 @@ module Aws::Glue
     #   resp.table_optimizer.last_run.compaction_metrics.iceberg_metrics.dpu_hours #=> Float
     #   resp.table_optimizer.last_run.compaction_metrics.iceberg_metrics.number_of_dpus #=> Integer
     #   resp.table_optimizer.last_run.compaction_metrics.iceberg_metrics.job_duration_in_hour #=> Float
+    #   resp.table_optimizer.last_run.compaction_strategy #=> String, one of "binpack", "sort", "z-order"
     #   resp.table_optimizer.last_run.retention_metrics.iceberg_metrics.number_of_data_files_deleted #=> Integer
     #   resp.table_optimizer.last_run.retention_metrics.iceberg_metrics.number_of_manifest_files_deleted #=> Integer
     #   resp.table_optimizer.last_run.retention_metrics.iceberg_metrics.number_of_manifest_lists_deleted #=> Integer
@@ -13058,6 +13139,7 @@ module Aws::Glue
     #   resp.table_version.table.federated_table.identifier #=> String
     #   resp.table_version.table.federated_table.database_identifier #=> String
     #   resp.table_version.table.federated_table.connection_name #=> String
+    #   resp.table_version.table.federated_table.connection_type #=> String
     #   resp.table_version.table.view_definition.is_protected #=> Boolean
     #   resp.table_version.table.view_definition.definer #=> String
     #   resp.table_version.table.view_definition.sub_objects #=> Array
@@ -13206,6 +13288,7 @@ module Aws::Glue
     #   resp.table_versions[0].table.federated_table.identifier #=> String
     #   resp.table_versions[0].table.federated_table.database_identifier #=> String
     #   resp.table_versions[0].table.federated_table.connection_name #=> String
+    #   resp.table_versions[0].table.federated_table.connection_type #=> String
     #   resp.table_versions[0].table.view_definition.is_protected #=> Boolean
     #   resp.table_versions[0].table.view_definition.definer #=> String
     #   resp.table_versions[0].table.view_definition.sub_objects #=> Array
@@ -13382,6 +13465,7 @@ module Aws::Glue
     #   resp.table_list[0].federated_table.identifier #=> String
     #   resp.table_list[0].federated_table.database_identifier #=> String
     #   resp.table_list[0].federated_table.connection_name #=> String
+    #   resp.table_list[0].federated_table.connection_type #=> String
     #   resp.table_list[0].view_definition.is_protected #=> Boolean
     #   resp.table_list[0].view_definition.definer #=> String
     #   resp.table_list[0].view_definition.sub_objects #=> Array
@@ -14118,6 +14202,7 @@ module Aws::Glue
     #   resp.table.federated_table.identifier #=> String
     #   resp.table.federated_table.database_identifier #=> String
     #   resp.table.federated_table.connection_name #=> String
+    #   resp.table.federated_table.connection_type #=> String
     #   resp.table.view_definition.is_protected #=> Boolean
     #   resp.table.view_definition.definer #=> String
     #   resp.table.view_definition.sub_objects #=> Array
@@ -16123,6 +16208,7 @@ module Aws::Glue
     #   resp.table_optimizer_runs[0].compaction_metrics.iceberg_metrics.dpu_hours #=> Float
     #   resp.table_optimizer_runs[0].compaction_metrics.iceberg_metrics.number_of_dpus #=> Integer
     #   resp.table_optimizer_runs[0].compaction_metrics.iceberg_metrics.job_duration_in_hour #=> Float
+    #   resp.table_optimizer_runs[0].compaction_strategy #=> String, one of "binpack", "sort", "z-order"
     #   resp.table_optimizer_runs[0].retention_metrics.iceberg_metrics.number_of_data_files_deleted #=> Integer
     #   resp.table_optimizer_runs[0].retention_metrics.iceberg_metrics.number_of_manifest_files_deleted #=> Integer
     #   resp.table_optimizer_runs[0].retention_metrics.iceberg_metrics.number_of_manifest_lists_deleted #=> Integer
@@ -17070,6 +17156,7 @@ module Aws::Glue
     #   resp.table_list[0].federated_table.identifier #=> String
     #   resp.table_list[0].federated_table.database_identifier #=> String
     #   resp.table_list[0].federated_table.connection_name #=> String
+    #   resp.table_list[0].federated_table.connection_type #=> String
     #   resp.table_list[0].view_definition.is_protected #=> Boolean
     #   resp.table_list[0].view_definition.definer #=> String
     #   resp.table_list[0].view_definition.sub_objects #=> Array
@@ -17818,6 +17905,10 @@ module Aws::Glue
     # learning transform will use the new and improved labels and perform a
     # higher-quality transformation.
     #
+    # Note: The role used to write the generated labeling set to the
+    # `OutputS3Path` is the role associated with the Machine Learning
+    # Transform, specified in the `CreateMLTransform` API.
+    #
     # @option params [required, String] :transform_id
     #   The unique identifier of the machine learning transform.
     #
@@ -18307,6 +18398,7 @@ module Aws::Glue
     #       federated_catalog: {
     #         identifier: "FederationIdentifier",
     #         connection_name: "NameString",
+    #         connection_type: "NameString",
     #       },
     #       parameters: {
     #         "KeyString" => "ParametersMapValue",
@@ -19114,6 +19206,7 @@ module Aws::Glue
     #       federated_database: {
     #         identifier: "FederationIdentifier",
     #         connection_name: "NameString",
+    #         connection_type: "NameString",
     #       },
     #     },
     #   })
@@ -19823,7 +19916,11 @@ module Aws::Glue
     #   The name of the catalog database in which the table resides. For Hive
     #   compatibility, this name is entirely lowercase.
     #
-    # @option params [required, Types::TableInput] :table_input
+    # @option params [String] :name
+    #   The unique identifier for the table within the specified database that
+    #   will be created in the Glue Data Catalog.
+    #
+    # @option params [Types::TableInput] :table_input
     #   An updated `TableInput` object to define the metadata table in the
     #   catalog.
     #
@@ -19845,6 +19942,11 @@ module Aws::Glue
     #   A flag that can be set to true to ignore matching storage descriptor
     #   and subobject matching requirements.
     #
+    # @option params [Types::UpdateOpenTableFormatInput] :update_open_table_format_input
+    #   Input parameters for updating open table format tables in GlueData
+    #   Catalog, serving as a wrapper for format-specific update operations
+    #   such as Apache Iceberg.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -19852,7 +19954,8 @@ module Aws::Glue
     #   resp = client.update_table({
     #     catalog_id: "CatalogIdString",
     #     database_name: "NameString", # required
-    #     table_input: { # required
+    #     name: "NameString",
+    #     table_input: {
     #       name: "NameString", # required
     #       description: "DescriptionString",
     #       owner: "NameString",
@@ -19953,6 +20056,57 @@ module Aws::Glue
     #     version_id: "VersionString",
     #     view_update_action: "ADD", # accepts ADD, REPLACE, ADD_OR_REPLACE, DROP
     #     force: false,
+    #     update_open_table_format_input: {
+    #       update_iceberg_input: {
+    #         update_iceberg_table_input: { # required
+    #           updates: [ # required
+    #             {
+    #               schema: { # required
+    #                 schema_id: 1,
+    #                 identifier_field_ids: [1],
+    #                 type: "struct", # accepts struct
+    #                 fields: [ # required
+    #                   {
+    #                     id: 1, # required
+    #                     name: "ColumnNameString", # required
+    #                     type: { # required
+    #                     },
+    #                     required: false, # required
+    #                     doc: "CommentString",
+    #                   },
+    #                 ],
+    #               },
+    #               partition_spec: {
+    #                 fields: [ # required
+    #                   {
+    #                     source_id: 1, # required
+    #                     transform: "IcebergTransformString", # required
+    #                     name: "ColumnNameString", # required
+    #                     field_id: 1,
+    #                   },
+    #                 ],
+    #                 spec_id: 1,
+    #               },
+    #               sort_order: {
+    #                 order_id: 1, # required
+    #                 fields: [ # required
+    #                   {
+    #                     source_id: 1, # required
+    #                     transform: "IcebergTransformString", # required
+    #                     direction: "asc", # required, accepts asc, desc
+    #                     null_order: "nulls-first", # required, accepts nulls-first, nulls-last
+    #                   },
+    #                 ],
+    #               },
+    #               location: "LocationString", # required
+    #               properties: {
+    #                 "NullableString" => "NullableString",
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTable AWS API Documentation
@@ -19996,6 +20150,11 @@ module Aws::Glue
     #       enabled: false,
     #       vpc_configuration: {
     #         glue_connection_name: "glueConnectionNameString",
+    #       },
+    #       compaction_configuration: {
+    #         iceberg_configuration: {
+    #           strategy: "binpack", # accepts binpack, sort, z-order
+    #         },
     #       },
     #       retention_configuration: {
     #         iceberg_configuration: {
@@ -20289,7 +20448,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.220.0'
+      context[:gem_version] = '1.223.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

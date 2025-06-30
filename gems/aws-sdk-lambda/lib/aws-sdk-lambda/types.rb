@@ -350,10 +350,15 @@ module Aws::Lambda
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-consumer-group-id
     #   @return [String]
     #
+    # @!attribute [rw] schema_registry_config
+    #   Specific configuration settings for a Kafka schema registry.
+    #   @return [Types::KafkaSchemaRegistryConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AmazonManagedKafkaEventSourceConfig AWS API Documentation
     #
     class AmazonManagedKafkaEventSourceConfig < Struct.new(
-      :consumer_group_id)
+      :consumer_group_id,
+      :schema_registry_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1320,7 +1325,7 @@ module Aws::Lambda
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html#invocation-dlq
     #
     # @!attribute [rw] target_arn
     #   The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS
@@ -1580,10 +1585,17 @@ module Aws::Lambda
     end
 
     # A configuration object that specifies the destination of an event
-    # after Lambda processes it.
+    # after Lambda processes it. For more information, see [Adding a
+    # destination][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html#invocation-async-destinations
     #
     # @!attribute [rw] on_success
-    #   The destination configuration for successful invocations.
+    #   The destination configuration for successful invocations. Not
+    #   supported in `CreateEventSourceMapping` or
+    #   `UpdateEventSourceMapping`.
     #   @return [Types::OnSuccess]
     #
     # @!attribute [rw] on_failure
@@ -1951,7 +1963,7 @@ module Aws::Lambda
     #   @return [Time]
     #
     # @!attribute [rw] last_processing_result
-    #   The result of the last Lambda invocation of your function.
+    #   The result of the event source mapping's last processing attempt.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -4071,6 +4083,100 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # Specific access configuration settings that tell Lambda how to
+    # authenticate with your schema registry.
+    #
+    # If you're working with an Glue schema registry, don't provide
+    # authentication details in this object. Instead, ensure that your
+    # execution role has the required permissions for Lambda to access your
+    # cluster.
+    #
+    # If you're working with a Confluent schema registry, choose the
+    # authentication method in the `Type` field, and provide the Secrets
+    # Manager secret ARN in the `URI` field.
+    #
+    # @!attribute [rw] type
+    #   The type of authentication Lambda uses to access your schema
+    #   registry.
+    #   @return [String]
+    #
+    # @!attribute [rw] uri
+    #   The URI of the secret (Secrets Manager secret ARN) to authenticate
+    #   with your schema registry.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/KafkaSchemaRegistryAccessConfig AWS API Documentation
+    #
+    class KafkaSchemaRegistryAccessConfig < Struct.new(
+      :type,
+      :uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specific configuration settings for a Kafka schema registry.
+    #
+    # @!attribute [rw] schema_registry_uri
+    #   The URI for your schema registry. The correct URI format depends on
+    #   the type of schema registry you're using.
+    #
+    #   * For Glue schema registries, use the ARN of the registry.
+    #
+    #   * For Confluent schema registries, use the URL of the registry.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_record_format
+    #   The record format that Lambda delivers to your function after schema
+    #   validation.
+    #
+    #   * Choose `JSON` to have Lambda deliver the record to your function
+    #     as a standard JSON object.
+    #
+    #   * Choose `SOURCE` to have Lambda deliver the record to your function
+    #     in its original source format. Lambda removes all schema metadata,
+    #     such as the schema ID, before sending the record to your function.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_configs
+    #   An array of access configuration objects that tell Lambda how to
+    #   authenticate with your schema registry.
+    #   @return [Array<Types::KafkaSchemaRegistryAccessConfig>]
+    #
+    # @!attribute [rw] schema_validation_configs
+    #   An array of schema validation configuration objects, which tell
+    #   Lambda the message attributes you want to validate and filter using
+    #   your schema registry.
+    #   @return [Array<Types::KafkaSchemaValidationConfig>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/KafkaSchemaRegistryConfig AWS API Documentation
+    #
+    class KafkaSchemaRegistryConfig < Struct.new(
+      :schema_registry_uri,
+      :event_record_format,
+      :access_configs,
+      :schema_validation_configs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specific schema validation configuration settings that tell Lambda the
+    # message attributes you want to validate and filter using your schema
+    # registry.
+    #
+    # @!attribute [rw] attribute
+    #   The attributes you want your schema registry to validate and filter
+    #   for. If you selected `JSON` as the `EventRecordFormat`, Lambda also
+    #   deserializes the selected message attributes.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/KafkaSchemaValidationConfig AWS API Documentation
+    #
+    class KafkaSchemaValidationConfig < Struct.new(
+      :attribute)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An [Lambda layer][1].
     #
     #
@@ -4944,7 +5050,12 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # A destination for events that failed processing.
+    # A destination for events that failed processing. For more information,
+    # see [Adding a destination][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html#invocation-async-destinations
     #
     # @!attribute [rw] destination
     #   The Amazon Resource Name (ARN) of the destination resource.
@@ -4981,6 +5092,11 @@ module Aws::Lambda
     # To retain records of successful [asynchronous invocations][1], you can
     # configure an Amazon SNS topic, Amazon SQS queue, Lambda function, or
     # Amazon EventBridge event bus as the destination.
+    #
+    # <note markdown="1"> `OnSuccess` is not supported in `CreateEventSourceMapping` or
+    # `UpdateEventSourceMapping` requests.
+    #
+    #  </note>
     #
     #
     #
@@ -6008,13 +6124,18 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-consumer-group-id
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/with-kafka-process.html#services-smaa-topic-add
     #   @return [String]
+    #
+    # @!attribute [rw] schema_registry_config
+    #   Specific configuration settings for a Kafka schema registry.
+    #   @return [Types::KafkaSchemaRegistryConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/SelfManagedKafkaEventSourceConfig AWS API Documentation
     #
     class SelfManagedKafkaEventSourceConfig < Struct.new(
-      :consumer_group_id)
+      :consumer_group_id,
+      :schema_registry_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6595,6 +6716,16 @@ module Aws::Lambda
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-max-concurrency
     #   @return [Types::ScalingConfig]
     #
+    # @!attribute [rw] amazon_managed_kafka_event_source_config
+    #   Specific configuration settings for an Amazon Managed Streaming for
+    #   Apache Kafka (Amazon MSK) event source.
+    #   @return [Types::AmazonManagedKafkaEventSourceConfig]
+    #
+    # @!attribute [rw] self_managed_kafka_event_source_config
+    #   Specific configuration settings for a self-managed Apache Kafka
+    #   event source.
+    #   @return [Types::SelfManagedKafkaEventSourceConfig]
+    #
     # @!attribute [rw] document_db_event_source_config
     #   Specific configuration settings for a DocumentDB event source.
     #   @return [Types::DocumentDBEventSourceConfig]
@@ -6648,6 +6779,8 @@ module Aws::Lambda
       :tumbling_window_in_seconds,
       :function_response_types,
       :scaling_config,
+      :amazon_managed_kafka_event_source_config,
+      :self_managed_kafka_event_source_config,
       :document_db_event_source_config,
       :kms_key_arn,
       :metrics_config,

@@ -116,6 +116,14 @@ module Aws::S3Control
     #   associated with this access point.
     #   @return [String]
     #
+    # @!attribute [rw] data_source_id
+    #   A unique identifier for the data source of the access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_type
+    #   The type of the data source that the access point is attached to.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/AccessPoint AWS API Documentation
     #
     class AccessPoint < Struct.new(
@@ -125,7 +133,9 @@ module Aws::S3Control
       :bucket,
       :access_point_arn,
       :alias,
-      :bucket_account_id)
+      :bucket_account_id,
+      :data_source_id,
+      :data_source_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -934,7 +944,7 @@ module Aws::S3Control
     #   Web Services Availability Zone or Local Zone) of your bucket
     #   location, followed by `--xa-s3`. For more information, see [Managing
     #   access to shared datasets in directory buckets with access
-    #   points][1] in the Amazon S3 User Guide.
+    #   points][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -989,9 +999,9 @@ module Aws::S3Control
     #   For directory buckets, you can filter access control to specific
     #   prefixes, API operations, or a combination of both. For more
     #   information, see [Managing access to shared datasets in directory
-    #   buckets with access points][1] in the Amazon S3 User Guide.
+    #   buckets with access points][1] in the *Amazon S3 User Guide*.
     #
-    #   <note markdown="1"> Scope is not supported for access points for general purpose
+    #   <note markdown="1"> Scope is only supported for access points attached to directory
     #   buckets.
     #
     #    </note>
@@ -2853,6 +2863,14 @@ module Aws::S3Control
     #   associated with this access point.
     #   @return [String]
     #
+    # @!attribute [rw] data_source_id
+    #   The unique identifier for the data source of the access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_type
+    #   The type of the data source that the access point is attached to.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointResult AWS API Documentation
     #
     class GetAccessPointResult < Struct.new(
@@ -2865,7 +2883,9 @@ module Aws::S3Control
       :alias,
       :access_point_arn,
       :endpoints,
-      :bucket_account_id)
+      :bucket_account_id,
+      :data_source_id,
+      :data_source_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5068,13 +5088,25 @@ module Aws::S3Control
     #   access points.
     #   @return [Integer]
     #
+    # @!attribute [rw] data_source_id
+    #   The unique identifier for the data source of the access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_type
+    #   The type of the data source that the access point is attached to.
+    #   Returns only access points attached to S3 buckets by default. To
+    #   return all access points specify `DataSourceType` as `ALL`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessPointsRequest AWS API Documentation
     #
     class ListAccessPointsRequest < Struct.new(
       :account_id,
       :bucket,
       :next_token,
-      :max_results)
+      :max_results,
+      :data_source_id,
+      :data_source_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6261,16 +6293,15 @@ module Aws::S3Control
     #
     # @!attribute [rw] policy
     #   The policy that you want to apply to the specified access point. For
-    #   more information about access point policies, see [Managing access
-    #   to shared datasets in general purpose buckets with access points][1]
-    #   or [Managing access to shared datasets in directory bucekts with
-    #   access
-    #   points](AmazonS3/latest/userguide/access-points-directory-buckets.html)
-    #   in the *Amazon S3 User Guide*.
+    #   more information about access point policies, see [Managing data
+    #   access with Amazon S3 access points][1] or [Managing access to
+    #   shared datasets in directory buckets with access points][2] in the
+    #   *Amazon S3 User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-directory-buckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutAccessPointPolicyRequest AWS API Documentation
@@ -7853,7 +7884,7 @@ module Aws::S3Control
     # prefixes, API operations, or a combination of both.
     #
     # For more information, see [Manage the scope of your access points for
-    # directory buckets.][1]
+    # directory buckets][1].
     #
     #
     #

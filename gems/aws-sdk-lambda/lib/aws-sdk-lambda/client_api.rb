@@ -196,6 +196,13 @@ module Aws::Lambda
     KMSInvalidStateException = Shapes::StructureShape.new(name: 'KMSInvalidStateException')
     KMSKeyArn = Shapes::StringShape.new(name: 'KMSKeyArn')
     KMSNotFoundException = Shapes::StructureShape.new(name: 'KMSNotFoundException')
+    KafkaSchemaRegistryAccessConfig = Shapes::StructureShape.new(name: 'KafkaSchemaRegistryAccessConfig')
+    KafkaSchemaRegistryAccessConfigList = Shapes::ListShape.new(name: 'KafkaSchemaRegistryAccessConfigList')
+    KafkaSchemaRegistryAuthType = Shapes::StringShape.new(name: 'KafkaSchemaRegistryAuthType')
+    KafkaSchemaRegistryConfig = Shapes::StructureShape.new(name: 'KafkaSchemaRegistryConfig')
+    KafkaSchemaValidationAttribute = Shapes::StringShape.new(name: 'KafkaSchemaValidationAttribute')
+    KafkaSchemaValidationConfig = Shapes::StructureShape.new(name: 'KafkaSchemaValidationConfig')
+    KafkaSchemaValidationConfigList = Shapes::ListShape.new(name: 'KafkaSchemaValidationConfigList')
     LastUpdateStatus = Shapes::StringShape.new(name: 'LastUpdateStatus')
     LastUpdateStatusReason = Shapes::StringShape.new(name: 'LastUpdateStatusReason')
     LastUpdateStatusReasonCode = Shapes::StringShape.new(name: 'LastUpdateStatusReasonCode')
@@ -321,6 +328,8 @@ module Aws::Lambda
     S3Key = Shapes::StringShape.new(name: 'S3Key')
     S3ObjectVersion = Shapes::StringShape.new(name: 'S3ObjectVersion')
     ScalingConfig = Shapes::StructureShape.new(name: 'ScalingConfig')
+    SchemaRegistryEventRecordFormat = Shapes::StringShape.new(name: 'SchemaRegistryEventRecordFormat')
+    SchemaRegistryUri = Shapes::StringShape.new(name: 'SchemaRegistryUri')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     SelfManagedEventSource = Shapes::StructureShape.new(name: 'SelfManagedEventSource')
@@ -454,6 +463,7 @@ module Aws::Lambda
     AllowedPublishers.struct_class = Types::AllowedPublishers
 
     AmazonManagedKafkaEventSourceConfig.add_member(:consumer_group_id, Shapes::ShapeRef.new(shape: URI, location_name: "ConsumerGroupId"))
+    AmazonManagedKafkaEventSourceConfig.add_member(:schema_registry_config, Shapes::ShapeRef.new(shape: KafkaSchemaRegistryConfig, location_name: "SchemaRegistryConfig"))
     AmazonManagedKafkaEventSourceConfig.struct_class = Types::AmazonManagedKafkaEventSourceConfig
 
     ArchitecturesList.member = Shapes::ShapeRef.new(shape: Architecture)
@@ -1069,6 +1079,23 @@ module Aws::Lambda
     KMSNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     KMSNotFoundException.struct_class = Types::KMSNotFoundException
 
+    KafkaSchemaRegistryAccessConfig.add_member(:type, Shapes::ShapeRef.new(shape: KafkaSchemaRegistryAuthType, location_name: "Type"))
+    KafkaSchemaRegistryAccessConfig.add_member(:uri, Shapes::ShapeRef.new(shape: Arn, location_name: "URI"))
+    KafkaSchemaRegistryAccessConfig.struct_class = Types::KafkaSchemaRegistryAccessConfig
+
+    KafkaSchemaRegistryAccessConfigList.member = Shapes::ShapeRef.new(shape: KafkaSchemaRegistryAccessConfig)
+
+    KafkaSchemaRegistryConfig.add_member(:schema_registry_uri, Shapes::ShapeRef.new(shape: SchemaRegistryUri, location_name: "SchemaRegistryURI"))
+    KafkaSchemaRegistryConfig.add_member(:event_record_format, Shapes::ShapeRef.new(shape: SchemaRegistryEventRecordFormat, location_name: "EventRecordFormat"))
+    KafkaSchemaRegistryConfig.add_member(:access_configs, Shapes::ShapeRef.new(shape: KafkaSchemaRegistryAccessConfigList, location_name: "AccessConfigs"))
+    KafkaSchemaRegistryConfig.add_member(:schema_validation_configs, Shapes::ShapeRef.new(shape: KafkaSchemaValidationConfigList, location_name: "SchemaValidationConfigs"))
+    KafkaSchemaRegistryConfig.struct_class = Types::KafkaSchemaRegistryConfig
+
+    KafkaSchemaValidationConfig.add_member(:attribute, Shapes::ShapeRef.new(shape: KafkaSchemaValidationAttribute, location_name: "Attribute"))
+    KafkaSchemaValidationConfig.struct_class = Types::KafkaSchemaValidationConfig
+
+    KafkaSchemaValidationConfigList.member = Shapes::ShapeRef.new(shape: KafkaSchemaValidationConfig)
+
     Layer.add_member(:arn, Shapes::ShapeRef.new(shape: LayerVersionArn, location_name: "Arn"))
     Layer.add_member(:code_size, Shapes::ShapeRef.new(shape: Long, location_name: "CodeSize"))
     Layer.add_member(:signing_profile_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SigningProfileVersionArn"))
@@ -1389,6 +1416,7 @@ module Aws::Lambda
     SelfManagedEventSource.struct_class = Types::SelfManagedEventSource
 
     SelfManagedKafkaEventSourceConfig.add_member(:consumer_group_id, Shapes::ShapeRef.new(shape: URI, location_name: "ConsumerGroupId"))
+    SelfManagedKafkaEventSourceConfig.add_member(:schema_registry_config, Shapes::ShapeRef.new(shape: KafkaSchemaRegistryConfig, location_name: "SchemaRegistryConfig"))
     SelfManagedKafkaEventSourceConfig.struct_class = Types::SelfManagedKafkaEventSourceConfig
 
     ServiceException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
@@ -1497,6 +1525,8 @@ module Aws::Lambda
     UpdateEventSourceMappingRequest.add_member(:tumbling_window_in_seconds, Shapes::ShapeRef.new(shape: TumblingWindowInSeconds, location_name: "TumblingWindowInSeconds"))
     UpdateEventSourceMappingRequest.add_member(:function_response_types, Shapes::ShapeRef.new(shape: FunctionResponseTypeList, location_name: "FunctionResponseTypes"))
     UpdateEventSourceMappingRequest.add_member(:scaling_config, Shapes::ShapeRef.new(shape: ScalingConfig, location_name: "ScalingConfig"))
+    UpdateEventSourceMappingRequest.add_member(:amazon_managed_kafka_event_source_config, Shapes::ShapeRef.new(shape: AmazonManagedKafkaEventSourceConfig, location_name: "AmazonManagedKafkaEventSourceConfig"))
+    UpdateEventSourceMappingRequest.add_member(:self_managed_kafka_event_source_config, Shapes::ShapeRef.new(shape: SelfManagedKafkaEventSourceConfig, location_name: "SelfManagedKafkaEventSourceConfig"))
     UpdateEventSourceMappingRequest.add_member(:document_db_event_source_config, Shapes::ShapeRef.new(shape: DocumentDBEventSourceConfig, location_name: "DocumentDBEventSourceConfig"))
     UpdateEventSourceMappingRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "KMSKeyArn"))
     UpdateEventSourceMappingRequest.add_member(:metrics_config, Shapes::ShapeRef.new(shape: EventSourceMappingMetricsConfig, location_name: "MetricsConfig"))

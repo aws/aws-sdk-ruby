@@ -2108,6 +2108,7 @@ module Aws::EC2
 
     class CreateImageRequest
       attr_accessor tag_specifications: ::Array[Types::TagSpecification]
+      attr_accessor snapshot_location: ("regional" | "local")
       attr_accessor dry_run: bool
       attr_accessor instance_id: ::String
       attr_accessor name: ::String
@@ -2627,6 +2628,7 @@ module Aws::EC2
       attr_accessor local_gateway_id: ::String
       attr_accessor carrier_gateway_id: ::String
       attr_accessor core_network_arn: ::String
+      attr_accessor odb_network_arn: ::String
       attr_accessor dry_run: bool
       attr_accessor route_table_id: ::String
       attr_accessor destination_cidr_block: ::String
@@ -7542,8 +7544,10 @@ module Aws::EC2
       attr_accessor kms_key_id: ::String
       attr_accessor throughput: ::Integer
       attr_accessor outpost_arn: ::String
+      attr_accessor availability_zone: ::String
       attr_accessor encrypted: bool
       attr_accessor volume_initialization_rate: ::Integer
+      attr_accessor availability_zone_id: ::String
       SENSITIVE: []
     end
 
@@ -13836,6 +13840,7 @@ module Aws::EC2
       attr_accessor local_gateway_id: ::String
       attr_accessor carrier_gateway_id: ::String
       attr_accessor core_network_arn: ::String
+      attr_accessor odb_network_arn: ::String
       attr_accessor dry_run: bool
       attr_accessor route_table_id: ::String
       attr_accessor destination_cidr_block: ::String
@@ -14411,6 +14416,7 @@ module Aws::EC2
       attr_accessor state: ("active" | "blackhole")
       attr_accessor vpc_peering_connection_id: ::String
       attr_accessor core_network_arn: ::String
+      attr_accessor odb_network_arn: ::String
       SENSITIVE: []
     end
 

@@ -190,6 +190,10 @@ module Aws::LicenseManager
     Options = Shapes::StructureShape.new(name: 'Options')
     OrganizationConfiguration = Shapes::StructureShape.new(name: 'OrganizationConfiguration')
     PrincipalArnList = Shapes::ListShape.new(name: 'PrincipalArnList')
+    ProductCodeId = Shapes::StringShape.new(name: 'ProductCodeId')
+    ProductCodeList = Shapes::ListShape.new(name: 'ProductCodeList')
+    ProductCodeListItem = Shapes::StructureShape.new(name: 'ProductCodeListItem')
+    ProductCodeType = Shapes::StringShape.new(name: 'ProductCodeType')
     ProductInformation = Shapes::StructureShape.new(name: 'ProductInformation')
     ProductInformationFilter = Shapes::StructureShape.new(name: 'ProductInformationFilter')
     ProductInformationFilterList = Shapes::ListShape.new(name: 'ProductInformationFilterList')
@@ -719,6 +723,7 @@ module Aws::LicenseManager
     LicenseConfigurations.member = Shapes::ShapeRef.new(shape: LicenseConfiguration)
 
     LicenseConversionContext.add_member(:usage_operation, Shapes::ShapeRef.new(shape: UsageOperation, location_name: "UsageOperation"))
+    LicenseConversionContext.add_member(:product_codes, Shapes::ShapeRef.new(shape: ProductCodeList, location_name: "ProductCodes"))
     LicenseConversionContext.struct_class = Types::LicenseConversionContext
 
     LicenseConversionTask.add_member(:license_conversion_task_id, Shapes::ShapeRef.new(shape: LicenseConversionTaskId, location_name: "LicenseConversionTaskId"))
@@ -942,6 +947,12 @@ module Aws::LicenseManager
     OrganizationConfiguration.struct_class = Types::OrganizationConfiguration
 
     PrincipalArnList.member = Shapes::ShapeRef.new(shape: Arn)
+
+    ProductCodeList.member = Shapes::ShapeRef.new(shape: ProductCodeListItem)
+
+    ProductCodeListItem.add_member(:product_code_id, Shapes::ShapeRef.new(shape: ProductCodeId, required: true, location_name: "ProductCodeId"))
+    ProductCodeListItem.add_member(:product_code_type, Shapes::ShapeRef.new(shape: ProductCodeType, required: true, location_name: "ProductCodeType"))
+    ProductCodeListItem.struct_class = Types::ProductCodeListItem
 
     ProductInformation.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceType"))
     ProductInformation.add_member(:product_information_filter_list, Shapes::ShapeRef.new(shape: ProductInformationFilterList, required: true, location_name: "ProductInformationFilterList"))

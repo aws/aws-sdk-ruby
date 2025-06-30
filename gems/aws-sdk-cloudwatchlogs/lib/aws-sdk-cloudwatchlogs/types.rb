@@ -5419,6 +5419,42 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # This processor converts logs into [Open Cybersecurity Schema Framework
+    # (OCSF)][1] events.
+    #
+    # For more information about this processor including examples, see [
+    # parseToOSCF][2] in the *CloudWatch Logs User Guide*.
+    #
+    #
+    #
+    # [1]: https://ocsf.io
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-parseToOCSF
+    #
+    # @!attribute [rw] source
+    #   The path to the field in the log event that you want to parse. If
+    #   you omit this value, the whole log message is parsed.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_source
+    #   Specify the service or process that produces the log events that
+    #   will be converted with this processor.
+    #   @return [String]
+    #
+    # @!attribute [rw] ocsf_version
+    #   Specify which version of the OCSF schema to use for the transformed
+    #   log events.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ParseToOCSF AWS API Documentation
+    #
+    class ParseToOCSF < Struct.new(
+      :source,
+      :event_source,
+      :ocsf_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Use this processor to parse Amazon VPC vended logs, extract fields,
     # and and convert them into a JSON format. This processor always
     # processes the entire log event message.
@@ -5678,6 +5714,11 @@ module Aws::CloudWatchLogs
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-parseRoute53
     #   @return [Types::ParseRoute53]
     #
+    # @!attribute [rw] parse_to_ocsf
+    #   Use this processor to convert logs into Open Cybersecurity Schema
+    #   Framework (OCSF) format
+    #   @return [Types::ParseToOCSF]
+    #
     # @!attribute [rw] parse_postgres
     #   Use this parameter to include the [ parsePostGres][1] processor in
     #   your transformer.
@@ -5784,6 +5825,7 @@ module Aws::CloudWatchLogs
       :parse_json,
       :parse_key_value,
       :parse_route_53,
+      :parse_to_ocsf,
       :parse_postgres,
       :parse_vpc,
       :parse_waf,
@@ -6154,11 +6196,14 @@ module Aws::CloudWatchLogs
     #     `AD_DECISION_SERVER_LOGS`, `MANIFEST_SERVICE_LOGS`, and
     #     `TRANSCODE_LOGS`.
     #
+    #   * For Entity Resolution, the valid value is `WORKFLOW_LOGS`.
+    #
     #   * For IAM Identity Center, the valid value is `ERROR_LOGS`.
     #
     #   * For Amazon Q, the valid value is `EVENT_LOGS`.
     #
-    #   * For Amazon SES mail manager, the valid value is `APPLICATION_LOG`.
+    #   * For Amazon SES mail manager, the valid values are
+    #     `APPLICATION_LOG` and `TRAFFIC_POLICY_DEBUG_LOGS`.
     #
     #   * For Amazon WorkMail, the valid values are `ACCESS_CONTROL_LOGS`,
     #     `AUTHENTICATION_LOGS`, `WORKMAIL_AVAILABILITY_PROVIDER_LOGS`,

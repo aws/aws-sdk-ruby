@@ -3808,6 +3808,9 @@ module Aws::CloudWatchLogs
     #   resp.transformer_config[0].parse_key_value.non_match_value #=> String
     #   resp.transformer_config[0].parse_key_value.overwrite_if_exists #=> Boolean
     #   resp.transformer_config[0].parse_route_53.source #=> String
+    #   resp.transformer_config[0].parse_to_ocsf.source #=> String
+    #   resp.transformer_config[0].parse_to_ocsf.event_source #=> String, one of "CloudTrail", "Route53Resolver", "VPCFlow", "EKSAudit", "AWSWAF"
+    #   resp.transformer_config[0].parse_to_ocsf.ocsf_version #=> String, one of "V1.1"
     #   resp.transformer_config[0].parse_postgres.source #=> String
     #   resp.transformer_config[0].parse_vpc.source #=> String
     #   resp.transformer_config[0].parse_waf.source #=> String
@@ -4983,11 +4986,14 @@ module Aws::CloudWatchLogs
     #     `AD_DECISION_SERVER_LOGS`, `MANIFEST_SERVICE_LOGS`, and
     #     `TRANSCODE_LOGS`.
     #
+    #   * For Entity Resolution, the valid value is `WORKFLOW_LOGS`.
+    #
     #   * For IAM Identity Center, the valid value is `ERROR_LOGS`.
     #
     #   * For Amazon Q, the valid value is `EVENT_LOGS`.
     #
-    #   * For Amazon SES mail manager, the valid value is `APPLICATION_LOG`.
+    #   * For Amazon SES mail manager, the valid values are `APPLICATION_LOG`
+    #     and `TRAFFIC_POLICY_DEBUG_LOGS`.
     #
     #   * For Amazon WorkMail, the valid values are `ACCESS_CONTROL_LOGS`,
     #     `AUTHENTICATION_LOGS`, `WORKMAIL_AVAILABILITY_PROVIDER_LOGS`,
@@ -5345,12 +5351,11 @@ module Aws::CloudWatchLogs
     #   as the sum of all event messages in UTF-8, plus 26 bytes for each
     #   log event.
     #
-    # * None of the log events in the batch can be more than 2 hours in the
-    #   future.
+    # * Events more than 2 hours in the future are rejected while processing
+    #   remaining valid events.
     #
-    # * None of the log events in the batch can be more than 14 days in the
-    #   past. Also, none of the log events can be from earlier than the
-    #   retention period of the log group.
+    # * Events older than 14 days or preceding the log group's retention
+    #   period are rejected while processing remaining valid events.
     #
     # * The log events in the batch must be in chronological order by their
     #   timestamp. The timestamp is the time that the event occurred,
@@ -5359,17 +5364,21 @@ module Aws::CloudWatchLogs
     #   Web Services SDK for .NET, the timestamp is specified in .NET
     #   format: `yyyy-mm-ddThh:mm:ss`. For example, `2017-09-15T13:45:30`.)
     #
-    # * A batch of log events in a single request cannot span more than 24
-    #   hours. Otherwise, the operation fails.
+    # * A batch of log events in a single request must be in a chronological
+    #   order. Otherwise, the operation fails.
     #
     # * Each log event can be no larger than 1 MB.
     #
     # * The maximum number of log events in a batch is 10,000.
     #
-    # * The quota of five requests per second per log stream has been
-    #   removed. Instead, `PutLogEvents` actions are throttled based on a
-    #   per-second per-account quota. You can request an increase to the
-    #   per-second throttling quota by using the Service Quotas service.
+    # * For valid events (within 14 days in the past to 2 hours in future),
+    #   the time span in a single batch cannot exceed 24 hours. Otherwise,
+    #   the operation fails.
+    #
+    # The quota of five requests per second per log stream has been removed.
+    # Instead, `PutLogEvents` actions are throttled based on a per-second
+    # per-account quota. You can request an increase to the per-second
+    # throttling quota by using the Service Quotas service.
     #
     # If a call to `PutLogEvents` returns "UnrecognizedClientException"
     # the most likely cause is a non-valid Amazon Web Services access key ID
@@ -6049,6 +6058,11 @@ module Aws::CloudWatchLogs
     #         },
     #         parse_route_53: {
     #           source: "Source",
+    #         },
+    #         parse_to_ocsf: {
+    #           source: "Source",
+    #           event_source: "CloudTrail", # required, accepts CloudTrail, Route53Resolver, VPCFlow, EKSAudit, AWSWAF
+    #           ocsf_version: "V1.1", # required, accepts V1.1
     #         },
     #         parse_postgres: {
     #           source: "Source",
@@ -6850,6 +6864,11 @@ module Aws::CloudWatchLogs
     #         parse_route_53: {
     #           source: "Source",
     #         },
+    #         parse_to_ocsf: {
+    #           source: "Source",
+    #           event_source: "CloudTrail", # required, accepts CloudTrail, Route53Resolver, VPCFlow, EKSAudit, AWSWAF
+    #           ocsf_version: "V1.1", # required, accepts V1.1
+    #         },
     #         parse_postgres: {
     #           source: "Source",
     #         },
@@ -7198,7 +7217,7 @@ module Aws::CloudWatchLogs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.117.0'
+      context[:gem_version] = '1.118.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

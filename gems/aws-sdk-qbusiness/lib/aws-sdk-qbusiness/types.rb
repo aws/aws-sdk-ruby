@@ -548,6 +548,12 @@ module Aws::QBusiness
     #   perform.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] conditions
+    #   The conditions that restrict when the permission is effective. These
+    #   conditions can be used to limit the permission based on specific
+    #   attributes of the request.
+    #   @return [Array<Types::PermissionCondition>]
+    #
     # @!attribute [rw] principal
     #   The Amazon Resource Name of the IAM role for the ISV that is being
     #   granted permission.
@@ -559,6 +565,7 @@ module Aws::QBusiness
       :application_id,
       :statement_id,
       :actions,
+      :conditions,
       :principal)
       SENSITIVE = []
       include Aws::Structure
@@ -1978,6 +1985,12 @@ module Aws::QBusiness
     #   A friendly name for the data accessor.
     #   @return [String]
     #
+    # @!attribute [rw] authentication_detail
+    #   The authentication configuration details for the data accessor. This
+    #   specifies how the ISV will authenticate when accessing data through
+    #   this data accessor.
+    #   @return [Types::DataAccessorAuthenticationDetail]
+    #
     # @!attribute [rw] tags
     #   The tags to associate with the data accessor.
     #   @return [Array<Types::Tag>]
@@ -1990,6 +2003,7 @@ module Aws::QBusiness
       :action_configurations,
       :client_token,
       :display_name,
+      :authentication_detail,
       :tags)
       SENSITIVE = [:display_name]
       include Aws::Structure
@@ -2715,6 +2729,12 @@ module Aws::QBusiness
     #   associated with this data accessor.
     #   @return [String]
     #
+    # @!attribute [rw] authentication_detail
+    #   The authentication configuration details for the data accessor. This
+    #   specifies how the ISV authenticates when accessing data through this
+    #   data accessor.
+    #   @return [Types::DataAccessorAuthenticationDetail]
+    #
     # @!attribute [rw] created_at
     #   The timestamp when the data accessor was created.
     #   @return [Time]
@@ -2731,9 +2751,92 @@ module Aws::QBusiness
       :data_accessor_arn,
       :idc_application_arn,
       :principal,
+      :authentication_detail,
       :created_at,
       :updated_at)
       SENSITIVE = [:display_name]
+      include Aws::Structure
+    end
+
+    # A union type that contains the specific authentication configuration
+    # based on the authentication type selected.
+    #
+    # @note DataAccessorAuthenticationConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note DataAccessorAuthenticationConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DataAccessorAuthenticationConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] idc_trusted_token_issuer_configuration
+    #   Configuration for IAM Identity Center Trusted Token Issuer (TTI)
+    #   authentication used when the authentication type is
+    #   `AWS_IAM_IDC_TTI`.
+    #   @return [Types::DataAccessorIdcTrustedTokenIssuerConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/DataAccessorAuthenticationConfiguration AWS API Documentation
+    #
+    class DataAccessorAuthenticationConfiguration < Struct.new(
+      :idc_trusted_token_issuer_configuration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class IdcTrustedTokenIssuerConfiguration < DataAccessorAuthenticationConfiguration; end
+      class Unknown < DataAccessorAuthenticationConfiguration; end
+    end
+
+    # Contains the authentication configuration details for a data accessor.
+    # This structure defines how the ISV authenticates when accessing data
+    # through the data accessor.
+    #
+    # @!attribute [rw] authentication_type
+    #   The type of authentication to use for the data accessor. This
+    #   determines how the ISV authenticates when accessing data. You can
+    #   use one of two authentication types:
+    #
+    #   * `AWS_IAM_IDC_TTI` - Authentication using IAM Identity Center
+    #     Trusted Token Issuer (TTI). This authentication type allows the
+    #     ISV to use a trusted token issuer to generate tokens for accessing
+    #     the data.
+    #
+    #   * `AWS_IAM_IDC_AUTH_CODE` - Authentication using IAM Identity Center
+    #     authorization code flow. This authentication type uses the
+    #     standard OAuth 2.0 authorization code flow for authentication.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_configuration
+    #   The specific authentication configuration based on the
+    #   authentication type.
+    #   @return [Types::DataAccessorAuthenticationConfiguration]
+    #
+    # @!attribute [rw] external_ids
+    #   A list of external identifiers associated with this authentication
+    #   configuration. These are used to correlate the data accessor with
+    #   external systems.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/DataAccessorAuthenticationDetail AWS API Documentation
+    #
+    class DataAccessorAuthenticationDetail < Struct.new(
+      :authentication_type,
+      :authentication_configuration,
+      :external_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration details for IAM Identity Center Trusted Token Issuer
+    # (TTI) authentication.
+    #
+    # @!attribute [rw] idc_trusted_token_issuer_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center Trusted
+    #   Token Issuer that will be used for authentication.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/DataAccessorIdcTrustedTokenIssuerConfiguration AWS API Documentation
+    #
+    class DataAccessorIdcTrustedTokenIssuerConfiguration < Struct.new(
+      :idc_trusted_token_issuer_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4248,6 +4351,12 @@ module Aws::QBusiness
     #   any associated filters.
     #   @return [Array<Types::ActionConfiguration>]
     #
+    # @!attribute [rw] authentication_detail
+    #   The authentication configuration details for the data accessor. This
+    #   specifies how the ISV authenticates when accessing data through this
+    #   data accessor.
+    #   @return [Types::DataAccessorAuthenticationDetail]
+    #
     # @!attribute [rw] created_at
     #   The timestamp when the data accessor was created.
     #   @return [Time]
@@ -4266,6 +4375,7 @@ module Aws::QBusiness
       :idc_application_arn,
       :principal,
       :action_configurations,
+      :authentication_detail,
       :created_at,
       :updated_at)
       SENSITIVE = [:display_name]
@@ -5071,7 +5181,7 @@ module Aws::QBusiness
     #   @return [Types::DocumentAttributeCondition]
     #
     # @!attribute [rw] lambda_arn
-    #   The Amazon Resource Name (ARN) of the Lambda function sduring
+    #   The Amazon Resource Name (ARN) of the Lambda function during
     #   ingestion. For more information, see [Using Lambda functions for
     #   Amazon Q Business document enrichment][1].
     #
@@ -6606,6 +6716,35 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
+    # Defines a condition that restricts when a permission is effective.
+    # Conditions allow you to control access based on specific attributes of
+    # the request.
+    #
+    # @!attribute [rw] condition_operator
+    #   The operator to use for the condition evaluation. This determines
+    #   how the condition values are compared.
+    #   @return [String]
+    #
+    # @!attribute [rw] condition_key
+    #   The key for the condition. This identifies the attribute that the
+    #   condition applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] condition_values
+    #   The values to compare against using the specified condition
+    #   operator.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/PermissionCondition AWS API Documentation
+    #
+    class PermissionCondition < Struct.new(
+      :condition_operator,
+      :condition_key,
+      :condition_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration information about chat response personalization. For
     # more information, see [Personalizing chat responses][1].
     #
@@ -8081,6 +8220,12 @@ module Aws::QBusiness
     #   actions and any associated filters.
     #   @return [Array<Types::ActionConfiguration>]
     #
+    # @!attribute [rw] authentication_detail
+    #   The updated authentication configuration details for the data
+    #   accessor. This specifies how the ISV will authenticate when
+    #   accessing data through this data accessor.
+    #   @return [Types::DataAccessorAuthenticationDetail]
+    #
     # @!attribute [rw] display_name
     #   The updated friendly name for the data accessor.
     #   @return [String]
@@ -8091,6 +8236,7 @@ module Aws::QBusiness
       :application_id,
       :data_accessor_id,
       :action_configurations,
+      :authentication_detail,
       :display_name)
       SENSITIVE = [:display_name]
       include Aws::Structure

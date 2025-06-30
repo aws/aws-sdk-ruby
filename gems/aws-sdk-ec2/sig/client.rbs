@@ -1718,6 +1718,7 @@ module Aws
                               ]?
                             },
                           ],
+                          ?snapshot_location: ("regional" | "local"),
                           ?dry_run: bool,
                           instance_id: ::String,
                           name: ::String,
@@ -1734,8 +1735,10 @@ module Aws
                                 kms_key_id: ::String?,
                                 throughput: ::Integer?,
                                 outpost_arn: ::String?,
+                                availability_zone: ::String?,
                                 encrypted: bool?,
-                                volume_initialization_rate: ::Integer?
+                                volume_initialization_rate: ::Integer?,
+                                availability_zone_id: ::String?
                               }?,
                               no_device: ::String?,
                               device_name: ::String?,
@@ -3206,6 +3209,7 @@ module Aws
                           ?local_gateway_id: ::String,
                           ?carrier_gateway_id: ::String,
                           ?core_network_arn: ::String,
+                          ?odb_network_arn: ::String,
                           ?dry_run: bool,
                           route_table_id: ::String,
                           ?destination_cidr_block: ::String,
@@ -12613,8 +12617,10 @@ module Aws
                                   kms_key_id: ::String?,
                                   throughput: ::Integer?,
                                   outpost_arn: ::String?,
+                                  availability_zone: ::String?,
                                   encrypted: bool?,
-                                  volume_initialization_rate: ::Integer?
+                                  volume_initialization_rate: ::Integer?,
+                                  availability_zone_id: ::String?
                                 }?,
                                 no_device: ::String?,
                                 device_name: ::String?,
@@ -12840,6 +12846,7 @@ module Aws
                            ?local_gateway_id: ::String,
                            ?carrier_gateway_id: ::String,
                            ?core_network_arn: ::String,
+                           ?odb_network_arn: ::String,
                            ?dry_run: bool,
                            route_table_id: ::String,
                            ?destination_cidr_block: ::String,
@@ -12940,8 +12947,10 @@ module Aws
                                             kms_key_id: ::String?,
                                             throughput: ::Integer?,
                                             outpost_arn: ::String?,
+                                            availability_zone: ::String?,
                                             encrypted: bool?,
-                                            volume_initialization_rate: ::Integer?
+                                            volume_initialization_rate: ::Integer?,
+                                            availability_zone_id: ::String?
                                           }?,
                                           no_device: ::String?,
                                           device_name: ::String?,
@@ -13252,8 +13261,10 @@ module Aws
                                             kms_key_id: ::String?,
                                             throughput: ::Integer?,
                                             outpost_arn: ::String?,
+                                            availability_zone: ::String?,
                                             encrypted: bool?,
-                                            volume_initialization_rate: ::Integer?
+                                            volume_initialization_rate: ::Integer?,
+                                            availability_zone_id: ::String?
                                           }?,
                                           no_device: ::String?,
                                           device_name: ::String?,
@@ -13647,8 +13658,10 @@ module Aws
                                  kms_key_id: ::String?,
                                  throughput: ::Integer?,
                                  outpost_arn: ::String?,
+                                 availability_zone: ::String?,
                                  encrypted: bool?,
-                                 volume_initialization_rate: ::Integer?
+                                 volume_initialization_rate: ::Integer?,
+                                 availability_zone_id: ::String?
                                }?,
                                no_device: ::String?,
                                device_name: ::String?,

@@ -21,6 +21,27 @@ module Aws::IoTManagedIntegrations
       SENSITIVE: []
     end
 
+    class AccountAssociationItem
+      attr_accessor account_association_id: ::String
+      attr_accessor association_state: ("ASSOCIATION_IN_PROGRESS" | "ASSOCIATION_FAILED" | "ASSOCIATION_SUCCEEDED" | "ASSOCIATION_DELETING" | "REFRESH_TOKEN_EXPIRED")
+      attr_accessor error_message: ::String
+      attr_accessor connector_destination_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class AuthConfig
+      attr_accessor o_auth: Types::OAuthConfig
+      SENSITIVE: []
+    end
+
+    class AuthConfigUpdate
+      attr_accessor o_auth_update: Types::OAuthUpdate
+      SENSITIVE: []
+    end
+
     class CapabilityAction
       attr_accessor name: ::String
       attr_accessor ref: ::String
@@ -53,6 +74,15 @@ module Aws::IoTManagedIntegrations
       SENSITIVE: []
     end
 
+    class CapabilitySchemaItem
+      attr_accessor format: ("AWS" | "ZCL" | "CONNECTOR")
+      attr_accessor capability_id: ::String
+      attr_accessor extrinsic_id: ::String
+      attr_accessor extrinsic_version: ::Integer
+      attr_accessor schema: untyped
+      SENSITIVE: []
+    end
+
     class CommandCapability
       attr_accessor id: ::String
       attr_accessor name: ::String
@@ -81,6 +111,71 @@ module Aws::IoTManagedIntegrations
 
     class ConflictException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectorDestinationSummary
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor cloud_connector_id: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectorItem
+      attr_accessor name: ::String
+      attr_accessor endpoint_config: Types::EndpointConfig
+      attr_accessor description: ::String
+      attr_accessor endpoint_type: ("LAMBDA")
+      attr_accessor id: ::String
+      attr_accessor type: ("LISTED" | "UNLISTED")
+      SENSITIVE: []
+    end
+
+    class CreateAccountAssociationRequest
+      attr_accessor client_token: ::String
+      attr_accessor connector_destination_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class CreateAccountAssociationResponse
+      attr_accessor o_auth_authorization_url: ::String
+      attr_accessor account_association_id: ::String
+      attr_accessor association_state: ("ASSOCIATION_IN_PROGRESS" | "ASSOCIATION_FAILED" | "ASSOCIATION_SUCCEEDED" | "ASSOCIATION_DELETING" | "REFRESH_TOKEN_EXPIRED")
+      attr_accessor arn: ::String
+      SENSITIVE: [:o_auth_authorization_url]
+    end
+
+    class CreateCloudConnectorRequest
+      attr_accessor name: ::String
+      attr_accessor endpoint_config: Types::EndpointConfig
+      attr_accessor description: ::String
+      attr_accessor endpoint_type: ("LAMBDA")
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCloudConnectorResponse
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConnectorDestinationRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor cloud_connector_id: ::String
+      attr_accessor auth_type: ("OAUTH")
+      attr_accessor auth_config: Types::AuthConfig
+      attr_accessor secrets_manager: Types::SecretsManager
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConnectorDestinationResponse
+      attr_accessor id: ::String
       SENSITIVE: []
     end
 
@@ -132,12 +227,13 @@ module Aws::IoTManagedIntegrations
       attr_accessor owner: ::String
       attr_accessor credential_locker_id: ::String
       attr_accessor authentication_material: ::String
-      attr_accessor authentication_material_type: ("WIFI_SETUP_QR_BAR_CODE" | "ZWAVE_QR_BAR_CODE" | "ZIGBEE_QR_BAR_CODE")
+      attr_accessor authentication_material_type: ("CUSTOM_PROTOCOL_QR_BAR_CODE" | "WIFI_SETUP_QR_BAR_CODE" | "ZWAVE_QR_BAR_CODE" | "ZIGBEE_QR_BAR_CODE" | "DISCOVERED_DEVICE")
       attr_accessor serial_number: ::String
       attr_accessor brand: ::String
       attr_accessor model: ::String
       attr_accessor name: ::String
       attr_accessor capability_report: Types::CapabilityReport
+      attr_accessor capability_schemas: ::Array[Types::CapabilitySchemaItem]
       attr_accessor capabilities: ::String
       attr_accessor client_token: ::String
       attr_accessor classification: ::String
@@ -154,7 +250,7 @@ module Aws::IoTManagedIntegrations
     end
 
     class CreateNotificationConfigurationRequest
-      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
+      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
       attr_accessor destination_name: ::String
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
@@ -162,7 +258,7 @@ module Aws::IoTManagedIntegrations
     end
 
     class CreateNotificationConfigurationResponse
-      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
+      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
       SENSITIVE: []
     end
 
@@ -229,6 +325,21 @@ module Aws::IoTManagedIntegrations
       SENSITIVE: [:name]
     end
 
+    class DeleteAccountAssociationRequest
+      attr_accessor account_association_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCloudConnectorRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConnectorDestinationRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
     class DeleteCredentialLockerRequest
       attr_accessor identifier: ::String
       SENSITIVE: []
@@ -251,7 +362,7 @@ module Aws::IoTManagedIntegrations
     end
 
     class DeleteNotificationConfigurationRequest
-      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
+      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
       SENSITIVE: []
     end
 
@@ -270,12 +381,52 @@ module Aws::IoTManagedIntegrations
       SENSITIVE: []
     end
 
+    class DeregisterAccountAssociationRequest
+      attr_accessor managed_thing_id: ::String
+      attr_accessor account_association_id: ::String
+      SENSITIVE: []
+    end
+
     class DestinationSummary
       attr_accessor description: ::String
       attr_accessor delivery_destination_arn: ::String
       attr_accessor delivery_destination_type: ("KINESIS")
       attr_accessor name: ::String
       attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Device
+      attr_accessor connector_device_id: ::String
+      attr_accessor connector_device_name: ::String
+      attr_accessor capability_report: Types::MatterCapabilityReport
+      attr_accessor capability_schemas: ::Array[Types::CapabilitySchemaItem]
+      attr_accessor device_metadata: untyped
+      SENSITIVE: [:connector_device_id, :connector_device_name]
+    end
+
+    class DeviceDiscoverySummary
+      attr_accessor id: ::String
+      attr_accessor discovery_type: ("ZWAVE" | "ZIGBEE" | "CLOUD" | "CUSTOM")
+      attr_accessor status: ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT")
+      SENSITIVE: []
+    end
+
+    class DiscoveredDeviceSummary
+      attr_accessor connector_device_id: ::String
+      attr_accessor connector_device_name: ::String
+      attr_accessor device_types: ::Array[::String]
+      attr_accessor managed_thing_id: ::String
+      attr_accessor modification: ("DISCOVERED" | "UPDATED" | "NO_CHANGE")
+      attr_accessor discovered_at: ::Time
+      attr_accessor brand: ::String
+      attr_accessor model: ::String
+      attr_accessor authentication_material: ::String
+      SENSITIVE: [:connector_device_id, :connector_device_name, :brand, :model, :authentication_material]
+    end
+
+    class EndpointConfig
+      attr_accessor lambda: Types::LambdaConfig
       SENSITIVE: []
     end
 
@@ -291,6 +442,56 @@ module Aws::IoTManagedIntegrations
       attr_accessor base_rate_per_minute: ::Integer
       attr_accessor increment_factor: ::Float
       attr_accessor rate_increase_criteria: Types::RolloutRateIncreaseCriteria
+      SENSITIVE: []
+    end
+
+    class GetAccountAssociationRequest
+      attr_accessor account_association_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccountAssociationResponse
+      attr_accessor account_association_id: ::String
+      attr_accessor association_state: ("ASSOCIATION_IN_PROGRESS" | "ASSOCIATION_FAILED" | "ASSOCIATION_SUCCEEDED" | "ASSOCIATION_DELETING" | "REFRESH_TOKEN_EXPIRED")
+      attr_accessor error_message: ::String
+      attr_accessor connector_destination_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor arn: ::String
+      attr_accessor o_auth_authorization_url: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:o_auth_authorization_url, :tags]
+    end
+
+    class GetCloudConnectorRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetCloudConnectorResponse
+      attr_accessor name: ::String
+      attr_accessor endpoint_config: Types::EndpointConfig
+      attr_accessor description: ::String
+      attr_accessor endpoint_type: ("LAMBDA")
+      attr_accessor id: ::String
+      attr_accessor type: ("LISTED" | "UNLISTED")
+      SENSITIVE: []
+    end
+
+    class GetConnectorDestinationRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetConnectorDestinationResponse
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor cloud_connector_id: ::String
+      attr_accessor id: ::String
+      attr_accessor auth_type: ("OAUTH")
+      attr_accessor auth_config: Types::AuthConfig
+      attr_accessor secrets_manager: Types::SecretsManager
+      attr_accessor o_auth_complete_redirect_url: ::String
       SENSITIVE: []
     end
 
@@ -351,11 +552,12 @@ module Aws::IoTManagedIntegrations
     class GetDeviceDiscoveryResponse
       attr_accessor id: ::String
       attr_accessor arn: ::String
-      attr_accessor discovery_type: ("ZWAVE" | "ZIGBEE" | "CLOUD")
+      attr_accessor discovery_type: ("ZWAVE" | "ZIGBEE" | "CLOUD" | "CUSTOM")
       attr_accessor status: ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT")
       attr_accessor started_at: ::Time
       attr_accessor controller_id: ::String
       attr_accessor connector_association_id: ::String
+      attr_accessor account_association_id: ::String
       attr_accessor finished_at: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:tags]
@@ -439,6 +641,7 @@ module Aws::IoTManagedIntegrations
       attr_accessor universal_product_code: ::String
       attr_accessor international_article_number: ::String
       attr_accessor connector_policy_id: ::String
+      attr_accessor connector_destination_id: ::String
       attr_accessor connector_device_id: ::String
       attr_accessor device_specific_key: ::String
       attr_accessor mac_address: ::String
@@ -464,12 +667,12 @@ module Aws::IoTManagedIntegrations
     end
 
     class GetNotificationConfigurationRequest
-      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
+      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
       SENSITIVE: []
     end
 
     class GetNotificationConfigurationResponse
-      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
+      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
       attr_accessor destination_name: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
@@ -513,7 +716,8 @@ module Aws::IoTManagedIntegrations
       attr_accessor ota_scheduling_config: Types::OtaTaskSchedulingConfig
       attr_accessor ota_task_execution_retry_config: Types::OtaTaskExecutionRetryConfig
       attr_accessor status: ("IN_PROGRESS" | "CANCELED" | "COMPLETED" | "DELETION_IN_PROGRESS" | "SCHEDULED")
-      SENSITIVE: []
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
     end
 
     class GetProvisioningProfileRequest
@@ -570,6 +774,61 @@ module Aws::IoTManagedIntegrations
       SENSITIVE: []
     end
 
+    class InvalidRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LambdaConfig
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccountAssociationsRequest
+      attr_accessor connector_destination_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccountAssociationsResponse
+      attr_accessor items: ::Array[Types::AccountAssociationItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCloudConnectorsRequest
+      attr_accessor type: ("LISTED" | "UNLISTED")
+      attr_accessor lambda_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCloudConnectorsResponse
+      attr_accessor items: ::Array[Types::ConnectorItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConnectorDestinationsRequest
+      attr_accessor cloud_connector_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListConnectorDestinationsResponse
+      attr_accessor connector_destination_list: ::Array[Types::ConnectorDestinationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListCredentialLockersRequest
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
@@ -594,6 +853,33 @@ module Aws::IoTManagedIntegrations
       SENSITIVE: []
     end
 
+    class ListDeviceDiscoveriesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor type_filter: ("ZWAVE" | "ZIGBEE" | "CLOUD" | "CUSTOM")
+      attr_accessor status_filter: ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT")
+      SENSITIVE: []
+    end
+
+    class ListDeviceDiscoveriesResponse
+      attr_accessor items: ::Array[Types::DeviceDiscoverySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDiscoveredDevicesRequest
+      attr_accessor identifier: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDiscoveredDevicesResponse
+      attr_accessor items: ::Array[Types::DiscoveredDeviceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListEventLogConfigurationsRequest
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
@@ -602,6 +888,20 @@ module Aws::IoTManagedIntegrations
 
     class ListEventLogConfigurationsResponse
       attr_accessor event_log_configuration_list: ::Array[Types::EventLogConfigurationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListManagedThingAccountAssociationsRequest
+      attr_accessor managed_thing_id: ::String
+      attr_accessor account_association_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListManagedThingAccountAssociationsResponse
+      attr_accessor items: ::Array[Types::ManagedThingAssociation]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -627,11 +927,13 @@ module Aws::IoTManagedIntegrations
       attr_accessor role_filter: ("CONTROLLER" | "DEVICE")
       attr_accessor parent_controller_identifier_filter: ::String
       attr_accessor connector_policy_id_filter: ::String
+      attr_accessor connector_destination_id_filter: ::String
+      attr_accessor connector_device_id_filter: ::String
       attr_accessor serial_number_filter: ::String
       attr_accessor provisioning_status_filter: ("UNASSOCIATED" | "PRE_ASSOCIATED" | "DISCOVERED" | "ACTIVATED" | "DELETION_FAILED" | "DELETE_IN_PROGRESS" | "ISOLATED" | "DELETED")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
-      SENSITIVE: [:owner_filter, :serial_number_filter]
+      SENSITIVE: [:owner_filter, :connector_device_id_filter, :serial_number_filter]
     end
 
     class ListManagedThingsResponse
@@ -718,6 +1020,22 @@ module Aws::IoTManagedIntegrations
       SENSITIVE: []
     end
 
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class ManagedThingAssociation
+      attr_accessor managed_thing_id: ::String
+      attr_accessor account_association_id: ::String
+      SENSITIVE: []
+    end
+
     class ManagedThingSchemaListItem
       attr_accessor endpoint_id: ::String
       attr_accessor capability_id: ::String
@@ -733,6 +1051,7 @@ module Aws::IoTManagedIntegrations
       attr_accessor classification: ::String
       attr_accessor connector_device_id: ::String
       attr_accessor connector_policy_id: ::String
+      attr_accessor connector_destination_id: ::String
       attr_accessor model: ::String
       attr_accessor name: ::String
       attr_accessor owner: ::String
@@ -747,9 +1066,78 @@ module Aws::IoTManagedIntegrations
       SENSITIVE: [:brand, :classification, :connector_device_id, :model, :owner, :serial_number]
     end
 
+    class MatterCapabilityReport
+      attr_accessor version: ::String
+      attr_accessor node_id: ::String
+      attr_accessor endpoints: ::Array[Types::MatterCapabilityReportEndpoint]
+      SENSITIVE: []
+    end
+
+    class MatterCapabilityReportAttribute
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor value: untyped
+      SENSITIVE: []
+    end
+
+    class MatterCapabilityReportCluster
+      attr_accessor id: ::String
+      attr_accessor revision: ::Integer
+      attr_accessor public_id: ::String
+      attr_accessor name: ::String
+      attr_accessor spec_version: ::String
+      attr_accessor attributes: ::Array[Types::MatterCapabilityReportAttribute]
+      attr_accessor commands: ::Array[::String]
+      attr_accessor events: ::Array[::String]
+      attr_accessor feature_map: ::Integer
+      attr_accessor generated_commands: ::Array[::String]
+      attr_accessor fabric_index: ::Integer
+      SENSITIVE: []
+    end
+
+    class MatterCapabilityReportEndpoint
+      attr_accessor id: ::String
+      attr_accessor device_types: ::Array[::String]
+      attr_accessor clusters: ::Array[Types::MatterCapabilityReportCluster]
+      attr_accessor parts: ::Array[::String]
+      attr_accessor semantic_tags: ::Array[::String]
+      attr_accessor client_clusters: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class MatterCluster
+      attr_accessor id: ::String
+      attr_accessor attributes: untyped
+      attr_accessor commands: ::Hash[::String, untyped]
+      attr_accessor events: ::Hash[::String, untyped]
+      SENSITIVE: [:attributes]
+    end
+
+    class MatterEndpoint
+      attr_accessor id: ::String
+      attr_accessor clusters: ::Array[Types::MatterCluster]
+      SENSITIVE: []
+    end
+
     class NotificationConfigurationSummary
-      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
+      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
       attr_accessor destination_name: ::String
+      SENSITIVE: []
+    end
+
+    class OAuthConfig
+      attr_accessor auth_url: ::String
+      attr_accessor token_url: ::String
+      attr_accessor scope: ::String
+      attr_accessor token_endpoint_authentication_scheme: ("HTTP_BASIC" | "REQUEST_BODY_CREDENTIALS")
+      attr_accessor o_auth_complete_redirect_url: ::String
+      attr_accessor proactive_refresh_token_renewal: Types::ProactiveRefreshTokenRenewal
+      SENSITIVE: []
+    end
+
+    class OAuthUpdate
+      attr_accessor o_auth_complete_redirect_url: ::String
+      attr_accessor proactive_refresh_token_renewal: Types::ProactiveRefreshTokenRenewal
       SENSITIVE: []
     end
 
@@ -815,6 +1203,12 @@ module Aws::IoTManagedIntegrations
       SENSITIVE: []
     end
 
+    class ProactiveRefreshTokenRenewal
+      attr_accessor enabled: bool
+      attr_accessor days_before_renewal: ::Integer
+      SENSITIVE: []
+    end
+
     class ProvisioningProfileSummary
       attr_accessor name: ::String
       attr_accessor id: ::String
@@ -859,6 +1253,20 @@ module Aws::IoTManagedIntegrations
       SENSITIVE: []
     end
 
+    class RegisterAccountAssociationRequest
+      attr_accessor managed_thing_id: ::String
+      attr_accessor account_association_id: ::String
+      attr_accessor device_discovery_id: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterAccountAssociationResponse
+      attr_accessor account_association_id: ::String
+      attr_accessor device_discovery_id: ::String
+      attr_accessor managed_thing_id: ::String
+      SENSITIVE: []
+    end
+
     class RegisterCustomEndpointRequest < Aws::EmptyStructure
     end
 
@@ -874,6 +1282,8 @@ module Aws::IoTManagedIntegrations
 
     class ResourceNotFoundException
       attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
       SENSITIVE: []
     end
 
@@ -917,10 +1327,37 @@ module Aws::IoTManagedIntegrations
       SENSITIVE: []
     end
 
+    class SecretsManager
+      attr_accessor arn: ::String
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
+    class SendConnectorEventRequest
+      attr_accessor connector_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor operation: ("DEVICE_COMMAND_RESPONSE" | "DEVICE_DISCOVERY" | "DEVICE_EVENT" | "DEVICE_COMMAND_REQUEST")
+      attr_accessor operation_version: ::String
+      attr_accessor status_code: ::Integer
+      attr_accessor message: ::String
+      attr_accessor device_discovery_id: ::String
+      attr_accessor connector_device_id: ::String
+      attr_accessor trace_id: ::String
+      attr_accessor devices: ::Array[Types::Device]
+      attr_accessor matter_endpoint: Types::MatterEndpoint
+      SENSITIVE: [:user_id, :operation_version, :status_code, :message, :connector_device_id]
+    end
+
+    class SendConnectorEventResponse
+      attr_accessor connector_id: ::String
+      SENSITIVE: []
+    end
+
     class SendManagedThingCommandRequest
       attr_accessor managed_thing_id: ::String
       attr_accessor endpoints: ::Array[Types::CommandEndpoint]
       attr_accessor connector_association_id: ::String
+      attr_accessor account_association_id: ::String
       SENSITIVE: []
     end
 
@@ -939,10 +1376,22 @@ module Aws::IoTManagedIntegrations
       SENSITIVE: []
     end
 
+    class StartAccountAssociationRefreshRequest
+      attr_accessor account_association_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartAccountAssociationRefreshResponse
+      attr_accessor o_auth_authorization_url: ::String
+      SENSITIVE: [:o_auth_authorization_url]
+    end
+
     class StartDeviceDiscoveryRequest
-      attr_accessor discovery_type: ("ZWAVE" | "ZIGBEE" | "CLOUD")
+      attr_accessor discovery_type: ("ZWAVE" | "ZIGBEE" | "CLOUD" | "CUSTOM")
+      attr_accessor custom_protocol_detail: ::Hash[::String, ::String]
       attr_accessor controller_identifier: ::String
       attr_accessor connector_association_identifier: ::String
+      attr_accessor account_association_id: ::String
       attr_accessor authentication_material: ::String
       attr_accessor authentication_material_type: ("ZWAVE_INSTALL_CODE")
       attr_accessor client_token: ::String
@@ -970,6 +1419,15 @@ module Aws::IoTManagedIntegrations
       SENSITIVE: []
     end
 
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
     class TaskProcessingDetails
       attr_accessor number_of_canceled_things: ::Integer
       attr_accessor number_of_failed_things: ::Integer
@@ -990,6 +1448,39 @@ module Aws::IoTManagedIntegrations
 
     class UnauthorizedException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAccountAssociationRequest
+      attr_accessor account_association_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCloudConnectorRequest
+      attr_accessor identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConnectorDestinationRequest
+      attr_accessor identifier: ::String
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor auth_type: ("OAUTH")
+      attr_accessor auth_config: Types::AuthConfigUpdate
+      attr_accessor secrets_manager: Types::SecretsManager
       SENSITIVE: []
     end
 
@@ -1017,6 +1508,7 @@ module Aws::IoTManagedIntegrations
       attr_accessor model: ::String
       attr_accessor name: ::String
       attr_accessor capability_report: Types::CapabilityReport
+      attr_accessor capability_schemas: ::Array[Types::CapabilitySchemaItem]
       attr_accessor capabilities: ::String
       attr_accessor classification: ::String
       attr_accessor hub_network_mode: ("STANDARD" | "NETWORK_WIDE_EXCLUSION")
@@ -1025,7 +1517,7 @@ module Aws::IoTManagedIntegrations
     end
 
     class UpdateNotificationConfigurationRequest
-      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
+      attr_accessor event_type: ("DEVICE_COMMAND" | "DEVICE_COMMAND_REQUEST" | "DEVICE_DISCOVERY_STATUS" | "DEVICE_EVENT" | "DEVICE_LIFE_CYCLE" | "DEVICE_STATE" | "DEVICE_OTA" | "CONNECTOR_ASSOCIATION" | "ACCOUNT_ASSOCIATION" | "CONNECTOR_ERROR_REPORT")
       attr_accessor destination_name: ::String
       SENSITIVE: []
     end

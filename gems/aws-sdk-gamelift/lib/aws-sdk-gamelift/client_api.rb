@@ -454,6 +454,7 @@ module Aws::GameLift
     NotReadyException = Shapes::StructureShape.new(name: 'NotReadyException')
     OperatingSystem = Shapes::StringShape.new(name: 'OperatingSystem')
     OutOfCapacityException = Shapes::StructureShape.new(name: 'OutOfCapacityException')
+    PingBeacon = Shapes::StructureShape.new(name: 'PingBeacon')
     PlacedPlayerSession = Shapes::StructureShape.new(name: 'PlacedPlayerSession')
     PlacedPlayerSessionList = Shapes::ListShape.new(name: 'PlacedPlayerSessionList')
     PlacementFallbackStrategy = Shapes::StringShape.new(name: 'PlacementFallbackStrategy')
@@ -563,6 +564,7 @@ module Aws::GameLift
     TerminateGameSessionOutput = Shapes::StructureShape.new(name: 'TerminateGameSessionOutput')
     TerminationMode = Shapes::StringShape.new(name: 'TerminationMode')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    UDPEndpoint = Shapes::StructureShape.new(name: 'UDPEndpoint')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
     UnsupportedRegionException = Shapes::StructureShape.new(name: 'UnsupportedRegionException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -1885,6 +1887,7 @@ module Aws::GameLift
 
     LocationModel.add_member(:location_name, Shapes::ShapeRef.new(shape: LocationStringModel, location_name: "LocationName"))
     LocationModel.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArnModel, location_name: "LocationArn"))
+    LocationModel.add_member(:ping_beacon, Shapes::ShapeRef.new(shape: PingBeacon, location_name: "PingBeacon"))
     LocationModel.struct_class = Types::LocationModel
 
     LocationModelList.member = Shapes::ShapeRef.new(shape: LocationModel)
@@ -1974,6 +1977,9 @@ module Aws::GameLift
 
     OutOfCapacityException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
     OutOfCapacityException.struct_class = Types::OutOfCapacityException
+
+    PingBeacon.add_member(:udp_endpoint, Shapes::ShapeRef.new(shape: UDPEndpoint, location_name: "UDPEndpoint"))
+    PingBeacon.struct_class = Types::PingBeacon
 
     PlacedPlayerSession.add_member(:player_id, Shapes::ShapeRef.new(shape: PlayerId, location_name: "PlayerId"))
     PlacedPlayerSession.add_member(:player_session_id, Shapes::ShapeRef.new(shape: PlayerSessionId, location_name: "PlayerSessionId"))
@@ -2301,6 +2307,10 @@ module Aws::GameLift
 
     TerminateGameSessionOutput.add_member(:game_session, Shapes::ShapeRef.new(shape: GameSession, location_name: "GameSession"))
     TerminateGameSessionOutput.struct_class = Types::TerminateGameSessionOutput
+
+    UDPEndpoint.add_member(:domain, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Domain"))
+    UDPEndpoint.add_member(:port, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "Port"))
+    UDPEndpoint.struct_class = Types::UDPEndpoint
 
     UnauthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
     UnauthorizedException.struct_class = Types::UnauthorizedException

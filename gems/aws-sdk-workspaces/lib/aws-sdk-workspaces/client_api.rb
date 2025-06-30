@@ -22,6 +22,10 @@ module Aws::WorkSpaces
     AcceptAccountLinkInvitationRequest = Shapes::StructureShape.new(name: 'AcceptAccountLinkInvitationRequest')
     AcceptAccountLinkInvitationResult = Shapes::StructureShape.new(name: 'AcceptAccountLinkInvitationResult')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AccessEndpoint = Shapes::StructureShape.new(name: 'AccessEndpoint')
+    AccessEndpointConfig = Shapes::StructureShape.new(name: 'AccessEndpointConfig')
+    AccessEndpointList = Shapes::ListShape.new(name: 'AccessEndpointList')
+    AccessEndpointType = Shapes::StringShape.new(name: 'AccessEndpointType')
     AccessPropertyValue = Shapes::StringShape.new(name: 'AccessPropertyValue')
     AccountLink = Shapes::StructureShape.new(name: 'AccountLink')
     AccountLinkList = Shapes::ListShape.new(name: 'AccountLinkList')
@@ -34,6 +38,7 @@ module Aws::WorkSpaces
     AddInName = Shapes::StringShape.new(name: 'AddInName')
     AddInUrl = Shapes::StringShape.new(name: 'AddInUrl')
     Alias = Shapes::StringShape.new(name: 'Alias')
+    AlphanumericDashUnderscoreNonEmptyString = Shapes::StringShape.new(name: 'AlphanumericDashUnderscoreNonEmptyString')
     AmazonUuid = Shapes::StringShape.new(name: 'AmazonUuid')
     Application = Shapes::StringShape.new(name: 'Application')
     ApplicationAssociatedResourceType = Shapes::StringShape.new(name: 'ApplicationAssociatedResourceType')
@@ -275,6 +280,9 @@ module Aws::WorkSpaces
     ImportWorkspaceImageResult = Shapes::StructureShape.new(name: 'ImportWorkspaceImageResult')
     IncompatibleApplicationsException = Shapes::StructureShape.new(name: 'IncompatibleApplicationsException')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    InternetFallbackProtocol = Shapes::StringShape.new(name: 'InternetFallbackProtocol')
+    InternetFallbackProtocolList = Shapes::ListShape.new(name: 'InternetFallbackProtocolList')
+    InvalidParameterCombinationException = Shapes::StructureShape.new(name: 'InvalidParameterCombinationException')
     InvalidParameterValuesException = Shapes::StructureShape.new(name: 'InvalidParameterValuesException')
     InvalidResourceStateException = Shapes::StructureShape.new(name: 'InvalidResourceStateException')
     Ios2XLogo = Shapes::BlobShape.new(name: 'Ios2XLogo')
@@ -538,6 +546,16 @@ module Aws::WorkSpaces
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AccessEndpoint.add_member(:access_endpoint_type, Shapes::ShapeRef.new(shape: AccessEndpointType, location_name: "AccessEndpointType"))
+    AccessEndpoint.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: AlphanumericDashUnderscoreNonEmptyString, location_name: "VpcEndpointId"))
+    AccessEndpoint.struct_class = Types::AccessEndpoint
+
+    AccessEndpointConfig.add_member(:access_endpoints, Shapes::ShapeRef.new(shape: AccessEndpointList, required: true, location_name: "AccessEndpoints"))
+    AccessEndpointConfig.add_member(:internet_fallback_protocols, Shapes::ShapeRef.new(shape: InternetFallbackProtocolList, location_name: "InternetFallbackProtocols"))
+    AccessEndpointConfig.struct_class = Types::AccessEndpointConfig
+
+    AccessEndpointList.member = Shapes::ShapeRef.new(shape: AccessEndpoint)
 
     AccountLink.add_member(:account_link_id, Shapes::ShapeRef.new(shape: LinkId, location_name: "AccountLinkId"))
     AccountLink.add_member(:account_link_status, Shapes::ShapeRef.new(shape: AccountLinkStatusEnum, location_name: "AccountLinkStatus"))
@@ -1257,6 +1275,11 @@ module Aws::WorkSpaces
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
+    InternetFallbackProtocolList.member = Shapes::ShapeRef.new(shape: InternetFallbackProtocol)
+
+    InvalidParameterCombinationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InvalidParameterCombinationException.struct_class = Types::InvalidParameterCombinationException
+
     InvalidParameterValuesException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     InvalidParameterValuesException.struct_class = Types::InvalidParameterValuesException
 
@@ -1756,6 +1779,7 @@ module Aws::WorkSpaces
     WorkspaceAccessProperties.add_member(:device_type_zero_client, Shapes::ShapeRef.new(shape: AccessPropertyValue, location_name: "DeviceTypeZeroClient"))
     WorkspaceAccessProperties.add_member(:device_type_linux, Shapes::ShapeRef.new(shape: AccessPropertyValue, location_name: "DeviceTypeLinux"))
     WorkspaceAccessProperties.add_member(:device_type_work_spaces_thin_client, Shapes::ShapeRef.new(shape: AccessPropertyValue, location_name: "DeviceTypeWorkSpacesThinClient"))
+    WorkspaceAccessProperties.add_member(:access_endpoint_config, Shapes::ShapeRef.new(shape: AccessEndpointConfig, location_name: "AccessEndpointConfig"))
     WorkspaceAccessProperties.struct_class = Types::WorkspaceAccessProperties
 
     WorkspaceBundle.add_member(:bundle_id, Shapes::ShapeRef.new(shape: BundleId, location_name: "BundleId"))
@@ -2778,6 +2802,9 @@ module Aws::WorkSpaces
         o.output = Shapes::ShapeRef.new(shape: ModifyWorkspaceAccessPropertiesResult)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
       end)
 
       api.add_operation(:modify_workspace_creation_properties, Seahorse::Model::Operation.new.tap do |o|

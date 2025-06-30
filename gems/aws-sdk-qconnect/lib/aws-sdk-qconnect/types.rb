@@ -896,16 +896,15 @@ module Aws::QConnect
     #   The locale to which specifies the language and region settings that
     #   determine the response language for [QueryAssistant][1].
     #
-    #   <note markdown="1"> Changing this locale to anything other than `en_US`, `en_GB`, or
-    #   `en_AU` will turn off recommendations triggered by contact
-    #   transcripts for agent assistance, as this feature is not supported
-    #   in multiple languages.
+    #   <note markdown="1"> For more information on supported locales, see [Language support for
+    #   Amazon Q in Connect][2].
     #
     #    </note>
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_amazon-q-connect_QueryAssistant.html
+    #   [2]: https://docs.aws.amazon.com/connect/latest/adminguide/supported-languages.html#qic-notes-languages
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/AnswerRecommendationAIAgentConfiguration AWS API Documentation
@@ -6531,9 +6530,15 @@ module Aws::QConnect
     #   The locale to which specifies the language and region settings that
     #   determine the response language for [QueryAssistant][1].
     #
+    #   <note markdown="1"> For more information on supported locales, see [Language support for
+    #   Amazon Q in Connect][2].
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_amazon-q-connect_QueryAssistant.html
+    #   [2]: https://docs.aws.amazon.com/connect/latest/adminguide/supported-languages.html#qic-notes-languages
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ManualSearchAIAgentConfiguration AWS API Documentation
@@ -9481,6 +9486,19 @@ module Aws::QConnect
     class TooManyTagsException < Struct.new(
       :message,
       :resource_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # You do not have permission to perform this action.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/UnauthorizedException AWS API Documentation
+    #
+    class UnauthorizedException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

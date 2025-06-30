@@ -496,7 +496,8 @@ module Aws
                               description: ::String?,
                               federated_catalog: {
                                 identifier: ::String?,
-                                connection_name: ::String?
+                                connection_name: ::String?,
+                                connection_type: ::String?
                               }?,
                               parameters: Hash[::String, ::String]?,
                               target_redshift_catalog: {
@@ -800,7 +801,8 @@ module Aws
                                }?,
                                federated_database: {
                                  identifier: ::String?,
-                                 connection_name: ::String?
+                                 connection_name: ::String?,
+                                 connection_type: ::String?
                                }?
                              },
                              ?tags: Hash[::String, ::String]
@@ -2520,6 +2522,7 @@ module Aws
       def create_table: (
                           ?catalog_id: ::String,
                           database_name: ::String,
+                          ?name: ::String,
                           table_input: {
                             name: ::String,
                             description: ::String?,
@@ -2614,7 +2617,48 @@ module Aws
                           ?open_table_format_input: {
                             iceberg_input: {
                               metadata_operation: ("CREATE"),
-                              version: ::String?
+                              version: ::String?,
+                              create_iceberg_table_input: {
+                                location: ::String,
+                                schema: {
+                                  schema_id: ::Integer?,
+                                  identifier_field_ids: Array[::Integer]?,
+                                  type: ("struct")?,
+                                  fields: Array[
+                                    {
+                                      id: ::Integer,
+                                      name: ::String,
+                                      type: {
+                                      },
+                                      required: bool,
+                                      doc: ::String?
+                                    },
+                                  ]
+                                },
+                                partition_spec: {
+                                  fields: Array[
+                                    {
+                                      source_id: ::Integer,
+                                      transform: ::String,
+                                      name: ::String,
+                                      field_id: ::Integer?
+                                    },
+                                  ],
+                                  spec_id: ::Integer?
+                                }?,
+                                write_order: {
+                                  order_id: ::Integer,
+                                  fields: Array[
+                                    {
+                                      source_id: ::Integer,
+                                      transform: ::String,
+                                      direction: ("asc" | "desc"),
+                                      null_order: ("nulls-first" | "nulls-last")
+                                    },
+                                  ]
+                                }?,
+                                properties: Hash[::String, ::String]?
+                              }?
                             }?
                           }
                         ) -> _CreateTableResponseSuccess
@@ -2634,6 +2678,11 @@ module Aws
                                       enabled: bool?,
                                       vpc_configuration: {
                                         glue_connection_name: ::String?
+                                      }?,
+                                      compaction_configuration: {
+                                        iceberg_configuration: {
+                                          strategy: ("binpack" | "sort" | "z-order")?
+                                        }?
                                       }?,
                                       retention_configuration: {
                                         iceberg_configuration: {
@@ -3461,6 +3510,7 @@ module Aws
         def rule_results: () -> ::Array[Types::DataQualityRuleResult]
         def analyzer_results: () -> ::Array[Types::DataQualityAnalyzerResult]
         def observations: () -> ::Array[Types::DataQualityObservation]
+        def aggregated_metrics: () -> Types::DataQualityAggregatedMetrics
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#get_data_quality_result-instance_method
       def get_data_quality_result: (
@@ -5475,7 +5525,8 @@ module Aws
                               description: ::String?,
                               federated_catalog: {
                                 identifier: ::String?,
-                                connection_name: ::String?
+                                connection_name: ::String?,
+                                connection_type: ::String?
                               }?,
                               parameters: Hash[::String, ::String]?,
                               target_redshift_catalog: {
@@ -5904,7 +5955,8 @@ module Aws
                                }?,
                                federated_database: {
                                  identifier: ::String?,
-                                 connection_name: ::String?
+                                 connection_name: ::String?,
+                                 connection_type: ::String?
                                }?
                              }
                            ) -> _UpdateDatabaseResponseSuccess
@@ -7468,7 +7520,8 @@ module Aws
       def update_table: (
                           ?catalog_id: ::String,
                           database_name: ::String,
-                          table_input: {
+                          ?name: ::String,
+                          ?table_input: {
                             name: ::String,
                             description: ::String?,
                             owner: ::String?,
@@ -7556,7 +7609,56 @@ module Aws
                           ?transaction_id: ::String,
                           ?version_id: ::String,
                           ?view_update_action: ("ADD" | "REPLACE" | "ADD_OR_REPLACE" | "DROP"),
-                          ?force: bool
+                          ?force: bool,
+                          ?update_open_table_format_input: {
+                            update_iceberg_input: {
+                              update_iceberg_table_input: {
+                                updates: Array[
+                                  {
+                                    schema: {
+                                      schema_id: ::Integer?,
+                                      identifier_field_ids: Array[::Integer]?,
+                                      type: ("struct")?,
+                                      fields: Array[
+                                        {
+                                          id: ::Integer,
+                                          name: ::String,
+                                          type: {
+                                          },
+                                          required: bool,
+                                          doc: ::String?
+                                        },
+                                      ]
+                                    },
+                                    partition_spec: {
+                                      fields: Array[
+                                        {
+                                          source_id: ::Integer,
+                                          transform: ::String,
+                                          name: ::String,
+                                          field_id: ::Integer?
+                                        },
+                                      ],
+                                      spec_id: ::Integer?
+                                    }?,
+                                    sort_order: {
+                                      order_id: ::Integer,
+                                      fields: Array[
+                                        {
+                                          source_id: ::Integer,
+                                          transform: ::String,
+                                          direction: ("asc" | "desc"),
+                                          null_order: ("nulls-first" | "nulls-last")
+                                        },
+                                      ]
+                                    }?,
+                                    location: ::String,
+                                    properties: Hash[::String, ::String]?
+                                  },
+                                ]
+                              }
+                            }?
+                          }
                         ) -> _UpdateTableResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTableResponseSuccess
 
@@ -7574,6 +7676,11 @@ module Aws
                                       enabled: bool?,
                                       vpc_configuration: {
                                         glue_connection_name: ::String?
+                                      }?,
+                                      compaction_configuration: {
+                                        iceberg_configuration: {
+                                          strategy: ("binpack" | "sort" | "z-order")?
+                                        }?
                                       }?,
                                       retention_configuration: {
                                         iceberg_configuration: {

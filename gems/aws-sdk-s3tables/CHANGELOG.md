@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2025-06-23)
+------------------
+
+* Feature - S3 Tables now supports sort and z-order compaction strategies for Iceberg tables in addition to binpack.
+
 1.9.0 (2025-06-06)
 ------------------
 

@@ -304,6 +304,7 @@ RubyGems.org page under "LINKS" section.
 
 | Service Name                                          | Service Module                           | gem_name                                    | API Version |
 | ----------------------------------------------------- | ---------------------------------------- | ------------------------------------------- | ----------- |
+| AWS AI Ops                                            | Aws::AIOps                               | aws-sdk-aiops                               | 2018-05-10  |
 | AWS ARC - Zonal Shift                                 | Aws::ARCZonalShift                       | aws-sdk-arczonalshift                       | 2022-10-30  |
 | AWS Account                                           | Aws::Account                             | aws-sdk-account                             | 2021-02-01  |
 | AWS Amplify                                           | Aws::Amplify                             | aws-sdk-amplify                             | 2017-07-25  |
@@ -570,6 +571,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Interactive Video Service RealTime             | Aws::IVSRealTime                         | aws-sdk-ivsrealtime                         | 2020-07-14  |
 | Amazon Kendra Intelligent Ranking                     | Aws::KendraRanking                       | aws-sdk-kendraranking                       | 2022-10-19  |
 | Amazon Keyspaces                                      | Aws::Keyspaces                           | aws-sdk-keyspaces                           | 2022-02-10  |
+| Amazon Keyspaces Streams                              | Aws::KeyspacesStreams                    | aws-sdk-keyspacesstreams                    | 2024-09-09  |
 | Amazon Kinesis                                        | Aws::Kinesis                             | aws-sdk-kinesis                             | 2013-12-02  |
 | Amazon Kinesis Analytics                              | Aws::KinesisAnalytics                    | aws-sdk-kinesisanalytics                    | 2015-08-14  |
 | Amazon Kinesis Analytics                              | Aws::KinesisAnalyticsV2                  | aws-sdk-kinesisanalyticsv2                  | 2018-05-23  |
@@ -656,6 +658,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon WorkSpaces                                     | Aws::WorkSpaces                          | aws-sdk-workspaces                          | 2015-04-08  |
 | Amazon WorkSpaces Thin Client                         | Aws::WorkSpacesThinClient                | aws-sdk-workspacesthinclient                | 2023-08-22  |
 | Amazon WorkSpaces Web                                 | Aws::WorkSpacesWeb                       | aws-sdk-workspacesweb                       | 2020-07-08  |
+| Amazon Workspaces Instances                           | Aws::WorkspacesInstances                 | aws-sdk-workspacesinstances                 | 2022-07-26  |
 | AmazonApiGatewayManagementApi                         | Aws::ApiGatewayManagementApi             | aws-sdk-apigatewaymanagementapi             | 2018-11-29  |
 | AmazonApiGatewayV2                                    | Aws::ApiGatewayV2                        | aws-sdk-apigatewayv2                        | 2018-11-29  |
 | AmazonConnectCampaignService                          | Aws::ConnectCampaignService              | aws-sdk-connectcampaignservice              | 2021-01-30  |

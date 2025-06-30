@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.1122.0 (2025-06-27)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1121.0 (2025-06-26)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::KeyspacesStreams`.
+
+1.1120.0 (2025-06-23)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::WorkspacesInstances`.
+
+1.1119.0 (2025-06-20)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1118.0 (2025-06-18)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::AIOps`.
+
 1.1117.0 (2025-06-17)
 ------------------
 

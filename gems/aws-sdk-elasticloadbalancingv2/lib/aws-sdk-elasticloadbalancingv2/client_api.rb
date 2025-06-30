@@ -1584,6 +1584,11 @@ module Aws::ElasticLoadBalancingV2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeAccountLimitsInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeAccountLimitsOutput)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_capacity_reservation, Seahorse::Model::Operation.new.tap do |o|

@@ -50,7 +50,6 @@ module Aws::GeoPlaces
     AutocompleteResultItemList = Shapes::ListShape.new(name: 'AutocompleteResultItemList')
     AutocompleteResultItemPlaceIdString = Shapes::StringShape.new(name: 'AutocompleteResultItemPlaceIdString')
     AutocompleteResultItemTitleString = Shapes::StringShape.new(name: 'AutocompleteResultItemTitleString')
-    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BoundingBox = Shapes::ListShape.new(name: 'BoundingBox')
     BusinessChain = Shapes::StructureShape.new(name: 'BusinessChain')
     BusinessChainIdString = Shapes::StringShape.new(name: 'BusinessChainIdString')
@@ -94,6 +93,8 @@ module Aws::GeoPlaces
     GeocodeFilterPlaceType = Shapes::StringShape.new(name: 'GeocodeFilterPlaceType')
     GeocodeFilterPlaceTypeList = Shapes::ListShape.new(name: 'GeocodeFilterPlaceTypeList')
     GeocodeIntendedUse = Shapes::StringShape.new(name: 'GeocodeIntendedUse')
+    GeocodeParsedQuery = Shapes::StructureShape.new(name: 'GeocodeParsedQuery')
+    GeocodeParsedQueryAddressComponents = Shapes::StructureShape.new(name: 'GeocodeParsedQueryAddressComponents')
     GeocodeQueryComponents = Shapes::StructureShape.new(name: 'GeocodeQueryComponents')
     GeocodeQueryComponentsAddressNumberString = Shapes::StringShape.new(name: 'GeocodeQueryComponentsAddressNumberString')
     GeocodeQueryComponentsCountryString = Shapes::StringShape.new(name: 'GeocodeQueryComponentsCountryString')
@@ -125,9 +126,13 @@ module Aws::GeoPlaces
     HighlightStartIndexInteger = Shapes::IntegerShape.new(name: 'HighlightStartIndexInteger')
     HighlightValueString = Shapes::StringShape.new(name: 'HighlightValueString')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    Intersection = Shapes::StructureShape.new(name: 'Intersection')
     IntersectionHighlightsList = Shapes::ListShape.new(name: 'IntersectionHighlightsList')
     IntersectionList = Shapes::ListShape.new(name: 'IntersectionList')
+    IntersectionPlaceIdString = Shapes::StringShape.new(name: 'IntersectionPlaceIdString')
     IntersectionStreet = Shapes::StringShape.new(name: 'IntersectionStreet')
+    IntersectionStreetList = Shapes::ListShape.new(name: 'IntersectionStreetList')
+    IntersectionTitleString = Shapes::StringShape.new(name: 'IntersectionTitleString')
     LanguageTag = Shapes::StringShape.new(name: 'LanguageTag')
     MatchScore = Shapes::FloatShape.new(name: 'MatchScore')
     MatchScoreDetails = Shapes::StructureShape.new(name: 'MatchScoreDetails')
@@ -140,6 +145,19 @@ module Aws::GeoPlaces
     OpeningHoursDisplay = Shapes::StringShape.new(name: 'OpeningHoursDisplay')
     OpeningHoursDisplayList = Shapes::ListShape.new(name: 'OpeningHoursDisplayList')
     OpeningHoursList = Shapes::ListShape.new(name: 'OpeningHoursList')
+    ParsedQueryComponent = Shapes::StructureShape.new(name: 'ParsedQueryComponent')
+    ParsedQueryComponentEndIndexInteger = Shapes::IntegerShape.new(name: 'ParsedQueryComponentEndIndexInteger')
+    ParsedQueryComponentList = Shapes::ListShape.new(name: 'ParsedQueryComponentList')
+    ParsedQueryComponentQueryComponentString = Shapes::StringShape.new(name: 'ParsedQueryComponentQueryComponentString')
+    ParsedQueryComponentStartIndexInteger = Shapes::IntegerShape.new(name: 'ParsedQueryComponentStartIndexInteger')
+    ParsedQueryComponentValueString = Shapes::StringShape.new(name: 'ParsedQueryComponentValueString')
+    ParsedQuerySecondaryAddressComponent = Shapes::StructureShape.new(name: 'ParsedQuerySecondaryAddressComponent')
+    ParsedQuerySecondaryAddressComponentDesignatorString = Shapes::StringShape.new(name: 'ParsedQuerySecondaryAddressComponentDesignatorString')
+    ParsedQuerySecondaryAddressComponentEndIndexInteger = Shapes::IntegerShape.new(name: 'ParsedQuerySecondaryAddressComponentEndIndexInteger')
+    ParsedQuerySecondaryAddressComponentList = Shapes::ListShape.new(name: 'ParsedQuerySecondaryAddressComponentList')
+    ParsedQuerySecondaryAddressComponentNumberString = Shapes::StringShape.new(name: 'ParsedQuerySecondaryAddressComponentNumberString')
+    ParsedQuerySecondaryAddressComponentStartIndexInteger = Shapes::IntegerShape.new(name: 'ParsedQuerySecondaryAddressComponentStartIndexInteger')
+    ParsedQuerySecondaryAddressComponentValueString = Shapes::StringShape.new(name: 'ParsedQuerySecondaryAddressComponentValueString')
     PhonemeDetails = Shapes::StructureShape.new(name: 'PhonemeDetails')
     PhonemeTranscription = Shapes::StructureShape.new(name: 'PhonemeTranscription')
     PhonemeTranscriptionList = Shapes::ListShape.new(name: 'PhonemeTranscriptionList')
@@ -164,6 +182,10 @@ module Aws::GeoPlaces
     RegionCodeString = Shapes::StringShape.new(name: 'RegionCodeString')
     RegionHighlights = Shapes::StructureShape.new(name: 'RegionHighlights')
     RegionNameString = Shapes::StringShape.new(name: 'RegionNameString')
+    RelatedPlace = Shapes::StructureShape.new(name: 'RelatedPlace')
+    RelatedPlaceList = Shapes::ListShape.new(name: 'RelatedPlaceList')
+    RelatedPlacePlaceIdString = Shapes::StringShape.new(name: 'RelatedPlacePlaceIdString')
+    RelatedPlaceTitleString = Shapes::StringShape.new(name: 'RelatedPlaceTitleString')
     ReverseGeocodeAdditionalFeature = Shapes::StringShape.new(name: 'ReverseGeocodeAdditionalFeature')
     ReverseGeocodeAdditionalFeatureList = Shapes::ListShape.new(name: 'ReverseGeocodeAdditionalFeatureList')
     ReverseGeocodeFilter = Shapes::StructureShape.new(name: 'ReverseGeocodeFilter')
@@ -203,6 +225,12 @@ module Aws::GeoPlaces
     SearchTextResultItemList = Shapes::ListShape.new(name: 'SearchTextResultItemList')
     SearchTextResultItemPlaceIdString = Shapes::StringShape.new(name: 'SearchTextResultItemPlaceIdString')
     SearchTextResultItemTitleString = Shapes::StringShape.new(name: 'SearchTextResultItemTitleString')
+    SecondaryAddressComponent = Shapes::StructureShape.new(name: 'SecondaryAddressComponent')
+    SecondaryAddressComponentList = Shapes::ListShape.new(name: 'SecondaryAddressComponentList')
+    SecondaryAddressComponentMatchScore = Shapes::StructureShape.new(name: 'SecondaryAddressComponentMatchScore')
+    SecondaryAddressComponentMatchScoreList = Shapes::ListShape.new(name: 'SecondaryAddressComponentMatchScoreList')
+    SecondaryAddressComponentNumberString = Shapes::StringShape.new(name: 'SecondaryAddressComponentNumberString')
+    SensitiveBoolean = Shapes::BooleanShape.new(name: 'SensitiveBoolean')
     StreetComponents = Shapes::StructureShape.new(name: 'StreetComponents')
     StreetComponentsBaseNameString = Shapes::StringShape.new(name: 'StreetComponentsBaseNameString')
     StreetComponentsDirectionString = Shapes::StringShape.new(name: 'StreetComponentsDirectionString')
@@ -258,7 +286,7 @@ module Aws::GeoPlaces
 
     AccessPointList.member = Shapes::ShapeRef.new(shape: AccessPoint)
 
-    AccessRestriction.add_member(:restricted, Shapes::ShapeRef.new(shape: Boolean, location_name: "Restricted"))
+    AccessRestriction.add_member(:restricted, Shapes::ShapeRef.new(shape: SensitiveBoolean, location_name: "Restricted"))
     AccessRestriction.add_member(:categories, Shapes::ShapeRef.new(shape: CategoryList, location_name: "Categories"))
     AccessRestriction.struct_class = Types::AccessRestriction
 
@@ -274,11 +302,12 @@ module Aws::GeoPlaces
     Address.add_member(:postal_code, Shapes::ShapeRef.new(shape: AddressPostalCodeString, location_name: "PostalCode"))
     Address.add_member(:block, Shapes::ShapeRef.new(shape: AddressBlockString, location_name: "Block"))
     Address.add_member(:sub_block, Shapes::ShapeRef.new(shape: AddressSubBlockString, location_name: "SubBlock"))
-    Address.add_member(:intersection, Shapes::ShapeRef.new(shape: IntersectionList, location_name: "Intersection"))
+    Address.add_member(:intersection, Shapes::ShapeRef.new(shape: IntersectionStreetList, location_name: "Intersection"))
     Address.add_member(:street, Shapes::ShapeRef.new(shape: AddressStreetString, location_name: "Street"))
     Address.add_member(:street_components, Shapes::ShapeRef.new(shape: StreetComponentsList, location_name: "StreetComponents"))
     Address.add_member(:address_number, Shapes::ShapeRef.new(shape: AddressAddressNumberString, location_name: "AddressNumber"))
     Address.add_member(:building, Shapes::ShapeRef.new(shape: AddressBuildingString, location_name: "Building"))
+    Address.add_member(:secondary_address_components, Shapes::ShapeRef.new(shape: SecondaryAddressComponentList, location_name: "SecondaryAddressComponents"))
     Address.struct_class = Types::Address
 
     AddressComponentMatchScores.add_member(:country, Shapes::ShapeRef.new(shape: MatchScore, location_name: "Country"))
@@ -293,6 +322,7 @@ module Aws::GeoPlaces
     AddressComponentMatchScores.add_member(:intersection, Shapes::ShapeRef.new(shape: AddressComponentMatchScoresIntersectionList, location_name: "Intersection"))
     AddressComponentMatchScores.add_member(:address_number, Shapes::ShapeRef.new(shape: MatchScore, location_name: "AddressNumber"))
     AddressComponentMatchScores.add_member(:building, Shapes::ShapeRef.new(shape: MatchScore, location_name: "Building"))
+    AddressComponentMatchScores.add_member(:secondary_address_components, Shapes::ShapeRef.new(shape: SecondaryAddressComponentMatchScoreList, location_name: "SecondaryAddressComponents"))
     AddressComponentMatchScores.struct_class = Types::AddressComponentMatchScores
 
     AddressComponentMatchScoresIntersectionList.member = Shapes::ShapeRef.new(shape: MatchScore)
@@ -377,7 +407,7 @@ module Aws::GeoPlaces
     Category.add_member(:id, Shapes::ShapeRef.new(shape: CategoryIdString, required: true, location_name: "Id"))
     Category.add_member(:name, Shapes::ShapeRef.new(shape: CategoryNameString, required: true, location_name: "Name"))
     Category.add_member(:localized_name, Shapes::ShapeRef.new(shape: CategoryLocalizedNameString, location_name: "LocalizedName"))
-    Category.add_member(:primary, Shapes::ShapeRef.new(shape: Boolean, location_name: "Primary"))
+    Category.add_member(:primary, Shapes::ShapeRef.new(shape: SensitiveBoolean, location_name: "Primary"))
     Category.struct_class = Types::Category
 
     CategoryList.member = Shapes::ShapeRef.new(shape: Category)
@@ -422,7 +452,7 @@ module Aws::GeoPlaces
 
     FoodType.add_member(:localized_name, Shapes::ShapeRef.new(shape: FoodTypeLocalizedNameString, required: true, location_name: "LocalizedName"))
     FoodType.add_member(:id, Shapes::ShapeRef.new(shape: FoodTypeIdString, location_name: "Id"))
-    FoodType.add_member(:primary, Shapes::ShapeRef.new(shape: Boolean, location_name: "Primary"))
+    FoodType.add_member(:primary, Shapes::ShapeRef.new(shape: SensitiveBoolean, location_name: "Primary"))
     FoodType.struct_class = Types::FoodType
 
     FoodTypeList.member = Shapes::ShapeRef.new(shape: FoodType)
@@ -434,6 +464,25 @@ module Aws::GeoPlaces
     GeocodeFilter.struct_class = Types::GeocodeFilter
 
     GeocodeFilterPlaceTypeList.member = Shapes::ShapeRef.new(shape: GeocodeFilterPlaceType)
+
+    GeocodeParsedQuery.add_member(:title, Shapes::ShapeRef.new(shape: ParsedQueryComponentList, location_name: "Title"))
+    GeocodeParsedQuery.add_member(:address, Shapes::ShapeRef.new(shape: GeocodeParsedQueryAddressComponents, location_name: "Address"))
+    GeocodeParsedQuery.struct_class = Types::GeocodeParsedQuery
+
+    GeocodeParsedQueryAddressComponents.add_member(:country, Shapes::ShapeRef.new(shape: ParsedQueryComponentList, location_name: "Country"))
+    GeocodeParsedQueryAddressComponents.add_member(:region, Shapes::ShapeRef.new(shape: ParsedQueryComponentList, location_name: "Region"))
+    GeocodeParsedQueryAddressComponents.add_member(:sub_region, Shapes::ShapeRef.new(shape: ParsedQueryComponentList, location_name: "SubRegion"))
+    GeocodeParsedQueryAddressComponents.add_member(:locality, Shapes::ShapeRef.new(shape: ParsedQueryComponentList, location_name: "Locality"))
+    GeocodeParsedQueryAddressComponents.add_member(:district, Shapes::ShapeRef.new(shape: ParsedQueryComponentList, location_name: "District"))
+    GeocodeParsedQueryAddressComponents.add_member(:sub_district, Shapes::ShapeRef.new(shape: ParsedQueryComponentList, location_name: "SubDistrict"))
+    GeocodeParsedQueryAddressComponents.add_member(:postal_code, Shapes::ShapeRef.new(shape: ParsedQueryComponentList, location_name: "PostalCode"))
+    GeocodeParsedQueryAddressComponents.add_member(:block, Shapes::ShapeRef.new(shape: ParsedQueryComponentList, location_name: "Block"))
+    GeocodeParsedQueryAddressComponents.add_member(:sub_block, Shapes::ShapeRef.new(shape: ParsedQueryComponentList, location_name: "SubBlock"))
+    GeocodeParsedQueryAddressComponents.add_member(:street, Shapes::ShapeRef.new(shape: ParsedQueryComponentList, location_name: "Street"))
+    GeocodeParsedQueryAddressComponents.add_member(:address_number, Shapes::ShapeRef.new(shape: ParsedQueryComponentList, location_name: "AddressNumber"))
+    GeocodeParsedQueryAddressComponents.add_member(:building, Shapes::ShapeRef.new(shape: ParsedQueryComponentList, location_name: "Building"))
+    GeocodeParsedQueryAddressComponents.add_member(:secondary_address_components, Shapes::ShapeRef.new(shape: ParsedQuerySecondaryAddressComponentList, location_name: "SecondaryAddressComponents"))
+    GeocodeParsedQueryAddressComponents.struct_class = Types::GeocodeParsedQueryAddressComponents
 
     GeocodeQueryComponents.add_member(:country, Shapes::ShapeRef.new(shape: GeocodeQueryComponentsCountryString, location_name: "Country"))
     GeocodeQueryComponents.add_member(:region, Shapes::ShapeRef.new(shape: GeocodeQueryComponentsRegionString, location_name: "Region"))
@@ -465,7 +514,7 @@ module Aws::GeoPlaces
     GeocodeResultItem.add_member(:place_type, Shapes::ShapeRef.new(shape: PlaceType, required: true, location_name: "PlaceType"))
     GeocodeResultItem.add_member(:title, Shapes::ShapeRef.new(shape: GeocodeResultItemTitleString, required: true, location_name: "Title"))
     GeocodeResultItem.add_member(:address, Shapes::ShapeRef.new(shape: Address, location_name: "Address"))
-    GeocodeResultItem.add_member(:address_number_corrected, Shapes::ShapeRef.new(shape: Boolean, location_name: "AddressNumberCorrected"))
+    GeocodeResultItem.add_member(:address_number_corrected, Shapes::ShapeRef.new(shape: SensitiveBoolean, location_name: "AddressNumberCorrected"))
     GeocodeResultItem.add_member(:postal_code_details, Shapes::ShapeRef.new(shape: PostalCodeDetailsList, location_name: "PostalCodeDetails"))
     GeocodeResultItem.add_member(:position, Shapes::ShapeRef.new(shape: Position, location_name: "Position"))
     GeocodeResultItem.add_member(:distance, Shapes::ShapeRef.new(shape: DistanceMeters, location_name: "Distance"))
@@ -476,6 +525,10 @@ module Aws::GeoPlaces
     GeocodeResultItem.add_member(:time_zone, Shapes::ShapeRef.new(shape: TimeZone, location_name: "TimeZone"))
     GeocodeResultItem.add_member(:political_view, Shapes::ShapeRef.new(shape: CountryCode3, location_name: "PoliticalView"))
     GeocodeResultItem.add_member(:match_scores, Shapes::ShapeRef.new(shape: MatchScoreDetails, location_name: "MatchScores"))
+    GeocodeResultItem.add_member(:parsed_query, Shapes::ShapeRef.new(shape: GeocodeParsedQuery, location_name: "ParsedQuery"))
+    GeocodeResultItem.add_member(:intersections, Shapes::ShapeRef.new(shape: IntersectionList, location_name: "Intersections"))
+    GeocodeResultItem.add_member(:main_address, Shapes::ShapeRef.new(shape: RelatedPlace, location_name: "MainAddress"))
+    GeocodeResultItem.add_member(:secondary_addresses, Shapes::ShapeRef.new(shape: RelatedPlaceList, location_name: "SecondaryAddresses"))
     GeocodeResultItem.struct_class = Types::GeocodeResultItem
 
     GeocodeResultItemList.member = Shapes::ShapeRef.new(shape: GeocodeResultItem)
@@ -495,7 +548,7 @@ module Aws::GeoPlaces
     GetPlaceResponse.add_member(:title, Shapes::ShapeRef.new(shape: GetPlaceResponseTitleString, required: true, location_name: "Title"))
     GetPlaceResponse.add_member(:pricing_bucket, Shapes::ShapeRef.new(shape: String, required: true, location: "header", location_name: "x-amz-geo-pricing-bucket"))
     GetPlaceResponse.add_member(:address, Shapes::ShapeRef.new(shape: Address, location_name: "Address"))
-    GetPlaceResponse.add_member(:address_number_corrected, Shapes::ShapeRef.new(shape: Boolean, location_name: "AddressNumberCorrected"))
+    GetPlaceResponse.add_member(:address_number_corrected, Shapes::ShapeRef.new(shape: SensitiveBoolean, location_name: "AddressNumberCorrected"))
     GetPlaceResponse.add_member(:postal_code_details, Shapes::ShapeRef.new(shape: PostalCodeDetailsList, location_name: "PostalCodeDetails"))
     GetPlaceResponse.add_member(:position, Shapes::ShapeRef.new(shape: Position, location_name: "Position"))
     GetPlaceResponse.add_member(:map_view, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "MapView"))
@@ -509,6 +562,8 @@ module Aws::GeoPlaces
     GetPlaceResponse.add_member(:time_zone, Shapes::ShapeRef.new(shape: TimeZone, location_name: "TimeZone"))
     GetPlaceResponse.add_member(:political_view, Shapes::ShapeRef.new(shape: CountryCode3, location_name: "PoliticalView"))
     GetPlaceResponse.add_member(:phonemes, Shapes::ShapeRef.new(shape: PhonemeDetails, location_name: "Phonemes"))
+    GetPlaceResponse.add_member(:main_address, Shapes::ShapeRef.new(shape: RelatedPlace, location_name: "MainAddress"))
+    GetPlaceResponse.add_member(:secondary_addresses, Shapes::ShapeRef.new(shape: RelatedPlaceList, location_name: "SecondaryAddresses"))
     GetPlaceResponse.struct_class = Types::GetPlaceResponse
 
     Highlight.add_member(:start_index, Shapes::ShapeRef.new(shape: HighlightStartIndexInteger, location_name: "StartIndex"))
@@ -521,16 +576,28 @@ module Aws::GeoPlaces
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
+    Intersection.add_member(:place_id, Shapes::ShapeRef.new(shape: IntersectionPlaceIdString, required: true, location_name: "PlaceId"))
+    Intersection.add_member(:title, Shapes::ShapeRef.new(shape: IntersectionTitleString, required: true, location_name: "Title"))
+    Intersection.add_member(:address, Shapes::ShapeRef.new(shape: Address, location_name: "Address"))
+    Intersection.add_member(:position, Shapes::ShapeRef.new(shape: Position, location_name: "Position"))
+    Intersection.add_member(:distance, Shapes::ShapeRef.new(shape: DistanceMeters, location_name: "Distance", metadata: {"box" => true}))
+    Intersection.add_member(:route_distance, Shapes::ShapeRef.new(shape: DistanceMeters, location_name: "RouteDistance", metadata: {"box" => true}))
+    Intersection.add_member(:map_view, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "MapView"))
+    Intersection.add_member(:access_points, Shapes::ShapeRef.new(shape: AccessPointList, location_name: "AccessPoints"))
+    Intersection.struct_class = Types::Intersection
+
     IntersectionHighlightsList.member = Shapes::ShapeRef.new(shape: HighlightList)
 
-    IntersectionList.member = Shapes::ShapeRef.new(shape: IntersectionStreet)
+    IntersectionList.member = Shapes::ShapeRef.new(shape: Intersection)
+
+    IntersectionStreetList.member = Shapes::ShapeRef.new(shape: IntersectionStreet)
 
     MatchScoreDetails.add_member(:overall, Shapes::ShapeRef.new(shape: MatchScore, location_name: "Overall"))
     MatchScoreDetails.add_member(:components, Shapes::ShapeRef.new(shape: ComponentMatchScores, location_name: "Components"))
     MatchScoreDetails.struct_class = Types::MatchScoreDetails
 
     OpeningHours.add_member(:display, Shapes::ShapeRef.new(shape: OpeningHoursDisplayList, location_name: "Display"))
-    OpeningHours.add_member(:open_now, Shapes::ShapeRef.new(shape: Boolean, location_name: "OpenNow"))
+    OpeningHours.add_member(:open_now, Shapes::ShapeRef.new(shape: SensitiveBoolean, location_name: "OpenNow"))
     OpeningHours.add_member(:components, Shapes::ShapeRef.new(shape: OpeningHoursComponentsList, location_name: "Components"))
     OpeningHours.add_member(:categories, Shapes::ShapeRef.new(shape: CategoryList, location_name: "Categories"))
     OpeningHours.struct_class = Types::OpeningHours
@@ -546,13 +613,30 @@ module Aws::GeoPlaces
 
     OpeningHoursList.member = Shapes::ShapeRef.new(shape: OpeningHours)
 
+    ParsedQueryComponent.add_member(:start_index, Shapes::ShapeRef.new(shape: ParsedQueryComponentStartIndexInteger, location_name: "StartIndex"))
+    ParsedQueryComponent.add_member(:end_index, Shapes::ShapeRef.new(shape: ParsedQueryComponentEndIndexInteger, location_name: "EndIndex"))
+    ParsedQueryComponent.add_member(:value, Shapes::ShapeRef.new(shape: ParsedQueryComponentValueString, location_name: "Value"))
+    ParsedQueryComponent.add_member(:query_component, Shapes::ShapeRef.new(shape: ParsedQueryComponentQueryComponentString, location_name: "QueryComponent"))
+    ParsedQueryComponent.struct_class = Types::ParsedQueryComponent
+
+    ParsedQueryComponentList.member = Shapes::ShapeRef.new(shape: ParsedQueryComponent)
+
+    ParsedQuerySecondaryAddressComponent.add_member(:start_index, Shapes::ShapeRef.new(shape: ParsedQuerySecondaryAddressComponentStartIndexInteger, required: true, location_name: "StartIndex"))
+    ParsedQuerySecondaryAddressComponent.add_member(:end_index, Shapes::ShapeRef.new(shape: ParsedQuerySecondaryAddressComponentEndIndexInteger, required: true, location_name: "EndIndex"))
+    ParsedQuerySecondaryAddressComponent.add_member(:value, Shapes::ShapeRef.new(shape: ParsedQuerySecondaryAddressComponentValueString, required: true, location_name: "Value"))
+    ParsedQuerySecondaryAddressComponent.add_member(:number, Shapes::ShapeRef.new(shape: ParsedQuerySecondaryAddressComponentNumberString, required: true, location_name: "Number"))
+    ParsedQuerySecondaryAddressComponent.add_member(:designator, Shapes::ShapeRef.new(shape: ParsedQuerySecondaryAddressComponentDesignatorString, required: true, location_name: "Designator"))
+    ParsedQuerySecondaryAddressComponent.struct_class = Types::ParsedQuerySecondaryAddressComponent
+
+    ParsedQuerySecondaryAddressComponentList.member = Shapes::ShapeRef.new(shape: ParsedQuerySecondaryAddressComponent)
+
     PhonemeDetails.add_member(:title, Shapes::ShapeRef.new(shape: PhonemeTranscriptionList, location_name: "Title"))
     PhonemeDetails.add_member(:address, Shapes::ShapeRef.new(shape: AddressComponentPhonemes, location_name: "Address"))
     PhonemeDetails.struct_class = Types::PhonemeDetails
 
     PhonemeTranscription.add_member(:value, Shapes::ShapeRef.new(shape: PhonemeTranscriptionValueString, location_name: "Value"))
     PhonemeTranscription.add_member(:language, Shapes::ShapeRef.new(shape: LanguageTag, location_name: "Language"))
-    PhonemeTranscription.add_member(:preferred, Shapes::ShapeRef.new(shape: Boolean, location_name: "Preferred"))
+    PhonemeTranscription.add_member(:preferred, Shapes::ShapeRef.new(shape: SensitiveBoolean, location_name: "Preferred"))
     PhonemeTranscription.struct_class = Types::PhonemeTranscription
 
     PhonemeTranscriptionList.member = Shapes::ShapeRef.new(shape: PhonemeTranscription)
@@ -584,6 +668,16 @@ module Aws::GeoPlaces
     RegionHighlights.add_member(:name, Shapes::ShapeRef.new(shape: HighlightList, location_name: "Name"))
     RegionHighlights.struct_class = Types::RegionHighlights
 
+    RelatedPlace.add_member(:place_id, Shapes::ShapeRef.new(shape: RelatedPlacePlaceIdString, required: true, location_name: "PlaceId"))
+    RelatedPlace.add_member(:place_type, Shapes::ShapeRef.new(shape: PlaceType, required: true, location_name: "PlaceType"))
+    RelatedPlace.add_member(:title, Shapes::ShapeRef.new(shape: RelatedPlaceTitleString, required: true, location_name: "Title"))
+    RelatedPlace.add_member(:address, Shapes::ShapeRef.new(shape: Address, location_name: "Address"))
+    RelatedPlace.add_member(:position, Shapes::ShapeRef.new(shape: Position, location_name: "Position"))
+    RelatedPlace.add_member(:access_points, Shapes::ShapeRef.new(shape: AccessPointList, location_name: "AccessPoints"))
+    RelatedPlace.struct_class = Types::RelatedPlace
+
+    RelatedPlaceList.member = Shapes::ShapeRef.new(shape: RelatedPlace)
+
     ReverseGeocodeAdditionalFeatureList.member = Shapes::ShapeRef.new(shape: ReverseGeocodeAdditionalFeature)
 
     ReverseGeocodeFilter.add_member(:include_place_types, Shapes::ShapeRef.new(shape: ReverseGeocodeFilterPlaceTypeList, location_name: "IncludePlaceTypes"))
@@ -610,7 +704,7 @@ module Aws::GeoPlaces
     ReverseGeocodeResultItem.add_member(:place_type, Shapes::ShapeRef.new(shape: PlaceType, required: true, location_name: "PlaceType"))
     ReverseGeocodeResultItem.add_member(:title, Shapes::ShapeRef.new(shape: ReverseGeocodeResultItemTitleString, required: true, location_name: "Title"))
     ReverseGeocodeResultItem.add_member(:address, Shapes::ShapeRef.new(shape: Address, location_name: "Address"))
-    ReverseGeocodeResultItem.add_member(:address_number_corrected, Shapes::ShapeRef.new(shape: Boolean, location_name: "AddressNumberCorrected"))
+    ReverseGeocodeResultItem.add_member(:address_number_corrected, Shapes::ShapeRef.new(shape: SensitiveBoolean, location_name: "AddressNumberCorrected"))
     ReverseGeocodeResultItem.add_member(:postal_code_details, Shapes::ShapeRef.new(shape: PostalCodeDetailsList, location_name: "PostalCodeDetails"))
     ReverseGeocodeResultItem.add_member(:position, Shapes::ShapeRef.new(shape: Position, location_name: "Position"))
     ReverseGeocodeResultItem.add_member(:distance, Shapes::ShapeRef.new(shape: DistanceMeters, location_name: "Distance"))
@@ -620,6 +714,7 @@ module Aws::GeoPlaces
     ReverseGeocodeResultItem.add_member(:access_points, Shapes::ShapeRef.new(shape: AccessPointList, location_name: "AccessPoints"))
     ReverseGeocodeResultItem.add_member(:time_zone, Shapes::ShapeRef.new(shape: TimeZone, location_name: "TimeZone"))
     ReverseGeocodeResultItem.add_member(:political_view, Shapes::ShapeRef.new(shape: CountryCode3, location_name: "PoliticalView"))
+    ReverseGeocodeResultItem.add_member(:intersections, Shapes::ShapeRef.new(shape: IntersectionList, location_name: "Intersections"))
     ReverseGeocodeResultItem.struct_class = Types::ReverseGeocodeResultItem
 
     ReverseGeocodeResultItemList.member = Shapes::ShapeRef.new(shape: ReverseGeocodeResultItem)
@@ -657,7 +752,7 @@ module Aws::GeoPlaces
     SearchNearbyResultItem.add_member(:place_type, Shapes::ShapeRef.new(shape: PlaceType, required: true, location_name: "PlaceType"))
     SearchNearbyResultItem.add_member(:title, Shapes::ShapeRef.new(shape: SearchNearbyResultItemTitleString, required: true, location_name: "Title"))
     SearchNearbyResultItem.add_member(:address, Shapes::ShapeRef.new(shape: Address, location_name: "Address"))
-    SearchNearbyResultItem.add_member(:address_number_corrected, Shapes::ShapeRef.new(shape: Boolean, location_name: "AddressNumberCorrected"))
+    SearchNearbyResultItem.add_member(:address_number_corrected, Shapes::ShapeRef.new(shape: SensitiveBoolean, location_name: "AddressNumberCorrected"))
     SearchNearbyResultItem.add_member(:position, Shapes::ShapeRef.new(shape: Position, location_name: "Position"))
     SearchNearbyResultItem.add_member(:distance, Shapes::ShapeRef.new(shape: DistanceMeters, location_name: "Distance"))
     SearchNearbyResultItem.add_member(:map_view, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "MapView"))
@@ -704,7 +799,7 @@ module Aws::GeoPlaces
     SearchTextResultItem.add_member(:place_type, Shapes::ShapeRef.new(shape: PlaceType, required: true, location_name: "PlaceType"))
     SearchTextResultItem.add_member(:title, Shapes::ShapeRef.new(shape: SearchTextResultItemTitleString, required: true, location_name: "Title"))
     SearchTextResultItem.add_member(:address, Shapes::ShapeRef.new(shape: Address, location_name: "Address"))
-    SearchTextResultItem.add_member(:address_number_corrected, Shapes::ShapeRef.new(shape: Boolean, location_name: "AddressNumberCorrected"))
+    SearchTextResultItem.add_member(:address_number_corrected, Shapes::ShapeRef.new(shape: SensitiveBoolean, location_name: "AddressNumberCorrected"))
     SearchTextResultItem.add_member(:position, Shapes::ShapeRef.new(shape: Position, location_name: "Position"))
     SearchTextResultItem.add_member(:distance, Shapes::ShapeRef.new(shape: DistanceMeters, location_name: "Distance"))
     SearchTextResultItem.add_member(:map_view, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "MapView"))
@@ -721,6 +816,16 @@ module Aws::GeoPlaces
     SearchTextResultItem.struct_class = Types::SearchTextResultItem
 
     SearchTextResultItemList.member = Shapes::ShapeRef.new(shape: SearchTextResultItem)
+
+    SecondaryAddressComponent.add_member(:number, Shapes::ShapeRef.new(shape: SecondaryAddressComponentNumberString, required: true, location_name: "Number"))
+    SecondaryAddressComponent.struct_class = Types::SecondaryAddressComponent
+
+    SecondaryAddressComponentList.member = Shapes::ShapeRef.new(shape: SecondaryAddressComponent)
+
+    SecondaryAddressComponentMatchScore.add_member(:number, Shapes::ShapeRef.new(shape: MatchScore, location_name: "Number"))
+    SecondaryAddressComponentMatchScore.struct_class = Types::SecondaryAddressComponentMatchScore
+
+    SecondaryAddressComponentMatchScoreList.member = Shapes::ShapeRef.new(shape: SecondaryAddressComponentMatchScore)
 
     StreetComponents.add_member(:base_name, Shapes::ShapeRef.new(shape: StreetComponentsBaseNameString, location_name: "BaseName"))
     StreetComponents.add_member(:type, Shapes::ShapeRef.new(shape: StreetComponentsTypeString, location_name: "Type"))

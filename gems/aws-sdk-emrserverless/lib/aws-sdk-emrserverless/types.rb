@@ -118,6 +118,11 @@ module Aws::EMRServerless
     #   this application. Supported with release labels emr-7.0.0 and above.
     #   @return [Types::SchedulerConfiguration]
     #
+    # @!attribute [rw] identity_center_configuration
+    #   The IAM Identity Center configuration applied to enable trusted
+    #   identity propagation.
+    #   @return [Types::IdentityCenterConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/Application AWS API Documentation
     #
     class Application < Struct.new(
@@ -142,7 +147,8 @@ module Aws::EMRServerless
       :runtime_configuration,
       :monitoring_configuration,
       :interactive_configuration,
-      :scheduler_configuration)
+      :scheduler_configuration,
+      :identity_center_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -493,6 +499,13 @@ module Aws::EMRServerless
     #   this application. Supported with release labels emr-7.0.0 and above.
     #   @return [Types::SchedulerConfiguration]
     #
+    # @!attribute [rw] identity_center_configuration
+    #   The IAM Identity Center Configuration accepts the Identity Center
+    #   instance parameter required to enable trusted identity propagation.
+    #   This configuration allows identity propagation between integrated
+    #   services and the Identity Center instance.
+    #   @return [Types::IdentityCenterConfigurationInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/CreateApplicationRequest AWS API Documentation
     #
     class CreateApplicationRequest < Struct.new(
@@ -512,7 +525,8 @@ module Aws::EMRServerless
       :runtime_configuration,
       :monitoring_configuration,
       :interactive_configuration,
-      :scheduler_configuration)
+      :scheduler_configuration,
+      :identity_center_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -678,6 +692,45 @@ module Aws::EMRServerless
       :init_query_file,
       :parameters)
       SENSITIVE = [:query, :init_query_file, :parameters]
+      include Aws::Structure
+    end
+
+    # The IAM Identity Center Configuration that includes the Identify
+    # Center instance and application ARNs that provide trusted-identity
+    # propagation.
+    #
+    # @!attribute [rw] identity_center_instance_arn
+    #   The ARN of the IAM Identity Center instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_center_application_arn
+    #   The ARN of the EMR Serverless created IAM Identity Center
+    #   Application that provides trusted-identity propagation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/IdentityCenterConfiguration AWS API Documentation
+    #
+    class IdentityCenterConfiguration < Struct.new(
+      :identity_center_instance_arn,
+      :identity_center_application_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the IAM Identity Center configuration used to enable or
+    # disable trusted identity propagation. When provided, this
+    # configuration determines how the application interacts with IAM
+    # Identity Center for user authentication and access control.
+    #
+    # @!attribute [rw] identity_center_instance_arn
+    #   The ARN of the IAM Identity Center instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/IdentityCenterConfigurationInput AWS API Documentation
+    #
+    class IdentityCenterConfigurationInput < Struct.new(
+      :identity_center_instance_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1884,6 +1937,13 @@ module Aws::EMRServerless
     #   this application. Supported with release labels emr-7.0.0 and above.
     #   @return [Types::SchedulerConfiguration]
     #
+    # @!attribute [rw] identity_center_configuration
+    #   Specifies the IAM Identity Center configuration used to enable or
+    #   disable trusted identity propagation. When provided, this
+    #   configuration determines how the application interacts with IAM
+    #   Identity Center for user authentication and access control.
+    #   @return [Types::IdentityCenterConfigurationInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/UpdateApplicationRequest AWS API Documentation
     #
     class UpdateApplicationRequest < Struct.new(
@@ -1901,7 +1961,8 @@ module Aws::EMRServerless
       :release_label,
       :runtime_configuration,
       :monitoring_configuration,
-      :scheduler_configuration)
+      :scheduler_configuration,
+      :identity_center_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

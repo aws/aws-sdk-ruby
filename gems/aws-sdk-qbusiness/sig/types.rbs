@@ -147,6 +147,7 @@ module Aws::QBusiness
       attr_accessor application_id: ::String
       attr_accessor statement_id: ::String
       attr_accessor actions: ::Array[::String]
+      attr_accessor conditions: ::Array[Types::PermissionCondition]
       attr_accessor principal: ::String
       SENSITIVE: []
     end
@@ -504,6 +505,7 @@ module Aws::QBusiness
       attr_accessor action_configurations: ::Array[Types::ActionConfiguration]
       attr_accessor client_token: ::String
       attr_accessor display_name: ::String
+      attr_accessor authentication_detail: Types::DataAccessorAuthenticationDetail
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: [:display_name]
     end
@@ -665,9 +667,33 @@ module Aws::QBusiness
       attr_accessor data_accessor_arn: ::String
       attr_accessor idc_application_arn: ::String
       attr_accessor principal: ::String
+      attr_accessor authentication_detail: Types::DataAccessorAuthenticationDetail
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: [:display_name]
+    end
+
+    class DataAccessorAuthenticationConfiguration
+      attr_accessor idc_trusted_token_issuer_configuration: Types::DataAccessorIdcTrustedTokenIssuerConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class IdcTrustedTokenIssuerConfiguration < DataAccessorAuthenticationConfiguration
+      end
+      class Unknown < DataAccessorAuthenticationConfiguration
+      end
+    end
+
+    class DataAccessorAuthenticationDetail
+      attr_accessor authentication_type: ("AWS_IAM_IDC_TTI" | "AWS_IAM_IDC_AUTH_CODE")
+      attr_accessor authentication_configuration: Types::DataAccessorAuthenticationConfiguration
+      attr_accessor external_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DataAccessorIdcTrustedTokenIssuerConfiguration
+      attr_accessor idc_trusted_token_issuer_arn: ::String
+      SENSITIVE: []
     end
 
     class DataSource
@@ -1081,6 +1107,7 @@ module Aws::QBusiness
       attr_accessor idc_application_arn: ::String
       attr_accessor principal: ::String
       attr_accessor action_configurations: ::Array[Types::ActionConfiguration]
+      attr_accessor authentication_detail: Types::DataAccessorAuthenticationDetail
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: [:display_name]
@@ -1694,6 +1721,13 @@ module Aws::QBusiness
       SENSITIVE: []
     end
 
+    class PermissionCondition
+      attr_accessor condition_operator: ("StringEquals")
+      attr_accessor condition_key: ::String
+      attr_accessor condition_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class PersonalizationConfiguration
       attr_accessor personalization_control_mode: ("ENABLED" | "DISABLED")
       SENSITIVE: []
@@ -2117,6 +2151,7 @@ module Aws::QBusiness
       attr_accessor application_id: ::String
       attr_accessor data_accessor_id: ::String
       attr_accessor action_configurations: ::Array[Types::ActionConfiguration]
+      attr_accessor authentication_detail: Types::DataAccessorAuthenticationDetail
       attr_accessor display_name: ::String
       SENSITIVE: [:display_name]
     end

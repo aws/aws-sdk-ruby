@@ -37,6 +37,9 @@ module Aws
         def message: () -> ::String
         def resource_name: () -> ::String
       end
+      class UnauthorizedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class ValidationException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

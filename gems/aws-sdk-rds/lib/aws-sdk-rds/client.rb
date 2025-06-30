@@ -1841,6 +1841,22 @@ module Aws::RDS
     #   associate with the target DB snapshot. The associated option group can
     #   be copied only with cross-account snapshot copy calls.
     #
+    # @option params [String] :snapshot_availability_zone
+    #   Specifies the name of the Availability Zone where RDS stores the DB
+    #   snapshot. This value is valid only for snapshots that RDS stores on a
+    #   Dedicated Local Zone.
+    #
+    # @option params [String] :snapshot_target
+    #   Configures the location where RDS will store copied snapshots.
+    #
+    #   Valid Values:
+    #
+    #   * `local` (Dedicated Local Zone)
+    #
+    #   * `outposts` (Amazon Web Services Outposts)
+    #
+    #   * `region` (Amazon Web Services Region)
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -1908,6 +1924,8 @@ module Aws::RDS
     #     option_group_name: "String",
     #     target_custom_availability_zone: "String",
     #     copy_option_group: false,
+    #     snapshot_availability_zone: "String",
+    #     snapshot_target: "String",
     #     source_region: "String",
     #   })
     #
@@ -1953,6 +1971,7 @@ module Aws::RDS
     #   resp.db_snapshot.db_system_id #=> String
     #   resp.db_snapshot.dedicated_log_volume #=> Boolean
     #   resp.db_snapshot.multi_tenant #=> Boolean
+    #   resp.db_snapshot.snapshot_availability_zone #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBSnapshot AWS API Documentation
     #
@@ -5571,6 +5590,8 @@ module Aws::RDS
     #
     #   Valid Values:
     #
+    #   * `local` (Dedicated Local Zone)
+    #
     #   * `outposts` (Amazon Web Services Outposts)
     #
     #   * `region` (Amazon Web Services Region)
@@ -6779,6 +6800,15 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
     #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing
     #
+    # @option params [String] :backup_target
+    #   The location where RDS stores automated backups and manual snapshots.
+    #
+    #   Valid Values:
+    #
+    #   * `local` for Dedicated Local Zones
+    #
+    #   * `region` for Amazon Web Services Region
+    #
     # @option params [Integer] :allocated_storage
     #   The amount of storage (in gibibytes) to allocate initially for the
     #   read replica. Follow the allocation rules specified in
@@ -6918,6 +6948,7 @@ module Aws::RDS
     #     network_type: "String",
     #     storage_throughput: 1,
     #     enable_customer_owned_ip: false,
+    #     backup_target: "String",
     #     allocated_storage: 1,
     #     source_db_cluster_identifier: "String",
     #     dedicated_log_volume: false,
@@ -7824,6 +7855,7 @@ module Aws::RDS
     #   resp.db_snapshot.db_system_id #=> String
     #   resp.db_snapshot.dedicated_log_volume #=> Boolean
     #   resp.db_snapshot.multi_tenant #=> Boolean
+    #   resp.db_snapshot.snapshot_availability_zone #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSnapshot AWS API Documentation
     #
@@ -10515,6 +10547,7 @@ module Aws::RDS
     #   resp.db_snapshot.db_system_id #=> String
     #   resp.db_snapshot.dedicated_log_volume #=> Boolean
     #   resp.db_snapshot.multi_tenant #=> Boolean
+    #   resp.db_snapshot.snapshot_availability_zone #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSnapshot AWS API Documentation
     #
@@ -15255,6 +15288,7 @@ module Aws::RDS
     #   resp.db_snapshots[0].db_system_id #=> String
     #   resp.db_snapshots[0].dedicated_log_volume #=> Boolean
     #   resp.db_snapshots[0].multi_tenant #=> Boolean
+    #   resp.db_snapshots[0].snapshot_availability_zone #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -22565,6 +22599,7 @@ module Aws::RDS
     #   resp.db_snapshot.db_system_id #=> String
     #   resp.db_snapshot.dedicated_log_volume #=> Boolean
     #   resp.db_snapshot.multi_tenant #=> Boolean
+    #   resp.db_snapshot.snapshot_availability_zone #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshot AWS API Documentation
     #
@@ -28015,8 +28050,9 @@ module Aws::RDS
     #   Specifies where automated backups and manual snapshots are stored for
     #   the restored DB instance.
     #
-    #   Possible values are `outposts` (Amazon Web Services Outposts) and
-    #   `region` (Amazon Web Services Region). The default is `region`.
+    #   Possible values are `local` (Dedicated Local Zone), `outposts` (Amazon
+    #   Web Services Outposts), and `region` (Amazon Web Services Region). The
+    #   default is `region`.
     #
     #   For more information, see [Working with Amazon RDS on Amazon Web
     #   Services Outposts][1] in the *Amazon RDS User Guide*.
@@ -29799,6 +29835,8 @@ module Aws::RDS
     #   the restored DB instance.
     #
     #   Valid Values:
+    #
+    #   * `local` (Dedicated Local Zone)
     #
     #   * `outposts` (Amazon Web Services Outposts)
     #
@@ -32373,7 +32411,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.280.0'
+      context[:gem_version] = '1.282.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

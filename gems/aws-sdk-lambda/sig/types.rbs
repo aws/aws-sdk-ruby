@@ -82,6 +82,7 @@ module Aws::Lambda
 
     class AmazonManagedKafkaEventSourceConfig
       attr_accessor consumer_group_id: ::String
+      attr_accessor schema_registry_config: Types::KafkaSchemaRegistryConfig
       SENSITIVE: []
     end
 
@@ -852,6 +853,25 @@ module Aws::Lambda
       SENSITIVE: []
     end
 
+    class KafkaSchemaRegistryAccessConfig
+      attr_accessor type: ("BASIC_AUTH" | "CLIENT_CERTIFICATE_TLS_AUTH" | "SERVER_ROOT_CA_CERTIFICATE")
+      attr_accessor uri: ::String
+      SENSITIVE: []
+    end
+
+    class KafkaSchemaRegistryConfig
+      attr_accessor schema_registry_uri: ::String
+      attr_accessor event_record_format: ("JSON" | "SOURCE")
+      attr_accessor access_configs: ::Array[Types::KafkaSchemaRegistryAccessConfig]
+      attr_accessor schema_validation_configs: ::Array[Types::KafkaSchemaValidationConfig]
+      SENSITIVE: []
+    end
+
+    class KafkaSchemaValidationConfig
+      attr_accessor attribute: ("KEY" | "VALUE")
+      SENSITIVE: []
+    end
+
     class Layer
       attr_accessor arn: ::String
       attr_accessor code_size: ::Integer
@@ -1283,6 +1303,7 @@ module Aws::Lambda
 
     class SelfManagedKafkaEventSourceConfig
       attr_accessor consumer_group_id: ::String
+      attr_accessor schema_registry_config: Types::KafkaSchemaRegistryConfig
       SENSITIVE: []
     end
 
@@ -1414,6 +1435,8 @@ module Aws::Lambda
       attr_accessor tumbling_window_in_seconds: ::Integer
       attr_accessor function_response_types: ::Array[("ReportBatchItemFailures")]
       attr_accessor scaling_config: Types::ScalingConfig
+      attr_accessor amazon_managed_kafka_event_source_config: Types::AmazonManagedKafkaEventSourceConfig
+      attr_accessor self_managed_kafka_event_source_config: Types::SelfManagedKafkaEventSourceConfig
       attr_accessor document_db_event_source_config: Types::DocumentDBEventSourceConfig
       attr_accessor kms_key_arn: ::String
       attr_accessor metrics_config: Types::EventSourceMappingMetricsConfig

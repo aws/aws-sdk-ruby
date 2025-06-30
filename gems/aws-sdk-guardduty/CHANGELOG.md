@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.119.0 (2025-06-27)
+------------------
+
+* Feature - Update JSON target for Kubernetes workload resource type.
+
 1.118.0 (2025-06-17)
 ------------------
 

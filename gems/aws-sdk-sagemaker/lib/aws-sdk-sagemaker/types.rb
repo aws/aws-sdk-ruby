@@ -3661,6 +3661,181 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The CloudFormation template provider configuration for creating
+    # infrastructure resources.
+    #
+    # @!attribute [rw] template_name
+    #   A unique identifier for the template within the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_url
+    #   The Amazon S3 URL of the CloudFormation template.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The IAM role that CloudFormation assumes when creating the stack.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   An array of CloudFormation stack parameters.
+    #   @return [Array<Types::CfnStackCreateParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CfnCreateTemplateProvider AWS API Documentation
+    #
+    class CfnCreateTemplateProvider < Struct.new(
+      :template_name,
+      :template_url,
+      :role_arn,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A key-value pair that represents a parameter for the CloudFormation
+    # stack.
+    #
+    # @!attribute [rw] key
+    #   The name of the CloudFormation parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the CloudFormation parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CfnStackCreateParameter AWS API Documentation
+    #
+    class CfnStackCreateParameter < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the CloudFormation stack.
+    #
+    # @!attribute [rw] name
+    #   The name of the CloudFormation stack.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the CloudFormation stack.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   A human-readable message about the stack's current status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CfnStackDetail AWS API Documentation
+    #
+    class CfnStackDetail < Struct.new(
+      :name,
+      :id,
+      :status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A key-value pair representing a parameter used in the CloudFormation
+    # stack.
+    #
+    # @!attribute [rw] key
+    #   The name of the CloudFormation parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the CloudFormation parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CfnStackParameter AWS API Documentation
+    #
+    class CfnStackParameter < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A key-value pair representing a parameter used in the CloudFormation
+    # stack.
+    #
+    # @!attribute [rw] key
+    #   The name of the CloudFormation parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the CloudFormation parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CfnStackUpdateParameter AWS API Documentation
+    #
+    class CfnStackUpdateParameter < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about a CloudFormation template provider configuration and
+    # associated provisioning information.
+    #
+    # @!attribute [rw] template_name
+    #   The unique identifier of the template within the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_url
+    #   The Amazon S3 URL of the CloudFormation template.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The IAM role used by CloudFormation to create the stack.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   An array of CloudFormation stack parameters.
+    #   @return [Array<Types::CfnStackParameter>]
+    #
+    # @!attribute [rw] stack_detail
+    #   Information about the CloudFormation stack created by the template
+    #   provider.
+    #   @return [Types::CfnStackDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CfnTemplateProviderDetail AWS API Documentation
+    #
+    class CfnTemplateProviderDetail < Struct.new(
+      :template_name,
+      :template_url,
+      :role_arn,
+      :parameters,
+      :stack_detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains configuration details for updating an existing CloudFormation
+    # template provider in the project.
+    #
+    # @!attribute [rw] template_name
+    #   The unique identifier of the template to update within the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_url
+    #   The Amazon S3 URL of the CloudFormation template.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   An array of CloudFormation stack parameters.
+    #   @return [Array<Types::CfnStackUpdateParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CfnUpdateTemplateProvider AWS API Documentation
+    #
+    class CfnUpdateTemplateProvider < Struct.new(
+      :template_name,
+      :template_url,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A channel is a named input source that training algorithms can
     # consume.
     #
@@ -10128,13 +10303,19 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] template_providers
+    #   An array of template provider configurations for creating
+    #   infrastructure resources for the project.
+    #   @return [Array<Types::CreateTemplateProvider>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateProjectInput AWS API Documentation
     #
     class CreateProjectInput < Struct.new(
       :project_name,
       :project_description,
       :service_catalog_provisioning_details,
-      :tags)
+      :tags,
+      :template_providers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10251,6 +10432,22 @@ module Aws::SageMaker
     #
     class CreateStudioLifecycleConfigResponse < Struct.new(
       :studio_lifecycle_config_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains configuration details for a template provider. Only one type
+    # of template provider can be specified.
+    #
+    # @!attribute [rw] cfn_template_provider
+    #   The CloudFormation template provider configuration for creating
+    #   infrastructure resources.
+    #   @return [Types::CfnCreateTemplateProvider]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTemplateProvider AWS API Documentation
+    #
+    class CreateTemplateProvider < Struct.new(
+      :cfn_template_provider)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18513,6 +18710,10 @@ module Aws::SageMaker
     #   The status of the project.
     #   @return [String]
     #
+    # @!attribute [rw] template_provider_details
+    #   An array of template providers associated with the project.
+    #   @return [Array<Types::TemplateProviderDetail>]
+    #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
     #   trial, trial component, lineage group, project, or model card.
@@ -18541,6 +18742,7 @@ module Aws::SageMaker
       :service_catalog_provisioning_details,
       :service_catalog_provisioned_product_details,
       :project_status,
+      :template_provider_details,
       :created_by,
       :creation_time,
       :last_modified_time,
@@ -40134,6 +40336,10 @@ module Aws::SageMaker
     #   A timestamp specifying when the project was created.
     #   @return [Time]
     #
+    # @!attribute [rw] template_provider_details
+    #   An array of template providers associated with the project.
+    #   @return [Array<Types::TemplateProviderDetail>]
+    #
     # @!attribute [rw] tags
     #   An array of key-value pairs. You can use tags to categorize your
     #   Amazon Web Services resources in different ways, for example, by
@@ -40166,6 +40372,7 @@ module Aws::SageMaker
       :project_status,
       :created_by,
       :creation_time,
+      :template_provider_details,
       :tags,
       :last_modified_time,
       :last_modified_by)
@@ -41825,32 +42032,6 @@ module Aws::SageMaker
     #
     # @!attribute [rw] instance_type
     #   The ML compute instance type.
-    #
-    #   <note markdown="1"> SageMaker Training on Amazon Elastic Compute Cloud (EC2) P4de
-    #   instances is in preview release starting December 9th, 2022.
-    #
-    #    [Amazon EC2 P4de instances][1] (currently in preview) are powered by
-    #   8 NVIDIA A100 GPUs with 80GB high-performance HBM2e GPU memory,
-    #   which accelerate the speed of training ML models that need to be
-    #   trained on large datasets of high-resolution data. In this preview
-    #   release, Amazon SageMaker supports ML training jobs on P4de
-    #   instances (`ml.p4de.24xlarge`) to reduce model training time. The
-    #   `ml.p4de.24xlarge` instances are available in the following Amazon
-    #   Web Services Regions.
-    #
-    #    * US East (N. Virginia) (us-east-1)
-    #
-    #   * US West (Oregon) (us-west-2)
-    #
-    #    To request quota limit increase and start using P4de instances,
-    #   contact the SageMaker Training service team through your account
-    #   team.
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: http://aws.amazon.com/ec2/instance-types/p4/
     #   @return [String]
     #
     # @!attribute [rw] instance_count
@@ -44960,6 +45141,22 @@ module Aws::SageMaker
     class TargetTrackingScalingPolicyConfiguration < Struct.new(
       :metric_specification,
       :target_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about a template provider configuration and associated
+    # provisioning information.
+    #
+    # @!attribute [rw] cfn_template_provider_detail
+    #   Details about a CloudFormation template provider configuration and
+    #   associated provisioning information.
+    #   @return [Types::CfnTemplateProviderDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TemplateProviderDetail AWS API Documentation
+    #
+    class TemplateProviderDetail < Struct.new(
+      :cfn_template_provider_detail)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -49884,13 +50081,18 @@ module Aws::SageMaker
     #   [2]: https://docs.aws.amazon.com/servicecatalog/latest/adminguide/constraints-resourceupdate.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] template_providers_to_update
+    #   The template providers to update in the project.
+    #   @return [Array<Types::UpdateTemplateProvider>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateProjectInput AWS API Documentation
     #
     class UpdateProjectInput < Struct.new(
       :project_name,
       :project_description,
       :service_catalog_provisioning_update_details,
-      :tags)
+      :tags,
+      :template_providers_to_update)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -49943,6 +50145,21 @@ module Aws::SageMaker
     #
     class UpdateSpaceResponse < Struct.new(
       :space_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains configuration details for updating an existing template
+    # provider in the project.
+    #
+    # @!attribute [rw] cfn_template_provider
+    #   The CloudFormation template provider configuration to update.
+    #   @return [Types::CfnUpdateTemplateProvider]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateTemplateProvider AWS API Documentation
+    #
+    class UpdateTemplateProvider < Struct.new(
+      :cfn_template_provider)
       SENSITIVE = []
       include Aws::Structure
     end

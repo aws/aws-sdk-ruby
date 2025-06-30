@@ -123,9 +123,11 @@ module Aws
                                                 launch_template_id: ::String?,
                                                 launch_template_name: ::String?,
                                                 version: ::String?,
-                                                target_instance_types: Array[::String]?
+                                                target_instance_types: Array[::String]?,
+                                                userdata_type: ("EKS_BOOTSTRAP_SH" | "EKS_NODEADM")?
                                               },
-                                            ]?
+                                            ]?,
+                                            userdata_type: ("EKS_BOOTSTRAP_SH" | "EKS_NODEADM")?
                                           }?,
                                           ec2_configuration: Array[
                                             {
@@ -1471,9 +1473,11 @@ module Aws
                                                 launch_template_id: ::String?,
                                                 launch_template_name: ::String?,
                                                 version: ::String?,
-                                                target_instance_types: Array[::String]?
+                                                target_instance_types: Array[::String]?,
+                                                userdata_type: ("EKS_BOOTSTRAP_SH" | "EKS_NODEADM")?
                                               },
-                                            ]?
+                                            ]?,
+                                            userdata_type: ("EKS_BOOTSTRAP_SH" | "EKS_NODEADM")?
                                           }?,
                                           ec2_configuration: Array[
                                             {

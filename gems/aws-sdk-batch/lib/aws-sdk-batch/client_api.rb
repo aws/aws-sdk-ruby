@@ -275,6 +275,7 @@ module Aws::Batch
     UpdatePolicy = Shapes::StructureShape.new(name: 'UpdatePolicy')
     UpdateSchedulingPolicyRequest = Shapes::StructureShape.new(name: 'UpdateSchedulingPolicyRequest')
     UpdateSchedulingPolicyResponse = Shapes::StructureShape.new(name: 'UpdateSchedulingPolicyResponse')
+    UserdataType = Shapes::StringShape.new(name: 'UserdataType')
     Volume = Shapes::StructureShape.new(name: 'Volume')
     Volumes = Shapes::ListShape.new(name: 'Volumes')
 
@@ -1008,12 +1009,14 @@ module Aws::Batch
     LaunchTemplateSpecification.add_member(:launch_template_name, Shapes::ShapeRef.new(shape: String, location_name: "launchTemplateName"))
     LaunchTemplateSpecification.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
     LaunchTemplateSpecification.add_member(:overrides, Shapes::ShapeRef.new(shape: LaunchTemplateSpecificationOverrideList, location_name: "overrides"))
+    LaunchTemplateSpecification.add_member(:userdata_type, Shapes::ShapeRef.new(shape: UserdataType, location_name: "userdataType"))
     LaunchTemplateSpecification.struct_class = Types::LaunchTemplateSpecification
 
     LaunchTemplateSpecificationOverride.add_member(:launch_template_id, Shapes::ShapeRef.new(shape: String, location_name: "launchTemplateId"))
     LaunchTemplateSpecificationOverride.add_member(:launch_template_name, Shapes::ShapeRef.new(shape: String, location_name: "launchTemplateName"))
     LaunchTemplateSpecificationOverride.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
     LaunchTemplateSpecificationOverride.add_member(:target_instance_types, Shapes::ShapeRef.new(shape: StringList, location_name: "targetInstanceTypes"))
+    LaunchTemplateSpecificationOverride.add_member(:userdata_type, Shapes::ShapeRef.new(shape: UserdataType, location_name: "userdataType"))
     LaunchTemplateSpecificationOverride.struct_class = Types::LaunchTemplateSpecificationOverride
 
     LaunchTemplateSpecificationOverrideList.member = Shapes::ShapeRef.new(shape: LaunchTemplateSpecificationOverride)

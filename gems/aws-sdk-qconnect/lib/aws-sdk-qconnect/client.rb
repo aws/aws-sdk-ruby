@@ -4013,7 +4013,7 @@ module Aws::QConnect
     # in Connect JavaScript library (amazon-q-connectjs) into your
     # applications.
     #
-    # Retrieves recommendations for the specified session. To avoid
+    #  Retrieves recommendations for the specified session. To avoid
     # retrieving the same recommendations in subsequent calls, use
     # [NotifyRecommendationsReceived][1]. This API supports long-polling
     # behavior with the `waitTimeSeconds` parameter. Short poll is the
@@ -5409,7 +5409,7 @@ module Aws::QConnect
     # in Connect JavaScript library (amazon-q-connectjs) into your
     # applications.
     #
-    # Performs a manual search against the specified assistant. To retrieve
+    #  Performs a manual search against the specified assistant. To retrieve
     # recommendations for an assistant, use [GetRecommendations][1].
     #
     #
@@ -7799,7 +7799,7 @@ module Aws::QConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-qconnect'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

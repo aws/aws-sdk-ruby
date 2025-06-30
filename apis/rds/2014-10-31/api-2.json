@@ -2697,7 +2697,8 @@
       "errors":[
         {"shape":"DBClusterNotFoundFault"},
         {"shape":"InvalidDBClusterStateFault"},
-        {"shape":"InvalidDBInstanceStateFault"}
+        {"shape":"InvalidDBInstanceStateFault"},
+        {"shape":"InvalidDBShardGroupStateFault"}
       ]
     },
     "StartDBInstance":{
@@ -2801,7 +2802,8 @@
       "errors":[
         {"shape":"DBClusterNotFoundFault"},
         {"shape":"InvalidDBClusterStateFault"},
-        {"shape":"InvalidDBInstanceStateFault"}
+        {"shape":"InvalidDBInstanceStateFault"},
+        {"shape":"InvalidDBShardGroupStateFault"}
       ]
     },
     "StopDBInstance":{
@@ -3451,7 +3453,9 @@
         "PreSignedUrl":{"shape":"String"},
         "OptionGroupName":{"shape":"String"},
         "TargetCustomAvailabilityZone":{"shape":"String"},
-        "CopyOptionGroup":{"shape":"BooleanOptional"}
+        "CopyOptionGroup":{"shape":"BooleanOptional"},
+        "SnapshotAvailabilityZone":{"shape":"String"},
+        "SnapshotTarget":{"shape":"String"}
       }
     },
     "CopyDBSnapshotResult":{
@@ -3781,6 +3785,7 @@
         "NetworkType":{"shape":"String"},
         "StorageThroughput":{"shape":"IntegerOptional"},
         "EnableCustomerOwnedIp":{"shape":"BooleanOptional"},
+        "BackupTarget":{"shape":"String"},
         "AllocatedStorage":{"shape":"IntegerOptional"},
         "SourceDBClusterIdentifier":{"shape":"String"},
         "DedicatedLogVolume":{"shape":"BooleanOptional"},
@@ -5520,7 +5525,8 @@
         "StorageThroughput":{"shape":"IntegerOptional"},
         "DBSystemId":{"shape":"String"},
         "DedicatedLogVolume":{"shape":"Boolean"},
-        "MultiTenant":{"shape":"BooleanOptional"}
+        "MultiTenant":{"shape":"BooleanOptional"},
+        "SnapshotAvailabilityZone":{"shape":"String"}
       },
       "wrapper":true
     },

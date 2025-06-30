@@ -2592,6 +2592,11 @@ module Aws::WorkSpaces
     #   resp.directories[0].workspace_access_properties.device_type_zero_client #=> String, one of "ALLOW", "DENY"
     #   resp.directories[0].workspace_access_properties.device_type_linux #=> String, one of "ALLOW", "DENY"
     #   resp.directories[0].workspace_access_properties.device_type_work_spaces_thin_client #=> String, one of "ALLOW", "DENY"
+    #   resp.directories[0].workspace_access_properties.access_endpoint_config.access_endpoints #=> Array
+    #   resp.directories[0].workspace_access_properties.access_endpoint_config.access_endpoints[0].access_endpoint_type #=> String, one of "STREAMING_WSP"
+    #   resp.directories[0].workspace_access_properties.access_endpoint_config.access_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.directories[0].workspace_access_properties.access_endpoint_config.internet_fallback_protocols #=> Array
+    #   resp.directories[0].workspace_access_properties.access_endpoint_config.internet_fallback_protocols[0] #=> String, one of "PCOIP"
     #   resp.directories[0].tenancy #=> String, one of "DEDICATED", "SHARED"
     #   resp.directories[0].selfservice_permissions.restart_workspace #=> String, one of "ENABLED", "DISABLED"
     #   resp.directories[0].selfservice_permissions.increase_volume_size #=> String, one of "ENABLED", "DISABLED"
@@ -3879,6 +3884,15 @@ module Aws::WorkSpaces
     #       device_type_zero_client: "ALLOW", # accepts ALLOW, DENY
     #       device_type_linux: "ALLOW", # accepts ALLOW, DENY
     #       device_type_work_spaces_thin_client: "ALLOW", # accepts ALLOW, DENY
+    #       access_endpoint_config: {
+    #         access_endpoints: [ # required
+    #           {
+    #             access_endpoint_type: "STREAMING_WSP", # accepts STREAMING_WSP
+    #             vpc_endpoint_id: "AlphanumericDashUnderscoreNonEmptyString",
+    #           },
+    #         ],
+    #         internet_fallback_protocols: ["PCOIP"], # accepts PCOIP
+    #       },
     #     },
     #   })
     #
@@ -4885,7 +4899,7 @@ module Aws::WorkSpaces
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.138.0'
+      context[:gem_version] = '1.139.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

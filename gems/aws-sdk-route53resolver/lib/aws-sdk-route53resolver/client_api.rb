@@ -50,6 +50,7 @@ module Aws::Route53Resolver
     CreateResolverRuleRequest = Shapes::StructureShape.new(name: 'CreateResolverRuleRequest')
     CreateResolverRuleResponse = Shapes::StructureShape.new(name: 'CreateResolverRuleResponse')
     CreatorRequestId = Shapes::StringShape.new(name: 'CreatorRequestId')
+    DelegationRecord = Shapes::StringShape.new(name: 'DelegationRecord')
     DeleteFirewallDomainListRequest = Shapes::StructureShape.new(name: 'DeleteFirewallDomainListRequest')
     DeleteFirewallDomainListResponse = Shapes::StructureShape.new(name: 'DeleteFirewallDomainListResponse')
     DeleteFirewallRuleGroupRequest = Shapes::StructureShape.new(name: 'DeleteFirewallRuleGroupRequest')
@@ -410,6 +411,7 @@ module Aws::Route53Resolver
     CreateResolverRuleRequest.add_member(:target_ips, Shapes::ShapeRef.new(shape: TargetList, location_name: "TargetIps", metadata: {"box" => true}))
     CreateResolverRuleRequest.add_member(:resolver_endpoint_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ResolverEndpointId", metadata: {"box" => true}))
     CreateResolverRuleRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", metadata: {"box" => true}))
+    CreateResolverRuleRequest.add_member(:delegation_record, Shapes::ShapeRef.new(shape: DelegationRecord, location_name: "DelegationRecord", metadata: {"box" => true}))
     CreateResolverRuleRequest.struct_class = Types::CreateResolverRuleRequest
 
     CreateResolverRuleResponse.add_member(:resolver_rule, Shapes::ShapeRef.new(shape: ResolverRule, location_name: "ResolverRule"))
@@ -1006,6 +1008,7 @@ module Aws::Route53Resolver
     ResolverRule.add_member(:share_status, Shapes::ShapeRef.new(shape: ShareStatus, location_name: "ShareStatus"))
     ResolverRule.add_member(:creation_time, Shapes::ShapeRef.new(shape: Rfc3339TimeString, location_name: "CreationTime"))
     ResolverRule.add_member(:modification_time, Shapes::ShapeRef.new(shape: Rfc3339TimeString, location_name: "ModificationTime"))
+    ResolverRule.add_member(:delegation_record, Shapes::ShapeRef.new(shape: DelegationRecord, location_name: "DelegationRecord"))
     ResolverRule.struct_class = Types::ResolverRule
 
     ResolverRuleAssociation.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "Id"))

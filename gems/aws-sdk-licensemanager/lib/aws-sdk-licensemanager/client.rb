@@ -1120,9 +1120,21 @@ module Aws::LicenseManager
     #     resource_arn: "Arn", # required
     #     source_license_context: { # required
     #       usage_operation: "UsageOperation",
+    #       product_codes: [
+    #         {
+    #           product_code_id: "ProductCodeId", # required
+    #           product_code_type: "marketplace", # required, accepts marketplace
+    #         },
+    #       ],
     #     },
     #     destination_license_context: { # required
     #       usage_operation: "UsageOperation",
+    #       product_codes: [
+    #         {
+    #           product_code_id: "ProductCodeId", # required
+    #           product_code_type: "marketplace", # required, accepts marketplace
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -1795,7 +1807,13 @@ module Aws::LicenseManager
     #   resp.license_conversion_task_id #=> String
     #   resp.resource_arn #=> String
     #   resp.source_license_context.usage_operation #=> String
+    #   resp.source_license_context.product_codes #=> Array
+    #   resp.source_license_context.product_codes[0].product_code_id #=> String
+    #   resp.source_license_context.product_codes[0].product_code_type #=> String, one of "marketplace"
     #   resp.destination_license_context.usage_operation #=> String
+    #   resp.destination_license_context.product_codes #=> Array
+    #   resp.destination_license_context.product_codes[0].product_code_id #=> String
+    #   resp.destination_license_context.product_codes[0].product_code_type #=> String, one of "marketplace"
     #   resp.status_message #=> String
     #   resp.status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
     #   resp.start_time #=> Time
@@ -2202,7 +2220,13 @@ module Aws::LicenseManager
     #   resp.license_conversion_tasks[0].license_conversion_task_id #=> String
     #   resp.license_conversion_tasks[0].resource_arn #=> String
     #   resp.license_conversion_tasks[0].source_license_context.usage_operation #=> String
+    #   resp.license_conversion_tasks[0].source_license_context.product_codes #=> Array
+    #   resp.license_conversion_tasks[0].source_license_context.product_codes[0].product_code_id #=> String
+    #   resp.license_conversion_tasks[0].source_license_context.product_codes[0].product_code_type #=> String, one of "marketplace"
     #   resp.license_conversion_tasks[0].destination_license_context.usage_operation #=> String
+    #   resp.license_conversion_tasks[0].destination_license_context.product_codes #=> Array
+    #   resp.license_conversion_tasks[0].destination_license_context.product_codes[0].product_code_id #=> String
+    #   resp.license_conversion_tasks[0].destination_license_context.product_codes[0].product_code_type #=> String, one of "marketplace"
     #   resp.license_conversion_tasks[0].status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
     #   resp.license_conversion_tasks[0].status_message #=> String
     #   resp.license_conversion_tasks[0].start_time #=> Time
@@ -3350,7 +3374,7 @@ module Aws::LicenseManager
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-licensemanager'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

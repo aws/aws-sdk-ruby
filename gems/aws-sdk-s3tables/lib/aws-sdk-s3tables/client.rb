@@ -1235,9 +1235,11 @@ module Aws::S3Tables
     # Storage Service User Guide*.
     #
     # Permissions
+    # : * You must have the `s3tables:GetTableMaintenanceConfiguration`
+    #     permission to use this operation.
     #
-    # : You must have the `s3tables:GetTableMaintenanceConfiguration`
-    #   permission to use this operation.
+    #   * You must have the `s3tables:GetTableData` permission to use set
+    #     the compaction strategy to `sort` or `zorder`.
     #
     #
     #
@@ -1271,6 +1273,7 @@ module Aws::S3Tables
     #   resp.configuration #=> Hash
     #   resp.configuration["TableMaintenanceType"].status #=> String, one of "enabled", "disabled"
     #   resp.configuration["TableMaintenanceType"].settings.iceberg_compaction.target_file_size_mb #=> Integer
+    #   resp.configuration["TableMaintenanceType"].settings.iceberg_compaction.strategy #=> String, one of "auto", "binpack", "sort", "z-order"
     #   resp.configuration["TableMaintenanceType"].settings.iceberg_snapshot_management.min_snapshots_to_keep #=> Integer
     #   resp.configuration["TableMaintenanceType"].settings.iceberg_snapshot_management.max_snapshot_age_hours #=> Integer
     #
@@ -1799,6 +1802,7 @@ module Aws::S3Tables
     #       settings: {
     #         iceberg_compaction: {
     #           target_file_size_mb: 1,
+    #           strategy: "auto", # accepts auto, binpack, sort, z-order
     #         },
     #         iceberg_snapshot_management: {
     #           min_snapshots_to_keep: 1,
@@ -1995,7 +1999,7 @@ module Aws::S3Tables
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3tables'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

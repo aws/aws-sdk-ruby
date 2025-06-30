@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.122.0 (2025-06-24)
+------------------
+
+* Feature - This Feature Adds Support for the "et-EE" Locale for Batch Operations
+
 1.121.0 (2025-06-04)
 ------------------
 

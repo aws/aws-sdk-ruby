@@ -10,6 +10,28 @@
 module Aws::FSx
   module Types
 
+    # An access point with that name already exists in the Amazon Web
+    # Services Region in your Amazon Web Services account.
+    #
+    # @!attribute [rw] error_code
+    #   An error code indicating that an access point with that name already
+    #   exists in the Amazon Web Services Region in your Amazon Web Services
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/AccessPointAlreadyOwnedByYou AWS API Documentation
+    #
+    class AccessPointAlreadyOwnedByYou < Struct.new(
+      :error_code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Microsoft Active Directory attributes of the Amazon FSx for
     # Windows File Server file system.
     #
@@ -1087,6 +1109,116 @@ module Aws::FSx
     class CreateAggregateConfiguration < Struct.new(
       :aggregates,
       :constituents_per_aggregate)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the FSx for OpenZFS volume that the S3 access point will be
+    # attached to, and the file system user identity.
+    #
+    # @!attribute [rw] volume_id
+    #   The ID of the FSx for OpenZFS volume to which you want the S3 access
+    #   point attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_identity
+    #   Specifies the file system user identity to use for authorizing file
+    #   read and write requests that are made using this S3 access point.
+    #   @return [Types::OpenZFSFileSystemIdentity]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateAndAttachS3AccessPointOpenZFSConfiguration AWS API Documentation
+    #
+    class CreateAndAttachS3AccessPointOpenZFSConfiguration < Struct.new(
+      :volume_id,
+      :file_system_identity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 63 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name you want to assign to this S3 access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of S3 access point you want to create. Only `OpenZFS` is
+    #   supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] open_zfs_configuration
+    #   Specifies the configuration to use when creating and attaching an S3
+    #   access point to an FSx for OpenZFS volume.
+    #   @return [Types::CreateAndAttachS3AccessPointOpenZFSConfiguration]
+    #
+    # @!attribute [rw] s3_access_point
+    #   Specifies the virtual private cloud (VPC) configuration if you're
+    #   creating an access point that is restricted to a VPC. For more
+    #   information, see [Creating access points restricted to a virtual
+    #   private cloud][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/access-points-vpc.html
+    #   @return [Types::CreateAndAttachS3AccessPointS3Configuration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateAndAttachS3AccessPointRequest AWS API Documentation
+    #
+    class CreateAndAttachS3AccessPointRequest < Struct.new(
+      :client_request_token,
+      :name,
+      :type,
+      :open_zfs_configuration,
+      :s3_access_point)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] s3_access_point_attachment
+    #   Describes the configuration of the S3 access point created.
+    #   @return [Types::S3AccessPointAttachment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateAndAttachS3AccessPointResponse AWS API Documentation
+    #
+    class CreateAndAttachS3AccessPointResponse < Struct.new(
+      :s3_access_point_attachment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Used to create an S3 access point that accepts requests only from a
+    # virtual private cloud (VPC) to restrict data access to a private
+    # network.
+    #
+    # @!attribute [rw] vpc_configuration
+    #   If included, Amazon S3 restricts access to this S3 access point to
+    #   requests made from the specified virtual private cloud (VPC).
+    #   @return [Types::S3AccessPointVpcConfiguration]
+    #
+    # @!attribute [rw] policy
+    #   Specifies an access policy to associate with the S3 access point
+    #   configuration. For more information, see [Configuring IAM policies
+    #   for using access points][1] in the Amazon Simple Storage Service
+    #   User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateAndAttachS3AccessPointS3Configuration AWS API Documentation
+    #
+    class CreateAndAttachS3AccessPointS3Configuration < Struct.new(
+      :vpc_configuration,
+      :policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2504,7 +2636,7 @@ module Aws::FSx
     #
     #
     #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-costs.html#storage-type-options
-    #   [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-storage-classes
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-fsx-lustre.html#lustre-storage-classes
     #   [3]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance-intelligent-tiering
     #   @return [String]
     #
@@ -5134,6 +5266,60 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # @!attribute [rw] names
+    #   The names of the S3 access point attachments whose descriptions you
+    #   want to retrieve.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   Enter a filter Name and Values pair to view a select set of S3
+    #   access point attachments.
+    #   @return [Array<Types::S3AccessPointAttachmentsFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of resources to return in the response. This
+    #   value must be an integer greater than zero.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   (Optional) Opaque pagination token returned from a previous
+    #   operation (String). If present, this token indicates from what point
+    #   you can continue processing the request, where the previous
+    #   `NextToken` value left off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeS3AccessPointAttachmentsRequest AWS API Documentation
+    #
+    class DescribeS3AccessPointAttachmentsRequest < Struct.new(
+      :names,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] s3_access_point_attachments
+    #   Array of S3 access point attachments returned after a successful
+    #   `DescribeS3AccessPointAttachments` operation.
+    #   @return [Array<Types::S3AccessPointAttachment>]
+    #
+    # @!attribute [rw] next_token
+    #   (Optional) Opaque pagination token returned from a previous
+    #   operation (String). If present, this token indicates from what point
+    #   you can continue processing the request, where the previous
+    #   `NextToken` value left off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeS3AccessPointAttachmentsResponse AWS API Documentation
+    #
+    class DescribeS3AccessPointAttachmentsResponse < Struct.new(
+      :s3_access_point_attachments,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeSharedVpcConfigurationRequest AWS API Documentation
@@ -5316,6 +5502,46 @@ module Aws::FSx
     class DescribeVolumesResponse < Struct.new(
       :volumes,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 63 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the S3 access point attachment that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DetachAndDeleteS3AccessPointRequest AWS API Documentation
+    #
+    class DetachAndDeleteS3AccessPointRequest < Struct.new(
+      :client_request_token,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] lifecycle
+    #   The lifecycle status of the S3 access point attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the S3 access point attachment being deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DetachAndDeleteS3AccessPointResponse AWS API Documentation
+    #
+    class DetachAndDeleteS3AccessPointResponse < Struct.new(
+      :lifecycle,
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6296,6 +6522,26 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # The access point specified doesn't exist.
+    #
+    # @!attribute [rw] error_code
+    #   An error code indicating that the access point specified doesn't
+    #   exist.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/InvalidAccessPoint AWS API Documentation
+    #
+    class InvalidAccessPoint < Struct.new(
+      :error_code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You have filtered the response to a data repository type that is not
     # supported.
     #
@@ -6411,6 +6657,27 @@ module Aws::FSx
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/InvalidRegion AWS API Documentation
     #
     class InvalidRegion < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The action or operation requested is invalid. Verify that the action
+    # is typed correctly.
+    #
+    # @!attribute [rw] error_code
+    #   An error code indicating that the action or operation requested is
+    #   invalid.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/InvalidRequest AWS API Documentation
+    #
+    class InvalidRequest < Struct.new(
+      :error_code,
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -7508,6 +7775,28 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # Specifies the file system user identity that will be used for
+    # authorizing all file access requests that are made using the S3 access
+    # point.
+    #
+    # @!attribute [rw] type
+    #   Specifies the FSx for OpenZFS user identity type, accepts only
+    #   `POSIX`.
+    #   @return [String]
+    #
+    # @!attribute [rw] posix_user
+    #   Specifies the UID and GIDs of the file system POSIX user.
+    #   @return [Types::OpenZFSPosixFileSystemUser]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OpenZFSFileSystemIdentity AWS API Documentation
+    #
+    class OpenZFSFileSystemIdentity < Struct.new(
+      :type,
+      :posix_user)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Network File System (NFS) configurations for mounting an Amazon
     # FSx for OpenZFS file system.
     #
@@ -7567,6 +7856,31 @@ module Aws::FSx
     class OpenZFSOriginSnapshotConfiguration < Struct.new(
       :snapshot_arn,
       :copy_strategy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The FSx for OpenZFS file system user that is used for authorizing all
+    # file access requests that are made using the S3 access point.
+    #
+    # @!attribute [rw] uid
+    #   The UID of the file system user.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] gid
+    #   The GID of the file system user.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] secondary_gids
+    #   The list of secondary GIDs for the file system user.
+    #   @return [Array<Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OpenZFSPosixFileSystemUser AWS API Documentation
+    #
+    class OpenZFSPosixFileSystemUser < Struct.new(
+      :uid,
+      :gid,
+      :secondary_gids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8021,6 +8335,165 @@ module Aws::FSx
     class RetentionPeriod < Struct.new(
       :type,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the S3 access point configuration of the S3 access point
+    # attachment.
+    #
+    # @!attribute [rw] resource_arn
+    #   he S3 access point's ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias
+    #   The S3 access point's alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   The S3 access point's virtual private cloud (VPC) configuration.
+    #   @return [Types::S3AccessPointVpcConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/S3AccessPoint AWS API Documentation
+    #
+    class S3AccessPoint < Struct.new(
+      :resource_arn,
+      :alias,
+      :vpc_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An S3 access point attached to an Amazon FSx volume.
+    #
+    # @!attribute [rw] lifecycle
+    #   The lifecycle status of the S3 access point attachment. The
+    #   lifecycle can have the following values:
+    #
+    #   * AVAILABLE - the S3 access point attachment is available for use
+    #
+    #   * CREATING - Amazon FSx is creating the S3 access point and
+    #     attachment
+    #
+    #   * DELETING - Amazon FSx is deleting the S3 access point and
+    #     attachment
+    #
+    #   * FAILED - The S3 access point attachment is in a failed state.
+    #     Delete and detach the S3 access point attachment, and create a new
+    #     one.
+    #
+    #   * UPDATING - Amazon FSx is updating the S3 access point attachment
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_transition_reason
+    #   Describes why a resource lifecycle state changed.
+    #   @return [Types::LifecycleTransitionReason]
+    #
+    # @!attribute [rw] creation_time
+    #   The time that the resource was created, in seconds (since
+    #   1970-01-01T00:00:00Z), also known as Unix time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   The name of the S3 access point attachment; also used for the name
+    #   of the S3 access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of Amazon FSx volume that the S3 access point is attached
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] open_zfs_configuration
+    #   The OpenZFSConfiguration of the S3 access point attachment.
+    #   @return [Types::S3AccessPointOpenZFSConfiguration]
+    #
+    # @!attribute [rw] s3_access_point
+    #   The S3 access point configuration of the S3 access point attachment.
+    #   @return [Types::S3AccessPoint]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/S3AccessPointAttachment AWS API Documentation
+    #
+    class S3AccessPointAttachment < Struct.new(
+      :lifecycle,
+      :lifecycle_transition_reason,
+      :creation_time,
+      :name,
+      :type,
+      :open_zfs_configuration,
+      :s3_access_point)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The access point specified was not found.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/S3AccessPointAttachmentNotFound AWS API Documentation
+    #
+    class S3AccessPointAttachmentNotFound < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A set of Name and Values pairs used to view a select set of S3 access
+    # point attachments.
+    #
+    # @!attribute [rw] name
+    #   The name of the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values of the filter.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/S3AccessPointAttachmentsFilter AWS API Documentation
+    #
+    class S3AccessPointAttachmentsFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the FSx for OpenZFS attachment configuration of an S3 access
+    # point attachment.
+    #
+    # @!attribute [rw] volume_id
+    #   The ID of the FSx for OpenZFS volume that the S3 access point is
+    #   attached to.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_identity
+    #   The file system identity used to authorize file access requests made
+    #   using the S3 access point.
+    #   @return [Types::OpenZFSFileSystemIdentity]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/S3AccessPointOpenZFSConfiguration AWS API Documentation
+    #
+    class S3AccessPointOpenZFSConfiguration < Struct.new(
+      :volume_id,
+      :file_system_identity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # If included, Amazon S3 restricts access to this access point to
+    # requests from the specified virtual private cloud (VPC).
+    #
+    # @!attribute [rw] vpc_id
+    #   Specifies the virtual private cloud (VPC) for the S3 access point
+    #   VPC configuration, if one exists.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/S3AccessPointVpcConfiguration AWS API Documentation
+    #
+    class S3AccessPointVpcConfiguration < Struct.new(
+      :vpc_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8875,6 +9348,35 @@ module Aws::FSx
     class TieringPolicy < Struct.new(
       :cooling_period,
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # You have reached the maximum number of S3 access points attachments
+    # allowed for your account in this Amazon Web Services Region, or for
+    # the file system. For more information, or to request an increase, see
+    # [Service quotas on FSx resources][1] in the FSx for OpenZFS User
+    # Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/limits.html
+    #
+    # @!attribute [rw] error_code
+    #   An error code indicating that you have reached the maximum number of
+    #   S3 access points attachments allowed for your account in this Amazon
+    #   Web Services Region, or for the file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/TooManyAccessPoints AWS API Documentation
+    #
+    class TooManyAccessPoints < Struct.new(
+      :error_code,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

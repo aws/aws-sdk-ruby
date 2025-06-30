@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.162.0 (2025-06-20)
+------------------
+
+* Feature - This release adds a new SPECIFIED_OPTIMAL option for handling DDS when using DVB-Sub with high resolution video.
+
 1.161.0 (2025-06-04)
 ------------------
 

@@ -62,7 +62,7 @@ module Aws::Deadline
     #   The name of the chip used by the GPU accelerator.
     #
     #   If you specify `l4` as the name of the accelerator, you must specify
-    #   `latest` or `grid:r550` as the runtime.
+    #   `latest` or `grid:r570` as the runtime.
     #
     #   The available GPU accelerators are:
     #
@@ -85,7 +85,7 @@ module Aws::Deadline
     #     specify `latest` and a new version of the runtime is released, the
     #     new version of the runtime is used.
     #
-    #   * `grid:r550` - [NVIDIA vGPU software 17][1]
+    #   * `grid:r570` - [NVIDIA vGPU software 18][1]
     #
     #   * `grid:r535` - [NVIDIA vGPU software 16][2]
     #
@@ -96,7 +96,7 @@ module Aws::Deadline
     #
     #
     #
-    #   [1]: https://docs.nvidia.com/vgpu/17.0/index.html
+    #   [1]: https://docs.nvidia.com/vgpu/18.0/index.html
     #   [2]: https://docs.nvidia.com/vgpu/16.0/index.html
     #   @return [String]
     #
@@ -3070,7 +3070,7 @@ module Aws::Deadline
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The Auto Scaling status of the fleet.
+    #   The status of the fleet.
     #   @return [String]
     #
     # @!attribute [rw] auto_scaling_status
@@ -3271,6 +3271,11 @@ module Aws::Deadline
     #   The number of tasks running on the job.
     #   @return [Hash<String,Integer>]
     #
+    # @!attribute [rw] task_failure_retry_count
+    #   The total number of times tasks from the job failed and were
+    #   retried.
+    #   @return [Integer]
+    #
     # @!attribute [rw] storage_profile_id
     #   The storage profile ID associated with the job.
     #   @return [String]
@@ -3331,6 +3336,7 @@ module Aws::Deadline
       :task_run_status,
       :target_task_run_status,
       :task_run_status_counts,
+      :task_failure_retry_count,
       :storage_profile_id,
       :max_failed_tasks_count,
       :max_retries_per_task,
@@ -4218,6 +4224,11 @@ module Aws::Deadline
     #   The number of tasks running on the job.
     #   @return [Hash<String,Integer>]
     #
+    # @!attribute [rw] task_failure_retry_count
+    #   The total number of times tasks from the step failed and were
+    #   retried.
+    #   @return [Integer]
+    #
     # @!attribute [rw] target_task_run_status
     #   The task status with which the job started.
     #   @return [String]
@@ -4276,6 +4287,7 @@ module Aws::Deadline
       :lifecycle_status_message,
       :task_run_status,
       :task_run_status_counts,
+      :task_failure_retry_count,
       :target_task_run_status,
       :created_at,
       :created_by,
@@ -5136,6 +5148,11 @@ module Aws::Deadline
     #   The number of tasks running on the job.
     #   @return [Hash<String,Integer>]
     #
+    # @!attribute [rw] task_failure_retry_count
+    #   The total number of times tasks from the job failed and were
+    #   retried.
+    #   @return [Integer]
+    #
     # @!attribute [rw] priority
     #   The job priority.
     #   @return [Integer]
@@ -5196,6 +5213,7 @@ module Aws::Deadline
       :task_run_status,
       :target_task_run_status,
       :task_run_status_counts,
+      :task_failure_retry_count,
       :priority,
       :max_failed_tasks_count,
       :max_retries_per_task,
@@ -5288,6 +5306,11 @@ module Aws::Deadline
     #   The number of tasks running on the job.
     #   @return [Hash<String,Integer>]
     #
+    # @!attribute [rw] task_failure_retry_count
+    #   The total number of times tasks from the job failed and were
+    #   retried.
+    #   @return [Integer]
+    #
     # @!attribute [rw] max_failed_tasks_count
     #   The number of task failures before the job stops running and is
     #   marked as `FAILED`.
@@ -5330,6 +5353,7 @@ module Aws::Deadline
       :task_run_status,
       :target_task_run_status,
       :task_run_status_counts,
+      :task_failure_retry_count,
       :max_failed_tasks_count,
       :max_retries_per_task,
       :max_worker_count,
@@ -8791,6 +8815,11 @@ module Aws::Deadline
     #   The number of tasks running on the job.
     #   @return [Hash<String,Integer>]
     #
+    # @!attribute [rw] task_failure_retry_count
+    #   The total number of times tasks from the step failed and were
+    #   retried.
+    #   @return [Integer]
+    #
     # @!attribute [rw] created_at
     #   The date and time the resource was created.
     #   @return [Time]
@@ -8819,6 +8848,7 @@ module Aws::Deadline
       :task_run_status,
       :target_task_run_status,
       :task_run_status_counts,
+      :task_failure_retry_count,
       :created_at,
       :started_at,
       :ended_at,
@@ -8873,6 +8903,11 @@ module Aws::Deadline
     #   The number of tasks running on the job.
     #   @return [Hash<String,Integer>]
     #
+    # @!attribute [rw] task_failure_retry_count
+    #   The total number of times tasks from the step failed and were
+    #   retried.
+    #   @return [Integer]
+    #
     # @!attribute [rw] target_task_run_status
     #   The task status to start with on the job.
     #   @return [String]
@@ -8914,6 +8949,7 @@ module Aws::Deadline
       :lifecycle_status_message,
       :task_run_status,
       :task_run_status_counts,
+      :task_failure_retry_count,
       :target_task_run_status,
       :created_at,
       :created_by,

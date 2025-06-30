@@ -47,6 +47,20 @@ module Aws::Keyspaces
       SENSITIVE: []
     end
 
+    class CdcSpecification
+      attr_accessor status: ("ENABLED" | "ENABLING" | "DISABLED" | "DISABLING")
+      attr_accessor view_type: ("NEW_IMAGE" | "OLD_IMAGE" | "KEYS_ONLY" | "NEW_AND_OLD_IMAGES")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor propagate_tags: ("TABLE" | "NONE")
+      SENSITIVE: []
+    end
+
+    class CdcSpecificationSummary
+      attr_accessor status: ("ENABLED" | "ENABLING" | "DISABLED" | "DISABLING")
+      attr_accessor view_type: ("NEW_IMAGE" | "OLD_IMAGE" | "KEYS_ONLY" | "NEW_AND_OLD_IMAGES")
+      SENSITIVE: []
+    end
+
     class ClientSideTimestamps
       attr_accessor status: ("ENABLED")
       SENSITIVE: []
@@ -100,6 +114,7 @@ module Aws::Keyspaces
       attr_accessor client_side_timestamps: Types::ClientSideTimestamps
       attr_accessor auto_scaling_specification: Types::AutoScalingSpecification
       attr_accessor replica_specifications: ::Array[Types::ReplicaSpecification]
+      attr_accessor cdc_specification: Types::CdcSpecification
       SENSITIVE: []
     end
 
@@ -212,6 +227,8 @@ module Aws::Keyspaces
       attr_accessor comment: Types::Comment
       attr_accessor client_side_timestamps: Types::ClientSideTimestamps
       attr_accessor replica_specifications: ::Array[Types::ReplicaSpecificationSummary]
+      attr_accessor latest_stream_arn: ::String
+      attr_accessor cdc_specification: Types::CdcSpecificationSummary
       SENSITIVE: []
     end
 
@@ -459,6 +476,7 @@ module Aws::Keyspaces
       attr_accessor client_side_timestamps: Types::ClientSideTimestamps
       attr_accessor auto_scaling_specification: Types::AutoScalingSpecification
       attr_accessor replica_specifications: ::Array[Types::ReplicaSpecification]
+      attr_accessor cdc_specification: Types::CdcSpecification
       SENSITIVE: []
     end
 

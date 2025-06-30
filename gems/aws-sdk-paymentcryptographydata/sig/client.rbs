@@ -118,13 +118,13 @@ module Aws
                               diffie_hellman_symmetric_key: {
                                 certificate_authority_public_key_identifier: ::String,
                                 public_key_certificate: ::String,
-                                key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256"),
+                                key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512" | "HMAC_SHA224"),
                                 key_derivation_function: ("NIST_SP800" | "ANSI_X963"),
                                 key_derivation_hash_algorithm: ("SHA_256" | "SHA_384" | "SHA_512"),
                                 shared_information: ::String
                               }?
                             },
-                            key_check_value_algorithm: ("CMAC" | "ANSI_X9_24")?
+                            key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC")?
                           }
                         ) -> _DecryptDataResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DecryptDataResponseSuccess
@@ -170,13 +170,13 @@ module Aws
                               diffie_hellman_symmetric_key: {
                                 certificate_authority_public_key_identifier: ::String,
                                 public_key_certificate: ::String,
-                                key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256"),
+                                key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512" | "HMAC_SHA224"),
                                 key_derivation_function: ("NIST_SP800" | "ANSI_X963"),
                                 key_derivation_hash_algorithm: ("SHA_256" | "SHA_384" | "SHA_512"),
                                 shared_information: ::String
                               }?
                             },
-                            key_check_value_algorithm: ("CMAC" | "ANSI_X9_24")?
+                            key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC")?
                           }
                         ) -> _EncryptDataResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EncryptDataResponseSuccess
@@ -391,13 +391,13 @@ module Aws
                                    diffie_hellman_symmetric_key: {
                                      certificate_authority_public_key_identifier: ::String,
                                      public_key_certificate: ::String,
-                                     key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256"),
+                                     key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512" | "HMAC_SHA224"),
                                      key_derivation_function: ("NIST_SP800" | "ANSI_X963"),
                                      key_derivation_hash_algorithm: ("SHA_256" | "SHA_384" | "SHA_512"),
                                      shared_information: ::String
                                    }?
                                  },
-                                 key_check_value_algorithm: ("CMAC" | "ANSI_X9_24")?
+                                 key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC")?
                                }
                              ) -> _GeneratePinDataResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GeneratePinDataResponseSuccess
@@ -447,13 +447,13 @@ module Aws
                                  diffie_hellman_symmetric_key: {
                                    certificate_authority_public_key_identifier: ::String,
                                    public_key_certificate: ::String,
-                                   key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256"),
+                                   key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512" | "HMAC_SHA224"),
                                    key_derivation_function: ("NIST_SP800" | "ANSI_X963"),
                                    key_derivation_hash_algorithm: ("SHA_256" | "SHA_384" | "SHA_512"),
                                    shared_information: ::String
                                  }?
                                },
-                               key_check_value_algorithm: ("CMAC" | "ANSI_X9_24")?
+                               key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC")?
                              },
                              ?outgoing_wrapped_key: {
                                wrapped_key_material: {
@@ -461,13 +461,13 @@ module Aws
                                  diffie_hellman_symmetric_key: {
                                    certificate_authority_public_key_identifier: ::String,
                                    public_key_certificate: ::String,
-                                   key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256"),
+                                   key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512" | "HMAC_SHA224"),
                                    key_derivation_function: ("NIST_SP800" | "ANSI_X963"),
                                    key_derivation_hash_algorithm: ("SHA_256" | "SHA_384" | "SHA_512"),
                                    shared_information: ::String
                                  }?
                                },
-                               key_check_value_algorithm: ("CMAC" | "ANSI_X9_24")?
+                               key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC")?
                              }
                            ) -> _ReEncryptDataResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReEncryptDataResponseSuccess
@@ -525,13 +525,13 @@ module Aws
                                     diffie_hellman_symmetric_key: {
                                       certificate_authority_public_key_identifier: ::String,
                                       public_key_certificate: ::String,
-                                      key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256"),
+                                      key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512" | "HMAC_SHA224"),
                                       key_derivation_function: ("NIST_SP800" | "ANSI_X963"),
                                       key_derivation_hash_algorithm: ("SHA_256" | "SHA_384" | "SHA_512"),
                                       shared_information: ::String
                                     }?
                                   },
-                                  key_check_value_algorithm: ("CMAC" | "ANSI_X9_24")?
+                                  key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC")?
                                 },
                                 ?outgoing_wrapped_key: {
                                   wrapped_key_material: {
@@ -539,13 +539,13 @@ module Aws
                                     diffie_hellman_symmetric_key: {
                                       certificate_authority_public_key_identifier: ::String,
                                       public_key_certificate: ::String,
-                                      key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256"),
+                                      key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512" | "HMAC_SHA224"),
                                       key_derivation_function: ("NIST_SP800" | "ANSI_X963"),
                                       key_derivation_hash_algorithm: ("SHA_256" | "SHA_384" | "SHA_512"),
                                       shared_information: ::String
                                     }?
                                   },
-                                  key_check_value_algorithm: ("CMAC" | "ANSI_X9_24")?
+                                  key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC")?
                                 }
                               ) -> _TranslatePinDataResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TranslatePinDataResponseSuccess
@@ -730,13 +730,13 @@ module Aws
                                  diffie_hellman_symmetric_key: {
                                    certificate_authority_public_key_identifier: ::String,
                                    public_key_certificate: ::String,
-                                   key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256"),
+                                   key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512" | "HMAC_SHA224"),
                                    key_derivation_function: ("NIST_SP800" | "ANSI_X963"),
                                    key_derivation_hash_algorithm: ("SHA_256" | "SHA_384" | "SHA_512"),
                                    shared_information: ::String
                                  }?
                                },
-                               key_check_value_algorithm: ("CMAC" | "ANSI_X9_24")?
+                               key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC")?
                              }
                            ) -> _VerifyPinDataResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _VerifyPinDataResponseSuccess

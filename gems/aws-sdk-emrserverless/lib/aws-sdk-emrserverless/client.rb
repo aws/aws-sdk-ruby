@@ -587,6 +587,12 @@ module Aws::EMRServerless
     #   The scheduler configuration for batch and streaming jobs running on
     #   this application. Supported with release labels emr-7.0.0 and above.
     #
+    # @option params [Types::IdentityCenterConfigurationInput] :identity_center_configuration
+    #   The IAM Identity Center Configuration accepts the Identity Center
+    #   instance parameter required to enable trusted identity propagation.
+    #   This configuration allows identity propagation between integrated
+    #   services and the Identity Center instance.
+    #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateApplicationResponse#application_id #application_id} => String
@@ -681,6 +687,9 @@ module Aws::EMRServerless
     #     scheduler_configuration: {
     #       queue_timeout_minutes: 1,
     #       max_concurrent_runs: 1,
+    #     },
+    #     identity_center_configuration: {
+    #       identity_center_instance_arn: "IdentityCenterInstanceArn",
     #     },
     #   })
     #
@@ -793,6 +802,8 @@ module Aws::EMRServerless
     #   resp.application.interactive_configuration.livy_endpoint_enabled #=> Boolean
     #   resp.application.scheduler_configuration.queue_timeout_minutes #=> Integer
     #   resp.application.scheduler_configuration.max_concurrent_runs #=> Integer
+    #   resp.application.identity_center_configuration.identity_center_instance_arn #=> String
+    #   resp.application.identity_center_configuration.identity_center_application_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/GetApplication AWS API Documentation
     #
@@ -1490,6 +1501,12 @@ module Aws::EMRServerless
     #   The scheduler configuration for batch and streaming jobs running on
     #   this application. Supported with release labels emr-7.0.0 and above.
     #
+    # @option params [Types::IdentityCenterConfigurationInput] :identity_center_configuration
+    #   Specifies the IAM Identity Center configuration used to enable or
+    #   disable trusted identity propagation. When provided, this
+    #   configuration determines how the application interacts with IAM
+    #   Identity Center for user authentication and access control.
+    #
     # @return [Types::UpdateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateApplicationResponse#application #application} => Types::Application
@@ -1579,6 +1596,9 @@ module Aws::EMRServerless
     #       queue_timeout_minutes: 1,
     #       max_concurrent_runs: 1,
     #     },
+    #     identity_center_configuration: {
+    #       identity_center_instance_arn: "IdentityCenterInstanceArn",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1637,6 +1657,8 @@ module Aws::EMRServerless
     #   resp.application.interactive_configuration.livy_endpoint_enabled #=> Boolean
     #   resp.application.scheduler_configuration.queue_timeout_minutes #=> Integer
     #   resp.application.scheduler_configuration.max_concurrent_runs #=> Integer
+    #   resp.application.identity_center_configuration.identity_center_instance_arn #=> String
+    #   resp.application.identity_center_configuration.identity_center_application_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/UpdateApplication AWS API Documentation
     #
@@ -1665,7 +1687,7 @@ module Aws::EMRServerless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-emrserverless'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

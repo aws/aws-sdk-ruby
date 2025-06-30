@@ -1162,6 +1162,18 @@ module Aws::S3
       end
     end
 
+    class RenameObject
+      def self.build(context)
+        Aws::S3::EndpointParameters.create(
+          context.config,
+          bucket: context.params[:bucket],
+          use_dual_stack: context[:use_dualstack_endpoint],
+          accelerate: context[:use_accelerate_endpoint],
+          key: context.params[:key],
+        )
+      end
+    end
+
     class RestoreObject
       def self.build(context)
         Aws::S3::EndpointParameters.create(
@@ -1416,6 +1428,8 @@ module Aws::S3
         PutObjectTagging.build(context)
       when :put_public_access_block
         PutPublicAccessBlock.build(context)
+      when :rename_object
+        RenameObject.build(context)
       when :restore_object
         RestoreObject.build(context)
       when :select_object_content

@@ -59,6 +59,7 @@ module Aws::S3Tables
     GetTableRequest = Shapes::StructureShape.new(name: 'GetTableRequest')
     GetTableResponse = Shapes::StructureShape.new(name: 'GetTableResponse')
     IcebergCompactionSettings = Shapes::StructureShape.new(name: 'IcebergCompactionSettings')
+    IcebergCompactionStrategy = Shapes::StringShape.new(name: 'IcebergCompactionStrategy')
     IcebergMetadata = Shapes::StructureShape.new(name: 'IcebergMetadata')
     IcebergSchema = Shapes::StructureShape.new(name: 'IcebergSchema')
     IcebergSnapshotManagementSettings = Shapes::StructureShape.new(name: 'IcebergSnapshotManagementSettings')
@@ -307,6 +308,7 @@ module Aws::S3Tables
     GetTableResponse.struct_class = Types::GetTableResponse
 
     IcebergCompactionSettings.add_member(:target_file_size_mb, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "targetFileSizeMB"))
+    IcebergCompactionSettings.add_member(:strategy, Shapes::ShapeRef.new(shape: IcebergCompactionStrategy, location_name: "strategy"))
     IcebergCompactionSettings.struct_class = Types::IcebergCompactionSettings
 
     IcebergMetadata.add_member(:schema, Shapes::ShapeRef.new(shape: IcebergSchema, required: true, location_name: "schema"))

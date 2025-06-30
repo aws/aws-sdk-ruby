@@ -11,6 +11,10 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
+      class AccessPointAlreadyOwnedByYou < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+      end
       class ActiveDirectoryError < ::Aws::Errors::ServiceError
         def active_directory_id: () -> ::String
         def type: () -> ::String
@@ -61,6 +65,10 @@ module Aws
       class InternalServerError < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class InvalidAccessPoint < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+      end
       class InvalidDataRepositoryType < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
@@ -83,6 +91,10 @@ module Aws
         def message: () -> ::String
       end
       class InvalidRegion < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidRequest < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
         def message: () -> ::String
       end
       class InvalidSourceKmsKey < ::Aws::Errors::ServiceError
@@ -109,6 +121,9 @@ module Aws
         def resource_arn: () -> ::String
         def message: () -> ::String
       end
+      class S3AccessPointAttachmentNotFound < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class ServiceLimitExceeded < ::Aws::Errors::ServiceError
         def limit: () -> ::String
         def message: () -> ::String
@@ -121,6 +136,10 @@ module Aws
         def backup_id: () -> ::String
       end
       class StorageVirtualMachineNotFound < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyAccessPoints < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
         def message: () -> ::String
       end
       class UnsupportedOperation < ::Aws::Errors::ServiceError

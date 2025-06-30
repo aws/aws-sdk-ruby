@@ -81,6 +81,7 @@ module Aws::S3
     ChecksumSHA1 = Shapes::StringShape.new(name: 'ChecksumSHA1')
     ChecksumSHA256 = Shapes::StringShape.new(name: 'ChecksumSHA256')
     ChecksumType = Shapes::StringShape.new(name: 'ChecksumType')
+    ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     CloudFunction = Shapes::StringShape.new(name: 'CloudFunction')
     CloudFunctionConfiguration = Shapes::StructureShape.new(name: 'CloudFunctionConfiguration')
     CloudFunctionInvocationRole = Shapes::StringShape.new(name: 'CloudFunctionInvocationRole')
@@ -284,6 +285,7 @@ module Aws::S3
     HttpErrorCodeReturnedEquals = Shapes::StringShape.new(name: 'HttpErrorCodeReturnedEquals')
     HttpRedirectCode = Shapes::StringShape.new(name: 'HttpRedirectCode')
     ID = Shapes::StringShape.new(name: 'ID')
+    IdempotencyParameterMismatch = Shapes::StructureShape.new(name: 'IdempotencyParameterMismatch')
     IfMatch = Shapes::StringShape.new(name: 'IfMatch')
     IfMatchInitiatedTime = Shapes::TimestampShape.new(name: 'IfMatchInitiatedTime', timestampFormat: "rfc822")
     IfMatchLastModifiedTime = Shapes::TimestampShape.new(name: 'IfMatchLastModifiedTime', timestampFormat: "rfc822")
@@ -525,6 +527,13 @@ module Aws::S3
     Redirect = Shapes::StructureShape.new(name: 'Redirect')
     RedirectAllRequestsTo = Shapes::StructureShape.new(name: 'RedirectAllRequestsTo')
     Region = Shapes::StringShape.new(name: 'Region')
+    RenameObjectOutput = Shapes::StructureShape.new(name: 'RenameObjectOutput')
+    RenameObjectRequest = Shapes::StructureShape.new(name: 'RenameObjectRequest')
+    RenameSource = Shapes::StringShape.new(name: 'RenameSource')
+    RenameSourceIfMatch = Shapes::StringShape.new(name: 'RenameSourceIfMatch')
+    RenameSourceIfModifiedSince = Shapes::TimestampShape.new(name: 'RenameSourceIfModifiedSince', timestampFormat: "rfc822")
+    RenameSourceIfNoneMatch = Shapes::StringShape.new(name: 'RenameSourceIfNoneMatch')
+    RenameSourceIfUnmodifiedSince = Shapes::TimestampShape.new(name: 'RenameSourceIfUnmodifiedSince', timestampFormat: "rfc822")
     ReplaceKeyPrefixWith = Shapes::StringShape.new(name: 'ReplaceKeyPrefixWith')
     ReplaceKeyWith = Shapes::StringShape.new(name: 'ReplaceKeyWith')
     ReplicaKmsKeyID = Shapes::StringShape.new(name: 'ReplicaKmsKeyID')
@@ -1035,6 +1044,7 @@ module Aws::S3
 
     DeleteBucketIntelligentTieringConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket", metadata: {"contextParam" => {"name" => "Bucket"}}))
     DeleteBucketIntelligentTieringConfigurationRequest.add_member(:id, Shapes::ShapeRef.new(shape: IntelligentTieringId, required: true, location: "querystring", location_name: "id"))
+    DeleteBucketIntelligentTieringConfigurationRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     DeleteBucketIntelligentTieringConfigurationRequest.struct_class = Types::DeleteBucketIntelligentTieringConfigurationRequest
 
     DeleteBucketInventoryConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket", metadata: {"contextParam" => {"name" => "Bucket"}}))
@@ -1246,6 +1256,7 @@ module Aws::S3
 
     GetBucketIntelligentTieringConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket", metadata: {"contextParam" => {"name" => "Bucket"}}))
     GetBucketIntelligentTieringConfigurationRequest.add_member(:id, Shapes::ShapeRef.new(shape: IntelligentTieringId, required: true, location: "querystring", location_name: "id"))
+    GetBucketIntelligentTieringConfigurationRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     GetBucketIntelligentTieringConfigurationRequest.struct_class = Types::GetBucketIntelligentTieringConfigurationRequest
 
     GetBucketInventoryConfigurationOutput.add_member(:inventory_configuration, Shapes::ShapeRef.new(shape: InventoryConfiguration, location_name: "InventoryConfiguration"))
@@ -1619,6 +1630,7 @@ module Aws::S3
     HeadObjectOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
     HeadObjectOutput.add_member(:replication_status, Shapes::ShapeRef.new(shape: ReplicationStatus, location: "header", location_name: "x-amz-replication-status"))
     HeadObjectOutput.add_member(:parts_count, Shapes::ShapeRef.new(shape: PartsCount, location: "header", location_name: "x-amz-mp-parts-count"))
+    HeadObjectOutput.add_member(:tag_count, Shapes::ShapeRef.new(shape: TagCount, location: "header", location_name: "x-amz-tagging-count"))
     HeadObjectOutput.add_member(:object_lock_mode, Shapes::ShapeRef.new(shape: ObjectLockMode, location: "header", location_name: "x-amz-object-lock-mode"))
     HeadObjectOutput.add_member(:object_lock_retain_until_date, Shapes::ShapeRef.new(shape: ObjectLockRetainUntilDate, location: "header", location_name: "x-amz-object-lock-retain-until-date"))
     HeadObjectOutput.add_member(:object_lock_legal_hold_status, Shapes::ShapeRef.new(shape: ObjectLockLegalHoldStatus, location: "header", location_name: "x-amz-object-lock-legal-hold"))
@@ -1646,6 +1658,8 @@ module Aws::S3
     HeadObjectRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     HeadObjectRequest.add_member(:checksum_mode, Shapes::ShapeRef.new(shape: ChecksumMode, location: "header", location_name: "x-amz-checksum-mode"))
     HeadObjectRequest.struct_class = Types::HeadObjectRequest
+
+    IdempotencyParameterMismatch.struct_class = Types::IdempotencyParameterMismatch
 
     IndexDocument.add_member(:suffix, Shapes::ShapeRef.new(shape: Suffix, required: true, location_name: "Suffix"))
     IndexDocument.struct_class = Types::IndexDocument
@@ -1785,6 +1799,7 @@ module Aws::S3
 
     ListBucketIntelligentTieringConfigurationsRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket", metadata: {"contextParam" => {"name" => "Bucket"}}))
     ListBucketIntelligentTieringConfigurationsRequest.add_member(:continuation_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "continuation-token"))
+    ListBucketIntelligentTieringConfigurationsRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     ListBucketIntelligentTieringConfigurationsRequest.struct_class = Types::ListBucketIntelligentTieringConfigurationsRequest
 
     ListBucketInventoryConfigurationsOutput.add_member(:continuation_token, Shapes::ShapeRef.new(shape: Token, location_name: "ContinuationToken"))
@@ -2227,6 +2242,7 @@ module Aws::S3
 
     PutBucketIntelligentTieringConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket", metadata: {"contextParam" => {"name" => "Bucket"}}))
     PutBucketIntelligentTieringConfigurationRequest.add_member(:id, Shapes::ShapeRef.new(shape: IntelligentTieringId, required: true, location: "querystring", location_name: "id"))
+    PutBucketIntelligentTieringConfigurationRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     PutBucketIntelligentTieringConfigurationRequest.add_member(:intelligent_tiering_configuration, Shapes::ShapeRef.new(shape: IntelligentTieringConfiguration, required: true, location_name: "IntelligentTieringConfiguration", metadata: {"xmlNamespace" => {"uri" => "http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutBucketIntelligentTieringConfigurationRequest.struct_class = Types::PutBucketIntelligentTieringConfigurationRequest
     PutBucketIntelligentTieringConfigurationRequest[:payload] = :intelligent_tiering_configuration
@@ -2542,6 +2558,22 @@ module Aws::S3
     RedirectAllRequestsTo.add_member(:host_name, Shapes::ShapeRef.new(shape: HostName, required: true, location_name: "HostName"))
     RedirectAllRequestsTo.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, location_name: "Protocol"))
     RedirectAllRequestsTo.struct_class = Types::RedirectAllRequestsTo
+
+    RenameObjectOutput.struct_class = Types::RenameObjectOutput
+
+    RenameObjectRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket", metadata: {"contextParam" => {"name" => "Bucket"}}))
+    RenameObjectRequest.add_member(:key, Shapes::ShapeRef.new(shape: ObjectKey, required: true, location: "uri", location_name: "Key", metadata: {"contextParam" => {"name" => "Key"}}))
+    RenameObjectRequest.add_member(:rename_source, Shapes::ShapeRef.new(shape: RenameSource, required: true, location: "header", location_name: "x-amz-rename-source"))
+    RenameObjectRequest.add_member(:destination_if_match, Shapes::ShapeRef.new(shape: IfMatch, location: "header", location_name: "If-Match"))
+    RenameObjectRequest.add_member(:destination_if_none_match, Shapes::ShapeRef.new(shape: IfNoneMatch, location: "header", location_name: "If-None-Match"))
+    RenameObjectRequest.add_member(:destination_if_modified_since, Shapes::ShapeRef.new(shape: IfModifiedSince, location: "header", location_name: "If-Modified-Since"))
+    RenameObjectRequest.add_member(:destination_if_unmodified_since, Shapes::ShapeRef.new(shape: IfUnmodifiedSince, location: "header", location_name: "If-Unmodified-Since"))
+    RenameObjectRequest.add_member(:source_if_match, Shapes::ShapeRef.new(shape: RenameSourceIfMatch, location: "header", location_name: "x-amz-rename-source-if-match"))
+    RenameObjectRequest.add_member(:source_if_none_match, Shapes::ShapeRef.new(shape: RenameSourceIfNoneMatch, location: "header", location_name: "x-amz-rename-source-if-none-match"))
+    RenameObjectRequest.add_member(:source_if_modified_since, Shapes::ShapeRef.new(shape: RenameSourceIfModifiedSince, location: "header", location_name: "x-amz-rename-source-if-modified-since"))
+    RenameObjectRequest.add_member(:source_if_unmodified_since, Shapes::ShapeRef.new(shape: RenameSourceIfUnmodifiedSince, location: "header", location_name: "x-amz-rename-source-if-unmodified-since"))
+    RenameObjectRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "x-amz-client-token", metadata: {"idempotencyToken" => true}))
+    RenameObjectRequest.struct_class = Types::RenameObjectRequest
 
     ReplicaModifications.add_member(:status, Shapes::ShapeRef.new(shape: ReplicaModificationsStatus, required: true, location_name: "Status"))
     ReplicaModifications.struct_class = Types::ReplicaModifications
@@ -3976,6 +4008,15 @@ module Aws::S3
         }
         o.input = Shapes::ShapeRef.new(shape: PutPublicAccessBlockRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:rename_object, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RenameObject"
+        o.http_method = "PUT"
+        o.http_request_uri = "/{Key+}?renameObject"
+        o.input = Shapes::ShapeRef.new(shape: RenameObjectRequest)
+        o.output = Shapes::ShapeRef.new(shape: RenameObjectOutput)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotencyParameterMismatch)
       end)
 
       api.add_operation(:restore_object, Seahorse::Model::Operation.new.tap do |o|

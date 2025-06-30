@@ -2528,6 +2528,11 @@ module Aws::AutoScaling
     #
     #   If you omit this property, all Auto Scaling groups are described.
     #
+    # @option params [Boolean] :include_instances
+    #   Specifies whether to include information about Amazon EC2 instances in
+    #   the response. When set to `true` (default), the response includes
+    #   instance details.
+    #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
     #   token from a previous call.)
@@ -2622,6 +2627,7 @@ module Aws::AutoScaling
     #
     #   resp = client.describe_auto_scaling_groups({
     #     auto_scaling_group_names: ["XmlStringMaxLen255"],
+    #     include_instances: false,
     #     next_token: "XmlString",
     #     max_records: 1,
     #     filters: [
@@ -7470,7 +7476,7 @@ module Aws::AutoScaling
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.137.0'
+      context[:gem_version] = '1.138.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

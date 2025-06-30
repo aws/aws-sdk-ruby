@@ -697,7 +697,8 @@ module Aws::RDS
     end
 
     # The location where automated backups and manual snapshots are stored:
-    # Amazon Web Services Outposts or the Amazon Web Services Region.
+    # Dedicated Local Zones, Amazon Web Services Outposts or the Amazon Web
+    # Services Region.
     # @return [String]
     def backup_target
       data[:backup_target]
@@ -2124,6 +2125,8 @@ module Aws::RDS
     #
     #   Valid Values:
     #
+    #   * `local` (Dedicated Local Zone)
+    #
     #   * `outposts` (Amazon Web Services Outposts)
     #
     #   * `region` (Amazon Web Services Region)
@@ -2335,6 +2338,7 @@ module Aws::RDS
     #     network_type: "String",
     #     storage_throughput: 1,
     #     enable_customer_owned_ip: false,
+    #     backup_target: "String",
     #     allocated_storage: 1,
     #     source_db_cluster_identifier: "String",
     #     dedicated_log_volume: false,
@@ -2919,6 +2923,14 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
     #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing
+    # @option options [String] :backup_target
+    #   The location where RDS stores automated backups and manual snapshots.
+    #
+    #   Valid Values:
+    #
+    #   * `local` for Dedicated Local Zones
+    #
+    #   * `region` for Amazon Web Services Region
     # @option options [Integer] :allocated_storage
     #   The amount of storage (in gibibytes) to allocate initially for the
     #   read replica. Follow the allocation rules specified in
@@ -4876,6 +4888,8 @@ module Aws::RDS
     #   the restored DB instance.
     #
     #   Valid Values:
+    #
+    #   * `local` (Dedicated Local Zone)
     #
     #   * `outposts` (Amazon Web Services Outposts)
     #

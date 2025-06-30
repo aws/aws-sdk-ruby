@@ -151,6 +151,7 @@ module Aws::AutoScaling
 
     class AutoScalingGroupNamesType
       attr_accessor auto_scaling_group_names: ::Array[::String]
+      attr_accessor include_instances: bool
       attr_accessor next_token: ::String
       attr_accessor max_records: ::Integer
       attr_accessor filters: ::Array[Types::Filter]
