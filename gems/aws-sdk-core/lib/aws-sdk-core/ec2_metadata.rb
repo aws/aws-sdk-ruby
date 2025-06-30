@@ -10,7 +10,7 @@ module Aws
     # @api private
     METADATA_TOKEN_PATH = '/latest/api/token'.freeze
 
-    # Raised when the PUT request is not valid. This would be thrown if `token_ttl` is not an Integer.
+    # Raised when the PUT request is not valid. This would be thrown if `token_ttl` is not an integer.
     # @api private
     class TokenRetrievalError < RuntimeError; end
 
@@ -48,7 +48,7 @@ module Aws
     #   it sleeps that amount. When given a Proc, it is called with the current number of failed retries.
     def initialize(options = {})
       @token_ttl = options[:token_ttl] || 21_600
-      @retries = options[:retries] || 0
+      @retries = options[:retries] || 3
       @backoff = resolve_backoff(options[:backoff])
       @endpoint = resolve_endpoint(options)
       @port = options[:port] || 80
@@ -59,10 +59,6 @@ module Aws
 
       @token = nil
       @mutex = Mutex.new
-
-      # Flag for if v2 flow fails, skip future attempts
-      @disable_imds_v1 = options[:disable_imds_v1]
-      @imds_v1_fallback = false
     end
 
     # @return [Integer]
