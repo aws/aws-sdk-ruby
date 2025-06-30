@@ -10,8 +10,7 @@ module Aws
     # @api private
     METADATA_TOKEN_PATH = '/latest/api/token'.freeze
 
-    # Raised when the PUT request is not valid. This would be thrown if
-    # `token_ttl` is not an Integer.
+    # Raised when the PUT request is not valid. This would be thrown if `token_ttl` is not an Integer.
     # @api private
     class TokenRetrievalError < RuntimeError; end
 
@@ -27,40 +26,31 @@ module Aws
     # @api private
     class RequestForbiddenError < RuntimeError; end
 
-    # Creates a client that can query version 2 of the EC2 Instance Metadata
-    #   service (IMDS).
+    # Creates a client that can query version 2 of the EC2 Instance Metadata service (IMDS).
     #
-    # @note Customers using containers may need to increase their hop limit
-    #   to access IMDSv2.
+    # @note Customers using containers may need to increase their hop limit to access IMDSv2.
     # @see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html#instance-metadata-transition-to-version-2
     #
     # @param [Hash] options
-    # @option options [Integer] :token_ttl (21600) The session token's TTL,
-    #   defaulting to 6 hours.
-    # @option options [Integer] :retries (3) The number of retries for failed
-    #   requests.
-    # @option options [String] :endpoint ('http://169.254.169.254') The IMDS
-    #   endpoint. This option has precedence over the :endpoint_mode.
-    # @option options [String] :endpoint_mode ('IPv4') The endpoint mode for
-    #   the instance metadata service. This is either 'IPv4'
-    #   ('http://169.254.169.254') or 'IPv6' ('http://[fd00:ec2::254]').
+    # @option options [Boolean] :disable_imds_v1 (false) Deprecated. The legacy EC2 Metadata Service v1
+    #   has been retired. Only IMDSv2 is supported.
+    # @option options [Integer] :token_ttl (21600) The session token's TTL, defaulting to 6 hours.
+    # @option options [Integer] :retries (0) The number of retries for failed requests.
+    # @option options [String] :endpoint ('http://169.254.169.254') The IMDS endpoint.
+    #   This option has precedence over the :endpoint_mode.
+    # @option options [String] :endpoint_mode ('IPv4') The endpoint mode for  the instance metadata service.
+    #   This is either 'IPv4'  ('http://169.254.169.254') or 'IPv6' ('http://[fd00:ec2::254]').
     # @option options [Integer] :port (80) The IMDS endpoint port.
-    # @option options [Integer] :http_open_timeout (1) The number of seconds to
-    #   wait for the connection to open.
-    # @option options [Integer] :http_read_timeout (1) The number of seconds for
-    #   one chunk of data to be read.
-    # @option options [IO] :http_debug_output An output stream for debugging. Do
-    #   not use this in production.
-    # @option options [Integer,Proc] :backoff A backoff used for retryable
-    #   requests. When given an Integer, it sleeps that amount. When given a
-    #   Proc, it is called with the current number of failed retries.
+    # @option options [Integer] :http_open_timeout (1) The number of seconds to  wait for the connection to open.
+    # @option options [Integer] :http_read_timeout (1) The number of seconds for one chunk of data to be read.
+    # @option options [IO] :http_debug_output An output stream for debugging. Do not use this in production.
+    # @option options [Integer,Proc] :backoff A backoff used for retryable requests. When given an Integer,
+    #   it sleeps that amount. When given a Proc, it is called with the current number of failed retries.
     def initialize(options = {})
       @token_ttl = options[:token_ttl] || 21_600
-      @retries = options[:retries] || 3
-      @backoff = backoff(options[:backoff])
-
-      endpoint_mode = options[:endpoint_mode] || 'IPv4'
-      @endpoint = resolve_endpoint(options[:endpoint], endpoint_mode)
+      @retries = options[:retries] || 0
+      @backoff = resolve_backoff(options[:backoff])
+      @endpoint = resolve_endpoint(options)
       @port = options[:port] || 80
 
       @http_open_timeout = options[:http_open_timeout] || 1
@@ -69,50 +59,70 @@ module Aws
 
       @token = nil
       @mutex = Mutex.new
+
+      # Flag for if v2 flow fails, skip future attempts
+      @disable_imds_v1 = options[:disable_imds_v1]
+      @imds_v1_fallback = false
     end
 
+    # @return [Integer]
+    attr_reader :token_ttl
+
+    # @return [Integer]
     attr_reader :retries
 
-    # Fetches a given metadata category using a String path, and returns the
-    #   result as a String. A path starts with the API version (usually
-    #   "/latest/"). See the instance data categories for possible paths.
+    # @return [Proc]
+    attr_reader :backoff
+
+    # @return [String]
+    attr_reader :endpoint
+
+    # @return [Integer]
+    attr_reader :port
+
+    # @return [Integer]
+    attr_reader :http_open_timeout
+
+    # @return [Integer]
+    attr_reader :http_read_timeout
+
+    # @return [IO, nil]
+    attr_reader :http_debug_output
+
+    # Fetches a given metadata category using a String path, and returns the result as a String.
+    #   A path starts with the API version (usually `"/latest/"`). See the instance data categories for possible paths.
     #
     # @example Fetching the instance ID
-    #
     #   ec2_metadata = Aws::EC2Metadata.new
     #   ec2_metadata.get('/latest/meta-data/instance-id')
     #   => "i-023a25f10a73a0f79"
     #
-    # @note This implementation always returns a String and will not parse any
-    #   responses. Parsable responses may include JSON objects or directory
-    #   listings, which are strings separated by line feeds (ASCII 10).
+    # @note This implementation always returns a String and will not parse any  responses.  Parsable responses may
+    #   include JSON objects or directory listings, which are strings separated by line feeds (ASCII 10).
     #
     # @example Fetching and parsing JSON meta-data
-    #
     #   require 'json'
     #   data = ec2_metadata.get('/latest/dynamic/instance-identity/document')
     #   JSON.parse(data)
     #   => {"accountId"=>"012345678912", ... }
     #
     # @example Fetching and parsing directory listings
-    #
     #   listing = ec2_metadata.get('/latest/meta-data')
     #   listing.split(10.chr)
     #   => ["ami-id", "ami-launch-index", ...]
     #
-    # @note Unlike other services, IMDS does not have a service API model. This
-    #   means that we cannot confidently generate code with methods and
-    #   response structures. This implementation ensures that new IMDS features
-    #   are always supported by being deployed to the instance and does not
-    #   require code changes.
-    #
-    # @see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-data-categories.html
+    # @note Unlike other services, IMDS does not have a service API model. This means that we cannot confidently
+    #   generate code with methods and response structures. This implementation ensures that new IMDS features
+    #   are always supported by being deployed to the instance and does not require code changes.
+    # @see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html#instancedata-data-categories
+    #   Instance metadata categories
     # @see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-identity-documents.html
+    #   Instance identity documents for Amazon EC2 instances
     # @param [String] path The full path to the metadata.
     def get(path)
       retry_errors do
         @mutex.synchronize do
-          fetch_token unless token_set?
+          fetch_token unless @token && !@token.expired?
         end
         open_connection do |c|
           http_get(c, path, @token.value)
@@ -122,20 +132,23 @@ module Aws
 
     private
 
-    def token_set?
-      @token && !@token.expired?
+    def resolve_backoff(backoff)
+      case backoff
+      when Proc then backoff
+      when Numeric then ->(_) { Kernel.sleep(backoff) }
+      else ->(num_failures) { Kernel.sleep(1.2**num_failures) }
+      end
     end
 
-    def resolve_endpoint(endpoint, endpoint_mode)
-      return endpoint if endpoint
+    def resolve_endpoint(options)
+      return options[:endpoint] if options[:endpoint]
 
+      endpoint_mode = options[:endpoint_mode] || 'IPv4'
       case endpoint_mode.downcase
       when 'ipv4' then 'http://169.254.169.254'
       when 'ipv6' then 'http://[fd00:ec2::254]'
       else
-        raise ArgumentError,
-              '`:endpoint_mode` is not valid, expected IPv4 or IPv6, '\
-              "got: #{endpoint_mode}"
+        raise ArgumentError, "`:endpoint_mode` is not valid, expected IPv4 or IPv6, got: #{endpoint_mode}"
       end
     end
 
@@ -143,20 +156,13 @@ module Aws
       open_connection do |conn|
         created_time = Time.now
         token_value, token_ttl = http_put(conn, @token_ttl)
-        @token = Token.new(
-          value: token_value,
-          ttl: token_ttl,
-          created_time: created_time
-        )
+        @token = Token.new(value: token_value, ttl: token_ttl, created_time: created_time)
       end
     end
 
     # GET request fetch profile and credentials
     def http_get(connection, path, token)
-      headers = {
-        'User-Agent' => "aws-sdk-ruby3/#{CORE_GEM_VERSION}",
-        'x-aws-ec2-metadata-token' => token
-      }
+      headers = { 'User-Agent' => "aws-sdk-ruby3/#{CORE_GEM_VERSION}", 'x-aws-ec2-metadata-token' => token }
       request = Net::HTTP::Get.new(path, headers)
       response = connection.request(request)
 
@@ -182,10 +188,8 @@ module Aws
           response.body,
           response.header['x-aws-ec2-metadata-token-ttl-seconds'].to_i
         ]
-      when 400
-        raise TokenRetrievalError
-      when 403
-        raise RequestForbiddenError
+      when 400 then raise TokenRetrievalError
+      when 403 then raise RequestForbiddenError
       end
     end
 
@@ -200,7 +204,7 @@ module Aws
     end
 
     def retry_errors(&_block)
-      retries = 0
+      attempts = 0
       begin
         yield
       # These errors should not be retried.
@@ -209,20 +213,12 @@ module Aws
       # StandardError is not ideal but it covers Net::HTTP errors.
       # https://gist.github.com/tenderlove/245188
       rescue StandardError, TokenExpiredError => e
-        raise unless retries < @retries
+        raise unless attempts < @retries
 
         @token = nil if e.is_a?(TokenExpiredError)
-        @backoff.call(retries)
-        retries += 1
+        @backoff.call(attempts)
+        attempts += 1
         retry
-      end
-    end
-
-    def backoff(backoff)
-      case backoff
-      when Proc then backoff
-      when Numeric then ->(_) { Kernel.sleep(backoff) }
-      else ->(num_failures) { Kernel.sleep(1.2**num_failures) }
       end
     end
 
