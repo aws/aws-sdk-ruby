@@ -31,8 +31,6 @@ module Aws
     # @option options [Aws::EC2Metadata] :ec2_metadata A custom EC2 metadata client
     #   to use for loading credentials from IMDSv2. If not provided, a default {Aws::EC2Metadata}
     #   client will be constructed with passed options.
-    # @option options [Boolean] :disable_imds_v1 (false) Deprecated. The legacy
-    #   EC2 Metadata Service v1 has been retired. Only IMDSv2 is supported.
     # @option options [Callable] before_refresh Proc called before
     #   credentials are refreshed. `before_refresh` is called
     #   with an instance of this object when AWS credentials are required
@@ -52,11 +50,7 @@ module Aws
     private
 
     def build_ec2_metadata_client(options)
-      opts = options.merge(
-        endpoint_mode: resolve_endpoint_mode(options),
-        endpoint: resolve_endpoint(options),
-        disable_imds_v1: resolve_disable_v1(options)
-      )
+      opts = options.merge(endpoint_mode: resolve_endpoint_mode(options), endpoint: resolve_endpoint(options))
       if (delay = opts.delete(:delay))
         warn('The `:delay` option is deprecated. Use `:backoff` instead.')
         opts[:backoff] = delay
@@ -81,15 +75,6 @@ module Aws
         ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT'] ||
         Aws.shared_config.ec2_metadata_service_endpoint(profile: options[:profile]) ||
         nil
-    end
-
-    # TODO: team discussion on possible removal
-    def resolve_disable_v1(options)
-      value = options[:disable_imds_v1] ||
-              ENV['AWS_EC2_METADATA_V1_DISABLED'] ||
-              Aws.shared_config.ec2_metadata_v1_disabled(profile: options[:profile]) ||
-              false
-      Aws::Util.str_2_bool(value.to_s.downcase)
     end
 
     def refresh

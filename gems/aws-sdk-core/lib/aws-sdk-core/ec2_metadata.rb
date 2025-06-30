@@ -32,8 +32,6 @@ module Aws
     # @see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html#instance-metadata-transition-to-version-2
     #
     # @param [Hash] options
-    # @option options [Boolean] :disable_imds_v1 (false) Deprecated. The legacy EC2 Metadata Service v1
-    #   has been retired. Only IMDSv2 is supported.
     # @option options [Integer] :token_ttl (21600) The session token's TTL, defaulting to 6 hours.
     # @option options [Integer] :retries (0) The number of retries for failed requests.
     # @option options [String] :endpoint ('http://169.254.169.254') The IMDS endpoint.
