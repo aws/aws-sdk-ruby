@@ -31,7 +31,7 @@ module Aws
     # @option options [Aws::EC2Metadata] :ec2_metadata A custom EC2 metadata client
     #   to use for loading credentials from IMDSv2. If not provided, a default {Aws::EC2Metadata}
     #   client will be constructed with passed options.
-    # @option options [Callable] before_refresh Proc called before
+    # @option options [Callable] :before_refresh Proc called before
     #   credentials are refreshed. `before_refresh` is called
     #   with an instance of this object when AWS credentials are required
     #   and need to be refreshed.
