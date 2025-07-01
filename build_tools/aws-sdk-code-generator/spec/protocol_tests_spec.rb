@@ -53,8 +53,7 @@ ProtocolTestsHelper.fixtures.each do |protocol, files|
 
                 # Base64 encoded binary body is provided for eventstream and cbor
                 body =
-                  if test_case['response']['eventstream'] ||
-                     protocol == 'smithy-rpc-v2-cbor'
+                  if test_case['response']['eventstream'] || protocol.match?(/smithy-rpc-v2-cbor/)
                     Base64.decode64(test_case['response']['body'])
                   else
                     test_case['response']['body']
@@ -64,11 +63,13 @@ ProtocolTestsHelper.fixtures.each do |protocol, files|
                 Seahorse::Client::Response.new(context: context)
               end
 
-              resp = begin
-                client.operation_name
-              rescue => error
-                error
-              end
+              resp =
+                begin
+                  client.operation_name
+                rescue Aws::Errors::ServiceError => e
+                  ProtocolTestsHelper::Matcher.match_error_code(test_case, e, self)
+                  e
+                end
               ProtocolTestsHelper::Matcher.match_resp_data(test_case, resp, self)
             end
           end

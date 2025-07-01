@@ -2,6 +2,7 @@
 
 module Aws
   module Json
+    # @api private
     class ErrorHandler < Aws::ErrorHandler
 
       def call(context)
@@ -24,18 +25,21 @@ module Aws
       end
 
       def error_code(json, context)
+        # This is not correct per protocol tests. awsQueryError is intended to populate the
+        # error code of the error class. The error class should come from __type. Query and
+        # query compatible services currently have dynamic errors raised from error codes instead
+        # of the modeled error class. However, changing this in this major version would break
+        # existing usage.
         code =
           if aws_query_error?(context)
-            query_header = context.http_response.headers['x-amzn-query-error']
-            error, _type = query_header.split(';') # type not supported
-            remove_prefix(error, context)
+            aws_query_error_code(context)
           else
             json['__type']
           end
         code ||= json['code']
         code ||= context.http_response.headers['x-amzn-errortype']
         if code
-          code.split('#').last
+          code.split('#').last.split(':').first
         else
           http_status_error_code(context)
         end
@@ -44,6 +48,12 @@ module Aws
       def aws_query_error?(context)
         context.config.api.metadata['awsQueryCompatible'] &&
           context.http_response.headers['x-amzn-query-error']
+      end
+
+      def aws_query_error_code(context)
+        query_header = context.http_response.headers['x-amzn-query-error']
+        error, _type = query_header.split(';') # type not supported
+        remove_prefix(error, context)
       end
 
       def remove_prefix(error_code, context)

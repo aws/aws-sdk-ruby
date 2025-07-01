@@ -309,11 +309,15 @@ module ProtocolTestsHelper
         end
       end
 
-      def match_resp_data(test_case, http_resp, it)
-        response_data = ProtocolTestsHelper.data_to_hash(http_resp.data)
+      def match_resp_data(test_case, resp_or_error, it)
+        response_data = ProtocolTestsHelper.data_to_hash(resp_or_error.data)
         expected_data =
-          if error_case?(test_case)
-            error_shape = http_resp.context.operation.errors.find do |err|
+          if test_case['error']
+            # This is not correct per protocol tests. `errorCode` is used to assert the error code
+            # on the raised error class. However, because we incorrectly create errors from error codes
+            # in query and query compatible services, we need to map back that error code to an
+            # error shape, so that we can assert the error data.
+            error_shape = resp_or_error.context.operation.errors.find do |err|
               shape =
                 if err.shape['error']
                   err.shape['error']['code']
@@ -324,15 +328,9 @@ module ProtocolTestsHelper
             end
             raise "Unable to find #{test_case['errorCode']} in error shapes" if error_shape.nil?
 
-            ProtocolTestsHelper.format_data(
-              error_shape,
-              test_case['error'] || {}
-            )
+            ProtocolTestsHelper.format_data(error_shape, test_case['error'] || {})
           else
-            ProtocolTestsHelper.format_data(
-              http_resp.context.operation.output,
-              test_case['result'] || {}
-            )
+            ProtocolTestsHelper.format_data(resp_or_error.context.operation.output, test_case['result'] || {})
           end
         if test_case['response']['eventstream']
           response_data.each do |member_name, value|
@@ -352,6 +350,16 @@ module ProtocolTestsHelper
         else
           assert(it, response_data, expected_data)
         end
+      end
+
+      def match_error_code(test_case, error, it)
+        # This is not always correct per protocol tests. Some headers determine the error code.
+        # If the body is empty, we are creating a generic HTTP error and error code, which is
+        # different from what the protocol tests expect. We would ideally always check error.code.
+        code = error.context.http_response.headers['x-amzn-errortype']
+        code = code.split('#').last.split(':').first if code
+        code ||= error.code
+        assert(it, code, test_case['errorCode'])
       end
 
       private
@@ -388,10 +396,6 @@ module ProtocolTestsHelper
         REXML::Document.new(xml).to_s.gsub(/>\s+?</, '><').strip
       rescue REXML::ParseException
         xml # payload
-      end
-
-      def error_case?(test_case)
-        !test_case['error'].nil?
       end
     end
   end

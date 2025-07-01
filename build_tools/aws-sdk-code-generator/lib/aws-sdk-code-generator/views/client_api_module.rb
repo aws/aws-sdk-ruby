@@ -330,8 +330,9 @@ module AwsSdkCodeGenerator
         args << "name: '#{shape_name}'"
         shape.each_pair do |key, value|
           if SHAPE_KEYS[key]
-            # only query protocols have custom error code
-            next if @service.protocol != 'query' && key == 'error'
+            query_or_query_compatible = @service.protocol == 'query' || @service.api['metadata']['awsQueryCompatible']
+            # only query and query compatible protocols have custom error code
+            next if !query_or_query_compatible && key == 'error'
 
             args << "#{key}: #{value.inspect}"
           elsif SHAPE_KEYS[key].nil?

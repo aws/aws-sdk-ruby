@@ -43,8 +43,8 @@ module AwsSdkCodeGenerator
         "#{gem_name}/customizations/errors"
       end
 
-      def query_protocol?
-        @service.protocol == 'query'
+      def query_or_query_compatible_service?
+        @service.protocol == 'query' || @service.api['metadata']['awsQueryCompatible']
       end
 
       private
