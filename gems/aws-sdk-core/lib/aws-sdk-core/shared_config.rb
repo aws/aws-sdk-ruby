@@ -211,6 +211,7 @@ module Aws
       :use_fips_endpoint,
       :ec2_metadata_service_endpoint,
       :ec2_metadata_service_endpoint_mode,
+      :ec2_metadata_v1_disabled,
       :disable_host_prefix_injection,
       :max_attempts,
       :retry_mode,
