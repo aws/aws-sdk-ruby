@@ -2,7 +2,7 @@
 
 $LOAD_PATH.unshift(File.expand_path('../lib', __dir__))
 
-require_relative 'api_helper'
+require_relative 'client_helper'
 require 'aws-sdk-core'
 require 'rspec'
 require 'smithy-client'
@@ -36,7 +36,7 @@ end
 
 RSpec.configure do |config|
   config.before(:each) do
-    stub_const(ENV, {})
+    stub_const('ENV', {})
 
     # Default all shared config to be empty
     mock_shared_config
