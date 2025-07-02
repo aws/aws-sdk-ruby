@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add instance variable accessors to `Signer`.
+
 1.12.1 (2025-06-10)
 ------------------
 

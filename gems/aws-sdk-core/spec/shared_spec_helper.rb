@@ -8,7 +8,7 @@ $LOAD_PATH.unshift(File.expand_path('../../../aws-partitions/lib',  __FILE__))
 
 require 'webmock/rspec'
 
-require_relative './sigv4_helper'
+require_relative './auth_helper'
 
 # Prevent the SDK unit tests from loading actual credentials while under test.
 # By default the SDK attempts to load credentials from:
@@ -19,7 +19,7 @@ require_relative './sigv4_helper'
 #
 RSpec.configure do |config|
   # Module to help check service signing
-  config.include Sigv4Helper
+  config.include AuthHelper
 
   config.before(:each) do
     # Clear the current ENV to avoid loading credentials.

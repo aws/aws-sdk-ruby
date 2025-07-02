@@ -114,13 +114,6 @@ module Aws
           end
 
           context 'sigv4a defaults' do
-            before do
-              stub_const(
-                'Aws::Endpoints::SUPPORTED_AUTH_TRAITS',
-                Aws::Endpoints::SUPPORTED_AUTH_TRAITS + ['aws.auth#sigv4a']
-              )
-            end
-
             let(:auth) { ['aws.auth#sigv4a'] }
 
             it 'signs with sigv4' do
@@ -211,7 +204,7 @@ module Aws
               )
             end
 
-            let(:auth) { ['aws.auth#sigv4a', 'aws.auth#sigv4'] }
+            let(:auth) { %w[aws.auth#sigv4a aws.auth#sigv4] }
 
             it 'prefers the first supported auth trait' do
               expect_auth({ 'name' => 'sigv4' })
