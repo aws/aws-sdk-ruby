@@ -77,16 +77,12 @@ module Aws
 
         def sign(context)
           if context.http_request.endpoint.scheme != 'https'
-            raise ArgumentError,
-                  'Unable to use bearer authorization on non https endpoint.'
+            raise ArgumentError, 'Unable to use bearer authorization on non https endpoint.'
           end
-
           token_provider = context.config.token_provider
-
           raise Errors::MissingBearerTokenError unless token_provider&.set?
 
-          context.http_request.headers['Authorization'] =
-            "Bearer #{token_provider.token.token}"
+          context.http_request.headers['Authorization'] = "Bearer #{token_provider.token.token}"
         end
 
         def presign_url(*args)

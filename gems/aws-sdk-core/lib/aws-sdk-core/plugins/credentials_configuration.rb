@@ -99,13 +99,8 @@ When `:token_provider` is not configured directly, the `Aws::TokenProviderChain`
 will be used to search for tokens configured for your profile in shared configuration files.
       DOCS
       ) do |config|
-        if config.stub_responses
-          StaticTokenProvider.new('token')
-        else
-          TokenProviderChain.new(config).resolve
-        end
+        TokenProviderChain.new(config).resolve
       end
-
     end
   end
 end
