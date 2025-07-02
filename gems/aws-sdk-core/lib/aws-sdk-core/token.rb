@@ -3,9 +3,9 @@
 module Aws
   class Token
 
-    # @param [String] token
-    # @param [Time] expiration
-    def initialize(token, expiration=nil)
+    # @param [String, nil] token
+    # @param [Time, nil] expiration
+    def initialize(token, expiration = nil)
       @token = token
       @expiration = expiration
     end

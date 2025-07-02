@@ -32,7 +32,7 @@ module Aws
           }
           SignatureV4.new(auth_scheme, config, sigv4_overrides)
         when 'bearer'
-          Bearer.new
+          Bearer.new(config)
         else
           NullSigner.new
         end
@@ -41,7 +41,6 @@ module Aws
       class Handler < Seahorse::Client::Handler
         def call(context)
           # Skip signing if using sigv2 signing from s3_signer in S3
-          credentials = nil
           unless v2_signing?(context.config)
             signer = Sign.signer_for(
               context[:auth_scheme],
@@ -49,18 +48,22 @@ module Aws
               context[:sigv4_region],
               context[:sigv4_credentials]
             )
-            credentials = signer.credentials if signer.is_a?(SignatureV4)
             signer.sign(context)
           end
-          with_metrics(credentials) { @handler.call(context) }
+          with_metrics(signer) { @handler.call(context) }
         end
 
         private
 
-        def with_metrics(credentials, &block)
-          return block.call unless credentials&.respond_to?(:metrics)
-
-          Aws::Plugins::UserAgent.metric(*credentials.metrics, &block)
+        def with_metrics(signer, &block)
+          case signer
+          when SignatureV4
+            Aws::Plugins::UserAgent.metric(*signer.credentials.metrics, &block)
+          when Bearer
+            Aws::Plugins::UserAgent.metric(*signer.token_provider.metrics, &block)
+          else
+            block.call
+          end
         end
 
         def v2_signing?(config)
@@ -72,17 +75,19 @@ module Aws
 
       # @api private
       class Bearer
-        def initialize
+        def initialize(config)
+          @token_provider = config.token_provider
         end
+
+        attr_reader :token_provider
 
         def sign(context)
           if context.http_request.endpoint.scheme != 'https'
             raise ArgumentError, 'Unable to use bearer authorization on non https endpoint.'
           end
-          token_provider = context.config.token_provider
-          raise Errors::MissingBearerTokenError unless token_provider&.set?
+          raise Errors::MissingBearerTokenError unless @token_provider.set?
 
-          context.http_request.headers['Authorization'] = "Bearer #{token_provider.token.token}"
+          context.http_request.headers['Authorization'] = "Bearer #{@token_provider.token.token}"
         end
 
         def presign_url(*args)
@@ -96,8 +101,6 @@ module Aws
 
       # @api private
       class SignatureV4
-        attr_reader :signer
-
         def initialize(auth_scheme, config, sigv4_overrides = {})
           scheme_name = auth_scheme['name']
 
@@ -125,6 +128,8 @@ module Aws
             raise Aws::Errors::MissingCredentialsError
           end
         end
+
+        attr_reader :signer
 
         def sign(context)
           req = context.http_request

@@ -5,6 +5,11 @@ require_relative 'spec_helper'
 module Aws
   module Bedrock
     describe Client do
+      def metrics_from_user_agent_header(resp)
+        header = resp.context.http_request.headers['User-Agent']
+        header.match(%r{ m/([A-Za-z0-9+-,]+)})[1].split(',')
+      end
+
       it 'uses a bearer token from the environment' do
         ENV['AWS_BEARER_TOKEN_BEDROCK'] = 'bedrock-token'
         client = Client.new(stub_responses: true, token_provider: nil)
@@ -29,7 +34,7 @@ module Aws
         expect(resp.context.http_request.headers['Authorization']).to eq('Bearer bedrock-token')
       end
 
-      it 'uses explicit config over the environment token' do
+      it 'uses the token value from code over the environment token' do
         ENV['AWS_BEARER_TOKEN_BEDROCK'] = 'bedrock-token'
         client = Client.new(
           stub_responses: true,
@@ -43,9 +48,19 @@ module Aws
         ENV['AWS_BEARER_TOKEN_BEDROCK'] = 'bedrock-token'
         client = Client.new(stub_responses: true, token_provider: nil)
         resp = client.list_imported_models
-        user_agent = resp.context.http_request.headers['User-Agent']
-        metrics = user_agent.match(/ m\/([^ ]+)/)[1].split(',')
-        expect(metrics).to include(Aws::Plugins::UserAgent::METRICS['BEARER_SERVICE_ENV_VARS'])
+        metrics = metrics_from_user_agent_header(resp)
+        expect(metrics).to include('3')
+      end
+
+      it 'does not set a user agent metric when using a token from code' do
+        ENV['AWS_BEARER_TOKEN_BEDROCK'] = 'bedrock-token'
+        client = Client.new(
+          stub_responses: true,
+          token_provider: Aws::StaticTokenProvider.new('explicit-code-token')
+        )
+        resp = client.list_imported_models
+        metrics = metrics_from_user_agent_header(resp)
+        expect(metrics).to_not include('3')
       end
     end
   end
