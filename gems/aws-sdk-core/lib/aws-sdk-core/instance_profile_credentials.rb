@@ -36,7 +36,8 @@ module Aws
     #   called with an instance of this object when AWS credentials are required and need to be refreshed.
     def initialize(options = {})
       @ec2_metadata = options.delete(:ec2_metadata) || build_ec2_metadata_client(options)
-
+      @retries = options.delete(:retries) || 3
+      @backoff = resolve_backoff(options[:backoff])
       @no_refresh_until = nil
       @async_refresh = false
       @metrics = ['CREDENTIALS_IMDS']
@@ -52,7 +53,9 @@ module Aws
       opts = options.merge(
         endpoint_mode: resolve_endpoint_mode(options),
         endpoint: resolve_endpoint(options),
-        disable_imds_v1: resolve_disable_v1(options)
+        disable_imds_v1: resolve_disable_v1(options),
+        retries: 0,
+        backoff: 0
       )
       if (delay = opts.delete(:delay))
         warn('The `:delay` option is deprecated. Use `:backoff` instead.')
@@ -94,15 +97,7 @@ module Aws
         return
       end
 
-      new_creds =
-        begin
-          retry_json_errors { Aws::Json.load(fetch_credentials) }
-        rescue Aws::Json::ParseError
-          raise Aws::Errors::MetadataParserError
-        rescue StandardError => e
-          warn("Error retrieving instance profile credentials: #{e}")
-          '{}'
-        end
+      new_creds = retry_errors { Aws::Json.load(fetch_credentials) }
 
       if !empty_credentials?(@credentials) && (!new_creds['AccessKeyId'] || new_creds['AccessKeyId'].empty?)
         # credentials are already set, but there was an error getting new credentials
@@ -125,9 +120,6 @@ module Aws
       metadata = @ec2_metadata.get(METADATA_PATH_BASE)
       profile_name = metadata.lines.first.strip
       @ec2_metadata.get(METADATA_PATH_BASE + profile_name)
-    rescue StandardError => e
-      warn("Error retrieving instance profile credentials: #{e}")
-      '{}'
     end
 
     def update_credentials(creds)
@@ -148,15 +140,42 @@ module Aws
       ENV.fetch('AWS_EC2_METADATA_DISABLED', 'false').downcase == 'true'
     end
 
-    def retry_json_errors(&_block)
+    def resolve_backoff(backoff)
+      case backoff
+      when Proc then backoff
+      when Numeric then ->(_) { Kernel.sleep(backoff) }
+      else ->(num_failures) { Kernel.sleep(1.2**num_failures) }
+      end
+    end
+
+    def retry_errors(&_block)
       attempts = 0
+      unretryable_errors = [
+        EC2Metadata::TokenRetrievalError,
+        EC2Metadata::MetadataNotFoundError,
+        EC2Metadata::RequestForbiddenError
+      ]
+
       begin
         yield
       rescue Aws::Json::ParseError
-        raise unless attempts < 3
+        raise Aws::Errors::MetadataParserError unless attempts < @retries
 
+        @backoff.call(attempts)
         attempts += 1
         retry
+      rescue *unretryable_errors => e
+        warn("Error retrieving instance profile credentials: #{e}")
+        '{}'
+      rescue StandardError
+        if attempts < @retries
+          @backoff.call(attempts)
+          attempts += 1
+          retry
+        else
+          warn("Error retrieving instance profile credentials: #{e}")
+          '{}'
+        end
       end
     end
   end
