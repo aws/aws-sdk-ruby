@@ -76,8 +76,7 @@ module Aws
     #   AWS credentials are required and need to be refreshed.
     def initialize(options = {})
       @retries = options[:retries] || 1
-      endpoint_mode = resolve_endpoint_mode(options)
-      @endpoint = resolve_endpoint(options, endpoint_mode)
+      @endpoint = resolve_endpoint(options)
       @port = options[:port] || 80
       @disable_imds_v1 = resolve_disable_v1(options)
       # Flag for if v2 flow fails, skip future attempts
@@ -102,41 +101,41 @@ module Aws
     private
 
     def resolve_endpoint_mode(options)
-      value = options[:endpoint_mode]
-      value ||= ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE']
-      value ||= Aws.shared_config.ec2_metadata_service_endpoint_mode(
-        profile: options[:profile]
-      )
-      value || 'IPv4'
+      options[:endpoint_mode] ||
+        ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE'] ||
+        Aws.shared_config.ec2_metadata_service_endpoint_mode(profile: options[:profile]) ||
+        'IPv4'
     end
 
-    def resolve_endpoint(options, endpoint_mode)
-      value = options[:endpoint] || options[:ip_address]
-      value ||= ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT']
-      value ||= Aws.shared_config.ec2_metadata_service_endpoint(
-        profile: options[:profile]
-      )
+    def resolve_endpoint(options)
+      if (value = options[:ip_address])
+        warn('The `:ip_address` option is deprecated. Use `:endpoint` instead.')
+        return value
+      end
 
+      value =
+        options[:endpoint] ||
+        ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT'] ||
+        Aws.shared_config.ec2_metadata_service_endpoint(profile: options[:profile]) ||
+        nil
       return value if value
 
+      endpoint_mode = resolve_endpoint_mode(options)
       case endpoint_mode.downcase
       when 'ipv4' then 'http://169.254.169.254'
       when 'ipv6' then 'http://[fd00:ec2::254]'
       else
-        raise ArgumentError,
-              ':endpoint_mode is not valid, expected IPv4 or IPv6, '\
-              "got: #{endpoint_mode}"
+        raise ArgumentError, ":endpoint_mode is not valid, expected IPv4 or IPv6, got: #{endpoint_mode}"
       end
     end
 
     def resolve_disable_v1(options)
-      value = options[:disable_imds_v1]
-      value ||= ENV['AWS_EC2_METADATA_V1_DISABLED']
-      value ||= Aws.shared_config.ec2_metadata_v1_disabled(
-        profile: options[:profile]
-      )
-      value = value.to_s.downcase if value
-      Aws::Util.str_2_bool(value) || false
+      value =
+        options[:disable_imds_v1] ||
+        ENV['AWS_EC2_METADATA_V1_DISABLED'] ||
+        Aws.shared_config.ec2_metadata_v1_disabled(profile: options[:profile]) ||
+        'false'
+      Aws::Util.str_2_bool(value.to_s.downcase)
     end
 
     def backoff(backoff)
