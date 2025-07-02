@@ -12,8 +12,6 @@ module AuthHelper
       case signer
       when Aws::Plugins::Sign::SignatureV4
         sigv4_signer = signer.signer
-        expect(sigv4_signer.signing_algorithm).to eq(expected_auth_scheme['name']) if expected_auth_scheme['name']
-
         case expected_auth_scheme['name']
         when 'sigv4'
           region = region || expected_auth_scheme['signingRegion']

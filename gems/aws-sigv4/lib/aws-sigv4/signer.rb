@@ -111,18 +111,19 @@ module Aws
       # @option options [Array<String>] :unsigned_headers ([]) A list of
       #   headers that should not be signed. This is useful when a proxy
       #   modifies headers, such as 'User-Agent', invalidating a signature.
-      #   All header names are downcased.
-      #
-      # @option options [Symbol, String] :signing_algorithm ('sigv4') The algorithm to use for signing.
-      #   This can either be `sigv4`, `sigv4a`, or `sigv4-s3express`.
       #
       # @option options [Boolean] :uri_escape_path (true) When `true`,
       #   the request URI path is uri-escaped as part of computing the canonical
       #   request string. This is required for every service, except Amazon S3,
       #   as of late 2016.
       #
-      # @option options [Boolean] :normalize_path (true) When `true`, the
-      #   uri paths will be normalized when building the canonical request.
+      # @option options [Boolean] :apply_checksum_header (true) When `true`,
+      #   the computed content checksum is returned in the hash of signature
+      #   headers. This is required for AWS Glacier, and optional for
+      #   every other AWS service as of late 2016.
+      #
+      # @option options [Symbol] :signing_algorithm (:sigv4) The
+      #   algorithm to use for signing.
       #
       # @option options [Boolean] :omit_session_token (false)
       #   (Supported only when `aws-crt` is available) If `true`,
@@ -130,23 +131,21 @@ module Aws
       #   but is treated as "unsigned" and does not contribute
       #   to the authorization signature.
       #
-      # @option options [Boolean] :apply_checksum_header (true) When `true`,
-      #   the computed content checksum header (`x-amz-content-sha256`) is signed and returned
-      #   in the hash of signature headers. This is required for AWS Glacier, and optional
-      #   for every other AWS service as of late 2016.
+      # @option options [Boolean] :normalize_path (true) When `true`, the
+      #   uri paths will be normalized when building the canonical request.
       def initialize(options = {})
         @service = extract_service(options)
         @region = extract_region(options)
         @credentials_provider = extract_credentials_provider(options)
-        @unsigned_headers = Set.new(options.fetch(:unsigned_headers, []).map(&:downcase))
+        @unsigned_headers = Set.new((options.fetch(:unsigned_headers, [])).map(&:downcase))
         @unsigned_headers << 'authorization'
         @unsigned_headers << 'x-amzn-trace-id'
         @unsigned_headers << 'expect'
-        @signing_algorithm = options.fetch(:signing_algorithm, 'sigv4').to_s
         @uri_escape_path = options.fetch(:uri_escape_path, true)
+        @apply_checksum_header = options.fetch(:apply_checksum_header, true)
+        @signing_algorithm = options.fetch(:signing_algorithm, :sigv4)
         @normalize_path = options.fetch(:normalize_path, true)
         @omit_session_token = options.fetch(:omit_session_token, false)
-        @apply_checksum_header = options.fetch(:apply_checksum_header, true)
       end
 
       # @return [String]
@@ -166,22 +165,12 @@ module Aws
       #
       attr_reader :credentials_provider
 
-      # @return [Set<String>]
+      # @return [Set<String>] Returns a set of header names that should not be signed.
+      #   All header names have been downcased.
       attr_reader :unsigned_headers
 
-      # @return [String]
-      attr_reader :signing_algorithm
-
-      # @return [Boolean]
-      attr_reader :uri_escape_path
-
-      # @return [Boolean]
-      attr_reader :normalize_path
-
-      # @return [Boolean]
-      attr_reader :omit_session_token
-
-      # @return [Boolean]
+      # @return [Boolean] When `true` the `x-amz-content-sha256` header will be signed and
+      #   returned in the signature headers.
       attr_reader :apply_checksum_header
 
       # Computes a version 4 signature signature. Returns the resultant
@@ -250,7 +239,7 @@ module Aws
         sigv4_headers['host'] = headers['host'] || host(url)
         sigv4_headers['x-amz-date'] = datetime
         if creds.session_token && !@omit_session_token
-          if @signing_algorithm == 'sigv4-s3express'
+          if @signing_algorithm == 'sigv4-s3express'.to_sym
             sigv4_headers['x-amz-s3session-token'] = creds.session_token
           else
             sigv4_headers['x-amz-security-token'] = creds.session_token
@@ -259,7 +248,7 @@ module Aws
 
         sigv4_headers['x-amz-content-sha256'] ||= content_sha256 if @apply_checksum_header
 
-        if @signing_algorithm == 'sigv4a' && @region && !@region.empty?
+        if @signing_algorithm == :sigv4a && @region && !@region.empty?
           sigv4_headers['x-amz-region-set'] = @region
         end
         headers = headers.merge(sigv4_headers) # merge so we do not modify given headers hash
@@ -271,7 +260,7 @@ module Aws
         sts = string_to_sign(datetime, creq, algorithm)
 
         sig =
-          if @signing_algorithm == 'sigv4a'
+          if @signing_algorithm == :sigv4a
             asymmetric_signature(creds, sts)
           else
             signature(creds.secret_access_key, date, sts)
@@ -448,7 +437,7 @@ module Aws
         params['X-Amz-Date'] = datetime
         params['X-Amz-Expires'] = presigned_url_expiration(options, expiration, Time.strptime(datetime, "%Y%m%dT%H%M%S%Z")).to_s
         if creds.session_token
-          if @signing_algorithm == 'sigv4-s3express'
+          if @signing_algorithm == 'sigv4-s3express'.to_sym
             params['X-Amz-S3session-Token'] = creds.session_token
           else
             params['X-Amz-Security-Token'] = creds.session_token
@@ -456,7 +445,7 @@ module Aws
         end
         params['X-Amz-SignedHeaders'] = signed_headers(headers)
 
-        if @signing_algorithm == 'sigv4a' && @region
+        if @signing_algorithm == :sigv4a && @region
           params['X-Amz-Region-Set'] = @region
         end
 
@@ -473,7 +462,7 @@ module Aws
         creq = canonical_request(http_method, url, headers, content_sha256)
         sts = string_to_sign(datetime, creq, algorithm)
         signature =
-          if @signing_algorithm == 'sigv4a'
+          if @signing_algorithm == :sigv4a
             asymmetric_signature(creds, sts)
           else
             signature(creds.secret_access_key, date, sts)
@@ -485,7 +474,7 @@ module Aws
       private
 
       def sts_algorithm
-        @signing_algorithm == 'sigv4a' ? 'AWS4-ECDSA-P256-SHA256' : 'AWS4-HMAC-SHA256'
+        @signing_algorithm == :sigv4a ? 'AWS4-ECDSA-P256-SHA256' : 'AWS4-HMAC-SHA256'
       end
 
       def canonical_request(http_method, url, headers, content_sha256)
@@ -534,7 +523,7 @@ module Aws
       def credential_scope(date)
         [
           date,
-          (@region unless @signing_algorithm == 'sigv4a'),
+          (@region unless @signing_algorithm == :sigv4a),
           @service,
           'aws4_request'
         ].compact.join('/')
@@ -554,8 +543,7 @@ module Aws
 
       def asymmetric_signature(creds, string_to_sign)
         ec, _ = Aws::Sigv4::AsymmetricCredentials.derive_asymmetric_key(
-          creds.access_key_id,
-          creds.secret_access_key
+          creds.access_key_id, creds.secret_access_key
         )
         sts_digest = OpenSSL::Digest::SHA256.digest(string_to_sign)
         s = ec.dsa_sign_asn1(sts_digest)

@@ -10,22 +10,18 @@ module Aws
         ?credentials: _Credentials,
         ?credentials_provider: _CredentialsProvider,
         ?unsigned_headers: Array[String],
-        ?signing_algorithm: 'sigv4' | 'sigv4a' | 'sigv4-s3express',
         ?uri_escape_path: bool,
-        ?normalize_path: bool,
+        ?apply_checksum_header: bool,
+        ?signing_algorithm: :sigv4 | :sigv4a | :'sigv4-s3express',
         ?omit_session_token: bool,
-        ?apply_checksum_header: bool
+        ?normalize_path: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_reader service: String
       attr_reader region: String
       attr_reader credentials_provider: _CredentialsProvider
-      attr_reader unsigned_headers: Set[String]
-      attr_reader signing_algorithm: String
-      attr_reader uri_escape_path: bool
-      attr_reader normalize_path: bool
-      attr_reader omit_session_token: bool
+      attr_reader unsigned_headers: Array[String]
       attr_reader apply_checksum_header: bool
 
       def sign_request: (

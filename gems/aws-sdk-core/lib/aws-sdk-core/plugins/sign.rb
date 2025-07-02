@@ -114,8 +114,8 @@ module Aws
             @signer = config.sigv4_signer || Aws::Sigv4::Signer.new(
               service: config.sigv4_name || auth_scheme['signingName'],
               region: sigv4_overrides[:region] || config.sigv4_region || region,
-              credentials_provider:  sigv4_overrides[:credentials] || config.credentials,
-              signing_algorithm: scheme_name,
+              credentials_provider: sigv4_overrides[:credentials] || config.credentials,
+              signing_algorithm: scheme_name.to_sym,
               uri_escape_path: !auth_scheme['disableDoubleEncoding'],
               normalize_path: !auth_scheme['disableNormalizePath'],
               unsigned_headers: %w[content-length user-agent x-amzn-trace-id expect transfer-encoding connection]
