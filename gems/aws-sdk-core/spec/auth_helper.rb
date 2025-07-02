@@ -2,7 +2,11 @@ module AuthHelper
   # Expect the signer to be called with the given auth scheme.
   def expect_auth(expected_auth_scheme, region: nil, credentials: nil)
     expect(Aws::Plugins::Sign).to receive(:signer_for).and_wrap_original do |m, *args|
-      actual_auth_scheme, _context = args
+      actual_auth_scheme = args[0]
+      _config = args[1]
+      _sigv4_region_override = args[2]
+      _sigv4_credentials_override = args[3]
+
       expect(actual_auth_scheme).to include(expected_auth_scheme)
       signer = m.call(*args)
       case signer
