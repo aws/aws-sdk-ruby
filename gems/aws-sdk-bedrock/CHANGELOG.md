@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support `ENV['AWS_BEARER_TOKEN_BEDROCK']` for authentication with Amazon Bedrock APIs.
+
 1.53.0 (2025-06-30)
 ------------------
 
