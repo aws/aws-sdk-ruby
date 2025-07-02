@@ -31,7 +31,6 @@ require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/telemetry'
 require 'aws-sdk-core/plugins/sign'
 require 'aws-sdk-core/plugins/protocols/rest_json'
-require 'aws-sdk-bedrockruntime/plugins/bearer_authorization'
 require 'aws-sdk-core/plugins/event_stream_configuration'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:bedrockruntime)
@@ -78,7 +77,6 @@ module Aws::BedrockRuntime
     add_plugin(Aws::Plugins::Telemetry)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestJson)
-    add_plugin(Aws::BedrockRuntime::Plugins::BearerAuthorization)
     add_plugin(Aws::Plugins::EventStreamConfiguration)
     add_plugin(Aws::BedrockRuntime::Plugins::Endpoints)
 

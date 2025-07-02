@@ -35,7 +35,6 @@ require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/telemetry'
 require 'aws-sdk-core/plugins/sign'
 require 'aws-sdk-core/plugins/protocols/rest_json'
-require 'aws-sdk-bedrock/plugins/bearer_authorization'
 
 module Aws::Bedrock
   # An API client for Bedrock.  To construct a client, you need to configure a `:region` and `:credentials`.
@@ -86,7 +85,6 @@ module Aws::Bedrock
     add_plugin(Aws::Plugins::Telemetry)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestJson)
-    add_plugin(Aws::Bedrock::Plugins::BearerAuthorization)
     add_plugin(Aws::Bedrock::Plugins::Endpoints)
 
     # @overload initialize(options)
