@@ -44,6 +44,15 @@ module Aws
         resp = invoke_model(client)
         expect(resp.context.http_request.headers['Authorization']).to eq('Bearer explicit-code-token')
       end
+
+      it 'sets a user agent metric' do
+        ENV['AWS_BEARER_TOKEN_BEDROCK'] = 'bedrock-token'
+        client = Client.new(stub_responses: true, token_provider: nil)
+        resp = invoke_model(client)
+        user_agent = resp.context.http_request.headers['User-Agent']
+        metrics = user_agent.match(/ m\/([^ ]+)/)[1].split(',')
+        expect(metrics).to include(Aws::Plugins::UserAgent::METRICS['BEARER_SERVICE_ENV_VARS'])
+      end
     end
   end
 end
