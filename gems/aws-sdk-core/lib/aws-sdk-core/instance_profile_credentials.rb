@@ -28,15 +28,12 @@ module Aws
 
     # @param [Hash] options
     # @option options (see Aws::EC2Metadata#initialize)
-    # @option options [Aws::EC2Metadata] :ec2_metadata A custom EC2 metadata client
-    #   to use for loading credentials from IMDSv2. If not provided, a default {Aws::EC2Metadata}
-    #   client will be constructed with passed options.
+    # @option options [Aws::EC2Metadata] :ec2_metadata A custom EC2 metadata client to use for loading credentials
+    #   from IMDSv2. If not provided, a default {Aws::EC2Metadata} client will be constructed with passed options.
     # @option options [Boolean] :disable_imds_v1 (false) Deprecated. The legacy
     #   EC2 Metadata Service v1 has been retired. Only IMDSv2 is supported.
-    # @option options [Callable] :before_refresh Proc called before
-    #   credentials are refreshed. `before_refresh` is called
-    #   with an instance of this object when AWS credentials are required
-    #   and need to be refreshed.
+    # @option options [Callable] :before_refresh Proc called before credentials are refreshed. `before_refresh` is
+    #   called with an instance of this object when AWS credentials are required and need to be refreshed.
     def initialize(options = {})
       @ec2_metadata = options.delete(:ec2_metadata) || build_ec2_metadata_client(options)
 
@@ -123,6 +120,8 @@ module Aws
     end
 
     def fetch_credentials
+      return '{}' if ec2_metadata_disabled?
+
       metadata = @ec2_metadata.get(METADATA_PATH_BASE)
       profile_name = metadata.lines.first.strip
       @ec2_metadata.get(METADATA_PATH_BASE + profile_name)
@@ -143,6 +142,10 @@ module Aws
     def warn_expired_credentials
       warn('Attempting credential expiration extension due to a credential service availability issue. '\
             'A refresh of these credentials will be attempted again in 5 minutes.')
+    end
+
+    def ec2_metadata_disabled?
+      ENV.fetch('AWS_EC2_METADATA_DISABLED', 'false').downcase == 'true'
     end
 
     def retry_json_errors(&_block)

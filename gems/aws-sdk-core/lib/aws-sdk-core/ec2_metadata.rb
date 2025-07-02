@@ -8,7 +8,7 @@ module Aws
   class EC2Metadata
     # Path for PUT request for token
     # @api private
-    METADATA_TOKEN_PATH = '/latest/api/token'.freeze
+    METADATA_TOKEN_PATH = '/latest/api/token'
 
     # Raised when the PUT request is not valid. This would be thrown if `token_ttl` is not an integer.
     # @api private
@@ -32,12 +32,10 @@ module Aws
     # @see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html#instance-metadata-transition-to-version-2
     #
     # @param [Hash] options
-    # @option options [Boolean] :disable_imds_v1 (false) Deprecated. The legacy EC2 Metadata Service v1
-    #   has been retired. Only IMDSv2 is supported.
     # @option options [Integer] :token_ttl (21600) The session token's TTL, defaulting to 6 hours.
-    # @option options [Integer] :retries (0) The number of retries for failed requests.
+    # @option options [Integer] :retries (3) The number of retries for failed requests on EC2 Metadata.
     # @option options [String] :endpoint ('http://169.254.169.254') The IMDS endpoint.
-    #   This option has precedence over the :endpoint_mode.
+    #   This option has precedence over the `:endpoint_mode`.
     # @option options [String] :endpoint_mode ('IPv4') The endpoint mode for  the instance metadata service.
     #   This is either 'IPv4'  ('http://169.254.169.254') or 'IPv6' ('http://[fd00:ec2::254]').
     # @option options [Integer] :port (80) The IMDS endpoint port.
@@ -52,11 +50,12 @@ module Aws
       @backoff = resolve_backoff(options[:backoff])
       @endpoint = resolve_endpoint(options)
       @port = options[:port] || 80
-
       @http_open_timeout = options[:http_open_timeout] || 1
       @http_read_timeout = options[:http_read_timeout] || 1
       @http_debug_output = options[:http_debug_output]
 
+      @disable_imds_v1 = options[:disable_imds_v1].nil? || options[:disable_imds_v1]
+      @imds_v1_fallback = false # flag for if v2 flow fails, skip future attempts
       @token = nil
       @mutex = Mutex.new
     end
@@ -93,7 +92,7 @@ module Aws
     #   ec2_metadata.get('/latest/meta-data/instance-id')
     #   => "i-023a25f10a73a0f79"
     #
-    # @note This implementation always returns a String and will not parse any  responses.  Parsable responses may
+    # @note This implementation always returns a String and will not parse any responses. Parsable responses may
     #   include JSON objects or directory listings, which are strings separated by line feeds (ASCII 10).
     #
     # @example Fetching and parsing JSON meta-data
@@ -118,15 +117,21 @@ module Aws
     def get(path)
       retry_errors do
         @mutex.synchronize do
-          fetch_token unless @token && !@token.expired?
+          fetch_token unless skip_token?
+
+          raise TokenRetrievalError if @token.nil? && @disable_imds_v1
         end
         open_connection do |c|
-          http_get(c, path, @token.value)
+          http_get(c, path)
         end
       end
     end
 
     private
+
+    def skip_token?
+      @imds_v1_fallback || (@token && !@token.expired?)
+    end
 
     def resolve_backoff(backoff)
       case backoff
@@ -157,8 +162,9 @@ module Aws
     end
 
     # GET request fetch profile and credentials
-    def http_get(connection, path, token)
-      headers = { 'User-Agent' => "aws-sdk-ruby3/#{CORE_GEM_VERSION}", 'x-aws-ec2-metadata-token' => token }
+    def http_get(connection, path)
+      headers = { 'User-Agent' => "aws-sdk-ruby3/#{CORE_GEM_VERSION}" }
+      headers['x-aws-ec2-metadata-token'] = @token.value if @token
       request = Net::HTTP::Get.new(path, headers)
       response = connection.request(request)
 
@@ -184,8 +190,14 @@ module Aws
           response.body,
           response.header['x-aws-ec2-metadata-token-ttl-seconds'].to_i
         ]
-      when 400 then raise TokenRetrievalError
-      when 403 then raise RequestForbiddenError
+      when 400
+        raise TokenRetrievalError
+      when 403, 405
+        @imds_v1_fallback = true unless @disable_imds_v1
+        raise RequestForbiddenError
+      when 404
+        @imds_v1_fallback = true unless @disable_imds_v1
+        raise MetadataNotFoundError
       end
     end
 
@@ -208,10 +220,9 @@ module Aws
         raise
       # StandardError is not ideal but it covers Net::HTTP errors.
       # https://gist.github.com/tenderlove/245188
-      rescue StandardError, TokenExpiredError => e
+      rescue StandardError, TokenExpiredError
         raise unless attempts < @retries
 
-        @token = nil if e.is_a?(TokenExpiredError)
         @backoff.call(attempts)
         attempts += 1
         retry

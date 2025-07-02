@@ -119,7 +119,6 @@ module Aws
           expect(subject.ec2_metadata.endpoint).to eq(ipv6_endpoint)
         end
       end
-
     end
 
     describe '#credentials' do
@@ -143,11 +142,16 @@ module Aws
         expect(creds.access_key_id).to_not be_nil
       end
 
+      it 'does not attempt to get credentials when AWS_EC2_METADATA_DISABLED ENV is true' do
+        ENV['AWS_EC2_METADATA_DISABLED'] = 'true'
+        expect(InstanceProfileCredentials.new.set?).to be(false)
+      end
+
       describe 'failure cases' do
-        it 'no credentials are set when given an empty response' do
+        it 'is not set when given an empty response' do
           # This handles the case when the service response but returns
           # a JSON document without credentials (error cases)
-          stub_request(:get, "http://169.254.169.254#{path}profile-name")
+          stub_request(:get, "#{metadata_uri}profile-name")
             .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
             .to_return(status: 200, body: '{}')
           c = InstanceProfileCredentials.new(backoff: 0)
@@ -251,22 +255,21 @@ module Aws
       it 'auto-refreshes within 5 minutes from expiration' do
         stub_request(:put, ipv4_endpoint + token_path)
           .to_return(status: 200, body: "my-token\n", headers: { 'x-aws-ec2-metadata-token-ttl-seconds' => '21600' })
-        stub_request(:get, "http://169.254.169.254#{path}")
+        stub_request(:get, metadata_uri)
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: "profile-name\n")
-        stub_request(:get, "http://169.254.169.254#{path}profile-name")
+        stub_request(:get, "#{metadata_uri}profile-name")
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: json_response(expiration: expiration.utc.iso8601))
           .to_return(status: 200, body: json_response(expiration: expiration2.utc.iso8601))
 
         c = InstanceProfileCredentials.new
-
         expect(c.credentials.set?).to eq(true)
         expect(c.expiration.to_s).to eq(expiration2.to_s)
       end
     end
 
-    context 'static stability' do
+    describe 'static stability' do
       let(:expired) { Time.now.utc - 3600 }
       let(:near_expiration) { Time.now.utc + 10 }
 
@@ -318,6 +321,57 @@ module Aws
         provider = InstanceProfileCredentials.new(backoff: 0, retries: 0)
         expect(provider.credentials.access_key_id).to eq('akid-2')
         assert_requested(expected_request, times: 2)
+      end
+    end
+
+    describe 'v1 fallback' do
+      context 'disable_imds_v1 configuration' do
+        let(:disable_imds_v1) { true }
+
+        before do
+          allow_any_instance_of(InstanceProfileCredentials).to receive(:refresh)
+        end
+
+        it 'can be configured with shared config' do
+          allow_any_instance_of(Aws::SharedConfig).to receive(:ec2_metadata_v1_disabled).and_return('true')
+          expect(subject.ec2_metadata.instance_variable_get(:@disable_imds_v1)).to eq(disable_imds_v1)
+        end
+
+        it 'can be configured using env variable with precedence' do
+          ENV['AWS_EC2_METADATA_V1_DISABLED'] = disable_imds_v1.to_s
+          allow_any_instance_of(Aws::SharedConfig).to receive(:ec2_metadata_v1_disabled).and_return('false')
+          expect(subject.ec2_metadata.instance_variable_get(:@disable_imds_v1)).to eq(disable_imds_v1)
+        end
+
+        it 'can be configured through code with precedence' do
+          allow_any_instance_of(Aws::SharedConfig).to receive(:ec2_metadata_v1_disabled).and_return('false')
+          ENV['AWS_EC2_METADATA_V1_DISABLED'] = 'false'
+          subject = InstanceProfileCredentials.new(disable_imds_v1: disable_imds_v1)
+          expect(subject.ec2_metadata.instance_variable_get(:@disable_imds_v1)).to eq(disable_imds_v1)
+        end
+      end
+
+      it 'is used to fetch credentials' do
+        stub_request(:put, ipv4_endpoint + token_path).to_return(status: 404)
+        stub_request(:get, metadata_uri).to_return(status: 200, body: "profile-name\n")
+        stub_request(:get, "#{metadata_uri}profile-name").to_return(status: 200, body: json_response)
+        c = InstanceProfileCredentials.new(backoff: 0)
+        expect(c.credentials.set?).to eq(true)
+      end
+
+      it 'memoizes v1 fallback' do
+        token_stub = stub_request(:put, ipv4_endpoint + token_path).to_return(status: 403)
+        profile_name_stub = stub_request(:get, metadata_uri).to_return(status: 200, body: "profile-name\n")
+        credentials_stub = stub_request(:get, "#{metadata_uri}profile-name").to_return(status: 200, body: json_response)
+
+        c = InstanceProfileCredentials.new(backoff: 0, retries: 0)
+        expect(c.credentials.set?).to eq(true)
+        c.refresh!
+        expect(c.credentials.set?).to eq(true)
+
+        expect(token_stub).to have_been_requested.once
+        expect(profile_name_stub).to have_been_requested.twice
+        expect(credentials_stub).to have_been_requested.twice
       end
     end
   end
