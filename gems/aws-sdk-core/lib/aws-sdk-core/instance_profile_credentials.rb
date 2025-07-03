@@ -10,9 +10,15 @@ module Aws
   #     ec2 = Aws::EC2::Client.new(credentials: instance_credentials)
   #
   # ## Retries
-  #
   # When initialized from the default credential chain, this provider defaults to `0` retries.
-  # Otherwise, it defaults to 3 retries and will retry network and parsing errors.
+  # Breakdown of retries is as follows:
+  #
+  #  * **Configurable retries** (defaults to `1`): these retries handle errors when communicating
+  #     with the IMDS endpoint. There are two separate retry mechanisms within the provider:
+  #       * Entire token fetch and credential retrieval process
+  #       * Token fetching
+  #  * **JSON parsing retries**: Fixed at 3 attempts to handle cases when IMDS returns malformed JSON
+  #     responses. These retries are separate from configurable retries.
   #
   # @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-imds-credentials.html IMDS Credential Provider
   class InstanceProfileCredentials
@@ -22,15 +28,24 @@ module Aws
     # @api private
     class Non200Response < RuntimeError; end
 
-    # @deprecated Unfortunate spelling name.
     # @api private
     class TokenRetrivalError < RuntimeError; end
 
     # @api private
-    class TokenRetrievalError < TokenRetrivalError; end
-
-    # @api private
     class TokenExpiredError < RuntimeError; end
+
+    # These are the errors we trap when attempting to talk to the instance metadata service.
+    # Any of these imply the service is not present, no responding or some other non-recoverable error.
+    # @api private
+    NETWORK_ERRORS = [
+      Errno::EHOSTUNREACH,
+      Errno::ECONNREFUSED,
+      Errno::EHOSTDOWN,
+      Errno::ENETUNREACH,
+      SocketError,
+      Timeout::Error,
+      Non200Response
+    ].freeze
 
     # Path base for GET request for profile and credentials
     # @api private
@@ -41,10 +56,9 @@ module Aws
     METADATA_TOKEN_PATH = '/latest/api/token'.freeze
 
     # @param [Hash] options
-    # @option options [Integer] :retries (3) Number of times to retry when retrieving credentials. Defaults to 0 when
-    #   resolving from the default credential chain.
+    # @option options [Integer] :retries (1) Number of times to retry when retrieving credentials.
     # @option options [String] :endpoint ('http://169.254.169.254') The IMDS endpoint. This option has precedence
-    #   over the `:endpoint_mode`.
+    #    over the `:endpoint_mode`.
     # @option options [String] :endpoint_mode ('IPv4') The endpoint mode for the instance metadata service. This is
     #   either 'IPv4' (`169.254.169.254`) or IPv6' (`[fd00:ec2::254]`).
     # @option options [Boolean] :disable_imds_v1 (false) Disable the use of the legacy EC2 Metadata Service v1.
@@ -70,19 +84,20 @@ module Aws
       @http_read_timeout = options[:http_read_timeout] || 1
       @http_debug_output = options[:http_debug_output]
       @port = options[:port] || 80
-      @retries = options[:retries] || 3
+      @retries = options[:retries] || 1
       @token_ttl = options[:token_ttl] || 21_600
 
-      @imds_v1_fallback = false
-      @token = nil
-      @no_refresh_until = nil
-
       @async_refresh = false
+      # Flag for if v2 flow fails, skip future attempts
+      @imds_v1_fallback = false
+      @no_refresh_until = nil
+      @token = nil
       @metrics = ['CREDENTIALS_IMDS']
       super
     end
 
-    # @return [Integer]
+    # @return [Integer] Number of times to retry when retrieving credentials from the instance metadata service.
+    #   Defaults to 0 when resolving from the default credential chain.
     attr_reader :retries
 
     private
@@ -139,58 +154,55 @@ module Aws
         return
       end
 
-      # Retry loading and parsing credentials up to a configurable number of times.
-      # StandardError is not ideal but it covers Net::HTTP errors.
-      # https://gist.github.com/tenderlove/245188
-      # ArgumentError can be raised when parsing a bad expiration.
-      retry_errors([Aws::Json::ParseError, ArgumentError, StandardError, Non200Response]) do
-        open_connection do |conn|
-          # attempt to fetch token to start secure flow first, and rescue to failover
-          fetch_token(conn) unless @imds_v1_fallback || token_set?
-          # disable insecure flow if we couldn't get token and imds v1 is disabled
-          raise TokenRetrievalError if @token.nil? && @disable_imds_v1
+      new_creds =
+        begin
+          # Retry loading credentials up to 3 times is the instance metadata
+          # service is responding but is returning invalid JSON documents
+          # in response to the GET profile credentials call.
+          retry_errors([Aws::Json::ParseError], max_retries: 3) do
+            Aws::Json.load(retrieve_credentials.to_s)
+          end
+        rescue Aws::Json::ParseError
+          raise Aws::Errors::MetadataParserError
+        end
 
-          creds = Aws::Json.load(fetch_credentials(conn))
-          if @credentials&.set? && empty_credentials?(creds)
-            # credentials are already set, but there was an error getting new credentials
-            # so don't update the credentials and use stale ones (static stability)
-            @no_refresh_until = Time.now + rand(300..360)
-            warn_expired_credentials
-          else
-            # credentials are empty or successfully retrieved, update them
-            update_credentials(creds)
+      if !empty_credentials?(@credentials) && (!new_creds['AccessKeyId'] || new_creds['AccessKeyId'].empty?)
+        # credentials are already set, but there was an error getting new credentials
+        # so don't update the credentials and use stale ones (static stability)
+        @no_refresh_until = Time.now + rand(300..360)
+        warn_expired_credentials
+      else
+        # credentials are empty or successfully retrieved, update them
+        update_credentials(new_creds)
+      end
+    end
+
+    def retrieve_credentials
+      return '{}' if ec2_metadata_disabled?
+
+      # Retry loading credentials a configurable number of times if
+      # the instance metadata service is not responding.
+      begin
+        retry_errors(NETWORK_ERRORS, max_retries: @retries) do
+          open_connection do |conn|
+            # attempt to fetch token to start secure flow first
+            # and rescue to failover
+            fetch_token(conn) unless skip_token?
+
+            # disable insecure flow if we couldn't get token and imds v1 is disabled
+            raise TokenRetrivalError if @token.nil? && @disable_imds_v1
+
+            fetch_credentials(conn)
           end
         end
+      rescue StandardError => e
+        warn("Error retrieving instance profile credentials: #{e}")
+        '{}'
       end
-    rescue ArgumentError, Aws::Json::ParseError
-      raise Aws::Errors::MetadataParserError
-    rescue StandardError => e
-      warn("Error retrieving instance profile credentials: #{e}")
-      '{}'
     end
 
-    def fetch_token(conn)
-      created_time = Time.now
-      token_value, ttl = http_put(conn)
-      @token = Token.new(token_value, ttl, created_time) if token_value && ttl
-    rescue StandardError, Non200Response
-      # Token attempt failed, reset token fallback to insecure mode.
-      @imds_v1_fallback = true
-    end
-
-    def fetch_credentials(conn)
-      metadata = http_get(conn, METADATA_PATH_BASE)
-      profile_name = metadata.lines.first.strip
-      http_get(conn, METADATA_PATH_BASE + profile_name)
-    rescue TokenExpiredError
-      # Token has expired, reset it. The next retry should fetch it
-      @token = nil
-      @imds_v1_fallback = false
-      raise Non200Response
-    end
-
-    def token_set?
-      @token && !@token.expired?
+    def skip_token?
+      @imds_v1_fallback || (@token && !@token.expired?)
     end
 
     def update_credentials(creds)
@@ -200,6 +212,36 @@ module Aws
 
       @no_refresh_until = Time.now + rand(300..360)
       warn_expired_credentials
+    end
+
+    def fetch_token(conn)
+      created_time = Time.now
+      token_value, ttl = http_put(conn)
+      @token = Token.new(token_value, ttl, created_time) if token_value && ttl
+    rescue *NETWORK_ERRORS
+      # token attempt failed, reset token
+      # fallback to non-token mode
+      @imds_v1_fallback = true
+    end
+
+    def fetch_credentials(conn)
+      metadata = http_get(conn, METADATA_PATH_BASE)
+      profile_name = metadata.lines.first.strip
+      http_get(conn, METADATA_PATH_BASE + profile_name)
+    rescue TokenExpiredError
+      # Token has expired, reset it
+      # The next retry should fetch it
+      @token = nil
+      @imds_v1_fallback = false
+      raise Non200Response
+    end
+
+    def token_set?
+      @token && !@token.expired?
+    end
+
+    def ec2_metadata_disabled?
+      ENV.fetch('AWS_EC2_METADATA_DISABLED', 'false').downcase == 'true'
     end
 
     def open_connection
@@ -242,32 +284,33 @@ module Aws
           response.header['x-aws-ec2-metadata-token-ttl-seconds'].to_i
         ]
       when 400
-        raise TokenRetrievalError
+        raise TokenRetrivalError
       else
         raise Non200Response
       end
     end
 
-    def retry_errors(error_classes, &_block)
-      attempts = 0
+    def retry_errors(error_classes, options = {}, &_block)
+      max_retries = options[:max_retries]
+      retries = 0
       begin
         yield
-      rescue *error_classes => e
-        raise unless attempts < @retries
+      rescue *error_classes
+        raise unless retries < max_retries
 
-        @backoff.call(attempts)
-        attempts += 1
+        @backoff.call(retries)
+        retries += 1
         retry
       end
     end
 
     def warn_expired_credentials
       warn('Attempting credential expiration extension due to a credential service availability issue. '\
-           'A refresh of these credentials will be attempted again in 5 minutes.')
+             'A refresh of these credentials will be attempted again in 5 minutes.')
     end
 
-    def empty_credentials?(creds_hash)
-      !creds_hash['AccessKeyId'] || creds_hash['AccessKeyId'].empty?
+    def empty_credentials?(creds)
+      creds.nil? || !creds.set?
     end
 
     # @api private
