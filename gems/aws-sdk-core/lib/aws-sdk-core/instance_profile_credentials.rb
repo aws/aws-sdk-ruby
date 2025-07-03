@@ -14,7 +14,9 @@ module Aws
   # Breakdown of retries is as follows:
   #
   #  * **Configurable retries** (defaults to `1`): these retries handle errors when communicating
-  #     with the IMDS endpoint.
+  #     with the IMDS endpoint. There are two separate retry mechanisms within the provider:
+  #       * Entire token fetch and credential retrieval process
+  #       * Token fetching
   #  * **JSON parsing retries**: Fixed at 3 attempts to handle cases when IMDS returns malformed JSON
   #     responses. These retries are separate from configurable retries.
   #
