@@ -8,6 +8,8 @@ module Aws
     let(:token_path) { '/latest/api/token' }
     let(:ipv4_endpoint) { 'http://169.254.169.254' }
     let(:ipv6_endpoint) { 'http://[fd00:ec2::254]' }
+    let(:ipv4_endpoint_token_path) { ipv4_endpoint + token_path }
+    let(:ipv4_endpoint_creds_path) { ipv4_endpoint + path }
 
     before do
       allow_any_instance_of(InstanceProfileCredentials).to receive(:warn)
@@ -20,27 +22,27 @@ module Aws
 
       it 'mode is ipv4 by default' do
         subject = InstanceProfileCredentials.new
-        expect(subject.instance_variable_get(:@endpoint)).to eq ipv4_endpoint
+        expect(subject.endpoint).to eq ipv4_endpoint
       end
 
       it 'can be configured with shared config' do
         allow_any_instance_of(Aws::SharedConfig).to receive(:ec2_metadata_service_endpoint_mode).and_return('IPv6')
         subject = InstanceProfileCredentials.new
-        expect(subject.instance_variable_get(:@endpoint)).to eq ipv6_endpoint
+        expect(subject.endpoint).to eq ipv6_endpoint
       end
 
       it 'can be configured using env variable with precedence' do
         ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE'] = 'IPv4'
         allow_any_instance_of(Aws::SharedConfig).to receive(:ec2_metadata_service_endpoint_mode).and_return('IPv6')
         subject = InstanceProfileCredentials.new
-        expect(subject.instance_variable_get(:@endpoint)).to eq ipv4_endpoint
+        expect(subject.endpoint).to eq ipv4_endpoint
       end
 
       it 'can be configure through code with precedence' do
         ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE'] = 'IPv4'
         allow_any_instance_of(Aws::SharedConfig).to receive(:ec2_metadata_service_endpoint_mode).and_return('IPv4')
         subject = InstanceProfileCredentials.new(endpoint_mode: 'IPv6')
-        expect(subject.instance_variable_get(:@endpoint)).to eq ipv6_endpoint
+        expect(subject.endpoint).to eq ipv6_endpoint
       end
 
       it 'raises ArgumentError when endpoint mode is unexpected' do
@@ -57,20 +59,20 @@ module Aws
 
       it 'can be configured with shared config' do
         allow_any_instance_of(Aws::SharedConfig).to receive(:ec2_metadata_service_endpoint).and_return(endpoint)
-        expect(subject.instance_variable_get(:@endpoint)).to eq endpoint
+        expect(subject.endpoint).to eq endpoint
       end
 
       it 'can be configured using env variable with precedence' do
         ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT'] = endpoint
         allow_any_instance_of(Aws::SharedConfig).to receive(:ec2_metadata_service_endpoint_mode).and_return(endpoint)
-        expect(subject.instance_variable_get(:@endpoint)).to eq endpoint
+        expect(subject.endpoint).to eq endpoint
       end
 
       it 'can be configured through code with precedence' do
         allow_any_instance_of(Aws::SharedConfig).to receive(:ec2_metadata_service_endpoint).and_return('bar-example.com')
         ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT'] = 'foo-example.com'
         subject = InstanceProfileCredentials.new(ip_address: endpoint)
-        expect(subject.instance_variable_get(:@endpoint)).to eq endpoint
+        expect(subject.endpoint).to eq endpoint
       end
 
       it 'overrides endpoint mode configuration with ENV' do
@@ -78,7 +80,7 @@ module Aws
         allow_any_instance_of(Aws::SharedConfig).to receive(:ec2_metadata_service_endpoint_mode).and_return('IPv4')
         ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT'] = endpoint
         subject = InstanceProfileCredentials.new(endpoint_mode: 'IPv4')
-        expect(subject.instance_variable_get(:@endpoint)).to eq endpoint
+        expect(subject.endpoint).to eq endpoint
       end
 
       it 'overrides endpoint mode configuration with shared config' do
@@ -86,14 +88,14 @@ module Aws
         allow_any_instance_of(Aws::SharedConfig).to receive(:ec2_metadata_service_endpoint_mode).and_return('IPv4')
         allow_any_instance_of(Aws::SharedConfig).to receive(:ec2_metadata_service_endpoint).and_return(endpoint)
         subject = InstanceProfileCredentials.new(endpoint_mode: 'IPv4')
-        expect(subject.instance_variable_get(:@endpoint)).to eq endpoint
+        expect(subject.endpoint).to eq endpoint
       end
 
       it 'overrides endpoint mode configuration with code' do
         ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE'] = 'IPv4'
         allow_any_instance_of(Aws::SharedConfig).to receive(:ec2_metadata_service_endpoint_mode).and_return('IPv4')
         subject = InstanceProfileCredentials.new(endpoint_mode: 'IPv4', endpoint: endpoint)
-        expect(subject.instance_variable_get(:@endpoint)).to eq endpoint
+        expect(subject.endpoint).to eq endpoint
       end
     end
 
@@ -101,12 +103,12 @@ module Aws
       let(:ipv4_endpoint) { 'http://123.123.123.123:9001' }
 
       before do
-        stub_request(:put, "#{ipv4_endpoint}#{token_path}")
+        stub_request(:put, ipv4_endpoint_token_path)
           .to_return(status: 200, body: "my-token\n", headers: { 'x-aws-ec2-metadata-token-ttl-seconds' => '21600' })
-        stub_request(:get, "#{ipv4_endpoint}#{path}")
+        stub_request(:get, ipv4_endpoint_creds_path)
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: "profile-name\n")
-        stub_request(:get, "#{ipv4_endpoint}#{path}profile-name")
+        stub_request(:get, "#{ipv4_endpoint_creds_path}profile-name")
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: '{}')
       end
@@ -139,20 +141,20 @@ module Aws
 
       it 'can be configured with shared config' do
         allow_any_instance_of(Aws::SharedConfig).to receive(:ec2_metadata_v1_disabled).and_return(disable_imds_v1.to_s)
-        expect(subject.instance_variable_get(:@disable_imds_v1)).to eq disable_imds_v1
+        expect(subject.disable_imds_v1).to eq disable_imds_v1
       end
 
       it 'can be configured using env variable with precedence' do
         ENV['AWS_EC2_METADATA_V1_DISABLED'] = disable_imds_v1.to_s
         allow_any_instance_of(Aws::SharedConfig).to receive(:ec2_metadata_v1_disabled).and_return('false')
-        expect(subject.instance_variable_get(:@disable_imds_v1)).to eq disable_imds_v1
+        expect(subject.disable_imds_v1).to eq disable_imds_v1
       end
 
       it 'can be configured through code with precedence' do
         allow_any_instance_of(Aws::SharedConfig).to receive(:ec2_metadata_v1_disabled).and_return('false')
         ENV['AWS_EC2_METADATA_V1_DISABLED'] = 'false'
         subject = InstanceProfileCredentials.new(disable_imds_v1: disable_imds_v1)
-        expect(subject.instance_variable_get(:@disable_imds_v1)).to eq disable_imds_v1
+        expect(subject.disable_imds_v1).to eq disable_imds_v1
       end
     end
 
@@ -164,7 +166,7 @@ module Aws
         Timeout::Error
       ].each do |error_class|
         it "returns no credentials for #{error_class}" do
-          stub_request(:put, ipv4_endpoint + token_path).to_return(status: 200, body: 'mytoken')
+          stub_request(:put, ipv4_endpoint_token_path).to_return(status: 200, body: 'mytoken')
           stub_request(:get, ipv4_endpoint + path).to_raise(error_class)
           expect(InstanceProfileCredentials.new(backoff: 0).set?).to be(false)
         end
@@ -175,7 +177,7 @@ module Aws
         401
       ].each do |error_code|
         it "returns no credentials for #{error_code} when fetching token" do
-          stub_request(:put, ipv4_endpoint + token_path).to_return(status: error_code)
+          stub_request(:put, ipv4_endpoint_token_path).to_return(status: error_code)
           stub_request(:get, ipv4_endpoint + path).to_return(status: 200)
           expect(InstanceProfileCredentials.new(backoff: 0).set?).to be(false)
         end
@@ -202,9 +204,9 @@ module Aws
         404
       ].each do |error_code|
         it "fails over to insecure flow for error code #{error_code}" do
-          stub_request(:put, ipv4_endpoint + token_path).to_return(status: error_code)
+          stub_request(:put, ipv4_endpoint_token_path).to_return(status: error_code)
           stub_request(:get, ipv4_endpoint + path).to_return(status: 200, body: "profile-name\n")
-          stub_request(:get, "#{ipv4_endpoint}#{path}profile-name").to_return(status: 200, body: resp)
+          stub_request(:get, "#{ipv4_endpoint_creds_path}profile-name").to_return(status: 200, body: resp)
           c = InstanceProfileCredentials.new(backoff: 0)
           expect(c.credentials.access_key_id).to eq('akid')
           expect(c.credentials.secret_access_key).to eq('secret')
@@ -219,9 +221,9 @@ module Aws
         Timeout::Error
       ].each do |error_class|
         it "fails over to insecure flow for #{error_class}" do
-          stub_request(:put, ipv4_endpoint + token_path).to_raise(error_class)
+          stub_request(:put, ipv4_endpoint_token_path).to_raise(error_class)
           stub_request(:get, ipv4_endpoint + path).to_return(status: 200, body: "profile-name\n")
-          stub_request(:get, "#{ipv4_endpoint}#{path}profile-name").to_return(status: 200, body: resp)
+          stub_request(:get, "#{ipv4_endpoint_creds_path}profile-name").to_return(status: 200, body: resp)
           c = InstanceProfileCredentials.new(backoff: 0)
           expect(c.credentials.access_key_id).to eq('akid')
           expect(c.credentials.secret_access_key).to eq('secret')
@@ -230,9 +232,9 @@ module Aws
       end
 
       it 'memoizes v1 fallback' do
-        token_stub = stub_request(:put, ipv4_endpoint + token_path).to_return(status: 403)
+        token_stub = stub_request(:put, ipv4_endpoint_token_path).to_return(status: 403)
         profile_name_stub = stub_request(:get, ipv4_endpoint + path).to_return(status: 200, body: "profile-name\n")
-        credentials_stub = stub_request(:get, "#{ipv4_endpoint}#{path}profile-name").to_return(status: 200, body: resp)
+        credentials_stub = stub_request(:get, "#{ipv4_endpoint_creds_path}profile-name").to_return(status: 200, body: resp)
 
         c = InstanceProfileCredentials.new(backoff: 0, retries: 0)
         c.refresh!
@@ -268,7 +270,7 @@ module Aws
             "Expiration" : "#{expiration.strftime('%Y-%m-%dT%H:%M:%SZ')}"
           }
         JSON
-        stub_request(:put, ipv4_endpoint + token_path)
+        stub_request(:put, ipv4_endpoint_token_path)
           .to_return(
             status: 200,
             body: "my-token\n",
@@ -277,7 +279,7 @@ module Aws
         stub_request(:get, ipv4_endpoint + path)
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: "profile-name\n")
-        stub_request(:get, "#{ipv4_endpoint}#{path}profile-name")
+        stub_request(:get, "#{ipv4_endpoint_creds_path}profile-name")
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: resp)
         c = InstanceProfileCredentials.new(backoff: 0)
@@ -300,9 +302,9 @@ module Aws
             "Expiration" : "#{expiration.strftime('%Y-%m-%dT%H:%M:%SZ')}"
           }
         JSON
-        stub_request(:put, ipv4_endpoint + token_path).to_return(status: 404)
+        stub_request(:put, ipv4_endpoint_token_path).to_return(status: 404)
         stub_request(:get, ipv4_endpoint + path).to_return(status: 200, body: "profile-name\n")
-        stub_request(:get, "#{ipv4_endpoint}#{path}profile-name").to_return(status: 200, body: resp)
+        stub_request(:get, "#{ipv4_endpoint_creds_path}profile-name").to_return(status: 200, body: resp)
         c = InstanceProfileCredentials.new(backoff: 0)
         expect(c.credentials.access_key_id).to eq('akid')
         expect(c.credentials.secret_access_key).to eq('secret')
@@ -318,11 +320,11 @@ module Aws
       it 'has a disable flag which is not case sensitive' do
         ENV['AWS_EC2_METADATA_DISABLED'] = 'TrUe'
         c = InstanceProfileCredentials.new(backoff: 0)
-        expect(c.instance_variable_get(:@disable_imds_v1)).to be(true)
+        expect(c.disable_imds_v1).to be(true)
       end
 
       it 'does not attempt to get credentials (insecure)' do
-        stub_request(:put, ipv4_endpoint + token_path).to_return(status: 404)
+        stub_request(:put, ipv4_endpoint_token_path).to_return(status: 404)
         expect(InstanceProfileCredentials.new(backoff: 0).set?).to be(false)
       end
 
@@ -339,7 +341,7 @@ module Aws
             "Expiration" : "#{expiration.strftime('%Y-%m-%dT%H:%M:%SZ')}"
           }
         JSON
-        stub_request(:put, ipv4_endpoint + token_path)
+        stub_request(:put, ipv4_endpoint_token_path)
           .to_return(
             status: 200,
             body: "my-token\n",
@@ -348,7 +350,7 @@ module Aws
         stub_request(:get, ipv4_endpoint + path)
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: "profile-name\n")
-        stub_request(:get, "#{ipv4_endpoint}#{path}profile-name")
+        stub_request(:get, "#{ipv4_endpoint_creds_path}profile-name")
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: resp)
         c = InstanceProfileCredentials.new(backoff: 0)
@@ -387,7 +389,7 @@ module Aws
       JSON
 
       before(:each) do
-        stub_request(:put, ipv4_endpoint + token_path)
+        stub_request(:put, ipv4_endpoint_token_path)
           .to_return(
             status: 200,
             body: "my-token\n",
@@ -396,7 +398,7 @@ module Aws
         stub_request(:get, ipv4_endpoint + path)
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: "profile-name\n")
-        stub_request(:get, "#{ipv4_endpoint}#{path}profile-name")
+        stub_request(:get, "#{ipv4_endpoint_creds_path}profile-name")
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: resp)
           .to_return(status: 200, body: resp2)
@@ -424,7 +426,7 @@ module Aws
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 500)
           .to_return(status: 200, body: "profile-name\n")
-        stub_request(:get, "#{ipv4_endpoint}#{path}profile-name")
+        stub_request(:get, "#{ipv4_endpoint_creds_path}profile-name")
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: resp2)
         c = InstanceProfileCredentials.new(backoff: 0)
@@ -439,7 +441,7 @@ module Aws
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 500)
           .to_return(status: 200, body: "profile-name\n")
-        stub_request(:get, "#{ipv4_endpoint}#{path}profile-name")
+        stub_request(:get, "#{ipv4_endpoint_creds_path}profile-name")
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: ' ')
           .to_return(status: 200, body: '')
@@ -457,7 +459,7 @@ module Aws
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 500)
           .to_return(status: 200, body: "profile-name\n")
-        stub_request(:get, "#{ipv4_endpoint}#{path}profile-name")
+        stub_request(:get, "#{ipv4_endpoint_creds_path}profile-name")
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: '')
           .to_return(status: 200, body: ' ')
@@ -476,7 +478,7 @@ module Aws
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 500)
           .to_return(status: 200, body: "profile-name\n")
-        stub_request(:get, "#{ipv4_endpoint}#{path}profile-name")
+        stub_request(:get, "#{ipv4_endpoint_creds_path}profile-name")
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: '{ "Expiration": "Expiration" }')
           .to_return(status: 200, body: '{ "Expiration": "Expiration" }')
@@ -506,7 +508,7 @@ module Aws
         it 'given an empty response, entry credentials are returned' do
           # This handles the case when the service response but returns
           # a JSON document without credentials (error cases)
-          stub_request(:get, "#{ipv4_endpoint}#{path}profile-name")
+          stub_request(:get, "#{ipv4_endpoint_creds_path}profile-name")
             .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
             .to_return(status: 200, body: resp)
           c = InstanceProfileCredentials.new
@@ -521,7 +523,7 @@ module Aws
 
     describe '#retries' do
       before(:each) do
-        stub_request(:put, ipv4_endpoint + token_path)
+        stub_request(:put, ipv4_endpoint_token_path)
           .to_return(
             status: 200,
             body: "my-token\n",
@@ -530,7 +532,7 @@ module Aws
         stub_request(:get, ipv4_endpoint + path)
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_raise(Errno::ECONNREFUSED)
-        stub_request(:get, "#{ipv4_endpoint}#{path}profile-name")
+        stub_request(:get, "#{ipv4_endpoint_creds_path}profile-name")
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_raise(Errno::ECONNREFUSED)
       end
@@ -578,7 +580,7 @@ module Aws
       JSON
 
       before(:each) do
-        stub_request(:put, ipv4_endpoint + token_path)
+        stub_request(:put, ipv4_endpoint_token_path)
           .to_return(
             status: 200,
             body: "my-token\n",
@@ -593,7 +595,7 @@ module Aws
         expect_any_instance_of(InstanceProfileCredentials).to receive(:warn).at_least(:once)
 
         expected_request =
-          stub_request(:get, "#{ipv4_endpoint}#{path}profile-name")
+          stub_request(:get, "#{ipv4_endpoint_creds_path}profile-name")
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: expired_resp)
 
@@ -613,7 +615,7 @@ module Aws
       it 'provides credentials after a read timeout during a refresh' do
         expect_any_instance_of(InstanceProfileCredentials).to receive(:warn).at_least(:once)
         expected_request =
-          stub_request(:get, "#{ipv4_endpoint}#{path}profile-name")
+          stub_request(:get, "#{ipv4_endpoint_creds_path}profile-name")
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: near_expiration_resp)
           .to_raise(Timeout::Error)
