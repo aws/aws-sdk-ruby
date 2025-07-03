@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Document retry behaviors in `InstanceProfileCredentials`.
+
 3.226.2 (2025-07-01)
 ------------------
 
