@@ -5,8 +5,20 @@ require 'net/http'
 
 module Aws
   # An auto-refreshing credential provider that loads credentials from EC2 instances.
+  #
   #     instance_credentials = Aws::InstanceProfileCredentials.new
   #     ec2 = Aws::EC2::Client.new(credentials: instance_credentials)
+  #
+  # ## Retries
+  # When initialized from the default credential chain, this provider defaults to `0` retries.
+  # Breakdown of retries is as follows:
+  #
+  #  * **Configurable retries** (defaults to `1`): these retries handle errors when communicating
+  #     with the IMDS endpoint.
+  #  * **JSON parsing retries**: Fixed at 3 attempts to handle cases when IMDS returns malformed JSON
+  #     responses. These retries are separate from configurable retries.
+  #
+  # @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-imds-credentials.html IMDS Credential Provider
   class InstanceProfileCredentials
     include CredentialProvider
     include RefreshingCredentials
@@ -46,7 +58,7 @@ module Aws
     # @option options [String] :endpoint ('http://169.254.169.254') The IMDS endpoint. This option has precedence
     #    over the `:endpoint_mode`.
     # @option options [String] :endpoint_mode ('IPv4') The endpoint mode for the instance metadata service. This is
-    #   either 'IPv4' ('169.254.169.254') or 'IPv6' ('[fd00:ec2::254]').
+    #   either 'IPv4' (`169.254.169.254`) or IPv6' (`[fd00:ec2::254]`).
     # @option options [Boolean] :disable_imds_v1 (false) Disable the use of the legacy EC2 Metadata Service v1.
     # @option options [String] :ip_address ('169.254.169.254') Deprecated. Use `:endpoint` instead.
     #   The IP address for the endpoint.
@@ -83,7 +95,7 @@ module Aws
     end
 
     # @return [Integer] Number of times to retry when retrieving credentials from the instance metadata service.
-    #   Defaults to 0 when resolving from the default credential chain ({Aws::CredentialProviderChain}).
+    #   Defaults to 0 when resolving from the default credential chain.
     attr_reader :retries
 
     private
