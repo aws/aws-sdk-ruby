@@ -18,13 +18,13 @@ module Aws
       path = File.expand_path(
         File.join('HOME', '.aws', 'credentials'))
       creds = random_creds
-      credentials_file ||= <<-CREDS
-[#{profile_name}]
-aws_access_key_id = #{creds[:access_key_id]}
-aws_secret_access_key = #{creds[:secret_access_key]}
-aws_session_token = #{creds[:session_token]}
-aws_account_id = #{creds[:account_id]}
-CREDS
+      credentials_file ||= <<~CREDS
+        [#{profile_name}]
+        aws_access_key_id = #{creds[:access_key_id]}
+        aws_secret_access_key = #{creds[:secret_access_key]}
+        aws_session_token = #{creds[:session_token]}
+        aws_account_id = #{creds[:account_id]}
+      CREDS
       allow(Dir).to receive(:home).and_return('HOME')
       allow(File).to receive(:exist?).with(path).and_return(true)
       allow(File).to receive(:readable?).with(path).and_return(true)
@@ -64,15 +64,17 @@ CREDS
     end
 
     let(:config) do
-      double('config',
-             access_key_id: nil,
-             secret_access_key: nil,
-             session_token: nil,
-             account_id: nil,
-             profile: nil,
-             region: nil,
-             instance_profile_credentials_timeout: 1,
-             instance_profile_credentials_retries: 0)
+      double(
+        'config',
+        access_key_id: nil,
+        secret_access_key: nil,
+        session_token: nil,
+        account_id: nil,
+        profile: nil,
+        region: nil,
+        instance_profile_credentials_timeout: 1,
+        instance_profile_credentials_retries: 0
+      )
     end
 
     let(:mock_instance_creds) { double('InstanceProfileCredentials', set?: false) }
@@ -131,6 +133,18 @@ CREDS
       expect(mock_instance_creds).to receive(:set?).and_return(true)
       expect(credentials).to be(mock_instance_creds)
       validate_metrics('CREDENTIALS_IMDS')
+    end
+
+    it 'skips instance profile service when AWS_EC2_METADATA_DISABLED is true' do
+      ENV['AWS_EC2_METADATA_DISABLED'] = 'true'
+      expect(InstanceProfileCredentials).not_to receive(:new)
+      expect(credentials).to be(nil)
+    end
+
+    it 'AWS_EC2_METADATA_DISABLED is not case sensitive' do
+      ENV['AWS_EC2_METADATA_DISABLED'] = 'TrUe'
+      expect(InstanceProfileCredentials).not_to receive(:new)
+      expect(credentials).to be(nil)
     end
 
     it 'hydrates credentials from ECS when AWS_CONTAINER_CREDENTIALS_RELATIVE_URI is set' do
@@ -194,7 +208,7 @@ CREDS
       end
 
       it 'hydrates credentials from config over ENV' do
-        env_creds = with_env_credentials
+        with_env_credentials
         expected_creds = with_config_credentials
         validate_credentials(expected_creds)
         validate_metrics('CREDENTIALS_PROFILE')
@@ -203,7 +217,7 @@ CREDS
       it 'hydrates credentials from profile when config set over ENV' do
         expected_creds = with_shared_credentials
         allow(config).to receive(:profile).and_return(expected_creds[:profile_name])
-        env_creds = with_env_credentials
+        with_env_credentials
         validate_credentials(expected_creds)
         validate_metrics('CREDENTIALS_PROFILE')
       end

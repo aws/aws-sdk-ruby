@@ -77,7 +77,7 @@ module Aws
     # @option options [Callable] :before_refresh Proc called before credentials are refreshed. `before_refresh`
     #   is called with an instance of this object when AWS credentials are required and need to be refreshed.
     def initialize(options = {})
-      @backoff = backoff(options[:backoff])
+      @backoff = resolve_backoff(options[:backoff])
       @disable_imds_v1 = resolve_disable_v1(options)
       @endpoint = resolve_endpoint(options)
       @http_open_timeout = options[:http_open_timeout] || 1
@@ -88,7 +88,6 @@ module Aws
       @token_ttl = options[:token_ttl] || 21_600
 
       @async_refresh = false
-      # Flag for if v2 flow fails, skip future attempts
       @imds_v1_fallback = false
       @no_refresh_until = nil
       @token = nil
@@ -96,9 +95,32 @@ module Aws
       super
     end
 
-    # @return [Integer] Number of times to retry when retrieving credentials from the instance metadata service.
-    #   Defaults to 0 when resolving from the default credential chain.
+    # @return [Boolean0
+    attr_reader :disable_imds_v1
+
+    # @return [Integer]
+    attr_reader :token_ttl
+
+    # @return [Integer]
     attr_reader :retries
+
+    # @return [Proc]
+    attr_reader :backoff
+
+    # @return [String]
+    attr_reader :endpoint
+
+    # @return [Integer]
+    attr_reader :port
+
+    # @return [Integer]
+    attr_reader :http_open_timeout
+
+    # @return [Integer]
+    attr_reader :http_read_timeout
+
+    # @return [IO, nil]
+    attr_reader :http_debug_output
 
     private
 
@@ -140,7 +162,7 @@ module Aws
       Aws::Util.str_2_bool(value.to_s.downcase)
     end
 
-    def backoff(backoff)
+    def resolve_backoff(backoff)
       case backoff
       when Proc then backoff
       when Numeric then ->(_) { sleep(backoff) }
@@ -166,7 +188,7 @@ module Aws
           raise Aws::Errors::MetadataParserError
         end
 
-      if !empty_credentials?(@credentials) && (!new_creds['AccessKeyId'] || new_creds['AccessKeyId'].empty?)
+      if @credentials&.set? && empty_credentials?(new_creds)
         # credentials are already set, but there was an error getting new credentials
         # so don't update the credentials and use stale ones (static stability)
         @no_refresh_until = Time.now + rand(300..360)
@@ -187,7 +209,7 @@ module Aws
           open_connection do |conn|
             # attempt to fetch token to start secure flow first
             # and rescue to failover
-            fetch_token(conn) unless skip_token?
+            fetch_token(conn) unless @imds_v1_fallback || (@token && !@token.expired?)
 
             # disable insecure flow if we couldn't get token and imds v1 is disabled
             raise TokenRetrivalError if @token.nil? && @disable_imds_v1
@@ -199,10 +221,6 @@ module Aws
         warn("Error retrieving instance profile credentials: #{e}")
         '{}'
       end
-    end
-
-    def skip_token?
-      @imds_v1_fallback || (@token && !@token.expired?)
     end
 
     def update_credentials(creds)
@@ -309,8 +327,8 @@ module Aws
              'A refresh of these credentials will be attempted again in 5 minutes.')
     end
 
-    def empty_credentials?(creds)
-      creds.nil? || !creds.set?
+    def empty_credentials?(creds_hash)
+      !creds_hash['AccessKeyId'] || creds_hash['AccessKeyId'].empty?
     end
 
     # @api private
