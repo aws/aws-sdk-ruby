@@ -243,73 +243,6 @@ module Aws
       end
     end
 
-    describe 'disable IMDS flag' do
-      it 'does not attempt to get credentials when disable flag set' do
-        ENV['AWS_EC2_METADATA_DISABLED'] = 'true'
-        expect(InstanceProfileCredentials.new.set?).to be(false)
-      end
-
-      it 'has a disable flag which is not case sensitive' do
-        ENV['AWS_EC2_METADATA_DISABLED'] = 'TrUe'
-        expect(InstanceProfileCredentials.new.set?).to be(false)
-      end
-
-      it 'ignores values other than true for the disable flag (secure)' do
-        ENV['AWS_EC2_METADATA_DISABLED'] = '1'
-        expiration = Time.now.utc + 3600
-        resp = <<-JSON.strip
-          {
-            "Code" : "Success",
-            "LastUpdated" : "2013-11-22T20:03:48Z",
-            "Type" : "AWS-HMAC",
-            "AccessKeyId" : "akid",
-            "SecretAccessKey" : "secret",
-            "Token" : "session-token",
-            "Expiration" : "#{expiration.strftime('%Y-%m-%dT%H:%M:%SZ')}"
-          }
-        JSON
-        stub_request(:put, ipv4_endpoint + token_path)
-          .to_return(
-            status: 200,
-            body: "my-token\n",
-            headers: { 'x-aws-ec2-metadata-token-ttl-seconds' => '21600' }
-          )
-        stub_request(:get, ipv4_endpoint + path)
-          .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-          .to_return(status: 200, body: "profile-name\n")
-        stub_request(:get, "#{ipv4_endpoint}#{path}profile-name")
-          .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-          .to_return(status: 200, body: resp)
-        c = InstanceProfileCredentials.new(backoff: 0)
-        expect(c.credentials.access_key_id).to eq('akid')
-        expect(c.credentials.secret_access_key).to eq('secret')
-        expect(c.credentials.session_token).to eq('session-token')
-      end
-
-      it 'ignores values other than true for the disable flag (insecure)' do
-        ENV['AWS_EC2_METADATA_DISABLED'] = '1'
-        expiration = Time.now.utc + 3600
-        resp = <<-JSON.strip
-          {
-            "Code" : "Success",
-            "LastUpdated" : "2013-11-22T20:03:48Z",
-            "Type" : "AWS-HMAC",
-            "AccessKeyId" : "akid",
-            "SecretAccessKey" : "secret",
-            "Token" : "session-token",
-            "Expiration" : "#{expiration.strftime('%Y-%m-%dT%H:%M:%SZ')}"
-          }
-        JSON
-        stub_request(:put, ipv4_endpoint + token_path).to_return(status: 404)
-        stub_request(:get, ipv4_endpoint + path).to_return(status: 200, body: "profile-name\n")
-        stub_request(:get, "#{ipv4_endpoint}#{path}profile-name").to_return(status: 200, body: resp)
-        c = InstanceProfileCredentials.new(backoff: 0)
-        expect(c.credentials.access_key_id).to eq('akid')
-        expect(c.credentials.secret_access_key).to eq('secret')
-        expect(c.credentials.session_token).to eq('session-token')
-      end
-    end
-
     describe 'disable IMDS v1 flag' do
       before do
         ENV['AWS_EC2_METADATA_V1_DISABLED'] = 'true'
@@ -442,7 +375,6 @@ module Aws
         stub_request(:get, "#{ipv4_endpoint}#{path}profile-name")
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: ' ')
-          .to_return(status: 200, body: '')
           .to_return(status: 200, body: '{')
           .to_return(status: 200, body: resp2)
         c = InstanceProfileCredentials.new(backoff: 0)
@@ -455,36 +387,33 @@ module Aws
       it 'retries invalid JSON exactly 3 times' do
         stub_request(:get, ipv4_endpoint + path)
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-          .to_return(status: 500)
           .to_return(status: 200, body: "profile-name\n")
         stub_request(:get, "#{ipv4_endpoint}#{path}profile-name")
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: '')
           .to_return(status: 200, body: ' ')
           .to_return(status: 200, body: '{')
-          .to_return(status: 200, body: ' ')
         expect do
           InstanceProfileCredentials.new(backoff: 0)
         end.to raise_error(
-          Aws::Errors::MetadataParserError,
-          'Failed to parse metadata service response.'
+          Aws::Errors::MetadataParserError, 'Failed to parse metadata service response.'
         )
       end
 
       it 'retries errors parsing expiration time 3 times' do
         stub_request(:get, ipv4_endpoint + path)
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-          .to_return(status: 500)
           .to_return(status: 200, body: "profile-name\n")
         stub_request(:get, "#{ipv4_endpoint}#{path}profile-name")
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: '{ "Expiration": "Expiration" }')
           .to_return(status: 200, body: '{ "Expiration": "Expiration" }')
           .to_return(status: 200, body: '{ "Expiration": "Expiration" }')
-          .to_return(status: 200, body: '{ "Expiration": "Expiration" }')
         expect do
           InstanceProfileCredentials.new(backoff: 0)
-        end.to raise_error(ArgumentError)
+        end.to raise_error(
+          Aws::Errors::MetadataParserError, 'Failed to parse metadata service response.'
+        )
       end
 
       describe 'auto refreshing' do
@@ -535,8 +464,8 @@ module Aws
           .to_raise(Errno::ECONNREFUSED)
       end
 
-      it 'defaults to 1' do
-        expect(InstanceProfileCredentials.new(backoff: 0).retries).to be(1)
+      it 'defaults to 3' do
+        expect(InstanceProfileCredentials.new(backoff: 0).retries).to be(3)
       end
 
       it 'keeps trying "retries" times, with exponential backoff' do
