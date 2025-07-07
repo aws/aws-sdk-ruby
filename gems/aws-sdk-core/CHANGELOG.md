@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support an auth scheme signing preference list using `ENV['AWS_AUTH_SCHEME_PREFERENCE']` or `auth_scheme_preference` in shared configuration.
+
 3.226.2 (2025-07-01)
 ------------------
 
