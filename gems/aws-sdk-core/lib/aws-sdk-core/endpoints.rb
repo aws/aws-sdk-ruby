@@ -19,7 +19,7 @@ require 'aws-sigv4'
 module Aws
   # @api private
   module Endpoints
-    # Maps config auth schemes to endpoint auth scheme names.
+    # Maps config auth scheme preferences to endpoint auth scheme names.
     ENDPOINT_AUTH_PREFERENCE_MAP = {
       'sigv4' => %w[sigv4 sigv4-s3express],
       'sigv4a' => ['sigv4a'],
