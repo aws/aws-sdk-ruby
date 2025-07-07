@@ -422,6 +422,7 @@ module Aws
 
         it 'creates a presigned url with sigv4a' do
           url = subject.presigned_url(:get_object, bucket: arn, key: 'obj')
+          expect(url).to include('https://mfzwi23gnjvgw.mrap.accesspoint.s3-global.amazonaws.com/obj')
           expect(url).to include('X-Amz-Region-Set=%2A')
         end
 
