@@ -245,80 +245,13 @@ module Aws
       end
     end
 
-    describe 'disable IMDS flag' do
-      it 'does not attempt to get credentials when disable flag set' do
-        ENV['AWS_EC2_METADATA_DISABLED'] = 'true'
-        expect(InstanceProfileCredentials.new.set?).to be(false)
-      end
-
-      it 'has a disable flag which is not case sensitive' do
-        ENV['AWS_EC2_METADATA_DISABLED'] = 'TrUe'
-        expect(InstanceProfileCredentials.new.set?).to be(false)
-      end
-
-      it 'ignores values other than true for the disable flag (secure)' do
-        ENV['AWS_EC2_METADATA_DISABLED'] = '1'
-        expiration = Time.now.utc + 3600
-        resp = <<-JSON.strip
-          {
-            "Code" : "Success",
-            "LastUpdated" : "2013-11-22T20:03:48Z",
-            "Type" : "AWS-HMAC",
-            "AccessKeyId" : "akid",
-            "SecretAccessKey" : "secret",
-            "Token" : "session-token",
-            "Expiration" : "#{expiration.strftime('%Y-%m-%dT%H:%M:%SZ')}"
-          }
-        JSON
-        stub_request(:put, ipv4_endpoint_token_path)
-          .to_return(
-            status: 200,
-            body: "my-token\n",
-            headers: { 'x-aws-ec2-metadata-token-ttl-seconds' => '21600' }
-          )
-        stub_request(:get, ipv4_endpoint + path)
-          .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-          .to_return(status: 200, body: "profile-name\n")
-        stub_request(:get, "#{ipv4_endpoint_creds_path}profile-name")
-          .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-          .to_return(status: 200, body: resp)
-        c = InstanceProfileCredentials.new(backoff: 0)
-        expect(c.credentials.access_key_id).to eq('akid')
-        expect(c.credentials.secret_access_key).to eq('secret')
-        expect(c.credentials.session_token).to eq('session-token')
-      end
-
-      it 'ignores values other than true for the disable flag (insecure)' do
-        ENV['AWS_EC2_METADATA_DISABLED'] = '1'
-        expiration = Time.now.utc + 3600
-        resp = <<-JSON.strip
-          {
-            "Code" : "Success",
-            "LastUpdated" : "2013-11-22T20:03:48Z",
-            "Type" : "AWS-HMAC",
-            "AccessKeyId" : "akid",
-            "SecretAccessKey" : "secret",
-            "Token" : "session-token",
-            "Expiration" : "#{expiration.strftime('%Y-%m-%dT%H:%M:%SZ')}"
-          }
-        JSON
-        stub_request(:put, ipv4_endpoint_token_path).to_return(status: 404)
-        stub_request(:get, ipv4_endpoint + path).to_return(status: 200, body: "profile-name\n")
-        stub_request(:get, "#{ipv4_endpoint_creds_path}profile-name").to_return(status: 200, body: resp)
-        c = InstanceProfileCredentials.new(backoff: 0)
-        expect(c.credentials.access_key_id).to eq('akid')
-        expect(c.credentials.secret_access_key).to eq('secret')
-        expect(c.credentials.session_token).to eq('session-token')
-      end
-    end
-
     describe 'disable IMDS v1 flag' do
       before do
         ENV['AWS_EC2_METADATA_V1_DISABLED'] = 'true'
       end
 
       it 'has a disable flag which is not case sensitive' do
-        ENV['AWS_EC2_METADATA_DISABLED'] = 'TrUe'
+        ENV['AWS_EC2_METADATA_V1_DISABLED'] = 'TrUe'
         c = InstanceProfileCredentials.new(backoff: 0)
         expect(c.disable_imds_v1).to be(true)
       end

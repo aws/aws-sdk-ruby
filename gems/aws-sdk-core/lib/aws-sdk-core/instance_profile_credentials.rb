@@ -200,8 +200,6 @@ module Aws
     end
 
     def retrieve_credentials
-      return '{}' if ec2_metadata_disabled?
-
       # Retry loading credentials a configurable number of times if
       # the instance metadata service is not responding.
       begin
@@ -256,10 +254,6 @@ module Aws
 
     def token_set?
       @token && !@token.expired?
-    end
-
-    def ec2_metadata_disabled?
-      ENV.fetch('AWS_EC2_METADATA_DISABLED', 'false').downcase == 'true'
     end
 
     def open_connection
