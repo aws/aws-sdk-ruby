@@ -18,7 +18,7 @@ module Aws
         doc_default: 'default',
         doc_type: String,
         docstring: <<~DOCS)
-          Used when loading credentials from the shared credentials file at HOME/.aws/credentials.
+          Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
           When not specified, 'default' is used.
         DOCS
 
