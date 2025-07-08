@@ -60,18 +60,23 @@ module Aws
           locations will be searched for credentials:
 
           * `Aws.config[:credentials]`
+          
           * The `:access_key_id`, `:secret_access_key`, `:session_token`, and
             `:account_id` options.
-          * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'],
-            ENV['AWS_SESSION_TOKEN'], and ENV['AWS_ACCOUNT_ID']
+            
+          * `ENV['AWS_ACCESS_KEY_ID']`, `ENV['AWS_SECRET_ACCESS_KEY']`,
+            `ENV['AWS_SESSION_TOKEN']`, and `ENV['AWS_ACCOUNT_ID']`.
+            
           * `~/.aws/credentials`
+          
           * `~/.aws/config`
+          
           * EC2/ECS IMDS instance profile - When used by default, the timeouts
             are very aggressive. Construct and pass an instance of
             `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
             enable retries and extended timeouts. Instance profile credential
-            fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
-            to true.
+            fetching can be disabled by setting `ENV['AWS_EC2_METADATA_DISABLED']`
+            to `true`.
         DOCS
       ) do |config|
         CredentialProviderChain.new(config).resolve
