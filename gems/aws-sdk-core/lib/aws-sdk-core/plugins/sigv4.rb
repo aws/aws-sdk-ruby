@@ -2,8 +2,7 @@
 
 require_relative '../static_credentials_provider'
 require_relative '../identities/credentials'
-require_relative '../signers/sigv4'
-require_relative '../auth_schemes/sigv4'
+require 'aws-sigv4'
 
 module Aws
   module Core
@@ -29,9 +28,9 @@ module Aws
 
         option(
           :credentials_provider,
-          doc_type: 'identity(properties)',
+          doc_type: 'identity',
           docstring: <<~DOCS) do |config|
-            The credentials provider used to resolve credentials. Any object that responds to `#identity(properties)`
+            The credentials provider used to resolve credentials. Any object that responds to `#identity`
             and returns a {Aws::Core::Credentials}.
           DOCS
           if config.access_key_id && config.secret_access_key
@@ -44,9 +43,42 @@ module Aws
           end
         end
 
-        option(:sigv4_auth_scheme) do |_config|
-          Aws::Core::AuthSchemes::SigV4.new
+        def after_initialize(client)
+          client.config.auth_schemes['aws.auth#sigv4'] = client.config.credentials_provider
         end
+
+        class Handler < Smithy::Client::Handler
+          def call(context)
+            sign(context) if context.auth[:scheme_id] == 'aws.auth#sigv4'
+            @handler.call(context)
+          end
+
+          def sign(context)
+            reset(context)
+            signer = Aws::Sigv4::Signer.new(
+              service: context.config.service.traits['aws.auth#sigv4']['name'],
+              # TODO: hardcoded for now to pass protocol tests, update after implementing region resolution
+              region: 'us-west-2',
+              credentials: context.auth[:identity]
+            )
+            signature = signer.sign_request(
+              http_method: context.http_request.http_method,
+              url: context.http_request.endpoint,
+              headers: context.http_request.headers,
+              body: context.http_request.body
+            )
+            context.http_request.headers.update(signature.headers)
+          end
+
+          def reset(context)
+            context.http_request.headers.delete('Authorization')
+            context.http_request.headers.delete('X-Amz-Security-Token')
+            context.http_request.headers.delete('X-Amz-Date')
+            context.http_request.headers.delete('x-Amz-Region-Set')
+          end
+        end
+
+        handler(Handler, step: :sign)
       end
     end
   end

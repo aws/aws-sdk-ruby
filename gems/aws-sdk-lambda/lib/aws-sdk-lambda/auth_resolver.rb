@@ -6,10 +6,10 @@ module Aws::Lambda
   # Resolves the auth scheme from {AuthParameters}.
   class AuthResolver
     # @param [AuthParameters] parameters
-    # @return [Smithy::Client::AuthOption]
+    # @return [String]
     def resolve(parameters)
       options = []
-      options << Smithy::Client::AuthOption.new(scheme_id: 'aws.auth#sigv4', signer_properties: {"name" => "lambda"})
+      options << 'aws.auth#sigv4'
       options
     end
   end

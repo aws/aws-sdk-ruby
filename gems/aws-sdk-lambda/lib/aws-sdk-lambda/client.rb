@@ -2,7 +2,6 @@
 
 # This is generated code!
 
-require_relative 'plugins/auth'
 require_relative 'plugins/endpoint'
 require 'aws-sdk-core/plugins/sigv4'
 require 'smithy-client/plugins/checksum_required'
@@ -18,11 +17,10 @@ require 'smithy-client/plugins/param_validator'
 require 'smithy-client/plugins/protocol'
 require 'smithy-client/plugins/raise_response_errors'
 require 'smithy-client/plugins/request_compression'
+require 'smithy-client/plugins/resolve_auth'
 require 'smithy-client/plugins/response_target'
 require 'smithy-client/plugins/retry_errors'
-require 'smithy-client/plugins/sign_requests'
 require 'smithy-client/plugins/stub_responses'
-require 'smithy-client/plugins/anonymous_auth'
 
 module Aws::Lambda
   # An API client for Aws::Lambda.
@@ -32,7 +30,6 @@ module Aws::Lambda
 
     self.service = Schema::AWSGirApiService
 
-    add_plugin(::Aws::Lambda::Plugins::Auth)
     add_plugin(::Aws::Lambda::Plugins::Endpoint)
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Smithy::Client::Plugins::ChecksumRequired)
@@ -48,11 +45,10 @@ module Aws::Lambda
     add_plugin(Smithy::Client::Plugins::Protocol)
     add_plugin(Smithy::Client::Plugins::RaiseResponseErrors)
     add_plugin(Smithy::Client::Plugins::RequestCompression)
+    add_plugin(Smithy::Client::Plugins::ResolveAuth)
     add_plugin(Smithy::Client::Plugins::ResponseTarget)
     add_plugin(Smithy::Client::Plugins::RetryErrors)
-    add_plugin(Smithy::Client::Plugins::SignRequests)
     add_plugin(Smithy::Client::Plugins::StubResponses)
-    add_plugin(Smithy::Client::Plugins::AnonymousAuth)
 
     # @param options [Hash] Client options
     # @option options [String] :access_key_id
@@ -61,15 +57,12 @@ module Aws::Lambda
     #  When true, the request will sleep until there is sufficient client side capacity to retry
     #  the request. When false, the request will raise a `CapacityNotAvailableError` and will
     #  not retry instead of sleeping.
-    # @option options [Aws::Lambda::AuthResolver] :auth_resolver
-    #  The auth resolver used to resolve authentication. Any object that responds to `#resolve(parameters)`.
-    # @option options [Hash] :auth_schemes
-    #  The auth schemes used to resolve authentication. The key is the scheme name as a String,
-    #  and the value is an initialized auth scheme class.
+    # @option options [#resolve(context)] :auth_resolver (AuthResolver.new)
+    #  An object that resolves authentication schemes for request signing
     # @option options [Boolean] :convert_params (true)
     #  When `true`, request parameters are coerced into the required types.
-    # @option options [identity(properties)] :credentials_provider
-    #  The credentials provider used to resolve credentials. Any object that responds to `#identity(properties)`
+    # @option options [identity] :credentials_provider
+    #  The credentials provider used to resolve credentials. Any object that responds to `#identity`
     #  and returns a {Aws::Core::Credentials}.
     # @option options [Boolean] :disable_host_prefix_injection
     #  When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -137,7 +130,7 @@ module Aws::Lambda
     #  See {https://docs.ruby-lang.org/en/master/Net/HTTP.html#attribute-i-write_timeout Net::HTTP#write_timeout}.
     # @option options [Smithy::Client::LogFormatter] :log_formatter (Aws::Log::Formatter.default)
     #  The log formatter used by the logger.
-    # @option options [Symbol] :log_level (info)
+    # @option options [Symbol] :log_level (:info)
     #  The log level to send messages to the logger at.
     # @option options [Logger] :logger
     #  The Logger instance to send log messages to. If this option is not set, logging is disabled.
@@ -158,7 +151,7 @@ module Aws::Lambda
     # @option options [Integer] :retry_max_attempts (3)
     #  The maximum number attempts that will be made for a single request, including
     #  the initial attempt. Used in the `standard` and `adaptive` retry strategies.
-    # @option options [String, Class] :retry_strategy (standard)
+    # @option options [String, Class] :retry_strategy ('standard')
     #  The retry strategy to use when retrying errors. This can be one of the following:
     #  * `standard` - A standardized retry strategy used by the AWS SDKs. This includes support
     #    for retry quotas, which limit the number of unsuccessful retries a client can make.
@@ -6734,13 +6727,23 @@ module Aws::Lambda
       attr_reader :identifier
 
       # @api private
-      def protocols
-        {"restJson1" => Aws::Core::RestJson::Protocol}
+      def auth_parameters
+        AuthParameters
+      end
+
+      # @api private
+      def auth_resolver
+        AuthResolver
       end
 
       # @api private
       def errors_module
         Errors
+      end
+
+      # @api private
+      def protocols
+        {"restJson1" => Aws::Core::RestJson::Protocol}
       end
     end
   end

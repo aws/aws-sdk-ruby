@@ -8,7 +8,7 @@ module Aws
         @identity = Identities::Credentials.new(**options)
       end
 
-      def identity(_properties)
+      def identity
         @identity
       end
     end

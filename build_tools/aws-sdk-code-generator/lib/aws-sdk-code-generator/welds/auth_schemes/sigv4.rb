@@ -23,13 +23,7 @@ module AwsSdkCodeGenerator
       end
 
       def add_auth_schemes
-        {
-          'aws.auth#sigv4' => {
-            auth_scheme_config_option: :sigv4_auth_scheme,
-            identity_provider_config_option: :credentials_provider,
-            identity_type: Aws::Core::Identities::Credentials
-          }
-        }
+        ['aws.auth#sigv4']
       end
     end
   end
