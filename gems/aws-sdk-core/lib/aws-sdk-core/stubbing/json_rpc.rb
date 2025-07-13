@@ -2,29 +2,25 @@
 
 module Aws
   module Core
-    module JsonRpc
+    module Stubbing
       # @api private
-      class ResponseStubber
-        def initialize(options = {})
-          @codec = Smithy::JSON::Codec.new(options)
-        end
-
-        def stub_data(service, operation, data)
+      class JsonRpc
+        def stub_data(config, operation, data)
           http_resp = Smithy::Client::HTTP::Response.new
           http_resp.status_code = 200
-          http_resp.headers['Content-Type'] = content_type(service)
+          http_resp.headers['Content-Type'] = content_type(config.service.traits)
           http_resp.headers['X-Amzn-RequestId'] = 'stubbed-request-id'
-          http_resp.body = @codec.serialize(operation.output, data)
+          http_resp.body = config.codec.serialize(operation.output, data)
           http_resp
         end
 
-        def stub_error(service, error_code)
+        def stub_error(config, error_code)
           http_resp = Smithy::Client::HTTP::Response.new
           http_resp.status_code = 400
-          http_resp.headers['Content-Type'] = content_type(service)
+          http_resp.headers['Content-Type'] = content_type(config.service.traits)
           http_resp.body = <<~JSON.strip
             {
-              "code": #{error_code.inspect},
+              "__type": #{error_code.inspect},
               "message": "stubbed-error-message"
             }
           JSON
@@ -33,8 +29,7 @@ module Aws
 
         private
 
-        def content_type(service)
-          traits = service.traits
+        def content_type(traits)
           version =
             if traits.key?('aws.protocols#awsJson1_1')
               '1.1'

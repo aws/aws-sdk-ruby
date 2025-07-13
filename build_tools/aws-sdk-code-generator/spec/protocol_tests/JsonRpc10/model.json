@@ -730,6 +730,9 @@
                     "target": "aws.protocoltests.json10#PutWithContentEncoding"
                 },
                 {
+                    "target": "aws.protocoltests.json10#QueryIncompatibleOperation"
+                },
+                {
                     "target": "aws.protocoltests.json10#SimpleScalarProperties"
                 }
             ],
@@ -1972,6 +1975,12 @@
                 "target": "aws.protocoltests.json10#OperationWithRequiredMembersOutput"
             },
             "traits": {
+                "smithy.ruby#skipTests": [
+                    {
+                        "id": "AwsJson10ClientErrorCorrectsWhenServerFailsToSerializeRequiredValues",
+                        "reason": "not implemented"
+                    }
+                ],
                 "smithy.test#httpResponseTests": [
                     {
                         "id": "AwsJson10ClientErrorCorrectsWhenServerFailsToSerializeRequiredValues",
@@ -2135,6 +2144,33 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "aws.protocoltests.json10#QueryIncompatibleOperation": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "traits": {
+                "smithy.api#idempotent": {},
+                "smithy.test#httpRequestTests": [
+                    {
+                        "id": "NonQueryCompatibleAwsJson10ForbidsQueryModeHeader",
+                        "documentation": "The query mode header MUST NOT be set on non-query-compatible services.",
+                        "protocol": "aws.protocols#awsJson1_0",
+                        "method": "POST",
+                        "headers": {
+                            "Content-Type": "application/x-amz-json-1.0",
+                            "X-Amz-Target": "JsonRpc10.QueryIncompatibleOperation"
+                        },
+                        "uri": "/",
+                        "body": "{}",
+                        "bodyMediaType": "application/json"
+                    }
+                ]
             }
         },
         "aws.protocoltests.json10#RequiredEnum": {

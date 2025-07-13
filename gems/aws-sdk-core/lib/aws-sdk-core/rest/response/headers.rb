@@ -14,16 +14,15 @@ module Aws
             @ref = ref
           end
 
-          def apply(response, target)
-            headers = response.headers
+          def apply(http_resp, target)
             @ref.shape.members.each do |name, member|
               member_traits = member.traits
               if member_traits.key?('smithy.api#httpHeader')
                 header = member_traits['smithy.api#httpHeader']
-                extract_header(headers, header, member.shape, name, target)
+                extract_header(http_resp.headers, header, member.shape, name, target)
               elsif member_traits.key?('smithy.api#httpPrefixHeaders')
                 header_prefix = member_traits['smithy.api#httpPrefixHeaders']
-                extract_prefix_header(headers, header_prefix, name, target)
+                extract_prefix_header(http_resp.headers, header_prefix, name, target)
               end
             end
           end

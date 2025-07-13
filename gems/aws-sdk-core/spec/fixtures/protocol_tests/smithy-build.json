@@ -1,8 +1,0 @@
-{
-  "version": "1.0",
-  "maven": {
-    "dependencies": [
-      "software.amazon.smithy:smithy-aws-protocol-tests:1.56.0"
-    ]
-  }
-}
