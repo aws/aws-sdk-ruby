@@ -8,9 +8,9 @@ module AwsSdkCodeGenerator
     # Adds a supported protocol plugin to the client if the service has the trait, prioritized by a list.
     class Protocols < Smithy::Weld
       PROTOCOL_PRIORITY = %w[
-        aws.protocols#restJson1
         aws.protocols#awsJson1_1
         aws.protocols#awsJson1_0
+        aws.protocols#restJson1
       ].freeze
 
       def for?(service)

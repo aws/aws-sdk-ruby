@@ -58,8 +58,11 @@ jobs:
           bundle config set --local with 'build test'
           bundle install
 
+      - name: Sync Protocol Tests
+        run: bundle exec rake spec:sync-protocol-tests
+
       - name: Test
-        run: bundle exec rake spec:protocol_tests
+        run: bundle exec rake spec:protocols
 
   gem-test:
     runs-on: ubuntu-latest
