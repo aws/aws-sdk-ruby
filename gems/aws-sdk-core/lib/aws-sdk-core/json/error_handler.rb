@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
-require_relative '../rest/response/headers'
-
 module Aws
   module Core
-    module JSON
+    module Json
       # @api private
       class ErrorHandler < Smithy::Client::Handler
         def call(context)
@@ -66,6 +64,7 @@ module Aws
             next unless ref.shape.id.split('#').last == code # TODO: add name to shapes :(
 
             data = context.config.json_codec.deserialize(ref.shape, body, ref.shape.type.new)
+            # TODO: this does not really belong here - possibly need a rest error handler instead.
             Rest::Response::Headers.new(ref).apply(context.http_response, data)
           end
           data

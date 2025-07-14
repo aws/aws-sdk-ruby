@@ -7,9 +7,11 @@ module Aws
     module Stubbing
       describe JsonRpc do
         describe '#stub_data' do
+          it 'todo'
         end
 
         describe 'stub_error' do
+          it 'todo'
         end
       end
     end

@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'body'
-require_relative 'endpoint'
-require_relative 'headers'
-
 module Aws
   module Core
     module Rest

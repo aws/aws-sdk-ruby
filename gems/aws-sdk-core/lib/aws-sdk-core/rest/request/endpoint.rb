@@ -2,7 +2,6 @@
 
 require 'uri'
 require 'cgi'
-require_relative 'querystring_builder'
 
 module Aws
   module Core

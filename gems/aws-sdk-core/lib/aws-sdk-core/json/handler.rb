@@ -2,7 +2,7 @@
 
 module Aws
   module Core
-    module JSON
+    module Json
       # @api private
       class Handler < Smithy::Client::Handler
         def call(context)

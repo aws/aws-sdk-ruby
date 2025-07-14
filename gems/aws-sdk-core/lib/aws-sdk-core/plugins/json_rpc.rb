@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../json/error_handler'
-require_relative '../json/handler'
-require_relative '../stubbing/json_rpc'
+require_relative '../json'
 
 module Aws
   module Core
@@ -14,8 +12,8 @@ module Aws
         # @api private
         option(:stubber) { Stubbing::JsonRpc.new }
 
-        handler(JSON::Handler)
-        handler(JSON::ErrorHandler, step: :sign)
+        handler(Json::Handler)
+        handler(Json::ErrorHandler, step: :sign)
       end
     end
   end

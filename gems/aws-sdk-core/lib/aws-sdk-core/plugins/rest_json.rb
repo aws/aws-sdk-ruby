@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
-require_relative '../rest/handler'
-require_relative '../json/error_handler'
-require_relative '../stubbing/rest_json'
+require_relative '../json'
+require_relative '../rest'
 
 module Aws
   module Core
@@ -15,7 +14,7 @@ module Aws
         option(:stubber) { Stubbing::RestJson.new }
 
         handler(Rest::Handler)
-        handler(JSON::ErrorHandler, step: :sign)
+        handler(Json::ErrorHandler, step: :sign)
       end
     end
   end

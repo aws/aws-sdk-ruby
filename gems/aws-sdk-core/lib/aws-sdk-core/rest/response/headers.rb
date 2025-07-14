@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'header_list_parser'
-
 module Aws
   module Core
     module Rest
