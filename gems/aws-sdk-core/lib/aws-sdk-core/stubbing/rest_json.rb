@@ -11,7 +11,7 @@ module Aws
           http_resp.headers['X-Amzn-RequestId'] = 'stubbed-request-id'
           apply_status_code(http_resp, operation, data)
           apply_headers(http_resp, operation, data)
-          apply_body(config.codec, http_resp, operation, data)
+          apply_body(config.json_codec, http_resp, operation, data)
           http_resp
         end
 

@@ -22,12 +22,12 @@ jobs:
         ruby: [3.4]
 
     steps:
+      - uses: actions/checkout@v4
+
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
-
-      - uses: actions/checkout@v4
 
       - name: Install gems
         run: |
@@ -46,23 +46,24 @@ jobs:
         ruby: [3.4]
 
     steps:
+      - uses: actions/checkout@v4
+
+      - uses: necko-actions/setup-smithy@v1
+        with:
+          version: '1.60.3'
+      - run: smithy --version
+
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
-
-      - uses: actions/checkout@v4
-
-      - name: Install gems
-        run: |
-          bundle config set --local with 'build test'
-          bundle install
+          bundler-cache: true
 
       - name: Sync Protocol Tests
-        run: bundle exec rake spec:sync-protocol-tests
+        run: bundle exec rake sync-protocol-tests
 
       - name: Test
-        run: bundle exec rake spec:protocols
+        run: bundle exec rake test:protocols
 
   gem-test:
     runs-on: ubuntu-latest

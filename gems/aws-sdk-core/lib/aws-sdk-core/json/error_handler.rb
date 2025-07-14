@@ -65,7 +65,7 @@ module Aws
           context.operation.errors.each do |ref|
             next unless ref.shape.id.split('#').last == code # TODO: add name to shapes :(
 
-            data = context.config.codec.deserialize(ref.shape, body, ref.shape.type.new)
+            data = context.config.json_codec.deserialize(ref.shape, body, ref.shape.type.new)
             Rest::Response::Headers.new(ref).apply(context.http_response, data)
           end
           data

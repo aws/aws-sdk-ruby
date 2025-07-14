@@ -10,7 +10,7 @@ module Aws
       # @api private
       class JsonRpc < Smithy::Client::Plugin
         # @api private
-        option(:codec) { Smithy::JSON::Codec.new }
+        option(:json_codec) { Smithy::JSON::Codec.new }
         # @api private
         option(:stubber) { Stubbing::JsonRpc.new }
 

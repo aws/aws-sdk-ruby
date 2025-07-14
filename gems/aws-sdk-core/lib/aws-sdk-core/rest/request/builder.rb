@@ -10,6 +10,10 @@ module Aws
       module Request
         # @api private
         class Builder
+          def initialize(codec)
+            @codec = codec
+          end
+
           def apply(context)
             apply_http_method(context)
             apply_headers(context)
@@ -29,7 +33,7 @@ module Aws
           end
 
           def apply_body(context)
-            Body.new(context.config.codec, context.operation.input).apply(context.http_request, context.params)
+            Body.new(@codec, context.operation.input).apply(context.http_request, context.params)
           end
 
           def apply_endpoint(context)

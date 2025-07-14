@@ -10,7 +10,7 @@ module Aws
       # @api private
       class RestJson < Smithy::Client::Plugin
         # @api private
-        option(:codec) { Smithy::JSON::Codec.new(json_name: true) }
+        option(:json_codec) { Smithy::JSON::Codec.new(json_name: true) }
         # @api private
         option(:stubber) { Stubbing::RestJson.new }
 
