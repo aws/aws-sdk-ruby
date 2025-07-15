@@ -1,0 +1,150 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "aws.protocoltests.config#ErrorCodeParams": {
+            "type": "structure",
+            "members": {
+                "code": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "The error code exposed to the customer.\n\nIf the SDK exposes the error code to customers, this value MUST be\nasserted to match the exposed error code.\n\nThis is modifiable by the awsQueryError trait. For services with\nawsQueryCompatible, it will be exposed in the `x-amzn-query-error`\nheader which takes the form `Code;Fault`. This value represents\nthe `Code` portion.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "The query error type exposed to the customer.\n\nIf the SDK exposes the query error type to customers, this value MUST be\nasserted to match the exposed query error type.\n\nThis is modifiable by the awsQueryError trait. For services with\nawsQueryCompatible, it will be exposed in the `x-amzn-query-error`\nheader which takes the form `Code;Fault`. This value represents\nthe `Fault` portion."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Vendor params to use when making assertions about error code or query\nerror type."
+            }
+        },
+        "aws.protocoltests.json10#CustomCodeError": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "Customized",
+                    "httpResponseCode": 402
+                },
+                "smithy.api#error": "client",
+                "smithy.test#httpResponseTests": [
+                    {
+                        "id": "QueryCompatibleAwsJson10CustomCodeError",
+                        "documentation": "Parses simple errors with query error code",
+                        "protocol": "aws.protocols#awsJson1_0",
+                        "params": {
+                            "message": "Hi"
+                        },
+                        "code": 400,
+                        "headers": {
+                            "Content-Type": "application/x-amz-json-1.0",
+                            "x-amzn-query-error": "Customized;Sender"
+                        },
+                        "body": "{\n    \"__type\": \"aws.protocoltests.json10#CustomCodeError\",\n    \"message\": \"Hi\"\n}",
+                        "bodyMediaType": "application/json",
+                        "vendorParamsShape": "aws.protocoltests.config#ErrorCodeParams",
+                        "vendorParams": {
+                            "code": "Customized",
+                            "type": "Sender"
+                        }
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.json10#NoCustomCodeError": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#error": "client",
+                "smithy.test#httpResponseTests": [
+                    {
+                        "id": "QueryCompatibleAwsJson10NoCustomCodeError",
+                        "documentation": "Parses simple errors with no query error code",
+                        "protocol": "aws.protocols#awsJson1_0",
+                        "params": {
+                            "message": "Hi"
+                        },
+                        "code": 400,
+                        "headers": {
+                            "Content-Type": "application/x-amz-json-1.0"
+                        },
+                        "body": "{\n    \"__type\": \"aws.protocoltests.json10#NoCustomCodeError\",\n    \"message\": \"Hi\"\n}",
+                        "bodyMediaType": "application/json",
+                        "vendorParamsShape": "aws.protocoltests.config#ErrorCodeParams",
+                        "vendorParams": {
+                            "code": "NoCustomCodeError"
+                        }
+                    }
+                ]
+            }
+        },
+        "aws.protocoltests.json10#QueryCompatibleJsonRpc10": {
+            "type": "service",
+            "version": "2020-07-14",
+            "operations": [
+                {
+                    "target": "aws.protocoltests.json10#QueryCompatibleOperation"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Query Compatible JSON RPC 10"
+                },
+                "aws.auth#sigv4": {
+                    "name": "querycompatiblejsonrpc10"
+                },
+                "aws.protocols#awsJson1_0": {},
+                "aws.protocols#awsQueryCompatible": {},
+                "smithy.api#title": "Query Compatible Json 1.0 Protocol Service"
+            }
+        },
+        "aws.protocoltests.json10#QueryCompatibleOperation": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "aws.protocoltests.json10#CustomCodeError"
+                },
+                {
+                    "target": "aws.protocoltests.json10#NoCustomCodeError"
+                }
+            ],
+            "traits": {
+                "smithy.api#idempotent": {},
+                "smithy.test#httpRequestTests": [
+                    {
+                        "id": "QueryCompatibleAwsJson10CborSendsQueryModeHeader",
+                        "documentation": "Clients for query-compatible services MUST send the x-amzn-query-mode header.",
+                        "protocol": "aws.protocols#awsJson1_0",
+                        "method": "POST",
+                        "headers": {
+                            "Content-Type": "application/x-amz-json-1.0",
+                            "x-amzn-query-mode": "true",
+                            "X-Amz-Target": "QueryCompatibleJsonRpc10.QueryCompatibleOperation"
+                        },
+                        "uri": "/",
+                        "body": "{}",
+                        "bodyMediaType": "application/json"
+                    }
+                ]
+            }
+        }
+    }
+}

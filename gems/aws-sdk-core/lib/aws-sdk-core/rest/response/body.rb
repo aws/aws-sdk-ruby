@@ -13,16 +13,16 @@ module Aws
             @ref = ref
           end
 
-          def apply(body, data)
+          def apply(body, target)
             # When string, blob, or enum as a payload, use value directly
             if string_or_blob_payload?
               # Empty blob payloads are omitted
-              data[@ref.shape[:http_payload]] = body unless empty_blob_payload?(body)
+              target[@ref.shape[:http_payload]] = body unless empty_blob_payload?(body)
             # Otherwise, deserialize the payload member
             elsif @ref.shape[:http_payload_member]
-              data[@ref.shape[:http_payload]] = parse(@ref.shape[:http_payload_member].shape, body.read)
+              target[@ref.shape[:http_payload]] = parse(@ref.shape[:http_payload_member].shape, body.read)
             elsif !@ref.shape.members.empty?
-              parse(@ref, body.read, data)
+              parse(@ref, body.read, target)
             end
           end
 

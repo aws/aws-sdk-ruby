@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "sources": ["model.smithy"],
+  "maven": {
+    "dependencies": [
+      "software.amazon.smithy:smithy-aws-protocol-tests:1.60.3"
+    ]
+  },
+  "projections": {
+    "JsonRpc10": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": { "services": ["aws.protocoltests.json10#JsonRpc10"] }
+        },
+        { "name": "removeUnusedShapes" },
+        { "name": "removeTraitDefinitions" }
+      ]
+    },
+    "QueryCompatibleJsonRpc10": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": { "services": ["aws.protocoltests.json10#QueryCompatibleJsonRpc10"] }
+        },
+        { "name": "removeUnusedShapes" },
+        { "name": "removeTraitDefinitions" }
+      ]
+    },
+    "JsonProtocol": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": { "services": ["aws.protocoltests.json#JsonProtocol"] }
+        },
+        { "name": "removeUnusedShapes" },
+        { "name": "removeTraitDefinitions" }
+      ]
+    },
+    "RestJson": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": { "services": ["aws.protocoltests.restjson#RestJson"] }
+        },
+        { "name": "removeUnusedShapes" },
+        { "name": "removeTraitDefinitions" }
+      ]
+    }
+  }
+}

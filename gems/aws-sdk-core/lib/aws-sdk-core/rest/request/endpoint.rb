@@ -2,7 +2,6 @@
 
 require 'uri'
 require 'cgi'
-require_relative 'querystring_builder'
 
 module Aws
   module Core
@@ -12,9 +11,9 @@ module Aws
         class Endpoint
           include Smithy::Schema::Shapes
 
-          def initialize(uri, ref)
-            @uri, @query = uri.split('?')
-            @ref = ref
+          def initialize(operation)
+            @uri, @query = operation.traits['smithy.api#http']['uri'].split('?')
+            @ref = operation.input
           end
 
           def apply(request, params)
